@@ -1,0 +1,7 @@
+{
+  "name": "admin-frontend-ionic",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
