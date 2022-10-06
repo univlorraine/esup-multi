@@ -1,9 +1,12 @@
+import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
+  const logger = new Logger('Bootstrap');
   const app = await NestFactory.create(AppModule);
   const port = parseInt(process.env.API_GATEWAY_SERVER_PORT) || 3000;
+  logger.log(`Listening on port ${port}`);
   await app.listen(port);
 }
 bootstrap();
