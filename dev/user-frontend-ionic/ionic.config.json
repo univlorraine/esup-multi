@@ -1,0 +1,7 @@
+{
+  "name": "user-frontend-ionic",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
