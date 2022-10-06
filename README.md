@@ -1,1 +1,1 @@
-# Université de Lorraine - application mobile
+# Université de Lorraine - Application MULTI
