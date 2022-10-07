@@ -1,0 +1,13 @@
+{
+  "name": "user-backend-nest",
+  "workspaces": [
+    "main",
+	"microservices/hello",
+	"microservices/math"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces",
+    "lint": "npm run lint --workspaces",
+    "format": "npm run format --workspaces"
+  }
+}
