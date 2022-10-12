@@ -6,6 +6,17 @@
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
+    "paths": {
+      "@ul/hello": [
+        "dist/hello"
+      ],
+      "@ul/shared": [
+        "dist/shared"
+      ],
+      "@ul/geo": [
+        "dist/geo"
+      ]
+    },
     "downlevelIteration": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",
