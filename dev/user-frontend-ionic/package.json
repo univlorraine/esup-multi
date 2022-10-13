@@ -13,7 +13,7 @@
     "module:create": "npx ng g library",
     "module:build": "npx ng build --project=",
     "module:watch": "npx ng build --watch --project=",
-    "module:build-all": "npm run module:build hello && npm run module:build geo",
+    "module:build-all": "npm run module:build shared && npm run module:build hello && npm run module:build geo",
     "dev:android": "ionic capacitor run android --open -l --external",
     "dev:ios": "ionic capacitor run ios --open -l --external"
   },
