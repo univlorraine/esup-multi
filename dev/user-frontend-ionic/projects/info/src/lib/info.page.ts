@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { finalize, map } from 'rxjs/operators';
 import { Info, infoList$, setInfoList } from './info.repository';
 import { Browser } from '@capacitor/browser';
 import { InfoService } from './info.service';
@@ -15,6 +15,7 @@ export class InfoPage {
 
   public infoList$: Observable<Info[]> = infoList$;
   public infoListIsEmpty$: Observable<boolean>;
+  public isLoading = false;
 
   constructor(
     private infoService: InfoService,
@@ -38,7 +39,10 @@ export class InfoPage {
       return;
     }
 
+    this.isLoading = true;
     this.infoService.getInfoList()
-      .subscribe(infoList => setInfoList(infoList) );
+    .pipe(
+      finalize(() => this.isLoading = false)
+    ).subscribe(infoList => setInfoList(infoList));
   }
 }
