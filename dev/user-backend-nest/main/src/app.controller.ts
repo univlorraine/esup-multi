@@ -7,6 +7,7 @@ export class AppController {
   constructor(
     @Inject('HELLO_SERVICE') private helloClient: ClientProxy,
     @Inject('MATH_SERVICE') private mathClient: ClientProxy,
+    @Inject('INFO_SERVICE') private infoClient: ClientProxy,
   ) {}
 
   @Get('/hello')
@@ -27,6 +28,16 @@ export class AppController {
         cmd: 'sum',
       },
       numbers,
+    );
+  }
+
+  @Get('/info')
+  info() {
+    return this.infoClient.send(
+      {
+        cmd: 'info',
+      },
+      {},
     );
   }
 }

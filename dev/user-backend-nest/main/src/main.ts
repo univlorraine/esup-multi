@@ -5,6 +5,10 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const logger = new Logger('Bootstrap');
   const app = await NestFactory.create(AppModule);
+  app.enableCors({
+    origin: `${process.env.API_GATEWAY_CORS_ORIGIN}`,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  });
   const port = parseInt(process.env.API_GATEWAY_SERVER_PORT) || 3000;
   logger.log(`Listening on port ${port}`);
   await app.listen(port);

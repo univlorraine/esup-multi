@@ -18,7 +18,6 @@ export class GeoPage implements OnInit {
   }
 
   async ionViewWillEnter() {
-    console.log('CHECK coordinates');
     this.coordinates.next(await Geolocation.getCurrentPosition());
   };
 

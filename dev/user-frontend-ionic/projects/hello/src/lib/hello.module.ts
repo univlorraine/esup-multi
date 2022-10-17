@@ -29,7 +29,7 @@ export class HelloPageModule {
     addMenuItem({
       title: 'Hello',
       icon: 'hand-left',
-      position: 1,
+      position: 10,
       path: HelloPageModule.PATH
     })
   }

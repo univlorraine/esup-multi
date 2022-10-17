@@ -25,7 +25,7 @@ export class GeoPageModule {
     addMenuItem({
       title: 'Geo',
       icon: 'compass',
-      position: 2,
+      position: 20,
       path: GeoPageModule.PATH
     })
   }
