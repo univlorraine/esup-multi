@@ -4,6 +4,7 @@ import { ClientsModule } from '@nestjs/microservices';
 import { AppController } from './app.controller';
 import microserviceMathConfig from './config/microservice-math.config';
 import microserviceHelloConfig from './config/microservice-hello.config';
+import microserviceInfoConfig from './config/microservice-info.config';
 
 @Module({
   imports: [
@@ -19,6 +20,12 @@ import microserviceHelloConfig from './config/microservice-hello.config';
         name: 'MATH_SERVICE',
         imports: [ConfigModule.forFeature(microserviceMathConfig)],
         useFactory: (config: ConfigService) => config.get('microservice-math'),
+        inject: [ConfigService],
+      },
+      {
+        name: 'INFO_SERVICE',
+        imports: [ConfigModule.forFeature(microserviceInfoConfig)],
+        useFactory: (config: ConfigService) => config.get('microservice-info'),
         inject: [ConfigService],
       },
     ]),

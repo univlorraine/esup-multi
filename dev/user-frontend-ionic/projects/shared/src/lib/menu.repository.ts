@@ -16,7 +16,9 @@ const menuStore = createStore(
     withProps<MenuProps>({ items: [] })
   );
 
-export const menuItems$ = menuStore.pipe(select((state) => state.items));
+export const menuItems$ = menuStore.pipe(select((state) => state.items.sort(
+    (itemA, itemB) => itemA.position - itemB.position
+)));
 
 export const addMenuItem = (item: MenuItem) => {
     menuStore.update((state) => ({

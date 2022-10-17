@@ -1,5 +1,6 @@
 # Configuration
 - `API_GATEWAY_SERVER_PORT`: App listening port
+- `API_GATEWAY_CORS_ORIGIN`: CORS authorization
 
 - `HELLO_SERVICE_HOST`: Hello service host to connect to
 - `HELLO_SERVICE_PORT`: Hello service port to connect to

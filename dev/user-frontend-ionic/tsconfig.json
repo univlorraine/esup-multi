@@ -15,6 +15,9 @@
       ],
       "@ul/geo": [
         "dist/geo"
+      ],
+      "@ul/info": [
+        "dist/info"
       ]
     },
     "downlevelIteration": true,
