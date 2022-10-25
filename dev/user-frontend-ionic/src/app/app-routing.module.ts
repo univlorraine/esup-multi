@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthModule } from '@ul/auth';
-import { GeoPageModule } from '@ul/geo';
-import { HelloPageModule } from '@ul/hello';
 import { InfoPageModule } from '@ul/info';
 
 
@@ -15,14 +13,6 @@ const routes: Routes = [
     path: '',
     redirectTo: 'home',
     pathMatch: 'full'
-  },
-  {
-    path: HelloPageModule.PATH,
-    loadChildren: () => import('@ul/hello').then( m => m.HelloPageModule)
-  },
-  {
-    path: GeoPageModule.PATH,
-    loadChildren: () => import('@ul/geo').then( m => m.GeoPageModule)
   },
   {
     path: InfoPageModule.PATH,
