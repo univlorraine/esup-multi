@@ -1,9 +1,12 @@
 # Configuration
-- `API_GATEWAY_SERVER_PORT`: App listening port
-- `API_GATEWAY_CORS_ORIGIN`: CORS authorization
+- `API_GATEWAY_SERVER_PORT`: Port d'écoute de l'API Gateway.
+- `API_GATEWAY_CORS_ORIGIN`: Autorisations CORS.
 
-- `HELLO_SERVICE_HOST`: Hello service host to connect to
-- `HELLO_SERVICE_PORT`: Hello service port to connect to
+- `HELLO_SERVICE_HOST`: Hôte du microservice `hello`.
+- `HELLO_SERVICE_PORT`: Port du microservice `hello`.
 
-- `MATH_SERVICE_HOST`: Math service host to connect to
-- `MATH_SERVICE_PORT`: Math service port to connect to
+- `MATH_SERVICE_HOST`: Hôte du microservice `math`.
+- `MATH_SERVICE_PORT`: Port du microservice `hello`.
+
+- `AUTH_SERVICE_HOST`: Hôte du microservice `auth`.
+- `MATH_SERVICE_PORT`: Port du microservice `auth`.

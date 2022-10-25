@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { HelloPageModule } from '@ul/hello';
+import { AuthModule } from '@ul/auth';
 import { GeoPageModule } from '@ul/geo';
+import { HelloPageModule } from '@ul/hello';
 import { InfoPageModule } from '@ul/info';
+
 
 const routes: Routes = [
   {
@@ -25,6 +27,10 @@ const routes: Routes = [
   {
     path: InfoPageModule.PATH,
     loadChildren: () => import('@ul/info').then( m => m.InfoPageModule)
+  },
+  {
+    path: AuthModule.PATH,
+    loadChildren: () => import('@ul/auth').then( m => m.AuthModule)
   },
 ];
 

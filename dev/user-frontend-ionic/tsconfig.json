@@ -18,6 +18,9 @@
       ],
       "@ul/info": [
         "dist/info"
+      ],
+      "@ul/auth": [
+        "dist/auth"
       ]
     },
     "downlevelIteration": true,
