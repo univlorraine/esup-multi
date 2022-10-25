@@ -1,0 +1,30 @@
+<ion-progress-bar *ngIf="isLoading" type="indeterminate" color="primary"></ion-progress-bar>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="loginForm" (ngSubmit)="submit()">
+
+    <ion-item lines="full">
+      <ion-label position="floating">Identifiant</ion-label>
+      <ion-input type="text" formControlName="username" class="form-control" id="username" required>
+      </ion-input>
+    </ion-item>
+    <ion-note slot="error" *ngIf="username && username.errors && (username.dirty&& username.touched)">
+      Identifiants requis.
+    </ion-note>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Mot de passe</ion-label>
+      <ion-input type="password" formControlName="password" class="form-control" id="password" required></ion-input>
+      <ion-note slot="error" *ngIf="password && password.errors && (password.dirty&& password.touched)">
+        Mot de passe requis.
+      </ion-note>
+    </ion-item>
+
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" expand="block" [disabled]="!loginForm.valid || isLoading">Se connecter</ion-button>
+      </ion-col>
+    </ion-row>
+
+  </form>
+</ion-content>

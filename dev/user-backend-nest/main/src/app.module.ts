@@ -5,6 +5,7 @@ import { AppController } from './app.controller';
 import microserviceMathConfig from './config/microservice-math.config';
 import microserviceHelloConfig from './config/microservice-hello.config';
 import microserviceInfoConfig from './config/microservice-info.config';
+import microserviceAuthConfig from './config/microservice-auth.config';
 
 @Module({
   imports: [
@@ -26,6 +27,12 @@ import microserviceInfoConfig from './config/microservice-info.config';
         name: 'INFO_SERVICE',
         imports: [ConfigModule.forFeature(microserviceInfoConfig)],
         useFactory: (config: ConfigService) => config.get('microservice-info'),
+        inject: [ConfigService],
+      },
+      {
+        name: 'AUTH_SERVICE',
+        imports: [ConfigModule.forFeature(microserviceAuthConfig)],
+        useFactory: (config: ConfigService) => config.get('microservice-auth'),
         inject: [ConfigService],
       },
     ]),

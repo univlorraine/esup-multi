@@ -1,0 +1,15 @@
+<ion-progress-bar *ngIf="isLoading" type="indeterminate" color="primary"></ion-progress-bar>
+
+<ion-content *ngIf="authenticatedUser$ | async as authenticatedUser" >
+  <ion-card class="card">
+    <ion-card-header>
+      <ion-card-subtitle>Bonjour </ion-card-subtitle>
+      <ion-card-title><b>{{authenticatedUser.firstname}} {{authenticatedUser.name}}</b></ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      {{authenticatedUser.email}} 
+    </ion-card-content>
+  </ion-card>
+  <ion-button color="danger" expand="block" (click)="logout()" [disabled]="isLoading">Déconnexion</ion-button>
+</ion-content>

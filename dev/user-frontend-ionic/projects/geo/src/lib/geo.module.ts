@@ -1,13 +1,13 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
 import { GeoPageRoutingModule } from './geo-routing.module';
 
-import { GeoPage } from './geo.page';
 import { addMenuItem } from '@ul/shared';
+import { GeoPage } from './geo.page';
 
 @NgModule({
   imports: [

@@ -2,7 +2,7 @@
   "name": "user-backend-nest",
   "workspaces": [
     "main",
-	  "microservices/*"
+    "microservices/*"
   ],
   "scripts": {
     "build": "npm run build --workspaces",
