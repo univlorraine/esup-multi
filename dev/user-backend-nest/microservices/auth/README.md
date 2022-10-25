@@ -1,5 +1,4 @@
 # Backend utilisateur - Module auth
-
 Ce module est en charge d'interagir avec le CAS serveur et autres services tiers qui fournissent authentification et autorisations.
 ## Configuration
 - `AUTH_SERVICE_PORT`: Port d'écoute du service
