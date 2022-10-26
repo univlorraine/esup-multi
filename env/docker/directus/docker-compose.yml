@@ -1,0 +1,53 @@
+version: "3.7"
+services:
+
+  directus-db:
+    container_name: directus-db
+    image: postgis/postgis:14-master
+    ports:
+      - "5432:5432"
+    # Uncomment to persist data on your local storage
+    # volumes:
+    #   - '/postgres-data:/var/lib/postgresql/data'
+    networks:
+      - directus
+    environment:
+      POSTGRES_USER: 'directus'
+      POSTGRES_PASSWORD: 'directus'
+      POSTGRES_DB: 'directus'
+
+  directus:
+    container_name: directus
+    image: directus/directus:latest 
+    ports:
+      - 8055:8055
+    # Uncomment to persist uploads on your local storage
+    # volumes:
+    # By default, uploads are stored in /directus/uploads
+    # Always make sure your volumes matches the storage root when using
+    # local driver
+    # - ./uploads:/directus/uploads
+    # Make sure to also mount the volume when using SQLite
+    # - ./database:/directus/database
+    # If you want to load extensions from the host
+    # - ./extensions:/directus/extensions
+    networks:
+      - directus
+    depends_on:
+      - directus-db
+    environment:
+      KEY: '255d861b-5ea1-5996-9aa3-922530ec40b1'
+      SECRET: '6116487b-cda1-52c2-b5b5-c8022c45e263'
+
+      ADMIN_EMAIL: 'admin@admin.com'
+      ADMIN_PASSWORD: 'admin'
+
+      DB_CLIENT: 'pg'
+      DB_HOST: 'directus-db'
+      DB_PORT: '5432'
+      DB_DATABASE: 'directus'
+      DB_USER: 'directus'
+      DB_PASSWORD: 'directus'
+
+networks:
+  directus:
