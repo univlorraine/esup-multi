@@ -24,8 +24,8 @@ export const persist = persistState(infoStore, {
     storage: localStorageStrategy,
 });
 
-export const infoList$ = infoStore.pipe(selectAllEntities());;
+export const infoList$ = infoStore.pipe(selectAllEntities());
 
 export const setInfoList = (infoList: Info[]) => {
     infoStore.update(setEntities(infoList));
-}
+};

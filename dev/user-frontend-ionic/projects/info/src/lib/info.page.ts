@@ -20,7 +20,7 @@ export class InfoPage {
   constructor(
     private infoService: InfoService,
   ) {
-    this.infoListIsEmpty$ = this.infoList$.pipe(map( infoList => infoList.length === 0))
+    this.infoListIsEmpty$ = this.infoList$.pipe(map( infoList => infoList.length === 0));
   }
 
   async onClick(info: Info) {
