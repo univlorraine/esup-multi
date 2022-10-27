@@ -16,7 +16,7 @@ export interface AuthenticatedUser {
   displayName: string;
   name: string;
   firstname: string;
-  email: string
+  email: string;
 }
 
 const authStore = createStore(
@@ -31,12 +31,12 @@ export const persist = persistState(authStore, {
 
 export const authenticatedUser$ = authStore.pipe(select((state) => state.authenticatedUser));
 
-export function updateUser(authenticatedUser: AuthProps['authenticatedUser']) {
+export const updateUser = (authenticatedUser: AuthProps['authenticatedUser']) => {
   authStore.update((state) => ({
     ...state,
     authenticatedUser,
   }));
-}
+};
 
 export const userIsAuthenticated$ = authStore.pipe(select((state) => !!state.authenticatedUser));
 

@@ -2,17 +2,20 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { addMenuItem } from '@ul/shared';
+import { addMenuItem, PreferencesService } from '@ul/shared';
 import { AuthRoutingModule } from './auth-routing.module';
 import { ConnectedPage } from './connected/connected.page';
 import { LoginPage } from './login/login.page';
+import { PreferencesComponent } from './preferences/preferences.component';
 
 
 
 @NgModule({
   declarations: [
     LoginPage,
-    ConnectedPage],
+    ConnectedPage,
+    PreferencesComponent,
+  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -22,14 +25,18 @@ import { LoginPage } from './login/login.page';
   ]
 })
 export class AuthModule {
-  static PATH = 'auth';
+  static path = 'auth';
 
-  constructor() {
+  constructor(private preferencesService: PreferencesService) {
     addMenuItem({
       title: 'Connexion',
       icon: 'log-in',
       position: 999,
-      path: AuthModule.PATH
-    })
+      path: AuthModule.path
+    });
+
+    this.preferencesService.addPreferencesComponent({
+      component: PreferencesComponent
+    });
   }
 }

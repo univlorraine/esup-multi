@@ -1,7 +1,7 @@
 
 <ion-progress-bar *ngIf="isLoading" type="indeterminate" color="primary"></ion-progress-bar>
 
-<ion-content *ngIf="!(infoListIsEmpty$ | async)">
+<ion-content *ngIf="(infoListIsEmpty$ | async) === false">
   <ion-card *ngFor="let info of (infoList$ | async)" (click)="onClick(info)">
     <ion-card-header>    
       <ion-card-title>

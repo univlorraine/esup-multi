@@ -15,6 +15,9 @@
       ],
       "@ul/auth": [
         "dist/auth"
+      ],
+      "@ul/preferences": [
+        "dist/preferences"
       ]
     },
     "downlevelIteration": true,

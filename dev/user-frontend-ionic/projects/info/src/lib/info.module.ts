@@ -20,14 +20,14 @@ import { InfoPage } from './info.page';
   declarations: [InfoPage]
 })
 export class InfoPageModule {
-  static PATH = 'info';
+  static path = 'info';
 
   constructor() {
     addMenuItem({
       title: 'Info',
       icon: 'information-circle',
       position: 50,
-      path: InfoPageModule.PATH
-    })
+      path: InfoPageModule.path
+    });
   }
 }

@@ -25,4 +25,4 @@ export const addMenuItem = (item: MenuItem) => {
         ...state,
         items: [...state.items, item]
     }));
-}
+};

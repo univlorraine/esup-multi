@@ -19,8 +19,8 @@ export class AuthService {
 
     const url = `${this.environment.apiEndpoint}/auth`;
     const data = {
-      username: username,
-      password: password,
+      username,
+      password,
     };
 
     return this.http.post<AuthenticatedUser>(url, data, {}).pipe(
@@ -31,19 +31,19 @@ export class AuthService {
           if (err.status === 401) {
             return of(null);
           }
-          
+
           return throwError(err);
         }
       }));
   }
 
-  logout(): Observable<Boolean> {
+  logout(): Observable<boolean> {
     const url = `${this.environment.apiEndpoint}/auth`;
-    
+
     return authenticatedUser$.pipe(
       first(),
       map(authenticatedUser => authenticatedUser.authToken),
-      concatMap(authToken => this.http.delete<Boolean>(url, {
+      concatMap(authToken => this.http.delete<boolean>(url, {
         body: { authToken }
       })),
       tap(() => updateUser(null))

@@ -36,6 +36,32 @@ Il faut également ajouter le module au script npm `module:build-all` :
   "module:build-all": "npm run module:build hello && npm run module:build [nom du module]",
 ```
 
+#### Lint
+
+Rajouter une section lint au project dans `user-frontend-ionic/angular.json`. A rajouter sous la section "test" du module :
+```json
+"lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/[nom du module]/**/*.ts",
+              "projects/[nom du module]/**/*.html"
+            ]
+          }
+        }
+```
+
+Puis rajouter le fichier `.eslintrc.json` suivant à la racine du module :
+```json
+{
+  "extends": "../../.eslintrc.json",
+  "ignorePatterns": [
+    "!**/*"
+  ]
+}
+
+```
+
 ### Dépendances inter-modules
 
 Un module ne doit en aucun cas dépendre d'un autre module. 
@@ -59,3 +85,10 @@ Compilation de tous les modules:
 ```bash
 npm run module:build-all
 ```
+
+### Liste des modules
+
+- [Module shared](dev/user-frontend-ionic/projects/shared/README.md)
+- [Module auth](dev/user-frontend-ionic/projects/auth/README.md)
+- [Module info](dev/user-frontend-ionic/projects/info/README.md)
+- [Module preferences](dev/user-frontend-ionic/projects/preferences/README.md)
