@@ -62,6 +62,33 @@ Puis rajouter le fichier `.eslintrc.json` suivant à la racine du module :
 
 ```
 
+#### Traductions
+Pour les traductions nous utilisons [ngx translate](https://github.com/ngx-translate/core).
+
+Si le module contient des éléments qui doivent être traduits il faudra créer un fichier de traduction au sein du module : `projects/[mon module]/assets/i18n/fr.json`.
+
+Il faut ensuite modifier la section "build" du fichier `angular.json` afin de rajouter le fichier de traduction du module aux assets :
+```json
+{
+  "glob": "**/*",
+  "input": "projects/[mon module]/assets/i18n",
+  "output": "/assets/i18n/[mon module]"
+}
+```
+
+Et enfin à l'initialisation dans le constructeur du module Angular (`projects/[mon-module]/src/lib/[mon-module].module.ts`), il faut faire appel au `ProjectModuleService` de shared afin d'indiquer que mon module contient des traductions :
+```typescript
+constructor(private projectModuleService: ProjectModuleService) {
+    this.projectModuleService.initProjectModule({
+      name: '[mon module]',
+      translation: true
+    });
+  }
+```
+Notez que toutes les clés de traduction du module seront préfixées par ce que vous aurez passé à `addTranslation()` mais converties en majuscules (`addTranslation('info')` --> `'INFO.XXX'`).
+
+**ATTENTION** un module qui contient des traductions doit être initialisé avant que le module de traduction ne démarre, il faudra donc obligatoirement importer le module dans `app.module.ts` (avant l'import du `TranslateModule`).
+
 ### Dépendances inter-modules
 
 Un module ne doit en aucun cas dépendre d'un autre module. 
@@ -70,7 +97,7 @@ L'exception est le module `shared` qui héberge le code partagé entre l'applica
 Pour qu'un module dépende du module `shared` il faut le déclarer dans les `peerDependencies` du `package.json` au niveau du module.
 ```json
   "peerDependencies": {
-    "shared": "^0.0.1"
+    "@ul/shared": "^0.0.1"
   },
 ```
 

@@ -4,25 +4,25 @@
   <form [formGroup]="loginForm" (ngSubmit)="submit()">
 
     <ion-item lines="full">
-      <ion-label position="floating">Identifiant</ion-label>
+      <ion-label position="floating">{{ 'AUTH.LOGIN.USERNAME' | translate }}</ion-label>
       <ion-input type="text" formControlName="username" class="form-control" id="username" required>
       </ion-input>
     </ion-item>
     <ion-note slot="error" *ngIf="username && username.errors && (username.dirty&& username.touched)">
-      Identifiants requis.
+      {{ 'AUTH.LOGIN.REQUIRED.USERNAME' | translate }}
     </ion-note>
 
     <ion-item lines="full">
-      <ion-label position="floating">Mot de passe</ion-label>
+      <ion-label position="floating">{{ 'AUTH.LOGIN.PASSWORD' | translate }}</ion-label>
       <ion-input type="password" formControlName="password" class="form-control" id="password" required></ion-input>
       <ion-note slot="error" *ngIf="password && password.errors && (password.dirty&& password.touched)">
-        Mot de passe requis.
+        {{ 'AUTH.LOGIN.REQUIRED.PASSWORD' | translate }}
       </ion-note>
     </ion-item>
 
     <ion-row>
       <ion-col>
-        <ion-button type="submit" expand="block" [disabled]="!loginForm.valid || isLoading">Se connecter</ion-button>
+        <ion-button type="submit" expand="block" [disabled]="!loginForm.valid || isLoading">{{ 'AUTH.LOGIN.SUBMIT' | translate }}</ion-button>
       </ion-col>
     </ion-row>
 

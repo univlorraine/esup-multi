@@ -3,11 +3,5 @@
  */
 
 export * from './lib/authenticated-user.repository';
-export * from './lib/menu.repository';
-export * from './lib/preferences.service';
-
-
-
-
-
-
+export * from './lib/project-module/project-module.service';
+export * from './lib/project-module/translations/translations-loader.factory';

@@ -28,6 +28,21 @@
                 "glob": "**/*.svg",
                 "input": "node_modules/ionicons/dist/ionicons/svg",
                 "output": "./svg"
+              },
+              {
+                "glob": "**/*",
+                "input": "projects/info/assets/i18n",
+                "output": "/assets/i18n/info"
+              },
+              {
+                "glob": "**/*",
+                "input": "projects/preferences/assets/i18n",
+                "output": "/assets/i18n/preferences"
+              },
+              {
+                "glob": "**/*",
+                "input": "projects/auth/assets/i18n",
+                "output": "/assets/i18n/auth"
               }
             ],
             "styles": ["src/theme/variables.scss", "src/global.scss"],

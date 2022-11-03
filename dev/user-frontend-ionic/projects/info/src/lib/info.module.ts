@@ -6,28 +6,33 @@ import { IonicModule } from '@ionic/angular';
 
 import { InfoPageRoutingModule } from './info-routing.module';
 
-import { addMenuItem } from '@ul/shared';
+import { ProjectModuleService } from '@ul/shared';
 import { InfoPage } from './info.page';
-
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    InfoPageRoutingModule
+    InfoPageRoutingModule,
+    TranslateModule
   ],
   declarations: [InfoPage]
 })
 export class InfoPageModule {
   static path = 'info';
 
-  constructor() {
-    addMenuItem({
-      title: 'Info',
-      icon: 'information-circle',
-      position: 50,
-      path: InfoPageModule.path
+  constructor(private projectModuleService: ProjectModuleService) {
+    this.projectModuleService.initProjectModule({
+      name: 'info',
+      translation: true,
+      menuItem: {
+        title: 'INFO.MENU',
+        icon: 'information-circle',
+        position: 50,
+        path: InfoPageModule.path
+      }
     });
   }
 }

@@ -1,13 +1,17 @@
-import { Component } from '@angular/core';
-import { menuItems$ } from '@ul/shared';
+import { Component, OnInit } from '@angular/core';
+import { ProjectModuleService } from '@ul/shared';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
-  public menuItems$ = menuItems$;
+  public menuItems;
 
-  constructor() {}
+  constructor(private projectModuleService: ProjectModuleService) {}
+
+  ngOnInit() {
+    this.menuItems = this.projectModuleService.getMenuItems();
+  }
 }

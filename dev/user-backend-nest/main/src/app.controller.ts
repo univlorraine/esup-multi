@@ -5,11 +5,9 @@ import {
   Get,
   Inject,
   Post,
-  Query,
   UseInterceptors,
 } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { Observable } from 'rxjs';
 import { ErrorsInterceptor } from './interceptors/errors.interceptor';
 
 @UseInterceptors(new ErrorsInterceptor())

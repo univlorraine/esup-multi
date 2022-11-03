@@ -21,7 +21,6 @@ export class AuthGuard implements CanActivate {
   }
 
   private async checkAuth() {
-    console.log('Check auth start');
     const authed = await userIsAuthenticated$.pipe(first()).toPromise();
     return authed || this.routeToLogin();
   }

@@ -16,5 +16,5 @@
 </ion-content>
 
 <ion-content class="ion-padding" *ngIf="(infoListIsEmpty$ | async)">
-  <ion-note>Aucune information disponible</ion-note>
+  <ion-note> {{ "INFO.NO_DATA" | translate }} </ion-note>
 </ion-content>
