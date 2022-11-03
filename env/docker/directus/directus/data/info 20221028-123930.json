@@ -1,0 +1,38 @@
+[
+	{
+		"id": 1,
+		"status": "published",
+		"sort": null,
+		"user_created": "4b4f2500-e63e-401e-a6b7-61642c6a67ae",
+		"date_created": "2022-10-28T12:36:49.004Z",
+		"user_updated": null,
+		"date_updated": null,
+		"title": "S’inscrire à l'université de Lorraine",
+		"content": "Les étapes de l'inscription à l'université varient en fonction de votre profil. Connaître ces étapes, c'est être certain de s'inscrire en toute sérénité.",
+		"link": "https://www.univ-lorraine.fr/enseignements-et-formations/sinscrire-a-l-universite-de-lorraine/"
+	},
+	{
+		"id": 2,
+		"status": "draft",
+		"sort": null,
+		"user_created": "4b4f2500-e63e-401e-a6b7-61642c6a67ae",
+		"date_created": "2022-10-28T12:36:49.012Z",
+		"user_updated": null,
+		"date_updated": null,
+		"title": "Le projet OTO twin récompensé",
+		"content": "Le projet OTO twin récompensé lors des Tremplins de la E-Sante City Healthcare !",
+		"link": "https://factuel.univ-lorraine.fr/node/21254"
+	},
+	{
+		"id": 3,
+		"status": "draft",
+		"sort": null,
+		"user_created": "4b4f2500-e63e-401e-a6b7-61642c6a67ae",
+		"date_created": "2022-10-28T12:36:49.018Z",
+		"user_updated": null,
+		"date_updated": null,
+		"title": "Contenu sans lien",
+		"content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+		"link": null
+	}
+]
