@@ -1,33 +1,42 @@
-import { Injectable } from '@nestjs/common';
-import { Observable, of } from 'rxjs';
+import { HttpService } from '@nestjs/axios';
+import { Injectable, Logger } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { RpcException } from '@nestjs/microservices';
+import { catchError, map, Observable } from 'rxjs';
+import { DirectusApi } from '../config/configuration.interface';
+import { DirectusResponse } from './directus.response.dto';
 import { Info } from './info.dto';
 
 @Injectable()
 export class InfoService {
-  getInfoList(): Observable<Info[]> {
-    const infoList: Info[] = [
-      {
-        id: 1,
-        title: "S’inscrire à l'université de Lorraine",
-        content:
-          "Les étapes de l'inscription à l'université varient en fonction de votre profil. Connaître ces étapes, c'est être certain de s'inscrire en toute sérénité.",
-        link: 'https://www.univ-lorraine.fr/enseignements-et-formations/sinscrire-a-l-universite-de-lorraine/',
-      },
-      {
-        id: 2,
-        title: 'Le projet OTO twin récompensé',
-        content:
-          'Le projet OTO twin récompensé lors des Tremplins de la E-Sante City Healthcare !',
-        link: 'https://factuel.univ-lorraine.fr/node/21254',
-      },
-      {
-        id: 3,
-        title: 'Contenu sans lien',
-        content:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-      },
-    ];
+  private readonly logger = new Logger(InfoService.name);
+  private directusApiConfig: DirectusApi;
+  constructor(
+    private readonly configService: ConfigService,
+    private readonly httpService: HttpService,
+  ) {
+    this.directusApiConfig = this.configService.get<DirectusApi>('directusApi');
+  }
 
-    return of(infoList);
+  public getInfo(): Observable<Info[]> {
+    const url = `${this.directusApiConfig.apiUrl}/items/info`;
+
+    return this.httpService
+      .get<DirectusResponse<Info[]>>(url, {
+        headers: {
+          Accept: 'application/json',
+          Authorization: `Bearer ${this.directusApiConfig.bearerToken}`,
+        },
+      })
+      .pipe(
+        catchError((err: any) => {
+          const errorMessage = 'Unable to get directus data';
+          this.logger.error(errorMessage, err);
+          throw new RpcException(errorMessage);
+        }),
+        map((res) => {
+          return res.data.data;
+        }),
+      );
   }
 }

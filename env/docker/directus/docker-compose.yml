@@ -22,13 +22,13 @@ services:
     ports:
       - 8055:8055
     # Uncomment to persist uploads on your local storage
-    # volumes:
+    volumes:
     # By default, uploads are stored in /directus/uploads
     # Always make sure your volumes matches the storage root when using
     # local driver
     # - ./uploads:/directus/uploads
     # Make sure to also mount the volume when using SQLite
-    # - ./database:/directus/database
+      -  ./directus/snapshot:/directus/snapshot
     # If you want to load extensions from the host
     # - ./extensions:/directus/extensions
     networks:

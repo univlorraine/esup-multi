@@ -10,6 +10,6 @@ export class InfoController {
 
   @MessagePattern({ cmd: 'info' })
   hello(): Observable<Info[]> {
-    return this.infoService.getInfoList();
+    return this.infoService.getInfo();
   }
 }

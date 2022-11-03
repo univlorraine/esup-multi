@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
+import { Browser } from '@capacitor/browser';
+import { Network } from '@capacitor/network';
 import { Observable } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
 import { Info, infoList$, setInfoList } from './info.repository';
-import { Browser } from '@capacitor/browser';
 import { InfoService } from './info.service';
-import { Network } from '@capacitor/network';
 
 @Component({
   selector: 'app-info',
@@ -20,11 +20,11 @@ export class InfoPage {
   constructor(
     private infoService: InfoService,
   ) {
-    this.infoListIsEmpty$ = this.infoList$.pipe(map( infoList => infoList.length === 0));
+    this.infoListIsEmpty$ = this.infoList$.pipe(map(infoList => infoList.length === 0));
   }
 
   async onClick(info: Info) {
-    if(info.link) {
+    if (info.link) {
       await Browser.open({ url: info.link });
     }
   }
@@ -41,8 +41,8 @@ export class InfoPage {
 
     this.isLoading = true;
     this.infoService.getInfoList()
-    .pipe(
-      finalize(() => this.isLoading = false)
-    ).subscribe(infoList => setInfoList(infoList));
+      .pipe(
+        finalize(() => this.isLoading = false)
+      ).subscribe(infoList => setInfoList(infoList));
   }
 }
