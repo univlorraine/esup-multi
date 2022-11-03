@@ -1,5 +1,5 @@
-import { Component, OnInit, QueryList, ViewChildren, ViewContainerRef } from '@angular/core';
-import { PreferencesComponent, PreferencesService } from '@ul/shared';
+import { Component, OnInit, QueryList, Type, ViewChildren, ViewContainerRef } from '@angular/core';
+import { ProjectModuleService } from '@ul/shared';
 
 @Component({
   selector: 'app-preferences',
@@ -10,20 +10,20 @@ export class PreferencesPage implements OnInit {
 
   @ViewChildren('preferences', {read: ViewContainerRef}) preferences: QueryList<ViewContainerRef>;
 
-  public preferencesComponents: PreferencesComponent[] = [];
+  public preferencesComponents: Type<any>[] = [];
 
   constructor(
-    private preferencesService: PreferencesService
+    private projectModuleService: ProjectModuleService
   ) { }
 
   ngOnInit(): void {
-    this.preferencesComponents = this.preferencesService.getPreferencesComponents();
+    this.preferencesComponents = this.projectModuleService.getPreferencesComponents();
   }
 
   ionViewWillEnter(): void {
     this.preferences.forEach((viewContainerRef: ViewContainerRef, index: number) => {
       viewContainerRef.clear();
-      const componentToCreate = this.preferencesComponents[index].component;
+      const componentToCreate = this.preferencesComponents[index];
       viewContainerRef.createComponent(componentToCreate);
     });
   }

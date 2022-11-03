@@ -1,18 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Type } from '@angular/core';
 
-export interface PreferencesComponent {
-    component: Type<any>;
-}
-
 @Injectable({
     providedIn: 'root'
 })
 export class PreferencesService {
 
-    private preferencesComponents: PreferencesComponent[] = [];
+    private preferencesComponents: Type<any>[] = [];
 
-    public addPreferencesComponent(preferencesComponent: PreferencesComponent) {
+    public addPreferencesComponent(preferencesComponent: Type<any>) {
         this.preferencesComponents.push(preferencesComponent);
     }
 

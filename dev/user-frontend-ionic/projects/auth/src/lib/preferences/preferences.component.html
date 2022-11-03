@@ -1,7 +1,7 @@
-<ion-label class="ion-padding"><h2>Authentification</h2></ion-label>
+<ion-label class="ion-padding"><h2>{{ 'AUTH.PREFERENCES.TITLE' | translate }}</h2></ion-label>
 <ion-item>  
   <ion-label class="ion-text-wrap">
-    Enregistrer mon identifiant et mot-de-passe lors de l'authentification
+    {{ 'AUTH.PREFERENCES.SAVE_CREDENTIALS' | translate }}
   </ion-label>
   <ion-toggle [checked]="saveCredentialsOnAuthentication$ | async" slot="start" (ionChange)="onSaveCredentialsOnAuthenticationChange($event)"></ion-toggle>  
 </ion-item>

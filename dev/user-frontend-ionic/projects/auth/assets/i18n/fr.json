@@ -1,0 +1,20 @@
+{
+    "MENU": "Connexion",
+    "PREFERENCES": {
+        "TITLE": "Authentification",
+        "SAVE_CREDENTIALS": "Enregistrer mon identifiant et mot-de-passe lors de l'authentification"
+    },
+    "LOGIN": {
+        "USERNAME": "Identifiant",
+        "PASSWORD": "Mot de passe",
+        "SUBMIT": "Se connecter",
+        "REQUIRED": {
+            "USERNAME": "Mot de passe requis",
+            "PASSWORD": "Identifiant requis"
+        }
+    },
+    "CONNECTED": {
+        "HELLO": "Bonjour",
+        "LOGOUT": "Déconnexion"
+    }
+}

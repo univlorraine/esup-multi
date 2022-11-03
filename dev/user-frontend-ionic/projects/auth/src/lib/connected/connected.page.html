@@ -3,7 +3,7 @@
 <ion-content *ngIf="authenticatedUser$ | async as authenticatedUser" >
   <ion-card class="card">
     <ion-card-header>
-      <ion-card-subtitle>Bonjour </ion-card-subtitle>
+      <ion-card-subtitle>{{ 'AUTH.CONNECTED.HELLO' | translate }}</ion-card-subtitle>
       <ion-card-title><b>{{authenticatedUser.firstname}} {{authenticatedUser.name}}</b></ion-card-title>
     </ion-card-header>
   
@@ -11,5 +11,5 @@
       {{authenticatedUser.email}} 
     </ion-card-content>
   </ion-card>
-  <ion-button color="danger" expand="block" (click)="logout()" [disabled]="isLoading">Déconnexion</ion-button>
+  <ion-button color="danger" expand="block" (click)="logout()" [disabled]="isLoading">{{ 'AUTH.CONNECTED.LOGOUT' | translate }}</ion-button>
 </ion-content>

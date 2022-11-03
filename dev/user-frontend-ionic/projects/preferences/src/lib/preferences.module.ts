@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { PreferencesPageRoutingModule } from './preferences-routing.module';
 
 import { PreferencesPage } from './preferences.page';
-import { addMenuItem } from '@ul/shared';
+import { ProjectModuleService } from '@ul/shared';
 
 @NgModule({
   imports: [
@@ -21,12 +21,16 @@ import { addMenuItem } from '@ul/shared';
 export class PreferencesPageModule {
   static path = 'preferences';
 
-  constructor() {
-    addMenuItem({
-      title: 'Configuration',
-      icon: 'settings',
-      position: 900,
-      path: PreferencesPageModule.path
+  constructor(private projectModuleService: ProjectModuleService) {
+    this.projectModuleService.initProjectModule({
+      name: 'preferences',
+      translation: true,
+      menuItem: {
+        title: 'PREFERENCES.MENU',
+        icon: 'settings',
+        position: 900,
+        path: PreferencesPageModule.path
+      }
     });
   }
 }
