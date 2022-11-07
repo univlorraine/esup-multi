@@ -4,6 +4,7 @@ import {
   AuthenticatedDto,
   AuthenticateQueryDto,
   LogoutQueryDto,
+  SsoServiceTokenQueryDto
 } from './auth.dto';
 import { AuthService } from './auth.service';
 import { MessagePattern } from '@nestjs/microservices';
@@ -20,5 +21,10 @@ export class AuthController {
   @MessagePattern({ cmd: 'logout' })
   logout(data: LogoutQueryDto): Observable<boolean> {
     return this.authService.logout(data);
+  }
+
+  @MessagePattern({ cmd: 'requestSsoServiceToken' })
+  requestSsoServiceToken(data: SsoServiceTokenQueryDto): Observable<string> {
+    return this.authService.requestSsoServiceToken(data);
   }
 }

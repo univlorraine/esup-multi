@@ -1,0 +1,41 @@
+[
+	{
+		"content": "Les étapes de l'inscription à l'université varient en fonction de votre profil. Connaître ces étapes, c'est être certain de s'inscrire en toute sérénité.",
+		"date_created": "2022-11-07T14:05:41.172Z",
+		"date_updated": null,
+		"id": 4,
+		"link": "https://arche.univ-lorraine.fr/login/index.php?authCAS=CAS&ticket={st}",
+		"ssoService": "https://arche.univ-lorraine.fr/login/index.php?authCAS=CAS",
+		"sort": null,
+		"status": "published",
+		"title": "Test SSO",
+		"user_created": "ec01a3d4-a39f-404c-af65-645f3f3f7dc2",
+		"user_updated": null
+	},
+	{
+		"content": "Le projet OTO twin récompensé lors des Tremplins de la E-Sante City Healthcare !",
+		"date_created": "2022-11-07T14:05:59.516Z",
+		"date_updated": null,
+		"id": 5,
+		"link": "https://factuel.univ-lorraine.fr/node/21254",
+		"ssoService": null,
+		"sort": null,
+		"status": "published",
+		"title": "Le projet OTO twin récompensé",
+		"user_created": "ec01a3d4-a39f-404c-af65-645f3f3f7dc2",
+		"user_updated": null
+	},
+	{
+		"content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+		"date_created": "2022-11-07T14:06:13.991Z",
+		"date_updated": null,
+		"id": 6,
+		"link": null,
+		"ssoService": null,
+		"sort": null,
+		"status": "draft",
+		"title": "Contenu sans lien",
+		"user_created": "ec01a3d4-a39f-404c-af65-645f3f3f7dc2",
+		"user_updated": null
+	}
+]

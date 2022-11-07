@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { Browser } from '@capacitor/browser';
 import { Network } from '@capacitor/network';
+import { authenticatedUser$ } from '@ul/shared';
+import { finalize, filter, first, map, switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { finalize, map } from 'rxjs/operators';
 import { Info, infoList$, setInfoList } from './info.repository';
 import { InfoService } from './info.service';
 
@@ -12,7 +13,6 @@ import { InfoService } from './info.service';
   styleUrls: ['./info.page.scss'],
 })
 export class InfoPage {
-
   public infoList$: Observable<Info[]> = infoList$;
   public infoListIsEmpty$: Observable<boolean>;
   public isLoading = false;
@@ -23,17 +23,34 @@ export class InfoPage {
     this.infoListIsEmpty$ = this.infoList$.pipe(map(infoList => infoList.length === 0));
   }
 
-  async onClick(info: Info) {
-    if (info.link) {
-      await Browser.open({ url: info.link });
-    }
-  }
-
   ionViewWillEnter() {
     this.loadInfoList();
   }
 
-  private async loadInfoList() {
+  public onClick(info: Info): Promise<void> {
+    if (!info.link) {
+      return;
+    }
+
+    if (!info.ssoService) {
+      return Browser.open({ url: info.link });
+    }
+
+    authenticatedUser$.pipe(
+      first(),
+      filter(authenticatedUser => authenticatedUser != null),
+      switchMap(authenticatedUser => this.infoService.requestSsoServiceToken(info.ssoService, authenticatedUser.authToken))
+    ).subscribe(serviceToken => {
+      if (!serviceToken) {
+        console.warn('No service token associated to url.');
+        return;
+      }
+
+      return Browser.open({url: info.link.replace('{st}', serviceToken)});
+    });
+  }
+
+  private async loadInfoList(): Promise<void> {
     // skip if network is not available
     if (!(await Network.getStatus()).connected) {
       return;

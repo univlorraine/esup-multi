@@ -158,7 +158,7 @@
           }
         }
       }
-    },   
+    },
     "shared": {
       "projectType": "library",
       "root": "projects/shared",

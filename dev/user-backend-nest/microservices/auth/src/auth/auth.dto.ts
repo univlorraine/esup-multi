@@ -18,3 +18,8 @@ export interface AuthenticatedDto extends UserProfileDto {
 export interface LogoutQueryDto {
   authToken: string;
 }
+
+export interface SsoServiceTokenQueryDto {
+  authToken: string;
+  service: string;
+}
