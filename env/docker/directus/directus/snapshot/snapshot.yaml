@@ -1,5 +1,5 @@
 version: 1
-directus: 9.18.1
+directus: 9.19.2
 collections:
   - collection: info
     meta:
@@ -41,7 +41,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: null
+      sort: 1
       special: null
       translations: null
       validation: null
@@ -83,7 +83,7 @@ fields:
       options: null
       readonly: true
       required: false
-      sort: null
+      sort: 2
       special:
         - date-created
       translations: null
@@ -126,7 +126,7 @@ fields:
       options: null
       readonly: true
       required: false
-      sort: null
+      sort: 3
       special:
         - date-updated
       translations: null
@@ -168,7 +168,7 @@ fields:
       options: null
       readonly: true
       required: false
-      sort: null
+      sort: 4
       special: null
       translations: null
       validation: null
@@ -209,7 +209,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: null
+      sort: 5
       special: null
       translations: null
       validation: null
@@ -250,7 +250,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: null
+      sort: 7
       special: null
       translations: null
       validation: null
@@ -276,6 +276,47 @@ fields:
       schema: public
       table: info
     type: integer
+  - collection: info
+    field: ssoService
+    meta:
+      collection: info
+      conditions: null
+      display: null
+      display_options: null
+      field: ssoService
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 6
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      comment: null
+      data_type: character varying
+      default_value: null
+      foreign_key_column: null
+      foreign_key_schema: null
+      foreign_key_table: null
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      max_length: 255
+      name: ssoService
+      numeric_precision: null
+      numeric_scale: null
+      schema: public
+      table: info
+    type: string
   - collection: info
     field: status
     meta:
@@ -312,7 +353,7 @@ fields:
             value: archived
       readonly: false
       required: false
-      sort: null
+      sort: 8
       special: null
       translations: null
       validation: null
@@ -353,7 +394,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: null
+      sort: 9
       special: null
       translations: null
       validation: null
@@ -395,7 +436,7 @@ fields:
         template: '{{avatar.$thumbnail}} {{first_name}} {{last_name}}'
       readonly: true
       required: false
-      sort: null
+      sort: 10
       special:
         - user-created
       translations: null
@@ -438,7 +479,7 @@ fields:
         template: '{{avatar.$thumbnail}} {{first_name}} {{last_name}}'
       readonly: true
       required: false
-      sort: null
+      sort: 11
       special:
         - user-updated
       translations: null

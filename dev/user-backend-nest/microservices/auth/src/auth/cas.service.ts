@@ -5,7 +5,7 @@ import { RpcException } from '@nestjs/microservices';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { CasUrl } from '../config/configuration.interface';
-import { AuthenticateQueryDto } from './auth.dto';
+import { AuthenticateQueryDto, SsoServiceTokenQueryDto } from './auth.dto';
 
 const CAS_HEADERS = {
   accept: 'application/json',
@@ -50,10 +50,10 @@ export class CasService {
       );
   }
 
-  public requestSt(tgt: string, service: string): Observable<string> {
-    const url = this.casUrlConfig.requestSt.replace(/\{tgt\}/g, tgt);
+  public requestSt(query: SsoServiceTokenQueryDto): Observable<string> {
+    const url = this.casUrlConfig.requestSt.replace(/\{tgt\}/g, query.authToken);
     const params = new URLSearchParams();
-    params.append('service', service);
+    params.append('service', query.service);
     return this.httpService
       .post<string>(url, params, { headers: CAS_HEADERS })
       .pipe(

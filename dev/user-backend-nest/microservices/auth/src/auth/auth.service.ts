@@ -5,6 +5,7 @@ import {
   AuthenticatedDto,
   AuthenticateQueryDto,
   LogoutQueryDto,
+  SsoServiceTokenQueryDto,
   UserProfileDto,
 } from './auth.dto';
 import { CasService } from './cas.service';
@@ -19,7 +20,7 @@ export class AuthService {
     private readonly userService: UserService,
   ) {}
 
-  authenticate(query: AuthenticateQueryDto): Observable<AuthenticatedDto> {
+  public authenticate(query: AuthenticateQueryDto): Observable<AuthenticatedDto> {
     return this.casService.requestTgt(query).pipe(
       concatWith(this.userService.getUserProfile(query.username)),
       toArray(),
@@ -36,7 +37,11 @@ export class AuthService {
     );
   }
 
-  logout(query: LogoutQueryDto): Observable<boolean> {
+  public logout(query: LogoutQueryDto): Observable<boolean> {
     return this.casService.logout(query.authToken);
+  }
+
+  public requestSsoServiceToken(query: SsoServiceTokenQueryDto): Observable<string> {
+    return this.casService.requestSt(query);
   }
 }

@@ -12,6 +12,7 @@ export interface Info {
     title: string;
     content: string;
     link?: string;
+    ssoService?: string;
 }
 
 const infoStore = createStore(

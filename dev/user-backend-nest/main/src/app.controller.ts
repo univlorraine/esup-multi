@@ -47,4 +47,14 @@ export class AppController {
       body,
     );
   }
+
+  @Post('/sso-service-token')
+  requestSsoServiceToken(@Body() body) {
+    return this.authClient.send(
+      {
+        cmd: 'requestSsoServiceToken',
+      },
+      body,
+    );
+  }
 }
