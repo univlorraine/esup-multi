@@ -20,7 +20,9 @@ export class AuthService {
     private readonly userService: UserService,
   ) {}
 
-  public authenticate(query: AuthenticateQueryDto): Observable<AuthenticatedDto> {
+  public authenticate(
+    query: AuthenticateQueryDto,
+  ): Observable<AuthenticatedDto> {
     return this.casService.requestTgt(query).pipe(
       concatWith(this.userService.getUserProfile(query.username)),
       toArray(),
@@ -41,7 +43,9 @@ export class AuthService {
     return this.casService.logout(query.authToken);
   }
 
-  public requestSsoServiceToken(query: SsoServiceTokenQueryDto): Observable<string> {
+  public requestSsoServiceToken(
+    query: SsoServiceTokenQueryDto,
+  ): Observable<string> {
     return this.casService.requestSt(query);
   }
 }

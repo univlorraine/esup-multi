@@ -1,3 +1,3 @@
 export interface DirectusResponse<T> {
-    data: T;
+  data: T;
 }

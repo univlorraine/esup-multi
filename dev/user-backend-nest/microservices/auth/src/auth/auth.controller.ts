@@ -4,7 +4,7 @@ import {
   AuthenticatedDto,
   AuthenticateQueryDto,
   LogoutQueryDto,
-  SsoServiceTokenQueryDto
+  SsoServiceTokenQueryDto,
 } from './auth.dto';
 import { AuthService } from './auth.service';
 import { MessagePattern } from '@nestjs/microservices';

@@ -14,6 +14,7 @@ import { ProjectModuleService, translationsLoaderFactory } from '@ul/shared';
 import { InfoPageModule } from '@ul/info';
 import { PreferencesPageModule } from '@ul/preferences';
 import { AuthModule } from '@ul/auth';
+import { MapModule } from '@ul/map';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,6 +27,7 @@ import { AuthModule } from '@ul/auth';
     InfoPageModule,
     PreferencesPageModule,
     AuthModule,
+    MapModule,
     TranslateModule.forRoot({
         defaultLanguage: 'fr',
         loader: {

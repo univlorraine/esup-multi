@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthModule } from '@ul/auth';
 import { InfoPageModule } from '@ul/info';
+import { MapModule } from '@ul/map';
 import { PreferencesPageModule } from '@ul/preferences';
 
 
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: PreferencesPageModule.path,
     loadChildren: () => import('@ul/preferences').then( m => m.PreferencesPageModule)
+  },
+  {
+    path: MapModule.path,
+    loadChildren: () => import('@ul/map').then( m => m.MapModule)
   },
 ];
 

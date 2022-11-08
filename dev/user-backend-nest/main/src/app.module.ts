@@ -2,8 +2,9 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ClientsModule } from '@nestjs/microservices';
 import { AppController } from './app.controller';
-import microserviceInfoConfig from './config/microservice-info.config';
 import microserviceAuthConfig from './config/microservice-auth.config';
+import microserviceInfoConfig from './config/microservice-info.config';
+import microserviceMapConfig from './config/microservice-map.config';
 
 @Module({
   imports: [
@@ -19,6 +20,12 @@ import microserviceAuthConfig from './config/microservice-auth.config';
         name: 'AUTH_SERVICE',
         imports: [ConfigModule.forFeature(microserviceAuthConfig)],
         useFactory: (config: ConfigService) => config.get('microservice-auth'),
+        inject: [ConfigService],
+      },
+      {
+        name: 'MAP_SERVICE',
+        imports: [ConfigModule.forFeature(microserviceMapConfig)],
+        useFactory: (config: ConfigService) => config.get('microservice-map'),
         inject: [ConfigService],
       },
     ]),

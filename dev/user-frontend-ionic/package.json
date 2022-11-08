@@ -16,7 +16,7 @@
     "module:create": "npx ng g library",
     "module:build": "npx ng build --project=",
     "module:watch": "npx ng build --watch --project=",
-    "module:build-all": "npm run module:build shared && npm run module:build preferences && npm run module:build info && npm run module:build auth",
+    "module:build-all": "npm run module:build shared && npm run module:build preferences && npm run module:build info && npm run module:build auth && npm run module:build map",
     "dev:android": "ionic capacitor run android --open -l --external",
     "dev:ios": "ionic capacitor run ios --open -l --external"
   },
@@ -46,6 +46,7 @@
     "@ngneat/react-rxjs": "^1.1.0",
     "@ngx-translate/core": "^14.0.0",
     "ionicons": "^6.0.3",
+    "leaflet": "^1.9.2",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"
@@ -64,6 +65,7 @@
     "@ionic/angular-toolkit": "^6.0.0",
     "@types/jasmine": "~3.6.0",
     "@types/jasminewd2": "~2.0.3",
+    "@types/leaflet": "^1.9.0",
     "@types/node": "^12.11.1",
     "@typescript-eslint/eslint-plugin": "5.3.0",
     "@typescript-eslint/parser": "5.3.0",

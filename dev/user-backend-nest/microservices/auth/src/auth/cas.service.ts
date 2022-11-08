@@ -51,7 +51,10 @@ export class CasService {
   }
 
   public requestSt(query: SsoServiceTokenQueryDto): Observable<string> {
-    const url = this.casUrlConfig.requestSt.replace(/\{tgt\}/g, query.authToken);
+    const url = this.casUrlConfig.requestSt.replace(
+      /\{tgt\}/g,
+      query.authToken,
+    );
     const params = new URLSearchParams();
     params.append('service', query.service);
     return this.httpService

@@ -1,0 +1,14 @@
+{
+    "MENU": "Plan",
+    "YOUR_POSITION": "Votre localisation",
+    "CATEGORY_FILTER": "Filtrer par catégories",
+    "CATEGORY": {
+        "PRESIDENCES": "Présidences",
+        "COMPOSANTES": "Composantes",
+        "BUS": "Bibliothèques",
+        "RESTOS": "Restos U",
+        "CITES": "Cités U",
+        "SANTES": "Services de Santé",
+        "SUAPS": "SUAPS"
+    }
+}
