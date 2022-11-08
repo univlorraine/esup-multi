@@ -1,0 +1,25 @@
+<ion-progress-bar *ngIf="isLoading" type="indeterminate" color="primary"></ion-progress-bar>
+
+<ion-content scroll="false">
+    <div class="map-page">
+        <ion-item>
+            <ion-select 
+                placeholder="{{ 'MAP.CATEGORY_FILTER' | translate }}" 
+                [multiple]="true"
+                (ionChange)="onCategoryFilterChange($event)"
+                >
+                <ion-select-option value="presidences_points">{{ 'MAP.CATEGORY.PRESIDENCES' | translate }}</ion-select-option>
+                <ion-select-option value="composantes_points">{{ 'MAP.CATEGORY.COMPOSANTES' | translate }}</ion-select-option>
+                <ion-select-option value="bus_points">{{ 'MAP.CATEGORY.BUS' | translate }}</ion-select-option>
+                <ion-select-option value="restos_points">{{ 'MAP.CATEGORY.RESTOS' | translate }}</ion-select-option>
+                <ion-select-option value="cites_points">{{ 'MAP.CATEGORY.CITES' | translate }}</ion-select-option>
+                <ion-select-option value="santes_points">{{ 'MAP.CATEGORY.SANTES' | translate }}</ion-select-option>
+                <ion-select-option value="suaps_points">{{ 'MAP.CATEGORY.SUAPS' | translate }}</ion-select-option>
+            </ion-select>
+            <ion-button slot="end" (click)="onLocateUserClick()">
+                <ion-icon slot="icon-only" name="locate"></ion-icon>
+            </ion-button>
+        </ion-item>
+        <div id="map"></div>
+    </div>
+</ion-content>

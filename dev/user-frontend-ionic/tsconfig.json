@@ -18,6 +18,9 @@
       ],
       "@ul/preferences": [
         "dist/preferences"
+      ],
+      "@ul/map": [
+        "dist/map"
       ]
     },
     "downlevelIteration": true,
@@ -26,7 +29,9 @@
     "importHelpers": true,
     "target": "es2015",
     "module": "es2020",
-    "lib": ["es2018", "dom"]
+    "lib": ["es2018", "dom"],
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

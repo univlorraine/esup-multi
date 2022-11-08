@@ -16,6 +16,7 @@ export class AppController {
   constructor(
     @Inject('INFO_SERVICE') private infoClient: ClientProxy,
     @Inject('AUTH_SERVICE') private authClient: ClientProxy,
+    @Inject('MAP_SERVICE') private mapClient: ClientProxy,
   ) {}
 
   @Get('/info')
@@ -55,6 +56,16 @@ export class AppController {
         cmd: 'requestSsoServiceToken',
       },
       body,
+    );
+  }
+
+  @Get('/map')
+  map() {
+    return this.mapClient.send(
+      {
+        cmd: 'map',
+      },
+      {},
     );
   }
 }
