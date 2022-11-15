@@ -26,12 +26,13 @@ export class MapModule {
     this.projectModuleService.initProjectModule({
       name: 'map',
       translation: true,
-      menuItem: {
-        title: 'MAP.MENU',
+      tileItems: [{
+        title: 'MAP.TILE.TITLE',
         icon: 'map',
         position: 60,
-        path: MapModule.path
-      }
+        path: MapModule.path,
+        description : 'MAP.TILE.DESCRIPTION',
+      }]
     });
   }
 }

@@ -17,6 +17,7 @@ export interface AuthenticatedUser {
   name: string;
   firstname: string;
   email: string;
+  roles: string[];
 }
 
 const authStore = createStore(
