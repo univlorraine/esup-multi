@@ -1,5 +1,8 @@
 {
-    "MENU": "Plan",
+    "TILE": {
+        "TITLE": "Plan",
+        "DESCRIPTION": "Retrouvez tous les lieux d'intéret de votre faculté et leurs coordonnées sur une carte."
+    },
     "YOUR_POSITION": "Votre localisation",
     "CATEGORY_FILTER": "Filtrer par catégories",
     "CATEGORY": {

@@ -1,3 +1,17 @@
+
 <ion-content class="ion-padding">
-  {{ 'HOME.HOME_WELCOME' | translate }}
+
+  <ion-card *ngFor="let tile of tileItems" routerLink="/{{tile.path}}">
+    <ion-card-header>
+      <ion-card-title>
+        <ion-icon name="{{tile.icon}}" class="icon"></ion-icon>
+        {{tile.title | translate}}
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      
+      <ion-label>{{tile.description | translate}}</ion-label>
+
+    </ion-card-content>
+  </ion-card>
 </ion-content>

@@ -8,6 +8,7 @@ export interface UserProfileDto {
   name: string;
   firstname: string;
   email: string;
+  roles: string[];
 }
 
 export interface AuthenticatedDto extends UserProfileDto {
