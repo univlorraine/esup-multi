@@ -5,6 +5,7 @@ import { AppController } from './app.controller';
 import microserviceAuthConfig from './config/microservice-auth.config';
 import microserviceInfoConfig from './config/microservice-info.config';
 import microserviceMapConfig from './config/microservice-map.config';
+import microserviceRssConfig from './config/microservice-rss.config';
 
 @Module({
   imports: [
@@ -26,6 +27,12 @@ import microserviceMapConfig from './config/microservice-map.config';
         name: 'MAP_SERVICE',
         imports: [ConfigModule.forFeature(microserviceMapConfig)],
         useFactory: (config: ConfigService) => config.get('microservice-map'),
+        inject: [ConfigService],
+      },
+      {
+        name: 'RSS_SERVICE',
+        imports: [ConfigModule.forFeature(microserviceRssConfig)],
+        useFactory: (config: ConfigService) => config.get('microservice-rss'),
         inject: [ConfigService],
       },
     ]),

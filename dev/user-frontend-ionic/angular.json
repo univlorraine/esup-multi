@@ -58,7 +58,13 @@
                 "glob": "*.png",
                 "input": "node_modules/leaflet/dist/images",
                 "output": "assets/map/leaflet"
+              },
+              {
+                "glob": "**/*",
+                "input": "projects/rss/assets/i18n",
+                "output": "/assets/i18n/rss"
               }
+              
             ],
             "styles": ["src/theme/variables.scss", "src/global.scss"],
             "scripts": [],
@@ -369,6 +375,46 @@
             "lintFilePatterns": [
               "projects/map/**/*.ts",
               "projects/map/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "rss": {
+      "projectType": "library",
+      "root": "projects/rss",
+      "sourceRoot": "projects/rss/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/rss/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/rss/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/rss/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/rss/src/test.ts",
+            "tsConfig": "projects/rss/tsconfig.spec.json",
+            "karmaConfig": "projects/rss/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/rss/**/*.ts",
+              "projects/rss/**/*.html"
             ]
           }
         }
