@@ -1,20 +1,21 @@
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { RouteReuseStrategy } from '@angular/router';
 
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
-import { AppComponent } from './app.component';
-import { AppRoutingModule } from './app-routing.module';
-import { environment } from '../environments/environment';
-import { ErrorModule } from './error/error.module';
-import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
-import { ProjectModuleService, translationsLoaderFactory } from '@ul/shared';
-import { InfoPageModule } from '@ul/info';
-import { PreferencesPageModule } from '@ul/preferences';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { AuthModule } from '@ul/auth';
+import { InfoPageModule } from '@ul/info';
 import { MapModule } from '@ul/map';
+import { PreferencesPageModule } from '@ul/preferences';
+import { RssPageModule } from '@ul/rss';
+import { ProjectModuleService, translationsLoaderFactory } from '@ul/shared';
+import { environment } from '../environments/environment';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { ErrorModule } from './error/error.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,6 +29,7 @@ import { MapModule } from '@ul/map';
     PreferencesPageModule,
     AuthModule,
     MapModule,
+    RssPageModule,
     TranslateModule.forRoot({
         defaultLanguage: 'fr',
         loader: {

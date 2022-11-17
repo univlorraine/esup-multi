@@ -4,6 +4,7 @@ import { AuthModule } from '@ul/auth';
 import { InfoPageModule } from '@ul/info';
 import { MapModule } from '@ul/map';
 import { PreferencesPageModule } from '@ul/preferences';
+import { RssPageModule } from '@ul/rss';
 
 
 const routes: Routes = [
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path: MapModule.path,
     loadChildren: () => import('@ul/map').then( m => m.MapModule)
+  },
+  {
+    path: RssPageModule.path,
+    loadChildren: () => import('@ul/rss').then( m => m.RssPageModule)
   },
 ];
 

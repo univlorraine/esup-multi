@@ -5,7 +5,7 @@ import {
   Get,
   Inject,
   Post,
-  UseInterceptors,
+  UseInterceptors
 } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { ErrorsInterceptor } from './interceptors/errors.interceptor';
@@ -17,6 +17,7 @@ export class AppController {
     @Inject('INFO_SERVICE') private infoClient: ClientProxy,
     @Inject('AUTH_SERVICE') private authClient: ClientProxy,
     @Inject('MAP_SERVICE') private mapClient: ClientProxy,
+    @Inject('RSS_SERVICE') private rssClient: ClientProxy,
   ) {}
 
   @Get('/info')
@@ -64,6 +65,16 @@ export class AppController {
     return this.mapClient.send(
       {
         cmd: 'map',
+      },
+      {},
+    );
+  }
+
+  @Get('/rss')
+  rss() {
+    return this.rssClient.send(
+      {
+        cmd: 'rss',
       },
       {},
     );
