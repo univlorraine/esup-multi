@@ -45,6 +45,7 @@
     "@ngneat/elf-persist-state": "^1.1.6",
     "@ngneat/react-rxjs": "^1.1.0",
     "@ngx-translate/core": "^14.0.0",
+    "date-fns": "^2.29.3",
     "ionicons": "^6.0.3",
     "leaflet": "^1.9.2",
     "rxjs": "~6.6.0",
