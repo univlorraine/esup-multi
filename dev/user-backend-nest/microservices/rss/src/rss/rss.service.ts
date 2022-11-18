@@ -1,6 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { RpcException } from '@nestjs/microservices';
+import { decode } from 'html-entities';
 import parse from 'rss-to-json';
 import { catchError, from, map, Observable } from 'rxjs';
 import { FeedItem } from './feed-item.dto';
@@ -21,8 +22,8 @@ export class RssService {
         this.logger.error(errorMessage, err);
         throw new RpcException(errorMessage);
       }),
-      map((res) => {
-        return res.items;
+      map((res: any) => {
+        return res.items.map((item) => ({ ...item, title: decode(item.title) }));
       }),
     );
   }

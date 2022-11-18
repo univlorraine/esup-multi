@@ -4,7 +4,7 @@
 <ion-content *ngIf="(rssFeedIsEmpty$ | async) === false">
   <ion-card *ngFor="let item of (rssFeed$ | async)" (click)="onClick(item)">
     <ion-card-header>
-      <ion-card-subtitle>Publié le {{item.published}}</ion-card-subtitle>
+      <ion-card-subtitle>{{item.published | relativeTime}}</ion-card-subtitle>
       <ion-card-title>
         <ion-icon name="link" class="title-icon" *ngIf="item"></ion-icon>
         {{item.title}}

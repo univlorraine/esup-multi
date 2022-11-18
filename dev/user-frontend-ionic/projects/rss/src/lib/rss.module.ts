@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { ProjectModuleService } from '@ul/shared';
+import { RelativeTimePipe } from './relative-time-pipe';
 import { RssPageRoutingModule } from './rss-routing.module';
 import { RssPage } from './rss.page';
 
@@ -15,7 +16,8 @@ import { RssPage } from './rss.page';
     TranslateModule,
   ],
   declarations: [
-    RssPage
+    RssPage,
+    RelativeTimePipe
   ],
 
 })
