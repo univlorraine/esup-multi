@@ -31,7 +31,7 @@ import { ErrorModule } from './error/error.module';
     MapModule,
     RssPageModule,
     TranslateModule.forRoot({
-        defaultLanguage: 'fr',
+        defaultLanguage: environment.defaultLanguage || 'fr',
         loader: {
             provide: TranslateLoader,
             useFactory: translationsLoaderFactory,
