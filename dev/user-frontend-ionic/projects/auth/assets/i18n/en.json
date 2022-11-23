@@ -1,0 +1,20 @@
+{
+    "MENU": "Login",
+    "PREFERENCES": {
+        "TITLE": "Authentication",
+        "SAVE_CREDENTIALS": "Save credentials during authentication"
+    },
+    "LOGIN": {
+        "USERNAME": "Username",
+        "PASSWORD": "Password",
+        "SUBMIT": "Log in",
+        "REQUIRED": {
+            "USERNAME": "Password required",
+            "PASSWORD": "Username required"
+        }
+    },
+    "CONNECTED": {
+        "HELLO": "Hello",
+        "LOGOUT": "Log out"
+    }
+}

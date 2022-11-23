@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  apiEndpoint: 'http://localhost:3000'
+  apiEndpoint: 'http://localhost:3000',
+  languages: ['fr', 'en'],
+  defaultLanguage: 'fr'
 };
 
 /*
