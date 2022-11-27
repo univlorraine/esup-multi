@@ -1,14 +1,23 @@
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { ProjectModuleService } from '@ul/shared';
 import { MapRoutingModule } from './map-routing.module';
 import { MapPage } from './map.page';
 
-
-
-
+const initModule = (projectModuleService: ProjectModuleService) =>
+  () => projectModuleService.initProjectModule({
+    name: 'map',
+    translation: true,
+    tileItems: [{
+      title: 'MAP.TILE.TITLE',
+      icon: 'map',
+      position: 60,
+      path: MapModule.path,
+      description : 'MAP.TILE.DESCRIPTION',
+    }]
+  });
 
 @NgModule({
   imports: [
@@ -17,22 +26,14 @@ import { MapPage } from './map.page';
     MapRoutingModule,
     TranslateModule,
   ],
-  declarations: [MapPage]
+  declarations: [MapPage],
+  providers: [{
+    provide: APP_INITIALIZER,
+    useFactory: initModule,
+    deps:[ProjectModuleService],
+    multi: true
+  }],
 })
 export class MapModule {
   static path = 'map';
-
-  constructor(private projectModuleService: ProjectModuleService) {
-    this.projectModuleService.initProjectModule({
-      name: 'map',
-      translation: true,
-      tileItems: [{
-        title: 'MAP.TILE.TITLE',
-        icon: 'map',
-        position: 60,
-        path: MapModule.path,
-        description : 'MAP.TILE.DESCRIPTION',
-      }]
-    });
-  }
 }
