@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
@@ -9,8 +9,18 @@ import { ConnectedPage } from './connected/connected.page';
 import { LoginPage } from './login/login.page';
 import { PreferencesComponent } from './preferences/preferences.component';
 
-
-
+const initModule = (projectModuleService: ProjectModuleService) =>
+  () => projectModuleService.initProjectModule({
+    name: 'auth',
+    translation: true,
+    menuItem: {
+      title: 'AUTH.MENU',
+      icon: 'log-in',
+      position: 999,
+      path: AuthModule.path
+    },
+    preferencesComponent: PreferencesComponent
+  });
 @NgModule({
   declarations: [
     LoginPage,
@@ -24,22 +34,14 @@ import { PreferencesComponent } from './preferences/preferences.component';
     AuthRoutingModule,
     ReactiveFormsModule,
     TranslateModule,
-  ]
+  ],
+  providers: [{
+    provide: APP_INITIALIZER,
+    useFactory: initModule,
+    deps:[ProjectModuleService],
+    multi: true
+  }],
 })
 export class AuthModule {
   static path = 'auth';
-
-  constructor(private projectModuleService: ProjectModuleService) {
-    this.projectModuleService.initProjectModule({
-      name: 'auth',
-      translation: true,
-      menuItem: {
-        title: 'AUTH.MENU',
-        icon: 'log-in',
-        position: 999,
-        path: AuthModule.path
-      },
-      preferencesComponent: PreferencesComponent
-    });
-  }
 }

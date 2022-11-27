@@ -78,12 +78,10 @@ Il faut ensuite modifier la section "build" du fichier `angular.json` afin de ra
 
 Et enfin à l'initialisation dans le constructeur du module Angular (`projects/[mon-module]/src/lib/[mon-module].module.ts`), il faut faire appel au `ProjectModuleService` de shared afin d'indiquer que mon module contient des traductions :
 ```typescript
-constructor(private projectModuleService: ProjectModuleService) {
-    this.projectModuleService.initProjectModule({
-      name: '[mon module]',
-      translation: true
-    });
-  }
+projectModuleService.initProjectModule({
+  name: '[mon module]',
+  translation: true
+});
 ```
 Notez que toutes les clés de traduction du module seront préfixées par ce que vous aurez passé à `addTranslation()` mais converties en majuscules (`addTranslation('info')` --> `'INFO.XXX'`).
 

@@ -17,8 +17,6 @@ export interface InitProjectModuleOptions {
 })
 export class ProjectModuleService {
 
-    private initializedProjectModules = new Set<string>();
-
     constructor(
         private preferencesService: PreferencesService,
         private translationsService: TranslationsService,
@@ -27,13 +25,6 @@ export class ProjectModuleService {
     ) {}
 
     initProjectModule(options: InitProjectModuleOptions) {
-        // prevent multiple initialization
-        if (this.initializedProjectModules.has(options.name)) {
-            return;
-        }
-
-        this.initializedProjectModules.add(options.name);
-
         if (options.preferencesComponent) {
             this.preferencesService.addPreferencesComponent(options.preferencesComponent);
         }
