@@ -5,10 +5,13 @@ import {
   Get,
   Inject,
   Post,
-  UseInterceptors
+  Request,
+  UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { ErrorsInterceptor } from './interceptors/errors.interceptor';
+import { AuthGuard } from '@nestjs/passport';
 
 @UseInterceptors(new ErrorsInterceptor())
 @Controller()
@@ -50,11 +53,73 @@ export class AppController {
     );
   }
 
+  @Post('/keep-auth/reauth')
+  @UseGuards(AuthGuard('auth-jwt'))
+  reauthenticateUsingSavedCredentials(@Request() request) {
+    const jwtPayload = request.user;
+    return this.authClient.send(
+      {
+        cmd: 'reauthenticateUsingSavedCredentials',
+      },
+      jwtPayload,
+    );
+  }
+
+  @Post('/keep-auth/auth')
+  authenticateAndSaveCredentials(@Body() body) {
+    return this.authClient.send(
+      {
+        cmd: 'authenticateAndSaveCredentials',
+      },
+      body,
+    );
+  }
+
+  @Delete('/keep-auth/auth')
+  @UseGuards(AuthGuard('auth-jwt'))
+  logoutAndDeleteCredentials(@Body() body, @Request() request) {
+    const jwtPayload = request.user;
+    return this.authClient.send(
+      {
+        cmd: 'logoutAndDeleteCredentials',
+      },
+      {
+        ...body,
+        ...jwtPayload,
+      },
+    );
+  }
+
+  @Delete('/keep-auth/reauth')
+  @UseGuards(AuthGuard('auth-jwt'))
+  deleteCredentials(@Request() request) {
+    const jwtPayload = request.user;
+    return this.authClient.send(
+      {
+        cmd: 'deleteCredentials',
+      },
+      {
+        ...jwtPayload,
+      },
+    );
+  }
+
   @Post('/sso-service-token')
   requestSsoServiceToken(@Body() body) {
     return this.authClient.send(
       {
         cmd: 'requestSsoServiceToken',
+      },
+      body,
+    );
+  }
+
+  @Post('/keep-auth/reauth-if-needed')
+  @UseGuards(AuthGuard('auth-jwt'))
+  reauthenticateIfNeeded(@Body() body) {
+    return this.authClient.send(
+      {
+        cmd: 'reauthenticateIfNeeded',
       },
       body,
     );

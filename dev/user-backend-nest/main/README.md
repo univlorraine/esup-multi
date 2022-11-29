@@ -7,6 +7,7 @@
 
 - `AUTH_SERVICE_HOST`: Hôte du microservice `auth`.
 - `AUTH_SERVICE_PORT`: Port du microservice `auth`.
+- `AUTH_SERVICE_JWT_SECRET`: Le secret du JWT qui protège les URLs de ré-authentification.
 
 - `MAP_SERVICE_HOST`: Hôte du microservice `map`.
 - `MAP_SERVICE_PORT`: Port du microservice `map`.

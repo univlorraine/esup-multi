@@ -2,7 +2,7 @@ import { HttpService } from '@nestjs/axios';
 import { Injectable, Logger, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { RpcException } from '@nestjs/microservices';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { CasUrl } from '../config/configuration.interface';
 import { AuthenticateQueryDto, SsoServiceTokenQueryDto } from './auth.dto';
@@ -22,6 +22,22 @@ export class CasService {
     private readonly httpService: HttpService,
   ) {
     this.casUrlConfig = this.configService.get<CasUrl>('casUrl');
+  }
+
+  public isTgtValid(tgt: string): Observable<boolean> {
+    const url = this.casUrlConfig.validateTgt.replace(/\{tgt\}/g, tgt);
+    return this.httpService.get<any>(url).pipe(
+      map(() => true),
+      catchError((err) => {
+        switch (err.response.status) {
+          case 404:
+            return of(false);
+
+          default:
+            throw new RpcException(err);
+        }
+      }),
+    );
   }
 
   public requestTgt(query: AuthenticateQueryDto): Observable<string> {
@@ -60,10 +76,18 @@ export class CasService {
     return this.httpService
       .post<string>(url, params, { headers: CAS_HEADERS })
       .pipe(
-        catchError((err) => {
-          throw new RpcException(err);
-        }),
         map((res) => res.data),
+        catchError((err) => {
+          switch (err.response.status) {
+            case 404:
+              throw new RpcException(
+                new UnauthorizedException(`Invalid or expired authentication'`),
+              );
+
+            default:
+              throw new RpcException(err);
+          }
+        }),
       );
   }
 
