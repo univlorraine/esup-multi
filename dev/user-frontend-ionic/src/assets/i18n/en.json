@@ -1,5 +1,12 @@
 {
     "HOME": {
         "MENU": "Home"
+    },
+    "ERROR": {
+        "UNKNOWN": "Unexpected error",
+        "UNAUTHENTICATED": {
+            "TITLE": "Restricted access",
+            "MESSAGE": "Please login before accessing this feature"
+        }
     }
 }

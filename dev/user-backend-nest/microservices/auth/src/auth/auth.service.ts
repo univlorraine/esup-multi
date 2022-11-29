@@ -7,6 +7,7 @@ import {
   LogoutQueryDto,
   SsoServiceTokenQueryDto,
   UserProfileDto,
+  IsAuthenticationValidQueryDto,
 } from './auth.dto';
 import { CasService } from './cas.service';
 import { UserService } from './user.service';
@@ -47,5 +48,11 @@ export class AuthService {
     query: SsoServiceTokenQueryDto,
   ): Observable<string> {
     return this.casService.requestSt(query);
+  }
+
+  public isAuthenticationValid(
+    query: IsAuthenticationValidQueryDto,
+  ): Observable<boolean> {
+    return this.casService.isTgtValid(query.authToken);
   }
 }

@@ -20,6 +20,10 @@ export interface LogoutQueryDto {
   authToken: string;
 }
 
+export interface IsAuthenticationValidQueryDto {
+  authToken: string;
+}
+
 export interface SsoServiceTokenQueryDto {
   authToken: string;
   service: string;

@@ -1,5 +1,12 @@
 {
     "HOME": {
         "MENU": "Accueil"
+    },
+    "ERROR": {
+        "UNKNOWN": "Erreur innatendue",
+        "UNAUTHENTICATED": {
+            "TITLE": "Accès protégé",
+            "MESSAGE": "Vous devez être authentifié pour accéder à cette fonctionnalité"
+        }
     }
 }

@@ -2,14 +2,19 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ClientsModule } from '@nestjs/microservices';
 import { AppController } from './app.controller';
+import { AuthJwtStrategy } from './security/auth-jwt.strategy';
+import { PassportModule } from '@nestjs/passport';
 import microserviceAuthConfig from './config/microservice-auth.config';
 import microserviceInfoConfig from './config/microservice-info.config';
 import microserviceMapConfig from './config/microservice-map.config';
 import microserviceRssConfig from './config/microservice-rss.config';
+import configuration from './config/configuration';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({}),
+    ConfigModule.forRoot({
+      load: [configuration],
+    }),
     ClientsModule.registerAsync([
       {
         name: 'INFO_SERVICE',
@@ -36,8 +41,9 @@ import microserviceRssConfig from './config/microservice-rss.config';
         inject: [ConfigService],
       },
     ]),
+    PassportModule,
   ],
   controllers: [AppController],
-  providers: [],
+  providers: [AuthJwtStrategy],
 })
 export class AppModule {}

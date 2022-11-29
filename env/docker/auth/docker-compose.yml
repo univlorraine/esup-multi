@@ -1,0 +1,29 @@
+version: "3.7"
+services:
+
+  mongo:
+    image: mongo
+    container_name: auth-mongo
+    ports:
+      - 27017:27017
+    networks:
+      - auth
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+
+  mongo-express:
+    image: mongo-express
+    container_name: auth-mongo-express
+    restart: unless-stopped
+    networks:
+      - auth
+    depends_on:
+      - mongo
+    ports:
+      - 8081:8081
+    environment:      
+      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
+
+networks:
+  auth:

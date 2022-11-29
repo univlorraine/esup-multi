@@ -38,6 +38,7 @@ export class LoginPage implements OnInit {
   }
 
   ionViewWillEnter() {
+    this.isLoading = false;
     this.loginForm.reset();
   }
 

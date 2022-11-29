@@ -9,7 +9,7 @@ import {
 import { AuthService } from './auth.service';
 import { MessagePattern } from '@nestjs/microservices';
 
-@Controller('auth')
+@Controller()
 export class AuthController {
   constructor(private authService: AuthService) {}
 

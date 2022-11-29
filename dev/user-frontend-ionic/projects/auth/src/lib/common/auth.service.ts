@@ -1,52 +1,37 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
-import { AuthenticatedUser, authenticatedUser$, updateUser } from '@ul/shared';
-import { Observable, of, throwError } from 'rxjs';
-import { catchError, concatMap, first, map, tap } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { AuthenticatedUser, getRefreshAuthToken } from '@ul/shared';
+import { Observable } from 'rxjs';
+import { KeepAuthService } from './keep-auth.service';
+import { StandardAuthService } from './standard-auth.service';
+import { saveCredentialsOnAuthentication$ } from '../preferences/preferences.repository';
+import { concatMap, first } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-
   constructor(
-    @Inject('environment')
-    private environment: any,
-    private http: HttpClient) { }
+    private standardAuthService: StandardAuthService,
+    private keepAuthService: KeepAuthService,
+  ) { }
 
   login(username: string, password: string): Observable<AuthenticatedUser | null> {
-
-    const url = `${this.environment.apiEndpoint}/auth`;
-    const data = {
-      username,
-      password,
-    };
-
-    return this.http.post<AuthenticatedUser>(url, data, {}).pipe(
-      tap(authenticatedUser => updateUser(authenticatedUser)),
-      catchError(err => {
-        if (err instanceof HttpErrorResponse) {
-
-          if (err.status === 401) {
-            return of(null);
-          }
-
-          return throwError(err);
-        }
-      }));
+    return saveCredentialsOnAuthentication$.pipe(
+      first(),
+      concatMap(saveCredentialsOnAuthentication => saveCredentialsOnAuthentication ?
+        this.keepAuthService.login(username, password) :
+        this.standardAuthService.login(username, password)
+      )
+    );
   }
 
   logout(): Observable<boolean> {
-    const url = `${this.environment.apiEndpoint}/auth`;
-
-    return authenticatedUser$.pipe(
-      first(),
-      map(authenticatedUser => authenticatedUser.authToken),
-      concatMap(authToken => this.http.delete<boolean>(url, {
-        body: { authToken }
-      })),
-      tap(() => updateUser(null))
+    return getRefreshAuthToken().pipe(
+      concatMap(token => token ?
+        this.keepAuthService.logout(token) :
+        this.standardAuthService.logout()
+      )
     );
   }
 }
