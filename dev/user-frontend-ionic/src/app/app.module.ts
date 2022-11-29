@@ -7,6 +7,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { AuthModule } from '@ul/auth';
+import { CardsPageModule } from '@ul/cards';
 import { InfoPageModule } from '@ul/info';
 import { MapModule } from '@ul/map';
 import { PreferencesPageModule } from '@ul/preferences';
@@ -30,6 +31,7 @@ import { ErrorModule } from './error/error.module';
     AuthModule,
     MapModule,
     RssPageModule,
+    CardsPageModule,
     TranslateModule.forRoot({
         defaultLanguage: environment.defaultLanguage || 'fr',
         loader: {

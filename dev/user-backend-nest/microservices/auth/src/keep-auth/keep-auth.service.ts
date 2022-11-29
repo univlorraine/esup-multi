@@ -16,7 +16,6 @@ import { JwtService } from '@nestjs/jwt';
 import { Cron } from '@nestjs/schedule';
 import { ConfigService } from '@nestjs/config';
 import * as dotenv from 'dotenv';
-import { CasService } from 'src/auth/cas.service';
 
 dotenv.config(); // used to get process.env access prior to AppModule instanciation (typically in @Cron decorators)
 @Injectable()
@@ -26,7 +25,6 @@ export class KeepAuthService {
   private credentialsCleanupNotUsedSinceInDays: number;
 
   constructor(
-    private readonly casService: CasService,
     private readonly authService: AuthService,
     private readonly encryptionService: AesEncryptionService,
     private readonly userCredentialsRepository: UserCredentialsRepository,
@@ -108,8 +106,8 @@ export class KeepAuthService {
   public logoutAndDeleteCredentials(
     query: KeepAuthenticatedLogoutQueryDto,
   ): Observable<boolean> {
-    return this.casService
-      .logout(query.authToken)
+    return this.authService
+      .logout({ authToken: query.authToken })
       .pipe(
         tap(() =>
           this.userCredentialsRepository.removeCredentialsById(query.uuid),

@@ -1,0 +1,52 @@
+<ion-progress-bar *ngIf="isLoading" type="indeterminate" color="primary"></ion-progress-bar>
+
+<ion-content *ngIf="(userAndCardsData$ | async) as userCards">
+
+  <ion-content *ngIf="!userCards.errors">
+
+    <ion-content *ngIf="!userCards.cards.staffCard">
+      <ion-card class="card" *ngFor="let card of userCards.cards | keyvalue" [routerLink]="['/card', card.key]">
+        <ion-card-header>
+          <ion-card-subtitle> </ion-card-subtitle>
+          <ion-card-title class="warning">
+            {{card.value.title}}
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <app-student-card *ngIf="card.key === 'studentCard'" [userAndCardsData]="userCards"></app-student-card>
+          <app-eu-student-card *ngIf="card.key === 'euStudentCard'" [userAndCardsData]="userCards"></app-eu-student-card>
+        </ion-card-content>
+      </ion-card>
+    </ion-content>
+
+    <ion-content *ngIf="userCards.cards.staffCard">
+      <ion-card>
+        <ion-card-content>
+          <app-staff-card [userAndCardsData]="userCards"></app-staff-card>
+        </ion-card-content>
+      </ion-card>
+      <ion-row class="ion-justify-content-center">
+      <qrcode  *ngIf="userCards.cards.staffCard.qrCode" [qrdata]="userCards.cards.staffCard.qrCode.value" [errorCorrectionLevel]="'M'"
+        [width]="400"></qrcode>
+      </ion-row>
+    </ion-content>
+
+  </ion-content>
+
+  <ion-content *ngIf="userCards.errors">
+
+    <ion-content class="ion-padding" *ngIf="!userCards.cards.staffCard">
+      <ion-note class="column" *ngFor="let error of userCards.errors"> {{ 'CARDS.ERRORS_STUDENT.' + error | translate}}</ion-note>
+    </ion-content>
+
+    <ion-content class="ion-padding" *ngIf="userCards.cards.staffCard">
+      <ion-note class="column" *ngFor="let error of userCards.errors"> {{ 'CARDS.ERRORS_STAFF.' + error | translate}}</ion-note>
+    </ion-content>
+
+  </ion-content>
+
+</ion-content>
+
+<ion-content class="ion-padding" *ngIf="(userAndCardsData$ | async) === null && !isLoading">
+  <ion-note> {{ "CARDS.ERRORS.NO_DATA" | translate }} </ion-note>
+</ion-content>

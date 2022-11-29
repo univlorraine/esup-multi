@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthModule } from '@ul/auth';
+import { CardsPageModule } from '@ul/cards';
 import { InfoPageModule } from '@ul/info';
 import { MapModule } from '@ul/map';
 import { PreferencesPageModule } from '@ul/preferences';
@@ -36,6 +37,10 @@ const routes: Routes = [
   {
     path: RssPageModule.path,
     loadChildren: () => import('@ul/rss').then( m => m.RssPageModule)
+  },
+  {
+    path: CardsPageModule.path,
+    loadChildren: () => import('@ul/cards').then( m => m.CardsPageModule)
   },
 ];
 

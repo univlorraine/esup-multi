@@ -10,7 +10,7 @@ export interface UlApi {
   userProfileUrl: string;
 }
 
-export interface CredentialsCleanup {
+export interface ScheduledCleanup {
   schedule: string;
   notUsedSinceInDays: number;
 }

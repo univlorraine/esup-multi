@@ -12,6 +12,7 @@ import {
 import { ClientProxy } from '@nestjs/microservices';
 import { ErrorsInterceptor } from './interceptors/errors.interceptor';
 import { AuthGuard } from '@nestjs/passport';
+import { concatMap } from 'rxjs';
 
 @UseInterceptors(new ErrorsInterceptor())
 @Controller()
@@ -21,6 +22,7 @@ export class AppController {
     @Inject('AUTH_SERVICE') private authClient: ClientProxy,
     @Inject('MAP_SERVICE') private mapClient: ClientProxy,
     @Inject('RSS_SERVICE') private rssClient: ClientProxy,
+    @Inject('CARDS_SERVICE') private cardsClient: ClientProxy,
   ) {}
 
   @Get('/info')
@@ -143,5 +145,26 @@ export class AppController {
       },
       {},
     );
+  }
+
+  @Post('/cards')
+  cards(@Body() body) {
+    return this.authClient
+      .send(
+        {
+          cmd: 'getUsername',
+        },
+        body,
+      )
+      .pipe(
+        concatMap((username) =>
+          this.cardsClient.send(
+            {
+              cmd: 'cards',
+            },
+            username,
+          ),
+        ),
+      );
   }
 }

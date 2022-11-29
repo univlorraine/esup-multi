@@ -16,7 +16,7 @@
     "module:create": "npx ng g library",
     "module:build": "npx ng build --project=",
     "module:watch": "npx ng build --watch --project=",
-    "module:build-all": "npm run module:build shared && npm run module:build preferences && npm run module:build info && npm run module:build auth && npm run module:build map && npm run module:build rss",
+    "module:build-all": "npm run module:build shared && npm run module:build preferences && npm run module:build info && npm run module:build auth && npm run module:build map && npm run module:build rss && npm run module:build cards",
     "dev:android": "ionic capacitor run android --open -l --external",
     "dev:ios": "ionic capacitor run ios --open -l --external"
   },
@@ -45,6 +45,7 @@
     "@ngneat/elf-persist-state": "^1.1.6",
     "@ngneat/react-rxjs": "^1.1.0",
     "@ngx-translate/core": "^14.0.0",
+    "angularx-qrcode": "^14.0.0",
     "capacitor-secure-storage-plugin": "^0.8.0",
     "date-fns": "^2.29.3",
     "ionicons": "^6.0.3",

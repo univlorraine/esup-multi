@@ -42,6 +42,7 @@ export class HomePage implements OnInit {
         for (const role of authenticatedUser.roles) {
           if (tileItem.roles.includes(role)) {
             sortedTileItems.push(tileItem);
+            break;
           }
         }
       }
