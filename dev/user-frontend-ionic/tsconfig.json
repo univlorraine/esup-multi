@@ -24,6 +24,9 @@
       ],
       "@ul/rss": [
         "dist/rss"
+      ],
+      "@ul/cards": [
+        "dist/cards"
       ]
     },
     "downlevelIteration": true,

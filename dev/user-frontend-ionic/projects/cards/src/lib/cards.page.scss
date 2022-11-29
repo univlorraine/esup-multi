@@ -1,0 +1,16 @@
+.warning{
+    background-color: orange;
+}
+.card:nth-child(2){
+    position: absolute;
+    left: 0;
+    top: 5rem;
+    right: 0;
+    width: auto;
+}
+
+.column{
+   display: flex;
+   flex-direction: column;
+   margin-bottom: 1rem;
+}

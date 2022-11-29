@@ -1,11 +1,12 @@
-import { UlApi, CasUrl, CredentialsCleanup } from './configuration.interface';
+import { UlApi, CasUrl, ScheduledCleanup } from './configuration.interface';
 
 interface Configuration {
   casUrl: CasUrl;
   ulApi: UlApi;
   mongoUrl: string;
   jwtSecret: string;
-  credentialsCleanup: CredentialsCleanup;
+  usernamesCleanup: ScheduledCleanup;
+  credentialsCleanup: ScheduledCleanup;
 }
 
 export default (): Configuration => ({
@@ -22,6 +23,13 @@ export default (): Configuration => ({
   },
   mongoUrl: process.env.AUTH_SERVICE_MONGO_URL,
   jwtSecret: process.env.AUTH_SERVICE_JWT_SECRET,
+  usernamesCleanup: {
+    schedule: process.env.AUTH_SERVICE_USERNAMES_CLEANUP_SCHEDULE,
+    notUsedSinceInDays:
+      parseInt(
+        process.env.AUTH_SERVICE_USERNAMES_CLEANUP_NOT_USED_SINCE_IN_DAYS,
+      ) || 30,
+  },
   credentialsCleanup: {
     schedule: process.env.AUTH_SERVICE_CREDENTIALS_CLEANUP_SCHEDULE,
     notUsedSinceInDays:

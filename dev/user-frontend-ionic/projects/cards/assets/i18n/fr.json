@@ -1,0 +1,25 @@
+{
+    "TILE_STUDENT": {
+        "TITLE": "Mes cartes d'étudiant",
+        "DESCRIPTION": "Retrouvez votre carte d'étudiant valable dans toute l'Europe ainsi que votre carte d'étudiant UL"
+    },
+    "TILE_STAFF": {
+        "TITLE": "Carte UL",
+        "DESCRIPTION": "Cette carte permet de justifier de votre statut à l'UL et de votre inscription au SUAPS"
+    },
+
+    "ERRORS":{
+        "NO_DATA": "Données indisponibles"
+    },
+    
+    "ERRORS_STUDENT": {
+        "NO_PHOTO": "L'accès à votre carte sera disponible après avoir fourni une photo d'identité à la scolarité de la formation",
+        "NO_ACTIVE_CARD" : "Vous ne disposez pas de carte active à l'Université",
+        "UNPAID_FEES" : "Vous ne pouvez pas disposer de carte d'étudiant car vous n'avez pas encore réglé vos droits d'inscription"
+    },
+    "ERRORS_STAFF": {
+        "NO_PHOTO": "L'accès à votre carte sera disponible après avoir fourni une photo d'identité aux ressources humaines de l'Université",
+        "NO_ACTIVE_CARD" : "Vous ne disposez pas de carte active à l'Université",
+        "UNPAID_FEES" : "Vous ne pouvez pas disposer de carte d'étudiant car vous n'avez pas encore réglé vos droits d'inscription"
+    }
+}

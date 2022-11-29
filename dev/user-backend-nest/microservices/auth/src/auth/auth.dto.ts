@@ -1,3 +1,7 @@
+interface AuthTokenDto {
+  authToken: string;
+}
+
 export interface AuthenticateQueryDto {
   username: string;
   password: string;
@@ -11,20 +15,11 @@ export interface UserProfileDto {
   roles: string[];
 }
 
-export interface AuthenticatedDto extends UserProfileDto {
-  authToken: string;
-  username: string;
-}
+export type AuthenticatedDto = UserProfileDto & AuthTokenDto;
+export type LogoutQueryDto = AuthTokenDto;
+export type IsAuthenticationValidQueryDto = AuthTokenDto;
+export type GetUsernameQueryDto = AuthTokenDto;
 
-export interface LogoutQueryDto {
-  authToken: string;
-}
-
-export interface IsAuthenticationValidQueryDto {
-  authToken: string;
-}
-
-export interface SsoServiceTokenQueryDto {
-  authToken: string;
+export interface SsoServiceTokenQueryDto extends AuthTokenDto {
   service: string;
 }

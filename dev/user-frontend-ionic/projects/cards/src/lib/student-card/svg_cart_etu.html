@@ -1,0 +1,91 @@
+<svg
+	xmlns="http://www.w3.org/2000/svg"
+	height="100%"
+	width="100%"
+	viewBox="0 0 850 540"
+	preserveAspectRatio="xMidYMin meet"
+	class="svg-card"
+>
+
+	<!-- Card white background -->
+	<rect rx="10" ry="10" width="850" height="540" fill="white" />
+
+	<!-- Student photo -->
+	<image height="320" width="240" x="605" y="5" [attr.href]="userAndCardsData.photo"/>
+
+	<!-- Lastname -->
+	<text id="lastname" x="40" y="70" font-family="Helvetica" font-size="33" letter-spacing="-0.5" font-weight="600">
+		{{userAndCardsData.lastname}}
+	</text>
+
+	<!-- Firstname -->
+	<text x="40" y="107" font-family="Helvetica" font-size="33" letter-spacing="-0.5" font-weight="600">
+		{{userAndCardsData.firstname}}
+	</text>
+
+	<!-- Apogee ID -->
+	<text x="590" y="120" font-family="Helvetica" font-size="25" letter-spacing="1" font-weight="200" text-anchor="end">
+		{{userAndCardsData.cards.studentCard.idNumber}}
+	</text>
+
+	<!-- INE Number -->
+	<text x="590" y="150" font-family="Helvetica" font-size="25" letter-spacing="1" font-weight="200" text-anchor="end">
+		{{userAndCardsData.ine}}
+	</text>
+
+	<!-- Card Title -->
+	<text
+		x="40"
+		y="270"
+		font-family="Times New Roman"
+		font-size="33"
+		letter-spacing="0"
+		font-weight="600"
+		font-style="italic"
+	>
+	    {{userAndCardsData.cards.studentCard.title}}
+	</text>
+
+	<!-- Title Complement -->
+	<text
+		x="40"
+		y="312"
+		font-family="Times New Roman"
+		font-size="33"
+		letter-spacing="0"
+		font-weight="600"
+		font-style="italic"
+	></text>
+
+	<!-- Logo UL -->
+	<image height="60" x="40" y="450" href="assets/logo/ul-logo.svg" />
+
+	<!-- Millesime y -->
+	<text
+		x="650"
+		y="420"
+		font-family="Helvetica"
+		font-size="35"
+		letter-spacing="1"
+		font-weight="600"
+		font-style="italic"
+		fill="gray"
+	>
+	{{userAndCardsData.cards.studentCard.endDate - 1}}
+
+	</text>
+
+	<!-- Millesime y + 1 -->
+	<text
+		x="710"
+		y="455"
+		font-family="Helvetica"
+		font-size="35"
+		letter-spacing="1"
+		font-weight="600"
+		font-style="italic"
+		fill="gray"
+	>
+	{{userAndCardsData.cards.studentCard.endDate}}
+	</text>
+</svg>
