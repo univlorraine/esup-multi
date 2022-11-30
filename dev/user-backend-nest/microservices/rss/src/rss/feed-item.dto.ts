@@ -1,6 +1,6 @@
 export interface FeedItem {
   title: string;
-  description: string;
+  content: string;
   link: string;
-  published: Date;
+  pubDate: Date;
 }

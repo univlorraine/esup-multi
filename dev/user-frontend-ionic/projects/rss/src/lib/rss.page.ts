@@ -34,6 +34,20 @@ export class RssPage {
     await this.loadRssFeedIfNetworkAvailable();
   }
 
+  public isMediaAnImage(media: any): boolean {
+    const imageTypes: Array<string> = [
+      'image/gif',
+      'image/x-icon',
+      'image/jpeg',
+      'image/png',
+      'image/svg+xml',
+      'image/tiff',
+      'image/webp'
+    ];
+
+    return media.type ? imageTypes.includes(media.type) : false;
+  }
+
   private async loadRssFeedIfNetworkAvailable() {
     // skip if network is not available
     if (!(await Network.getStatus()).connected) {
