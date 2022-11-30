@@ -1,0 +1,25 @@
+{
+    "TILE_STUDENT": {
+        "TITLE": "My student cards",
+        "DESCRIPTION": "Find your student card valid throughout Europe and your UL student card"
+    },
+    "TILE_STAFF": {
+        "TITLE": "Carte UL",
+        "DESCRIPTION": "This card allows you to prove your status at UL and your registration at SUAPS"
+    },
+
+    "ERRORS":{
+        "NO_DATA": "Data unavailable"
+    },
+    
+    "ERRORS_STUDENT": {
+        "NO_PHOTO": "Access to your card will be available after providing a photo ID to the school",
+        "NO_ACTIVE_CARD" : "You do not have an active card at the University",
+        "UNPAID_FEES" : "You do not have a student card because you have not yet paid your registration fees"
+    },
+    "ERRORS_STAFF": {
+        "NO_PHOTO": "Access to your card will be available after providing a photo ID to University Human Resources",
+        "NO_ACTIVE_CARD" : "You do not have an active card at the University",
+        "UNPAID_FEES" : "You do not have a student card because you have not yet paid your registration fees"
+    }
+}
