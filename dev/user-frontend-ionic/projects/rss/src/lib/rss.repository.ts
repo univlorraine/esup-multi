@@ -9,11 +9,18 @@ export interface RssFeedProps {
   rssFeed: FeedItem[];
 }
 
+interface enclosure {
+  url: string;
+  type: string;
+  length: number;
+}
+
 export interface FeedItem {
   title: string;
-  description: string;
+  enclosure: enclosure;
+  content: string;
   link: string;
-  published: Date;
+  pubDate: string;
 }
 
 const rssFeedStore = createStore(

@@ -12,8 +12,8 @@ export class RelativeTimePipe implements PipeTransform {
 
     constructor(private translateService: TranslateService) {}
 
-    transform(inputDate: Date): string {
+    transform(inputDate: string): string {
         const lang = this.translateService.currentLang || this.translateService.defaultLang;
-        return formatDistanceToNow(inputDate, { locale: locale[lang] });
+        return formatDistanceToNow(new Date(inputDate), { locale: locale[lang] });
     }
 }

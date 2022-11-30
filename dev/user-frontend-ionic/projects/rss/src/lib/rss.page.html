@@ -4,14 +4,19 @@
 <ion-content *ngIf="(rssFeedIsEmpty$ | async) === false">
   <ion-card *ngFor="let item of (rssFeed$ | async)" (click)="onClick(item)">
     <ion-card-header>
-      <ion-card-subtitle>{{item.published | relativeTime}}</ion-card-subtitle>
+      <ion-card-subtitle>{{item.pubDate | relativeTime}}</ion-card-subtitle>
       <ion-card-title>
         <ion-icon name="link" class="title-icon" *ngIf="item"></ion-icon>
         {{item.title}}
       </ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <div [innerHTML]="item.description"></div>
+      <ion-row>
+        <ion-col size="12" size-sm="3" *ngIf="item.enclosure && isMediaAnImage(item.enclosure)">
+          <img alt="{{ item.enclosure.url }}" src="{{ item.enclosure.url }}" />
+        </ion-col>
+        <ion-col><div [innerHTML]="item.content"></div></ion-col>
+      </ion-row>
     </ion-card-content>
   </ion-card>
 </ion-content>
