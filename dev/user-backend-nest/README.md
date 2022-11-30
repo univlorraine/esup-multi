@@ -3,6 +3,8 @@
 - [Microservice auth](dev/user-backend-nest/microservices/auth/README.md)
 - [Microservice info](dev/user-backend-nest/microservices/info/README.md)
 - [Microservice map](dev/user-backend-nest/microservices/map/README.md)
+- [Microservice cards](dev/user-backend-nest/microservices/cards/README.md)
+- [Microservice rss](dev/user-backend-nest/microservices/rss/README.md)
 
 ## Créer un nouveau microservice
 
