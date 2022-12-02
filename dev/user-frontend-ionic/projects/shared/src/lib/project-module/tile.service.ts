@@ -1,27 +1,29 @@
 import { Injectable } from '@angular/core';
+import { AuthorizationHelper, WithAuthorization } from '../authorization/authorization.helper';
 
-export interface TileItem {
+interface RawTile {
     title: string;
     icon: string;
     position: number;
     path: string;
     description: string;
-    roles?: string[];
 }
+
+export type Tile = WithAuthorization<RawTile>;
 
 @Injectable({
     providedIn: 'root'
 })
 export class TileService {
 
-    private tileItems: TileItem[] = [];
+    private tiles: Tile[] = [];
 
-    public addTileItems(tileItems: TileItem[]) {
-        this.tileItems.push(...tileItems);
-        this.tileItems.sort((itemA, itemB) => itemA.position - itemB.position);
+    public addTiles(tiles: Tile[]) {
+        this.tiles.push(...tiles);
+        this.tiles.sort((itemA, itemB) => itemA.position - itemB.position);
     }
 
-    public getTileItems() {
-        return this.tileItems;
+    public getTiles(userRoles: string[]) {
+        return new AuthorizationHelper(userRoles).filter(this.tiles);
     }
 }

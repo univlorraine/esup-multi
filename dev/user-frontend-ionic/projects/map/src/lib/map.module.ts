@@ -10,7 +10,7 @@ const initModule = (projectModuleService: ProjectModuleService) =>
   () => projectModuleService.initProjectModule({
     name: 'map',
     translation: true,
-    tileItems: [{
+    tiles: [{
       title: 'MAP.TILE.TITLE',
       icon: 'map',
       position: 60,

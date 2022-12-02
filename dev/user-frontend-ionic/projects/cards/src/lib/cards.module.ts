@@ -15,13 +15,16 @@ const initModule = (projectModuleService: ProjectModuleService) =>
   () => projectModuleService.initProjectModule({
     name: 'cards',
     translation: true,
-    tileItems: [{
+    tiles: [{
       title: 'CARDS.TILE_STUDENT.TITLE',
       icon: 'card',
       position: 40,
       path: CardsPageModule.path,
       description: 'CARDS.TILE_STUDENT.DESCRIPTION',
-      roles: ['student']
+      authorization: {
+        roles: ['student'],
+        type: 'ALLOW',
+      }
     },
     {
       title: 'CARDS.TILE_STAFF.TITLE',
@@ -29,7 +32,10 @@ const initModule = (projectModuleService: ProjectModuleService) =>
       position: 40,
       path: CardsPageModule.path,
       description: 'CARDS.TILE_STAFF.DESCRIPTION',
-      roles: ['staff', 'teacher', 'phd-student', 'CE', 'DC']
+      authorization: {
+        roles: ['staff', 'teacher', 'phd-student', 'CE', 'DC'],
+        type: 'ALLOW'
+      }
     }]
   });
 
