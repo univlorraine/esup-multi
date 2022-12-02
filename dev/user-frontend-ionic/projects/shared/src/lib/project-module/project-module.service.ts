@@ -1,7 +1,7 @@
 import { Injectable, Type } from '@angular/core';
 import { MenuItem, MenuService } from './menu.service';
 import { PreferencesService } from './preferences.service';
-import { TileItem, TileService } from './tile.service';
+import { Tile, TileService } from './tile.service';
 import { TranslationsService } from './translations/translations.service';
 
 export interface InitProjectModuleOptions {
@@ -9,7 +9,7 @@ export interface InitProjectModuleOptions {
     preferencesComponent?: Type<any>;
     translation?: boolean;
     menuItem?: MenuItem;
-    tileItems?: TileItem[];
+    tiles?: Tile[];
 }
 
 @Injectable({
@@ -37,8 +37,8 @@ export class ProjectModuleService {
             this.menuService.addMenuItem(options.menuItem);
         }
 
-        if (options.tileItems) {
-            this.tileService.addTileItems(options.tileItems);
+        if (options.tiles) {
+            this.tileService.addTiles(options.tiles);
         }
     }
 
@@ -50,8 +50,8 @@ export class ProjectModuleService {
         return this.menuService.getMenuItems();
     }
 
-    getTileItems(): TileItem[] {
-        return this.tileService.getTileItems();
+    getTiles(userRoles: string[]): Tile[] {
+        return this.tileService.getTiles(userRoles);
     }
 
     getPreferencesComponents(): Type<any>[] {
