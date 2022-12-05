@@ -9,7 +9,7 @@ export interface RssFeedProps {
   rssFeed: FeedItem[];
 }
 
-interface enclosure {
+interface Enclosure {
   url: string;
   type: string;
   length: number;
@@ -17,7 +17,7 @@ interface enclosure {
 
 export interface FeedItem {
   title: string;
-  enclosure: enclosure;
+  enclosure: Enclosure;
   content: string;
   link: string;
   pubDate: string;

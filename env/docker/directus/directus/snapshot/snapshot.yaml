@@ -3,7 +3,7 @@ directus: 9.19.2
 collections:
   - collection: info
     meta:
-      accountability: all
+      accountability: null
       archive_app_filter: true
       archive_field: status
       archive_value: archived
@@ -25,48 +25,55 @@ collections:
       comment: null
       name: info
       schema: public
-fields:
-  - collection: info
-    field: content
+  - collection: info_translations
     meta:
-      collection: info
-      conditions: null
-      display: null
-      display_options: null
-      field: content
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: info_translations
+      color: null
+      display_template: null
       group: null
-      hidden: false
-      interface: input-multiline
+      hidden: true
+      icon: import_export
+      item_duplication_fields: null
       note: null
-      options: null
-      readonly: false
-      required: false
-      sort: 1
-      special: null
+      singleton: false
+      sort: null
+      sort_field: null
       translations: null
-      validation: null
-      validation_message: null
-      width: full
+      unarchive_value: null
     schema:
       comment: null
-      data_type: text
-      default_value: null
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: true
-      is_primary_key: false
-      is_unique: false
-      max_length: null
-      name: content
-      numeric_precision: null
-      numeric_scale: null
+      name: info_translations
       schema: public
-      table: info
-    type: text
+  - collection: languages
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: languages
+      color: null
+      display_template: null
+      group: null
+      hidden: false
+      icon: null
+      item_duplication_fields: null
+      note: null
+      singleton: false
+      sort: null
+      sort_field: null
+      translations: null
+      unarchive_value: null
+    schema:
+      comment: null
+      name: languages
+      schema: public
+fields:
   - collection: info
     field: date_created
     meta:
@@ -380,9 +387,199 @@ fields:
       table: info
     type: string
   - collection: info
-    field: title
+    field: translations
     meta:
       collection: info
+      conditions: null
+      display: null
+      display_options: null
+      field: translations
+      group: null
+      hidden: false
+      interface: translations
+      note: null
+      options:
+        languageField: code
+        userLanguage: true
+      readonly: false
+      required: false
+      sort: null
+      special:
+        - translations
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema: null
+    type: alias
+  - collection: info_translations
+    field: content
+    meta:
+      collection: info_translations
+      conditions: null
+      display: null
+      display_options: null
+      field: content
+      group: null
+      hidden: false
+      interface: input-multiline
+      note: null
+      options: null
+      readonly: false
+      required: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      comment: null
+      data_type: text
+      default_value: null
+      foreign_key_column: null
+      foreign_key_schema: null
+      foreign_key_table: null
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      max_length: null
+      name: content
+      numeric_precision: null
+      numeric_scale: null
+      schema: public
+      table: info_translations
+    type: text
+  - collection: info_translations
+    field: id
+    meta:
+      collection: info_translations
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      comment: null
+      data_type: integer
+      default_value: nextval('info_translations_id_seq'::regclass)
+      foreign_key_column: null
+      foreign_key_schema: null
+      foreign_key_table: null
+      generation_expression: null
+      has_auto_increment: true
+      is_generated: false
+      is_nullable: false
+      is_primary_key: true
+      is_unique: true
+      max_length: null
+      name: id
+      numeric_precision: 32
+      numeric_scale: 0
+      schema: public
+      table: info_translations
+    type: integer
+  - collection: info_translations
+    field: info_id
+    meta:
+      collection: info_translations
+      conditions: null
+      display: null
+      display_options: null
+      field: info_id
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      comment: null
+      data_type: integer
+      default_value: null
+      foreign_key_column: id
+      foreign_key_schema: public
+      foreign_key_table: info
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      max_length: null
+      name: info_id
+      numeric_precision: 32
+      numeric_scale: 0
+      schema: public
+      table: info_translations
+    type: integer
+  - collection: info_translations
+    field: languages_code
+    meta:
+      collection: info_translations
+      conditions: null
+      display: null
+      display_options: null
+      field: languages_code
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      comment: null
+      data_type: character varying
+      default_value: null
+      foreign_key_column: code
+      foreign_key_schema: public
+      foreign_key_table: languages
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      max_length: 255
+      name: languages_code
+      numeric_precision: null
+      numeric_scale: null
+      schema: public
+      table: info_translations
+    type: string
+  - collection: info_translations
+    field: title
+    meta:
+      collection: info_translations
       conditions: null
       display: null
       display_options: null
@@ -393,8 +590,49 @@ fields:
       note: null
       options: null
       readonly: false
+      required: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      comment: null
+      data_type: character varying
+      default_value: null
+      foreign_key_column: null
+      foreign_key_schema: null
+      foreign_key_table: null
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      max_length: 255
+      name: title
+      numeric_precision: null
+      numeric_scale: null
+      schema: public
+      table: info_translations
+    type: string
+  - collection: languages
+    field: code
+    meta:
+      collection: languages
+      conditions: null
+      display: null
+      display_options: null
+      field: code
+      group: null
+      hidden: false
+      interface: null
+      note: null
+      options: null
+      readonly: false
       required: false
-      sort: 9
+      sort: null
       special: null
       translations: null
       validation: null
@@ -411,143 +649,150 @@ fields:
       has_auto_increment: false
       is_generated: false
       is_nullable: false
+      is_primary_key: true
+      is_unique: true
+      max_length: 255
+      name: code
+      numeric_precision: null
+      numeric_scale: null
+      schema: public
+      table: languages
+    type: string
+  - collection: languages
+    field: direction
+    meta:
+      collection: languages
+      conditions: null
+      display: labels
+      display_options:
+        choices:
+          - text: $t:left_to_right
+            value: ltr
+          - text: $t:right_to_left
+            value: rtl
+        format: false
+      field: direction
+      group: null
+      hidden: false
+      interface: select-dropdown
+      note: null
+      options:
+        choices:
+          - text: $t:left_to_right
+            value: ltr
+          - text: $t:right_to_left
+            value: rtl
+      readonly: false
+      required: false
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      comment: null
+      data_type: character varying
+      default_value: ltr
+      foreign_key_column: null
+      foreign_key_schema: null
+      foreign_key_table: null
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: true
       is_primary_key: false
       is_unique: false
       max_length: 255
-      name: title
+      name: direction
       numeric_precision: null
       numeric_scale: null
       schema: public
-      table: info
+      table: languages
     type: string
-  - collection: info
-    field: user_created
+  - collection: languages
+    field: name
     meta:
-      collection: info
+      collection: languages
       conditions: null
-      display: user
+      display: null
       display_options: null
-      field: user_created
+      field: name
       group: null
-      hidden: true
-      interface: select-dropdown-m2o
+      hidden: false
+      interface: null
       note: null
-      options:
-        template: '{{avatar.$thumbnail}} {{first_name}} {{last_name}}'
-      readonly: true
+      options: null
+      readonly: false
       required: false
-      sort: 10
-      special:
-        - user-created
+      sort: null
+      special: null
       translations: null
       validation: null
       validation_message: null
-      width: half
+      width: full
     schema:
       comment: null
-      data_type: uuid
+      data_type: character varying
       default_value: null
-      foreign_key_column: id
-      foreign_key_schema: public
-      foreign_key_table: directus_users
+      foreign_key_column: null
+      foreign_key_schema: null
+      foreign_key_table: null
       generation_expression: null
       has_auto_increment: false
       is_generated: false
       is_nullable: true
       is_primary_key: false
       is_unique: false
-      max_length: null
-      name: user_created
+      max_length: 255
+      name: name
       numeric_precision: null
       numeric_scale: null
       schema: public
-      table: info
-    type: uuid
-  - collection: info
-    field: user_updated
-    meta:
-      collection: info
-      conditions: null
-      display: user
-      display_options: null
-      field: user_updated
-      group: null
-      hidden: true
-      interface: select-dropdown-m2o
-      note: null
-      options:
-        template: '{{avatar.$thumbnail}} {{first_name}} {{last_name}}'
-      readonly: true
-      required: false
-      sort: 11
-      special:
-        - user-updated
-      translations: null
-      validation: null
-      validation_message: null
-      width: half
-    schema:
-      comment: null
-      data_type: uuid
-      default_value: null
-      foreign_key_column: id
-      foreign_key_schema: public
-      foreign_key_table: directus_users
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: true
-      is_primary_key: false
-      is_unique: false
-      max_length: null
-      name: user_updated
-      numeric_precision: null
-      numeric_scale: null
-      schema: public
-      table: info
-    type: uuid
+      table: languages
+    type: string
 relations:
-  - collection: info
-    field: user_created
+  - collection: info_translations
+    field: info_id
     meta:
-      junction_field: null
-      many_collection: info
-      many_field: user_created
+      junction_field: languages_code
+      many_collection: info_translations
+      many_field: info_id
       one_allowed_collections: null
-      one_collection: directus_users
+      one_collection: info
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: translations
+      sort_field: null
+    related_collection: info
+    schema:
+      column: info_id
+      constraint_name: info_translations_info_id_foreign
+      foreign_key_column: id
+      foreign_key_schema: public
+      foreign_key_table: info
+      on_delete: SET NULL
+      on_update: NO ACTION
+      table: info_translations
+  - collection: info_translations
+    field: languages_code
+    meta:
+      junction_field: info_id
+      many_collection: info_translations
+      many_field: languages_code
+      one_allowed_collections: null
+      one_collection: languages
       one_collection_field: null
       one_deselect_action: nullify
       one_field: null
       sort_field: null
-    related_collection: directus_users
+    related_collection: languages
     schema:
-      column: user_created
-      constraint_name: info_user_created_foreign
-      foreign_key_column: id
+      column: languages_code
+      constraint_name: info_translations_languages_code_foreign
+      foreign_key_column: code
       foreign_key_schema: public
-      foreign_key_table: directus_users
-      on_delete: NO ACTION
+      foreign_key_table: languages
+      on_delete: SET NULL
       on_update: NO ACTION
-      table: info
-  - collection: info
-    field: user_updated
-    meta:
-      junction_field: null
-      many_collection: info
-      many_field: user_updated
-      one_allowed_collections: null
-      one_collection: directus_users
-      one_collection_field: null
-      one_deselect_action: nullify
-      one_field: null
-      sort_field: null
-    related_collection: directus_users
-    schema:
-      column: user_updated
-      constraint_name: info_user_updated_foreign
-      foreign_key_column: id
-      foreign_key_schema: public
-      foreign_key_table: directus_users
-      on_delete: NO ACTION
-      on_update: NO ACTION
-      table: info
+      table: info_translations

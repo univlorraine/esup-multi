@@ -3,9 +3,10 @@ import { Browser } from '@capacitor/browser';
 import { Network } from '@capacitor/network';
 import { authenticatedUser$ } from '@ul/shared';
 import { finalize, filter, first, map, switchMap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Info, infoList$, setInfoList } from './info.repository';
 import { InfoService } from './info.service';
+import { currentLanguage$ } from '@ul/shared';
 
 @Component({
   selector: 'app-info',
@@ -16,6 +17,7 @@ export class InfoPage {
   public infoList$: Observable<Info[]> = infoList$;
   public infoListIsEmpty$: Observable<boolean>;
   public isLoading = false;
+  private currentLanguageSubcription: Subscription;
 
   constructor(
     private infoService: InfoService,
@@ -24,7 +26,12 @@ export class InfoPage {
   }
 
   ionViewWillEnter() {
-    this.loadInfoList();
+    this.currentLanguageSubcription = currentLanguage$
+      .subscribe(lang => this.loadInfoList(lang));
+  }
+
+  ionViewWillLeave() {
+    this.currentLanguageSubcription?.unsubscribe();
   }
 
   public onClick(info: Info): Promise<void> {
@@ -50,14 +57,14 @@ export class InfoPage {
     });
   }
 
-  private async loadInfoList(): Promise<void> {
+  private async loadInfoList(lang: string): Promise<void> {
     // skip if network is not available
     if (!(await Network.getStatus()).connected) {
       return;
     }
 
     this.isLoading = true;
-    this.infoService.getInfoList()
+    this.infoService.getInfoList(lang)
       .pipe(
         finalize(() => this.isLoading = false)
       ).subscribe(infoList => setInfoList(infoList));

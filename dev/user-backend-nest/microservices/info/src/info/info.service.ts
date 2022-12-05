@@ -5,7 +5,7 @@ import { RpcException } from '@nestjs/microservices';
 import { catchError, map, Observable } from 'rxjs';
 import { DirectusApi } from '../config/configuration.interface';
 import { DirectusResponse } from './directus.response.dto';
-import { Info } from './info.dto';
+import { DirectusInfo, Info } from './info.dto';
 
 @Injectable()
 export class InfoService {
@@ -18,11 +18,16 @@ export class InfoService {
     this.directusApiConfig = this.configService.get<DirectusApi>('directusApi');
   }
 
-  public getInfo(): Observable<Info[]> {
+  public getInfo(language: string): Observable<Info[]> {
     const url = `${this.directusApiConfig.apiUrl}/items/info`;
 
     return this.httpService
-      .get<DirectusResponse<Info[]>>(url, {
+      .get<DirectusResponse<DirectusInfo[]>>(url, {
+        params: {
+          'filter[translations][languages_code][_eq]': language,
+          'deep[translations][_filter][languages_code][_eq]': language,
+          fields: '*,translations.*',
+        },
         headers: {
           Accept: 'application/json',
           Authorization: `Bearer ${this.directusApiConfig.bearerToken}`,
@@ -34,9 +39,17 @@ export class InfoService {
           this.logger.error(errorMessage, err);
           throw new RpcException(errorMessage);
         }),
-        map((res) => {
-          return res.data.data;
-        }),
+        map((res) =>
+          res.data.data.map(
+            (info: DirectusInfo): Info => ({
+              id: info.id,
+              title: info.translations[0].title,
+              content: info.translations[0].content,
+              link: info.link,
+              ssoService: info.ssoService,
+            }),
+          ),
+        ),
       );
   }
 }

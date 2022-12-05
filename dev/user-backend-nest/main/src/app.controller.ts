@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Inject,
+  Param,
   Post,
   Request,
   UseGuards,
@@ -25,13 +26,13 @@ export class AppController {
     @Inject('CARDS_SERVICE') private cardsClient: ClientProxy,
   ) {}
 
-  @Get('/info')
-  info() {
+  @Get('/info/:language')
+  info(@Param('language') language) {
     return this.infoClient.send(
       {
         cmd: 'info',
       },
-      {},
+      language,
     );
   }
 

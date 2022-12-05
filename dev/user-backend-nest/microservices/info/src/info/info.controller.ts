@@ -9,7 +9,7 @@ export class InfoController {
   constructor(private infoService: InfoService) {}
 
   @MessagePattern({ cmd: 'info' })
-  hello(): Observable<Info[]> {
-    return this.infoService.getInfo();
+  getInfo(language: string): Observable<Info[]> {
+    return this.infoService.getInfo(language);
   }
 }
