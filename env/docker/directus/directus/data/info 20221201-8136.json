@@ -1,0 +1,70 @@
+[
+	{
+		"date_created": "2022-12-01T08:08:39.348Z",
+		"date_updated": "2022-12-01T08:10:22.958Z",
+		"id": 2,
+		"link": "https://arche.univ-lorraine.fr/login/index.php?authCAS=CAS&ticket={st}",
+		"ssoService": "https://arche.univ-lorraine.fr/login/index.php?authCAS=CAS",
+		"sort": null,
+		"status": "published",
+		"translations": [
+			{
+				"content": "Les étapes de l'inscription à l'université varient en fonction de votre profil. Connaître ces étapes, c'est être certain de s'inscrire en toute sérénité.",
+				"id": 1,
+				"title": "Test SSO",
+				"info_id": 2,
+				"languages_code": "fr"
+			},
+			{
+				"content": "The steps involved in applying to college vary depending on your profile. Knowing these steps is the best way to ensure that you will be able to enroll with confidence.",
+				"id": 5,
+				"title": "SSO test",
+				"info_id": 2,
+				"languages_code": "en"
+			}
+		]
+	},
+	{
+		"date_created": "2022-12-01T08:09:14.322Z",
+		"date_updated": "2022-12-01T08:10:46.101Z",
+		"id": 3,
+		"link": "https://factuel.univ-lorraine.fr/node/21254",
+		"ssoService": null,
+		"sort": null,
+		"status": "published",
+		"translations": [
+			{
+				"content": "The OTO twin project rewarded at the E-Sante City Healthcare springboards!",
+				"id": 2,
+				"title": "The OTO twin project rewarded",
+				"info_id": 3,
+				"languages_code": "en"
+			},
+			{
+				"content": "Le projet OTO twin récompensé lors des Tremplins de la E-Sante City Healthcare !",
+				"id": 3,
+				"title": "Le projet OTO twin récompensé",
+				"info_id": 3,
+				"languages_code": "fr"
+			}
+		]
+	},
+	{
+		"date_created": "2022-12-01T08:09:34.226Z",
+		"date_updated": null,
+		"id": 4,
+		"link": null,
+		"ssoService": null,
+		"sort": null,
+		"status": "draft",
+		"translations": [
+			{
+				"content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+				"id": 4,
+				"title": "Contenu sans lien",
+				"info_id": 4,
+				"languages_code": "fr"
+			}
+		]
+	}
+]

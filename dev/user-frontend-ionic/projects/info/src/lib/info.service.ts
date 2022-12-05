@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, of, throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { catchError, concatMap } from 'rxjs/operators';
 import { Info } from './info.repository';
 import { KeepAuthService } from '@ul/shared';
@@ -17,8 +17,8 @@ export class InfoService {
     private keepAuthService: KeepAuthService,
   ) {}
 
-  public getInfoList(): Observable<Info[]> {
-    return this.http.get<Info[]>(`${this.environment.apiEndpoint}/info`);
+  public getInfoList(language: string): Observable<Info[]> {
+    return this.http.get<Info[]>(`${this.environment.apiEndpoint}/info/${language}`);
   }
 
   public requestSsoServiceToken(service: string, authToken: string): Observable<string> {

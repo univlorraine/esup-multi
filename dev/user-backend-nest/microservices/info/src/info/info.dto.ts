@@ -5,3 +5,15 @@ export interface Info {
   link?: string;
   ssoService?: string;
 }
+
+interface DirectusInfoTranslation {
+  title: string;
+  content: string;
+}
+
+export interface DirectusInfo {
+  id: number;
+  translations: DirectusInfoTranslation[];
+  link?: string;
+  ssoService?: string;
+}
