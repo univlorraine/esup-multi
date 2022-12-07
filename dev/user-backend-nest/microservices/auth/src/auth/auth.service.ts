@@ -2,7 +2,7 @@ import { Injectable, Logger, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Cron } from '@nestjs/schedule';
 import { from, Observable } from 'rxjs';
-import { concatWith, delayWhen, map, toArray } from 'rxjs/operators';
+import { concatWith, delayWhen, map, tap, toArray } from 'rxjs/operators';
 import {
   AuthenticatedDto,
   AuthenticateQueryDto,
@@ -10,11 +10,12 @@ import {
   SsoServiceTokenQueryDto,
   UserProfileDto,
   IsAuthenticationValidQueryDto,
-  GetUsernameQueryDto,
+  GetUserQueryDto,
+  GetUserResultDto,
 } from './auth.dto';
 import { CasService } from './cas.service';
 import { UserService } from './user.service';
-import { UsernameRepository } from './username/username.repository';
+import { AuthenticatedUserRepository } from './authenticated-user/authenticated-user.repository';
 import * as dotenv from 'dotenv';
 import { RpcException } from '@nestjs/microservices';
 
@@ -29,7 +30,7 @@ export class AuthService {
   constructor(
     private readonly casService: CasService,
     private readonly userService: UserService,
-    private readonly usernameRepository: UsernameRepository,
+    private readonly usernameRepository: AuthenticatedUserRepository,
     private readonly config: ConfigService,
   ) {
     this.usernamesCleanupNotUsedSinceInDays = this.config.get<number>(
@@ -54,9 +55,10 @@ export class AuthService {
       }),
       delayWhen((authenticated) =>
         from(
-          this.usernameRepository.saveUsername({
+          this.usernameRepository.saveAuthenticatedUser({
             authToken: authenticated.authToken,
             username: query.username,
+            roles: authenticated.roles,
           }),
         ),
       ),
@@ -68,7 +70,9 @@ export class AuthService {
       .logout(query.authToken)
       .pipe(
         delayWhen(() =>
-          from(this.usernameRepository.removeUsername(query.authToken)),
+          from(
+            this.usernameRepository.removeAuthenticatedUser(query.authToken),
+          ),
         ),
       );
   }
@@ -85,19 +89,41 @@ export class AuthService {
     return this.casService.isTgtValid(query.authToken);
   }
 
-  public getUsername(query: GetUsernameQueryDto): Observable<string | null> {
-    return from(this.usernameRepository.getUsername(query.authToken)).pipe(
+  public getUser(query: GetUserQueryDto): Observable<GetUserResultDto | null> {
+    return from(
+      this.usernameRepository.getAuthenticatedUser(query.authToken),
+    ).pipe(
       map((usernameDocument) => {
         if (!usernameDocument) {
-          const message = `Unable to get username associated to authentication token ${query.authToken}`;
-          this.logger.warn(message);
-          throw new RpcException(new UnauthorizedException(message));
+          this.logger.debug(
+            `Unable to get user associated to authentication token ${query.authToken}`,
+          );
+          return null;
         }
 
         this.logger.debug(
-          `Got username ${usernameDocument.username} from authToken ${query.authToken}`,
+          `Got user ${usernameDocument} from authToken ${query.authToken}`,
         );
-        return usernameDocument.username;
+        return {
+          username: usernameDocument.username,
+          roles: usernameDocument.roles,
+        };
+      }),
+    );
+  }
+
+  public getUserOrThrowError(
+    query: GetUserQueryDto,
+  ): Observable<GetUserResultDto> {
+    return this.getUser(query).pipe(
+      tap((user) => {
+        if (!user) {
+          throw new RpcException(
+            new UnauthorizedException(
+              `Unable to get user associated to authentication token ${query.authToken}`,
+            ),
+          );
+        }
       }),
     );
   }
@@ -111,6 +137,8 @@ export class AuthService {
     this.logger.log(
       `Removing usernames not used for ${this.usernamesCleanupNotUsedSinceInDays} days (since ${limitDate})`,
     );
-    await this.usernameRepository.removeUsernameLastUsedBefore(limitDate);
+    await this.usernameRepository.removeAuthenticatedUserLastUsedBefore(
+      limitDate,
+    );
   }
 }

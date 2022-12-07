@@ -26,7 +26,7 @@ export class InfoService {
         params: {
           'filter[translations][languages_code][_eq]': language,
           'deep[translations][_filter][languages_code][_eq]': language,
-          fields: '*,translations.*',
+          fields: '*,translations.*,authorization.*',
         },
         headers: {
           Accept: 'application/json',
@@ -47,6 +47,7 @@ export class InfoService {
               content: info.translations[0].content,
               link: info.link,
               ssoService: info.ssoService,
+              authorization: info.authorization,
             }),
           ),
         ),

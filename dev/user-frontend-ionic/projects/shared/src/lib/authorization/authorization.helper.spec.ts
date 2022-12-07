@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { AuthorizationHelper, WithAuthorization } from './authorization.helper';
 
-interface Stuff {
+interface Stuff extends WithAuthorization {
     name: string;
 }
 
@@ -10,7 +10,7 @@ describe('AuthorizationHelper', () => {
 
   it('should keep only allowed items', () => {
     const helper: AuthorizationHelper = new AuthorizationHelper(['r1','r2']);
-    const unfiltered: WithAuthorization<Stuff>[] = [
+    const unfiltered: Stuff[] = [
         {
             name: 'a',
         },
@@ -45,7 +45,7 @@ describe('AuthorizationHelper', () => {
 
   it('should exclude disallowed items', () => {
     const helper: AuthorizationHelper = new AuthorizationHelper(['r1','r2']);
-    const unfiltered: WithAuthorization<Stuff>[] = [
+    const unfiltered: Stuff[] = [
         {
             name: 'a',
         },

@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
 import { AuthorizationHelper, WithAuthorization } from '../authorization/authorization.helper';
 
-interface RawTile {
+export interface Tile extends WithAuthorization {
     title: string;
     icon: string;
     position: number;
     path: string;
     description: string;
 }
-
-export type Tile = WithAuthorization<RawTile>;
 
 @Injectable({
     providedIn: 'root'

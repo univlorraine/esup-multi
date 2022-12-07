@@ -17,8 +17,13 @@ export class InfoService {
     private keepAuthService: KeepAuthService,
   ) {}
 
-  public getInfoList(language: string): Observable<Info[]> {
-    return this.http.get<Info[]>(`${this.environment.apiEndpoint}/info/${language}`);
+  public getInfoList(language: string, authToken: string): Observable<Info[]> {
+    const url = `${this.environment.apiEndpoint}/info/${language}`;
+    const data = {
+      authToken
+    };
+
+    return this.http.post<Info[]>(url, data);
   }
 
   public requestSsoServiceToken(service: string, authToken: string): Observable<string> {
