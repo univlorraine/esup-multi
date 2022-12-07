@@ -5,7 +5,7 @@ interface Authorization {
     type: AuthorizationType;
 }
 
-export type WithAuthorization<T> = T & {
+export interface WithAuthorization {
     authorization?: Authorization;
 };
 
@@ -13,7 +13,7 @@ export class AuthorizationHelper {
 
     constructor(private userRoles: string[]) {}
 
-    public filter<T>(toFilter: WithAuthorization<T>[]): WithAuthorization<T>[] {
+    public filter<T extends WithAuthorization>(toFilter: T[]): T[] {
         return toFilter.filter(({authorization}) => {
             if (!authorization) {
                 return true;

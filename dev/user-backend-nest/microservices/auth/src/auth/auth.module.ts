@@ -5,19 +5,27 @@ import { ConfigModule } from '@nestjs/config';
 import { HttpModule } from '@nestjs/axios';
 import { CasService } from './cas.service';
 import { UserService } from './user.service';
-import { UsernameRepository } from './username/username.repository';
+import { AuthenticatedUserRepository } from './authenticated-user/authenticated-user.repository';
 import { MongooseModule } from '@nestjs/mongoose';
-import { Username, UsernameSchema } from './username/username.schema';
+import {
+  AuthenticatedUser,
+  AuthenticatedUserSchema,
+} from './authenticated-user/authenticated-user.schema';
 
 @Module({
   imports: [
     ConfigModule,
     HttpModule,
     MongooseModule.forFeature([
-      { name: Username.name, schema: UsernameSchema },
+      { name: AuthenticatedUser.name, schema: AuthenticatedUserSchema },
     ]),
   ],
-  providers: [AuthService, CasService, UserService, UsernameRepository],
+  providers: [
+    AuthService,
+    CasService,
+    UserService,
+    AuthenticatedUserRepository,
+  ],
   controllers: [AuthController],
   exports: [AuthService],
 })

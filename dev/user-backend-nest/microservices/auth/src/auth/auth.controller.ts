@@ -3,7 +3,8 @@ import { Observable } from 'rxjs';
 import {
   AuthenticatedDto,
   AuthenticateQueryDto,
-  GetUsernameQueryDto,
+  GetUserQueryDto,
+  GetUserResultDto,
   LogoutQueryDto,
   SsoServiceTokenQueryDto,
 } from './auth.dto';
@@ -29,8 +30,13 @@ export class AuthController {
     return this.authService.requestSsoServiceToken(data);
   }
 
-  @MessagePattern({ cmd: 'getUsername' })
-  getUsername(data: GetUsernameQueryDto): Observable<string> {
-    return this.authService.getUsername(data);
+  @MessagePattern({ cmd: 'getUser' })
+  getUser(data: GetUserQueryDto): Observable<GetUserResultDto | null> {
+    return this.authService.getUser(data);
+  }
+
+  @MessagePattern({ cmd: 'getUserOrThrowError' })
+  getUserOrThrowError(data: GetUserQueryDto): Observable<GetUserResultDto> {
+    return this.authService.getUserOrThrowError(data);
   }
 }

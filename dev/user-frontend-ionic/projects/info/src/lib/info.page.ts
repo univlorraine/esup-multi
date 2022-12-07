@@ -3,7 +3,7 @@ import { Browser } from '@capacitor/browser';
 import { Network } from '@capacitor/network';
 import { authenticatedUser$ } from '@ul/shared';
 import { finalize, filter, first, map, switchMap } from 'rxjs/operators';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, zip } from 'rxjs';
 import { Info, infoList$, setInfoList } from './info.repository';
 import { InfoService } from './info.service';
 import { currentLanguage$ } from '@ul/shared';
@@ -64,9 +64,10 @@ export class InfoPage {
     }
 
     this.isLoading = true;
-    this.infoService.getInfoList(lang)
-      .pipe(
-        finalize(() => this.isLoading = false)
-      ).subscribe(infoList => setInfoList(infoList));
+    zip(currentLanguage$, authenticatedUser$).pipe(
+      first(),
+      switchMap(([currentLanguage, authenticatedUser]) => this.infoService.getInfoList(currentLanguage, authenticatedUser?.authToken)),
+      finalize(() => this.isLoading = false)
+    ).subscribe(infoList => setInfoList(infoList));
   }
 }

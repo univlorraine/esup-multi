@@ -13,7 +13,8 @@ import {
 import { ClientProxy } from '@nestjs/microservices';
 import { ErrorsInterceptor } from './interceptors/errors.interceptor';
 import { AuthGuard } from '@nestjs/passport';
-import { concatMap } from 'rxjs';
+import { concatMap, map, zip } from 'rxjs';
+import { AuthorizationHelper } from './security/authorization.helper';
 
 @UseInterceptors(new ErrorsInterceptor())
 @Controller()
@@ -26,13 +27,26 @@ export class AppController {
     @Inject('CARDS_SERVICE') private cardsClient: ClientProxy,
   ) {}
 
-  @Get('/info/:language')
-  info(@Param('language') language) {
-    return this.infoClient.send(
+  @Post('/info/:language')
+  info(@Body() body, @Param('language') language) {
+    const user$ = this.authClient.send(
+      {
+        cmd: 'getUser',
+      },
+      body,
+    );
+    const info$ = this.infoClient.send(
       {
         cmd: 'info',
       },
       language,
+    );
+
+    return zip(user$, info$).pipe(
+      map(([user, info]) => {
+        const roles = user ? user.roles : ['anonymous'];
+        return new AuthorizationHelper(roles).filter(info);
+      }),
     );
   }
 
@@ -153,17 +167,17 @@ export class AppController {
     return this.authClient
       .send(
         {
-          cmd: 'getUsername',
+          cmd: 'getUserOrThrowError',
         },
         body,
       )
       .pipe(
-        concatMap((username) =>
+        concatMap((user) =>
           this.cardsClient.send(
             {
               cmd: 'cards',
             },
-            username,
+            user.username,
           ),
         ),
       );

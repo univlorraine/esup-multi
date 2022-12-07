@@ -1,6 +1,30 @@
 version: 1
 directus: 9.19.2
 collections:
+  - collection: authorization
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: authorization
+      color: null
+      display_template: null
+      group: null
+      hidden: false
+      icon: null
+      item_duplication_fields: null
+      note: null
+      singleton: false
+      sort: null
+      sort_field: null
+      translations: null
+      unarchive_value: null
+    schema:
+      comment: null
+      name: authorization
+      schema: public
   - collection: info
     meta:
       accountability: null
@@ -74,6 +98,179 @@ collections:
       name: languages
       schema: public
 fields:
+  - collection: authorization
+    field: id
+    meta:
+      collection: authorization
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: true
+      required: false
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      comment: null
+      data_type: integer
+      default_value: nextval('authorization_id_seq'::regclass)
+      foreign_key_column: null
+      foreign_key_schema: null
+      foreign_key_table: null
+      generation_expression: null
+      has_auto_increment: true
+      is_generated: false
+      is_nullable: false
+      is_primary_key: true
+      is_unique: true
+      max_length: null
+      name: id
+      numeric_precision: 32
+      numeric_scale: 0
+      schema: public
+      table: authorization
+    type: integer
+  - collection: authorization
+    field: roles
+    meta:
+      collection: authorization
+      conditions: null
+      display: null
+      display_options: null
+      field: roles
+      group: null
+      hidden: false
+      interface: tags
+      note: null
+      options:
+        alphabetize: true
+      readonly: false
+      required: true
+      sort: null
+      special:
+        - cast-json
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      comment: null
+      data_type: json
+      default_value: null
+      foreign_key_column: null
+      foreign_key_schema: null
+      foreign_key_table: null
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      max_length: null
+      name: roles
+      numeric_precision: null
+      numeric_scale: null
+      schema: public
+      table: authorization
+    type: json
+  - collection: authorization
+    field: type
+    meta:
+      collection: authorization
+      conditions: null
+      display: null
+      display_options: null
+      field: type
+      group: null
+      hidden: false
+      interface: select-radio
+      note: null
+      options:
+        choices:
+          - text: Liste blanche
+            value: ALLOW
+          - text: Liste noire
+            value: DISALLOW
+      readonly: false
+      required: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      comment: null
+      data_type: character varying
+      default_value: null
+      foreign_key_column: null
+      foreign_key_schema: null
+      foreign_key_table: null
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      max_length: 255
+      name: type
+      numeric_precision: null
+      numeric_scale: null
+      schema: public
+      table: authorization
+    type: string
+  - collection: info
+    field: authorization
+    meta:
+      collection: info
+      conditions: null
+      display: null
+      display_options: null
+      field: authorization
+      group: null
+      hidden: false
+      interface: select-dropdown-m2o
+      note: null
+      options:
+        enableSelect: false
+      readonly: false
+      required: false
+      sort: null
+      special:
+        - m2o
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      comment: null
+      data_type: integer
+      default_value: null
+      foreign_key_column: id
+      foreign_key_schema: public
+      foreign_key_table: authorization
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: true
+      is_primary_key: false
+      is_unique: true
+      max_length: null
+      name: authorization
+      numeric_precision: 32
+      numeric_scale: 0
+      schema: public
+      table: info
+    type: integer
   - collection: info
     field: date_created
     meta:
@@ -90,7 +287,7 @@ fields:
       options: null
       readonly: true
       required: false
-      sort: 2
+      sort: 1
       special:
         - date-created
       translations: null
@@ -133,7 +330,7 @@ fields:
       options: null
       readonly: true
       required: false
-      sort: 3
+      sort: 2
       special:
         - date-updated
       translations: null
@@ -175,7 +372,7 @@ fields:
       options: null
       readonly: true
       required: false
-      sort: 4
+      sort: 3
       special: null
       translations: null
       validation: null
@@ -216,7 +413,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: 5
+      sort: 4
       special: null
       translations: null
       validation: null
@@ -257,7 +454,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: 7
+      sort: 6
       special: null
       translations: null
       validation: null
@@ -298,7 +495,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: 6
+      sort: 5
       special: null
       translations: null
       validation: null
@@ -360,7 +557,7 @@ fields:
             value: archived
       readonly: false
       required: false
-      sort: 8
+      sort: 7
       special: null
       translations: null
       validation: null
@@ -403,7 +600,7 @@ fields:
         userLanguage: true
       readonly: false
       required: false
-      sort: null
+      sort: 8
       special:
         - translations
       translations: null
@@ -752,6 +949,28 @@ fields:
       table: languages
     type: string
 relations:
+  - collection: info
+    field: authorization
+    meta:
+      junction_field: null
+      many_collection: info
+      many_field: authorization
+      one_allowed_collections: null
+      one_collection: authorization
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    related_collection: authorization
+    schema:
+      column: authorization
+      constraint_name: info_authorization_foreign
+      foreign_key_column: id
+      foreign_key_schema: public
+      foreign_key_table: authorization
+      on_delete: SET NULL
+      on_update: NO ACTION
+      table: info
   - collection: info_translations
     field: info_id
     meta:
