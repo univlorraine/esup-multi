@@ -27,6 +27,9 @@
       ],
       "@ul/cards": [
         "dist/cards"
+      ],
+      "@ul/schedule": [
+        "dist/schedule"
       ]
     },
     "downlevelIteration": true,

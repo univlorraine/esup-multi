@@ -8,12 +8,12 @@ import {
   Post,
   Request,
   UseGuards,
-  UseInterceptors,
+  UseInterceptors
 } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
-import { ErrorsInterceptor } from './interceptors/errors.interceptor';
 import { AuthGuard } from '@nestjs/passport';
 import { concatMap, map, zip } from 'rxjs';
+import { ErrorsInterceptor } from './interceptors/errors.interceptor';
 import { AuthorizationHelper } from './security/authorization.helper';
 
 @UseInterceptors(new ErrorsInterceptor())
@@ -25,7 +25,8 @@ export class AppController {
     @Inject('MAP_SERVICE') private mapClient: ClientProxy,
     @Inject('RSS_SERVICE') private rssClient: ClientProxy,
     @Inject('CARDS_SERVICE') private cardsClient: ClientProxy,
-  ) {}
+    @Inject('SCHEDULE_SERVICE') private scheduleClient: ClientProxy,
+  ) { }
 
   @Post('/info/:language')
   info(@Body() body, @Param('language') language) {
@@ -178,6 +179,31 @@ export class AppController {
               cmd: 'cards',
             },
             user.username,
+          ),
+        ),
+      );
+  }
+
+  @Post('/schedule')
+  schedule(@Body() body) {
+    return this.authClient
+      .send(
+        {
+          cmd: 'getUserOrThrowError',
+        },
+        body,
+      )
+      .pipe(
+        concatMap((user) =>
+          this.scheduleClient.send(
+            {
+              cmd: 'schedule',
+            },
+            {
+              username: user.username,
+              startDate: body.startDate,
+              endDate: body.endDate
+            }
           ),
         ),
       );

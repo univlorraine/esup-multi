@@ -1,15 +1,16 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ClientsModule } from '@nestjs/microservices';
-import { AppController } from './app.controller';
-import { AuthJwtStrategy } from './security/auth-jwt.strategy';
 import { PassportModule } from '@nestjs/passport';
+import { AppController } from './app.controller';
+import configuration from './config/configuration';
 import microserviceAuthConfig from './config/microservice-auth.config';
 import microserviceCardsConfig from './config/microservice-cards.config';
 import microserviceInfoConfig from './config/microservice-info.config';
 import microserviceMapConfig from './config/microservice-map.config';
 import microserviceRssConfig from './config/microservice-rss.config';
-import configuration from './config/configuration';
+import microserviceScheduleConfig from './config/microservice-schedule.config';
+import { AuthJwtStrategy } from './security/auth-jwt.strategy';
 
 @Module({
   imports: [
@@ -45,6 +46,12 @@ import configuration from './config/configuration';
         name: 'CARDS_SERVICE',
         imports: [ConfigModule.forFeature(microserviceCardsConfig)],
         useFactory: (config: ConfigService) => config.get('microservice-cards'),
+        inject: [ConfigService],
+      },
+      {
+        name: 'SCHEDULE_SERVICE',
+        imports: [ConfigModule.forFeature(microserviceScheduleConfig)],
+        useFactory: (config: ConfigService) => config.get('microservice-schedule'),
         inject: [ConfigService],
       },
     ]),

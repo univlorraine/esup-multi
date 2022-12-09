@@ -6,6 +6,10 @@ import { InfoPageModule } from '@ul/info';
 import { MapModule } from '@ul/map';
 import { PreferencesPageModule } from '@ul/preferences';
 import { RssPageModule } from '@ul/rss';
+import { ScheduleModule } from '@ul/schedule';
+
+
+
 
 
 const routes: Routes = [
@@ -41,6 +45,10 @@ const routes: Routes = [
   {
     path: CardsPageModule.path,
     loadChildren: () => import('@ul/cards').then( m => m.CardsPageModule)
+  },
+  {
+    path: ScheduleModule.path,
+    loadChildren: () => import('@ul/schedule').then( m => m.ScheduleModule)
   },
 ];
 

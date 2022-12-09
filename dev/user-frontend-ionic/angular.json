@@ -68,7 +68,12 @@
                 "glob": "**/*",
                 "input": "projects/cards/assets/i18n",
                 "output": "/assets/i18n/cards"
-              }             
+              },
+              {
+                "glob": "**/*",
+                "input": "projects/schedule/assets/i18n",
+                "output": "/assets/i18n/schedule"
+              }
             ],
             "styles": ["src/theme/variables.scss", "src/global.scss"],
             "scripts": [],
@@ -459,6 +464,47 @@
             "lintFilePatterns": [
               "projects/cards/**/*.ts",
               "projects/cards/**/*.html"
+            ]
+          }
+        }
+
+      }
+    },
+    "schedule": {
+      "projectType": "library",
+      "root": "projects/schedule",
+      "sourceRoot": "projects/schedule/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/schedule/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/schedule/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/schedule/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/schedule/src/test.ts",
+            "tsConfig": "projects/schedule/tsconfig.spec.json",
+            "karmaConfig": "projects/schedule/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/schedule/**/*.ts",
+              "projects/schedule/**/*.html"
             ]
           }
         }
