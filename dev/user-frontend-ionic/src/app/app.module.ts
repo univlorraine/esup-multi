@@ -2,9 +2,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { AuthModule } from '@ul/auth';
 import { CardsPageModule } from '@ul/cards';
@@ -12,6 +10,7 @@ import { InfoPageModule } from '@ul/info';
 import { MapModule } from '@ul/map';
 import { PreferencesPageModule } from '@ul/preferences';
 import { RssPageModule } from '@ul/rss';
+import { ScheduleModule } from '@ul/schedule';
 import { ProjectModuleService, translationsLoaderFactory } from '@ul/shared';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
@@ -32,6 +31,7 @@ import { ErrorModule } from './error/error.module';
     MapModule,
     RssPageModule,
     CardsPageModule,
+    ScheduleModule,
     TranslateModule.forRoot({
         defaultLanguage: environment.defaultLanguage || 'fr',
         loader: {

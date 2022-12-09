@@ -1,0 +1,32 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-title class="ion-text-center">
+      {{event.startDateTime | localHour}} - {{event.endDateTime | localHour}}
+    </ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    <ion-row>
+
+      <ion-col>
+        <ion-text class="cardLabels courseLabel">{{event.course.label}}</ion-text>
+        <ion-row class="cardLabels" *ngFor="let room of event.rooms">
+          <ion-icon name="business-outline"></ion-icon>
+          <ion-text>{{room.label}}</ion-text>
+        </ion-row>
+        <ion-row class="cardLabels" *ngFor="let teacher of event.teachers">
+          <ion-icon name="man-outline"></ion-icon>
+          <ion-text>{{teacher.firstname}} {{teacher.lastname}}</ion-text>
+        </ion-row>
+        <ion-row class="cardLabels" *ngFor="let group of event.groups">
+          <ion-icon name="people-circle-outline"></ion-icon>
+          <ion-text>{{group.label}}</ion-text>
+        </ion-row>
+      </ion-col>
+
+      <ion-col [ngStyle]="{'background-color': event.course.color}" size="0.2"></ion-col>
+
+    </ion-row>
+  </ion-card-content>
+
+</ion-card>

@@ -1,0 +1,29 @@
+<ion-progress-bar *ngIf="isLoading" type="indeterminate" color="primary"></ion-progress-bar>
+
+<ion-content *ngIf="(schedule$ | async) as schedule" #scrollContent>
+
+  <ng-container *ngIf="(areEventInPlannings$ | async) === true">
+
+    <ion-item-group *ngFor="let eventsByDay of (eventsByDays$ | async);">
+
+      <ion-item-divider sticky class="ion-text-center completeDate" [id]="eventsByDay.day">
+        <ion-col>{{eventsByDay.day | completeLocalDate}}</ion-col>
+      </ion-item-divider>
+
+      <ion-col class="ion-text-center" *ngIf="!eventsByDay.events.length">
+        <p>{{ "SCHEDULE.NO_EVENTS_THIS_DAY" | translate }}</p>
+      </ion-col>
+
+      <app-event-detail *ngFor="let event of eventsByDay.events" [event]="event"></app-event-detail>
+
+    </ion-item-group>
+  </ng-container>
+</ion-content>
+
+<ion-content class="ion-padding" *ngIf="(areEventInPlannings$ | async) === false">
+  <ion-note> {{ "SCHEDULE.NO_EVENTS" | translate }} </ion-note>
+</ion-content>
+
+<ion-content class="ion-padding" *ngIf="(schedule$ | async) === null">
+  <ion-note> {{ "SCHEDULE.NO_DATA" | translate }} </ion-note>
+</ion-content>
