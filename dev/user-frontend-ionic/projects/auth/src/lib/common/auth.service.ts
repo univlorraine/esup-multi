@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { AuthenticatedUser, getRefreshAuthToken } from '@ul/shared';
+import { AuthenticatedUser, cleanupPrivateData, getRefreshAuthToken } from '@ul/shared';
 import { Observable } from 'rxjs';
+import { concatMap, first, tap } from 'rxjs/operators';
+import { saveCredentialsOnAuthentication$ } from '../preferences/preferences.repository';
 import { KeepAuthService } from './keep-auth.service';
 import { StandardAuthService } from './standard-auth.service';
-import { saveCredentialsOnAuthentication$ } from '../preferences/preferences.repository';
-import { concatMap, first } from 'rxjs/operators';
+import { Actions } from '@ngneat/effects-ng';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ import { concatMap, first } from 'rxjs/operators';
 export class AuthService {
 
   constructor(
+    private actions: Actions,
     private standardAuthService: StandardAuthService,
     private keepAuthService: KeepAuthService,
   ) { }
@@ -19,10 +21,11 @@ export class AuthService {
   login(username: string, password: string): Observable<AuthenticatedUser | null> {
     return saveCredentialsOnAuthentication$.pipe(
       first(),
+      tap(() => this.cleanupPrivateData()),
       concatMap(saveCredentialsOnAuthentication => saveCredentialsOnAuthentication ?
         this.keepAuthService.login(username, password) :
         this.standardAuthService.login(username, password)
-      )
+      ),
     );
   }
 
@@ -31,7 +34,12 @@ export class AuthService {
       concatMap(token => token ?
         this.keepAuthService.logout(token) :
         this.standardAuthService.logout()
-      )
+      ),
+      tap(() => this.cleanupPrivateData()),
     );
+  }
+
+  cleanupPrivateData() {
+    this.actions.dispatch(cleanupPrivateData());
   }
 }

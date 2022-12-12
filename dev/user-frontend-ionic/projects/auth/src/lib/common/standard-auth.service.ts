@@ -45,8 +45,7 @@ export class StandardAuthService {
       map(authenticatedUser => authenticatedUser.authToken),
       concatMap(authToken => this.http.delete<boolean>(url, {
         body: { authToken }
-      })),
-      tap(() => updateUser(null))
+      }))
     );
   }
 }

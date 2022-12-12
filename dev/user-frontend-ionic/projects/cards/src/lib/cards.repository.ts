@@ -66,3 +66,5 @@ export const setUserAndCardsData = (userAndCardsData: UserAndCardsProps['userAnd
     userAndCardsData,
   }));
 };
+
+export const clearUserAndCardsData = () => userAndCardsStore.reset();

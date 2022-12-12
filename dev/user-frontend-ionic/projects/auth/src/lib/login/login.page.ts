@@ -50,7 +50,9 @@ export class LoginPage implements OnInit {
         finalize(() => this.isLoading = false)
       )
       .subscribe(
-        () => this.router.navigate(['auth/connected'])
+        () => {
+          this.router.navigate(['auth/connected']);
+        }
       );
   }
 

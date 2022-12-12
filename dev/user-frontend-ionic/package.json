@@ -40,6 +40,7 @@
     "@capacitor/status-bar": "4.0.1",
     "@ionic/angular": "^6.1.9",
     "@larscom/ngx-translate-module-loader": "^3.0.6",
+    "@ngneat/effects-ng": "^2.0.0",
     "@ngneat/elf": "^2.1.0",
     "@ngneat/elf-entities": "^4.4.2",
     "@ngneat/elf-persist-state": "^1.1.6",
