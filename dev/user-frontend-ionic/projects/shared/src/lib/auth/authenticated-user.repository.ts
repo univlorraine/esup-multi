@@ -40,3 +40,5 @@ export const updateUser = (authenticatedUser: AuthProps['authenticatedUser']) =>
 
 export const userIsAuthenticated$ = authStore.pipe(select((state) => !!state.authenticatedUser));
 
+export const clearAuthenticatedUser = () => authStore.reset();
+

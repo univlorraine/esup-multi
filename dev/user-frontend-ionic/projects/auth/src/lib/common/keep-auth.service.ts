@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { AuthenticatedUser, authenticatedUser$, updateUser, updateRefreshAuthToken, deleteRefreshAuthToken } from '@ul/shared';
+import { AuthenticatedUser, authenticatedUser$, updateUser, updateRefreshAuthToken } from '@ul/shared';
 import { Observable, of, throwError, EMPTY } from 'rxjs';
 import { catchError, concatMap, delayWhen, tap, first } from 'rxjs/operators';
 
@@ -72,8 +72,6 @@ export class KeepAuthService {
           }
         });
       }),
-      tap(() => updateUser(null)),
-      delayWhen(() => deleteRefreshAuthToken()),
     );
   }
 

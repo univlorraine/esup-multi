@@ -2,9 +2,11 @@ import { CommonModule } from '@angular/common';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
+import { EffectsNgModule } from '@ngneat/effects-ng';
 import { TranslateModule } from '@ngx-translate/core';
 import { ProjectModuleService } from '@ul/shared';
 import { AuthRoutingModule } from './auth-routing.module';
+import { AuthEffects } from './auth.effects';
 import { ConnectedPage } from './connected/connected.page';
 import { LoginPage } from './login/login.page';
 import { PreferencesComponent } from './preferences/preferences.component';
@@ -34,6 +36,7 @@ const initModule = (projectModuleService: ProjectModuleService) =>
     AuthRoutingModule,
     ReactiveFormsModule,
     TranslateModule,
+    EffectsNgModule.forFeature([AuthEffects]),
   ],
   providers: [{
     provide: APP_INITIALIZER,

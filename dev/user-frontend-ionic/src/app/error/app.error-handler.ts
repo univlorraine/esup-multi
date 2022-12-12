@@ -2,8 +2,8 @@ import { Injectable, ErrorHandler, Injector } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AlertController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
-import { deleteRefreshAuthToken, updateUser } from '@ul/shared';
-import { first } from 'rxjs/operators';
+import { cleanupPrivateData } from '@ul/shared';
+import { Actions } from '@ngneat/effects-ng';
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +13,7 @@ export class AppErrorHandler implements ErrorHandler {
   private translateService: TranslateService;
 
   constructor(
+    private actions: Actions,
     private alertController: AlertController,
     private injector: Injector,
   ) {}
@@ -30,8 +31,7 @@ export class AppErrorHandler implements ErrorHandler {
   private async handleHttpError(error: HttpErrorResponse) {
     switch(error.status) {
       case 401:
-        updateUser(null);
-        deleteRefreshAuthToken().pipe(first()).subscribe();
+        this.actions.dispatch(cleanupPrivateData());
         return this.displayUnauthenticatedError(error);
       default:
         return this.displayGenericError(error);
