@@ -6,6 +6,8 @@ import { Observable } from 'rxjs';
 import { filter, finalize, first, switchMap } from 'rxjs/operators';
 import { setUserAndCardsData, UserAndCardsData, userAndCardsData$ } from '../cards.repository';
 import { CardsService } from '../cards.service';
+import { ScreenService } from '../screen.service';
+
 
 @Component({
   selector: 'app-card',
@@ -18,7 +20,11 @@ export class CardPage implements OnInit {
   public cardType: string;
   public isLoading = false;
 
-  constructor(private route: ActivatedRoute, private cardsService: CardsService,) {
+  constructor(
+    private route: ActivatedRoute,
+    private cardsService: CardsService,
+    private screenService: ScreenService,
+  ) {
   }
 
   ngOnInit() {
@@ -27,6 +33,14 @@ export class CardPage implements OnInit {
 
   async ionViewWillEnter() {
     this.loadUserAndCardsData();
+  }
+
+  ionViewDidEnter() {
+    this.screenService.fullBrightness();
+  }
+
+  ionViewWillLeave() {
+    this.screenService.restorePreviousBrightness();
   }
 
   private async loadUserAndCardsData() {
@@ -44,6 +58,8 @@ export class CardPage implements OnInit {
       setUserAndCardsData(data);
     });
   }
+
+
 
 }
 
