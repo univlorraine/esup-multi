@@ -1,8 +1,8 @@
 import { createStore, select, setProps, withProps } from '@ngneat/elf';
 import {
     persistState,
-    localStorageStrategy,
   } from '@ngneat/elf-persist-state';
+import { localForageStore } from '@ul/shared';
 
 const STORE_NAME = 'auth-preferences';
 
@@ -19,7 +19,7 @@ const store = createStore(
 
 export const persist = persistState(store, {
     key: STORE_NAME,
-    storage: localStorageStrategy,
+    storage: localForageStore,
 });
 
 export const saveCredentialsOnAuthentication$ = store.pipe(select((state) => state.saveCredentialsOnAuthentication));

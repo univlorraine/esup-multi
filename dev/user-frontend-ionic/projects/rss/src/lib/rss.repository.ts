@@ -1,7 +1,8 @@
 import { createStore, select, withProps } from '@ngneat/elf';
 import {
-  localStorageStrategy, persistState
+  persistState
 } from '@ngneat/elf-persist-state';
+import { localForageStore } from '@ul/shared';
 
 const STORE_NAME = 'rssFeed';
 
@@ -30,7 +31,7 @@ const rssFeedStore = createStore(
 
 export const persist = persistState(rssFeedStore, {
     key: STORE_NAME,
-    storage: localStorageStrategy,
+    storage: localForageStore,
 });
 
 export const rssFeed$ = rssFeedStore.pipe(select((state) => state.rssFeed));
