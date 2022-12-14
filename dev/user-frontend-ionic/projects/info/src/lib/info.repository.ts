@@ -2,8 +2,8 @@ import { createStore } from '@ngneat/elf';
 import { withEntities, selectAllEntities, setEntities } from '@ngneat/elf-entities';
 import {
     persistState,
-    localStorageStrategy,
   } from '@ngneat/elf-persist-state';
+import { localForageStore } from '@ul/shared';
 
 const STORE_NAME = 'info';
 
@@ -22,7 +22,7 @@ const infoStore = createStore(
 
 export const persist = persistState(infoStore, {
     key: STORE_NAME,
-    storage: localStorageStrategy,
+    storage: localForageStore,
 });
 
 export const infoList$ = infoStore.pipe(selectAllEntities());

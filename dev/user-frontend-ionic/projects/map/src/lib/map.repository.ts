@@ -1,7 +1,8 @@
 import { createStore, select, withProps } from '@ngneat/elf';
 import {
-    localStorageStrategy, persistState
+    persistState
 } from '@ngneat/elf-persist-state';
+import { localForageStore } from '@ul/shared';
 
 const STORE_NAME = 'markers';
 
@@ -23,7 +24,7 @@ const markersStore = createStore(
 
 export const persist = persistState(markersStore, {
     key: STORE_NAME,
-    storage: localStorageStrategy,
+    storage: localForageStore,
 });
 
 export const markersList$ = markersStore.pipe(select((state) => state.markers));

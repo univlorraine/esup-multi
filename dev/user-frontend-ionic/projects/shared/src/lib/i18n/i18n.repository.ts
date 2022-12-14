@@ -1,7 +1,8 @@
 import { createStore, select, withProps } from '@ngneat/elf';
 import {
-  localStorageStrategy, persistState
+  persistState
 } from '@ngneat/elf-persist-state';
+import { localForageStore } from '../store/local-forage';
 
 const STORE_NAME = 'i18n';
 
@@ -20,7 +21,7 @@ const store = createStore(
 
 const persist = persistState(store, {
   key: STORE_NAME,
-  storage: localStorageStrategy,
+  storage: localForageStore,
 });
 
 export const currentLanguage$ = store.pipe(select((state) => state.language || state.defaultLanguage));

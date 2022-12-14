@@ -1,7 +1,8 @@
 import { createStore, select, withProps } from '@ngneat/elf';
 import {
-  localStorageStrategy, persistState
+ persistState
 } from '@ngneat/elf-persist-state';
+import { localForageStore } from '@ul/shared';
 
 const STORE_NAME = 'screen';
 
@@ -16,7 +17,7 @@ const store = createStore(
 
 export const persist = persistState(store, {
     key: STORE_NAME,
-    storage: localStorageStrategy,
+    storage: localForageStore,
 });
 
 export const brightness$ = store.pipe(select((state) => state.brightness));
