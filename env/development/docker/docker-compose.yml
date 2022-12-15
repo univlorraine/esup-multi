@@ -1,0 +1,137 @@
+version: '3.7'
+name: 'apps4_ul'
+services:
+
+  registry-ul:
+    image: registry:2
+    restart: unless-stopped
+    container_name: registry-ul
+    volumes:
+      - /home/docker/rooms/ul/registry/volumes/registry:/var/lib/registry
+    expose:
+      - 5000
+    networks:
+      - ul
+
+  ul-multi-directus:
+    image: directus/directus:9.21.2
+    restart: unless-stopped
+    container_name: ul-multi-directus
+    env_file:
+      - /home/docker/rooms/ul/multi/develop/directus/directus.env
+    expose:
+      - 8055
+    volumes:
+      - /home/docker/rooms/ul/multi/develop/directus/volumes/uploads:/directus/uploads
+    # Make sure to also mount the volume when using SQLite
+    #      - /home/docker/rooms/ul/multi/develop/directus/volumes/snapshot:/directus/snapshot
+    # If you want to load extensions from the host
+    #      - /home/docker/rooms/ul/multi/develop/directus/volumes/extensions:/directus/extensions
+    depends_on:
+      - ul-multi-directus-db
+    environment:
+      - ADMIN_EMAIL=admin@admin.com
+      - DB_CLIENT=pg
+      - DB_HOST=ul-multi-directus-db
+      - DB_PORT=5432
+      - DB_DATABASE=directus
+      - DB_USER=directus
+      - PUBLIC_URL=https://multi-directus.jnesis.com
+    networks:
+      - ul
+
+  ul-multi-directus-db:
+    image: postgis/postgis:14-master
+    restart: unless-stopped
+    container_name: ul-multi-directus-db
+    env_file:
+      - /home/docker/rooms/ul/multi/develop/directus-db/directus-db.env
+    expose:
+      - 5432
+    volumes:
+      - /home/docker/rooms/ul/multi/develop/directus-db/volumes/postgres-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=directus
+      - POSTGRES_DB=directus
+    networks:
+      - ul
+
+  ul-multi-main-develop:
+    image: registry-ul.jnesis.com/multi-main:develop
+    restart: unless-stopped
+    container_name: ul-multi-main-develop
+    depends_on:
+      - ul-multi-auth-develop
+      - ul-multi-info-develop
+      - ul-multi-map-develop
+      - ul-multi-rss-develop
+      - ul-multi-cards-develop
+    command: bash -c "node main.js"
+    networks:
+      - ul
+
+  ul-multi-auth-develop:
+    image: registry-ul.jnesis.com/multi-auth:develop
+    restart: unless-stopped
+    container_name: ul-multi-auth-develop
+    command: bash -c "node main.js"
+    networks:
+      - ul
+
+  ul-multi-auth-mongo-develop:
+    image: mongo:5.0.14
+    restart: unless-stopped
+    container_name: ul-multi-auth-mongo-develop
+    env_file:
+      - /home/docker/rooms/ul/multi/develop/auth-mongo/auth-mongo.env
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+    networks:
+      - ul
+
+  ul-multi-info-develop:
+    image: registry-ul.jnesis.com/multi-info:develop
+    restart: unless-stopped
+    container_name: ul-multi-info-develop
+    command: bash -c "node main.js"
+    networks:
+      - ul
+
+  ul-multi-map-develop:
+    image: registry-ul.jnesis.com/multi-map:develop
+    restart: unless-stopped
+    container_name: ul-multi-map-develop
+    command: bash -c "node main.js"
+    networks:
+      - ul
+
+  ul-multi-rss-develop:
+    image: registry-ul.jnesis.com/multi-rss:develop
+    restart: unless-stopped
+    container_name: ul-multi-rss-develop
+    expose:
+      - 3006
+    command: bash -c "node main.js"
+    networks:
+      - ul
+
+  ul-multi-cards-develop:
+    image: registry-ul.jnesis.com/multi-cards:develop
+    restart: unless-stopped
+    container_name: ul-multi-cards-develop
+    command: bash -c "node main.js"
+    networks:
+      - ul
+
+  ul-multi-schedule-develop:
+    image: registry-ul.jnesis.com/multi-schedule:develop
+    restart: unless-stopped
+    container_name: ul-multi-schedule-develop
+    command: bash -c "node main.js"
+    networks:
+      - ul
+
+networks:
+  ul:
+    driver: bridge
+    name: ul

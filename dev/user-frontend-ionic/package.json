@@ -9,7 +9,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "prebuild": "npm run module:build-all",
+    "build": "BUILD_ENV=${BUILD_ENV:-local} ng build --configuration=$BUILD_ENV",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
