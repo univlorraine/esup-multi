@@ -3,7 +3,7 @@ import { Network } from '@capacitor/network';
 import { IonContent } from '@ionic/angular';
 import { AuthenticatedUser, authenticatedUser$ } from '@ul/shared';
 import { add, startOfWeek } from 'date-fns';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { filter, finalize, first, map, switchMap, tap } from 'rxjs/operators';
 import { Schedule, schedule$, setSchedule } from '../schedule.repository';
 import { ScheduleService } from '../schedule.service';
@@ -28,6 +28,7 @@ export class ScheduleListPage {
   public currentDay: string;
   public startDate: Date;
   public endDate: Date;
+  private scheduleSubscription: Subscription;
 
   constructor(
     private scheduleService: ScheduleService,
@@ -39,11 +40,14 @@ export class ScheduleListPage {
   }
 
   ionViewWillEnter() {
-    this.currentDay = formatDay(new Date());
-    this.startDate = startOfWeek(new Date(), { weekStartsOn: 1 });
+    const now = new Date();
+    this.currentDay = formatDay(now);
+    this.startDate = startOfWeek(now, { weekStartsOn: 1 });
     this.endDate = add(this.startDate, { days: 27 });
 
-    this.loadSchedule().then(() => {
+    this.loadSchedule();
+
+    this.scheduleSubscription = schedule$.subscribe(() => {
       setTimeout(() => {
         this.scrollToCurrentDate();
       }, 300);
@@ -53,6 +57,10 @@ export class ScheduleListPage {
       const dateInterval = {start: this.startDate, end: this.endDate};
       return this.scheduleListService.scheduleToEventsByDay(schedule, dateInterval);
     }));
+  }
+
+  ionViewWillLeave() {
+    this.scheduleSubscription?.unsubscribe();
   }
 
   scrollToCurrentDate() {
