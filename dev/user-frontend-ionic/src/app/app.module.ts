@@ -33,7 +33,6 @@ import { ErrorModule } from './error/error.module';
     CardsPageModule,
     ScheduleModule,
     TranslateModule.forRoot({
-        defaultLanguage: environment.defaultLanguage || 'fr',
         loader: {
             provide: TranslateLoader,
             useFactory: translationsLoaderFactory,
