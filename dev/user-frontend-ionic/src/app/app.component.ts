@@ -1,8 +1,7 @@
 import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
-import { currentLanguage$, ProjectModuleService, updateDefaultLanguage, updateLanguage } from '@ul/shared';
+import { currentLanguage$, ProjectModuleService, updateLanguage } from '@ul/shared';
 import { LangChangeEvent, TranslateService} from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
-import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -22,10 +21,6 @@ export class AppComponent implements OnInit, OnDestroy {
     private translateService: TranslateService
   ) {
     // Listen for translation events
-    this.subscriptions.push(this.translateService.onDefaultLangChange
-      .subscribe((event: LangChangeEvent) => {
-        updateDefaultLanguage(event.lang);
-      }));
     this.subscriptions.push(this.translateService.onLangChange
       .subscribe((event: LangChangeEvent) => {
         updateLanguage(event.lang);
@@ -40,9 +35,9 @@ export class AppComponent implements OnInit, OnDestroy {
     this.menuItems = this.projectModuleService.getMenuItems();
 
     // apply language saved in persistent state
-    currentLanguage$
-      .pipe(first())
-      .subscribe(l => this.useLanguage(l));
+    this.subscriptions.push( currentLanguage$
+      .subscribe(l => this.useLanguage(l || this.environment.defaultLanguage))
+    );
   }
 
   ngOnDestroy(): void {
