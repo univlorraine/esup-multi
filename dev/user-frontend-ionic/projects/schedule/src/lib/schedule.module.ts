@@ -5,9 +5,10 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ProjectModuleService } from '@ul/shared';
 import { CompleteLocalDatePipe } from './common/pipe/complete-local-date.pipe';
 import { LocalHourPipe } from './common/pipe/local-hour.pipe';
-import { EventDetailComponent } from './schedule-list/event-detail/event-detail.component';
+import { EventDetailComponent } from './common/event-detail/event-detail.component';
 import { ScheduleListPage } from './schedule-list/schedule-list.page';
 import { SchedulePageRoutingModule } from './schedule-routing.module';
+import { ShortenedDatePipe } from "./common/pipe/shortened-date.pipe";
 
 const initModule = (projectModuleService: ProjectModuleService) =>
   () => projectModuleService.initProjectModule({
@@ -27,10 +28,13 @@ const initModule = (projectModuleService: ProjectModuleService) =>
   });
 
 @NgModule({
-  declarations: [ScheduleListPage,
+  declarations: [
+    ScheduleListPage,
     CompleteLocalDatePipe,
     LocalHourPipe,
-  EventDetailComponent],
+    ShortenedDatePipe,
+    EventDetailComponent
+  ],
   imports: [
     CommonModule,
     IonicModule,

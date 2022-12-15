@@ -1,7 +1,7 @@
 <ion-card>
   <ion-card-header>
     <ion-card-title class="ion-text-center">
-      {{event.startDateTime | localHour}} - {{event.endDateTime | localHour}}
+      {{displayShortenedDate ? (event.startDateTime | shortenedDate) : ""}} {{event.startDateTime | localHour}} - {{event.endDateTime | localHour}}
     </ion-card-title>
   </ion-card-header>
 
@@ -27,6 +27,7 @@
       <ion-col [ngStyle]="{'background-color': event.course.color}" size="0.2"></ion-col>
 
     </ion-row>
+
   </ion-card-content>
 
 </ion-card>
