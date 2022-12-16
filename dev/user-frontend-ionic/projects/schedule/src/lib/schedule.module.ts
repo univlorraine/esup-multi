@@ -8,6 +8,9 @@ import { LocalHourPipe } from './common/pipe/local-hour.pipe';
 import { EventDetailComponent } from './common/event-detail/event-detail.component';
 import { ScheduleListPage } from './schedule-list/schedule-list.page';
 import { SchedulePageRoutingModule } from './schedule-routing.module';
+import { FullCalendarModule } from '@fullcalendar/angular'; // must go before plugins
+import { ScheduleCalendarComponent } from './schedule-calendar/schedule-calendar.component';
+import { SchedulePage } from './schedule.page';
 import { ShortenedDatePipe } from "./common/pipe/shortened-date.pipe";
 
 const initModule = (projectModuleService: ProjectModuleService) =>
@@ -29,17 +32,21 @@ const initModule = (projectModuleService: ProjectModuleService) =>
 
 @NgModule({
   declarations: [
+    SchedulePage,
     ScheduleListPage,
+    ScheduleCalendarComponent,
     CompleteLocalDatePipe,
     LocalHourPipe,
     ShortenedDatePipe,
     EventDetailComponent
+  
   ],
   imports: [
     CommonModule,
     IonicModule,
     SchedulePageRoutingModule,
-    TranslateModule
+    TranslateModule,
+    FullCalendarModule,
   ],
   providers: [{
     provide: APP_INITIALIZER,

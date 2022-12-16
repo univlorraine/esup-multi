@@ -3,5 +3,11 @@
     "NO_DATA": "Pas de données disponibles",
     "NO_EVENTS": "Pas de cours dans vos plannings",
     "NO_EVENTS_THIS_DAY": "Pas de cours à cette date",
-    "DESCRIPTION": "Retrouvez tous vos évènements"
+    "DESCRIPTION": "Retrouvez tous vos évènements",
+    "VIEW_TYPE": {
+        "MONTH": "Mois",
+        "WEEK": "Semaine",
+        "DAY": "Jour",
+        "LIST": "Liste"        
+    }
 }
