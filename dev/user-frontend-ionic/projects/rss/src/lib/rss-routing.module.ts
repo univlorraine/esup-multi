@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
 import { RssPage } from './rss.page';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'rss',
     component: RssPage
   }
 ];

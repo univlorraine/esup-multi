@@ -6,13 +6,18 @@ import { CardsPage } from './cards.page';
 
 const routes: Routes = [
   {
-    path: '',
-    component: CardsPage
-  },
-  {
-    path: 'card',
+    path: 'cards',
     children: [
-      { path: ':type', component: CardPage }
+      {
+        path: '',
+        component: CardsPage,
+      },
+      {
+        path: 'card',
+        children: [
+          { path: ':type', component: CardPage }
+        ]
+      },
     ]
   },
 ];

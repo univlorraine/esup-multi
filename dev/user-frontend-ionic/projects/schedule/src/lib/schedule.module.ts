@@ -11,7 +11,7 @@ import { SchedulePageRoutingModule } from './schedule-routing.module';
 import { FullCalendarModule } from '@fullcalendar/angular'; // must go before plugins
 import { ScheduleCalendarComponent } from './schedule-calendar/schedule-calendar.component';
 import { SchedulePage } from './schedule.page';
-import { ShortenedDatePipe } from "./common/pipe/shortened-date.pipe";
+import { ShortenedDatePipe } from './common/pipe/shortened-date.pipe';
 
 const initModule = (projectModuleService: ProjectModuleService) =>
   () => projectModuleService.initProjectModule({
@@ -39,7 +39,7 @@ const initModule = (projectModuleService: ProjectModuleService) =>
     LocalHourPipe,
     ShortenedDatePipe,
     EventDetailComponent
-  
+
   ],
   imports: [
     CommonModule,

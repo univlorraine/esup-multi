@@ -5,21 +5,25 @@ import { ConnectedPage } from './connected/connected.page';
 import { LoginPage } from './login/login.page';
 
 const routes: Routes = [
-
   {
-    path: '', redirectTo: 'connected',
-    pathMatch: 'full',
-  },
-  {
-    path: 'connected',
-    component: ConnectedPage,
-    canActivate: [AuthGuard],
-  },
-  {
-    path: 'login',
-    component: LoginPage
-  },
-
+    path: 'auth',
+    children: [
+      {
+        path: 'connected',
+        component: ConnectedPage,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'login',
+        component: LoginPage
+      },
+      {
+        path: '',
+        redirectTo: 'connected',
+        pathMatch: 'full'
+      }
+    ]
+  }
 ];
 
 @NgModule({
