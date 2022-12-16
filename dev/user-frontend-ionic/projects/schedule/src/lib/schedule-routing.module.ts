@@ -6,7 +6,7 @@ import { SchedulePage } from './schedule.page';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'schedule',
     component: SchedulePage,
     children: [
       {

@@ -5,7 +5,7 @@
   <ion-content *ngIf="!userCards.errors">
 
     <ion-content *ngIf="!userCards.cards.staffCard">
-      <ion-card class="card" *ngFor="let card of userCards.cards | keyvalue" [routerLink]="['/card', card.key]">
+      <ion-card class="card" *ngFor="let card of userCards.cards | keyvalue" [routerLink]="['card', card.key]">
         <ion-card-header>
           <ion-card-subtitle> </ion-card-subtitle>
           <ion-card-title class="warning">

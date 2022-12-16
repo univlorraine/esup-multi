@@ -9,7 +9,7 @@ import { Event } from '../../schedule.repository';
 export class EventDetailComponent {
 
   @Input() event: Event;
-  @Input() displayShortenedDate: boolean = false;
+  @Input() displayShortenedDate = false;
   constructor() { }
 
 }
