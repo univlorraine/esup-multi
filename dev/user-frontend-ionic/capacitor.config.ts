@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'user-frontend-ionic',
+  appId: 'fr.univlorraine.mobile.multitest',
+  appName: 'Multi',
   webDir: 'www',
   bundledWebRuntime: false
 };
