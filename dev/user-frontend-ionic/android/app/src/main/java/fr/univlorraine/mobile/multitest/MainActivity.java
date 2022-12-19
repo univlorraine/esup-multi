@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package fr.univlorraine.mobile.multitest;
 
 import com.getcapacitor.BridgeActivity;
 
