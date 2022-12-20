@@ -9,5 +9,11 @@
         "WEEK": "Week",
         "DAY": "Day",
         "LIST": "List"
+    },
+    "SELECT_PLANNING":{
+        "TITLE": "Select planning",
+        "SUBTITLE": "Select the planning you want to see displayed",
+        "CANCEL": "Cancel",
+        "VALIDATE": "Validate"
     }
 }

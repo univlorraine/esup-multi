@@ -1,5 +1,6 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
@@ -24,6 +25,7 @@ import { ErrorModule } from './error/error.module';
     IonicModule.forRoot(),
     HttpClientModule,
     AppRoutingModule,
+    ReactiveFormsModule,
     ErrorModule,
     InfoPageModule,
     PreferencesPageModule,
