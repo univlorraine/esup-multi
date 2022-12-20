@@ -1,11 +1,11 @@
 import { Component, OnDestroy, ViewChild } from '@angular/core';
-import { Calendar, CalendarOptions } from '@fullcalendar/core';
+import { ActivatedRoute } from '@angular/router';
 import { FullCalendarComponent } from '@fullcalendar/angular';
-import dayGridPlugin from '@fullcalendar/daygrid';
+import { Calendar, CalendarOptions } from '@fullcalendar/core';
 import allLocales from '@fullcalendar/core/locales-all';
+import dayGridPlugin from '@fullcalendar/daygrid';
 import { currentLanguage$ } from '@ul/shared';
 import { Observable, Subscription } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
 @Component({

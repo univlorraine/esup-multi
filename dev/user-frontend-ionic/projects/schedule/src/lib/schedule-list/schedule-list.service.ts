@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { eachDayOfInterval, format, Interval } from 'date-fns';
-import { Event, Schedule } from '../schedule.repository';
+import { Event, Planning } from '../schedule.repository';
 
 export interface EventsByDay {
   day: string;
@@ -16,14 +16,15 @@ export class ScheduleListService {
 
   constructor() {}
 
-  scheduleToEventsByDay(schedule: Schedule, dateInterval: Interval): EventsByDay[] | null {
+  planningListToEventsByDay(planningList: Planning[], dateInterval: Interval): EventsByDay[] {
 
-     if (!schedule) { return null; }
-     if (!schedule.plannings.length) { return null; }
+     if (planningList.length === 0) {
+      return [];
+    }
 
     const days = eachDayOfInterval(dateInterval);
 
-    const eventsMapByDay = schedule.plannings
+    const eventsMapByDay = planningList
       .reduce((events, planning) => events.concat(planning.events),[])
       .sort((a: Event, b: Event) => new Date(a.startDateTime).getTime() - new Date(b.startDateTime).getTime())
       .reduce((accumulatorEventsMapByDay, event) => {

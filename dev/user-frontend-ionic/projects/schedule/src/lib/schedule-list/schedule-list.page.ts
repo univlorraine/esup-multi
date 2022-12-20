@@ -5,7 +5,7 @@ import { AuthenticatedUser, authenticatedUser$ } from '@ul/shared';
 import { add, startOfWeek } from 'date-fns';
 import { Observable, Subscription } from 'rxjs';
 import { filter, finalize, first, map, switchMap, tap } from 'rxjs/operators';
-import { Schedule, schedule$, setSchedule } from '../schedule.repository';
+import { activePlanningList$, Schedule, schedule$, setSchedule } from '../schedule.repository';
 import { ScheduleService } from '../schedule.service';
 import { EventsByDay, formatDay, ScheduleListService } from './schedule-list.service';
 
@@ -34,9 +34,7 @@ export class ScheduleListPage {
     private scheduleService: ScheduleService,
     private scheduleListService: ScheduleListService,
   ) {
-    this.areEventInPlannings$ = schedule$.pipe(map(schedule => {
-      if (schedule) { return schedule.plannings.some(planning => planning.events.length > 0); }
-    }));
+    this.areEventInPlannings$ = activePlanningList$.pipe(map(activePlanningList => activePlanningList.length > 0));
   }
 
   ionViewWillEnter() {
@@ -53,9 +51,9 @@ export class ScheduleListPage {
       }, 300);
     });
 
-    this.eventsByDays$ = schedule$.pipe(map(schedule => {
+    this.eventsByDays$ = activePlanningList$.pipe(map(planningList => {
       const dateInterval = {start: this.startDate, end: this.endDate};
-      return this.scheduleListService.scheduleToEventsByDay(schedule, dateInterval);
+      return this.scheduleListService.planningListToEventsByDay(planningList, dateInterval);
     }));
   }
 
@@ -83,7 +81,7 @@ export class ScheduleListPage {
       first(),
       filter(authenticatedUser => authenticatedUser != null),
       switchMap(authenticatedUser =>
-        this.scheduleService .getSchedule(
+        this.scheduleService.getSchedule(
           authenticatedUser.authToken,
           formatDay(this.startDate),
           formatDay(this.endDate)

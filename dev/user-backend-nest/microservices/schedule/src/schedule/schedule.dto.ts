@@ -24,6 +24,7 @@ export interface Plannings {
     {
       level: string;
       text: string
+
     }
   ];
   events?: Event[];

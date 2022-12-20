@@ -1,17 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FullCalendarModule } from '@fullcalendar/angular'; // must go before plugins
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { ProjectModuleService } from '@ul/shared';
+import { EventDetailComponent } from './common/event-detail/event-detail.component';
 import { CompleteLocalDatePipe } from './common/pipe/complete-local-date.pipe';
 import { LocalHourPipe } from './common/pipe/local-hour.pipe';
-import { EventDetailComponent } from './common/event-detail/event-detail.component';
+import { ShortenedDatePipe } from './common/pipe/shortened-date.pipe';
+import { SelectPlanningComponent } from './common/select-planning/select-planning.component';
+import { ScheduleCalendarComponent } from './schedule-calendar/schedule-calendar.component';
 import { ScheduleListPage } from './schedule-list/schedule-list.page';
 import { SchedulePageRoutingModule } from './schedule-routing.module';
-import { FullCalendarModule } from '@fullcalendar/angular'; // must go before plugins
-import { ScheduleCalendarComponent } from './schedule-calendar/schedule-calendar.component';
 import { SchedulePage } from './schedule.page';
-import { ShortenedDatePipe } from './common/pipe/shortened-date.pipe';
 
 const initModule = (projectModuleService: ProjectModuleService) =>
   () => projectModuleService.initProjectModule({
@@ -24,7 +26,7 @@ const initModule = (projectModuleService: ProjectModuleService) =>
       path: ScheduleModule.path,
       description: 'SCHEDULE.DESCRIPTION',
       authorization: {
-        roles: ['student','staff', 'teacher', 'phd-student', 'CE', 'DC'],
+        roles: ['student', 'staff', 'teacher', 'phd-student', 'CE', 'DC'],
         type: 'ALLOW',
       }
     }]
@@ -38,14 +40,16 @@ const initModule = (projectModuleService: ProjectModuleService) =>
     CompleteLocalDatePipe,
     LocalHourPipe,
     ShortenedDatePipe,
-    EventDetailComponent
-
+    EventDetailComponent,
+    SelectPlanningComponent,
   ],
   imports: [
     CommonModule,
     IonicModule,
     SchedulePageRoutingModule,
     TranslateModule,
+    FormsModule,
+    ReactiveFormsModule,
     FullCalendarModule,
   ],
   providers: [{
@@ -54,8 +58,8 @@ const initModule = (projectModuleService: ProjectModuleService) =>
     deps: [ProjectModuleService],
     multi: true
   },
-  CompleteLocalDatePipe
-],
+    CompleteLocalDatePipe
+  ],
 })
 export class ScheduleModule {
   static path = 'schedule';
