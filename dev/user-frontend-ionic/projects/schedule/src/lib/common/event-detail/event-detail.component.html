@@ -1,7 +1,8 @@
 <ion-card>
   <ion-card-header>
     <ion-card-title class="ion-text-center">
-      {{displayShortenedDate ? (event.startDateTime | shortenedDate) : ""}} {{event.startDateTime | localHour}} - {{event.endDateTime | localHour}}
+      {{displayShortenedDate ? (event.startDateTime | shortenedDate) : ""}} {{event.startDateTime | localHour}} -
+      {{event.endDateTime | localHour}}
     </ion-card-title>
   </ion-card-header>
 
@@ -16,7 +17,9 @@
         </ion-row>
         <ion-row class="cardLabels" *ngFor="let teacher of event.teachers">
           <ion-icon name="man-outline"></ion-icon>
-          <ion-text>{{teacher.firstname}} {{teacher.lastname}}</ion-text>
+          <!-- @TODO supprimer ligne suivante quand l'api sera en place contre celle en commentaire -->
+          <ion-text>{{teacher.name}}</ion-text>
+          <!-- <ion-text>{{teacher.firstname}} {{teacher.lastname}}</ion-text> -->
         </ion-row>
         <ion-row class="cardLabels" *ngFor="let group of event.groups">
           <ion-icon name="people-circle-outline"></ion-icon>

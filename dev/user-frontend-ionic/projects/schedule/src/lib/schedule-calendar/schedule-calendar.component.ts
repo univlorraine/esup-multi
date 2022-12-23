@@ -1,47 +1,82 @@
-import { Component, OnDestroy, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FullCalendarComponent } from '@fullcalendar/angular';
 import { Calendar, CalendarOptions } from '@fullcalendar/core';
 import allLocales from '@fullcalendar/core/locales-all';
 import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
 import { currentLanguage$ } from '@ul/shared';
 import { Observable, Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
+import { activePlanningList$ } from '../schedule.repository';
+import { Event } from './../schedule.repository';
 
 @Component({
   selector: 'app-schedule-calendar',
   templateUrl: './schedule-calendar.component.html',
   styleUrls: ['./schedule-calendar.component.scss'],
 })
-export class ScheduleCalendarComponent implements OnDestroy, OnDestroy {
+export class ScheduleCalendarComponent {
 
   @ViewChild('calendar') calendarComponent: FullCalendarComponent;
 
-  calendarOptions: CalendarOptions = {
-    plugins: [dayGridPlugin],
-    viewHeight: 'auto',
+  public viewType$: Observable<string>;
+  public isEventDetailOpen = false;
+  public selectedEvent: Event;
+  public calendarOptions: CalendarOptions = {
+    plugins: [timeGridPlugin, dayGridPlugin],
+    height: '100%',
     locales: allLocales,
+    allDaySlot: false,
+    slotEventOverlap: false,
+    eventClick: info => {
+      this.selectedEvent = info.event.extendedProps.event;
+      this.isEventDetailOpen = true;
+    }
   };
-
   private subscriptions: Subscription[] = [];
-  private viewType$: Observable<string>;
 
   constructor(private route: ActivatedRoute) {
     this.viewType$ = this.route.fragment
-    .pipe(
-      filter(f => f !== null)
-    );
-  }
-
-  ngOnDestroy() {
-    this.subscriptions.forEach(subscription => subscription.unsubscribe());
+      .pipe(
+        filter(f => f !== null)
+      );
   }
 
   ionViewDidEnter() {
-    this.subscriptions.push(
-      this.viewType$.subscribe(viewType => this.changeViewType(viewType))
-    );
+
     this.initCalendar();
+
+    this.subscriptions.push(this.viewType$.subscribe(viewType => {
+      this.changeViewType(viewType);
+    }));
+
+    this.subscriptions.push(activePlanningList$.pipe(
+      map(activePlanningList =>
+        activePlanningList.reduce(
+          (events, planning) => events.concat(planning.events),
+          []
+        )
+      )
+    ).subscribe(events => {
+        this.getCalendar().removeAllEvents();
+        events.forEach(event => this.addEventToCalendar(event));
+      }));
+  }
+
+  ionViewDidLeave() {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
+  }
+
+  addEventToCalendar(event: Event) {
+    this.getCalendar().addEvent({
+      start: event.startDateTime,
+      end: event.endDateTime,
+      backgroundColor: event.course.color,
+      extendedProps: {
+        event
+      }
+    });
   }
 
   initCalendar() {
@@ -57,19 +92,23 @@ export class ScheduleCalendarComponent implements OnDestroy, OnDestroy {
     );
   }
 
+  onModalWillDismiss() {
+    this.isEventDetailOpen = false;
+  }
+
   private changeViewType(viewType: string) {
-    if(!this.getCalendar()) {
+    if (!this.getCalendar()) {
       return;
     }
     this.getCalendar().changeView(this.getCalendarView(viewType));
   }
 
   private getCalendarView(viewType: string) {
-    switch(viewType) {
+    switch (viewType) {
       case 'day':
-        return 'dayGridDay';
+        return 'timeGridDay';
       case 'week':
-        return 'dayGridWeek';
+        return 'timeGridWeek';
       default:
         return 'dayGridMonth';
     }
@@ -78,4 +117,5 @@ export class ScheduleCalendarComponent implements OnDestroy, OnDestroy {
   private getCalendar(): Calendar {
     return this.calendarComponent?.getApi();
   }
+
 }

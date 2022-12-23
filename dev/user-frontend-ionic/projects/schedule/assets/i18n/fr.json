@@ -10,10 +10,13 @@
         "DAY": "Jour",
         "LIST": "Liste"
     },
-    "SELECT_PLANNING":{
+    "SELECT_PLANNING": {
         "TITLE": "Sélection de planning",
         "SUBTITLE": "Sélectionner les plannings que vous souhaitez voir s'afficher",
         "CANCEL": "Annuler",
         "VALIDATE": "Valider"
+    },
+    "CALENDAR": {
+        "CLOSE": "Fermer"
     }
 }

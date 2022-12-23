@@ -10,6 +10,7 @@ import { CompleteLocalDatePipe } from './common/pipe/complete-local-date.pipe';
 import { LocalHourPipe } from './common/pipe/local-hour.pipe';
 import { ShortenedDatePipe } from './common/pipe/shortened-date.pipe';
 import { SelectPlanningComponent } from './common/select-planning/select-planning.component';
+import { CalendarEventComponent } from './schedule-calendar/calendar-event/calendar-event.component';
 import { ScheduleCalendarComponent } from './schedule-calendar/schedule-calendar.component';
 import { ScheduleListPage } from './schedule-list/schedule-list.page';
 import { SchedulePageRoutingModule } from './schedule-routing.module';
@@ -42,6 +43,7 @@ const initModule = (projectModuleService: ProjectModuleService) =>
     ShortenedDatePipe,
     EventDetailComponent,
     SelectPlanningComponent,
+    CalendarEventComponent
   ],
   imports: [
     CommonModule,
