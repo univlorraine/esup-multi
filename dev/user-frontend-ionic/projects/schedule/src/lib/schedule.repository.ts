@@ -3,7 +3,6 @@ import {
   persistState
 } from '@ngneat/elf-persist-state';
 import { localForageStore } from '@ul/shared';
-import { pl } from 'date-fns/locale';
 
 const STORE_NAME = 'schedule';
 
@@ -63,6 +62,7 @@ export interface Event {
       firstname: string;
       lastname: string;
       email: string;
+      name: string; // @TODO supprimer cette ligne une fois la nouvelle API en place
     }
   ];
   groups: [

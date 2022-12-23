@@ -1,4 +1,4 @@
-import { Component,ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Network } from '@capacitor/network';
 import { IonContent } from '@ionic/angular';
 import { AuthenticatedUser, authenticatedUser$ } from '@ul/shared';
