@@ -4,7 +4,7 @@
     </ion-fab-button>
   </ion-fab>
 
-  <ion-modal [isOpen]="isModalOpen">
+  <ion-modal [isOpen]="isModalOpen" (willDismiss)="onDismiss()">
     <ng-template>
       <ion-progress-bar *ngIf="isLoading" type="indeterminate" color="primary"></ion-progress-bar>
 

@@ -54,6 +54,11 @@ export class SelectPlanningComponent {
     this.planningList.clear();
   }
 
+  onDismiss() {
+    this.closeModal();
+    return false;
+  }
+
   openModal() {
     this.isLoading = true;
     this.isModalOpen = true;
