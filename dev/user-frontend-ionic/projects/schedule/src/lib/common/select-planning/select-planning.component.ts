@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { zip } from 'rxjs';
-import { activePlanningIds$, schedule$ } from '../../schedule.repository';
-import { setActivePlanningIds } from '../../schedule.repository';
+import { activePlanningIds$, schedule$, setActivePlanningIds } from '../../schedule.repository';
 
 interface AvailablePlanningFormInput extends AvailablePlanning {
   checked: boolean;

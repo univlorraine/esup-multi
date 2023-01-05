@@ -1,5 +1,12 @@
 <ion-content class="ion-padding-top">
 
+  <ion-item lines="none" *ngIf="loadScheduleOutOfStateError === true">
+    <ion-note *ngIf="errorIsBefore" class="ion-padding" color="danger"> {{ "SCHEDULE.REQUEST_ERROR.BEFORE" | translate }} {{dateError |
+      completeLocalDate}}.</ion-note>
+    <ion-note *ngIf="!errorIsBefore" class="ion-padding" color="danger"> {{ "SCHEDULE.REQUEST_ERROR.AFTER" | translate }} {{dateError |
+      completeLocalDate}}.</ion-note>
+  </ion-item>
+
   <full-calendar #calendar [options]="calendarOptions">
     <ng-template #eventContent let-arg>
       <app-calendar-event [event]="arg.event.extendedProps.event"
@@ -17,7 +24,7 @@
         </ion-toolbar>
       </ion-header>
       <ion-content class="ion-padding">
-          <app-event-detail *ngIf="selectedEvent" [event]="selectedEvent"></app-event-detail>
+        <app-event-detail *ngIf="selectedEvent" [event]="selectedEvent"></app-event-detail>
       </ion-content>
     </ng-template>
   </ion-modal>
