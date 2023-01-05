@@ -15,5 +15,7 @@
     </ion-tab-bar>
 </ion-tabs>
 
+<ion-progress-bar *ngIf="isLoading$ | async" type="indeterminate" color="primary"></ion-progress-bar>
+
 <app-select-planning></app-select-planning>
 

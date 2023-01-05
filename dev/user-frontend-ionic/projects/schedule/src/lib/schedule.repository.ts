@@ -24,6 +24,8 @@ export interface Message {
 
 export interface Planning {
   id: string;
+  // @TODO code: a retirer une fois l'api en place ______________________________________________
+  code: string;
   label: string;
   default: boolean;
   type: string;

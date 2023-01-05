@@ -1,5 +1,3 @@
-<ion-progress-bar *ngIf="isLoading" type="indeterminate" color="primary"></ion-progress-bar>
-
 <ion-content *ngIf="(schedule$ | async) as schedule" #scrollContent>
 
   <ng-container *ngIf="(areEventInPlannings$ | async) === true">
@@ -17,6 +15,14 @@
       <app-event-detail *ngFor="let event of eventsByDay.events" [event]="event"></app-event-detail>
 
     </ion-item-group>
+
+    <ion-row class="ion-justify-content-center ion-margin-bottom">
+      <ion-button fill="outline" (click)="loadMoreEvents()">
+        <ion-icon name="add-outline"></ion-icon>
+        {{ "SCHEDULE.LIST.SEE_MORE" | translate }}
+      </ion-button>
+    </ion-row>
+
   </ng-container>
 
 </ion-content>

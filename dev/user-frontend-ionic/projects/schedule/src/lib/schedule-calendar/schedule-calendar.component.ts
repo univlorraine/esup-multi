@@ -6,10 +6,13 @@ import allLocales from '@fullcalendar/core/locales-all';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import { currentLanguage$ } from '@ul/shared';
+import { isAfter, isBefore, sub } from 'date-fns';
 import { Observable, Subscription } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
-import { activePlanningList$ } from '../schedule.repository';
+import { filter, first, map, mergeMap, tap } from 'rxjs/operators';
+import { activePlanningList$, Planning } from '../schedule.repository';
+import { formatDay, ScheduleService } from '../schedule.service';
 import { Event } from './../schedule.repository';
+import { ScheduleCalendarService } from './schedule-calendar.service';
 
 @Component({
   selector: 'app-schedule-calendar',
@@ -23,20 +26,75 @@ export class ScheduleCalendarComponent {
   public viewType$: Observable<string>;
   public isEventDetailOpen = false;
   public selectedEvent: Event;
+  public loadScheduleOutOfStateError = false;
+  public dateError: string;
+  public errorIsBefore: boolean;
+  public calendarDisplaySomeDateOutOfState: boolean;
   public calendarOptions: CalendarOptions = {
     plugins: [timeGridPlugin, dayGridPlugin],
     height: '100%',
     locales: allLocales,
     allDaySlot: false,
     slotEventOverlap: false,
+    showNonCurrentDates: false,
     eventClick: info => {
       this.selectedEvent = info.event.extendedProps.event;
       this.isEventDetailOpen = true;
+    },
+    events: (fetchInfo, successCallback) => {
+
+      this.loadScheduleOutOfStateError = false;
+      fetchInfo.end = sub(fetchInfo.end, { days: 1 });
+
+      this.calendarDisplaySomeDateOutOfState = isBefore(fetchInfo.start, this.scheduleService.getStateStartDate())
+      || isAfter(fetchInfo.end, this.scheduleService.getStateEndDate());
+
+
+      if (!this.calendarDisplaySomeDateOutOfState) {
+        activePlanningList$.pipe(
+          first(),
+          map(planningList => this.scheduleCalendarService.planningListToCalendarEvents(planningList))
+        ).subscribe(events => successCallback(events));
+        return
+      }
+
+      this.scheduleService.loadScheduleOutOfStateInterval(formatDay(fetchInfo.start), formatDay(fetchInfo.end))
+        .pipe(
+          mergeMap(outOfStateSchedule => this.scheduleService.filterSelectedPlanningsFromSchedule(outOfStateSchedule)),
+          first(),
+          map((outOfStateSelectedPlannings: Planning[]) =>
+            this.scheduleCalendarService.planningListToCalendarEvents(outOfStateSelectedPlannings))
+        )
+        .subscribe(
+          events => successCallback(events),
+          () => {
+
+            if (this.calendarDisplaySomeDateOutOfState) {
+              this.loadScheduleOutOfStateError = true;
+
+              if (isBefore(fetchInfo.start, this.scheduleService.getStateStartDate())) {
+                this.errorIsBefore = true;
+                this.dateError = formatDay(this.scheduleService.getStateStartDate());
+              } else {
+                this.errorIsBefore = false;
+                this.dateError = formatDay(this.scheduleService.getStateEndDate());
+              }
+            }
+
+            activePlanningList$.pipe(
+              first(),
+              map(planningList => this.scheduleCalendarService.planningListToCalendarEvents(planningList))
+            ).subscribe(events => successCallback(events));
+          }
+        );
     }
   };
+
   private subscriptions: Subscription[] = [];
 
-  constructor(private route: ActivatedRoute) {
+  constructor(private route: ActivatedRoute,
+    private scheduleCalendarService: ScheduleCalendarService,
+    private scheduleService: ScheduleService) {
     this.viewType$ = this.route.fragment
       .pipe(
         filter(f => f !== null)
@@ -44,24 +102,16 @@ export class ScheduleCalendarComponent {
   }
 
   ionViewDidEnter() {
-
     this.initCalendar();
 
     this.subscriptions.push(this.viewType$.subscribe(viewType => {
       this.changeViewType(viewType);
     }));
 
-    this.subscriptions.push(activePlanningList$.pipe(
-      map(activePlanningList =>
-        activePlanningList.reduce(
-          (events, planning) => events.concat(planning.events),
-          []
-        )
-      )
-    ).subscribe(events => {
-        this.getCalendar().removeAllEvents();
-        events.forEach(event => this.addEventToCalendar(event));
-      }));
+    this.subscriptions.push(
+      activePlanningList$.pipe(
+        tap(() => this.getCalendar().refetchEvents()),
+      ).subscribe());
   }
 
   ionViewDidLeave() {
@@ -117,5 +167,4 @@ export class ScheduleCalendarComponent {
   private getCalendar(): Calendar {
     return this.calendarComponent?.getApi();
   }
-
 }
