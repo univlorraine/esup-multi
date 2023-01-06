@@ -3,7 +3,7 @@ import { IonContent } from '@ionic/angular';
 import { AuthenticatedUser } from '@ul/shared';
 import { add, isAfter, startOfWeek } from 'date-fns';
 import { Observable, Subscription } from 'rxjs';
-import { finalize, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { activePlanningList$, Schedule, schedule$ } from '../schedule.repository';
 import { formatDay, ScheduleService } from '../schedule.service';
 import { EventsByDay, ScheduleListService } from './schedule-list.service';
@@ -70,18 +70,18 @@ export class ScheduleListPage {
     let outOfStateSchedule: Schedule;
 
     if (isAfter(endDateToLoad, this.scheduleService.getStateEndDate())) {
-    const nextDateAfterStateEndDate = add(this.scheduleService.getStateEndDate(), { days: 1 });
-    outOfStateSchedule = await this.scheduleService
-      .loadScheduleOutOfStateInterval(formatDay(nextDateAfterStateEndDate), formatDay(endDateToLoad)).toPromise();
+      const nextDateAfterStateEndDate = add(this.scheduleService.getStateEndDate(), { days: 1 });
+      outOfStateSchedule = await this.scheduleService
+        .loadScheduleOutOfStateInterval(formatDay(nextDateAfterStateEndDate), formatDay(endDateToLoad)).toPromise();
     }
 
-    this.eventsByDays$ = this.scheduleListService.loadEventsByDays(this.viewStartDate, endDateToLoad, outOfStateSchedule).pipe(
-      finalize(() => {
-        this.viewEndDate = endDateToLoad;
-          setTimeout(() => {
-            this.content.scrollToPoint(0, scrollPosition);
-          }, 0);
-      }));
-  }
+    this.eventsByDays$ = this.scheduleListService.loadEventsByDays(this.viewStartDate, endDateToLoad, outOfStateSchedule);
 
+    setTimeout(() => {
+      this.content.scrollToPoint(0, scrollPosition);
+    }, 0);
+
+    this.viewEndDate = endDateToLoad;
+
+  }
 }
