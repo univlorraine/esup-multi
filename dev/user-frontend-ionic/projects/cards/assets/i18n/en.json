@@ -1,13 +1,4 @@
 {
-    "TILE_STUDENT": {
-        "TITLE": "My student cards",
-        "DESCRIPTION": "Find your student card valid throughout Europe and your UL student card"
-    },
-    "TILE_STAFF": {
-        "TITLE": "Carte UL",
-        "DESCRIPTION": "This card allows you to prove your status at UL and your registration at SUAPS"
-    },
-
     "ERRORS":{
         "NO_DATA": "Data unavailable"
     },

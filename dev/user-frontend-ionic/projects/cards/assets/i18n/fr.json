@@ -1,13 +1,4 @@
 {
-    "TILE_STUDENT": {
-        "TITLE": "Mes cartes d'étudiant",
-        "DESCRIPTION": "Retrouvez votre carte d'étudiant valable dans toute l'Europe ainsi que votre carte d'étudiant UL"
-    },
-    "TILE_STAFF": {
-        "TITLE": "Carte UL",
-        "DESCRIPTION": "Cette carte permet de justifier de votre statut à l'UL et de votre inscription au SUAPS"
-    },
-
     "ERRORS":{
         "NO_DATA": "Données indisponibles"
     },

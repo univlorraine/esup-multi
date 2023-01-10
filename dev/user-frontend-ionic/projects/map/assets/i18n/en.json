@@ -1,8 +1,4 @@
 {
-    "TILE": {
-        "TITLE": "Map",
-        "DESCRIPTION": "Find all POI about your faculty and their coordinates on a map."
-    },
     "YOUR_POSITION": "Your location",
     "CATEGORY_FILTER": "Filter by categories",
     "CATEGORY": {

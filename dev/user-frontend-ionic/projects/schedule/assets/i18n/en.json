@@ -1,5 +1,4 @@
 {
-    "MENU": "Schedule",
     "NO_DATA": "No data available",
     "NO_EVENTS": "No courses in your schedule",
     "NO_EVENTS_THIS_DAY": "No courses on this date.",
@@ -7,7 +6,6 @@
         "BEFORE": "Please try again later. An error occurred while fetching events before",
         "AFTER": "Please try again later. An error occurred while fetching events after"
     },
-    "DESCRIPTION": "Find all your events",
     "VIEW_TYPE": {
         "MONTH": "Month",
         "WEEK": "Week",

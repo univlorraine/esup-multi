@@ -1,0 +1,125 @@
+[
+	{
+		"id": 1,
+		"status": "published",
+		"sort": null,
+		"path": "cards",
+		"icon": "card",
+		"translations": [
+			{
+				"id": 1,
+				"title": "My student cards",
+				"content": "Find your student card valid throughout Europe and your UL student card",
+				"languages_code": "en",
+				"apps_id": 1
+			},
+			{
+				"id": 2,
+				"title": "Mes cartes d'étudiant",
+				"content": "Retrouvez votre carte d'étudiant valable dans toute l'Europe ainsi que votre carte d'étudiant UL",
+				"languages_code": "fr",
+				"apps_id": 1
+			}
+		],
+		"authorization": {
+			"id": 3,
+			"type": "ALLOW",
+			"roles": [
+				"student"
+			]
+		}
+	},
+	{
+		"id": 2,
+		"status": "published",
+		"sort": null,
+		"path": "cards",
+		"icon": "card",
+		"translations": [
+			{
+				"id": 3,
+				"title": "Carte UL",
+				"content": "Cette carte permet de justifier de votre statut à l'UL et de votre inscription au SUAPS",
+				"languages_code": "fr",
+				"apps_id": 2
+			},
+			{
+				"id": 4,
+				"title": "UL card",
+				"content": "This card allows you to prove your status at UL and your registration at SUAPS",
+				"languages_code": "en",
+				"apps_id": 2
+			}
+		],
+		"authorization": {
+			"id": 5,
+			"type": "ALLOW",
+			"roles": [
+				"CE",
+				"DC",
+				"phd-student",
+				"staff",
+				"teacher"
+			]
+		}
+	},
+	{
+		"id": 3,
+		"status": "published",
+		"sort": null,
+		"path": "map",
+		"icon": "map",
+		"translations": [
+			{
+				"id": 5,
+				"title": "Map",
+				"content": "Find all POI about your faculty and their coordinates on a map.",
+				"languages_code": "en",
+				"apps_id": 3
+			},
+			{
+				"id": 6,
+				"title": "Plan",
+				"content": "Retrouvez tous les lieux d'intéret de votre faculté et leurs coordonnées sur une carte.",
+				"languages_code": "fr",
+				"apps_id": 3
+			}
+		],
+		"authorization": null
+	},
+	{
+		"id": 4,
+		"status": "published",
+		"sort": null,
+		"path": "schedule",
+		"icon": "calendar",
+		"translations": [
+			{
+				"id": 7,
+				"title": "Schedule",
+				"content": "Find all your events",
+				"languages_code": "en",
+				"apps_id": 4
+			},
+			{
+				"id": 8,
+				"title": "Emploi du temps",
+				"content": "Retrouvez tous vos évènements",
+				"languages_code": "fr",
+				"apps_id": 4
+			}
+		],
+		"authorization": {
+			"id": 6,
+			"type": "ALLOW",
+			"roles": [
+				"CE",
+				"DC",
+				"phd-student",
+				"staff",
+				"student",
+				"teacher"
+			]
+		}
+	}
+]

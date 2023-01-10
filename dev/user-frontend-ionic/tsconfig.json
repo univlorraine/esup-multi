@@ -30,6 +30,9 @@
       ],
       "@ul/schedule": [
         "dist/schedule"
+      ],
+      "@ul/tiles": [
+        "dist/tiles"
       ]
     },
     "downlevelIteration": true,

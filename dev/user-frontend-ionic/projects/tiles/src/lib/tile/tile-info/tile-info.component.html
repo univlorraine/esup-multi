@@ -1,0 +1,11 @@
+<ion-card (click)="onClick()">
+    <ion-card-header>
+      <ion-card-title>
+        <ion-icon name="link" class="title-icon" *ngIf="info.link"></ion-icon>
+        {{info.title}}
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      {{info.content}}
+    </ion-card-content>
+</ion-card>

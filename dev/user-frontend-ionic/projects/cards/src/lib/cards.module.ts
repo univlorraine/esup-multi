@@ -17,28 +17,6 @@ const initModule = (projectModuleService: ProjectModuleService) =>
   () => projectModuleService.initProjectModule({
     name: 'cards',
     translation: true,
-    tiles: [{
-      title: 'CARDS.TILE_STUDENT.TITLE',
-      icon: 'card',
-      position: 40,
-      path: CardsPageModule.path,
-      description: 'CARDS.TILE_STUDENT.DESCRIPTION',
-      authorization: {
-        roles: ['student'],
-        type: 'ALLOW',
-      }
-    },
-    {
-      title: 'CARDS.TILE_STAFF.TITLE',
-      icon: 'card',
-      position: 40,
-      path: CardsPageModule.path,
-      description: 'CARDS.TILE_STAFF.DESCRIPTION',
-      authorization: {
-        roles: ['staff', 'teacher', 'phd-student', 'CE', 'DC'],
-        type: 'ALLOW'
-      }
-    }]
   });
 
 @NgModule({

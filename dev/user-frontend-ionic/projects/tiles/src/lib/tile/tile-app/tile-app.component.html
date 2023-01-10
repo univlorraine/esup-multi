@@ -1,0 +1,11 @@
+<ion-card (click)="onClick()">
+    <ion-card-header>
+      <ion-card-title>
+        <ion-icon name="{{app.icon}}" class="title-icon" *ngIf="app.icon"></ion-icon>
+        {{app.title}}
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      {{app.content}}
+    </ion-card-content>
+</ion-card>

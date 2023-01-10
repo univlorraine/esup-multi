@@ -31,8 +31,8 @@
               },
               {
                 "glob": "**/*",
-                "input": "projects/info/assets/i18n",
-                "output": "/assets/i18n/info"
+                "input": "projects/tiles/assets/i18n",
+                "output": "/assets/i18n/tiles"
               },
               {
                 "glob": "**/*",
@@ -247,46 +247,6 @@
             "lintFilePatterns": [
               "projects/shared/**/*.ts",
               "projects/shared/**/*.html"
-            ]
-          }
-        }
-      }
-    },
-    "info": {
-      "projectType": "library",
-      "root": "projects/info",
-      "sourceRoot": "projects/info/src",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
-          "options": {
-            "project": "projects/info/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/info/tsconfig.lib.prod.json"
-            },
-            "development": {
-              "tsConfig": "projects/info/tsconfig.lib.json"
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/info/src/test.ts",
-            "tsConfig": "projects/info/tsconfig.spec.json",
-            "karmaConfig": "projects/info/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
-          "options": {
-            "lintFilePatterns": [
-              "projects/info/**/*.ts",
-              "projects/info/**/*.html"
             ]
           }
         }
@@ -528,6 +488,47 @@
             "lintFilePatterns": [
               "projects/schedule/**/*.ts",
               "projects/schedule/**/*.html"
+            ]
+          }
+        }
+
+      }
+    },
+    "tiles": {
+      "projectType": "library",
+      "root": "projects/tiles",
+      "sourceRoot": "projects/tiles/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/tiles/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/tiles/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/tiles/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/tiles/src/test.ts",
+            "tsConfig": "projects/tiles/tsconfig.spec.json",
+            "karmaConfig": "projects/tiles/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/tiles/**/*.ts",
+              "projects/tiles/**/*.html"
             ]
           }
         }
