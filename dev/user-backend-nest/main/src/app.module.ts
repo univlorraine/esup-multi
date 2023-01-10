@@ -6,7 +6,7 @@ import { AppController } from './app.controller';
 import configuration from './config/configuration';
 import microserviceAuthConfig from './config/microservice-auth.config';
 import microserviceCardsConfig from './config/microservice-cards.config';
-import microserviceInfoConfig from './config/microservice-info.config';
+import microserviceInfoConfig from './config/microservice-tiles.config';
 import microserviceMapConfig from './config/microservice-map.config';
 import microserviceRssConfig from './config/microservice-rss.config';
 import microserviceScheduleConfig from './config/microservice-schedule.config';
@@ -19,9 +19,9 @@ import { AuthJwtStrategy } from './security/auth-jwt.strategy';
     }),
     ClientsModule.registerAsync([
       {
-        name: 'INFO_SERVICE',
+        name: 'TILES_SERVICE',
         imports: [ConfigModule.forFeature(microserviceInfoConfig)],
-        useFactory: (config: ConfigService) => config.get('microservice-info'),
+        useFactory: (config: ConfigService) => config.get('microservice-tiles'),
         inject: [ConfigService],
       },
       {
@@ -51,7 +51,8 @@ import { AuthJwtStrategy } from './security/auth-jwt.strategy';
       {
         name: 'SCHEDULE_SERVICE',
         imports: [ConfigModule.forFeature(microserviceScheduleConfig)],
-        useFactory: (config: ConfigService) => config.get('microservice-schedule'),
+        useFactory: (config: ConfigService) =>
+          config.get('microservice-schedule'),
         inject: [ConfigService],
       },
     ]),

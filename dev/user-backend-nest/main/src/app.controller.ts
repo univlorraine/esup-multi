@@ -8,7 +8,7 @@ import {
   Post,
   Request,
   UseGuards,
-  UseInterceptors
+  UseInterceptors,
 } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { AuthGuard } from '@nestjs/passport';
@@ -20,15 +20,15 @@ import { AuthorizationHelper } from './security/authorization.helper';
 @Controller()
 export class AppController {
   constructor(
-    @Inject('INFO_SERVICE') private infoClient: ClientProxy,
+    @Inject('TILES_SERVICE') private infoClient: ClientProxy,
     @Inject('AUTH_SERVICE') private authClient: ClientProxy,
     @Inject('MAP_SERVICE') private mapClient: ClientProxy,
     @Inject('RSS_SERVICE') private rssClient: ClientProxy,
     @Inject('CARDS_SERVICE') private cardsClient: ClientProxy,
     @Inject('SCHEDULE_SERVICE') private scheduleClient: ClientProxy,
-  ) { }
+  ) {}
 
-  @Post('/info/:language')
+  @Post('/tiles/:language')
   info(@Body() body, @Param('language') language) {
     const user$ = this.authClient.send(
       {
@@ -38,7 +38,7 @@ export class AppController {
     );
     const info$ = this.infoClient.send(
       {
-        cmd: 'info',
+        cmd: 'tiles',
       },
       language,
     );
@@ -202,8 +202,8 @@ export class AppController {
             {
               username: user.username,
               startDate: body.startDate,
-              endDate: body.endDate
-            }
+              endDate: body.endDate,
+            },
           ),
         ),
       );

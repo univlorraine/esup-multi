@@ -9,14 +9,7 @@ import { MapPage } from './map.page';
 const initModule = (projectModuleService: ProjectModuleService) =>
   () => projectModuleService.initProjectModule({
     name: 'map',
-    translation: true,
-    tiles: [{
-      title: 'MAP.TILE.TITLE',
-      icon: 'map',
-      position: 60,
-      path: MapModule.path,
-      description : 'MAP.TILE.DESCRIPTION',
-    }]
+    translation: true
   });
 
 @NgModule({

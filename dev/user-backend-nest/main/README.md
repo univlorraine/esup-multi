@@ -2,8 +2,8 @@
 - `API_GATEWAY_SERVER_PORT`: Port d'écoute de l'API Gateway.
 - `API_GATEWAY_CORS_ORIGIN`: Autorisations CORS.
 
-- `INFO_SERVICE_HOST`: Hôte du microservice `info`.
-- `INFO_SERVICE_PORT`: Port du microservice `info`.
+- `TILES_SERVICE_HOST`: Hôte du microservice `tiles`.
+- `TILES_SERVICE_PORT`: Port du microservice `tiles`.
 
 - `AUTH_SERVICE_HOST`: Hôte du microservice `auth`.
 - `AUTH_SERVICE_PORT`: Port du microservice `auth`.

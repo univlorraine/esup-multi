@@ -55,7 +55,7 @@ export class ScheduleCalendarComponent {
           first(),
           map(planningList => this.scheduleCalendarService.planningListToCalendarEvents(planningList))
         ).subscribe(events => successCallback(events));
-        return
+        return;
       }
 
       this.scheduleService.loadScheduleOutOfStateInterval(formatDay(fetchInfo.start), formatDay(fetchInfo.end))

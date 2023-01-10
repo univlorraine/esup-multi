@@ -20,17 +20,6 @@ const initModule = (projectModuleService: ProjectModuleService) =>
   () => projectModuleService.initProjectModule({
     name: 'schedule',
     translation: true,
-    tiles: [{
-      title: 'SCHEDULE.MENU',
-      icon: 'calendar',
-      position: 50,
-      path: ScheduleModule.path,
-      description: 'SCHEDULE.DESCRIPTION',
-      authorization: {
-        roles: ['student', 'staff', 'teacher', 'phd-student', 'CE', 'DC'],
-        type: 'ALLOW',
-      }
-    }]
   });
 
 @NgModule({

@@ -7,12 +7,12 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { AuthModule } from '@ul/auth';
 import { CardsPageModule } from '@ul/cards';
-import { InfoPageModule } from '@ul/info';
 import { MapModule } from '@ul/map';
 import { PreferencesPageModule } from '@ul/preferences';
 import { RssPageModule } from '@ul/rss';
 import { ScheduleModule } from '@ul/schedule';
 import { ProjectModuleService, translationsLoaderFactory } from '@ul/shared';
+import { TilesModule } from '@ul/tiles';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -27,13 +27,13 @@ import { ErrorModule } from './error/error.module';
     AppRoutingModule,
     ReactiveFormsModule,
     ErrorModule,
-    InfoPageModule,
     PreferencesPageModule,
     AuthModule,
     MapModule,
     RssPageModule,
     CardsPageModule,
     ScheduleModule,
+    TilesModule,
     TranslateModule.forRoot({
         loader: {
             provide: TranslateLoader,
