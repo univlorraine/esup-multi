@@ -7,11 +7,14 @@ async function bootstrap() {
   const logger = new Logger('Bootstrap');
   const app = await NestFactory.create(AppModule);
   app.useGlobalInterceptors(new EmptyResponseInterceptor());
+  const origin = (process.env.API_GATEWAY_CORS_ORIGIN || '')
+    .split(',')
+    .map((origin) => origin.trim());
   app.enableCors({
-    origin: `${process.env.API_GATEWAY_CORS_ORIGIN}`,
+    origin,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   });
-  const host = process.env.API_GATEWAY_SERVER_HOST || "127.0.0.1";
+  const host = process.env.API_GATEWAY_SERVER_HOST || '127.0.0.1';
   const port = parseInt(process.env.API_GATEWAY_SERVER_PORT) || 3000;
   logger.log(`Listening on host ${host}, port ${port}`);
   await app.listen(port, host);
