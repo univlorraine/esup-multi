@@ -1,11 +1,12 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { AuthenticatedUser, authenticatedUser$, updateUser, updateRefreshAuthToken } from '@ul/shared';
-import { Observable, of, throwError, EMPTY } from 'rxjs';
-import { catchError, concatMap, delayWhen, tap, first } from 'rxjs/operators';
+import { AuthenticatedUser, updateUser, updateRefreshAuthToken, getAuthToken, updateAuthToken } from '@ul/shared';
+import { Observable, of, throwError, EMPTY, zip, forkJoin } from 'rxjs';
+import { catchError, concatMap, delayWhen, tap, first, switchMap } from 'rxjs/operators';
 
 interface KeepAuthenticatedUser extends AuthenticatedUser {
   refreshAuthToken: string;
+  authToken: string;
 }
 
 @Injectable({
@@ -28,16 +29,20 @@ export class KeepAuthService {
     };
 
     return this.http.post<KeepAuthenticatedUser>(url, data, {}).pipe(
-      tap(keepAuthenticatedUser => {
-        const { refreshAuthToken, ...authenticatedUser } = keepAuthenticatedUser;
-        updateUser(authenticatedUser);
-      }),
       delayWhen(keepAuthenticatedUser => {
         if (!keepAuthenticatedUser) {
           return;
         }
 
-        return updateRefreshAuthToken(keepAuthenticatedUser.refreshAuthToken);
+        const {
+          refreshAuthToken,
+          authToken,
+          ...authenticatedUser
+        } = keepAuthenticatedUser;
+        updateUser(authenticatedUser);
+        return zip(
+          updateRefreshAuthToken(refreshAuthToken),updateAuthToken(authToken)
+        );
       }),
       catchError(err => {
         if (err instanceof HttpErrorResponse) {
@@ -58,17 +63,17 @@ export class KeepAuthService {
       Authorization: `Bearer ${refreshAuthToken}`
     };
 
-    return authenticatedUser$.pipe(
+    return getAuthToken().pipe(
       first(),
-      concatMap((authenticatedUser) => {
-        if(!authenticatedUser) {
+      concatMap((authToken) => {
+        if(!authToken) {
           return EMPTY;
         }
 
         return this.http.delete<boolean>(url, {
           headers,
           body: {
-            authToken: authenticatedUser.authToken
+            authToken
           }
         });
       }),

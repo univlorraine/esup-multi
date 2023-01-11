@@ -2,6 +2,7 @@
  * Public API Surface of shared
  */
 
+export * from './lib/auth/auth.repository';
 export * from './lib/auth/keep-auth.repository';
 export * from './lib/auth/keep-auth.service';
 export * from './lib/auth/authenticated-user.repository';

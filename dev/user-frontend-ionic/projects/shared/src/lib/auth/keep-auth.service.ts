@@ -1,9 +1,17 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
+import { updateAuthToken } from './auth.repository';
 import { Observable, of } from 'rxjs';
-import { concatMap, tap } from 'rxjs/operators';
+import { concatMap, delayWhen, tap } from 'rxjs/operators';
 import { AuthenticatedUser, updateUser } from './authenticated-user.repository';
 import { getRefreshAuthToken } from './keep-auth.repository';
+import { Actions } from '@ngneat/effects-ng';
+import { cleanupPrivateData } from '../shared.actions';
+
+
+interface ReauthResult extends AuthenticatedUser {
+    authToken: string;
+}
 
 @Injectable({
     providedIn: 'root'
@@ -14,16 +22,24 @@ export class KeepAuthService {
         @Inject('environment')
         private environment: any,
         private http: HttpClient,
+        private actions: Actions,
     ) {}
 
-    public reauthenticateIfAvailable(): Observable<AuthenticatedUser | null> {
+    public reauthenticateIfAvailable(): Observable<ReauthResult | null> {
         return getRefreshAuthToken().pipe(
             concatMap(refreshAuthToken => refreshAuthToken ?
                 this.reauthenticate(refreshAuthToken) :
                 of(null)
             ),
-            tap(authenticatedUser => {
+            delayWhen(reauthResult => {
+                if (!reauthResult) {
+                    this.actions.dispatch(cleanupPrivateData());
+                    return;
+                }
+
+                const { authToken, ...authenticatedUser } = reauthResult;
                 updateUser(authenticatedUser);
+                return updateAuthToken(authToken);
             }),
         );
     }
@@ -35,7 +51,7 @@ export class KeepAuthService {
             Authorization: `Bearer ${refreshAuthToken}`
         };
 
-        return this.http.post<AuthenticatedUser | null>(url,
+        return this.http.post<ReauthResult | null>(url,
             { authToken: refreshAuthToken },
             { headers }
         );

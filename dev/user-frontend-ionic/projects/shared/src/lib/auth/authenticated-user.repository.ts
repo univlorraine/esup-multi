@@ -12,7 +12,6 @@ export interface AuthProps {
 }
 
 export interface AuthenticatedUser {
-  authToken: string;
   displayName: string;
   name: string;
   firstname: string;
