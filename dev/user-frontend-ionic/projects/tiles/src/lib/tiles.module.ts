@@ -12,6 +12,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { TileComponent } from './tile/tile.component';
 import { TileAppComponent } from './tile/tile-app/tile-app.component';
 import { TileInfoComponent } from './tile/tile-info/tile-info.component';
+import { EffectsNgModule } from '@ngneat/effects-ng';
+import { TilesEffects } from './tiles.effects';
 
 const initModule = (projectModuleService: ProjectModuleService) =>
   () => projectModuleService.initProjectModule({
@@ -31,7 +33,8 @@ const initModule = (projectModuleService: ProjectModuleService) =>
     FormsModule,
     IonicModule,
     TilesRoutingModule,
-    TranslateModule
+    TranslateModule,
+    EffectsNgModule.forFeature([TilesEffects]),
   ],
   declarations: [TileComponent, TileAppComponent, TileInfoComponent, TilesPage],
   providers: [{
