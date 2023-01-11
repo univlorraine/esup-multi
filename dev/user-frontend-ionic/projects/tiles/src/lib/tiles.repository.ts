@@ -55,3 +55,5 @@ export const tiles$ = store.pipe(selectAllEntities());
 export const setTiles = (tiles: Tile[]) => {
     store.update(setEntities(tiles));
 };
+
+export const clearTiles = () => store.reset();

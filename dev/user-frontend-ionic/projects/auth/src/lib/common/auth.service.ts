@@ -35,7 +35,7 @@ export class AuthService {
         this.keepAuthService.logout(token) :
         this.standardAuthService.logout()
       ),
-      tap(() => this.cleanupPrivateData()),
+      tap((logoutSuccess) => logoutSuccess && this.cleanupPrivateData()),
     );
   }
 
