@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Network } from '@capacitor/network';
-import { authenticatedUser$ } from '@ul/shared';
-import { finalize, filter, first, map, switchMap } from 'rxjs/operators';
+import { getAuthToken } from '@ul/shared';
+import { finalize, first, map, switchMap } from 'rxjs/operators';
 import { Observable, Subscription, zip } from 'rxjs';
 import { Tile, tiles$, setTiles } from './tiles.repository';
 import { currentLanguage$ } from '@ul/shared';
@@ -42,9 +42,9 @@ export class TilesPage {
     }
 
     this.isLoading = true;
-    zip(currentLanguage$, authenticatedUser$).pipe(
+    zip(currentLanguage$, getAuthToken()).pipe(
       first(),
-      switchMap(([currentLanguage, authenticatedUser]) => this.tilesService.getTiles(currentLanguage, authenticatedUser?.authToken)),
+      switchMap(([currentLanguage, authToken]) => this.tilesService.getTiles(currentLanguage, authToken)),
       finalize(() => this.isLoading = false)
     ).subscribe(infoList => setTiles(infoList));
   }

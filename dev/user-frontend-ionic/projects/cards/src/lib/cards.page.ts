@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthenticatedUser, authenticatedUser$ } from '@ul/shared';
+import { AuthenticatedUser, getAuthToken } from '@ul/shared';
 import { setUserAndCardsData, UserAndCardsData, userAndCardsData$ } from './cards.repository';
 
 import { Network } from '@capacitor/network';
@@ -50,10 +50,10 @@ export class CardsPage {
     }
 
     this.isLoading = true;
-    authenticatedUser$.pipe(
+    getAuthToken().pipe(
       first(),
-      filter(authenticatedUser => authenticatedUser != null),
-      switchMap(authenticatedUser => this.cardsService.getUserAndCardsData(authenticatedUser.authToken)),
+      filter(authToken => authToken != null),
+      switchMap(authToken => this.cardsService.getUserAndCardsData(authToken)),
       finalize(() => this.isLoading = false)
     ).subscribe(userAndCardsData => {
       setUserAndCardsData(userAndCardsData);

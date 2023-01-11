@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Network } from '@capacitor/network';
-import { authenticatedUser$ } from '@ul/shared';
+import { getAuthToken } from '@ul/shared';
 import { Observable } from 'rxjs';
 import { filter, finalize, first, switchMap } from 'rxjs/operators';
 import { setUserAndCardsData, UserAndCardsData, userAndCardsData$ } from '../cards.repository';
@@ -49,10 +49,10 @@ export class CardPage implements OnInit {
     }
 
     this.isLoading = true;
-    authenticatedUser$.pipe(
+    getAuthToken().pipe(
       first(),
-      filter(authenticatedUser => authenticatedUser != null),
-      switchMap(authenticatedUser => this.cardsService.getUserAndCardsData(authenticatedUser.authToken)),
+      filter(authToken => authToken != null),
+      switchMap(authToken => this.cardsService.getUserAndCardsData(authToken)),
       finalize(() => this.isLoading = false)
     ).subscribe(data => {
       setUserAndCardsData(data);

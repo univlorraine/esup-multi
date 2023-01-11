@@ -1,8 +1,12 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { AuthenticatedUser, authenticatedUser$, updateUser } from '@ul/shared';
+import { AuthenticatedUser, getAuthToken, updateAuthToken, updateUser } from '@ul/shared';
 import { Observable, of, throwError } from 'rxjs';
-import { catchError, concatMap, first, map, tap } from 'rxjs/operators';
+import { catchError, concatMap, delayWhen, first, tap } from 'rxjs/operators';
+
+interface LoginResult extends AuthenticatedUser {
+  authToken: string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -23,8 +27,12 @@ export class StandardAuthService {
       password,
     };
 
-    return this.http.post<AuthenticatedUser>(url, data, {}).pipe(
-      tap(authenticatedUser => updateUser(authenticatedUser)),
+    return this.http.post<LoginResult>(url, data, {}).pipe(
+      delayWhen(loginResult => {
+        const { authToken, ...authenticatedUser } = loginResult;
+        updateUser(authenticatedUser);
+        return updateAuthToken(authToken);
+      }),
       catchError(err => {
         if (err instanceof HttpErrorResponse) {
 
@@ -40,9 +48,8 @@ export class StandardAuthService {
   logout(): Observable<boolean> {
     const url = `${this.environment.apiEndpoint}/auth`;
 
-    return authenticatedUser$.pipe(
+    return getAuthToken().pipe(
       first(),
-      map(authenticatedUser => authenticatedUser.authToken),
       concatMap(authToken => this.http.delete<boolean>(url, {
         body: { authToken }
       }))

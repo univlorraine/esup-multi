@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Network } from '@capacitor/network';
-import { authenticatedUser$ } from '@ul/shared';
+import { getAuthToken } from '@ul/shared';
 import { add, format, startOfMonth, sub } from 'date-fns';
 import { from, Observable, Subject } from 'rxjs';
 import { filter, finalize, first, map, mergeMap, switchMap, tap } from 'rxjs/operators';
@@ -42,12 +42,12 @@ export class ScheduleService {
     return from(Network.getStatus()).pipe(
       filter(status => status.connected),
       tap(() => this.isLoadingSubject.next(true)),
-      mergeMap(() => authenticatedUser$.pipe(
+      mergeMap(() => getAuthToken().pipe(
         first(),
-        filter(authenticatedUser => authenticatedUser != null),
-        switchMap(authenticatedUser =>
+        filter(authToken => authToken != null),
+        switchMap(authToken =>
           this.getSchedule(
-            authenticatedUser.authToken,
+            authToken,
             startDate,
             endDate
           )

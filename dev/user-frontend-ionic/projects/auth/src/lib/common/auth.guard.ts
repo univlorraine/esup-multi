@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot } from '@angular/router';
 import { NavController } from '@ionic/angular';
-import { userIsAuthenticated$ } from '@ul/shared';
+import { getAuthToken } from '@ul/shared';
 import { first } from 'rxjs/operators';
 
 @Injectable({
@@ -21,8 +21,8 @@ export class AuthGuard implements CanActivate {
   }
 
   private async checkAuth() {
-    const authed = await userIsAuthenticated$.pipe(first()).toPromise();
-    return authed || this.routeToLogin();
+    const authed = await getAuthToken().pipe(first()).toPromise();
+    return !!authed || this.routeToLogin();
   }
 
   private routeToLogin(): boolean {

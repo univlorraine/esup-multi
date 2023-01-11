@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Browser } from '@capacitor/browser';
-import { authenticatedUser$ } from '@ul/shared';
+import { getAuthToken } from '@ul/shared';
 import { filter, first, switchMap } from 'rxjs/operators';
 import { Info } from '../../tiles.repository';
 import { TileInfoService } from './tile-info.service';
@@ -24,17 +24,17 @@ export class TileInfoComponent {
         return Browser.open({ url: this.info.link });
         }
 
-        authenticatedUser$.pipe(
-        first(),
-        filter(authenticatedUser => authenticatedUser != null),
-        switchMap(authenticatedUser => this.tileInfoService.requestSsoServiceToken(this.info.ssoService, authenticatedUser.authToken))
+        getAuthToken().pipe(
+            first(),
+            filter(authToken => authToken != null),
+            switchMap(authToken => this.tileInfoService.requestSsoServiceToken(this.info.ssoService, authToken))
         ).subscribe(serviceToken => {
-        if (!serviceToken) {
-            console.warn('No service token associated to url.');
-            return;
-        }
+            if (!serviceToken) {
+                console.warn('No service token associated to url.');
+                return;
+            }
 
-        return Browser.open({url: this.info.link.replace('{st}', serviceToken)});
+            return Browser.open({url: this.info.link.replace('{st}', serviceToken)});
         });
   }
 }
