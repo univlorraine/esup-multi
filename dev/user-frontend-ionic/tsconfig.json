@@ -10,9 +10,6 @@
       "@ul/shared": [
         "dist/shared"
       ],
-      "@ul/info": [
-        "dist/info"
-      ],
       "@ul/auth": [
         "dist/auth"
       ],
