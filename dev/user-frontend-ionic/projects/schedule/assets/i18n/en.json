@@ -16,7 +16,8 @@
         "TITLE": "Select planning",
         "SUBTITLE": "Select the planning you want to see displayed",
         "CANCEL": "Cancel",
-        "VALIDATE": "Validate"
+        "VALIDATE": "Validate",
+        "HIDDEN_COURSE": "Hidden course"
     },
     "CALENDAR": {
         "CLOSE": "Close"

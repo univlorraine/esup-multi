@@ -9,7 +9,7 @@ import { currentLanguage$ } from '@ul/shared';
 import { isAfter, isBefore, sub } from 'date-fns';
 import { Observable, Subscription } from 'rxjs';
 import { filter, first, map, mergeMap, tap } from 'rxjs/operators';
-import { activePlanningList$, Planning } from '../schedule.repository';
+import { displayedEvents$ } from '../schedule.repository';
 import { formatDay, ScheduleService } from '../schedule.service';
 import { Event } from './../schedule.repository';
 import { ScheduleCalendarService } from './schedule-calendar.service';
@@ -51,19 +51,18 @@ export class ScheduleCalendarComponent {
 
 
       if (!this.calendarDisplaySomeDateOutOfState) {
-        activePlanningList$.pipe(
+        displayedEvents$.pipe(
           first(),
-          map(planningList => this.scheduleCalendarService.planningListToCalendarEvents(planningList))
+          map(events => this.scheduleCalendarService.eventsToCalendarEvents(events))
         ).subscribe(events => successCallback(events));
         return;
       }
 
       this.scheduleService.loadScheduleOutOfStateInterval(formatDay(fetchInfo.start), formatDay(fetchInfo.end))
         .pipe(
-          mergeMap(outOfStateSchedule => this.scheduleService.filterSelectedPlanningsFromSchedule(outOfStateSchedule)),
+          mergeMap(outOfStateSchedule => this.scheduleService.outOfStateScheduleToDisplayedEvents(outOfStateSchedule)),
           first(),
-          map((outOfStateSelectedPlannings: Planning[]) =>
-            this.scheduleCalendarService.planningListToCalendarEvents(outOfStateSelectedPlannings))
+          map((events: Event[]) => this.scheduleCalendarService.eventsToCalendarEvents(events))
         )
         .subscribe(
           events => successCallback(events),
@@ -81,9 +80,9 @@ export class ScheduleCalendarComponent {
               }
             }
 
-            activePlanningList$.pipe(
+            displayedEvents$.pipe(
               first(),
-              map(planningList => this.scheduleCalendarService.planningListToCalendarEvents(planningList))
+              map(events => this.scheduleCalendarService.eventsToCalendarEvents(events))
             ).subscribe(events => successCallback(events));
           }
         );
@@ -109,7 +108,7 @@ export class ScheduleCalendarComponent {
     }));
 
     this.subscriptions.push(
-      activePlanningList$.pipe(
+      displayedEvents$.pipe(
         tap(() => this.getCalendar().refetchEvents()),
       ).subscribe());
   }

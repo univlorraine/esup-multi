@@ -3,12 +3,15 @@ import {
   persistState
 } from '@ngneat/elf-persist-state';
 import { localForageStore } from '@ul/shared';
+import { combineLatest } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 const STORE_NAME = 'schedule';
 
 export interface ScheduleProps {
   schedule: Schedule;
   activePlanningIds: string[];
+  hiddenEvents: HiddenEvent[];
 };
 
 export interface Schedule {
@@ -24,7 +27,7 @@ export interface Message {
 
 export interface Planning {
   id: string;
-  // @TODO code: a retirer une fois l'api en place ______________________________________________
+  // @TODO code: a retirer une fois l'api en place
   code: string;
   label: string;
   default: boolean;
@@ -41,6 +44,8 @@ export interface Planning {
 
 export interface Event {
   id: string;
+  // @TODO _adeEventId: a retirer une fois l'api en place
+  _adeEventId: number;
   startDateTime: string;
   endDateTime: string;
   course: {
@@ -75,6 +80,11 @@ export interface Event {
   ];
 };
 
+export interface HiddenEvent {
+  id: string;
+  title: string;
+}
+
 const filterDefaultPlanning = (planning: Planning): boolean => planning.default === true;
 const mapPlanningId = (planning: Planning): string =>
   planning.id || (planning as any).code; // @TODO supprimer .code une fois la nouvelle API en place
@@ -83,12 +93,12 @@ export interface SelectedPlanningProps {
   selectedPlanning: string[];
 };
 
-
 export const scheduleStore = createStore(
   { name: STORE_NAME },
   withProps<ScheduleProps>({
     schedule: null,
     activePlanningIds: [],
+    hiddenEvents: []
   })
 );
 
@@ -118,7 +128,7 @@ export const setSchedule = (schedule: ScheduleProps['schedule']) => {
     return {
       ...state,
       schedule,
-      activePlanningIds,
+      activePlanningIds
     };
   });
 };
@@ -132,8 +142,27 @@ export const setActivePlanningIds = (activePlanningIds: ScheduleProps['activePla
   }));
 };
 
-export const activePlanningList$ = scheduleStore.pipe(select((state) =>
-  state.schedule?.plannings?.filter(
-    planning => state.activePlanningIds.includes(mapPlanningId(planning))
-  ) || []
+export const eventsFromActivePlannings$ = scheduleStore.pipe(select((state) =>
+  state.schedule?.plannings?.filter(planning => state.activePlanningIds.includes(mapPlanningId(planning)))
+    .reduce((events, planning) => events.concat(planning.events), [])
+    .sort((a: Event, b: Event) => new Date(a.startDateTime).getTime() - new Date(b.startDateTime).getTime()) || []
 ));
+
+export const hiddenEvents$ = scheduleStore.pipe(select((state) => state.hiddenEvents));
+
+export const displayedEvents$ = combineLatest([eventsFromActivePlannings$, hiddenEvents$]).pipe(
+  map(([storedEvents, hiddenEvents]) => {
+    return storedEvents.filter(event => {
+      // @TODO supprimer la ligne suivante quand l'API de l'UL sera prête.
+      event.id = event._adeEventId.toString();
+
+      return  !hiddenEvents.some(hiddenEvent => hiddenEvent.id === event.id);
+    });;
+  }));
+
+export const setHiddenEvents = (hiddenEvents: ScheduleProps['hiddenEvents']) => {
+  scheduleStore.update((state) => ({
+    ...state,
+    hiddenEvents,
+  }));
+};

@@ -1,21 +1,20 @@
 <ion-tabs>
-    <ion-tab-bar slot="top">
-      <ion-tab-button tab="calendar#month">
-        <ion-label>{{ 'SCHEDULE.VIEW_TYPE.MONTH' | translate }}</ion-label>
-      </ion-tab-button>
-      <ion-tab-button tab="calendar#week">
-        <ion-label>{{ 'SCHEDULE.VIEW_TYPE.WEEK' | translate }}</ion-label>
-      </ion-tab-button>
-      <ion-tab-button tab="calendar#day">
-        <ion-label>{{ 'SCHEDULE.VIEW_TYPE.DAY' | translate }}</ion-label>
-      </ion-tab-button>
-      <ion-tab-button tab="list">
-        <ion-label>{{ 'SCHEDULE.VIEW_TYPE.LIST' | translate }}</ion-label>
-      </ion-tab-button>
-    </ion-tab-bar>
+  <ion-tab-bar slot="top">
+    <ion-tab-button tab="calendar#month">
+      <ion-label>{{ 'SCHEDULE.VIEW_TYPE.MONTH' | translate }}</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="calendar#week">
+      <ion-label>{{ 'SCHEDULE.VIEW_TYPE.WEEK' | translate }}</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="calendar#day">
+      <ion-label>{{ 'SCHEDULE.VIEW_TYPE.DAY' | translate }}</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="list">
+      <ion-label>{{ 'SCHEDULE.VIEW_TYPE.LIST' | translate }}</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
 </ion-tabs>
 
 <ion-progress-bar *ngIf="isLoading$ | async" type="indeterminate" color="primary"></ion-progress-bar>
 
 <app-select-planning></app-select-planning>
-

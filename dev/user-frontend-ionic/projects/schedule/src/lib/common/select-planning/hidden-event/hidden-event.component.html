@@ -1,0 +1,17 @@
+<ion-card>
+  <ion-card-content class="ion-no-padding">
+    <ion-grid >
+      <ion-row class="ion-align-items-center">
+        <ion-col >
+          <ion-text>{{hiddenEvent.title}}
+          </ion-text>
+        </ion-col>
+        <ion-col size="2">
+          <ion-button fill="clear" size="small" class="ion-text-center" (click)="showEvent(hiddenEvent)">
+            <ion-icon name="eye-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>

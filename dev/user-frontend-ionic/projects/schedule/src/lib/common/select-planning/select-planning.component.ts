@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
-import { zip } from 'rxjs';
-import { activePlanningIds$, schedule$, setActivePlanningIds } from '../../schedule.repository';
+import { Observable, zip } from 'rxjs';
+import { activePlanningIds$, HiddenEvent, hiddenEvents$, schedule$, setActivePlanningIds } from '../../schedule.repository';
 
 interface AvailablePlanningFormInput extends AvailablePlanning {
   checked: boolean;
@@ -12,9 +12,9 @@ interface AvailablePlanning {
 }
 
 const atLeastOneCheckedValidator = (): ValidatorFn =>
- (control: FormArray): ValidationErrors | null => {
+  (control: FormArray): ValidationErrors | null => {
     const countChecked = control.controls.filter(c => c.value === true).length;
-    return countChecked >= 1 ? null : {atLeastOnChecked: false};
+    return countChecked >= 1 ? null : { atLeastOnChecked: false };
   };
 
 @Component({
@@ -30,9 +30,10 @@ export class SelectPlanningComponent {
   public isLoading = false;
   public availablePlanningList: AvailablePlanning[] = [];
   public lastSelectedPlanningIndex: number | null = null;
+  public hiddenEvents$: Observable<HiddenEvent[]> = hiddenEvents$;
 
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: FormBuilder
   ) {
     this.form = this.formBuilder.group({
       planningList: this.formBuilder.array([], atLeastOneCheckedValidator())
@@ -85,7 +86,7 @@ export class SelectPlanningComponent {
   private applySelectedPlanning() {
     const selectedPlanningIds = [];
     for (const i in this.planningList.value) {
-      if( this.planningList.value[i] === true ) {
+      if (this.planningList.value[i] === true) {
         selectedPlanningIds.push(this.availablePlanningList[i].id);
       }
     }

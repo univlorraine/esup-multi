@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { EventInput } from 'fullcalendar';
-import { Planning } from '../schedule.repository';
-
+import { Event } from './../schedule.repository';
 
 @Injectable({
   providedIn: 'root'
@@ -10,14 +9,13 @@ export class ScheduleCalendarService {
 
   constructor() { }
 
-  planningListToCalendarEvents(planningList: Planning[]): EventInput[] {
+  eventsToCalendarEvents(events: Event[]): EventInput[] {
 
-    if (planningList.length === 0) {
+    if (events.length === 0) {
       return [];
     }
 
-    const eventInput = planningList
-      .reduce((events, planning) => events.concat(planning.events), [])
+    const eventsInput = events
       .map(event =>
        ({
               start: event.startDateTime,
@@ -28,6 +26,6 @@ export class ScheduleCalendarService {
               }
             }));
 
-      return eventInput;
+      return eventsInput;
   }
 }

@@ -3,9 +3,9 @@ import { Inject, Injectable } from '@angular/core';
 import { Network } from '@capacitor/network';
 import { getAuthToken } from '@ul/shared';
 import { add, format, startOfMonth, sub } from 'date-fns';
-import { from, Observable, Subject } from 'rxjs';
+import { combineLatest, from, Observable, Subject } from 'rxjs';
 import { filter, finalize, first, map, mergeMap, switchMap, tap } from 'rxjs/operators';
-import { activePlanningIds$, Planning, Schedule, setSchedule } from './schedule.repository';
+import { activePlanningIds$, Event, hiddenEvents$, Schedule, setSchedule } from './schedule.repository';
 
 export const formatDay = (date: Date) => format(date, 'yyyy-MM-dd');
 
@@ -81,11 +81,17 @@ export class ScheduleService {
     return startOfMonth(now);
   }
 
-  filterSelectedPlanningsFromSchedule(schedule: Schedule): Observable<Planning[]> {
-    return activePlanningIds$.pipe(
-      map(activPlanningIds => schedule.plannings.filter(planning => activPlanningIds.includes(planning.code))
-      ));
+  outOfStateScheduleToDisplayedEvents(schedule: Schedule): Observable<Event[]> {
+    return combineLatest([activePlanningIds$, hiddenEvents$]).pipe(
+      map(([activPlanningIds, hiddenEvents]) => schedule.plannings.filter(planning => activPlanningIds.includes(planning.code))
+        .reduce((events, planning) => events.concat(planning.events), [])
+        .sort((a: Event, b: Event) => new Date(a.startDateTime).getTime() - new Date(b.startDateTime).getTime())
+        .filter((event: Event) => {
+          event.id = event._adeEventId.toString();
 
+          return !hiddenEvents.some(hiddenEvent => hiddenEvent.id === event.id);}
+        )),
+    );
   }
 
 }
