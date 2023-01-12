@@ -4,24 +4,27 @@
       {{displayShortenedDate ? (event.startDateTime | shortenedDate) : ""}} {{event.startDateTime | localHour}} -
       {{event.endDateTime | localHour}}
     </ion-card-title>
+    <ion-button fill="clear" size="small" class="ion-text-center" class="hide-event-icon" (click)="hideEvent(event)">
+      <ion-icon name="eye-off-outline"></ion-icon>
+    </ion-button>
   </ion-card-header>
 
   <ion-card-content>
     <ion-row>
 
       <ion-col>
-        <ion-text class="cardLabels courseLabel">{{event.course.label}}</ion-text>
-        <ion-row class="cardLabels" *ngFor="let room of event.rooms">
+        <ion-text class="card-labels course-label">{{event.course.label}}</ion-text>
+        <ion-row class="card-labels" *ngFor="let room of event.rooms">
           <ion-icon name="business-outline"></ion-icon>
           <ion-text>{{room.label}}</ion-text>
         </ion-row>
-        <ion-row class="cardLabels" *ngFor="let teacher of event.teachers">
+        <ion-row class="card-labels" *ngFor="let teacher of event.teachers">
           <ion-icon name="man-outline"></ion-icon>
           <!-- @TODO supprimer ligne suivante quand l'api sera en place contre celle en commentaire -->
           <ion-text>{{teacher.name}}</ion-text>
           <!-- <ion-text>{{teacher.firstname}} {{teacher.lastname}}</ion-text> -->
         </ion-row>
-        <ion-row class="cardLabels" *ngFor="let group of event.groups">
+        <ion-row class="card-labels" *ngFor="let group of event.groups">
           <ion-icon name="people-circle-outline"></ion-icon>
           <ion-text>{{group.label}}</ion-text>
         </ion-row>

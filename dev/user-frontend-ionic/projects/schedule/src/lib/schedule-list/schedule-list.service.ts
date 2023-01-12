@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { add, eachDayOfInterval, Interval, isAfter } from 'date-fns';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { activePlanningList$, Event, Planning, Schedule } from '../schedule.repository';
+import { displayedEvents$, Event, Schedule } from '../schedule.repository';
 import { formatDay } from '../schedule.service';
 import { ScheduleService } from './../schedule.service';
 
@@ -16,19 +16,19 @@ export interface EventsByDay {
 })
 export class ScheduleListService {
 
+  public keepScrollPosition = new Subject();
+
   constructor(private scheduleService: ScheduleService) { }
 
-  planningListToEventsByDay(planningList: Planning[], dateInterval: Interval): EventsByDay[] {
+  eventsToEventsByDay(events: Event[], dateInterval: Interval): EventsByDay[] {
 
-    if (planningList.length === 0) {
+    if (events.length === 0) {
       return [];
     }
 
     const days = eachDayOfInterval(dateInterval);
 
-    const eventsMapByDay = planningList
-      .reduce((events, planning) => events.concat(planning.events), [])
-      .sort((a: Event, b: Event) => new Date(a.startDateTime).getTime() - new Date(b.startDateTime).getTime())
+    const eventsMapByDay = events
       .reduce((accumulatorEventsMapByDay, event) => {
         const day = formatDay(new Date(event.startDateTime));
 
@@ -62,11 +62,11 @@ export class ScheduleListService {
       const nextDateAfterStateEndDate = add(this.scheduleService.getStateEndDate(), { days: 1 });
       const outOfStateInterval = { start: nextDateAfterStateEndDate, end: endDateToLoad };
 
-      return activePlanningList$.pipe(
-        map(planningList => this.planningListToEventsByDay(planningList, intervalViewForStateEvents)),
-        switchMap(stateEventsByDay => this.scheduleService.filterSelectedPlanningsFromSchedule(outOfStateSchedule).pipe(
-            map(selectedOutOfStatePlannings => {
-              const outOfStateEventsByDay = this.planningListToEventsByDay(selectedOutOfStatePlannings, outOfStateInterval);
+      return displayedEvents$.pipe(
+        map(events => this.eventsToEventsByDay(events, intervalViewForStateEvents)),
+        switchMap(stateEventsByDay => this.scheduleService.outOfStateScheduleToDisplayedEvents(outOfStateSchedule).pipe(
+            map(events => {
+              const outOfStateEventsByDay = this.eventsToEventsByDay(events, outOfStateInterval);
 
               return [...stateEventsByDay, ...outOfStateEventsByDay];
             }
@@ -77,13 +77,17 @@ export class ScheduleListService {
 
     } else {
 
-      return activePlanningList$.pipe(
-        map(planningList => {
+      return displayedEvents$.pipe(
+        map(events => {
           const dateInterval = { start: viewStartDate, end: endDateToLoad };
 
-          return this.planningListToEventsByDay(planningList, dateInterval);
+          return this.eventsToEventsByDay(events, dateInterval);
         }));
 
     }
+  }
+
+  emitKeepScrollPosition() {
+    this.keepScrollPosition.next();
   }
 }

@@ -1,10 +1,10 @@
 <ion-content *ngIf="(schedule$ | async) as schedule" #scrollContent>
 
-  <ng-container *ngIf="(areEventInPlannings$ | async) === true">
+  <ng-container *ngIf="(areEventsFromActivePlannings$ | async) === true">
 
     <ion-item-group *ngFor="let eventsByDay of (eventsByDays$ | async);">
 
-      <ion-item-divider sticky class="ion-text-center completeDate" [id]="eventsByDay.day">
+      <ion-item-divider sticky class="ion-text-center complete-date" [id]="eventsByDay.day">
         <ion-col>{{eventsByDay.day | completeLocalDate}}</ion-col>
       </ion-item-divider>
 
@@ -12,7 +12,8 @@
         <p>{{ "SCHEDULE.NO_EVENTS_THIS_DAY" | translate }}</p>
       </ion-col>
 
-      <app-event-detail *ngFor="let event of eventsByDay.events" [event]="event"></app-event-detail>
+      <app-event-detail *ngFor="let event of eventsByDay.events" [event]="event"
+        (hideEventEvt)="keepScrollPosition()"></app-event-detail>
 
     </ion-item-group>
 
@@ -27,7 +28,7 @@
 
 </ion-content>
 
-<ion-content class="ion-padding" *ngIf="(areEventInPlannings$ | async) === false">
+<ion-content class="ion-padding" *ngIf="(areEventsFromActivePlannings$ | async) === false">
   <ion-note> {{ "SCHEDULE.NO_EVENTS" | translate }} </ion-note>
 </ion-content>
 

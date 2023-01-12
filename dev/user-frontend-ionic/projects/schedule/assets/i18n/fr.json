@@ -16,7 +16,8 @@
         "TITLE": "Sélection de planning",
         "SUBTITLE": "Sélectionner les plannings que vous souhaitez voir s'afficher",
         "CANCEL": "Annuler",
-        "VALIDATE": "Valider"
+        "VALIDATE": "Valider",
+        "HIDDEN_COURSE": "Cours Masqués"
     },
     "CALENDAR": {
         "CLOSE": "Fermer"

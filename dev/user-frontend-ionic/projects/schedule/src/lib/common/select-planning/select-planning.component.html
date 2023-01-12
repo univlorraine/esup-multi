@@ -1,36 +1,46 @@
-  <ion-fab slot="fixed" vertical="bottom" horizontal="end" size="small">
-    <ion-fab-button (click)="openModal()">
-      <ion-icon name="layers-outline"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+<ion-fab slot="fixed" vertical="bottom" horizontal="end" size="small">
+  <ion-fab-button (click)="openModal()">
+    <ion-icon name="layers-outline"></ion-icon>
+  </ion-fab-button>
+</ion-fab>
 
-  <ion-modal [isOpen]="isModalOpen" (willDismiss)="onDismiss()">
-    <ng-template>
-      <ion-progress-bar *ngIf="isLoading" type="indeterminate" color="primary"></ion-progress-bar>
+<ion-modal [isOpen]="isModalOpen" (willDismiss)="onDismiss()">
+  <ng-template>
+    <ion-progress-bar *ngIf="isLoading" type="indeterminate" color="primary"></ion-progress-bar>
 
-      <ion-header>
-        <ion-toolbar>          
-          <ion-buttons slot="secondary">
-            <ion-button (click)="closeModal()">{{ 'SCHEDULE.SELECT_PLANNING.CANCEL' | translate }}</ion-button>
-          </ion-buttons>
-          <ion-title>{{ 'SCHEDULE.SELECT_PLANNING.TITLE' | translate }}</ion-title>
-          <ion-buttons slot="primary">
-            <ion-button [disabled]="!form.valid" fill="solid" (click)="validate()">{{ 'SCHEDULE.SELECT_PLANNING.VALIDATE' | translate }}</ion-button>
-          </ion-buttons>
-        </ion-toolbar>
-      </ion-header>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="secondary">
+          <ion-button (click)="closeModal()">{{ 'SCHEDULE.SELECT_PLANNING.CANCEL' | translate }}</ion-button>
+        </ion-buttons>
+        <ion-title>{{ 'SCHEDULE.SELECT_PLANNING.TITLE' | translate }}</ion-title>
+        <ion-buttons slot="primary">
+          <ion-button [disabled]="!form.valid" fill="solid" (click)="validate()">{{ 'SCHEDULE.SELECT_PLANNING.VALIDATE'
+            | translate }}</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
 
-      <ion-content>
-        <ion-row class="ion-margin">
-          <ion-label>{{'SCHEDULE.SELECT_PLANNING.SUBTITLE' | translate }}</ion-label>
-        </ion-row>
-        <form [formGroup]="form">
-          <ion-item formArrayName="planningList" *ngFor="let planning of planningList.controls; let i = index">
-            <ion-label class="ion-text-wrap" for="terms">{{availablePlanningList[i].label}}</ion-label>
-            <ion-checkbox [formControlName]="i"></ion-checkbox>
-          </ion-item>
-        </form>
-      </ion-content>
+    <ion-content>
+      <ion-row class="ion-margin">
+        <ion-label class="subTitle">{{'SCHEDULE.SELECT_PLANNING.SUBTITLE' | translate }}</ion-label>
+      </ion-row>
+      <form [formGroup]="form">
+        <ion-item formArrayName="planningList" *ngFor="let planning of planningList.controls; let i = index">
+          <ion-label class="ion-text-wrap" for="terms">{{availablePlanningList[i].label}}</ion-label>
+          <ion-checkbox [formControlName]="i"></ion-checkbox>
+        </ion-item>
+      </form>
 
-    </ng-template>
-  </ion-modal>
+      <ion-row class="ion-margin" *ngIf="(hiddenEvents$ | async)?.length > 0;">
+        <ion-col class="ion-margin-bottom">
+          <ion-row class="ion-margin-bottom">
+            <ion-label class="sub-title">{{ 'SCHEDULE.SELECT_PLANNING.HIDDEN_COURSE' | translate }}</ion-label>
+          </ion-row>
+          <app-hidden-event *ngFor="let event of (hiddenEvents$ | async);" [hiddenEvent]="event"></app-hidden-event>
+        </ion-col>
+      </ion-row>
+    </ion-content>
+
+  </ng-template>
+</ion-modal>

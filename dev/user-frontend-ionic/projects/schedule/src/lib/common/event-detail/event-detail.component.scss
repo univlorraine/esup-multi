@@ -1,4 +1,4 @@
-.cardLabels{
+.card-labels{
     margin-bottom: 0.3rem;
 }
 
@@ -8,9 +8,15 @@ ion-icon {
     margin-left: 0.2rem;
   }
 
-.courseLabel{
+.course-label{
     font-size: 1.2rem;
     font-style: bold;
     color: black;
 
+}
+
+.hide-event-icon{
+    position: absolute;
+    right: 0;
+    top: 0.2rem;
 }

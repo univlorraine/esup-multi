@@ -4,7 +4,7 @@ import { AuthenticatedUser } from '@ul/shared';
 import { add, isAfter, startOfWeek } from 'date-fns';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { activePlanningList$, Schedule, schedule$ } from '../schedule.repository';
+import { eventsFromActivePlannings$, Schedule, schedule$ } from '../schedule.repository';
 import { formatDay, ScheduleService } from '../schedule.service';
 import { EventsByDay, ScheduleListService } from './schedule-list.service';
 
@@ -19,19 +19,18 @@ export class ScheduleListPage {
 
   public authenticatedUser$: Observable<AuthenticatedUser>;
   public schedule$: Observable<Schedule> = schedule$;
-  public areEventInPlannings$: Observable<boolean>;
+  public areEventsFromActivePlannings$: Observable<boolean>;
   public eventsByDays$: Observable<EventsByDay[]>;
   public currentDay: string;
   public viewStartDate: Date;
   public viewEndDate: Date;
-  private scheduleSubscription: Subscription;
-
+  private subscriptions: Subscription[] = [];
 
   constructor(
     private scheduleListService: ScheduleListService,
     private scheduleService: ScheduleService,
   ) {
-    this.areEventInPlannings$ = activePlanningList$.pipe(map(activePlanningList => activePlanningList.length > 0));
+    this.areEventsFromActivePlannings$ = eventsFromActivePlannings$.pipe(map(eventList => eventList.length > 0));
   }
 
   async ionViewWillEnter() {
@@ -40,17 +39,21 @@ export class ScheduleListPage {
     this.viewStartDate = startOfWeek(now, { weekStartsOn: 1 });
     this.viewEndDate = add(this.viewStartDate, { days: 27 });
 
-    this.scheduleSubscription = schedule$.subscribe(() => {
+    this.subscriptions.push(schedule$.subscribe(() => {
       setTimeout(() => {
         this.scrollToCurrentDate();
       }, 300);
-    });
+    }));
 
     this.eventsByDays$ = this.scheduleListService.loadEventsByDays(this.viewStartDate, this.viewEndDate);
+
+    this.subscriptions.push(this.scheduleListService.keepScrollPosition.subscribe(() => {
+      this.keepScrollPosition();
+    }));
   }
 
   ionViewWillLeave() {
-    this.scheduleSubscription?.unsubscribe();
+    this.subscriptions?.forEach(subscription => subscription.unsubscribe());
   }
 
   scrollToCurrentDate() {
@@ -61,6 +64,15 @@ export class ScheduleListPage {
 
     const y = element.offsetTop;
     this.content.scrollToPoint(0, y);
+  }
+
+  async keepScrollPosition(scrollPosition?: number) {
+    if (!scrollPosition) {
+      scrollPosition = (await this.content.getScrollElement()).scrollTop;
+    }
+    setTimeout(() => {
+      this.content.scrollToPoint(0, scrollPosition);
+    }, 0);
   }
 
   async loadMoreEvents() {
@@ -77,10 +89,7 @@ export class ScheduleListPage {
 
     this.eventsByDays$ = this.scheduleListService.loadEventsByDays(this.viewStartDate, endDateToLoad, outOfStateSchedule);
 
-    setTimeout(() => {
-      this.content.scrollToPoint(0, scrollPosition);
-    }, 0);
-
+    this.keepScrollPosition(scrollPosition);
     this.viewEndDate = endDateToLoad;
 
   }
