@@ -18,14 +18,13 @@ export class AppsService {
     this.directusApiConfig = this.configService.get<DirectusApi>('directusApi');
   }
 
-  public getApps(language: string): Observable<App[]> {
+  public getApps(): Observable<App[]> {
     const url = `${this.directusApiConfig.apiUrl}/items/apps`;
 
     return this.httpService
       .get<DirectusResponse<DirectusApp[]>>(url, {
         params: {
-          'filter[translations][languages_code][_eq]': language,
-          'deep[translations][_filter][languages_code][_eq]': language,
+          'filter[status][_eq]': 'published',
           fields: '*,translations.*,authorization.*',
         },
         headers: {
@@ -44,8 +43,7 @@ export class AppsService {
             (info: DirectusApp): App => ({
               id: `${TileType.App}:${info.id}`,
               type: TileType.App,
-              title: info.translations[0].title,
-              content: info.translations[0].content,
+              translations: info.translations,
               icon: info.icon,
               path: info.path,
               authorization: info.authorization,

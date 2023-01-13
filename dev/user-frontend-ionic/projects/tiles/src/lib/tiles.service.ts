@@ -14,8 +14,8 @@ export class TilesService {
     private http: HttpClient,
   ) {}
 
-  public getTiles(language: string, authToken: string): Observable<Tile[]> {
-    const url = `${this.environment.apiEndpoint}/tiles/${language}`;
+  public getTiles(authToken: string): Observable<Tile[]> {
+    const url = `${this.environment.apiEndpoint}/tiles`;
     const data = {
       authToken
     };
