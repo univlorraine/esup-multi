@@ -15,10 +15,9 @@ export class TilesService {
     private readonly appsService: AppsService,
   ) {}
 
-  public getTiles(language: string): Observable<Tile[]> {
-    return zip([
-      this.infoService.getInfo(language),
-      this.appsService.getApps(language),
-    ]).pipe(map(([infoList, apps]) => [...apps, ...infoList]));
+  public getTiles(): Observable<Tile[]> {
+    return zip([this.infoService.getInfo(), this.appsService.getApps()]).pipe(
+      map(([infoList, apps]) => [...apps, ...infoList]),
+    );
   }
 }

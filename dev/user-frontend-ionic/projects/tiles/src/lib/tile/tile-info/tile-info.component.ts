@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Browser } from '@capacitor/browser';
 import { getAuthToken } from '@ul/shared';
 import { filter, first, switchMap } from 'rxjs/operators';
-import { Info } from '../../tiles.repository';
+import { TranslatedInfo } from '../../tiles.repository';
 import { TileInfoService } from './tile-info.service';
 
 @Component({
@@ -11,7 +11,7 @@ templateUrl: './tile-info.component.html',
 styleUrls: ['./tile-info.component.scss'],
 })
 export class TileInfoComponent {
-    @Input() info: Info;
+    @Input() info: TranslatedInfo;
 
     constructor(private tileInfoService: TileInfoService) {}
 

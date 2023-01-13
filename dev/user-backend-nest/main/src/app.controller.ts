@@ -4,7 +4,6 @@ import {
   Delete,
   Get,
   Inject,
-  Param,
   Post,
   Request,
   UseGuards,
@@ -28,8 +27,8 @@ export class AppController {
     @Inject('SCHEDULE_SERVICE') private scheduleClient: ClientProxy,
   ) {}
 
-  @Post('/tiles/:language')
-  info(@Body() body, @Param('language') language) {
+  @Post('/tiles')
+  info(@Body() body) {
     const user$ = this.authClient.send(
       {
         cmd: 'getUser',
@@ -40,7 +39,7 @@ export class AppController {
       {
         cmd: 'tiles',
       },
-      language,
+      {},
     );
 
     return zip(user$, info$).pipe(

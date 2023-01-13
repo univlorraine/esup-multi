@@ -12,17 +12,21 @@ interface Authorization {
   roles: string[];
 }
 
-
 export enum TileType {
   app = 'app',
   info = 'info',
 }
 
+interface Translation {
+  languages_code: string;
+  title: string;
+  content: string;
+}
+
 interface AbstractTile {
   id: string;
   type: TileType;
-  title: string;
-  content: string;
+  translations: Translation[];
   authorization?: Authorization;
 }
 
@@ -38,7 +42,28 @@ export interface Info extends AbstractTile {
   type: TileType.info;
 }
 
+interface AbstractTranslatedTile {
+  id: string;
+  type: TileType;
+  title: string;
+  content: string;
+  authorization?: Authorization;
+}
+
+export interface TranslatedApp extends AbstractTranslatedTile {
+  path: string;
+  icon?: string;
+  type: TileType.app;
+}
+
+export interface TranslatedInfo extends AbstractTranslatedTile {
+  link?: string;
+  ssoService?: string;
+  type: TileType.info;
+}
+
 export type Tile = Info | App;
+export type TranslatedTile = TranslatedInfo | TranslatedApp;
 
 const store = createStore(
     { name: STORE_NAME },

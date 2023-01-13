@@ -18,14 +18,13 @@ export class InfoService {
     this.directusApiConfig = this.configService.get<DirectusApi>('directusApi');
   }
 
-  public getInfo(language: string): Observable<Info[]> {
+  public getInfo(): Observable<Info[]> {
     const url = `${this.directusApiConfig.apiUrl}/items/info`;
 
     return this.httpService
       .get<DirectusResponse<DirectusInfo[]>>(url, {
         params: {
-          'filter[translations][languages_code][_eq]': language,
-          'deep[translations][_filter][languages_code][_eq]': language,
+          'filter[status][_eq]': 'published',
           fields: '*,translations.*,authorization.*',
         },
         headers: {
@@ -44,8 +43,7 @@ export class InfoService {
             (info: DirectusInfo): Info => ({
               id: `${TileType.Info}:${info.id}`,
               type: TileType.Info,
-              title: info.translations[0].title,
-              content: info.translations[0].content,
+              translations: info.translations,
               link: info.link,
               ssoService: info.ssoService,
               authorization: info.authorization,

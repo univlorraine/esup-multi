@@ -1,7 +1,7 @@
 <ion-progress-bar *ngIf="isLoading" type="indeterminate" color="primary"></ion-progress-bar>
 
 <ion-content *ngIf="(tilesIsEmpty$ | async) === false">
-  <app-tile *ngFor="let tile of (tiles$ | async)" [tile]="tile">
+  <app-tile *ngFor="let translatedTile of (translatedTiles$ | async)" [tile]="translatedTile">
   </app-tile>
 </ion-content>
 

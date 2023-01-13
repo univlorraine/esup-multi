@@ -1,11 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
 import { IonicModule } from '@ionic/angular';
-
 import { TilesRoutingModule } from './tiles-routing.module';
-
 import { ProjectModuleService } from '@ul/shared';
 import { TilesPage } from './tiles.page';
 import { TranslateModule } from '@ngx-translate/core';
