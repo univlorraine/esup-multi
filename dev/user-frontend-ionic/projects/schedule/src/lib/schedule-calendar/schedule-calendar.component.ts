@@ -47,7 +47,7 @@ export class ScheduleCalendarComponent {
       fetchInfo.end = sub(fetchInfo.end, { days: 1 });
 
       this.calendarDisplaySomeDateOutOfState = isBefore(fetchInfo.start, this.scheduleService.getStateStartDate())
-      || isAfter(fetchInfo.end, this.scheduleService.getStateEndDate());
+        || isAfter(fetchInfo.end, this.scheduleService.getStateEndDate());
 
 
       if (!this.calendarDisplaySomeDateOutOfState) {
@@ -111,6 +111,10 @@ export class ScheduleCalendarComponent {
       displayedEvents$.pipe(
         tap(() => this.getCalendar().refetchEvents()),
       ).subscribe());
+
+    this.subscriptions.push(this.scheduleService.hideEventEvt.subscribe(() => {
+      this.dismissModal();
+    }));
   }
 
   ionViewDidLeave() {
@@ -141,7 +145,7 @@ export class ScheduleCalendarComponent {
     );
   }
 
-  onModalWillDismiss() {
+  dismissModal() {
     this.isEventDetailOpen = false;
   }
 
