@@ -1,12 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Geolocation } from '@capacitor/geolocation';
+import { Network } from '@capacitor/network';
+import { TranslateService } from '@ngx-translate/core';
 import * as Leaflet from 'leaflet';
-import { Subject } from 'rxjs';
 import { finalize, first } from 'rxjs/operators';
 import { Marker, markersList$, setMarkers } from './map.repository';
-import { Geolocation, Position } from '@capacitor/geolocation';
 import { MapService } from './map.service';
-import { TranslateService } from '@ngx-translate/core';
-import { Network } from '@capacitor/network';
 
 @Component({
   selector: 'app-map',
@@ -19,12 +18,12 @@ export class MapPage {
   private map: Leaflet.Map;
   private markersByCategory: Map<string, Leaflet.Marker[]> = new Map();
   private layerGroupByCategory: Map<string, Leaflet.LayerGroup> = new Map();
-  private userPositionLayerGroup: Leaflet.LayerGroup;
+  private positionLayerGroup: Leaflet.LayerGroup;
 
   constructor(
     private mapService: MapService,
     private translateService: TranslateService,
-    ) {}
+  ) { }
 
   async ionViewDidEnter() {
     this.isLoading = true;
@@ -51,7 +50,7 @@ export class MapPage {
   }
 
   private async leafletMapInit() {
-    this.map = Leaflet.map('map').setView([0, 0], 12);
+    this.map = Leaflet.map('map').setView([0, 0], 9);
     Leaflet.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(this.map);
@@ -68,21 +67,30 @@ export class MapPage {
   }
 
   private async refreshUserPosition() {
-    const position = await Geolocation.getCurrentPosition();
-    const latLng: Leaflet.LatLngTuple = [position.coords.latitude, position.coords.longitude];
-    const circle = Leaflet.circle(latLng, position.coords.accuracy);
 
-    const icon = this.buildSimpleMarkerIcon();
-    const popupContent = this.translateService.instant('MAP.YOUR_POSITION');
-    const marker = Leaflet.marker(latLng, { icon })
-      .bindPopup(popupContent);
+    await Geolocation.getCurrentPosition().then(position => {
+      const latLng: Leaflet.LatLngTuple = [position.coords.latitude, position.coords.longitude];
+      const circle = Leaflet.circle(latLng, position.coords.accuracy);
 
-    if (this.userPositionLayerGroup) {
-      this.userPositionLayerGroup.remove();
-    }
+      const icon = this.buildSimpleMarkerIcon();
+      const popupContent = this.translateService.instant('MAP.YOUR_POSITION');
+      const marker = Leaflet.marker(latLng, { icon })
+        .bindPopup(popupContent);
+      if (this.positionLayerGroup) {
+        this.positionLayerGroup.remove();
+      }
 
-    this.userPositionLayerGroup = Leaflet.layerGroup([circle, marker]).addTo(this.map);
-    this.map.setView(latLng);
+      this.positionLayerGroup = Leaflet.layerGroup([circle, marker]).addTo(this.map);
+      this.map.setView(latLng);
+      this.map.setZoom(11)
+    },
+      error => {
+        const latLngOfTheUniversity: Leaflet.LatLngTuple = [48.69137200828818, 6.183309429175067]
+        if (this.positionLayerGroup) {
+          this.positionLayerGroup.remove();
+        }
+        this.map.setView(latLngOfTheUniversity);
+      });
   }
 
   private async loadMarkersInNetworkAvailable() {
@@ -122,7 +130,7 @@ export class MapPage {
 
 
   private getIconFileByCategory(category: string) {
-    switch(category) {
+    switch (category) {
       case 'presidences_points':
         return 'home.svg';
       case 'composantes_points':
@@ -155,8 +163,8 @@ export class MapPage {
 
   private buildSimpleMarkerIcon() {
     return Leaflet.icon({
-      iconSize: [ 25, 41 ],
-      iconAnchor: [ 13, 41 ],
+      iconSize: [25, 41],
+      iconAnchor: [13, 41],
       iconUrl: './assets/map/leaflet/marker-icon.png',
       iconRetinaUrl: './assets/map/leaflet/marker-icon-2x.png',
       shadowUrl: './assets/map/leaflet/marker-shadow.png'
