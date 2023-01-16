@@ -21,7 +21,7 @@ export class HiddenEventComponent {
         const filteredHiddenEvents = hiddenEvents.filter(hiddenEvent => hiddenEvent.id !== eventToShow.id);
         setHiddenEvents(filteredHiddenEvents);
       }
-      this.scheduleListService.emitKeepScrollPosition();
+      this.scheduleListService.emitShowEventEvt();
     });
 
   }

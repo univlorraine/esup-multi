@@ -15,7 +15,9 @@ export const formatDay = (date: Date) => format(date, 'yyyy-MM-dd');
 export class ScheduleService {
 
   public isLoading$: Observable<boolean>;
+  public hideEventEvt = new Subject();
   private isLoadingSubject = new Subject<boolean>();
+
 
   constructor(
     @Inject('environment')
@@ -94,4 +96,7 @@ export class ScheduleService {
     );
   }
 
+  emitHideEventEvt() {
+    this.hideEventEvt.next();
+  }
 }

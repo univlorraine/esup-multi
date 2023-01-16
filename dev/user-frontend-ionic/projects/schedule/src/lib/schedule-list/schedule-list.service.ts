@@ -16,7 +16,7 @@ export interface EventsByDay {
 })
 export class ScheduleListService {
 
-  public keepScrollPosition = new Subject();
+  public showEventEvt = new Subject();
 
   constructor(private scheduleService: ScheduleService) { }
 
@@ -87,7 +87,7 @@ export class ScheduleListService {
     }
   }
 
-  emitKeepScrollPosition() {
-    this.keepScrollPosition.next();
+  emitShowEventEvt() {
+    this.showEventEvt.next();
   }
 }

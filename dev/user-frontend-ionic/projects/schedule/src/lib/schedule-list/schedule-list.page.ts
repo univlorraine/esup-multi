@@ -47,7 +47,11 @@ export class ScheduleListPage {
 
     this.eventsByDays$ = this.scheduleListService.loadEventsByDays(this.viewStartDate, this.viewEndDate);
 
-    this.subscriptions.push(this.scheduleListService.keepScrollPosition.subscribe(() => {
+    this.subscriptions.push(this.scheduleListService.showEventEvt.subscribe(() => {
+      this.keepScrollPosition();
+    }));
+
+    this.subscriptions.push(this.scheduleService.hideEventEvt.subscribe(() => {
       this.keepScrollPosition();
     }));
   }
