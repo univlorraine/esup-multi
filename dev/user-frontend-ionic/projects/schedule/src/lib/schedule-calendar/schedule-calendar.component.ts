@@ -1,10 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { GetCurrentOrientationResult, ScreenOrientation, ScreenOrientationChange } from '@capawesome/capacitor-screen-orientation';
 import { FullCalendarComponent } from '@fullcalendar/angular';
 import { Calendar, CalendarOptions } from '@fullcalendar/core';
 import allLocales from '@fullcalendar/core/locales-all';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
+import { IonModal } from '@ionic/angular';
 import { currentLanguage$ } from '@ul/shared';
 import { isAfter, isBefore, sub } from 'date-fns';
 import { Observable, Subscription } from 'rxjs';
@@ -14,6 +16,7 @@ import { formatDay, ScheduleService } from '../schedule.service';
 import { Event } from './../schedule.repository';
 import { ScheduleCalendarService } from './schedule-calendar.service';
 
+
 @Component({
   selector: 'app-schedule-calendar',
   templateUrl: './schedule-calendar.component.html',
@@ -22,6 +25,7 @@ import { ScheduleCalendarService } from './schedule-calendar.service';
 export class ScheduleCalendarComponent {
 
   @ViewChild('calendar') calendarComponent: FullCalendarComponent;
+  @ViewChild('modal') modal: IonModal;
 
   public viewType$: Observable<string>;
   public isEventDetailOpen = false;
@@ -30,6 +34,7 @@ export class ScheduleCalendarComponent {
   public dateError: string;
   public errorIsBefore: boolean;
   public calendarDisplaySomeDateOutOfState: boolean;
+  public initialBreakpoint: number;
   public calendarOptions: CalendarOptions = {
     plugins: [timeGridPlugin, dayGridPlugin],
     height: '100%',
@@ -100,7 +105,7 @@ export class ScheduleCalendarComponent {
       );
   }
 
-  ionViewDidEnter() {
+  async ionViewDidEnter() {
     this.initCalendar();
 
     this.subscriptions.push(this.viewType$.subscribe(viewType => {
@@ -111,14 +116,22 @@ export class ScheduleCalendarComponent {
       displayedEvents$.pipe(
         tap(() => this.getCalendar().refetchEvents()),
       ).subscribe());
-
     this.subscriptions.push(this.scheduleService.hideEventEvt.subscribe(() => {
       this.dismissModal();
     }));
+
+    await ScreenOrientation.getCurrentOrientation().then((screenOrientation: GetCurrentOrientationResult) => {
+      this.updateBreakpoints(screenOrientation);
+    });
+
+    ScreenOrientation.addListener('screenOrientationChange', (screenOrientation: ScreenOrientationChange) => {
+      this.updateBreakpoints(screenOrientation);
+    });
   }
 
   ionViewDidLeave() {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
+    ScreenOrientation.removeAllListeners();
   }
 
   addEventToCalendar(event: Event) {
@@ -169,5 +182,11 @@ export class ScheduleCalendarComponent {
 
   private getCalendar(): Calendar {
     return this.calendarComponent?.getApi();
+  }
+
+  private updateBreakpoints(screenOrientation: GetCurrentOrientationResult | ScreenOrientationChange) {
+    const breakpoint = screenOrientation.type.startsWith('landscape') ? 1 : 0.60;
+    this.modal.initialBreakpoint = breakpoint;
+    this.modal.setCurrentBreakpoint(breakpoint);
   }
 }

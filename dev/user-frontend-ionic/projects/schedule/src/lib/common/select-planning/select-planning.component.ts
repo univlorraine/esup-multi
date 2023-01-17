@@ -12,9 +12,9 @@ interface AvailablePlanning {
 }
 
 const atLeastOneCheckedValidator = (): ValidatorFn =>
-  (control: FormArray): ValidationErrors | null => {
+ (control: FormArray): ValidationErrors | null => {
     const countChecked = control.controls.filter(c => c.value === true).length;
-    return countChecked >= 1 ? null : { atLeastOnChecked: false };
+    return countChecked >= 1 ? null : {atLeastOnChecked: false};
   };
 
 @Component({
@@ -86,7 +86,7 @@ export class SelectPlanningComponent {
   private applySelectedPlanning() {
     const selectedPlanningIds = [];
     for (const i in this.planningList.value) {
-      if (this.planningList.value[i] === true) {
+      if( this.planningList.value[i] === true ) {
         selectedPlanningIds.push(this.availablePlanningList[i].id);
       }
     }
