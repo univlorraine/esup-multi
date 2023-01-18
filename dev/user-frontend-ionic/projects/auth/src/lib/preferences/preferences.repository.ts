@@ -1,7 +1,7 @@
 import { createStore, select, setProps, withProps } from '@ngneat/elf';
 import {
-    persistState,
-  } from '@ngneat/elf-persist-state';
+  persistState
+} from '@ngneat/elf-persist-state';
 import { localForageStore } from '@ul/shared';
 
 const STORE_NAME = 'auth-preferences';

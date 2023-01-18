@@ -20,6 +20,13 @@
       </ion-note>
     </ion-item>
 
+    <ion-item lines="none">
+      <ion-checkbox [checked]="(saveCredentialsOnAuthentication$ | async)"
+      (ionChange)="onSaveCredentialsOnAuthenticationChange($event)"
+      class="ion-margin"></ion-checkbox>
+      <ion-label>{{ 'AUTH.LOGIN.SAVE_CREDENTIALS' | translate }}</ion-label>
+    </ion-item>
+
     <ion-row>
       <ion-col>
         <ion-button type="submit" expand="block" [disabled]="!loginForm.valid || isLoading">{{ 'AUTH.LOGIN.SUBMIT' | translate }}</ion-button>

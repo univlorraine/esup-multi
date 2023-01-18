@@ -11,7 +11,8 @@
         "REQUIRED": {
             "USERNAME": "Mot de passe requis",
             "PASSWORD": "Identifiant requis"
-        }
+        },
+        "SAVE_CREDENTIALS": "Enregistrer mes identifiants"
     },
     "CONNECTED": {
         "HELLO": "Bonjour",
