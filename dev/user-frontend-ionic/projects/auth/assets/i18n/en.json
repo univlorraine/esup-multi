@@ -11,7 +11,8 @@
         "REQUIRED": {
             "USERNAME": "Password required",
             "PASSWORD": "Username required"
-        }
+        },
+        "SAVE_CREDENTIALS": "Save credentials"
     },
     "CONNECTED": {
         "HELLO": "Hello",

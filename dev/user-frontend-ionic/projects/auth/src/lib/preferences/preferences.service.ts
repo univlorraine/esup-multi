@@ -2,15 +2,24 @@ import { Injectable } from '@angular/core';
 import { deleteRefreshAuthToken, getRefreshAuthToken } from '@ul/shared';
 import { concatMap, filter, finalize, first } from 'rxjs/operators';
 import { KeepAuthService } from '../common/keep-auth.service';
+import { setSaveCredentialsOnAuthentication } from './preferences.repository';
 
 @Injectable({
-providedIn: 'root'
+    providedIn: 'root'
 })
 export class PreferencesService {
 
     constructor(
-      private keepAuthService: KeepAuthService
-    ) {}
+        private keepAuthService: KeepAuthService
+    ) { }
+
+    public saveCredentialsOnAuthenticationChange(saveCredentials: boolean) {
+        setSaveCredentialsOnAuthentication(saveCredentials);
+
+        if (saveCredentials === false) {
+            this.removeSavedCredentialsIfExists();
+        }
+    }
 
     public removeSavedCredentialsIfExists() {
         return getRefreshAuthToken().pipe(
@@ -21,4 +30,3 @@ export class PreferencesService {
         ).subscribe();
     }
 }
-

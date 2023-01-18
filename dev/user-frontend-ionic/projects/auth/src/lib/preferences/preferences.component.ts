@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
+import { saveCredentialsOnAuthentication$ } from './preferences.repository';
 import { PreferencesService } from './preferences.service';
-
-import { saveCredentialsOnAuthentication$, setSaveCredentialsOnAuthentication } from './preferences.repository';
 
 @Component({
   selector: 'app-auth-preferences',
@@ -12,14 +11,11 @@ export class PreferencesComponent {
 
   saveCredentialsOnAuthentication$ = saveCredentialsOnAuthentication$;
 
-  constructor(private preferencesService: PreferencesService) { }
+  constructor(private preferencesService: PreferencesService) {
+  }
 
   onSaveCredentialsOnAuthenticationChange(event) {
-    const saveCredentialsOnAuthentication = event.detail.checked;
-    setSaveCredentialsOnAuthentication(saveCredentialsOnAuthentication);
-
-    if (saveCredentialsOnAuthentication === false) {
-      this.preferencesService.removeSavedCredentialsIfExists();
-    }
+      const saveCredentials = event.detail.checked;
+      this.preferencesService.saveCredentialsOnAuthenticationChange(saveCredentials);
   }
 }

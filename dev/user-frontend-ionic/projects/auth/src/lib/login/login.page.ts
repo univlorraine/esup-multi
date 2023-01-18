@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { finalize, tap } from 'rxjs/operators';
 import { AuthService } from '../common/auth.service';
+import { saveCredentialsOnAuthentication$ } from '../preferences/preferences.repository';
+import { PreferencesService } from '../preferences/preferences.service';
 
 @Component({
   selector: 'app-login',
@@ -13,14 +15,15 @@ import { AuthService } from '../common/auth.service';
 export class LoginPage implements OnInit {
 
   loginForm: FormGroup;
-
+  public saveCredentialsOnAuthentication$ = saveCredentialsOnAuthentication$;
   public isLoading = false;
 
   constructor(
     private fb: FormBuilder,
     public authService: AuthService,
     private router: Router,
-    private toastController: ToastController) { }
+    private toastController: ToastController,
+    private preferencesService: PreferencesService) { }
 
   get username() {
     return this.loginForm.get('username');
@@ -30,16 +33,25 @@ export class LoginPage implements OnInit {
     return this.loginForm.get('password');
   }
 
+  get savePassword() {
+    return this.loginForm.get('savePassword');
+  }
+
   ngOnInit() {
     this.loginForm = this.fb.group({
       username: ['', [Validators.required]],
-      password: ['', [Validators.required]],
+      password: ['', [Validators.required]]
     });
   }
 
   ionViewWillEnter() {
     this.isLoading = false;
     this.loginForm.reset();
+  }
+
+  onSaveCredentialsOnAuthenticationChange(event) {
+    const saveCredentials = event.detail.checked;
+    this.preferencesService.saveCredentialsOnAuthenticationChange(saveCredentials);
   }
 
   submit() {
