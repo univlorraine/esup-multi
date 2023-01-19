@@ -9,9 +9,10 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import { IonModal } from '@ionic/angular';
 import { currentLanguage$ } from '@ul/shared';
 import { isAfter, isBefore, sub } from 'date-fns';
+import { EventInput } from 'fullcalendar';
 import { Observable, Subscription } from 'rxjs';
 import { filter, first, map, mergeMap, tap } from 'rxjs/operators';
-import { displayedEvents$ } from '../schedule.repository';
+import { displayedEvents$, Schedule } from '../schedule.repository';
 import { formatDay, ScheduleService } from '../schedule.service';
 import { Event } from './../schedule.repository';
 import { ScheduleCalendarService } from './schedule-calendar.service';
@@ -58,19 +59,19 @@ export class ScheduleCalendarComponent {
       if (!this.calendarDisplaySomeDateOutOfState) {
         displayedEvents$.pipe(
           first(),
-          map(events => this.scheduleCalendarService.eventsToCalendarEvents(events))
-        ).subscribe(events => successCallback(events));
+          map((events : Event[]) => this.scheduleCalendarService.eventsToCalendarEvents(events))
+        ).subscribe((events : EventInput[]) => successCallback(events));
         return;
       }
 
       this.scheduleService.loadScheduleOutOfStateInterval(formatDay(fetchInfo.start), formatDay(fetchInfo.end))
         .pipe(
-          mergeMap(outOfStateSchedule => this.scheduleService.outOfStateScheduleToDisplayedEvents(outOfStateSchedule)),
+          mergeMap((outOfStateSchedule: Schedule) => this.scheduleService.outOfStateScheduleToDisplayedEvents(outOfStateSchedule)),
           first(),
           map((events: Event[]) => this.scheduleCalendarService.eventsToCalendarEvents(events))
         )
         .subscribe(
-          events => successCallback(events),
+          (events : EventInput[]) => successCallback(events),
           () => {
 
             if (this.calendarDisplaySomeDateOutOfState) {
@@ -87,8 +88,8 @@ export class ScheduleCalendarComponent {
 
             displayedEvents$.pipe(
               first(),
-              map(events => this.scheduleCalendarService.eventsToCalendarEvents(events))
-            ).subscribe(events => successCallback(events));
+              map((events: Event[]) => this.scheduleCalendarService.eventsToCalendarEvents(events))
+            ).subscribe((events : EventInput[]) => successCallback(events));
           }
         );
     }

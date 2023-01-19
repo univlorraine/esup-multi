@@ -1,8 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { first } from 'rxjs/operators';
-import { Event, HiddenEvent } from '../../schedule.repository';
+import { Course, Event, HiddenCourse } from '../../schedule.repository';
 import { ScheduleService } from '../../schedule.service';
-import { hiddenEvents$, setHiddenEvents } from './../../schedule.repository';
+import { hiddenCourseList$, setHiddenCourseList } from './../../schedule.repository';
 
 @Component({
   selector: 'app-event-detail',
@@ -13,27 +13,27 @@ export class EventDetailComponent {
 
   @Input() event: Event;
   @Input() displayShortenedDate = false;
-  public disableHideEventButton = false;
+  public disableHideCourseButton = false;
 
   constructor(private scheduleService: ScheduleService) { }
 
-  hideEvent(eventToHide: Event) {
-    this.disableHideEventButton = true;
+  hideAllSimilarCourse(course: Course) {
+    this.disableHideCourseButton = true;
 
     //@TODO supprimer ligne suivante quand l'API de l'UL sera en place
-    eventToHide.id = eventToHide._adeEventId.toString();
+    // course.id = course._adeEventId.toString();
+    course.id = course.code;
 
-
-    hiddenEvents$.pipe(first()).subscribe(hiddenEvents => {
-      const hiddenEventObj: HiddenEvent = {
-        id: eventToHide.id,
-        title: eventToHide.course.label
+    hiddenCourseList$.pipe(first()).subscribe(hiddenCourseList => {
+      const hiddenCourseObj: HiddenCourse = {
+        id: course.id,
+        title: course.label
       };
 
-      if (!hiddenEvents.some(hiddenEvent => hiddenEvent.id === hiddenEventObj.id)) {
-        setHiddenEvents([...hiddenEvents, hiddenEventObj]);
+      if (!hiddenCourseList.some(hiddenCourse => hiddenCourse.id === hiddenCourseObj.id)) {
+        setHiddenCourseList([...hiddenCourseList, hiddenCourseObj]);
       }
-      this.scheduleService.emitHideEventEvt();
+      this.scheduleService.emitHideCourseEvt();
     });
   }
 }

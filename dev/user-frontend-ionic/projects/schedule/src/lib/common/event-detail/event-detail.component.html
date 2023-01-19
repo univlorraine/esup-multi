@@ -4,7 +4,8 @@
       {{displayShortenedDate ? (event.startDateTime | shortenedDate) : ""}} {{event.startDateTime | localHour}} -
       {{event.endDateTime | localHour}}
     </ion-card-title>
-    <ion-button fill="clear" size="small" class="ion-text-center" class="hide-event-icon" (click)="hideEvent(event)" [disabled]="disableHideEventButton">
+    <ion-button fill="clear" size="small" class="ion-text-center" class="hide-event-icon" (click)="hideAllSimilarCourse(event.course)"
+      [disabled]="disableHideCourseButton">
       <ion-icon name="eye-off-outline"></ion-icon>
     </ion-button>
   </ion-card-header>

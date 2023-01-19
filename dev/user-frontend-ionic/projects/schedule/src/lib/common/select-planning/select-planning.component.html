@@ -32,12 +32,12 @@
         </ion-item>
       </form>
 
-      <ion-row class="ion-margin" *ngIf="(hiddenEvents$ | async)?.length > 0;">
+      <ion-row class="ion-margin" *ngIf="(hiddenCourseList$ | async)?.length > 0;">
         <ion-col class="ion-margin-bottom">
           <ion-row class="ion-margin-bottom">
             <ion-label class="sub-title">{{ 'SCHEDULE.SELECT_PLANNING.HIDDEN_COURSE' | translate }}</ion-label>
           </ion-row>
-          <app-hidden-event *ngFor="let event of (hiddenEvents$ | async);" [hiddenEvent]="event"></app-hidden-event>
+          <app-hidden-course *ngFor="let course of (hiddenCourseList$ | async);" [hiddenCourse]="course"></app-hidden-course>
         </ion-col>
       </ion-row>
     </ion-content>
