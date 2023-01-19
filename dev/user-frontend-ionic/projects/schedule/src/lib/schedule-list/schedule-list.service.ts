@@ -87,7 +87,7 @@ export class ScheduleListService {
     }
   }
 
-  emitShowEventEvt() {
+  emitShowCourseEvt() {
     this.showEventEvt.next();
   }
 }

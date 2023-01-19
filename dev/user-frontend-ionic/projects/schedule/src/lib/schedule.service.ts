@@ -5,7 +5,7 @@ import { getAuthToken } from '@ul/shared';
 import { add, format, startOfMonth, sub } from 'date-fns';
 import { combineLatest, from, Observable, Subject } from 'rxjs';
 import { filter, finalize, first, map, mergeMap, switchMap, tap } from 'rxjs/operators';
-import { activePlanningIds$, Event, hiddenEvents$, Schedule, setSchedule } from './schedule.repository';
+import { activePlanningIds$, Event, hiddenCourseList$, Schedule, setSchedule } from './schedule.repository';
 
 export const formatDay = (date: Date) => format(date, 'yyyy-MM-dd');
 
@@ -84,19 +84,32 @@ export class ScheduleService {
   }
 
   outOfStateScheduleToDisplayedEvents(schedule: Schedule): Observable<Event[]> {
-    return combineLatest([activePlanningIds$, hiddenEvents$]).pipe(
-      map(([activPlanningIds, hiddenEvents]) => schedule.plannings.filter(planning => activPlanningIds.includes(planning.code))
-        .reduce((events, planning) => events.concat(planning.events), [])
+    let eventIds = [];
+    return combineLatest([activePlanningIds$, hiddenCourseList$]).pipe(
+      map(([activPlanningIds, hiddenCourseList]) => schedule.plannings.filter(planning => activPlanningIds.includes(planning.code))
+        .reduce((events, planning) => {
+          planning.events.forEach(event => {
+            // @TODO supprimer la ligne suivante quand l'API de l'UL sera prête.
+            event.id = event._adeEventId.toString()
+            if (!eventIds.includes(event.id)) {
+              eventIds.push(event.id)
+              events.push(event)
+            }
+          })
+          return events
+        }, [])
         .sort((a: Event, b: Event) => new Date(a.startDateTime).getTime() - new Date(b.startDateTime).getTime())
         .filter((event: Event) => {
-          event.id = event._adeEventId.toString();
+          // @TODO supprimer la ligne suivante quand l'API de l'UL sera prête.
+          event.course.id = event.course.code;
 
-          return !hiddenEvents.some(hiddenEvent => hiddenEvent.id === event.id);}
+          return !hiddenCourseList.some(hiddenCourse => hiddenCourse.id === event.course.id);
+        }
         )),
     );
   }
 
-  emitHideEventEvt() {
+  emitHideCourseEvt() {
     this.hideEventEvt.next();
   }
 }

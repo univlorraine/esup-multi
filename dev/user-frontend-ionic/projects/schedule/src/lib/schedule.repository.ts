@@ -3,7 +3,7 @@ import {
   persistState
 } from '@ngneat/elf-persist-state';
 import { localForageStore } from '@ul/shared';
-import { combineLatest } from 'rxjs';
+import { combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 const STORE_NAME = 'schedule';
@@ -11,7 +11,7 @@ const STORE_NAME = 'schedule';
 export interface ScheduleProps {
   schedule: Schedule;
   activePlanningIds: string[];
-  hiddenEvents: HiddenEvent[];
+  hiddenCourseList: HiddenCourse[];
 };
 
 export interface Schedule {
@@ -48,14 +48,7 @@ export interface Event {
   _adeEventId: number;
   startDateTime: string;
   endDateTime: string;
-  course: {
-    id: string;
-    label: string;
-    color: string;
-    type: string;
-    online: boolean;
-    url?: string;
-  };
+  course: Course,
   rooms: [
     {
       id: string;
@@ -80,7 +73,18 @@ export interface Event {
   ];
 };
 
-export interface HiddenEvent {
+export interface Course {
+  // @TODO code: a retirer une fois l'api en place
+  code: string;
+  id: string;
+  label: string;
+  color: string;
+  type: string;
+  online: boolean;
+  url?: string;
+};
+
+export interface HiddenCourse {
   id: string;
   title: string;
 }
@@ -98,7 +102,7 @@ export const scheduleStore = createStore(
   withProps<ScheduleProps>({
     schedule: null,
     activePlanningIds: [],
-    hiddenEvents: []
+    hiddenCourseList: []
   })
 );
 
@@ -142,27 +146,40 @@ export const setActivePlanningIds = (activePlanningIds: ScheduleProps['activePla
   }));
 };
 
-export const eventsFromActivePlannings$ = scheduleStore.pipe(select((state) =>
-  state.schedule?.plannings?.filter(planning => state.activePlanningIds.includes(mapPlanningId(planning)))
-    .reduce((events, planning) => events.concat(planning.events), [])
+export const eventsFromActivePlannings$ : Observable<Event[]> = scheduleStore.pipe(select((state) => {
+  let eventIds = [];
+  return state.schedule?.plannings?.filter(planning => state.activePlanningIds.includes(mapPlanningId(planning)))
+    .reduce((events, planning) => {
+      planning.events.forEach(event => {
+        // @TODO supprimer la ligne suivante quand l'API de l'UL sera prête.
+        event.id = event._adeEventId.toString()
+        if (!eventIds.includes(event.id)) {
+          eventIds.push(event.id)
+          events.push(event)
+        }
+      })
+      return events
+    }, [])
     .sort((a: Event, b: Event) => new Date(a.startDateTime).getTime() - new Date(b.startDateTime).getTime()) || []
-));
+}));
 
-export const hiddenEvents$ = scheduleStore.pipe(select((state) => state.hiddenEvents));
+export const hiddenCourseList$ : Observable<HiddenCourse[]> = scheduleStore.pipe(select((state) => state.hiddenCourseList));
 
-export const displayedEvents$ = combineLatest([eventsFromActivePlannings$, hiddenEvents$]).pipe(
-  map(([storedEvents, hiddenEvents]) => {
+export const displayedEvents$ : Observable<Event[]> = combineLatest([eventsFromActivePlannings$, hiddenCourseList$]).pipe(
+  map(([storedEvents, hiddenCourseList]) => {
+    console.log(hiddenCourseList);
+    console.log(storedEvents);
     return storedEvents.filter(event => {
       // @TODO supprimer la ligne suivante quand l'API de l'UL sera prête.
-      event.id = event._adeEventId.toString();
+      event.course.id = event.course.code;
 
-      return  !hiddenEvents.some(hiddenEvent => hiddenEvent.id === event.id);
+      return !hiddenCourseList.some(hiddenCourse => hiddenCourse.id === event.course.id);
     });;
   }));
 
-export const setHiddenEvents = (hiddenEvents: ScheduleProps['hiddenEvents']) => {
+export const setHiddenCourseList = (hiddenCourseList: ScheduleProps['hiddenCourseList']) => {
   scheduleStore.update((state) => ({
     ...state,
-    hiddenEvents,
+    hiddenCourseList: hiddenCourseList,
   }));
 };

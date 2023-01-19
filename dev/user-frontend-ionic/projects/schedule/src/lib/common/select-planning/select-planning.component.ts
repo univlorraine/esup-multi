@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { Observable, zip } from 'rxjs';
-import { activePlanningIds$, HiddenEvent, hiddenEvents$, schedule$, setActivePlanningIds } from '../../schedule.repository';
+import { activePlanningIds$, HiddenCourse, hiddenCourseList$, schedule$, setActivePlanningIds } from '../../schedule.repository';
 
 interface AvailablePlanningFormInput extends AvailablePlanning {
   checked: boolean;
@@ -30,7 +30,7 @@ export class SelectPlanningComponent {
   public isLoading = false;
   public availablePlanningList: AvailablePlanning[] = [];
   public lastSelectedPlanningIndex: number | null = null;
-  public hiddenEvents$: Observable<HiddenEvent[]> = hiddenEvents$;
+  public hiddenCourseList$: Observable<HiddenCourse[]> = hiddenCourseList$;
 
   constructor(
     private formBuilder: FormBuilder
