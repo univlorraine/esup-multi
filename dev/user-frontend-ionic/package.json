@@ -1,7 +1,7 @@
 {
-  "name": "user-frontend-ionic",
-  "version": "0.0.1",
-  "author": "Ionic Framework",
+  "name": "Multi",
+  "version": "2.0.0",
+  "author": "UL",
   "homepage": "https://ionicframework.com/",
   "engines": {
     "node": ">=16"
@@ -11,6 +11,7 @@
     "start": "ng serve",
     "prebuild": "npm run module:build-all",
     "build": "BUILD_ENV=${BUILD_ENV:-local} ng build --configuration=$BUILD_ENV",
+    "capacitor:sync:before": "./trapeze-launcher.sh",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
@@ -50,6 +51,7 @@
     "@ngneat/elf-persist-state": "^1.1.6",
     "@ngneat/react-rxjs": "^1.1.0",
     "@ngx-translate/core": "^14.0.0",
+    "@trapezedev/configure": "^7.0.5",
     "angularx-qrcode": "^14.0.0",
     "capacitor-secure-storage-plugin": "^0.8.0",
     "date-fns": "^2.29.3",
