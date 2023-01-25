@@ -1,5 +1,10 @@
-import { AbstractTile, Authorization, DirectusTileTranslation, TileType } from '../tiles.dto';
- 
+import {
+  AbstractTile,
+  Authorization,
+  DirectusTileTranslation,
+  TileType,
+} from '../tiles.dto';
+
 export interface Info extends AbstractTile {
   link?: string;
   ssoService?: string;
@@ -9,6 +14,7 @@ export interface Info extends AbstractTile {
 export interface DirectusInfo {
   id: number;
   translations: DirectusTileTranslation[];
+  widget: string;
   link?: string;
   ssoService?: string;
   authorization?: Authorization;

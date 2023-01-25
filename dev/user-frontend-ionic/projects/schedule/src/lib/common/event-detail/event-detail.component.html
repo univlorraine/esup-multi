@@ -5,6 +5,7 @@
       {{event.endDateTime | localHour}}
     </ion-card-title>
     <ion-button fill="clear" size="small" class="ion-text-center" class="hide-event-icon" (click)="hideAllSimilarCourse(event.course)"
+      *ngIf="showHideButton"
       [disabled]="disableHideCourseButton">
       <ion-icon name="eye-off-outline"></ion-icon>
     </ion-button>

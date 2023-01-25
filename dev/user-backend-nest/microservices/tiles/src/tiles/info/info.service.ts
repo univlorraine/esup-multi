@@ -43,6 +43,7 @@ export class InfoService {
             (info: DirectusInfo): Info => ({
               id: `${TileType.Info}:${info.id}`,
               type: TileType.Info,
+              widget: info.widget,
               translations: info.translations,
               link: info.link,
               ssoService: info.ssoService,

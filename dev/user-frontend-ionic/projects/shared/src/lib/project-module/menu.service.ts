@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Type } from '@angular/core';
 
 export interface MenuItem {
     title: string;

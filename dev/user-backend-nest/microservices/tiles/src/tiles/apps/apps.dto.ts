@@ -14,6 +14,7 @@ export interface App extends AbstractTile {
 export interface DirectusApp {
   id: number;
   translations: DirectusTileTranslation[];
+  widget: string;
   path: string;
   icon?: string;
   authorization?: Authorization;

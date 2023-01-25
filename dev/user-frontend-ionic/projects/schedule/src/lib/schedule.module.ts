@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { APP_INITIALIZER, ModuleWithProviders, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FullCalendarModule } from '@fullcalendar/angular'; // must go before plugins
 import { IonicModule } from '@ionic/angular';
@@ -15,12 +15,18 @@ import { CalendarEventComponent } from './schedule-calendar/calendar-event/calen
 import { ScheduleCalendarComponent } from './schedule-calendar/schedule-calendar.component';
 import { ScheduleListPage } from './schedule-list/schedule-list.page';
 import { SchedulePageRoutingModule } from './schedule-routing.module';
+import { ScheduleModuleConfig, SCHEDULE_CONFIG } from './schedule.config';
 import { SchedulePage } from './schedule.page';
+import { NextEventsComponent } from './widgets/next-events/next-events.component';
 
 const initModule = (projectModuleService: ProjectModuleService) =>
   () => projectModuleService.initProjectModule({
     name: 'schedule',
     translation: true,
+    widgets: [{
+      id: 'next-events',
+      component: NextEventsComponent,
+    }]
   });
 
 @NgModule({
@@ -34,7 +40,8 @@ const initModule = (projectModuleService: ProjectModuleService) =>
     EventDetailComponent,
     SelectPlanningComponent,
     CalendarEventComponent,
-    HiddenCourseComponent
+    HiddenCourseComponent,
+    NextEventsComponent,
   ],
   imports: [
     CommonModule,
@@ -56,4 +63,13 @@ const initModule = (projectModuleService: ProjectModuleService) =>
 })
 export class ScheduleModule {
   static path = 'schedule';
+
+  static forRoot(config: ScheduleModuleConfig): ModuleWithProviders<ScheduleModule> {
+    return {
+      ngModule: ScheduleModule,
+      providers: [
+        { provide: SCHEDULE_CONFIG, useValue: config }
+      ]
+    };
+  }
 }

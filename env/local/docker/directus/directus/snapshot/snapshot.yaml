@@ -163,7 +163,7 @@ fields:
         template: '{{type}}{{roles}}'
       readonly: false
       required: false
-      sort: null
+      sort: 8
       special:
         - m2o
       translations: null
@@ -205,7 +205,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: null
+      sort: 5
       special: null
       translations: null
       validation: null
@@ -246,7 +246,7 @@ fields:
       options: null
       readonly: true
       required: false
-      sort: null
+      sort: 1
       special: null
       translations: null
       validation: null
@@ -287,7 +287,7 @@ fields:
       options: null
       readonly: false
       required: true
-      sort: null
+      sort: 4
       special: null
       translations: null
       validation: null
@@ -328,7 +328,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: null
+      sort: 3
       special: null
       translations: null
       validation: null
@@ -390,7 +390,7 @@ fields:
             value: archived
       readonly: false
       required: false
-      sort: null
+      sort: 2
       special: null
       translations: null
       validation: null
@@ -434,7 +434,7 @@ fields:
         languageField: code
       readonly: false
       required: false
-      sort: null
+      sort: 7
       special:
         - translations
       translations: null
@@ -443,6 +443,47 @@ fields:
       width: full
     schema: null
     type: alias
+  - collection: apps
+    field: widget
+    meta:
+      collection: apps
+      conditions: null
+      display: null
+      display_options: null
+      field: widget
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 6
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      comment: null
+      data_type: character varying
+      default_value: null
+      foreign_key_column: null
+      foreign_key_schema: null
+      foreign_key_table: null
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      max_length: 255
+      name: widget
+      numeric_precision: null
+      numeric_scale: null
+      schema: public
+      table: apps
+    type: string
   - collection: apps_translations
     field: apps_id
     meta:
@@ -794,7 +835,7 @@ fields:
         enableSelect: false
       readonly: false
       required: false
-      sort: null
+      sort: 10
       special:
         - m2o
       translations: null
@@ -1152,7 +1193,7 @@ fields:
         userLanguage: true
       readonly: false
       required: false
-      sort: 8
+      sort: 9
       special:
         - translations
       translations: null
@@ -1161,6 +1202,47 @@ fields:
       width: full
     schema: null
     type: alias
+  - collection: info
+    field: widget
+    meta:
+      collection: info
+      conditions: null
+      display: null
+      display_options: null
+      field: widget
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 8
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      comment: null
+      data_type: character varying
+      default_value: null
+      foreign_key_column: null
+      foreign_key_schema: null
+      foreign_key_table: null
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      max_length: 255
+      name: widget
+      numeric_precision: null
+      numeric_scale: null
+      schema: public
+      table: info
+    type: string
   - collection: info_translations
     field: content
     meta:
@@ -1192,7 +1274,7 @@ fields:
       generation_expression: null
       has_auto_increment: false
       is_generated: false
-      is_nullable: true
+      is_nullable: false
       is_primary_key: false
       is_unique: false
       max_length: null

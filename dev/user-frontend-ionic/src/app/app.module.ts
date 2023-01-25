@@ -32,7 +32,12 @@ import { ErrorModule } from './error/error.module';
     MapModule,
     RssPageModule,
     CardsPageModule,
-    ScheduleModule,
+    ScheduleModule.forRoot({
+      nextEventsWidget: {
+        numberOfEventsLimit: 2,
+        numberOfDaysLimit: 7
+      }
+    }),
     TilesModule,
     TranslateModule.forRoot({
         loader: {
