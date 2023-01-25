@@ -24,5 +24,10 @@
     },
     "LIST": {
         "SEE_MORE": "See more"
+    },
+    "WIDGET": {
+        "NEXT_EVENTS": {
+            "NO_EVENTS": "No courses soon"
+        }
     }
 }

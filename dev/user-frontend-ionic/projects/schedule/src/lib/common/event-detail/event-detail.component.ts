@@ -13,6 +13,7 @@ export class EventDetailComponent {
 
   @Input() event: Event;
   @Input() displayShortenedDate = false;
+  @Input() showHideButton = true;
   public disableHideCourseButton = false;
 
   constructor(private scheduleService: ScheduleService) { }

@@ -44,6 +44,7 @@ export class AppsService {
               id: `${TileType.App}:${info.id}`,
               type: TileType.App,
               translations: info.translations,
+              widget: info.widget,
               icon: info.icon,
               path: info.path,
               authorization: info.authorization,

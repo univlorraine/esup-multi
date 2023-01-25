@@ -62,7 +62,7 @@ export class TilesPage {
         ...tile,
         title: translation.title,
         content: translation.content
-      }
+      };
     });
   }
 }

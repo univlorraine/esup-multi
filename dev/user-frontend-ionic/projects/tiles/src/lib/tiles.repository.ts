@@ -26,6 +26,7 @@ interface Translation {
 interface AbstractTile {
   id: string;
   type: TileType;
+  widget: string;
   translations: Translation[];
   authorization?: Authorization;
 }
@@ -45,6 +46,7 @@ export interface Info extends AbstractTile {
 interface AbstractTranslatedTile {
   id: string;
   type: TileType;
+  widget: string;
   title: string;
   content: string;
   authorization?: Authorization;
