@@ -80,7 +80,7 @@ export class ScheduleListPage {
   }
 
   async loadMoreEvents() {
-    const endDateToLoad = add(this.viewEndDate, { days: 27 });
+    const endDateToLoad = add(this.viewEndDate, { days: 7 });
     const scrollPosition = (await this.content.getScrollElement()).scrollTop;
 
     let outOfStateSchedule: Schedule;

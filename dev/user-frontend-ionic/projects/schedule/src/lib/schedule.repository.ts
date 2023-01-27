@@ -170,8 +170,6 @@ export const hiddenCourseList$: Observable<HiddenCourse[]> = scheduleStore.pipe(
 
 export const displayedEvents$: Observable<Event[]> = combineLatest([eventsFromActivePlannings$, hiddenCourseList$]).pipe(
   map(([storedEvents, hiddenCourseList]) => {
-    console.log(hiddenCourseList);
-    console.log(storedEvents);
     return storedEvents.filter(event => {
       // @TODO supprimer la ligne suivante quand l'API de l'UL sera prête.
       event.course.id = event.course.code;

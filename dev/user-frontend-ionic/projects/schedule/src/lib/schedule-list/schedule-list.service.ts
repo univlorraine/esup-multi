@@ -22,10 +22,6 @@ export class ScheduleListService {
 
   eventsToEventsByDay(events: Event[], dateInterval: Interval): EventsByDay[] {
 
-    if (events.length === 0) {
-      return [];
-    }
-
     const days = eachDayOfInterval(dateInterval);
 
     const eventsMapByDay = events
