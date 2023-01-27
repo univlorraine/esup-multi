@@ -82,10 +82,10 @@ export class MapPage {
 
       this.positionLayerGroup = Leaflet.layerGroup([circle, marker]).addTo(this.map);
       this.map.setView(latLng);
-      this.map.setZoom(11)
+      this.map.setZoom(11);
     },
       error => {
-        const latLngOfTheUniversity: Leaflet.LatLngTuple = [48.69137200828818, 6.183309429175067]
+        const latLngOfTheUniversity: Leaflet.LatLngTuple = [48.69137200828818, 6.183309429175067];
         if (this.positionLayerGroup) {
           this.positionLayerGroup.remove();
         }

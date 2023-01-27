@@ -1,12 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { GetCurrentOrientationResult, ScreenOrientation, ScreenOrientationChange } from '@capawesome/capacitor-screen-orientation';
 import { FullCalendarComponent } from '@fullcalendar/angular';
 import { Calendar, CalendarOptions } from '@fullcalendar/core';
 import allLocales from '@fullcalendar/core/locales-all';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
-import { IonModal } from '@ionic/angular';
+import { IonModal, Platform } from '@ionic/angular';
 import { currentLanguage$ } from '@ul/shared';
 import { isAfter, isBefore, sub } from 'date-fns';
 import { EventInput } from 'fullcalendar';
@@ -17,6 +16,7 @@ import { formatDay, ScheduleService } from '../schedule.service';
 import { Event } from './../schedule.repository';
 import { ScheduleCalendarService } from './schedule-calendar.service';
 
+const defaultBreakpoint = 0.60;
 
 @Component({
   selector: 'app-schedule-calendar',
@@ -59,8 +59,8 @@ export class ScheduleCalendarComponent {
       if (!this.calendarDisplaySomeDateOutOfState) {
         displayedEvents$.pipe(
           first(),
-          map((events : Event[]) => this.scheduleCalendarService.eventsToCalendarEvents(events))
-        ).subscribe((events : EventInput[]) => successCallback(events));
+          map((events: Event[]) => this.scheduleCalendarService.eventsToCalendarEvents(events))
+        ).subscribe((events: EventInput[]) => successCallback(events));
         return;
       }
 
@@ -71,7 +71,7 @@ export class ScheduleCalendarComponent {
           map((events: Event[]) => this.scheduleCalendarService.eventsToCalendarEvents(events))
         )
         .subscribe(
-          (events : EventInput[]) => successCallback(events),
+          (events: EventInput[]) => successCallback(events),
           () => {
 
             if (this.calendarDisplaySomeDateOutOfState) {
@@ -89,17 +89,17 @@ export class ScheduleCalendarComponent {
             displayedEvents$.pipe(
               first(),
               map((events: Event[]) => this.scheduleCalendarService.eventsToCalendarEvents(events))
-            ).subscribe((events : EventInput[]) => successCallback(events));
+            ).subscribe((events: EventInput[]) => successCallback(events));
           }
         );
     }
   };
-
   private subscriptions: Subscription[] = [];
 
   constructor(private route: ActivatedRoute,
     private scheduleCalendarService: ScheduleCalendarService,
-    private scheduleService: ScheduleService) {
+    private scheduleService: ScheduleService,
+    public platform: Platform) {
     this.viewType$ = this.route.fragment
       .pipe(
         filter(f => f !== null)
@@ -121,18 +121,13 @@ export class ScheduleCalendarComponent {
       this.dismissModal();
     }));
 
-    await ScreenOrientation.getCurrentOrientation().then((screenOrientation: GetCurrentOrientationResult) => {
-      this.updateBreakpoints(screenOrientation);
-    });
-
-    ScreenOrientation.addListener('screenOrientationChange', (screenOrientation: ScreenOrientationChange) => {
-      this.updateBreakpoints(screenOrientation);
-    });
+      this.subscriptions.push(this.platform.resize.subscribe(async () => {
+        this.updateBreakpoints();
+      }));
   }
 
   ionViewDidLeave() {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
-    ScreenOrientation.removeAllListeners();
   }
 
   addEventToCalendar(event: Event) {
@@ -185,9 +180,13 @@ export class ScheduleCalendarComponent {
     return this.calendarComponent?.getApi();
   }
 
-  private updateBreakpoints(screenOrientation: GetCurrentOrientationResult | ScreenOrientationChange) {
-    const breakpoint = screenOrientation.type.startsWith('landscape') ? 1 : 0.60;
-    this.modal.initialBreakpoint = breakpoint;
-    this.modal.setCurrentBreakpoint(breakpoint);
+  private updateBreakpoints() {
+      const isLandscape = this.platform.isLandscape();
+      const isDesktop = this.platform.is('desktop');
+
+      const breakpoint = (isDesktop || !isLandscape) ? defaultBreakpoint : 1;
+
+      this.modal.initialBreakpoint = breakpoint;
+      this.modal.setCurrentBreakpoint(breakpoint);
   }
 }

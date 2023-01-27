@@ -45,10 +45,11 @@ export interface Planning {
 export interface Event {
   id: string;
   // @TODO _adeEventId: a retirer une fois l'api en place
+  // eslint-disable-next-line no-underscore-dangle
   _adeEventId: number;
   startDateTime: string;
   endDateTime: string;
-  course: Course,
+  course: Course;
   rooms: [
     {
       id: string;
@@ -146,26 +147,28 @@ export const setActivePlanningIds = (activePlanningIds: ScheduleProps['activePla
   }));
 };
 
-export const eventsFromActivePlannings$ : Observable<Event[]> = scheduleStore.pipe(select((state) => {
-  let eventIds = [];
+export const eventsFromActivePlannings$: Observable<Event[]> = scheduleStore.pipe(select((state) => {
+  const eventIds = [];
   return state.schedule?.plannings?.filter(planning => state.activePlanningIds.includes(mapPlanningId(planning)))
     .reduce((events, planning) => {
       planning.events.forEach(event => {
+        /* eslint-disable no-underscore-dangle*/
         // @TODO supprimer la ligne suivante quand l'API de l'UL sera prête.
-        event.id = event._adeEventId.toString()
+        event.id = event._adeEventId.toString();
+        /* eslint-enable no-underscore-dangle */
         if (!eventIds.includes(event.id)) {
-          eventIds.push(event.id)
-          events.push(event)
+          eventIds.push(event.id);
+          events.push(event);
         }
-      })
-      return events
+      });
+      return events;
     }, [])
-    .sort((a: Event, b: Event) => new Date(a.startDateTime).getTime() - new Date(b.startDateTime).getTime()) || []
+    .sort((a: Event, b: Event) => new Date(a.startDateTime).getTime() - new Date(b.startDateTime).getTime()) || [];
 }));
 
-export const hiddenCourseList$ : Observable<HiddenCourse[]> = scheduleStore.pipe(select((state) => state.hiddenCourseList));
+export const hiddenCourseList$: Observable<HiddenCourse[]> = scheduleStore.pipe(select((state) => state.hiddenCourseList));
 
-export const displayedEvents$ : Observable<Event[]> = combineLatest([eventsFromActivePlannings$, hiddenCourseList$]).pipe(
+export const displayedEvents$: Observable<Event[]> = combineLatest([eventsFromActivePlannings$, hiddenCourseList$]).pipe(
   map(([storedEvents, hiddenCourseList]) => {
     console.log(hiddenCourseList);
     console.log(storedEvents);
@@ -180,6 +183,6 @@ export const displayedEvents$ : Observable<Event[]> = combineLatest([eventsFromA
 export const setHiddenCourseList = (hiddenCourseList: ScheduleProps['hiddenCourseList']) => {
   scheduleStore.update((state) => ({
     ...state,
-    hiddenCourseList: hiddenCourseList,
+    hiddenCourseList,
   }));
 };
