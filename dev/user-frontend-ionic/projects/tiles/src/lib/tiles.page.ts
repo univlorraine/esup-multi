@@ -1,9 +1,9 @@
 import { Component, Inject } from '@angular/core';
 import { Network } from '@capacitor/network';
 import { currentLanguage$, getAuthToken } from '@ul/shared';
+import { combineLatest, Observable } from 'rxjs';
 import { finalize, first, map, switchMap } from 'rxjs/operators';
-import { Observable, combineLatest} from 'rxjs';
-import { Tile, tiles$, setTiles, TranslatedTile } from './tiles.repository';
+import { setTiles, Tile, tiles$, TranslatedTile } from './tiles.repository';
 import { TilesService } from './tiles.service';
 
 @Component({
@@ -53,10 +53,11 @@ export class TilesPage {
       // Si le contenu traduit n'est pas trouvé dans la langue souhaitée, on prend le contenu dans la langue par défaut
       // Si, ni la langue courante, ni la langue par défaut n'ont été trouvées, on prend la première traduction disponible
       const translation =
+        /* eslint-disable @typescript-eslint/naming-convention */
         tile.translations.find((t) => t.languages_code === currentLanguage) ||
         tile.translations.find((t) => t.languages_code === this.environment.defaultLanguage) ||
-        tile.translations[0]
-      ;
+        tile.translations[0];
+      /* eslint-enable @typescript-eslint/naming-convention */
 
       return {
         ...tile,

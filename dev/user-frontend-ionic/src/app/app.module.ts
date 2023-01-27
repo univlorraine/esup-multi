@@ -22,7 +22,14 @@ import { ErrorModule } from './error/error.module';
   declarations: [AppComponent],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(),
+    IonicModule.forRoot({
+      platform: {
+        desktop: (win) => {
+          const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(win.navigator.userAgent);
+          return !isMobile;
+        }
+      },
+    }),
     HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule,
@@ -40,11 +47,11 @@ import { ErrorModule } from './error/error.module';
     }),
     TilesModule,
     TranslateModule.forRoot({
-        loader: {
-            provide: TranslateLoader,
-            useFactory: translationsLoaderFactory,
-            deps: [HttpClient, ProjectModuleService]
-        }
+      loader: {
+        provide: TranslateLoader,
+        useFactory: translationsLoaderFactory,
+        deps: [HttpClient, ProjectModuleService]
+      }
     })
   ],
   providers: [
@@ -53,4 +60,4 @@ import { ErrorModule } from './error/error.module';
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

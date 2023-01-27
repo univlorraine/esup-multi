@@ -1,8 +1,8 @@
 import { createStore } from '@ngneat/elf';
-import { withEntities, selectAllEntities, setEntities } from '@ngneat/elf-entities';
+import { selectAllEntities, setEntities, withEntities } from '@ngneat/elf-entities';
 import {
-    persistState,
-  } from '@ngneat/elf-persist-state';
+  persistState
+} from '@ngneat/elf-persist-state';
 import { localForageStore } from '@ul/shared';
 
 const STORE_NAME = 'tiles';
@@ -18,6 +18,7 @@ export enum TileType {
 }
 
 interface Translation {
+  // eslint-disable-next-line @typescript-eslint/naming-convention
   languages_code: string;
   title: string;
   content: string;
@@ -68,19 +69,19 @@ export type Tile = Info | App;
 export type TranslatedTile = TranslatedInfo | TranslatedApp;
 
 const store = createStore(
-    { name: STORE_NAME },
-    withEntities<Tile>()
-  );
+  { name: STORE_NAME },
+  withEntities<Tile>()
+);
 
 export const persist = persistState(store, {
-    key: STORE_NAME,
-    storage: localForageStore,
+  key: STORE_NAME,
+  storage: localForageStore,
 });
 
 export const tiles$ = store.pipe(selectAllEntities());
 
 export const setTiles = (tiles: Tile[]) => {
-    store.update(setEntities(tiles));
+  store.update(setEntities(tiles));
 };
 
 export const clearTiles = () => store.reset();

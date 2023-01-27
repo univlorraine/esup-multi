@@ -84,19 +84,22 @@ export class ScheduleService {
   }
 
   outOfStateScheduleToDisplayedEvents(schedule: Schedule): Observable<Event[]> {
-    let eventIds = [];
+    const eventIds = [];
     return combineLatest([activePlanningIds$, hiddenCourseList$]).pipe(
       map(([activPlanningIds, hiddenCourseList]) => schedule.plannings.filter(planning => activPlanningIds.includes(planning.code))
         .reduce((events, planning) => {
           planning.events.forEach(event => {
+            /* eslint-disable no-underscore-dangle*/
             // @TODO supprimer la ligne suivante quand l'API de l'UL sera prête.
-            event.id = event._adeEventId.toString()
+            event.id = event._adeEventId.toString();
+            /* eslint-enable no-underscore-dangle */
+
             if (!eventIds.includes(event.id)) {
-              eventIds.push(event.id)
-              events.push(event)
+              eventIds.push(event.id);
+              events.push(event);
             }
-          })
-          return events
+          });
+          return events;
         }, [])
         .sort((a: Event, b: Event) => new Date(a.startDateTime).getTime() - new Date(b.startDateTime).getTime())
         .filter((event: Event) => {

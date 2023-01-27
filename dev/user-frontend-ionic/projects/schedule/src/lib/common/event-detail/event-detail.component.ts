@@ -21,8 +21,6 @@ export class EventDetailComponent {
   hideAllSimilarCourse(course: Course) {
     this.disableHideCourseButton = true;
 
-    //@TODO supprimer ligne suivante quand l'API de l'UL sera en place
-    // course.id = course._adeEventId.toString();
     course.id = course.code;
 
     hiddenCourseList$.pipe(first()).subscribe(hiddenCourseList => {
