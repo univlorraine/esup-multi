@@ -1,5 +1,5 @@
 version: 1
-directus: 9.19.2
+directus: 9.22.4
 collections:
   - collection: apps
     meta:
@@ -163,7 +163,7 @@ fields:
         template: '{{type}}{{roles}}'
       readonly: false
       required: false
-      sort: 8
+      sort: 9
       special:
         - m2o
       translations: null
@@ -205,7 +205,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: 5
+      sort: 6
       special: null
       translations: null
       validation: null
@@ -287,7 +287,7 @@ fields:
       options: null
       readonly: false
       required: true
-      sort: 4
+      sort: 5
       special: null
       translations: null
       validation: null
@@ -314,6 +314,47 @@ fields:
       table: apps
     type: string
   - collection: apps
+    field: position
+    meta:
+      collection: apps
+      conditions: null
+      display: null
+      display_options: null
+      field: position
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 3
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      comment: null
+      data_type: integer
+      default_value: null
+      foreign_key_column: null
+      foreign_key_schema: null
+      foreign_key_table: null
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      max_length: null
+      name: position
+      numeric_precision: 32
+      numeric_scale: 0
+      schema: public
+      table: apps
+    type: integer
+  - collection: apps
     field: sort
     meta:
       collection: apps
@@ -328,7 +369,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: 3
+      sort: 4
       special: null
       translations: null
       validation: null
@@ -434,7 +475,7 @@ fields:
         languageField: code
       readonly: false
       required: false
-      sort: 7
+      sort: 8
       special:
         - translations
       translations: null
@@ -458,7 +499,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: 6
+      sort: 7
       special: null
       translations: null
       validation: null
@@ -835,7 +876,7 @@ fields:
         enableSelect: false
       readonly: false
       required: false
-      sort: 10
+      sort: 11
       special:
         - m2o
       translations: null
@@ -1031,6 +1072,47 @@ fields:
       table: info
     type: string
   - collection: info
+    field: position
+    meta:
+      collection: info
+      conditions: null
+      display: null
+      display_options: null
+      field: position
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 6
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      comment: null
+      data_type: integer
+      default_value: null
+      foreign_key_column: null
+      foreign_key_schema: null
+      foreign_key_table: null
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      max_length: null
+      name: position
+      numeric_precision: 32
+      numeric_scale: 0
+      schema: public
+      table: info
+    type: integer
+  - collection: info
     field: sort
     meta:
       collection: info
@@ -1045,7 +1127,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: 6
+      sort: 7
       special: null
       translations: null
       validation: null
@@ -1148,7 +1230,7 @@ fields:
             value: archived
       readonly: false
       required: false
-      sort: 7
+      sort: 8
       special: null
       translations: null
       validation: null
@@ -1193,7 +1275,7 @@ fields:
         userLanguage: true
       readonly: false
       required: false
-      sort: 9
+      sort: 10
       special:
         - translations
       translations: null
@@ -1217,7 +1299,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: 8
+      sort: 9
       special: null
       translations: null
       validation: null

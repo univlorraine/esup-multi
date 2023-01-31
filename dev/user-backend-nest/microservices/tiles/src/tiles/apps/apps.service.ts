@@ -5,7 +5,7 @@ import { RpcException } from '@nestjs/microservices';
 import { catchError, map, Observable } from 'rxjs';
 import { DirectusApi } from '../../config/configuration.interface';
 import { DirectusResponse, TileType } from '../tiles.dto';
-import { DirectusApp, App } from './apps.dto';
+import { App, DirectusApp } from './apps.dto';
 
 @Injectable()
 export class AppsService {
@@ -40,14 +40,15 @@ export class AppsService {
         }),
         map((res) =>
           res.data.data.map(
-            (info: DirectusApp): App => ({
-              id: `${TileType.App}:${info.id}`,
+            (app: DirectusApp): App => ({
+              id: `${TileType.App}:${app.id}`,
               type: TileType.App,
-              translations: info.translations,
-              widget: info.widget,
-              icon: info.icon,
-              path: info.path,
-              authorization: info.authorization,
+              position: app.position,
+              translations: app.translations,
+              widget: app.widget,
+              icon: app.icon,
+              path: app.path,
+              authorization: app.authorization,
             }),
           ),
         ),
