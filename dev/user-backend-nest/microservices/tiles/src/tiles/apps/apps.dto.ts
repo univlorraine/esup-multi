@@ -2,7 +2,7 @@ import {
   AbstractTile,
   Authorization,
   DirectusTileTranslation,
-  TileType,
+  TileType
 } from '../tiles.dto';
 
 export interface App extends AbstractTile {
@@ -14,6 +14,7 @@ export interface App extends AbstractTile {
 export interface DirectusApp {
   id: number;
   translations: DirectusTileTranslation[];
+  position: number | null,
   widget: string;
   path: string;
   icon?: string;

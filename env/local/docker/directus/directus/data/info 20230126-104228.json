@@ -1,12 +1,14 @@
 [
 	{
-		"date_created": "2022-12-01T08:08:39.348Z",
-		"date_updated": "2022-12-01T08:10:22.958Z",
+		"date_created": "2023-01-26T09:25:48.953Z",
+		"date_updated": "2023-01-26T10:31:42.069Z",
 		"id": 2,
 		"link": "https://arche.univ-lorraine.fr/login/index.php?authCAS=CAS&ticket={st}",
 		"ssoService": "https://arche.univ-lorraine.fr/login/index.php?authCAS=CAS",
+		"position": 3,
 		"sort": null,
 		"status": "published",
+		"widget": null,
 		"translations": [
 			{
 				"content": "Les étapes de l'inscription à l'université varient en fonction de votre profil. Connaître ces étapes, c'est être certain de s'inscrire en toute sérénité.",
@@ -22,16 +24,19 @@
 				"info_id": 2,
 				"languages_code": "en"
 			}
-		]
+		],
+		"authorization": null
 	},
 	{
-		"date_created": "2022-12-01T08:09:14.322Z",
-		"date_updated": "2022-12-01T08:10:46.101Z",
+		"date_created": "2023-01-26T09:25:48.983Z",
+		"date_updated": "2023-01-26T10:31:49.545Z",
 		"id": 3,
 		"link": "https://factuel.univ-lorraine.fr/node/21254",
 		"ssoService": null,
+		"position": 5,
 		"sort": null,
 		"status": "published",
+		"widget": null,
 		"translations": [
 			{
 				"content": "The OTO twin project rewarded at the E-Sante City Healthcare springboards!",
@@ -47,16 +52,19 @@
 				"info_id": 3,
 				"languages_code": "fr"
 			}
-		]
+		],
+		"authorization": null
 	},
 	{
-		"date_created": "2022-12-01T08:09:34.226Z",
-		"date_updated": null,
+		"date_created": "2023-01-26T09:25:49.013Z",
+		"date_updated": "2023-01-26T10:15:45.212Z",
 		"id": 4,
 		"link": null,
 		"ssoService": null,
+		"position": 8,
 		"sort": null,
 		"status": "draft",
+		"widget": null,
 		"translations": [
 			{
 				"content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
@@ -65,6 +73,7 @@
 				"info_id": 4,
 				"languages_code": "fr"
 			}
-		]
+		],
+		"authorization": null
 	}
 ]

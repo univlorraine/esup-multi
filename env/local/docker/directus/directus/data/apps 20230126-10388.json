@@ -2,23 +2,25 @@
 	{
 		"id": 1,
 		"status": "published",
+		"position": 1,
 		"sort": null,
 		"path": "cards",
 		"icon": "card",
+		"widget": null,
 		"translations": [
 			{
-				"id": 1,
-				"title": "My student cards",
+				"apps_id": 1,
 				"content": "Find your student card valid throughout Europe and your UL student card",
+				"id": 1,
 				"languages_code": "en",
-				"apps_id": 1
+				"title": "My student cards"
 			},
 			{
-				"id": 2,
-				"title": "Mes cartes d'étudiant",
+				"apps_id": 1,
 				"content": "Retrouvez votre carte d'étudiant valable dans toute l'Europe ainsi que votre carte d'étudiant UL",
+				"id": 2,
 				"languages_code": "fr",
-				"apps_id": 1
+				"title": "Mes cartes d'étudiant"
 			}
 		],
 		"authorization": {
@@ -32,23 +34,25 @@
 	{
 		"id": 2,
 		"status": "published",
+		"position": 1,
 		"sort": null,
 		"path": "cards",
 		"icon": "card",
+		"widget": null,
 		"translations": [
 			{
-				"id": 3,
-				"title": "Carte UL",
+				"apps_id": 2,
 				"content": "Cette carte permet de justifier de votre statut à l'UL et de votre inscription au SUAPS",
+				"id": 3,
 				"languages_code": "fr",
-				"apps_id": 2
+				"title": "Carte UL"
 			},
 			{
-				"id": 4,
-				"title": "UL card",
+				"apps_id": 2,
 				"content": "This card allows you to prove your status at UL and your registration at SUAPS",
+				"id": 4,
 				"languages_code": "en",
-				"apps_id": 2
+				"title": "UL card"
 			}
 		],
 		"authorization": {
@@ -66,23 +70,25 @@
 	{
 		"id": 3,
 		"status": "published",
+		"position": 2,
 		"sort": null,
 		"path": "map",
 		"icon": "map",
+		"widget": null,
 		"translations": [
 			{
-				"id": 5,
-				"title": "Map",
+				"apps_id": 3,
 				"content": "Find all POI about your faculty and their coordinates on a map.",
+				"id": 5,
 				"languages_code": "en",
-				"apps_id": 3
+				"title": "Map"
 			},
 			{
-				"id": 6,
-				"title": "Plan",
+				"apps_id": 3,
 				"content": "Retrouvez tous les lieux d'intéret de votre faculté et leurs coordonnées sur une carte.",
+				"id": 6,
 				"languages_code": "fr",
-				"apps_id": 3
+				"title": "Plan"
 			}
 		],
 		"authorization": null
@@ -90,23 +96,25 @@
 	{
 		"id": 4,
 		"status": "published",
+		"position": 4,
 		"sort": null,
 		"path": "schedule",
 		"icon": "calendar",
+		"widget": null,
 		"translations": [
 			{
-				"id": 7,
-				"title": "Schedule",
+				"apps_id": 4,
 				"content": "Find all your events",
+				"id": 7,
 				"languages_code": "en",
-				"apps_id": 4
+				"title": "Schedule"
 			},
 			{
-				"id": 8,
-				"title": "Emploi du temps",
+				"apps_id": 4,
 				"content": "Retrouvez tous vos évènements",
+				"id": 8,
 				"languages_code": "fr",
-				"apps_id": 4
+				"title": "Emploi du temps"
 			}
 		],
 		"authorization": {

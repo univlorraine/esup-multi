@@ -23,6 +23,7 @@ export enum TileType {
 export interface AbstractTile {
   id: string;
   type: TileType;
+  position: number | null;
   widget: string;
   translations: DirectusTileTranslation[];
   authorization?: Authorization;
