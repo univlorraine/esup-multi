@@ -7,6 +7,14 @@
         "UNAUTHENTICATED": {
             "TITLE": "Accès protégé",
             "MESSAGE": "Vous devez être authentifié pour accéder à cette fonctionnalité"
+        },
+        "NO_NETWORK": {
+            "TITLE": "Pas de réseau",
+            "MESSAGE": "Vous ne pouvez pas accéder à cette fonctionnalité sans réseau"
+        },
+        "SERVICE_UNREACHABLE": {
+            "TITLE": "Service injoignable",
+            "MESSAGE": "Le service que vous essayez de contacter n'est pas joignable"
         }
     }
 }
