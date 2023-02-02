@@ -2,20 +2,20 @@ import { AfterViewInit, ChangeDetectorRef, Component, Input, ViewChild, ViewCont
 import { Browser } from '@capacitor/browser';
 import { getAuthToken, ProjectModuleService } from '@ul/shared';
 import { filter, first, switchMap } from 'rxjs/operators';
-import { TranslatedInfo } from '../../tiles.repository';
-import { TileInfoService } from './tile-info.service';
+import { TranslatedInfo } from '../../../../tiles.repository';
+import { TilesService } from '../../../../tiles.service';
 
 @Component({
-selector: 'app-tile-info',
-templateUrl: './tile-info.component.html',
-styleUrls: ['./tile-info.component.scss'],
+selector: 'app-widget-info',
+templateUrl: './widget-info.component.html',
+styleUrls: ['./widget-info.component.scss'],
 })
-export class TileInfoComponent implements AfterViewInit {
+export class WidgetInfoComponent implements AfterViewInit {
     @Input() info: TranslatedInfo;
     @ViewChild('widget', {read: ViewContainerRef}) widgetContainerRef: ViewContainerRef;
 
     constructor(
-        private tileInfoService: TileInfoService,
+        private tilesService: TilesService,
         private projectModuleService: ProjectModuleService,
         private cdr: ChangeDetectorRef,
     ) {}
@@ -41,7 +41,7 @@ export class TileInfoComponent implements AfterViewInit {
         getAuthToken().pipe(
             first(),
             filter(authToken => authToken != null),
-            switchMap(authToken => this.tileInfoService.requestSsoServiceToken(this.info.ssoService, authToken))
+            switchMap(authToken => this.tilesService.requestSsoServiceToken(this.info.ssoService, authToken))
         ).subscribe(serviceToken => {
             if (!serviceToken) {
                 console.warn('No service token associated to url.');

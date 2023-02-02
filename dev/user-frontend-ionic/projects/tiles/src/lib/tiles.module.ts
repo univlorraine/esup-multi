@@ -4,24 +4,33 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { TilesRoutingModule } from './tiles-routing.module';
 import { ProjectModuleService } from '@ul/shared';
-import { TilesPage } from './tiles.page';
+import { ServicesPage } from './pages/services/services.page';
+import { WidgetsPage } from './pages/widgets/widgets.page';
 import { TranslateModule } from '@ngx-translate/core';
-import { TileComponent } from './tile/tile.component';
-import { TileAppComponent } from './tile/tile-app/tile-app.component';
-import { TileInfoComponent } from './tile/tile-info/tile-info.component';
+import { WidgetComponent } from './pages/widgets/widget/widget.component';
+import { WidgetAppComponent } from './pages/widgets/widget/widget-app/widget-app.component';
+import { WidgetInfoComponent } from './pages/widgets/widget/widget-info/widget-info.component';
 import { EffectsNgModule } from '@ngneat/effects-ng';
 import { TilesEffects } from './tiles.effects';
+import { ServiceComponent } from './pages/services/service/service.component';
+import { ServiceAppComponent } from './pages/services/service/service-app/service-app.component';
+import { ServiceInfoComponent } from './pages/services/service/service-info/service-info.component';
 
 const initModule = (projectModuleService: ProjectModuleService) =>
   () => projectModuleService.initProjectModule({
     name: 'tiles',
     translation: true,
-    menuItem: {
-      title: 'TILES.MENU',
-      icon: 'apps-sharp',
+    menuItems: [{
+      title: 'TILES.MENU.WIDGETS',
+      icon: 'home',
       position: -1000,
-      path: TilesModule.path
-    }
+      path: `${TilesModule.path}/widgets`
+    },{
+      title: 'TILES.MENU.SERVICES',
+      icon: 'apps-sharp',
+      position: -900,
+      path: `${TilesModule.path}/services`
+    }]
   });
 
 @NgModule({
@@ -33,7 +42,16 @@ const initModule = (projectModuleService: ProjectModuleService) =>
     TranslateModule,
     EffectsNgModule.forFeature([TilesEffects]),
   ],
-  declarations: [TileComponent, TileAppComponent, TileInfoComponent, TilesPage],
+  declarations: [
+    WidgetComponent,
+    WidgetAppComponent,
+    WidgetInfoComponent,
+    WidgetsPage,
+    ServiceComponent,
+    ServiceAppComponent,
+    ServiceInfoComponent,
+    ServicesPage,
+  ],
   providers: [{
     provide: APP_INITIALIZER,
     useFactory: initModule,

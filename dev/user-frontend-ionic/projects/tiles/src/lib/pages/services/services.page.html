@@ -1,8 +1,10 @@
 <ion-progress-bar *ngIf="isLoading" type="indeterminate" color="primary"></ion-progress-bar>
 
 <ion-content *ngIf="(tilesIsEmpty$ | async) === false">
-  <app-tile *ngFor="let translatedTile of (translatedTiles$ | async)" [tile]="translatedTile">
-  </app-tile>
+  <div class="services">
+    <app-service *ngFor="let translatedTile of (translatedTiles$ | async)" [tile]="translatedTile">
+    </app-service>
+  </div>
 </ion-content>
 
 <ion-content class="ion-padding" *ngIf="(tilesIsEmpty$ | async)">

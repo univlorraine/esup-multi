@@ -15,12 +15,12 @@ const initModule = (projectModuleService: ProjectModuleService) =>
   () => projectModuleService.initProjectModule({
     name: 'auth',
     translation: true,
-    menuItem: {
+    menuItems: [{
       title: 'AUTH.MENU',
       icon: 'log-in',
       position: 999,
       path: AuthModule.path
-    },
+    }],
     preferencesComponent: PreferencesComponent
   });
 @NgModule({

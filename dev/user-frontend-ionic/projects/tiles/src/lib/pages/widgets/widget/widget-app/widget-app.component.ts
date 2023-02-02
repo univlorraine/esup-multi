@@ -1,14 +1,14 @@
 import { AfterViewInit, ChangeDetectorRef, Component, Input, ViewChild, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProjectModuleService } from '@ul/shared';
-import { TranslatedApp } from '../../tiles.repository';
+import { TranslatedApp } from '../../../../tiles.repository';
 
 @Component({
-selector: 'app-tile-app',
-templateUrl: './tile-app.component.html',
-styleUrls: ['./tile-app.component.scss'],
+selector: 'app-widget-app',
+templateUrl: './widget-app.component.html',
+styleUrls: ['./widget-app.component.scss'],
 })
-export class TileAppComponent implements AfterViewInit {
+export class WidgetAppComponent implements AfterViewInit {
     @Input() app: TranslatedApp;
     @ViewChild('widget', {read: ViewContainerRef}) widgetContainerRef: ViewContainerRef;
 
