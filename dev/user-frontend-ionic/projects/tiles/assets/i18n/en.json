@@ -1,4 +1,7 @@
 {
-    "MENU": "News & apps",
+    "MENU": {
+        "WIDGETS": "Home",
+        "SERVICES": "Services"
+    },
     "NO_DATA": "No data available"
 }

@@ -8,7 +8,7 @@ export interface InitProjectModuleOptions {
     name: string;
     preferencesComponent?: Type<any>;
     translation?: boolean;
-    menuItem?: MenuItem;
+    menuItems?: MenuItem[];
     widgets?: Widget[];
 }
 
@@ -33,15 +33,15 @@ export class ProjectModuleService {
             this.translationsService.addTranslation(options.name);
         }
 
-        if (options.menuItem) {
-            this.menuService.addMenuItem(options.menuItem);
+        if (options.menuItems) {
+            this.menuService.addMenuItems(options.menuItems);
         }
 
         if (options.widgets) {
             // prefix widgets ids with module name
             const widgets = options.widgets.map(widget => ({
                 id: `${options.name}:${widget.id}`,
-                ...widget
+                component: widget.component
             }));
             this.widgetsService.addWidgets(widgets);
         }
@@ -60,6 +60,6 @@ export class ProjectModuleService {
     }
 
     getWidgetComponent(widgetId: string): Type<any> {
-        return this.widgetsService.getWidget(widgetId).component;
+        return this.widgetsService.getWidget(widgetId)?.component;
     }
 }

@@ -11,12 +11,12 @@ const initModule = (projectModuleService: ProjectModuleService) =>
   () => projectModuleService.initProjectModule({
     name: 'rss',
     translation: true,
-    menuItem: {
+    menuItems: [{
       title: 'RSS.MENU',
       icon: 'logo-rss',
       position: 50,
       path: RssPageModule.path
-    }
+    }]
   });
 @NgModule({
   imports: [

@@ -14,13 +14,16 @@ export class MenuService {
 
     private menuItems: MenuItem[] = [];
 
-    public addMenuItem(menuItem: MenuItem) {
-        this.menuItems.push(menuItem);
-        this.menuItems.sort((itemA, itemB) => itemA.position - itemB.position);
+    public addMenuItems(menuItems: MenuItem[]) {
+        menuItems.forEach(menuItem => this.addMenuItem(menuItem));
     }
 
     public getMenuItems() {
         return this.menuItems;
     }
 
+    private addMenuItem(menuItem: MenuItem) {
+        this.menuItems.push(menuItem);
+        this.menuItems.sort((itemA, itemB) => itemA.position - itemB.position);
+    }
 }

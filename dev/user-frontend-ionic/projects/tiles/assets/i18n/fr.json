@@ -1,4 +1,7 @@
 {
-    "MENU": "Actualités & applications",
+    "MENU": {
+        "WIDGETS": "Accueil",
+        "SERVICES": "Services"
+    },
     "NO_DATA": "Aucune donnée disponible"
 }

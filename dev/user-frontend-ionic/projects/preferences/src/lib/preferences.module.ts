@@ -13,12 +13,12 @@ const initModule = (projectModuleService: ProjectModuleService) =>
   () => projectModuleService.initProjectModule({
     name: 'preferences',
     translation: true,
-    menuItem: {
+    menuItems: [{
       title: 'PREFERENCES.MENU',
       icon: 'settings',
       position: 900,
       path: PreferencesPageModule.path
-    }
+    }]
   });
 
 @NgModule({

@@ -1,0 +1,9 @@
+<ion-progress-bar *ngIf="isLoading" type="indeterminate" color="primary"></ion-progress-bar>
+
+<ion-content *ngIf="(tilesIsEmpty$ | async) === false">
+  <app-widget *ngFor="let translatedTile of (translatedTiles$ | async)" [tile]="translatedTile"></app-widget>  
+</ion-content>
+
+<ion-content class="ion-padding" *ngIf="(tilesIsEmpty$ | async)">
+  <ion-note> {{ "TILES.NO_DATA" | translate }} </ion-note>
+</ion-content>
