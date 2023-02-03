@@ -4,6 +4,7 @@ import { AlertController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { cleanupPrivateData } from '@ul/shared';
 import { Actions } from '@ngneat/effects-ng';
+import { Network } from '@capacitor/network';
 
 @Injectable({
   providedIn: 'root',
@@ -18,21 +19,26 @@ export class AppErrorHandler implements ErrorHandler {
     private injector: Injector,
   ) {}
 
-  handleError(error: Error | HttpErrorResponse) {
-
+  async handleError(error: Error | HttpErrorResponse) {
     this.loadTranslateService();
     if (error instanceof HttpErrorResponse) {
-        this.handleHttpError(error as HttpErrorResponse);
+        await this.handleHttpError(error as HttpErrorResponse);
     }
 
     console.error(error);
   }
 
   private async handleHttpError(error: HttpErrorResponse) {
+    if (!(await Network.getStatus()).connected) {
+      return this.displayError('NO_NETWORK');
+    }
+
     switch(error.status) {
+      case 0:
+        return this.displayError('SERVICE_UNREACHABLE');
       case 401:
         this.actions.dispatch(cleanupPrivateData());
-        return this.displayUnauthenticatedError(error);
+        return this.displayError('UNAUTHENTICATED');
       default:
         return this.displayGenericError(error);
     }
@@ -50,9 +56,9 @@ export class AppErrorHandler implements ErrorHandler {
     this.translateService = this.injector.get(TranslateService);
   }
 
-  private async displayUnauthenticatedError(error: HttpErrorResponse) {
-    const header = this.translateService.instant('ERROR.UNAUTHENTICATED.TITLE');
-    const message = this.translateService.instant('ERROR.UNAUTHENTICATED.MESSAGE');
+  private async displayError(errorType: string) {
+    const header = this.translateService.instant(`ERROR.${errorType}.TITLE`);
+    const message = this.translateService.instant(`ERROR.${errorType}.MESSAGE`);
 
     const alert = await this.alertController.create({
       header,

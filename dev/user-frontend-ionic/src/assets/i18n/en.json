@@ -7,6 +7,14 @@
         "UNAUTHENTICATED": {
             "TITLE": "Restricted access",
             "MESSAGE": "Please login before accessing this feature"
+        },
+        "NO_NETWORK": {
+            "TITLE": "No network",
+            "MESSAGE": "You cannot access this feature without network"
+        },
+        "SERVICE_UNREACHABLE": {
+            "TITLE": "Service unreachable",
+            "MESSAGE": "The service you're trying to contact is not reachable"
         }
     }
 }
