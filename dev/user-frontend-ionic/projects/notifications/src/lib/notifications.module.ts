@@ -14,12 +14,12 @@ const initModule = (projectModuleService: ProjectModuleService) =>
   () => projectModuleService.initProjectModule({
     name: 'notifications',
     translation: true,
-    menuItem: {
+    menuItems: [{
       title: 'NOTIFICATIONS.MENU',
       icon: 'notifications-outline',
       position: 60,
       path: NotificationsModule.path
-    }
+    }]
   });
 
 @NgModule({
