@@ -1,11 +1,10 @@
 #!/bin/bash
-if [ "$CI_PLATFORM" = "ios" ];
+if [ -v "$CI_PLATFORM" ];
 then
-  echo "Lancement de trapeze"
-  npx trapeze run trapeze-ios-ci.yml -y
-elif [ "$CI_PLATFORM" = "android" ];
-then
-  echo "Lancement de trapeze"
-  npx trapeze run trapeze-android-ci.yml -y
+  echo "Lancement de trapeze pour la CI"
+  npx trapeze run trapeze-config.prod.yml --$CI_PLATFORM -y
+else
+  echo "Lancement de trapeze pour le développement local"
+  npx trapeze run trapeze-config.dev.yml -y
 fi
 

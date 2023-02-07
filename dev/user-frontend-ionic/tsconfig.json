@@ -30,6 +30,9 @@
       ],
       "@ul/tiles": [
         "dist/tiles"
+      ],
+      "@ul/notifications": [
+        "dist/notifications"
       ]
     },
     "downlevelIteration": true,

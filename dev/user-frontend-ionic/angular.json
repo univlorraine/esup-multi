@@ -73,6 +73,11 @@
                 "glob": "**/*",
                 "input": "projects/schedule/assets/i18n",
                 "output": "/assets/i18n/schedule"
+              },
+              {
+                "glob": "**/*",
+                "input": "projects/notifications/assets/i18n",
+                "output": "/assets/i18n/notifications"
               }
             ],
             "styles": ["src/theme/variables.scss", "src/global.scss"],
@@ -533,6 +538,46 @@
           }
         }
 
+      }
+    },
+    "notifications": {
+      "projectType": "library",
+      "root": "projects/notifications",
+      "sourceRoot": "projects/notifications/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/notifications/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/notifications/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/notifications/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/notifications/src/test.ts",
+            "tsConfig": "projects/notifications/tsconfig.spec.json",
+            "karmaConfig": "projects/notifications/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/notifications/**/*.ts",
+              "projects/notifications/**/*.html"
+            ]
+          }
+        }
       }
     }
   },

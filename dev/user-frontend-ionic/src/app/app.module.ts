@@ -8,6 +8,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { AuthModule } from '@ul/auth';
 import { CardsPageModule } from '@ul/cards';
 import { MapModule } from '@ul/map';
+import { NotificationsModule } from '@ul/notifications';
 import { PreferencesPageModule } from '@ul/preferences';
 import { RssPageModule } from '@ul/rss';
 import { ScheduleModule } from '@ul/schedule';
@@ -38,6 +39,7 @@ import { ErrorModule } from './error/error.module';
     AuthModule,
     MapModule,
     RssPageModule,
+
     CardsPageModule,
     ScheduleModule.forRoot({
       nextEventsWidget: {
@@ -46,6 +48,7 @@ import { ErrorModule } from './error/error.module';
       }
     }),
     TilesModule,
+    NotificationsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
