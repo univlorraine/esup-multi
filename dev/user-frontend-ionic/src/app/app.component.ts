@@ -1,6 +1,6 @@
-import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
+import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 import { currentLanguage$, ProjectModuleService, updateLanguage } from '@ul/shared';
-import { LangChangeEvent, TranslateService} from '@ngx-translate/core';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -20,6 +20,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private projectModuleService: ProjectModuleService,
     private translateService: TranslateService
   ) {
+
     // Listen for translation events
     this.subscriptions.push(this.translateService.onLangChange
       .subscribe((event: LangChangeEvent) => {
