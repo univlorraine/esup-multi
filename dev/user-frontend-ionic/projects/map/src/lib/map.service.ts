@@ -12,7 +12,7 @@ export class MapService {
   constructor(
     @Inject('environment')
     private environment: any,
-    private http: HttpClient
+    private http: HttpClient,
   ) { }
 
   getMarkers(): Observable<Marker[]> {
