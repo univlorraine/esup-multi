@@ -7,6 +7,8 @@ interface NextEventsWidgetConfig {
 
 export interface ScheduleModuleConfig {
     nextEventsWidget: NextEventsWidgetConfig;
+    previousWeeksInCache: number;
+    nextWeeksInCache: number;
 };
 
 export const SCHEDULE_CONFIG =

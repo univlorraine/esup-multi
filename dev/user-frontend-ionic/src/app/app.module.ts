@@ -37,7 +37,12 @@ import { ErrorModule } from './error/error.module';
     ErrorModule,
     PreferencesPageModule,
     AuthModule,
-    MapModule,
+    MapModule.forRoot({
+      defaultMapLocation: {
+        longitude: 48.69137200828818,
+        latitude: 6.183309429175067
+      }
+    }),
     RssPageModule,
 
     CardsPageModule,
@@ -45,7 +50,9 @@ import { ErrorModule } from './error/error.module';
       nextEventsWidget: {
         numberOfEventsLimit: 2,
         numberOfDaysLimit: 7
-      }
+      },
+      previousWeeksInCache: 1,
+      nextWeeksInCache: 2
     }),
     TilesModule,
     NotificationsModule,

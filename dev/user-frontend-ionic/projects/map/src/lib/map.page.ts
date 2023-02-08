@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { Geolocation } from '@capacitor/geolocation';
 import { Network } from '@capacitor/network';
 import { TranslateService } from '@ngx-translate/core';
 import * as Leaflet from 'leaflet';
 import { finalize, first } from 'rxjs/operators';
+import { MapModuleConfig, MAP_CONFIG } from './map.config';
 import { Marker, markersList$, setMarkers } from './map.repository';
 import { MapService } from './map.service';
 
@@ -23,6 +24,7 @@ export class MapPage {
   constructor(
     private mapService: MapService,
     private translateService: TranslateService,
+    @Inject(MAP_CONFIG) private config: MapModuleConfig
   ) { }
 
   async ionViewDidEnter() {
@@ -85,7 +87,8 @@ export class MapPage {
       this.map.setZoom(11);
     },
       error => {
-        const latLngOfTheUniversity: Leaflet.LatLngTuple = [48.69137200828818, 6.183309429175067];
+        const latLngOfTheUniversity: Leaflet.LatLngTuple = [this.config.defaultMapLocation.latitude,
+          this.config.defaultMapLocation.longitude];
         if (this.positionLayerGroup) {
           this.positionLayerGroup.remove();
         }
@@ -127,7 +130,6 @@ export class MapPage {
 
     markersInCategory.push(marker);
   }
-
 
   private getIconFileByCategory(category: string) {
     switch (category) {
@@ -171,5 +173,3 @@ export class MapPage {
     });
   }
 }
-
-

@@ -2,9 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Network } from '@capacitor/network';
 import { getAuthToken } from '@ul/shared';
-import { add, format, startOfMonth, sub } from 'date-fns';
+import { add, format, startOfMonth, startOfToday, startOfWeek, sub } from 'date-fns';
 import { combineLatest, from, Observable, Subject } from 'rxjs';
 import { filter, finalize, first, map, mergeMap, switchMap, tap } from 'rxjs/operators';
+import { ScheduleModuleConfig, SCHEDULE_CONFIG } from './schedule.config';
 import { activePlanningIds$, Event, hiddenCourseList$, Schedule, setSchedule } from './schedule.repository';
 
 export const formatDay = (date: Date) => format(date, 'yyyy-MM-dd');
@@ -23,6 +24,7 @@ export class ScheduleService {
     @Inject('environment')
     private environment: any,
     private http: HttpClient,
+    @Inject(SCHEDULE_CONFIG) private config: ScheduleModuleConfig
   ) {
     this.isLoading$ = this.isLoadingSubject.asObservable();
   }
@@ -70,17 +72,17 @@ export class ScheduleService {
   }
 
   getStateStartDate(): Date {
-    return sub(this.getStartOfCurrentMonth(), { months: 1 });
+    return sub(this.getStartOfCurrentWeek(), { weeks: this.config.previousWeeksInCache });
   }
 
   getStateEndDate(): Date {
-    const stateEndDate = add(this.getStartOfCurrentMonth(), { months: 3 });
+    const stateEndDate = add(this.getStartOfCurrentWeek(), { weeks: this.config.nextWeeksInCache });
     return sub(stateEndDate, { days: 1 });;
   }
 
-  getStartOfCurrentMonth(): Date {
+  getStartOfCurrentWeek(): Date {
     const now = new Date();
-    return startOfMonth(now);
+    return startOfWeek(now);
   }
 
   outOfStateScheduleToDisplayedEvents(schedule: Schedule): Observable<Event[]> {
