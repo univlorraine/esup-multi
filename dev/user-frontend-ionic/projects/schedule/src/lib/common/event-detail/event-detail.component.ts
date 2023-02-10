@@ -21,8 +21,6 @@ export class EventDetailComponent {
   hideAllSimilarCourse(course: Course) {
     this.disableHideCourseButton = true;
 
-    course.id = course.code;
-
     hiddenCourseList$.pipe(first()).subscribe(hiddenCourseList => {
       const hiddenCourseObj: HiddenCourse = {
         id: course.id,

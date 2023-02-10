@@ -9,9 +9,7 @@
     </ion-row>
     <ion-row class="eventRows ion-text-center" *ngFor="let teacher of event.teachers">
       <ion-icon name="man-outline" size="small"></ion-icon>
-      <!-- @TODO supprimer ligne suivante une fois la nouvelle API en place et décommenter celle d'après -->
-      <ion-text>{{teacher.name}}</ion-text>
-      <!-- <ion-text>{{teacher.firstname}} {{teacher.lastname}}</ion-text> -->
+      <ion-text>{{teacher.displayname}}</ion-text>
     </ion-row>
   </ion-col>
 </ion-row>
