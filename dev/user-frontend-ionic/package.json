@@ -11,7 +11,7 @@
     "start": "ng serve",
     "prebuild": "npm run module:build-all",
     "build": "BUILD_ENV=${BUILD_ENV:-local} ng build --configuration=$BUILD_ENV",
-    "capacitor:sync:before": "TRAPEZE_FILE=${TRAPEZE_FILE:-trapeze-config.dev.yml} npx trapeze run $TRAPEZE_FILE -y",
+    "appflow:build": "./appflow.sh",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
