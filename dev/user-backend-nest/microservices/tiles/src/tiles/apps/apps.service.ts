@@ -25,7 +25,8 @@ export class AppsService {
       .get<DirectusResponse<DirectusApp[]>>(url, {
         params: {
           'filter[status][_eq]': 'published',
-          fields: '*,translations.*,authorization.*',
+          fields:
+            '*,translations.*,authorization.*,settings_by_role.settings_by_role_id.*',
         },
         headers: {
           Accept: 'application/json',
@@ -49,6 +50,9 @@ export class AppsService {
               icon: app.icon,
               path: app.path,
               authorization: app.authorization,
+              settingsByRole: app.settings_by_role.map(
+                (sbr) => sbr.settings_by_role_id,
+              ),
             }),
           ),
         ),

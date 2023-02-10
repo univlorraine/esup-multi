@@ -1,8 +1,9 @@
 import {
   AbstractTile,
   Authorization,
+  DirectusSettingsByRole,
   DirectusTileTranslation,
-  TileType
+  TileType,
 } from '../tiles.dto';
 
 export interface Info extends AbstractTile {
@@ -19,4 +20,5 @@ export interface DirectusInfo {
   link?: string;
   ssoService?: string;
   authorization?: Authorization;
+  settings_by_role: DirectusSettingsByRole[];
 }

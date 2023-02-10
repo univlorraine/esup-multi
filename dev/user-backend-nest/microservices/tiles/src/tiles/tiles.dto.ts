@@ -11,6 +11,10 @@ export interface DirectusTileTranslation {
   content: string;
 }
 
+export interface DirectusSettingsByRole {
+  settings_by_role_id: SettingsByRole;
+}
+
 export interface DirectusResponse<T> {
   data: T;
 }
@@ -20,6 +24,11 @@ export enum TileType {
   Info = 'info',
 }
 
+export interface SettingsByRole {
+  role: string;
+  position: number;
+}
+
 export interface AbstractTile {
   id: string;
   type: TileType;
@@ -27,6 +36,7 @@ export interface AbstractTile {
   widget: string;
   translations: DirectusTileTranslation[];
   authorization?: Authorization;
+  settingsByRole: SettingsByRole[];
 }
 
 export type Tile = Info | App;

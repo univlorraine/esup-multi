@@ -9,7 +9,7 @@ export class TilesController {
   constructor(private tilesService: TilesService) {}
 
   @MessagePattern({ cmd: 'tiles' })
-  getInfo(): Observable<Tile[]> {
-    return this.tilesService.getTiles();
+  getTiles(userRoles: string[]): Observable<Tile[]> {
+    return this.tilesService.getTiles(userRoles);
   }
 }
