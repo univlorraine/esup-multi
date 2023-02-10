@@ -9,7 +9,7 @@ export class ScheduleController {
   constructor(private readonly scheduleService: ScheduleService) {}
 
   @MessagePattern({ cmd: 'schedule' })
-  getSchedule(data: UserScheduleQueryDto ): Observable<Schedule> {
+  getSchedule(data: UserScheduleQueryDto): Observable<Schedule> {
     return this.scheduleService.getSchedule(data);
   }
 }

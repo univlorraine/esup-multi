@@ -66,9 +66,9 @@ export class SelectPlanningComponent {
     zip(schedule$, activePlanningIds$)
       .subscribe(([schedule, activePlanningIds]) => {
         const availablePlanningFormInputs = schedule.plannings.map(p => ({
-          id: p.id || (p as any).code, // @TODO enlever .code une fois l'API en place
+          id: p.id,
           label: p.label,
-          checked: activePlanningIds.includes(p.id || (p as any).code) // @TODO enlever .code une fois l'API en place
+          checked: activePlanningIds.includes(p.id)
         }));
         this.buildForm(availablePlanningFormInputs);
         this.isLoading = false;

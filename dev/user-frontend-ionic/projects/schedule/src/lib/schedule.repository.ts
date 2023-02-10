@@ -27,8 +27,6 @@ export interface Message {
 
 export interface Planning {
   id: string;
-  // @TODO code: a retirer une fois l'api en place
-  code: string;
   label: string;
   default: boolean;
   type: string;
@@ -44,9 +42,6 @@ export interface Planning {
 
 export interface Event {
   id: string;
-  // @TODO _adeEventId: a retirer une fois l'api en place
-  // eslint-disable-next-line no-underscore-dangle
-  _adeEventId: number;
   startDateTime: string;
   endDateTime: string;
   course: Course;
@@ -60,10 +55,8 @@ export interface Event {
   teachers: [
     {
       id: string;
-      firstname: string;
-      lastname: string;
+      displayname: string;
       email: string;
-      name: string; // @TODO supprimer cette ligne une fois la nouvelle API en place
     }
   ];
   groups: [
@@ -75,8 +68,6 @@ export interface Event {
 };
 
 export interface Course {
-  // @TODO code: a retirer une fois l'api en place
-  code: string;
   id: string;
   label: string;
   color: string;
@@ -92,7 +83,7 @@ export interface HiddenCourse {
 
 const filterDefaultPlanning = (planning: Planning): boolean => planning.default === true;
 const mapPlanningId = (planning: Planning): string =>
-  planning.id || (planning as any).code; // @TODO supprimer .code une fois la nouvelle API en place
+  planning.id;
 
 export interface SelectedPlanningProps {
   selectedPlanning: string[];
@@ -152,9 +143,6 @@ export const eventsFromActivePlannings$: Observable<Event[]> = scheduleStore.pip
   return state.schedule?.plannings?.filter(planning => state.activePlanningIds.includes(mapPlanningId(planning)))
     .reduce((events, planning) => {
       planning.events.forEach(event => {
-        /* eslint-disable no-underscore-dangle*/
-        // @TODO supprimer la ligne suivante quand l'API de l'UL sera prête.
-        event.id = event._adeEventId.toString();
         /* eslint-enable no-underscore-dangle */
         if (!eventIds.includes(event.id)) {
           eventIds.push(event.id);
@@ -170,12 +158,7 @@ export const hiddenCourseList$: Observable<HiddenCourse[]> = scheduleStore.pipe(
 
 export const displayedEvents$: Observable<Event[]> = combineLatest([eventsFromActivePlannings$, hiddenCourseList$]).pipe(
   map(([storedEvents, hiddenCourseList]) => {
-    return storedEvents.filter(event => {
-      // @TODO supprimer la ligne suivante quand l'API de l'UL sera prête.
-      event.course.id = event.course.code;
-
-      return !hiddenCourseList.some(hiddenCourse => hiddenCourse.id === event.course.id);
-    });;
+    return storedEvents.filter(event => !hiddenCourseList.some(hiddenCourse => hiddenCourse.id === event.course.id));;
   }));
 
 export const setHiddenCourseList = (hiddenCourseList: ScheduleProps['hiddenCourseList']) => {
