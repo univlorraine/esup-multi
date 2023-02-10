@@ -11,7 +11,7 @@ import {
 } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { AuthGuard } from '@nestjs/passport';
-import { concatMap, map, zip } from 'rxjs';
+import { concatMap, map } from 'rxjs';
 import { ErrorsInterceptor } from './interceptors/errors.interceptor';
 import { AuthorizationHelper } from './security/authorization.helper';
 
@@ -29,25 +29,30 @@ export class AppController {
 
   @Post('/tiles')
   info(@Body() body) {
-    const user$ = this.authClient.send(
-      {
-        cmd: 'getUser',
-      },
-      body,
-    );
-    const info$ = this.infoClient.send(
-      {
-        cmd: 'tiles',
-      },
-      {},
-    );
-
-    return zip(user$, info$).pipe(
-      map(([user, info]) => {
-        const roles = user ? user.roles : ['anonymous'];
-        return new AuthorizationHelper(roles).filter(info);
-      }),
-    );
+    return this.authClient
+      .send(
+        {
+          cmd: 'getUser',
+        },
+        body,
+      )
+      .pipe(
+        concatMap((user) => {
+          const roles = user ? user.roles : ['anonymous'];
+          return this.infoClient
+            .send(
+              {
+                cmd: 'tiles',
+              },
+              roles,
+            )
+            .pipe(
+              map((tiles) => {
+                return new AuthorizationHelper(roles).filter(tiles);
+              }),
+            );
+        }),
+      );
   }
 
   @Post('/auth')

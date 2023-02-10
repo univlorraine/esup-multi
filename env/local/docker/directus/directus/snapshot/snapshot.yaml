@@ -1,5 +1,5 @@
 version: 1
-directus: 9.22.4
+directus: 9.19.2
 collections:
   - collection: apps
     meta:
@@ -24,6 +24,30 @@ collections:
     schema:
       comment: null
       name: apps
+      schema: public
+  - collection: apps_settings_by_role
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: apps_settings_by_role
+      color: null
+      display_template: null
+      group: null
+      hidden: true
+      icon: import_export
+      item_duplication_fields: null
+      note: null
+      singleton: false
+      sort: null
+      sort_field: null
+      translations: null
+      unarchive_value: null
+    schema:
+      comment: null
+      name: apps_settings_by_role
       schema: public
   - collection: apps_translations
     meta:
@@ -97,6 +121,30 @@ collections:
       comment: null
       name: info
       schema: public
+  - collection: info_settings_by_role
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: info_settings_by_role
+      color: null
+      display_template: null
+      group: null
+      hidden: true
+      icon: import_export
+      item_duplication_fields: null
+      note: null
+      singleton: false
+      sort: null
+      sort_field: null
+      translations: null
+      unarchive_value: null
+    schema:
+      comment: null
+      name: info_settings_by_role
+      schema: public
   - collection: info_translations
     meta:
       accountability: all
@@ -144,6 +192,32 @@ collections:
     schema:
       comment: null
       name: languages
+      schema: public
+  - collection: settings_by_role
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: settings_by_role
+      color: null
+      display_template: "{{role}}:\_{{position}}"
+      group: null
+      hidden: true
+      icon: null
+      item_duplication_fields:
+        - position
+        - role
+      note: null
+      singleton: false
+      sort: null
+      sort_field: null
+      translations: null
+      unarchive_value: null
+    schema:
+      comment: null
+      name: settings_by_role
       schema: public
 fields:
   - collection: apps
@@ -355,6 +429,30 @@ fields:
       table: apps
     type: integer
   - collection: apps
+    field: settings_by_role
+    meta:
+      collection: apps
+      conditions: null
+      display: null
+      display_options: null
+      field: settings_by_role
+      group: null
+      hidden: false
+      interface: list-m2m
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: null
+      special:
+        - m2m
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema: null
+    type: alias
+  - collection: apps
     field: sort
     meta:
       collection: apps
@@ -525,6 +623,170 @@ fields:
       schema: public
       table: apps
     type: string
+  - collection: apps_settings_by_role
+    field: apps_id
+    meta:
+      collection: apps_settings_by_role
+      conditions: null
+      display: null
+      display_options: null
+      field: apps_id
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      comment: null
+      data_type: integer
+      default_value: null
+      foreign_key_column: id
+      foreign_key_schema: public
+      foreign_key_table: apps
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      max_length: null
+      name: apps_id
+      numeric_precision: 32
+      numeric_scale: 0
+      schema: public
+      table: apps_settings_by_role
+    type: integer
+  - collection: apps_settings_by_role
+    field: id
+    meta:
+      collection: apps_settings_by_role
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      comment: null
+      data_type: integer
+      default_value: nextval('apps_settings_by_role_id_seq'::regclass)
+      foreign_key_column: null
+      foreign_key_schema: null
+      foreign_key_table: null
+      generation_expression: null
+      has_auto_increment: true
+      is_generated: false
+      is_nullable: false
+      is_primary_key: true
+      is_unique: true
+      max_length: null
+      name: id
+      numeric_precision: 32
+      numeric_scale: 0
+      schema: public
+      table: apps_settings_by_role
+    type: integer
+  - collection: apps_settings_by_role
+    field: settings_by_role_id
+    meta:
+      collection: apps_settings_by_role
+      conditions: null
+      display: null
+      display_options: null
+      field: settings_by_role_id
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      comment: null
+      data_type: integer
+      default_value: null
+      foreign_key_column: id
+      foreign_key_schema: public
+      foreign_key_table: settings_by_role
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      max_length: null
+      name: settings_by_role_id
+      numeric_precision: 32
+      numeric_scale: 0
+      schema: public
+      table: apps_settings_by_role
+    type: integer
+  - collection: apps_settings_by_role
+    field: sort
+    meta:
+      collection: apps_settings_by_role
+      conditions: null
+      display: null
+      display_options: null
+      field: sort
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      comment: null
+      data_type: integer
+      default_value: null
+      foreign_key_column: null
+      foreign_key_schema: null
+      foreign_key_table: null
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      max_length: null
+      name: sort
+      numeric_precision: 32
+      numeric_scale: 0
+      schema: public
+      table: apps_settings_by_role
+    type: integer
   - collection: apps_translations
     field: apps_id
     meta:
@@ -1113,6 +1375,30 @@ fields:
       table: info
     type: integer
   - collection: info
+    field: settings_by_role
+    meta:
+      collection: info
+      conditions: null
+      display: null
+      display_options: null
+      field: settings_by_role
+      group: null
+      hidden: false
+      interface: list-m2m
+      note: null
+      options: {}
+      readonly: false
+      required: false
+      sort: null
+      special:
+        - m2m
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema: null
+    type: alias
+  - collection: info
     field: sort
     meta:
       collection: info
@@ -1325,6 +1611,170 @@ fields:
       schema: public
       table: info
     type: string
+  - collection: info_settings_by_role
+    field: id
+    meta:
+      collection: info_settings_by_role
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      comment: null
+      data_type: integer
+      default_value: nextval('info_settings_by_role_id_seq'::regclass)
+      foreign_key_column: null
+      foreign_key_schema: null
+      foreign_key_table: null
+      generation_expression: null
+      has_auto_increment: true
+      is_generated: false
+      is_nullable: false
+      is_primary_key: true
+      is_unique: true
+      max_length: null
+      name: id
+      numeric_precision: 32
+      numeric_scale: 0
+      schema: public
+      table: info_settings_by_role
+    type: integer
+  - collection: info_settings_by_role
+    field: info_id
+    meta:
+      collection: info_settings_by_role
+      conditions: null
+      display: null
+      display_options: null
+      field: info_id
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      comment: null
+      data_type: integer
+      default_value: null
+      foreign_key_column: id
+      foreign_key_schema: public
+      foreign_key_table: info
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      max_length: null
+      name: info_id
+      numeric_precision: 32
+      numeric_scale: 0
+      schema: public
+      table: info_settings_by_role
+    type: integer
+  - collection: info_settings_by_role
+    field: settings_by_role_id
+    meta:
+      collection: info_settings_by_role
+      conditions: null
+      display: null
+      display_options: null
+      field: settings_by_role_id
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      comment: null
+      data_type: integer
+      default_value: null
+      foreign_key_column: id
+      foreign_key_schema: public
+      foreign_key_table: settings_by_role
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      max_length: null
+      name: settings_by_role_id
+      numeric_precision: 32
+      numeric_scale: 0
+      schema: public
+      table: info_settings_by_role
+    type: integer
+  - collection: info_settings_by_role
+    field: sort
+    meta:
+      collection: info_settings_by_role
+      conditions: null
+      display: null
+      display_options: null
+      field: sort
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      comment: null
+      data_type: integer
+      default_value: null
+      foreign_key_column: null
+      foreign_key_schema: null
+      foreign_key_table: null
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      max_length: null
+      name: sort
+      numeric_precision: 32
+      numeric_scale: 0
+      schema: public
+      table: info_settings_by_role
+    type: integer
   - collection: info_translations
     field: content
     meta:
@@ -1664,6 +2114,129 @@ fields:
       schema: public
       table: languages
     type: string
+  - collection: settings_by_role
+    field: id
+    meta:
+      collection: settings_by_role
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: true
+      required: false
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      comment: null
+      data_type: integer
+      default_value: nextval('settings_by_role_id_seq'::regclass)
+      foreign_key_column: null
+      foreign_key_schema: null
+      foreign_key_table: null
+      generation_expression: null
+      has_auto_increment: true
+      is_generated: false
+      is_nullable: false
+      is_primary_key: true
+      is_unique: true
+      max_length: null
+      name: id
+      numeric_precision: 32
+      numeric_scale: 0
+      schema: public
+      table: settings_by_role
+    type: integer
+  - collection: settings_by_role
+    field: position
+    meta:
+      collection: settings_by_role
+      conditions: null
+      display: null
+      display_options: null
+      field: position
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      comment: null
+      data_type: integer
+      default_value: null
+      foreign_key_column: null
+      foreign_key_schema: null
+      foreign_key_table: null
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: false
+      is_primary_key: false
+      is_unique: false
+      max_length: null
+      name: position
+      numeric_precision: 32
+      numeric_scale: 0
+      schema: public
+      table: settings_by_role
+    type: integer
+  - collection: settings_by_role
+    field: role
+    meta:
+      collection: settings_by_role
+      conditions: null
+      display: null
+      display_options: null
+      field: role
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      comment: null
+      data_type: character varying
+      default_value: null
+      foreign_key_column: null
+      foreign_key_schema: null
+      foreign_key_table: null
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: false
+      is_primary_key: false
+      is_unique: false
+      max_length: 255
+      name: role
+      numeric_precision: null
+      numeric_scale: null
+      schema: public
+      table: settings_by_role
+    type: string
 relations:
   - collection: apps
     field: authorization
@@ -1687,6 +2260,50 @@ relations:
       on_delete: SET NULL
       on_update: NO ACTION
       table: apps
+  - collection: apps_settings_by_role
+    field: apps_id
+    meta:
+      junction_field: settings_by_role_id
+      many_collection: apps_settings_by_role
+      many_field: apps_id
+      one_allowed_collections: null
+      one_collection: apps
+      one_collection_field: null
+      one_deselect_action: delete
+      one_field: settings_by_role
+      sort_field: sort
+    related_collection: apps
+    schema:
+      column: apps_id
+      constraint_name: apps_settings_by_role_apps_id_foreign
+      foreign_key_column: id
+      foreign_key_schema: public
+      foreign_key_table: apps
+      on_delete: CASCADE
+      on_update: NO ACTION
+      table: apps_settings_by_role
+  - collection: apps_settings_by_role
+    field: settings_by_role_id
+    meta:
+      junction_field: apps_id
+      many_collection: apps_settings_by_role
+      many_field: settings_by_role_id
+      one_allowed_collections: null
+      one_collection: settings_by_role
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    related_collection: settings_by_role
+    schema:
+      column: settings_by_role_id
+      constraint_name: apps_settings_by_role_settings_by_role_id_foreign
+      foreign_key_column: id
+      foreign_key_schema: public
+      foreign_key_table: settings_by_role
+      on_delete: CASCADE
+      on_update: NO ACTION
+      table: apps_settings_by_role
   - collection: apps_translations
     field: apps_id
     meta:
@@ -1753,6 +2370,50 @@ relations:
       on_delete: SET NULL
       on_update: NO ACTION
       table: info
+  - collection: info_settings_by_role
+    field: info_id
+    meta:
+      junction_field: settings_by_role_id
+      many_collection: info_settings_by_role
+      many_field: info_id
+      one_allowed_collections: null
+      one_collection: info
+      one_collection_field: null
+      one_deselect_action: delete
+      one_field: settings_by_role
+      sort_field: sort
+    related_collection: info
+    schema:
+      column: info_id
+      constraint_name: info_settings_by_role_info_id_foreign
+      foreign_key_column: id
+      foreign_key_schema: public
+      foreign_key_table: info
+      on_delete: CASCADE
+      on_update: NO ACTION
+      table: info_settings_by_role
+  - collection: info_settings_by_role
+    field: settings_by_role_id
+    meta:
+      junction_field: info_id
+      many_collection: info_settings_by_role
+      many_field: settings_by_role_id
+      one_allowed_collections: null
+      one_collection: settings_by_role
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    related_collection: settings_by_role
+    schema:
+      column: settings_by_role_id
+      constraint_name: info_settings_by_role_settings_by_role_id_foreign
+      foreign_key_column: id
+      foreign_key_schema: public
+      foreign_key_table: settings_by_role
+      on_delete: CASCADE
+      on_update: NO ACTION
+      table: info_settings_by_role
   - collection: info_translations
     field: info_id
     meta:

@@ -25,7 +25,8 @@ export class InfoService {
       .get<DirectusResponse<DirectusInfo[]>>(url, {
         params: {
           'filter[status][_eq]': 'published',
-          fields: '*,translations.*,authorization.*',
+          fields:
+            '*,translations.*,authorization.*,settings_by_role.settings_by_role_id.*',
         },
         headers: {
           Accept: 'application/json',
@@ -49,6 +50,9 @@ export class InfoService {
               link: info.link,
               ssoService: info.ssoService,
               authorization: info.authorization,
+              settingsByRole: info.settings_by_role.map(
+                (sbr) => sbr.settings_by_role_id,
+              ),
             }),
           ),
         ),
