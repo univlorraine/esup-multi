@@ -11,3 +11,15 @@
 
 - `MAP_SERVICE_HOST`: Hôte du microservice `map`.
 - `MAP_SERVICE_PORT`: Port du microservice `map`.
+
+- `RSS_SERVICE_PORT=3006` : Hôte du microservice `rss`
+- `RSS_SERVICE_HOST=localhost` : Port du microservice `rss`
+
+- `CARDS_SERVICE_PORT=3007` : Hôte du microservice `cards`
+- `CARDS_SERVICE_HOST=localhost` : Port du microservice `cards`
+
+- `SCHEDULE_SERVICE_PORT=3008` : Hôte du microservice `schedule`
+- `SCHEDULE_SERVICE_HOST=localhost` : Port du microservice `schedule`
+
+- `NOTIFICATIONS_SERVICE_PORT=3010` : Hôte du microservice `notifications`
+- `NOTIFICATIONS_SERVICE_HOST=localhost` : Port du microservice `notifications`

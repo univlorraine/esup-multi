@@ -1,3 +1,7 @@
 {
-    "MENU": "Notifications"
+    "MENU": "Notifications",
+    "NO_DATA": "No new notifications",
+    "END_OF_NOTIFICATIONS": "End of notifications",
+    "LOAD_MORE_ERROR": "Error loading notifications"
 }
+

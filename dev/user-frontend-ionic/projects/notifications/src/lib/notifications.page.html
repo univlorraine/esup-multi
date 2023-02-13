@@ -1,3 +1,52 @@
-<p>
-  notifications works!
-</p>
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-progress-bar *ngIf="isLoading" type="indeterminate" color="primary"></ion-progress-bar>
+  <ng-container *ngIf="(notificationsIsEmpty$ | async) === false">
+    <ion-list>
+      <ion-item class="ion-margin-bottom" *ngFor="let notification of (notifications$ | async)"
+       [ngClass]="{'notification-unread': notification.state === 'UNREAD'}">
+        <div class="notification-color-bar" [ngStyle]="{'background-color': notification.color}"></div>
+        <ion-grid class="ion-margin-start">
+          <ion-row>
+            <ion-col size="10">
+              <ion-row class="ion-align-items-center ion-margin-bottom ion-nowrap">
+                <ion-icon [name]="notification.icon" size="large"></ion-icon>
+                <ion-label class="ion-margin-start">
+                    <h2 class="ion-text-wrap">{{notification.title}}</h2>
+                    <p class="ion-text-wrap">{{notification.creationDate | completeLocalDateAndTime}}</p>
+                </ion-label>
+              </ion-row>
+              <ion-row>
+                <ion-text>{{notification.message}}</ion-text>
+              </ion-row>
+            </ion-col>
+            <ion-col size="2">
+              <ion-icon class="ion-float-right" name="ellipsis-horizontal-outline"></ion-icon>
+              <div *ngIf="notification.state === 'UNREAD'" class="new-notification-dot"></div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-list>
+    <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
+      <ion-infinite-scroll-content>
+        <ng-container *ngIf="endOfNotifications">
+          <ion-note class="ion-text-center">
+            {{ "NOTIFICATIONS.END_OF_NOTIFICATIONS" | translate }}
+          </ion-note>
+        </ng-container>
+        <ng-container *ngIf="loadMoreNotificationsError">
+          <ion-note class="ion-text-center" color="danger">
+            {{ "NOTIFICATIONS.LOAD_MORE_ERROR" | translate }}
+          </ion-note>
+        </ng-container>
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ng-container>
+
+  <ng-container *ngIf="(notificationsIsEmpty$ | async)">
+    <ion-note> {{ "NOTIFICATIONS.NO_DATA" | translate }} </ion-note>
+  </ng-container>
+</ion-content>

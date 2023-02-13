@@ -7,7 +7,7 @@ import {
   Post,
   Request,
   UseGuards,
-  UseInterceptors,
+  UseInterceptors
 } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { AuthGuard } from '@nestjs/passport';
@@ -25,7 +25,8 @@ export class AppController {
     @Inject('RSS_SERVICE') private rssClient: ClientProxy,
     @Inject('CARDS_SERVICE') private cardsClient: ClientProxy,
     @Inject('SCHEDULE_SERVICE') private scheduleClient: ClientProxy,
-  ) {}
+    @Inject('NOTIFICATIONS_SERVICE') private notificationsClient: ClientProxy,
+  ) { }
 
   @Post('/tiles')
   info(@Body() body) {
@@ -211,5 +212,40 @@ export class AppController {
           ),
         ),
       );
+  }
+
+  @Post('/notifications')
+  notifications(@Body() body) {
+    return this.authClient
+      .send(
+        {
+          cmd: 'getUserOrThrowError',
+        },
+        body,
+      )
+      .pipe(
+        concatMap((user) =>
+          this.notificationsClient.send(
+            {
+              cmd: 'notifications',
+            },
+            {
+              username: user.username,
+              offset: body.offset,
+              length: body.length
+            }
+          ),
+        ),
+      );
+  }
+
+  @Get('/notifications/channels')
+  notificationsChannels(@Body() body) {
+    return this.notificationsClient.send(
+      {
+        cmd: 'notifications/channels',
+      },
+      {},
+    );
   }
 }

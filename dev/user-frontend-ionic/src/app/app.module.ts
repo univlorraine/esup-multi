@@ -55,7 +55,10 @@ import { ErrorModule } from './error/error.module';
       nextWeeksInCache: 2
     }),
     TilesModule,
-    NotificationsModule,
+    NotificationsModule.forRoot({
+      numberOfNotificationsOnFirstLoad: 20,
+      numberOfNotificationsToLoadOnScroll: 10
+    }),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
