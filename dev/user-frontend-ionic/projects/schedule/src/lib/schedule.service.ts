@@ -3,7 +3,7 @@ import { Inject, Injectable } from '@angular/core';
 import { Network } from '@capacitor/network';
 import { getAuthToken } from '@ul/shared';
 import { add, format, startOfMonth, startOfToday, startOfWeek, sub } from 'date-fns';
-import { combineLatest, from, Observable, Subject } from 'rxjs';
+import { combineLatest, from, Observable, of, Subject } from 'rxjs';
 import { filter, finalize, first, map, mergeMap, switchMap, tap } from 'rxjs/operators';
 import { ScheduleModuleConfig, SCHEDULE_CONFIG } from './schedule.config';
 import { activePlanningIds$, Event, hiddenCourseList$, Schedule, setSchedule } from './schedule.repository';
@@ -86,6 +86,9 @@ export class ScheduleService {
   }
 
   outOfStateScheduleToDisplayedEvents(schedule: Schedule): Observable<Event[]> {
+    if (!schedule) {
+       return of([]);
+    }
     const eventIds = [];
     return combineLatest([activePlanningIds$, hiddenCourseList$]).pipe(
       map(([activPlanningIds, hiddenCourseList]) => schedule.plannings.filter(planning => activPlanningIds.includes(planning.id))
