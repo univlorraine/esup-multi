@@ -23,7 +23,7 @@ const initModule = (projectModuleService: ProjectModuleService) =>
     CommonModule,
     IonicModule,
     RssPageRoutingModule,
-    TranslateModule,
+    TranslateModule
   ],
   declarations: [
     RssPage,

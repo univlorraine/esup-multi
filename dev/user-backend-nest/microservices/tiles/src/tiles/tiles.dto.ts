@@ -7,6 +7,7 @@ export interface Authorization {
 }
 
 export interface DirectusTileTranslation {
+  languages_code: string;
   title: string;
   content: string;
 }

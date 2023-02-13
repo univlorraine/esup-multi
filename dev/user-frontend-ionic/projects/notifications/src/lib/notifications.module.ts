@@ -1,14 +1,17 @@
 import { CommonModule } from '@angular/common';
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { APP_INITIALIZER, ModuleWithProviders, NgModule } from '@angular/core';
 import { Capacitor } from '@capacitor/core';
 import { Device } from '@capacitor/device';
 import { PushNotifications, Token } from '@capacitor/push-notifications';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { ProjectModuleService } from '@ul/shared';
+import { CompleteLocalDateAndTimePipe } from './complete-local-date-and-time.pipe';
 import { NotificationsRoutingModule } from './notifications-routing.module';
+import { NotificationsModuleConfig, NOTIFICATIONS_CONFIG } from './notifications.config';
 import { NotificationsPage } from './notifications.page';
 import { setFcmToken } from './notifications.repository';
+
 
 const initModule = (projectModuleService: ProjectModuleService) =>
   () => projectModuleService.initProjectModule({
@@ -27,17 +30,18 @@ const initModule = (projectModuleService: ProjectModuleService) =>
     CommonModule,
     IonicModule,
     NotificationsRoutingModule,
-    TranslateModule,
+    TranslateModule
   ],
   declarations: [
-    NotificationsPage
+    NotificationsPage,
+    CompleteLocalDateAndTimePipe
   ],
   providers: [{
     provide: APP_INITIALIZER,
     useFactory: initModule,
     deps: [ProjectModuleService],
     multi: true
-  }],
+  }]
 })
 
 export class NotificationsModule {
@@ -46,6 +50,15 @@ export class NotificationsModule {
 
   constructor() {
     this.initPushNotifications();
+  }
+
+  static forRoot(config: NotificationsModuleConfig): ModuleWithProviders<NotificationsModule> {
+    return {
+      ngModule: NotificationsModule,
+      providers: [
+        { provide: NOTIFICATIONS_CONFIG, useValue: config }
+      ]
+    };
   }
 
   async initPushNotifications() {
