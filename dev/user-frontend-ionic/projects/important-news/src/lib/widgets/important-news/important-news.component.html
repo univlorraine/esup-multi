@@ -1,0 +1,24 @@
+<ion-row *ngIf="isLoading === true">
+  <ion-spinner name="dots"></ion-spinner>
+</ion-row>
+<ng-container *ngIf="isLoading === false && (noImportantNews$ | async) === false">
+  <ion-grid>
+    <ion-item *ngFor="let importantNews of (translatedImportantNewsList$ | async)">
+      <ion-col [size]="importantNews.image ? '8' : '12'">
+        <ion-label class="ion-text-wrap">
+          <h2>{{importantNews.title}}</h2>
+          <p>{{importantNews.content}}</p>
+        </ion-label>
+      </ion-col>
+      <ion-col size="4" *ngIf="importantNews.image">
+        <ion-img [src]="cmsPublicAssetsEndpoint + importantNews.image"></ion-img>
+      </ion-col>
+    </ion-item>
+  </ion-grid>
+</ng-container>
+
+<ng-container class="ion-padding" *ngIf="(noImportantNews$ | async)">
+  <ion-row class="ion-margin-top">
+    <ion-note> {{ "IMPORTANT-NEWS.WIDGET.NO_DATA" | translate }} </ion-note>
+  </ion-row>
+</ng-container>

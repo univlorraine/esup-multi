@@ -6,6 +6,7 @@ import { AppController } from './app.controller';
 import configuration from './config/configuration';
 import microserviceAuthConfig from './config/microservice-auth.config';
 import microserviceCardsConfig from './config/microservice-cards.config';
+import microserviceImportantNewsConfig from './config/microservice-important-news.config';
 import microserviceMapConfig from './config/microservice-map.config';
 import microserviceNotificationsConfig from './config/microservice-notifications.config';
 import microserviceRssConfig from './config/microservice-rss.config';
@@ -54,6 +55,13 @@ import { AuthJwtStrategy } from './security/auth-jwt.strategy';
         imports: [ConfigModule.forFeature(microserviceScheduleConfig)],
         useFactory: (config: ConfigService) =>
           config.get('microservice-schedule'),
+        inject: [ConfigService],
+      },
+      {
+        name: 'IMPORTANT_NEWS_SERVICE',
+        imports: [ConfigModule.forFeature(microserviceImportantNewsConfig)],
+        useFactory: (config: ConfigService) =>
+          config.get('microservice-important-news'),
         inject: [ConfigService],
       },
       {

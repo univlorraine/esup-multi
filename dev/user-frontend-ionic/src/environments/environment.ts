@@ -6,7 +6,8 @@ export const environment = {
   production: false,
   apiEndpoint: 'http://localhost:3000',
   languages: ['fr', 'en'],
-  defaultLanguage: 'fr'
+  defaultLanguage: 'fr',
+  cmsPublicAssetsEndpoint: 'http://localhost:8055/assets/'
 };
 
 /*

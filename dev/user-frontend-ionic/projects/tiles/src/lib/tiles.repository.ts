@@ -3,14 +3,9 @@ import { selectAllEntities, setEntities, withEntities } from '@ngneat/elf-entiti
 import {
   persistState
 } from '@ngneat/elf-persist-state';
-import { localForageStore } from '@ul/shared';
+import { Authorization, localForageStore } from '@ul/shared';
 
 const STORE_NAME = 'tiles';
-
-interface Authorization {
-  type: 'ALLOW' | 'DISALLOW';
-  roles: string[];
-}
 
 export enum TileType {
   app = 'app',

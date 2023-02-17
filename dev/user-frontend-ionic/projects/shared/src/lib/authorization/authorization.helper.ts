@@ -1,6 +1,6 @@
 type AuthorizationType = 'ALLOW'|'DISALLOW';
 
-interface Authorization {
+export interface Authorization {
     roles: string[];
     type: AuthorizationType;
 }

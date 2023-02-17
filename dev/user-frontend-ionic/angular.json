@@ -78,6 +78,11 @@
                 "glob": "**/*",
                 "input": "projects/notifications/assets/i18n",
                 "output": "/assets/i18n/notifications"
+              },
+              {
+                "glob": "**/*",
+                "input": "projects/important-news/assets/i18n",
+                "output": "/assets/i18n/important-news"
               }
             ],
             "styles": ["src/theme/variables.scss", "src/global.scss"],
@@ -575,6 +580,47 @@
             "lintFilePatterns": [
               "projects/notifications/**/*.ts",
               "projects/notifications/**/*.html"
+            ]
+          }
+        }
+
+      }
+    },
+    "important-news": {
+      "projectType": "library",
+      "root": "projects/important-news",
+      "sourceRoot": "projects/important-news/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/important-news/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/important-news/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/important-news/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/important-news/src/test.ts",
+            "tsConfig": "projects/important-news/tsconfig.spec.json",
+            "karmaConfig": "projects/important-news/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/important-news/**/*.ts",
+              "projects/important-news/**/*.html"
             ]
           }
         }

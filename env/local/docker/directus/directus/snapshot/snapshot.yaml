@@ -145,6 +145,54 @@ collections:
       comment: null
       name: channels_translations
       schema: public
+  - collection: important_news
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: status
+      archive_value: archived
+      collapse: open
+      collection: important_news
+      color: null
+      display_template: null
+      group: null
+      hidden: false
+      icon: null
+      item_duplication_fields: null
+      note: null
+      singleton: false
+      sort: null
+      sort_field: sort
+      translations: null
+      unarchive_value: draft
+    schema:
+      comment: null
+      name: important_news
+      schema: public
+  - collection: important_news_translations
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: important_news_translations
+      color: null
+      display_template: null
+      group: null
+      hidden: true
+      icon: import_export
+      item_duplication_fields: null
+      note: null
+      singleton: false
+      sort: null
+      sort_field: null
+      translations: null
+      unarchive_value: null
+    schema:
+      comment: null
+      name: important_news_translations
+      schema: public
   - collection: info
     meta:
       accountability: null
@@ -491,7 +539,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: null
+      sort: 10
       special:
         - m2m
       translations: null
@@ -1185,7 +1233,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: 4
+      sort: null
       special: null
       translations: null
       validation: null
@@ -1226,7 +1274,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: 3
+      sort: null
       special: null
       translations: null
       validation: null
@@ -1267,7 +1315,7 @@ fields:
       options: null
       readonly: true
       required: false
-      sort: 1
+      sort: null
       special: null
       translations: null
       validation: null
@@ -1308,7 +1356,7 @@ fields:
       options: null
       readonly: false
       required: true
-      sort: 2
+      sort: null
       special: null
       translations: null
       validation: null
@@ -1324,7 +1372,7 @@ fields:
       generation_expression: null
       has_auto_increment: false
       is_generated: false
-      is_nullable: true
+      is_nullable: false
       is_primary_key: false
       is_unique: false
       max_length: 255
@@ -1352,7 +1400,7 @@ fields:
         userLanguage: true
       readonly: false
       required: false
-      sort: 5
+      sort: null
       special:
         - translations
       translations: null
@@ -1376,7 +1424,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: null
+      sort: 2
       special: null
       translations: null
       validation: null
@@ -1417,7 +1465,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: null
+      sort: 1
       special: null
       translations: null
       validation: null
@@ -1458,7 +1506,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: null
+      sort: 3
       special: null
       translations: null
       validation: null
@@ -1499,7 +1547,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: null
+      sort: 4
       special: null
       translations: null
       validation: null
@@ -1524,6 +1572,470 @@ fields:
       numeric_scale: null
       schema: public
       table: channels_translations
+    type: string
+  - collection: important_news
+    field: authorization
+    meta:
+      collection: important_news
+      conditions: null
+      display: null
+      display_options: null
+      field: authorization
+      group: null
+      hidden: false
+      interface: select-dropdown-m2o
+      note: null
+      options:
+        enableSelect: false
+        template: '{{type}}{{roles}}'
+      readonly: false
+      required: false
+      sort: 9
+      special:
+        - m2o
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      comment: null
+      data_type: integer
+      default_value: null
+      foreign_key_column: id
+      foreign_key_schema: public
+      foreign_key_table: authorization
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      max_length: null
+      name: authorization
+      numeric_precision: 32
+      numeric_scale: 0
+      schema: public
+      table: important_news
+    type: integer
+  - collection: important_news
+    field: id
+    meta:
+      collection: important_news
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: true
+      required: false
+      sort: 1
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      comment: null
+      data_type: integer
+      default_value: nextval('important_news_id_seq'::regclass)
+      foreign_key_column: null
+      foreign_key_schema: null
+      foreign_key_table: null
+      generation_expression: null
+      has_auto_increment: true
+      is_generated: false
+      is_nullable: false
+      is_primary_key: true
+      is_unique: true
+      max_length: null
+      name: id
+      numeric_precision: 32
+      numeric_scale: 0
+      schema: public
+      table: important_news
+    type: integer
+  - collection: important_news
+    field: image
+    meta:
+      collection: important_news
+      conditions: null
+      display: null
+      display_options: null
+      field: image
+      group: null
+      hidden: false
+      interface: file-image
+      note: null
+      options:
+        folder: null
+      readonly: false
+      required: false
+      sort: 7
+      special:
+        - file
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      comment: null
+      data_type: uuid
+      default_value: null
+      foreign_key_column: id
+      foreign_key_schema: public
+      foreign_key_table: directus_files
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      max_length: null
+      name: image
+      numeric_precision: null
+      numeric_scale: null
+      schema: public
+      table: important_news
+    type: uuid
+  - collection: important_news
+    field: sort
+    meta:
+      collection: important_news
+      conditions: null
+      display: null
+      display_options: null
+      field: sort
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 3
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      comment: null
+      data_type: integer
+      default_value: null
+      foreign_key_column: null
+      foreign_key_schema: null
+      foreign_key_table: null
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      max_length: null
+      name: sort
+      numeric_precision: 32
+      numeric_scale: 0
+      schema: public
+      table: important_news
+    type: integer
+  - collection: important_news
+    field: status
+    meta:
+      collection: important_news
+      conditions: null
+      display: labels
+      display_options:
+        choices:
+          - text: $t:published
+            value: published
+            foreground: '#FFFFFF'
+            background: var(--primary)
+          - text: $t:draft
+            value: draft
+            foreground: '#18222F'
+            background: '#D3DAE4'
+          - text: $t:archived
+            value: archived
+            foreground: '#FFFFFF'
+            background: var(--warning)
+        showAsDot: true
+      field: status
+      group: null
+      hidden: false
+      interface: select-dropdown
+      note: null
+      options:
+        choices:
+          - text: $t:published
+            value: published
+          - text: $t:draft
+            value: draft
+          - text: $t:archived
+            value: archived
+      readonly: false
+      required: false
+      sort: 2
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      comment: null
+      data_type: character varying
+      default_value: draft
+      foreign_key_column: null
+      foreign_key_schema: null
+      foreign_key_table: null
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: false
+      is_primary_key: false
+      is_unique: false
+      max_length: 255
+      name: status
+      numeric_precision: null
+      numeric_scale: null
+      schema: public
+      table: important_news
+    type: string
+  - collection: important_news
+    field: translations
+    meta:
+      collection: important_news
+      conditions: null
+      display: translations
+      display_options:
+        languageField: code
+        template: '{{important_news_id.title}}{{important_news_id.description}}'
+      field: translations
+      group: null
+      hidden: false
+      interface: translations
+      note: null
+      options:
+        languageField: code
+        userLanguage: true
+      readonly: false
+      required: false
+      sort: 6
+      special:
+        - translations
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema: null
+    type: alias
+  - collection: important_news_translations
+    field: content
+    meta:
+      collection: important_news_translations
+      conditions: null
+      display: null
+      display_options: null
+      field: content
+      group: null
+      hidden: false
+      interface: input-multiline
+      note: null
+      options: null
+      readonly: false
+      required: true
+      sort: 2
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      comment: null
+      data_type: text
+      default_value: null
+      foreign_key_column: null
+      foreign_key_schema: null
+      foreign_key_table: null
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      max_length: null
+      name: content
+      numeric_precision: null
+      numeric_scale: null
+      schema: public
+      table: important_news_translations
+    type: text
+  - collection: important_news_translations
+    field: id
+    meta:
+      collection: important_news_translations
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 3
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      comment: null
+      data_type: integer
+      default_value: nextval('important_news_translations_id_seq'::regclass)
+      foreign_key_column: null
+      foreign_key_schema: null
+      foreign_key_table: null
+      generation_expression: null
+      has_auto_increment: true
+      is_generated: false
+      is_nullable: false
+      is_primary_key: true
+      is_unique: true
+      max_length: null
+      name: id
+      numeric_precision: 32
+      numeric_scale: 0
+      schema: public
+      table: important_news_translations
+    type: integer
+  - collection: important_news_translations
+    field: important_news_id
+    meta:
+      collection: important_news_translations
+      conditions: null
+      display: null
+      display_options: null
+      field: important_news_id
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 4
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      comment: null
+      data_type: integer
+      default_value: null
+      foreign_key_column: id
+      foreign_key_schema: public
+      foreign_key_table: important_news
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      max_length: null
+      name: important_news_id
+      numeric_precision: 32
+      numeric_scale: 0
+      schema: public
+      table: important_news_translations
+    type: integer
+  - collection: important_news_translations
+    field: languages_code
+    meta:
+      collection: important_news_translations
+      conditions: null
+      display: null
+      display_options: null
+      field: languages_code
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 5
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      comment: null
+      data_type: character varying
+      default_value: null
+      foreign_key_column: code
+      foreign_key_schema: public
+      foreign_key_table: languages
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      max_length: 255
+      name: languages_code
+      numeric_precision: null
+      numeric_scale: null
+      schema: public
+      table: important_news_translations
+    type: string
+  - collection: important_news_translations
+    field: title
+    meta:
+      collection: important_news_translations
+      conditions: null
+      display: null
+      display_options: null
+      field: title
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: true
+      sort: 1
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      comment: null
+      data_type: character varying
+      default_value: null
+      foreign_key_column: null
+      foreign_key_schema: null
+      foreign_key_table: null
+      generation_expression: null
+      has_auto_increment: false
+      is_generated: false
+      is_nullable: true
+      is_primary_key: false
+      is_unique: false
+      max_length: 255
+      name: title
+      numeric_precision: null
+      numeric_scale: null
+      schema: public
+      table: important_news_translations
     type: string
   - collection: info
     field: authorization
@@ -2795,6 +3307,94 @@ relations:
       on_delete: SET NULL
       on_update: NO ACTION
       table: channels_translations
+  - collection: important_news
+    field: authorization
+    meta:
+      junction_field: null
+      many_collection: important_news
+      many_field: authorization
+      one_allowed_collections: null
+      one_collection: authorization
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    related_collection: authorization
+    schema:
+      column: authorization
+      constraint_name: important_news_authorization_foreign
+      foreign_key_column: id
+      foreign_key_schema: public
+      foreign_key_table: authorization
+      on_delete: SET NULL
+      on_update: NO ACTION
+      table: important_news
+  - collection: important_news
+    field: image
+    meta:
+      junction_field: null
+      many_collection: important_news
+      many_field: image
+      one_allowed_collections: null
+      one_collection: directus_files
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    related_collection: directus_files
+    schema:
+      column: image
+      constraint_name: important_news_image_foreign
+      foreign_key_column: id
+      foreign_key_schema: public
+      foreign_key_table: directus_files
+      on_delete: SET NULL
+      on_update: NO ACTION
+      table: important_news
+  - collection: important_news_translations
+    field: important_news_id
+    meta:
+      junction_field: languages_code
+      many_collection: important_news_translations
+      many_field: important_news_id
+      one_allowed_collections: null
+      one_collection: important_news
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: translations
+      sort_field: null
+    related_collection: important_news
+    schema:
+      column: important_news_id
+      constraint_name: important_news_translations_important_news_id_foreign
+      foreign_key_column: id
+      foreign_key_schema: public
+      foreign_key_table: important_news
+      on_delete: SET NULL
+      on_update: NO ACTION
+      table: important_news_translations
+  - collection: important_news_translations
+    field: languages_code
+    meta:
+      junction_field: important_news_id
+      many_collection: important_news_translations
+      many_field: languages_code
+      one_allowed_collections: null
+      one_collection: languages
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    related_collection: languages
+    schema:
+      column: languages_code
+      constraint_name: important_news_translations_languages_code_foreign
+      foreign_key_column: code
+      foreign_key_schema: public
+      foreign_key_table: languages
+      on_delete: SET NULL
+      on_update: NO ACTION
+      table: important_news_translations
   - collection: info
     field: authorization
     meta:

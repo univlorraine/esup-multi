@@ -25,6 +25,7 @@ export class AppController {
     @Inject('RSS_SERVICE') private rssClient: ClientProxy,
     @Inject('CARDS_SERVICE') private cardsClient: ClientProxy,
     @Inject('SCHEDULE_SERVICE') private scheduleClient: ClientProxy,
+    @Inject('IMPORTANT_NEWS_SERVICE') private importantNewsClient: ClientProxy,
     @Inject('NOTIFICATIONS_SERVICE') private notificationsClient: ClientProxy,
   ) { }
 
@@ -212,6 +213,35 @@ export class AppController {
           ),
         ),
       );
+  }
+
+  @Post('/important-news')
+  importantNews(@Body() body) {
+    return this.authClient
+      .send(
+        {
+          cmd: 'getUser',
+        },
+        body,
+      )
+      .pipe(
+        concatMap((user) => {
+          const roles = user ? user.roles : ['anonymous'];
+          return this.importantNewsClient
+            .send(
+              {
+                cmd: 'important-news',
+              },
+              roles,
+            )
+            .pipe(
+              map((importantNews) => {
+                return new AuthorizationHelper(roles).filter(importantNews);
+              }),
+            );
+        }),
+      );
+
   }
 
   @Post('/notifications')
