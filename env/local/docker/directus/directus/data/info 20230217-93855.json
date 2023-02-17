@@ -1,6 +1,6 @@
 [
 	{
-		"date_created": "2023-02-13T10:46:24.370Z",
+		"date_created": "2023-02-17T09:36:52.591Z",
 		"date_updated": "2023-01-26T10:31:42.069Z",
 		"id": 2,
 		"link": "https://arche.univ-lorraine.fr/login/index.php?authCAS=CAS&ticket={st}",
@@ -15,21 +15,23 @@
 				"id": 1,
 				"info_id": 2,
 				"languages_code": "fr",
-				"title": "Test SSO"
+				"title": "Test SSO",
+				"searchKeywords": null
 			},
 			{
 				"content": "The steps involved in applying to college vary depending on your profile. Knowing these steps is the best way to ensure that you will be able to enroll with confidence.",
 				"id": 5,
 				"info_id": 2,
 				"languages_code": "en",
-				"title": "SSO test"
+				"title": "SSO test",
+				"searchKeywords": null
 			}
 		],
 		"settings_by_role": [],
 		"authorization": null
 	},
 	{
-		"date_created": "2023-02-13T10:46:24.395Z",
+		"date_created": "2023-02-17T09:36:52.620Z",
 		"date_updated": "2023-01-26T10:31:49.545Z",
 		"id": 3,
 		"link": "https://factuel.univ-lorraine.fr/node/21254",
@@ -44,21 +46,23 @@
 				"id": 2,
 				"info_id": 3,
 				"languages_code": "en",
-				"title": "The OTO twin project rewarded"
+				"title": "The OTO twin project rewarded",
+				"searchKeywords": null
 			},
 			{
 				"content": "Le projet OTO twin récompensé lors des Tremplins de la E-Sante City Healthcare !",
 				"id": 3,
 				"info_id": 3,
 				"languages_code": "fr",
-				"title": "Le projet OTO twin récompensé"
+				"title": "Le projet OTO twin récompensé",
+				"searchKeywords": null
 			}
 		],
 		"settings_by_role": [],
 		"authorization": null
 	},
 	{
-		"date_created": "2023-02-13T10:46:24.416Z",
+		"date_created": "2023-02-17T09:36:52.649Z",
 		"date_updated": "2023-01-26T10:15:45.212Z",
 		"id": 4,
 		"link": null,
@@ -73,7 +77,8 @@
 				"id": 4,
 				"info_id": 4,
 				"languages_code": "fr",
-				"title": "Contenu sans lien"
+				"title": "Contenu sans lien",
+				"searchKeywords": null
 			}
 		],
 		"settings_by_role": [],

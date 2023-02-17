@@ -13,14 +13,23 @@
 				"content": "Find your student card valid throughout Europe and your UL student card",
 				"id": 1,
 				"languages_code": "en",
-				"title": "My student cards"
+				"title": "My student cards",
+				"searchKeywords": [
+					"pass",
+					"access",
+					"identity"
+				]
 			},
 			{
 				"apps_id": 1,
 				"content": "Retrouvez votre carte d'étudiant valable dans toute l'Europe ainsi que votre carte d'étudiant UL",
 				"id": 2,
 				"languages_code": "fr",
-				"title": "Mes cartes d'étudiant"
+				"title": "Mes cartes d'étudiant",
+				"searchKeywords": [
+					"cantine",
+					"identifiant"
+				]
 			}
 		],
 		"settings_by_role": [],
@@ -46,14 +55,23 @@
 				"content": "Cette carte permet de justifier de votre statut à l'UL et de votre inscription au SUAPS",
 				"id": 3,
 				"languages_code": "fr",
-				"title": "Carte UL"
+				"title": "Carte UL",
+				"searchKeywords": [
+					"professeur",
+					"cantine"
+				]
 			},
 			{
 				"apps_id": 2,
 				"content": "This card allows you to prove your status at UL and your registration at SUAPS",
 				"id": 4,
 				"languages_code": "en",
-				"title": "UL card"
+				"title": "UL card",
+				"searchKeywords": [
+					"pass",
+					"professional pass",
+					"prof"
+				]
 			}
 		],
 		"settings_by_role": [],
@@ -83,14 +101,16 @@
 				"content": "Find all POI about your faculty and their coordinates on a map.",
 				"id": 5,
 				"languages_code": "en",
-				"title": "Map"
+				"title": "Map",
+				"searchKeywords": null
 			},
 			{
 				"apps_id": 3,
 				"content": "Retrouvez tous les lieux d'intéret de votre faculté et leurs coordonnées sur une carte.",
 				"id": 6,
 				"languages_code": "fr",
-				"title": "Plan"
+				"title": "Plan",
+				"searchKeywords": null
 			}
 		],
 		"settings_by_role": [],
@@ -110,14 +130,16 @@
 				"content": "Find all your events",
 				"id": 7,
 				"languages_code": "en",
-				"title": "Schedule"
+				"title": "Schedule",
+				"searchKeywords": null
 			},
 			{
 				"apps_id": 4,
 				"content": "Retrouvez tous vos évènements",
 				"id": 8,
 				"languages_code": "fr",
-				"title": "Emploi du temps"
+				"title": "Emploi du temps",
+				"searchKeywords": null
 			}
 		],
 		"settings_by_role": [],
@@ -148,14 +170,16 @@
 				"content": "Here are the important news to check out \nfor your student education:",
 				"id": 9,
 				"languages_code": "en",
-				"title": "Important News !"
+				"title": "Important News !",
+				"searchKeywords": null
 			},
 			{
 				"apps_id": 13,
 				"content": "Voici les nouvelles importantes à consulter pour votre scolarité d'étudiant : ",
 				"id": 10,
 				"languages_code": "fr",
-				"title": "Nouvelles Importantes !"
+				"title": "Nouvelles Importantes !",
+				"searchKeywords": null
 			}
 		],
 		"settings_by_role": [],
@@ -181,14 +205,16 @@
 				"content": "Here are the important news to check out for staff members:",
 				"id": 11,
 				"languages_code": "en",
-				"title": "Important News !"
+				"title": "Important News !",
+				"searchKeywords": null
 			},
 			{
 				"apps_id": 14,
 				"content": "Voici les nouvelles importantes à consulter pour les membres du staff: ",
 				"id": 12,
 				"languages_code": "fr",
-				"title": "Nouvelles Importantes !"
+				"title": "Nouvelles Importantes !",
+				"searchKeywords": null
 			}
 		],
 		"settings_by_role": [],

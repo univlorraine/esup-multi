@@ -16,7 +16,8 @@ interface Translation {
   // eslint-disable-next-line @typescript-eslint/naming-convention
   languages_code: string;
   title: string;
-  content: string;
+  content?: string;
+  searchKeywords?: string[];
 }
 
 interface AbstractTile {
@@ -44,8 +45,9 @@ interface AbstractTranslatedTile {
   type: TileType;
   widget: string;
   title: string;
-  content: string;
+  content?: string;
   authorization?: Authorization;
+  searchKeywords?: string[];
 }
 
 export interface TranslatedApp extends AbstractTranslatedTile {

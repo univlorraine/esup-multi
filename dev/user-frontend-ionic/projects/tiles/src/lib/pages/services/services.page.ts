@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Network } from '@capacitor/network';
 import { currentLanguage$, getAuthToken } from '@ul/shared';
-import { combineLatest, Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { finalize, first, map, switchMap } from 'rxjs/operators';
 import { setTiles, Tile, tiles$, TranslatedTile } from '../../tiles.repository';
 import { TilesService } from '../../tiles.service';
@@ -16,15 +16,26 @@ export class ServicesPage {
   public tilesIsEmpty$: Observable<boolean>;
   public isLoading = false;
   public translatedTiles$: Observable<TranslatedTile[]>;
+  public searchQuery$: BehaviorSubject<string> = new BehaviorSubject('');
 
   constructor(
     private tilesService: TilesService,
   ) {
     this.tilesIsEmpty$ = this.tiles$.pipe(map(tiles => tiles.length === 0));
-    this.translatedTiles$ = combineLatest([this.tiles$, currentLanguage$])
+    this.translatedTiles$ = combineLatest([this.tiles$, currentLanguage$, this.searchQuery$])
       .pipe(
-        map(tilesAndCurrentLang => this.tilesService.mapToTranslatedTiles(tilesAndCurrentLang))
+        map(([tiles, currentLanguage, searchQuery]) => this.tilesService.mapToTranslatedTiles([tiles, currentLanguage])
+          .filter(tile => (
+              tile.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+              tile.content?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+              tile.searchKeywords?.some((keyWord) => keyWord.toLowerCase().includes(searchQuery.toLowerCase()))
+            ))
+        )
       );
+  }
+
+  handleChange(event) {
+    this.searchQuery$.next(event.target.value);
   }
 
   ionViewWillEnter() {
