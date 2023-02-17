@@ -1,0 +1,112 @@
+[
+	{
+		"image": null,
+		"status": "published",
+		"id": 2,
+		"sort": 1,
+		"translations": [
+			{
+				"title": " Important News without role",
+				"content": "Hello anonymous and other roles.",
+				"id": 3,
+				"important_news_id": 2,
+				"languages_code": "en"
+			},
+			{
+				"title": "Important News sans rôle ",
+				"content": "Bonjour aux anonymous et aux autres rôles.",
+				"id": 4,
+				"important_news_id": 2,
+				"languages_code": "fr"
+			}
+		],
+		"authorization": null
+	},
+	{
+		"image": null,
+		"status": "published",
+		"id": 1,
+		"sort": 2,
+		"translations": [
+			{
+				"title": "Nouvelle importante pour les étudiants! ",
+				"content": "Jnesis est sur la vague !",
+				"id": 1,
+				"important_news_id": 1,
+				"languages_code": "fr"
+			},
+			{
+				"title": "Important news for students !",
+				"content": "Jnesis is on the wave ! ",
+				"id": 2,
+				"important_news_id": 1,
+				"languages_code": "en"
+			}
+		],
+		"authorization": {
+			"roles": [
+				"student"
+			],
+			"id": 1,
+			"type": "ALLOW"
+		}
+	},
+	{
+		"image": null,
+		"status": "published",
+		"id": 3,
+		"sort": 3,
+		"translations": [
+			{
+				"title": "Troisième information importante pour les étudiants",
+				"content": "La carte de cantine est à récupérer au secrétariat.",
+				"id": 5,
+				"important_news_id": 3,
+				"languages_code": "fr"
+			},
+			{
+				"title": "Third important student news",
+				"content": "The canteen card is to be collected at the secretariat.",
+				"id": 6,
+				"important_news_id": 3,
+				"languages_code": "en"
+			}
+		],
+		"authorization": {
+			"roles": [
+				"student"
+			],
+			"id": 2,
+			"type": "ALLOW"
+		}
+	},
+	{
+		"image": null,
+		"status": "published",
+		"id": 4,
+		"sort": 4,
+		"translations": [
+			{
+				"title": "Your staff pass",
+				"content": "Your staff card is available at reception.",
+				"id": 7,
+				"important_news_id": 4,
+				"languages_code": "en"
+			},
+			{
+				"title": "Votre \"pass staff\"",
+				"content": "Votre \"pass staff\" est disponible à l'accueil.",
+				"id": 8,
+				"important_news_id": 4,
+				"languages_code": "fr"
+			}
+		],
+		"authorization": {
+			"roles": [
+				"staff"
+			],
+			"id": 4,
+			"type": "ALLOW"
+		}
+	}
+]

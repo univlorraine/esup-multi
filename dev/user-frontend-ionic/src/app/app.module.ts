@@ -7,6 +7,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { AuthModule } from '@ul/auth';
 import { CardsPageModule } from '@ul/cards';
+import { ImportantNewsModule } from '@ul/important-news';
 import { MapModule } from '@ul/map';
 import { NotificationsModule } from '@ul/notifications';
 import { PreferencesPageModule } from '@ul/preferences';
@@ -44,7 +45,6 @@ import { ErrorModule } from './error/error.module';
       }
     }),
     RssPageModule,
-
     CardsPageModule,
     ScheduleModule.forRoot({
       nextEventsWidget: {
@@ -54,6 +54,7 @@ import { ErrorModule } from './error/error.module';
       previousWeeksInCache: 1,
       nextWeeksInCache: 2
     }),
+    ImportantNewsModule,
     TilesModule,
     NotificationsModule.forRoot({
       numberOfNotificationsOnFirstLoad: 20,

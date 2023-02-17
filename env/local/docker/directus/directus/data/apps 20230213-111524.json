@@ -2,8 +2,8 @@
 	{
 		"id": 1,
 		"status": "published",
-		"position": 1,
-		"sort": null,
+		"position": 2,
+		"sort": 3,
 		"path": "cards",
 		"icon": "card",
 		"widget": null,
@@ -23,19 +23,20 @@
 				"title": "Mes cartes d'étudiant"
 			}
 		],
+		"settings_by_role": [],
 		"authorization": {
 			"id": 3,
-			"type": "ALLOW",
 			"roles": [
 				"student"
-			]
+			],
+			"type": "ALLOW"
 		}
 	},
 	{
 		"id": 2,
 		"status": "published",
-		"position": 1,
-		"sort": null,
+		"position": 2,
+		"sort": 4,
 		"path": "cards",
 		"icon": "card",
 		"widget": null,
@@ -55,23 +56,24 @@
 				"title": "UL card"
 			}
 		],
+		"settings_by_role": [],
 		"authorization": {
 			"id": 5,
-			"type": "ALLOW",
 			"roles": [
 				"CE",
 				"DC",
 				"phd-student",
 				"staff",
 				"teacher"
-			]
+			],
+			"type": "ALLOW"
 		}
 	},
 	{
 		"id": 3,
 		"status": "published",
-		"position": 2,
-		"sort": null,
+		"position": 3,
+		"sort": 5,
 		"path": "map",
 		"icon": "map",
 		"widget": null,
@@ -91,13 +93,14 @@
 				"title": "Plan"
 			}
 		],
+		"settings_by_role": [],
 		"authorization": null
 	},
 	{
 		"id": 4,
 		"status": "published",
 		"position": 4,
-		"sort": null,
+		"sort": 6,
 		"path": "schedule",
 		"icon": "calendar",
 		"widget": null,
@@ -117,9 +120,9 @@
 				"title": "Emploi du temps"
 			}
 		],
+		"settings_by_role": [],
 		"authorization": {
 			"id": 6,
-			"type": "ALLOW",
 			"roles": [
 				"CE",
 				"DC",
@@ -127,7 +130,74 @@
 				"staff",
 				"student",
 				"teacher"
-			]
+			],
+			"type": "ALLOW"
+		}
+	},
+	{
+		"id": 13,
+		"status": "published",
+		"position": 1,
+		"sort": 1,
+		"path": "important-news",
+		"icon": "warning-outline",
+		"widget": "important-news:important-news",
+		"translations": [
+			{
+				"apps_id": 13,
+				"content": "Here are the important news to check out \nfor your student education:",
+				"id": 9,
+				"languages_code": "en",
+				"title": "Important News !"
+			},
+			{
+				"apps_id": 13,
+				"content": "Voici les nouvelles importantes à consulter pour votre scolarité d'étudiant : ",
+				"id": 10,
+				"languages_code": "fr",
+				"title": "Nouvelles Importantes !"
+			}
+		],
+		"settings_by_role": [],
+		"authorization": {
+			"id": 19,
+			"roles": [
+				"student"
+			],
+			"type": "ALLOW"
+		}
+	},
+	{
+		"id": 14,
+		"status": "published",
+		"position": 1,
+		"sort": 2,
+		"path": "important-news",
+		"icon": "warning-outline",
+		"widget": "important-news:important-news",
+		"translations": [
+			{
+				"apps_id": 14,
+				"content": "Here are the important news to check out for staff members:",
+				"id": 11,
+				"languages_code": "en",
+				"title": "Important News !"
+			},
+			{
+				"apps_id": 14,
+				"content": "Voici les nouvelles importantes à consulter pour les membres du staff: ",
+				"id": 12,
+				"languages_code": "fr",
+				"title": "Nouvelles Importantes !"
+			}
+		],
+		"settings_by_role": [],
+		"authorization": {
+			"id": 20,
+			"roles": [
+				"staff"
+			],
+			"type": "ALLOW"
 		}
 	}
 ]

@@ -33,6 +33,9 @@
       ],
       "@ul/notifications": [
         "dist/notifications"
+      ],
+      "@ul/important-news": [
+        "dist/important-news"
       ]
     },
     "downlevelIteration": true,

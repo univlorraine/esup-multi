@@ -26,6 +26,7 @@ import { Transport, MicroserviceOptions } from '@nestjs/microservices';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
+  const host = process.env.[NOM-DU-MICROSERVICE]_SERVICE_HOST || '127.0.0.1';
   const port = parseInt(process.env.[NOM-DU-MICROSERVICE]_SERVICE_PORT) || 30[XX];
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(
     AppModule,
