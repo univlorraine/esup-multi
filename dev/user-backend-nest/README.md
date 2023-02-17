@@ -33,11 +33,12 @@ async function bootstrap() {
     {
       transport: Transport.TCP,
       options: {
+        host,
         port,
       },
     },
   );
-  Logger.log(`Listening on port ${port}`);
+  Logger.log(`Listening on host ${host}, port ${port}`);
   await app.listen();
 }
 bootstrap();
