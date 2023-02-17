@@ -1,9 +1,9 @@
-import { Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Inject, Injectable } from '@angular/core';
+import { KeepAuthService } from '@ul/shared';
 import { Observable, throwError } from 'rxjs';
 import { catchError, concatMap } from 'rxjs/operators';
 import { Tile, TranslatedTile } from './tiles.repository';
-import { KeepAuthService } from '@ul/shared';
 
 @Injectable({
   providedIn: 'root'
@@ -37,11 +37,11 @@ export class TilesService {
         tile.translations.find((t) => t.languages_code === this.environment.defaultLanguage) ||
         tile.translations[0];
       /* eslint-enable @typescript-eslint/naming-convention */
-
       return {
         ...tile,
         title: translation.title,
-        content: translation.content
+        content: translation.content,
+        searchKeywords: translation.searchKeywords
       };
     });
   }

@@ -3,5 +3,6 @@
         "WIDGETS": "Accueil",
         "SERVICES": "Services"
     },
-    "NO_DATA": "Aucune donnée disponible"
+    "NO_DATA": "Aucune donnée disponible",
+    "SEARCHBAR_MESSAGE": "Rechercher un service"
 }

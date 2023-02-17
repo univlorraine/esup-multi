@@ -1,6 +1,7 @@
 <ion-progress-bar *ngIf="isLoading" type="indeterminate" color="primary"></ion-progress-bar>
 
 <ion-content *ngIf="(tilesIsEmpty$ | async) === false">
+  <ion-searchbar show-clear-button="focus" [placeholder]="'TILES.SEARCHBAR_MESSAGE' | translate" (ionChange)="handleChange($event)"></ion-searchbar>
   <div class="services">
     <app-service *ngFor="let translatedTile of (translatedTiles$ | async)" [tile]="translatedTile">
     </app-service>

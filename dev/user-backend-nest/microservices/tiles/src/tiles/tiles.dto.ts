@@ -10,6 +10,7 @@ export interface DirectusTileTranslation {
   languages_code: string;
   title: string;
   content: string;
+  searchKeywords: string[];
 }
 
 export interface DirectusSettingsByRole {
