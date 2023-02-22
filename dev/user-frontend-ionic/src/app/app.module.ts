@@ -15,6 +15,7 @@ import { RssPageModule } from '@ul/rss';
 import { ScheduleModule } from '@ul/schedule';
 import { ProjectModuleService, translationsLoaderFactory } from '@ul/shared';
 import { TilesModule } from '@ul/tiles';
+import { ContactsModule } from '@ul/contacts';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -56,6 +57,9 @@ import { ErrorModule } from './error/error.module';
     }),
     ImportantNewsModule,
     TilesModule,
+    ContactsModule.forRoot({
+      contactTypes: ['STUDENT', 'STAFF', 'STANDIN']
+    }),
     NotificationsModule.forRoot({
       numberOfNotificationsOnFirstLoad: 20,
       numberOfNotificationsToLoadOnScroll: 10

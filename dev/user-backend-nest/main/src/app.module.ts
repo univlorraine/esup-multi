@@ -11,6 +11,7 @@ import microserviceMapConfig from './config/microservice-map.config';
 import microserviceNotificationsConfig from './config/microservice-notifications.config';
 import microserviceRssConfig from './config/microservice-rss.config';
 import microserviceScheduleConfig from './config/microservice-schedule.config';
+import microserviceContactsConfig from './config/microservice-contacts.config';
 import microserviceInfoConfig from './config/microservice-tiles.config';
 import { AuthJwtStrategy } from './security/auth-jwt.strategy';
 
@@ -55,6 +56,13 @@ import { AuthJwtStrategy } from './security/auth-jwt.strategy';
         imports: [ConfigModule.forFeature(microserviceScheduleConfig)],
         useFactory: (config: ConfigService) =>
           config.get('microservice-schedule'),
+        inject: [ConfigService],
+      },
+      {
+        name: 'CONTACTS_SERVICE',
+        imports: [ConfigModule.forFeature(microserviceContactsConfig)],
+        useFactory: (config: ConfigService) =>
+          config.get('microservice-contacts'),
         inject: [ConfigService],
       },
       {

@@ -225,5 +225,29 @@
 			],
 			"type": "ALLOW"
 		}
+	},
+	{
+		"id": 5,
+		"status": "published",
+		"sort": null,
+		"path": "contacts",
+		"icon": "at",
+		"translations": [
+			{
+				"id": 1,
+				"title": "Contacts",
+				"content": "Find the contact details of a person, a department of the University of Lorraine",
+				"languages_code": "en",
+				"apps_id": 1
+			},
+			{
+				"id": 2,
+				"title": "Annuaire",
+				"content": "Retrouvez les coordonnées d'une personne, d'un service de l'Université de Lorraine",
+				"languages_code": "fr",
+				"apps_id": 1
+			}
+		],
+		"authorization": null
 	}
 ]

@@ -31,6 +31,9 @@
       "@ul/tiles": [
         "dist/tiles"
       ],
+      "@ul/contacts": [
+        "dist/contacts"
+      ],
       "@ul/notifications": [
         "dist/notifications"
       ],

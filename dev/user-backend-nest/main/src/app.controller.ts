@@ -3,11 +3,13 @@ import {
   Controller,
   Delete,
   Get,
+  Header,
   Inject,
+  Param,
   Post,
   Request,
   UseGuards,
-  UseInterceptors
+  UseInterceptors,
 } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { AuthGuard } from '@nestjs/passport';
@@ -25,9 +27,10 @@ export class AppController {
     @Inject('RSS_SERVICE') private rssClient: ClientProxy,
     @Inject('CARDS_SERVICE') private cardsClient: ClientProxy,
     @Inject('SCHEDULE_SERVICE') private scheduleClient: ClientProxy,
+    @Inject('CONTACTS_SERVICE') private contactsClient: ClientProxy,
     @Inject('IMPORTANT_NEWS_SERVICE') private importantNewsClient: ClientProxy,
     @Inject('NOTIFICATIONS_SERVICE') private notificationsClient: ClientProxy,
-  ) { }
+  ) {}
 
   @Post('/tiles')
   info(@Body() body) {
@@ -241,7 +244,6 @@ export class AppController {
             );
         }),
       );
-
   }
 
   @Post('/notifications')
@@ -262,8 +264,33 @@ export class AppController {
             {
               username: user.username,
               offset: body.offset,
-              length: body.length
-            }
+              length: body.length,
+            },
+          ),
+        ),
+      );
+  }
+
+  @Post('/contacts')
+  contacts(@Body() body) {
+    return this.authClient
+      .send(
+        {
+          cmd: 'getUser',
+        },
+        body,
+      )
+      .pipe(
+        concatMap((user) =>
+          this.contactsClient.send(
+            {
+              cmd: 'contacts',
+            },
+            {
+              type: body.type,
+              value: body.value,
+              userId: user.username,
+            },
           ),
         ),
       );

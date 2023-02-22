@@ -76,6 +76,11 @@
               },
               {
                 "glob": "**/*",
+                "input": "projects/contacts/assets/i18n",
+                "output": "/assets/i18n/contacts"
+              },
+              {
+                "glob": "**/*",
                 "input": "projects/notifications/assets/i18n",
                 "output": "/assets/i18n/notifications"
               },
@@ -543,6 +548,46 @@
           }
         }
 
+      }
+    },
+    "contacts": {
+      "projectType": "library",
+      "root": "projects/contacts",
+      "sourceRoot": "projects/contacts/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/contacts/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/contacts/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/contacts/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/contacts/src/test.ts",
+            "tsConfig": "projects/contacts/tsconfig.spec.json",
+            "karmaConfig": "projects/contacts/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/contacts/**/*.ts",
+              "projects/contacts/**/*.html"
+            ]
+          }
+        }
       }
     },
     "notifications": {
