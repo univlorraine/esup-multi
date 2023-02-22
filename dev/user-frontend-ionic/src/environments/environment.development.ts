@@ -3,5 +3,5 @@ export const environment = {
   apiEndpoint: 'https://multi-development.jnesis.com',
   languages: ['fr', 'en'],
   defaultLanguage: 'fr',
-  cmsPublicAssetsEndpoint: 'http://multi-directus.jnesis.com/assets/'
+  cmsPublicAssetsEndpoint: 'https://multi-development.jnesis.com/assets/'
 };
