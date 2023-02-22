@@ -1,0 +1,35 @@
+<ion-row>
+  <ion-searchbar (ionChange)="saveSearchBar($event)" placeholder="{{ 'CONTACTS.PLACEHOLDER' | translate }}"></ion-searchbar>
+  <ion-spinner *ngIf="loading"></ion-spinner>
+</ion-row>
+<ion-radio-group class="ion-padding" [value]="this.filterChecked" (ionChange)="selectedCategory($event)">
+  <ion-item lines="none" *ngFor="let filter of this.filtersList">
+    <ion-label>{{ 'CONTACTS.CONTACT_TYPES.' + filter | translate }}</ion-label>
+    <ion-radio [value]="filter"></ion-radio>
+  </ion-item>
+</ion-radio-group>
+<div class="ion-padding ion-text-end">
+  <ion-button (click)="searchContacts()">{{ 'CONTACTS.SEARCH' | translate }}</ion-button>
+</div>
+<ion-content class="ion-padding">
+  <ion-text class="ion-padding" *ngIf="searchButtonPressed">{{contacts.length}} {{ 'CONTACTS.RESULTS' | translate }}</ion-text>
+  <ion-card *ngFor="let item of contacts">
+    <ion-card-header>
+        <ion-card-title class="ion-padding">{{item.name}} {{item.firstname}}</ion-card-title>
+      <ion-card-subtitle class="ion-padding" *ngFor="let assignment of item.assignments">{{assignment}}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item lines="none" *ngFor="let email of item.mailAdresses; last as isLast" [lines]="isLast ? '' : 'none' ">
+        <a href="mailto:{{email}}" >{{email}}</a>
+      </ion-item>
+      <ion-item *ngFor="let mobile of item.phoneNumbers; last as isLast" [lines]="isLast ? '' : 'none' ">
+        <a href="tel:{{mobile}}" >{{mobile}}</a>
+      </ion-item>
+      <div class=" ion-text-end">
+        <ion-button (click)="createContact(item)">
+          <ion-icon name="person-add-outline"></ion-icon>
+        </ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

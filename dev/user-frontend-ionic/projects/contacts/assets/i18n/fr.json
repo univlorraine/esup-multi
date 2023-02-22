@@ -1,0 +1,23 @@
+{
+    "CONTACT_TYPES": {
+        "STUDENT": "Etudiant",
+        "STAFF": "Personnel",
+        "STANDIN": "Personnel Vacataire"
+    },
+    "SEARCH": "Rechercher",
+    "CANCEL": "Annuler",
+    "RESULTS": "résultat(s)",
+    "PLACEHOLDER": "Nom/Prénom/Téléphone",
+    "ALERT": {
+        "ERROR": {
+            "HEADER": "Erreur",
+            "SUBHEADER": "Impossible d'ajouter un contact",
+            "MESSAGE": "Impossible d'ajouter un contact sur la version web",
+            "EXIST":"Le contact existe déjà",
+            "BUTTON1": "ok"
+        },
+        "SUCCESS": {
+            "MESSAGE": "Contact créé"
+        }
+    }
+}

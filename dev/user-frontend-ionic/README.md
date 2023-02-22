@@ -158,3 +158,4 @@ npm run module:build-all
 - [Module info](dev/user-frontend-ionic/projects/info/README.md)
 - [Module preferences](dev/user-frontend-ionic/projects/preferences/README.md)
 - [Module map](dev/user-frontend-ionic/projects/map/README.md)
+- [Module contact](dev/user-frontend-ionic/projects/contact/README.md)
