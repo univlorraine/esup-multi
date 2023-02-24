@@ -227,6 +227,39 @@
 		}
 	},
 	{
+		"id": 19,
+		"status": "published",
+		"position": 8,
+		"sort": null,
+		"path": "reservation",
+		"icon": "clipboard-outline",
+		"widget": null,
+		"translations": [
+			{
+				"apps_id": 19,
+				"content": null,
+				"languages_code": "en",
+				"searchKeywords": null,
+				"title": "Room reservation"
+			},
+			{
+				"apps_id": 19,
+				"content": null,
+				"languages_code": "fr",
+				"searchKeywords": null,
+				"title": "Réservation de salle"
+			}
+		],
+		"settings_by_role": [],
+		"authorization": {
+			"id": 27,
+			"roles": [
+				"anonymous"
+			],
+			"type": "DISALLOW"
+		}
+	},
+	{
 		"id": 5,
 		"status": "published",
 		"sort": null,

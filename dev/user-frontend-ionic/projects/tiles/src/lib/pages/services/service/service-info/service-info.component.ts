@@ -1,9 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Browser } from '@capacitor/browser';
-import { getAuthToken } from '@ul/shared';
-import { filter, first, switchMap } from 'rxjs/operators';
+import { SsoService } from '@ul/shared';
 import { TranslatedInfo } from '../../../../tiles.repository';
-import { TilesService } from '../../../../tiles.service';
 
 @Component({
 selector: 'app-service-info',
@@ -14,7 +12,7 @@ export class ServiceInfoComponent {
     @Input() info: TranslatedInfo;
 
     constructor(
-        private tilesService: TilesService,
+        private ssoService: SsoService,
     ) {}
 
     public onClick(): Promise<void> {
@@ -26,17 +24,10 @@ export class ServiceInfoComponent {
         return Browser.open({ url: this.info.link });
         }
 
-        getAuthToken().pipe(
-            first(),
-            filter(authToken => authToken != null),
-            switchMap(authToken => this.tilesService.requestSsoServiceToken(this.info.ssoService, authToken))
-        ).subscribe(serviceToken => {
-            if (!serviceToken) {
-                console.warn('No service token associated to url.');
-                return;
-            }
-
-            return Browser.open({url: this.info.link.replace('{st}', serviceToken)});
-        });
-  }
+        this.ssoService.getSsoExternalLink({
+            urlTemplate: this.info.link,
+            service: this.info.ssoService
+        })
+        .subscribe(url => Browser.open({url }));
+    }
 }
