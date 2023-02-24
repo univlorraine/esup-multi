@@ -37,6 +37,9 @@
       "@ul/notifications": [
         "dist/notifications"
       ],
+      "@ul/reservation": [
+        "dist/reservation"
+      ],
       "@ul/important-news": [
         "dist/important-news"
       ]

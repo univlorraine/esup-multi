@@ -86,9 +86,15 @@
               },
               {
                 "glob": "**/*",
+                "input": "projects/reservation/assets/i18n",
+                "output": "/assets/i18n/reservation"
+              },
+              {
+                "glob": "**/*",
                 "input": "projects/important-news/assets/i18n",
                 "output": "/assets/i18n/important-news"
               }
+
             ],
             "styles": ["src/theme/variables.scss", "src/global.scss"],
             "scripts": [],
@@ -629,6 +635,46 @@
           }
         }
 
+      }
+    },
+    "reservation": {
+      "projectType": "library",
+      "root": "projects/reservation",
+      "sourceRoot": "projects/reservation/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/reservation/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/reservation/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/reservation/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/reservation/src/test.ts",
+            "tsConfig": "projects/reservation/tsconfig.spec.json",
+            "karmaConfig": "projects/reservation/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/reservation/**/*.ts",
+              "projects/reservation/**/*.html"
+            ]
+          }
+        }
       }
     },
     "important-news": {

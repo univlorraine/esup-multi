@@ -11,6 +11,7 @@ import { ImportantNewsModule } from '@ul/important-news';
 import { MapModule } from '@ul/map';
 import { NotificationsModule } from '@ul/notifications';
 import { PreferencesPageModule } from '@ul/preferences';
+import { ReservationModule } from '@ul/reservation';
 import { RssPageModule } from '@ul/rss';
 import { ScheduleModule } from '@ul/schedule';
 import { ProjectModuleService, translationsLoaderFactory } from '@ul/shared';
@@ -63,6 +64,10 @@ import { ErrorModule } from './error/error.module';
     NotificationsModule.forRoot({
       numberOfNotificationsOnFirstLoad: 20,
       numberOfNotificationsToLoadOnScroll: 10
+    }),
+    ReservationModule.forRoot({
+      reservationSsoServiceName: 'https://resa-espace.univ-lorraine.fr/reservationsalles/Authentification.aspx',
+      reservationSsoUrlTemplate: 'https://resa-espace.univ-lorraine.fr/reservationsalles/Authentification.aspx?ticket={st}',
     }),
     TranslateModule.forRoot({
       loader: {

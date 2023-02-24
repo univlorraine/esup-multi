@@ -1,9 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef, Component, Input, ViewChild, ViewContainerRef } from '@angular/core';
 import { Browser } from '@capacitor/browser';
-import { getAuthToken, ProjectModuleService } from '@ul/shared';
-import { filter, first, switchMap } from 'rxjs/operators';
+import { ProjectModuleService, SsoService } from '@ul/shared';
 import { TranslatedInfo } from '../../../../tiles.repository';
-import { TilesService } from '../../../../tiles.service';
 
 @Component({
 selector: 'app-widget-info',
@@ -15,7 +13,7 @@ export class WidgetInfoComponent implements AfterViewInit {
     @ViewChild('widget', {read: ViewContainerRef}) widgetContainerRef: ViewContainerRef;
 
     constructor(
-        private tilesService: TilesService,
+        private ssoService: SsoService,
         private projectModuleService: ProjectModuleService,
         private cdr: ChangeDetectorRef,
     ) {}
@@ -38,17 +36,10 @@ export class WidgetInfoComponent implements AfterViewInit {
         return Browser.open({ url: this.info.link });
         }
 
-        getAuthToken().pipe(
-            first(),
-            filter(authToken => authToken != null),
-            switchMap(authToken => this.tilesService.requestSsoServiceToken(this.info.ssoService, authToken))
-        ).subscribe(serviceToken => {
-            if (!serviceToken) {
-                console.warn('No service token associated to url.');
-                return;
-            }
-
-            return Browser.open({url: this.info.link.replace('{st}', serviceToken)});
-        });
+        this.ssoService.getSsoExternalLink({
+          urlTemplate: this.info.link,
+          service: this.info.ssoService
+        })
+        .subscribe(url => Browser.open({url }));
   }
 }
