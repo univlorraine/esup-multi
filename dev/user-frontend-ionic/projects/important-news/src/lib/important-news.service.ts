@@ -18,14 +18,6 @@ export class ImportantNewsService {
   ) {
   }
 
-  private getImportantNews(authToken: string): Observable<ImportantNews[]> {
-    const url = `${this.environment.apiEndpoint}/important-news`;
-    const data = {
-      authToken
-    };
-    return this.http.post<ImportantNews[]>(url, data);
-  }
-
   public loadImportantNewsList(): Observable<ImportantNews[]> {
     return from(Network.getStatus()).pipe(
       filter(status => status.connected),
@@ -53,5 +45,13 @@ export class ImportantNewsService {
         content: translation.content
       };
     });
+  }
+
+  private getImportantNews(authToken: string): Observable<ImportantNews[]> {
+    const url = `${this.environment.apiEndpoint}/important-news`;
+    const data = {
+      authToken
+    };
+    return this.http.post<ImportantNews[]>(url, data);
   }
 }
