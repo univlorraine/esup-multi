@@ -15,6 +15,9 @@
         "SERVICE_UNREACHABLE": {
             "TITLE": "Service unreachable",
             "MESSAGE": "The service you're trying to contact is not reachable"
+        },
+        "WARNING": {
+            "TITLE": "Warning"
         }
     }
 }

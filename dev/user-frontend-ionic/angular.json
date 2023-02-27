@@ -93,8 +93,12 @@
                 "glob": "**/*",
                 "input": "projects/important-news/assets/i18n",
                 "output": "/assets/i18n/important-news"
-              }
-
+              },
+              {
+                "glob": "**/*",
+                "input": "projects/clocking/assets/i18n",
+                "output": "/assets/i18n/clocking"
+              }              
             ],
             "styles": ["src/theme/variables.scss", "src/global.scss"],
             "scripts": [],
@@ -716,6 +720,46 @@
           }
         }
 
+      }
+    },
+    "clocking": {
+      "projectType": "library",
+      "root": "projects/clocking",
+      "sourceRoot": "projects/clocking/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/clocking/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/clocking/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/clocking/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/clocking/src/test.ts",
+            "tsConfig": "projects/clocking/tsconfig.spec.json",
+            "karmaConfig": "projects/clocking/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/clocking/**/*.ts",
+              "projects/clocking/**/*.html"
+            ]
+          }
+        }
       }
     }
   },

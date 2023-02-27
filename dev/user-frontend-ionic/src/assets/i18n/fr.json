@@ -15,6 +15,9 @@
         "SERVICE_UNREACHABLE": {
             "TITLE": "Service injoignable",
             "MESSAGE": "Le service que vous essayez de contacter n'est pas joignable"
+        },
+        "WARNING": {
+            "TITLE": "Attention"
         }
     }
 }

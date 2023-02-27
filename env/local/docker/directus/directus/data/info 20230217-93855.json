@@ -83,5 +83,34 @@
 		],
 		"settings_by_role": [],
 		"authorization": null
+	},
+	{
+		"id": 5,
+		"link": "https://agatte.univ-lorraine.fr/login/cas?ticket={st}",
+		"ssoService": "https://agatte.univ-lorraine.fr/login/cas",
+		"status": "published",
+		"widget": "clocking:clocking",
+		"translations": [
+			{
+				"content": "",
+				"info_id": 5,
+				"languages_code": "en",
+				"title": "Your work time"
+			},
+			{
+				"content": "",
+				"info_id": 5,
+				"languages_code": "fr",
+				"title": "Votre temps de travail"
+			}
+		],
+		"authorization": {
+			"type": "ALLOW",
+			"roles": [
+				"staff",
+				"teacher",
+				"phd-student"
+			]
+		}
 	}
 ]
