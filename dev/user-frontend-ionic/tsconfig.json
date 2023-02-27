@@ -42,6 +42,9 @@
       ],
       "@ul/important-news": [
         "dist/important-news"
+      ],
+      "@ul/clocking": [
+        "dist/clocking"
       ]
     },
     "downlevelIteration": true,

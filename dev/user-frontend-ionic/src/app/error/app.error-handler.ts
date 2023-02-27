@@ -2,7 +2,7 @@ import { Injectable, ErrorHandler, Injector } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AlertController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
-import { cleanupPrivateData } from '@ul/shared';
+import { cleanupPrivateData, getExpectedErrorMessage } from '@ul/shared';
 import { Actions } from '@ngneat/effects-ng';
 import { Network } from '@capacitor/network';
 
@@ -39,6 +39,14 @@ export class AppErrorHandler implements ErrorHandler {
       case 401:
         this.actions.dispatch(cleanupPrivateData());
         return this.displayError('UNAUTHENTICATED');
+      case 500:
+        // expected errors (business error case which should display a specific message)
+        const expectedErrorMessage = getExpectedErrorMessage(error)
+        if(expectedErrorMessage) {
+          return this.displayWarning(expectedErrorMessage);
+        }
+        // unexpected errors
+        return this.displayGenericError(error);
       default:
         return this.displayGenericError(error);
     }
@@ -54,6 +62,18 @@ export class AppErrorHandler implements ErrorHandler {
     }
 
     this.translateService = this.injector.get(TranslateService);
+  }
+
+  private async displayWarning(message: string) {
+    const header = this.translateService.instant(`ERROR.WARNING.TITLE`);
+
+    const alert = await this.alertController.create({
+      header,
+      message,
+      buttons: ['OK'],
+    });
+
+    await alert.present();
   }
 
   private async displayError(errorType: string) {

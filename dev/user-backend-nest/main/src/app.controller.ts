@@ -30,6 +30,7 @@ export class AppController {
     @Inject('CONTACTS_SERVICE') private contactsClient: ClientProxy,
     @Inject('IMPORTANT_NEWS_SERVICE') private importantNewsClient: ClientProxy,
     @Inject('NOTIFICATIONS_SERVICE') private notificationsClient: ClientProxy,
+    @Inject('CLOCKING_SERVICE') private clockingClient: ClientProxy,
   ) {}
 
   @Post('/tiles')
@@ -304,5 +305,53 @@ export class AppController {
       },
       {},
     );
+  }
+
+  @Post('/clocking')
+  getClocking(@Request() request) {
+    return this.authClient
+      .send(
+        {
+          cmd: 'getUserOrThrowError',
+        },
+        request.body,
+      )
+      .pipe(
+        concatMap((user) =>
+          this.clockingClient.send(
+            {
+              cmd: 'clocking',
+            },
+            {
+              username: user.username,
+              ip: request.ip,
+            },
+          ),
+        ),
+      );
+  }
+
+  @Post('/clock-in')
+  clockIn(@Request() request) {
+    return this.authClient
+      .send(
+        {
+          cmd: 'getUserOrThrowError',
+        },
+        request.body,
+      )
+      .pipe(
+        concatMap((user) =>
+          this.clockingClient.send(
+            {
+              cmd: 'clockIn',
+            },
+            {
+              username: user.username,
+              ip: request.ip,
+            },
+          ),
+        ),
+      );
   }
 }

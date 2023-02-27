@@ -7,6 +7,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { AuthModule } from '@ul/auth';
 import { CardsPageModule } from '@ul/cards';
+import { ClockingModule } from '@ul/clocking';
 import { ImportantNewsModule } from '@ul/important-news';
 import { MapModule } from '@ul/map';
 import { NotificationsModule } from '@ul/notifications';
@@ -65,6 +66,7 @@ import { ErrorModule } from './error/error.module';
       numberOfNotificationsOnFirstLoad: 20,
       numberOfNotificationsToLoadOnScroll: 10
     }),
+    ClockingModule,
     ReservationModule.forRoot({
       reservationSsoServiceName: 'https://resa-espace.univ-lorraine.fr/reservationsalles/Authentification.aspx',
       reservationSsoUrlTemplate: 'https://resa-espace.univ-lorraine.fr/reservationsalles/Authentification.aspx?ticket={st}',

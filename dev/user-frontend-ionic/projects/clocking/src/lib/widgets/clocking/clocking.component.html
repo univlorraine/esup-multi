@@ -1,0 +1,16 @@
+<ion-row *ngIf="isLoading">
+  <ion-spinner name="dots"></ion-spinner>
+</ion-row>
+<ng-container *ngIf="!isLoading">
+  <ion-row *ngIf="errorMessage" class="ion-padding">
+    <ion-note color="danger">{{errorMessage}}</ion-note>
+  </ion-row>
+  <ion-row *ngIf="!errorMessage" class="ion-align-items-center">
+    {{ 'CLOCKING.YOUR_TIMES' | translate }}: <ion-chip *ngFor="let time of (clocking$ | async)?.times">{{ time }}</ion-chip>
+  </ion-row>
+  <ion-row class="ion-justify-content-center ion-padding-top">
+    <ion-button *ngIf="!clockInLoading" (click)="onClockIn($event)">{{ 'CLOCKING.CLOCK_IN' | translate }}</ion-button>
+    <ion-spinner *ngIf="clockInLoading" name="lines"></ion-spinner>
+  </ion-row>
+</ng-container>
+

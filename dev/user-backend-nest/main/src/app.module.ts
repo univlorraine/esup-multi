@@ -13,6 +13,7 @@ import microserviceRssConfig from './config/microservice-rss.config';
 import microserviceScheduleConfig from './config/microservice-schedule.config';
 import microserviceContactsConfig from './config/microservice-contacts.config';
 import microserviceInfoConfig from './config/microservice-tiles.config';
+import microserviceClockingConfig from './config/microservice-clocking.config';
 import { AuthJwtStrategy } from './security/auth-jwt.strategy';
 
 @Module({
@@ -77,6 +78,13 @@ import { AuthJwtStrategy } from './security/auth-jwt.strategy';
         imports: [ConfigModule.forFeature(microserviceNotificationsConfig)],
         useFactory: (config: ConfigService) =>
           config.get('microservice-notifications'),
+        inject: [ConfigService],
+      },
+      {
+        name: 'CLOCKING_SERVICE',
+        imports: [ConfigModule.forFeature(microserviceClockingConfig)],
+        useFactory: (config: ConfigService) =>
+          config.get('microservice-clocking'),
         inject: [ConfigService],
       },
     ]),
