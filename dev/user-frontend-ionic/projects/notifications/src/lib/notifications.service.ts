@@ -3,7 +3,7 @@ import { Inject, Injectable } from '@angular/core';
 import { getAuthToken } from '@ul/shared';
 import { Observable } from 'rxjs';
 import { filter, switchMap, tap } from 'rxjs/operators';
-import { addNotifications, Channel, Notification, setNotifications } from './notifications.repository';
+import { addNotifications, Channel, Notification, setNotifications, TranslatedChannel } from './notifications.repository';
 
 @Injectable({
   providedIn: 'root'
@@ -47,5 +47,17 @@ export class NotificationsService {
         }
       })
     );
+  }
+
+  public mapToTranslatedChannels(channels, currentLanguage): TranslatedChannel[] {
+    const translated: TranslatedChannel[] = [];
+    channels.map(channel => {
+      const translation =
+        channel.translations.find((t) => t.languages_code === currentLanguage) ||
+        channel.translations.find((t) => t.languages_code === this.environment.defaultLanguage) ||
+        channel.translations[0];
+      translated.push({label: translation.label, code: channel.name});
+    });
+    return translated;
   }
 }

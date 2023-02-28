@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { APP_INITIALIZER, ModuleWithProviders, NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { Capacitor } from '@capacitor/core';
 import { Device } from '@capacitor/device';
 import { PushNotifications, Token } from '@capacitor/push-notifications';
@@ -30,7 +31,8 @@ const initModule = (projectModuleService: ProjectModuleService) =>
     CommonModule,
     IonicModule,
     NotificationsRoutingModule,
-    TranslateModule
+    TranslateModule,
+    ReactiveFormsModule
   ],
   declarations: [
     NotificationsPage,

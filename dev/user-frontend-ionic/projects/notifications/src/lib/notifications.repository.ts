@@ -42,6 +42,10 @@ interface Translation {
   languages_code: string;
   label: string;
 }
+export interface TranslatedChannel {
+  code: string;
+  label: string;
+}
 
 const notificationsStore = createStore(
   { name: STORE_NAME },
