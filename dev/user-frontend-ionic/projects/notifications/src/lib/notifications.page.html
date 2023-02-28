@@ -1,11 +1,45 @@
-<ion-content>
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{ "NOTIFICATIONS.MENU" | translate }}</ion-title>
+    <ion-button slot="end" id="click-trigger" fill="clear">
+      <ion-icon name="filter-outline"></ion-icon>
+    </ion-button>
+    <ion-popover trigger="click-trigger" triggerAction="click">
+      <ng-template>
+        <ion-list>
+          <ion-row class="ion-justify-content-center">
+            <ion-text>{{ "NOTIFICATIONS.FILTERS" | translate }}</ion-text>
+          </ion-row>
+          <form [formGroup]="form" *ngIf="(translatedChannels$ | async) as translatedChannels">
+            <ion-item formArrayName="channelsForm" *ngFor="let channel of channelsForm.controls; let i = index">
+              <ion-label class="ion-text-wrap" for="terms">{{translatedChannels[i].label}}</ion-label>
+              <ion-checkbox [formControlName]="i"></ion-checkbox>
+            </ion-item>
+          </form>
+        </ion-list>
+      </ng-template>
+    </ion-popover>
+  </ion-toolbar>
+</ion-header>
+<ion-toolbar>
+  <ion-list>
+      <ion-chip *ngFor="let channel of channelsSelected$ | async" (click)="removeChannelFromFilter(channel.code)">
+        {{channel.label}}
+        <ion-icon name="close-circle-outline"></ion-icon>
+      </ion-chip>
+  </ion-list>
+</ion-toolbar>
+<ion-content *ngIf="(filteredNotifications$ | async) as filteredNotifications">
   <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ion-progress-bar *ngIf="isLoading" type="indeterminate" color="primary"></ion-progress-bar>
-  <ng-container *ngIf="(notificationsIsEmpty$ | async) === false">
+  <ng-container *ngIf="filteredNotifications.length > 0">
     <ion-list>
-      <ion-item class="ion-margin-bottom" *ngFor="let notification of (notifications$ | async)"
+      <ion-item class="ion-margin-bottom" *ngFor="let notification of filteredNotifications"
        [ngClass]="{'notification-unread': notification.state === 'UNREAD'}">
         <div class="notification-color-bar" [ngStyle]="{'background-color': notification.color}"></div>
         <ion-grid class="ion-margin-start">
@@ -46,7 +80,7 @@
     </ion-infinite-scroll>
   </ng-container>
 
-  <ng-container *ngIf="(notificationsIsEmpty$ | async)">
+  <ng-container *ngIf="filteredNotifications.length === 0">
     <ion-note> {{ "NOTIFICATIONS.NO_DATA" | translate }} </ion-note>
   </ng-container>
 </ion-content>
