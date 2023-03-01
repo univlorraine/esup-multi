@@ -1,0 +1,128 @@
+[
+	{
+		"color": "#FB3737",
+		"icon": "warning-outline",
+		"name": "ALERT",
+		"id": 7,
+		"appsRouterLink": null,
+		"translations": [
+			{
+				"id": 1,
+				"channels_id": 7,
+				"label": "ALERT",
+				"languages_code": "en"
+			},
+			{
+				"id": 2,
+				"channels_id": 7,
+				"label": "ALERTE",
+				"languages_code": "fr"
+			}
+		]
+	},
+	{
+		"color": "#12F86A",
+		"icon": "home-outline",
+		"name": "ETAB",
+		"id": 8,
+		"appsRouterLink": null,
+		"translations": [
+			{
+				"id": 3,
+				"channels_id": 8,
+				"label": "Establishment info",
+				"languages_code": "en"
+			},
+			{
+				"id": 4,
+				"channels_id": 8,
+				"label": "Infos établissement",
+				"languages_code": "fr"
+			}
+		]
+	},
+	{
+		"color": "#4F4DFF",
+		"icon": "calendar-outline",
+		"name": "EDT",
+		"id": 9,
+		"appsRouterLink": "/schedule",
+		"translations": [
+			{
+				"id": 5,
+				"channels_id": 9,
+				"label": "Infos emploi du temps",
+				"languages_code": "fr"
+			},
+			{
+				"id": 6,
+				"channels_id": 9,
+				"label": "Schedule  info",
+				"languages_code": "en"
+			}
+		]
+	},
+	{
+		"color": "#7AFF95",
+		"icon": "home-outline",
+		"name": "CMP",
+		"id": 10,
+		"appsRouterLink": null,
+		"translations": [
+			{
+				"id": 7,
+				"channels_id": 10,
+				"label": "Infos composante",
+				"languages_code": "fr"
+			},
+			{
+				"id": 8,
+				"channels_id": 10,
+				"label": " Component Info",
+				"languages_code": "en"
+			}
+		]
+	},
+	{
+		"color": "#FFCF24",
+		"icon": "barbell-outline",
+		"name": "SUAPS",
+		"id": 11,
+		"appsRouterLink": null,
+		"translations": [
+			{
+				"id": 9,
+				"channels_id": 11,
+				"label": "Sports",
+				"languages_code": "fr"
+			},
+			{
+				"id": 10,
+				"channels_id": 11,
+				"label": "Sports",
+				"languages_code": "en"
+			}
+		]
+	},
+	{
+		"color": "#B02BEE",
+		"icon": "school-outline",
+		"name": "SCOL",
+		"id": 12,
+		"appsRouterLink": null,
+		"translations": [
+			{
+				"id": 11,
+				"channels_id": 12,
+				"label": "Scolarité",
+				"languages_code": "fr"
+			},
+			{
+				"id": 12,
+				"channels_id": 12,
+				"label": "Schooling",
+				"languages_code": "en"
+			}
+		]
+	}
+]

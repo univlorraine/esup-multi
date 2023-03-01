@@ -11,25 +11,25 @@
 			{
 				"apps_id": 1,
 				"content": "Find your student card valid throughout Europe and your UL student card",
-				"id": 1,
+				"id": 15,
 				"languages_code": "en",
-				"title": "My student cards",
 				"searchKeywords": [
 					"pass",
 					"access",
 					"identity"
-				]
+				],
+				"title": "My student cards"
 			},
 			{
 				"apps_id": 1,
 				"content": "Retrouvez votre carte d'étudiant valable dans toute l'Europe ainsi que votre carte d'étudiant UL",
-				"id": 2,
+				"id": 16,
 				"languages_code": "fr",
-				"title": "Mes cartes d'étudiant",
 				"searchKeywords": [
 					"cantine",
 					"identifiant"
-				]
+				],
+				"title": "Mes cartes d'étudiant"
 			}
 		],
 		"settings_by_role": [],
@@ -55,23 +55,23 @@
 				"content": "Cette carte permet de justifier de votre statut à l'UL et de votre inscription au SUAPS",
 				"id": 3,
 				"languages_code": "fr",
-				"title": "Carte UL",
 				"searchKeywords": [
 					"professeur",
 					"cantine"
-				]
+				],
+				"title": "Carte UL"
 			},
 			{
 				"apps_id": 2,
 				"content": "This card allows you to prove your status at UL and your registration at SUAPS",
 				"id": 4,
 				"languages_code": "en",
-				"title": "UL card",
 				"searchKeywords": [
 					"pass",
 					"professional pass",
 					"prof"
-				]
+				],
+				"title": "UL card"
 			}
 		],
 		"settings_by_role": [],
@@ -101,16 +101,16 @@
 				"content": "Find all POI about your faculty and their coordinates on a map.",
 				"id": 5,
 				"languages_code": "en",
-				"title": "Map",
-				"searchKeywords": null
+				"searchKeywords": null,
+				"title": "Map"
 			},
 			{
 				"apps_id": 3,
 				"content": "Retrouvez tous les lieux d'intéret de votre faculté et leurs coordonnées sur une carte.",
 				"id": 6,
 				"languages_code": "fr",
-				"title": "Plan",
-				"searchKeywords": null
+				"searchKeywords": null,
+				"title": "Plan"
 			}
 		],
 		"settings_by_role": [],
@@ -130,16 +130,16 @@
 				"content": "Find all your events",
 				"id": 7,
 				"languages_code": "en",
-				"title": "Schedule",
-				"searchKeywords": null
+				"searchKeywords": null,
+				"title": "Schedule"
 			},
 			{
 				"apps_id": 4,
 				"content": "Retrouvez tous vos évènements",
 				"id": 8,
 				"languages_code": "fr",
-				"title": "Emploi du temps",
-				"searchKeywords": null
+				"searchKeywords": null,
+				"title": "Emploi du temps"
 			}
 		],
 		"settings_by_role": [],
@@ -157,6 +157,42 @@
 		}
 	},
 	{
+		"id": 5,
+		"status": "published",
+		"position": null,
+		"sort": null,
+		"path": "contacts",
+		"icon": "at",
+		"widget": null,
+		"translations": [
+			{
+				"apps_id": 5,
+				"content": "Find the contact details of a person, a department of the University of Lorraine",
+				"id": 1,
+				"languages_code": "en",
+				"searchKeywords": [
+					"pass",
+					"access",
+					"identity"
+				],
+				"title": "Contacts"
+			},
+			{
+				"apps_id": 5,
+				"content": "Retrouvez les coordonnées d'une personne, d'un service de l'Université de Lorraine",
+				"id": 2,
+				"languages_code": "fr",
+				"searchKeywords": [
+					"cantine",
+					"identifiant"
+				],
+				"title": "Annuaire"
+			}
+		],
+		"settings_by_role": [],
+		"authorization": null
+	},
+	{
 		"id": 13,
 		"status": "published",
 		"position": 1,
@@ -170,16 +206,16 @@
 				"content": "Here are the important news to check out \nfor your student education:",
 				"id": 9,
 				"languages_code": "en",
-				"title": "Important News !",
-				"searchKeywords": null
+				"searchKeywords": null,
+				"title": "Important News !"
 			},
 			{
 				"apps_id": 13,
 				"content": "Voici les nouvelles importantes à consulter pour votre scolarité d'étudiant : ",
 				"id": 10,
 				"languages_code": "fr",
-				"title": "Nouvelles Importantes !",
-				"searchKeywords": null
+				"searchKeywords": null,
+				"title": "Nouvelles Importantes !"
 			}
 		],
 		"settings_by_role": [],
@@ -205,16 +241,16 @@
 				"content": "Here are the important news to check out for staff members:",
 				"id": 11,
 				"languages_code": "en",
-				"title": "Important News !",
-				"searchKeywords": null
+				"searchKeywords": null,
+				"title": "Important News !"
 			},
 			{
 				"apps_id": 14,
 				"content": "Voici les nouvelles importantes à consulter pour les membres du staff: ",
 				"id": 12,
 				"languages_code": "fr",
-				"title": "Nouvelles Importantes !",
-				"searchKeywords": null
+				"searchKeywords": null,
+				"title": "Nouvelles Importantes !"
 			}
 		],
 		"settings_by_role": [],
@@ -238,6 +274,7 @@
 			{
 				"apps_id": 19,
 				"content": null,
+				"id": 13,
 				"languages_code": "en",
 				"searchKeywords": null,
 				"title": "Room reservation"
@@ -245,6 +282,7 @@
 			{
 				"apps_id": 19,
 				"content": null,
+				"id": 14,
 				"languages_code": "fr",
 				"searchKeywords": null,
 				"title": "Réservation de salle"
@@ -258,29 +296,5 @@
 			],
 			"type": "DISALLOW"
 		}
-	},
-	{
-		"id": 5,
-		"status": "published",
-		"sort": null,
-		"path": "contacts",
-		"icon": "at",
-		"translations": [
-			{
-				"id": 1,
-				"title": "Contacts",
-				"content": "Find the contact details of a person, a department of the University of Lorraine",
-				"languages_code": "en",
-				"apps_id": 1
-			},
-			{
-				"id": 2,
-				"title": "Annuaire",
-				"content": "Retrouvez les coordonnées d'une personne, d'un service de l'Université de Lorraine",
-				"languages_code": "fr",
-				"apps_id": 1
-			}
-		],
-		"authorization": null
 	}
 ]

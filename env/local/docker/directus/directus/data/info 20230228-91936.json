@@ -1,6 +1,6 @@
 [
 	{
-		"date_created": "2023-02-17T09:36:52.591Z",
+		"date_created": "2023-02-27T15:59:47.401Z",
 		"date_updated": "2023-01-26T10:31:42.069Z",
 		"id": 2,
 		"link": "https://arche.univ-lorraine.fr/login/index.php?authCAS=CAS&ticket={st}",
@@ -15,23 +15,23 @@
 				"id": 1,
 				"info_id": 2,
 				"languages_code": "fr",
-				"title": "Test SSO",
-				"searchKeywords": null
+				"searchKeywords": null,
+				"title": "Test SSO"
 			},
 			{
 				"content": "The steps involved in applying to college vary depending on your profile. Knowing these steps is the best way to ensure that you will be able to enroll with confidence.",
 				"id": 5,
 				"info_id": 2,
 				"languages_code": "en",
-				"title": "SSO test",
-				"searchKeywords": null
+				"searchKeywords": null,
+				"title": "SSO test"
 			}
 		],
 		"settings_by_role": [],
 		"authorization": null
 	},
 	{
-		"date_created": "2023-02-17T09:36:52.620Z",
+		"date_created": "2023-02-27T15:59:47.453Z",
 		"date_updated": "2023-01-26T10:31:49.545Z",
 		"id": 3,
 		"link": "https://factuel.univ-lorraine.fr/node/21254",
@@ -46,23 +46,23 @@
 				"id": 2,
 				"info_id": 3,
 				"languages_code": "en",
-				"title": "The OTO twin project rewarded",
-				"searchKeywords": null
+				"searchKeywords": null,
+				"title": "The OTO twin project rewarded"
 			},
 			{
 				"content": "Le projet OTO twin récompensé lors des Tremplins de la E-Sante City Healthcare !",
 				"id": 3,
 				"info_id": 3,
 				"languages_code": "fr",
-				"title": "Le projet OTO twin récompensé",
-				"searchKeywords": null
+				"searchKeywords": null,
+				"title": "Le projet OTO twin récompensé"
 			}
 		],
 		"settings_by_role": [],
 		"authorization": null
 	},
 	{
-		"date_created": "2023-02-17T09:36:52.649Z",
+		"date_created": "2023-02-27T15:59:47.467Z",
 		"date_updated": "2023-01-26T10:15:45.212Z",
 		"id": 4,
 		"link": null,
@@ -77,40 +77,50 @@
 				"id": 4,
 				"info_id": 4,
 				"languages_code": "fr",
-				"title": "Contenu sans lien",
-				"searchKeywords": null
+				"searchKeywords": null,
+				"title": "Contenu sans lien"
 			}
 		],
 		"settings_by_role": [],
 		"authorization": null
 	},
 	{
+		"date_created": "2023-02-27T15:59:47.480Z",
+		"date_updated": null,
 		"id": 5,
 		"link": "https://agatte.univ-lorraine.fr/login/cas?ticket={st}",
 		"ssoService": "https://agatte.univ-lorraine.fr/login/cas",
+		"position": null,
+		"sort": null,
 		"status": "published",
 		"widget": "clocking:clocking",
 		"translations": [
 			{
 				"content": "",
+				"id": 8,
 				"info_id": 5,
 				"languages_code": "en",
+				"searchKeywords": null,
 				"title": "Your work time"
 			},
 			{
 				"content": "",
+				"id": 9,
 				"info_id": 5,
 				"languages_code": "fr",
+				"searchKeywords": null,
 				"title": "Votre temps de travail"
 			}
 		],
+		"settings_by_role": [],
 		"authorization": {
-			"type": "ALLOW",
+			"id": 9,
 			"roles": [
 				"staff",
 				"teacher",
 				"phd-student"
-			]
+			],
+			"type": "ALLOW"
 		}
 	}
 ]

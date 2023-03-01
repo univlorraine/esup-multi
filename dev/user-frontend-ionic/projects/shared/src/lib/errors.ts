@@ -8,4 +8,4 @@ export const getExpectedErrorMessage = (err: HttpErrorResponse): string | null =
         return subErrorMessage.slice(expectedErrorPrefix.length);
     }
     return null;
-}
+};

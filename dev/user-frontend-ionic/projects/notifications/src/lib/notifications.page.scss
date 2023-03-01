@@ -2,6 +2,11 @@
     --background: #f4f4f4;
 }
 
+.notification-right-col{
+    display: flex; 
+    flex-direction: column; 
+    justify-content: space-between;
+}
 
 .notification-color-bar {
     height: 100%;

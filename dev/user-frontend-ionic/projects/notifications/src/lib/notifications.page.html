@@ -26,10 +26,10 @@
 </ion-header>
 <ion-toolbar>
   <ion-list>
-      <ion-chip *ngFor="let channel of channelsSelected$ | async" (click)="removeChannelFromFilter(channel.code)">
-        {{channel.label}}
-        <ion-icon name="close-circle-outline"></ion-icon>
-      </ion-chip>
+    <ion-chip *ngFor="let channel of channelsSelected$ | async" (click)="removeChannelFromFilter(channel.code)">
+      {{channel.label}}
+      <ion-icon name="close-circle-outline"></ion-icon>
+    </ion-chip>
   </ion-list>
 </ion-toolbar>
 <ion-content *ngIf="(filteredNotifications$ | async) as filteredNotifications">
@@ -40,7 +40,7 @@
   <ng-container *ngIf="filteredNotifications.length > 0">
     <ion-list>
       <ion-item class="ion-margin-bottom" *ngFor="let notification of filteredNotifications"
-       [ngClass]="{'notification-unread': notification.state === 'UNREAD'}">
+        [ngClass]="{'notification-unread': notification.state === 'UNREAD'}">
         <div class="notification-color-bar" [ngStyle]="{'background-color': notification.color}"></div>
         <ion-grid class="ion-margin-start">
           <ion-row>
@@ -48,17 +48,24 @@
               <ion-row class="ion-align-items-center ion-margin-bottom ion-nowrap">
                 <ion-icon [name]="notification.icon" size="large"></ion-icon>
                 <ion-label class="ion-margin-start">
-                    <h2 class="ion-text-wrap">{{notification.title}}</h2>
-                    <p class="ion-text-wrap">{{notification.creationDate | completeLocalDateAndTime}}</p>
+                  <h2 class="ion-text-wrap">{{notification.title}}</h2>
+                  <p class="ion-text-wrap">{{notification.creationDate | completeLocalDateAndTime}}</p>
                 </ion-label>
               </ion-row>
               <ion-row>
                 <ion-text>{{notification.message}}</ion-text>
               </ion-row>
             </ion-col>
-            <ion-col size="2">
-              <ion-icon class="ion-float-right" name="ellipsis-horizontal-outline"></ion-icon>
+            <ion-col size="2" class="notification-right-col">
+              <ion-icon class="ion-align-self-end" name="ellipsis-horizontal-outline"></ion-icon>
               <div *ngIf="notification.state === 'UNREAD'" class="new-notification-dot"></div>
+              <ion-button *ngIf="notification.appsRouterLink" 
+              class="ion-text-end ion-no-padding" 
+              fill="clear" 
+              [routerLink]="notification.appsRouterLink"
+              size="large">
+                <ion-icon name="arrow-redo-outline" slot="end"></ion-icon>
+              </ion-button>
             </ion-col>
           </ion-row>
         </ion-grid>

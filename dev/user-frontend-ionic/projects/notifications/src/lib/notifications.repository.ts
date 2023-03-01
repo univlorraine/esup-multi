@@ -27,6 +27,7 @@ export interface Notification {
   state: string;
   creationDate: string;
   color: string;
+  appsRouterLink?: string;
 }
 
 export interface Channel {
@@ -35,6 +36,7 @@ export interface Channel {
   color?: string;
   translations?: Translation[];
   icon?: string;
+  appsRouterLink?: string;
 }
 
 interface Translation {
@@ -72,6 +74,7 @@ export const notifications$: Observable<Notification[]> = combineLatest(
       const matchedChannel = channels.find(channel => notification.channel === channel.name);
       notification.color = matchedChannel?.color ? matchedChannel.color : defaultNotificationColor;
       notification.icon = matchedChannel?.icon ? matchedChannel.icon : defaultNotificationIcon;
+      notification.appsRouterLink = matchedChannel?.appsRouterLink ? matchedChannel.appsRouterLink : null;
     }
     );
     return notifications;
