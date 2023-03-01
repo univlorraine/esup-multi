@@ -13,7 +13,7 @@ import {
   ExternalApiClockingReplyDto,
 } from './clocking.dto';
 
-const externalApiDayFormat = 'dd-MM-yyyy';
+const externalApiDayFormat = 'dd/MM/yyyy';
 const apiDayFormat = 'yyyy-MM-dd';
 @Injectable()
 export class ClockingService {
