@@ -13,7 +13,6 @@ import {
   ExternalApiClockingReplyDto,
 } from './clocking.dto';
 
-const externalApiDayFormat = 'dd/MM/yyyy';
 const apiDayFormat = 'yyyy-MM-dd';
 @Injectable()
 export class ClockingService {
@@ -39,7 +38,6 @@ export class ClockingService {
       login: query.username,
       ip: query.ip,
       top,
-      date: format(now, externalApiDayFormat),
     };
 
     return this.httpService
@@ -64,7 +62,7 @@ export class ClockingService {
           }
 
           // Unexpected error
-          const errorMessage = `Unable to get clockin info with username '${query.username}' from ip '${query.ip}'`;
+          const errorMessage = `Unable to get clocking info with username '${query.username}' from ip '${query.ip}'`;
           this.logger.error(errorMessage, err);
           throw new RpcException(errorMessage);
         }),

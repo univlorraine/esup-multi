@@ -2,7 +2,6 @@ export interface ExternalApiClockingQueryDto {
   login: string;
   ip: string;
   top: boolean;
-  date: string;
 }
 
 export type ExternalApiClockingReplyDto = string[];
