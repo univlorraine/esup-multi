@@ -22,6 +22,7 @@ export interface DirectusChannel {
   translations?: DirectusChannelTranslation[];
   icon?: string;
   color?: string;
+  appsRouterLink?: string;
 }
 
 export interface DirectusResponse<T> {

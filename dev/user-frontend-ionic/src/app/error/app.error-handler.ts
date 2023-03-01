@@ -41,7 +41,7 @@ export class AppErrorHandler implements ErrorHandler {
         return this.displayError('UNAUTHENTICATED');
       case 500:
         // expected errors (business error case which should display a specific message)
-        const expectedErrorMessage = getExpectedErrorMessage(error)
+        const expectedErrorMessage = getExpectedErrorMessage(error);
         if(expectedErrorMessage) {
           return this.displayWarning(expectedErrorMessage);
         }
