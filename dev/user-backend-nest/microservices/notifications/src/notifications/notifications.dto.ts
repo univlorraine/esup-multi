@@ -33,3 +33,8 @@ export interface DirectusChannelTranslation {
   languages_code: string;
   label: string;
 }
+
+export interface NotificationDeleteQueryDto {
+  id: number;
+  login: string;
+}

@@ -307,6 +307,29 @@ export class AppController {
     );
   }
 
+  @Delete('/notifications/delete')
+  deteleNotifications(@Body() body) {
+    return this.authClient
+      .send(
+        {
+          cmd: 'getUserOrThrowError',
+        },
+        body,
+      )
+      .pipe(
+        concatMap((user) =>
+          this.notificationsClient.send(
+            {
+              cmd: 'notificationsDelete',
+            },
+            {
+              id: body.id,
+              login: user.username,
+            },
+          ),
+        ),
+      );
+  }
   @Post('/clocking')
   getClocking(@Request() request) {
     return this.authClient

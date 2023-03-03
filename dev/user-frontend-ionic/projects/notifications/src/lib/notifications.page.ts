@@ -2,10 +2,11 @@ import { Component, Inject, OnDestroy } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
 import { currentLanguage$ } from '@ul/shared';
-import { combineLatest, Observable, pipe, Subscription } from 'rxjs';
-import { catchError, finalize, first, map, filter, tap } from 'rxjs/operators';
+import { combineLatest, EMPTY, Observable, pipe, Subscription } from 'rxjs';
+import { catchError, finalize, first, map, filter, tap, take, switchMap } from 'rxjs/operators';
 import { NotificationsModuleConfig, NOTIFICATIONS_CONFIG } from './notifications.config';
-import { Channel, Notification, notifications$, setChannels, channels$, TranslatedChannel } from './notifications.repository';
+import { Channel, Notification, notifications$, setChannels, channels$, TranslatedChannel,
+  setNotifications } from './notifications.repository';
 import { NotificationsService } from './notifications.service';
 
 @Component({
@@ -116,6 +117,17 @@ export class NotificationsPage implements OnDestroy {
           this.endOfNotifications = true;
         }
       });
+  }
+
+  deleteNotification(id: number) {
+    this.notificationsService.deleteNotification(id)
+    .pipe(
+      switchMap((res) => notifications$),
+      first(),
+    )
+    .subscribe((notifications: Notification[]) => {
+      setNotifications(notifications.filter(notification => notification.id !== id));
+    });
   }
 
   async removeChannelFromFilter(channelCode: string) {

@@ -7,6 +7,7 @@ import { DirectusApi, UlApi } from 'src/config/configuration.interface';
 import {
   DirectusChannel,
   DirectusResponse,
+  NotificationDeleteQueryDto,
   NotificationDto,
   NotificationsQueryDto,
 } from './notifications.dto';
@@ -72,6 +73,27 @@ export class NotificationsService {
           throw new RpcException(errorMessage);
         }),
         map((res) => res.data.data),
+      );
+  }
+
+  public deleteNotification(query: NotificationDeleteQueryDto) {
+    return this.httpService
+      .delete<NotificationDto[]>(this.ulApiConfig.notificationsUrl, {
+        headers: {
+          Accept: 'application/json',
+          Authorization: `Bearer ${this.ulApiConfig.bearerToken}`,
+        },
+        data: query,
+      })
+      .pipe(
+        catchError((err) => {
+          const errorMessage = `Unable to delete user notification with id '${query.id}' and username '${query.login}''`;
+          this.logger.error(errorMessage, err);
+          throw new RpcException(errorMessage);
+        }),
+        map((res) => {
+          return res.status;
+        }),
       );
   }
 }

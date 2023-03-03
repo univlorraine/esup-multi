@@ -3,6 +3,7 @@ import { MessagePattern } from '@nestjs/microservices';
 import { Observable } from 'rxjs';
 import {
   DirectusChannel,
+  NotificationDeleteQueryDto,
   NotificationDto,
   NotificationsQueryDto,
 } from './notifications.dto';
@@ -20,5 +21,10 @@ export class NotificationsController {
   @MessagePattern({ cmd: 'notifications/channels' })
   getChannels(): Observable<DirectusChannel[]> {
     return this.notificationsService.getChannels();
+  }
+
+  @MessagePattern({ cmd: 'notificationsDelete' })
+  deleteNotification(data: NotificationDeleteQueryDto) {
+    return this.notificationsService.deleteNotification(data);
   }
 }

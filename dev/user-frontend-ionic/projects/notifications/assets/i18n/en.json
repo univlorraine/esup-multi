@@ -3,6 +3,7 @@
     "NO_DATA": "No new notifications",
     "END_OF_NOTIFICATIONS": "End of notifications",
     "LOAD_MORE_ERROR": "Error loading notifications",
-    "FILTERS": "Filters"
+    "FILTERS": "Filters",
+    "DELETE": "Delete"
 }
 
