@@ -3,5 +3,6 @@
     "NO_DATA": "Pas de nouvelles notifications.",
     "END_OF_NOTIFICATIONS": "Fin des notifications",
     "LOAD_MORE_ERROR": "Erreur lors du chargement des notifications",
-    "FILTERS": "Filtres"
+    "FILTERS": "Filtres",
+    "DELETE": "Supprimer"
 }

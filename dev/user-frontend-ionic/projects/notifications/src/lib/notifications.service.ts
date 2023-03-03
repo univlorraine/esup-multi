@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { getAuthToken } from '@ul/shared';
 import { Observable } from 'rxjs';
-import { filter, switchMap, tap } from 'rxjs/operators';
+import { filter, first, switchMap, tap } from 'rxjs/operators';
 import { addNotifications, Channel, Notification, setNotifications, TranslatedChannel } from './notifications.repository';
 
 @Injectable({
@@ -49,6 +49,14 @@ export class NotificationsService {
     );
   }
 
+  public deleteNotification(id: number)  {
+    return getAuthToken().pipe(
+      first(),
+      filter(authToken => authToken != null),
+      switchMap(authToken => this.removeNotification(authToken, id)),
+    );
+  }
+
   public mapToTranslatedChannels(channels, currentLanguage): TranslatedChannel[] {
     const translated: TranslatedChannel[] = [];
     channels.map(channel => {
@@ -59,5 +67,15 @@ export class NotificationsService {
       translated.push({label: translation.label, code: channel.name});
     });
     return translated;
+  }
+
+  private removeNotification(authToken: string, id: number) {
+    const url = `${this.environment.apiEndpoint}/notifications/delete`;
+    const data = {
+      authToken,
+      id
+    };
+
+    return this.http.delete(url, {body: data});
   }
 }
