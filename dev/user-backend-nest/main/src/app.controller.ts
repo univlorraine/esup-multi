@@ -2,14 +2,10 @@ import {
   Body,
   Controller,
   Delete,
-  Get,
-  Header,
-  Inject,
-  Param,
-  Post,
+  Get, Inject, Post,
   Request,
   UseGuards,
-  UseInterceptors,
+  UseInterceptors
 } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { AuthGuard } from '@nestjs/passport';
@@ -31,7 +27,7 @@ export class AppController {
     @Inject('IMPORTANT_NEWS_SERVICE') private importantNewsClient: ClientProxy,
     @Inject('NOTIFICATIONS_SERVICE') private notificationsClient: ClientProxy,
     @Inject('CLOCKING_SERVICE') private clockingClient: ClientProxy,
-  ) {}
+  ) { }
 
   @Post('/tiles')
   info(@Body() body) {
@@ -247,30 +243,6 @@ export class AppController {
       );
   }
 
-  @Post('/notifications')
-  notifications(@Body() body) {
-    return this.authClient
-      .send(
-        {
-          cmd: 'getUserOrThrowError',
-        },
-        body,
-      )
-      .pipe(
-        concatMap((user) =>
-          this.notificationsClient.send(
-            {
-              cmd: 'notifications',
-            },
-            {
-              username: user.username,
-              offset: body.offset,
-              length: body.length,
-            },
-          ),
-        ),
-      );
-  }
 
   @Post('/contacts')
   contacts(@Body() body) {
@@ -297,11 +269,61 @@ export class AppController {
       );
   }
 
+  @Post('/notifications')
+  notifications(@Body() body) {
+    return this.authClient
+      .send(
+        {
+          cmd: 'getUserOrThrowError',
+        },
+        body,
+      )
+      .pipe(
+        concatMap((user) =>
+          this.notificationsClient.send(
+            {
+              cmd: 'notifications',
+            },
+            {
+              username: user.username,
+              offset: body.offset,
+              length: body.length,
+            },
+          ),
+        ),
+      );
+  }
+
+  @Post('/notifications/read')
+  notificationsRead(@Body() body) {
+    return this.authClient
+      .send(
+        {
+          cmd: 'getUserOrThrowError',
+        },
+        body,
+      )
+      .pipe(
+        concatMap((user) =>
+          this.notificationsClient.send(
+            {
+              cmd: 'notificationsRead',
+            },
+            {
+              username: user.username,
+              notificationIds: body.notificationIds,
+            },
+          ),
+        ),
+      );
+  }
+
+
   @Get('/notifications/channels')
   notificationsChannels(@Body() body) {
     return this.notificationsClient.send(
       {
-        cmd: 'notifications/channels',
+        cmd: 'notificationsChannels',
       },
       {},
     );

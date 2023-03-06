@@ -3,9 +3,13 @@ export interface NotificationsQueryDto {
   offset: number;
   length: number;
 }
+export interface MarkAsReadQueryDto {
+  username: string;
+  notificationIds: string[];
+}
 
 export interface NotificationDto {
-  id: number;
+  id: string;
   author: string;
   channel: string;
   color: string;
@@ -19,6 +23,7 @@ export interface NotificationDto {
 export interface DirectusChannel {
   id: number;
   name: string;
+  code: string;
   translations?: DirectusChannelTranslation[];
   icon?: string;
   color?: string;

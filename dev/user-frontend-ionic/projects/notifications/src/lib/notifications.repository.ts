@@ -18,7 +18,7 @@ export interface NotificationsProps {
 }
 
 export interface Notification {
-  id: number;
+  id: string;
   author: string;
   channel: string;
   icon: string;
