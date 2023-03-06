@@ -49,7 +49,7 @@ export class NotificationsService {
     );
   }
 
-  public deleteNotification(id: number)  {
+  public deleteNotification(id: string)  {
     return getAuthToken().pipe(
       first(),
       filter(authToken => authToken != null),
@@ -64,12 +64,27 @@ export class NotificationsService {
         channel.translations.find((t) => t.languages_code === currentLanguage) ||
         channel.translations.find((t) => t.languages_code === this.environment.defaultLanguage) ||
         channel.translations[0];
-      translated.push({label: translation.label, code: channel.name});
+      translated.push({ label: translation.label, code: channel.name });
     });
     return translated;
   }
 
-  private removeNotification(authToken: string, id: number) {
+  public markUnreadNotificationsAsRead(notificationIds: string[]): Observable<void> {
+    return getAuthToken().pipe(
+      filter(authToken => authToken != null),
+      switchMap(authToken => {
+        const url = `${this.environment.apiEndpoint}/notifications/read`;
+        const data = {
+          authToken,
+          notificationIds
+        };
+
+        return this.http.post<void>(url, data);
+      })
+    );
+  }
+
+  private removeNotification(authToken: string, id: string) {
     const url = `${this.environment.apiEndpoint}/notifications/delete`;
     const data = {
       authToken,

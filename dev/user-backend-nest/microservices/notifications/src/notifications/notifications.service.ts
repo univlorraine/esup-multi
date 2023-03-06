@@ -7,6 +7,7 @@ import { DirectusApi, UlApi } from 'src/config/configuration.interface';
 import {
   DirectusChannel,
   DirectusResponse,
+  MarkAsReadQueryDto,
   NotificationDeleteQueryDto,
   NotificationDto,
   NotificationsQueryDto,
@@ -29,10 +30,7 @@ export class NotificationsService {
   public getNotifications(
     query: NotificationsQueryDto,
   ): Observable<NotificationDto[]> {
-    const url = this.ulApiConfig.notificationsUrl
-      .replace(/\{username\}/g, query.username)
-      .replace(/\{offset\}/g, query.offset.toString())
-      .replace(/\{length\}/g, query.length.toString());
+    const url = `${this.ulApiConfig.notificationsUrl}/${query.username}?offset=${query.offset}&length=${query.length}`;
 
     return this.httpService
       .get<NotificationDto[]>(url, {
@@ -94,6 +92,26 @@ export class NotificationsService {
         map((res) => {
           return res.status;
         }),
+      );
+  }
+
+  markNotificationsAsRead(data: MarkAsReadQueryDto): Observable<void> {
+    const url = `${this.ulApiConfig.notificationsUrl}/read`;
+    return this.httpService
+      .post<void>(url, data, {
+        headers: {
+          Accept: 'application/json',
+          Authorization: `Bearer ${this.ulApiConfig.bearerToken}`,
+        },
+      })
+      .pipe(
+        catchError((err) => {
+          const errorMessage =
+            'An error occurred while marking notifications as read';
+          this.logger.error(errorMessage, err);
+          throw new RpcException(errorMessage);
+        }),
+        map(() => void 0),
       );
   }
 }
