@@ -3,7 +3,7 @@ import {
   Authorization,
   DirectusSettingsByRole,
   DirectusTileTranslation,
-  TileType
+  TileType,
 } from '../tiles.dto';
 
 export interface Info extends AbstractTile {

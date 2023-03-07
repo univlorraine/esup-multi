@@ -22,7 +22,8 @@ const initModule = (projectModuleService: ProjectModuleService) =>
       title: 'NOTIFICATIONS.MENU',
       icon: 'notifications-outline',
       position: 60,
-      path: NotificationsModule.path
+      path: `/${NotificationsModule.path}`,
+      type: 'top',
     }]
   });
 

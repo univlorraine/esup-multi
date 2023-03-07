@@ -15,6 +15,7 @@ import { TilesEffects } from './tiles.effects';
 import { ServiceComponent } from './pages/services/service/service.component';
 import { ServiceAppComponent } from './pages/services/service/service-app/service-app.component';
 import { ServiceInfoComponent } from './pages/services/service/service-info/service-info.component';
+import { TilesService } from './tiles.service';
 
 const initModule = (projectModuleService: ProjectModuleService) =>
   () => projectModuleService.initProjectModule({
@@ -24,12 +25,14 @@ const initModule = (projectModuleService: ProjectModuleService) =>
       title: 'TILES.MENU.WIDGETS',
       icon: 'home',
       position: -1000,
-      path: `${TilesModule.path}/widgets`
+      path: `/${TilesModule.path}/widgets`,
+      type: 'tabs',
     },{
       title: 'TILES.MENU.SERVICES',
       icon: 'apps-sharp',
       position: -900,
-      path: `${TilesModule.path}/services`
+      path: `/${TilesModule.path}/services`,
+      type: 'tabs',
     }]
   });
 
@@ -55,7 +58,11 @@ const initModule = (projectModuleService: ProjectModuleService) =>
   providers: [{
     provide: APP_INITIALIZER,
     useFactory: initModule,
-    deps:[ProjectModuleService],
+    /*
+       Having TilesService as a dep here is mandatory to trigger some initialization logic
+       when module is Loaded (not only when a service page is loaded)
+    */
+    deps:[ProjectModuleService, TilesService],
     multi: true
   }],
 })

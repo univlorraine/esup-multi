@@ -4,7 +4,7 @@
 		"status": "published",
 		"position": 2,
 		"sort": 3,
-		"path": "cards",
+		"path": "/cards",
 		"icon": "card",
 		"widget": null,
 		"translations": [
@@ -46,7 +46,7 @@
 		"status": "published",
 		"position": 2,
 		"sort": 4,
-		"path": "cards",
+		"path": "/cards",
 		"icon": "card",
 		"widget": null,
 		"translations": [
@@ -92,7 +92,7 @@
 		"status": "published",
 		"position": 3,
 		"sort": 5,
-		"path": "map",
+		"path": "/map",
 		"icon": "map",
 		"widget": null,
 		"translations": [
@@ -121,7 +121,7 @@
 		"status": "published",
 		"position": 4,
 		"sort": 6,
-		"path": "schedule",
+		"path": "/schedule",
 		"icon": "calendar",
 		"widget": null,
 		"translations": [
@@ -161,7 +161,7 @@
 		"status": "published",
 		"position": null,
 		"sort": null,
-		"path": "contacts",
+		"path": "/contacts",
 		"icon": "at",
 		"widget": null,
 		"translations": [
@@ -197,7 +197,7 @@
 		"status": "published",
 		"position": 1,
 		"sort": 1,
-		"path": "important-news",
+		"path": "/important-news",
 		"icon": "warning-outline",
 		"widget": "important-news:important-news",
 		"translations": [
@@ -232,7 +232,7 @@
 		"status": "published",
 		"position": 1,
 		"sort": 2,
-		"path": "important-news",
+		"path": "/important-news",
 		"icon": "warning-outline",
 		"widget": "important-news:important-news",
 		"translations": [
@@ -267,7 +267,7 @@
 		"status": "published",
 		"position": 8,
 		"sort": null,
-		"path": "reservation",
+		"path": "/reservation",
 		"icon": "clipboard-outline",
 		"widget": null,
 		"translations": [

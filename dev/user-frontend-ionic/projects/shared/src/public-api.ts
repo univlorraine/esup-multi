@@ -14,4 +14,6 @@ export * from './lib/project-module/translations/translations-loader.factory';
 export * from './lib/shared.actions';
 export * from './lib/store/local-forage';
 export * from './lib/errors';
+export * from './lib/navigation/page-layouts.service';
+export * from './lib/navigation/navigation.service';
 

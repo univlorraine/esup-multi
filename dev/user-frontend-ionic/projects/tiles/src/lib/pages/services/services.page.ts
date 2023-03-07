@@ -22,14 +22,14 @@ export class ServicesPage {
     private tilesService: TilesService,
   ) {
     this.tilesIsEmpty$ = this.tiles$.pipe(map(tiles => tiles.length === 0));
-    this.translatedTiles$ = combineLatest([this.tiles$, currentLanguage$, this.searchQuery$])
+    this.translatedTiles$ = combineLatest([this.tilesService.translatedTiles$, this.searchQuery$])
       .pipe(
-        map(([tiles, currentLanguage, searchQuery]) => this.tilesService.mapToTranslatedTiles([tiles, currentLanguage])
-          .filter(tile => (
-              tile.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-              tile.content?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-              tile.searchKeywords?.some((keyWord) => keyWord.toLowerCase().includes(searchQuery.toLowerCase()))
-            ))
+        map(([tiles, searchQuery]) =>
+          tiles.filter(tile => (
+            tile.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            tile.content?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            tile.searchKeywords?.some((keyWord) => keyWord.toLowerCase().includes(searchQuery.toLowerCase()))
+          ))
         )
       );
   }

@@ -15,7 +15,8 @@ const initModule = (projectModuleService: ProjectModuleService) =>
       title: 'RSS.MENU',
       icon: 'logo-rss',
       position: 50,
-      path: RssPageModule.path
+      path: `/${RssPageModule.path}`,
+      type: 'top'
     }]
   });
 @NgModule({
