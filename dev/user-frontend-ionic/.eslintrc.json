@@ -35,6 +35,10 @@
             "prefix": "app",
             "style": "camelCase"
           }
+        ],
+        "no-console": [ 
+          "error",
+          { "allow": ["warn", "error"] }
         ]
       }
     },

@@ -1,5 +1,5 @@
 import { Injectable, Type } from '@angular/core';
-import { MenuItem, MenuService } from './menu.service';
+import { MenuItem, MenuService, MenuType } from './menu.service';
 import { PreferencesService } from './preferences.service';
 import { TranslationsService } from './translations/translations.service';
 import { Widget, WidgetsService } from './widgets.service';
@@ -51,8 +51,8 @@ export class ProjectModuleService {
         return this.translationsService.getTranslations();
     }
 
-    getMenuItems(): MenuItem[] {
-        return this.menuService.getMenuItems();
+    getMenuItemsByType(menuType: MenuType): MenuItem[] {
+        return this.menuService.getMenuItemsByType(menuType);
     }
 
     getPreferencesComponents(): Type<any>[] {

@@ -19,7 +19,8 @@ const initModule = (projectModuleService: ProjectModuleService) =>
       title: 'AUTH.MENU',
       icon: 'log-in',
       position: 999,
-      path: AuthModule.path
+      path: `/${AuthModule.path}`,
+      type: 'burger'
     }],
     preferencesComponent: PreferencesComponent
   });

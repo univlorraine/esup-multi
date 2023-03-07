@@ -1,7 +1,8 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
-import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
-import { currentLanguage$, ProjectModuleService, updateLanguage } from '@ul/shared';
-import { Subscription } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
+import { PageLayout, PageLayoutsService, currentLanguage$ } from '@ul/shared';
+import { Observable, Subscription } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -10,42 +11,31 @@ import { Subscription } from 'rxjs';
 })
 export class AppComponent implements OnInit, OnDestroy {
 
-  public menuItems;
   public languages: Array<string> = [];
+  public currentPageLayout$: Observable<PageLayout>;
   private subscriptions: Subscription[] = [];
 
   constructor(
     @Inject('environment')
     private environment: any,
-    private projectModuleService: ProjectModuleService,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private pageLayoutsService: PageLayoutsService,
   ) {
-
-    // Listen for translation events
-    this.subscriptions.push(this.translateService.onLangChange
-      .subscribe((event: LangChangeEvent) => {
-        updateLanguage(event.lang);
-      }));
-
     // Define available languages in app
     this.languages = this.environment.languages;
     this.translateService.addLangs(this.languages);
+
+    this.currentPageLayout$ = this.pageLayoutsService.currentPageLayout$;
   }
 
   ngOnInit() {
-    this.menuItems = this.projectModuleService.getMenuItems();
-
     // apply language saved in persistent state
     this.subscriptions.push( currentLanguage$
-      .subscribe(l => this.useLanguage(l || this.environment.defaultLanguage))
+      .subscribe(language => this.translateService.use(language || this.environment.defaultLanguage))
     );
   }
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(s => s.unsubscribe());
-  }
-
-  useLanguage(language: string): void {
-    this.translateService.use(language);
   }
 }

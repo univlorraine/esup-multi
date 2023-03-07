@@ -1,35 +1,34 @@
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
 import { IonicModule } from '@ionic/angular';
-
-import { PreferencesPageRoutingModule } from './preferences-routing.module';
-
-import { PreferencesPage } from './preferences.page';
+import { BurgerMenuPage } from './burger-menu/burger-menu.page';
 import { ProjectModuleService } from '@ul/shared';
+import { MenuRoutingModule } from './menu-routing.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 const initModule = (projectModuleService: ProjectModuleService) =>
   () => projectModuleService.initProjectModule({
-    name: 'preferences',
+    name: 'menu',
     translation: true,
     menuItems: [{
-      title: 'PREFERENCES.MENU',
-      icon: 'settings',
-      position: 900,
-      path: `/${PreferencesPageModule.path}`,
-      type: 'burger',
+      title: 'MENU.MENU',
+      icon: 'menu',
+      position: 999,
+      path: `/${MenuModule.path}`,
+      type: 'tabs',
     }]
   });
 
 @NgModule({
+  declarations: [BurgerMenuPage],
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    PreferencesPageRoutingModule
+    MenuRoutingModule,
+    TranslateModule,
   ],
-  declarations: [PreferencesPage],
   providers: [{
     provide: APP_INITIALIZER,
     useFactory: initModule,
@@ -37,6 +36,6 @@ const initModule = (projectModuleService: ProjectModuleService) =>
     multi: true
   }],
 })
-export class PreferencesPageModule {
-  static path = 'preferences';
+export class MenuModule {
+  static path = 'menu';
 }

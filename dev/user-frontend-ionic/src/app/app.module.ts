@@ -22,6 +22,8 @@ import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ErrorModule } from './error/error.module';
+import { PageLayoutsModule } from './page-layouts/page-layouts.module';
+import { MenuModule } from '@ul/menu';
 
 @NgModule({
   declarations: [AppComponent],
@@ -39,6 +41,7 @@ import { ErrorModule } from './error/error.module';
     AppRoutingModule,
     ReactiveFormsModule,
     ErrorModule,
+    PageLayoutsModule,
     PreferencesPageModule,
     AuthModule,
     MapModule.forRoot({
@@ -71,13 +74,14 @@ import { ErrorModule } from './error/error.module';
       reservationSsoServiceName: 'https://resa-espace.univ-lorraine.fr/reservationsalles/Authentification.aspx',
       reservationSsoUrlTemplate: 'https://resa-espace.univ-lorraine.fr/reservationsalles/Authentification.aspx?ticket={st}',
     }),
+    MenuModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
         useFactory: translationsLoaderFactory,
         deps: [HttpClient, ProjectModuleService]
       }
-    })
+    }),
   ],
   providers: [
     { provide: 'environment', useValue: environment },

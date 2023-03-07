@@ -12,7 +12,6 @@ import { TilesService } from '../../tiles.service';
   styleUrls: ['./widgets.page.scss'],
 })
 export class WidgetsPage {
-  public tiles$: Observable<Tile[]> = tiles$.pipe(map(tiles => tiles.filter(t => t.widget)));
   public tilesIsEmpty$: Observable<boolean>;
   public isLoading = false;
   public translatedTiles$: Observable<TranslatedTile[]>;
@@ -20,11 +19,10 @@ export class WidgetsPage {
   constructor(
     private tilesService: TilesService,
   ) {
-    this.tilesIsEmpty$ = this.tiles$.pipe(map(tiles => tiles.length === 0));
-    this.translatedTiles$ = combineLatest([this.tiles$, currentLanguage$])
-      .pipe(
-        map(tilesAndCurrentLang => this.tilesService.mapToTranslatedTiles(tilesAndCurrentLang)),
-      );
+    this.translatedTiles$ = this.tilesService.translatedTiles$.pipe(
+      map(tiles => tiles.filter(t => t.widget))
+    );
+    this.tilesIsEmpty$ = this.translatedTiles$.pipe(map(tiles => tiles.length === 0));
   }
 
   ionViewWillEnter() {

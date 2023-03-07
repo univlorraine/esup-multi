@@ -1,0 +1,13 @@
+<ion-content>
+  <ion-item button *ngFor="let menu of menuItems" routerLink="/{{menu.path}}">
+    <ion-icon name="{{menu.icon}}" slot="start"></ion-icon>
+    <ion-label>{{menu.title | translate}}</ion-label>
+  </ion-item>
+</ion-content>
+<ion-footer *ngIf="languages.length > 1">
+  <ion-row class="ion-justify-content-center">
+  <ion-button *ngFor="let language of languages" fill="clear" (click)="useLanguage(language)">
+    <ion-icon src="{{'/assets/icon/flags/' + language + '.svg'}}"></ion-icon>
+  </ion-button>
+</ion-row>
+</ion-footer>

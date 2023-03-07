@@ -45,6 +45,9 @@
       ],
       "@ul/clocking": [
         "dist/clocking"
+      ],
+      "@ul/menu": [
+        "dist/menu"
       ]
     },
     "downlevelIteration": true,
