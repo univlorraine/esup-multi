@@ -10,6 +10,7 @@ import { AuthEffects } from './auth.effects';
 import { ConnectedPage } from './connected/connected.page';
 import { LoginPage } from './login/login.page';
 import { PreferencesComponent } from './preferences/preferences.component';
+import { AuthPage } from './auth.page';
 
 const initModule = (projectModuleService: ProjectModuleService) =>
   () => projectModuleService.initProjectModule({
@@ -29,6 +30,7 @@ const initModule = (projectModuleService: ProjectModuleService) =>
     LoginPage,
     ConnectedPage,
     PreferencesComponent,
+    AuthPage,
   ],
   imports: [
     CommonModule,

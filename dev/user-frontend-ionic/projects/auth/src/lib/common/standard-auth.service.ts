@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { AuthenticatedUser, getAuthToken, updateAuthToken, updateUser } from '@ul/shared';
 import { Observable, of, throwError } from 'rxjs';
-import { catchError, concatMap, delayWhen, first, tap } from 'rxjs/operators';
+import { catchError, concatMap, delayWhen, first } from 'rxjs/operators';
 
 interface LoginResult extends AuthenticatedUser {
   authToken: string;

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { finalize, tap } from 'rxjs/operators';
 import { AuthService } from '../common/auth.service';
@@ -21,7 +20,6 @@ export class LoginPage implements OnInit {
   constructor(
     private fb: FormBuilder,
     public authService: AuthService,
-    private router: Router,
     private toastController: ToastController,
     private preferencesService: PreferencesService) { }
 
@@ -61,11 +59,7 @@ export class LoginPage implements OnInit {
         tap(val => !val && this.showToastConnectionFail()),
         finalize(() => this.isLoading = false)
       )
-      .subscribe(
-        () => {
-          this.router.navigate(['auth/connected']);
-        }
-      );
+      .subscribe();
   }
 
   async showToastConnectionFail() {
