@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { AuthenticatedUser, authenticatedUser$ } from '@ul/shared';
 import { Observable } from 'rxjs';
 import { finalize } from 'rxjs/operators';
-import { AuthService } from '../../public-api';
+import { AuthService } from '../common/auth.service';
 
 @Component({
   selector: 'app-connected',
@@ -17,7 +16,6 @@ export class ConnectedPage implements OnInit {
 
   constructor(
     private authService: AuthService,
-    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -30,10 +28,6 @@ export class ConnectedPage implements OnInit {
       .pipe(
         finalize(() => this.isLoading = false)
       )
-      .subscribe(
-        () => {
-          this.router.navigate(['auth','login']);
-        }
-      );
+      .subscribe();
   }
 }

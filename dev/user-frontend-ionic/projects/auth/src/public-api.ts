@@ -4,5 +4,5 @@
 
 export * from './lib/auth.module';
 export * from './lib/common/auth.service';
-export * from './lib/login/login.page';
+export * from './lib/auth.page';
 
