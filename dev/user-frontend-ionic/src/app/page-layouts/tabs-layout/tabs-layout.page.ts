@@ -8,12 +8,14 @@ import { ProjectModuleService } from '@ul/shared';
 })
 export class TabsLayoutPage {
 
-  public menuItems;
+  public tabsMenuItems;
+  public topBarMenuItems;
 
   constructor(
     private projectModuleService: ProjectModuleService
   ) {
-    this.menuItems = this.projectModuleService.getMenuItemsByType('tabs');
+    this.tabsMenuItems = this.projectModuleService.getMenuItemsByType('tabs');
+    this.topBarMenuItems = this.projectModuleService.getMenuItemsByType('top');
   }
 
 }

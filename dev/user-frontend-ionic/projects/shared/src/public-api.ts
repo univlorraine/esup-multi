@@ -16,4 +16,6 @@ export * from './lib/store/local-forage';
 export * from './lib/errors';
 export * from './lib/navigation/page-layouts.service';
 export * from './lib/navigation/navigation.service';
+export * from './lib/components/back-button/back-button.component';
+export * from './lib/components/shared-components.module';
 
