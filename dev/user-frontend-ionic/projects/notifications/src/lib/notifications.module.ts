@@ -6,7 +6,7 @@ import { Device } from '@capacitor/device';
 import { PushNotifications, Token } from '@capacitor/push-notifications';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
-import { ProjectModuleService } from '@ul/shared';
+import { ProjectModuleService, SharedComponentsModule } from '@ul/shared';
 import { CompleteLocalDateAndTimePipe } from './complete-local-date-and-time.pipe';
 import { NotificationsRoutingModule } from './notifications-routing.module';
 import { NotificationsModuleConfig, NOTIFICATIONS_CONFIG } from './notifications.config';
@@ -24,6 +24,10 @@ const initModule = (projectModuleService: ProjectModuleService) =>
       position: 60,
       path: `/${NotificationsModule.path}`,
       type: 'top',
+    }],
+    pageConfigurations: [{
+      path: `/${NotificationsModule.path}`,
+      disableAutoHeader: true,
     }]
   });
 
@@ -33,7 +37,8 @@ const initModule = (projectModuleService: ProjectModuleService) =>
     IonicModule,
     NotificationsRoutingModule,
     TranslateModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedComponentsModule
   ],
   declarations: [
     NotificationsPage,

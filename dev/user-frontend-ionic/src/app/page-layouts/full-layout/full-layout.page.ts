@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { NavigationService, PageLayoutsService, PageTitle } from '@ul/shared';
+import { NavigationService, PageLayoutsService, PageTitle, ProjectModuleService } from '@ul/shared';
 import { Observable } from 'rxjs';
-import { first, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-full-layout',
@@ -12,19 +11,18 @@ import { first, map } from 'rxjs/operators';
 export class FullLayoutPage {
 
   public currentPageTitle$: Observable<PageTitle>;
+  public showHeader$: Observable<boolean>;
 
   constructor(
     private pageLayoutService: PageLayoutsService,
     private navigationService: NavigationService,
-    private router: Router,
+    private projectModuleService: ProjectModuleService,
   ) {
     this.currentPageTitle$ = this.pageLayoutService.currentPageTitle$;
-  }
 
-  goBack() {
-    this.navigationService.navigationPath$.pipe(
-      first(),
-      map(navigationPath => navigationPath.previous),
-    ).subscribe(previousPath => this.router.navigateByUrl(previousPath));
+    this.showHeader$ = this.navigationService.navigationPath$.pipe(
+      map(navigationPath => this.projectModuleService.getPageConfigurationByPath(navigationPath.current)),
+      map(pageConfiguration => pageConfiguration ? pageConfiguration.disableAutoHeader === false : true)
+    );
   }
 }

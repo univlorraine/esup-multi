@@ -3,6 +3,7 @@ import { MenuItem, MenuService, MenuType } from './menu.service';
 import { PreferencesService } from './preferences.service';
 import { TranslationsService } from './translations/translations.service';
 import { Widget, WidgetsService } from './widgets.service';
+import { PageConfiguration, PageConfigurationService } from './page-configuration.service';
 
 export interface InitProjectModuleOptions {
     name: string;
@@ -10,6 +11,7 @@ export interface InitProjectModuleOptions {
     translation?: boolean;
     menuItems?: MenuItem[];
     widgets?: Widget[];
+    pageConfigurations?: PageConfiguration[];
 }
 
 @Injectable({
@@ -22,6 +24,7 @@ export class ProjectModuleService {
         private translationsService: TranslationsService,
         private menuService: MenuService,
         private widgetsService: WidgetsService,
+        private pageConfigurationService: PageConfigurationService,
     ) {}
 
     initProjectModule(options: InitProjectModuleOptions) {
@@ -45,6 +48,10 @@ export class ProjectModuleService {
             }));
             this.widgetsService.addWidgets(widgets);
         }
+
+        if (options.pageConfigurations) {
+            this.pageConfigurationService.addPageConfigurations(options.pageConfigurations);
+        }
     }
 
     getTranslatedProjectModules(): string[] {
@@ -61,5 +68,9 @@ export class ProjectModuleService {
 
     getWidgetComponent(widgetId: string): Type<any> {
         return this.widgetsService.getWidget(widgetId)?.component;
+    }
+
+    getPageConfigurationByPath(path: string): PageConfiguration {
+        return this.pageConfigurationService.getPageConfigurationByPath(path);
     }
 }
