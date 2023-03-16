@@ -1,7 +1,18 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <app-back-button></app-back-button>
+    </ion-buttons>
+    <ion-title>{{'RESERVATION.RESERVATION_TITLE' | translate}}</ion-title>
+  </ion-toolbar>
+</ion-header>
 <ion-content>
   <ion-list>
     <ion-item button (click)="openReservationService()" detail="true">
       <ion-label>{{'RESERVATION.GO_TO_SERVICE' | translate}}</ion-label>
+    </ion-item>
+    <ion-item button routerLink="/reservation/scan" detail="true">
+        <ion-label>{{'RESERVATION.SCAN_BUTTON' | translate}}</ion-label>
     </ion-item>
   </ion-list>
 </ion-content>

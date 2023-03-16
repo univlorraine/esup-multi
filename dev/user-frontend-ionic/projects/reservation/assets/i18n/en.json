@@ -1,3 +1,6 @@
 {
-    "GO_TO_SERVICE": "Access to room reservation service"
+    "GO_TO_SERVICE": "Access to room reservation service",
+    "SCAN_BUTTON": "Scan QR Code",
+    "SCAN_TITLE": "Scan",
+    "RESERVATION_TITLE": "Reservation"
 }
