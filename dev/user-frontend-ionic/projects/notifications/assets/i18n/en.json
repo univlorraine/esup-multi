@@ -4,6 +4,14 @@
     "END_OF_NOTIFICATIONS": "End of notifications",
     "LOAD_MORE_ERROR": "Error loading notifications",
     "FILTERS": "Filters",
-    "DELETE": "Delete"
+    "CLOSE": "Close",
+    "SETTINGS": {
+        "TITLE": "Manage my alerts",
+        "SUBTITLE": "Activate / Deactivate the channels for which I want to be alerted"
+    },
+    "UNSUBSCRIBE_TO_CHANNEL": "Don't alert me to incoming channel messages",
+    "SUBSCRIBE_TO_CHANNEL": "Reactivate alert to incoming channel messages",
+    "DELETE": "Delete",
+    "DELETE_THIS_NOTIFICATION": "Delete this notification"
 }
 

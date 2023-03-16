@@ -20,8 +20,8 @@ export class FullLayoutPage {
   ) {
     this.currentPageTitle$ = this.pageLayoutService.currentPageTitle$;
 
-    this.showHeader$ = this.navigationService.navigationPath$.pipe(
-      map(navigationPath => this.projectModuleService.getPageConfigurationByPath(navigationPath.current)),
+    this.showHeader$ = this.navigationService.navigationRouterLink$.pipe(
+      map(navigationRouterLink => this.projectModuleService.getPageConfigurationByRouterLink(navigationRouterLink.current)),
       map(pageConfiguration => pageConfiguration ? pageConfiguration.disableAutoHeader === false : true)
     );
   }

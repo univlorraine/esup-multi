@@ -5,7 +5,7 @@ describe('TilesPositionHelper', () => {
   it('should not match any role and returns default position which is null', () => {
     const helper: TilesPositionHelper = new TilesPositionHelper(['r1', 'r2']);
     const tile: Tile = {
-      path: '',
+      routerLink: '',
       type: TileType.App,
       id: '',
       widget: null,
@@ -30,7 +30,7 @@ describe('TilesPositionHelper', () => {
   it('should not match any role and returns default position which is 5', () => {
     const helper: TilesPositionHelper = new TilesPositionHelper(['r1', 'r2']);
     const tile: Tile = {
-      path: '',
+      routerLink: '',
       type: TileType.App,
       id: '',
       widget: null,
@@ -55,7 +55,7 @@ describe('TilesPositionHelper', () => {
   it('should match role r2 and returns its position which is 20', () => {
     const helper: TilesPositionHelper = new TilesPositionHelper(['r1', 'r2']);
     const tile: Tile = {
-      path: '',
+      routerLink: '',
       type: TileType.App,
       id: '',
       widget: null,
@@ -88,7 +88,7 @@ describe('TilesPositionHelper', () => {
       'r2',
     ]);
     const tile: Tile = {
-      path: '',
+      routerLink: '',
       type: TileType.App,
       id: '',
       widget: null,
@@ -117,7 +117,7 @@ describe('TilesPositionHelper', () => {
       'r2',
     ]);
     const tile: Tile = {
-      path: '',
+      routerLink: '',
       type: TileType.App,
       id: '',
       widget: null,

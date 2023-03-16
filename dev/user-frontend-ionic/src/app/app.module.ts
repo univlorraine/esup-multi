@@ -8,8 +8,10 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { AuthModule } from '@ul/auth';
 import { CardsPageModule } from '@ul/cards';
 import { ClockingModule } from '@ul/clocking';
+import { ContactsModule } from '@ul/contacts';
 import { ImportantNewsModule } from '@ul/important-news';
 import { MapModule } from '@ul/map';
+import { MenuModule } from '@ul/menu';
 import { NotificationsModule } from '@ul/notifications';
 import { PreferencesPageModule } from '@ul/preferences';
 import { ReservationModule } from '@ul/reservation';
@@ -17,13 +19,11 @@ import { RssPageModule } from '@ul/rss';
 import { ScheduleModule } from '@ul/schedule';
 import { ProjectModuleService, translationsLoaderFactory } from '@ul/shared';
 import { TilesModule } from '@ul/tiles';
-import { ContactsModule } from '@ul/contacts';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ErrorModule } from './error/error.module';
 import { PageLayoutsModule } from './page-layouts/page-layouts.module';
-import { MenuModule } from '@ul/menu';
 
 @NgModule({
   declarations: [AppComponent],

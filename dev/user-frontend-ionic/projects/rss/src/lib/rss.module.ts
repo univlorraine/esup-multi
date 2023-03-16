@@ -15,7 +15,7 @@ const initModule = (projectModuleService: ProjectModuleService) =>
       title: 'RSS.MENU',
       icon: 'logo-rss',
       position: 50,
-      path: `/${RssPageModule.path}`,
+      routerLink: RssPageModule.routerLink,
       type: 'top'
     }]
   });
@@ -38,5 +38,5 @@ const initModule = (projectModuleService: ProjectModuleService) =>
   }],
 })
 export class RssPageModule {
-  static path = 'rss';
+  static routerLink = '/rss';
 }

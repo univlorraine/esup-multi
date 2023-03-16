@@ -5,12 +5,9 @@ import { RpcException } from '@nestjs/microservices';
 import { catchError, map, Observable } from 'rxjs';
 import { DirectusApi, UlApi } from 'src/config/configuration.interface';
 import {
-  DirectusChannel,
-  DirectusResponse,
-  MarkAsReadQueryDto,
-  NotificationDeleteQueryDto,
-  NotificationDto,
-  NotificationsQueryDto,
+  ChannelSubscriberQueryDto, DirectusChannelResultDto,
+  DirectusResponse, NotificationDeleteQueryDto,
+  NotificationResultDto, NotificationsMarkAsReadQueryDto, NotificationsQueryDto, UnsubscribedChannelsQueryDto, UnsubscribedChannelsResultDto
 } from './notifications.dto';
 
 @Injectable()
@@ -29,11 +26,11 @@ export class NotificationsService {
 
   public getNotifications(
     query: NotificationsQueryDto,
-  ): Observable<NotificationDto[]> {
-    const url = `${this.ulApiConfig.notificationsUrl}/${query.username}?offset=${query.offset}&length=${query.length}`;
+  ): Observable<NotificationResultDto[]> {
+    const url = `${this.ulApiConfig.notificationsUrl}/notifications/${query.username}?offset=${query.offset}&length=${query.length}`;
 
     return this.httpService
-      .get<NotificationDto[]>(url, {
+      .get<NotificationResultDto[]>(url, {
         headers: {
           Accept: 'application/json',
           Authorization: `Bearer ${this.ulApiConfig.bearerToken}`,
@@ -51,11 +48,11 @@ export class NotificationsService {
       );
   }
 
-  public getChannels(): Observable<DirectusChannel[]> {
+  public getChannels(): Observable<DirectusChannelResultDto[]> {
     const url = `${this.directusApiConfig.url}/items/channels`;
 
     return this.httpService
-      .get<DirectusResponse<DirectusChannel[]>>(url, {
+      .get<DirectusResponse<DirectusChannelResultDto[]>>(url, {
         params: {
           fields: '*,translations.*',
         },
@@ -74,9 +71,35 @@ export class NotificationsService {
       );
   }
 
-  public deleteNotification(query: NotificationDeleteQueryDto) {
+  public getUnsubscribedChannels(
+    query: UnsubscribedChannelsQueryDto,
+  ): Observable<string[]> {
+    const url = `${this.ulApiConfig.notificationsUrl}/channels/${query.username}`;
+
     return this.httpService
-      .delete<NotificationDto[]>(this.ulApiConfig.notificationsUrl, {
+      .get<UnsubscribedChannelsResultDto>(url, {
+        headers: {
+          Accept: 'application/json',
+          Authorization: `Bearer ${this.ulApiConfig.bearerToken}`,
+        },
+      })
+      .pipe(
+        catchError((err) => {
+          const errorMessage = `Unable to get user's unsubscribed channels with username '${query.username}'`;
+          this.logger.error(errorMessage, err);
+          throw new RpcException(errorMessage);
+        }),
+        map((res) => {
+          return res.data.channels;
+        }),
+      );
+  }
+
+  public deleteNotification(query: NotificationDeleteQueryDto) {
+    const url = `${this.ulApiConfig.notificationsUrl}/notifications`;
+
+    return this.httpService
+      .delete<NotificationResultDto[]>(url, {
         headers: {
           Accept: 'application/json',
           Authorization: `Bearer ${this.ulApiConfig.bearerToken}`,
@@ -95,8 +118,8 @@ export class NotificationsService {
       );
   }
 
-  markNotificationsAsRead(data: MarkAsReadQueryDto): Observable<void> {
-    const url = `${this.ulApiConfig.notificationsUrl}/read`;
+  markNotificationsAsRead(data: NotificationsMarkAsReadQueryDto): Observable<void> {
+    const url = `${this.ulApiConfig.notificationsUrl}/notifications/read`;
     return this.httpService
       .post<void>(url, data, {
         headers: {
@@ -113,5 +136,36 @@ export class NotificationsService {
         }),
         map(() => void 0),
       );
+  }
+
+  subscribeOrUnsubscribeUserToChannel(
+    query: ChannelSubscriberQueryDto,
+  ): Observable<number> {
+    const urlBase = `${this.ulApiConfig.notificationsUrl}/channels`;
+    const urlSuffix = query.isSubscription ? 'allow' : 'disallow';
+    const url = `${urlBase}/${urlSuffix}`;
+
+    const body = {
+      username: query.username,
+      channel: query.channelCode,
+    };
+
+    const options = {
+      headers: {
+        Accept: 'application/json',
+        Authorization: `Bearer ${this.ulApiConfig.bearerToken}`,
+      },
+    };
+
+    return this.httpService.post<any>(url, body, options).pipe(
+      catchError((err) => {
+        const errorMessage = `Unable to '${urlSuffix}' channel with code '${query.channelCode} for user with username '${query.username}'`;
+        this.logger.error(errorMessage, err);
+        throw new RpcException(errorMessage);
+      }),
+      map((res) => {
+        return res.status;
+      }),
+    );
   }
 }

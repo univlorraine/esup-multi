@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { NavigationEnd, Router, RouterEvent } from '@angular/router';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { filter, map, pairwise, startWith } from 'rxjs/operators';
 
-export interface NavigationPath {
+export interface NavigationRouterLink {
     current: string;
     previous: string;
 }
@@ -13,8 +13,8 @@ export interface NavigationPath {
     providedIn: 'root'
 })
 export class NavigationService {
-    public navigationPath$: Observable<NavigationPath>;
-    private navigationPathSubject$ = new BehaviorSubject<NavigationPath>({
+    public navigationRouterLink$: Observable<NavigationRouterLink>;
+    private navigationRouterLinkSubject$ = new BehaviorSubject<NavigationRouterLink>({
         current: '/',
         previous: '/'
     });
@@ -22,7 +22,7 @@ export class NavigationService {
     constructor(
         private router: Router,
     ) {
-        this.navigationPath$ = this.navigationPathSubject$;
+        this.navigationRouterLink$ = this.navigationRouterLinkSubject$;
 
         this.router.events.pipe(
             filter((event: RouterEvent) => event instanceof NavigationEnd),
@@ -34,7 +34,7 @@ export class NavigationService {
                 previous,
                 current
             }))
-        ).subscribe(this.navigationPathSubject$);
+        ).subscribe(this.navigationRouterLinkSubject$);
     }
 
 }

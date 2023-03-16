@@ -29,7 +29,7 @@ const initModule = (projectModuleService: ProjectModuleService) =>
   }],
 })
 export class MapModule {
-  static path = 'map';
+  static routerLink = '/map';
 
   static forRoot(config: MapModuleConfig): ModuleWithProviders<MapModule> {
     return {

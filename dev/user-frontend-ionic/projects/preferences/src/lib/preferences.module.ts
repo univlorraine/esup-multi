@@ -1,13 +1,13 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
 import { PreferencesPageRoutingModule } from './preferences-routing.module';
 
-import { PreferencesPage } from './preferences.page';
 import { ProjectModuleService } from '@ul/shared';
+import { PreferencesPage } from './preferences.page';
 
 const initModule = (projectModuleService: ProjectModuleService) =>
   () => projectModuleService.initProjectModule({
@@ -17,7 +17,7 @@ const initModule = (projectModuleService: ProjectModuleService) =>
       title: 'PREFERENCES.MENU',
       icon: 'settings',
       position: 900,
-      path: `/${PreferencesPageModule.path}`,
+      routerLink: PreferencesPageModule.routerLink,
       type: 'burger',
     }]
   });
@@ -38,5 +38,5 @@ const initModule = (projectModuleService: ProjectModuleService) =>
   }],
 })
 export class PreferencesPageModule {
-  static path = 'preferences';
+  static routerLink = '/preferences';
 }

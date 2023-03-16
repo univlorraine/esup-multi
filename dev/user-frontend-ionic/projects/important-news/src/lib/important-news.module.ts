@@ -30,5 +30,5 @@ const initModule = (projectModuleService: ProjectModuleService) =>
   }],
 })
 export class ImportantNewsModule {
-  static path = 'important-news';
+  static routerLink = '/important-news';
  }

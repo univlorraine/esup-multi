@@ -3,12 +3,8 @@ export interface NotificationsQueryDto {
   offset: number;
   length: number;
 }
-export interface MarkAsReadQueryDto {
-  username: string;
-  notificationIds: string[];
-}
 
-export interface NotificationDto {
+export interface NotificationResultDto {
   id: string;
   author: string;
   channel: string;
@@ -20,14 +16,38 @@ export interface NotificationDto {
   creationDate: string;
 }
 
-export interface DirectusChannel {
+export interface NotificationsMarkAsReadQueryDto {
+  username: string;
+  notificationIds: string[];
+}
+
+export interface NotificationDeleteQueryDto {
   id: number;
-  name: string;
+  login: string;
+}
+
+export interface UnsubscribedChannelsQueryDto {
+  username: string;
+}
+
+export interface UnsubscribedChannelsResultDto {
+  channels: string[];
+}
+
+export interface ChannelSubscriberQueryDto {
+  username: string;
+  channelCode: string;
+  isSubscription: boolean;
+}
+
+export interface DirectusChannelResultDto {
+  id: number;
   code: string;
   translations?: DirectusChannelTranslation[];
   icon?: string;
   color?: string;
-  appsRouterLink?: string;
+  routerLink?: string;
+  filterable: boolean;
 }
 
 export interface DirectusResponse<T> {
@@ -37,9 +57,4 @@ export interface DirectusResponse<T> {
 export interface DirectusChannelTranslation {
   languages_code: string;
   label: string;
-}
-
-export interface NotificationDeleteQueryDto {
-  id: number;
-  login: string;
 }

@@ -62,7 +62,7 @@ const initModule = (projectModuleService: ProjectModuleService) =>
   ],
 })
 export class ScheduleModule {
-  static path = 'schedule';
+  static routerLink = '/schedule';
 
   static forRoot(config: ScheduleModuleConfig): ModuleWithProviders<ScheduleModule> {
     return {

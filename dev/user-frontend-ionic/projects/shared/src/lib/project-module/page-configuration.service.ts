@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 export interface PageConfiguration {
-    path: string;
+    routerLink: string;
     disableAutoHeader: boolean;
 }
 
@@ -16,14 +16,14 @@ export class PageConfigurationService {
         pageConfigurations.forEach(pageConfiguration => this.addPageConfiguration(pageConfiguration));
     }
 
-    public getPageConfigurationByPath(path: string) {
-        return this.pageConfigurations.find(pageConfiguration => pageConfiguration.path.startsWith(path));
+    public getPageConfigurationByRouterLink(routerLink: string) {
+        return this.pageConfigurations.find(pageConfiguration => pageConfiguration.routerLink.startsWith(routerLink));
     }
 
     private addPageConfiguration(pageConfiguration: PageConfiguration) {
         this.pageConfigurations.push(pageConfiguration);
-        //sort by deepest paths first
-        this.pageConfigurations.sort((pcA, pcB) => pcB.path.split(('/')).length - pcA.path.split(('/')).length);
+        //sort by deepest routerLink first
+        this.pageConfigurations.sort((pcA, pcB) => pcB.routerLink.split(('/')).length - pcA.routerLink.split(('/')).length);
     }
 
 }

@@ -243,7 +243,6 @@ export class AppController {
       );
   }
 
-
   @Post('/contacts')
   contacts(@Body() body) {
     return this.authClient
@@ -318,17 +317,6 @@ export class AppController {
       );
   }
 
-
-  @Get('/notifications/channels')
-  notificationsChannels(@Body() body) {
-    return this.notificationsClient.send(
-      {
-        cmd: 'notificationsChannels',
-      },
-      {},
-    );
-  }
-
   @Delete('/notifications/delete')
   deteleNotifications(@Body() body) {
     return this.authClient
@@ -352,6 +340,67 @@ export class AppController {
         ),
       );
   }
+
+  @Get('/notifications/channels')
+  notificationsChannels(@Body() body) {
+    return this.notificationsClient.send(
+      {
+        cmd: 'channels',
+      },
+      {},
+    );
+  }
+
+  @Post('/notifications/channels/allow-or-disallow')
+  notificationsSubscribeUserToChannel(@Body() body) {
+    return this.authClient
+      .send(
+        {
+          cmd: 'getUserOrThrowError',
+        },
+        body,
+      )
+      .pipe(
+        concatMap((user) =>
+          this.notificationsClient.send(
+            {
+              cmd: 'channelsAllowOrDisallow',
+            },
+            {
+              username: user.username,
+              channelName: body.channelCode,
+              isSubscription: body.isSubscription
+            },
+          ),
+        ),
+      );
+  }
+  
+
+  @Post('/notifications/unsubscribed-channels')
+  notificationsUnsubscribedChannels(@Body() body) {
+    return this.authClient
+      .send(
+        {
+          cmd: 'getUserOrThrowError',
+        },
+        body,
+      )
+      .pipe(
+        concatMap((user) =>
+          this.notificationsClient.send(
+            {
+              cmd: 'unsubscribedChannels',
+            },
+            {
+              username: user.username,
+            },
+          ),
+        ),
+      );
+  }
+
+
   @Post('/clocking')
   getClocking(@Request() request) {
     return this.authClient

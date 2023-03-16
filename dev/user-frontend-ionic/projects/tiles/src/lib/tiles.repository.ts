@@ -29,7 +29,7 @@ interface AbstractTile {
 }
 
 export interface App extends AbstractTile {
-  path: string;
+  routerLink: string;
   icon?: string;
   type: TileType.app;
 }
@@ -51,7 +51,7 @@ interface AbstractTranslatedTile {
 }
 
 export interface TranslatedApp extends AbstractTranslatedTile {
-  path: string;
+  routerLink: string;
   icon?: string;
   type: TileType.app;
 }

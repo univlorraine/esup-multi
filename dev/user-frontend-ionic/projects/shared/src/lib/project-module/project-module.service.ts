@@ -1,9 +1,9 @@
 import { Injectable, Type } from '@angular/core';
 import { MenuItem, MenuService, MenuType } from './menu.service';
+import { PageConfiguration, PageConfigurationService } from './page-configuration.service';
 import { PreferencesService } from './preferences.service';
 import { TranslationsService } from './translations/translations.service';
 import { Widget, WidgetsService } from './widgets.service';
-import { PageConfiguration, PageConfigurationService } from './page-configuration.service';
 
 export interface InitProjectModuleOptions {
     name: string;
@@ -70,7 +70,7 @@ export class ProjectModuleService {
         return this.widgetsService.getWidget(widgetId)?.component;
     }
 
-    getPageConfigurationByPath(path: string): PageConfiguration {
-        return this.pageConfigurationService.getPageConfigurationByPath(path);
+    getPageConfigurationByRouterLink(routerLink: string): PageConfiguration {
+        return this.pageConfigurationService.getPageConfigurationByRouterLink(routerLink);
     }
 }

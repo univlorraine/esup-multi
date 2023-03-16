@@ -3,7 +3,7 @@ import { Inject, Injectable } from '@angular/core';
 import { getAuthToken } from '@ul/shared';
 import { Observable } from 'rxjs';
 import { filter, first, switchMap, tap } from 'rxjs/operators';
-import { addNotifications, Channel, Notification, setNotifications, TranslatedChannel } from './notifications.repository';
+import { Channel, Notification, NotificationsRepository } from './notifications.repository';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +14,7 @@ export class NotificationsService {
     @Inject('environment')
     private environment: any,
     private http: HttpClient,
+    public notificationRepository: NotificationsRepository
   ) {
   }
 
@@ -28,28 +29,31 @@ export class NotificationsService {
     return this.http.post<Notification[]>(url, data);
   }
 
-  public getChannels(): Observable<Channel[]> {
+  public loadAndStoreChannels(): Observable<Channel[]> {
     const url = `${this.environment.apiEndpoint}/notifications/channels`;
 
-    return this.http.get<Channel[]>(url);
+    return this.http.get<Channel[]>(url).pipe(
+      tap((channels) => {
+        this.notificationRepository.setChannels(channels);
+      }));
   }
 
-  loadNotifications(offset: number, length: number): Observable<Notification[]> {
+  public loadNotifications(offset: number, length: number): Observable<Notification[]> {
 
     return getAuthToken().pipe(
       filter(authToken => authToken != null),
       switchMap(authToken => this.getNotifications(authToken, offset, length)),
       tap((notifications) => {
         if (offset === 0) {
-          setNotifications(notifications);
+          this.notificationRepository.setNotifications(notifications);
         } else {
-          addNotifications(notifications);
+          this.notificationRepository.addNotifications(notifications);
         }
       })
     );
   }
 
-  public deleteNotification(id: string)  {
+  public deleteNotification(id: string) {
     return getAuthToken().pipe(
       first(),
       filter(authToken => authToken != null),
@@ -57,16 +61,38 @@ export class NotificationsService {
     );
   }
 
-  public mapToTranslatedChannels(channels, currentLanguage): TranslatedChannel[] {
-    const translated: TranslatedChannel[] = [];
-    channels.map(channel => {
-      const translation =
-        channel.translations.find((t) => t.languages_code === currentLanguage) ||
-        channel.translations.find((t) => t.languages_code === this.environment.defaultLanguage) ||
-        channel.translations[0];
-      translated.push({ label: translation.label, code: channel.name });
-    });
-    return translated;
+
+  public loadAndStoreUnsubscribedChannels(): Observable<string[]> {
+    return getAuthToken().pipe(
+      filter(authToken => authToken != null),
+      switchMap(authToken => {
+        const url = `${this.environment.apiEndpoint}/notifications/unsubscribed-channels`;
+        const data = {
+          authToken
+        };
+
+        return this.http.post<string[]>(url, data);
+      }),
+      tap((userChannels) => {
+        this.notificationRepository.setUnsubscribedChannels(userChannels);
+      }
+      ));
+  }
+
+  public subscribeOrUnsubscribeUserToChannel(options: { isSubscription: boolean; channelCode: string }): Observable<any> {
+    return getAuthToken().pipe(
+      filter(authToken => authToken != null),
+      switchMap(authToken => {
+        const url = `${this.environment.apiEndpoint}/notifications/channels/allow-or-disallow`;
+        const data = {
+          authToken,
+          channelCode: options.channelCode,
+          isSubscription: options.isSubscription
+        };
+
+        return this.http.post(url, data);
+      }
+      ));
   }
 
   public markUnreadNotificationsAsRead(notificationIds: string[]): Observable<void> {
@@ -91,6 +117,6 @@ export class NotificationsService {
       id
     };
 
-    return this.http.delete(url, {body: data});
+    return this.http.delete(url, { body: data });
   }
 }

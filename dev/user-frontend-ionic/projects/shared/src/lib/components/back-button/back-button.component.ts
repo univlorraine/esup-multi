@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { NavigationService } from '../../navigation/navigation.service';
 import { Router } from '@angular/router';
 import { first, map } from 'rxjs/operators';
+import { NavigationService } from '../../navigation/navigation.service';
 
 @Component({
   selector: 'app-back-button',
@@ -15,9 +15,9 @@ export class BackButtonComponent {
   ) {}
 
   goBack() {
-    this.navigationService.navigationPath$.pipe(
+    this.navigationService.navigationRouterLink$.pipe(
       first(),
-      map(navigationPath => navigationPath.previous),
-    ).subscribe(previousPath => this.router.navigateByUrl(previousPath));
+      map(navigationRouterLink => navigationRouterLink.previous),
+    ).subscribe(previousRouterLink => this.router.navigateByUrl(previousRouterLink));
   }
 }

@@ -2,23 +2,18 @@ import { Controller } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
 import { Observable } from 'rxjs';
 import {
-  DirectusChannel, MarkAsReadQueryDto, NotificationDeleteQueryDto, NotificationDto,
-  NotificationsQueryDto
+  ChannelSubscriberQueryDto, DirectusChannelResultDto, NotificationDeleteQueryDto,
+  NotificationResultDto, NotificationsMarkAsReadQueryDto, NotificationsQueryDto, UnsubscribedChannelsQueryDto
 } from './notifications.dto';
 import { NotificationsService } from './notifications.service';
 
 @Controller()
 export class NotificationsController {
-  constructor(private readonly notificationsService: NotificationsService) { }
+  constructor(private readonly notificationsService: NotificationsService) {}
 
   @MessagePattern({ cmd: 'notifications' })
-  getNotifications(data: NotificationsQueryDto): Observable<NotificationDto[]> {
+  getNotifications(data: NotificationsQueryDto): Observable<NotificationResultDto[]> {
     return this.notificationsService.getNotifications(data);
-  }
-
-  @MessagePattern({ cmd: 'notificationsChannels' })
-  getChannels(): Observable<DirectusChannel[]> {
-    return this.notificationsService.getChannels();
   }
 
   @MessagePattern({ cmd: 'notificationsDelete' })
@@ -27,7 +22,26 @@ export class NotificationsController {
   }
 
   @MessagePattern({ cmd: 'notificationsRead' })
-  markNotificationsAsRead(data: MarkAsReadQueryDto): Observable<void> {
+  markNotificationsAsRead(data: NotificationsMarkAsReadQueryDto): Observable<void> {
     return this.notificationsService.markNotificationsAsRead(data);
+  }
+
+  @MessagePattern({ cmd: 'channels' })
+  getChannels(): Observable<DirectusChannelResultDto[]> {
+    return this.notificationsService.getChannels();
+  }
+
+  @MessagePattern({ cmd: 'unsubscribedChannels' })
+  getUnsubscribedChannels(
+    data: UnsubscribedChannelsQueryDto,
+  ): Observable<string[]> {
+    return this.notificationsService.getUnsubscribedChannels(data);
+  }
+
+  @MessagePattern({ cmd: 'channelsAllowOrDisallow' })
+  subscribeOrUnsubscribeUserToChannel(
+    data: ChannelSubscriberQueryDto,
+  ): Observable<number> {
+    return this.notificationsService.subscribeOrUnsubscribeUserToChannel(data);
   }
 }

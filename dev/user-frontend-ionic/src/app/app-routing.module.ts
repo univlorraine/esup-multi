@@ -5,7 +5,7 @@ import { TilesModule } from '@ul/tiles';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: `${TilesModule.path}/widgets`,
+    redirectTo: `${TilesModule.routerLink}/widgets`,
     pathMatch: 'full'
   },
 ];

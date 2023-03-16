@@ -4,7 +4,7 @@
 		"status": "published",
 		"position": 2,
 		"sort": 3,
-		"path": "/cards",
+		"routerLink": "/cards",
 		"icon": "card",
 		"widget": null,
 		"translations": [
@@ -46,7 +46,7 @@
 		"status": "published",
 		"position": 2,
 		"sort": 4,
-		"path": "/cards",
+		"routerLink": "/cards",
 		"icon": "card",
 		"widget": null,
 		"translations": [
@@ -92,7 +92,7 @@
 		"status": "published",
 		"position": 3,
 		"sort": 5,
-		"path": "/map",
+		"routerLink": "/map",
 		"icon": "map",
 		"widget": null,
 		"translations": [
@@ -121,7 +121,7 @@
 		"status": "published",
 		"position": 4,
 		"sort": 6,
-		"path": "/schedule",
+		"routerLink": "/schedule",
 		"icon": "calendar",
 		"widget": null,
 		"translations": [
@@ -161,7 +161,7 @@
 		"status": "published",
 		"position": null,
 		"sort": null,
-		"path": "/contacts",
+		"routerLink": "/contacts",
 		"icon": "at",
 		"widget": null,
 		"translations": [
@@ -193,81 +193,11 @@
 		"authorization": null
 	},
 	{
-		"id": 13,
-		"status": "published",
-		"position": 1,
-		"sort": 1,
-		"path": "/important-news",
-		"icon": "warning-outline",
-		"widget": "important-news:important-news",
-		"translations": [
-			{
-				"apps_id": 13,
-				"content": "Here are the important news to check out \nfor your student education:",
-				"id": 9,
-				"languages_code": "en",
-				"searchKeywords": null,
-				"title": "Important News !"
-			},
-			{
-				"apps_id": 13,
-				"content": "Voici les nouvelles importantes à consulter pour votre scolarité d'étudiant : ",
-				"id": 10,
-				"languages_code": "fr",
-				"searchKeywords": null,
-				"title": "Nouvelles Importantes !"
-			}
-		],
-		"settings_by_role": [],
-		"authorization": {
-			"id": 19,
-			"roles": [
-				"student"
-			],
-			"type": "ALLOW"
-		}
-	},
-	{
-		"id": 14,
-		"status": "published",
-		"position": 1,
-		"sort": 2,
-		"path": "/important-news",
-		"icon": "warning-outline",
-		"widget": "important-news:important-news",
-		"translations": [
-			{
-				"apps_id": 14,
-				"content": "Here are the important news to check out for staff members:",
-				"id": 11,
-				"languages_code": "en",
-				"searchKeywords": null,
-				"title": "Important News !"
-			},
-			{
-				"apps_id": 14,
-				"content": "Voici les nouvelles importantes à consulter pour les membres du staff: ",
-				"id": 12,
-				"languages_code": "fr",
-				"searchKeywords": null,
-				"title": "Nouvelles Importantes !"
-			}
-		],
-		"settings_by_role": [],
-		"authorization": {
-			"id": 20,
-			"roles": [
-				"staff"
-			],
-			"type": "ALLOW"
-		}
-	},
-	{
 		"id": 19,
 		"status": "published",
 		"position": 8,
 		"sort": null,
-		"path": "/reservation",
+		"routerLink": "/reservation",
 		"icon": "clipboard-outline",
 		"widget": null,
 		"translations": [
