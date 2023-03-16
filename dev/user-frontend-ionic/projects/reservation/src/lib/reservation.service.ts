@@ -20,4 +20,12 @@ export class ReservationService {
     })
     .subscribe(url => Browser.open({ url }));
   }
+
+  public openURL(service: string) {
+    this.ssoService.getSsoExternalLink({
+      service,
+      urlTemplate: `${service}&ticket={st}`
+    })
+    .subscribe(url => Browser.open({ url }));
+  }
 }

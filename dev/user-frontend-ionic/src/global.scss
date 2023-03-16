@@ -28,3 +28,7 @@
 /* leaflet for map module */
 @import "~leaflet/dist/leaflet.css";
 
+body.scanner-active {
+    --background: transparent;
+    --ion-background-color: transparent;
+}

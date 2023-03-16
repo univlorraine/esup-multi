@@ -1,3 +1,6 @@
 {
-    "GO_TO_SERVICE": "Accéder au service de réservation de salle"
+    "GO_TO_SERVICE": "Accéder au service de réservation de salle",
+    "SCAN_BUTTON": "Scanner un QR Code",
+    "SCAN_TITLE": "Scan",
+    "RESERVATION_TITLE": "Réservation"
 }
