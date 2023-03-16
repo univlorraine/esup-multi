@@ -1,5 +1,5 @@
 version: 1
-directus: 9.23.0
+directus: 9.23.1
 vendor: postgres
 collections:
   - collection: apps
@@ -309,7 +309,7 @@ fields:
         template: '{{type}}{{roles}}'
       readonly: false
       required: false
-      sort: 9
+      sort: 10
       special:
         - m2o
       translations: null
@@ -348,7 +348,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: 6
+      sort: 7
       special: null
       translations: null
       validation: null
@@ -409,44 +409,6 @@ fields:
       foreign_key_table: null
       foreign_key_column: null
   - collection: apps
-    field: path
-    type: string
-    meta:
-      collection: apps
-      conditions: null
-      display: null
-      display_options: null
-      field: path
-      group: null
-      hidden: false
-      interface: input
-      note: null
-      options: null
-      readonly: false
-      required: true
-      sort: 5
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: path
-      table: apps
-      data_type: character varying
-      default_value: null
-      max_length: 255
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: false
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: apps
     field: position
     type: integer
     meta:
@@ -485,6 +447,44 @@ fields:
       foreign_key_table: null
       foreign_key_column: null
   - collection: apps
+    field: routerLink
+    type: string
+    meta:
+      collection: apps
+      conditions: null
+      display: null
+      display_options: null
+      field: routerLink
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: true
+      sort: 6
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: routerLink
+      table: apps
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: apps
     field: settings_by_role
     type: alias
     meta:
@@ -500,7 +500,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: 10
+      sort: 11
       special:
         - m2m
       translations: null
@@ -623,7 +623,7 @@ fields:
         languageField: code
       readonly: false
       required: false
-      sort: 8
+      sort: 9
       special:
         - translations
       translations: null
@@ -646,7 +646,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: 7
+      sort: 8
       special: null
       translations: null
       validation: null
@@ -1171,29 +1171,29 @@ fields:
       foreign_key_table: null
       foreign_key_column: null
   - collection: channels
-    field: appsRouterLink
+    field: code
     type: string
     meta:
       collection: channels
       conditions: null
       display: null
       display_options: null
-      field: appsRouterLink
+      field: code
       group: null
       hidden: false
       interface: input
       note: null
       options: null
       readonly: false
-      required: false
-      sort: null
+      required: true
+      sort: 1
       special: null
       translations: null
       validation: null
       validation_message: null
       width: full
     schema:
-      name: appsRouterLink
+      name: code
       table: channels
       data_type: character varying
       default_value: null
@@ -1224,7 +1224,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: null
+      sort: 3
       special: null
       translations: null
       validation: null
@@ -1239,6 +1239,45 @@ fields:
       numeric_precision: null
       numeric_scale: null
       is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: channels
+    field: filterable
+    type: boolean
+    meta:
+      collection: channels
+      conditions: null
+      display: null
+      display_options: null
+      field: filterable
+      group: null
+      hidden: false
+      interface: boolean
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 7
+      special:
+        - cast-boolean
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: filterable
+      table: channels
+      data_type: boolean
+      default_value: false
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
       is_unique: false
       is_primary_key: false
       is_generated: false
@@ -1262,7 +1301,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: null
+      sort: 4
       special: null
       translations: null
       validation: null
@@ -1300,7 +1339,7 @@ fields:
       options: null
       readonly: true
       required: false
-      sort: null
+      sort: 5
       special: null
       translations: null
       validation: null
@@ -1323,36 +1362,36 @@ fields:
       foreign_key_table: null
       foreign_key_column: null
   - collection: channels
-    field: name
+    field: routerLink
     type: string
     meta:
       collection: channels
       conditions: null
       display: null
       display_options: null
-      field: name
+      field: routerLink
       group: null
       hidden: false
       interface: input
       note: null
       options: null
       readonly: false
-      required: true
-      sort: null
+      required: false
+      sort: 2
       special: null
       translations: null
       validation: null
       validation_message: null
       width: full
     schema:
-      name: name
+      name: routerLink
       table: channels
       data_type: character varying
       default_value: null
       max_length: 255
       numeric_precision: null
       numeric_scale: null
-      is_nullable: false
+      is_nullable: true
       is_unique: false
       is_primary_key: false
       is_generated: false
@@ -1379,7 +1418,7 @@ fields:
         userLanguage: true
       readonly: false
       required: false
-      sort: null
+      sort: 6
       special:
         - translations
       translations: null
@@ -1986,6 +2025,7 @@ fields:
       note: null
       options:
         enableSelect: false
+        template: '{{type}}{{roles}}'
       readonly: false
       required: false
       sort: 11

@@ -4,10 +4,16 @@
       <app-back-button></app-back-button>
     </ion-buttons>
     <ion-title>{{ "NOTIFICATIONS.MENU" | translate }}</ion-title>
-    <ion-button slot="end" id="click-trigger" fill="clear">
+
+    <ion-button slot="end" id="filter-click-trigger" fill="clear" class="ion-no-padding">
       <ion-icon name="filter-outline"></ion-icon>
     </ion-button>
-    <ion-popover trigger="click-trigger" triggerAction="click">
+
+    <ion-button slot="end" fill="clear" routerLink="/notifications/settings">
+      <ion-icon name="settings-outline"></ion-icon>
+    </ion-button>
+
+    <ion-popover trigger="filter-click-trigger" triggerAction="click">
       <ng-template>
         <ion-list>
           <ion-row class="ion-justify-content-center">
@@ -22,9 +28,11 @@
         </ion-list>
       </ng-template>
     </ion-popover>
+
   </ion-toolbar>
 </ion-header>
-<ion-toolbar>
+
+<ion-toolbar *ngIf="(hasNoChannelsSelected$ | async) === false">
   <ion-list>
     <ion-chip *ngFor="let channel of channelsSelected$ | async" (click)="removeChannelFromFilter(channel.code)">
       {{channel.label}}
@@ -32,25 +40,26 @@
     </ion-chip>
   </ion-list>
 </ion-toolbar>
+
 <ion-content *ngIf="(filteredNotifications$ | async) as filteredNotifications">
   <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   <ion-progress-bar *ngIf="isLoading" type="indeterminate" color="primary"></ion-progress-bar>
+
   <ng-container *ngIf="filteredNotifications.length > 0">
     <ion-list>
       <ion-item-sliding *ngFor="let notification of (filteredNotifications$ | async)">
-      <ion-item class="ion-margin-bottom"
-       [ngClass]="{'notification-unread': notification.state === 'UNREAD'}">
-        <div class="notification-color-bar" [ngStyle]="{'background-color': notification.color}"></div>
-        <ion-grid class="ion-margin-start">
+        <ion-item class="ion-margin-bottom" [ngClass]="{'notification-unread': notification.state === 'UNREAD'}">
+          <div class="notification-color-bar" [ngStyle]="{'background-color': notification.color}"></div>
+          <ion-grid class="ion-margin-start">
             <ion-row>
               <ion-col size="10">
                 <ion-row class="ion-align-items-center ion-margin-bottom ion-nowrap">
                   <ion-icon [name]="notification.icon" size="large"></ion-icon>
                   <ion-label class="ion-margin-start">
-                      <h2 class="ion-text-wrap">{{notification.title}}</h2>
-                      <p class="ion-text-wrap">{{notification.creationDate | completeLocalDateAndTime}}</p>
+                    <h2 class="ion-text-wrap">{{notification.title}}</h2>
+                    <p class="ion-text-wrap">{{notification.creationDate | completeLocalDateAndTime}}</p>
                   </ion-label>
                 </ion-row>
                 <ion-row>
@@ -58,13 +67,11 @@
                 </ion-row>
               </ion-col>
               <ion-col size="2" class="notification-right-col">
-                <ion-icon class="ion-align-self-end" name="ellipsis-horizontal-outline"></ion-icon>
+                <ion-icon class="ion-align-self-end" name="ellipsis-horizontal-outline"
+                  (click)="openModal(notification.id)"></ion-icon>
                 <div *ngIf="notification.state === 'UNREAD'" class="new-notification-dot"></div>
-                <ion-button *ngIf="notification.appsRouterLink" 
-                class="ion-text-end ion-no-padding" 
-                fill="clear" 
-                [routerLink]="notification.appsRouterLink"
-                size="large">
+                <ion-button *ngIf="notification.appsRouterLink" class="ion-text-end ion-no-padding" fill="clear"
+                  [routerLink]="notification.appsRouterLink" size="large">
                   <ion-icon name="arrow-redo-outline" slot="end"></ion-icon>
                 </ion-button>
               </ion-col>
@@ -72,15 +79,34 @@
           </ion-grid>
         </ion-item>
         <ion-item-options>
-          <ion-item-option class="ion-margin-bottom"  (click)="deleteNotification(notification.id)">
+          <ion-item-option class="ion-margin-bottom" (click)="deleteNotification(notification.id)">
             <ion-icon size="large" name="trash"></ion-icon>
             <ion-label class="ion-text-uppercase">
-                <h2>{{ "NOTIFICATIONS.DELETE" | translate }}</h2>
-              </ion-label>
+              <h2>{{ "NOTIFICATIONS.DELETE" | translate }}</h2>
+            </ion-label>
           </ion-item-option>
         </ion-item-options>
       </ion-item-sliding>
-      </ion-list>
+    </ion-list>
+
+    <ion-modal #modal [isOpen]="isNotificationOptionsOpen" [initialBreakpoint]="0.5" [breakpoints]="[0, 0.5, 0.75, 1]"
+      (willDismiss)="dismissModal()">
+      <ng-template>
+        <ion-header>
+          <ion-toolbar>
+            <ion-buttons slot="end">
+              <ion-button (click)="dismissModal()">{{ 'NOTIFICATIONS.CLOSE' | translate }}</ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+        <ng-container *ngIf="selectedNotificationOption">
+          <ion-content class="ion-padding">
+            <app-notification-options [notification]="selectedNotificationOption" (closeModal)="dismissModal()"></app-notification-options>
+          </ion-content>
+        </ng-container>
+      </ng-template>
+    </ion-modal>
+
     <ion-infinite-scroll (ionInfinite)="onIonInfinite($event)">
       <ion-infinite-scroll-content>
         <ng-container *ngIf="endOfNotifications">

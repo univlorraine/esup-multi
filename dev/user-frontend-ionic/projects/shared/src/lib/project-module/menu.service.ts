@@ -6,7 +6,7 @@ export interface MenuItem {
     title: string;
     icon: string;
     position: number;
-    path: string;
+    routerLink: string;
     type: MenuType;
 }
 

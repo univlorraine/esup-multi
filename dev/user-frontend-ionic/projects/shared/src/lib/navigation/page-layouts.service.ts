@@ -22,16 +22,17 @@ export class PageLayoutsService {
       private navigationService: NavigationService,
       private menuService: MenuService,
     ) {
-        this.currentPageLayout$ = this.navigationService.navigationPath$.pipe(
-          map(path =>
+        this.currentPageLayout$ = this.navigationService.navigationRouterLink$.pipe(
+          map(routerLink =>
             this.menuService.getMenuItemsByType('tabs')
-            .map(menu => menu.path)
-            .includes(path.current) ? 'tabs' : 'full')
+            .map(menu => menu.routerLink)
+            .includes(routerLink.current) ? 'tabs' : 'full')
         );
 
-        // set current page title if current path matches any menu item
-        this.navigationService.navigationPath$.pipe(
-          map(navigationPath => this.menuService.getMenuItems().find(menuItem => navigationPath.current.startsWith(menuItem.path))),
+        // set current page title if current routerLink matches any menu item
+        this.navigationService.navigationRouterLink$.pipe(
+          map(navigationRouterLink =>
+            this.menuService.getMenuItems().find(menuItem => navigationRouterLink.current.startsWith(menuItem.routerLink))),
           filter(menuItem => menuItem !== undefined),
           map(menuItem => ({
             title: menuItem.title,

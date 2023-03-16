@@ -15,6 +15,6 @@ export class ServiceAppComponent {
     ) {}
 
     public onClick() {
-        this.router.navigate([this.app.path]);
+        this.router.navigate([this.app.routerLink]);
     }
 }

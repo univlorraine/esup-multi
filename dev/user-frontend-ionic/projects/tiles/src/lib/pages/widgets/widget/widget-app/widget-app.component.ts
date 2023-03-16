@@ -28,6 +28,6 @@ export class WidgetAppComponent implements AfterViewInit {
       }
 
     public onClick() {
-        this.router.navigate([this.app.path]);
+        this.router.navigate([this.app.routerLink]);
     }
 }

@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { APP_INITIALIZER,  ModuleWithProviders,  NgModule } from '@angular/core';
+import { APP_INITIALIZER, ModuleWithProviders, NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { ProjectModuleService } from '@ul/shared';
-import {ContactsRoutingModule} from './contacts-routing.module';
-import { ContactsComponent } from './contacts.page';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { ContactsRoutingModule } from './contacts-routing.module';
 import { ContactsModuleConfig, CONTACTS_CONFIG } from './contacts.config';
+import { ContactsComponent } from './contacts.page';
 
 
 const initModule = (projectModuleService: ProjectModuleService) =>
@@ -35,7 +35,7 @@ const initModule = (projectModuleService: ProjectModuleService) =>
   }],
 })
 export class ContactsModule {
-  static path = 'contatcs';
+  static routerLink = '/contatcs';
 
   static forRoot(config: ContactsModuleConfig): ModuleWithProviders<ContactsModule> {
     return {

@@ -7,10 +7,10 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ProjectModuleService } from '@ul/shared';
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthEffects } from './auth.effects';
+import { AuthPage } from './auth.page';
 import { ConnectedPage } from './connected/connected.page';
 import { LoginPage } from './login/login.page';
 import { PreferencesComponent } from './preferences/preferences.component';
-import { AuthPage } from './auth.page';
 
 const initModule = (projectModuleService: ProjectModuleService) =>
   () => projectModuleService.initProjectModule({
@@ -20,7 +20,7 @@ const initModule = (projectModuleService: ProjectModuleService) =>
       title: 'AUTH.MENU',
       icon: 'log-in',
       position: 999,
-      path: `/${AuthModule.path}`,
+      routerLink: AuthModule.routerLink,
       type: 'burger'
     }],
     preferencesComponent: PreferencesComponent
@@ -49,5 +49,5 @@ const initModule = (projectModuleService: ProjectModuleService) =>
   }],
 })
 export class AuthModule {
-  static path = 'auth';
+  static routerLink = '/auth';
 }

@@ -1,10 +1,11 @@
 [
 	{
+		"code": "ALERT",
+		"routerLink": null,
 		"color": "#FB3737",
 		"icon": "warning-outline",
-		"name": "ALERT",
 		"id": 7,
-		"appsRouterLink": null,
+		"filterable": false,
 		"translations": [
 			{
 				"id": 1,
@@ -21,11 +22,12 @@
 		]
 	},
 	{
+		"code": "ETAB",
+		"routerLink": null,
 		"color": "#12F86A",
 		"icon": "home-outline",
-		"name": "ETAB",
 		"id": 8,
-		"appsRouterLink": null,
+		"filterable": true,
 		"translations": [
 			{
 				"id": 3,
@@ -42,11 +44,12 @@
 		]
 	},
 	{
+		"code": "EDT",
+		"routerLink": "/schedule",
 		"color": "#4F4DFF",
 		"icon": "calendar-outline",
-		"name": "EDT",
 		"id": 9,
-		"appsRouterLink": "/schedule",
+		"filterable": true,
 		"translations": [
 			{
 				"id": 5,
@@ -63,11 +66,12 @@
 		]
 	},
 	{
+		"code": "CMP",
+		"routerLink": null,
 		"color": "#7AFF95",
 		"icon": "home-outline",
-		"name": "CMP",
 		"id": 10,
-		"appsRouterLink": null,
+		"filterable": true,
 		"translations": [
 			{
 				"id": 7,
@@ -84,11 +88,12 @@
 		]
 	},
 	{
+		"code": "SUAPS",
+		"routerLink": null,
 		"color": "#FFCF24",
 		"icon": "barbell-outline",
-		"name": "SUAPS",
 		"id": 11,
-		"appsRouterLink": null,
+		"filterable": true,
 		"translations": [
 			{
 				"id": 9,
@@ -105,11 +110,12 @@
 		]
 	},
 	{
+		"code": "SCOL",
+		"routerLink": null,
 		"color": "#B02BEE",
 		"icon": "school-outline",
-		"name": "SCOL",
 		"id": 12,
-		"appsRouterLink": null,
+		"filterable": true,
 		"translations": [
 			{
 				"id": 11,

@@ -1,11 +1,11 @@
-import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { BurgerMenuPage } from './burger-menu/burger-menu.page';
-import { ProjectModuleService } from '@ul/shared';
-import { MenuRoutingModule } from './menu-routing.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { ProjectModuleService } from '@ul/shared';
+import { BurgerMenuPage } from './burger-menu/burger-menu.page';
+import { MenuRoutingModule } from './menu-routing.module';
 
 const initModule = (projectModuleService: ProjectModuleService) =>
   () => projectModuleService.initProjectModule({
@@ -15,7 +15,7 @@ const initModule = (projectModuleService: ProjectModuleService) =>
       title: 'MENU.MENU',
       icon: 'menu',
       position: 999,
-      path: `/${MenuModule.path}`,
+      routerLink: MenuModule.routerLink,
       type: 'tabs',
     }]
   });
@@ -37,5 +37,5 @@ const initModule = (projectModuleService: ProjectModuleService) =>
   }],
 })
 export class MenuModule {
-  static path = 'menu';
+  static routerLink = '/menu';
 }

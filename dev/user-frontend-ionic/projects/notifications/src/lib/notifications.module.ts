@@ -8,28 +8,34 @@ import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { ProjectModuleService, SharedComponentsModule } from '@ul/shared';
 import { CompleteLocalDateAndTimePipe } from './complete-local-date-and-time.pipe';
+import { NotificationOptionsComponent } from './notification-options/notification-options.component';
 import { NotificationsRoutingModule } from './notifications-routing.module';
 import { NotificationsModuleConfig, NOTIFICATIONS_CONFIG } from './notifications.config';
 import { NotificationsPage } from './notifications.page';
-import { setFcmToken } from './notifications.repository';
+import { NotificationsRepository } from './notifications.repository';
+import { ChannelSubscriptionComponent } from './settings/channel-subscription/channel-subscription.component';
+import { SettingsPage } from './settings/settings.page';
 
 
-const initModule = (projectModuleService: ProjectModuleService) =>
-  () => projectModuleService.initProjectModule({
-    name: 'notifications',
-    translation: true,
-    menuItems: [{
-      title: 'NOTIFICATIONS.MENU',
-      icon: 'notifications-outline',
-      position: 60,
-      path: `/${NotificationsModule.path}`,
-      type: 'top',
-    }],
-    pageConfigurations: [{
-      path: `/${NotificationsModule.path}`,
-      disableAutoHeader: true,
-    }]
-  });
+const initModule = (projectModuleService: ProjectModuleService, notificationsRepository: NotificationsRepository) =>
+  () => {
+    projectModuleService.initProjectModule({
+      name: 'notifications',
+      translation: true,
+      menuItems: [{
+        title: 'NOTIFICATIONS.MENU',
+        icon: 'notifications-outline',
+        position: 60,
+        routerLink: NotificationsModule.routerLink,
+        type: 'top',
+      }],
+      pageConfigurations: [{
+        routerLink: NotificationsModule.routerLink,
+        disableAutoHeader: true,
+      }]
+    });
+    NotificationsModule.initPushNotifications(notificationsRepository);
+  };
 
 @NgModule({
   imports: [
@@ -42,23 +48,27 @@ const initModule = (projectModuleService: ProjectModuleService) =>
   ],
   declarations: [
     NotificationsPage,
-    CompleteLocalDateAndTimePipe
+    CompleteLocalDateAndTimePipe,
+    ChannelSubscriptionComponent,
+    SettingsPage,
+    NotificationOptionsComponent
   ],
   providers: [{
     provide: APP_INITIALIZER,
     useFactory: initModule,
-    deps: [ProjectModuleService],
+    deps: [
+      ProjectModuleService,
+      NotificationsRepository
+    ],
     multi: true
   }]
 })
 
 export class NotificationsModule {
 
-  static path = 'notifications';
+  static routerLink = '/notifications';
 
-  constructor() {
-    this.initPushNotifications();
-  }
+  constructor() { }
 
   static forRoot(config: NotificationsModuleConfig): ModuleWithProviders<NotificationsModule> {
     return {
@@ -69,7 +79,7 @@ export class NotificationsModule {
     };
   }
 
-  async initPushNotifications() {
+  static async initPushNotifications(notificationsRepository: NotificationsRepository) {
 
     const isPushNotificationsAvailable = Capacitor.isPluginAvailable('PushNotifications');
 
@@ -102,7 +112,7 @@ export class NotificationsModule {
 
     PushNotifications.addListener('registration',
       (token: Token) => {
-        setFcmToken(token);
+        notificationsRepository.setFcmToken(token);
       }
     );
 
@@ -115,9 +125,9 @@ export class NotificationsModule {
 
     // PushNotifications.addListener('pushNotificationReceived',
     //   (notification: PushNotificationSchema) => {
-        // à compléter pour ticket MULTI-122 affichage notifications
-        // test si recois bien la notif sans ajouter listener
-      // }
+    // à compléter pour ticket MULTI-122 affichage notifications
+    // test si recois bien la notif sans ajouter listener
+    // }
     // );
   }
 }

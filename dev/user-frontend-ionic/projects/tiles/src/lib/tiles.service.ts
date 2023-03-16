@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, combineLatest } from 'rxjs';
-import { Tile, TileType, TranslatedApp, TranslatedTile, tiles$ } from './tiles.repository';
-import { PageLayoutsService, NavigationService, currentLanguage$ } from '@ul/shared';
+import { currentLanguage$, NavigationService, PageLayoutsService } from '@ul/shared';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { filter, map, share } from 'rxjs/operators';
+import { Tile, tiles$, TileType, TranslatedApp, TranslatedTile } from './tiles.repository';
 
 @Injectable({
   providedIn: 'root'
@@ -28,12 +28,12 @@ export class TilesService {
         share(),
     ).subscribe(this.translatedTilesSubject$);
 
-    // set current page title if current path matches any app tile
-    combineLatest([this.navigationService.navigationPath$, this.translatedTiles$]).pipe(
-      map(([navigationPath, tiles]) => tiles
+    // set current page title if current routerLink matches any app tile
+    combineLatest([this.navigationService.navigationRouterLink$, this.translatedTiles$]).pipe(
+      map(([navigationRouterLink, tiles]) => tiles
         .filter(tile => tile.type === TileType.app)
         .map(tile =>  tile as TranslatedApp)
-        .find(tile => navigationPath.current.startsWith(tile.path))
+        .find(tile => navigationRouterLink.current.startsWith(tile.routerLink))
       ),
       filter(translatedApp => translatedApp !== undefined),
       map(translatedApp => ({

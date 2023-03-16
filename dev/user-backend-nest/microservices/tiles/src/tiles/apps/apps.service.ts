@@ -48,7 +48,7 @@ export class AppsService {
               translations: app.translations,
               widget: app.widget,
               icon: app.icon,
-              path: app.path,
+              routerLink: app.routerLink,
               authorization: app.authorization,
               settingsByRole: app.settings_by_role.map(
                 (sbr) => sbr.settings_by_role_id,

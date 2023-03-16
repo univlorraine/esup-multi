@@ -44,6 +44,6 @@ const initModule = (projectModuleService: ProjectModuleService) =>
 })
 
 export class CardsPageModule {
-  static path = 'cards';
+  static routerLink = '/cards';
 }
 

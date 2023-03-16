@@ -3,21 +3,21 @@ import { APP_INITIALIZER, ModuleWithProviders, NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { ProjectModuleService, SharedComponentsModule } from '@ul/shared';
-import { QRScanPage } from './scan/scan.page';
 import { ReservationRoutingModule } from './reservation-routing.module';
 import { ReservationModuleConfig, RESERVATION_CONFIG } from './reservation.config';
 import { ReservationPage } from './reservation.page';
+import { QRScanPage } from './scan/scan.page';
 
 const initModule = (projectModuleService: ProjectModuleService) =>
   () => projectModuleService.initProjectModule({
     name: 'reservation',
     translation: true,
     pageConfigurations: [{
-      path: `/reservation`,
+      routerLink: '/reservation',
       disableAutoHeader: true,
     },
     {
-      path: `/reservation/scan`,
+      routerLink: '/reservation/scan',
       disableAutoHeader: true,
     }]
   });
@@ -43,7 +43,7 @@ const initModule = (projectModuleService: ProjectModuleService) =>
 })
 export class ReservationModule {
 
-  static path = '/reservation';
+  static routerLink = '/reservation';
 
   static forRoot(config: ReservationModuleConfig): ModuleWithProviders<ReservationModule> {
     return {

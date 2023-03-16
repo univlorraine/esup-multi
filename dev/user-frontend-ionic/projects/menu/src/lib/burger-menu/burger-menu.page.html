@@ -1,5 +1,5 @@
 <ion-content>
-  <ion-item button *ngFor="let menu of menuItems" routerLink="/{{menu.path}}">
+  <ion-item button *ngFor="let menu of menuItems" routerLink="{{menu.routerLink}}">
     <ion-icon name="{{menu.icon}}" slot="start"></ion-icon>
     <ion-label>{{menu.title | translate}}</ion-label>
   </ion-item>
