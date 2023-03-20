@@ -3,8 +3,8 @@ import { APP_INITIALIZER, ModuleWithProviders, NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Capacitor } from '@capacitor/core';
 import { Device } from '@capacitor/device';
-import { PushNotifications, Token } from '@capacitor/push-notifications';
-import { IonicModule } from '@ionic/angular';
+import { PushNotifications, PushNotificationSchema, Token } from '@capacitor/push-notifications';
+import { IonicModule, ToastController } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { ProjectModuleService, SharedComponentsModule } from '@ul/shared';
 import { CompleteLocalDateAndTimePipe } from './complete-local-date-and-time.pipe';
@@ -17,7 +17,9 @@ import { ChannelSubscriptionComponent } from './settings/channel-subscription/ch
 import { SettingsPage } from './settings/settings.page';
 
 
-const initModule = (projectModuleService: ProjectModuleService, notificationsRepository: NotificationsRepository) =>
+const initModule = (projectModuleService: ProjectModuleService,
+  notificationsRepository: NotificationsRepository,
+  toastController: ToastController) =>
   () => {
     projectModuleService.initProjectModule({
       name: 'notifications',
@@ -34,7 +36,7 @@ const initModule = (projectModuleService: ProjectModuleService, notificationsRep
         disableAutoHeader: true,
       }]
     });
-    NotificationsModule.initPushNotifications(notificationsRepository);
+    NotificationsModule.initPushNotifications(notificationsRepository, toastController);
   };
 
 @NgModule({
@@ -58,7 +60,8 @@ const initModule = (projectModuleService: ProjectModuleService, notificationsRep
     useFactory: initModule,
     deps: [
       ProjectModuleService,
-      NotificationsRepository
+      NotificationsRepository,
+      ToastController
     ],
     multi: true
   }]
@@ -68,7 +71,7 @@ export class NotificationsModule {
 
   static routerLink = '/notifications';
 
-  constructor() { }
+  constructor() {}
 
   static forRoot(config: NotificationsModuleConfig): ModuleWithProviders<NotificationsModule> {
     return {
@@ -79,7 +82,7 @@ export class NotificationsModule {
     };
   }
 
-  static async initPushNotifications(notificationsRepository: NotificationsRepository) {
+  static async initPushNotifications(notificationsRepository: NotificationsRepository, toastController: ToastController) {
 
     const isPushNotificationsAvailable = Capacitor.isPluginAvailable('PushNotifications');
 
@@ -122,12 +125,16 @@ export class NotificationsModule {
       }
     );
 
-
-    // PushNotifications.addListener('pushNotificationReceived',
-    //   (notification: PushNotificationSchema) => {
-    // à compléter pour ticket MULTI-122 affichage notifications
-    // test si recois bien la notif sans ajouter listener
-    // }
-    // );
+    PushNotifications.addListener('pushNotificationReceived',
+      async (notification: PushNotificationSchema) => {
+        const toast = await toastController.create({
+          header: notification.title,
+          message: notification.body.length >= 110 ? notification.body.slice(0, 110) + '...' : notification.body,
+          position: 'top',
+          duration: 2000,
+        });
+        return toast.present();
+      }
+    );
   }
 }
