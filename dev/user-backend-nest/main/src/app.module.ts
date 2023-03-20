@@ -14,6 +14,7 @@ import microserviceScheduleConfig from './config/microservice-schedule.config';
 import microserviceContactsConfig from './config/microservice-contacts.config';
 import microserviceInfoConfig from './config/microservice-tiles.config';
 import microserviceClockingConfig from './config/microservice-clocking.config';
+import microserviceSocialNetworkConfig from './config/microservice-social-network';
 import { AuthJwtStrategy } from './security/auth-jwt.strategy';
 
 @Module({
@@ -85,6 +86,13 @@ import { AuthJwtStrategy } from './security/auth-jwt.strategy';
         imports: [ConfigModule.forFeature(microserviceClockingConfig)],
         useFactory: (config: ConfigService) =>
           config.get('microservice-clocking'),
+        inject: [ConfigService],
+      },
+      {
+        name: 'SOCIAL_NETWORK_SERVICE',
+        imports: [ConfigModule.forFeature(microserviceSocialNetworkConfig)],
+        useFactory: (config: ConfigService) =>
+          config.get('microservice-social-network'),
         inject: [ConfigService],
       },
     ]),
