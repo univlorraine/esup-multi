@@ -2,10 +2,12 @@ import {
   Body,
   Controller,
   Delete,
-  Get, Inject, Post,
+  Get,
+  Inject,
+  Post,
   Request,
   UseGuards,
-  UseInterceptors
+  UseInterceptors,
 } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { AuthGuard } from '@nestjs/passport';
@@ -27,7 +29,8 @@ export class AppController {
     @Inject('IMPORTANT_NEWS_SERVICE') private importantNewsClient: ClientProxy,
     @Inject('NOTIFICATIONS_SERVICE') private notificationsClient: ClientProxy,
     @Inject('CLOCKING_SERVICE') private clockingClient: ClientProxy,
-  ) { }
+    @Inject('SOCIAL_NETWORK_SERVICE') private socialNetworkClient: ClientProxy,
+  ) {}
 
   @Post('/tiles')
   info(@Body() body) {
@@ -375,7 +378,6 @@ export class AppController {
         ),
       );
   }
-  
 
   @Post('/notifications/unsubscribed-channels')
   notificationsUnsubscribedChannels(@Body() body) {
@@ -399,7 +401,6 @@ export class AppController {
         ),
       );
   }
-
 
   @Post('/clocking')
   getClocking(@Request() request) {
@@ -447,5 +448,15 @@ export class AppController {
           ),
         ),
       );
+  }
+
+  @Get('/social-network')
+  socialnetwork() {
+    return this.socialNetworkClient.send(
+      {
+        cmd: 'socialNetwork',
+      },
+      {},
+    );
   }
 }

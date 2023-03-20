@@ -3,6 +3,12 @@
     <ion-icon name="{{menu.icon}}" slot="start"></ion-icon>
     <ion-label>{{menu.title | translate}}</ion-label>
   </ion-item>
+  <ion-row>
+    <ion-col class="ion-text-center" *ngIf="(socialNetworks$ | async) as socialNetworks">
+      <ion-icon *ngFor="let social_network of socialNetworks" class="ion-padding"
+      [name]="social_network.icon" size="large" (click)="openExternalLink(social_network.link)"></ion-icon>
+    </ion-col>
+  </ion-row>
 </ion-content>
 <ion-footer *ngIf="languages.length > 1">
   <ion-row class="ion-justify-content-center">
