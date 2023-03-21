@@ -12,5 +12,6 @@
     "UNSUBSCRIBE_TO_CHANNEL": "Ne plus m'alerter de l'arrivée des messages du canal",
     "SUBSCRIBE_TO_CHANNEL": "Réactiver les alertes des messages du canal",
     "DELETE": "Supprimer",
-    "DELETE_THIS_NOTIFICATION": "Supprimer cette notification"
+    "DELETE_THIS_NOTIFICATION": "Supprimer cette notification",
+    "LOAD_MORE": "Charger plus"
 }
