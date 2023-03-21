@@ -3,7 +3,7 @@ import { Inject, Injectable } from '@angular/core';
 import { getAuthToken } from '@ul/shared';
 import { Observable } from 'rxjs';
 import { filter, first, switchMap, tap } from 'rxjs/operators';
-import { Channel, Notification, NotificationsRepository } from './notifications.repository';
+import { Channel, Notification, NotificationsRepository, TranslatedChannel } from './notifications.repository';
 
 @Injectable({
   providedIn: 'root'
@@ -60,7 +60,6 @@ export class NotificationsService {
       switchMap(authToken => this.removeNotification(authToken, id)),
     );
   }
-
 
   public loadAndStoreUnsubscribedChannels(): Observable<string[]> {
     return getAuthToken().pipe(

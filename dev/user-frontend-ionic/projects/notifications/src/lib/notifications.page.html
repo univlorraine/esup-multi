@@ -5,7 +5,7 @@
     </ion-buttons>
     <ion-title>{{ "NOTIFICATIONS.MENU" | translate }}</ion-title>
 
-    <ion-button slot="end" id="filter-click-trigger" fill="clear" class="ion-no-padding">
+    <ion-button slot="end" (click)="presentPopover($event)" fill="clear" class="ion-no-padding">
       <ion-icon name="filter-outline"></ion-icon>
     </ion-button>
 
@@ -13,15 +13,15 @@
       <ion-icon name="settings-outline"></ion-icon>
     </ion-button>
 
-    <ion-popover trigger="filter-click-trigger" triggerAction="click">
+    <ion-popover #popover [isOpen]="isOpen" (didDismiss)="isOpen = false">
       <ng-template>
         <ion-list>
           <ion-row class="ion-justify-content-center">
             <ion-text>{{ "NOTIFICATIONS.FILTERS" | translate }}</ion-text>
           </ion-row>
-          <form [formGroup]="form" *ngIf="(translatedChannels$ | async) as translatedChannels">
+          <form [formGroup]="form" *ngIf="(filterableChannels$ | async) as filterableChannels">
             <ion-item formArrayName="channelsForm" *ngFor="let channel of channelsForm.controls; let i = index">
-              <ion-label class="ion-text-wrap" for="terms">{{translatedChannels[i].label}}</ion-label>
+              <ion-label class="ion-text-wrap" for="terms">{{filterableChannels[i].label}}</ion-label>
               <ion-checkbox [formControlName]="i"></ion-checkbox>
             </ion-item>
           </form>
@@ -32,14 +32,13 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-toolbar *ngIf="(hasNoChannelsSelected$ | async) === false">
-  <ion-list>
-    <ion-chip *ngFor="let channel of channelsSelected$ | async" (click)="removeChannelFromFilter(channel.code)">
-      {{channel.label}}
-      <ion-icon name="close-circle-outline"></ion-icon>
-    </ion-chip>
-  </ion-list>
-</ion-toolbar>
+<ion-list>
+  <ion-chip *ngFor="let channel of channelsSelected$ | async" (click)="removeChannelFromFilter(channel.code)">
+    {{channel.label}}
+    <ion-icon name="close-circle-outline"></ion-icon>
+  </ion-chip>
+</ion-list>
+
 
 <ion-content *ngIf="(filteredNotifications$ | async) as filteredNotifications">
   <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
@@ -88,6 +87,9 @@
         </ion-item-options>
       </ion-item-sliding>
     </ion-list>
+    <ion-row class="ion-padding ion-justify-content-center">
+      <ion-button *ngIf="!hasScrollbar && !this.endOfNotifications" (click)="onIonInfinite($event)">{{ "NOTIFICATIONS.LOAD_MORE" | translate }}</ion-button>
+    </ion-row>
 
     <ion-modal #modal [isOpen]="isNotificationOptionsOpen" [initialBreakpoint]="0.5" [breakpoints]="[0, 0.5, 0.75, 1]"
       (willDismiss)="dismissModal()">
