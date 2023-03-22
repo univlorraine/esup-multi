@@ -31,7 +31,7 @@
     "@angular/platform-browser-dynamic": "^14.0.0",
     "@angular/router": "^14.0.0",
     "@awesome-cordova-plugins/core": "^6.3.0",
-    "@capacitor-community/contacts": "^4.0.2",
+    "@capacitor-community/contacts": "^4.0.3",
     "@capacitor-community/barcode-scanner": "^3.0.1",
     "@capacitor-community/screen-brightness": "^4.0.0",
     "@capacitor/android": "4.6.1",
