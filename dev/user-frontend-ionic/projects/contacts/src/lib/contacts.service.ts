@@ -38,10 +38,10 @@ export class ContactsService {
     );
   }
   public async contactAlreadyExists(user: Contact): Promise<boolean> {
-    const list = await Contacts.getContacts({projection: {emails: true}});
-    const contactContainsUserEmail = contact => contact.emails.find(e => user.mailAdresses.includes(e.address)) !== undefined;
-    const existingContact = list.contacts.find(contactContainsUserEmail);
-    return existingContact !== undefined;
+    const { contacts: allContacts } = await Contacts.getContacts({projection: {emails: true}});
+    const contactExists = allContacts.find((contact) => contact.emails?.find((email) =>
+    user.mailAdresses.includes(email.address))) !== undefined;
+    return contactExists;
   }
 
   public async createContact(user: Contact) {
