@@ -10,7 +10,7 @@
     "ng": "ng",
     "start": "ng serve",
     "prebuild": "npm run module:build-all",
-    "build": "BUILD_ENV=${BUILD_ENV:-local} ng build --configuration=$BUILD_ENV",
+    "build": "ng build",
     "appflow:build": "./appflow.sh",
     "test": "ng test",
     "lint": "ng lint",
