@@ -18,6 +18,7 @@ import { ReservationModule } from '@ul/reservation';
 import { RssPageModule } from '@ul/rss';
 import { ScheduleModule } from '@ul/schedule';
 import { ProjectModuleService, translationsLoaderFactory } from '@ul/shared';
+import { StaticPagesModule } from '@ul/static-pages';
 import { TilesModule } from '@ul/tiles';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
@@ -75,6 +76,7 @@ import { PageLayoutsModule } from './page-layouts/page-layouts.module';
       reservationSsoUrlTemplate: 'https://resa-espace.univ-lorraine.fr/reservationsalles/Authentification.aspx?ticket={st}',
     }),
     MenuModule,
+    StaticPagesModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

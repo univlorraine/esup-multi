@@ -3,7 +3,7 @@ import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
-import { ProjectModuleService } from '@ul/shared';
+import { ProjectModuleService, SharedComponentsModule } from '@ul/shared';
 import { BurgerMenuPage } from './burger-menu/burger-menu.page';
 import { MenuRoutingModule } from './menu-routing.module';
 
@@ -28,6 +28,7 @@ const initModule = (projectModuleService: ProjectModuleService) =>
     IonicModule,
     MenuRoutingModule,
     TranslateModule,
+    SharedComponentsModule
   ],
   providers: [{
     provide: APP_INITIALIZER,

@@ -1,0 +1,4 @@
+<ion-item button *ngFor="let page of translatedStaticPages$ | async" routerLink="/page/{{ page.id }}">
+  <ion-icon [name]="page.icon" slot="start"></ion-icon>
+  <ion-label>{{ page.title }}</ion-label>
+</ion-item>

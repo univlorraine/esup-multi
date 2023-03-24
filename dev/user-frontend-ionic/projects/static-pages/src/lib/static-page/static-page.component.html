@@ -1,0 +1,14 @@
+<ng-container *ngIf="page$ | async as page">
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <app-back-button></app-back-button>
+      </ion-buttons>
+      <ion-title>{{ page.title }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-content>
+    <div [innerHTML]="page.content"></div>
+  </ion-content>
+</ng-container>

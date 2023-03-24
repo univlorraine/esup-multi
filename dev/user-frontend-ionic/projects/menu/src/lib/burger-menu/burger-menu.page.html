@@ -1,23 +1,26 @@
 <ion-content>
   <ion-list lines="none" class="menu-section ion-padding">
+    <app-widget [widgetId]="'static-pages:static-pages-widget'"></app-widget>
+  </ion-list>
+
+  <ion-list lines="none" class="menu-section ion-padding">
     <ion-item button *ngFor="let menu of (staticMenuItems$ | async)" (click)="menuOpenerService.open(menu)">
       <ion-icon name="{{menu.icon}}" slot="start"></ion-icon>
       <ion-label>{{menu.title | translate}}</ion-label>
     </ion-item>
   </ion-list>
+
   <ion-list lines="none" class="menu-section ion-padding">
     <ion-item button *ngFor="let menu of (dynamicMenuItems$ | async)" (click)="menuOpenerService.open(menu)">
       <ion-icon name="{{menu.icon}}" slot="start"></ion-icon>
       <ion-label>{{menu.title | translate}}</ion-label>
     </ion-item>
   </ion-list>
-  <ion-row *ngIf="(socialNetworks$ | async) as socialNetworks" class="menu-section ion-padding ion-justify-content-center">
-      <ion-icon *ngFor="let social_network of socialNetworks" 
-          class="ion-padding" 
-          [name]="social_network.icon" 
-          size="large" 
-          (click)="openExternalLink(social_network.link)">
-      </ion-icon>
+  <ion-row *ngIf="(socialNetworks$ | async) as socialNetworks"
+    class="menu-section ion-padding ion-justify-content-center">
+    <ion-icon *ngFor="let social_network of socialNetworks" class="ion-padding" [name]="social_network.icon"
+      size="large" (click)="openExternalLink(social_network.link)">
+    </ion-icon>
   </ion-row>
 </ion-content>
 <ion-footer *ngIf="languages.length > 1">

@@ -10,7 +10,7 @@ export interface SocialNetwork {
   title: string;
 }
 
-const STORE_NAME = 'socialNetwork';
+const STORE_NAME = 'social-network';
 
 const store = createStore(
     { name: STORE_NAME },
@@ -28,3 +28,4 @@ export const setSocialNetworks = (socialNetworks: SocialNetwork[]) => {
 };
 
 export const clearSocialNetworks = () => store.reset();
+
