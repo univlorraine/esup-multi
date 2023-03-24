@@ -53,6 +53,7 @@ export class AppsService {
               settingsByRole: app.settings_by_role.map(
                 (sbr) => sbr.settings_by_role_id,
               ),
+              menu: app.menu,
             }),
           ),
         ),

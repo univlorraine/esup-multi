@@ -1,0 +1,8 @@
+.menu-section:after {
+    content: "";
+    display: block;
+    margin: 0 auto;
+    width: 90%; /* Change this to whatever width you want. */
+    padding-top: 1rem;
+    border-bottom: 0.15rem solid black; /* This creates the border. Replace black with whatever color you want. */
+}

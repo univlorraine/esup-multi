@@ -16,7 +16,7 @@ const initModule = (projectModuleService: ProjectModuleService) =>
       icon: 'menu',
       position: 999,
       routerLink: MenuModule.routerLink,
-      type: 'tabs',
+      type: 'tabs:end',
     }]
   });
 

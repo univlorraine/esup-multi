@@ -1,40 +1,38 @@
 import { Injectable } from '@angular/core';
 import { NavigationEnd, Router, RouterEvent } from '@angular/router';
+import { Location } from '@angular/common';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { filter, map, pairwise, startWith } from 'rxjs/operators';
+import { filter, map, tap } from 'rxjs/operators';
 
-export interface NavigationRouterLink {
-    current: string;
-    previous: string;
-}
 
 
 @Injectable({
     providedIn: 'root'
 })
 export class NavigationService {
-    public navigationRouterLink$: Observable<NavigationRouterLink>;
-    private navigationRouterLinkSubject$ = new BehaviorSubject<NavigationRouterLink>({
-        current: '/',
-        previous: '/'
-    });
+    public currentRouterLink$: Observable<string>;
+    private currentRouterLinkSubject$ = new BehaviorSubject<string>('/');
+    private history: string[] = [];
 
     constructor(
         private router: Router,
+        private location: Location,
     ) {
-        this.navigationRouterLink$ = this.navigationRouterLinkSubject$;
-
+        this.currentRouterLink$ = this.currentRouterLinkSubject$;
         this.router.events.pipe(
             filter((event: RouterEvent) => event instanceof NavigationEnd),
             map((event: RouterEvent): NavigationEnd => event as NavigationEnd),
-            map(navigatioEnd => navigatioEnd.urlAfterRedirects),
-            startWith('/'),
-            pairwise(),
-            map(([previous, current]) => ({
-                previous,
-                current
-            }))
-        ).subscribe(this.navigationRouterLinkSubject$);
+            map(navigationEnd => navigationEnd.urlAfterRedirects),
+            tap(url => this.history.push(url))
+        ).subscribe(this.currentRouterLinkSubject$);
     }
 
+    navigateBack() {
+        this.history.pop();
+        if (this.history.length > 0) {
+            this.location.back();
+        } else {
+            this.router.navigateByUrl('/');
+        }
+    }
 }

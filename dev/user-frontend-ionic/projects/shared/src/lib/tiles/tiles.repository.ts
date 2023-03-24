@@ -3,9 +3,13 @@ import { selectAllEntities, setEntities, withEntities } from '@ngneat/elf-entiti
 import {
   persistState
 } from '@ngneat/elf-persist-state';
-import { Authorization, localForageStore } from '@ul/shared';
+import { Authorization } from '../authorization/authorization.helper';
+import { localForageStore } from '../store/local-forage';
+
 
 const STORE_NAME = 'tiles';
+
+export type TileMenuType = 'top' | 'tabs' | 'burger' | 'service';
 
 export enum TileType {
   app = 'app',
@@ -26,11 +30,12 @@ interface AbstractTile {
   widget: string;
   translations: Translation[];
   authorization?: Authorization;
+  menu: TileMenuType;
+  icon: string;
 }
 
 export interface App extends AbstractTile {
   routerLink: string;
-  icon?: string;
   type: TileType.app;
 }
 
@@ -40,37 +45,14 @@ export interface Info extends AbstractTile {
   type: TileType.info;
 }
 
-interface AbstractTranslatedTile {
-  id: string;
-  type: TileType;
-  widget: string;
-  title: string;
-  content?: string;
-  authorization?: Authorization;
-  searchKeywords?: string[];
-}
-
-export interface TranslatedApp extends AbstractTranslatedTile {
-  routerLink: string;
-  icon?: string;
-  type: TileType.app;
-}
-
-export interface TranslatedInfo extends AbstractTranslatedTile {
-  link?: string;
-  ssoService?: string;
-  type: TileType.info;
-}
-
 export type Tile = Info | App;
-export type TranslatedTile = TranslatedInfo | TranslatedApp;
 
 const store = createStore(
   { name: STORE_NAME },
   withEntities<Tile>()
 );
 
-export const persist = persistState(store, {
+const persist = persistState(store, {
   key: STORE_NAME,
   storage: localForageStore,
 });

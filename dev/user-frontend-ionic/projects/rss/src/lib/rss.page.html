@@ -1,6 +1,8 @@
 
 <ion-progress-bar *ngIf="isLoading" type="indeterminate" color="primary"></ion-progress-bar>
 
+<app-header></app-header>
+
 <ion-content *ngIf="(rssFeedIsEmpty$ | async) === false">
   <ion-card *ngFor="let item of (rssFeed$ | async)" (click)="onClick(item)">
     <ion-card-header>

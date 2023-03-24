@@ -1,6 +1,5 @@
 import { Injectable, Type } from '@angular/core';
-import { MenuItem, MenuService, MenuType } from './menu.service';
-import { PageConfiguration, PageConfigurationService } from './page-configuration.service';
+import { StaticMenuItem, StaticMenuService, StaticMenuType } from './static-menu.service';
 import { PreferencesService } from './preferences.service';
 import { TranslationsService } from './translations/translations.service';
 import { Widget, WidgetsService } from './widgets.service';
@@ -9,9 +8,8 @@ export interface InitProjectModuleOptions {
     name: string;
     preferencesComponent?: Type<any>;
     translation?: boolean;
-    menuItems?: MenuItem[];
+    menuItems?: StaticMenuItem[];
     widgets?: Widget[];
-    pageConfigurations?: PageConfiguration[];
 }
 
 @Injectable({
@@ -22,9 +20,8 @@ export class ProjectModuleService {
     constructor(
         private preferencesService: PreferencesService,
         private translationsService: TranslationsService,
-        private menuService: MenuService,
+        private staticMenuService: StaticMenuService,
         private widgetsService: WidgetsService,
-        private pageConfigurationService: PageConfigurationService,
     ) {}
 
     initProjectModule(options: InitProjectModuleOptions) {
@@ -37,7 +34,7 @@ export class ProjectModuleService {
         }
 
         if (options.menuItems) {
-            this.menuService.addMenuItems(options.menuItems);
+            this.staticMenuService.addMenuItems(options.menuItems);
         }
 
         if (options.widgets) {
@@ -48,18 +45,18 @@ export class ProjectModuleService {
             }));
             this.widgetsService.addWidgets(widgets);
         }
-
-        if (options.pageConfigurations) {
-            this.pageConfigurationService.addPageConfigurations(options.pageConfigurations);
-        }
     }
 
     getTranslatedProjectModules(): string[] {
         return this.translationsService.getTranslations();
     }
 
-    getMenuItemsByType(menuType: MenuType): MenuItem[] {
-        return this.menuService.getMenuItemsByType(menuType);
+    getStaticMenuItemsByType(menuType: StaticMenuType): StaticMenuItem[] {
+        return this.staticMenuService.getMenuItemsByType(menuType);
+    }
+
+    getStaticMenuItems(): StaticMenuItem[] {
+        return this.staticMenuService.getMenuItems();
     }
 
     getPreferencesComponents(): Type<any>[] {
@@ -68,9 +65,5 @@ export class ProjectModuleService {
 
     getWidgetComponent(widgetId: string): Type<any> {
         return this.widgetsService.getWidget(widgetId)?.component;
-    }
-
-    getPageConfigurationByRouterLink(routerLink: string): PageConfiguration {
-        return this.pageConfigurationService.getPageConfigurationByRouterLink(routerLink);
     }
 }

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { TranslatedTile } from '../../../tiles.repository';
+import { TranslatedTile } from '@ul/shared';
 
 @Component({
 selector: 'app-widget',

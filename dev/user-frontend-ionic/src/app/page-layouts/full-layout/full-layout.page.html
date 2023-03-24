@@ -1,12 +1,4 @@
 <div class="ion-page" id="main-content">
-  <ion-header [translucent]="true" *ngIf="(showHeader$ | async)">
-    <ion-toolbar>
-      <ion-buttons slot="start">
-        <app-back-button></app-back-button>
-      </ion-buttons>
-      <ion-title *ngIf="(currentPageTitle$ | async) as pageTitle">{{ pageTitle.translated ? pageTitle.title : (pageTitle.title | translate) }}</ion-title>
-    </ion-toolbar>
-  </ion-header>
   <ion-content>
     <ion-router-outlet></ion-router-outlet>
   </ion-content>

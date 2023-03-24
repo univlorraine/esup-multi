@@ -1,10 +1,36 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { currentLanguage$, NavigationService, PageLayoutsService } from '@ul/shared';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { filter, map, share } from 'rxjs/operators';
-import { Tile, tiles$, TileType, TranslatedApp, TranslatedTile } from './tiles.repository';
+import { BehaviorSubject, Observable, combineLatest } from 'rxjs';
+import { Tile, TileType, tiles$, TileMenuType, setTiles } from './tiles.repository';
+import { first, map, share, switchMap, tap } from 'rxjs/operators';
+import { currentLanguage$ } from '../i18n/i18n.repository';
+import { Authorization } from '../authorization/authorization.helper';
+import { getAuthToken } from '../auth/auth.repository';
 
+interface AbstractTranslatedTile {
+  id: string;
+  type: TileType;
+  widget: string;
+  title: string;
+  content?: string;
+  authorization?: Authorization;
+  searchKeywords?: string[];
+  menu: TileMenuType;
+  icon: string;
+}
+
+export interface TranslatedApp extends AbstractTranslatedTile {
+  routerLink: string;
+  type: TileType.app;
+}
+
+export interface TranslatedInfo extends AbstractTranslatedTile {
+  link?: string;
+  ssoService?: string;
+  type: TileType.info;
+}
+
+export type TranslatedTile = TranslatedInfo | TranslatedApp;
 @Injectable({
   providedIn: 'root'
 })
@@ -17,8 +43,6 @@ export class TilesService {
     @Inject('environment')
     private environment: any,
     private http: HttpClient,
-    private navigationService: NavigationService,
-    private pageLayoutService: PageLayoutsService,
   ) {
     this.translatedTiles$ = this.translatedTilesSubject$;
 
@@ -27,23 +51,18 @@ export class TilesService {
         map(tilesAndCurrentLang => this.mapToTranslatedTiles(tilesAndCurrentLang)),
         share(),
     ).subscribe(this.translatedTilesSubject$);
-
-    // set current page title if current routerLink matches any app tile
-    combineLatest([this.navigationService.navigationRouterLink$, this.translatedTiles$]).pipe(
-      map(([navigationRouterLink, tiles]) => tiles
-        .filter(tile => tile.type === TileType.app)
-        .map(tile =>  tile as TranslatedApp)
-        .find(tile => navigationRouterLink.current.startsWith(tile.routerLink))
-      ),
-      filter(translatedApp => translatedApp !== undefined),
-      map(translatedApp => ({
-        title: translatedApp.title,
-        translated: true
-      }))
-    ).subscribe(this.pageLayoutService.currentPageTitle$);
   }
 
-  public getTiles(authToken: string): Observable<Tile[]> {
+  loadAndStoreTiles(): Observable<void> {
+    return getAuthToken().pipe(
+      first(),
+      switchMap((authToken) => this.getTiles(authToken)),
+      tap(infoList => setTiles(infoList)),
+      map(() => null)
+    );
+  }
+
+  private getTiles(authToken: string): Observable<Tile[]> {
     const url = `${this.environment.apiEndpoint}/tiles`;
     const data = {
       authToken

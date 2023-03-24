@@ -1,8 +1,7 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { PageLayout, PageLayoutsService, currentLanguage$ } from '@ul/shared';
+import { PageLayout, PageLayoutService, currentLanguage$ } from '@ul/shared';
 import { Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -19,13 +18,13 @@ export class AppComponent implements OnInit, OnDestroy {
     @Inject('environment')
     private environment: any,
     private translateService: TranslateService,
-    private pageLayoutsService: PageLayoutsService,
+    private pageLayoutService: PageLayoutService,
   ) {
     // Define available languages in app
     this.languages = this.environment.languages;
     this.translateService.addLangs(this.languages);
 
-    this.currentPageLayout$ = this.pageLayoutsService.currentPageLayout$;
+    this.currentPageLayout$ = this.pageLayoutService.currentPageLayout$;
   }
 
   ngOnInit() {

@@ -1,5 +1,6 @@
 version: 1
-directus: 9.22.4
+directus: 9.23.1
+vendor: postgres
 collections:
   - collection: apps
     meta:
@@ -22,9 +23,7 @@ collections:
       translations: null
       unarchive_value: draft
     schema:
-      comment: null
       name: apps
-      schema: public
   - collection: apps_settings_by_role
     meta:
       accountability: all
@@ -46,9 +45,7 @@ collections:
       translations: null
       unarchive_value: null
     schema:
-      comment: null
       name: apps_settings_by_role
-      schema: public
   - collection: apps_translations
     meta:
       accountability: null
@@ -70,9 +67,7 @@ collections:
       translations: null
       unarchive_value: null
     schema:
-      comment: null
       name: apps_translations
-      schema: public
   - collection: authorization
     meta:
       accountability: all
@@ -94,9 +89,7 @@ collections:
       translations: null
       unarchive_value: null
     schema:
-      comment: null
       name: authorization
-      schema: public
   - collection: channels
     meta:
       accountability: all
@@ -118,9 +111,7 @@ collections:
       translations: null
       unarchive_value: null
     schema:
-      comment: null
       name: channels
-      schema: public
   - collection: channels_translations
     meta:
       accountability: all
@@ -142,9 +133,7 @@ collections:
       translations: null
       unarchive_value: null
     schema:
-      comment: null
       name: channels_translations
-      schema: public
   - collection: important_news
     meta:
       accountability: all
@@ -166,9 +155,7 @@ collections:
       translations: null
       unarchive_value: draft
     schema:
-      comment: null
       name: important_news
-      schema: public
   - collection: important_news_translations
     meta:
       accountability: all
@@ -190,9 +177,7 @@ collections:
       translations: null
       unarchive_value: null
     schema:
-      comment: null
       name: important_news_translations
-      schema: public
   - collection: info
     meta:
       accountability: null
@@ -214,9 +199,7 @@ collections:
       translations: null
       unarchive_value: draft
     schema:
-      comment: null
       name: info
-      schema: public
   - collection: info_settings_by_role
     meta:
       accountability: all
@@ -238,9 +221,7 @@ collections:
       translations: null
       unarchive_value: null
     schema:
-      comment: null
       name: info_settings_by_role
-      schema: public
   - collection: info_translations
     meta:
       accountability: all
@@ -262,9 +243,7 @@ collections:
       translations: null
       unarchive_value: null
     schema:
-      comment: null
       name: info_translations
-      schema: public
   - collection: languages
     meta:
       accountability: all
@@ -286,9 +265,7 @@ collections:
       translations: null
       unarchive_value: null
     schema:
-      comment: null
       name: languages
-      schema: public
   - collection: settings_by_role
     meta:
       accountability: all
@@ -312,9 +289,7 @@ collections:
       translations: null
       unarchive_value: null
     schema:
-      comment: null
       name: settings_by_role
-      schema: public
   - collection: social_networks
     meta:
       accountability: all
@@ -336,12 +311,11 @@ collections:
       translations: null
       unarchive_value: null
     schema:
-      comment: null
       name: social_networks
-      schema: public
 fields:
   - collection: apps
     field: authorization
+    type: integer
     meta:
       collection: apps
       conditions: null
@@ -365,27 +339,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: authorization
+      table: apps
       data_type: integer
       default_value: null
-      foreign_key_column: id
-      foreign_key_schema: public
-      foreign_key_table: authorization
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: true
-      is_primary_key: false
-      is_unique: true
       max_length: null
-      name: authorization
       numeric_precision: 32
       numeric_scale: 0
-      schema: public
-      table: apps
-    type: integer
+      is_nullable: true
+      is_unique: true
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: authorization
+      foreign_key_column: id
   - collection: apps
     field: icon
+    type: string
     meta:
       collection: apps
       conditions: null
@@ -406,27 +377,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: icon
+      table: apps
       data_type: character varying
       default_value: null
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: true
-      is_primary_key: false
-      is_unique: false
       max_length: 255
-      name: icon
       numeric_precision: null
       numeric_scale: null
-      schema: public
-      table: apps
-    type: string
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: apps
     field: id
+    type: integer
     meta:
       collection: apps
       conditions: null
@@ -447,27 +415,72 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: id
+      table: apps
       data_type: integer
       default_value: nextval('apps_id_seq'::regclass)
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: true
-      is_generated: false
-      is_nullable: false
-      is_primary_key: true
-      is_unique: true
       max_length: null
-      name: id
       numeric_precision: 32
       numeric_scale: 0
-      schema: public
+      is_nullable: false
+      is_unique: true
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: apps
+    field: menu
+    type: string
+    meta:
+      collection: apps
+      conditions: null
+      display: null
+      display_options: null
+      field: menu
+      group: null
+      hidden: false
+      interface: select-dropdown
+      note: null
+      options:
+        allowNone: true
+        choices:
+          - text: top
+            value: top
+          - text: tabs
+            value: tabs
+          - text: burger
+            value: burger
+          - text: service
+            value: service
+      readonly: false
+      required: false
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: menu
       table: apps
-    type: integer
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: apps
     field: position
+    type: integer
     meta:
       collection: apps
       conditions: null
@@ -488,27 +501,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: position
+      table: apps
       data_type: integer
       default_value: null
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: true
-      is_primary_key: false
-      is_unique: false
       max_length: null
-      name: position
       numeric_precision: 32
       numeric_scale: 0
-      schema: public
-      table: apps
-    type: integer
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: apps
     field: routerLink
+    type: string
     meta:
       collection: apps
       conditions: null
@@ -529,27 +539,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: routerLink
+      table: apps
       data_type: character varying
       default_value: null
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: false
-      is_primary_key: false
-      is_unique: false
       max_length: 255
-      name: routerLink
       numeric_precision: null
       numeric_scale: null
-      schema: public
-      table: apps
-    type: string
+      is_nullable: false
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: apps
     field: settings_by_role
+    type: alias
     meta:
       collection: apps
       conditions: null
@@ -570,10 +577,9 @@ fields:
       validation: null
       validation_message: null
       width: full
-    schema: null
-    type: alias
   - collection: apps
     field: sort
+    type: integer
     meta:
       collection: apps
       conditions: null
@@ -594,27 +600,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: sort
+      table: apps
       data_type: integer
       default_value: null
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: true
-      is_primary_key: false
-      is_unique: false
       max_length: null
-      name: sort
       numeric_precision: 32
       numeric_scale: 0
-      schema: public
-      table: apps
-    type: integer
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: apps
     field: status
+    type: string
     meta:
       collection: apps
       conditions: null
@@ -656,27 +659,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: status
+      table: apps
       data_type: character varying
       default_value: draft
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: false
-      is_primary_key: false
-      is_unique: false
       max_length: 255
-      name: status
       numeric_precision: null
       numeric_scale: null
-      schema: public
-      table: apps
-    type: string
+      is_nullable: false
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: apps
     field: translations
+    type: alias
     meta:
       collection: apps
       conditions: null
@@ -700,10 +700,9 @@ fields:
       validation: null
       validation_message: null
       width: full
-    schema: null
-    type: alias
   - collection: apps
     field: widget
+    type: string
     meta:
       collection: apps
       conditions: null
@@ -724,27 +723,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: widget
+      table: apps
       data_type: character varying
       default_value: null
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: true
-      is_primary_key: false
-      is_unique: false
       max_length: 255
-      name: widget
       numeric_precision: null
       numeric_scale: null
-      schema: public
-      table: apps
-    type: string
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: apps_settings_by_role
     field: apps_id
+    type: integer
     meta:
       collection: apps_settings_by_role
       conditions: null
@@ -765,27 +761,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: apps_id
+      table: apps_settings_by_role
       data_type: integer
       default_value: null
-      foreign_key_column: id
-      foreign_key_schema: public
-      foreign_key_table: apps
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: true
-      is_primary_key: false
-      is_unique: false
       max_length: null
-      name: apps_id
       numeric_precision: 32
       numeric_scale: 0
-      schema: public
-      table: apps_settings_by_role
-    type: integer
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: apps
+      foreign_key_column: id
   - collection: apps_settings_by_role
     field: id
+    type: integer
     meta:
       collection: apps_settings_by_role
       conditions: null
@@ -806,27 +799,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: id
+      table: apps_settings_by_role
       data_type: integer
       default_value: nextval('apps_settings_by_role_id_seq'::regclass)
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: true
-      is_generated: false
-      is_nullable: false
-      is_primary_key: true
-      is_unique: true
       max_length: null
-      name: id
       numeric_precision: 32
       numeric_scale: 0
-      schema: public
-      table: apps_settings_by_role
-    type: integer
+      is_nullable: false
+      is_unique: true
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: apps_settings_by_role
     field: settings_by_role_id
+    type: integer
     meta:
       collection: apps_settings_by_role
       conditions: null
@@ -847,27 +837,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: settings_by_role_id
+      table: apps_settings_by_role
       data_type: integer
       default_value: null
-      foreign_key_column: id
-      foreign_key_schema: public
-      foreign_key_table: settings_by_role
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: true
-      is_primary_key: false
-      is_unique: false
       max_length: null
-      name: settings_by_role_id
       numeric_precision: 32
       numeric_scale: 0
-      schema: public
-      table: apps_settings_by_role
-    type: integer
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: settings_by_role
+      foreign_key_column: id
   - collection: apps_settings_by_role
     field: sort
+    type: integer
     meta:
       collection: apps_settings_by_role
       conditions: null
@@ -888,27 +875,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: sort
+      table: apps_settings_by_role
       data_type: integer
       default_value: null
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: true
-      is_primary_key: false
-      is_unique: false
       max_length: null
-      name: sort
       numeric_precision: 32
       numeric_scale: 0
-      schema: public
-      table: apps_settings_by_role
-    type: integer
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: apps_translations
     field: apps_id
+    type: integer
     meta:
       collection: apps_translations
       conditions: null
@@ -929,27 +913,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: apps_id
+      table: apps_translations
       data_type: integer
       default_value: null
-      foreign_key_column: id
-      foreign_key_schema: public
-      foreign_key_table: apps
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: true
-      is_primary_key: false
-      is_unique: false
       max_length: null
-      name: apps_id
       numeric_precision: 32
       numeric_scale: 0
-      schema: public
-      table: apps_translations
-    type: integer
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: apps
+      foreign_key_column: id
   - collection: apps_translations
     field: content
+    type: text
     meta:
       collection: apps_translations
       conditions: null
@@ -970,27 +951,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: content
+      table: apps_translations
       data_type: text
       default_value: null
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: true
-      is_primary_key: false
-      is_unique: false
       max_length: null
-      name: content
       numeric_precision: null
       numeric_scale: null
-      schema: public
-      table: apps_translations
-    type: text
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: apps_translations
     field: id
+    type: integer
     meta:
       collection: apps_translations
       conditions: null
@@ -1011,27 +989,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: id
+      table: apps_translations
       data_type: integer
       default_value: nextval('apps_translations_id_seq'::regclass)
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: true
-      is_generated: false
-      is_nullable: false
-      is_primary_key: true
-      is_unique: true
       max_length: null
-      name: id
       numeric_precision: 32
       numeric_scale: 0
-      schema: public
-      table: apps_translations
-    type: integer
+      is_nullable: false
+      is_unique: true
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: apps_translations
     field: languages_code
+    type: string
     meta:
       collection: apps_translations
       conditions: null
@@ -1052,27 +1027,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: languages_code
+      table: apps_translations
       data_type: character varying
       default_value: null
-      foreign_key_column: code
-      foreign_key_schema: public
-      foreign_key_table: languages
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: true
-      is_primary_key: false
-      is_unique: false
       max_length: 255
-      name: languages_code
       numeric_precision: null
       numeric_scale: null
-      schema: public
-      table: apps_translations
-    type: string
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: languages
+      foreign_key_column: code
   - collection: apps_translations
     field: searchKeywords
+    type: json
     meta:
       collection: apps_translations
       conditions: null
@@ -1094,27 +1066,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: searchKeywords
+      table: apps_translations
       data_type: json
       default_value: null
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: true
-      is_primary_key: false
-      is_unique: false
       max_length: null
-      name: searchKeywords
       numeric_precision: null
       numeric_scale: null
-      schema: public
-      table: apps_translations
-    type: json
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: apps_translations
     field: title
+    type: string
     meta:
       collection: apps_translations
       conditions: null
@@ -1135,27 +1104,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: title
+      table: apps_translations
       data_type: character varying
       default_value: null
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: true
-      is_primary_key: false
-      is_unique: false
       max_length: 255
-      name: title
       numeric_precision: null
       numeric_scale: null
-      schema: public
-      table: apps_translations
-    type: string
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: authorization
     field: id
+    type: integer
     meta:
       collection: authorization
       conditions: null
@@ -1176,27 +1142,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: id
+      table: authorization
       data_type: integer
       default_value: nextval('authorization_id_seq'::regclass)
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: true
-      is_generated: false
-      is_nullable: false
-      is_primary_key: true
-      is_unique: true
       max_length: null
-      name: id
       numeric_precision: 32
       numeric_scale: 0
-      schema: public
-      table: authorization
-    type: integer
+      is_nullable: false
+      is_unique: true
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: authorization
     field: roles
+    type: json
     meta:
       collection: authorization
       conditions: null
@@ -1219,27 +1182,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: roles
+      table: authorization
       data_type: json
       default_value: null
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: true
-      is_primary_key: false
-      is_unique: false
       max_length: null
-      name: roles
       numeric_precision: null
       numeric_scale: null
-      schema: public
-      table: authorization
-    type: json
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: authorization
     field: type
+    type: string
     meta:
       collection: authorization
       conditions: null
@@ -1265,27 +1225,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: type
+      table: authorization
       data_type: character varying
       default_value: null
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: true
-      is_primary_key: false
-      is_unique: false
       max_length: 255
-      name: type
       numeric_precision: null
       numeric_scale: null
-      schema: public
-      table: authorization
-    type: string
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: channels
     field: code
+    type: string
     meta:
       collection: channels
       conditions: null
@@ -1306,27 +1263,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: code
+      table: channels
       data_type: character varying
       default_value: null
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: true
-      is_primary_key: false
-      is_unique: false
       max_length: 255
-      name: code
       numeric_precision: null
       numeric_scale: null
-      schema: public
-      table: channels
-    type: string
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: channels
     field: color
+    type: string
     meta:
       collection: channels
       conditions: null
@@ -1347,27 +1301,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: color
+      table: channels
       data_type: character varying
       default_value: null
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: true
-      is_primary_key: false
-      is_unique: false
       max_length: 255
-      name: color
       numeric_precision: null
       numeric_scale: null
-      schema: public
-      table: channels
-    type: string
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: channels
     field: filterable
+    type: boolean
     meta:
       collection: channels
       conditions: null
@@ -1389,27 +1340,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: filterable
+      table: channels
       data_type: boolean
       default_value: false
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: false
-      is_primary_key: false
-      is_unique: false
       max_length: null
-      name: filterable
       numeric_precision: null
       numeric_scale: null
-      schema: public
-      table: channels
-    type: boolean
+      is_nullable: false
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: channels
     field: icon
+    type: string
     meta:
       collection: channels
       conditions: null
@@ -1430,27 +1378,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: icon
+      table: channels
       data_type: character varying
       default_value: null
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: true
-      is_primary_key: false
-      is_unique: false
       max_length: 255
-      name: icon
       numeric_precision: null
       numeric_scale: null
-      schema: public
-      table: channels
-    type: string
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: channels
     field: id
+    type: integer
     meta:
       collection: channels
       conditions: null
@@ -1471,27 +1416,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: id
+      table: channels
       data_type: integer
       default_value: nextval('channels_id_seq'::regclass)
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: true
-      is_generated: false
-      is_nullable: false
-      is_primary_key: true
-      is_unique: true
       max_length: null
-      name: id
       numeric_precision: 32
       numeric_scale: 0
-      schema: public
-      table: channels
-    type: integer
+      is_nullable: false
+      is_unique: true
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: channels
     field: routerLink
+    type: string
     meta:
       collection: channels
       conditions: null
@@ -1512,27 +1454,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: routerLink
+      table: channels
       data_type: character varying
       default_value: null
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: true
-      is_primary_key: false
-      is_unique: false
       max_length: 255
-      name: routerLink
       numeric_precision: null
       numeric_scale: null
-      schema: public
-      table: channels
-    type: string
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: channels
     field: translations
+    type: alias
     meta:
       collection: channels
       conditions: null
@@ -1556,10 +1495,9 @@ fields:
       validation: null
       validation_message: null
       width: full
-    schema: null
-    type: alias
   - collection: channels_translations
     field: channels_id
+    type: integer
     meta:
       collection: channels_translations
       conditions: null
@@ -1580,27 +1518,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: channels_id
+      table: channels_translations
       data_type: integer
       default_value: null
-      foreign_key_column: id
-      foreign_key_schema: public
-      foreign_key_table: channels
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: true
-      is_primary_key: false
-      is_unique: false
       max_length: null
-      name: channels_id
       numeric_precision: 32
       numeric_scale: 0
-      schema: public
-      table: channels_translations
-    type: integer
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: channels
+      foreign_key_column: id
   - collection: channels_translations
     field: id
+    type: integer
     meta:
       collection: channels_translations
       conditions: null
@@ -1621,27 +1556,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: id
+      table: channels_translations
       data_type: integer
       default_value: nextval('channels_translations_id_seq'::regclass)
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: true
-      is_generated: false
-      is_nullable: false
-      is_primary_key: true
-      is_unique: true
       max_length: null
-      name: id
       numeric_precision: 32
       numeric_scale: 0
-      schema: public
-      table: channels_translations
-    type: integer
+      is_nullable: false
+      is_unique: true
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: channels_translations
     field: label
+    type: string
     meta:
       collection: channels_translations
       conditions: null
@@ -1662,27 +1594,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: label
+      table: channels_translations
       data_type: character varying
       default_value: null
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: true
-      is_primary_key: false
-      is_unique: false
       max_length: 255
-      name: label
       numeric_precision: null
       numeric_scale: null
-      schema: public
-      table: channels_translations
-    type: string
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: channels_translations
     field: languages_code
+    type: string
     meta:
       collection: channels_translations
       conditions: null
@@ -1703,27 +1632,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: languages_code
+      table: channels_translations
       data_type: character varying
       default_value: null
-      foreign_key_column: code
-      foreign_key_schema: public
-      foreign_key_table: languages
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: true
-      is_primary_key: false
-      is_unique: false
       max_length: 255
-      name: languages_code
       numeric_precision: null
       numeric_scale: null
-      schema: public
-      table: channels_translations
-    type: string
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: languages
+      foreign_key_column: code
   - collection: important_news
     field: authorization
+    type: integer
     meta:
       collection: important_news
       conditions: null
@@ -1747,27 +1673,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: authorization
+      table: important_news
       data_type: integer
       default_value: null
-      foreign_key_column: id
-      foreign_key_schema: public
-      foreign_key_table: authorization
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: true
-      is_primary_key: false
-      is_unique: false
       max_length: null
-      name: authorization
       numeric_precision: 32
       numeric_scale: 0
-      schema: public
-      table: important_news
-    type: integer
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: authorization
+      foreign_key_column: id
   - collection: important_news
     field: id
+    type: integer
     meta:
       collection: important_news
       conditions: null
@@ -1788,27 +1711,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: id
+      table: important_news
       data_type: integer
       default_value: nextval('important_news_id_seq'::regclass)
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: true
-      is_generated: false
-      is_nullable: false
-      is_primary_key: true
-      is_unique: true
       max_length: null
-      name: id
       numeric_precision: 32
       numeric_scale: 0
-      schema: public
-      table: important_news
-    type: integer
+      is_nullable: false
+      is_unique: true
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: important_news
     field: image
+    type: uuid
     meta:
       collection: important_news
       conditions: null
@@ -1831,27 +1751,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: image
+      table: important_news
       data_type: uuid
       default_value: null
-      foreign_key_column: id
-      foreign_key_schema: public
-      foreign_key_table: directus_files
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: true
-      is_primary_key: false
-      is_unique: false
       max_length: null
-      name: image
       numeric_precision: null
       numeric_scale: null
-      schema: public
-      table: important_news
-    type: uuid
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: directus_files
+      foreign_key_column: id
   - collection: important_news
     field: sort
+    type: integer
     meta:
       collection: important_news
       conditions: null
@@ -1872,27 +1789,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: sort
+      table: important_news
       data_type: integer
       default_value: null
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: true
-      is_primary_key: false
-      is_unique: false
       max_length: null
-      name: sort
       numeric_precision: 32
       numeric_scale: 0
-      schema: public
-      table: important_news
-    type: integer
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: important_news
     field: status
+    type: string
     meta:
       collection: important_news
       conditions: null
@@ -1934,27 +1848,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: status
+      table: important_news
       data_type: character varying
       default_value: draft
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: false
-      is_primary_key: false
-      is_unique: false
       max_length: 255
-      name: status
       numeric_precision: null
       numeric_scale: null
-      schema: public
-      table: important_news
-    type: string
+      is_nullable: false
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: important_news
     field: translations
+    type: alias
     meta:
       collection: important_news
       conditions: null
@@ -1979,10 +1890,9 @@ fields:
       validation: null
       validation_message: null
       width: full
-    schema: null
-    type: alias
   - collection: important_news_translations
     field: content
+    type: text
     meta:
       collection: important_news_translations
       conditions: null
@@ -2003,27 +1913,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: content
+      table: important_news_translations
       data_type: text
       default_value: null
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: true
-      is_primary_key: false
-      is_unique: false
       max_length: null
-      name: content
       numeric_precision: null
       numeric_scale: null
-      schema: public
-      table: important_news_translations
-    type: text
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: important_news_translations
     field: id
+    type: integer
     meta:
       collection: important_news_translations
       conditions: null
@@ -2044,27 +1951,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: id
+      table: important_news_translations
       data_type: integer
       default_value: nextval('important_news_translations_id_seq'::regclass)
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: true
-      is_generated: false
-      is_nullable: false
-      is_primary_key: true
-      is_unique: true
       max_length: null
-      name: id
       numeric_precision: 32
       numeric_scale: 0
-      schema: public
-      table: important_news_translations
-    type: integer
+      is_nullable: false
+      is_unique: true
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: important_news_translations
     field: important_news_id
+    type: integer
     meta:
       collection: important_news_translations
       conditions: null
@@ -2085,27 +1989,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: important_news_id
+      table: important_news_translations
       data_type: integer
       default_value: null
-      foreign_key_column: id
-      foreign_key_schema: public
-      foreign_key_table: important_news
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: true
-      is_primary_key: false
-      is_unique: false
       max_length: null
-      name: important_news_id
       numeric_precision: 32
       numeric_scale: 0
-      schema: public
-      table: important_news_translations
-    type: integer
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: important_news
+      foreign_key_column: id
   - collection: important_news_translations
     field: languages_code
+    type: string
     meta:
       collection: important_news_translations
       conditions: null
@@ -2126,27 +2027,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: languages_code
+      table: important_news_translations
       data_type: character varying
       default_value: null
-      foreign_key_column: code
-      foreign_key_schema: public
-      foreign_key_table: languages
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: true
-      is_primary_key: false
-      is_unique: false
       max_length: 255
-      name: languages_code
       numeric_precision: null
       numeric_scale: null
-      schema: public
-      table: important_news_translations
-    type: string
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: languages
+      foreign_key_column: code
   - collection: important_news_translations
     field: title
+    type: string
     meta:
       collection: important_news_translations
       conditions: null
@@ -2167,27 +2065,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: title
+      table: important_news_translations
       data_type: character varying
       default_value: null
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: true
-      is_primary_key: false
-      is_unique: false
       max_length: 255
-      name: title
       numeric_precision: null
       numeric_scale: null
-      schema: public
-      table: important_news_translations
-    type: string
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: info
     field: authorization
+    type: integer
     meta:
       collection: info
       conditions: null
@@ -2211,27 +2106,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: authorization
+      table: info
       data_type: integer
       default_value: null
-      foreign_key_column: id
-      foreign_key_schema: public
-      foreign_key_table: authorization
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: true
-      is_primary_key: false
-      is_unique: true
       max_length: null
-      name: authorization
       numeric_precision: 32
       numeric_scale: 0
-      schema: public
-      table: info
-    type: integer
+      is_nullable: true
+      is_unique: true
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: authorization
+      foreign_key_column: id
   - collection: info
     field: date_created
+    type: timestamp
     meta:
       collection: info
       conditions: null
@@ -2254,27 +2146,24 @@ fields:
       validation_message: null
       width: half
     schema:
-      comment: null
+      name: date_created
+      table: info
       data_type: timestamp with time zone
       default_value: null
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: true
-      is_primary_key: false
-      is_unique: false
       max_length: null
-      name: date_created
       numeric_precision: null
       numeric_scale: null
-      schema: public
-      table: info
-    type: timestamp
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: info
     field: date_updated
+    type: timestamp
     meta:
       collection: info
       conditions: null
@@ -2297,27 +2186,24 @@ fields:
       validation_message: null
       width: half
     schema:
-      comment: null
+      name: date_updated
+      table: info
       data_type: timestamp with time zone
       default_value: null
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: true
-      is_primary_key: false
-      is_unique: false
       max_length: null
-      name: date_updated
       numeric_precision: null
       numeric_scale: null
-      schema: public
-      table: info
-    type: timestamp
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: info
     field: id
+    type: integer
     meta:
       collection: info
       conditions: null
@@ -2338,27 +2224,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: id
+      table: info
       data_type: integer
       default_value: nextval('info_id_seq'::regclass)
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: true
-      is_generated: false
-      is_nullable: false
-      is_primary_key: true
-      is_unique: true
       max_length: null
-      name: id
       numeric_precision: 32
       numeric_scale: 0
-      schema: public
-      table: info
-    type: integer
+      is_nullable: false
+      is_unique: true
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: info
     field: link
+    type: string
     meta:
       collection: info
       conditions: null
@@ -2379,27 +2262,72 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: link
+      table: info
       data_type: character varying
       default_value: null
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: true
-      is_primary_key: false
-      is_unique: false
       max_length: 255
-      name: link
       numeric_precision: null
       numeric_scale: null
-      schema: public
-      table: info
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: info
+    field: menu
     type: string
+    meta:
+      collection: info
+      conditions: null
+      display: null
+      display_options: null
+      field: menu
+      group: null
+      hidden: false
+      interface: select-dropdown
+      note: null
+      options:
+        allowNone: true
+        choices:
+          - text: top
+            value: top
+          - text: tabs
+            value: tabs
+          - text: burger
+            value: burger
+          - text: service
+            value: service
+      readonly: false
+      required: false
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: menu
+      table: info
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: info
     field: position
+    type: integer
     meta:
       collection: info
       conditions: null
@@ -2420,27 +2348,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: position
+      table: info
       data_type: integer
       default_value: null
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: true
-      is_primary_key: false
-      is_unique: false
       max_length: null
-      name: position
       numeric_precision: 32
       numeric_scale: 0
-      schema: public
-      table: info
-    type: integer
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: info
     field: settings_by_role
+    type: alias
     meta:
       collection: info
       conditions: null
@@ -2461,10 +2386,9 @@ fields:
       validation: null
       validation_message: null
       width: full
-    schema: null
-    type: alias
   - collection: info
     field: sort
+    type: integer
     meta:
       collection: info
       conditions: null
@@ -2485,27 +2409,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: sort
+      table: info
       data_type: integer
       default_value: null
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: true
-      is_primary_key: false
-      is_unique: false
       max_length: null
-      name: sort
       numeric_precision: 32
       numeric_scale: 0
-      schema: public
-      table: info
-    type: integer
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: info
     field: ssoService
+    type: string
     meta:
       collection: info
       conditions: null
@@ -2526,27 +2447,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: ssoService
+      table: info
       data_type: character varying
       default_value: null
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: true
-      is_primary_key: false
-      is_unique: false
       max_length: 255
-      name: ssoService
       numeric_precision: null
       numeric_scale: null
-      schema: public
-      table: info
-    type: string
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: info
     field: status
+    type: string
     meta:
       collection: info
       conditions: null
@@ -2588,27 +2506,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: status
+      table: info
       data_type: character varying
       default_value: draft
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: false
-      is_primary_key: false
-      is_unique: false
       max_length: 255
-      name: status
       numeric_precision: null
       numeric_scale: null
-      schema: public
-      table: info
-    type: string
+      is_nullable: false
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: info
     field: translations
+    type: alias
     meta:
       collection: info
       conditions: null
@@ -2633,10 +2548,9 @@ fields:
       validation: null
       validation_message: null
       width: full
-    schema: null
-    type: alias
   - collection: info
     field: widget
+    type: string
     meta:
       collection: info
       conditions: null
@@ -2657,27 +2571,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: widget
+      table: info
       data_type: character varying
       default_value: null
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: true
-      is_primary_key: false
-      is_unique: false
       max_length: 255
-      name: widget
       numeric_precision: null
       numeric_scale: null
-      schema: public
-      table: info
-    type: string
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: info_settings_by_role
     field: id
+    type: integer
     meta:
       collection: info_settings_by_role
       conditions: null
@@ -2698,27 +2609,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: id
+      table: info_settings_by_role
       data_type: integer
       default_value: nextval('info_settings_by_role_id_seq'::regclass)
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: true
-      is_generated: false
-      is_nullable: false
-      is_primary_key: true
-      is_unique: true
       max_length: null
-      name: id
       numeric_precision: 32
       numeric_scale: 0
-      schema: public
-      table: info_settings_by_role
-    type: integer
+      is_nullable: false
+      is_unique: true
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: info_settings_by_role
     field: info_id
+    type: integer
     meta:
       collection: info_settings_by_role
       conditions: null
@@ -2739,27 +2647,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: info_id
+      table: info_settings_by_role
       data_type: integer
       default_value: null
-      foreign_key_column: id
-      foreign_key_schema: public
-      foreign_key_table: info
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: true
-      is_primary_key: false
-      is_unique: false
       max_length: null
-      name: info_id
       numeric_precision: 32
       numeric_scale: 0
-      schema: public
-      table: info_settings_by_role
-    type: integer
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: info
+      foreign_key_column: id
   - collection: info_settings_by_role
     field: settings_by_role_id
+    type: integer
     meta:
       collection: info_settings_by_role
       conditions: null
@@ -2780,27 +2685,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: settings_by_role_id
+      table: info_settings_by_role
       data_type: integer
       default_value: null
-      foreign_key_column: id
-      foreign_key_schema: public
-      foreign_key_table: settings_by_role
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: true
-      is_primary_key: false
-      is_unique: false
       max_length: null
-      name: settings_by_role_id
       numeric_precision: 32
       numeric_scale: 0
-      schema: public
-      table: info_settings_by_role
-    type: integer
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: settings_by_role
+      foreign_key_column: id
   - collection: info_settings_by_role
     field: sort
+    type: integer
     meta:
       collection: info_settings_by_role
       conditions: null
@@ -2821,27 +2723,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: sort
+      table: info_settings_by_role
       data_type: integer
       default_value: null
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: true
-      is_primary_key: false
-      is_unique: false
       max_length: null
-      name: sort
       numeric_precision: 32
       numeric_scale: 0
-      schema: public
-      table: info_settings_by_role
-    type: integer
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: info_translations
     field: content
+    type: text
     meta:
       collection: info_translations
       conditions: null
@@ -2862,27 +2761,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: content
+      table: info_translations
       data_type: text
       default_value: null
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: true
-      is_primary_key: false
-      is_unique: false
       max_length: null
-      name: content
       numeric_precision: null
       numeric_scale: null
-      schema: public
-      table: info_translations
-    type: text
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: info_translations
     field: id
+    type: integer
     meta:
       collection: info_translations
       conditions: null
@@ -2903,27 +2799,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: id
+      table: info_translations
       data_type: integer
       default_value: nextval('info_translations_id_seq'::regclass)
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: true
-      is_generated: false
-      is_nullable: false
-      is_primary_key: true
-      is_unique: true
       max_length: null
-      name: id
       numeric_precision: 32
       numeric_scale: 0
-      schema: public
-      table: info_translations
-    type: integer
+      is_nullable: false
+      is_unique: true
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: info_translations
     field: info_id
+    type: integer
     meta:
       collection: info_translations
       conditions: null
@@ -2944,27 +2837,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: info_id
+      table: info_translations
       data_type: integer
       default_value: null
-      foreign_key_column: id
-      foreign_key_schema: public
-      foreign_key_table: info
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: true
-      is_primary_key: false
-      is_unique: false
       max_length: null
-      name: info_id
       numeric_precision: 32
       numeric_scale: 0
-      schema: public
-      table: info_translations
-    type: integer
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: info
+      foreign_key_column: id
   - collection: info_translations
     field: languages_code
+    type: string
     meta:
       collection: info_translations
       conditions: null
@@ -2985,27 +2875,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: languages_code
+      table: info_translations
       data_type: character varying
       default_value: null
-      foreign_key_column: code
-      foreign_key_schema: public
-      foreign_key_table: languages
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: true
-      is_primary_key: false
-      is_unique: false
       max_length: 255
-      name: languages_code
       numeric_precision: null
       numeric_scale: null
-      schema: public
-      table: info_translations
-    type: string
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: languages
+      foreign_key_column: code
   - collection: info_translations
     field: searchKeywords
+    type: json
     meta:
       collection: info_translations
       conditions: null
@@ -3027,27 +2914,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: searchKeywords
+      table: info_translations
       data_type: json
       default_value: null
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: true
-      is_primary_key: false
-      is_unique: false
       max_length: null
-      name: searchKeywords
       numeric_precision: null
       numeric_scale: null
-      schema: public
-      table: info_translations
-    type: json
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: info_translations
     field: title
+    type: string
     meta:
       collection: info_translations
       conditions: null
@@ -3068,27 +2952,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: title
+      table: info_translations
       data_type: character varying
       default_value: null
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: true
-      is_primary_key: false
-      is_unique: false
       max_length: 255
-      name: title
       numeric_precision: null
       numeric_scale: null
-      schema: public
-      table: info_translations
-    type: string
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: languages
     field: code
+    type: string
     meta:
       collection: languages
       conditions: null
@@ -3109,27 +2990,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: code
+      table: languages
       data_type: character varying
       default_value: null
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: false
-      is_primary_key: true
-      is_unique: true
       max_length: 255
-      name: code
       numeric_precision: null
       numeric_scale: null
-      schema: public
-      table: languages
-    type: string
+      is_nullable: false
+      is_unique: true
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: languages
     field: direction
+    type: string
     meta:
       collection: languages
       conditions: null
@@ -3161,27 +3039,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: direction
+      table: languages
       data_type: character varying
       default_value: ltr
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: true
-      is_primary_key: false
-      is_unique: false
       max_length: 255
-      name: direction
       numeric_precision: null
       numeric_scale: null
-      schema: public
-      table: languages
-    type: string
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: languages
     field: name
+    type: string
     meta:
       collection: languages
       conditions: null
@@ -3202,27 +3077,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: name
+      table: languages
       data_type: character varying
       default_value: null
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: true
-      is_primary_key: false
-      is_unique: false
       max_length: 255
-      name: name
       numeric_precision: null
       numeric_scale: null
-      schema: public
-      table: languages
-    type: string
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: settings_by_role
     field: id
+    type: integer
     meta:
       collection: settings_by_role
       conditions: null
@@ -3243,27 +3115,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: id
+      table: settings_by_role
       data_type: integer
       default_value: nextval('settings_by_role_id_seq'::regclass)
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: true
-      is_generated: false
-      is_nullable: false
-      is_primary_key: true
-      is_unique: true
       max_length: null
-      name: id
       numeric_precision: 32
       numeric_scale: 0
-      schema: public
-      table: settings_by_role
-    type: integer
+      is_nullable: false
+      is_unique: true
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: settings_by_role
     field: position
+    type: integer
     meta:
       collection: settings_by_role
       conditions: null
@@ -3284,27 +3153,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: position
+      table: settings_by_role
       data_type: integer
       default_value: null
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: false
-      is_primary_key: false
-      is_unique: false
       max_length: null
-      name: position
       numeric_precision: 32
       numeric_scale: 0
-      schema: public
-      table: settings_by_role
-    type: integer
+      is_nullable: false
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: settings_by_role
     field: role
+    type: string
     meta:
       collection: settings_by_role
       conditions: null
@@ -3325,27 +3191,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: role
+      table: settings_by_role
       data_type: character varying
       default_value: null
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: false
-      is_primary_key: false
-      is_unique: false
       max_length: 255
-      name: role
       numeric_precision: null
       numeric_scale: null
-      schema: public
-      table: settings_by_role
-    type: string
+      is_nullable: false
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: social_networks
     field: icon
+    type: string
     meta:
       collection: social_networks
       conditions: null
@@ -3370,27 +3233,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: icon
+      table: social_networks
       data_type: character varying
       default_value: null
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: true
-      is_primary_key: false
-      is_unique: false
       max_length: 255
-      name: icon
       numeric_precision: null
       numeric_scale: null
-      schema: public
-      table: social_networks
-    type: string
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: social_networks
     field: id
+    type: integer
     meta:
       collection: social_networks
       conditions: null
@@ -3411,27 +3271,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: id
+      table: social_networks
       data_type: integer
       default_value: nextval('social_networks_id_seq'::regclass)
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: true
-      is_generated: false
-      is_nullable: false
-      is_primary_key: true
-      is_unique: true
       max_length: null
-      name: id
       numeric_precision: 32
       numeric_scale: 0
-      schema: public
-      table: social_networks
-    type: integer
+      is_nullable: false
+      is_unique: true
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: social_networks
     field: link
+    type: string
     meta:
       collection: social_networks
       conditions: null
@@ -3456,27 +3313,24 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: link
+      table: social_networks
       data_type: character varying
       default_value: null
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: true
-      is_primary_key: false
-      is_unique: false
       max_length: 255
-      name: link
       numeric_precision: null
       numeric_scale: null
-      schema: public
-      table: social_networks
-    type: string
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: social_networks
     field: title
+    type: string
     meta:
       collection: social_networks
       conditions: null
@@ -3501,28 +3355,25 @@ fields:
       validation_message: null
       width: full
     schema:
-      comment: null
+      name: title
+      table: social_networks
       data_type: character varying
       default_value: null
-      foreign_key_column: null
-      foreign_key_schema: null
-      foreign_key_table: null
-      generation_expression: null
-      has_auto_increment: false
-      is_generated: false
-      is_nullable: true
-      is_primary_key: false
-      is_unique: false
       max_length: 255
-      name: title
       numeric_precision: null
       numeric_scale: null
-      schema: public
-      table: social_networks
-    type: string
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
 relations:
   - collection: apps
     field: authorization
+    related_collection: authorization
     meta:
       junction_field: null
       many_collection: apps
@@ -3533,18 +3384,17 @@ relations:
       one_deselect_action: nullify
       one_field: null
       sort_field: null
-    related_collection: authorization
     schema:
-      column: authorization
-      constraint_name: apps_authorization_foreign
-      foreign_key_column: id
-      foreign_key_schema: public
-      foreign_key_table: authorization
-      on_delete: SET NULL
-      on_update: NO ACTION
       table: apps
+      column: authorization
+      foreign_key_table: authorization
+      foreign_key_column: id
+      constraint_name: apps_authorization_foreign
+      on_update: NO ACTION
+      on_delete: SET NULL
   - collection: apps_settings_by_role
     field: apps_id
+    related_collection: apps
     meta:
       junction_field: settings_by_role_id
       many_collection: apps_settings_by_role
@@ -3555,18 +3405,17 @@ relations:
       one_deselect_action: delete
       one_field: settings_by_role
       sort_field: sort
-    related_collection: apps
     schema:
-      column: apps_id
-      constraint_name: apps_settings_by_role_apps_id_foreign
-      foreign_key_column: id
-      foreign_key_schema: public
-      foreign_key_table: apps
-      on_delete: CASCADE
-      on_update: NO ACTION
       table: apps_settings_by_role
+      column: apps_id
+      foreign_key_table: apps
+      foreign_key_column: id
+      constraint_name: apps_settings_by_role_apps_id_foreign
+      on_update: NO ACTION
+      on_delete: CASCADE
   - collection: apps_settings_by_role
     field: settings_by_role_id
+    related_collection: settings_by_role
     meta:
       junction_field: apps_id
       many_collection: apps_settings_by_role
@@ -3577,18 +3426,17 @@ relations:
       one_deselect_action: nullify
       one_field: null
       sort_field: null
-    related_collection: settings_by_role
     schema:
-      column: settings_by_role_id
-      constraint_name: apps_settings_by_role_settings_by_role_id_foreign
-      foreign_key_column: id
-      foreign_key_schema: public
-      foreign_key_table: settings_by_role
-      on_delete: CASCADE
-      on_update: NO ACTION
       table: apps_settings_by_role
+      column: settings_by_role_id
+      foreign_key_table: settings_by_role
+      foreign_key_column: id
+      constraint_name: apps_settings_by_role_settings_by_role_id_foreign
+      on_update: NO ACTION
+      on_delete: CASCADE
   - collection: apps_translations
     field: apps_id
+    related_collection: apps
     meta:
       junction_field: languages_code
       many_collection: apps_translations
@@ -3599,18 +3447,17 @@ relations:
       one_deselect_action: nullify
       one_field: translations
       sort_field: null
-    related_collection: apps
     schema:
-      column: apps_id
-      constraint_name: apps_translations_apps_id_foreign
-      foreign_key_column: id
-      foreign_key_schema: public
-      foreign_key_table: apps
-      on_delete: SET NULL
-      on_update: NO ACTION
       table: apps_translations
+      column: apps_id
+      foreign_key_table: apps
+      foreign_key_column: id
+      constraint_name: apps_translations_apps_id_foreign
+      on_update: NO ACTION
+      on_delete: SET NULL
   - collection: apps_translations
     field: languages_code
+    related_collection: languages
     meta:
       junction_field: apps_id
       many_collection: apps_translations
@@ -3621,18 +3468,17 @@ relations:
       one_deselect_action: nullify
       one_field: null
       sort_field: null
-    related_collection: languages
     schema:
-      column: languages_code
-      constraint_name: apps_translations_languages_code_foreign
-      foreign_key_column: code
-      foreign_key_schema: public
-      foreign_key_table: languages
-      on_delete: SET NULL
-      on_update: NO ACTION
       table: apps_translations
+      column: languages_code
+      foreign_key_table: languages
+      foreign_key_column: code
+      constraint_name: apps_translations_languages_code_foreign
+      on_update: NO ACTION
+      on_delete: SET NULL
   - collection: channels_translations
     field: channels_id
+    related_collection: channels
     meta:
       junction_field: languages_code
       many_collection: channels_translations
@@ -3643,18 +3489,17 @@ relations:
       one_deselect_action: nullify
       one_field: translations
       sort_field: null
-    related_collection: channels
     schema:
-      column: channels_id
-      constraint_name: channels_translations_channels_id_foreign
-      foreign_key_column: id
-      foreign_key_schema: public
-      foreign_key_table: channels
-      on_delete: SET NULL
-      on_update: NO ACTION
       table: channels_translations
+      column: channels_id
+      foreign_key_table: channels
+      foreign_key_column: id
+      constraint_name: channels_translations_channels_id_foreign
+      on_update: NO ACTION
+      on_delete: SET NULL
   - collection: channels_translations
     field: languages_code
+    related_collection: languages
     meta:
       junction_field: channels_id
       many_collection: channels_translations
@@ -3665,18 +3510,17 @@ relations:
       one_deselect_action: nullify
       one_field: null
       sort_field: null
-    related_collection: languages
     schema:
-      column: languages_code
-      constraint_name: channels_translations_languages_code_foreign
-      foreign_key_column: code
-      foreign_key_schema: public
-      foreign_key_table: languages
-      on_delete: SET NULL
-      on_update: NO ACTION
       table: channels_translations
+      column: languages_code
+      foreign_key_table: languages
+      foreign_key_column: code
+      constraint_name: channels_translations_languages_code_foreign
+      on_update: NO ACTION
+      on_delete: SET NULL
   - collection: important_news
     field: authorization
+    related_collection: authorization
     meta:
       junction_field: null
       many_collection: important_news
@@ -3687,18 +3531,17 @@ relations:
       one_deselect_action: nullify
       one_field: null
       sort_field: null
-    related_collection: authorization
     schema:
-      column: authorization
-      constraint_name: important_news_authorization_foreign
-      foreign_key_column: id
-      foreign_key_schema: public
-      foreign_key_table: authorization
-      on_delete: SET NULL
-      on_update: NO ACTION
       table: important_news
+      column: authorization
+      foreign_key_table: authorization
+      foreign_key_column: id
+      constraint_name: important_news_authorization_foreign
+      on_update: NO ACTION
+      on_delete: SET NULL
   - collection: important_news
     field: image
+    related_collection: directus_files
     meta:
       junction_field: null
       many_collection: important_news
@@ -3709,18 +3552,17 @@ relations:
       one_deselect_action: nullify
       one_field: null
       sort_field: null
-    related_collection: directus_files
     schema:
-      column: image
-      constraint_name: important_news_image_foreign
-      foreign_key_column: id
-      foreign_key_schema: public
-      foreign_key_table: directus_files
-      on_delete: SET NULL
-      on_update: NO ACTION
       table: important_news
+      column: image
+      foreign_key_table: directus_files
+      foreign_key_column: id
+      constraint_name: important_news_image_foreign
+      on_update: NO ACTION
+      on_delete: SET NULL
   - collection: important_news_translations
     field: important_news_id
+    related_collection: important_news
     meta:
       junction_field: languages_code
       many_collection: important_news_translations
@@ -3731,18 +3573,17 @@ relations:
       one_deselect_action: nullify
       one_field: translations
       sort_field: null
-    related_collection: important_news
     schema:
-      column: important_news_id
-      constraint_name: important_news_translations_important_news_id_foreign
-      foreign_key_column: id
-      foreign_key_schema: public
-      foreign_key_table: important_news
-      on_delete: SET NULL
-      on_update: NO ACTION
       table: important_news_translations
+      column: important_news_id
+      foreign_key_table: important_news
+      foreign_key_column: id
+      constraint_name: important_news_translations_important_news_id_foreign
+      on_update: NO ACTION
+      on_delete: SET NULL
   - collection: important_news_translations
     field: languages_code
+    related_collection: languages
     meta:
       junction_field: important_news_id
       many_collection: important_news_translations
@@ -3753,18 +3594,17 @@ relations:
       one_deselect_action: nullify
       one_field: null
       sort_field: null
-    related_collection: languages
     schema:
-      column: languages_code
-      constraint_name: important_news_translations_languages_code_foreign
-      foreign_key_column: code
-      foreign_key_schema: public
-      foreign_key_table: languages
-      on_delete: SET NULL
-      on_update: NO ACTION
       table: important_news_translations
+      column: languages_code
+      foreign_key_table: languages
+      foreign_key_column: code
+      constraint_name: important_news_translations_languages_code_foreign
+      on_update: NO ACTION
+      on_delete: SET NULL
   - collection: info
     field: authorization
+    related_collection: authorization
     meta:
       junction_field: null
       many_collection: info
@@ -3775,18 +3615,17 @@ relations:
       one_deselect_action: nullify
       one_field: null
       sort_field: null
-    related_collection: authorization
     schema:
-      column: authorization
-      constraint_name: info_authorization_foreign
-      foreign_key_column: id
-      foreign_key_schema: public
-      foreign_key_table: authorization
-      on_delete: SET NULL
-      on_update: NO ACTION
       table: info
+      column: authorization
+      foreign_key_table: authorization
+      foreign_key_column: id
+      constraint_name: info_authorization_foreign
+      on_update: NO ACTION
+      on_delete: SET NULL
   - collection: info_settings_by_role
     field: info_id
+    related_collection: info
     meta:
       junction_field: settings_by_role_id
       many_collection: info_settings_by_role
@@ -3797,18 +3636,17 @@ relations:
       one_deselect_action: delete
       one_field: settings_by_role
       sort_field: sort
-    related_collection: info
     schema:
-      column: info_id
-      constraint_name: info_settings_by_role_info_id_foreign
-      foreign_key_column: id
-      foreign_key_schema: public
-      foreign_key_table: info
-      on_delete: CASCADE
-      on_update: NO ACTION
       table: info_settings_by_role
+      column: info_id
+      foreign_key_table: info
+      foreign_key_column: id
+      constraint_name: info_settings_by_role_info_id_foreign
+      on_update: NO ACTION
+      on_delete: CASCADE
   - collection: info_settings_by_role
     field: settings_by_role_id
+    related_collection: settings_by_role
     meta:
       junction_field: info_id
       many_collection: info_settings_by_role
@@ -3819,18 +3657,17 @@ relations:
       one_deselect_action: nullify
       one_field: null
       sort_field: null
-    related_collection: settings_by_role
     schema:
-      column: settings_by_role_id
-      constraint_name: info_settings_by_role_settings_by_role_id_foreign
-      foreign_key_column: id
-      foreign_key_schema: public
-      foreign_key_table: settings_by_role
-      on_delete: CASCADE
-      on_update: NO ACTION
       table: info_settings_by_role
+      column: settings_by_role_id
+      foreign_key_table: settings_by_role
+      foreign_key_column: id
+      constraint_name: info_settings_by_role_settings_by_role_id_foreign
+      on_update: NO ACTION
+      on_delete: CASCADE
   - collection: info_translations
     field: info_id
+    related_collection: info
     meta:
       junction_field: languages_code
       many_collection: info_translations
@@ -3841,18 +3678,17 @@ relations:
       one_deselect_action: nullify
       one_field: translations
       sort_field: null
-    related_collection: info
     schema:
-      column: info_id
-      constraint_name: info_translations_info_id_foreign
-      foreign_key_column: id
-      foreign_key_schema: public
-      foreign_key_table: info
-      on_delete: SET NULL
-      on_update: NO ACTION
       table: info_translations
+      column: info_id
+      foreign_key_table: info
+      foreign_key_column: id
+      constraint_name: info_translations_info_id_foreign
+      on_update: NO ACTION
+      on_delete: SET NULL
   - collection: info_translations
     field: languages_code
+    related_collection: languages
     meta:
       junction_field: info_id
       many_collection: info_translations
@@ -3863,13 +3699,11 @@ relations:
       one_deselect_action: nullify
       one_field: null
       sort_field: null
-    related_collection: languages
     schema:
-      column: languages_code
-      constraint_name: info_translations_languages_code_foreign
-      foreign_key_column: code
-      foreign_key_schema: public
-      foreign_key_table: languages
-      on_delete: SET NULL
-      on_update: NO ACTION
       table: info_translations
+      column: languages_code
+      foreign_key_table: languages
+      foreign_key_column: code
+      constraint_name: info_translations_languages_code_foreign
+      on_update: NO ACTION
+      on_delete: SET NULL

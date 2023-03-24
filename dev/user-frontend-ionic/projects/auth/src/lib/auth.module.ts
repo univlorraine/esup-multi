@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { EffectsNgModule } from '@ngneat/effects-ng';
 import { TranslateModule } from '@ngx-translate/core';
-import { ProjectModuleService } from '@ul/shared';
+import { ProjectModuleService, SharedComponentsModule } from '@ul/shared';
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthEffects } from './auth.effects';
 import { AuthPage } from './auth.page';
@@ -39,6 +39,7 @@ const initModule = (projectModuleService: ProjectModuleService) =>
     AuthRoutingModule,
     ReactiveFormsModule,
     TranslateModule,
+    SharedComponentsModule,
     EffectsNgModule.forFeature([AuthEffects]),
   ],
   providers: [{

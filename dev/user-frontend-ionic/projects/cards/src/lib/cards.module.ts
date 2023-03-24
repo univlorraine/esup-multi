@@ -3,7 +3,7 @@ import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { EffectsNgModule } from '@ngneat/effects-ng';
 import { TranslateModule } from '@ngx-translate/core';
-import { ProjectModuleService } from '@ul/shared';
+import { ProjectModuleService, SharedComponentsModule } from '@ul/shared';
 import { QRCodeModule } from 'angularx-qrcode';
 import { CardPage } from './card/card.page';
 import { CardsRoutingModule } from './cards-routing.module';
@@ -26,6 +26,7 @@ const initModule = (projectModuleService: ProjectModuleService) =>
     CardsRoutingModule,
     TranslateModule,
     QRCodeModule,
+    SharedComponentsModule,
     EffectsNgModule.forFeature([CardsEffects]),
   ],
   declarations: [
