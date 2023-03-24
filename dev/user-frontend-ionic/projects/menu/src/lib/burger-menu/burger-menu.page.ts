@@ -1,12 +1,11 @@
 import { Component, Inject } from '@angular/core';
+import { Browser } from '@capacitor/browser';
+import { Network } from '@capacitor/network';
 import { MenuItem, MenuOpenerService, MenuService as SharedMenuService, updateLanguage } from '@ul/shared';
 import { Observable } from 'rxjs';
-import { SocialNetwork } from './social-network.repository';
-import { MenuService } from './menu.service';
-import { Browser } from '@capacitor/browser';
 import { first, map } from 'rxjs/operators';
-import { Network } from '@capacitor/network';
-import { socialNetworks$ ,setSocialNetworks } from './social-network.repository';
+import { MenuService } from '../menu.service';
+import { SocialNetwork, socialNetworks$ } from '../social-network.repository';
 
 @Component({
   selector: 'app-menu',
@@ -40,11 +39,8 @@ export class BurgerMenuPage {
     if (!(await Network.getStatus()).connected) {
       return;
     }
-    this.menuService.getSocialNetworks()
-    .pipe(first()
-    ).subscribe(socials => {
-      setSocialNetworks(socials);
-    });
+    this.menuService.loadAndStoreSocialNetworks()
+      .pipe(first()).subscribe();
   }
 
   useLanguage(language: string): void {

@@ -7,7 +7,7 @@ import {
   Post,
   Request,
   UseGuards,
-  UseInterceptors,
+  UseInterceptors
 } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { AuthGuard } from '@nestjs/passport';
@@ -30,6 +30,7 @@ export class AppController {
     @Inject('NOTIFICATIONS_SERVICE') private notificationsClient: ClientProxy,
     @Inject('CLOCKING_SERVICE') private clockingClient: ClientProxy,
     @Inject('SOCIAL_NETWORK_SERVICE') private socialNetworkClient: ClientProxy,
+    @Inject('STATIC_PAGES_SERVICE') private staticPagesClient: ClientProxy,
   ) {}
 
   @Post('/tiles')
@@ -455,6 +456,16 @@ export class AppController {
     return this.socialNetworkClient.send(
       {
         cmd: 'socialNetwork',
+      },
+      {},
+    );
+  }
+
+  @Get('/static-pages')
+  staticPages() {
+    return this.staticPagesClient.send(
+      {
+        cmd: 'staticPages',
       },
       {},
     );

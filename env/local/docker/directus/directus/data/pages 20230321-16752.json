@@ -1,0 +1,24 @@
+[
+	{
+		"id": 1,
+		"status": "published",
+		"sort": null,
+		"icon": "help-circle-outline",
+		"translations": [
+			{
+				"id": 1,
+				"title": "Help",
+				"content": "<h1>You will find the help you need on this page</h1>\n<p>&nbsp;</p>\n<p>If you encounter any problems or have any suggestions, please do not hesitate to contact us at the following email address: aidezefzefzbynty@gmail.com</p>\n<p>We hope you enjoy using our mobile application.</p>\n<p>&nbsp;</p>",
+				"pages_id": 1,
+				"languages_code": "en"
+			},
+			{
+				"id": 2,
+				"title": "Aide",
+				"content": "<h1>Vous trouverez l'aide n&eacute;c&eacute;ssaire sur cette page&nbsp;</h1>\n<p>&nbsp;</p>\n<p>Si vous rencontrez des probl&egrave;mes ou si vous avez des suggestions, n'h&eacute;sitez pas &agrave; nous contacter &agrave; l'adresse suivante : aidezefzefzbynty@gmail.com</p>\n<p>Nous esp&eacute;rons que vous appr&eacute;cierez l'utilisation de notre application mobile.</p>\n<p>&nbsp;</p>",
+				"pages_id": 1,
+				"languages_code": "fr"
+			}
+		]
+	}
+]

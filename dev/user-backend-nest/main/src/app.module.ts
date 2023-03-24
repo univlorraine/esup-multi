@@ -6,15 +6,16 @@ import { AppController } from './app.controller';
 import configuration from './config/configuration';
 import microserviceAuthConfig from './config/microservice-auth.config';
 import microserviceCardsConfig from './config/microservice-cards.config';
+import microserviceClockingConfig from './config/microservice-clocking.config';
+import microserviceContactsConfig from './config/microservice-contacts.config';
 import microserviceImportantNewsConfig from './config/microservice-important-news.config';
 import microserviceMapConfig from './config/microservice-map.config';
 import microserviceNotificationsConfig from './config/microservice-notifications.config';
 import microserviceRssConfig from './config/microservice-rss.config';
 import microserviceScheduleConfig from './config/microservice-schedule.config';
-import microserviceContactsConfig from './config/microservice-contacts.config';
-import microserviceInfoConfig from './config/microservice-tiles.config';
-import microserviceClockingConfig from './config/microservice-clocking.config';
 import microserviceSocialNetworkConfig from './config/microservice-social-network';
+import microserviceStaticPagesConfig from './config/microservice-static-pages.config';
+import microserviceInfoConfig from './config/microservice-tiles.config';
 import { AuthJwtStrategy } from './security/auth-jwt.strategy';
 
 @Module({
@@ -93,6 +94,13 @@ import { AuthJwtStrategy } from './security/auth-jwt.strategy';
         imports: [ConfigModule.forFeature(microserviceSocialNetworkConfig)],
         useFactory: (config: ConfigService) =>
           config.get('microservice-social-network'),
+        inject: [ConfigService],
+      },
+      {
+        name: 'STATIC_PAGES_SERVICE',
+        imports: [ConfigModule.forFeature(microserviceStaticPagesConfig)],
+        useFactory: (config: ConfigService) =>
+          config.get('microservice-static-pages'),
         inject: [ConfigService],
       },
     ]),

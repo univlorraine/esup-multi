@@ -12,7 +12,8 @@ const initModule = (projectModuleService: ProjectModuleService) =>
     widgets: [{
       id: 'important-news',
       component: ImportantNewsComponent,
-    }]
+    }
+  ]
   });
 
 @NgModule({

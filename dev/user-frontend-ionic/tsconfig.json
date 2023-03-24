@@ -48,6 +48,9 @@
       ],
       "@ul/menu": [
         "dist/menu"
+      ],
+      "@ul/static-pages": [
+        "dist/static-pages"
       ]
     },
     "downlevelIteration": true,
