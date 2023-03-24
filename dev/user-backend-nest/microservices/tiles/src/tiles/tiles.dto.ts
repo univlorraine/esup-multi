@@ -39,6 +39,8 @@ export interface AbstractTile {
   translations: DirectusTileTranslation[];
   authorization?: Authorization;
   settingsByRole: SettingsByRole[];
+  menu: string | null;
+  icon: string;
 }
 
 export type Tile = Info | App;

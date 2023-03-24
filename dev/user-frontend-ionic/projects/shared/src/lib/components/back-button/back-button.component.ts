@@ -1,6 +1,4 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { first, map } from 'rxjs/operators';
+import { Component, Input } from '@angular/core';
 import { NavigationService } from '../../navigation/navigation.service';
 
 @Component({
@@ -9,15 +7,20 @@ import { NavigationService } from '../../navigation/navigation.service';
   styleUrls: ['back-button.component.scss']
 })
 export class BackButtonComponent {
+
+  @Input() defaultHref = '';
+
   constructor(
     private navigationService: NavigationService,
-    private router: Router,
   ) {}
 
   goBack() {
-    this.navigationService.navigationRouterLink$.pipe(
-      first(),
-      map(navigationRouterLink => navigationRouterLink.previous),
-    ).subscribe(previousRouterLink => this.router.navigateByUrl(previousRouterLink));
+    // use defaultHref if not empty
+    if(this.defaultHref !== '') {
+      return;
+    }
+
+    // use navigation service if defaultHref is empty
+    this.navigationService.navigateBack();
   }
 }

@@ -7,6 +7,7 @@
 		"routerLink": "/cards",
 		"icon": "card",
 		"widget": null,
+		"menu": "tabs",
 		"translations": [
 			{
 				"apps_id": 1,
@@ -49,6 +50,7 @@
 		"routerLink": "/cards",
 		"icon": "card",
 		"widget": null,
+		"menu": "tabs",
 		"translations": [
 			{
 				"apps_id": 2,
@@ -95,6 +97,7 @@
 		"routerLink": "/map",
 		"icon": "map",
 		"widget": null,
+		"menu": "service",
 		"translations": [
 			{
 				"apps_id": 3,
@@ -124,6 +127,7 @@
 		"routerLink": "/schedule",
 		"icon": "calendar",
 		"widget": null,
+		"menu": "service",
 		"translations": [
 			{
 				"apps_id": 4,
@@ -164,6 +168,7 @@
 		"routerLink": "/contacts",
 		"icon": "at",
 		"widget": null,
+		"menu": "burger",
 		"translations": [
 			{
 				"apps_id": 5,
@@ -193,6 +198,72 @@
 		"authorization": null
 	},
 	{
+		"id": 14,
+		"status": "published",
+		"position": null,
+		"sort": null,
+		"routerLink": "/rss",
+		"icon": "logo-rss",
+		"widget": null,
+		"menu": "top",
+		"translations": [
+			{
+				"apps_id": 14,
+				"content": null,
+				"id": 9,
+				"languages_code": "en",
+				"searchKeywords": null,
+				"title": "RSS"
+			},
+			{
+				"apps_id": 14,
+				"content": null,
+				"id": 10,
+				"languages_code": "fr",
+				"searchKeywords": null,
+				"title": "RSS"
+			}
+		],
+		"settings_by_role": [],
+		"authorization": null
+	},
+	{
+		"id": 15,
+		"status": "published",
+		"position": null,
+		"sort": null,
+		"routerLink": "/notifications",
+		"icon": "notifications",
+		"widget": null,
+		"menu": "top",
+		"translations": [
+			{
+				"apps_id": 15,
+				"content": null,
+				"id": 11,
+				"languages_code": "en",
+				"searchKeywords": null,
+				"title": "Notifications"
+			},
+			{
+				"apps_id": 15,
+				"content": null,
+				"id": 12,
+				"languages_code": "fr",
+				"searchKeywords": null,
+				"title": "Notifications"
+			}
+		],
+		"settings_by_role": [],
+		"authorization": {
+			"id": 7,
+			"roles": [
+				"anonymous"
+			],
+			"type": "DISALLOW"
+		}
+	},
+	{
 		"id": 19,
 		"status": "published",
 		"position": 8,
@@ -200,6 +271,7 @@
 		"routerLink": "/reservation",
 		"icon": "clipboard-outline",
 		"widget": null,
+		"menu": "service",
 		"translations": [
 			{
 				"apps_id": 19,
@@ -226,5 +298,35 @@
 			],
 			"type": "DISALLOW"
 		}
+	},
+	{
+		"id": 21,
+		"status": "published",
+		"position": null,
+		"sort": null,
+		"routerLink": "/contacts",
+		"icon": "people",
+		"widget": null,
+		"menu": "service",
+		"translations": [
+			{
+				"apps_id": 21,
+				"content": null,
+				"id": 17,
+				"languages_code": "fr",
+				"searchKeywords": null,
+				"title": "Contacts"
+			},
+			{
+				"apps_id": 21,
+				"content": null,
+				"id": 18,
+				"languages_code": "en",
+				"searchKeywords": null,
+				"title": "Contacts"
+			}
+		],
+		"settings_by_role": [],
+		"authorization": null
 	}
 ]

@@ -6,7 +6,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { PreferencesPageRoutingModule } from './preferences-routing.module';
 
-import { ProjectModuleService } from '@ul/shared';
+import { ProjectModuleService, SharedComponentsModule } from '@ul/shared';
 import { PreferencesPage } from './preferences.page';
 
 const initModule = (projectModuleService: ProjectModuleService) =>
@@ -27,7 +27,8 @@ const initModule = (projectModuleService: ProjectModuleService) =>
     CommonModule,
     FormsModule,
     IonicModule,
-    PreferencesPageRoutingModule
+    SharedComponentsModule,
+    PreferencesPageRoutingModule,
   ],
   declarations: [PreferencesPage],
   providers: [{

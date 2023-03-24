@@ -6,19 +6,19 @@
     <ion-toolbar>
       <img src="/assets/logo/ul-logo.svg" class="logo ion-padding-start" />
       <ion-buttons slot="end">
-        <ion-button *ngFor="let menu of topBarMenuItems" [routerLink]="menu.routerLink">
+        <ion-button *ngFor="let menu of (topMenuItems$ | async)" (click)="menuOpenerService.open(menu)">
           <ion-icon [name]="menu.icon"></ion-icon>
         </ion-button>
       </ion-buttons>
     </ion-toolbar>
-  </ion-header>
-
+    <ion-progress-bar *ngIf="isLoading" type="indeterminate" color="primary"></ion-progress-bar>
+  </ion-header>  
  <ion-tab-bar slot="bottom">
     <!-- 
       We must set 'tab-selected' class manually because ion-tab-bar has troubles to mark tab as selected 
       when current route contains '/'. It doesn't work with selected attribute either.
     -->
-    <ion-tab-button *ngFor="let menu of tabsMenuItems" [routerLink]="menu.routerLink" routerLinkActive="tab-selected">
+    <ion-tab-button *ngFor="let menu of (tabsMenuItems$ | async)" (click)="openExternalOrSsoLinkOnly(menu)" [routerLink]="menu.routerLink" routerLinkActive="tab-selected">
       <ion-icon [name]="menu.icon"></ion-icon>
     </ion-tab-button>
   </ion-tab-bar>

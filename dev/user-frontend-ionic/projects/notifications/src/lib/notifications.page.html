@@ -1,17 +1,14 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <app-back-button></app-back-button>
-    </ion-buttons>
-    <ion-title>{{ "NOTIFICATIONS.MENU" | translate }}</ion-title>
+<app-header>
 
-    <ion-button slot="end" (click)="presentPopover($event)" fill="clear" class="ion-no-padding">
+  <ion-buttons slot="end">
+    <ion-button (click)="presentPopover($event)" fill="clear" class="ion-no-padding">
       <ion-icon name="filter-outline"></ion-icon>
     </ion-button>
 
-    <ion-button slot="end" fill="clear" routerLink="/notifications/settings">
+    <ion-button fill="clear" routerLink="/notifications/settings">
       <ion-icon name="settings-outline"></ion-icon>
     </ion-button>
+  </ion-buttons>
 
     <ion-popover #popover [isOpen]="isOpen" (didDismiss)="isOpen = false">
       <ng-template>
@@ -29,8 +26,7 @@
       </ng-template>
     </ion-popover>
 
-  </ion-toolbar>
-</ion-header>
+</app-header>
 
 <ion-list>
   <ion-chip *ngFor="let channel of channelsSelected$ | async" (click)="removeChannelFromFilter(channel.code)">

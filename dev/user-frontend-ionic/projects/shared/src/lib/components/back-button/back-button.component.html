@@ -3,4 +3,4 @@
     therefore defaultHref is mandatory to prevent the back button from being hidden.
     This is also the reason why we must programatically perform the back operation.
 -->
-<ion-back-button (click)="goBack()" defaultHref=""></ion-back-button>
+<ion-back-button (click)="goBack()" [defaultHref]="defaultHref"></ion-back-button>

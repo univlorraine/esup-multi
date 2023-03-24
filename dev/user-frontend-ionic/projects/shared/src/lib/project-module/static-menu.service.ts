@@ -1,33 +1,33 @@
 import { Injectable } from '@angular/core';
 
-export type MenuType = 'top' | 'tabs' | 'burger';
+export type StaticMenuType = 'tabs:start' | 'tabs:end' | 'burger';
 
-export interface MenuItem {
+export interface StaticMenuItem {
     title: string;
     icon: string;
     position: number;
     routerLink: string;
-    type: MenuType;
+    type: StaticMenuType;
 }
 
 @Injectable({
     providedIn: 'root'
 })
-export class MenuService {
+export class StaticMenuService {
 
-    private menuItemsByType: Map<MenuType, MenuItem[]> = new Map([
-        ['top', []],
-        ['tabs', []],
+    private menuItemsByType: Map<StaticMenuType, StaticMenuItem[]> = new Map([
+        ['tabs:start', []],
+        ['tabs:end', []],
         ['burger', []],
     ]);
 
-    private menuItems: MenuItem[] = [];
+    private menuItems: StaticMenuItem[] = [];
 
-    public addMenuItems(menuItems: MenuItem[]) {
+    public addMenuItems(menuItems: StaticMenuItem[]) {
         menuItems.forEach(menuItem => this.addMenuItem(menuItem));
     }
 
-    public getMenuItemsByType(menuType: MenuType) {
+    public getMenuItemsByType(menuType: StaticMenuType) {
         return this.menuItemsByType.get(menuType);
     }
 
@@ -35,7 +35,7 @@ export class MenuService {
         return this.menuItems;
     }
 
-    private addMenuItem(menuItem: MenuItem) {
+    private addMenuItem(menuItem: StaticMenuItem) {
         const menuItemsForThisType = this.menuItemsByType.get(menuItem.type);
         menuItemsForThisType.push(menuItem);
         menuItemsForThisType.sort((itemA, itemB) => itemA.position - itemB.position);

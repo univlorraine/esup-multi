@@ -53,6 +53,8 @@ export class InfoService {
               settingsByRole: info.settings_by_role.map(
                 (sbr) => sbr.settings_by_role_id,
               ),
+              menu: info.menu,
+              icon: info.icon,
             }),
           ),
         ),

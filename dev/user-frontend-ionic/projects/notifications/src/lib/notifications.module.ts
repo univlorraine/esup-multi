@@ -24,17 +24,6 @@ const initModule = (projectModuleService: ProjectModuleService,
     projectModuleService.initProjectModule({
       name: 'notifications',
       translation: true,
-      menuItems: [{
-        title: 'NOTIFICATIONS.MENU',
-        icon: 'notifications-outline',
-        position: 60,
-        routerLink: NotificationsModule.routerLink,
-        type: 'top',
-      }],
-      pageConfigurations: [{
-        routerLink: NotificationsModule.routerLink,
-        disableAutoHeader: true,
-      }]
     });
     NotificationsModule.initPushNotifications(notificationsRepository, toastController);
   };

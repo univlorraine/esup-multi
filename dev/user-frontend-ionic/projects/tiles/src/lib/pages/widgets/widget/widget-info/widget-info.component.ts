@@ -1,7 +1,6 @@
 import { AfterViewInit, ChangeDetectorRef, Component, Input, ViewChild, ViewContainerRef } from '@angular/core';
 import { Browser } from '@capacitor/browser';
-import { ProjectModuleService, SsoService } from '@ul/shared';
-import { TranslatedInfo } from '../../../../tiles.repository';
+import { ProjectModuleService, SsoService, TranslatedInfo } from '@ul/shared';
 
 @Component({
 selector: 'app-widget-info',

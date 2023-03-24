@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FullCalendarModule } from '@fullcalendar/angular'; // must go before plugins
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
-import { ProjectModuleService } from '@ul/shared';
+import { ProjectModuleService, SharedComponentsModule } from '@ul/shared';
 import { EventDetailComponent } from './common/event-detail/event-detail.component';
 import { CompleteLocalDatePipe } from './common/pipe/complete-local-date.pipe';
 import { LocalHourPipe } from './common/pipe/local-hour.pipe';
@@ -51,6 +51,7 @@ const initModule = (projectModuleService: ProjectModuleService) =>
     FormsModule,
     ReactiveFormsModule,
     FullCalendarModule,
+    SharedComponentsModule,
   ],
   providers: [{
     provide: APP_INITIALIZER,

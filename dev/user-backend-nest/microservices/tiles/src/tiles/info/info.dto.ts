@@ -21,4 +21,6 @@ export interface DirectusInfo {
   ssoService?: string;
   authorization?: Authorization;
   settings_by_role: DirectusSettingsByRole[];
+  menu: string | null;
+  icon: string;
 }

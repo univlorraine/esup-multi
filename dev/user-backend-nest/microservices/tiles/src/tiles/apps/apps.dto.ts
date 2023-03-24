@@ -3,12 +3,11 @@ import {
   Authorization,
   DirectusSettingsByRole,
   DirectusTileTranslation,
-  TileType
+  TileType,
 } from '../tiles.dto';
 
 export interface App extends AbstractTile {
   routerLink: string;
-  icon?: string;
   type: TileType.App;
 }
 
@@ -21,4 +20,5 @@ export interface DirectusApp {
   icon?: string;
   authorization?: Authorization;
   settings_by_role: DirectusSettingsByRole[];
+  menu: string | null;
 }

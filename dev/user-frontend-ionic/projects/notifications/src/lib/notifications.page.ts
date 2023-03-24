@@ -1,8 +1,9 @@
 import { Component, Inject, OnDestroy, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { InfiniteScrollCustomEvent, IonContent, IonModal, Platform } from '@ionic/angular';
+import { PageLayoutService } from '@ul/shared';
 import { combineLatest, Observable, Subscription,  } from 'rxjs';
-import { catchError, finalize, first, map, filter, mergeMap, switchMap, startWith } from 'rxjs/operators';
+import { catchError, finalize, first, map, filter, mergeMap, startWith } from 'rxjs/operators';
 import { NotificationsModuleConfig, NOTIFICATIONS_CONFIG } from './notifications.config';
 import { Channel,
   Notification,
@@ -45,6 +46,7 @@ export class NotificationsPage implements OnDestroy {
     private notificationsService: NotificationsService,
     @Inject(NOTIFICATIONS_CONFIG) private config: NotificationsModuleConfig,
     private formBuilder: FormBuilder,
+    public pageLayoutService: PageLayoutService,
     public platform: Platform,
     public notificationRepository: NotificationsRepository
   ) {

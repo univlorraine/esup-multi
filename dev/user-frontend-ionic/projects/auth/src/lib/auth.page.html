@@ -1,3 +1,4 @@
+<app-header></app-header>
 <ion-content>
     <app-login *ngIf="(authentified$ | async) === false"></app-login>
     <app-connected *ngIf="(authentified$ | async) === true"></app-connected>    

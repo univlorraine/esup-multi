@@ -12,14 +12,6 @@ const initModule = (projectModuleService: ProjectModuleService) =>
   () => projectModuleService.initProjectModule({
     name: 'reservation',
     translation: true,
-    pageConfigurations: [{
-      routerLink: '/reservation',
-      disableAutoHeader: true,
-    },
-    {
-      routerLink: '/reservation/scan',
-      disableAutoHeader: true,
-    }]
   });
 
 @NgModule({

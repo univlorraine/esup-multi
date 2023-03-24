@@ -1,7 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef, Component, Input, ViewChild, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProjectModuleService } from '@ul/shared';
-import { TranslatedApp } from '../../../../tiles.repository';
+import { TranslatedApp } from '@ul/shared';
 
 @Component({
 selector: 'app-widget-app',

@@ -1,0 +1,9 @@
+<ion-header [translucent]="true" *ngIf="showCurrentPageHeader$ | async">
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <app-back-button [defaultHref]="backRouterLink"></app-back-button>
+      </ion-buttons>
+      <ion-title *ngIf="(currentPageTitle$ | async) as title">{{ title.translated ? title.title : (title.title | translate) }}</ion-title>
+      <ng-content></ng-content>
+    </ion-toolbar>
+  </ion-header>
