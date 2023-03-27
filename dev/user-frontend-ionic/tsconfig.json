@@ -49,6 +49,9 @@
       "@ul/menu": [
         "dist/menu"
       ],
+      "@ul/chatbot": [
+        "dist/chatbot"
+      ],
       "@ul/static-pages": [
         "dist/static-pages"
       ]

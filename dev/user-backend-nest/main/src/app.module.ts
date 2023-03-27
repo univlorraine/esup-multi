@@ -6,6 +6,7 @@ import { AppController } from './app.controller';
 import configuration from './config/configuration';
 import microserviceAuthConfig from './config/microservice-auth.config';
 import microserviceCardsConfig from './config/microservice-cards.config';
+import microserviceChatbotConfig from './config/microservice-chatbot.config';
 import microserviceClockingConfig from './config/microservice-clocking.config';
 import microserviceContactsConfig from './config/microservice-contacts.config';
 import microserviceImportantNewsConfig from './config/microservice-important-news.config';
@@ -94,6 +95,13 @@ import { AuthJwtStrategy } from './security/auth-jwt.strategy';
         imports: [ConfigModule.forFeature(microserviceSocialNetworkConfig)],
         useFactory: (config: ConfigService) =>
           config.get('microservice-social-network'),
+        inject: [ConfigService],
+      },
+      {
+        name: 'CHATBOT_SERVICE',
+        imports: [ConfigModule.forFeature(microserviceChatbotConfig)],
+        useFactory: (config: ConfigService) =>
+          config.get('microservice-chatbot'),
         inject: [ConfigService],
       },
       {

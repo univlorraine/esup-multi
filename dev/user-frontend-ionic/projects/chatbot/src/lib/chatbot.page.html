@@ -1,0 +1,49 @@
+<app-header></app-header>
+
+<ion-progress-bar *ngIf="isLoading" type="indeterminate" color="primary"></ion-progress-bar>
+
+<ion-content #scrollContent class="ion-padding">
+  <ion-list #messages>
+    <ion-item *ngFor="let message of messages$ | async"
+      [ngClass]="message.messageType === messageType.bot? 'message-bot' : 'message-user'" class="ion-margin">
+
+      <ion-col *ngIf="message.messageType === messageType.bot">
+        <ion-row>
+          <ion-label *ngIf="!message.card" [innerHTML]="message.text" text-wrap></ion-label>
+          <ion-img *ngIf="message.card" [src]="message.card.file.url"></ion-img>
+        </ion-row>
+
+        <ion-row *ngIf="message.buttons" class="ion-margin-top">
+          <ion-col>
+            <ion-item button *ngFor="let button of message.buttons" (click)="onButtonClick(button)"
+              class="buttonRequest ion-margin-bottom">
+              {{button.title}}
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+
+      <ion-col *ngIf="message.messageType === messageType.user">
+        <ion-row>
+          <ion-label [innerHTML]="message.text" text-wrap></ion-label>
+        </ion-row>
+      </ion-col>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-item>
+    <ion-input [(ngModel)]="userInput" placeholder="{{'CHATBOT.MESSAGE_PROMPT' | translate}}"
+      (keyup.enter)="onMessageInputEnter()"></ion-input>
+    <ion-buttons slot="end">
+      <ion-button ion-button icon-only (click)="clearUserInput()">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
+
+      <ion-button ion-button icon-only (click)="textRequest(userInput)">
+        <ion-icon name="send"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-item>
+</ion-footer>
