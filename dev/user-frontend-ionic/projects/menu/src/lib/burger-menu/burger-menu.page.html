@@ -13,7 +13,7 @@
   <ion-list lines="none" class="menu-section ion-padding">
     <ion-item button *ngFor="let menu of (dynamicMenuItems$ | async)" (click)="menuOpenerService.open(menu)">
       <ion-icon name="{{menu.icon}}" slot="start"></ion-icon>
-      <ion-label>{{menu.title | translate}}</ion-label>
+      <ion-label>{{menu.title}}</ion-label>
     </ion-item>
   </ion-list>
   <ion-row *ngIf="(socialNetworks$ | async) as socialNetworks"
