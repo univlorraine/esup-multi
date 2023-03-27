@@ -21,10 +21,12 @@ import { ProjectModuleService, translationsLoaderFactory } from '@ul/shared';
 import { StaticPagesModule } from '@ul/static-pages';
 import { TilesModule } from '@ul/tiles';
 import { environment } from '../environments/environment';
+import { ChatbotModule } from './../../projects/chatbot/src/lib/chatbot.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ErrorModule } from './error/error.module';
 import { PageLayoutsModule } from './page-layouts/page-layouts.module';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -76,6 +78,7 @@ import { PageLayoutsModule } from './page-layouts/page-layouts.module';
       reservationSsoUrlTemplate: 'https://resa-espace.univ-lorraine.fr/reservationsalles/Authentification.aspx?ticket={st}',
     }),
     MenuModule,
+    ChatbotModule,
     StaticPagesModule,
     TranslateModule.forRoot({
       loader: {

@@ -29,6 +29,7 @@ export class AppController {
     @Inject('IMPORTANT_NEWS_SERVICE') private importantNewsClient: ClientProxy,
     @Inject('NOTIFICATIONS_SERVICE') private notificationsClient: ClientProxy,
     @Inject('CLOCKING_SERVICE') private clockingClient: ClientProxy,
+    @Inject('CHATBOT_SERVICE') private chatbotClient: ClientProxy,
     @Inject('SOCIAL_NETWORK_SERVICE') private socialNetworkClient: ClientProxy,
     @Inject('STATIC_PAGES_SERVICE') private staticPagesClient: ClientProxy,
   ) {}
@@ -451,13 +452,33 @@ export class AppController {
       );
   }
 
-  @Get('/social-network')
+    @Get('/social-network')
   socialnetwork() {
     return this.socialNetworkClient.send(
       {
         cmd: 'socialNetwork',
       },
       {},
+    );
+  }
+
+  @Post('/chatbot/text-request')
+  chatbotTextRequest(@Body() body) {
+    return this.chatbotClient.send(
+      {
+        cmd: 'textRequest',
+      },
+       body,
+    );
+  }
+
+   @Post('/chatbot/button-payload-request')
+  chatbotButtonPayloadRequest(@Body() body) {
+    return this.chatbotClient.send(
+      {
+        cmd: 'buttonRequest',
+      },
+       body,
     );
   }
 
