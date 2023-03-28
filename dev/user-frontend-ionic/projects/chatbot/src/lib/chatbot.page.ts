@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Capacitor } from '@capacitor/core';
 import { Keyboard } from '@capacitor/keyboard';
 import { IonContent } from '@ionic/angular';
 import { BehaviorSubject } from 'rxjs';
@@ -47,14 +48,18 @@ export class ChatbotPage implements OnInit {
     });
     this.domMessageListObserver.observe(this.domMessageList.nativeElement, { childList: true, subtree: true });
 
-    Keyboard.addListener('keyboardWillShow', info => {
-      this.scrollContent.scrollToBottom(0);
-    });
+    if (Capacitor.isNativePlatform()) {
+      Keyboard.addListener('keyboardWillShow', info => {
+        this.scrollContent.scrollToBottom(0);
+      });
+    }
   }
 
   ionViewWillLeave() {
     this.domMessageListObserver.disconnect();
-    Keyboard.removeAllListeners();
+    if (Capacitor.isNativePlatform()) {
+      Keyboard.removeAllListeners();
+    }
   }
 
   textRequest(text: string): void {
