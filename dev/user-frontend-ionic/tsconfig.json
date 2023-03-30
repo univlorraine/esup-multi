@@ -28,8 +28,8 @@
       "@ul/schedule": [
         "dist/schedule"
       ],
-      "@ul/tiles": [
-        "dist/tiles"
+      "@ul/features": [
+        "dist/features"
       ],
       "@ul/contacts": [
         "dist/contacts"

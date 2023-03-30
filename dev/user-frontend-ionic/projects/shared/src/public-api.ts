@@ -24,6 +24,6 @@ export * from './lib/project-module/translations/translations-loader.factory';
 export * from './lib/shared.actions';
 export * from './lib/sso/sso.service';
 export * from './lib/store/local-forage';
-export * from './lib/tiles/tiles.repository';
-export * from './lib/tiles/tiles.service';
+export * from './lib/features/features.repository';
+export * from './lib/features/features.service';
 

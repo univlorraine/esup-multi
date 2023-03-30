@@ -1,6 +1,6 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { Network } from '@capacitor/network';
-import { MenuItem, MenuItemLinkType, MenuItemRouterLink, MenuOpenerService, MenuService, TilesService } from '@ul/shared';
+import { MenuItem, MenuItemLinkType, MenuItemRouterLink, MenuOpenerService, MenuService, FeaturesService } from '@ul/shared';
 import { Observable } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
 
@@ -21,7 +21,7 @@ export class TabsLayoutPage implements AfterViewInit {
 
   constructor(
     private menuService: MenuService,
-    private tilesService: TilesService,
+    private featuresService: FeaturesService,
     public menuOpenerService: MenuOpenerService,
   ) {
     this.tabsMenuItems$ = this.menuService.tabsMenuItems$.pipe(
@@ -43,7 +43,7 @@ export class TabsLayoutPage implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.loadTilesList();
+    this.loadFeatures();
   }
 
   public async openExternalOrSsoLinkOnly(menuItem: MenuItem) {
@@ -54,14 +54,14 @@ export class TabsLayoutPage implements AfterViewInit {
     return this.menuOpenerService.open(menuItem);
   }
 
-  private async loadTilesList(): Promise<void> {
+  private async loadFeatures(): Promise<void> {
     // skip if network is not available
     if (!(await Network.getStatus()).connected) {
       return;
     }
 
     this.isLoading = true;
-    this.tilesService.loadAndStoreTiles().pipe(
+    this.featuresService.loadAndStoreFeatures().pipe(
       finalize(() => this.isLoading = false)
     ).subscribe();
   }

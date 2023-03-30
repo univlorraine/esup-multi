@@ -7,7 +7,7 @@ import {
   Post,
   Request,
   UseGuards,
-  UseInterceptors
+  UseInterceptors,
 } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { AuthGuard } from '@nestjs/passport';
@@ -19,7 +19,7 @@ import { AuthorizationHelper } from './security/authorization.helper';
 @Controller()
 export class AppController {
   constructor(
-    @Inject('TILES_SERVICE') private infoClient: ClientProxy,
+    @Inject('FEATURES_SERVICE') private featuresClient: ClientProxy,
     @Inject('AUTH_SERVICE') private authClient: ClientProxy,
     @Inject('MAP_SERVICE') private mapClient: ClientProxy,
     @Inject('RSS_SERVICE') private rssClient: ClientProxy,
@@ -34,7 +34,7 @@ export class AppController {
     @Inject('STATIC_PAGES_SERVICE') private staticPagesClient: ClientProxy,
   ) {}
 
-  @Post('/tiles')
+  @Post('/features')
   info(@Body() body) {
     return this.authClient
       .send(
@@ -46,16 +46,16 @@ export class AppController {
       .pipe(
         concatMap((user) => {
           const roles = user ? user.roles : ['anonymous'];
-          return this.infoClient
+          return this.featuresClient
             .send(
               {
-                cmd: 'tiles',
+                cmd: 'features',
               },
               roles,
             )
             .pipe(
-              map((tiles) => {
-                return new AuthorizationHelper(roles).filter(tiles);
+              map((features) => {
+                return new AuthorizationHelper(roles).filter(features);
               }),
             );
         }),
@@ -374,7 +374,7 @@ export class AppController {
             {
               username: user.username,
               channelName: body.channelCode,
-              isSubscription: body.isSubscription
+              isSubscription: body.isSubscription,
             },
           ),
         ),
@@ -452,7 +452,7 @@ export class AppController {
       );
   }
 
-    @Get('/social-network')
+  @Get('/social-network')
   socialnetwork() {
     return this.socialNetworkClient.send(
       {
@@ -468,17 +468,17 @@ export class AppController {
       {
         cmd: 'textRequest',
       },
-       body,
+      body,
     );
   }
 
-   @Post('/chatbot/button-payload-request')
+  @Post('/chatbot/button-payload-request')
   chatbotButtonPayloadRequest(@Body() body) {
     return this.chatbotClient.send(
       {
         cmd: 'buttonRequest',
       },
-       body,
+      body,
     );
   }
 

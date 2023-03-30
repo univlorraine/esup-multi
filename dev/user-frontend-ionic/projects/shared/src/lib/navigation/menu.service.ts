@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ProjectModuleService } from '../project-module/project-module.service';
-import { TilesService, TranslatedApp, TranslatedInfo, TranslatedTile } from '../tiles/tiles.service';
-import { TileType } from '../tiles/tiles.repository';
+import { FeaturesService, TranslatedInternalFeature, TranslatedExternalFeature, TranslatedFeature } from '../features/features.service';
+import { FeatureType } from '../features/features.repository';
 import { StaticMenuType, StaticMenuItem } from '../project-module/static-menu.service';
 import { MenuItem, MenuItemLink, MenuItemLinkType } from './menu.model';
 
@@ -25,7 +25,7 @@ export class MenuService {
 
     constructor(
       private projectModuleService: ProjectModuleService,
-      private tilesService: TilesService,
+      private featuresService: FeaturesService,
     ) {
       this.allStaticMenuItems = this.getStaticMenuItems();
       this.tabsStaticMenuItemsStart = this.getStaticMenuItemsByType('tabs:start');
@@ -37,9 +37,9 @@ export class MenuService {
       ]);
 
       // all menu items are a merge between static (from modules) and dynamic (from CMS) menu items
-      this.tilesService.translatedTiles$.pipe(
-        map(tiles => tiles.filter(tile => tile.menu)),
-        map(tiles => tiles.map((app: TranslatedTile) => this.convertTranslatedTile(app))),
+      this.featuresService.translatedFeatures$.pipe(
+        map(features => features.filter(feature => feature.menu)),
+        map(features => features.map((app: TranslatedFeature) => this.convertTranslatedFeature(app))),
         map((dynamicMenuItems: MenuItem[]) => [
             ...this.allStaticMenuItems,
             ...dynamicMenuItems,
@@ -47,9 +47,9 @@ export class MenuService {
       ).subscribe(this.allMenuItems$);
 
       // burger menu items are a merge between static (from modules) and dynamic (from CMS) menu items
-      this.tilesService.translatedTiles$.pipe(
-        map(tiles => tiles.filter(tile => tile.menu === 'burger')),
-        map(tiles => tiles.map((app: TranslatedTile) => this.convertTranslatedTile(app))),
+      this.featuresService.translatedFeatures$.pipe(
+        map(features => features.filter(feature => feature.menu === 'burger')),
+        map(features => features.map((app: TranslatedFeature) => this.convertTranslatedFeature(app))),
         map((dynamicMenuItems: MenuItem[]) => [
             ...this.burgerStaticMenuItems,
             ...dynamicMenuItems,
@@ -58,9 +58,9 @@ export class MenuService {
 
 
       // tabs menu items are a merge between static (from modules) and dynamic (from CMS) menu items
-      this.tilesService.translatedTiles$.pipe(
-        map(tiles => tiles.filter(tile => tile.menu === 'tabs')),
-        map(tiles => tiles.map((app: TranslatedTile) => this.convertTranslatedTile(app))),
+      this.featuresService.translatedFeatures$.pipe(
+        map(features => features.filter(feature => feature.menu === 'tabs')),
+        map(features => features.map((app: TranslatedFeature) => this.convertTranslatedFeature(app))),
         map((dynamicMenuItems: MenuItem[]) => [
             ...this.tabsStaticMenuItemsStart,
             ...dynamicMenuItems,
@@ -69,18 +69,18 @@ export class MenuService {
       ).subscribe(this.tabsMenuItems$);
 
       // top menu items are fully dynamic (from CMS)
-      this.tilesService.translatedTiles$.pipe(
-        map(tiles => tiles.filter(tile => tile.menu === 'top')),
-        map(tiles => tiles.map((app: TranslatedTile) => this.convertTranslatedTile(app)))
+      this.featuresService.translatedFeatures$.pipe(
+        map(features => features.filter(feature => feature.menu === 'top')),
+        map(features => features.map((app: TranslatedFeature) => this.convertTranslatedFeature(app)))
       ).subscribe(this.topMenuItems$);
     }
 
-    public convertTranslatedTile(tile: TranslatedTile): MenuItem {
-      switch(tile.type) {
-        case TileType.app:
-          return this.convertTranslatedApp(tile);
-        case TileType.info:
-          return this.convertTranslatedInfo(tile);
+    public convertTranslatedFeature(feature: TranslatedFeature): MenuItem {
+      switch(feature.type) {
+        case FeatureType.internal:
+          return this.convertTranslatedInternalFeature(feature);
+        case FeatureType.external:
+          return this.convertTranslatedExternalFeature(feature);
       }
     }
 
@@ -106,7 +106,7 @@ export class MenuService {
       };
     }
 
-    private convertTranslatedApp(app: TranslatedApp): MenuItem {
+    private convertTranslatedInternalFeature(app: TranslatedInternalFeature): MenuItem {
       return {
         icon: app.icon,
         title: app.title,
@@ -119,7 +119,7 @@ export class MenuService {
     }
 
 
-    private convertTranslatedInfo(app: TranslatedInfo): MenuItem {
+    private convertTranslatedExternalFeature(app: TranslatedExternalFeature): MenuItem {
       const link: MenuItemLink = (app.ssoService) ?
         {
           type: MenuItemLinkType.sso,
