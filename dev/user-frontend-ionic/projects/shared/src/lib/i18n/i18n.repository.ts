@@ -24,7 +24,7 @@ const persist = persistState(store, {
 
 export const currentLanguage$ = store.pipe(select((state) => state.language));
 
-export const updateLanguage = (language: I18nProps['language']) => {
+export const setLanguage = (language: I18nProps['language']) => {
   store.update((state) => ({
     ...state,
     language,

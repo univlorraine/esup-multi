@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Network } from '@capacitor/network';
 import { getAuthToken } from '@ul/shared';
-import { add, format, startOfMonth, startOfToday, startOfWeek, sub } from 'date-fns';
+import { add, format, startOfWeek, sub } from 'date-fns';
 import { combineLatest, from, Observable, of, Subject } from 'rxjs';
 import { filter, finalize, first, map, mergeMap, switchMap, tap } from 'rxjs/operators';
 import { ScheduleModuleConfig, SCHEDULE_CONFIG } from './schedule.config';
@@ -76,8 +76,7 @@ export class ScheduleService {
   }
 
   getStateEndDate(): Date {
-    const stateEndDate = add(this.getStartOfCurrentWeek(), { weeks: this.config.nextWeeksInCache });
-    return sub(stateEndDate, { days: 1 });;
+    return add(this.getStartOfCurrentWeek(), { weeks: this.config.nextWeeksInCache });;
   }
 
   getStartOfCurrentWeek(): Date {

@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { Browser } from '@capacitor/browser';
 import { Network } from '@capacitor/network';
-import { MenuItem, MenuOpenerService, MenuService as SharedMenuService, updateLanguage } from '@ul/shared';
+import { MenuItem, MenuOpenerService, MenuService as SharedMenuService, setLanguage } from '@ul/shared';
 import { Observable } from 'rxjs';
 import { first, map } from 'rxjs/operators';
 import { MenuService } from '../menu.service';
@@ -44,7 +44,7 @@ export class BurgerMenuPage {
   }
 
   useLanguage(language: string): void {
-    updateLanguage(language);
+    setLanguage(language);
   }
 
   async openExternalLink(link: string) {
