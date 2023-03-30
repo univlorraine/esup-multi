@@ -16,7 +16,7 @@ import microserviceRssConfig from './config/microservice-rss.config';
 import microserviceScheduleConfig from './config/microservice-schedule.config';
 import microserviceSocialNetworkConfig from './config/microservice-social-network';
 import microserviceStaticPagesConfig from './config/microservice-static-pages.config';
-import microserviceInfoConfig from './config/microservice-tiles.config';
+import microserviceFeaturesConfig from './config/microservice-features.config';
 import { AuthJwtStrategy } from './security/auth-jwt.strategy';
 
 @Module({
@@ -26,9 +26,10 @@ import { AuthJwtStrategy } from './security/auth-jwt.strategy';
     }),
     ClientsModule.registerAsync([
       {
-        name: 'TILES_SERVICE',
-        imports: [ConfigModule.forFeature(microserviceInfoConfig)],
-        useFactory: (config: ConfigService) => config.get('microservice-tiles'),
+        name: 'FEATURES_SERVICE',
+        imports: [ConfigModule.forFeature(microserviceFeaturesConfig)],
+        useFactory: (config: ConfigService) =>
+          config.get('microservice-features'),
         inject: [ConfigService],
       },
       {

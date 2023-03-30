@@ -19,7 +19,7 @@ import { RssPageModule } from '@ul/rss';
 import { ScheduleModule } from '@ul/schedule';
 import { ProjectModuleService, translationsLoaderFactory } from '@ul/shared';
 import { StaticPagesModule } from '@ul/static-pages';
-import { TilesModule } from '@ul/tiles';
+import { FeaturesModule } from '@ul/features';
 import { environment } from '../environments/environment';
 import { ChatbotModule } from './../../projects/chatbot/src/lib/chatbot.module';
 import { AppRoutingModule } from './app-routing.module';
@@ -64,7 +64,7 @@ import { PageLayoutsModule } from './page-layouts/page-layouts.module';
       nextWeeksInCache: 2
     }),
     ImportantNewsModule,
-    TilesModule,
+    FeaturesModule,
     ContactsModule.forRoot({
       contactTypes: ['STUDENT', 'STAFF', 'STANDIN']
     }),

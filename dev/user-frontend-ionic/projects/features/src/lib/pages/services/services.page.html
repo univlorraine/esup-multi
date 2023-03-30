@@ -1,0 +1,11 @@
+<ion-content *ngIf="(featuresIsEmpty$ | async) === false">
+  <ion-searchbar show-clear-button="focus" [placeholder]="'FEATURES.SEARCHBAR_MESSAGE' | translate" (ionChange)="handleChange($event)"></ion-searchbar>
+  <div class="services">
+    <app-service *ngFor="let menuItem of (menuItems$ | async)" [menuItem]="menuItem">
+    </app-service>
+  </div>
+</ion-content>
+
+<ion-content class="ion-padding" *ngIf="(featuresIsEmpty$ | async)">
+  <ion-note> {{ "FEATURES.NO_DATA" | translate }} </ion-note>
+</ion-content>

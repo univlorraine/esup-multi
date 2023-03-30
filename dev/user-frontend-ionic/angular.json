@@ -31,8 +31,8 @@
               },
               {
                 "glob": "**/*",
-                "input": "projects/tiles/assets/i18n",
-                "output": "/assets/i18n/tiles"
+                "input": "projects/features/assets/i18n",
+                "output": "/assets/i18n/features"
               },
               {
                 "glob": "**/*",
@@ -552,23 +552,23 @@
 
       }
     },
-    "tiles": {
+    "features": {
       "projectType": "library",
-      "root": "projects/tiles",
-      "sourceRoot": "projects/tiles/src",
+      "root": "projects/features",
+      "sourceRoot": "projects/features/src",
       "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "project": "projects/tiles/ng-package.json"
+            "project": "projects/features/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/tiles/tsconfig.lib.prod.json"
+              "tsConfig": "projects/features/tsconfig.lib.prod.json"
             },
             "development": {
-              "tsConfig": "projects/tiles/tsconfig.lib.json"
+              "tsConfig": "projects/features/tsconfig.lib.json"
             }
           },
           "defaultConfiguration": "production"
@@ -576,17 +576,17 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/tiles/src/test.ts",
-            "tsConfig": "projects/tiles/tsconfig.spec.json",
-            "karmaConfig": "projects/tiles/karma.conf.js"
+            "main": "projects/features/src/test.ts",
+            "tsConfig": "projects/features/tsconfig.spec.json",
+            "karmaConfig": "projects/features/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
             "lintFilePatterns": [
-              "projects/tiles/**/*.ts",
-              "projects/tiles/**/*.html"
+              "projects/features/**/*.ts",
+              "projects/features/**/*.html"
             ]
           }
         }

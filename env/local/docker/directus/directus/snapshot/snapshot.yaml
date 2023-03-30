@@ -2,72 +2,6 @@ version: 1
 directus: 9.23.1
 vendor: postgres
 collections:
-  - collection: apps
-    meta:
-      accountability: null
-      archive_app_filter: true
-      archive_field: status
-      archive_value: archived
-      collapse: open
-      collection: apps
-      color: null
-      display_template: null
-      group: null
-      hidden: false
-      icon: null
-      item_duplication_fields: null
-      note: null
-      singleton: false
-      sort: 1
-      sort_field: sort
-      translations: null
-      unarchive_value: draft
-    schema:
-      name: apps
-  - collection: apps_settings_by_role
-    meta:
-      accountability: all
-      archive_app_filter: true
-      archive_field: null
-      archive_value: null
-      collapse: open
-      collection: apps_settings_by_role
-      color: null
-      display_template: null
-      group: null
-      hidden: true
-      icon: import_export
-      item_duplication_fields: null
-      note: null
-      singleton: false
-      sort: null
-      sort_field: null
-      translations: null
-      unarchive_value: null
-    schema:
-      name: apps_settings_by_role
-  - collection: apps_translations
-    meta:
-      accountability: null
-      archive_app_filter: true
-      archive_field: null
-      archive_value: null
-      collapse: open
-      collection: apps_translations
-      color: null
-      display_template: null
-      group: null
-      hidden: true
-      icon: import_export
-      item_duplication_fields: null
-      note: null
-      singleton: false
-      sort: 2
-      sort_field: null
-      translations: null
-      unarchive_value: null
-    schema:
-      name: apps_translations
   - collection: authorization
     meta:
       accountability: all
@@ -84,7 +18,7 @@ collections:
       item_duplication_fields: null
       note: null
       singleton: false
-      sort: 5
+      sort: 10
       sort_field: null
       translations: null
       unarchive_value: null
@@ -106,7 +40,7 @@ collections:
       item_duplication_fields: null
       note: null
       singleton: false
-      sort: null
+      sort: 5
       sort_field: null
       translations: null
       unarchive_value: null
@@ -122,18 +56,84 @@ collections:
       collection: channels_translations
       color: null
       display_template: null
-      group: null
+      group: channels
       hidden: true
       icon: import_export
       item_duplication_fields: null
       note: null
       singleton: false
-      sort: null
+      sort: 1
       sort_field: null
       translations: null
       unarchive_value: null
     schema:
       name: channels_translations
+  - collection: features
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: features
+      color: null
+      display_template: null
+      group: null
+      hidden: false
+      icon: null
+      item_duplication_fields: null
+      note: null
+      singleton: false
+      sort: 1
+      sort_field: null
+      translations: null
+      unarchive_value: null
+    schema:
+      name: features
+  - collection: features_settings_by_role
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: features_settings_by_role
+      color: null
+      display_template: null
+      group: features
+      hidden: true
+      icon: import_export
+      item_duplication_fields: null
+      note: null
+      singleton: false
+      sort: 2
+      sort_field: null
+      translations: null
+      unarchive_value: null
+    schema:
+      name: features_settings_by_role
+  - collection: features_translations
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: features_translations
+      color: null
+      display_template: null
+      group: features
+      hidden: true
+      icon: import_export
+      item_duplication_fields: null
+      note: null
+      singleton: false
+      sort: 1
+      sort_field: null
+      translations: null
+      unarchive_value: null
+    schema:
+      name: features_translations
   - collection: important_news
     meta:
       accountability: all
@@ -150,7 +150,7 @@ collections:
       item_duplication_fields: null
       note: null
       singleton: false
-      sort: null
+      sort: 3
       sort_field: sort
       translations: null
       unarchive_value: draft
@@ -166,84 +166,18 @@ collections:
       collection: important_news_translations
       color: null
       display_template: null
-      group: null
+      group: important_news
       hidden: true
       icon: import_export
       item_duplication_fields: null
       note: null
       singleton: false
-      sort: null
+      sort: 1
       sort_field: null
       translations: null
       unarchive_value: null
     schema:
       name: important_news_translations
-  - collection: info
-    meta:
-      accountability: null
-      archive_app_filter: true
-      archive_field: status
-      archive_value: archived
-      collapse: open
-      collection: info
-      color: null
-      display_template: null
-      group: null
-      hidden: false
-      icon: null
-      item_duplication_fields: null
-      note: null
-      singleton: false
-      sort: 3
-      sort_field: sort
-      translations: null
-      unarchive_value: draft
-    schema:
-      name: info
-  - collection: info_settings_by_role
-    meta:
-      accountability: all
-      archive_app_filter: true
-      archive_field: null
-      archive_value: null
-      collapse: open
-      collection: info_settings_by_role
-      color: null
-      display_template: null
-      group: null
-      hidden: true
-      icon: import_export
-      item_duplication_fields: null
-      note: null
-      singleton: false
-      sort: null
-      sort_field: null
-      translations: null
-      unarchive_value: null
-    schema:
-      name: info_settings_by_role
-  - collection: info_translations
-    meta:
-      accountability: all
-      archive_app_filter: true
-      archive_field: null
-      archive_value: null
-      collapse: open
-      collection: info_translations
-      color: null
-      display_template: null
-      group: null
-      hidden: true
-      icon: import_export
-      item_duplication_fields: null
-      note: null
-      singleton: false
-      sort: 4
-      sort_field: null
-      translations: null
-      unarchive_value: null
-    schema:
-      name: info_translations
   - collection: languages
     meta:
       accountability: all
@@ -260,7 +194,7 @@ collections:
       item_duplication_fields: null
       note: null
       singleton: false
-      sort: 6
+      sort: 8
       sort_field: null
       translations: null
       unarchive_value: null
@@ -282,7 +216,7 @@ collections:
       item_duplication_fields: null
       note: null
       singleton: false
-      sort: null
+      sort: 2
       sort_field: sort
       translations: null
       unarchive_value: draft
@@ -298,13 +232,13 @@ collections:
       collection: pages_translations
       color: null
       display_template: null
-      group: null
+      group: pages
       hidden: true
       icon: import_export
       item_duplication_fields: null
       note: null
       singleton: false
-      sort: null
+      sort: 1
       sort_field: null
       translations: null
       unarchive_value: null
@@ -328,7 +262,7 @@ collections:
         - role
       note: null
       singleton: false
-      sort: null
+      sort: 9
       sort_field: null
       translations: null
       unarchive_value: null
@@ -350,818 +284,13 @@ collections:
       item_duplication_fields: null
       note: null
       singleton: false
-      sort: null
+      sort: 4
       sort_field: null
       translations: null
       unarchive_value: null
     schema:
       name: social_networks
 fields:
-  - collection: apps
-    field: authorization
-    type: integer
-    meta:
-      collection: apps
-      conditions: null
-      display: null
-      display_options: null
-      field: authorization
-      group: null
-      hidden: false
-      interface: select-dropdown-m2o
-      note: null
-      options:
-        enableSelect: false
-        template: '{{type}}{{roles}}'
-      readonly: false
-      required: false
-      sort: 10
-      special:
-        - m2o
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: authorization
-      table: apps
-      data_type: integer
-      default_value: null
-      max_length: null
-      numeric_precision: 32
-      numeric_scale: 0
-      is_nullable: true
-      is_unique: true
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: authorization
-      foreign_key_column: id
-  - collection: apps
-    field: icon
-    type: string
-    meta:
-      collection: apps
-      conditions: null
-      display: null
-      display_options: null
-      field: icon
-      group: null
-      hidden: false
-      interface: input
-      note: null
-      options: null
-      readonly: false
-      required: false
-      sort: 7
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: icon
-      table: apps
-      data_type: character varying
-      default_value: null
-      max_length: 255
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: apps
-    field: id
-    type: integer
-    meta:
-      collection: apps
-      conditions: null
-      display: null
-      display_options: null
-      field: id
-      group: null
-      hidden: true
-      interface: input
-      note: null
-      options: null
-      readonly: true
-      required: false
-      sort: 1
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: id
-      table: apps
-      data_type: integer
-      default_value: nextval('apps_id_seq'::regclass)
-      max_length: null
-      numeric_precision: 32
-      numeric_scale: 0
-      is_nullable: false
-      is_unique: true
-      is_primary_key: true
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: true
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: apps
-    field: menu
-    type: string
-    meta:
-      collection: apps
-      conditions: null
-      display: null
-      display_options: null
-      field: menu
-      group: null
-      hidden: false
-      interface: select-dropdown
-      note: null
-      options:
-        choices:
-          - text: top
-            value: top
-          - text: tabs
-            value: tabs
-          - text: burger
-            value: burger
-          - text: service
-            value: service
-      readonly: false
-      required: false
-      sort: null
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: menu
-      table: apps
-      data_type: character varying
-      default_value: null
-      max_length: 255
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: apps
-    field: position
-    type: integer
-    meta:
-      collection: apps
-      conditions: null
-      display: null
-      display_options: null
-      field: position
-      group: null
-      hidden: false
-      interface: input
-      note: null
-      options: null
-      readonly: false
-      required: false
-      sort: 3
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: position
-      table: apps
-      data_type: integer
-      default_value: null
-      max_length: null
-      numeric_precision: 32
-      numeric_scale: 0
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: apps
-    field: routerLink
-    type: string
-    meta:
-      collection: apps
-      conditions: null
-      display: null
-      display_options: null
-      field: routerLink
-      group: null
-      hidden: false
-      interface: input
-      note: null
-      options: null
-      readonly: false
-      required: true
-      sort: 6
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: routerLink
-      table: apps
-      data_type: character varying
-      default_value: null
-      max_length: 255
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: false
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: apps
-    field: settings_by_role
-    type: alias
-    meta:
-      collection: apps
-      conditions: null
-      display: null
-      display_options: null
-      field: settings_by_role
-      group: null
-      hidden: false
-      interface: list-m2m
-      note: null
-      options: null
-      readonly: false
-      required: false
-      sort: 11
-      special:
-        - m2m
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-  - collection: apps
-    field: sort
-    type: integer
-    meta:
-      collection: apps
-      conditions: null
-      display: null
-      display_options: null
-      field: sort
-      group: null
-      hidden: true
-      interface: input
-      note: null
-      options: null
-      readonly: false
-      required: false
-      sort: 4
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: sort
-      table: apps
-      data_type: integer
-      default_value: null
-      max_length: null
-      numeric_precision: 32
-      numeric_scale: 0
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: apps
-    field: status
-    type: string
-    meta:
-      collection: apps
-      conditions: null
-      display: labels
-      display_options:
-        choices:
-          - text: $t:published
-            value: published
-            foreground: '#FFFFFF'
-            background: var(--primary)
-          - text: $t:draft
-            value: draft
-            foreground: '#18222F'
-            background: '#D3DAE4'
-          - text: $t:archived
-            value: archived
-            foreground: '#FFFFFF'
-            background: var(--warning)
-        showAsDot: true
-      field: status
-      group: null
-      hidden: false
-      interface: select-dropdown
-      note: null
-      options:
-        choices:
-          - text: $t:published
-            value: published
-          - text: $t:draft
-            value: draft
-          - text: $t:archived
-            value: archived
-      readonly: false
-      required: false
-      sort: 2
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: status
-      table: apps
-      data_type: character varying
-      default_value: draft
-      max_length: 255
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: false
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: apps
-    field: translations
-    type: alias
-    meta:
-      collection: apps
-      conditions: null
-      display: translations
-      display_options:
-        languageField: code
-        template: '{{title}}{{content}}'
-      field: translations
-      group: null
-      hidden: false
-      interface: translations
-      note: null
-      options:
-        languageField: code
-      readonly: false
-      required: false
-      sort: 9
-      special:
-        - translations
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-  - collection: apps
-    field: widget
-    type: string
-    meta:
-      collection: apps
-      conditions: null
-      display: null
-      display_options: null
-      field: widget
-      group: null
-      hidden: false
-      interface: input
-      note: null
-      options: null
-      readonly: false
-      required: false
-      sort: 8
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: widget
-      table: apps
-      data_type: character varying
-      default_value: null
-      max_length: 255
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: apps_settings_by_role
-    field: apps_id
-    type: integer
-    meta:
-      collection: apps_settings_by_role
-      conditions: null
-      display: null
-      display_options: null
-      field: apps_id
-      group: null
-      hidden: true
-      interface: null
-      note: null
-      options: null
-      readonly: false
-      required: false
-      sort: null
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: apps_id
-      table: apps_settings_by_role
-      data_type: integer
-      default_value: null
-      max_length: null
-      numeric_precision: 32
-      numeric_scale: 0
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: apps
-      foreign_key_column: id
-  - collection: apps_settings_by_role
-    field: id
-    type: integer
-    meta:
-      collection: apps_settings_by_role
-      conditions: null
-      display: null
-      display_options: null
-      field: id
-      group: null
-      hidden: true
-      interface: null
-      note: null
-      options: null
-      readonly: false
-      required: false
-      sort: null
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: id
-      table: apps_settings_by_role
-      data_type: integer
-      default_value: nextval('apps_settings_by_role_id_seq'::regclass)
-      max_length: null
-      numeric_precision: 32
-      numeric_scale: 0
-      is_nullable: false
-      is_unique: true
-      is_primary_key: true
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: true
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: apps_settings_by_role
-    field: settings_by_role_id
-    type: integer
-    meta:
-      collection: apps_settings_by_role
-      conditions: null
-      display: null
-      display_options: null
-      field: settings_by_role_id
-      group: null
-      hidden: true
-      interface: null
-      note: null
-      options: null
-      readonly: false
-      required: false
-      sort: null
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: settings_by_role_id
-      table: apps_settings_by_role
-      data_type: integer
-      default_value: null
-      max_length: null
-      numeric_precision: 32
-      numeric_scale: 0
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: settings_by_role
-      foreign_key_column: id
-  - collection: apps_settings_by_role
-    field: sort
-    type: integer
-    meta:
-      collection: apps_settings_by_role
-      conditions: null
-      display: null
-      display_options: null
-      field: sort
-      group: null
-      hidden: true
-      interface: null
-      note: null
-      options: null
-      readonly: false
-      required: false
-      sort: null
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: sort
-      table: apps_settings_by_role
-      data_type: integer
-      default_value: null
-      max_length: null
-      numeric_precision: 32
-      numeric_scale: 0
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: apps_translations
-    field: apps_id
-    type: integer
-    meta:
-      collection: apps_translations
-      conditions: null
-      display: null
-      display_options: null
-      field: apps_id
-      group: null
-      hidden: true
-      interface: null
-      note: null
-      options: null
-      readonly: false
-      required: false
-      sort: null
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: apps_id
-      table: apps_translations
-      data_type: integer
-      default_value: null
-      max_length: null
-      numeric_precision: 32
-      numeric_scale: 0
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: apps
-      foreign_key_column: id
-  - collection: apps_translations
-    field: content
-    type: text
-    meta:
-      collection: apps_translations
-      conditions: null
-      display: null
-      display_options: null
-      field: content
-      group: null
-      hidden: false
-      interface: input-multiline
-      note: null
-      options: null
-      readonly: false
-      required: false
-      sort: null
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: content
-      table: apps_translations
-      data_type: text
-      default_value: null
-      max_length: null
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: apps_translations
-    field: id
-    type: integer
-    meta:
-      collection: apps_translations
-      conditions: null
-      display: null
-      display_options: null
-      field: id
-      group: null
-      hidden: true
-      interface: null
-      note: null
-      options: null
-      readonly: false
-      required: false
-      sort: null
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: id
-      table: apps_translations
-      data_type: integer
-      default_value: nextval('apps_translations_id_seq'::regclass)
-      max_length: null
-      numeric_precision: 32
-      numeric_scale: 0
-      is_nullable: false
-      is_unique: true
-      is_primary_key: true
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: true
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: apps_translations
-    field: languages_code
-    type: string
-    meta:
-      collection: apps_translations
-      conditions: null
-      display: null
-      display_options: null
-      field: languages_code
-      group: null
-      hidden: true
-      interface: null
-      note: null
-      options: null
-      readonly: false
-      required: false
-      sort: null
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: languages_code
-      table: apps_translations
-      data_type: character varying
-      default_value: null
-      max_length: 255
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: languages
-      foreign_key_column: code
-  - collection: apps_translations
-    field: searchKeywords
-    type: json
-    meta:
-      collection: apps_translations
-      conditions: null
-      display: null
-      display_options: null
-      field: searchKeywords
-      group: null
-      hidden: false
-      interface: tags
-      note: null
-      options: null
-      readonly: false
-      required: false
-      sort: null
-      special:
-        - cast-json
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: searchKeywords
-      table: apps_translations
-      data_type: json
-      default_value: null
-      max_length: null
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: apps_translations
-    field: title
-    type: string
-    meta:
-      collection: apps_translations
-      conditions: null
-      display: null
-      display_options: null
-      field: title
-      group: null
-      hidden: false
-      interface: input
-      note: null
-      options: null
-      readonly: false
-      required: true
-      sort: null
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: title
-      table: apps_translations
-      data_type: character varying
-      default_value: null
-      max_length: 255
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
   - collection: authorization
     field: id
     type: integer
@@ -1690,6 +819,948 @@ fields:
       has_auto_increment: false
       foreign_key_table: languages
       foreign_key_column: code
+  - collection: features
+    field: authorization
+    type: integer
+    meta:
+      collection: features
+      conditions: null
+      display: null
+      display_options: null
+      field: authorization
+      group: null
+      hidden: false
+      interface: select-dropdown-m2o
+      note: null
+      options:
+        enableSelect: false
+        template: '{{type}}:{{roles}}'
+      readonly: false
+      required: false
+      sort: 7
+      special:
+        - m2o
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: authorization
+      table: features
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: true
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: authorization
+      foreign_key_column: id
+  - collection: features
+    field: icon
+    type: string
+    meta:
+      collection: features
+      conditions: null
+      display: null
+      display_options: null
+      field: icon
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: true
+      sort: 4
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: icon
+      table: features
+      data_type: character varying
+      default_value: warning
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: features
+    field: id
+    type: integer
+    meta:
+      collection: features
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: true
+      required: false
+      sort: 1
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: features
+      data_type: integer
+      default_value: nextval('features_id_seq'::regclass)
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: true
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: features
+    field: link
+    type: string
+    meta:
+      collection: features
+      conditions:
+        - name: if internal
+          rule:
+            _and:
+              - type:
+                  _eq: internal
+          readonly: true
+          hidden: true
+          options:
+            font: sans-serif
+            trim: false
+            masked: false
+            clear: false
+            slug: false
+      display: null
+      display_options: null
+      field: link
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 13
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: link
+      table: features
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: features
+    field: menu
+    type: string
+    meta:
+      collection: features
+      conditions: null
+      display: null
+      display_options: null
+      field: menu
+      group: null
+      hidden: false
+      interface: select-dropdown
+      note: null
+      options:
+        allowNone: true
+        choices:
+          - text: top
+            value: top
+          - text: tabs
+            value: tabs
+          - text: burger
+            value: burger
+          - text: service
+            value: service
+      readonly: false
+      required: false
+      sort: 6
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: menu
+      table: features
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: features
+    field: position
+    type: integer
+    meta:
+      collection: features
+      conditions: null
+      display: null
+      display_options: null
+      field: position
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 8
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: position
+      table: features
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: features
+    field: routerLink
+    type: string
+    meta:
+      collection: features
+      conditions:
+        - name: if internal
+          rule:
+            _and:
+              - type:
+                  _eq: internal
+          readonly: false
+          hidden: false
+          required: true
+          options:
+            font: sans-serif
+            trim: false
+            masked: false
+            clear: false
+            slug: false
+        - name: if external
+          rule:
+            _and:
+              - type:
+                  _eq: external
+          readonly: true
+          hidden: true
+          required: false
+          options:
+            font: sans-serif
+            trim: false
+            masked: false
+            clear: false
+            slug: false
+      display: null
+      display_options: null
+      field: routerLink
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 12
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: routerLink
+      table: features
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: features
+    field: settings_by_role
+    type: alias
+    meta:
+      collection: features
+      conditions: null
+      display: null
+      display_options: null
+      field: settings_by_role
+      group: null
+      hidden: false
+      interface: list-m2m
+      note: null
+      options: {}
+      readonly: false
+      required: false
+      sort: 9
+      special:
+        - m2m
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+  - collection: features
+    field: ssoService
+    type: string
+    meta:
+      collection: features
+      conditions:
+        - name: if internal
+          rule:
+            _and:
+              - type:
+                  _eq: internal
+          readonly: true
+          hidden: true
+          options:
+            font: sans-serif
+            trim: false
+            masked: false
+            clear: false
+            slug: false
+      display: null
+      display_options: null
+      field: ssoService
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 14
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: ssoService
+      table: features
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: features
+    field: status
+    type: string
+    meta:
+      collection: features
+      conditions: null
+      display: labels
+      display_options:
+        choices:
+          - text: Published
+            value: published
+            foreground: '#FFFFFF'
+            background: var(--primary)
+          - text: Draft
+            value: draft
+            foreground: '#18222F'
+            background: '#D3DAE4'
+          - text: Archived
+            value: archived
+            foreground: '#FFFFFF'
+            background: var(--warning)
+        showAsDot: true
+      field: status
+      group: null
+      hidden: false
+      interface: select-dropdown
+      note: null
+      options:
+        choices:
+          - text: Published
+            value: published
+          - text: Draft
+            value: draft
+          - text: Archived
+            value: archived
+      readonly: false
+      required: false
+      sort: 2
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: status
+      table: features
+      data_type: character varying
+      default_value: draft
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: features
+    field: translations
+    type: alias
+    meta:
+      collection: features
+      conditions: null
+      display: translations
+      display_options:
+        languageField: code
+        template: '{{title}}'
+      field: translations
+      group: null
+      hidden: false
+      interface: translations
+      note: null
+      options:
+        languageField: code
+      readonly: false
+      required: false
+      sort: 3
+      special:
+        - translations
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+  - collection: features
+    field: type
+    type: string
+    meta:
+      collection: features
+      conditions: null
+      display: null
+      display_options: null
+      field: type
+      group: null
+      hidden: false
+      interface: select-radio
+      note: null
+      options:
+        choices:
+          - text: internal
+            value: internal
+          - text: external
+            value: external
+      readonly: false
+      required: true
+      sort: 11
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: type
+      table: features
+      data_type: character varying
+      default_value: internal
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: features
+    field: widget
+    type: string
+    meta:
+      collection: features
+      conditions: null
+      display: null
+      display_options: null
+      field: widget
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 5
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: widget
+      table: features
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: features_settings_by_role
+    field: features_id
+    type: integer
+    meta:
+      collection: features_settings_by_role
+      conditions: null
+      display: null
+      display_options: null
+      field: features_id
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: features_id
+      table: features_settings_by_role
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: features
+      foreign_key_column: id
+  - collection: features_settings_by_role
+    field: id
+    type: integer
+    meta:
+      collection: features_settings_by_role
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: features_settings_by_role
+      data_type: integer
+      default_value: nextval('features_settings_by_role_id_seq'::regclass)
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: true
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: features_settings_by_role
+    field: settings_by_role_id
+    type: integer
+    meta:
+      collection: features_settings_by_role
+      conditions: null
+      display: null
+      display_options: null
+      field: settings_by_role_id
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: settings_by_role_id
+      table: features_settings_by_role
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: settings_by_role
+      foreign_key_column: id
+  - collection: features_settings_by_role
+    field: sort
+    type: integer
+    meta:
+      collection: features_settings_by_role
+      conditions: null
+      display: null
+      display_options: null
+      field: sort
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: sort
+      table: features_settings_by_role
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: features_translations
+    field: content
+    type: text
+    meta:
+      collection: features_translations
+      conditions: null
+      display: null
+      display_options: null
+      field: content
+      group: null
+      hidden: false
+      interface: input-multiline
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: content
+      table: features_translations
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: features_translations
+    field: features_id
+    type: integer
+    meta:
+      collection: features_translations
+      conditions: null
+      display: null
+      display_options: null
+      field: features_id
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: features_id
+      table: features_translations
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: features
+      foreign_key_column: id
+  - collection: features_translations
+    field: id
+    type: integer
+    meta:
+      collection: features_translations
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: features_translations
+      data_type: integer
+      default_value: nextval('features_translations_id_seq'::regclass)
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: true
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: features_translations
+    field: languages_code
+    type: string
+    meta:
+      collection: features_translations
+      conditions: null
+      display: null
+      display_options: null
+      field: languages_code
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: languages_code
+      table: features_translations
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: languages
+      foreign_key_column: code
+  - collection: features_translations
+    field: searchKeywords
+    type: json
+    meta:
+      collection: features_translations
+      conditions: null
+      display: null
+      display_options: null
+      field: searchKeywords
+      group: null
+      hidden: false
+      interface: tags
+      note: null
+      options:
+        alphabetize: true
+      readonly: false
+      required: false
+      sort: null
+      special:
+        - cast-json
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: searchKeywords
+      table: features_translations
+      data_type: json
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: features_translations
+    field: title
+    type: string
+    meta:
+      collection: features_translations
+      conditions: null
+      display: null
+      display_options: null
+      field: title
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: true
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: title
+      table: features_translations
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: important_news
     field: authorization
     type: integer
@@ -2110,930 +2181,6 @@ fields:
     schema:
       name: title
       table: important_news_translations
-      data_type: character varying
-      default_value: null
-      max_length: 255
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: info
-    field: authorization
-    type: integer
-    meta:
-      collection: info
-      conditions: null
-      display: null
-      display_options: null
-      field: authorization
-      group: null
-      hidden: false
-      interface: select-dropdown-m2o
-      note: null
-      options:
-        enableSelect: false
-        template: '{{type}}{{roles}}'
-      readonly: false
-      required: false
-      sort: 11
-      special:
-        - m2o
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: authorization
-      table: info
-      data_type: integer
-      default_value: null
-      max_length: null
-      numeric_precision: 32
-      numeric_scale: 0
-      is_nullable: true
-      is_unique: true
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: authorization
-      foreign_key_column: id
-  - collection: info
-    field: date_created
-    type: timestamp
-    meta:
-      collection: info
-      conditions: null
-      display: datetime
-      display_options:
-        relative: true
-      field: date_created
-      group: null
-      hidden: true
-      interface: datetime
-      note: null
-      options: null
-      readonly: true
-      required: false
-      sort: 1
-      special:
-        - date-created
-      translations: null
-      validation: null
-      validation_message: null
-      width: half
-    schema:
-      name: date_created
-      table: info
-      data_type: timestamp with time zone
-      default_value: null
-      max_length: null
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: info
-    field: date_updated
-    type: timestamp
-    meta:
-      collection: info
-      conditions: null
-      display: datetime
-      display_options:
-        relative: true
-      field: date_updated
-      group: null
-      hidden: true
-      interface: datetime
-      note: null
-      options: null
-      readonly: true
-      required: false
-      sort: 2
-      special:
-        - date-updated
-      translations: null
-      validation: null
-      validation_message: null
-      width: half
-    schema:
-      name: date_updated
-      table: info
-      data_type: timestamp with time zone
-      default_value: null
-      max_length: null
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: info
-    field: icon
-    type: string
-    meta:
-      collection: info
-      conditions: null
-      display: null
-      display_options: null
-      field: icon
-      group: null
-      hidden: false
-      interface: input
-      note: null
-      options: null
-      readonly: false
-      required: false
-      sort: null
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: icon
-      table: info
-      data_type: character varying
-      default_value: null
-      max_length: 255
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: info
-    field: id
-    type: integer
-    meta:
-      collection: info
-      conditions: null
-      display: null
-      display_options: null
-      field: id
-      group: null
-      hidden: true
-      interface: input
-      note: null
-      options: null
-      readonly: true
-      required: false
-      sort: 3
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: id
-      table: info
-      data_type: integer
-      default_value: nextval('info_id_seq'::regclass)
-      max_length: null
-      numeric_precision: 32
-      numeric_scale: 0
-      is_nullable: false
-      is_unique: true
-      is_primary_key: true
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: true
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: info
-    field: link
-    type: string
-    meta:
-      collection: info
-      conditions: null
-      display: null
-      display_options: null
-      field: link
-      group: null
-      hidden: false
-      interface: input
-      note: null
-      options: null
-      readonly: false
-      required: false
-      sort: 4
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: link
-      table: info
-      data_type: character varying
-      default_value: null
-      max_length: 255
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: info
-    field: menu
-    type: string
-    meta:
-      collection: info
-      conditions: null
-      display: null
-      display_options: null
-      field: menu
-      group: null
-      hidden: false
-      interface: select-dropdown
-      note: null
-      options:
-        choices:
-          - text: top
-            value: top
-          - text: tabs
-            value: tabs
-          - text: burger
-            value: burger
-          - text: service
-            value: service
-      readonly: false
-      required: false
-      sort: null
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: menu
-      table: info
-      data_type: character varying
-      default_value: null
-      max_length: 255
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: info
-    field: position
-    type: integer
-    meta:
-      collection: info
-      conditions: null
-      display: null
-      display_options: null
-      field: position
-      group: null
-      hidden: false
-      interface: input
-      note: null
-      options: null
-      readonly: false
-      required: false
-      sort: 6
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: position
-      table: info
-      data_type: integer
-      default_value: null
-      max_length: null
-      numeric_precision: 32
-      numeric_scale: 0
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: info
-    field: settings_by_role
-    type: alias
-    meta:
-      collection: info
-      conditions: null
-      display: null
-      display_options: null
-      field: settings_by_role
-      group: null
-      hidden: false
-      interface: list-m2m
-      note: null
-      options: {}
-      readonly: false
-      required: false
-      sort: null
-      special:
-        - m2m
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-  - collection: info
-    field: sort
-    type: integer
-    meta:
-      collection: info
-      conditions: null
-      display: null
-      display_options: null
-      field: sort
-      group: null
-      hidden: true
-      interface: input
-      note: null
-      options: null
-      readonly: false
-      required: false
-      sort: 7
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: sort
-      table: info
-      data_type: integer
-      default_value: null
-      max_length: null
-      numeric_precision: 32
-      numeric_scale: 0
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: info
-    field: ssoService
-    type: string
-    meta:
-      collection: info
-      conditions: null
-      display: null
-      display_options: null
-      field: ssoService
-      group: null
-      hidden: false
-      interface: input
-      note: null
-      options: null
-      readonly: false
-      required: false
-      sort: 5
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: ssoService
-      table: info
-      data_type: character varying
-      default_value: null
-      max_length: 255
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: info
-    field: status
-    type: string
-    meta:
-      collection: info
-      conditions: null
-      display: labels
-      display_options:
-        choices:
-          - text: $t:published
-            value: published
-            foreground: '#FFFFFF'
-            background: var(--primary)
-          - text: $t:draft
-            value: draft
-            foreground: '#18222F'
-            background: '#D3DAE4'
-          - text: $t:archived
-            value: archived
-            foreground: '#FFFFFF'
-            background: var(--warning)
-        showAsDot: true
-      field: status
-      group: null
-      hidden: false
-      interface: select-dropdown
-      note: null
-      options:
-        choices:
-          - text: $t:published
-            value: published
-          - text: $t:draft
-            value: draft
-          - text: $t:archived
-            value: archived
-      readonly: false
-      required: false
-      sort: 8
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: status
-      table: info
-      data_type: character varying
-      default_value: draft
-      max_length: 255
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: false
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: info
-    field: translations
-    type: alias
-    meta:
-      collection: info
-      conditions: null
-      display: translations
-      display_options:
-        languageField: code
-        template: '{{title}}{{content}}'
-      field: translations
-      group: null
-      hidden: false
-      interface: translations
-      note: null
-      options:
-        languageField: code
-        userLanguage: true
-      readonly: false
-      required: false
-      sort: 10
-      special:
-        - translations
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-  - collection: info
-    field: widget
-    type: string
-    meta:
-      collection: info
-      conditions: null
-      display: null
-      display_options: null
-      field: widget
-      group: null
-      hidden: false
-      interface: input
-      note: null
-      options: null
-      readonly: false
-      required: false
-      sort: 9
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: widget
-      table: info
-      data_type: character varying
-      default_value: null
-      max_length: 255
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: info_settings_by_role
-    field: id
-    type: integer
-    meta:
-      collection: info_settings_by_role
-      conditions: null
-      display: null
-      display_options: null
-      field: id
-      group: null
-      hidden: true
-      interface: null
-      note: null
-      options: null
-      readonly: false
-      required: false
-      sort: null
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: id
-      table: info_settings_by_role
-      data_type: integer
-      default_value: nextval('info_settings_by_role_id_seq'::regclass)
-      max_length: null
-      numeric_precision: 32
-      numeric_scale: 0
-      is_nullable: false
-      is_unique: true
-      is_primary_key: true
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: true
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: info_settings_by_role
-    field: info_id
-    type: integer
-    meta:
-      collection: info_settings_by_role
-      conditions: null
-      display: null
-      display_options: null
-      field: info_id
-      group: null
-      hidden: true
-      interface: null
-      note: null
-      options: null
-      readonly: false
-      required: false
-      sort: null
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: info_id
-      table: info_settings_by_role
-      data_type: integer
-      default_value: null
-      max_length: null
-      numeric_precision: 32
-      numeric_scale: 0
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: info
-      foreign_key_column: id
-  - collection: info_settings_by_role
-    field: settings_by_role_id
-    type: integer
-    meta:
-      collection: info_settings_by_role
-      conditions: null
-      display: null
-      display_options: null
-      field: settings_by_role_id
-      group: null
-      hidden: true
-      interface: null
-      note: null
-      options: null
-      readonly: false
-      required: false
-      sort: null
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: settings_by_role_id
-      table: info_settings_by_role
-      data_type: integer
-      default_value: null
-      max_length: null
-      numeric_precision: 32
-      numeric_scale: 0
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: settings_by_role
-      foreign_key_column: id
-  - collection: info_settings_by_role
-    field: sort
-    type: integer
-    meta:
-      collection: info_settings_by_role
-      conditions: null
-      display: null
-      display_options: null
-      field: sort
-      group: null
-      hidden: true
-      interface: null
-      note: null
-      options: null
-      readonly: false
-      required: false
-      sort: null
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: sort
-      table: info_settings_by_role
-      data_type: integer
-      default_value: null
-      max_length: null
-      numeric_precision: 32
-      numeric_scale: 0
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: info_translations
-    field: content
-    type: text
-    meta:
-      collection: info_translations
-      conditions: null
-      display: null
-      display_options: null
-      field: content
-      group: null
-      hidden: false
-      interface: input-multiline
-      note: null
-      options: null
-      readonly: false
-      required: false
-      sort: null
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: content
-      table: info_translations
-      data_type: text
-      default_value: null
-      max_length: null
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: info_translations
-    field: id
-    type: integer
-    meta:
-      collection: info_translations
-      conditions: null
-      display: null
-      display_options: null
-      field: id
-      group: null
-      hidden: true
-      interface: null
-      note: null
-      options: null
-      readonly: false
-      required: false
-      sort: null
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: id
-      table: info_translations
-      data_type: integer
-      default_value: nextval('info_translations_id_seq'::regclass)
-      max_length: null
-      numeric_precision: 32
-      numeric_scale: 0
-      is_nullable: false
-      is_unique: true
-      is_primary_key: true
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: true
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: info_translations
-    field: info_id
-    type: integer
-    meta:
-      collection: info_translations
-      conditions: null
-      display: null
-      display_options: null
-      field: info_id
-      group: null
-      hidden: true
-      interface: null
-      note: null
-      options: null
-      readonly: false
-      required: false
-      sort: null
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: info_id
-      table: info_translations
-      data_type: integer
-      default_value: null
-      max_length: null
-      numeric_precision: 32
-      numeric_scale: 0
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: info
-      foreign_key_column: id
-  - collection: info_translations
-    field: languages_code
-    type: string
-    meta:
-      collection: info_translations
-      conditions: null
-      display: null
-      display_options: null
-      field: languages_code
-      group: null
-      hidden: true
-      interface: null
-      note: null
-      options: null
-      readonly: false
-      required: false
-      sort: null
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: languages_code
-      table: info_translations
-      data_type: character varying
-      default_value: null
-      max_length: 255
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: languages
-      foreign_key_column: code
-  - collection: info_translations
-    field: searchKeywords
-    type: json
-    meta:
-      collection: info_translations
-      conditions: null
-      display: null
-      display_options: null
-      field: searchKeywords
-      group: null
-      hidden: false
-      interface: tags
-      note: null
-      options: null
-      readonly: false
-      required: false
-      sort: null
-      special:
-        - cast-json
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: searchKeywords
-      table: info_translations
-      data_type: json
-      default_value: null
-      max_length: null
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: info_translations
-    field: title
-    type: string
-    meta:
-      collection: info_translations
-      conditions: null
-      display: null
-      display_options: null
-      field: title
-      group: null
-      hidden: false
-      interface: input
-      note: null
-      options: null
-      readonly: false
-      required: true
-      sort: null
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: title
-      table: info_translations
       data_type: character varying
       default_value: null
       max_length: 255
@@ -3837,111 +2984,6 @@ fields:
       foreign_key_table: null
       foreign_key_column: null
 relations:
-  - collection: apps
-    field: authorization
-    related_collection: authorization
-    meta:
-      junction_field: null
-      many_collection: apps
-      many_field: authorization
-      one_allowed_collections: null
-      one_collection: authorization
-      one_collection_field: null
-      one_deselect_action: nullify
-      one_field: null
-      sort_field: null
-    schema:
-      table: apps
-      column: authorization
-      foreign_key_table: authorization
-      foreign_key_column: id
-      constraint_name: apps_authorization_foreign
-      on_update: NO ACTION
-      on_delete: SET NULL
-  - collection: apps_settings_by_role
-    field: apps_id
-    related_collection: apps
-    meta:
-      junction_field: settings_by_role_id
-      many_collection: apps_settings_by_role
-      many_field: apps_id
-      one_allowed_collections: null
-      one_collection: apps
-      one_collection_field: null
-      one_deselect_action: delete
-      one_field: settings_by_role
-      sort_field: sort
-    schema:
-      table: apps_settings_by_role
-      column: apps_id
-      foreign_key_table: apps
-      foreign_key_column: id
-      constraint_name: apps_settings_by_role_apps_id_foreign
-      on_update: NO ACTION
-      on_delete: CASCADE
-  - collection: apps_settings_by_role
-    field: settings_by_role_id
-    related_collection: settings_by_role
-    meta:
-      junction_field: apps_id
-      many_collection: apps_settings_by_role
-      many_field: settings_by_role_id
-      one_allowed_collections: null
-      one_collection: settings_by_role
-      one_collection_field: null
-      one_deselect_action: nullify
-      one_field: null
-      sort_field: null
-    schema:
-      table: apps_settings_by_role
-      column: settings_by_role_id
-      foreign_key_table: settings_by_role
-      foreign_key_column: id
-      constraint_name: apps_settings_by_role_settings_by_role_id_foreign
-      on_update: NO ACTION
-      on_delete: CASCADE
-  - collection: apps_translations
-    field: apps_id
-    related_collection: apps
-    meta:
-      junction_field: languages_code
-      many_collection: apps_translations
-      many_field: apps_id
-      one_allowed_collections: null
-      one_collection: apps
-      one_collection_field: null
-      one_deselect_action: nullify
-      one_field: translations
-      sort_field: null
-    schema:
-      table: apps_translations
-      column: apps_id
-      foreign_key_table: apps
-      foreign_key_column: id
-      constraint_name: apps_translations_apps_id_foreign
-      on_update: NO ACTION
-      on_delete: SET NULL
-  - collection: apps_translations
-    field: languages_code
-    related_collection: languages
-    meta:
-      junction_field: apps_id
-      many_collection: apps_translations
-      many_field: languages_code
-      one_allowed_collections: null
-      one_collection: languages
-      one_collection_field: null
-      one_deselect_action: nullify
-      one_field: null
-      sort_field: null
-    schema:
-      table: apps_translations
-      column: languages_code
-      foreign_key_table: languages
-      foreign_key_column: code
-      constraint_name: apps_translations_languages_code_foreign
-      on_update: NO ACTION
-      on_delete: SET NULL
   - collection: channels_translations
     field: channels_id
     related_collection: channels
@@ -3982,6 +3024,111 @@ relations:
       foreign_key_table: languages
       foreign_key_column: code
       constraint_name: channels_translations_languages_code_foreign
+      on_update: NO ACTION
+      on_delete: SET NULL
+  - collection: features
+    field: authorization
+    related_collection: authorization
+    meta:
+      junction_field: null
+      many_collection: features
+      many_field: authorization
+      one_allowed_collections: null
+      one_collection: authorization
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    schema:
+      table: features
+      column: authorization
+      foreign_key_table: authorization
+      foreign_key_column: id
+      constraint_name: features_authorization_foreign
+      on_update: NO ACTION
+      on_delete: CASCADE
+  - collection: features_settings_by_role
+    field: features_id
+    related_collection: features
+    meta:
+      junction_field: settings_by_role_id
+      many_collection: features_settings_by_role
+      many_field: features_id
+      one_allowed_collections: null
+      one_collection: features
+      one_collection_field: null
+      one_deselect_action: delete
+      one_field: settings_by_role
+      sort_field: sort
+    schema:
+      table: features_settings_by_role
+      column: features_id
+      foreign_key_table: features
+      foreign_key_column: id
+      constraint_name: features_settings_by_role_features_id_foreign
+      on_update: NO ACTION
+      on_delete: CASCADE
+  - collection: features_settings_by_role
+    field: settings_by_role_id
+    related_collection: settings_by_role
+    meta:
+      junction_field: features_id
+      many_collection: features_settings_by_role
+      many_field: settings_by_role_id
+      one_allowed_collections: null
+      one_collection: settings_by_role
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    schema:
+      table: features_settings_by_role
+      column: settings_by_role_id
+      foreign_key_table: settings_by_role
+      foreign_key_column: id
+      constraint_name: features_settings_by_role_settings_by_role_id_foreign
+      on_update: NO ACTION
+      on_delete: CASCADE
+  - collection: features_translations
+    field: features_id
+    related_collection: features
+    meta:
+      junction_field: languages_code
+      many_collection: features_translations
+      many_field: features_id
+      one_allowed_collections: null
+      one_collection: features
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: translations
+      sort_field: null
+    schema:
+      table: features_translations
+      column: features_id
+      foreign_key_table: features
+      foreign_key_column: id
+      constraint_name: features_translations_features_id_foreign
+      on_update: NO ACTION
+      on_delete: SET NULL
+  - collection: features_translations
+    field: languages_code
+    related_collection: languages
+    meta:
+      junction_field: features_id
+      many_collection: features_translations
+      many_field: languages_code
+      one_allowed_collections: null
+      one_collection: languages
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    schema:
+      table: features_translations
+      column: languages_code
+      foreign_key_table: languages
+      foreign_key_column: code
+      constraint_name: features_translations_languages_code_foreign
       on_update: NO ACTION
       on_delete: SET NULL
   - collection: important_news
@@ -4066,111 +3213,6 @@ relations:
       foreign_key_table: languages
       foreign_key_column: code
       constraint_name: important_news_translations_languages_code_foreign
-      on_update: NO ACTION
-      on_delete: SET NULL
-  - collection: info
-    field: authorization
-    related_collection: authorization
-    meta:
-      junction_field: null
-      many_collection: info
-      many_field: authorization
-      one_allowed_collections: null
-      one_collection: authorization
-      one_collection_field: null
-      one_deselect_action: nullify
-      one_field: null
-      sort_field: null
-    schema:
-      table: info
-      column: authorization
-      foreign_key_table: authorization
-      foreign_key_column: id
-      constraint_name: info_authorization_foreign
-      on_update: NO ACTION
-      on_delete: SET NULL
-  - collection: info_settings_by_role
-    field: info_id
-    related_collection: info
-    meta:
-      junction_field: settings_by_role_id
-      many_collection: info_settings_by_role
-      many_field: info_id
-      one_allowed_collections: null
-      one_collection: info
-      one_collection_field: null
-      one_deselect_action: delete
-      one_field: settings_by_role
-      sort_field: sort
-    schema:
-      table: info_settings_by_role
-      column: info_id
-      foreign_key_table: info
-      foreign_key_column: id
-      constraint_name: info_settings_by_role_info_id_foreign
-      on_update: NO ACTION
-      on_delete: CASCADE
-  - collection: info_settings_by_role
-    field: settings_by_role_id
-    related_collection: settings_by_role
-    meta:
-      junction_field: info_id
-      many_collection: info_settings_by_role
-      many_field: settings_by_role_id
-      one_allowed_collections: null
-      one_collection: settings_by_role
-      one_collection_field: null
-      one_deselect_action: nullify
-      one_field: null
-      sort_field: null
-    schema:
-      table: info_settings_by_role
-      column: settings_by_role_id
-      foreign_key_table: settings_by_role
-      foreign_key_column: id
-      constraint_name: info_settings_by_role_settings_by_role_id_foreign
-      on_update: NO ACTION
-      on_delete: CASCADE
-  - collection: info_translations
-    field: info_id
-    related_collection: info
-    meta:
-      junction_field: languages_code
-      many_collection: info_translations
-      many_field: info_id
-      one_allowed_collections: null
-      one_collection: info
-      one_collection_field: null
-      one_deselect_action: nullify
-      one_field: translations
-      sort_field: null
-    schema:
-      table: info_translations
-      column: info_id
-      foreign_key_table: info
-      foreign_key_column: id
-      constraint_name: info_translations_info_id_foreign
-      on_update: NO ACTION
-      on_delete: SET NULL
-  - collection: info_translations
-    field: languages_code
-    related_collection: languages
-    meta:
-      junction_field: info_id
-      many_collection: info_translations
-      many_field: languages_code
-      one_allowed_collections: null
-      one_collection: languages
-      one_collection_field: null
-      one_deselect_action: nullify
-      one_field: null
-      sort_field: null
-    schema:
-      table: info_translations
-      column: languages_code
-      foreign_key_table: languages
-      foreign_key_column: code
-      constraint_name: info_translations_languages_code_foreign
       on_update: NO ACTION
       on_delete: SET NULL
   - collection: pages_translations
