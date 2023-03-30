@@ -37,7 +37,7 @@ export class ScheduleListPage {
     const now = new Date();
     this.currentDay = formatDay(now);
     this.viewStartDate = startOfWeek(now, { weekStartsOn: 1 });
-    this.viewEndDate = add(this.viewStartDate, { days: 27 });
+    this.viewEndDate = this.scheduleService.getStateEndDate();
 
     this.subscriptions.push(schedule$.subscribe(() => {
       setTimeout(() => {

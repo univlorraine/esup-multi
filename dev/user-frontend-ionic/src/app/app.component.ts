@@ -1,6 +1,6 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { PageLayout, PageLayoutService, currentLanguage$ } from '@ul/shared';
+import { currentLanguage$, PageLayout, PageLayoutService } from '@ul/shared';
 import { Observable, Subscription } from 'rxjs';
 
 @Component({
@@ -29,7 +29,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // apply language saved in persistent state
-    this.subscriptions.push( currentLanguage$
+    this.subscriptions.push(currentLanguage$
       .subscribe(language => this.translateService.use(language || this.environment.defaultLanguage))
     );
   }

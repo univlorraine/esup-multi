@@ -82,8 +82,7 @@ export interface HiddenCourse {
 }
 
 const filterDefaultPlanning = (planning: Planning): boolean => planning.default === true;
-const mapPlanningId = (planning: Planning): string =>
-  planning.id;
+const mapPlanningId = (planning: Planning): string => planning.id;
 
 export interface SelectedPlanningProps {
   selectedPlanning: string[];

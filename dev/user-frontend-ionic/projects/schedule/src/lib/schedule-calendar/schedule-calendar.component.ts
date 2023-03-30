@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, Inject, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FullCalendarComponent } from '@fullcalendar/angular';
 import { Calendar, CalendarOptions } from '@fullcalendar/core';
@@ -96,7 +96,10 @@ export class ScheduleCalendarComponent {
   };
   private subscriptions: Subscription[] = [];
 
-  constructor(private route: ActivatedRoute,
+  constructor(
+    @Inject('environment')
+    private environment: any,
+    private route: ActivatedRoute,
     private scheduleCalendarService: ScheduleCalendarService,
     private scheduleService: ScheduleService,
     public platform: Platform) {
@@ -121,9 +124,9 @@ export class ScheduleCalendarComponent {
       this.dismissModal();
     }));
 
-      this.subscriptions.push(this.platform.resize.subscribe(async () => {
-        this.updateBreakpoints();
-      }));
+    this.subscriptions.push(this.platform.resize.subscribe(async () => {
+      this.updateBreakpoints();
+    }));
   }
 
   ionViewDidLeave() {
@@ -144,7 +147,12 @@ export class ScheduleCalendarComponent {
   initCalendar() {
     this.subscriptions.push(
       currentLanguage$.subscribe(lang => {
-        this.getCalendar().setOption('locale', lang);
+
+        if (!lang) {
+          this.getCalendar().setOption('locale', this.environment.defaultLanguage);
+        } else {
+          this.getCalendar().setOption('locale', lang);
+        }
 
         // fix a display bug from @fullcalendar/angular in Ionic
         setTimeout(
@@ -181,12 +189,12 @@ export class ScheduleCalendarComponent {
   }
 
   private updateBreakpoints() {
-      const isLandscape = this.platform.isLandscape();
-      const isDesktop = this.platform.is('desktop');
+    const isLandscape = this.platform.isLandscape();
+    const isDesktop = this.platform.is('desktop');
 
       const breakpoint = (isDesktop || !isLandscape) ? defaultBreakpoint : 0.7;
 
-      this.modal.initialBreakpoint = breakpoint;
-      this.modal.setCurrentBreakpoint(breakpoint);
+    this.modal.initialBreakpoint = breakpoint;
+    this.modal.setCurrentBreakpoint(breakpoint);
   }
 }
