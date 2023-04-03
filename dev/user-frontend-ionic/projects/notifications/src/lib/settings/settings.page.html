@@ -9,8 +9,13 @@
 </ion-header>
 <ng-container>
   <ion-content class="ion-padding">
-      <ion-list *ngIf="(channelsSubscriptions$ | async) as channelsSubscriptions">
-          <app-channel-subscription *ngFor="let channel of channelsSubscriptions" [channelSubscription]="channel"></app-channel-subscription>
+    <form [formGroup]="channelForm" *ngIf="(channelsSubscriptions$| async) as channelsSubscriptions">
+      <ion-list>
+        <ion-item *ngFor="let channelSubscription of channelsSubscriptions">
+          <ion-label>{{ channelSubscription.label }}</ion-label>
+          <ion-toggle [formControlName]="channelSubscription.code"></ion-toggle>
+        </ion-item>
       </ion-list>
+    </form>
   </ion-content>
 </ng-container>

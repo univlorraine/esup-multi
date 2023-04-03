@@ -78,25 +78,25 @@ export class NotificationsService {
       ));
   }
 
-  public subscribeOrUnsubscribeUserToChannel(options: { isSubscription: boolean; channelCode: string }): Observable<any> {
+  public subscribeOrUnsubscribeUserToChannels(options: { channelCodes: string[] }): Observable<any> {
     return getAuthToken().pipe(
       filter(authToken => authToken != null),
       switchMap(authToken => {
-        const url = `${this.environment.apiEndpoint}/notifications/channels/allow-or-disallow`;
+        const url = `${this.environment.apiEndpoint}/notifications/channels`;
         const data = {
           authToken,
-          channelCode: options.channelCode,
-          isSubscription: options.isSubscription
+          channelCodes: options.channelCodes,
         };
 
-        return this.http.post(url, data);
+        return this.http.patch(url, data);
       }
       ));
   }
 
   public markUnreadNotificationsAsRead(notificationIds: string[]): Observable<void> {
     return getAuthToken().pipe(
-      filter(authToken => authToken != null),
+      // On ne balance la requête au serveur que si la liste des notifications à marquer comme lues n'est pas vide
+      filter(authToken => authToken != null && notificationIds.length > 0),
       switchMap(authToken => {
         const url = `${this.environment.apiEndpoint}/notifications/read`;
         const data = {
@@ -109,11 +109,11 @@ export class NotificationsService {
     );
   }
 
-  private removeNotification(authToken: string, id: string) {
+  private removeNotification(authToken: string, notificationId: string) {
     const url = `${this.environment.apiEndpoint}/notifications/delete`;
     const data = {
       authToken,
-      id
+      notificationId
     };
 
     return this.http.delete(url, { body: data });

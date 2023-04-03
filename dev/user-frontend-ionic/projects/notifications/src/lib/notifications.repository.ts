@@ -148,17 +148,25 @@ export class NotificationsRepository {
     }));
   }
 
-  public subscribeChannel(channelCode: string){
+  public subscribeChannel(channelCode: string) {
     channelsStore.update((state) => ({
           ...state,
           unsubscribedChannels: state.unsubscribedChannels.filter((code) => code !== channelCode)
         }));
   }
 
-  public unsubscribeChannel(channelCode: string){
-    channelsStore.update((state) => ({
-          ...state,
-          unsubscribedChannels: [...state.unsubscribedChannels, channelCode]
-        }));
+  public unsubscribeChannel(channelCode: string) {
+    channelsStore.update(state => {
+      // On crée un nouveau set contenant les canaux actuels auxquels l'utilisateur est désabonné
+      const unsubscribedChannelsSet = new Set(state.unsubscribedChannels);
+      // On ajout le canal demandé à la liste
+      unsubscribedChannelsSet.add(channelCode);
+      // On retourne une nouvelle copie de l'ensemble en le convertissant en tableau grâce à l'opérateur
+      // de spread qui permet également de retirer les doublons au passage
+      return {
+        ...state,
+        unsubscribedChannels: [...unsubscribedChannelsSet],
+      }
+    });
   }
 }

@@ -23,11 +23,13 @@ export class NotificationOptionsComponent {
 
   public notifications$: Observable<Notification[]>;
   public notificationOptions$: Observable<NotificationOptions>;
+  unsubscribedChannels: string[] = [];
 
   constructor(public platform: Platform,
     private notificationsService: NotificationsService,
     public notificationRepository: NotificationsRepository
   ) {
+
     this.notificationOptions$ = combineLatest([
       this.notificationRepository.translatedChannels$,
       this.notificationRepository.unsubscribedChannels$,
@@ -35,6 +37,7 @@ export class NotificationOptionsComponent {
       map(([channels, unsubscribedChannels]) => {
         const channel = channels.find((c) => c.code === this.notification.channel);
         const isSubscribed = !unsubscribedChannels.includes(this.notification.channel);
+        this.unsubscribedChannels = unsubscribedChannels;
         return {
           filterable: channels.some(c => c.code === this.notification.channel && channel.filterable),
           channel,
@@ -63,9 +66,16 @@ export class NotificationOptionsComponent {
   }
 
   private onSubscribeOrUnsubscribeChannelClick(channelCode: string, isSubscription: boolean) {
-    this.notificationsService.subscribeOrUnsubscribeUserToChannel({
-      isSubscription,
-      channelCode
+    if (isSubscription === !this.unsubscribedChannels.includes(channelCode)) {
+      return;
+    } else if (isSubscription) {
+      this.unsubscribedChannels = this.unsubscribedChannels.filter((channel: string) => channel !== channelCode);
+    } else {
+      this.unsubscribedChannels.push(channelCode);
+    }
+
+    this.notificationsService.subscribeOrUnsubscribeUserToChannels({
+      channelCodes: this.unsubscribedChannels
     }).pipe(
       first()
     ).subscribe(() => {

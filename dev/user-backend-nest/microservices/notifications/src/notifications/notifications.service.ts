@@ -5,9 +5,15 @@ import { RpcException } from '@nestjs/microservices';
 import { catchError, map, Observable } from 'rxjs';
 import { DirectusApi, UlApi } from 'src/config/configuration.interface';
 import {
-  ChannelSubscriberQueryDto, DirectusChannelResultDto,
-  DirectusResponse, NotificationDeleteQueryDto,
-  NotificationResultDto, NotificationsMarkAsReadQueryDto, NotificationsQueryDto, UnsubscribedChannelsQueryDto, UnsubscribedChannelsResultDto
+  ChannelSubscriberQueryDto,
+  DirectusChannelResultDto,
+  DirectusResponse,
+  NotificationDeleteQueryDto,
+  NotificationResultDto,
+  NotificationsMarkAsReadQueryDto,
+  NotificationsQueryDto,
+  UnsubscribedChannelsQueryDto,
+  UnsubscribedChannelsResultDto,
 } from './notifications.dto';
 
 @Injectable()
@@ -108,7 +114,7 @@ export class NotificationsService {
       })
       .pipe(
         catchError((err) => {
-          const errorMessage = `Unable to delete user notification with id '${query.id}' and username '${query.login}''`;
+          const errorMessage = `Unable to delete user notification with id '${query.notificationId}' and username '${query.username}''`;
           this.logger.error(errorMessage, err);
           throw new RpcException(errorMessage);
         }),
@@ -118,7 +124,9 @@ export class NotificationsService {
       );
   }
 
-  markNotificationsAsRead(data: NotificationsMarkAsReadQueryDto): Observable<void> {
+  markNotificationsAsRead(
+    data: NotificationsMarkAsReadQueryDto,
+  ): Observable<void> {
     const url = `${this.ulApiConfig.notificationsUrl}/notifications/read`;
     return this.httpService
       .post<void>(url, data, {
@@ -138,18 +146,11 @@ export class NotificationsService {
       );
   }
 
-  subscribeOrUnsubscribeUserToChannel(
+  subscribeOrUnsubscribeUserToChannels(
     query: ChannelSubscriberQueryDto,
   ): Observable<number> {
-    const urlBase = `${this.ulApiConfig.notificationsUrl}/channels`;
-    const urlSuffix = query.isSubscription ? 'allow' : 'disallow';
-    const url = `${urlBase}/${urlSuffix}`;
-
-    const body = {
-      username: query.username,
-      channel: query.channelCode,
-    };
-
+    const url = `${this.ulApiConfig.notificationsUrl}/channels`;
+    const body = { ...query };
     const options = {
       headers: {
         Accept: 'application/json',
@@ -157,9 +158,11 @@ export class NotificationsService {
       },
     };
 
-    return this.httpService.post<any>(url, body, options).pipe(
+    return this.httpService.patch<any>(url, body, options).pipe(
       catchError((err) => {
-        const errorMessage = `Unable to '${urlSuffix}' channel with code '${query.channelCode} for user with username '${query.username}'`;
+        const errorMessage = `Unable to update unsubscribed channels ${JSON.stringify(
+          query.channels,
+        )} for user with username '${query.username}'`;
         this.logger.error(errorMessage, err);
         throw new RpcException(errorMessage);
       }),

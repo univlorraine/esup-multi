@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Inject,
+  Patch,
   Post,
   Request,
   UseGuards,
@@ -338,8 +339,8 @@ export class AppController {
               cmd: 'notificationsDelete',
             },
             {
-              id: body.id,
-              login: user.username,
+              notificationId: body.notificationId,
+              username: user.username,
             },
           ),
         ),
@@ -347,7 +348,7 @@ export class AppController {
   }
 
   @Get('/notifications/channels')
-  notificationsChannels(@Body() body) {
+  notificationsChannels() {
     return this.notificationsClient.send(
       {
         cmd: 'channels',
@@ -356,7 +357,7 @@ export class AppController {
     );
   }
 
-  @Post('/notifications/channels/allow-or-disallow')
+  @Patch('/notifications/channels')
   notificationsSubscribeUserToChannel(@Body() body) {
     return this.authClient
       .send(
@@ -373,8 +374,7 @@ export class AppController {
             },
             {
               username: user.username,
-              channelName: body.channelCode,
-              isSubscription: body.isSubscription,
+              channels: body.channelCodes,
             },
           ),
         ),
