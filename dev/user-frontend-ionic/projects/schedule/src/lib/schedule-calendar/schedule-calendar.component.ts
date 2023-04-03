@@ -192,9 +192,11 @@ export class ScheduleCalendarComponent {
     const isLandscape = this.platform.isLandscape();
     const isDesktop = this.platform.is('desktop');
 
-      const breakpoint = (isDesktop || !isLandscape) ? defaultBreakpoint : 0.7;
+      const breakpoint = (isDesktop || !isLandscape) ? defaultBreakpoint : 1;
 
-    this.modal.initialBreakpoint = breakpoint;
-    this.modal.setCurrentBreakpoint(breakpoint);
+      requestAnimationFrame(() => {
+        this.modal.initialBreakpoint = breakpoint;
+        this.modal.setCurrentBreakpoint(breakpoint);
+      })
   }
 }
