@@ -197,6 +197,6 @@ export class ScheduleCalendarComponent {
       requestAnimationFrame(() => {
         this.modal.initialBreakpoint = breakpoint;
         this.modal.setCurrentBreakpoint(breakpoint);
-      })
+      });
   }
 }

@@ -16,12 +16,7 @@
       <ion-label>{{menu.title}}</ion-label>
     </ion-item>
   </ion-list>
-  <ion-row *ngIf="(socialNetworks$ | async) as socialNetworks"
-    class="menu-section ion-padding ion-justify-content-center">
-    <ion-icon *ngFor="let social_network of socialNetworks" class="ion-padding" [name]="social_network.icon"
-      size="large" (click)="openExternalLink(social_network.link)">
-    </ion-icon>
-  </ion-row>
+    <app-widget class="menu-section ion-padding" [widgetId]="'social-network:social-network-widget'"></app-widget>
 </ion-content>
 <ion-footer *ngIf="languages.length > 1">
   <ion-row class="ion-justify-content-center">

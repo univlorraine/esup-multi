@@ -1,0 +1,5 @@
+<ion-row *ngIf="(socialNetworks$ | async) as socialNetworks" class="menu-section ion-padding ion-justify-content-center">
+  <ion-icon *ngFor="let social_network of socialNetworks" class="ion-padding" [name]="social_network.icon"
+    size="large" (click)="openExternalLink(social_network.link)">
+  </ion-icon>
+</ion-row>

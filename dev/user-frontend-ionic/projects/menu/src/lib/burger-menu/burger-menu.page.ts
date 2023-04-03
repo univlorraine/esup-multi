@@ -4,8 +4,6 @@ import { Network } from '@capacitor/network';
 import { MenuItem, MenuOpenerService, MenuService as SharedMenuService, setLanguage } from '@ul/shared';
 import { Observable } from 'rxjs';
 import { first, map } from 'rxjs/operators';
-import { MenuService } from '../menu.service';
-import { SocialNetwork, socialNetworks$ } from '../social-network.repository';
 
 @Component({
   selector: 'app-menu',
@@ -17,13 +15,11 @@ export class BurgerMenuPage {
   public dynamicMenuItems$: Observable<MenuItem[]>;
   public staticMenuItems$: Observable<MenuItem[]>;
   public languages: Array<string> = [];
-  public socialNetworks$: Observable<SocialNetwork[]> = socialNetworks$;
 
   constructor(
     @Inject('environment')
     private environment: any,
     private sharedMenuService: SharedMenuService,
-    private menuService: MenuService,
     public menuOpenerService: MenuOpenerService,
   ) {
     this.languages = this.environment.languages;
@@ -35,19 +31,8 @@ export class BurgerMenuPage {
     );
   }
 
-  async ionViewWillEnter() {
-    if (!(await Network.getStatus()).connected) {
-      return;
-    }
-    this.menuService.loadAndStoreSocialNetworks()
-      .pipe(first()).subscribe();
-  }
-
   useLanguage(language: string): void {
     setLanguage(language);
   }
 
-  async openExternalLink(link: string) {
-    await Browser.open({ url: link });
-  }
 }

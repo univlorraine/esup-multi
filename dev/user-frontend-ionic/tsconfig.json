@@ -54,6 +54,9 @@
       ],
       "@ul/static-pages": [
         "dist/static-pages"
+      ],
+      "@ul/social-network": [
+        "dist/social-network"
       ]
     },
     "downlevelIteration": true,

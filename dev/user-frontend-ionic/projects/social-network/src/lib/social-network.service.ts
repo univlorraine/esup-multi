@@ -7,13 +7,12 @@ import { setSocialNetworks, SocialNetwork } from './social-network.repository';
 @Injectable({
   providedIn: 'root'
 })
-export class MenuService {
+export class SocialNetworkService {
 
   constructor(
     @Inject('environment')
-    private environment: any,
-    private http: HttpClient) { }
-
+  private environment: any,
+  private http: HttpClient) { }
   public loadAndStoreSocialNetworks(): Observable<SocialNetwork[]> {
     const url = `${this.environment.apiEndpoint}/social-network`;
 
