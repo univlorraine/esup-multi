@@ -4,5 +4,4 @@
 
 export * from './lib/burger-menu/burger-menu.page';
 export * from './lib/menu.module';
-export * from './lib/menu.service';
 

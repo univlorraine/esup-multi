@@ -17,6 +17,7 @@ import { PreferencesPageModule } from '@ul/preferences';
 import { ReservationModule } from '@ul/reservation';
 import { RssPageModule } from '@ul/rss';
 import { ScheduleModule } from '@ul/schedule';
+import { SocialNetworkModule } from '@ul/social-network';
 import { ProjectModuleService, translationsLoaderFactory } from '@ul/shared';
 import { StaticPagesModule } from '@ul/static-pages';
 import { FeaturesModule } from '@ul/features';
@@ -87,6 +88,7 @@ import { PageLayoutsModule } from './page-layouts/page-layouts.module';
         deps: [HttpClient, ProjectModuleService]
       }
     }),
+    SocialNetworkModule
   ],
   providers: [
     { provide: 'environment', useValue: environment },
