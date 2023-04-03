@@ -2,8 +2,13 @@ import { Controller } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
 import { Observable } from 'rxjs';
 import {
-  ChannelSubscriberQueryDto, DirectusChannelResultDto, NotificationDeleteQueryDto,
-  NotificationResultDto, NotificationsMarkAsReadQueryDto, NotificationsQueryDto, UnsubscribedChannelsQueryDto
+  ChannelSubscriberQueryDto,
+  DirectusChannelResultDto,
+  NotificationDeleteQueryDto,
+  NotificationResultDto,
+  NotificationsMarkAsReadQueryDto,
+  NotificationsQueryDto,
+  UnsubscribedChannelsQueryDto,
 } from './notifications.dto';
 import { NotificationsService } from './notifications.service';
 
@@ -12,7 +17,9 @@ export class NotificationsController {
   constructor(private readonly notificationsService: NotificationsService) {}
 
   @MessagePattern({ cmd: 'notifications' })
-  getNotifications(data: NotificationsQueryDto): Observable<NotificationResultDto[]> {
+  getNotifications(
+    data: NotificationsQueryDto,
+  ): Observable<NotificationResultDto[]> {
     return this.notificationsService.getNotifications(data);
   }
 
@@ -22,7 +29,9 @@ export class NotificationsController {
   }
 
   @MessagePattern({ cmd: 'notificationsRead' })
-  markNotificationsAsRead(data: NotificationsMarkAsReadQueryDto): Observable<void> {
+  markNotificationsAsRead(
+    data: NotificationsMarkAsReadQueryDto,
+  ): Observable<void> {
     return this.notificationsService.markNotificationsAsRead(data);
   }
 
@@ -39,9 +48,9 @@ export class NotificationsController {
   }
 
   @MessagePattern({ cmd: 'channelsAllowOrDisallow' })
-  subscribeOrUnsubscribeUserToChannel(
+  subscribeOrUnsubscribeUserToChannels(
     data: ChannelSubscriberQueryDto,
   ): Observable<number> {
-    return this.notificationsService.subscribeOrUnsubscribeUserToChannel(data);
+    return this.notificationsService.subscribeOrUnsubscribeUserToChannels(data);
   }
 }

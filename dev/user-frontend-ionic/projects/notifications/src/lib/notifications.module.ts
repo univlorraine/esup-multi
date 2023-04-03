@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { APP_INITIALIZER, ModuleWithProviders, NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Capacitor } from '@capacitor/core';
 import { Device } from '@capacitor/device';
 import { PushNotifications, PushNotificationSchema, Token } from '@capacitor/push-notifications';
@@ -13,7 +13,6 @@ import { NotificationsRoutingModule } from './notifications-routing.module';
 import { NotificationsModuleConfig, NOTIFICATIONS_CONFIG } from './notifications.config';
 import { NotificationsPage } from './notifications.page';
 import { NotificationsRepository } from './notifications.repository';
-import { ChannelSubscriptionComponent } from './settings/channel-subscription/channel-subscription.component';
 import { SettingsPage } from './settings/settings.page';
 
 
@@ -31,6 +30,7 @@ const initModule = (projectModuleService: ProjectModuleService,
 @NgModule({
   imports: [
     CommonModule,
+    FormsModule,
     IonicModule,
     NotificationsRoutingModule,
     TranslateModule,
@@ -40,7 +40,6 @@ const initModule = (projectModuleService: ProjectModuleService,
   declarations: [
     NotificationsPage,
     CompleteLocalDateAndTimePipe,
-    ChannelSubscriptionComponent,
     SettingsPage,
     NotificationOptionsComponent
   ],

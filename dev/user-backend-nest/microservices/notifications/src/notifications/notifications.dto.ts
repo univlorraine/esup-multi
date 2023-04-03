@@ -22,8 +22,8 @@ export interface NotificationsMarkAsReadQueryDto {
 }
 
 export interface NotificationDeleteQueryDto {
-  id: number;
-  login: string;
+  notificationId: string;
+  username: string;
 }
 
 export interface UnsubscribedChannelsQueryDto {
@@ -36,8 +36,7 @@ export interface UnsubscribedChannelsResultDto {
 
 export interface ChannelSubscriberQueryDto {
   username: string;
-  channelCode: string;
-  isSubscription: boolean;
+  channels: string[];
 }
 
 export interface DirectusChannelResultDto {

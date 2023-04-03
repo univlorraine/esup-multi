@@ -2,7 +2,7 @@ import { Component, Inject, OnDestroy, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { InfiniteScrollCustomEvent, IonContent, IonModal, Platform } from '@ionic/angular';
 import { PageLayoutService } from '@ul/shared';
-import { combineLatest, Observable, Subscription,  } from 'rxjs';
+import { combineLatest, Observable, Subscription } from 'rxjs';
 import { catchError, finalize, first, map, filter, mergeMap, startWith } from 'rxjs/operators';
 import { NotificationsModuleConfig, NOTIFICATIONS_CONFIG } from './notifications.config';
 import { Channel,
