@@ -1,0 +1,27 @@
+[
+	{
+		"icon": "logo-facebook",
+		"link": "https://www.facebook.com/UnivLorraine",
+		"title": "facebook"
+	},
+	{
+		"icon": "logo-twitter",
+		"link": "https://twitter.com/univ_Lorraine",
+		"title": "twitter"
+	},
+	{
+		"icon": "logo-instagram",
+		"link": "https://www.linkedin.com/company/universit-de-lorraine",
+		"title": "instagram"
+	},
+	{
+		"icon": "logo-linkedin",
+		"link": "https://www.linkedin.com/company/universit-de-lorraine/",
+		"title": "linkedin"
+	},
+	{
+		"icon": "logo-twitch",
+		"link": "https://www.twitch.tv/vie_etudiante_ul",
+		"title": "Twitch"
+	}
+]
