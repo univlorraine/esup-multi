@@ -5,14 +5,14 @@ import { IonicModule } from '@ionic/angular';
 import { EffectsNgModule } from '@ngneat/effects-ng';
 import { TranslateModule } from '@ngx-translate/core';
 import { ProjectModuleService, SharedComponentsModule } from '@ul/shared';
-import { ServiceComponent } from './pages/services/service/service.component';
-import { ServicesPage } from './pages/services/services.page';
-import { WidgetInternalFeatureComponent } from './pages/widgets/widget/widget-internal-feature/widget-internal-feature.component';
-import { WidgetExternalFeatureComponent } from './pages/widgets/widget/widget-external-feature/widget-external-feature.component';
-import { WidgetComponent } from './pages/widgets/widget/widget.component';
-import { WidgetsPage } from './pages/widgets/widgets.page';
 import { FeaturesRoutingModule } from './features-routing.module';
 import { FeaturesEffects } from './features.effects';
+import { ServiceComponent } from './pages/services/service/service.component';
+import { ServicesPage } from './pages/services/services.page';
+import { WidgetExternalFeatureComponent } from './pages/widgets/widget/widget-external-feature/widget-external-feature.component';
+import { WidgetInternalFeatureComponent } from './pages/widgets/widget/widget-internal-feature/widget-internal-feature.component';
+import { WidgetComponent } from './pages/widgets/widget/widget.component';
+import { WidgetsPage } from './pages/widgets/widgets.page';
 
 const initModule = (projectModuleService: ProjectModuleService) =>
   () => projectModuleService.initProjectModule({
@@ -26,7 +26,7 @@ const initModule = (projectModuleService: ProjectModuleService) =>
       type: 'tabs:start',
     },{
       title: 'FEATURES.MENU.SERVICES',
-      icon: 'apps-sharp',
+      icon: 'services',
       position: -900,
       routerLink: `${FeaturesModule.routerLink}/services`,
       type: 'tabs:start',

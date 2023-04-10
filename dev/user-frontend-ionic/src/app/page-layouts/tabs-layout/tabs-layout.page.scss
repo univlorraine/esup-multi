@@ -1,3 +1,20 @@
 .logo {
-    height: 2rem;
+  transform: translateY(0.1rem);
+}
+
+.short-title {
+  margin-top: 0.2rem;
+}
+
+ion-icon {
+  font-size: var(--icon-4-size);
+  color: var(--ion-color-primary-contrast);
+}
+
+.last-button {
+  color: var(--ion-color-secondary);
+
+  ion-icon {
+    color: var(--ion-color-secondary);
+  }
 }

@@ -16,7 +16,7 @@ const initModule = (projectModuleService: ProjectModuleService) =>
     menuItems: [{
       title: 'PREFERENCES.MENU',
       icon: 'settings',
-      position: 900,
+      position: 999,
       routerLink: PreferencesPageModule.routerLink,
       type: 'burger',
     }]

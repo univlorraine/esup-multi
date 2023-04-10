@@ -20,6 +20,7 @@ interface Translation {
   // eslint-disable-next-line @typescript-eslint/naming-convention
   languages_code: string;
   title: string;
+  shortTitle?: string;
   content?: string;
   searchKeywords?: string[];
 }

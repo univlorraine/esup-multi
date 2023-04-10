@@ -28,6 +28,18 @@
 /* leaflet for map module */
 @import "~leaflet/dist/leaflet.css";
 
+/* Custom CSS variables theming */
+@import "./theme/app-theme-variables.scss";
+
+/* Font CSS classes */
+@import "./theme/fonts/fonts.scss";
+
+/* Icons CSS classes */
+@import "./theme/icons/icons.scss";
+
+/* Logos CSS classes */
+@import "./theme/logos/logos.scss";
+
 body.scanner-active {
     --background: transparent;
     --ion-background-color: transparent;

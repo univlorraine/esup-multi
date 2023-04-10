@@ -159,3 +159,40 @@ npm run module:build-all
 - [Module preferences](dev/user-frontend-ionic/projects/preferences/README.md)
 - [Module map](dev/user-frontend-ionic/projects/map/README.md)
 - [Module contact](dev/user-frontend-ionic/projects/contact/README.md)
+
+## Personnalisation du style de l'application
+
+### Thème de l'application
+
+Le thème de l'application est défini dans les fichiers suivants :
+
+- **src/theme/variable.scss** : Fichier de configuration Ionic des couleurs du thème. Il contient les couleurs utilisées dans l'application sous forme de variable CSS (Thème "Light" et "Dark").
+
+- **src/theme/app-theme-variables.scss** : Contient les variables CSS custom pour personnaliser l'application. Modifiez les valeurs des variables dans ce fichier et les changements seront pris en compte automatiquement dans toute l'application.
+
+Ces variables ne sont à utiliser que dans les fichiers suivant pour paramètrer les classes CSS correspondantes : 
+
+- **src/theme/icons** : Contient les classes CSS utilisées dans toutes les balises ```<ion-icon>```.
+
+- **src/theme/logos** : Contient les classes CSS utilisées dans toutes les balises balises ```<img>```.
+
+- **src/theme/fonts** : Contient les classes CSS utilisées dans toutes les balises contenant du texte.
+
+Exception : les variables de type "Boxes" définies dans app-theme-variables.scss peuvent être utilisées directement dans les SCSS des modules en raison de la complexité d'un design de boîte (exemple : ```border-width : var(--app-ma-variable-de-bordure);```). Il n'y a donc pas de classe CSS globale pour ce type de variable, mais toute modification de leurs valeurs aura un impact sur l'ensemble de l'application là où elles sont utilisées.
+
+### Modifier ou ajouter des icônes personnalisés.
+
+Un mécanisme a été mis en place pour permettre l'ajout d'icônes et les utiliser comme des icônes natives Ionic. Par exemple : ```<ion-icon name="[nom-icône]">```, où ```[nom-icône]``` représente simplement le nom du fichier SVG.
+
+Pour modifier les icônes de l'application présentes dans le dossier ```src/assets/icon```, veuillez renommer la nouvelle icône avec le même nom que celle que vous souhaitez remplacer. Supprimez les attributs ```fill``` de votre SVG (dans les balises ```<svg>``` et ```<path>```) afin que les couleurs définies dans l'application puissent s'appliquer à l'icône.
+
+Vous pouvez également ajouter de nouvelles icônes aux dossiers déjà présents dans src/assets/icon.
+
+Pour ajouter un nouveau dossier d'icônes, modifiez angular.json en ajoutant à la propriété ```projects.app.architect.build.assets``` l'objet suivant :
+
+```
+  { "glob": "**/*.svg",
+    "input": "src/assets/icon/[Nom du dossier]",
+    "output": "./svg"
+  }
+```

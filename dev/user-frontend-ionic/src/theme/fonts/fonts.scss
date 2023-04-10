@@ -1,0 +1,50 @@
+// // // CSS classes (Use this css classes in HTML on every text tags throughout the app).
+
+// // // ---------------------
+// // // Title level 
+// // // ---------------------
+
+.app-title-1 {
+    font-size: var(--app-title-1-size) !important;
+    font-family: var(--app-font-primary-static-bold) !important;
+}
+
+.app-title-2 {
+    font-size: var(--app-title-2-size) !important;
+    font-family: var(--app-font-primary-static-bold) !important;
+}
+
+.app-title-3 {
+    font-size: var(--app-title-3-size) !important;
+    font-family: var(--app-font-primary-static-light) !important;
+}
+
+.app-title-4 {
+    font-size: var(--app-title-4-size) !important;
+    font-family: var(--app-font-primary-static-light) !important;
+}
+
+// // // ---------------------
+// // // Text level
+// // // ---------------------
+
+.app-text-1 {
+    font-size: var(--app-text-1-size) !important;
+    font-family: var(--app-font-secondary) !important;
+    font-weight: 800 !important;
+}
+
+.app-text-2 {
+    font-size: var(--app-text-2-size) !important;
+    font-family: var(--app-font-secondary) !important;
+}
+
+.app-text-3 {
+    font-size: var(--app-text-3-size) !important;
+    font-family: var(--app-font-secondary) !important;
+}
+
+.app-text-4 {
+    font-size: var(--app-text-4-size) !important;
+    font-family: var(--app-font-secondary) !important;
+}

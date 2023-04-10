@@ -31,6 +31,7 @@ export type MenuItemLink = MenuItemRouterLink | MenuItemExternalLink | MenuItemS
 export interface MenuItem {
     icon: string;
     title: string;
+    shortTitle?: string;
     link: MenuItemLink;
     type: MenuItemType;
 }

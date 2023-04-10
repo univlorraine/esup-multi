@@ -1,8 +1,34 @@
-.menu-section:after {
-    content: "";
-    display: block;
-    margin: 0 auto;
-    width: 90%; /* Change this to whatever width you want. */
-    padding-top: 1rem;
-    border-bottom: 0.15rem solid black; /* This creates the border. Replace black with whatever color you want. */
+.menu-section {
+    border-bottom: var(--app-border-4-width) solid var(--ion-color-primary);
+
+    &:last-of-type {
+        border-bottom: none;
+    }
+}
+
+.menu-section.ios {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.multi-auth-widget {
+    border-bottom: var(--app-border-2-width) solid var(--ion-color-secondary);
+}
+
+ion-item.md {
+    padding-left: 0.7rem;
+}
+
+ion-item.ios {
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+    padding-left: 0.5rem !important;
+}
+
+ion-label.ios {
+    padding-left: 0.5rem;
+}
+
+ion-icon {
+  color: var(--ion-color-primary);
 }
