@@ -166,7 +166,7 @@ export class NotificationsRepository {
       return {
         ...state,
         unsubscribedChannels: [...unsubscribedChannelsSet],
-      }
+      };
     });
   }
 }

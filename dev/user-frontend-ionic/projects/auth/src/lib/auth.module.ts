@@ -18,8 +18,8 @@ const initModule = (projectModuleService: ProjectModuleService) =>
     translation: true,
     menuItems: [{
       title: 'AUTH.MENU',
-      icon: 'log-in',
-      position: 999,
+      icon: 'deconnect',
+      position: 900,
       routerLink: AuthModule.routerLink,
       type: 'burger'
     }],

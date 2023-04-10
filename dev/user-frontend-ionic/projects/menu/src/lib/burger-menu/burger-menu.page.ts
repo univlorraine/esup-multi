@@ -1,9 +1,7 @@
 import { Component, Inject } from '@angular/core';
-import { Browser } from '@capacitor/browser';
-import { Network } from '@capacitor/network';
 import { MenuItem, MenuOpenerService, MenuService as SharedMenuService, setLanguage } from '@ul/shared';
 import { Observable } from 'rxjs';
-import { first, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-menu',

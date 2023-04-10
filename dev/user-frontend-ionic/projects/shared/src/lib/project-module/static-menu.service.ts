@@ -4,6 +4,7 @@ export type StaticMenuType = 'tabs:start' | 'tabs:end' | 'burger';
 
 export interface StaticMenuItem {
     title: string;
+    shortTitle?: string;
     icon: string;
     position: number;
     routerLink: string;

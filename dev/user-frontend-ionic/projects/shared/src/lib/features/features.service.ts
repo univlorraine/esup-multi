@@ -1,17 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, combineLatest } from 'rxjs';
-import { Feature, FeatureType, features$, FeatureMenuType, setFeatures } from './features.repository';
+import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { first, map, share, switchMap, tap } from 'rxjs/operators';
-import { currentLanguage$ } from '../i18n/i18n.repository';
-import { Authorization } from '../authorization/authorization.helper';
 import { getAuthToken } from '../auth/auth.repository';
+import { Authorization } from '../authorization/authorization.helper';
+import { currentLanguage$ } from '../i18n/i18n.repository';
+import { Feature, FeatureMenuType, features$, FeatureType, setFeatures } from './features.repository';
 
 interface TranslatedFeatureCommon {
   id: string;
   type: FeatureType;
   widget: string;
   title: string;
+  shortTitle?: string;
   content?: string;
   authorization?: Authorization;
   searchKeywords?: string[];
@@ -85,6 +86,7 @@ export class FeaturesService {
       return {
         ...feature,
         title: translation.title,
+        shortTitle: translation.shortTitle,
         content: translation.content,
         searchKeywords: translation.searchKeywords
       };

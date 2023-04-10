@@ -1,6 +1,6 @@
 [
 	{
-		"icon": "logo-facebook",
+		"icon": "facebook",
 		"link": "https://www.facebook.com/UnivLorraine",
 		"title": "facebook"
 	},
@@ -10,12 +10,12 @@
 		"title": "twitter"
 	},
 	{
-		"icon": "logo-instagram",
+		"icon": "instagram",
 		"link": "https://www.linkedin.com/company/universit-de-lorraine",
 		"title": "instagram"
 	},
 	{
-		"icon": "logo-linkedin",
+		"icon": "linkedin",
 		"link": "https://www.linkedin.com/company/universit-de-lorraine/",
 		"title": "linkedin"
 	},

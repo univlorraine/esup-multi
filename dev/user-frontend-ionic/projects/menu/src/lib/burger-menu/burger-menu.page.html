@@ -1,27 +1,43 @@
 <ion-content>
-  <ion-list lines="none" class="menu-section ion-padding">
+
+  <!--Futur Auth widget  -->
+  <ion-grid class="ion-text-center ion-padding-top ion-padding-bottom multi-auth-widget">
+    <ion-col>
+      <ion-label>
+        <h1 class="app-title-1">JOHN DOE</h1>
+        <h3 class="app-title-4">Université de Lorraine</h3>
+      </ion-label>
+    </ion-col>
+  </ion-grid>
+
+  <ion-list lines="none" class="menu-section">
+    <ion-item button *ngFor="let menu of (staticMenuItems$ | async)" (click)="menuOpenerService.open(menu)">
+
+      <ion-icon class="app-icon-4" name="{{menu.icon}}" slot="start"></ion-icon>
+      <ion-label class="app-title-3">{{menu.title | translate}}</ion-label>
+    </ion-item>
+  </ion-list>
+  <!-- End of futur Auth widget  -->
+
+  <ion-list lines="none" class="menu-section">
     <app-widget [widgetId]="'static-pages:static-pages-widget'"></app-widget>
   </ion-list>
 
-  <ion-list lines="none" class="menu-section ion-padding">
-    <ion-item button *ngFor="let menu of (staticMenuItems$ | async)" (click)="menuOpenerService.open(menu)">
-      <ion-icon name="{{menu.icon}}" slot="start"></ion-icon>
-      <ion-label>{{menu.title | translate}}</ion-label>
+  <ion-list lines="none" class="menu-section">
+    <ion-item button *ngFor="let menu of (dynamicMenuItems$ | async)" (click)="menuOpenerService.open(menu)">
+      <ion-icon class="app-icon-4" name="{{menu.icon}}" slot="start"></ion-icon>
+      <ion-label class="app-title-3">{{menu.title}}</ion-label>
     </ion-item>
   </ion-list>
 
-  <ion-list lines="none" class="menu-section ion-padding">
-    <ion-item button *ngFor="let menu of (dynamicMenuItems$ | async)" (click)="menuOpenerService.open(menu)">
-      <ion-icon name="{{menu.icon}}" slot="start"></ion-icon>
-      <ion-label>{{menu.title}}</ion-label>
-    </ion-item>
-  </ion-list>
-    <app-widget class="menu-section ion-padding" [widgetId]="'social-network:social-network-widget'"></app-widget>
+  <app-widget class="menu-section" [widgetId]="'social-network:social-network-widget'"></app-widget>
+
 </ion-content>
+
 <ion-footer *ngIf="languages.length > 1">
   <ion-row class="ion-justify-content-center">
     <ion-button *ngFor="let language of languages" fill="clear" (click)="useLanguage(language)">
-      <ion-icon src="{{'/assets/icon/flags/' + language + '.svg'}}"></ion-icon>
+      <ion-icon name="{{language}}"></ion-icon>
     </ion-button>
   </ion-row>
 </ion-footer>

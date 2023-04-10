@@ -108,6 +108,31 @@
                 "glob": "**/*",
                 "input": "projects/chatbot/assets/i18n",
                 "output": "/assets/i18n/chatbot"
+              },
+                {
+                "glob": "**/*.svg",
+                "input": "src/assets/icon/flag",
+                "output": "./svg"
+              },
+              {
+                "glob": "**/*.svg",
+                "input": "src/assets/icon/features",
+                "output": "./svg"
+              },
+              {
+                "glob": "**/*.svg",
+                "input": "src/assets/icon/navigation",
+                "output": "./svg"
+              },
+              {
+                "glob": "**/*.svg",
+                "input": "src/assets/icon/social-network",
+                "output": "./svg"
+              },
+              {
+                "glob": "**/*.svg",
+                "input": "src/assets/icon/static-pages",
+                "output": "./svg"
               }
             ],
             "styles": ["src/theme/variables.scss", "src/global.scss"],

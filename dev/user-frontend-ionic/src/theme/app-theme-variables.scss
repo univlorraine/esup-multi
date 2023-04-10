@@ -1,0 +1,114 @@
+@font-face {
+    font-family: "MavenProVariableFont";
+    src: url('../assets/font/Maven_Pro/MavenPro-VariableFont_wght.ttf');
+}
+
+@font-face {
+    font-family: 'RobotoCondensedRegular';
+    src: url('../assets/font/Roboto_Condensed/RobotoCondensed-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'RobotoCondensedBold';
+    src: url('../assets/font/Roboto_Condensed/RobotoCondensed-Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'RobotoCondensedLight';
+    src: url('../assets/font/Roboto_Condensed/RobotoCondensed-Light.ttf') format('truetype');
+}
+
+
+:root {
+
+    // // // ---------------------
+    // // // Font CSS variables (Change value here but use variables only in this file).
+    // // // ---------------------
+
+
+    // // // Font family definition variables
+
+
+    --app-font-family-base: 'RobotoCondensedRegular',
+        sans-serif;
+
+    // Set base font to gloabl application
+    --ion-font-family: var(--app-font-family-base), sans-serif;
+
+    // This next font have static weight in multiple files : 
+    --app-font-primary-static-regular: 'RobotoCondensedRegular',
+        sans-serif;
+    --app-font-primary-static-bold: 'RobotoCondensedBold',
+        sans-serif;
+    --app-font-primary-static-light: 'RobotoCondensedLight',
+        sans-serif;
+
+    // MavenPro is a weight dynamic font  (one file for multiple weight), 
+    // if your font-family is static you must to do like the static font method above
+    // exemple : --app-font-secondary-regular, ...
+    --app-font-secondary: 'MavenProVariableFont',
+        sans-serif;
+
+
+    // // // ---------------------
+    // // // Title size variables (Change value here but use variables only in theme/fonts/fonts.scss)
+    // // // ---------------------
+
+    --app-title-1-size: 1.5rem;
+    --app-title-2-size: 1.325rem;
+    --app-title-3-size: 1.1rem;
+    --app-title-4-size: 1rem;
+    --app-title-5-size: 0.75rem;
+
+
+    // // // ---------------------
+    // // // Texte size variables (Change value here but use variables only in theme/fonts/fonts.scss)
+    // // // ---------------------
+
+    --app-text-1-size: 1.5rem;
+    --app-text-2-size: 1.325rem;
+    --app-text-3-size: 1rem;
+    --app-text-4-size: 0.875rem;
+
+
+    // // ---------------------
+    // // Icon size variables (Change value here but use variables only in theme/icons/icons.scss)
+    // // ---------------------
+
+    --icon-1-size: 2rem !important;
+    --icon-2-size: 1.75rem !important;
+    --icon-3-size: 1.5rem !important;
+    --icon-4-size: 1.25rem !important;
+
+    // // ---------------------
+    // // Logo size variables (Change value here but use variables only in theme/logos/logos.scss)
+    // // ---------------------
+
+    --logo-1-size: 5rem;
+    --logo-2-size: 4rem;
+    --logo-3-size: 3rem;
+    --logo-4-size: 2rem;
+    --logo-5-size: 1rem;
+
+
+    // // ---------------------
+    // Box styling variables (Change value here and use variables in SCSS files on all CSS classes needed throughout the app)
+    // Example usage: border: var(--app-border-3-width) solid var(--ion-color-primary);
+    // // ---------------------
+
+    // // // Border width variables
+
+    --app-border-1-width: 0.4rem;
+    --app-border-2-width: 0.3rem;
+    --app-border-3-width: 0.2rem;
+    --app-border-4-width: 0.1rem;
+
+    // // // ---------------------
+    // // // Radius level variables
+    // // // ---------------------
+
+    --app-border-1-radius: 2rem;
+    --app-border-2-radius: 1rem;
+    --app-border-3-radius: 0.5rem;
+    --app-border-4-radius: 0.25rem;
+}

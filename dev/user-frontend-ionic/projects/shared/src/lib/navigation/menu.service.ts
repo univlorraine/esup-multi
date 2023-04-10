@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { ProjectModuleService } from '../project-module/project-module.service';
-import { FeaturesService, TranslatedInternalFeature, TranslatedExternalFeature, TranslatedFeature } from '../features/features.service';
 import { FeatureType } from '../features/features.repository';
-import { StaticMenuType, StaticMenuItem } from '../project-module/static-menu.service';
+import { FeaturesService, TranslatedExternalFeature, TranslatedFeature, TranslatedInternalFeature } from '../features/features.service';
+import { ProjectModuleService } from '../project-module/project-module.service';
+import { StaticMenuItem, StaticMenuType } from '../project-module/static-menu.service';
 import { MenuItem, MenuItemLink, MenuItemLinkType } from './menu.model';
 
 
@@ -98,6 +98,7 @@ export class MenuService {
       return {
         icon: staticMenuItem.icon,
         title: staticMenuItem.title,
+        shortTitle: staticMenuItem.shortTitle,
         link: {
             type: MenuItemLinkType.router,
             routerLink: staticMenuItem.routerLink
@@ -110,6 +111,7 @@ export class MenuService {
       return {
         icon: app.icon,
         title: app.title,
+        shortTitle: app.shortTitle,
         link: {
           type: MenuItemLinkType.router,
           routerLink: app.routerLink
@@ -134,6 +136,7 @@ export class MenuService {
       return {
         icon: app.icon,
         title: app.title,
+        shortTitle: app.shortTitle,
         link,
         type: 'dynamic',
       };

@@ -6,6 +6,7 @@ export interface Authorization {
 export interface FeatureTranslation {
   languages_code: string;
   title: string;
+  shortTitle?: string;
   content: string;
   searchKeywords: string[];
 }
