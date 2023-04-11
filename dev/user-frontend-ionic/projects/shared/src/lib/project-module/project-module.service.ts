@@ -3,6 +3,7 @@ import { StaticMenuItem, StaticMenuService, StaticMenuType } from './static-menu
 import { PreferencesService } from './preferences.service';
 import { TranslationsService } from './translations/translations.service';
 import { Widget, WidgetsService } from './widgets.service';
+import { HistoryBlacklistService } from './history-blacklist.service';
 
 export interface InitProjectModuleOptions {
     name: string;
@@ -10,6 +11,7 @@ export interface InitProjectModuleOptions {
     translation?: boolean;
     menuItems?: StaticMenuItem[];
     widgets?: Widget[];
+    historyBlacklist?: string[];
 }
 
 @Injectable({
@@ -22,6 +24,7 @@ export class ProjectModuleService {
         private translationsService: TranslationsService,
         private staticMenuService: StaticMenuService,
         private widgetsService: WidgetsService,
+        private historyBlacklistService: HistoryBlacklistService,
     ) {}
 
     initProjectModule(options: InitProjectModuleOptions) {
@@ -45,6 +48,10 @@ export class ProjectModuleService {
             }));
             this.widgetsService.addWidgets(widgets);
         }
+
+        if (options.historyBlacklist) {
+            this.historyBlacklistService.addHistoryBlacklist(options.historyBlacklist);
+        }
     }
 
     getTranslatedProjectModules(): string[] {
@@ -65,5 +72,9 @@ export class ProjectModuleService {
 
     getWidgetComponent(widgetId: string): Type<any> {
         return this.widgetsService.getWidget(widgetId)?.component;
+    }
+
+    getHistoryBlacklist(): string[] {
+        return this.historyBlacklistService.getHistoryBlacklist();
     }
 }

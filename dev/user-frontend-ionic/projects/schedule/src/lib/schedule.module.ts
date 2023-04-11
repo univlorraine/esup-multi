@@ -26,7 +26,12 @@ const initModule = (projectModuleService: ProjectModuleService) =>
     widgets: [{
       id: 'next-events',
       component: NextEventsComponent,
-    }]
+    }],
+    historyBlacklist: [
+      '/schedule/calendar#day',
+      '/schedule/calendar#week',
+      '/schedule/calendar#month',
+    ]
   });
 
 @NgModule({
