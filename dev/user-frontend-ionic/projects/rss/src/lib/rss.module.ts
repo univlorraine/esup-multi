@@ -2,8 +2,7 @@ import { CommonModule } from '@angular/common';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
-import { ProjectModuleService, SharedComponentsModule } from '@ul/shared';
-import { RelativeTimePipe } from './relative-time-pipe';
+import { ProjectModuleService, SharedComponentsModule, SharedPipeModule } from '@ul/shared';
 import { RssPageRoutingModule } from './rss-routing.module';
 import { RssPage } from './rss.page';
 
@@ -19,10 +18,10 @@ const initModule = (projectModuleService: ProjectModuleService) =>
     RssPageRoutingModule,
     TranslateModule,
     SharedComponentsModule,
+    SharedPipeModule
   ],
   declarations: [
-    RssPage,
-    RelativeTimePipe
+    RssPage
   ],
   providers: [{
     provide: APP_INITIALIZER,
