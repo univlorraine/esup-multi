@@ -54,7 +54,7 @@
                   <ion-icon [name]="notification.icon" size="large"></ion-icon>
                   <ion-label class="ion-margin-start">
                     <h2 class="ion-text-wrap">{{notification.title}}</h2>
-                    <p class="ion-text-wrap">{{notification.creationDate | completeLocalDateAndTime}}</p>
+                    <p class="ion-text-wrap">{{notification.creationDate | relativeTime}}</p>
                   </ion-label>
                 </ion-row>
                 <ion-row>
