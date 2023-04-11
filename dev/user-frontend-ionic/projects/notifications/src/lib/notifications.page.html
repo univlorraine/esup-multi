@@ -65,8 +65,8 @@
                 <ion-icon class="ion-align-self-end" name="ellipsis-horizontal-outline"
                   (click)="openModal(notification.id)"></ion-icon>
                 <div *ngIf="notification.state === 'UNREAD'" class="new-notification-dot"></div>
-                <ion-button *ngIf="notification.appsRouterLink" class="ion-text-end ion-no-padding" fill="clear"
-                  [routerLink]="notification.appsRouterLink" size="large">
+                <ion-button *ngIf="notification.routerLink" class="ion-text-end ion-no-padding" fill="clear"
+                  [routerLink]="notification.routerLink" size="large">
                   <ion-icon name="arrow-redo-outline" slot="end"></ion-icon>
                 </ion-button>
               </ion-col>

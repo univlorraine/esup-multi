@@ -34,7 +34,7 @@ export interface Notification {
   state: string;
   creationDate: string;
   color: string;
-  appsRouterLink?: string;
+  routerLink?: string;
 }
 
 export interface Channel {
@@ -43,7 +43,7 @@ export interface Channel {
   color?: string;
   translations?: Translation[];
   icon?: string;
-  appsRouterLink?: string;
+  routerLink?: string;
   filterable: boolean;
 }
 
@@ -89,7 +89,7 @@ export class NotificationsRepository {
         const matchedChannel = channels.find(channel => notification.channel === channel.code);
         notification.color = matchedChannel?.color ? matchedChannel.color : defaultNotificationColor;
         notification.icon = matchedChannel?.icon ? matchedChannel.icon : defaultNotificationIcon;
-        notification.appsRouterLink = matchedChannel?.appsRouterLink ? matchedChannel.appsRouterLink : null;
+        notification.routerLink = matchedChannel?.routerLink ? matchedChannel.routerLink : null;
         return notification;
       }))
   );
