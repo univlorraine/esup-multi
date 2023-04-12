@@ -1,18 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticatedUser, authenticatedUser$ } from '@ul/shared';
 import { Observable } from 'rxjs';
-import { finalize } from 'rxjs/operators';
-import { AuthService } from '../common/auth.service';
+import { finalize, first } from 'rxjs/operators';
+import { AuthService } from '../../common/auth.service';
 
 @Component({
-  selector: 'app-connected',
-  templateUrl: './connected.page.html',
-  styleUrls: ['./connected.page.scss'],
+  selector: 'app-auth-widget',
+  templateUrl: './auth.component.html',
+  styleUrls: ['./auth.component.scss'],
 })
-export class ConnectedPage implements OnInit {
-
+export class AuthComponent implements OnInit {
+  isLoading = false;
   authenticatedUser$: Observable<AuthenticatedUser>;
-  public isLoading = false;
 
   constructor(
     private authService: AuthService,
@@ -26,7 +25,8 @@ export class ConnectedPage implements OnInit {
     this.isLoading = true;
     this.authService.logout()
       .pipe(
-        finalize(() => this.isLoading = false)
+        first(),
+        finalize(() => this.isLoading = false),
       )
       .subscribe();
   }

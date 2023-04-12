@@ -7,30 +7,25 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ProjectModuleService, SharedComponentsModule } from '@ul/shared';
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthEffects } from './auth.effects';
-import { AuthPage } from './auth.page';
-import { ConnectedPage } from './connected/connected.page';
 import { LoginPage } from './login/login.page';
 import { PreferencesComponent } from './preferences/preferences.component';
+import { AuthComponent } from './widget/auth/auth.component';
 
 const initModule = (projectModuleService: ProjectModuleService) =>
   () => projectModuleService.initProjectModule({
     name: 'auth',
     translation: true,
-    menuItems: [{
-      title: 'AUTH.MENU',
-      icon: 'deconnect',
-      position: 900,
-      routerLink: AuthModule.routerLink,
-      type: 'burger'
+    widgets: [{
+      id: 'auth-widget',
+      component: AuthComponent
     }],
     preferencesComponent: PreferencesComponent
   });
 @NgModule({
   declarations: [
     LoginPage,
-    ConnectedPage,
     PreferencesComponent,
-    AuthPage,
+    AuthComponent
   ],
   imports: [
     CommonModule,

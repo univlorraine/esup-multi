@@ -5,6 +5,7 @@ import { finalize, tap } from 'rxjs/operators';
 import { AuthService } from '../common/auth.service';
 import { saveCredentialsOnAuthentication$ } from '../preferences/preferences.repository';
 import { PreferencesService } from '../preferences/preferences.service';
+import { NavigationService } from '@ul/shared';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,9 @@ export class LoginPage implements OnInit {
     private fb: FormBuilder,
     public authService: AuthService,
     private toastController: ToastController,
-    private preferencesService: PreferencesService) { }
+    private preferencesService: PreferencesService,
+    private navigationService: NavigationService,
+  ) { }
 
   get username() {
     return this.loginForm.get('username');
@@ -59,7 +62,9 @@ export class LoginPage implements OnInit {
         tap(val => !val && this.showToastConnectionFail()),
         finalize(() => this.isLoading = false)
       )
-      .subscribe();
+      .subscribe(() => {
+        this.navigationService.navigateBack();
+      });
   }
 
   async showToastConnectionFail() {
