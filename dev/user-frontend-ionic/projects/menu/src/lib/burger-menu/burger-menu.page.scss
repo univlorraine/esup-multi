@@ -11,6 +11,10 @@
     padding-bottom: 0.5rem;
 }
 
+.menu-section:nth-of-type(1) {
+    padding-top: 0 !important;
+}
+
 .multi-auth-widget {
     border-bottom: var(--app-border-2-width) solid var(--ion-color-secondary);
 }

@@ -17,5 +17,9 @@
     "CONNECTED": {
         "HELLO": "Bonjour",
         "LOGOUT": "Déconnexion"
+    },
+    "WIDGET": {
+        "SUBTITLE": "Université de Lorraine",
+        "NOT_LOGGED_IN": "Utilisateur anonyme"
     }
 }
