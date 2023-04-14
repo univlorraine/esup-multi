@@ -42,7 +42,8 @@ export class ImportantNewsService {
       return {
         ...importantNews,
         title: translation.title,
-        content: translation.content
+        content: translation.content,
+        buttonLabel: translation.buttonLabel
       };
     });
   }

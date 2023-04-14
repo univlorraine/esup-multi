@@ -1,12 +1,12 @@
 <ion-card (click)="onClick()">
-    <ion-card-header>
-      <ion-card-title>
-        <ion-icon name="link" class="title-icon" *ngIf="feature.link"></ion-icon>
-        {{feature.title}}
-      </ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      {{feature.content}}
-      <app-widget [widgetId]="feature.widget"></app-widget>
-    </ion-card-content>
+  <ion-card-header *ngIf="feature.title">
+    <ion-card-title>
+      <ion-icon [name]="feature.icon" *ngIf="feature.icon"></ion-icon>
+      {{feature.title}}
+    </ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    {{feature.content}}
+    <app-widget [widgetId]="feature.widget"></app-widget>
+  </ion-card-content>
 </ion-card>

@@ -10,7 +10,9 @@ const STORE_NAME = 'important-news';
 export interface ImportantNews {
   id: string;
   status: string;
-  image: string;
+  image?: string;
+  color?: string;
+  link?: string;
   authorization?: Authorization;
   translations?: Translation[];
 };
@@ -20,15 +22,19 @@ interface Translation {
   languages_code: string;
   title: string;
   content: string;
-  searchKeywords: string[];
+  buttonLabel: string;
+
 }
 
 export interface TranslatedImportantNews {
   id: string;
   status: string;
-  image: string;
+  image?: string;
   title: string;
+  link?: string;
+  color?: string;
   content: string;
+  buttonLabel?: string;
   authorization?: Authorization;
 }
 

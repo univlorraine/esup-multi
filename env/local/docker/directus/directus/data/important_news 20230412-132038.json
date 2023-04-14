@@ -4,20 +4,24 @@
 		"status": "published",
 		"sort": 2,
 		"image": null,
+		"link": "https://www.univ-lorraine.fr/",
+		"color": "#D3FDC4",
 		"translations": [
 			{
 				"title": "Nouvelle importante pour les étudiants! ",
-				"content": "Jnesis est sur la vague !",
+				"content": "L'UL est sur la vague !",
 				"id": 1,
 				"important_news_id": 1,
-				"languages_code": "fr"
+				"languages_code": "fr",
+				"buttonLabel": "Visitez notre site"
 			},
 			{
 				"title": "Important news for students !",
-				"content": "Jnesis is on the wave ! ",
+				"content": "L'UL is on the wave ! ",
 				"id": 2,
 				"important_news_id": 1,
-				"languages_code": "en"
+				"languages_code": "en",
+				"buttonLabel": " Visit our website"
 			}
 		],
 		"authorization": {
@@ -33,20 +37,24 @@
 		"status": "published",
 		"sort": 1,
 		"image": null,
+		"link": null,
+		"color": null,
 		"translations": [
 			{
 				"title": " Important News without role",
 				"content": "Hello anonymous and other roles.",
 				"id": 3,
 				"important_news_id": 2,
-				"languages_code": "en"
+				"languages_code": "en",
+				"buttonLabel": null
 			},
 			{
 				"title": "Important News sans rôle ",
 				"content": "Bonjour aux anonymous et aux autres rôles.",
 				"id": 4,
 				"important_news_id": 2,
-				"languages_code": "fr"
+				"languages_code": "fr",
+				"buttonLabel": null
 			}
 		],
 		"authorization": null
@@ -56,20 +64,24 @@
 		"status": "published",
 		"sort": 3,
 		"image": null,
+		"link": "/cards",
+		"color": "#F4E648",
 		"translations": [
 			{
 				"title": "Troisième information importante pour les étudiants",
-				"content": "La carte de cantine est à récupérer au secrétariat.",
+				"content": "Vos cartes d'étudiant sont disponibles !",
 				"id": 5,
 				"important_news_id": 3,
-				"languages_code": "fr"
+				"languages_code": "fr",
+				"buttonLabel": "Votre carte"
 			},
 			{
 				"title": "Third important student news",
-				"content": "The canteen card is to be collected at the secretariat.",
+				"content": "Your student cards are available.",
 				"id": 6,
 				"important_news_id": 3,
-				"languages_code": "en"
+				"languages_code": "en",
+				"buttonLabel": "Your card"
 			}
 		],
 		"authorization": {
@@ -85,20 +97,24 @@
 		"status": "published",
 		"sort": 4,
 		"image": null,
+		"link": null,
+		"color": null,
 		"translations": [
 			{
 				"title": "Your staff pass",
 				"content": "Your staff card is available at reception.",
 				"id": 7,
 				"important_news_id": 4,
-				"languages_code": "en"
+				"languages_code": "en",
+				"buttonLabel": null
 			},
 			{
 				"title": "Votre \"pass staff\"",
 				"content": "Votre \"pass staff\" est disponible à l'accueil.",
 				"id": 8,
 				"important_news_id": 4,
-				"languages_code": "fr"
+				"languages_code": "fr",
+				"buttonLabel": null
 			}
 		],
 		"authorization": {

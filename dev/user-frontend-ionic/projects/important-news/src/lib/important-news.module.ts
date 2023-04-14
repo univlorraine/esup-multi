@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { ProjectModuleService } from '@ul/shared';
@@ -22,6 +23,7 @@ const initModule = (projectModuleService: ProjectModuleService) =>
     CommonModule,
     IonicModule,
     TranslateModule,
+    RouterModule
   ],
   providers: [{
     provide: APP_INITIALIZER,

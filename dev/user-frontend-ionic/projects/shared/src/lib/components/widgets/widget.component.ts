@@ -1,5 +1,4 @@
 import { AfterViewInit, ChangeDetectorRef, Component, Input, ViewChild, ViewContainerRef } from '@angular/core';
-import { AlertController } from '@ionic/angular';
 import { ProjectModuleService } from '../../project-module/project-module.service';
 
 @Component({
@@ -14,7 +13,6 @@ export class WidgetComponent implements AfterViewInit {
   constructor(
     private projectModuleService: ProjectModuleService,
     private cdr: ChangeDetectorRef,
-    private alertController: AlertController,
   ) { }
 
   async ngAfterViewInit() {

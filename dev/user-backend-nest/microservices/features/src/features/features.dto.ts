@@ -5,10 +5,10 @@ export interface Authorization {
 
 export interface FeatureTranslation {
   languages_code: string;
-  title: string;
+  title?: string;
   shortTitle?: string;
-  content: string;
-  searchKeywords: string[];
+  content?: string;
+  searchKeywords?: string[];
 }
 
 export enum FeatureType {
@@ -25,12 +25,12 @@ interface FeatureCommon<SBR> {
   id: string;
   type: FeatureType;
   position: number | null;
-  widget: string;
+  widget?: string;
   translations: FeatureTranslation[];
   authorization: Authorization | null;
   settings_by_role: SBR[];
   menu: string | null;
-  icon: string;
+  icon?: string;
 }
 
 export interface ExternalFeature extends FeatureCommon<SettingsByRole> {

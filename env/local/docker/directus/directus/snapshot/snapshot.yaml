@@ -865,7 +865,19 @@ fields:
     type: string
     meta:
       collection: features
-      conditions: null
+      conditions:
+        - name: required if widget is null
+          rule:
+            _and:
+              - widget:
+                  _null: true
+          required: true
+          options:
+            font: sans-serif
+            trim: false
+            masked: false
+            clear: false
+            slug: false
       display: null
       display_options: null
       field: icon
@@ -875,7 +887,7 @@ fields:
       note: null
       options: null
       readonly: false
-      required: true
+      required: false
       sort: 4
       special: null
       translations: null
@@ -1777,7 +1789,7 @@ fields:
       note: null
       options: null
       readonly: false
-      required: true
+      required: false
       sort: null
       special: null
       translations: null
@@ -1841,6 +1853,44 @@ fields:
       has_auto_increment: false
       foreign_key_table: authorization
       foreign_key_column: id
+  - collection: important_news
+    field: color
+    type: string
+    meta:
+      collection: important_news
+      conditions: null
+      display: null
+      display_options: null
+      field: color
+      group: null
+      hidden: false
+      interface: select-color
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: color
+      table: important_news
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: important_news
     field: id
     type: integer
@@ -1919,6 +1969,44 @@ fields:
       has_auto_increment: false
       foreign_key_table: directus_files
       foreign_key_column: id
+  - collection: important_news
+    field: link
+    type: string
+    meta:
+      collection: important_news
+      conditions: null
+      display: null
+      display_options: null
+      field: link
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: link
+      table: important_news
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: important_news
     field: sort
     type: integer
@@ -2043,6 +2131,44 @@ fields:
       validation: null
       validation_message: null
       width: full
+  - collection: important_news_translations
+    field: buttonLabel
+    type: string
+    meta:
+      collection: important_news_translations
+      conditions: null
+      display: null
+      display_options: null
+      field: buttonLabel
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: buttonLabel
+      table: important_news_translations
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: important_news_translations
     field: content
     type: text

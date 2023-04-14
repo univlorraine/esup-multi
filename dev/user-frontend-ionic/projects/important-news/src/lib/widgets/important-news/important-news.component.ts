@@ -1,4 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
+import { Browser } from '@capacitor/browser';
 import { currentLanguage$ } from '@ul/shared';
 import { combineLatest, Observable } from 'rxjs';
 import { finalize, first, map } from 'rxjs/operators';
@@ -19,6 +20,8 @@ export class ImportantNewsComponent implements OnInit {
   public noImportantNews$: Observable<boolean>;
   public translatedImportantNewsList$: Observable<TranslatedImportantNews[]>;
   public cmsPublicAssetsEndpoint = this.environment.cmsPublicAssetsEndpoint;
+  public randomImportantNews$: Observable<TranslatedImportantNews | undefined>;
+
 
   constructor(
     @Inject('environment')
@@ -33,6 +36,16 @@ export class ImportantNewsComponent implements OnInit {
       .pipe(
         map(importantNewsListAndCurrentLang => this.importantNewsService.mapToTranslatedImportantNews(importantNewsListAndCurrentLang))
       );
+
+    this.randomImportantNews$ = this.translatedImportantNewsList$.pipe(
+      map(translatedImportantNewsList => {
+        if (!translatedImportantNewsList || translatedImportantNewsList.length === 0) {
+          return undefined;
+        }
+        const randomIndex = Math.floor(Math.random() * translatedImportantNewsList.length);
+        return translatedImportantNewsList[randomIndex];
+      })
+    );
   }
 
   ngOnInit(): void {
@@ -43,5 +56,12 @@ export class ImportantNewsComponent implements OnInit {
     ).subscribe(importantNewsList => {
       setImportantNewsList(importantNewsList);
     });
+  }
+
+  public onClick(importantNews: TranslatedImportantNews): Promise<void> {
+    if (!importantNews.link) {
+      return;
+    }
+    return Browser.open({ url: importantNews.link });
   }
 }
