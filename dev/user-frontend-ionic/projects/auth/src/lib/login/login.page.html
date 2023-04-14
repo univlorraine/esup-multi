@@ -1,3 +1,12 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <app-back-button></app-back-button>
+    </ion-buttons>
+
+    <ion-title>{{ "AUTH.MENU" | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
 <ion-progress-bar *ngIf="isLoading" type="indeterminate" color="primary"></ion-progress-bar>
 
 <ion-content class="ion-padding">
