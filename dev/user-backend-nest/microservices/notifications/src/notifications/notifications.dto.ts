@@ -57,3 +57,15 @@ export interface DirectusChannelTranslation {
   languages_code: string;
   label: string;
 }
+
+export interface RegisterFCMTokenQueryDto {
+  username: string;
+  token: string;
+  platform: string;
+  ip: string;
+}
+
+export interface UnregisterFCMTokenQueryDto {
+  username: string;
+  token: string;
+}

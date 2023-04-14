@@ -12,6 +12,8 @@ import {
   NotificationResultDto,
   NotificationsMarkAsReadQueryDto,
   NotificationsQueryDto,
+  RegisterFCMTokenQueryDto,
+  UnregisterFCMTokenQueryDto,
   UnsubscribedChannelsQueryDto,
   UnsubscribedChannelsResultDto,
 } from './notifications.dto';
@@ -163,6 +165,46 @@ export class NotificationsService {
         const errorMessage = `Unable to update unsubscribed channels ${JSON.stringify(
           query.channels,
         )} for user with username '${query.username}'`;
+        this.logger.error(errorMessage, err);
+        throw new RpcException(errorMessage);
+      }),
+      map((res) => {
+        return res.status;
+      }),
+    );
+  }
+
+  saveFCMToken(query: RegisterFCMTokenQueryDto) {
+    const url = `${this.ulApiConfig.notificationsUrl}/register`;
+    const options = {
+      headers: {
+        Accept: 'application/json',
+        Authorization: `Bearer ${this.ulApiConfig.bearerToken}`,
+      },
+    };
+    return this.httpService.post<any>(url, query, options).pipe(
+      catchError((err) => {
+        const errorMessage = `Unable to save FCM Token from '${query.username}'`;
+        this.logger.error(errorMessage, err);
+        throw new RpcException(errorMessage);
+      }),
+      map((res) => {
+        return res.status;
+      }),
+    );
+  }
+
+  unregisterFCMToken(query: UnregisterFCMTokenQueryDto) {
+    const url = `${this.ulApiConfig.notificationsUrl}/unregister`;
+    const options = {
+      headers: {
+        Accept: 'application/json',
+        Authorization: `Bearer ${this.ulApiConfig.bearerToken}`,
+      },
+    };
+    return this.httpService.post<any>(url, query, options).pipe(
+      catchError((err) => {
+        const errorMessage = `Unable to delete FCM Token from '${query.username}'`;
         this.logger.error(errorMessage, err);
         throw new RpcException(errorMessage);
       }),

@@ -137,6 +137,10 @@ export class NotificationsRepository {
     notificationsStore.update(deleteEntities(id));
   }
 
+  public clearNotifications() {
+    notificationsStore.reset();
+  }
+
   public setChannels(channels: Channel[]) {
     channelsStore.update(setEntities(channels));
   }

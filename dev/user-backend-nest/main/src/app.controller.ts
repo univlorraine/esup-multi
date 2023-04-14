@@ -403,6 +403,55 @@ export class AppController {
         ),
       );
   }
+  @Post('/notifications/register')
+  registerFCMToken(@Request() request, @Body() body) {
+    return this.authClient
+      .send(
+        {
+          cmd: 'getUserOrThrowError',
+        },
+        body,
+      )
+      .pipe(
+        concatMap((user) =>
+          this.notificationsClient.send(
+            {
+              cmd: 'registerFCMToken',
+            },
+            {
+              username: user.username,
+              token: body.token,
+              platform: body.platform,
+              ip: request.ip,
+            },
+          ),
+        ),
+      );
+  }
+
+  @Post('/notifications/unregister')
+  unregisterFCMToken(@Body() body) {
+    return this.authClient
+      .send(
+        {
+          cmd: 'getUserOrThrowError',
+        },
+        body,
+      )
+      .pipe(
+        concatMap((user) =>
+          this.notificationsClient.send(
+            {
+              cmd: 'unregisterFCMToken',
+            },
+            {
+              username: user.username,
+              token: body.token,
+            },
+          ),
+        ),
+      );
+  }
 
   @Post('/clocking')
   getClocking(@Request() request) {

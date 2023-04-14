@@ -33,7 +33,7 @@ export class KeepAuthService {
             ),
             delayWhen(reauthResult => {
                 if (!reauthResult) {
-                    this.actions.dispatch(cleanupPrivateData());
+                    this.actions.dispatch(cleanupPrivateData({authToken: null}));
                     return;
                 }
 
