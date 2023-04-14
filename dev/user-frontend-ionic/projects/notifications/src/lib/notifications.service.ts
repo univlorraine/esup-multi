@@ -1,9 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
+import { Platform } from '@ionic/angular';
 import { getAuthToken } from '@ul/shared';
-import { Observable } from 'rxjs';
-import { filter, first, switchMap, tap } from 'rxjs/operators';
+import { combineLatest, Observable, of } from 'rxjs';
+import { filter, first, switchMap, take, tap } from 'rxjs/operators';
 import { Channel, Notification, NotificationsRepository, TranslatedChannel } from './notifications.repository';
+import { PushNotifications, Token } from '@capacitor/push-notifications';
+import { Capacitor } from '@capacitor/core';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +17,8 @@ export class NotificationsService {
     @Inject('environment')
     private environment: any,
     private http: HttpClient,
-    public notificationRepository: NotificationsRepository
+    public notificationRepository: NotificationsRepository,
+    private platform: Platform
   ) {
   }
 
@@ -109,6 +113,57 @@ export class NotificationsService {
     );
   }
 
+  public async saveFCMToken() {
+    if (!Capacitor.isNativePlatform()) {
+      return;
+    }
+    this.registerPushNotifications();
+    combineLatest([getAuthToken(), this.notificationRepository.fcmToken$])
+      .pipe(
+        filter(([authToken, fcmToken]) => !!fcmToken),
+        first(),
+        switchMap(([authToken, fcmToken]) => {
+          const url = `${this.environment.apiEndpoint}/notifications/register`;
+          const data = {
+            authToken,
+            token: fcmToken.value,
+            platform: this.platform.platforms().join(',')
+          };
+          return this.http.post(url, data);
+        })
+      )
+      .subscribe(res => res);
+
+  }
+
+  public async unregisterFCMToken(authToken: string) {
+    if (!Capacitor.isNativePlatform() || !authToken) {
+      return;
+    }
+    this.notificationRepository.fcmToken$
+      .pipe(
+        switchMap((fcmToken) => {
+          if (!fcmToken) {
+            return;
+          }
+          const url = `${this.environment.apiEndpoint}/notifications/unregister`;
+          const data = {
+            authToken,
+            fcmToken: fcmToken.value,
+          };
+          return this.http.post(url, data);
+        })
+      )
+      .subscribe(res => {
+        this.deleteFCMToken();
+        return;
+      });
+}
+
+  public async deleteFCMToken() {
+    this.notificationRepository.clearNotifications();
+  }
+
   private removeNotification(authToken: string, notificationId: string) {
     const url = `${this.environment.apiEndpoint}/notifications/delete`;
     const data = {
@@ -117,5 +172,19 @@ export class NotificationsService {
     };
 
     return this.http.delete(url, { body: data });
+  }
+
+  private registerPushNotifications() {
+    PushNotifications.requestPermissions().then(result => {
+      if (result.receive === 'granted') {
+        PushNotifications.register();
+      }
+    });
+
+    PushNotifications.addListener('registration',
+      (token: Token) => {
+        this.notificationRepository.setFcmToken(token);
+      }
+    );
   }
 }

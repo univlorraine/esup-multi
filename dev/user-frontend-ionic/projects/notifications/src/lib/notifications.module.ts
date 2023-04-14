@@ -5,11 +5,13 @@ import { Capacitor } from '@capacitor/core';
 import { Device } from '@capacitor/device';
 import { PushNotifications, PushNotificationSchema, Token } from '@capacitor/push-notifications';
 import { IonicModule, ToastController } from '@ionic/angular';
+import { EffectsNgModule } from '@ngneat/effects-ng';
 import { TranslateModule } from '@ngx-translate/core';
 import { ProjectModuleService, SharedComponentsModule, SharedPipeModule } from '@ul/shared';
 import { NotificationOptionsComponent } from './notification-options/notification-options.component';
 import { NotificationsRoutingModule } from './notifications-routing.module';
 import { NotificationsModuleConfig, NOTIFICATIONS_CONFIG } from './notifications.config';
+import { NotificationsEffects } from './notifications.effects';
 import { NotificationsPage } from './notifications.page';
 import { NotificationsRepository } from './notifications.repository';
 import { SettingsPage } from './settings/settings.page';
@@ -35,6 +37,7 @@ const initModule = (projectModuleService: ProjectModuleService,
     TranslateModule,
     ReactiveFormsModule,
     SharedComponentsModule,
+    EffectsNgModule.forFeature([NotificationsEffects]),
     SharedPipeModule
   ],
   declarations: [
@@ -93,18 +96,6 @@ export class NotificationsModule {
       });
     }
     //_______________________________________
-
-    PushNotifications.requestPermissions().then(result => {
-      if (result.receive === 'granted') {
-        PushNotifications.register();
-      }
-    });
-
-    PushNotifications.addListener('registration',
-      (token: Token) => {
-        notificationsRepository.setFcmToken(token);
-      }
-    );
 
     PushNotifications.addListener('registrationError',
       (error: any) => {

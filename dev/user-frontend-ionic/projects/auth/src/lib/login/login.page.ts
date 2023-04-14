@@ -1,11 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
+import { AuthenticatedUser } from '@ul/shared';
 import { finalize, tap } from 'rxjs/operators';
 import { AuthService } from '../common/auth.service';
 import { saveCredentialsOnAuthentication$ } from '../preferences/preferences.repository';
 import { PreferencesService } from '../preferences/preferences.service';
 import { NavigationService } from '@ul/shared';
+
+interface AuthenticatedUserToken extends AuthenticatedUser {
+  authToken: string;
+}
 
 @Component({
   selector: 'app-login',
@@ -62,7 +67,11 @@ export class LoginPage implements OnInit {
         tap(val => !val && this.showToastConnectionFail()),
         finalize(() => this.isLoading = false)
       )
-      .subscribe(() => {
+      .subscribe((token: AuthenticatedUserToken) => {
+        if (!token) {
+          return;
+        }
+        this.authService.dispatchLoginAction();
         this.navigationService.navigateBack();
       });
   }

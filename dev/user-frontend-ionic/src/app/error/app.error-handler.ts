@@ -2,9 +2,10 @@ import { Injectable, ErrorHandler, Injector } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { AlertController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
-import { cleanupPrivateData, getExpectedErrorMessage } from '@ul/shared';
+import { cleanupPrivateData, getAuthToken, getExpectedErrorMessage } from '@ul/shared';
 import { Actions } from '@ngneat/effects-ng';
 import { Network } from '@capacitor/network';
+import { first } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -37,7 +38,7 @@ export class AppErrorHandler implements ErrorHandler {
       case 0:
         return this.displayError('SERVICE_UNREACHABLE');
       case 401:
-        this.actions.dispatch(cleanupPrivateData());
+        getAuthToken().pipe(first()).subscribe(token => this.actions.dispatch(cleanupPrivateData({authToken: token})));
         return this.displayError('UNAUTHENTICATED');
       case 500:
         // expected errors (business error case which should display a specific message)

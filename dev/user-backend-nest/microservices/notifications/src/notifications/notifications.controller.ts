@@ -8,6 +8,8 @@ import {
   NotificationResultDto,
   NotificationsMarkAsReadQueryDto,
   NotificationsQueryDto,
+  RegisterFCMTokenQueryDto,
+  UnregisterFCMTokenQueryDto,
   UnsubscribedChannelsQueryDto,
 } from './notifications.dto';
 import { NotificationsService } from './notifications.service';
@@ -52,5 +54,15 @@ export class NotificationsController {
     data: ChannelSubscriberQueryDto,
   ): Observable<number> {
     return this.notificationsService.subscribeOrUnsubscribeUserToChannels(data);
+  }
+
+  @MessagePattern({ cmd: 'registerFCMToken' })
+  registerFCMToken(data: RegisterFCMTokenQueryDto) {
+    return this.notificationsService.saveFCMToken(data);
+  }
+
+  @MessagePattern({ cmd: 'unregisterFCMToken' })
+  unregisterFCMToken(data: UnregisterFCMTokenQueryDto) {
+    return this.notificationsService.unregisterFCMToken(data);
   }
 }
