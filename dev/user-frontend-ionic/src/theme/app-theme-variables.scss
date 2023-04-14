@@ -35,7 +35,7 @@
     // Set base font to gloabl application
     --ion-font-family: var(--app-font-family-base), sans-serif;
 
-    // This next font have static weight in multiple files : 
+    // This next font have static weight in multiple files :
     --app-font-primary-static-regular: 'RobotoCondensedRegular',
         sans-serif;
     --app-font-primary-static-bold: 'RobotoCondensedBold',
@@ -43,7 +43,7 @@
     --app-font-primary-static-light: 'RobotoCondensedLight',
         sans-serif;
 
-    // MavenPro is a weight dynamic font  (one file for multiple weight), 
+    // MavenPro is a weight dynamic font  (one file for multiple weight),
     // if your font-family is static you must to do like the static font method above
     // exemple : --app-font-secondary-regular, ...
     --app-font-secondary: 'MavenProVariableFont',
@@ -79,6 +79,8 @@
     --icon-2-size: 1.75rem !important;
     --icon-3-size: 1.5rem !important;
     --icon-4-size: 1.25rem !important;
+    --icon-5-size: 0.75rem !important;
+
 
     // // ---------------------
     // // Logo size variables (Change value here but use variables only in theme/logos/logos.scss)

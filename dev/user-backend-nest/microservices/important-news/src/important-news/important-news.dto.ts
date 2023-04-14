@@ -5,7 +5,9 @@ export interface Authorization {
 
 export interface DirectusImportantNews {
   id: string;
-  image: string;
+  image?: string;
+  color?: string;
+  link?: string;
   authorization?: Authorization;
   translations?: DirectusImportantNewsTranslation[];
 }
@@ -18,4 +20,5 @@ export interface DirectusImportantNewsTranslation {
   language_code: string;
   title: string;
   content: string;
+  buttonLabel?:string;
 }

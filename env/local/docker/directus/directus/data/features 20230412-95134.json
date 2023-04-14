@@ -1,0 +1,948 @@
+[
+	{
+		"icon": "contacts",
+		"status": "published",
+		"widget": null,
+		"id": 1,
+		"menu": "service",
+		"authorization": null,
+		"position": null,
+		"type": "internal",
+		"routerLink": "/contacts",
+		"link": null,
+		"ssoService": null,
+		"translations": [
+			{
+				"content": null,
+				"features_id": 1,
+				"id": 1,
+				"languages_code": "en",
+				"searchKeywords": [
+					"Phone",
+					"Phone numbers",
+					"Phones"
+				],
+				"shortTitle": null,
+				"title": "Contacts"
+			},
+			{
+				"content": null,
+				"features_id": 1,
+				"id": 2,
+				"languages_code": "fr",
+				"searchKeywords": [
+					"Contacts",
+					"Numéros",
+					"Téléphone",
+					"Téléphones"
+				],
+				"shortTitle": null,
+				"title": "Annuaire"
+			}
+		],
+		"settings_by_role": []
+	},
+	{
+		"icon": "clipboard-outline",
+		"status": "published",
+		"widget": null,
+		"id": 2,
+		"menu": "service",
+		"authorization": 5,
+		"position": 8,
+		"type": "internal",
+		"routerLink": "/reservation",
+		"link": null,
+		"ssoService": null,
+		"translations": [
+			{
+				"content": null,
+				"features_id": 2,
+				"id": 3,
+				"languages_code": "en",
+				"searchKeywords": null,
+				"shortTitle": null,
+				"title": "Room reservation"
+			},
+			{
+				"content": null,
+				"features_id": 2,
+				"id": 4,
+				"languages_code": "fr",
+				"searchKeywords": null,
+				"shortTitle": null,
+				"title": "Réservation de salle"
+			}
+		],
+		"settings_by_role": []
+	},
+	{
+		"icon": "cards",
+		"status": "published",
+		"widget": null,
+		"id": 3,
+		"menu": "tabs",
+		"authorization": 6,
+		"position": 2,
+		"type": "internal",
+		"routerLink": "/cards",
+		"link": null,
+		"ssoService": null,
+		"translations": [
+			{
+				"content": "Find your student card valid throughout Europe and your UL student card",
+				"features_id": 3,
+				"id": 5,
+				"languages_code": "en",
+				"searchKeywords": [
+					"European card",
+					"Student card"
+				],
+				"shortTitle": "Cards",
+				"title": "Cards"
+			},
+			{
+				"content": null,
+				"features_id": 3,
+				"id": 6,
+				"languages_code": "fr",
+				"searchKeywords": [
+					"Carte européenne",
+					"Carte étudiante"
+				],
+				"shortTitle": "Carte",
+				"title": "Carte"
+			}
+		],
+		"settings_by_role": []
+	},
+	{
+		"icon": "cards",
+		"status": "published",
+		"widget": null,
+		"id": 4,
+		"menu": "tabs",
+		"authorization": 20,
+		"position": 2,
+		"type": "internal",
+		"routerLink": "/cards",
+		"link": null,
+		"ssoService": null,
+		"translations": [
+			{
+				"content": null,
+				"features_id": 4,
+				"id": 7,
+				"languages_code": "en",
+				"searchKeywords": [
+					"Staff card"
+				],
+				"shortTitle": "Card",
+				"title": "Card"
+			},
+			{
+				"content": null,
+				"features_id": 4,
+				"id": 8,
+				"languages_code": "fr",
+				"searchKeywords": [
+					"Carte professionnelle"
+				],
+				"shortTitle": "Carte",
+				"title": "Carte"
+			}
+		],
+		"settings_by_role": []
+	},
+	{
+		"icon": "map-outline",
+		"status": "published",
+		"widget": null,
+		"id": 5,
+		"menu": "service",
+		"authorization": null,
+		"position": 300,
+		"type": "internal",
+		"routerLink": "/map",
+		"link": null,
+		"ssoService": null,
+		"translations": [
+			{
+				"content": null,
+				"features_id": 5,
+				"id": 9,
+				"languages_code": "en",
+				"searchKeywords": null,
+				"shortTitle": null,
+				"title": "Map"
+			},
+			{
+				"content": null,
+				"features_id": 5,
+				"id": 10,
+				"languages_code": "fr",
+				"searchKeywords": null,
+				"shortTitle": null,
+				"title": "Plan"
+			}
+		],
+		"settings_by_role": []
+	},
+	{
+		"icon": "calendar-outline",
+		"status": "published",
+		"widget": null,
+		"id": 6,
+		"menu": "service",
+		"authorization": 8,
+		"position": 4,
+		"type": "internal",
+		"routerLink": "/schedule",
+		"link": null,
+		"ssoService": null,
+		"translations": [
+			{
+				"content": null,
+				"features_id": 6,
+				"id": 11,
+				"languages_code": "en",
+				"searchKeywords": [
+					"ADE",
+					"Courses"
+				],
+				"shortTitle": null,
+				"title": "Schedule"
+			},
+			{
+				"content": null,
+				"features_id": 6,
+				"id": 12,
+				"languages_code": "fr",
+				"searchKeywords": [
+					"ADE",
+					"Cours",
+					"EDT"
+				],
+				"shortTitle": null,
+				"title": "Emploi du temps"
+			}
+		],
+		"settings_by_role": []
+	},
+	{
+		"icon": "rss",
+		"status": "published",
+		"widget": null,
+		"id": 7,
+		"menu": "top",
+		"authorization": null,
+		"position": 10,
+		"type": "internal",
+		"routerLink": "/rss",
+		"link": null,
+		"ssoService": null,
+		"translations": [
+			{
+				"content": null,
+				"features_id": 7,
+				"id": 13,
+				"languages_code": "en",
+				"searchKeywords": null,
+				"shortTitle": null,
+				"title": "RSS"
+			},
+			{
+				"content": null,
+				"features_id": 7,
+				"id": 14,
+				"languages_code": "fr",
+				"searchKeywords": null,
+				"shortTitle": null,
+				"title": "RSS"
+			}
+		],
+		"settings_by_role": []
+	},
+	{
+		"icon": "notifications",
+		"status": "published",
+		"widget": null,
+		"id": 8,
+		"menu": "top",
+		"authorization": 9,
+		"position": 20,
+		"type": "internal",
+		"routerLink": "/notifications",
+		"link": null,
+		"ssoService": null,
+		"translations": [
+			{
+				"content": null,
+				"features_id": 8,
+				"id": 15,
+				"languages_code": "en",
+				"searchKeywords": null,
+				"shortTitle": null,
+				"title": "Notifications"
+			},
+			{
+				"content": null,
+				"features_id": 8,
+				"id": 16,
+				"languages_code": "fr",
+				"searchKeywords": null,
+				"shortTitle": null,
+				"title": "Notifications"
+			}
+		],
+		"settings_by_role": []
+	},
+	{
+		"icon": "time-outline",
+		"status": "published",
+		"widget": null,
+		"id": 10,
+		"menu": "service",
+		"authorization": 11,
+		"position": 600,
+		"type": "external",
+		"routerLink": null,
+		"link": "https://agatte.univ-lorraine.fr/login/cas?ticket={st}",
+		"ssoService": "https://agatte.univ-lorraine.fr/login/cas",
+		"translations": [
+			{
+				"content": null,
+				"features_id": 10,
+				"id": 19,
+				"languages_code": "fr",
+				"searchKeywords": [
+					"Agatte",
+					"Congé",
+					"Congés",
+					"Top",
+					"Toper",
+					"Tops"
+				],
+				"shortTitle": null,
+				"title": "Temps de travail"
+			},
+			{
+				"content": null,
+				"features_id": 10,
+				"id": 20,
+				"languages_code": "en",
+				"searchKeywords": [
+					"Agatte",
+					"Holiday",
+					"Holidays",
+					"Top",
+					"Toper",
+					"Tops"
+				],
+				"shortTitle": null,
+				"title": "Work time"
+			}
+		],
+		"settings_by_role": []
+	},
+	{
+		"icon": null,
+		"status": "published",
+		"widget": "important-news:important-news",
+		"id": 11,
+		"menu": null,
+		"authorization": null,
+		"position": null,
+		"type": "external",
+		"routerLink": null,
+		"link": null,
+		"ssoService": null,
+		"translations": [
+			{
+				"content": null,
+				"features_id": 11,
+				"id": 21,
+				"languages_code": "fr",
+				"searchKeywords": null,
+				"shortTitle": null,
+				"title": null
+			},
+			{
+				"content": null,
+				"features_id": 11,
+				"id": 22,
+				"languages_code": "en",
+				"searchKeywords": null,
+				"shortTitle": null,
+				"title": null
+			}
+		],
+		"settings_by_role": []
+	},
+	{
+		"icon": "mail-unread-outline",
+		"status": "published",
+		"widget": null,
+		"id": 12,
+		"menu": "service",
+		"authorization": 12,
+		"position": 100,
+		"type": "external",
+		"routerLink": null,
+		"link": "https://mail.etu.univ-lorraine.fr/zimbra/preauth/preauthUL_ETU.jsp?ticket={st}",
+		"ssoService": "https://mail.etu.univ-lorraine.fr/zimbra/preauth/preauthUL_ETU.jsp",
+		"translations": [
+			{
+				"content": null,
+				"features_id": 12,
+				"id": 23,
+				"languages_code": "fr",
+				"searchKeywords": [
+					"Boite aux lettres",
+					"Email",
+					"Emails",
+					"Mail",
+					"Mails"
+				],
+				"shortTitle": null,
+				"title": "Messagerie"
+			},
+			{
+				"content": null,
+				"features_id": 12,
+				"id": 24,
+				"languages_code": "en",
+				"searchKeywords": [
+					"Email",
+					"Emails",
+					"Mail",
+					"Mail Box",
+					"Mails"
+				],
+				"shortTitle": null,
+				"title": "Messaging"
+			}
+		],
+		"settings_by_role": []
+	},
+	{
+		"icon": "school-outline",
+		"status": "published",
+		"widget": null,
+		"id": 13,
+		"menu": "service",
+		"authorization": 13,
+		"position": 200,
+		"type": "external",
+		"routerLink": null,
+		"link": "https://mdw.univ-lorraine.fr/login/cas?ticket={st}",
+		"ssoService": "https://mdw.univ-lorraine.fr/login/cas",
+		"translations": [
+			{
+				"content": null,
+				"features_id": 13,
+				"id": 25,
+				"languages_code": "fr",
+				"searchKeywords": [
+					"MDW",
+					"Mon dossier web"
+				],
+				"shortTitle": null,
+				"title": "Dossier étudiant"
+			},
+			{
+				"content": null,
+				"features_id": 13,
+				"id": 26,
+				"languages_code": "en",
+				"searchKeywords": null,
+				"shortTitle": null,
+				"title": "Student file"
+			}
+		],
+		"settings_by_role": []
+	},
+	{
+		"icon": "laptop-outline",
+		"status": "published",
+		"widget": null,
+		"id": 14,
+		"menu": "service",
+		"authorization": 14,
+		"position": 300,
+		"type": "external",
+		"routerLink": null,
+		"link": "https://arche.univ-lorraine.fr",
+		"ssoService": null,
+		"translations": [
+			{
+				"content": null,
+				"features_id": 14,
+				"id": 27,
+				"languages_code": "fr",
+				"searchKeywords": [
+					"Arche",
+					"Distanciel"
+				],
+				"shortTitle": null,
+				"title": "Cours en ligne"
+			},
+			{
+				"content": null,
+				"features_id": 14,
+				"id": 28,
+				"languages_code": "en",
+				"searchKeywords": [
+					"Arche"
+				],
+				"shortTitle": null,
+				"title": "Online courses"
+			}
+		],
+		"settings_by_role": []
+	},
+	{
+		"icon": "laptop-outline",
+		"status": "published",
+		"widget": null,
+		"id": 15,
+		"menu": "service",
+		"authorization": 15,
+		"position": 300,
+		"type": "external",
+		"routerLink": null,
+		"link": "https://arche.univ-lorraine.fr/login/index.php?authCAS=CAS&ticket={st}",
+		"ssoService": "https://arche.univ-lorraine.fr/login/index.php?authCAS=CAS",
+		"translations": [
+			{
+				"content": null,
+				"features_id": 15,
+				"id": 29,
+				"languages_code": "fr",
+				"searchKeywords": [
+					"Arche",
+					"Distanciel"
+				],
+				"shortTitle": null,
+				"title": "Cours en ligne"
+			},
+			{
+				"content": null,
+				"features_id": 15,
+				"id": 30,
+				"languages_code": "en",
+				"searchKeywords": [
+					"Arche"
+				],
+				"shortTitle": null,
+				"title": "Online courses"
+			}
+		],
+		"settings_by_role": []
+	},
+	{
+		"icon": "mail-unread-outline",
+		"status": "published",
+		"widget": null,
+		"id": 16,
+		"menu": "service",
+		"authorization": 16,
+		"position": 100,
+		"type": "external",
+		"routerLink": null,
+		"link": "https://mail.univ-lorraine.fr/zimbra/preauth/preauthUL_PERS.jsp?ticket={st}",
+		"ssoService": "https://mail.univ-lorraine.fr/zimbra/preauth/preauthUL_PERS.jsp",
+		"translations": [
+			{
+				"content": null,
+				"features_id": 16,
+				"id": 31,
+				"languages_code": "fr",
+				"searchKeywords": [
+					"Boite aux lettres",
+					"Email",
+					"Emails",
+					"Mail",
+					"Mails"
+				],
+				"shortTitle": null,
+				"title": "Messagerie"
+			},
+			{
+				"content": null,
+				"features_id": 16,
+				"id": 32,
+				"languages_code": "en",
+				"searchKeywords": [
+					"Email",
+					"Emails",
+					"Mail",
+					"Mail box",
+					"Mails"
+				],
+				"shortTitle": null,
+				"title": "Messaging"
+			}
+		],
+		"settings_by_role": []
+	},
+	{
+		"icon": "calendar-number-outline",
+		"status": "published",
+		"widget": null,
+		"id": 17,
+		"menu": "service",
+		"authorization": 17,
+		"position": 400,
+		"type": "external",
+		"routerLink": null,
+		"link": "https://rdv.univ-lorraine.fr/authentification?ticket={st}",
+		"ssoService": "https://rdv.univ-lorraine.fr/authentification",
+		"translations": [
+			{
+				"content": null,
+				"features_id": 17,
+				"id": 33,
+				"languages_code": "fr",
+				"searchKeywords": [
+					"Doodle"
+				],
+				"shortTitle": null,
+				"title": "Rendez-vous"
+			},
+			{
+				"content": null,
+				"features_id": 17,
+				"id": 34,
+				"languages_code": "en",
+				"searchKeywords": [
+					"Doodle"
+				],
+				"shortTitle": null,
+				"title": "Appointment"
+			}
+		],
+		"settings_by_role": []
+	},
+	{
+		"icon": "calendar-outline",
+		"status": "published",
+		"widget": "schedule:next-events",
+		"id": 18,
+		"menu": null,
+		"authorization": 18,
+		"position": null,
+		"type": "internal",
+		"routerLink": "/schedule",
+		"link": null,
+		"ssoService": null,
+		"translations": [
+			{
+				"content": null,
+				"features_id": 18,
+				"id": 35,
+				"languages_code": "fr",
+				"searchKeywords": null,
+				"shortTitle": null,
+				"title": "Vos prochains cours"
+			},
+			{
+				"content": null,
+				"features_id": 18,
+				"id": 36,
+				"languages_code": "en",
+				"searchKeywords": null,
+				"shortTitle": null,
+				"title": "Courses to come"
+			}
+		],
+		"settings_by_role": []
+	},
+	{
+		"icon": "calendar-outline",
+		"status": "published",
+		"widget": "clocking:clocking",
+		"id": 19,
+		"menu": null,
+		"authorization": 19,
+		"position": null,
+		"type": "internal",
+		"routerLink": "/clocking",
+		"link": null,
+		"ssoService": null,
+		"translations": [
+			{
+				"content": "Mes tops de la journée",
+				"features_id": 19,
+				"id": 37,
+				"languages_code": "fr",
+				"searchKeywords": [],
+				"shortTitle": null,
+				"title": "Agatte"
+			},
+			{
+				"content": "My daily tops",
+				"features_id": 19,
+				"id": 38,
+				"languages_code": "en",
+				"searchKeywords": [],
+				"shortTitle": null,
+				"title": "Agatte"
+			}
+		],
+		"settings_by_role": []
+	},
+	{
+		"icon": "battery-charging-outline",
+		"status": "published",
+		"widget": null,
+		"id": 20,
+		"menu": "service",
+		"authorization": 21,
+		"position": 700,
+		"type": "external",
+		"routerLink": null,
+		"link": "http://u2l.fr/pret-portable",
+		"ssoService": null,
+		"translations": [
+			{
+				"content": null,
+				"features_id": 20,
+				"id": 39,
+				"languages_code": "fr",
+				"searchKeywords": [
+					"Informatique",
+					"Ordinateur",
+					"Portable"
+				],
+				"shortTitle": null,
+				"title": "Prêt de matériel"
+			},
+			{
+				"content": null,
+				"features_id": 20,
+				"id": 40,
+				"languages_code": "en",
+				"searchKeywords": [
+					"Computer",
+					"Laptop"
+				],
+				"shortTitle": null,
+				"title": "Equipment loan"
+			}
+		],
+		"settings_by_role": []
+	},
+	{
+		"icon": "basketball-outline",
+		"status": "published",
+		"widget": null,
+		"id": 21,
+		"menu": "service",
+		"authorization": null,
+		"position": 900,
+		"type": "external",
+		"routerLink": null,
+		"link": "https://sport.univ-lorraine.fr",
+		"ssoService": null,
+		"translations": [
+			{
+				"content": null,
+				"features_id": 21,
+				"id": 41,
+				"languages_code": "fr",
+				"searchKeywords": [
+					"sport"
+				],
+				"shortTitle": null,
+				"title": "Catalogue du SUAPS"
+			},
+			{
+				"content": null,
+				"features_id": 21,
+				"id": 42,
+				"languages_code": "en",
+				"searchKeywords": [
+					"sport"
+				],
+				"shortTitle": null,
+				"title": "SUAPS catalog"
+			}
+		],
+		"settings_by_role": []
+	},
+	{
+		"icon": "man-outline",
+		"status": "published",
+		"widget": null,
+		"id": 22,
+		"menu": "service",
+		"authorization": 22,
+		"position": 1500,
+		"type": "external",
+		"routerLink": null,
+		"link": "https://travailleur-isole.univ-lorraine.fr/login/cas?ticket={st}",
+		"ssoService": "https://travailleur-isole.univ-lorraine.fr/login/cas",
+		"translations": [
+			{
+				"content": null,
+				"features_id": 22,
+				"id": 43,
+				"languages_code": "fr",
+				"searchKeywords": null,
+				"shortTitle": null,
+				"title": "Travailleur isolé"
+			},
+			{
+				"content": null,
+				"features_id": 22,
+				"id": 44,
+				"languages_code": "en",
+				"searchKeywords": null,
+				"shortTitle": null,
+				"title": "Lone worker"
+			}
+		],
+		"settings_by_role": []
+	},
+	{
+		"icon": "pricetags-outline",
+		"status": "published",
+		"widget": null,
+		"id": 23,
+		"menu": "service",
+		"authorization": null,
+		"position": 1000,
+		"type": "external",
+		"routerLink": null,
+		"link": "https://formations.univ-lorraine.fr",
+		"ssoService": null,
+		"translations": [
+			{
+				"content": null,
+				"features_id": 23,
+				"id": 45,
+				"languages_code": "fr",
+				"searchKeywords": null,
+				"shortTitle": null,
+				"title": "Catalogue des formations"
+			},
+			{
+				"content": null,
+				"features_id": 23,
+				"id": 46,
+				"languages_code": "en",
+				"searchKeywords": null,
+				"shortTitle": null,
+				"title": "Courses catalog"
+			}
+		],
+		"settings_by_role": []
+	},
+	{
+		"icon": "library-outline",
+		"status": "published",
+		"widget": null,
+		"id": 24,
+		"menu": "service",
+		"authorization": null,
+		"position": 800,
+		"type": "external",
+		"routerLink": null,
+		"link": "https://bu.univ-lorraine.fr",
+		"ssoService": null,
+		"translations": [
+			{
+				"content": null,
+				"features_id": 24,
+				"id": 47,
+				"languages_code": "fr",
+				"searchKeywords": [
+					"BU"
+				],
+				"shortTitle": null,
+				"title": "Bibliothèques universitaires"
+			},
+			{
+				"content": null,
+				"features_id": 24,
+				"id": 48,
+				"languages_code": "en",
+				"searchKeywords": [
+					"BU"
+				],
+				"shortTitle": null,
+				"title": "University libraries"
+			}
+		],
+		"settings_by_role": []
+	},
+	{
+		"icon": "chatbot",
+		"status": "published",
+		"widget": null,
+		"id": 25,
+		"menu": "tabs",
+		"authorization": null,
+		"position": 2,
+		"type": "internal",
+		"routerLink": "/chatbot",
+		"link": null,
+		"ssoService": null,
+		"translations": [
+			{
+				"content": null,
+				"features_id": 25,
+				"id": 49,
+				"languages_code": "fr",
+				"searchKeywords": null,
+				"shortTitle": "Chatbot",
+				"title": "Chatbot"
+			},
+			{
+				"content": null,
+				"features_id": 25,
+				"id": 50,
+				"languages_code": "en",
+				"searchKeywords": null,
+				"shortTitle": "Chatbot",
+				"title": "Chatbot"
+			}
+		],
+		"settings_by_role": []
+	},
+	{
+		"icon": "medkit-outline",
+		"status": "published",
+		"widget": null,
+		"id": 26,
+		"menu": "burger",
+		"authorization": null,
+		"position": 1,
+		"type": "external",
+		"routerLink": null,
+		"link": "https://www.univ-lorraine.fr/covid-19-les-mesures-en-vigueur/",
+		"ssoService": null,
+		"translations": [
+			{
+				"content": null,
+				"features_id": 26,
+				"id": 51,
+				"languages_code": "fr",
+				"searchKeywords": null,
+				"shortTitle": null,
+				"title": "Infos Covid"
+			},
+			{
+				"content": null,
+				"features_id": 26,
+				"id": 52,
+				"languages_code": "en",
+				"searchKeywords": null,
+				"shortTitle": null,
+				"title": "Covid Informations"
+			}
+		],
+		"settings_by_role": []
+	}
+]
