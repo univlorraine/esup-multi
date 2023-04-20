@@ -3,12 +3,16 @@ import { NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { RelativeTimePipe } from './relative-time-pipe';
+import { TruncatePipe } from './truncate-pipe';
 
 @NgModule({
   declarations: [
-    RelativeTimePipe],
+    RelativeTimePipe,
+    TruncatePipe
+  ],
   exports: [
-    RelativeTimePipe
+    RelativeTimePipe,
+    TruncatePipe
   ],
   imports: [
     CommonModule,

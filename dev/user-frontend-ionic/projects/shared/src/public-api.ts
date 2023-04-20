@@ -21,6 +21,7 @@ export * from './lib/navigation/menu.service';
 export * from './lib/navigation/navigation.service';
 export * from './lib/navigation/page-layout.service';
 export * from './lib/pipe/relative-time-pipe';
+export * from './lib/pipe/truncate-pipe';
 export * from './lib/pipe/shared-pipe.module';
 export * from './lib/project-module/project-module.service';
 export * from './lib/project-module/static-menu.service';

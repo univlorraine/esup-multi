@@ -3,6 +3,7 @@ import { first } from 'rxjs/operators';
 import { Course, Event, HiddenCourse } from '../../schedule.repository';
 import { ScheduleService } from '../../schedule.service';
 import { hiddenCourseList$, setHiddenCourseList } from './../../schedule.repository';
+import { Browser } from '@capacitor/browser';
 
 @Component({
   selector: 'app-event-detail',
@@ -32,5 +33,9 @@ export class EventDetailComponent {
       }
       this.scheduleService.emitHideCourseEvt();
     });
+  }
+
+  openCourseURL(url: string) {
+    Browser.open({url});
   }
 }
