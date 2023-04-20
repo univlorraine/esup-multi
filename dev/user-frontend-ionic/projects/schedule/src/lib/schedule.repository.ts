@@ -50,6 +50,7 @@ export interface Event {
       id: string;
       label: string;
       type: string;
+      building: string;
     }
   ];
   teachers: [
