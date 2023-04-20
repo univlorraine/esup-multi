@@ -17,6 +17,7 @@ import microserviceScheduleConfig from './config/microservice-schedule.config';
 import microserviceSocialNetworkConfig from './config/microservice-social-network';
 import microserviceStaticPagesConfig from './config/microservice-static-pages.config';
 import microserviceFeaturesConfig from './config/microservice-features.config';
+import microserviceContactUsConfig from './config/microservice-contact-us.config';
 import { AuthJwtStrategy } from './security/auth-jwt.strategy';
 
 @Module({
@@ -110,6 +111,13 @@ import { AuthJwtStrategy } from './security/auth-jwt.strategy';
         imports: [ConfigModule.forFeature(microserviceStaticPagesConfig)],
         useFactory: (config: ConfigService) =>
           config.get('microservice-static-pages'),
+        inject: [ConfigService],
+      },
+      {
+        name: 'CONTACT_US_SERVICE',
+        imports: [ConfigModule.forFeature(microserviceContactUsConfig)],
+        useFactory: (config: ConfigService) =>
+          config.get('microservice-contact-us'),
         inject: [ConfigService],
       },
     ]),

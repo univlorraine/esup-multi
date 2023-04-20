@@ -33,6 +33,7 @@ export class AppController {
     @Inject('CHATBOT_SERVICE') private chatbotClient: ClientProxy,
     @Inject('SOCIAL_NETWORK_SERVICE') private socialNetworkClient: ClientProxy,
     @Inject('STATIC_PAGES_SERVICE') private staticPagesClient: ClientProxy,
+    @Inject('CONTACT_US_SERVICE') private contactUsClient: ClientProxy,
   ) {}
 
   @Post('/features')
@@ -536,6 +537,26 @@ export class AppController {
     return this.staticPagesClient.send(
       {
         cmd: 'staticPages',
+      },
+      {},
+    );
+  }
+
+  @Post('/contact-us')
+  contactUs(@Body() body) {
+    return this.contactUsClient.send(
+      {
+        cmd: 'contactUs',
+      },
+      body,
+    );
+  }
+
+  @Get('/contact-us')
+  contactUsPageContent() {
+    return this.contactUsClient.send(
+      {
+        cmd: 'contactUsPageContent',
       },
       {},
     );

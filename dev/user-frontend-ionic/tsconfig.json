@@ -57,6 +57,9 @@
       ],
       "@ul/social-network": [
         "dist/social-network"
+      ],
+      "@ul/contact-us": [
+        "dist/contact-us"
       ]
     },
     "downlevelIteration": true,

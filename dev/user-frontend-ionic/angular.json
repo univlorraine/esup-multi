@@ -109,7 +109,12 @@
                 "input": "projects/chatbot/assets/i18n",
                 "output": "/assets/i18n/chatbot"
               },
-                {
+              {
+                "glob": "**/*",
+                "input": "projects/contact-us/assets/i18n",
+                "output": "/assets/i18n/contact-us"
+              },              
+              {
                 "glob": "**/*.svg",
                 "input": "src/assets/icon/flag",
                 "output": "./svg"
@@ -993,6 +998,47 @@
             "karmaConfig": "projects/social-network/karma.conf.js"
           }
         }
+      }
+    },
+    "contact-us": {
+      "projectType": "library",
+      "root": "projects/contact-us",
+      "sourceRoot": "projects/contact-us/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/contact-us/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/contact-us/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/contact-us/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/contact-us/src/test.ts",
+            "tsConfig": "projects/contact-us/tsconfig.spec.json",
+            "karmaConfig": "projects/contact-us/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/contact-us/**/*.ts",
+              "projects/contact-us/**/*.html"
+            ]
+          }
+        }
+
       }
     }
   },
