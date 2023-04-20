@@ -1,3 +1,5 @@
 {
-    "MENU": "Menu"
+    "MENU": "Menu",
+    "VERSION": "Version:",
+    "VERSION_NOT_FOUND": "Indisponible"
 }

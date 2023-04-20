@@ -22,3 +22,15 @@
 .app-icon-5 {
   font-size: var(--icon-5-size) !important;
 }
+
+.app-round-icon {
+    height: var(--app-rounded-button-height);
+    width: var(--app-rounded-button-width);
+    border-radius: 50%;
+    display: 'flex';
+    justify-content: 'center';
+    align-items: 'center';
+    border-style: solid;
+    border-width: var(--app-rounded-button-border-width);
+    margin-inline: 0.625rem;
+}

@@ -19,14 +19,29 @@
     </ion-item>
   </ion-list>
 
-  <app-widget class="menu-section" [widgetId]="'social-network:social-network-widget'"></app-widget>
+  <app-widget  [widgetId]="'social-network:social-network-widget'"></app-widget>
 
 </ion-content>
-
-<ion-footer *ngIf="languages.length > 1">
+<ion-footer class="ion-no-border">
   <ion-row class="ion-justify-content-center">
-    <ion-button *ngFor="let language of languages" fill="clear" (click)="useLanguage(language)">
+    <ion-button class="app-round-icon" fill=“clear”>
+      <ion-icon name="moon"></ion-icon>
+    </ion-button>
+  </ion-row>
+  <ion-row class="ion-justify-content-center">
+    <ion-button *ngFor="let language of languages" fill=“clear” (click)="useLanguage(language)">
       <ion-icon name="{{language}}"></ion-icon>
     </ion-button>
+  </ion-row>
+  <ion-row class="ion-justify-content-center ion-padding-bottom">
+    <ion-label class="app-title-3">
+      {{ 'MENU.VERSION' | translate }}
+      <ng-container *ngIf="appVersion$ | async as version else notFound">
+        {{ version }}
+      </ng-container>
+      <ng-template #notFound>
+        {{ 'MENU.VERSION_NOT_FOUND' | translate }}
+      </ng-template>
+    </ion-label>    
   </ion-row>
 </ion-footer>
