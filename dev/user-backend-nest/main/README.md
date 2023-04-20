@@ -26,3 +26,6 @@
 
 - `SOCIAL_NETWORK_SERVICE_PORT` : Hôte du microservice `social-network`
 - `SOCIAL_NETWORK_SERVICE_HOST` : Port du microservice `social-network`
+
+- `CONTACT_US_SERVICE_PORT` : Hôte du microservice `contact-us`
+- `CONTACT_US_SERVICE_HOST` : Port du microservice `contact-us`

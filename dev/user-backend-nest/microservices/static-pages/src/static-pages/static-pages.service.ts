@@ -6,7 +6,7 @@ import { catchError, map, Observable } from 'rxjs';
 import { DirectusApi } from 'src/config/configuration.interface';
 import {
   DirectusResponse,
-  DirectusStaticPageResultDto
+  DirectusStaticPageResultDto,
 } from './static-pages.dto';
 
 @Injectable()

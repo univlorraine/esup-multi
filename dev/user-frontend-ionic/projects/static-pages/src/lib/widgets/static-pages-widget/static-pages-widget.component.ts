@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { StaticPagesRepository, TranslatedStaticPage } from '../../static-pages.repository';
 import { StaticPagesService } from '../../static-pages.service';
+import { Network } from '@capacitor/network';
 
 @Component({
   selector: 'app-static-pages-widget',
@@ -21,7 +22,11 @@ export class StaticPagesWidgetComponent implements OnInit {
     this.translatedStaticPages$ = this.staticPagesRepository.translatedStaticPages$;
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    if (!(await Network.getStatus()).connected) {
+      return;
+    }
+
     this.staticPagesService.loadAndStoreStaticPages()
       .pipe(
         first()

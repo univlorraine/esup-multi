@@ -27,6 +27,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ErrorModule } from './error/error.module';
 import { PageLayoutsModule } from './page-layouts/page-layouts.module';
+import { ContactUsModule } from '@ul/contact-us';
 
 
 @NgModule({
@@ -81,6 +82,7 @@ import { PageLayoutsModule } from './page-layouts/page-layouts.module';
     MenuModule,
     ChatbotModule,
     StaticPagesModule,
+    ContactUsModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
