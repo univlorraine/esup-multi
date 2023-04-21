@@ -10,6 +10,7 @@ import { AuthEffects } from './auth.effects';
 import { LoginPage } from './login/login.page';
 import { PreferencesComponent } from './preferences/preferences.component';
 import { AuthComponent } from './widget/auth/auth.component';
+import { NotAuthentifiedComponent } from './widget/not-authentified/not-authentified.component';
 
 const initModule = (projectModuleService: ProjectModuleService) =>
   () => projectModuleService.initProjectModule({
@@ -18,6 +19,9 @@ const initModule = (projectModuleService: ProjectModuleService) =>
     widgets: [{
       id: 'auth-widget',
       component: AuthComponent
+    }, {
+      id: 'auth-not-authentified-widget',
+      component: NotAuthentifiedComponent
     }],
     preferencesComponent: PreferencesComponent
   });
@@ -25,7 +29,8 @@ const initModule = (projectModuleService: ProjectModuleService) =>
   declarations: [
     LoginPage,
     PreferencesComponent,
-    AuthComponent
+    AuthComponent,
+    NotAuthentifiedComponent,
   ],
   imports: [
     CommonModule,

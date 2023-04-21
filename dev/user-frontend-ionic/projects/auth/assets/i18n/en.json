@@ -20,6 +20,9 @@
     },
     "WIDGET": {
         "SUBTITLE": "University of Lorraine",
-        "NOT_LOGGED_IN": "Anonymous user"
+        "NOT_LOGGED_IN": "Anonymous user",
+        "NOT_AUTHENTIFIED": {
+            "MESSAGE": "Please log in"
+        }
     }
 }

@@ -944,5 +944,26 @@
 			}
 		],
 		"settings_by_role": []
+	},
+	{
+		"id": 49,
+		"status": "published",
+		"icon": null,
+		"widget": "auth:auth-not-authentified-widget",
+		"menu": null,
+		"position": -100,
+		"type": "internal",
+		"routerLink": "/auth",
+		"link": null,
+		"ssoService": null,
+		"translations": [],
+		"settings_by_role": [],
+		"authorization": {
+			"id": 48,
+			"roles": [
+				"anonymous"
+			],
+			"type": "ALLOW"
+		}
 	}
 ]
