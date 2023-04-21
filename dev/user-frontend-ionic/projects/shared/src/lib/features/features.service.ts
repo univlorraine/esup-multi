@@ -82,13 +82,14 @@ export class FeaturesService {
         feature.translations.find((t) => t.languages_code === currentLanguage) ||
         feature.translations.find((t) => t.languages_code === this.environment.defaultLanguage) ||
         feature.translations[0];
+
       /* eslint-enable @typescript-eslint/naming-convention */
       return {
         ...feature,
-        title: translation.title,
-        shortTitle: translation.shortTitle,
-        content: translation.content,
-        searchKeywords: translation.searchKeywords
+        title: translation?.title,
+        shortTitle: translation?.shortTitle,
+        content: translation?.content,
+        searchKeywords: translation?.searchKeywords
       };
     });
   }

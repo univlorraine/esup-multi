@@ -20,6 +20,9 @@
     },
     "WIDGET": {
         "SUBTITLE": "Université de Lorraine",
-        "NOT_LOGGED_IN": "Utilisateur anonyme"
+        "NOT_LOGGED_IN": "Utilisateur anonyme",
+        "NOT_AUTHENTIFIED": {
+            "MESSAGE": "Veuillez vous identifier"
+        }
     }
 }

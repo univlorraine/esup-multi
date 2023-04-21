@@ -1,0 +1,13 @@
+// // // CSS classes (Use this css classes in HTML on ion-button tags throughout the app).
+
+
+
+.app-button-1 {
+    --background: var(--ion-color-primary-contrast);
+    color: var(--ion-color-primary);
+    border-bottom: var(--app-border-2-width) solid var(--ion-color-quaternary-yellow);
+    outline: var(--app-border-4-width) solid var(--ion-color-primary);
+    padding-right: 0.05rem;
+    --box-shadow: 0px;
+    --border-radio: 0px;
+}

@@ -40,6 +40,9 @@
 /* Logos CSS classes */
 @import "./theme/logos/logos.scss";
 
+/* Button CSS classes */
+@import "./theme/components/button.scss";
+
 body.scanner-active {
     --background: transparent;
     --ion-background-color: transparent;

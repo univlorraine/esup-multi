@@ -98,6 +98,7 @@
   --ion-color-quaternary-contrast-rgb: 0, 0, 0;
   --ion-color-quaternary-shade: #a4c4d1;
   --ion-color-quaternary-tint: #c1e2f0;
+  --ion-color-quaternary-yellow: yellow;
 }
 
 .ion-color-quaternary {
@@ -106,7 +107,8 @@
   --ion-color-contrast: var(--ion-color-quaternary-contrast) !important;
   --ion-color-contrast-rgb: var(--ion-color-quaternary-contrast-rgb) !important;
   --ion-color-shade: var(--ion-color-quaternary-shade) !important;
-  --ion-color-tint: var(--ion-color-quaternary-tint) !important
+  --ion-color-tint: var(--ion-color-quaternary-tint) !important;
+  --ion-color-quaternary-yellow: var(--ion-color-quaternary-yellow) !important;
 }
 
 @media (prefers-color-scheme: dark) {
