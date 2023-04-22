@@ -13,6 +13,13 @@
     "SUBSCRIBE_TO_CHANNEL": "Reactivate alert to incoming channel messages",
     "DELETE": "Delete",
     "DELETE_THIS_NOTIFICATION": "Delete this notification",
-    "LOAD_MORE": "Load more"
+    "LOAD_MORE": "Load more",
+    "ALERT": {
+        "DELETED": "Notification deleted",
+        "CHANNEL": {
+            "UNSUBSCRIBED": "You are unsubscribed from '{channel}' channel",
+            "SUBSCRIBED": "You have subscribed to '{channel}' channel"
+        }
+    }
 }
 

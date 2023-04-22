@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { combineLatest, Observable } from 'rxjs';
-import { catchError, filter, finalize, first, map } from 'rxjs/operators';
+import { catchError, filter, finalize, first, map, tap } from 'rxjs/operators';
 import { NotificationsRepository, TranslatedChannel } from '../notifications.repository';
 import { NotificationsService } from '../notifications.service';
+import { ToastService } from '../toast.service';
 
 interface ChannelSubscription extends TranslatedChannel {
   subscribed: boolean;
@@ -21,7 +22,8 @@ export class SettingsPage implements OnInit {
 
   constructor(
     private notificationsService: NotificationsService,
-    public notificationRepository: NotificationsRepository
+    public notificationRepository: NotificationsRepository,
+    private toastService: ToastService,
   ) {}
 
   ngOnInit() {
@@ -56,9 +58,8 @@ export class SettingsPage implements OnInit {
         if (!this.channelForm.contains(channelSubscription.code)) {
           control =  new FormControl(channelSubscription.subscribed);
           this.channelForm.addControl(`${channelSubscription.code}`, control);
-
           // On ajoute une souscription au changement de valeur sur ce contrôle
-          control.valueChanges.subscribe(() => this.toggleSubscription(channelSubscription.code));
+          control.valueChanges.subscribe(() => this.toggleSubscription(channelSubscription));
         } else {
           // Sinon on met à jour la valeur de ce contrôle avec la nouvelle valeur retournée par l'observable
           control = this.channelForm.get(`${channelSubscription.code}`);
@@ -68,7 +69,10 @@ export class SettingsPage implements OnInit {
     });
   }
 
-  toggleSubscription(channelCode: string) {
+  toggleSubscription(channelSubscription: ChannelSubscription) {
+    const control = this.channelForm.get(channelSubscription.code);
+    const controlValue = control.value;
+
     // On détermine dans le formulaire la liste des codes des channels à envoyer pour désabonnement
     const unsubChannels = Object.keys(this.channelForm.controls)
       .filter(controlName => !this.channelForm.controls[controlName].value);
@@ -80,14 +84,16 @@ export class SettingsPage implements OnInit {
       first(),
       catchError(err => {
         // Si une erreur a lieu, on replace le toggle à sa position initiale
-        const control = this.channelForm.get(channelCode);
-        control.setValue(!control.value, { emitEvent: false });
+        control.setValue(!controlValue, { emitEvent: false });
         throw err;
       }),
       finalize(() => {
         // Si le désabonnement a réussi on met à jour le state avec les nouvelles valeurs
         this.notificationRepository.setUnsubscribedChannels(unsubChannels);
       })
-    ).subscribe();
+    ).subscribe(() => {
+        const toastMessage = controlValue ? 'NOTIFICATIONS.ALERT.CHANNEL.SUBSCRIBED' : 'NOTIFICATIONS.ALERT.CHANNEL.UNSUBSCRIBED';
+        this.toastService.displayToast(toastMessage, channelSubscription.label);
+    });
   }
 }
