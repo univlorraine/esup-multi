@@ -13,5 +13,12 @@
     "SUBSCRIBE_TO_CHANNEL": "Réactiver les alertes des messages du canal",
     "DELETE": "Supprimer",
     "DELETE_THIS_NOTIFICATION": "Supprimer cette notification",
-    "LOAD_MORE": "Charger plus"
+    "LOAD_MORE": "Charger plus",
+    "ALERT": {
+        "DELETED": "Notification supprimée",
+        "CHANNEL": {
+            "UNSUBSCRIBED": "Vous êtes désabonné du canal '{channel}'",
+            "SUBSCRIBED": "Vous êtes abonné au canal '{channel}'"
+        }
+    }
 }

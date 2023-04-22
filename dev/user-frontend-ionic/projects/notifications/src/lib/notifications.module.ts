@@ -43,7 +43,7 @@ const initModule = (projectModuleService: ProjectModuleService,
   declarations: [
     NotificationsPage,
     SettingsPage,
-    NotificationOptionsComponent
+    NotificationOptionsComponent,
   ],
   providers: [{
     provide: APP_INITIALIZER,

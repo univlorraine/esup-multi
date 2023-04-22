@@ -4,6 +4,7 @@ import { combineLatest, Observable } from 'rxjs';
 import { first, map } from 'rxjs/operators';
 import { Notification, NotificationsRepository, TranslatedChannel } from '../notifications.repository';
 import { NotificationsService } from '../notifications.service';
+import { ToastService } from '../toast.service';
 
 interface NotificationOptions {
   filterable: boolean;
@@ -23,11 +24,12 @@ export class NotificationOptionsComponent {
 
   public notifications$: Observable<Notification[]>;
   public notificationOptions$: Observable<NotificationOptions>;
-  unsubscribedChannels: string[] = [];
+  unsubscribedChannelsCodes: string[] = [];
 
   constructor(public platform: Platform,
     private notificationsService: NotificationsService,
-    public notificationRepository: NotificationsRepository
+    public notificationRepository: NotificationsRepository,
+    private toastService: ToastService,
   ) {
 
     this.notificationOptions$ = combineLatest([
@@ -37,7 +39,7 @@ export class NotificationOptionsComponent {
       map(([channels, unsubscribedChannels]) => {
         const channel = channels.find((c) => c.code === this.notification.channel);
         const isSubscribed = !unsubscribedChannels.includes(this.notification.channel);
-        this.unsubscribedChannels = unsubscribedChannels;
+        this.unsubscribedChannelsCodes = unsubscribedChannels;
         return {
           filterable: channels.some(c => c.code === this.notification.channel && channel.filterable),
           channel,
@@ -51,38 +53,43 @@ export class NotificationOptionsComponent {
     this.notificationsService.deleteNotification(id)
       .pipe(
         first(),
-      ).subscribe(() => {
+      ).subscribe(async () => {
         this.notificationRepository.deletNotification(id);
+        this.toastService.displayToast('NOTIFICATIONS.ALERT.DELETED');
         this.closeModal.emit();
       });
   }
 
-  onSubscribeToChannel(channelCode: string){
-    this.onSubscribeOrUnsubscribeChannelClick(channelCode, true);
+  onSubscribeToChannel(channel: TranslatedChannel){
+    this.onSubscribeOrUnsubscribeChannelClick(channel, true);
   }
 
-  onUnsubscribeFromChannel(channelCode: string){
-    this.onSubscribeOrUnsubscribeChannelClick(channelCode, false);
+  onUnsubscribeFromChannel(channel: TranslatedChannel){
+    this.onSubscribeOrUnsubscribeChannelClick(channel, false);
   }
 
-  private onSubscribeOrUnsubscribeChannelClick(channelCode: string, isSubscription: boolean) {
-    if (isSubscription === !this.unsubscribedChannels.includes(channelCode)) {
+  private onSubscribeOrUnsubscribeChannelClick(channel: TranslatedChannel, isSubscription: boolean) {
+    if (isSubscription === !this.unsubscribedChannelsCodes.includes(channel.code)) {
       return;
     } else if (isSubscription) {
-      this.unsubscribedChannels = this.unsubscribedChannels.filter((channel: string) => channel !== channelCode);
+      this.unsubscribedChannelsCodes = this.unsubscribedChannelsCodes.filter(
+        (unsubscribedChannelCode: string) => unsubscribedChannelCode !== channel.code
+      );
     } else {
-      this.unsubscribedChannels.push(channelCode);
+      this.unsubscribedChannelsCodes.push(channel.code);
     }
 
     this.notificationsService.subscribeOrUnsubscribeUserToChannels({
-      channelCodes: this.unsubscribedChannels
+      channelCodes: this.unsubscribedChannelsCodes
     }).pipe(
       first()
-    ).subscribe(() => {
+    ).subscribe(async (status) => {
       if (isSubscription) {
-        this.notificationRepository.subscribeChannel(channelCode);
+        this.notificationRepository.subscribeChannel(channel.code);
+        this.toastService.displayToast('NOTIFICATIONS.ALERT.CHANNEL.SUBSCRIBED', channel.label);
       } else {
-        this.notificationRepository.unsubscribeChannel(channelCode);
+        this.notificationRepository.unsubscribeChannel(channel.code);
+        this.toastService.displayToast('NOTIFICATIONS.ALERT.CHANNEL.UNSUBSCRIBED', channel.label);
       }
     });
   }

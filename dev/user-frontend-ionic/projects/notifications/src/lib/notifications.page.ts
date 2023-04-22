@@ -10,6 +10,7 @@ import { Channel,
   TranslatedChannel, NotificationsRepository } from './notifications.repository';
 
 import { NotificationsService } from './notifications.service';
+import { ToastService } from './toast.service';
 
 const defaultBreakpoint = 0.50;
 
@@ -48,7 +49,8 @@ export class NotificationsPage implements OnDestroy {
     private formBuilder: FormBuilder,
     public pageLayoutService: PageLayoutService,
     public platform: Platform,
-    public notificationRepository: NotificationsRepository
+    public notificationRepository: NotificationsRepository,
+    private toastService: ToastService,
   ) {
     this.translatedChannels$ = this.notificationRepository.translatedChannels$;
     this.channels$ = this.notificationRepository.channels$;
@@ -188,8 +190,9 @@ export class NotificationsPage implements OnDestroy {
     this.notificationsService.deleteNotification(id)
       .pipe(
         first(),
-      ).subscribe(() => {
+      ).subscribe(async (status) => {
         this.notificationRepository.deletNotification(id);
+        this.toastService.displayToast('NOTIFICATIONS.ALERT.DELETED');
         this.dismissModal();
       });
   }
@@ -235,5 +238,4 @@ export class NotificationsPage implements OnDestroy {
     this.modal.initialBreakpoint = breakpoint;
     this.modal.setCurrentBreakpoint(breakpoint);
   }
-
 }

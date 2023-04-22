@@ -14,7 +14,7 @@
 
 <ng-container *ngIf="(notificationOptions$ | async) as options">
   <ion-item button *ngIf="options.isSubscribed && options.filterable"
-    (click)="onUnsubscribeFromChannel(notification.channel)">
+    (click)="onUnsubscribeFromChannel(options.channel)">
     <ion-icon name="close-circle-outline" slot="start"></ion-icon>
     <ion-label class="ion-text-wrap">
       {{ 'NOTIFICATIONS.UNSUBSCRIBE_TO_CHANNEL' | translate }}
@@ -23,7 +23,7 @@
   </ion-item>
 
   <ion-item button *ngIf="!options.isSubscribed && options.filterable"
-    (click)="onSubscribeToChannel(notification.channel)">
+    (click)="onSubscribeToChannel(options.channel)">
     <ion-icon name="notifications-outline" slot="start"></ion-icon>
     <ion-label class="ion-text-wrap">
       {{ 'NOTIFICATIONS.SUBSCRIBE_TO_CHANNEL' | translate }}
