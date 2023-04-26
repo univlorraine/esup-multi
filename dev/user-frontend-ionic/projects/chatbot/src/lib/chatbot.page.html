@@ -2,47 +2,45 @@
 
 <ion-progress-bar *ngIf="isLoading" type="indeterminate" color="primary"></ion-progress-bar>
 
-<ion-content #scrollContent class="ion-padding">
+<ion-content #scrollContent>
   <ion-list #messages>
-    <ion-item *ngFor="let message of messages$ | async"
-      [ngClass]="message.messageType === messageType.bot? 'message-bot' : 'message-user'" class="ion-margin">
-
-      <ion-col *ngIf="message.messageType === messageType.bot">
-        <ion-row>
-          <ion-label *ngIf="!message.card" [innerHTML]="message.text" text-wrap></ion-label>
-          <ion-img *ngIf="message.card" [src]="message.card.file.url"></ion-img>
-        </ion-row>
-
-        <ion-row *ngIf="message.buttons" class="ion-margin-top">
+    <ion-item-group *ngFor="let message of messages$ | async; let index = index">
+      <div class="message-container ion-margin">
+        <div [ngClass]="message.messageType === messageType.bot ? message.card && index === 0 ? 'image-bot' : 'message-bot' : 'message-user'">
+            <ion-row *ngIf="message.messageType === messageType.bot">
+              <ion-label class="app-title-4" *ngIf="!message.card" [innerHTML]="message.text" text-wrap></ion-label>
+              <ion-img *ngIf="message.card" [src]="message.card.file.url"></ion-img>
+            </ion-row>
+            <ion-row *ngIf="message.messageType === messageType.user">
+              <ion-label class="app-title-4" [innerHTML]="message.text" text-wrap></ion-label>
+            </ion-row>
+        </div>
+        <ion-item lines="none" *ngIf="message.messageType === messageType.bot && message.buttons" class="ion-margin-top">
           <ion-col>
-            <ion-item button *ngFor="let button of message.buttons" (click)="onButtonClick(button)"
-              class="buttonRequest ion-margin-bottom">
+            <ion-item  *ngFor="let button of message.buttons" (click)="onButtonClick(button)"
+              class="app-title-4 buttonRequest ion-margin-bottom">
               {{button.title}}
             </ion-item>
           </ion-col>
-        </ion-row>
-      </ion-col>
-
-      <ion-col *ngIf="message.messageType === messageType.user">
-        <ion-row>
-          <ion-label [innerHTML]="message.text" text-wrap></ion-label>
-        </ion-row>
-      </ion-col>
-    </ion-item>
+        </ion-item>
+      </div>
+    </ion-item-group>
   </ion-list>
 </ion-content>
 
-<ion-footer>
-  <ion-item>
-    <ion-input [(ngModel)]="userInput" placeholder="{{'CHATBOT.MESSAGE_PROMPT' | translate}}"
-      (keyup.enter)="onMessageInputEnter()"></ion-input>
+<ion-footer line="none">
+  <ion-item no-lines class="footer">
+      <ion-item lines="full" class="ion-margin input footer-container">
+        <ion-input [(ngModel)]="userInput" class="form-control" placeholder="{{'CHATBOT.MESSAGE_PROMPT' | translate}}"
+        (keyup.enter)="onMessageInputEnter()"></ion-input>
+      </ion-item>
     <ion-buttons slot="end">
       <ion-button ion-button icon-only (click)="clearUserInput()">
-        <ion-icon name="trash"></ion-icon>
+        <ion-icon name="trash" class="icon"></ion-icon>
       </ion-button>
 
       <ion-button ion-button icon-only (click)="textRequest(userInput)">
-        <ion-icon name="send"></ion-icon>
+        <ion-icon name="send" class="icon"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-item>
