@@ -22,7 +22,7 @@ import { ProjectModuleService, translationsLoaderFactory } from '@ul/shared';
 import { StaticPagesModule } from '@ul/static-pages';
 import { FeaturesModule } from '@ul/features';
 import { environment } from '../environments/environment';
-import { ChatbotModule } from './../../projects/chatbot/src/lib/chatbot.module';
+import { ChatbotModule } from '@ul/chatbot';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ErrorModule } from './error/error.module';
