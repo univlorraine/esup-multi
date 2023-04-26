@@ -31,6 +31,7 @@ interface FeatureCommon<SBR> {
   settings_by_role: SBR[];
   menu: string | null;
   icon?: string;
+  color?: string;
 }
 
 export interface ExternalFeature extends FeatureCommon<SettingsByRole> {

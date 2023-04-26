@@ -9,7 +9,7 @@
     {{ 'CLOCKING.YOUR_TIMES' | translate }}: <ion-chip *ngFor="let time of (clocking$ | async)?.times">{{ time }}</ion-chip>
   </ion-row>
   <ion-row class="ion-justify-content-center ion-padding-top">
-    <ion-button *ngIf="!clockInLoading" (click)="onClockIn($event)">{{ 'CLOCKING.CLOCK_IN' | translate }}</ion-button>
+    <ion-button class="app-button-1" *ngIf="!clockInLoading" (click)="onClockIn($event)">{{ 'CLOCKING.CLOCK_IN' | translate }}</ion-button>
     <ion-spinner *ngIf="clockInLoading" name="lines"></ion-spinner>
   </ion-row>
 </ng-container>
