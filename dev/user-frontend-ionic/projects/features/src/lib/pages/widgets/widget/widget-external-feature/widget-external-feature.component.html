@@ -1,4 +1,4 @@
-<ion-card (click)="onClick()">
+<ion-card (click)="onClick()" [ngStyle]="{'background-color': feature.color}">
   <ion-card-header *ngIf="feature.title">
     <ion-card-title>
       <ion-icon [name]="feature.icon" *ngIf="feature.icon"></ion-icon>

@@ -11,6 +11,7 @@ interface TranslatedFeatureCommon {
   id: string;
   type: FeatureType;
   widget: string;
+  color?: string;
   title: string;
   shortTitle?: string;
   content?: string;

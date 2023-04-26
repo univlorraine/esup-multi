@@ -1,5 +1,5 @@
 version: 1
-directus: 9.24.0
+directus: 9.23.1
 vendor: postgres
 collections:
   - collection: authorization
@@ -18,7 +18,7 @@ collections:
       item_duplication_fields: null
       note: null
       singleton: false
-      sort: 10
+      sort: 8
       sort_field: null
       translations: null
       unarchive_value: null
@@ -238,7 +238,7 @@ collections:
       item_duplication_fields: null
       note: null
       singleton: false
-      sort: 8
+      sort: 6
       sort_field: null
       translations: null
       unarchive_value: null
@@ -306,7 +306,7 @@ collections:
         - role
       note: null
       singleton: false
-      sort: 9
+      sort: 7
       sort_field: null
       translations: null
       unarchive_value: null
@@ -1232,6 +1232,44 @@ fields:
       has_auto_increment: false
       foreign_key_table: authorization
       foreign_key_column: id
+  - collection: features
+    field: color
+    type: string
+    meta:
+      collection: features
+      conditions: null
+      display: null
+      display_options: null
+      field: color
+      group: null
+      hidden: false
+      interface: select-color
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: color
+      table: features
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: features
     field: icon
     type: string
