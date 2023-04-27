@@ -1,0 +1,47 @@
+.importantNews {
+    --border-bottom: 0.3rem;
+}
+
+.text-title {
+    margin-top: 2rem;
+    margin-left: 0.625rem;
+    margin-right: 0.7rem;
+}
+
+.text-content {
+    margin-top: 0.875rem;
+    margin-left: 0.625rem;
+    margin-right: 0.7rem;
+    margin-bottom: 2rem;
+}
+
+.link-icon {
+    margin-left: 0.3rem;
+}
+
+.link-button {
+    margin-top: 0.3rem;
+    padding-top: 15px;
+    margin-right: -0.4rem;
+}
+
+ion-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.news-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.border-bottom {
+    border-bottom: var(--app-border-2-width) solid var(--ion-color-quaternary-yellow);
+}
+
+.border {
+    border-top: var(--app-border-4-width) solid var(--ion-color-primary);
+    border-bottom: var(--app-border-4-width) solid var(--ion-color-primary);
+}
