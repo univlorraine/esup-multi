@@ -16,13 +16,16 @@
       We must set 'tab-selected' class manually because ion-tab-bar has troubles to mark tab as selected
       when current route contains '/'. It doesn't work with selected attribute either.
     -->
-    <ion-tab-button *ngFor="let menu of (tabsMenuItems$ | async); let last = last"
-      [ngClass]="{'last-button': last}" (click)="openExternalOrSsoLinkOnly(menu)" [routerLink]="menu.routerLink"
-      routerLinkActive="tab-selected">
+    <ion-tab-button 
+      *ngFor="let menu of (tabsMenuItems$ | async);"
+      (click)="openExternalOrSsoLinkOnly(menu)" 
+      [routerLink]="menu.routerLink" 
+      routerLinkActive="tab-selected"
+    >
       <ion-icon [name]="menu.icon"></ion-icon>
       <ion-text class="short-title">
-        {{(menu.shortTitle || menu.title) |  translate}}</ion-text>
+        {{(menu.shortTitle || menu.title) |  translate}}
+      </ion-text>
     </ion-tab-button>
   </ion-tab-bar>
-
 </ion-tabs>
