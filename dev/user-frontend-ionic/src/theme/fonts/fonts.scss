@@ -24,6 +24,16 @@
     font-family: var(--app-font-primary-static-light) !important;
 }
 
+.app-title-5 {
+    font-size: var(--app-title-5-size) !important;
+    font-family: var(--app-font-primary-static-bold) !important;
+}
+
+.app-title-6 {
+    font-size: var(--app-title-4-size) !important;
+    font-family: var(--app-font-primary-static-bold) !important;
+}
+
 // // // ---------------------
 // // // Text level
 // // // ---------------------
@@ -51,5 +61,10 @@
 
 .app-text-5 {
     font-size: var(--app-text-5-size) !important;
+    font-family: var(--app-font-secondary) !important;
+}
+
+.app-text-6 {
+    font-size: var(--app-text-6-size) !important;
     font-family: var(--app-font-secondary) !important;
 }

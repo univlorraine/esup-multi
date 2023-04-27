@@ -2,32 +2,31 @@
   <ion-spinner name="dots"></ion-spinner>
 </ion-row>
 <ng-container *ngIf="isLoading === false && randomImportantNews$ | async as randomImportantNews">
-  <ion-grid [ngStyle]="{'background-color': randomImportantNews.color}">
-    <ion-row>
+  <ion-grid class="border ion-no-padding">
+    <ion-row [ngStyle]="{'background-color': randomImportantNews.color}">
       <ion-col>
-        <ion-row>
-
-          <ion-col size="6" *ngIf="randomImportantNews.image">
+        <ion-row class="importantNews">
+          <ion-col *ngIf="randomImportantNews.image">
             <ion-img [src]="cmsPublicAssetsEndpoint + randomImportantNews.image"></ion-img>
           </ion-col>
-          <ion-col [size]="randomImportantNews.image ? '6' : '12'"
-            style="display: flex; flex-direction: column; justify-content: space-between;">
-            <ion-label class="ion-text-wrap">
-              <h2>{{randomImportantNews.title}}</h2>
-              <p>{{randomImportantNews.content}}</p>
+          <ion-col class="border-bottom" [size]="randomImportantNews.image ? '6' : '12'"
+            class="news-content">
+            <ion-label color="primary" class="ion-text-wrap text-title">
+              <h2 class="app-title-6">{{randomImportantNews.title}}</h2>
             </ion-label>
-
+            <ion-label color="primary" class="ion-text-wrap text-content">
+              <h3>{{randomImportantNews.content}}</h3>
+            </ion-label>
             <ion-row *ngIf="randomImportantNews.link" class="ion-justify-content-end">
               <ion-button size="small" style="text-transform: none;" color="primary" fill="clear"
                 [routerLink]="randomImportantNews.link.startsWith('/') ? randomImportantNews.link : null"
-                (click)="!randomImportantNews.link.startsWith('/') && onClick(randomImportantNews)">
+                (click)="!randomImportantNews.link.startsWith('/') && onClick(randomImportantNews)" class="app-title-5 link-button">
                 {{ randomImportantNews.buttonLabel }}
-                <ion-icon class="app-icon-5 ion-padding-start" name="arrow-right"></ion-icon>
+                <ion-icon class="app-icon-5 link-icon" name="arrow-right"></ion-icon>
               </ion-button>
             </ion-row>
           </ion-col>
         </ion-row>
-
       </ion-col>
     </ion-row>
   </ion-grid>
