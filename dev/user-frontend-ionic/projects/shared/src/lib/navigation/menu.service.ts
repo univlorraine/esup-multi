@@ -38,7 +38,7 @@ export class MenuService {
 
       // all menu items are a merge between static (from modules) and dynamic (from CMS) menu items
       this.featuresService.translatedFeatures$.pipe(
-        map(features => features.filter(feature => feature.menu)),
+        map(features => features.filter(feature => feature.menu && !feature.widget)),
         map(features => features.map((app: TranslatedFeature) => this.convertTranslatedFeature(app))),
         map((dynamicMenuItems: MenuItem[]) => [
             ...this.allStaticMenuItems,
@@ -48,7 +48,7 @@ export class MenuService {
 
       // burger menu items are a merge between static (from modules) and dynamic (from CMS) menu items
       this.featuresService.translatedFeatures$.pipe(
-        map(features => features.filter(feature => feature.menu === 'burger')),
+        map(features => features.filter(feature => feature.menu === 'burger' && !feature.widget)),
         map(features => features.map((app: TranslatedFeature) => this.convertTranslatedFeature(app))),
         map((dynamicMenuItems: MenuItem[]) => [
             ...this.burgerStaticMenuItems,
@@ -59,7 +59,7 @@ export class MenuService {
 
       // tabs menu items are a merge between static (from modules) and dynamic (from CMS) menu items
       this.featuresService.translatedFeatures$.pipe(
-        map(features => features.filter(feature => feature.menu === 'tabs')),
+        map(features => features.filter(feature => feature.menu === 'tabs' && !feature.widget)),
         map(features => features.map((app: TranslatedFeature) => this.convertTranslatedFeature(app))),
         map((dynamicMenuItems: MenuItem[]) => [
             ...this.tabsStaticMenuItemsStart,
@@ -70,7 +70,7 @@ export class MenuService {
 
       // top menu items are fully dynamic (from CMS)
       this.featuresService.translatedFeatures$.pipe(
-        map(features => features.filter(feature => feature.menu === 'top')),
+        map(features => features.filter(feature => feature.menu === 'top' && !feature.widget)),
         map(features => features.map((app: TranslatedFeature) => this.convertTranslatedFeature(app)))
       ).subscribe(this.topMenuItems$);
     }
