@@ -600,7 +600,7 @@
 		"settings_by_role": [],
 		"authorization": {
 			"roles": [
-				"Anonymous"
+				"anonymous"
 			],
 			"type": "DISALLOW",
 			"id": 15
