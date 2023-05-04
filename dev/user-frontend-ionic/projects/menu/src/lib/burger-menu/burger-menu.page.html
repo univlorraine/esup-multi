@@ -2,9 +2,8 @@
   <app-widget [widgetId]="'auth:auth-widget'"></app-widget>
   <ion-list lines="none" class="menu-section">
     <ion-item button *ngFor="let menu of (staticMenuItems$ | async)" (click)="menuOpenerService.open(menu)">
-
       <ion-icon class="app-icon-4" name="{{menu.icon}}" slot="start"></ion-icon>
-      <ion-label class="app-title-3">{{menu.title | translate}}</ion-label>
+      <ion-label class="app-text-2">{{menu.title | translate}}</ion-label>
     </ion-item>
   </ion-list>
   <ion-list lines="none" class="menu-section">
@@ -15,7 +14,7 @@
   <ion-list lines="none" class="menu-section">
     <ion-item button *ngFor="let menu of (dynamicMenuItems$ | async)" (click)="menuOpenerService.open(menu)">
       <ion-icon class="app-icon-4" name="{{menu.icon}}" slot="start"></ion-icon>
-      <ion-label class="app-title-3">{{menu.title}}</ion-label>
+      <ion-label class="app-text-2">{{menu.title}}</ion-label>
     </ion-item>
   </ion-list>
 
@@ -34,7 +33,7 @@
     </ion-button>
   </ion-row>
   <ion-row class="ion-justify-content-center ion-padding-bottom">
-    <ion-label class="app-title-3">
+    <ion-label class="app-text-3">
       {{ 'MENU.VERSION' | translate }}
       <ng-container *ngIf="appVersion$ | async as version else notFound">
         {{ version }}
