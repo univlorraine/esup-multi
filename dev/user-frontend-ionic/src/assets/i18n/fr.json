@@ -3,7 +3,7 @@
         "MENU": "Accueil"
     },
     "ERROR": {
-        "UNKNOWN": "Erreur innatendue",
+        "UNKNOWN": "Erreur inattendue",
         "UNAUTHENTICATED": {
             "TITLE": "Accès protégé",
             "MESSAGE": "Vous devez être authentifié pour accéder à cette fonctionnalité"
