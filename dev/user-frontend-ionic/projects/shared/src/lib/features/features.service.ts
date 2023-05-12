@@ -19,6 +19,7 @@ interface TranslatedFeatureCommon {
   searchKeywords?: string[];
   menu: FeatureMenuType;
   icon: string;
+  isNew: boolean;
 }
 
 export interface TranslatedInternalFeature extends TranslatedFeatureCommon {
@@ -59,7 +60,7 @@ export class FeaturesService {
     return getAuthToken().pipe(
       first(),
       switchMap((authToken) => this.getFeatures(authToken)),
-      tap(infoList => setFeatures(infoList)),
+      tap(features => setFeatures(features)),
       map(() => null)
     );
   }
@@ -90,7 +91,7 @@ export class FeaturesService {
         title: translation?.title,
         shortTitle: translation?.shortTitle,
         content: translation?.content,
-        searchKeywords: translation?.searchKeywords
+        searchKeywords: translation?.searchKeywords,
       };
     });
   }

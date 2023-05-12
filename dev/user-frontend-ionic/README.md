@@ -166,7 +166,7 @@ npm run module:build-all
 
 Le thème de l'application est défini dans les fichiers suivants :
 
-- **src/theme/variable.scss** : Fichier de configuration Ionic des couleurs du thème. Il contient les couleurs utilisées dans l'application sous forme de variable CSS (Thème "Light" et "Dark").
+- **src/theme/variable.scss** : Fichier de configuration Ionic des couleurs du thème. On retrouve les variables css gérées par Ionic et toutes les autres variables de couleur présentes dans l'application. Il contient les variables CSS du thème "Light" et "Dark".
 
 - **src/theme/app-theme-variables.scss** : Contient les variables CSS custom pour personnaliser l'application. Modifiez les valeurs des variables dans ce fichier et les changements seront pris en compte automatiquement dans toute l'application.
 

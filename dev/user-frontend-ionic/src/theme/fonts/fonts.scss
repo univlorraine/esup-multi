@@ -8,6 +8,7 @@
 .app-title-1 {
   font-size: var(--app-title-1-size) !important;
   font-family: var(--app-font-primary-static-bold) !important;
+  color: var(--app-font-color-primary);
   text-transform: uppercase;
 }
 
@@ -15,11 +16,13 @@
   font-family: var(--app-font-primary-static-light) !important;
   text-transform: none;
 }
+
 // Title-2
 
 .app-title-2 {
   font-size: var(--app-title-2-size) !important;
   font-family: var(--app-font-primary-static-bold) !important;
+  color: var(--app-font-color-primary);
   text-transform: uppercase;
 }
 .app-title-2.light {
@@ -32,6 +35,7 @@
 .app-title-3 {
   font-size: var(--app-title-3-size) !important;
   font-family: var(--app-font-primary-static-bold) !important;
+  color: var(--app-font-color-primary);
   text-transform: uppercase;
 }
 
@@ -44,6 +48,7 @@
 .app-title-4 {
   font-size: var(--app-title-4-size) !important;
   font-family: var(--app-font-primary-static-bold) !important;
+  color: var(--app-font-color-primary);
   text-transform: uppercase;
 }
 
@@ -57,8 +62,8 @@
 .app-title-5 {
   font-size: var(--app-title-5-size) !important;
   font-family: var(--app-font-primary-static-bold) !important;
+  color: var(--app-font-color-primary);
   text-transform: uppercase;
-
 }
 
 .app-title-5.light {
@@ -70,6 +75,7 @@
 .app-title-6 {
   font-size: var(--app-title-6-size) !important;
   font-family: var(--app-font-primary-static-bold) !important;
+  color: var(--app-font-color-primary);
   text-transform: uppercase;
 }
 
@@ -81,6 +87,7 @@
 .app-title-7 {
   font-size: var(--app-title-7-size) !important;
   font-family: var(--app-font-primary-static-bold) !important;
+  color: var(--app-font-color-primary);
   text-transform: uppercase;
 }
 
@@ -97,29 +104,35 @@
   font-size: var(--app-text-1-size) !important;
   font-family: var(--app-font-secondary) !important;
   font-weight: 800 !important;
+  color: var(--app-font-color-primary-medium);
 }
 
 .app-text-2 {
   font-size: var(--app-text-2-size) !important;
   font-family: var(--app-font-secondary) !important;
+  color: var(--app-font-color-primary-medium);
 }
 
 .app-text-3 {
   font-size: var(--app-text-3-size) !important;
   font-family: var(--app-font-secondary) !important;
+  color: var(--app-font-color-primary-medium);
 }
 
 .app-text-4 {
   font-size: var(--app-text-4-size) !important;
   font-family: var(--app-font-secondary) !important;
+  color: var(--app-font-color-primary-medium);
 }
 
 .app-text-5 {
   font-size: var(--app-text-5-size) !important;
   font-family: var(--app-font-secondary) !important;
+  color: var(--app-font-color-primary-medium);
 }
 
 .app-text-6 {
   font-size: var(--app-text-6-size) !important;
   font-family: var(--app-font-secondary) !important;
+  color: var(--app-font-color-primary-medium);
 }

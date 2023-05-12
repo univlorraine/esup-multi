@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { EffectsNgModule } from '@ngneat/effects-ng';
 import { TranslateModule } from '@ngx-translate/core';
 import { ProjectModuleService, SharedComponentsModule } from '@ul/shared';
+import { DragulaModule } from 'ng2-dragula';
 import { FeaturesRoutingModule } from './features-routing.module';
 import { FeaturesEffects } from './features.effects';
 import { ServiceComponent } from './pages/services/service/service.component';
@@ -42,6 +43,7 @@ const initModule = (projectModuleService: ProjectModuleService) =>
     TranslateModule,
     EffectsNgModule.forFeature([FeaturesEffects]),
     SharedComponentsModule,
+    DragulaModule.forRoot()
   ],
   declarations: [
     WidgetComponent,
