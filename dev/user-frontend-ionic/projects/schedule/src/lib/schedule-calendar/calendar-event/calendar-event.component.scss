@@ -1,22 +1,29 @@
 .content {
-    height: 100%;
-    overflow: hidden;
-    color: black;
-    font-size: 0.7rem;
+  height: 100%;
+  overflow: hidden;
+  border: var(--app-border-width-8) solid var(--ion-color-medium);
+  background-color: var(--app-color-component-background-primary);
+  border-radius: var(--app-border-radius-4);
+  padding-bottom: 0.7rem;
+  position: relative;
 }
 
 .eventRows {
-    display: flex;
-    align-items: center;
-    margin-left: 0.2rem;
-    margin-bottom: 0.3rem;
+  max-width: 100% !important;
 }
 
-ion-icon {
-    margin-right: 0.5rem;
+ion-col {
+  padding: 0.1rem;
+}
+
+.event-color {
+  position: absolute;
+  bottom: 0rem;
+  left: 0rem;
+  border-bottom: var(--app-border-width-3) solid;
 }
 
 .courseLabel {
-    font-weight: bold;
-    font-size: 0.9rem;
+  font-weight: bold;
+  width: 100%;
 }

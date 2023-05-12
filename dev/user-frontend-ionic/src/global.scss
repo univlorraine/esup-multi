@@ -43,7 +43,17 @@
 /* Button CSS classes */
 @import "./theme/components/button.scss";
 
+/* External library */
+  /* FullCalendar */
+@import "./theme/external-ui-library/fullcalendar/fullcalendar.scss";
+
+
+
 body.scanner-active {
     --background: transparent;
     --ion-background-color: transparent;
+}
+
+body {
+  --ion-background-color: var(--app-color-background) !important;
 }

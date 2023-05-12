@@ -6,6 +6,7 @@ import allLocales from '@fullcalendar/core/locales-all';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import { IonModal, Platform } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 import { currentLanguage$ } from '@ul/shared';
 import { isAfter, isBefore, sub } from 'date-fns';
 import { EventInput } from 'fullcalendar';
@@ -15,6 +16,7 @@ import { displayedEvents$, Schedule } from '../schedule.repository';
 import { formatDay, ScheduleService } from '../schedule.service';
 import { Event } from './../schedule.repository';
 import { ScheduleCalendarService } from './schedule-calendar.service';
+
 
 const defaultBreakpoint = 0.60;
 
@@ -102,7 +104,8 @@ export class ScheduleCalendarComponent {
     private route: ActivatedRoute,
     private scheduleCalendarService: ScheduleCalendarService,
     private scheduleService: ScheduleService,
-    public platform: Platform) {
+    public platform: Platform,
+    private translate: TranslateService) {
     this.viewType$ = this.route.fragment
       .pipe(
         filter(f => f !== null)
@@ -137,7 +140,6 @@ export class ScheduleCalendarComponent {
     this.getCalendar().addEvent({
       start: event.startDateTime,
       end: event.endDateTime,
-      backgroundColor: event.course.color,
       extendedProps: {
         event
       }
@@ -153,6 +155,8 @@ export class ScheduleCalendarComponent {
         } else {
           this.getCalendar().setOption('locale', lang);
         }
+
+        this.getCalendar().setOption('buttonText',{today: this.translate.instant('SCHEDULE.CALENDAR.TODAY_ABBREVIATION')});
 
         // fix a display bug from @fullcalendar/angular in Ionic
         setTimeout(

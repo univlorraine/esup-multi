@@ -1,0 +1,90 @@
+.fc-view-harness {
+  font-family: var(--app-font-secondary);
+}
+
+.fc .fc-button {
+  background-color: rgb(0, 0, 0) !important;
+  border: none !important;
+  border-radius: 0em !important;
+  font-size: 0.8rem !important;
+  padding: 0.3em 0.40em !important;
+}
+
+.fc-button-today {
+  background-color: rgb(0, 0, 0) !important;
+}
+
+.fc .fc-button:disabled {
+  display: none;
+}
+
+.fc-button-group {
+  margin-right: 1rem !important;
+
+}
+
+.fc-prev-button {
+  margin-right: 0.65rem !important;
+}
+
+.fc-toolbar.fc-header-toolbar {
+  margin-bottom: 0rem !important;
+}
+
+.fc-toolbar-title:first-letter {
+  text-transform: uppercase;
+}
+
+.fc .fc-toolbar-title {
+  margin: 0.8rem !important;
+  margin-left: 1.3rem !important;
+  max-width: 100%;
+  font-size: var(--app-title-3-size) !important;
+  font-family: var(--app-font-primary-static-bold);
+  border-bottom-width: var(--app-border-2-width);
+  border-bottom-style: solid;
+  border-bottom-color: var(--ion-color-secondary);
+  text-transform: uppercase !important;
+}
+
+.fc-col-header-cell-cushion:first-letter {
+  text-transform: uppercase !important;
+}
+
+.fc-day-today {
+  background-color: var(--ion-color-quaternary) !important;
+}
+
+.fc-col-header-cell {
+  background-color: var(--ion-color-light);
+}
+
+.fc-view-harness {
+  border-top: 1px solid black !important;
+
+}
+
+.fc-day-disabled {
+  background: var(--ion-color-light-shade) !important;
+}
+
+.fc-daygrid-day {
+  border: none !important;
+  border-bottom: 1px solid var(--ion-color-medium) !important;
+}
+
+.fc-daygrid-day-number {
+  font-size: 0.8rem;
+}
+
+.fc-daygrid-event-harness {
+  margin-bottom: 5px !important;
+}
+
+.fc-daygrid-day-top {
+  background-color: var(--ion-color-light-tint) !important;
+}
+
+.fc-v-event .fc-event-main{
+  color: var(--app-font-color-primary) !important;
+}

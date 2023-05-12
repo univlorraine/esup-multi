@@ -1,4 +1,4 @@
-<ion-content class="ion-padding-top">
+<ion-content>
 
   <ion-item lines="none" *ngIf="loadScheduleOutOfStateError === true">
     <ion-note *ngIf="errorIsBefore" class="ion-padding" color="danger"> {{ "SCHEDULE.REQUEST_ERROR.BEFORE" | translate }} {{dateError |
@@ -10,7 +10,7 @@
   <full-calendar #calendar [options]="calendarOptions">
     <ng-template #eventContent let-arg>
       <app-calendar-event [event]="arg.event.extendedProps.event"
-        [ngStyle]="{'background-color': arg.event.backgroundColor}"></app-calendar-event>
+        ></app-calendar-event>
     </ng-template>
   </full-calendar>
 

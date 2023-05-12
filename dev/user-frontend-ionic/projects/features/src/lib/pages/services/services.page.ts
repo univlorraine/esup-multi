@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FeaturesService, MenuService, MenuItem } from '@ul/shared';
+import { FeaturesService, MenuItem, MenuService } from '@ul/shared';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -26,7 +26,7 @@ export class ServicesPage {
         // convert into translated features
         map(([features, searchQuery]) =>
           features.filter(feature => (
-            feature.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            feature.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
             feature.content?.toLowerCase().includes(searchQuery.toLowerCase()) ||
             feature.searchKeywords?.some((keyWord) => keyWord.toLowerCase().includes(searchQuery.toLowerCase()))
           ))

@@ -1,139 +1,158 @@
 @font-face {
-    font-family: "MavenProVariableFont";
-    src: url('../assets/font/Maven_Pro/MavenPro-VariableFont_wght.ttf');
+  font-family: "MavenProVariableFont";
+  src: url('../assets/font/Maven_Pro/MavenPro-VariableFont_wght.ttf');
 }
 
 @font-face {
-    font-family: 'RobotoCondensedRegular';
-    src: url('../assets/font/Roboto_Condensed/RobotoCondensed-Regular.ttf') format('truetype');
+  font-family: 'RobotoCondensedRegular';
+  src: url('../assets/font/Roboto_Condensed/RobotoCondensed-Regular.ttf') format('truetype');
 }
 
 @font-face {
-    font-family: 'RobotoCondensedBold';
-    src: url('../assets/font/Roboto_Condensed/RobotoCondensed-Bold.ttf') format('truetype');
+  font-family: 'RobotoCondensedBold';
+  src: url('../assets/font/Roboto_Condensed/RobotoCondensed-Bold.ttf') format('truetype');
 }
 
 @font-face {
-    font-family: 'RobotoCondensedLight';
-    src: url('../assets/font/Roboto_Condensed/RobotoCondensed-Light.ttf') format('truetype');
+  font-family: 'RobotoCondensedLight';
+  src: url('../assets/font/Roboto_Condensed/RobotoCondensed-Light.ttf') format('truetype');
 }
-
 
 :root {
 
-    // // // ---------------------
-    // // // Font CSS variables (Change value here but use variables only in this file).
-    // // // ---------------------
+  // // // ---------------------
+  // // // Font CSS variables (Change value here but use variables only in this file).
+  // // // ---------------------
 
 
-    // // // Font family definition variables
+  // // // Font family definition variables
 
 
-    --app-font-family-base: 'RobotoCondensedRegular',
-        sans-serif;
+  --app-font-family-base: 'RobotoCondensedRegular',
+    sans-serif;
 
-    // Set base font to gloabl application
-    --ion-font-family: var(--app-font-family-base), sans-serif;
+  // Set base font to gloabl application
+  --ion-font-family: var(--app-font-family-base), sans-serif;
 
-    // This next font have static weight in multiple files :
-    --app-font-primary-static-regular: 'RobotoCondensedRegular',
-        sans-serif;
-    --app-font-primary-static-bold: 'RobotoCondensedBold',
-        sans-serif;
-    --app-font-primary-static-light: 'RobotoCondensedLight',
-        sans-serif;
+  // This next font have static weight in multiple files :
+  --app-font-primary-static-regular: 'RobotoCondensedRegular',
+    sans-serif;
+  --app-font-primary-static-bold: 'RobotoCondensedBold',
+    sans-serif;
+  --app-font-primary-static-light: 'RobotoCondensedLight',
+    sans-serif;
 
-    // MavenPro is a weight dynamic font  (one file for multiple weight),
-    // if your font-family is static you must to do like the static font method above
-    // exemple : --app-font-secondary-regular, ...
-    --app-font-secondary: 'MavenProVariableFont',
-        sans-serif;
-
-
-    // // // ---------------------
-    // // // Title size variables (Change value here but use variables only in theme/fonts/fonts.scss)
-    // // // ---------------------
-
-    --app-title-1-size: 1.5rem;
-    --app-title-2-size: 1.325rem;
-    --app-title-3-size: 1.1rem;
-    --app-title-4-size: 1rem;
-    --app-title-5-size: 0.875rem;
-    --app-title-6-size: 0.8rem;
+  // MavenPro is a weight dynamic font  (one file for multiple weight),
+  // if your font-family is static you must to do like the static font method above
+  // exemple : --app-font-secondary-regular, ...
+  --app-font-secondary: 'MavenProVariableFont',
+    sans-serif;
 
 
-    // // // ---------------------
-    // // // Texte size variables (Change value here but use variables only in theme/fonts/fonts.scss)
-    // // // ---------------------
+  // // // ---------------------
+  // // // Title size variables (Change value here but use variables only in theme/fonts/fonts.scss)
+  // // // ---------------------
 
-    --app-text-1-size: 1.5rem;
-    --app-text-2-size: 1.325rem;
-    --app-text-3-size: 1rem;
-    --app-text-4-size: 0.875rem;
-    --app-text-5-size: 1.25rem;
-    --app-text-6-size: 0.75rem;
-
-
-    // // ---------------------
-    // // Icon size variables (Change value here but use variables only in theme/icons/icons.scss)
-    // // ---------------------
-
-    --icon-1-size: 2rem !important;
-    --icon-2-size: 1.75rem !important;
-    --icon-3-size: 1.5rem !important;
-    --icon-4-size: 1.25rem !important;
-    --icon-5-size: 0.75rem !important;
+  --app-title-1-size: 2rem;
+  --app-title-2-size: 1.75rem;
+  --app-title-3-size: 1.5rem;
+  --app-title-4-size: 1.325rem;
+  --app-title-5-size: 1rem;
+  --app-title-6-size: 0.9rem;
+  --app-title-7-size: 0.7rem;
 
 
-    // // ---------------------
-    // // Logo size variables (Change value here but use variables only in theme/logos/logos.scss)
-    // // ---------------------
+  // // // ---------------------
+  // // // Texte size variables (Change value here but use variables only in theme/fonts/fonts.scss)
+  // // // ---------------------
 
-    --logo-1-size: 5rem;
-    --logo-2-size: 4rem;
-    --logo-3-size: 3rem;
-    --logo-4-size: 2rem;
-    --logo-5-size: 1rem;
+  --app-text-1-size: 1.5rem;
+  --app-text-2-size: 1.325rem;
+  --app-text-3-size: 1rem;
+  --app-text-4-size: 0.875rem;
+  --app-text-5-size: 0.75rem;
+  --app-text-6-size: 0.7rem;
 
 
-    // // ---------------------
+  // // ---------------------
+  // // Icon size variables (Change value here but use variables only in theme/icons/icons.scss)
+  // // ---------------------
+
+  --icon-1-size: 2rem !important;
+  --icon-2-size: 1.75rem !important;
+  --icon-3-size: 1.5rem !important;
+  --icon-4-size: 1.25rem !important;
+  --icon-5-size: 0.75rem !important;
+
+
+  // // ---------------------
+  // // Logo size variables (Change value here but use variables only in theme/logos/logos.scss)
+  // // ---------------------
+
+  --logo-1-size: 5rem;
+  --logo-2-size: 4rem;
+  --logo-3-size: 3rem;
+  --logo-4-size: 2rem;
+  --logo-5-size: 1rem;
+
+  // // ---------------------
+  // Button styling variables (Change value here but use variables only in theme/components/button.scss)
+  // // ---------------------
+
+  // Button Rectangular type 1
+  --app-button-1-background-color: white;
+  --app-button-1-bottom-border-width: 0.4rem;
+  --app-button-1-border-bottom-color: var(--ion-color-secondary);
+  --app-button-1-outline-width: 0.12rem;
+  --app-button-1-outline-color: var(--ion-color-primary);
+  --app-button-1-font-family: var(--app-font-primary-static-regular);
+  --app-button-1-font-size: 0.95rem;
+  --app-button-1-height: 2.3rem;
+  --app-button-1-width: 7rem;
+
+
+  // Button Rounded type 1
+  --app-rounded-button-1-background-color: rgb(255, 255, 255);
+  --app-rounded-button-1-height: 2.5rem;
+  --app-rounded-button-1-width: 2.5rem;
+  --app-rounded-button-1-border-width: 0.1rem;
+  --app-rounded-button-1-icon-size: 30px // // ---------------------
     // Box styling variables (Change value here and use variables in SCSS files on all CSS classes needed throughout the app)
     // Example usage: border: var(--app-border-3-width) solid var(--ion-color-primary);
     // // ---------------------
 
     // // // Border width variables
+    --app-border-width-1: 1rem;
+  --app-border-width-2: 0.7rem;
+  --app-border-width-3: 0.5rem;
+  --app-border-width-4: 0.4rem;
+  --app-border-width-5: 0.3rem;
+  --app-border-width-6: 0.2rem;
+  --app-border-width-7: 0.1rem;
+  --app-border-width-8: 0.063rem; // = 1px
 
-    --app-border-1-width: 0.4rem;
-    --app-border-2-width: 0.3rem;
-    --app-border-3-width: 0.2rem;
-    --app-border-4-width: 0.1rem;
+  // // // ---------------------
+  // // // Radius level variables (set to 0 on all variables for no border-radius)
+  // // // ---------------------
+  // Exemple of value :
+  // --app-border-radius-1: 2rem;
+  // --app-border-radius-2: 1rem;
+  // --app-border-radius-3: 0.5rem;
+  // --app-border-radius-4: 0.25rem;
 
-    // // // ---------------------
-    // // // Radius level variables
-    // // // ---------------------
+  --app-border-radius-1: 0rem;
+  --app-border-radius-2: 0rem;
+  --app-border-radius-3: 0rem;
+  --app-border-radius-4: 0rem;
 
-    --app-border-1-radius: 2rem;
-    --app-border-2-radius: 1rem;
-    --app-border-3-radius: 0.5rem;
-    --app-border-4-radius: 0.25rem;
+  // // // ---------------------
+  // // // Underline variables
+  // // // ---------------------
 
-     // // // ---------------------
-    // // // Chatbot variables
-    // // // ---------------------
-    --app-chatbot-first-image-margin-bottom: -1.25rem;
+  --app-underline-offset-1: 0.3rem;
 
-    // // // ---------------------
-    // // // Underline variables
-    // // // ---------------------
-
-    --app-underline-offset-1: 0.3rem;
-
-    // // // ---------------------
-    // // // Rounded button variables
-    // // // ---------------------
-
-    --app-rounded-button-height: 3.125rem;
-    --app-rounded-button-width: 3.125rem;
-    --app-rounded-button-border-width: 0.063rem;
-
+  // // // ---------------------
+  // // // Chatbot variables
+  // // // ---------------------
+  --app-chatbot-first-image-margin-bottom: -1.25rem;
 }

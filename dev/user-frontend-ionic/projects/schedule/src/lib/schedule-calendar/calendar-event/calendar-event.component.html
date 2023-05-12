@@ -1,15 +1,17 @@
 <ion-row class="content">
   <ion-col>
-    <ion-row>
-      <ion-text class="eventRows courseLabel">{{event.course.label}}</ion-text>
+    <ion-row class="eventRows">
+      <ion-text class="courseLabel ion-text-wrap app-text-5">{{event.course.label}}</ion-text>
     </ion-row>
-    <ion-row class="eventRows" *ngFor="let room of event.rooms">
+    <!-- Le code en commentaire suivant sera nécéssaire au prohain ticket pour afficher cette partie lors de la vue semaine et journalière -->
+    <!-- <ion-row class="eventRows" *ngFor="let room of event.rooms">
       <ion-icon name="business-outline" size="small"></ion-icon>
       <ion-text class="ion-text-justify">{{room.label}}</ion-text>
-    </ion-row>
-    <ion-row class="eventRows ion-text-center" *ngFor="let teacher of event.teachers">
+    </ion-row> -->
+    <!-- <ion-row class="eventRows ion-text-center" *ngFor="let teacher of event.teachers">
       <ion-icon name="man-outline" size="small"></ion-icon>
       <ion-text>{{teacher.displayname}}</ion-text>
-    </ion-row>
+    </ion-row> -->
   </ion-col>
+  <ion-col class="event-color" [style.border-bottom-color]="event.course.color"></ion-col>
 </ion-row>
