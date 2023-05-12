@@ -4,7 +4,7 @@
       {{displayShortenedDate ? (event.startDateTime | shortenedDate) : ""}} {{event.startDateTime | localHour}} -
       {{event.endDateTime | localHour}}
     </ion-card-title>
-    <ion-button fill="clear" size="small" class="ion-text-center" class="hide-event-icon" (click)="hideAllSimilarCourse(event.course)"
+    <ion-button fill="clear" size="small" class="ion-text-center hide-event-icon" (click)="hideAllSimilarCourse(event.course)"
       *ngIf="showHideButton"
       [disabled]="disableHideCourseButton">
       <ion-icon name="eye-off-outline"></ion-icon>
@@ -12,31 +12,34 @@
   </ion-card-header>
 
   <ion-card-content>
-    <ion-row>
-
-      <ion-col>
-        <ion-text class="card-labels course-label">{{event.course.label}}</ion-text>
-        <ion-row class="card-labels" *ngFor="let room of event.rooms">
-          <ion-icon name="business-outline"></ion-icon>
-          <ion-text>{{room.label}} - {{room.building}}</ion-text>
-        </ion-row>
-        <ion-row class="card-labels" *ngFor="let teacher of event.teachers">
-          <ion-icon name="man-outline"></ion-icon>
-          <ion-text>{{teacher.displayname}}</ion-text>
-        </ion-row>
-        <ion-row class="card-labels" *ngFor="let group of event.groups">
-          <ion-icon name="people-circle-outline"></ion-icon>
-          <ion-text>{{group.label}}</ion-text>
-        </ion-row>
-        <ion-row class="card-labels" *ngIf="event.course.url" (click)="openCourseURL(event.course.url)">
-          <ion-icon name="link-outline"></ion-icon>
-          <ion-text>{{ event.course.url | truncate:35 }}</ion-text>
-        </ion-row>
-      </ion-col>
-
-      <ion-col [ngStyle]="{'background-color': event.course.color}" size="0.2"></ion-col>
-
-    </ion-row>
+      <ion-row>
+        <ion-col size="11.5">
+          <ion-row class="card-labels">
+            <ion-text class="course-label">{{event.course.label}}</ion-text>
+          </ion-row>
+          <ion-row class="card-labels" *ngFor="let room of event.rooms">
+            <ion-icon name="business-outline"></ion-icon>
+            <ion-text>{{room.label}} - {{room.building}}</ion-text>
+          </ion-row>
+          <ion-row class="card-labels" *ngFor="let teacher of event.teachers">
+            <ion-icon name="man-outline"></ion-icon>
+            <ion-text>{{teacher.displayname}}</ion-text>
+          </ion-row>
+          <ion-row class="card-labels" *ngFor="let group of event.groups">
+            <ion-icon name="people-circle-outline"></ion-icon>
+            <ion-text>{{group.label}}</ion-text>
+          </ion-row>
+          <ion-row class="card-labels" *ngIf="event.course.url" (click)="openCourseURL(event.course.url)">
+            <ion-icon name="link-outline"></ion-icon>
+            <ion-text>{{ event.course.url }}</ion-text>
+          </ion-row>
+        </ion-col>
+        <ion-col
+          [ngStyle]="{'background-color': event.course.color}"
+          size="auto"
+          class="course-type"
+        ></ion-col>
+      </ion-row>
 
   </ion-card-content>
 
