@@ -20,7 +20,8 @@
         "HIDDEN_COURSE": "Hidden course"
     },
     "CALENDAR": {
-        "CLOSE": "Close"
+        "CLOSE": "Close",
+        "TODAY_ABBREVIATION": "Tday"
     },
     "LIST": {
         "SEE_MORE": "See more"

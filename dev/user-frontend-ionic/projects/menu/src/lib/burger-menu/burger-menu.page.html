@@ -3,7 +3,7 @@
   <ion-list lines="none" class="menu-section">
     <ion-item button *ngFor="let menu of (staticMenuItems$ | async)" (click)="menuOpenerService.open(menu)">
       <ion-icon class="app-icon-4" name="{{menu.icon}}" slot="start"></ion-icon>
-      <ion-label class="app-text-2">{{menu.title | translate}}</ion-label>
+      <ion-label class="app-title-5 light">{{menu.title | translate}}</ion-label>
     </ion-item>
   </ion-list>
   <ion-list lines="none" class="menu-section">
@@ -14,7 +14,7 @@
   <ion-list lines="none" class="menu-section">
     <ion-item button *ngFor="let menu of (dynamicMenuItems$ | async)" (click)="menuOpenerService.open(menu)">
       <ion-icon class="app-icon-4" name="{{menu.icon}}" slot="start"></ion-icon>
-      <ion-label class="app-text-2">{{menu.title}}</ion-label>
+      <ion-label class="app-title-5 light">{{menu.title}}</ion-label>
     </ion-item>
   </ion-list>
 
@@ -23,8 +23,8 @@
 </ion-content>
 <ion-footer class="ion-no-border">
   <ion-row class="ion-justify-content-center">
-    <ion-button class="app-round-icon" fill=“clear”>
-      <ion-icon name="moon"></ion-icon>
+    <ion-button shape="round" class="app-round-button-1 ion-no-padding ion-no-margin">
+      <ion-icon name="moon" slot="icon-only"></ion-icon>
     </ion-button>
   </ion-row>
   <ion-row class="ion-justify-content-center">
@@ -33,7 +33,7 @@
     </ion-button>
   </ion-row>
   <ion-row class="ion-justify-content-center ion-padding-bottom">
-    <ion-label class="app-text-3">
+    <ion-label class="app-title-6 light">
       {{ 'MENU.VERSION' | translate }}
       <ng-container *ngIf="appVersion$ | async as version else notFound">
         {{ version }}
@@ -41,6 +41,6 @@
       <ng-template #notFound>
         {{ 'MENU.VERSION_NOT_FOUND' | translate }}
       </ng-template>
-    </ion-label>    
+    </ion-label>
   </ion-row>
 </ion-footer>

@@ -20,7 +20,8 @@
         "HIDDEN_COURSE": "Cours Masqués"
     },
     "CALENDAR": {
-        "CLOSE": "Fermer"
+        "CLOSE": "Fermer",
+        "TODAY_ABBREVIATION": "Auj."
     },
     "LIST": {
         "SEE_MORE": "Voir plus"

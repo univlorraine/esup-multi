@@ -1,25 +1,45 @@
-// Ionic colors Variables and Theming. For more info, please see:
+// Colors Variables and Ionic Theming. For more info, please see:
 // http://ionicframework.com/docs/theming/
 
 :root {
 
-  /** Ionic CSS colors Variables **/
-  
+  /**  Our custom app colors variables **/
+
+  // // ---------------------
+  // Change value here and use variables in SCSS files on all CSS classes needed throughout the app)
+  // Example usage: .css-class { --ion-background-color: var(--app-component-background-primary) !important; }
+  // // ---------------------
+
+  /** Background of the app **/
+  --app-color-background: #ffffff;
+  /** Component background (if color is different from Ionic colors Theming below). Add colors if necessary**/
+  --app-color-component-background-primary: #ffffff;
+
+  // // // ---------------------
+  // // // Font color variables (Change value here but use variables only in theme/fonts/fonts.scss)
+  // // // ---------------------
+
+  --app-font-color-primary: #050301;
+  --app-font-color-primary-medium: #515151;
+
+
+  /** Ionic CSS colors variables theming **/
+
   // ---------------------
   // Change value here with the Ionic Colors generator https://ionicframework.com/docs/theming/color-generator
   //  Two ways to use this variables :
   // - In SCSS files on all CSS classes needed throughout the app. Example: background-color: var(--ion-color-primary);
-  // - On Ionic HTML components when they have a color property. Example: <ion-toolbar color="primary"> 
+  // - On Ionic HTML components when they have a color property. Example: <ion-toolbar color="primary">
   // To add a new default color, please see below.
   // ---------------------
 
   /** primary **/
-  --ion-color-primary: #050301;
-  --ion-color-primary-rgb: 5, 3, 1;
+  --ion-color-primary: #000000;
+  --ion-color-primary-rgb: 0, 0, 0;
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 255, 255, 255;
-  --ion-color-primary-shade: #040301;
-  --ion-color-primary-tint: #1e1c1a;
+  --ion-color-primary-shade: #000000;
+  --ion-color-primary-tint: #1a1a1a;
 
   /** secondary **/
   --ion-color-secondary: #ffef65;
@@ -62,34 +82,34 @@
   --ion-color-danger-tint: #ed576b;
 
   /** dark **/
-  --ion-color-dark: #222428;
-  --ion-color-dark-rgb: 34, 36, 40;
+  --ion-color-dark: #222222;
+  --ion-color-dark-rgb: 34, 34, 34;
   --ion-color-dark-contrast: #ffffff;
   --ion-color-dark-contrast-rgb: 255, 255, 255;
-  --ion-color-dark-shade: #1e2023;
-  --ion-color-dark-tint: #383a3e;
+  --ion-color-dark-shade: #1e1e1e;
+  --ion-color-dark-tint: #383838;
 
   /** medium **/
-  --ion-color-medium: #707277;
-   --ion-color-medium-rgb: 112,114,119;
-   --ion-color-medium-contrast: #ffffff;
-   --ion-color-medium-contrast-rgb: 255,255,255;
-   --ion-color-medium-shade: #636469;
-   --ion-color-medium-tint: #7e8085;
-
+	--ion-color-medium: #575760;
+	--ion-color-medium-rgb: 87,87,96;
+	--ion-color-medium-contrast: #ffffff;
+	--ion-color-medium-contrast-rgb: 255,255,255;
+	--ion-color-medium-shade: #4d4d54;
+	--ion-color-medium-tint: #686870;
 
   /** light **/
-  --ion-color-light: #f4f5f8;
-  --ion-color-light-rgb: 244, 245, 248;
+  --ion-color-light: #f5f8fb;
+  --ion-color-light-rgb: 247, 248, 249;
   --ion-color-light-contrast: #000000;
   --ion-color-light-contrast-rgb: 0, 0, 0;
-  --ion-color-light-shade: #d7d8da;
-  --ion-color-light-tint: #f5f6f9;
+  --ion-color-light-shade: #d9dadb;
+  --ion-color-light-tint: #f8f9fa;
 
-/**
+  /**
  * The next colors are added as a new Ionic default color parameter.
  * You can name it anything you want, for example: quaternary.
- * You can use it in a component just like the default Ionic colors above by specifying the color attribute: <ion-toolbar color='quaternary'>
+ * You can use it in a component just like the default Ionic colors above by specifying
+ * the color attribute: <ion-toolbar color='quaternary'> or with var() in scss files
  */
 
   /** quaternary **/
@@ -99,7 +119,6 @@
   --ion-color-quaternary-contrast-rgb: 0, 0, 0;
   --ion-color-quaternary-shade: #a4c4d1;
   --ion-color-quaternary-tint: #c1e2f0;
-  --ion-color-quaternary-yellow: yellow;
 }
 
 .ion-color-quaternary {
@@ -109,7 +128,6 @@
   --ion-color-contrast-rgb: var(--ion-color-quaternary-contrast-rgb) !important;
   --ion-color-shade: var(--ion-color-quaternary-shade) !important;
   --ion-color-tint: var(--ion-color-quaternary-tint) !important;
-  --ion-color-quaternary-yellow: var(--ion-color-quaternary-yellow) !important;
 }
 
 @media (prefers-color-scheme: dark) {

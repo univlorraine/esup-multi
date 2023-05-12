@@ -8,17 +8,17 @@
       <div class="message-container ion-margin">
         <div [ngClass]="message.messageType === messageType.bot ? message.card && index === 0 ? 'image-bot' : 'message-bot' : 'message-user'">
             <ion-row *ngIf="message.messageType === messageType.bot">
-              <ion-label class="app-title-4" *ngIf="!message.card" [innerHTML]="message.text" text-wrap></ion-label>
+              <ion-label class="app-text-4" *ngIf="!message.card" [innerHTML]="message.text" text-wrap></ion-label>
               <ion-img *ngIf="message.card" [src]="message.card.file.url"></ion-img>
             </ion-row>
             <ion-row *ngIf="message.messageType === messageType.user">
-              <ion-label class="app-title-4" [innerHTML]="message.text" text-wrap></ion-label>
+              <ion-label class="app-text-4" [innerHTML]="message.text" text-wrap></ion-label>
             </ion-row>
         </div>
         <ion-item lines="none" *ngIf="message.messageType === messageType.bot && message.buttons" class="ion-margin-top">
           <ion-col>
             <ion-item  *ngFor="let button of message.buttons" (click)="onButtonClick(button)"
-              class="app-title-4 buttonRequest ion-margin-bottom">
+              class="app-text-4 buttonRequest ion-margin-bottom">
               {{button.title}}
             </ion-item>
           </ion-col>

@@ -38,10 +38,10 @@ ion-img {
 }
 
 .border-bottom {
-    border-bottom: var(--app-border-2-width) solid var(--ion-color-quaternary-yellow);
+    border-bottom: var(--app-border-width-5) solid var(--ion-color-secondary) !important;
 }
 
 .border {
-    border-top: var(--app-border-4-width) solid var(--ion-color-primary);
-    border-bottom: var(--app-border-4-width) solid var(--ion-color-primary);
+    border-top: var(--app-border-width-7) solid var(--ion-color-primary) !important;
+    border-bottom: var(--app-border-width-7) solid var(--ion-color-primary) !important;
 }
