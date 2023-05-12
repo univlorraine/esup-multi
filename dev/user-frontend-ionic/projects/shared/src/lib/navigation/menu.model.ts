@@ -29,9 +29,14 @@ export interface MenuItemSsoLink extends MenuItemLinkCommon {
 export type MenuItemLink = MenuItemRouterLink | MenuItemExternalLink | MenuItemSsoLink;
 
 export interface MenuItem {
-    icon: string;
-    title: string;
-    shortTitle?: string;
-    link: MenuItemLink;
-    type: MenuItemType;
+  icon: string;
+  title: string;
+  shortTitle?: string;
+  link: MenuItemLink;
+  type: MenuItemType;
+}
+
+export interface ServiceMenuItem extends MenuItem {
+  id: string;
+  isNew?: boolean;
 }

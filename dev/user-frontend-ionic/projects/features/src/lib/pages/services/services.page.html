@@ -1,9 +1,30 @@
-<ion-content *ngIf="(featuresIsEmpty$ | async) === false">
-  <ion-searchbar show-clear-button="focus" [placeholder]="'FEATURES.SEARCHBAR_MESSAGE' | translate" (ionChange)="handleChange($event)"></ion-searchbar>
-  <div class="services">
-    <app-service *ngFor="let menuItem of (menuItems$ | async)" [menuItem]="menuItem">
-    </app-service>
+<ion-content id="scrollContent" *ngIf="(featuresIsEmpty$ | async) === false && (menuItems$ | async)">
+
+  <ion-searchbar show-clear-button="focus" [placeholder]="'FEATURES.SEARCHBAR_MESSAGE' | translate"
+    (ionChange)="handleChange($event)" [disabled]="draggableIsOn"></ion-searchbar>
+
+  <ion-fab *ngIf="draggableIsOn" slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button size="small" (click)="deactivateDrag()" color="secondary">
+      <ion-icon name="checkmark-circle-outline" color="primary"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <div #servicesContainer class="services" dragula="SERVICES" [(dragulaModel)]="menuItems">
+
+    <div #draggableServices class="not-draggable draggableServices" *ngFor="let menuItem of menuItems;">
+
+      <ion-button shape="round" size="small" *ngIf="draggableIsOn" color="light"
+        class="drag-icon-row ion-no-padding ion-no-margin" dragHandle>
+        <ion-icon class="drag-icon" name="move-outline" dragHandle slot="icon-only"
+          size="small"></ion-icon></ion-button>
+
+      <ion-badge class="new app-title-7" *ngIf="menuItem.isNew">{{ "FEATURES.NEW" | translate }}</ion-badge>
+
+      <app-service [menuItem]="menuItem" [draggableIsOn]="draggableIsOn"></app-service>
+
+    </div>
   </div>
+
 </ion-content>
 
 <ion-content class="ion-padding" *ngIf="(featuresIsEmpty$ | async)">

@@ -5,7 +5,7 @@ import { FeatureType } from '../features/features.repository';
 import { FeaturesService, TranslatedExternalFeature, TranslatedFeature, TranslatedInternalFeature } from '../features/features.service';
 import { ProjectModuleService } from '../project-module/project-module.service';
 import { StaticMenuItem, StaticMenuType } from '../project-module/static-menu.service';
-import { MenuItem, MenuItemLink, MenuItemLinkType } from './menu.model';
+import { MenuItem, MenuItemLink, MenuItemLinkType, ServiceMenuItem } from './menu.model';
 
 
 
@@ -75,7 +75,7 @@ export class MenuService {
       ).subscribe(this.topMenuItems$);
     }
 
-    public convertTranslatedFeature(feature: TranslatedFeature): MenuItem {
+    public convertTranslatedFeature(feature: TranslatedFeature): ServiceMenuItem {
       switch(feature.type) {
         case FeatureType.internal:
           return this.convertTranslatedInternalFeature(feature);
@@ -103,12 +103,13 @@ export class MenuService {
             type: MenuItemLinkType.router,
             routerLink: staticMenuItem.routerLink
         },
-        type: 'static',
+        type: 'static'
       };
     }
 
-    private convertTranslatedInternalFeature(app: TranslatedInternalFeature): MenuItem {
+    private convertTranslatedInternalFeature(app: TranslatedInternalFeature): ServiceMenuItem {
       return {
+        ...app,
         icon: app.icon,
         title: app.title,
         shortTitle: app.shortTitle,
@@ -116,12 +117,12 @@ export class MenuService {
           type: MenuItemLinkType.router,
           routerLink: app.routerLink
         },
-        type: 'dynamic',
+        type: 'dynamic'
       };
     }
 
 
-    private convertTranslatedExternalFeature(app: TranslatedExternalFeature): MenuItem {
+    private convertTranslatedExternalFeature(app: TranslatedExternalFeature): ServiceMenuItem {
       const link: MenuItemLink = (app.ssoService) ?
         {
           type: MenuItemLinkType.sso,
@@ -134,6 +135,7 @@ export class MenuService {
         };
 
       return {
+        ...app,
         icon: app.icon,
         title: app.title,
         shortTitle: app.shortTitle,

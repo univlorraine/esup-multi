@@ -4,5 +4,6 @@
         "SERVICES": "Services"
     },
     "NO_DATA": "No data available",
-    "SEARCHBAR_MESSAGE": "Search a service"
+    "SEARCHBAR_MESSAGE": "Search a service",
+    "NEW": "NEW !"
 }

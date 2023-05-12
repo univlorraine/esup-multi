@@ -1,4 +1,4 @@
-<ion-card (click)="menuOpenerService.open(menuItem)">
+<ion-card (click)="draggableIsOn ? null : open(menuItem)">
     <ion-card-header class="ion-text-center">
       <ion-icon size="large" [name]="menuItem.icon" class="ion-align-self-center"></ion-icon>
     </ion-card-header>
