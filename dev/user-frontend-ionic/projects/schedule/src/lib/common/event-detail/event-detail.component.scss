@@ -1,18 +1,32 @@
+ion-row {
+  ion-text:not(.course-label) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 85%;
+  }
+}
+
+ion-icon {
+  font-size: 1.3rem;
+  margin-right: 0.5rem;
+  margin-left: 0.2rem;
+}
+
+
 .card-labels{
     margin-bottom: 0.3rem;
 }
 
-ion-icon {
-    font-size: 1.3rem;
-    margin-right: 0.5rem;
-    margin-left: 0.2rem;
-  }
-
 .course-label{
     font-size: 1.2rem;
-    font-style: bold;
+    font-weight: bold;
     color: black;
 
+}
+
+.course-type {
+  max-width: 10px;
 }
 
 .hide-event-icon{
