@@ -543,13 +543,33 @@ export class AppController {
   }
 
   @Post('/contact-us')
-  contactUs(@Body() body) {
-    return this.contactUsClient.send(
-      {
-        cmd: 'contactUs',
-      },
-      body,
-    );
+  contactUs(@Body() body, @Request() request) {
+    return this.authClient
+      .send(
+        {
+          cmd: 'getUser',
+        },
+        body.userData,
+      )
+      .pipe(
+        concatMap((user) => {
+          return this.contactUsClient.send(
+            {
+              cmd: 'contactUs',
+            },
+            {
+              from: body.from,
+              subject: body.subject,
+              text: body.text,
+              userData: {
+                username: user ? user.username : 'anonymous',
+                userAgent: request.headers['user-agent'],
+                ...(({ authToken, ...rest }) => rest)(body.userData),
+              }
+            },
+          );
+        }),
+      );
   }
 
   @Get('/contact-us')
