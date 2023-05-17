@@ -2,11 +2,9 @@
 <app-header></app-header>
 
 <ion-content *ngIf="(userAndCardsData$ | async) as userCards">
-
   <ion-content *ngIf="!userCards.errors || userCards.errors.length === 0">
-
     <ion-content *ngIf="!userCards.cards.staffCard">
-      <ion-card class="card" *ngFor="let card of userCards.cards | keyvalue" [routerLink]="['card', card.key]">
+      <ion-card class="card" *ngFor="let card of userCards.cards | keyvalue" (click)="openModal(card.key)">
         <ion-card-header>
           <ion-card-subtitle> </ion-card-subtitle>
           <ion-card-title class="warning">
@@ -18,6 +16,8 @@
           <app-eu-student-card *ngIf="card.key === 'euStudentCard'" [userAndCardsData]="userCards"></app-eu-student-card>
         </ion-card-content>
       </ion-card>
+
+      <app-card-modal [userAndCardsData]="userCards"></app-card-modal>
     </ion-content>
 
     <ion-content *ngIf="userCards.cards.staffCard">
@@ -27,15 +27,13 @@
         </ion-card-content>
       </ion-card>
       <ion-row class="ion-justify-content-center">
-      <qrcode  *ngIf="userCards.cards.staffCard.qrCode" [qrdata]="userCards.cards.staffCard.qrCode.value" [errorCorrectionLevel]="'M'"
+      <qrcode *ngIf="userCards.cards.staffCard.qrCode" [qrdata]="userCards.cards.staffCard.qrCode.value" [errorCorrectionLevel]="'M'"
         [width]="400"></qrcode>
       </ion-row>
     </ion-content>
-
   </ion-content>
 
   <ion-content *ngIf="userCards.errors && userCards.errors.length > 0">
-
     <ion-content class="ion-padding" *ngIf="!userCards.cards.staffCard">
       <ion-note class="column" *ngFor="let error of userCards.errors"> {{ 'CARDS.ERRORS_STUDENT.' + error | translate}}</ion-note>
     </ion-content>
@@ -43,9 +41,7 @@
     <ion-content class="ion-padding" *ngIf="userCards.cards.staffCard">
       <ion-note class="column" *ngFor="let error of userCards.errors"> {{ 'CARDS.ERRORS_STAFF.' + error | translate}}</ion-note>
     </ion-content>
-
   </ion-content>
-
 </ion-content>
 
 <ion-content class="ion-padding" *ngIf="(userAndCardsData$ | async) === null && !isLoading">

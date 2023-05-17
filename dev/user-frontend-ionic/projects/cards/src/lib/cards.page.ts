@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import { AuthenticatedUser, getAuthToken } from '@ul/shared';
 import { setUserAndCardsData, UserAndCardsData, userAndCardsData$ } from './cards.repository';
-
 import { Network } from '@capacitor/network';
 import { Observable, Subscription } from 'rxjs';
 import { filter, finalize, first, switchMap } from 'rxjs/operators';
 import { CardsService } from './cards.service';
 import { ScreenService } from './screen.service';
+import { CardModalComponent } from './card/card-modal.component';
 
 @Component({
   selector: 'app-cards',
@@ -14,16 +14,21 @@ import { ScreenService } from './screen.service';
   styleUrls: ['./cards.page.scss']
 })
 export class CardsPage {
-
+  @ViewChild(CardModalComponent) cardModalComponent: CardModalComponent;
   public authenticatedUser$: Observable<AuthenticatedUser>;
   public userAndCardsData$: Observable<UserAndCardsData> = userAndCardsData$;
   public isLoading = false;
   private userAndCardsDataSubscription: Subscription;
 
+
   constructor(
     private cardsService: CardsService,
     private screenService: ScreenService,
   ) {}
+
+  openModal(cardType) {
+    this.cardModalComponent.openModal(cardType);
+  }
 
   ionViewWillEnter() {
     this.userAndCardsDataSubscription = userAndCardsData$.subscribe(userAndCardsData => {
