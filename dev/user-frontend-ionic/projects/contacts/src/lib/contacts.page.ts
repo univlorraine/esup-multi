@@ -1,6 +1,6 @@
 import { Component, Inject, Injector } from '@angular/core';
 import { Capacitor } from '@capacitor/core';
-import { finalize } from 'rxjs/operators';
+import { finalize, first } from 'rxjs/operators';
 import { Contact, ContactsBody, ContactsService } from './contacts.service';
 import { ActionSheetController, AlertController, ToastController } from '@ionic/angular';
 import { ContactsModuleConfig, CONTACTS_CONFIG } from './contacts.config';
@@ -50,7 +50,7 @@ export class ContactsComponent {
     };
 
     this.contactsService.getContacts(searchBody)
-    .pipe(finalize(() => this.loading = false))
+    .pipe(first(), finalize(() => this.loading = false))
     .subscribe(contacts => {
       this.contacts = contacts;
      this.searchButtonPressed = true;

@@ -1,8 +1,14 @@
 <app-header></app-header>
 
-<ion-progress-bar *ngIf="isLoading" type="indeterminate" color="primary"></ion-progress-bar>
+<ion-item-group *ngIf="isLoading" class="spinner-container ion-align-items-center ion-justify-content-center">
+  <ion-row class="ion-margin">
+    <ion-spinner name="circular" color="primary"></ion-spinner>
+  </ion-row>
+</ion-item-group>
 
-<ion-content #scrollContent>
+<ion-progress-bar *ngIf="isFetchingAnswer" type="indeterminate" color="primary"></ion-progress-bar>
+
+<ion-content #scrollContent [ngClass]="isLoading ? 'ion-hide' : ''">
   <ion-list #messages>
     <ion-item-group *ngFor="let message of messages$ | async; let index = index">
       <div class="message-container ion-margin">

@@ -23,7 +23,8 @@ export class ChatbotPage implements OnInit {
   public messageType = MessageType;
   public messages$: BehaviorSubject<Message[]> = new BehaviorSubject<Message[]>([]);
   public userInput = '';
-  public isLoading = false;
+  public isLoading = true;
+  public isFetchingAnswer = false;
   private messages: Message[] = [];
   private domMessageListObserver: MutationObserver;
 
@@ -31,13 +32,11 @@ export class ChatbotPage implements OnInit {
 
   ngOnInit() {
     this.chatbotService.textRequest('Hello', ChatbotPage.userChatId)
-      .pipe(first())
+      .pipe(first(), finalize(() => this.isLoading = false))
       .subscribe((chatBotResponse) => {
-        this.addMessageToChat(chatBotResponse);
-      }
+          this.addMessageToChat(chatBotResponse);
+        }
       );
-
-
   }
 
   ionViewDidEnter() {
@@ -63,14 +62,18 @@ export class ChatbotPage implements OnInit {
   }
 
   textRequest(text: string): void {
+    if(!text) {
+      return;
+    }
+
     const newUserMessage: UserMessage = { text, messageType: MessageType.user };
     this.addMessageToChat(newUserMessage);
 
-    this.isLoading = true;
+    this.isFetchingAnswer = true;
     this.chatbotService.textRequest(text, ChatbotPage.userChatId)
       .pipe(
         first(),
-        finalize(() => this.isLoading = false)
+        finalize(() => this.isFetchingAnswer = false)
       ).subscribe((chatbotResponses: ChatbotMessage[]) => {
         this.addMessageToChat(chatbotResponses);
         this.userInput = '';
@@ -81,11 +84,11 @@ export class ChatbotPage implements OnInit {
     const newMessage: UserMessage = { text: buttonTitle, messageType: MessageType.user };
     this.addMessageToChat(newMessage);
 
-    this.isLoading = true;
+    this.isFetchingAnswer = true;
     this.chatbotService.buttonPayloadRequest(buttonPayload, ChatbotPage.userChatId)
       .pipe(
         first(),
-        finalize(() => this.isLoading = false)
+        finalize(() => this.isFetchingAnswer = false)
       ).subscribe((chatbotResponses: ChatbotMessage[]) => {
         this.addMessageToChat(chatbotResponses);
         this.userInput = '';
