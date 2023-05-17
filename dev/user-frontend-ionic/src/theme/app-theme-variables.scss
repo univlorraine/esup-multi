@@ -21,7 +21,7 @@
 :root {
 
   // // // ---------------------
-  // // // Font CSS variables (Change value here but use variables only in this file).
+  // // // Font CSS variables (Change value here and use variables only in this file or theme/fonts/.. files).
   // // // ---------------------
 
   // // // Font family definition variables
@@ -29,7 +29,7 @@
   --app-font-family-base: 'RobotoCondensedRegular',
     sans-serif;
 
-  // Set base font to gloabl application
+  // Set base font to global application
   --ion-font-family: var(--app-font-family-base), sans-serif;
 
   // This next font have static weight in multiple files :
@@ -71,17 +71,17 @@
   --app-text-6-size: 0.7rem;
 
   // // ---------------------
-  // // Icon size variables (Change value here but use variables only in theme/icons/icons.scss)
+  // // Icon size variables (Change value here and use variables only here (Button section) and and in theme/icons/icons.scss)
   // // ---------------------
 
-  --icon-1-size: 2rem !important;
+  --icon-1-size: 3.2rem !important;
   --icon-2-size: 1.75rem !important;
   --icon-3-size: 1.5rem !important;
   --icon-4-size: 1.25rem !important;
   --icon-5-size: 0.75rem !important;
 
   // // ---------------------
-  // // Logo size variables (Change value here but use variables only in theme/logos/logos.scss)
+  // // Logo size variables (Change value here and use variables only in theme/logos/logos.scss)
   // // ---------------------
 
   --logo-1-size: 5rem;
@@ -90,13 +90,8 @@
   --logo-4-size: 2rem;
   --logo-5-size: 1rem;
 
-
   // // ---------------------
-  // Box styling variables (Change value here and use variables in SCSS files on all CSS classes needed throughout the app)
-  // Example usage: border: var(--app-border-3-width) solid var(--ion-color-primary);
-  // // ---------------------
-  // // ---------------------
-  // Button styling variables (Change value here but use variables only in theme/components/button.scss)
+  // Button styling variables (Change value here and use variables only in theme/components/button.scss)
   // // ---------------------
 
   // Button Rectangular type 1
@@ -107,20 +102,31 @@
   --app-button-1-outline-color: var(--ion-color-primary);
   --app-button-1-font-family: var(--app-font-primary-static-regular);
   --app-button-1-font-size: 0.8rem;
+  --app-button-1-font-color: var(--app-font-color-primary)
   --app-button-1-height: 2.3rem;
   --app-button-1-width: 7rem;
 
+  // Button Square type 1 (icon only with label bellow)
+  --app-square-button-1-background-color: white;
+  --app-square-button-1-font-family: var(--app-font-primary-static-regular);
+  --app-square-button-1-font-size: 0.875rem;
+  --app-square-button-1-font-color: var(--app-font-color-primary);
+  --app-square-button-1-font-weight: bolder;
+  --app-square-button-1-label-margin-top: 0.2rem;
+  --app-square-button-1-letter-spacing: 0rem;
+  --app-square-button-1-border-radius: var(--app-border-radius-4);
+  --app-square-button-1-icon-size: var(--icon-1-size);
 
-  // Button Rounded type 1
-  --app-rounded-button-1-background-color: rgb(255, 255, 255);
+  // Button Rounded type 1 (icon only or short text)
+  --app-rounded-button-1-background-color: white;
   --app-rounded-button-1-height: 2.5rem;
   --app-rounded-button-1-width: 2.5rem;
   --app-rounded-button-1-border-width: 0.1rem;
   --app-rounded-button-1-icon-size: 30px;
 
   // // ---------------------
-  // Box styling variables (Change value here and use variables in SCSS files on all CSS classes needed throughout the app)
-  // Example usage: border: var(--app-border-3-width) solid var(--ion-color-primary);
+  // Box styling variables (Change value here and use variables here and in SCSS files on all CSS classes needed throughout the app)
+  // Example usage: .container { border: var(--app-border-3-width) solid var(--ion-color-primary);}
   // // ---------------------
 
   // // // Border width variables
@@ -134,21 +140,13 @@
   --app-border-width-8: 0.063rem; // = 1px
 
   // // // ---------------------
-  // // // Radius level variables
-  // // // ---------------------
-  // // // ---------------------
   // // // Radius level variables (set to 0 on all variables for no border-radius)
   // // // ---------------------
-  // Exemple of value :
-  // --app-border-radius-1: 2rem;
-  // --app-border-radius-2: 1rem;
-  // --app-border-radius-3: 0.5rem;
-  // --app-border-radius-4: 0.25rem;
 
-  --app-border-radius-1: 0rem;
-  --app-border-radius-2: 0rem;
-  --app-border-radius-3: 0rem;
-  --app-border-radius-4: 0rem;
+  --app-border-radius-1: 2rem;
+  --app-border-radius-2: 1rem;
+  --app-border-radius-3: 0.5rem;
+  --app-border-radius-4: 0.25rem;
 
   // // // ---------------------
   // Chatbot variables (the name of the logo sent by the chatbot must be '_ully5.png'). If it isn't, this style won't be applied.

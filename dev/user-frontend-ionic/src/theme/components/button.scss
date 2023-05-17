@@ -1,9 +1,17 @@
-// // // CSS classes (Use this css classes in HTML on ion-button tags throughout the app).
+// // // CSS classes (Use this css classes in HTML tags descripted below throughout the app).
+
+// // // ---------------------
+// // // Rectangular Button
+// // // ---------------------
+
+// Button Rectangular type 1. Use it on simple ion-button tags
+
+// <ion-button class="app-button-1">
 
 .app-button-1 {
   --background: var(--app-button-1-background-color);
   --background-activated: var(--app-button-1-background-color);
-  color: var(--app-font-color-primary);
+  color: var(--app-button-1-font-color);
   border-bottom: var(--app-button-1-bottom-border-width) solid var(--app-button-1-border-bottom-color);
   outline: var(--app-button-1-outline-width) solid var(--app-button-1-outline-color);
   --box-shadow: none;
@@ -19,11 +27,86 @@
   }
 }
 
-// app-round-button-1 class is for round bouton with ion-icon only or short text. Use it like this exemple :
+// // // ---------------------
+// // // Square Button
+// // // ---------------------
+
+// Button Square type 1 (with label below)
+// app-square-button-1 css class is for square button with ion-icon only
+// and label below. Use it like this exemple (respect dom and class) :
+
+// <ion-card class="app-square-button-1">
+//   <ion-card-header class="ion-text-center" (click)="action()">
+//   <ion-col>
+//     <ion-icon name="icon-name"></ion-icon>
+//   </ion-col>
+// </ion-card-header>
+// <ion-card-content class="ion-text-center">
+//   <ion-label>{{title}}</ion-label>
+// </ion-card-content>
+// </ion-card>
+
+.app-square-button-1 {
+  width: 6rem;
+  height: 6rem;
+  overflow: visible;
+  margin: auto;
+  background: none;
+  box-shadow: none;
+  user-select: none;
+  display: grid;
+  justify-items: center;
+  align-items: center;
+
+  ion-label {
+    user-select: none;
+    font-family: var(--app-square-button-1-font-family);
+    color: var(--app-square-button-1-font-color);
+    letter-spacing: var(--app-square-button-1-letter-spacing);
+    font-size: var(--app-square-button-1-font-size);
+  }
+
+  ion-card-header {
+    padding-bottom: var(--app-square-button-1-label-margin-top);
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+  }
+
+  ion-col {
+    width: 5rem;
+    height: 5rem;
+    border-radius: var(--app-square-button-1-border-radius) !important;
+    background-color: var(--app-square-button-1-background-color);
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    align-items: center;
+  }
+
+  ion-card-content {
+    padding: 0;
+    font-weight: var(--app-square-button-1-font-weight);
+    max-width: 6rem;
+  }
+
+  ion-icon {
+    // @TODO color A supprimer une fois que la couleur viendra de directus
+    color: var(--ion-color-primary);
+    font-size: var(--app-square-button-1-icon-size) !important;
+  }
+}
+
+// // // ---------------------
+// // // Rounded Button
+// // // ---------------------
+
+// Button Rounded type 1
+// app-round-button-1 css class is for round button with ion-icon only or short text. Use it like this exemple (respect dom and class) :
+
 // <ion-button shape="round" class="app-round-button-1 ion-no-padding ion-no-margin" color="light">
-//   <ion-icon name="moon" slot="icon-only" size="small"></ion-icon>
-//   </ion-button>
-// </ion-row>
+//   <ion-icon name="moon" slot="icon-only" size="small"></ion-icon> //or text
+// </ion-button>
 
 .app-round-button-1 {
   height: var(--app-rounded-button-1-height);

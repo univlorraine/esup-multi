@@ -44,14 +44,12 @@
 @import "./theme/components/button.scss";
 
 /* External library */
-  /* FullCalendar */
+/* FullCalendar */
 @import "./theme/external-ui-library/fullcalendar/fullcalendar.scss";
 
-
-
 body.scanner-active {
-    --background: transparent;
-    --ion-background-color: transparent;
+  --background: transparent;
+  --ion-background-color: transparent;
 }
 
 body {

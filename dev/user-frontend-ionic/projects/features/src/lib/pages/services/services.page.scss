@@ -1,9 +1,101 @@
-.services {
+ion-content {
+  --background: var(--ion-color-quaternary);
+}
+
+ion-searchbar {
+  padding-top: 0px;
+  padding-bottom: 0px;
+  --background: var(--app-color-component-background-primary);
+}
+ion-col {
+  display: inline-block;
+}
+
+.searchbar-row {
+  background: var(--ion-color-medium);
+  margin-bottom: 1.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 4rem;
+}
+
+.searchbar-row.ios {
+  margin-bottom: 1.8rem;
+}
+
+.container-draggable-list {
   display: flex;
   flex-wrap: wrap;
-  align-content: flex-start;
+  padding-left: 0.8rem;
+  padding-right: 0.8rem;
+}
+
+.draggable-container {
+  position: relative;
+  display: flex;
   justify-content: center;
-  width: auto;
+  width: 20%;
+}
+
+.inner-draggable-container {
+  position: relative;
+  display: inline-block;
+  max-width: 400px;
+}
+
+@media screen and (max-width: 1000px) {
+  .draggable-container {
+    width: 25%;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .draggable-container {
+    width: 33%;
+  }
+}
+
+@media screen and (max-width: 340px) {
+  .draggable-container {
+    width: 50%;
+  }
+}
+
+app-service {
+  z-index: -100 !important;
+}
+
+
+.drag-button {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  right: -0.5rem;
+  top: -0.8rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  z-index: 100000 !important;
+}
+
+.drag-button-icon {
+  position: relative;
+  right: 0;
+  z-index: 10000 !important;
+}
+
+.new {
+  position: absolute;
+  z-index: 10;
+  background-color: var(--ion-color-secondary);
+  margin: 0;
+  top: -0.5rem;
+  left: -0.7rem;
+}
+
+.no-scroll {
+  --overflow: hidden;
 }
 
 /*
@@ -40,44 +132,5 @@ Dragula drag and drop documentation CSS
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
   filter: alpha(opacity=20);
 }
+
 /* End of Dragula documentation CSS */
-
-
-.no-scroll {
-  --overflow: hidden;
-}
-
-.draggableServices {
-  position: relative;
-}
-
-.new {
-  position: absolute;
-  z-index: 10;
-  background-color: var(--ion-color-secondary);
-  margin: 0;
-  top: 0rem;
-  left: 0.4rem;
-}
-
-.drag-icon {
-  position: relative;
-  right: 0;
-  z-index: 10000 !important;
-}
-
-app-service {
-  z-index: -100 !important;
-}
-
-.drag-icon-row{
-  position: absolute;
-  display: flex;
-  align-items: center;
-  left: 75%;
-  margin-bottom: -20%;
-  width: 2rem;
-  height: 2rem;
-  border-radius: 50%;
-  z-index: 100000 !important;
-}

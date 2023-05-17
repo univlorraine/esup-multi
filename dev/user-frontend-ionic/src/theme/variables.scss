@@ -2,32 +2,27 @@
 // http://ionicframework.com/docs/theming/
 
 :root {
+  /**  Our custom app colors variables **/
 
+  // // ---------------------
+
+  // // ---------------------
   // // // ---------------------
-  // // // Font color variables (Change value here but use variables only in theme/fonts/fonts.scss)
+  // // // Font color variables (Change value here and use variables only in theme/fonts.scss and in other theme/... files if necessary)
   // // // ---------------------
 
   --app-font-color-primary: #050301;
   --app-font-color-primary-medium: #515151;
 
-  /**  Our custom app colors variables **/
-
-  // // ---------------------
-  // Change value here and use variables in SCSS files on all CSS classes needed throughout the app)
+  // // // ---------------------
+  // // // Background variables (Change value here and use variables in SCSS files on all CSS classes needed throughout the app)
   // Example usage: .css-class { --ion-background-color: var(--app-component-background-primary) !important; }
-  // // ---------------------
+  // // // ---------------------
 
   /** Background of the app **/
   --app-color-background: #ffffff;
   /** Component background (if color is different from Ionic colors Theming below). Add colors if necessary**/
   --app-color-component-background-primary: #ffffff;
-
-  // // // ---------------------
-  // // // Font color variables (Change value here but use variables only in theme/fonts/fonts.scss)
-  // // // ---------------------
-
-  --app-font-color-primary: #050301;
-  --app-font-color-primary-medium: #515151;
 
 
   /** Ionic CSS colors variables theming **/
@@ -97,12 +92,13 @@
   --ion-color-dark-tint: #383838;
 
   /** medium **/
-	--ion-color-medium: #575760;
-	--ion-color-medium-rgb: 87,87,96;
-	--ion-color-medium-contrast: #ffffff;
-	--ion-color-medium-contrast-rgb: 255,255,255;
-	--ion-color-medium-shade: #4d4d54;
-	--ion-color-medium-tint: #686870;
+  --ion-color-medium: #707277;
+  --ion-color-medium-rgb: 112, 114, 119;
+  --ion-color-medium-contrast: #ffffff;
+  --ion-color-medium-contrast-rgb: 255, 255, 255;
+  --ion-color-medium-shade: #636469;
+  --ion-color-medium-tint: #7e8085;
+
 
   /** light **/
   --ion-color-light: #f5f8fb;
@@ -195,9 +191,9 @@
 
 
     --ion-color-medium: #707277;
-    --ion-color-medium-rgb: 112,114,119;
+    --ion-color-medium-rgb: 112, 114, 119;
     --ion-color-medium-contrast: #ffffff;
-    --ion-color-medium-contrast-rgb: 255,255,255;
+    --ion-color-medium-contrast-rgb: 255, 255, 255;
     --ion-color-medium-shade: #636469;
     --ion-color-medium-tint: #7e8085;
 
