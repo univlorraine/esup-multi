@@ -29,3 +29,6 @@
 
 - `CONTACT_US_SERVICE_PORT` : Hôte du microservice `contact-us`
 - `CONTACT_US_SERVICE_HOST` : Port du microservice `contact-us`
+
+- `CONTACTS_SERVICE_PORT` : Hôte du microservice `contacts`
+- `CONTACTS_SERVICE_HOST` : Port du microservice `contacts`
