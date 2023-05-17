@@ -4,9 +4,12 @@
 // // // Rectangular Button
 // // // ---------------------
 
-// Button Rectangular type 1. Use it on simple ion-button tags
+// Button Rectangular type 1. Use it on ion-button tags
+// like this exemple (respect dom and class) :
 
-// <ion-button class="app-button-1">
+// <ion-button class="app-button-1" lines="none">
+// <ion-label>Label</ion-label>
+// </ion-button>
 
 .app-button-1 {
   --background: var(--app-button-1-background-color);

@@ -5,12 +5,13 @@
   <ion-row *ngIf="errorMessage" class="ion-padding">
     <ion-note color="danger">{{errorMessage}}</ion-note>
   </ion-row>
-  <ion-row *ngIf="!errorMessage" class="ion-align-items-center">
-    {{ 'CLOCKING.YOUR_TIMES' | translate }}: <ion-chip *ngFor="let time of (clocking$ | async)?.times">{{ time }}</ion-chip>
+  <ion-row *ngIf="!errorMessage" class="ion-align-items-center ion-padding app-text-4">
+    {{ 'CLOCKING.YOUR_TIMES' | translate }}: <ion-chip *ngFor="let time of (clocking$ | async)?.times">{{ time
+      }}</ion-chip>
   </ion-row>
-  <ion-row class="ion-justify-content-center ion-padding-top">
-    <ion-button class="app-button-1" *ngIf="!clockInLoading" (click)="onClockIn($event)">{{ 'CLOCKING.CLOCK_IN' | translate }}</ion-button>
+  <ion-row class="ion-justify-content-center ion-padding">
+    <ion-button class="app-button-1" *ngIf="!clockInLoading" (click)="onClockIn($event)" lines="none">
+      <ion-label>{{ 'CLOCKING.CLOCK_IN' | translate }}</ion-label></ion-button>
     <ion-spinner *ngIf="clockInLoading" name="lines"></ion-spinner>
   </ion-row>
 </ng-container>
-
