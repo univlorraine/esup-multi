@@ -1,0 +1,36 @@
+<ion-modal [isOpen]="isModalOpen">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="start">
+          <ion-back-button defaultHref="cards" (click)="closeModal()"></ion-back-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-content *ngIf="cardType === 'studentCard'">
+        <ion-card>
+          <ion-card-content>
+            <app-student-card [userAndCardsData]="userAndCardsData"></app-student-card>
+          </ion-card-content>
+        </ion-card>
+        <ion-row class="ion-justify-content-center">
+          <qrcode *ngIf="userAndCardsData.cards.studentCard.qrCode" [qrdata]="userAndCardsData.cards.studentCard.qrCode.value"
+                  [errorCorrectionLevel]="'M'" [width]="400"></qrcode>
+        </ion-row>
+      </ion-content>
+
+      <ion-content *ngIf="cardType === 'euStudentCard'">
+        <ion-card>
+          <ion-card-content>
+            <app-eu-student-card [userAndCardsData]="userAndCardsData"></app-eu-student-card>
+          </ion-card-content>
+        </ion-card>
+        <ion-row class="ion-justify-content-center">
+          <qrcode *ngIf="userAndCardsData.cards.euStudentCard.qrCode" [qrdata]="userAndCardsData.cards.euStudentCard.qrCode.value"
+                  [errorCorrectionLevel]="'M'" [width]="400"></qrcode>
+        </ion-row>
+      </ion-content>
+    </ion-content>
+  </ng-template>
+</ion-modal>

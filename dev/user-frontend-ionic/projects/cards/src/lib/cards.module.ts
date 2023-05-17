@@ -5,7 +5,7 @@ import { EffectsNgModule } from '@ngneat/effects-ng';
 import { TranslateModule } from '@ngx-translate/core';
 import { ProjectModuleService, SharedComponentsModule } from '@ul/shared';
 import { QRCodeModule } from 'angularx-qrcode';
-import { CardPage } from './card/card.page';
+import { CardModalComponent } from './card/card-modal.component';
 import { CardsRoutingModule } from './cards-routing.module';
 import { CardsEffects } from './cards.effects';
 import { CardsPage } from './cards.page';
@@ -34,7 +34,7 @@ const initModule = (projectModuleService: ProjectModuleService) =>
     StudentCardComponent,
     EuStudentCardComponent,
     StaffCardComponent,
-    CardPage
+    CardModalComponent
   ],
   providers: [{
     provide: APP_INITIALIZER,
