@@ -1,25 +1,53 @@
-
 <ion-progress-bar *ngIf="isLoading" type="indeterminate" color="primary"></ion-progress-bar>
 
 <app-header></app-header>
 
 <ion-content *ngIf="(rssFeedIsEmpty$ | async) === false">
-  <ion-card *ngFor="let item of (rssFeed$ | async)" (click)="onClick(item)">
-    <ion-card-header>
-      <ion-card-subtitle>{{item.pubDate | relativeTime}}</ion-card-subtitle>
-      <ion-card-title>
-        <ion-icon name="link" class="title-icon" *ngIf="item"></ion-icon>
-        {{item.title}}
-      </ion-card-title>
+  <ion-card *ngFor="let item of (rssFeed$ | async); let i = index">
+    <ion-card-header class="ion-no-padding">
+      <ion-grid class="ion-no-padding">
+        <ion-row>
+          <ion-col>
+            <ion-row class="rss-news-header">
+              <ion-col *ngIf="item.enclosure && isMediaAnImage(item.enclosure)">
+                <img alt="{{ item.enclosure.url }}" src="{{ item.enclosure.url }}" />
+              </ion-col>
+              <ion-col class="border-bottom title-col"
+                [size]="item.enclosure && isMediaAnImage(item.enclosure) ? '7' : '12'">
+                <ion-label color="primary" class="ion-text-wrap title">
+                  <h2 class="app-text-3">{{item.title}}</h2>
+                </ion-label>
+
+                <ion-row class="ion-justify-content-end">
+                  <ion-button size="small" style="text-transform: none;" color="primary" fill="clear"
+                    (click)="openContent(i)" class="app-text-5 link-button">
+                    <ion-text *ngIf="!isContentVisible[i]" >{{ "RSS.SEE_MORE" | translate }}</ion-text>
+                    <ion-text *ngIf="isContentVisible[i]" >{{ "RSS.SEE_LESS" | translate }}</ion-text>
+                    <ion-icon class="app-icon-5 see-more-icon" [class.content-open]="!isContentVisible[i]"
+                      [class.content-close]="isContentVisible[i]" name="arrow-right"></ion-icon>
+                  </ion-button>
+                </ion-row>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-card-header>
-    <ion-card-content>
+    <div class="rss-news-content" [ngClass]="{'visible': isContentVisible[i]}">
       <ion-row>
-        <ion-col size="12" size-sm="3" *ngIf="item.enclosure && isMediaAnImage(item.enclosure)">
-          <img alt="{{ item.enclosure.url }}" src="{{ item.enclosure.url }}" />
-        </ion-col>
-        <ion-col><div [innerHTML]="item.content"></div></ion-col>
+        <ion-text color="primary" class="ion-text-wrap ion-margin">
+          <div class="app-text-4" [innerHTML]="item.content"></div>
+        </ion-text>
       </ion-row>
-    </ion-card-content>
+      <ion-row class="ion-justify-content-end ion-margin">
+        <ion-label>{{item.pubDate | relativeTime}}</ion-label>
+      </ion-row>
+      <ion-row class="ion-justify-content-center">
+        <ion-button class="open-link-button ion-no-margin" (click)="onClick(item)" expand="full">
+          {{ "RSS.SEE_MORE_EXTERNAL" | translate }}
+        </ion-button>
+      </ion-row>
+    </div>
   </ion-card>
 </ion-content>
 
