@@ -1,12 +1,12 @@
 <ion-row *ngIf="isLoading === true">
-    <ion-spinner name="dots"></ion-spinner>
+    <ion-spinner class="ion-margin" name="dots"></ion-spinner>
 </ion-row>
 <ng-container *ngIf="isLoading === false">
     <ion-row *ngIf="(noNextEvents$ | async) === true">
         <ion-note>{{ "SCHEDULE.WIDGET.NEXT_EVENTS.NO_EVENTS" | translate }}</ion-note>
     </ion-row>
-    <app-event-detail *ngFor="let event of (nextEvents$ | async)" 
-        [event]="event" 
+    <app-event-detail *ngFor="let event of (nextEvents$ | async)"
+        [event]="event"
         [displayShortenedDate]="true"
         [showHideButton]="false"
     ></app-event-detail>

@@ -102,8 +102,8 @@
   --app-button-1-outline-color: var(--ion-color-primary);
   --app-button-1-font-family: var(--app-font-primary-static-regular);
   --app-button-1-font-size: 0.8rem;
-  --app-button-1-font-color: var(--app-font-color-primary)
-  --app-button-1-height: 2.3rem;
+  --app-button-1-font-color: var(--app-font-color-primary);
+  --app-button-1-height: 2.2rem;
   --app-button-1-width: 7rem;
 
   // Button Square type 1 (icon only with label bellow)
@@ -147,6 +147,17 @@
   --app-border-radius-2: 1rem;
   --app-border-radius-3: 0.5rem;
   --app-border-radius-4: 0.25rem;
+  // Search for the next variable in all app folders if you want to set another radius variable.
+  // Do not modify this value (=> 0rem).
+  --app-border-no-radius: 0rem;
+
+  // // // ---------------------
+  // // // Box shadow variables
+  // // // ---------------------
+
+  // Search for the next variable in all app folders if you want to set a different radius variable.
+  // Do not modify this value (=> 0rem).
+  --app-border-no-box-shadow: 0rem;
 
   // // // ---------------------
   // Chatbot variables (the name of the logo sent by the chatbot must be '_ully5.png'). If it isn't, this style won't be applied.
