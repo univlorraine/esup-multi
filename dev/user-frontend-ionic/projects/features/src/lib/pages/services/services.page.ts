@@ -62,10 +62,10 @@ export class ServicesPage implements OnInit, OnDestroy {
   }
 
   deactivateDrag() {
-    const dragIconRows = document.querySelectorAll('.drag-icon-row');
-    dragIconRows.forEach((dragIconRow) => {
-      dragIconRow.removeEventListener('mousedown', () => this.activateIonContentScroll());
-      dragIconRow.removeEventListener('touchend', () => this.activateIonContentScroll());
+    const dragButtons = document.querySelectorAll('.drag-button');
+    dragButtons.forEach((dragButton) => {
+      dragButton.removeEventListener('mousedown', () => this.activateIonContentScroll());
+      dragButton.removeEventListener('touchend', () => this.activateIonContentScroll());
     });
 
     Array.from(this.servicesContainer.nativeElement.children).forEach((child: any) => {
@@ -181,16 +181,16 @@ export class ServicesPage implements OnInit, OnDestroy {
     this.draggableIsOn = true;
 
     setTimeout(() => {
-      const dragIconRows = document.querySelectorAll('.drag-icon-row');
+      const dragButtons = document.querySelectorAll('.drag-button');
 
-      dragIconRows.forEach((dragIconRow) => {
+      dragButtons.forEach((dragButton) => {
 
-        dragIconRow.addEventListener('mousedown', () => this.activateIonContentScroll());
-        dragIconRow.addEventListener('touchstart', () => this.activateIonContentScroll());
+        dragButton.addEventListener('mousedown', () => this.activateIonContentScroll());
+        dragButton.addEventListener('touchstart', () => this.activateIonContentScroll());
 
 
-        dragIconRow.addEventListener('mouseup', () => this.desactivateIonContentScroll());
-        dragIconRow.addEventListener('touchend', () => this.desactivateIonContentScroll());
+        dragButton.addEventListener('mouseup', () => this.desactivateIonContentScroll());
+        dragButton.addEventListener('touchend', () => this.desactivateIonContentScroll());
       });
     }, 300);
 

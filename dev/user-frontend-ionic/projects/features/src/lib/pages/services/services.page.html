@@ -1,7 +1,8 @@
 <ion-content id="scrollContent" *ngIf="(featuresIsEmpty$ | async) === false && (menuItems$ | async)">
-
-  <ion-searchbar show-clear-button="focus" [placeholder]="'FEATURES.SEARCHBAR_MESSAGE' | translate"
-    (ionChange)="handleChange($event)" [disabled]="draggableIsOn"></ion-searchbar>
+  <ion-row class="searchbar-row">
+    <ion-searchbar show-clear-button="focus" [placeholder]="'FEATURES.SEARCHBAR_MESSAGE' | translate"
+      (ionChange)="handleChange($event)" [disabled]="draggableIsOn"></ion-searchbar>
+  </ion-row>
 
   <ion-fab *ngIf="draggableIsOn" slot="fixed" vertical="bottom" horizontal="end">
     <ion-fab-button size="small" (click)="deactivateDrag()" color="secondary">
@@ -9,19 +10,19 @@
     </ion-fab-button>
   </ion-fab>
 
-  <div #servicesContainer class="services" dragula="SERVICES" [(dragulaModel)]="menuItems">
+  <div #servicesContainer class="container-draggable-list" dragula="SERVICES" [(dragulaModel)]="menuItems">
 
-    <div #draggableServices class="not-draggable draggableServices" *ngFor="let menuItem of menuItems;">
+    <div #draggableServices class="not-draggable draggable-container" *ngFor="let menuItem of menuItems;">
+      <div class="inner-draggable-container">
+        <ion-button shape="round" size="small" *ngIf="draggableIsOn" color="light"
+          class="drag-button ion-no-padding ion-no-margin" dragHandle>
+          <ion-icon class="drag-button-icon" name="move-outline" dragHandle slot="icon-only"
+            size="small"></ion-icon></ion-button>
 
-      <ion-button shape="round" size="small" *ngIf="draggableIsOn" color="light"
-        class="drag-icon-row ion-no-padding ion-no-margin" dragHandle>
-        <ion-icon class="drag-icon" name="move-outline" dragHandle slot="icon-only"
-          size="small"></ion-icon></ion-button>
+        <ion-badge class="new app-title-7" *ngIf="menuItem.isNew">{{ "FEATURES.NEW" | translate }}</ion-badge>
 
-      <ion-badge class="new app-title-7" *ngIf="menuItem.isNew">{{ "FEATURES.NEW" | translate }}</ion-badge>
-
-      <app-service [menuItem]="menuItem" [draggableIsOn]="draggableIsOn"></app-service>
-
+        <app-service [menuItem]="menuItem" [draggableIsOn]="draggableIsOn"></app-service>
+      </div>
     </div>
   </div>
 

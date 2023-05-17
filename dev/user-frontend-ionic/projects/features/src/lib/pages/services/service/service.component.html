@@ -1,8 +1,10 @@
-<ion-card (click)="draggableIsOn ? null : open(menuItem)">
-    <ion-card-header class="ion-text-center">
-      <ion-icon size="large" [name]="menuItem.icon" class="ion-align-self-center"></ion-icon>
-    </ion-card-header>
-    <ion-card-content class="ion-text-center">
-      <ion-label>{{menuItem.title}}</ion-label>
+<ion-card class="app-square-button-1">
+  <ion-card-header class="ion-text-center" (click)="draggableIsOn ? null : open(menuItem)">
+    <ion-col>
+      <ion-icon [name]="menuItem.icon"></ion-icon>
+    </ion-col>
+  </ion-card-header>
+  <ion-card-content class="ion-text-center">
+    <ion-label>{{menuItem.title}}</ion-label>
   </ion-card-content>
 </ion-card>
