@@ -4,8 +4,8 @@ import { Transport, MicroserviceOptions } from '@nestjs/microservices';
 import { ContactsModule } from './contacts.module';
 
 async function bootstrap() {
-  const host = process.env.CONTACT_SERVICE_HOST || '127.0.0.1';
-  const port = parseInt(process.env.CONTACT_SERVICE_PORT) || 3009;
+  const host = process.env.CONTACTS_SERVICE_HOST || '127.0.0.1';
+  const port = parseInt(process.env.CONTACTS_SERVICE_PORT) || 3009;
   const app = await NestFactory.createMicroservice<MicroserviceOptions>(
     ContactsModule,
     {
