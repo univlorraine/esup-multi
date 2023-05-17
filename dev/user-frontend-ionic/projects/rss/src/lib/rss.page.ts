@@ -16,6 +16,9 @@ export class RssPage {
   public rssFeed$: Observable<FeedItem[]> = rssFeed$;
   public rssFeedIsEmpty$: Observable<boolean>;
   public isLoading = false;
+  public isContentVisible: boolean[] = [];
+  private rssFeed: FeedItem[];
+
 
   constructor(
     private rssService: RssService,
@@ -48,6 +51,11 @@ export class RssPage {
     return media.type ? imageTypes.includes(media.type) : false;
   }
 
+
+  public openContent(index: number) {
+    this.isContentVisible[index] = !this.isContentVisible[index];
+  }
+
   private async loadRssFeedIfNetworkAvailable() {
     // skip if network is not available
     if (!(await Network.getStatus()).connected) {
@@ -57,6 +65,10 @@ export class RssPage {
     this.rssService.getRssFeed()
       .pipe(
         finalize(() => this.isLoading = false)
-      ).subscribe(rssFeed => setRssFeed(rssFeed));
+      ).subscribe(rssFeed => {
+        setRssFeed(rssFeed);
+        this.isContentVisible = new Array(rssFeed.length).fill(false);
+      }
+      );
   }
 }
