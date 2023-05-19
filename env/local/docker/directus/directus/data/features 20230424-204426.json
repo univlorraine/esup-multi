@@ -1174,6 +1174,47 @@
 		"authorization": null
 	},
 	{
+		"id": 30,
+		"status": "published",
+		"icon": "restaurant",
+		"widget": null,
+		"menu": "service",
+		"position": 5,
+		"type": "internal",
+		"routerLink": "/restaurants",
+		"link": null,
+		"ssoService": null,
+		"color": null,
+		"translations": [
+			{
+				"content": null,
+				"features_id": 30,
+				"languages_code": "en",
+				"searchKeywords": [
+					"Crous",
+					"Crous Menu",
+					"Menu"
+				],
+				"shortTitle": null,
+				"title": "Crous Menus"
+			},
+			{
+				"content": null,
+				"features_id": 30,
+				"languages_code": "fr",
+				"searchKeywords": [
+					"Menu Crous",
+					"Menu",
+					"Crous"
+				],
+				"shortTitle": null,
+				"title": "Menus Crous"
+			}
+		],
+		"settings_by_role": [],
+		"authorization": null
+	},
+	{
 		"id": 49,
 		"status": "published",
 		"icon": null,
