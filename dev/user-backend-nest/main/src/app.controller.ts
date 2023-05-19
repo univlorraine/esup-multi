@@ -34,6 +34,7 @@ export class AppController {
     @Inject('SOCIAL_NETWORK_SERVICE') private socialNetworkClient: ClientProxy,
     @Inject('STATIC_PAGES_SERVICE') private staticPagesClient: ClientProxy,
     @Inject('CONTACT_US_SERVICE') private contactUsClient: ClientProxy,
+    @Inject('RESTAURANTS_SERVICE') private restaurantsClient: ClientProxy,
   ) {}
 
   @Post('/features')
@@ -577,6 +578,16 @@ export class AppController {
     return this.contactUsClient.send(
       {
         cmd: 'contactUsPageContent',
+      },
+      {},
+    );
+  }
+
+  @Get('/restaurants')
+  restaurants() {
+    return this.restaurantsClient.send(
+      {
+        cmd: 'restaurants',
       },
       {},
     );

@@ -60,6 +60,9 @@
       ],
       "@ul/contact-us": [
         "dist/contact-us"
+      ],
+      "@ul/restaurants": [
+        "dist/restaurants"
       ]
     },
     "downlevelIteration": true,

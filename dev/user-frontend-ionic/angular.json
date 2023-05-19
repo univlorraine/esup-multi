@@ -113,6 +113,11 @@
                 "glob": "**/*",
                 "input": "projects/contact-us/assets/i18n",
                 "output": "/assets/i18n/contact-us"
+              },   
+              {
+                "glob": "**/*",
+                "input": "projects/restaurants/assets/i18n",
+                "output": "/assets/i18n/restaurants"
               },              
               {
                 "glob": "**/*.svg",
@@ -1035,6 +1040,47 @@
             "lintFilePatterns": [
               "projects/contact-us/**/*.ts",
               "projects/contact-us/**/*.html"
+            ]
+          }
+        }
+
+      }
+    },
+    "restaurants": {
+      "projectType": "library",
+      "root": "projects/restaurants",
+      "sourceRoot": "projects/restaurants/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/restaurants/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/restaurants/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/restaurants/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/restaurants/src/test.ts",
+            "tsConfig": "projects/restaurants/tsconfig.spec.json",
+            "karmaConfig": "projects/restaurants/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/restaurants/**/*.ts",
+              "projects/restaurants/**/*.html"
             ]
           }
         }
