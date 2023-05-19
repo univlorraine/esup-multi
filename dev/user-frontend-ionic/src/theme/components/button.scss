@@ -14,7 +14,6 @@
 .app-button-1 {
   --background: var(--app-button-1-background-color);
   --background-activated: var(--app-button-1-background-color);
-  color: var(--app-button-1-font-color);
   border-bottom: var(--app-button-1-bottom-border-width) solid var(--app-button-1-border-bottom-color);
   outline: var(--app-button-1-outline-width) solid var(--app-button-1-outline-color);
   --box-shadow: none;
@@ -23,6 +22,7 @@
   width: var(--app-button-1-width);
 
   ion-label {
+    color: var(--app-font-color-primary);
     margin-top: 0.2rem;
     font-family: var(--app-button-1-font-family);
     font-size: var(--app-button-1-font-size);
