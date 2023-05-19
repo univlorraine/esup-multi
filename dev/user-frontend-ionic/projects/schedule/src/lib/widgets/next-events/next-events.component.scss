@@ -1,0 +1,68 @@
+ion-card {
+  overflow: visible;
+  box-shadow: var(--app-border-no-box-shadow);
+  border-radius: var(--app-border-no-radius);
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+}
+
+.last-card {
+  padding-bottom: 0.8rem !important;
+}
+
+.events-container {
+padding-left: 1rem !important;
+padding-bottom: 0rem !important;
+}
+
+.dashed-line{
+  position: absolute;
+  top: 0.77rem;
+  left: 0rem;
+  width: 2rem;
+  height: 100%;
+
+  background-image: linear-gradient(rgb(255, 255, 255) 43%, rgba(255, 255, 255, 0) 0%);
+  background-position: left;
+  background-size: 0.13rem 0.9rem;
+  background-repeat: repeat-y;
+  overflow: visible;
+  z-index: 10 !important;
+}
+
+.event-day {
+  position: relative;
+  padding-bottom: 0.5rem !important;
+  padding-top: 0.5rem !important;
+  padding-left: 0rem !important;
+  background-color: var(--ion-color-quaternary) !important;
+  z-index: 12;
+}
+
+ion-card-header {
+  padding-top: 0px;
+  padding-left: 1.2rem;
+  padding-bottom: 0px;
+}
+
+ion-card-content {
+  padding-left: 2.3rem;
+}
+
+.circle-top-left {
+  position: absolute;
+  top: 0.30rem;
+  left: -0.18rem;
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: var(--ion-color-dark-contrast);
+  border-radius: 50%;
+}
+
+.card-labels {
+  margin-right: 0.6rem;
+}
+
+.card-labels-icons {
+margin-right: 0.3rem;
+}

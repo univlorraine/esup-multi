@@ -1,13 +1,56 @@
 <ion-row *ngIf="isLoading === true">
-    <ion-spinner class="ion-margin" name="dots"></ion-spinner>
+  <ion-spinner class="ion-margin" name="dots"></ion-spinner>
 </ion-row>
+
 <ng-container *ngIf="isLoading === false">
+  <ion-grid class="events-container">
     <ion-row *ngIf="(noNextEvents$ | async) === true">
-        <ion-note>{{ "SCHEDULE.WIDGET.NEXT_EVENTS.NO_EVENTS" | translate }}</ion-note>
+      <ion-note>{{ "SCHEDULE.WIDGET.NEXT_EVENTS.NO_EVENTS" | translate }}</ion-note>
     </ion-row>
-    <app-event-detail *ngFor="let event of (nextEvents$ | async)"
-        [event]="event"
-        [displayShortenedDate]="true"
-        [showHideButton]="false"
-    ></app-event-detail>
+
+    <ion-col *ngFor="let event of (nextEvents$ | async) let last = last" class="ion-no-padding">
+      <ion-row *ngIf="shouldDisplayDay(event)" class="event-day">
+        <ion-text class="app-title-6 light">{{event.startDateTime |
+          completeLocalDate}}</ion-text>
+      </ion-row>
+
+      <ion-card color="quaternary" [ngClass]="{'last-card': last}">
+        <div class="circle-top-left"></div>
+        <div class="dashed-line"></div>
+
+        <ion-card-header>
+          <ion-card-title class="app-title-5 light">
+            {{event.startDateTime | localHour}} - {{event.endDateTime | localHour}}
+          </ion-card-title>
+        </ion-card-header>
+
+        <ion-card-content>
+          <ion-row>
+            <ion-col>
+              <ion-text class="app-title-5">{{event.course.label}}</ion-text>
+              <ion-row>
+                <ion-row class="ion-align-items-center card-labels" *ngFor="let room of event.rooms">
+                  <ion-icon class="card-labels-icons" name="business-outline"></ion-icon>
+                  <ion-text class="app-title-6 light">{{room.label}} - {{room.building}}</ion-text>
+                </ion-row>
+                <ion-row class="ion-align-items-center card-labels" *ngFor="let teacher of event.teachers">
+                  <ion-icon class="card-labels-icons" name="man-outline"></ion-icon>
+                  <ion-text class="app-title-6 light">{{teacher.displayname}}</ion-text>
+                </ion-row>
+                <ion-row class="ion-align-items-center card-labels" *ngFor="let group of event.groups">
+                  <ion-icon class="card-labels-icons" name="people-circle-outline"></ion-icon>
+                  <ion-text class="app-title-6 light">{{group.label}}</ion-text>
+                </ion-row>
+                <ion-row class="ion-align-items-center  card-labels" *ngIf="event.course.url">
+                  <ion-icon class="card-labels-icons" name="link-outline"></ion-icon>
+                  <ion-text class="app-title-6 light">{{ event.course.url | truncate:35 }}</ion-text>
+                </ion-row>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+
+      </ion-card>
+    </ion-col>
+  </ion-grid>
 </ng-container>

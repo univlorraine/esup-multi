@@ -719,7 +719,7 @@
 	{
 		"id": 18,
 		"status": "published",
-		"icon": "calendar-outline",
+		"icon": null,
 		"widget": "schedule:next-events",
 		"menu": null,
 		"position": null,
@@ -727,7 +727,7 @@
 		"routerLink": "/schedule",
 		"link": null,
 		"ssoService": null,
-		"color": null,
+		"color": "#badfee",
 		"translations": [
 			{
 				"features_id": 18,
