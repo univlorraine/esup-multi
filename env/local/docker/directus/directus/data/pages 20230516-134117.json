@@ -4,6 +4,8 @@
 		"status": "published",
 		"sort": null,
 		"icon": "help",
+		"iconSourceSvg": "",
+		"iconSourceSvgDark": null,
 		"translations": [
 			{
 				"id": 1,

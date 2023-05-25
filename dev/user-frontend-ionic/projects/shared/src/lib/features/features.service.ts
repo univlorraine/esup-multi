@@ -19,6 +19,7 @@ interface TranslatedFeatureCommon {
   searchKeywords?: string[];
   menu: FeatureMenuType;
   icon: string;
+  iconSourceSvg: string;
   isNew: boolean;
 }
 

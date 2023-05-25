@@ -5,7 +5,7 @@
       <img src="/assets/logo/white-university-logo.svg" class="logo ion-padding-start app-logo-3"/>
       <ion-buttons slot="end">
         <ion-button *ngFor="let menu of (topMenuItems$ | async)" (click)="menuOpenerService.open(menu)">
-          <ion-icon [name]="menu.icon"></ion-icon>
+          <app-custom-icon [icon]="menu.icon" [iconSourceSvg]="menu.iconSourceSvg"></app-custom-icon>
         </ion-button>
       </ion-buttons>
     </ion-toolbar>
@@ -16,13 +16,13 @@
       We must set 'tab-selected' class manually because ion-tab-bar has troubles to mark tab as selected
       when current route contains '/'. It doesn't work with selected attribute either.
     -->
-    <ion-tab-button 
+    <ion-tab-button
       *ngFor="let menu of (tabsMenuItems$ | async);"
-      (click)="openExternalOrSsoLinkOnly(menu)" 
-      [routerLink]="menu.routerLink" 
+      (click)="openExternalOrSsoLinkOnly(menu)"
+      [routerLink]="menu.routerLink"
       routerLinkActive="tab-selected"
     >
-      <ion-icon [name]="menu.icon"></ion-icon>
+      <app-custom-icon [icon]="menu.icon" [iconSourceSvg]="menu.iconSourceSvg"></app-custom-icon>
       <ion-text class="short-title">
         {{(menu.shortTitle || menu.title) |  translate}}
       </ion-text>

@@ -6,7 +6,7 @@
   margin-top: 0.2rem;
 }
 
-ion-icon {
+app-custom-icon {
   font-size: var(--icon-4-size);
   color: var(--ion-color-primary-contrast);
 }
@@ -14,7 +14,7 @@ ion-icon {
 .tab-selected {
   color: var(--ion-color-secondary);
 
-  ion-icon {
+  app-custom-icon {
     color: var(--ion-color-secondary);
   }
 }

@@ -31,7 +31,7 @@ const initModule = (projectModuleService: ProjectModuleService) =>
     CommonModule,
     IonicModule,
     StaticPagesRoutingModule,
-    SharedComponentsModule
+    SharedComponentsModule,
   ]
 })
 export class StaticPagesModule {

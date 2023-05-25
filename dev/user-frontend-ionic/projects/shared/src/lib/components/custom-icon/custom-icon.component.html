@@ -1,0 +1,12 @@
+<ion-icon *ngIf="!iconSourceSvg"
+          [name]="icon"
+          [slot]="slot"
+          [size]="size"
+          [color]="color"
+></ion-icon>
+<ion-icon *ngIf="iconSourceSvg"
+          [src]="'data:image/svg+xml;utf8, ' + iconSourceSvg"
+          [slot]="slot"
+          [size]="size"
+          [color]="color"
+></ion-icon>

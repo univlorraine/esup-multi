@@ -30,13 +30,14 @@ export type MenuItemLink = MenuItemRouterLink | MenuItemExternalLink | MenuItemS
 
 export interface MenuItem {
   icon: string;
+  iconSourceSvg?: string;
   title: string;
   shortTitle?: string;
   link: MenuItemLink;
   type: MenuItemType;
 }
 
-export interface ServiceMenuItem extends MenuItem {
+export interface ServiceMenuItem extends MenuItem {
   id: string;
   isNew?: boolean;
 }

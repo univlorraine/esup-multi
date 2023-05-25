@@ -8,6 +8,7 @@ export * from './lib/auth/keep-auth.repository';
 export * from './lib/auth/keep-auth.service';
 export * from './lib/authorization/authorization.helper';
 export * from './lib/components/back-button/back-button.component';
+export * from './lib/components/custom-icon/custom-icon.component';
 export * from './lib/components/header/header.component';
 export * from './lib/components/shared-components.module';
 export * from './lib/components/widgets/widget.component';

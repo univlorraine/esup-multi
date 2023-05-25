@@ -5,14 +5,17 @@ import { TranslateModule } from '@ngx-translate/core';
 import { BackButtonComponent } from './back-button/back-button.component';
 import { HeaderComponent } from './header/header.component';
 import { WidgetComponent } from './widgets/widget.component';
+import { CustomIconComponent } from './custom-icon/custom-icon.component';
 
 @NgModule({
   declarations: [
     BackButtonComponent,
+    CustomIconComponent,
     HeaderComponent,
     WidgetComponent],
   exports: [
     BackButtonComponent,
+    CustomIconComponent,
     WidgetComponent,
     HeaderComponent,
   ],
