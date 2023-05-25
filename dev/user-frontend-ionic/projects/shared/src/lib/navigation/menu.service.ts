@@ -111,6 +111,7 @@ export class MenuService {
       return {
         ...app,
         icon: app.icon,
+        iconSourceSvg: app.iconSourceSvg,
         title: app.title,
         shortTitle: app.shortTitle,
         link: {
@@ -137,6 +138,7 @@ export class MenuService {
       return {
         ...app,
         icon: app.icon,
+        iconSourceSvg: app.iconSourceSvg,
         title: app.title,
         shortTitle: app.shortTitle,
         link,

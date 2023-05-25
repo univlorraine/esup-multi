@@ -38,6 +38,7 @@ interface FeatureCommon {
   authorization?: Authorization;
   menu: FeatureMenuType;
   icon: string;
+  iconSourceSvg: string;
   isNew: boolean;
 }
 

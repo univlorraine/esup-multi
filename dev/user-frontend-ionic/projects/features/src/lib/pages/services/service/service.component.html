@@ -1,7 +1,7 @@
 <ion-card class="app-square-button-1">
   <ion-card-header class="ion-text-center" (click)="draggableIsOn ? null : open(menuItem)">
     <ion-col>
-      <ion-icon [name]="menuItem.icon"></ion-icon>
+      <app-custom-icon [icon]="menuItem.icon" [iconSourceSvg]="menuItem.iconSourceSvg"></app-custom-icon>
     </ion-col>
   </ion-card-header>
   <ion-card-content class="ion-text-center">

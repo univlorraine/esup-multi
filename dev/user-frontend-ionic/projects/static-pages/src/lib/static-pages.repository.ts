@@ -11,6 +11,7 @@ import { map } from 'rxjs/operators';
 export interface StaticPage {
   id: number;
   icon?: string;
+  iconSourceSvg?: string;
   translations?: Translation[];
 }
 
@@ -19,6 +20,7 @@ export interface TranslatedStaticPage {
   title: string;
   content: string;
   icon?: string;
+  iconSourceSvg?: string;
 }
 
 interface Translation {
@@ -49,7 +51,13 @@ export class StaticPagesRepository {
       const translation = staticPage.translations.find((t) => t.languages_code === currentLanguage) ||
         staticPage.translations.find((t) => t.languages_code === this.environment.defaultLanguage) ||
         staticPage.translations[0];
-      return { id: staticPage.id, title: translation.title, content: translation.content, icon: staticPage.icon };
+      return {
+        id: staticPage.id,
+        title: translation.title,
+        content: translation.content,
+        icon: staticPage.icon,
+        iconSourceSvg: staticPage.iconSourceSvg
+      };
     }))
   );
 

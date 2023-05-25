@@ -1,4 +1,4 @@
 <ion-item button *ngFor="let page of translatedStaticPages$ | async" routerLink="/page/{{ page.id }}">
-  <ion-icon class="app-icon-4" [name]="page.icon" slot="start"></ion-icon>
+  <app-custom-icon [icon]="page.icon" [iconSourceSvg]="page.iconSourceSvg" class="app-icon-4" slot="start"></app-custom-icon>
   <ion-label class="app-title-5 light">{{ page.title }}</ion-label>
 </ion-item>
