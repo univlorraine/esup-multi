@@ -52,8 +52,8 @@ import { RestaurantsModule } from '@ul/restaurants';
     AuthModule,
     MapModule.forRoot({
       defaultMapLocation: {
-        longitude: 48.69137200828818,
-        latitude: 6.183309429175067
+        longitude: 6.183309429175067,
+        latitude: 48.69137200828818
       }
     }),
     RssPageModule,
