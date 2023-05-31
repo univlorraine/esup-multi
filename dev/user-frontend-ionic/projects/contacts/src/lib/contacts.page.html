@@ -1,36 +1,46 @@
 <app-header></app-header>
-<ion-row>
-  <ion-searchbar (ionChange)="saveSearchBar($event)" placeholder="{{ 'CONTACTS.PLACEHOLDER' | translate }}"></ion-searchbar>
-  <ion-spinner *ngIf="loading"></ion-spinner>
-</ion-row>
-<ion-radio-group class="ion-padding" [value]="this.filterChecked" (ionChange)="selectedCategory($event)">
-  <ion-item lines="none" *ngFor="let filter of this.filtersList">
-    <ion-label>{{ 'CONTACTS.CONTACT_TYPES.' + filter | translate }}</ion-label>
-    <ion-radio [value]="filter"></ion-radio>
-  </ion-item>
-</ion-radio-group>
-<div class="ion-padding ion-text-end">
-  <ion-button (click)="searchContacts()">{{ 'CONTACTS.SEARCH' | translate }}</ion-button>
+<div class="search-and-filters">
+  <ion-row>
+    <ion-searchbar (ionChange)="saveSearchBar($event)" placeholder="{{ 'CONTACTS.PLACEHOLDER' | translate }}"></ion-searchbar>
+  </ion-row>
+  <ion-radio-group [value]="this.filterChecked" (ionChange)="selectedCategory($event)">
+    <ion-item lines="none" *ngFor="let filter of this.filtersList">
+      <ion-label class="app-text-4">{{ 'CONTACTS.CONTACT_TYPES.' + filter | translate }}</ion-label>
+      <ion-radio [value]="filter"></ion-radio>
+    </ion-item>
+  </ion-radio-group>
+  <ion-row class="ion-padding ion-justify-content-center">
+    <ion-button class="app-button-1" (click)="searchContacts()">
+      <ion-label>{{ 'CONTACTS.SEARCH' | translate }}</ion-label>
+    </ion-button>
+  </ion-row>
 </div>
 <ion-content class="ion-padding">
-  <ion-text class="ion-padding" *ngIf="searchButtonPressed">{{contacts.length}} {{ 'CONTACTS.RESULTS' | translate }}</ion-text>
-  <ion-card *ngFor="let item of contacts">
-    <ion-card-header>
-        <ion-card-title class="ion-padding">{{item.name}} {{item.firstname}}</ion-card-title>
-      <ion-card-subtitle class="ion-padding" *ngFor="let assignment of item.assignments">{{assignment}}</ion-card-subtitle>
-    </ion-card-header>
-    <ion-card-content>
-      <ion-item lines="none" *ngFor="let email of item.mailAdresses; last as isLast" [lines]="isLast ? '' : 'none' ">
-        <a href="mailto:{{email}}" >{{email}}</a>
-      </ion-item>
-      <ion-item *ngFor="let mobile of item.phoneNumbers; last as isLast" [lines]="isLast ? '' : 'none' ">
-        <a href="tel:{{mobile}}" >{{mobile}}</a>
-      </ion-item>
-      <div class=" ion-text-end">
-        <ion-button (click)="createContact(item)">
-          <ion-icon name="person-add-outline"></ion-icon>
-        </ion-button>
-      </div>
-    </ion-card-content>
-  </ion-card>
+  <ion-row *ngIf="loading" class="ion-justify-content-center ion-padding">
+    <ion-spinner></ion-spinner>
+  </ion-row>
+  <div *ngIf="!loading">
+    <ion-text class="ion-padding app-text-4" *ngIf="searchButtonPressed">{{contacts.length}} {{ 'CONTACTS.RESULTS' | translate }}</ion-text>
+    <ion-card class="ion-margin-top ion-margin-bottom" *ngFor="let item of contacts">
+      <ion-card-header>
+        <ion-card-title class="ion-padding-bottom app-title-4">{{item.name}} {{item.firstname}}</ion-card-title>
+        <ion-card-subtitle class="app-text-4 light" *ngFor="let assignment of item.assignments">{{assignment}}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content class="border-bottom">
+        <div class="ion-padding">
+          <ion-item class="ion-no-padding" *ngFor="let email of item.mailAdresses; last as isLast" [lines]="isLast ? 'inset' : 'none' ">
+            <a class="app-text-4" href="mailto:{{email}}" >{{email}}</a>
+          </ion-item>
+          <ion-item class="ion-no-padding" *ngFor="let mobile of item.phoneNumbers; last as isLast" [lines]="isLast ? 'inset' : 'none' ">
+            <a class="app-text-4" href="tel:{{mobile}}" >{{mobile}}</a>
+          </ion-item>
+        </div>
+        <div class="ion-margin-top ion-text-end">
+          <ion-button (click)="createContact(item)">
+            <ion-icon name="person-add-outline"></ion-icon>
+          </ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

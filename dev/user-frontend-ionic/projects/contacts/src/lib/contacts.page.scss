@@ -1,0 +1,23 @@
+.search-and-filters {
+  background-color: var(--ion-color-light);
+  --ion-item-background: var(--ion-color-light);
+  border-bottom: var(--app-border-width-7) solid var(--ion-color-primary);
+}
+
+.search-and-filters ion-item {
+  --min-height: 2rem;
+}
+
+ion-card {
+  border-top: var(--app-border-width-7) solid var(--ion-color-primary) !important;
+  border-left: var(--app-border-width-7) solid var(--ion-color-primary) !important;
+  border-right: var(--app-border-width-7) solid var(--ion-color-primary) !important;
+  border-bottom: var(--app-border-width-7) solid var(--ion-color-primary) !important;
+  border-radius: var(--app-border-no-radius);
+  box-shadow: var(--app-border-no-box-shadow);
+}
+
+.border-bottom {
+  border-radius: var(--app-border-no-radius);
+  border-bottom: var(--app-border-width-5) solid var(--ion-color-secondary) !important;
+}
