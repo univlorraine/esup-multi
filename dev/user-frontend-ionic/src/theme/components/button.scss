@@ -19,7 +19,7 @@
   --box-shadow: none;
   --border-radius: 0px !important;
   height: var(--app-button-1-height);
-  width: var(--app-button-1-width);
+  min-width: var(--app-button-1-min-width);
 
   ion-label {
     color: var(--app-font-color-primary);
