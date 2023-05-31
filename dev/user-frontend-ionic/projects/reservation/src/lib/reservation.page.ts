@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { ReservationService } from './reservation.service';
-import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reservation',
