@@ -176,9 +176,11 @@ Ces variables ne sont à utiliser que dans les fichiers suivant pour paramètrer
 
 - **src/theme/logos** : Contient les classes CSS utilisées dans toutes les balises balises ```<img>```.
 
-- **src/theme/fonts** : Contient les classes CSS utilisées dans toutes les balises contenant du texte.
+- **src/theme/fonts** : Contient les classes CSS utilisées dans toutes les balises de texte (h1, p, ion-text, etc.).
 
 Exception : les variables de type "Boxes" définies dans app-theme-variables.scss peuvent être utilisées directement dans les SCSS des modules en raison de la complexité d'un design de boîte (exemple : ```border-width : var(--app-ma-variable-de-bordure);```). Il n'y a donc pas de classe CSS globale pour ce type de variable, mais toute modification de leurs valeurs aura un impact sur l'ensemble de l'application là où elles sont utilisées.
+
+Se référer aux commentaires de chaque fichier pour leurs utilisations.
 
 ### Modifier ou ajouter des icônes personnalisés.
 

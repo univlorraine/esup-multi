@@ -1,18 +1,19 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <app-back-button></app-back-button>
     </ion-buttons>
 
-    <ion-title>{{ "NOTIFICATIONS.SETTINGS.TITLE" | translate }}</ion-title>
+    <ion-title class="app-title-4 contrast">{{ "NOTIFICATIONS.SETTINGS.TITLE" | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 <ng-container>
   <ion-content class="ion-padding">
+    <ion-label class="app-text-3 label">{{ "NOTIFICATIONS.SETTINGS.DESCRIPTION" | translate }}</ion-label>
     <form [formGroup]="channelForm" *ngIf="(channelsSubscriptions$| async) as channelsSubscriptions">
       <ion-list>
         <ion-item *ngFor="let channelSubscription of channelsSubscriptions">
-          <ion-label>{{ channelSubscription.label }}</ion-label>
+          <ion-label class="app-text-3 light">{{ channelSubscription.label }}</ion-label>
           <ion-toggle [formControlName]="channelSubscription.code"></ion-toggle>
         </ion-item>
       </ion-list>

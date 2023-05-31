@@ -1,31 +1,68 @@
-.notification-unread {
-    --background: #f4f4f4;
+.notifications-list {
+  background-color: var(--ion-color-medium-light);
+  padding-top: 0px;
 }
 
-.notification-right-col{
-    display: flex; 
-    flex-direction: column; 
-    justify-content: space-between;
+.notifications {
+  --background: var(--app-color-component-background-primary);
 }
 
-.notification-color-bar {
-    height: 100%;
-    width: 0.2rem;
+.notifications-col {
+  padding-right: 0px;
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
 }
 
-.new-notification-dot {
-    height: 0.8rem;
-    width: 0.8rem;
-    border-radius: 1rem;
-    position: absolute;
-    top: 50%;
-    right: 0rem;
-    transform: translate(-50%, -50%);
-    background-color: red;
+.notifications-unread {
+  --background: var(--ion-color-highlight);
 }
 
-.hr {
-    border-bottom: 0.1em solid #262626;
-    margin-top: 1em;
-    width: 100%;
+.icon-row {
+  height: 100%;
+}
+
+.routerlink-col {
+  display: flex;
+}
+
+.routerlink-button {
+  height: 1.5rem;
+}
+
+.ellipsis {
+  position: absolute !important;
+  right: 0.2rem;
+  top: -1rem;
+  z-index: 10;
+}
+
+.notifications-color-bar {
+  height: 100%;
+  width: 0.2rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.filter-list {
+  background-color: var(--app-color-component-background-primary) !important;
+  padding-top: 1rem;
+  padding-right: 0.4rem;
+}
+
+.channel-list{
+  --background: var(--app-color-component-background-primary) !important;
+}
+
+.chip-list {
+  background-color: var(--ion-color-medium-light);
+}
+
+ion-chip {
+  background-color: var(--app-color-component-background-primary);
+}
+
+.notifications-option {
+margin-bottom: 0.1rem;
 }

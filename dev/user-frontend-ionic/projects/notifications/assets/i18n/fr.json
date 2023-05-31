@@ -7,7 +7,7 @@
     "CLOSE": "Fermer",
     "SETTINGS": {
         "TITLE": "Gérer mes alertes",
-        "SUBTITLE": "Activer / Désactiver les canaux de diffusion pour lesquels je souhaite être alerté"
+        "DESCRIPTION": "Activer / Désactiver les canaux de diffusion pour lesquels je souhaite être alerté "
     },
     "UNSUBSCRIBE_TO_CHANNEL": "Ne plus m'alerter de l'arrivée des messages du canal",
     "SUBSCRIBE_TO_CHANNEL": "Réactiver les alertes des messages du canal",

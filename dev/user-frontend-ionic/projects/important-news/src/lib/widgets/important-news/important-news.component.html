@@ -18,11 +18,11 @@
               <h3 class="app-text-5">{{randomImportantNews.content}}</h3>
             </ion-label>
             <ion-row *ngIf="randomImportantNews.link" class="ion-justify-content-end">
-              <ion-button size="small" style="text-transform: none;" color="primary" fill="clear"
+              <ion-button
                 [routerLink]="randomImportantNews.link.startsWith('/') ? randomImportantNews.link : null"
                 (click)="!randomImportantNews.link.startsWith('/') && onClick(randomImportantNews)"
-                class="app-text-5 link-button">
-                {{ randomImportantNews.buttonLabel }}
+                class="app-text-button-1 link-button">
+                <ion-text class="app-text-5"> {{ randomImportantNews.buttonLabel }} </ion-text>
                 <ion-icon class="app-icon-5 link-icon" name="arrow-right"></ion-icon>
               </ion-button>
             </ion-row>

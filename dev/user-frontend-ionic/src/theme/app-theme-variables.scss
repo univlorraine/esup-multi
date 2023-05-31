@@ -64,7 +64,7 @@
   // // // ---------------------
 
   --app-text-1-size: 1.5rem;
-  --app-text-2-size: 1.325rem;
+  --app-text-2-size: 1.15rem;
   --app-text-3-size: 1rem;
   --app-text-4-size: 0.875rem;
   --app-text-5-size: 0.75rem;
@@ -75,7 +75,7 @@
   // // ---------------------
 
   --icon-1-size: 3.2rem !important;
-  --icon-2-size: 1.75rem !important;
+  --icon-2-size: 2.3rem !important;
   --icon-3-size: 1.5rem !important;
   --icon-4-size: 1.25rem !important;
   --icon-5-size: 0.75rem !important;
@@ -94,17 +94,24 @@
   // Button styling variables (Change value here and use variables only in theme/components/button.scss)
   // // ---------------------
 
+  // Button simple text type 1
+  --app-text-button-1-background: transparent;
+  --app-text-button-1-box-shadow: none;
+  --app-text-button-1-text-transform: none;
+  --app-text-button-1-max-height: 1.7rem;
+  --app-text-button-1-color: var(--app-font-color-primary);
+
   // Button Rectangular type 1
-  --app-button-1-background-color: white;
-  --app-button-1-bottom-border-width: 0.4rem;
-  --app-button-1-border-bottom-color: var(--ion-color-secondary);
-  --app-button-1-outline-width: 0.12rem;
-  --app-button-1-outline-color: var(--ion-color-primary);
-  --app-button-1-font-family: var(--app-font-primary-static-regular);
-  --app-button-1-font-size: 0.8rem;
-  --app-button-1-font-color: var(--app-font-color-primary);
-  --app-button-1-height: 2.2rem;
-  --app-button-1-min-width: 7rem;
+  --app-rectangular-button-1-background-color: white;
+  --app-rectangular-button-1-bottom-border-width: 0.4rem;
+  --app-rectangular-button-1-border-bottom-color: var(--ion-color-secondary);
+  --app-rectangular-button-1-outline-width: 0.12rem;
+  --app-rectangular-button-1-outline-color: var(--ion-color-primary);
+  --app-rectangular-button-1-font-family: var(--app-font-primary-static-regular);
+  --app-rectangular-button-1-font-size: 0.8rem;
+  --app-rectangular-button-1-font-color: var(--app-font-color-primary);
+  --app-rectangular-button-1-height: 2.2rem;
+  --app-rectangular-button-1-min-width: 7rem;
 
   // Button Square type 1 (icon only with label bellow)
   --app-square-button-1-background-color: white;
@@ -155,7 +162,12 @@
   // // // Box shadow variables
   // // // ---------------------
 
-  // Search for the next variable in all app folders if you want to set a different radius variable.
+  --app-box-shadow-1: 0.5rem;
+  --app-box-shadow-2: 0.3rem;
+  --app-box-shadow-3: 0.2rem;
+  --app-box-shadow-4: 0.1rem;
+
+  // Search for the next variable in all app folders if you want to set a different box shadow variable.
   // Do not modify this value (=> 0rem).
   --app-border-no-box-shadow: 0rem;
 

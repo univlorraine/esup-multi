@@ -8,17 +8,17 @@
           <ion-row>
             <ion-col size="3">
               <ion-img [src]="restaurant.thumbnailUrl"></ion-img>
-              <ion-icon  
-                color="primary" 
-                *ngIf="restaurant.favorite" 
-                name="heart" 
+              <ion-icon
+                color="primary"
+                *ngIf="restaurant.favorite"
+                name="heart"
                 (click)="unsetFavoriteRestaurant(restaurant.id)"
                 class="app-icon-4 favorite-icon">
               </ion-icon>
-              <ion-icon  
-                color="primary" 
+              <ion-icon
+                color="primary"
                 *ngIf="!restaurant.favorite"
-                name="heart-outline" 
+                name="heart-outline"
                 (click)="setFavoriteRestaurant(restaurant.id)"
                 class="app-icon-4 favorite-icon">
               </ion-icon>
@@ -38,13 +38,13 @@
               <ion-icon color="medium" size="large" name="pin-outline" class="pin"></ion-icon>
             </ion-col>
           </ion-row>
-          <ion-label *ngIf="restaurant.open" class="opening" color="primary" >
+          <ion-label *ngIf="restaurant.open" class="opening">
             <h2 class="app-text-6">
               {{ restaurant.opening }}
             </h2>
           </ion-label>
-          <ion-label *ngIf="!restaurant.open" class="opening" color="danger" >
-            <h2 class="app-text-6">
+          <ion-label *ngIf="!restaurant.open" class="opening">
+            <h2 class="app-text-6 danger">
               {{ 'RESTAURANTS.CLOSED' | translate }}
             </h2>
           </ion-label>
