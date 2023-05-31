@@ -10,9 +10,9 @@
 
 <ion-content #scrollContent [ngClass]="isLoading ? 'ion-hide' : ''">
   <ion-list #messages>
-    <ion-item-group *ngFor="let message of messages$ | async; let index = index">
+    <ion-item-group *ngFor="let message of messages$ | async">
       <div class="message-container ion-margin">
-        <div [ngClass]="message.messageType === messageType.bot ? message.card && index === 0 ? 'image-bot' : 'message-bot' : 'message-user'">
+        <div [ngClass]="message.messageType === messageType.bot ? message.card && isChatbotLogo(message) ? 'image-bot' : 'message-bot' : 'message-user'">
             <ion-row *ngIf="message.messageType === messageType.bot">
               <ion-label class="app-text-4" *ngIf="!message.card" [innerHTML]="message.text" text-wrap></ion-label>
               <ion-img *ngIf="message.card" [src]="message.card.file.url"></ion-img>
@@ -34,17 +34,17 @@
   </ion-list>
 </ion-content>
 
-<ion-footer line="none">
-  <ion-item no-lines class="footer">
+<ion-footer>
+  <ion-item class="footer">
         <ion-input [(ngModel)]="userInput" class="form-control ion-margin input" placeholder="{{'CHATBOT.MESSAGE_PROMPT' | translate}}"
         (keyup.enter)="onMessageInputEnter()"></ion-input>
 
     <ion-buttons slot="end">
-      <ion-button ion-button icon-only (click)="clearUserInput()">
+      <ion-button (click)="clearUserInput()">
         <ion-icon name="trash" class="icon"></ion-icon>
       </ion-button>
 
-      <ion-button ion-button icon-only (click)="textRequest(userInput)">
+      <ion-button (click)="textRequest(userInput)">
         <ion-icon name="send" class="icon"></ion-icon>
       </ion-button>
     </ion-buttons>

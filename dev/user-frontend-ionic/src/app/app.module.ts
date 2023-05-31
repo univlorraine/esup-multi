@@ -81,7 +81,9 @@ import { RestaurantsModule } from '@ul/restaurants';
       reservationSsoUrlTemplate: 'https://resa-espace.univ-lorraine.fr/reservationsalles/Authentification.aspx?ticket={st}',
     }),
     MenuModule,
-    ChatbotModule,
+    ChatbotModule.forRoot({
+      chatbotLogoRegex: /_ully5/i
+    }),
     StaticPagesModule,
     ContactUsModule,
     RestaurantsModule,

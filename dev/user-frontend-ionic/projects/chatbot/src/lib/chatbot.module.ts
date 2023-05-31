@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { APP_INITIALIZER, ModuleWithProviders, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { ProjectModuleService, SharedComponentsModule } from '@ul/shared';
 import { ChatbotRoutingModule } from './chatbot-routing.module';
 import { ChatbotPage } from './chatbot.page';
+import { CHATBOT_CONFIG, ChatbotModuleConfig } from './chatbot.config';
 
 const initModule = (projectModuleService: ProjectModuleService) =>
   () => projectModuleService.initProjectModule({
@@ -35,4 +36,13 @@ const initModule = (projectModuleService: ProjectModuleService) =>
 })
 export class ChatbotModule {
   static path = '/chatbot';
+
+  static forRoot(config: ChatbotModuleConfig): ModuleWithProviders<ChatbotModule> {
+    return {
+      ngModule: ChatbotModule,
+      providers: [
+        { provide: CHATBOT_CONFIG, useValue: config }
+      ]
+    };
+  }
 }

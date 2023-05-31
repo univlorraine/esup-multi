@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { Capacitor } from '@capacitor/core';
 import { Keyboard } from '@capacitor/keyboard';
 import { IonContent } from '@ionic/angular';
@@ -7,6 +7,7 @@ import { finalize, first } from 'rxjs/operators';
 import { ChatbotMessage, ChatButton, Message, MessageType, UserMessage } from './chatbot.dto';
 import { ChatbotService } from './chatbot.service';
 import { UserIdGeneratorService } from './user-id-generator.service';
+import { CHATBOT_CONFIG, ChatbotModuleConfig } from './chatbot.config';
 
 @Component({
   selector: 'app-chatbot',
@@ -28,7 +29,10 @@ export class ChatbotPage implements OnInit {
   private messages: Message[] = [];
   private domMessageListObserver: MutationObserver;
 
-  constructor(private chatbotService: ChatbotService) { }
+  constructor(
+    @Inject(CHATBOT_CONFIG) private config: ChatbotModuleConfig,
+    private chatbotService: ChatbotService
+  ) { }
 
   ngOnInit() {
     this.chatbotService.textRequest('Hello', ChatbotPage.userChatId)
@@ -48,7 +52,7 @@ export class ChatbotPage implements OnInit {
     this.domMessageListObserver.observe(this.domMessageList.nativeElement, { childList: true, subtree: true });
 
     if (Capacitor.isNativePlatform()) {
-      Keyboard.addListener('keyboardWillShow', info => {
+      Keyboard.addListener('keyboardWillShow', () => {
         this.scrollContent.scrollToBottom(0);
       });
     }
@@ -118,5 +122,10 @@ export class ChatbotPage implements OnInit {
 
   clearUserInput() {
     this.userInput = '';
+  }
+
+  isChatbotLogo(message: ChatbotMessage) {
+    return message?.card?.file?.type === 'image'
+      && message?.card?.file?.name.match(this.config.chatbotLogoRegex);
   }
 }
