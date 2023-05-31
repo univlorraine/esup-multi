@@ -10,6 +10,7 @@
 
 .eventRows {
   max-width: 100% !important;
+  margin-bottom: 0.6rem;
 }
 
 ion-col {
@@ -24,6 +25,11 @@ ion-col {
 }
 
 .courseLabel {
-  font-weight: bold;
+  font-weight: bold !important;
   width: 100%;
+}
+
+.detail-text{
+  margin-left: 0.2rem;
+  margin-right: 0.4rem;
 }

@@ -8,7 +8,8 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import { IonModal, Platform } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { currentLanguage$ } from '@ul/shared';
-import { isAfter, isBefore, sub } from 'date-fns';
+import { format, isAfter, isBefore, sub } from 'date-fns';
+import * as locale from 'date-fns/locale';
 import { EventInput } from 'fullcalendar';
 import { Observable, Subscription } from 'rxjs';
 import { filter, first, map, mergeMap, tap } from 'rxjs/operators';
@@ -31,6 +32,7 @@ export class ScheduleCalendarComponent {
   @ViewChild('modal') modal: IonModal;
 
   public viewType$: Observable<string>;
+  public viewType: string;
   public isEventDetailOpen = false;
   public selectedEvent: Event;
   public loadScheduleOutOfStateError = false;
@@ -45,6 +47,24 @@ export class ScheduleCalendarComponent {
     allDaySlot: false,
     slotEventOverlap: false,
     showNonCurrentDates: false,
+    slotMinTime: '06:00:00',
+    slotMaxTime: '22:00:00',
+    scrollTime: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+    nowIndicator: true,
+    firstDay: 1,
+    views: {
+      timeGridWeek: {
+        dayHeaderContent: (args) => {
+          const lang = this.translate.currentLang || this.translate.defaultLang;
+          return {
+            html: `
+            <div class="week-view-column-header-day">${format(args.date, 'EEE', { locale: locale[lang] })}</div>
+            <div class="week-view-column-header-number">${format(args.date, 'd', { locale: locale[lang] })}</div>
+            `
+          };
+        },
+      }
+    },
     eventClick: info => {
       this.selectedEvent = info.event.extendedProps.event;
       this.isEventDetailOpen = true;
@@ -116,6 +136,7 @@ export class ScheduleCalendarComponent {
     this.initCalendar();
 
     this.subscriptions.push(this.viewType$.subscribe(viewType => {
+      this.viewType = viewType;
       this.changeViewType(viewType);
     }));
 
@@ -136,16 +157,6 @@ export class ScheduleCalendarComponent {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
-  addEventToCalendar(event: Event) {
-    this.getCalendar().addEvent({
-      start: event.startDateTime,
-      end: event.endDateTime,
-      extendedProps: {
-        event
-      }
-    });
-  }
-
   initCalendar() {
     this.subscriptions.push(
       currentLanguage$.subscribe(lang => {
@@ -156,7 +167,7 @@ export class ScheduleCalendarComponent {
           this.getCalendar().setOption('locale', lang);
         }
 
-        this.getCalendar().setOption('buttonText',{today: this.translate.instant('SCHEDULE.CALENDAR.TODAY_ABBREVIATION')});
+        this.getCalendar().setOption('buttonText', { today: this.translate.instant('SCHEDULE.CALENDAR.TODAY_ABBREVIATION') });
 
         // fix a display bug from @fullcalendar/angular in Ionic
         setTimeout(
@@ -196,11 +207,11 @@ export class ScheduleCalendarComponent {
     const isLandscape = this.platform.isLandscape();
     const isDesktop = this.platform.is('desktop');
 
-      const breakpoint = (isDesktop || !isLandscape) ? defaultBreakpoint : 1;
+    const breakpoint = (isDesktop || !isLandscape) ? defaultBreakpoint : 1;
 
-      requestAnimationFrame(() => {
-        this.modal.initialBreakpoint = breakpoint;
-        this.modal.setCurrentBreakpoint(breakpoint);
-      });
+    requestAnimationFrame(() => {
+      this.modal.initialBreakpoint = breakpoint;
+      this.modal.setCurrentBreakpoint(breakpoint);
+    });
   }
 }

@@ -2,6 +2,7 @@
     "NO_DATA": "Pas de données disponibles",
     "NO_EVENTS": "Pas de cours dans vos plannings",
     "NO_EVENTS_THIS_DAY": "Pas de cours à cette date",
+    "CLOSE": "Fermer",
     "REQUEST_ERROR": {
         "BEFORE": "Veuillez réessayer plus tard. Une erreur s'est produite lors de la récupération des événements avant le",
         "AFTER": "Veuillez réessayer plus tard. Une erreur s'est produite lors de la récupération des événements après le"

@@ -20,7 +20,6 @@ export class ScheduleCalendarService {
        ({
               start: event.startDateTime,
               end: event.endDateTime,
-              backgroundColor: event.course.color,
               extendedProps: {
                 event
               }

@@ -1,15 +1,15 @@
 <ion-content>
 
   <ion-item lines="none" *ngIf="loadScheduleOutOfStateError === true">
-    <ion-note *ngIf="errorIsBefore" class="ion-padding" color="danger"> {{ "SCHEDULE.REQUEST_ERROR.BEFORE" | translate }} {{dateError |
+    <ion-note *ngIf="errorIsBefore" class="ion-padding app-text-4 danger"> {{ "SCHEDULE.REQUEST_ERROR.BEFORE" | translate }} {{dateError |
       completeLocalDate}}.</ion-note>
-    <ion-note *ngIf="!errorIsBefore" class="ion-padding" color="danger"> {{ "SCHEDULE.REQUEST_ERROR.AFTER" | translate }} {{dateError |
+    <ion-note *ngIf="!errorIsBefore" class="ion-padding app-text-4 danger"> {{ "SCHEDULE.REQUEST_ERROR.AFTER" | translate }} {{dateError |
       completeLocalDate}}.</ion-note>
   </ion-item>
 
   <full-calendar #calendar [options]="calendarOptions">
     <ng-template #eventContent let-arg>
-      <app-calendar-event [event]="arg.event.extendedProps.event"
+      <app-calendar-event [event]="arg.event.extendedProps.event" [viewType]="viewType"
         ></app-calendar-event>
     </ng-template>
   </full-calendar>

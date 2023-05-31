@@ -9,6 +9,7 @@ import { Event } from '../../schedule.repository';
 export class CalendarEventComponent {
 
   @Input() event: Event;
+  @Input() viewType: string;
   constructor() { }
 
 }
