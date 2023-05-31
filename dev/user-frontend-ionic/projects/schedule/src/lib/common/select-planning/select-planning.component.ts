@@ -26,7 +26,8 @@ export class SelectPlanningComponent {
 
 
   form: FormGroup;
-  public isModalOpen = false;
+  public isSelectPlanningModalOpen = false;
+  public isHiddenCourseModalOpen = false;
   public isLoading = false;
   public availablePlanningList: AvailablePlanning[] = [];
   public lastSelectedPlanningIndex: number | null = null;
@@ -46,22 +47,22 @@ export class SelectPlanningComponent {
 
   async validate() {
     this.applySelectedPlanning();
-    this.closeModal();
+    this.closeSelectPlanningModal();
   }
 
-  closeModal() {
-    this.isModalOpen = false;
+  closeSelectPlanningModal() {
+    this.isSelectPlanningModalOpen = false;
     this.planningList.clear();
   }
 
-  onDismiss() {
-    this.closeModal();
+  onDismissSelectPlanningModal() {
+    this.closeSelectPlanningModal();
     return false;
   }
 
-  openModal() {
+  openSelectPlanningModal() {
     this.isLoading = true;
-    this.isModalOpen = true;
+    this.isSelectPlanningModalOpen = true;
 
     zip(schedule$, activePlanningIds$)
       .subscribe(([schedule, activePlanningIds]) => {
@@ -73,6 +74,19 @@ export class SelectPlanningComponent {
         this.buildForm(availablePlanningFormInputs);
         this.isLoading = false;
       });
+  }
+
+  openHiddenCourseModal(){
+    this.isHiddenCourseModalOpen = true;
+  }
+
+  onDismissHiddenCourseModal(){
+    this.closeHiddenCourseModal();
+    return false;
+  }
+
+  closeHiddenCourseModal(){
+    this.isHiddenCourseModalOpen = false;
   }
 
   private buildForm(availablePlanningFormInputs: AvailablePlanningFormInput[]) {
@@ -92,5 +106,7 @@ export class SelectPlanningComponent {
     }
     setActivePlanningIds(selectedPlanningIds);
   }
+
+
 
 }

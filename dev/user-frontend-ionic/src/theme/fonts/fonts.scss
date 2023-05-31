@@ -145,6 +145,7 @@
 // // // Text level
 // // // ---------------------
 
+// Text-1
 .app-text-1 {
   font-size: var(--app-text-1-size) !important;
   font-family: var(--app-font-secondary) !important;
@@ -157,6 +158,11 @@
   font-weight: normal !important;
 }
 
+.app-text-1.contrast {
+  color: var(--app-font-color-primary-contrast) !important;
+}
+
+// Text-2
 .app-text-2 {
   font-size: var(--app-text-2-size) !important;
   font-family: var(--app-font-secondary) !important;
@@ -168,6 +174,11 @@
   font-weight: normal !important;
 }
 
+.app-text-2.contrast {
+  color: var(--app-font-color-primary-contrast) !important;
+}
+
+// Text-3
 .app-text-3 {
   font-size: var(--app-text-3-size) !important;
   font-family: var(--app-font-secondary) !important;
@@ -179,6 +190,11 @@
   font-weight: normal !important;
 }
 
+.app-text-3.contrast {
+  color: var(--app-font-color-primary-contrast) !important;
+}
+
+// Text-4
 .app-text-4 {
   font-size: var(--app-text-4-size) !important;
   font-family: var(--app-font-secondary) !important;
@@ -190,6 +206,11 @@
   font-weight: normal !important;
 }
 
+.app-text-4.contrast {
+  color: var(--app-font-color-primary-contrast) !important;
+}
+
+// Text-5
 .app-text-5 {
   font-size: var(--app-text-5-size) !important;
   font-family: var(--app-font-secondary) !important;
@@ -201,6 +222,11 @@
   font-weight: normal !important;
 }
 
+.app-text-5.contrast {
+  color: var(--app-font-color-primary-contrast) !important;
+}
+
+// Text-6
 .app-text-6 {
   font-size: var(--app-text-6-size) !important;
   font-family: var(--app-font-secondary) !important;
@@ -210,6 +236,10 @@
 
 .app-text-6.light {
   font-weight: normal !important;
+}
+
+.app-text-6.contrast {
+  color: var(--app-font-color-primary-contrast) !important;
 }
 
 // danger color (use this class in adition with other class above.

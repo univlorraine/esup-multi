@@ -2,6 +2,9 @@ ion-tab-bar {
   height: 2.4rem;
 }
 
-ion-tab-button{
-  background-color: var(--app-color-component-background-primary) !important;
+
+.tab-selected {
+  ion-label{
+    color: var(--ion-color-secondary) !important;
+  }
 }
