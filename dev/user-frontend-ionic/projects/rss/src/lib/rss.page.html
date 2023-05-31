@@ -19,10 +19,10 @@
                 </ion-label>
 
                 <ion-row class="ion-justify-content-end">
-                  <ion-button size="small" style="text-transform: none;" color="primary" fill="clear"
-                    (click)="openContent(i)" class="app-text-5 link-button">
-                    <ion-text *ngIf="!isContentVisible[i]" >{{ "RSS.SEE_MORE" | translate }}</ion-text>
-                    <ion-text *ngIf="isContentVisible[i]" >{{ "RSS.SEE_LESS" | translate }}</ion-text>
+                  <ion-button
+                    (click)="openContent(i)" class="app-text-button-1 link-button">
+                    <ion-text class="app-text-5" *ngIf="!isContentVisible[i]" >{{ "RSS.SEE_MORE" | translate }}</ion-text>
+                    <ion-text class="app-text-5" *ngIf="isContentVisible[i]" >{{ "RSS.SEE_LESS" | translate }}</ion-text>
                     <ion-icon class="app-icon-5 see-more-icon" [class.content-open]="!isContentVisible[i]"
                       [class.content-close]="isContentVisible[i]" name="arrow-right"></ion-icon>
                   </ion-button>

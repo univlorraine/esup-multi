@@ -1,0 +1,71 @@
+@media screen and (min-width: 320px) {
+  ion-title {
+    position: absolute;
+    width: auto;
+    height: 100%;
+    left: 50%;
+    top: 0%;
+    transform: translate(-50%, 0%);
+  }
+}
+
+ion-item {
+  overflow: visible;
+  padding-right: 0px;
+  --padding-start: 0px;
+  --inner-padding-end: 0px;
+}
+
+ion-content {
+  --padding-top: 1.7rem !important;
+  --padding-start: 1.7rem !important;
+  --padding-end: 1.7rem !important;
+}
+
+ion-list {
+  margin-top: 1rem !important;
+}
+
+ion-toggle {
+
+  --track-background: #f9f9f9;
+  --track-background-checked: #ffffff;
+
+  --handle-background: #ffffff;
+  --handle-background-checked: var(--ion-color-tertiary);
+
+  --handle-width: 20px;
+  --handle-height: 20px;
+  --handle-max-height: auto;
+  --handle-spacing: -1px;
+
+  --handle-border-radius: 6px;
+  --handle-box-shadow: none;
+}
+
+ion-toggle.md{
+  padding-top: 0.5rem;
+}
+
+ion-toggle.ios{
+  padding-top: 0.7rem;
+  padding-bottom: 0rem;
+}
+
+ion-toggle::part(handle) {
+  border: 1px solid black !important;
+
+  /* Required for iOS handle to overflow the height of the track */
+  overflow: visible;
+}
+
+ion-toggle::part(track) {
+  border: 1px solid rgb(148, 148, 148) !important;
+  background-color: rgb(231, 231, 231);
+  height: 20px;
+  width: 43px;
+  border-radius: 6px;
+
+  /* Required for iOS handle to overflow the height of the track */
+  overflow: visible;
+}

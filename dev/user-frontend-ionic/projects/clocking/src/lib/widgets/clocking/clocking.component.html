@@ -10,7 +10,7 @@
       }}</ion-chip>
   </ion-row>
   <ion-row class="ion-justify-content-center ion-padding">
-    <ion-button class="app-button-1" *ngIf="!clockInLoading" (click)="onClockIn($event)" lines="none">
+    <ion-button class="app-rectangle-button-1" *ngIf="!clockInLoading" (click)="onClockIn($event)" lines="none">
       <ion-label>{{ 'CLOCKING.CLOCK_IN' | translate }}</ion-label></ion-button>
     <ion-spinner *ngIf="clockInLoading" name="lines"></ion-spinner>
   </ion-row>

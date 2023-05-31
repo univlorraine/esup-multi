@@ -8,11 +8,12 @@
 
   // // ---------------------
   // // // ---------------------
-  // // // Font color variables (Change value here and use variables only in theme/fonts.scss and in other theme/... files if necessary)
+  // // // Font color variables (Change value here and use variables only in css)
   // // // ---------------------
 
-  --app-font-color-primary: #050301;
+  --app-font-color-primary: #000000;
   --app-font-color-primary-medium: #1b1b1b;
+  --app-font-color-primary-contrast: #ffffff;
 
   // // // ---------------------
   // // // Background variables (Change value here and use variables in SCSS files on all CSS classes needed throughout the app)
@@ -99,7 +100,6 @@
   --ion-color-medium-shade: #636469;
   --ion-color-medium-tint: #7e8085;
 
-
   /** light **/
   --ion-color-light: #f5f8fb;
   --ion-color-light-rgb: 247, 248, 249;
@@ -122,6 +122,23 @@
   --ion-color-quaternary-contrast-rgb: 0, 0, 0;
   --ion-color-quaternary-shade: #a4c4d1;
   --ion-color-quaternary-tint: #c1e2f0;
+
+  /** medium-light **/
+  --ion-color-medium-light: #b2b2be;
+  --ion-color-medium-light-rgb: 178, 178, 190;
+  --ion-color-medium-light-contrast: #000000;
+  --ion-color-medium-light-contrast-rgb: 0, 0, 0;
+  --ion-color-medium-light-shade: #9d9da7;
+  --ion-color-medium-light-tint: #babac5;
+
+  /** highlight **/
+  // Exemple of use : new item in a list (used in Notifications module for new notification)
+  --ion-color-highlight: #ffef65;
+  --ion-color-highlight-rgb: 255, 239, 101;
+  --ion-color-highlight-contrast: #000000;
+  --ion-color-highlight-contrast-rgb: 0, 0, 0;
+  --ion-color-highlight-shade: #e0d259;
+  --ion-color-highlight-tint: #fff174;
 }
 
 .ion-color-quaternary {
@@ -131,6 +148,24 @@
   --ion-color-contrast-rgb: var(--ion-color-quaternary-contrast-rgb) !important;
   --ion-color-shade: var(--ion-color-quaternary-shade) !important;
   --ion-color-tint: var(--ion-color-quaternary-tint) !important;
+}
+
+.ion-color-medium-light {
+  --ion-color-base: var(--ion-color-medium-light) !important;
+  --ion-color-base-rgb: var(--ion-color-medium-light-rgb) !important;
+  --ion-color-contrast: var(--ion-color-medium-light-contrast) !important;
+  --ion-color-contrast-rgb: var(--ion-color-medium-light-contrast-rgb) !important;
+  --ion-color-shade: var(--ion-color-medium-light-shade) !important;
+  --ion-color-tint: var(--ion-color-medium-light-tint) !important;
+}
+
+.ion-color-highlight {
+  --ion-color-base: var(--ion-color-highlight) !important;
+  --ion-color-base-rgb: var(--ion-color-highlight-rgb) !important;
+  --ion-color-contrast: var(--ion-color-highlight-contrast) !important;
+  --ion-color-contrast-rgb: var(--ion-color-highlight-contrast-rgb) !important;
+  --ion-color-shade: var(--ion-color-highlight-shade) !important;
+  --ion-color-tint: var(--ion-color-highlight-tint) !important;
 }
 
 @media (prefers-color-scheme: dark) {

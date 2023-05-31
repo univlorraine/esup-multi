@@ -1,14 +1,31 @@
-// // // CSS classes (Use this css classes in HTML on every text tags throughout the app).
+// // ---------------------
+// // Font css classes (Use these CSS classes in HTML for all text tags throughout the app).
+// // ---------------------
 
-// // // ---------------------
+// Note :
+/* Don't use the color attribute of Ionic components on ion-label tags and don't use a class bellow
+   on ion-button or on a parent of a text tag.
+
+   How not to do it: <ion-label color="primary"> <h1> text </h1> <p> text </p> </ion-label>
+   How not to do it: <ion-button class="app-text-1"> text </ion-button>
+
+   How to do it: Use the following font classes directly on the text tags.
+   Example: <ion-label> <h1 class="app-title-1"></h1> <p class="app-text-1"></p> </ion-label>
+   <ion-button> <ion-text class="app-text-1"> text </ion-text> </ion-button>
+   Because Ionic handles the styling for tags inside ion-label and for the text inside ion-button. */
+
+/* At the bottom of the file, you will find the danger color (use this class in addition to the other classes above).
+   Don't use the color="danger" attribute, but instead use: <ion-text class="app-title-1 light danger"> */
+
+
+// // // --------------------
 // // // Title level
 // // // ---------------------
 
-// Title-1
 .app-title-1 {
   font-size: var(--app-title-1-size) !important;
   font-family: var(--app-font-primary-static-bold) !important;
-  color: var(--app-font-color-primary);
+  color: var(--app-font-color-primary) !important;
   text-transform: uppercase;
 }
 
@@ -17,25 +34,32 @@
   text-transform: none;
 }
 
-// Title-2
+.app-title-1.contrast {
+  color: var(--app-font-color-primary-contrast) !important;
+}
 
+// Title-2
 .app-title-2 {
   font-size: var(--app-title-2-size) !important;
   font-family: var(--app-font-primary-static-bold) !important;
-  color: var(--app-font-color-primary);
+  color: var(--app-font-color-primary) !important;
   text-transform: uppercase;
 }
+
 .app-title-2.light {
   font-family: var(--app-font-primary-static-light) !important;
   text-transform: none;
+}
 
+.app-title-2.contrast {
+  color: var(--app-font-color-primary-contrast) !important;
 }
 
 // Title-3
 .app-title-3 {
   font-size: var(--app-title-3-size) !important;
   font-family: var(--app-font-primary-static-bold) !important;
-  color: var(--app-font-color-primary);
+  color: var(--app-font-color-primary) !important;
   text-transform: uppercase;
 }
 
@@ -44,11 +68,15 @@
   text-transform: none;
 }
 
+.app-title-3.contrast {
+  color: var(--app-font-color-primary-contrast) !important;
+}
+
 // Title-4
 .app-title-4 {
   font-size: var(--app-title-4-size) !important;
   font-family: var(--app-font-primary-static-bold) !important;
-  color: var(--app-font-color-primary);
+  color: var(--app-font-color-primary) !important;
   text-transform: uppercase;
 }
 
@@ -58,11 +86,15 @@
 
 }
 
+.app-title-4.contrast {
+  color: var(--app-font-color-primary-contrast) !important;
+}
+
 // Title-5
 .app-title-5 {
   font-size: var(--app-title-5-size) !important;
   font-family: var(--app-font-primary-static-bold) !important;
-  color: var(--app-font-color-primary);
+  color: var(--app-font-color-primary) !important;
   text-transform: uppercase;
 }
 
@@ -71,11 +103,15 @@
   text-transform: none;
 }
 
+.app-title-5.contrast {
+  color: var(--app-font-color-primary-contrast) !important;
+}
+
 // Title-6
 .app-title-6 {
   font-size: var(--app-title-6-size) !important;
   font-family: var(--app-font-primary-static-bold) !important;
-  color: var(--app-font-color-primary);
+  color: var(--app-font-color-primary) !important;
   text-transform: uppercase;
 }
 
@@ -83,11 +119,16 @@
   font-family: var(--app-font-primary-static-light) !important;
   text-transform: none;
 }
+
+.app-title-6.contrast {
+  color: var(--app-font-color-primary-contrast) !important;
+}
+
 // Title-7
 .app-title-7 {
   font-size: var(--app-title-7-size) !important;
   font-family: var(--app-font-primary-static-bold) !important;
-  color: var(--app-font-color-primary);
+  color: var(--app-font-color-primary) !important;
   text-transform: uppercase;
 }
 
@@ -96,12 +137,9 @@
   text-transform: none;
 }
 
-.app-title-7 {
-    font-size: var(--app-title-5-size) !important;
-    font-family: var(--app-font-primary-static-light) !important;
+.app-title-7.contrast {
+  color: var(--app-font-color-primary-contrast) !important;
 }
-
-
 
 // // // ---------------------
 // // // Text level
@@ -111,15 +149,23 @@
   font-size: var(--app-text-1-size) !important;
   font-family: var(--app-font-secondary) !important;
   font-weight: 800 !important;
-  color: var(--app-font-color-primary-medium);
+  color: var(--app-font-color-primary-medium) !important;
   font-weight: 500 !important;
+}
+
+.app-text-1.light {
+  font-weight: normal !important;
 }
 
 .app-text-2 {
   font-size: var(--app-text-2-size) !important;
   font-family: var(--app-font-secondary) !important;
-  color: var(--app-font-color-primary-medium);
+  color: var(--app-font-color-primary-medium) !important;
   font-weight: 500 !important;
+}
+
+.app-text-2.light {
+  font-weight: normal !important;
 }
 
 .app-text-3 {
@@ -129,24 +175,45 @@
   font-weight: 500 !important;
 }
 
+.app-text-3.light {
+  font-weight: normal !important;
+}
+
 .app-text-4 {
   font-size: var(--app-text-4-size) !important;
   font-family: var(--app-font-secondary) !important;
-  color: var(--app-font-color-primary-medium);
+  color: var(--app-font-color-primary-medium) !important;
   font-weight: 500 !important;
+}
+
+.app-text-4.light {
+  font-weight: normal !important;
 }
 
 .app-text-5 {
   font-size: var(--app-text-5-size) !important;
   font-family: var(--app-font-secondary) !important;
-  color: var(--app-font-color-primary-medium);
+  color: var(--app-font-color-primary-medium) !important;
   font-weight: 500 !important;
+}
+
+.app-text-5.light {
+  font-weight: normal !important;
 }
 
 .app-text-6 {
   font-size: var(--app-text-6-size) !important;
   font-family: var(--app-font-secondary) !important;
-  color: var(--app-font-color-primary-medium);
+  color: var(--app-font-color-primary-medium) !important;
   font-weight: 500 !important;
 }
 
+.app-text-6.light {
+  font-weight: normal !important;
+}
+
+// danger color (use this class in adition with other class above.
+// Don't use the color="danger" attribute, but instead use: <ion-text class="app-title-1 light danger">
+.danger {
+  color: var(--ion-color-danger) !important;
+}

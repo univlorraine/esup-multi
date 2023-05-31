@@ -3,11 +3,11 @@
     <ion-row class="ion-align-items-center ion-margin-bottom ion-nowrap">
       <ion-icon [name]="notification.icon" size="large"></ion-icon>
       <ion-label class="ion-margin-start">
-        <h2 class="ion-text-wrap">{{notification.title}}</h2>
+        <h2 class="app-text-2 ion-text-wrap">{{notification.title}}</h2>
       </ion-label>
     </ion-row>
-    <ion-row>
-      <ion-text>{{notification.message}}</ion-text>
+    <ion-row class="ion-margin-bottom">
+      <ion-text class="app-text-4">{{notification.message}}</ion-text>
     </ion-row>
   </ion-row>
 </ion-grid>
@@ -16,7 +16,7 @@
   <ion-item button *ngIf="options.isSubscribed && options.filterable"
     (click)="onUnsubscribeFromChannel(options.channel)">
     <ion-icon name="close-circle-outline" slot="start"></ion-icon>
-    <ion-label class="ion-text-wrap">
+    <ion-label class="app-text-4 ion-text-wrap">
       {{ 'NOTIFICATIONS.UNSUBSCRIBE_TO_CHANNEL' | translate }}
       <ion-text> '{{ options.channel.label }}' </ion-text>
     </ion-label>
@@ -25,7 +25,7 @@
   <ion-item button *ngIf="!options.isSubscribed && options.filterable"
     (click)="onSubscribeToChannel(options.channel)">
     <ion-icon name="notifications-outline" slot="start"></ion-icon>
-    <ion-label class="ion-text-wrap">
+    <ion-label class="app-text-4 ion-text-wrap">
       {{ 'NOTIFICATIONS.SUBSCRIBE_TO_CHANNEL' | translate }}
       <ion-text> '{{ options.channel.label }}' </ion-text>
     </ion-label>
@@ -34,7 +34,7 @@
 
 <ion-item button (click)="deleteNotification(notification.id)">
   <ion-icon name="trash-outline" slot="start"></ion-icon>
-  <ion-label class="ion-text-wrap">
+  <ion-label class="app-text-4 ion-text-wrap">
     {{ 'NOTIFICATIONS.DELETE_THIS_NOTIFICATION' | translate }}
   </ion-label>
 </ion-item>
