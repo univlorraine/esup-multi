@@ -14,6 +14,33 @@
   max-height: var(--app-text-button-1-max-height);
 }
 
+// Button text type 2 with rotated arrow icon on the right. The icon will rotate when you click on the button. Use it on ion-button tags
+// Example:
+
+// <ion-button class="app-text-button-2 app-text-5" (click)="toggleExpandGroups()">
+//   <ion-text>My button</ion-text>
+//   <ion-icon [class.content-open]="!opened" [class.content-close]="opened" name="arrow-right"></ion-icon>
+// </ion-button>
+.app-text-button-2 {
+  text-transform: var(--app-text-button-2-text-transform);
+  --background: var(--app-text-button-2-background);
+  --box-shadow: var(--app-text-button-2-box-shadow);
+  color: var(--app-text-button-2-color);
+  max-height: var(--app-text-button-2-max-height);
+
+  ion-icon {
+    margin-left: var(--app-text-button-2-icon-margin-left) !important;
+  }
+
+  ion-icon.content-open {
+    transform: rotate(90deg);
+  }
+
+  ion-icon.content-close {
+    transform: rotate(-90deg);
+  }
+}
+
 // // // ---------------------
 // // // Rectangular Button
 // // // ---------------------

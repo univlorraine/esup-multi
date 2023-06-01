@@ -11,11 +11,11 @@ import { Browser } from '@capacitor/browser';
   styleUrls: ['./event-detail.component.scss'],
 })
 export class EventDetailComponent {
-
   @Input() event: Event;
   @Input() displayShortenedDate = false;
   @Input() showHideButton = true;
   public disableHideCourseButton = false;
+  public isGroupsVisible = false;
 
   constructor(private scheduleService: ScheduleService) { }
 
@@ -37,5 +37,9 @@ export class EventDetailComponent {
 
   openCourseURL(url: string) {
     Browser.open({url});
+  }
+
+  public toggleExpandGroups() {
+    this.isGroupsVisible = !this.isGroupsVisible;
   }
 }
