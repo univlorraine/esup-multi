@@ -4,7 +4,7 @@ import {
 } from '@ngneat/elf-persist-state';
 import { localForageStore } from '@ul/shared';
 
-const STORE_NAME = 'cards';
+const STORE_NAME = 'clocking';
 
 export interface ClockingProps {
   clocking: Clocking;
