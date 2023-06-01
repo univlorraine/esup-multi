@@ -31,18 +31,6 @@ img {
   object-fit: cover;
 }
 
-.see-more-icon {
-  margin-left: 0.3rem;
-}
-
-.see-more-icon.content-open {
-  transform: rotate(90deg);
-}
-
-.see-more-icon.content-close {
-  transform: rotate(-90deg);
-}
-
 .open-link-button {
   width: 100%;
 }

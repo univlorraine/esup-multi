@@ -101,6 +101,14 @@
   --app-text-button-1-max-height: 1.7rem;
   --app-text-button-1-color: var(--app-font-color-primary);
 
+  // Button simple text type 2
+  --app-text-button-2-background: transparent;
+  --app-text-button-2-box-shadow: none;
+  --app-text-button-2-text-transform: none;
+  --app-text-button-2-max-height: 1.7rem;
+  --app-text-button-2-color: var(--app-font-color-primary);
+  --app-text-button-2-icon-margin-left: 0.3rem;
+
   // Button Rectangular type 1
   --app-rectangular-button-1-background-color: white;
   --app-rectangular-button-1-bottom-border-width: 0.4rem;

@@ -20,10 +20,10 @@
 
                 <ion-row class="ion-justify-content-end">
                   <ion-button
-                    (click)="openContent(i)" class="app-text-button-1 link-button">
+                    (click)="openContent(i)" class="app-text-button-2 link-button">
                     <ion-text class="app-text-5" *ngIf="!isContentVisible[i]" >{{ "RSS.SEE_MORE" | translate }}</ion-text>
                     <ion-text class="app-text-5" *ngIf="isContentVisible[i]" >{{ "RSS.SEE_LESS" | translate }}</ion-text>
-                    <ion-icon class="app-icon-5 see-more-icon" [class.content-open]="!isContentVisible[i]"
+                    <ion-icon class="app-icon-5" [class.content-open]="!isContentVisible[i]"
                       [class.content-close]="isContentVisible[i]" name="arrow-right"></ion-icon>
                   </ion-button>
                 </ion-row>
