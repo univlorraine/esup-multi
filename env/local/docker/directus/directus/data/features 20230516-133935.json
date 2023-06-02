@@ -13,6 +13,7 @@
 		"link": null,
 		"ssoService": null,
 		"color": null,
+		"statisticName": "contacts",
 		"translations": [
 			{
 				"content": null,
@@ -57,6 +58,7 @@
 		"link": null,
 		"ssoService": null,
 		"color": null,
+		"statisticName": "workspaces",
 		"translations": [
 			{
 				"content": null,
@@ -98,6 +100,7 @@
 		"link": null,
 		"ssoService": null,
 		"color": null,
+		"statisticName": "cards",
 		"translations": [
 			{
 				"content": "Find your student card valid throughout Europe and your UL student card",
@@ -146,6 +149,7 @@
 		"link": null,
 		"ssoService": null,
 		"color": null,
+		"statisticName": "cards",
 		"translations": [
 			{
 				"content": null,
@@ -201,6 +205,7 @@
 		"link": null,
 		"ssoService": null,
 		"color": null,
+		"statisticName": "map",
 		"translations": [
 			{
 				"content": null,
@@ -236,6 +241,7 @@
 		"link": null,
 		"ssoService": null,
 		"color": null,
+		"statisticName": null,
 		"translations": [
 			{
 				"content": null,
@@ -288,6 +294,7 @@
 		"link": null,
 		"ssoService": null,
 		"color": null,
+		"statisticName": "rss",
 		"translations": [
 			{
 				"content": null,
@@ -323,6 +330,7 @@
 		"link": null,
 		"ssoService": null,
 		"color": null,
+		"statisticName": "notifications",
 		"translations": [
 			{
 				"content": null,
@@ -364,6 +372,7 @@
 		"link": "https://agatte.univ-lorraine.fr/login/cas?ticket={st}",
 		"ssoService": "https://agatte.univ-lorraine.fr/login/cas",
 		"color": null,
+		"statisticName": "work-time",
 		"translations": [
 			{
 				"content": null,
@@ -420,6 +429,7 @@
 		"link": null,
 		"ssoService": null,
 		"color": null,
+		"statisticName": null,
 		"translations": [
 			{
 				"content": null,
@@ -455,6 +465,7 @@
 		"link": "https://mail.etu.univ-lorraine.fr/zimbra/preauth/preauthUL_ETU.jsp?ticket={st}",
 		"ssoService": "https://mail.etu.univ-lorraine.fr/zimbra/preauth/preauthUL_ETU.jsp",
 		"color": null,
+		"statisticName": "messaging",
 		"translations": [
 			{
 				"content": null,
@@ -508,6 +519,7 @@
 		"link": "https://mdw.univ-lorraine.fr/login/cas?ticket={st}",
 		"ssoService": "https://mdw.univ-lorraine.fr/login/cas",
 		"color": null,
+		"statisticName": "student-file",
 		"translations": [
 			{
 				"content": null,
@@ -556,6 +568,7 @@
 		"link": "https://arche.univ-lorraine.fr",
 		"ssoService": null,
 		"color": null,
+		"statisticName": "online-courses",
 		"translations": [
 			{
 				"content": null,
@@ -602,6 +615,7 @@
 		"link": "https://arche.univ-lorraine.fr/login/index.php?authCAS=CAS&ticket={st}",
 		"ssoService": "https://arche.univ-lorraine.fr/login/index.php?authCAS=CAS",
 		"color": null,
+		"statisticName": "online-courses",
 		"translations": [
 			{
 				"content": null,
@@ -648,6 +662,7 @@
 		"link": "https://mail.univ-lorraine.fr/zimbra/preauth/preauthUL_PERS.jsp?ticket={st}",
 		"ssoService": "https://mail.univ-lorraine.fr/zimbra/preauth/preauthUL_PERS.jsp",
 		"color": null,
+		"statisticName": "messaging",
 		"translations": [
 			{
 				"content": null,
@@ -717,6 +732,7 @@
 		"link": "https://rdv.univ-lorraine.fr/authentification?ticket={st}",
 		"ssoService": "https://rdv.univ-lorraine.fr/authentification",
 		"color": null,
+		"statisticName": "appointment",
 		"translations": [
 			{
 				"content": null,
@@ -805,6 +821,7 @@
 		"link": null,
 		"ssoService": null,
 		"color": "#A0D0B0",
+		"statisticName": "clocking",
 		"translations": [
 			{
 				"content": "Mes tops de la journée",
@@ -847,6 +864,7 @@
 		"link": "http://u2l.fr/pret-portable",
 		"ssoService": null,
 		"color": null,
+		"statisticName": "borrow-equipment",
 		"translations": [
 			{
 				"content": null,
@@ -897,6 +915,7 @@
 		"link": "https://sport.univ-lorraine.fr",
 		"ssoService": null,
 		"color": null,
+		"statisticName": "suaps",
 		"translations": [
 			{
 				"content": null,
@@ -936,6 +955,7 @@
 		"link": "https://travailleur-isole.univ-lorraine.fr/login/cas?ticket={st}",
 		"ssoService": "https://travailleur-isole.univ-lorraine.fr/login/cas",
 		"color": null,
+		"statisticName": "isolated-worker",
 		"translations": [
 			{
 				"content": null,
@@ -978,6 +998,7 @@
 		"link": "https://formations.univ-lorraine.fr",
 		"ssoService": null,
 		"color": null,
+		"statisticName": "courses-catalog",
 		"translations": [
 			{
 				"content": null,
@@ -1013,6 +1034,7 @@
 		"link": "https://bu.univ-lorraine.fr",
 		"ssoService": null,
 		"color": null,
+		"statisticName": "libraries",
 		"translations": [
 			{
 				"content": null,
@@ -1052,6 +1074,7 @@
 		"link": null,
 		"ssoService": null,
 		"color": null,
+		"statisticName": "chatbot",
 		"translations": [
 			{
 				"content": null,
@@ -1087,6 +1110,7 @@
 		"link": "https://www.univ-lorraine.fr/covid-19-les-mesures-en-vigueur/",
 		"ssoService": null,
 		"color": null,
+		"statisticName": "covid-info",
 		"translations": [
 			{
 				"content": null,
@@ -1122,6 +1146,7 @@
 		"link": "https://www.univ-lorraine.fr/luniversite-de-lorraine/une-universite-engagee/#mission-EDI",
 		"ssoService": null,
 		"color": null,
+		"statisticName": "warning-measures",
 		"translations": [
 			{
 				"content": null,
@@ -1165,6 +1190,7 @@
 		"link": "https://intranet-rh.univ-lorraine.fr/les-dispositifs-dalerte-harcelement-discriminations/",
 		"ssoService": null,
 		"color": null,
+		"statisticName": "warning-measures",
 		"translations": [
 			{
 				"content": null,
@@ -1208,6 +1234,7 @@
 		"link": "https://www.univ-lorraine.fr/initiatives-etudiantes/",
 		"ssoService": null,
 		"color": null,
+		"statisticName": "associations",
 		"translations": [
 			{
 				"content": null,
@@ -1241,6 +1268,7 @@
 		"link": null,
 		"ssoService": null,
 		"color": null,
+		"statisticName": "restaurants",
 		"translations": [
 			{
 				"content": null,
@@ -1284,6 +1312,7 @@
 		"link": null,
 		"ssoService": null,
 		"color": null,
+		"statisticName": null,
 		"translations": [],
 		"settings_by_role": [],
 		"authorization": {

@@ -10,6 +10,7 @@ export interface DirectusImportantNews {
   link?: string;
   authorization?: Authorization;
   translations?: DirectusImportantNewsTranslation[];
+  statisticName?: string;
 }
 
 export interface DirectusResponse<T> {

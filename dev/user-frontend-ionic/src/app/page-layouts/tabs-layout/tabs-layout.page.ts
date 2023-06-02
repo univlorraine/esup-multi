@@ -1,6 +1,7 @@
 import { AfterViewInit, Component } from '@angular/core';
 import { Network } from '@capacitor/network';
-import { MenuItem, MenuItemLinkType, MenuItemRouterLink, MenuOpenerService, MenuService, FeaturesService } from '@ul/shared';
+import { MenuItem, MenuItemLinkType, MenuItemRouterLink, MenuOpenerService, MenuService, FeaturesService,
+  StatisticsService } from '@ul/shared';
 import { Observable } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
 
@@ -22,6 +23,7 @@ export class TabsLayoutPage implements AfterViewInit {
   constructor(
     private menuService: MenuService,
     private featuresService: FeaturesService,
+    private statisticsService: StatisticsService,
     public menuOpenerService: MenuOpenerService,
   ) {
     this.tabsMenuItems$ = this.menuService.tabsMenuItems$.pipe(
@@ -48,6 +50,7 @@ export class TabsLayoutPage implements AfterViewInit {
 
   public async openExternalOrSsoLinkOnly(menuItem: MenuItem) {
     if (menuItem.link.type === MenuItemLinkType.router) {
+      this.statisticsService.onFunctionalityOpened(menuItem.statisticName);
       return;
     }
 

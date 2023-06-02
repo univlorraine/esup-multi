@@ -35,6 +35,7 @@ export interface MenuItem {
   shortTitle?: string;
   link: MenuItemLink;
   type: MenuItemType;
+  statisticName?: string;
 }
 
 export interface ServiceMenuItem extends MenuItem {

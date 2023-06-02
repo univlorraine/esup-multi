@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { TranslatedInternalFeature } from '@ul/shared';
+import { TranslatedInternalFeature, StatisticsService } from '@ul/shared';
 
 @Component({
 selector: 'app-widget-internal-feature',
@@ -12,9 +12,11 @@ export class WidgetInternalFeatureComponent {
 
     constructor(
         private router: Router,
+        private statisticsService: StatisticsService,
     ) {}
 
     public onClick() {
-        this.router.navigateByUrl(this.feature.routerLink);
+      this.statisticsService.onFunctionalityOpened(this.feature.statisticName);
+      this.router.navigateByUrl(this.feature.routerLink);
     }
 }

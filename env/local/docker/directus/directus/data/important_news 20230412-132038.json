@@ -30,7 +30,8 @@
 				"student"
 			],
 			"type": "ALLOW"
-		}
+		},
+		"statisticName": null
 	},
 	{
 		"id": 2,
@@ -57,7 +58,8 @@
 				"buttonLabel": null
 			}
 		],
-		"authorization": null
+		"authorization": null,
+		"statisticName": null
 	},
 	{
 		"id": 3,
@@ -90,7 +92,8 @@
 				"student"
 			],
 			"type": "ALLOW"
-		}
+		},
+		"statisticName": "cards"
 	},
 	{
 		"id": 4,
@@ -123,6 +126,7 @@
 				"staff"
 			],
 			"type": "ALLOW"
-		}
+		},
+		"statisticName": null
 	}
 ]

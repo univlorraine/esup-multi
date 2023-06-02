@@ -21,6 +21,7 @@ interface TranslatedFeatureCommon {
   icon: string;
   iconSourceSvg: string;
   isNew: boolean;
+  statisticName?: string;
 }
 
 export interface TranslatedInternalFeature extends TranslatedFeatureCommon {

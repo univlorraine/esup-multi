@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { StatisticsService } from '@ul/shared';
 import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { StaticPagesRepository, TranslatedStaticPage } from '../../static-pages.repository';
@@ -17,7 +18,9 @@ export class StaticPagesWidgetComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private staticPagesService: StaticPagesService,
-    private staticPagesRepository: StaticPagesRepository
+    private staticPagesRepository: StaticPagesRepository,
+    private router: Router,
+    private statisticsService: StatisticsService,
   ) {
     this.translatedStaticPages$ = this.staticPagesRepository.translatedStaticPages$;
   }
@@ -31,6 +34,10 @@ export class StaticPagesWidgetComponent implements OnInit {
       .pipe(
         first()
       ).subscribe();
+  }
 
+  public onClick(page: TranslatedStaticPage): Promise<boolean> {
+    this.statisticsService.onFunctionalityOpened(page.statisticName);
+    return this.router.navigateByUrl(`/page/${page.id}`);
   }
 }
