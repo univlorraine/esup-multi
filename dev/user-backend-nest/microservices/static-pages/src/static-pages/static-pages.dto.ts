@@ -3,6 +3,7 @@ export interface DirectusStaticPageResultDto {
   status: string;
   icon?: string;
   translations?: DirectusStaticPageTranslation[];
+  statisticName?: string;
 }
 
 export interface DirectusResponse<T> {

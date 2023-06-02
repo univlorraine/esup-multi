@@ -15,6 +15,7 @@ export interface ImportantNews {
   link?: string;
   authorization?: Authorization;
   translations?: Translation[];
+  statisticName?: string;
 };
 
 interface Translation {
@@ -36,6 +37,7 @@ export interface TranslatedImportantNews {
   content: string;
   buttonLabel?: string;
   authorization?: Authorization;
+  statisticName?: string;
 }
 
 export const store = createStore(

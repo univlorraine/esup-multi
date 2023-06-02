@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { MenuItem, MenuItemExternalLink, MenuItemLinkType, MenuItemRouterLink, MenuItemSsoLink } from './menu.model';
-
 import { Router } from '@angular/router';
 import { Browser } from '@capacitor/browser';
 import { SsoService } from '../sso/sso.service';
+import { StatisticsService } from '../statistics/statistics.service';
 import { from } from 'rxjs';
 
 @Injectable({
@@ -14,9 +14,11 @@ export class MenuOpenerService {
     constructor(
         private router: Router,
         private ssoService: SsoService,
+        private statisticsService: StatisticsService,
     ) {}
 
     public async open(menuItem: MenuItem) {
+        this.statisticsService.onFunctionalityOpened(menuItem.statisticName);
         switch(menuItem.link.type) {
             case MenuItemLinkType.router:
                 return this.openRouterLink(menuItem.link);

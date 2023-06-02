@@ -13,6 +13,7 @@ export interface StaticPage {
   icon?: string;
   iconSourceSvg?: string;
   translations?: Translation[];
+  statisticName?: string;
 }
 
 export interface TranslatedStaticPage {
@@ -21,6 +22,7 @@ export interface TranslatedStaticPage {
   content: string;
   icon?: string;
   iconSourceSvg?: string;
+  statisticName?: string;
 }
 
 interface Translation {
@@ -56,7 +58,8 @@ export class StaticPagesRepository {
         title: translation.title,
         content: translation.content,
         icon: staticPage.icon,
-        iconSourceSvg: staticPage.iconSourceSvg
+        iconSourceSvg: staticPage.iconSourceSvg,
+        statisticName: staticPage.statisticName
       };
     }))
   );

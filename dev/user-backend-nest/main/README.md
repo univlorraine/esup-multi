@@ -32,3 +32,9 @@
 
 - `CONTACTS_SERVICE_PORT` : Hôte du microservice `contacts`
 - `CONTACTS_SERVICE_HOST` : Port du microservice `contacts`
+
+- `RESTAURANTS_SERVICE_PORT` : Hôte du microservice `restaurants`
+- `RESTAURANTS_SERVICE_HOST` : Port du microservice `restaurants`
+
+- `STATISTICS_SERVICE_PORT` : Hôte du microservice `statistics`
+- `STATISTICS_SERVICE_HOST` : Port du microservice `statistics`

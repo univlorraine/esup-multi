@@ -19,6 +19,7 @@ import microserviceStaticPagesConfig from './config/microservice-static-pages.co
 import microserviceFeaturesConfig from './config/microservice-features.config';
 import microserviceContactUsConfig from './config/microservice-contact-us.config';
 import microserviceRestaurantsConfig from './config/microservice-restaurants.config';
+import microserviceStatisticsConfig from './config/microservice-statistics.config';
 import { AuthJwtStrategy } from './security/auth-jwt.strategy';
 
 @Module({
@@ -126,6 +127,12 @@ import { AuthJwtStrategy } from './security/auth-jwt.strategy';
         imports: [ConfigModule.forFeature(microserviceRestaurantsConfig)],
         useFactory: (config: ConfigService) =>
           config.get('microservice-restaurants'),
+        inject: [ConfigService],
+      },
+      {
+        name: 'STATISTICS_SERVICE',
+        imports: [ConfigModule.forFeature(microserviceStatisticsConfig)],
+        useFactory: (config: ConfigService) => config.get('microservice-statistics'),
         inject: [ConfigService],
       },
     ]),

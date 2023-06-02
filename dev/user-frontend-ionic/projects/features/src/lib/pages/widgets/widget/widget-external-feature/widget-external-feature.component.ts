@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Browser } from '@capacitor/browser';
-import { SsoService, TranslatedExternalFeature } from '@ul/shared';
+import { SsoService, TranslatedExternalFeature, StatisticsService } from '@ul/shared';
 
 @Component({
 selector: 'app-widget-external-feature',
@@ -12,15 +12,18 @@ export class WidgetExternalFeatureComponent {
 
     constructor(
         private ssoService: SsoService,
+        private statisticsService: StatisticsService,
     ) {}
 
     public onClick(): Promise<void> {
         if (!this.feature.link) {
-        return;
+          return;
         }
 
+        this.statisticsService.onFunctionalityOpened(this.feature.statisticName);
+
         if (!this.feature.ssoService) {
-        return Browser.open({ url: this.feature.link });
+          return Browser.open({ url: this.feature.link });
         }
 
         this.ssoService.getSsoExternalLink({

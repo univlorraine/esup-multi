@@ -35,6 +35,7 @@ export class AppController {
     @Inject('STATIC_PAGES_SERVICE') private staticPagesClient: ClientProxy,
     @Inject('CONTACT_US_SERVICE') private contactUsClient: ClientProxy,
     @Inject('RESTAURANTS_SERVICE') private restaurantsClient: ClientProxy,
+    @Inject('STATISTICS_SERVICE') private statisticsClient: ClientProxy,
   ) {}
 
   @Post('/features')
@@ -591,5 +592,31 @@ export class AppController {
       },
       {},
     );
+  }
+
+  @Post('/statistics/user-action')
+  statisticsUserAction(@Body() body, @Request() request) {
+    return this.authClient
+      .send(
+        {
+          cmd: 'getUser',
+        },
+        body,
+      )
+      .pipe(
+        concatMap((user) => {
+          return this.statisticsClient.send(
+            {
+              cmd: 'postUserActionStatistic',
+            },
+            {
+              uid: user ? user.username : null,
+              userAgent: request.headers['user-agent'],
+              xForwardedFor: request.headers['x-forwarded-for'] || request.connection.remoteAddress,
+              ...(({ authToken, ...rest }) => rest)(body.data),
+            }
+          );
+        }),
+      );
   }
 }

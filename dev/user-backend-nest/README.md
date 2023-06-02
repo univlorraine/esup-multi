@@ -44,3 +44,11 @@ async function bootstrap() {
 }
 bootstrap();
 ```
+
+
+Ne pas oublier de créer les différentes variables d'env:
+```
+[NOM-DU-MICROSERVICE]_SERVICE_HOST=[NOM]
+[NOM-DU-MICROSERVICE]_SERVICE_PORT=[PORT]
+```
+Ces deux lignes sont à ajouter à la suite du `/main/.env` ainsi que du `/[NOM-DU-MICROSERVICE]/.env`

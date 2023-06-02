@@ -33,6 +33,7 @@ interface FeatureCommon<SBR> {
   icon?: string;
   iconSourceSvg?: string;
   color?: string;
+  statisticName?: string;
 }
 
 export interface ExternalFeature extends FeatureCommon<SettingsByRole> {
