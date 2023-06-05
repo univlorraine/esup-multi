@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
-import { AuthenticatedUser } from '@ul/shared';
-import { finalize, tap } from 'rxjs/operators';
+import { AuthenticatedUser, NavigationService } from '@ul/shared';
+import { Observable } from 'rxjs';
+import { finalize, first, tap } from 'rxjs/operators';
 import { AuthService } from '../common/auth.service';
 import { saveCredentialsOnAuthentication$ } from '../preferences/preferences.repository';
 import { PreferencesService } from '../preferences/preferences.service';
-import { NavigationService } from '@ul/shared';
+import { LoginRepository, TranslatedLoginPageContent } from './login.repository';
+import { LoginService } from './login.service';
 
 interface AuthenticatedUserToken extends AuthenticatedUser {
   authToken: string;
@@ -22,6 +24,8 @@ export class LoginPage implements OnInit {
   loginForm: FormGroup;
   public saveCredentialsOnAuthentication$ = saveCredentialsOnAuthentication$;
   public isLoading = false;
+  public translatedPageContent$: Observable<TranslatedLoginPageContent>;
+
 
   constructor(
     private fb: FormBuilder,
@@ -29,7 +33,11 @@ export class LoginPage implements OnInit {
     private toastController: ToastController,
     private preferencesService: PreferencesService,
     private navigationService: NavigationService,
-  ) { }
+    private loginService: LoginService,
+    private loginRepository: LoginRepository,
+  ) {
+    this.translatedPageContent$ = this.loginRepository.translatedPageContent$;
+  }
 
   get username() {
     return this.loginForm.get('username');
@@ -44,6 +52,10 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
+    this.loginService.loadAndStoreLoginPageContent()
+    .pipe(first())
+    .subscribe();
+
     this.loginForm = this.fb.group({
       username: ['', [Validators.required]],
       password: ['', [Validators.required]]

@@ -14,3 +14,8 @@ export interface ScheduledCleanup {
   schedule: string;
   notUsedSinceInDays: number;
 }
+
+export interface DirectusApi {
+  url: string;
+  bearerToken: string;
+}

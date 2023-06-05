@@ -13,3 +13,5 @@ Ce module est en charge d'interagir avec le CAS serveur et autres services tiers
 - `AUTH_SERVICE_JWT_SECRET`: Le secret du JWT qui protège les URLs de ré-authentification.
 - `AUTH_SERVICE_CREDENTIALS_CLEANUP_SCHEDULE`: La notation cron qui définit la tâche planifiée de nettoyage des anciennes authentifications sauvegardées devenues obsolètes.
 - `AUTH_SERVICE_CREDENTIALS_CLEANUP_NOT_USED_SINCE_IN_DAYS`: Le nombre de jours d'inactivité après lesquels une authentification sauvegardée est considérée comme étant obsolète.
+- `AUTH_SERVICE_DIRECTUS_API_BEARER_TOKEN`: Bearer token permettant l'accès à l'API du CMS Directus
+- `AUTH_SERVICE_DIRECTUS_API_URL`: L'URL d'accès à l'API Directus

@@ -1,4 +1,9 @@
-import { UlApi, CasUrl, ScheduledCleanup } from './configuration.interface';
+import {
+  CasUrl,
+  DirectusApi,
+  ScheduledCleanup,
+  UlApi,
+} from './configuration.interface';
 
 interface Configuration {
   casUrl: CasUrl;
@@ -7,6 +12,7 @@ interface Configuration {
   jwtSecret: string;
   usernamesCleanup: ScheduledCleanup;
   credentialsCleanup: ScheduledCleanup;
+  directusApi: DirectusApi;
 }
 
 export default (): Configuration => ({
@@ -36,5 +42,9 @@ export default (): Configuration => ({
       parseInt(
         process.env.AUTH_SERVICE_CREDENTIALS_CLEANUP_NOT_USED_SINCE_IN_DAYS,
       ) || 365,
+  },
+  directusApi: {
+    url: process.env.AUTH_SERVICE_DIRECTUS_API_URL,
+    bearerToken: process.env.AUTH_SERVICE_DIRECTUS_API_BEARER_TOKEN,
   },
 });
