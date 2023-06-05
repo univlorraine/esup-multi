@@ -1,10 +1,15 @@
-import { Injectable, Logger } from '@nestjs/common';
-import { RestaurantDTO, RestaurantExternalApiDTO } from './restaurants.dto';
-import { UlApi } from './config/configuration.interfaces';
-import { ConfigService } from '@nestjs/config';
 import { HttpService } from '@nestjs/axios';
-import { Observable, catchError, map } from 'rxjs';
+import { Injectable, Logger } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { RpcException } from '@nestjs/microservices';
+import { catchError, map, Observable } from 'rxjs';
+import { UlApi } from './config/configuration.interfaces';
+import {
+  RestaurantDTO,
+  RestaurantExternalApiDTO,
+  RestaurantMenu,
+  RestaurantMenusQueryDto
+} from './restaurants.dto';
 
 @Injectable()
 export class RestaurantsService {
@@ -52,4 +57,23 @@ export class RestaurantsService {
         ),
       );
   }
+
+  getRestaurantMenus(query: RestaurantMenusQueryDto): Observable<RestaurantMenu[]> {
+    const url = `${this.ulApiConfig.url}/${query.id}`;
+    const params = query.date ? `/defaultMeal?datetime=${query.date}` : '';
+
+    return this.httpService
+      .get<RestaurantMenu[]>(`${url}${params}`, {
+        headers: {
+          Accept: 'application/json',
+          Authorization: `Bearer ${this.ulApiConfig.bearerToken}`,
+        },
+      })
+      .pipe(
+        catchError((err) => {
+          const errorMessage = `Unable to get menu`;
+          this.logger.error(errorMessage, err);
+          throw new RpcException(errorMessage);
+        }),
+        map((res) => res.data))}
 }

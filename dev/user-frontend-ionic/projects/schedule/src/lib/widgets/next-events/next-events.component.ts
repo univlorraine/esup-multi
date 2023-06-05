@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CompleteLocalDatePipe } from '@ul/shared';
 import { Observable } from 'rxjs';
 import { finalize, first, map } from 'rxjs/operators';
-import { CompleteLocalDatePipe } from '../../common/pipe/complete-local-date.pipe';
 import { Event } from '../../schedule.repository';
 import { ScheduleService } from '../../schedule.service';
 import { NextEventsService } from './next-events.service';

@@ -1,26 +1,21 @@
 <app-header></app-header>
 <ion-content>
+  <ion-progress-bar *ngIf="isLoading" type="indeterminate" color="primary"></ion-progress-bar>
+
   <ion-list>
-    <ion-list *ngIf="(restaurants$ | async) as restaurants" >
-      <ion-item *ngFor="let restaurant of restaurants">
-        <div class="border"></div>
+    <ion-list *ngIf="(restaurants$ | async) as restaurants">
+      <ion-item *ngFor="let restaurant of restaurants" (click)="navigateToRestaurantMenus(restaurant.id)">
         <ion-grid>
           <ion-row>
             <ion-col size="3">
+              <div class="border"></div>
+
               <ion-img [src]="restaurant.thumbnailUrl"></ion-img>
-              <ion-icon
-                color="primary"
-                *ngIf="restaurant.favorite"
-                name="heart"
-                (click)="unsetFavoriteRestaurant(restaurant.id)"
-                class="app-icon-4 favorite-icon">
+              <ion-icon color="primary" *ngIf="restaurant.favorite" name="heart"
+                (click)="unsetFavoriteRestaurant(restaurant.id)" class="app-icon-4 favorite-icon">
               </ion-icon>
-              <ion-icon
-                color="primary"
-                *ngIf="!restaurant.favorite"
-                name="heart-outline"
-                (click)="setFavoriteRestaurant(restaurant.id)"
-                class="app-icon-4 favorite-icon">
+              <ion-icon color="primary" *ngIf="!restaurant.favorite" name="heart-outline"
+                (click)="setFavoriteRestaurant(restaurant.id)" class="app-icon-4 favorite-icon">
               </ion-icon>
             </ion-col>
             <ion-col size="6" class="ion-text-start">
@@ -33,7 +28,8 @@
             </ion-col>
             <ion-col size="3" class="ion-text-end" *ngIf="restaurant.distance">
               <ion-label>
-                <h2 class="app-title-7">{{ restaurant.distance | number : '1.1-1' }} {{ "RESTAURANTS.KILOMETERS" | translate }} </h2>
+                <h2 class="app-title-7">{{ restaurant.distance | number : '1.1-1' }} {{ "RESTAURANTS.KILOMETERS" |
+                  translate }} </h2>
               </ion-label>
               <ion-icon color="medium" size="large" name="pin-outline" class="pin"></ion-icon>
             </ion-col>
@@ -52,5 +48,11 @@
       </ion-item>
     </ion-list>
   </ion-list>
-</ion-content>
 
+  <ng-container *ngIf="(restaurantsIsEmpty$ | async) && !isLoading">
+    <ion-row class="ion-margin ion-justify-content-center">
+      <ion-text>{{ "RESTAURANTS.NO_DATA" | translate }}</ion-text>
+    </ion-row>
+  </ng-container>
+
+</ion-content>

@@ -4,9 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FullCalendarModule } from '@fullcalendar/angular'; // must go before plugins
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
-import { ProjectModuleService, SharedComponentsModule, SharedPipeModule } from '@ul/shared';
+import { CompleteLocalDatePipe, ProjectModuleService, SharedComponentsModule, SharedPipeModule } from '@ul/shared';
 import { EventDetailComponent } from './common/event-detail/event-detail.component';
-import { CompleteLocalDatePipe } from './common/pipe/complete-local-date.pipe';
 import { LocalHourPipe } from './common/pipe/local-hour.pipe';
 import { ShortenedDatePipe } from './common/pipe/shortened-date.pipe';
 import { HiddenCourseComponent } from './common/select-planning/hidden-course/hidden-course.component';
@@ -39,14 +38,13 @@ const initModule = (projectModuleService: ProjectModuleService) =>
     SchedulePage,
     ScheduleListPage,
     ScheduleCalendarComponent,
-    CompleteLocalDatePipe,
     LocalHourPipe,
     ShortenedDatePipe,
     EventDetailComponent,
     SelectPlanningComponent,
     CalendarEventComponent,
     HiddenCourseComponent,
-    NextEventsComponent,
+    NextEventsComponent
   ],
   imports: [
     CommonModule,
