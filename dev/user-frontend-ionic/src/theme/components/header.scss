@@ -1,0 +1,13 @@
+// Header Title centered even if they are button or icons on the left and/or on the right of the title.
+// exemple : <ion-header> <ion-title class="app-centered-header-title"> </ion-title> </ion-header>
+@media screen and (min-width: 320px) {
+  .app-centered-header-title {
+    position: absolute;
+    width: auto;
+    height: 100%;
+    left: 50%;
+    top: 0%;
+    transform: translate(-50%, 0%);
+    text-align: center;
+  }
+}

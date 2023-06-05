@@ -6,6 +6,7 @@ import {
   Inject,
   Patch,
   Post,
+  Query,
   Request,
   UseGuards,
   UseInterceptors
@@ -601,6 +602,16 @@ export class AppController {
         cmd: 'restaurants',
       },
       {},
+    );
+  }
+
+  @Get('/restaurant/menus')
+  getRestaurantMenus(@Query() queryParams) {
+    return this.restaurantsClient.send(
+      {
+        cmd: 'restaurant/menus',
+      },
+      queryParams
     );
   }
 

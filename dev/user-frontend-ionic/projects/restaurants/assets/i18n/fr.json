@@ -1,4 +1,9 @@
 {
     "KILOMETERS": "km",
-    "CLOSED": "Fermé"
+    "CLOSED": "Fermé",
+    "NO_DATA": "Aucun restaurant trouvé",
+    "MENUS":{
+        "NO_DATA": "Pas de menus disponibles",
+        "DEFAULT_TOP_BAR_TITLE": "Menus"
+    }
 }

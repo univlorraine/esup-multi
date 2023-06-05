@@ -24,3 +24,23 @@ export interface RestaurantDTO {
   infos: string;
   zone: string;
 }
+
+export interface RestaurantMenusQueryDto {
+  id: string;
+  date: Date;
+}
+
+export interface RestaurantMenu {
+  date: string;
+  meal: Meal[];
+}
+
+export interface Meal {
+  name: string;
+  foodcategory: FoodCategory[];
+}
+
+export interface FoodCategory {
+  name: string;
+  dishes: string[];
+}

@@ -1,33 +1,33 @@
 .favorite-icon {
-    position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
-    padding: 0.125rem;
-    background-color: var(--ion-color-primary-contrast);
-    border-radius: 50%;
-  }
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  padding: 0.125rem;
+  background-color: var(--ion-color-primary-contrast);
+  border-radius: 50%;
+}
 
-  .pin {
-    padding-top: 8%;
-  }
+.pin {
+  padding-top: 8%;
+}
 
-  .description {
-    width: 100%;
-    margin-top: 0.3rem;
-  }
+.description {
+  width: 100%;
+  margin-top: 0.3rem;
+}
 
-  .border {
-    height: 80%;
-    width: 0.13rem;
-    background-color: var(--ion-color-dark);
-    --background: var(--ion-color-dark);
-    margin-right: -4px;
-  }
+.border {
+  position: absolute;
+  top: 0.3rem;
+  height: 100%;
+  left: -0.3rem;
+  width: 0.13rem;
+  background-color: var(--ion-color-dark);
+  --background: var(--ion-color-dark);
+  margin-right: -4px;
+}
 
-  .opening {
-    text-align: right;
-    margin-top: -2%;
-  }
-  
-
-  
+.opening {
+  text-align: right;
+  margin-top: -2%;
+}
