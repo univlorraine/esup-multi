@@ -1,5 +1,7 @@
 import { Controller } from '@nestjs/common';
+import { MessagePattern } from '@nestjs/microservices';
 import { Observable } from 'rxjs';
+import { LoginPageContentResultDto } from 'src/page-content/login-page-content/login-page-content.dto';
 import {
   AuthenticatedDto,
   AuthenticateQueryDto,
@@ -9,7 +11,6 @@ import {
   SsoServiceTokenQueryDto,
 } from './auth.dto';
 import { AuthService } from './auth.service';
-import { MessagePattern } from '@nestjs/microservices';
 
 @Controller()
 export class AuthController {
@@ -38,5 +39,10 @@ export class AuthController {
   @MessagePattern({ cmd: 'getUserOrThrowError' })
   getUserOrThrowError(data: GetUserQueryDto): Observable<GetUserResultDto> {
     return this.authService.getUserOrThrowError(data);
+  }
+
+  @MessagePattern({ cmd: 'loginPageContent' })
+  getLoginPageContent(): Observable<LoginPageContentResultDto> {
+    return this.authService.getPageContent();
   }
 }

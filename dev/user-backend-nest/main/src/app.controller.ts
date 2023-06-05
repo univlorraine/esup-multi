@@ -8,7 +8,7 @@ import {
   Post,
   Request,
   UseGuards,
-  UseInterceptors,
+  UseInterceptors
 } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { AuthGuard } from '@nestjs/passport';
@@ -155,6 +155,16 @@ export class AppController {
         cmd: 'reauthenticateIfNeeded',
       },
       body,
+    );
+  }
+
+  @Get('/auth/login-page-content')
+  loginPageContent() {
+    return this.authClient.send(
+      {
+        cmd: 'loginPageContent',
+      },
+      {},
     );
   }
 

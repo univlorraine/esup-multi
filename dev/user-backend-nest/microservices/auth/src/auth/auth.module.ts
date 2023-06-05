@@ -1,16 +1,17 @@
-import { Module } from '@nestjs/common';
-import { AuthService } from './auth.service';
-import { AuthController } from './auth.controller';
-import { ConfigModule } from '@nestjs/config';
 import { HttpModule } from '@nestjs/axios';
-import { CasService } from './cas.service';
-import { UserService } from './user.service';
-import { AuthenticatedUserRepository } from './authenticated-user/authenticated-user.repository';
+import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
+import { LoginPageContentService } from '../page-content/login-page-content/login-page-content.service';
+import { AuthController } from './auth.controller';
+import { AuthService } from './auth.service';
+import { AuthenticatedUserRepository } from './authenticated-user/authenticated-user.repository';
 import {
   AuthenticatedUser,
-  AuthenticatedUserSchema,
+  AuthenticatedUserSchema
 } from './authenticated-user/authenticated-user.schema';
+import { CasService } from './cas.service';
+import { UserService } from './user.service';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import {
     CasService,
     UserService,
     AuthenticatedUserRepository,
+    LoginPageContentService,
   ],
   controllers: [AuthController],
   exports: [AuthService],

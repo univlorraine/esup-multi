@@ -1,35 +1,39 @@
 import { Injectable, Logger, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { RpcException } from '@nestjs/microservices';
 import { Cron } from '@nestjs/schedule';
+import * as dotenv from 'dotenv';
 import { from, Observable } from 'rxjs';
 import { concatWith, delayWhen, map, tap, toArray } from 'rxjs/operators';
+import { DirectusApi } from '../config/configuration.interface';
+import { LoginPageContentResultDto } from '../page-content/login-page-content/login-page-content.dto';
+import { LoginPageContentService } from '../page-content/login-page-content/login-page-content.service';
 import {
   AuthenticatedDto,
   AuthenticateQueryDto,
-  LogoutQueryDto,
-  SsoServiceTokenQueryDto,
-  UserProfileDto,
-  IsAuthenticationValidQueryDto,
   GetUserQueryDto,
   GetUserResultDto,
+  IsAuthenticationValidQueryDto,
+  LogoutQueryDto,
+  SsoServiceTokenQueryDto,
+  UserProfileDto
 } from './auth.dto';
+import { AuthenticatedUserRepository } from './authenticated-user/authenticated-user.repository';
 import { CasService } from './cas.service';
 import { UserService } from './user.service';
-import { AuthenticatedUserRepository } from './authenticated-user/authenticated-user.repository';
-import * as dotenv from 'dotenv';
-import { RpcException } from '@nestjs/microservices';
 
 dotenv.config(); // used to get process.env access prior to AppModule instanciation (typically in @Cron decorators)
 
 @Injectable()
 export class AuthService {
   private readonly logger = new Logger(AuthService.name);
-
   private usernamesCleanupNotUsedSinceInDays: number;
+  private directusApiConfig: DirectusApi;
 
   constructor(
     private readonly casService: CasService,
     private readonly userService: UserService,
+    private readonly loginPageContentService: LoginPageContentService,
     private readonly usernameRepository: AuthenticatedUserRepository,
     private readonly config: ConfigService,
   ) {
@@ -140,5 +144,9 @@ export class AuthService {
     await this.usernameRepository.removeAuthenticatedUserLastUsedBefore(
       limitDate,
     );
+  }
+
+  public getPageContent(): Observable<LoginPageContentResultDto> {
+    return from(this.loginPageContentService.getLoginPageContent());
   }
 }

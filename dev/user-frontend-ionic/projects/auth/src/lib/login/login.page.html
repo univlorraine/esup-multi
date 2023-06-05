@@ -9,8 +9,9 @@
 </ion-header>
 <ion-progress-bar *ngIf="isLoading" type="indeterminate" color="primary"></ion-progress-bar>
 
-<ion-content class="ion-padding">
+<ion-content class="ion-padding" *ngIf="translatedPageContent$ | async as page">
   <form [formGroup]="loginForm" (ngSubmit)="submit()">
+    <div [innerHTML]="page.connexion_text"></div>
 
     <ion-item lines="full">
       <ion-label position="floating">{{ 'AUTH.LOGIN.USERNAME' | translate }}</ion-label>
