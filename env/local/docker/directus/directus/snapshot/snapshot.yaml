@@ -1,5 +1,5 @@
 version: 1
-directus: 9.23.1
+directus: 9.26.0
 vendor: postgres
 collections:
   - collection: authorization
@@ -297,7 +297,7 @@ collections:
       collapse: open
       collection: settings_by_role
       color: null
-      display_template: "{{role}}:\_{{position}}"
+      display_template: '{{role}}:\_{{position}}'
       group: null
       hidden: true
       icon: null
@@ -334,6 +334,72 @@ collections:
       unarchive_value: null
     schema:
       name: social_networks
+  - collection: widgets
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: widgets
+      color: null
+      display_template: null
+      group: null
+      hidden: false
+      icon: null
+      item_duplication_fields: null
+      note: null
+      singleton: false
+      sort: 10
+      sort_field: null
+      translations: null
+      unarchive_value: null
+    schema:
+      name: widgets
+  - collection: widgets_settings_by_role
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: widgets_settings_by_role
+      color: null
+      display_template: null
+      group: widgets
+      hidden: true
+      icon: import_export
+      item_duplication_fields: null
+      note: null
+      singleton: false
+      sort: 2
+      sort_field: null
+      translations: null
+      unarchive_value: null
+    schema:
+      name: widgets_settings_by_role
+  - collection: widgets_translations
+    meta:
+      accountability: all
+      archive_app_filter: true
+      archive_field: null
+      archive_value: null
+      collapse: open
+      collection: widgets_translations
+      color: null
+      display_template: null
+      group: widgets
+      hidden: true
+      icon: import_export
+      item_duplication_fields: null
+      note: null
+      singleton: false
+      sort: 1
+      sort_field: null
+      translations: null
+      unarchive_value: null
+    schema:
+      name: widgets_translations
 fields:
   - collection: authorization
     field: id
@@ -1209,7 +1275,7 @@ fields:
         template: '{{type}}:{{roles}}'
       readonly: false
       required: false
-      sort: 7
+      sort: 9
       special:
         - m2o
       translations: null
@@ -1248,7 +1314,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: null
+      sort: 16
       special: null
       translations: null
       validation: null
@@ -1465,7 +1531,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: 13
+      sort: 14
       special: null
       translations: null
       validation: null
@@ -1513,7 +1579,7 @@ fields:
             value: service
       readonly: false
       required: false
-      sort: 6
+      sort: 8
       special: null
       translations: null
       validation: null
@@ -1551,7 +1617,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: 8
+      sort: 10
       special: null
       translations: null
       validation: null
@@ -1617,7 +1683,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: 12
+      sort: 13
       special: null
       translations: null
       validation: null
@@ -1655,7 +1721,7 @@ fields:
       options: {}
       readonly: false
       required: false
-      sort: 9
+      sort: 11
       special:
         - m2m
       translations: null
@@ -1691,7 +1757,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: 14
+      sort: 15
       special: null
       translations: null
       validation: null
@@ -1733,7 +1799,7 @@ fields:
           accesses the feature
       readonly: false
       required: false
-      sort: null
+      sort: 17
       special: null
       translations: null
       validation: null
@@ -1861,7 +1927,7 @@ fields:
             value: external
       readonly: false
       required: true
-      sort: 11
+      sort: 12
       special: null
       translations: null
       validation: null
@@ -1872,44 +1938,6 @@ fields:
       table: features
       data_type: character varying
       default_value: internal
-      max_length: 255
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: features
-    field: widget
-    type: string
-    meta:
-      collection: features
-      conditions: null
-      display: null
-      display_options: null
-      field: widget
-      group: null
-      hidden: false
-      interface: input
-      note: null
-      options: null
-      readonly: false
-      required: false
-      sort: 5
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: widget
-      table: features
-      data_type: character varying
-      default_value: null
       max_length: 255
       numeric_precision: null
       numeric_scale: null
@@ -3840,6 +3868,1097 @@ fields:
       has_auto_increment: false
       foreign_key_table: null
       foreign_key_column: null
+  - collection: widgets
+    field: authorization
+    type: integer
+    meta:
+      collection: widgets
+      conditions: null
+      display: null
+      display_options: null
+      field: authorization
+      group: null
+      hidden: false
+      interface: select-dropdown-m2o
+      note: null
+      options:
+        enableSelect: false
+        template: '{{type}}:{{roles}}'
+      readonly: false
+      required: false
+      sort: 8
+      special:
+        - m2o
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: authorization
+      table: widgets
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: true
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: authorization
+      foreign_key_column: id
+  - collection: widgets
+    field: color
+    type: string
+    meta:
+      collection: widgets
+      conditions: null
+      display: null
+      display_options: null
+      field: color
+      group: null
+      hidden: false
+      interface: select-color
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 15
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: color
+      table: widgets
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: widgets
+    field: icon
+    type: string
+    meta:
+      collection: widgets
+      conditions: null
+      display: null
+      display_options: null
+      field: icon
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 5
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: icon
+      table: widgets
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: widgets
+    field: iconSourceSvg
+    type: text
+    meta:
+      collection: widgets
+      conditions: null
+      display: null
+      display_options: null
+      field: iconSourceSvg
+      group: null
+      hidden: false
+      interface: input-code
+      note: null
+      options:
+        language: xml
+      readonly: false
+      required: false
+      sort: 6
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: iconSourceSvg
+      table: widgets
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: widgets
+    field: iconSourceSvgDark
+    type: text
+    meta:
+      collection: widgets
+      conditions: null
+      display: null
+      display_options: null
+      field: iconSourceSvgDark
+      group: null
+      hidden: false
+      interface: input-code
+      note: null
+      options:
+        language: xml
+      readonly: false
+      required: false
+      sort: 7
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: iconSourceSvgDark
+      table: widgets
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: widgets
+    field: id
+    type: integer
+    meta:
+      collection: widgets
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: input
+      note: null
+      options: null
+      readonly: true
+      required: false
+      sort: 1
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: widgets
+      data_type: integer
+      default_value: nextval('widgets_id_seq'::regclass)
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: true
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: widgets
+    field: link
+    type: string
+    meta:
+      collection: widgets
+      conditions:
+        - name: if internal
+          rule:
+            _and:
+              - type:
+                  _eq: internal
+          readonly: true
+          hidden: true
+          options:
+            font: sans-serif
+            trim: false
+            masked: false
+            clear: false
+            slug: false
+      display: null
+      display_options: null
+      field: link
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 13
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: link
+      table: widgets
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: widgets
+    field: position
+    type: integer
+    meta:
+      collection: widgets
+      conditions: null
+      display: null
+      display_options: null
+      field: position
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 9
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: position
+      table: widgets
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: widgets
+    field: routerLink
+    type: string
+    meta:
+      collection: widgets
+      conditions:
+        - name: if internal
+          rule:
+            _and:
+              - type:
+                  _eq: internal
+          readonly: false
+          hidden: false
+          required: true
+          options:
+            font: sans-serif
+            trim: false
+            masked: false
+            clear: false
+            slug: false
+        - name: if external
+          rule:
+            _and:
+              - type:
+                  _eq: external
+          readonly: true
+          hidden: true
+          required: false
+          options:
+            font: sans-serif
+            trim: false
+            masked: false
+            clear: false
+            slug: false
+      display: null
+      display_options: null
+      field: routerLink
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 12
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: routerLink
+      table: widgets
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: widgets
+    field: settings_by_role
+    type: alias
+    meta:
+      collection: widgets
+      conditions: null
+      display: null
+      display_options: null
+      field: settings_by_role
+      group: null
+      hidden: false
+      interface: list-m2m
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 10
+      special:
+        - m2m
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+  - collection: widgets
+    field: ssoService
+    type: string
+    meta:
+      collection: widgets
+      conditions:
+        - name: if internal
+          rule:
+            _and:
+              - type:
+                  _eq: internal
+          readonly: true
+          hidden: true
+          options:
+            font: sans-serif
+            trim: false
+            masked: false
+            clear: false
+            slug: false
+      display: null
+      display_options: null
+      field: ssoService
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 14
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: ssoService
+      table: widgets
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: widgets
+    field: statisticName
+    type: string
+    meta:
+      collection: widgets
+      conditions: null
+      display: null
+      display_options: null
+      field: statisticName
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options:
+        iconLeft: auto_graph
+        placeholder: >-
+          The name that should be sent to the statistics api when a user
+          accesses the feature
+      readonly: false
+      required: false
+      sort: 16
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: statisticName
+      table: widgets
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: widgets
+    field: status
+    type: string
+    meta:
+      collection: widgets
+      conditions: null
+      display: labels
+      display_options:
+        choices:
+          - text: $t:published
+            value: published
+            foreground: '#FFFFFF'
+            background: var(--primary)
+          - text: $t:draft
+            value: draft
+            foreground: '#18222F'
+            background: '#D3DAE4'
+          - text: $t:archived
+            value: archived
+            foreground: '#FFFFFF'
+            background: var(--warning)
+        showAsDot: true
+      field: status
+      group: null
+      hidden: false
+      interface: select-dropdown
+      note: null
+      options:
+        choices:
+          - text: $t:published
+            value: published
+          - text: $t:draft
+            value: draft
+          - text: $t:archived
+            value: archived
+      readonly: false
+      required: false
+      sort: 2
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: status
+      table: widgets
+      data_type: character varying
+      default_value: draft
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: false
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: widgets
+    field: translations
+    type: alias
+    meta:
+      collection: widgets
+      conditions: null
+      display: translations
+      display_options:
+        languageField: code
+        template: '{{title}}'
+      field: translations
+      group: null
+      hidden: false
+      interface: translations
+      note: null
+      options:
+        languageField: code
+      readonly: false
+      required: false
+      sort: 4
+      special:
+        - translations
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+  - collection: widgets
+    field: type
+    type: string
+    meta:
+      collection: widgets
+      conditions: null
+      display: null
+      display_options: null
+      field: type
+      group: null
+      hidden: false
+      interface: select-radio
+      note: null
+      options:
+        choices:
+          - text: internal
+            value: internal
+          - text: external
+            value: external
+      readonly: false
+      required: true
+      sort: 11
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: type
+      table: widgets
+      data_type: character varying
+      default_value: internal
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: widgets
+    field: widget
+    type: string
+    meta:
+      collection: widgets
+      conditions: null
+      display: null
+      display_options: null
+      field: widget
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: 3
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: widget
+      table: widgets
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: widgets_settings_by_role
+    field: id
+    type: integer
+    meta:
+      collection: widgets_settings_by_role
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: widgets_settings_by_role
+      data_type: integer
+      default_value: nextval('widgets_settings_by_role_id_seq'::regclass)
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: true
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: widgets_settings_by_role
+    field: settings_by_role_id
+    type: integer
+    meta:
+      collection: widgets_settings_by_role
+      conditions: null
+      display: null
+      display_options: null
+      field: settings_by_role_id
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: settings_by_role_id
+      table: widgets_settings_by_role
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: settings_by_role
+      foreign_key_column: id
+  - collection: widgets_settings_by_role
+    field: sort
+    type: integer
+    meta:
+      collection: widgets_settings_by_role
+      conditions: null
+      display: null
+      display_options: null
+      field: sort
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: sort
+      table: widgets_settings_by_role
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: widgets_settings_by_role
+    field: widgets_id
+    type: integer
+    meta:
+      collection: widgets_settings_by_role
+      conditions: null
+      display: null
+      display_options: null
+      field: widgets_id
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: widgets_id
+      table: widgets_settings_by_role
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: widgets
+      foreign_key_column: id
+  - collection: widgets_translations
+    field: content
+    type: text
+    meta:
+      collection: widgets_translations
+      conditions: null
+      display: null
+      display_options: null
+      field: content
+      group: null
+      hidden: false
+      interface: input-multiline
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: content
+      table: widgets_translations
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: widgets_translations
+    field: id
+    type: integer
+    meta:
+      collection: widgets_translations
+      conditions: null
+      display: null
+      display_options: null
+      field: id
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: id
+      table: widgets_translations
+      data_type: integer
+      default_value: nextval('widgets_translations_id_seq'::regclass)
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: false
+      is_unique: true
+      is_primary_key: true
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: true
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: widgets_translations
+    field: languages_code
+    type: string
+    meta:
+      collection: widgets_translations
+      conditions: null
+      display: null
+      display_options: null
+      field: languages_code
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: languages_code
+      table: widgets_translations
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: languages
+      foreign_key_column: code
+  - collection: widgets_translations
+    field: searchKeywords
+    type: json
+    meta:
+      collection: widgets_translations
+      conditions: null
+      display: null
+      display_options: null
+      field: searchKeywords
+      group: null
+      hidden: false
+      interface: tags
+      note: null
+      options:
+        alphabetize: true
+      readonly: false
+      required: false
+      sort: null
+      special:
+        - cast-json
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: searchKeywords
+      table: widgets_translations
+      data_type: json
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: widgets_translations
+    field: shortTitle
+    type: string
+    meta:
+      collection: widgets_translations
+      conditions: null
+      display: null
+      display_options: null
+      field: shortTitle
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options:
+        softLength: 25
+      readonly: false
+      required: false
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: shortTitle
+      table: widgets_translations
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: widgets_translations
+    field: title
+    type: string
+    meta:
+      collection: widgets_translations
+      conditions: null
+      display: null
+      display_options: null
+      field: title
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: title
+      table: widgets_translations
+      data_type: character varying
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: widgets_translations
+    field: widgets_id
+    type: integer
+    meta:
+      collection: widgets_translations
+      conditions: null
+      display: null
+      display_options: null
+      field: widgets_id
+      group: null
+      hidden: true
+      interface: null
+      note: null
+      options: null
+      readonly: false
+      required: false
+      sort: null
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: widgets_id
+      table: widgets_translations
+      data_type: integer
+      default_value: null
+      max_length: null
+      numeric_precision: 32
+      numeric_scale: 0
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: widgets
+      foreign_key_column: id
 relations:
   - collection: channels_translations
     field: channels_id
@@ -4154,5 +5273,110 @@ relations:
       foreign_key_table: pages
       foreign_key_column: id
       constraint_name: pages_translations_pages_id_foreign
+      on_update: NO ACTION
+      on_delete: SET NULL
+  - collection: widgets
+    field: authorization
+    related_collection: authorization
+    meta:
+      junction_field: null
+      many_collection: widgets
+      many_field: authorization
+      one_allowed_collections: null
+      one_collection: authorization
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    schema:
+      table: widgets
+      column: authorization
+      foreign_key_table: authorization
+      foreign_key_column: id
+      constraint_name: widgets_authorization_foreign
+      on_update: NO ACTION
+      on_delete: CASCADE
+  - collection: widgets_settings_by_role
+    field: settings_by_role_id
+    related_collection: settings_by_role
+    meta:
+      junction_field: widgets_id
+      many_collection: widgets_settings_by_role
+      many_field: settings_by_role_id
+      one_allowed_collections: null
+      one_collection: settings_by_role
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    schema:
+      table: widgets_settings_by_role
+      column: settings_by_role_id
+      foreign_key_table: settings_by_role
+      foreign_key_column: id
+      constraint_name: widgets_settings_by_role_settings_by_role_id_foreign
+      on_update: NO ACTION
+      on_delete: CASCADE
+  - collection: widgets_settings_by_role
+    field: widgets_id
+    related_collection: widgets
+    meta:
+      junction_field: settings_by_role_id
+      many_collection: widgets_settings_by_role
+      many_field: widgets_id
+      one_allowed_collections: null
+      one_collection: widgets
+      one_collection_field: null
+      one_deselect_action: delete
+      one_field: settings_by_role
+      sort_field: sort
+    schema:
+      table: widgets_settings_by_role
+      column: widgets_id
+      foreign_key_table: widgets
+      foreign_key_column: id
+      constraint_name: widgets_settings_by_role_widgets_id_foreign
+      on_update: NO ACTION
+      on_delete: CASCADE
+  - collection: widgets_translations
+    field: languages_code
+    related_collection: languages
+    meta:
+      junction_field: widgets_id
+      many_collection: widgets_translations
+      many_field: languages_code
+      one_allowed_collections: null
+      one_collection: languages
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: null
+      sort_field: null
+    schema:
+      table: widgets_translations
+      column: languages_code
+      foreign_key_table: languages
+      foreign_key_column: code
+      constraint_name: widgets_translations_languages_code_foreign
+      on_update: NO ACTION
+      on_delete: SET NULL
+  - collection: widgets_translations
+    field: widgets_id
+    related_collection: widgets
+    meta:
+      junction_field: languages_code
+      many_collection: widgets_translations
+      many_field: widgets_id
+      one_allowed_collections: null
+      one_collection: widgets
+      one_collection_field: null
+      one_deselect_action: nullify
+      one_field: translations
+      sort_field: null
+    schema:
+      table: widgets_translations
+      column: widgets_id
+      foreign_key_table: widgets
+      foreign_key_column: id
+      constraint_name: widgets_translations_widgets_id_foreign
       on_update: NO ACTION
       on_delete: SET NULL

@@ -1,5 +1,5 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { catchError, map, Observable } from 'rxjs';
+import { catchError, map, Observable, zip } from 'rxjs';
 import { FeaturesPositionHelper } from './features-position.helper';
 import { DirectusFeature, Feature } from './features.dto';
 import { DirectusApi } from '../config/configuration.interface';
@@ -23,7 +23,8 @@ export class FeaturesService {
   }
 
   public getFeatures(userRoles: string[]): Observable<Feature[]> {
-    const url = `${this.directusApiConfig.apiUrl}/items/features`;
+    const urlFeatures = `${this.directusApiConfig.apiUrl}/items/features`;
+    const urlWidgets = `${this.directusApiConfig.apiUrl}/items/widgets`;
     const requestConfig = {
       params: {
         'filter[status][_eq]': 'published',
@@ -52,19 +53,31 @@ export class FeaturesService {
       };
     };
 
-    return this.httpService
-      .get<DirectusResponse<DirectusFeature[]>>(url, requestConfig)
-      .pipe(
-        catchError((err: any) => {
-          const errorMessage = 'Unable to get directus features';
-          this.logger.error(errorMessage, err);
-          throw new RpcException(errorMessage);
-        }),
-        map((res) => res.data.data),
-        map((features: DirectusFeature[]): Feature[] =>
-          features.map(directusFeaturesToFeatures),
+    return zip(
+      this.httpService.get<DirectusResponse<DirectusFeature[]>>(
+        urlFeatures,
+        requestConfig,
+      ),
+      this.httpService.get<DirectusResponse<DirectusFeature[]>>(
+        urlWidgets,
+        requestConfig,
+      ),
+    ).pipe(
+      catchError((err: any) => {
+        const errorMessage = 'Unable to get directus features';
+        this.logger.error(errorMessage, err);
+        throw new RpcException(errorMessage);
+      }),
+      map((res) =>
+        Array.prototype.concat(
+          res[0].data.data.map((f) => ({ ...f, id: `feature:${f.id}` })),
+          res[1].data.data.map((w) => ({ ...w, id: `widget:${w.id}` })),
         ),
-        map((features: Feature[]) => features.sort(sortFeatures)),
-      );
+      ),
+      map((features: DirectusFeature[]): Feature[] =>
+        features.map(directusFeaturesToFeatures),
+      ),
+      map((features: Feature[]) => features.sort(sortFeatures)),
+    );
   }
 }
