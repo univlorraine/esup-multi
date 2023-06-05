@@ -54,7 +54,7 @@ export class StatisticsService {
         const data: UserActionRequestData = {
           authToken,
           data: {
-            duid: deviceId.identifier,
+            duid: deviceId.uuid,
             action: userActionDetails.action,
             functionality: userActionDetails.functionality,
             platform: Capacitor.getPlatform(),
