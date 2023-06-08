@@ -25,9 +25,9 @@
             <ion-icon name="man-outline"></ion-icon>
             <ion-text>{{teacher.displayname}}</ion-text>
           </ion-row>
-          <ion-row class="card-labels" *ngIf="event.course.url" (click)="openCourseURL(event.course.url)">
+          <ion-row class="card-labels" *ngIf="event.course.url && isCourseUrlValid()" (click)="openCourseURL(event.course.url)">
             <ion-icon name="link-outline"></ion-icon>
-            <ion-text>{{ event.course.url }}</ion-text>
+            <ion-text>{{ "SCHEDULE.COURSE_URL_TEXT" | translate }}</ion-text>
           </ion-row>
           <ng-container *ngIf="isGroupsVisible"> <!-- Groups -->
             <ion-row class="card-labels" *ngFor="let group of event.groups">

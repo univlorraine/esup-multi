@@ -16,6 +16,7 @@ export class EventDetailComponent {
   @Input() showHideButton = true;
   public disableHideCourseButton = false;
   public isGroupsVisible = false;
+  public courseUrlRegex = /^https?:\/\//;
 
   constructor(private scheduleService: ScheduleService) { }
 
@@ -41,5 +42,9 @@ export class EventDetailComponent {
 
   public toggleExpandGroups() {
     this.isGroupsVisible = !this.isGroupsVisible;
+  }
+
+  public isCourseUrlValid() {
+    return this.courseUrlRegex.test(this.event.course.url.trim());
   }
 }
