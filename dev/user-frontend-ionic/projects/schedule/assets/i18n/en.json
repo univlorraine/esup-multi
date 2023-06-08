@@ -4,6 +4,7 @@
     "NO_EVENTS_THIS_DAY": "No courses on this date.",
     "SEE_GROUPS": "See groups",
     "HIDE_GROUPS": "Hide groups",
+    "COURSE_URL_TEXT": "Link to the course",
     "CLOSE": "Close",
     "REQUEST_ERROR": {
         "BEFORE": "Please try again later. An error occurred while fetching events before",
