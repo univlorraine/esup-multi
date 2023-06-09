@@ -11,26 +11,30 @@
 <ion-content>
   <ion-progress-bar *ngIf="isLoading" type="indeterminate" color="primary"></ion-progress-bar>
 
-  <ng-container *ngIf="restaurant$ | async">
-    <ion-card *ngFor="let menu of (menus$ | async)">
-      <ion-card-header color="medium" class="ion-text-center">
-        <ion-text class="app-title-5 contrast">{{ menu.date | completeLocalDate}}</ion-text>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-list *ngFor="let meal of menu.meal">
-            <ion-row class="meal-name ion-justify-content-center">
-            <ion-text class="app-title-6 contrast">{{ meal.name }} </ion-text>
-          </ion-row>
-          <ion-item *ngFor="let category of meal.foodcategory" lines="none">
-            <ion-label>
-              <h5 class="app-title-6 ion-text-center">{{ category.name }}</h5>
-              <p class="app-text-4 light ion-text-center" *ngFor="let dish of category.dishes">{{ dish }}</p>
-            </ion-label>
-          </ion-item>
-        </ion-list>
-      </ion-card-content>
-    </ion-card>
-  </ng-container>
+  <div #swiperContainer class="swiper-container">
+    <div class="swiper-wrapper">
+      <ng-container *ngIf="restaurant$ | async">
+        <ion-card class="swiper-slide" *ngFor="let menu of (menus$ | async)">
+          <ion-card-header color="medium" class="ion-text-center">
+            <ion-text class="app-title-5 contrast">{{ menu.date | completeLocalDate}}</ion-text>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-list *ngFor="let meal of menu.meal">
+              <ion-row class="meal-name ion-justify-content-center">
+                <ion-text class="app-title-6 contrast">{{ meal.name }} </ion-text>
+              </ion-row>
+              <ion-item *ngFor="let category of meal.foodcategory" lines="none">
+                <ion-label>
+                  <h5 class="app-title-6 ion-text-center">{{ category.name }}</h5>
+                  <p class="app-text-4 light ion-text-center" *ngFor="let dish of category.dishes">{{ dish }}</p>
+                </ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+      </ng-container>
+    </div>
+  </div>
 
   <ng-container *ngIf="(restaurantMenusIsEmpty$| async) && !isLoading">
     <ion-row class="ion-margin ion-justify-content-center">

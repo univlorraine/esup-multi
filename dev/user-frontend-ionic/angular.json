@@ -113,12 +113,12 @@
                 "glob": "**/*",
                 "input": "projects/contact-us/assets/i18n",
                 "output": "/assets/i18n/contact-us"
-              },   
+              },
               {
                 "glob": "**/*",
                 "input": "projects/restaurants/assets/i18n",
                 "output": "/assets/i18n/restaurants"
-              },              
+              },
               {
                 "glob": "**/*.svg",
                 "input": "src/assets/icon/flag",
@@ -145,8 +145,14 @@
                 "output": "./svg"
               }
             ],
-            "styles": ["src/theme/variables.scss", "src/global.scss"],
-            "scripts": [],
+            "styles": [
+              "src/theme/variables.scss",
+              "src/global.scss",
+              "node_modules/swiper/swiper-bundle.min.css"
+            ],
+            "scripts": [
+              "node_modules/swiper/swiper-bundle.min.js"
+            ],
             "aot": false,
             "vendorChunk": true,
             "extractLicenses": false,

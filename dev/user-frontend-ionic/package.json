@@ -69,6 +69,7 @@
     "localforage": "^1.10.0",
     "ng2-dragula": "^3.2.0",
     "rxjs": "~6.6.0",
+    "swiper": "^9.3.2",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"
   },
