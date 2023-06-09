@@ -73,7 +73,6 @@
     "module": "es2020",
     "lib": ["es2018", "dom"],
     "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true,
     "allowSyntheticDefaultImports": true
   },
   "angularCompilerOptions": {
