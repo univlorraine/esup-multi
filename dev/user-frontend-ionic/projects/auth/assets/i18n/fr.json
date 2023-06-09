@@ -9,8 +9,8 @@
         "PASSWORD": "Mot de passe",
         "SUBMIT": "Se connecter",
         "REQUIRED": {
-            "USERNAME": "Mot de passe requis",
-            "PASSWORD": "Identifiant requis"
+            "USERNAME": "Identifiant requis",
+            "PASSWORD": "Mot de passe requis"
         },
         "SAVE_CREDENTIALS": "Enregistrer mes identifiants"
     },

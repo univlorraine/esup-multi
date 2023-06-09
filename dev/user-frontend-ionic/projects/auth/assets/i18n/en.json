@@ -9,8 +9,8 @@
         "PASSWORD": "Password",
         "SUBMIT": "Log in",
         "REQUIRED": {
-            "USERNAME": "Password required",
-            "PASSWORD": "Username required"
+            "USERNAME": "Username required",
+            "PASSWORD": "Password required"
         },
         "SAVE_CREDENTIALS": "Save credentials"
     },
