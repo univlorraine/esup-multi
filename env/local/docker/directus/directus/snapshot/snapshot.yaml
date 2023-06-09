@@ -3220,7 +3220,7 @@ fields:
       field: connexion_text
       group: null
       hidden: false
-      interface: input-multiline
+      interface: input-rich-text-html
       note: null
       options: null
       readonly: false
