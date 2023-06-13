@@ -1,5 +1,5 @@
 <ion-content>
-  <app-widget [widgetId]="'auth:auth-widget'"></app-widget>
+  <app-widget [widgetId]="widgetIds.auth"></app-widget>
   <ion-list lines="none" class="menu-section">
     <ion-item button *ngFor="let menu of (staticMenuItems$ | async)" (click)="menuOpenerService.open(menu)">
       <ion-icon class="app-icon-4" name="{{menu.icon}}" slot="start"></ion-icon>
@@ -7,8 +7,8 @@
     </ion-item>
   </ion-list>
   <ion-list lines="none" class="menu-section">
-    <app-widget [widgetId]="'contact-us:contact-us-menu-item-widget'"></app-widget>
-    <app-widget [widgetId]="'static-pages:static-pages-widget'"></app-widget>
+    <app-widget [widgetId]="widgetIds.contactUs"></app-widget>
+    <app-widget [widgetId]="widgetIds.staticPages"></app-widget>
   </ion-list>
 
   <ion-list lines="none" class="menu-section">
@@ -18,7 +18,7 @@
     </ion-item>
   </ion-list>
 
-  <app-widget  [widgetId]="'social-network:social-network-widget'"></app-widget>
+  <app-widget  [widgetId]="widgetIds.socialNetwork"></app-widget>
 
 </ion-content>
 <ion-footer class="ion-no-border">
