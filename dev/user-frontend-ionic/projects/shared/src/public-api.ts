@@ -12,6 +12,7 @@ export * from './lib/components/custom-icon/custom-icon.component';
 export * from './lib/components/header/header.component';
 export * from './lib/components/shared-components.module';
 export * from './lib/components/widgets/widget.component';
+export * from './lib/components/widgets/widget-lifecycle.service';
 export * from './lib/errors';
 export * from './lib/features/features.repository';
 export * from './lib/features/features.service';
