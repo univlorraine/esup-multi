@@ -4,6 +4,7 @@
 
 export * from './lib/auth/auth.repository';
 export * from './lib/auth/authenticated-user.repository';
+export * from './lib/auth/authenticated-username.repository';
 export * from './lib/auth/keep-auth.repository';
 export * from './lib/auth/keep-auth.service';
 export * from './lib/authorization/authorization.helper';

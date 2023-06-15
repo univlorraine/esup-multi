@@ -1,11 +1,9 @@
-import { createStore, select, withProps } from '@ngneat/elf';
+import { select, withProps } from '@ngneat/elf';
 import { getAllEntities, getEntity, selectAllEntities, setEntities, updateEntities, withEntities } from '@ngneat/elf-entities';
-import {
-  persistState
-} from '@ngneat/elf-persist-state';
 import { Authorization } from '../authorization/authorization.helper';
 import { ServiceMenuItem } from '../navigation/menu.model';
-import { localForageStore } from '../store/local-forage';
+import { registerUserStore } from '../store/user-store-helper';
+import { mergeMap } from 'rxjs/operators';
 
 
 const STORE_NAME = 'features';
@@ -55,7 +53,7 @@ export interface ExternalFeature extends FeatureCommon {
 
 export type Feature = ExternalFeature | InternalFeature;
 
-const store = createStore(
+const [userStore$, getUserStore] = registerUserStore(
   { name: STORE_NAME },
   withEntities<Feature>(),
   withProps<FeaturesProps>({
@@ -63,16 +61,16 @@ const store = createStore(
   }),
 );
 
-const persist = persistState(store, {
-  key: STORE_NAME,
-  storage: localForageStore,
-});
 
-export const features$ = store.pipe(selectAllEntities());
-export const featuresUserOrder$ = store.pipe(select((state) => state.userOrder));
+export const features$ = userStore$.pipe(
+  mergeMap(selectAllEntities()),
+);
+export const featuresUserOrder$ = userStore$.pipe(
+  mergeMap(select((state: any) => state.userOrder))
+);
 
 export const setFeatures = (features: Feature[]) => {
-  const previousFeatures = store.query(getAllEntities());
+  const previousFeatures = getUserStore().query(getAllEntities());
 
   if (previousFeatures && previousFeatures.length > 0) {
     const updatedFeatures = features.map((feature) => {
@@ -90,32 +88,32 @@ export const setFeatures = (features: Feature[]) => {
         };
       }
     });
-    store.update(setEntities(updatedFeatures));
+    getUserStore().update(setEntities(updatedFeatures));
   } else {
-    store.update(setEntities(features));
+    getUserStore().update(setEntities(features));
   }
 };
 
 export const updateFeaturesListIsNewToFalse = () => {
-  const features = store.query(getAllEntities());
+  const features = getUserStore().query(getAllEntities());
   const updatedFeatures = features.map((feature) => ({
     ...feature,
     isNew: false,
   }));
-  store.update(setEntities(updatedFeatures));
+  getUserStore().update(setEntities(updatedFeatures));
 };
 
 export const updateFeatureIsNewToFalse = (menuItem: ServiceMenuItem) => {
-  const feature = store.query(getEntity(menuItem.id));
+  const feature = getUserStore().query(getEntity(menuItem.id));
   const updatedFeature = { ...feature, isNew: false };
-  store.update(updateEntities(updatedFeature.id, () => (updatedFeature)));
+  getUserStore().update(updateEntities(updatedFeature.id, () => (updatedFeature)));
 };
 
 export const setFeaturesUserOrder = (userOrder: FeaturesProps['userOrder']) => {
-  store.update((state) => ({
+  getUserStore().update((state) => ({
     ...state,
     userOrder,
   }));
 };
 
-export const clearFeatures = () => store.reset();
+export const clearFeatures = () => getUserStore().reset();

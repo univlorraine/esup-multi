@@ -1,8 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Actions } from '@ngneat/effects-ng';
-import { AuthenticatedUser, cleanupPrivateData, getRefreshAuthToken, authenticate, getAuthToken } from '@ul/shared';
-import { Observable, pipe } from 'rxjs';
-import { concatMap, finalize, first, tap } from 'rxjs/operators';
+import {
+  AuthenticatedUser,
+  cleanupPrivateData,
+  getRefreshAuthToken,
+  authenticate,
+  getAuthToken,
+  updateAuthenticatedUsername
+} from '@ul/shared';
+import { Observable } from 'rxjs';
+import { concatMap, first, tap } from 'rxjs/operators';
 import { saveCredentialsOnAuthentication$ } from '../preferences/preferences.repository';
 import { KeepAuthService } from './keep-auth.service';
 import { StandardAuthService } from './standard-auth.service';
@@ -26,6 +33,7 @@ export class AuthService {
         this.keepAuthService.login(username, password) :
         this.standardAuthService.login(username, password)
       ),
+      tap(() => updateAuthenticatedUsername(username)),
     );
   }
 
@@ -35,8 +43,7 @@ export class AuthService {
       concatMap(token => token ?
         this.keepAuthService.logout(token) :
         this.standardAuthService.logout()
-      ),
-      tap((logoutSuccess) => logoutSuccess),
+      )
     );
   }
 
