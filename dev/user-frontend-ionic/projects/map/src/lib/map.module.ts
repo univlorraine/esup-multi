@@ -6,6 +6,7 @@ import { ProjectModuleService, SharedComponentsModule } from '@ul/shared';
 import { MapRoutingModule } from './map-routing.module';
 import { MapModuleConfig, MAP_CONFIG } from './map.config';
 import { MapPage } from './map.page';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const initModule = (projectModuleService: ProjectModuleService) =>
   () => projectModuleService.initProjectModule({
@@ -14,13 +15,14 @@ const initModule = (projectModuleService: ProjectModuleService) =>
   });
 
 @NgModule({
-  imports: [
-    CommonModule,
-    IonicModule,
-    MapRoutingModule,
-    TranslateModule,
-    SharedComponentsModule,
-  ],
+    imports: [
+        CommonModule,
+        IonicModule,
+        MapRoutingModule,
+        TranslateModule,
+        SharedComponentsModule,
+        ReactiveFormsModule,
+    ],
   declarations: [MapPage],
   providers: [{
     provide: APP_INITIALIZER,

@@ -55,6 +55,11 @@
   --background: var(--app-color-component-background-primary) !important;
 }
 
+ion-item:last-child {
+  --inner-border-width: 0;
+}
+
+
 .chip-list {
   background-color: var(--ion-color-medium-light);
 }
