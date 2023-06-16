@@ -1,4 +1,4 @@
-.map-page {  
+.map-page {
     display: flex;
     flex-flow: column;
     height: 100%;
@@ -7,4 +7,18 @@
 #map {
     flex: 1;
     width: 100%;
+}
+
+.filter-list {
+  background-color: var(--app-color-component-background-primary);
+  padding-top: 1rem;
+  padding-right: 0.4rem;
+}
+
+ion-item::part(native) {
+  background: var(--app-color-component-background-primary);
+}
+
+ion-item:last-child {
+  --inner-border-width: 0;
 }

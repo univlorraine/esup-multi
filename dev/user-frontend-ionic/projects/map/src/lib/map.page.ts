@@ -1,31 +1,64 @@
-import { Component, Inject } from '@angular/core';
+import {Component, Inject, OnDestroy, ViewChild} from '@angular/core';
 import { Geolocation } from '@capacitor/geolocation';
 import { Network } from '@capacitor/network';
 import { TranslateService } from '@ngx-translate/core';
 import * as Leaflet from 'leaflet';
-import { finalize, first } from 'rxjs/operators';
+import { finalize, first, takeUntil } from 'rxjs/operators';
 import { MapModuleConfig, MAP_CONFIG } from './map.config';
 import { Marker, markersList$, setMarkers } from './map.repository';
 import { MapService } from './map.service';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Subject } from 'rxjs';
+
+const CATEGORIES = [
+  'presidences_points',
+  'composantes_points',
+  'bus_points',
+  'restos_points',
+  'cites_points',
+  'santes_points',
+  'suaps_points'
+];
 
 @Component({
   selector: 'app-map',
   templateUrl: './map.page.html',
   styleUrls: ['./map.page.scss'],
 })
-export class MapPage {
+export class MapPage implements OnDestroy {
 
+  @ViewChild('popover') popover;
+
+  public isOpen = false;
   public isLoading = false;
+  public form: FormGroup;
+  public categoriesSelected: string[];
+  protected readonly categories = CATEGORIES;
   private map: Leaflet.Map;
   private markersByCategory: Map<string, Leaflet.Marker[]> = new Map();
   private layerGroupByCategory: Map<string, Leaflet.LayerGroup> = new Map();
   private positionLayerGroup: Leaflet.LayerGroup;
+  private unsubscribe$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
     private mapService: MapService,
     private translateService: TranslateService,
+    private formBuilder: FormBuilder,
     @Inject(MAP_CONFIG) private config: MapModuleConfig
-  ) { }
+  ) {
+    this.initCategoriesForm();
+
+    this.categoriesForm.valueChanges.pipe(
+      takeUntil(this.unsubscribe$)
+    ).subscribe(formValues => {
+      this.categoriesSelected = CATEGORIES.filter((value, index) => formValues[index]);
+      this.refreshMap();
+    });
+  }
+
+  get categoriesForm(): FormArray {
+    return this.form.get('categoriesForm') as FormArray;
+  }
 
   async ionViewDidEnter() {
     this.isLoading = true;
@@ -43,12 +76,46 @@ export class MapPage {
     this.map.remove();
   }
 
-  onCategoryFilterChange(e) {
-    this.refreshMapWithSelectedCategories(e.detail.value);
+  ngOnDestroy() {
+    this.unsubscribe$.next(true);
+    this.unsubscribe$.complete();
   }
 
   onLocateUserClick() {
     this.refreshUserPosition();
+  }
+
+  presentPopover(e: Event) {
+    this.popover.event = e;
+    this.isOpen = true;
+  }
+
+  getCategoryTranslation(category: string) {
+    switch (category) {
+      case 'presidences_points':
+        return 'MAP.CATEGORY.PRESIDENCES';
+      case 'composantes_points':
+        return 'MAP.CATEGORY.COMPOSANTES';
+      case 'bus_points':
+        return 'MAP.CATEGORY.BUS';
+      case 'restos_points':
+        return 'MAP.CATEGORY.RESTOS';
+      case 'cites_points':
+        return 'MAP.CATEGORY.CITES';
+      case 'santes_points':
+        return 'MAP.CATEGORY.SANTES';
+      case 'suaps_points':
+        return 'MAP.CATEGORY.SUAPS';
+    }
+  }
+
+  removeSelectedCategory(category: string, selectedCatIndex: number ) {
+    this.categoriesSelected.splice(selectedCatIndex, 1);
+    this.refreshMap();
+
+    const newValue = [...this.categoriesForm.value];
+    newValue[CATEGORIES.indexOf(category)] = false;
+    this.categoriesForm.setValue(newValue);
   }
 
   private async leafletMapInit() {
@@ -62,7 +129,7 @@ export class MapPage {
   private refreshMapWithSelectedCategories(categories: string[]) {
     this.layerGroupByCategory.forEach((layerGroup, category) => {
       layerGroup.removeFrom(this.map);
-      if (categories.indexOf(category) >= 0) {
+      if (categories.length === 0 || categories.indexOf(category) >= 0) {
         layerGroup.addTo(this.map);
       }
     });
@@ -124,8 +191,9 @@ export class MapPage {
 
     const icon = this.buildIconForCategory(m.category);
     const marker = Leaflet.marker([m.latitude, m.longitude], { icon })
-      .bindPopup(`<h4>${m.title}</h4><br>
-      ${m.description}`
+      .bindPopup(
+        `<h4 class="app-title-4">${m.title}</h4><br>
+        <div class="app-text-5">${m.description}</div>`
       );
 
     markersInCategory.push(marker);
@@ -134,21 +202,21 @@ export class MapPage {
   private getIconFileByCategory(category: string) {
     switch (category) {
       case 'presidences_points':
-        return 'home.svg';
+        return 'presidence.png';
       case 'composantes_points':
-        return 'composantes.png';
+        return 'composante.png';
       case 'bus_points':
-        return 'bus.png';
+        return 'bu.png';
       case 'restos_points':
-        return 'restos.png';
+        return 'resto_u.png';
       case 'cites_points':
-        return 'cites.png';
+        return 'cite_u.png';
       case 'santes_points':
-        return 'santes.png';
-      case 'santes_points':
-        return 'swap.png';
+        return 'sante.png';
+      case 'suaps_points':
+        return 'suap.png';
       default:
-        return 'home.svg'; //default icon for unknown category
+        return 'composante.png'; //default icon for unknown category
     }
   }
 
@@ -158,8 +226,8 @@ export class MapPage {
 
     return Leaflet.icon({
       iconUrl,
-      iconSize: [41, 41], // size of the icon
-      iconAnchor: [12, 41], // point of the icon which will correspond to marker's location
+      iconSize: [34, 48], // size of the icon
+      iconAnchor: [18, 48], // point of the icon which will correspond to marker's location
     });
   }
 
@@ -171,5 +239,18 @@ export class MapPage {
       iconRetinaUrl: './assets/map/leaflet/marker-icon-2x.png',
       shadowUrl: './assets/map/leaflet/marker-shadow.png'
     });
+  }
+
+  private refreshMap() {
+    this.refreshMapWithSelectedCategories(this.categoriesSelected);
+  }
+
+  private initCategoriesForm() {
+    this.form = this.formBuilder.group({
+      categoriesForm: this.formBuilder.array([]) ,
+    });
+
+    this.categoriesForm.clear();
+    CATEGORIES.forEach(() => this.categoriesForm.push(new FormControl(false)));
   }
 }
