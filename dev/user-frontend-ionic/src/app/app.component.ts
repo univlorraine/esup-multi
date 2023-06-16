@@ -2,6 +2,7 @@ import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { currentLanguage$, PageLayout, PageLayoutService } from '@ul/shared';
 import { Observable, Subscription } from 'rxjs';
+import { SplashScreen } from '@capacitor/splash-screen';
 
 @Component({
   selector: 'app-root',
@@ -18,8 +19,15 @@ export class AppComponent implements OnInit, OnDestroy {
     @Inject('environment')
     private environment: any,
     private translateService: TranslateService,
-    private pageLayoutService: PageLayoutService,
+    private pageLayoutService: PageLayoutService
   ) {
+
+    SplashScreen.show({
+      showDuration: 1500,
+      autoHide: true,
+      fadeInDuration: 500
+    });
+
     // Define available languages in app
     this.languages = this.environment.languages;
     this.translateService.addLangs(this.languages);

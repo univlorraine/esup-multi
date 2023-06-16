@@ -9,7 +9,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Multi</string>
+	<string>UnivLorraine</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -57,7 +57,7 @@
 	<false/>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Pour scanner les codes-barres</string>
-  <key>NSContactsUsageDescription</key>
-  <string>Pour ajouter des contacts depuis un annuaire</string>
+	<key>NSContactsUsageDescription</key>
+	<string>Pour ajouter des contacts depuis un annuaire</string>
 </dict>
 </plist>
