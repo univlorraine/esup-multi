@@ -57,3 +57,11 @@ ion-img {
   border-top: var(--app-border-width-7) solid var(--ion-color-primary) !important;
   border-bottom: var(--app-border-width-7) solid var(--ion-color-primary) !important;
 }
+
+.light-font-color{
+  color: var(--app-font-color-for-dark-background-from-cms) !important;
+}
+
+.dark-font-color{
+  color: var(--app-font-color-for-light-background-from-cms) !important;
+}

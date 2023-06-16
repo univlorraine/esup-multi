@@ -1,21 +1,22 @@
 import { Component, Input } from '@angular/core';
-import { MenuOpenerService, ServiceMenuItem, updateFeatureIsNewToFalse } from '@ul/shared';
+import { isDarkTheme$, MenuOpenerService, ServiceMenuItem, updateFeatureIsNewToFalse } from '@ul/shared';
 
 @Component({
-selector: 'app-service',
-templateUrl: './service.component.html',
-styleUrls: ['./service.component.scss'],
+  selector: 'app-service',
+  templateUrl: './service.component.html',
+  styleUrls: ['./service.component.scss'],
 })
 export class ServiceComponent {
-    @Input() menuItem: ServiceMenuItem;
-    @Input() draggableIsOn: boolean;
+  @Input() menuItem: ServiceMenuItem;
+  @Input() draggableIsOn: boolean;
+  public isDarkTheme$ = isDarkTheme$;
 
-    constructor(
-        public menuOpenerService: MenuOpenerService
-    ) {}
+  constructor(
+    public menuOpenerService: MenuOpenerService
+  ) {}
 
-    open(menuItem: ServiceMenuItem){
-      updateFeatureIsNewToFalse(menuItem);
-      this.menuOpenerService.open(menuItem);
-    }
+  open(menuItem: ServiceMenuItem) {
+    updateFeatureIsNewToFalse(menuItem);
+    this.menuOpenerService.open(menuItem);
+  }
 }

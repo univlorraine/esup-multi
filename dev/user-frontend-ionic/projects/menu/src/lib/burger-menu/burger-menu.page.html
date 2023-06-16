@@ -23,8 +23,9 @@
 </ion-content>
 <ion-footer class="ion-no-border">
   <ion-row class="ion-justify-content-center">
-    <ion-button shape="round" class="app-round-button-1 ion-no-padding ion-no-margin">
-      <ion-icon name="moon" slot="icon-only"></ion-icon>
+    <ion-button shape="round" class="app-round-button-1 ion-no-padding ion-no-margin" (click)="toggleDarkMode()">
+      <ion-icon *ngIf="(isDarkTheme$ | async) === false" name="moon" slot="icon-only"></ion-icon>
+      <ion-icon *ngIf="(isDarkTheme$ | async) === true" name="sunny-outline" slot="icon-only"></ion-icon>
     </ion-button>
   </ion-row>
   <ion-row class="ion-justify-content-center">
@@ -33,7 +34,7 @@
     </ion-button>
   </ion-row>
   <ion-row class="ion-justify-content-center ion-padding-bottom">
-    <ion-label class="app-title-6 light">
+    <ion-label class="app-title-6 light ion-no-padding">
       {{ 'MENU.VERSION' | translate }}
       <ng-container *ngIf="appVersion$ | async as version else notFound">
         {{ version }}

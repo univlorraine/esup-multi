@@ -1,7 +1,11 @@
 <ion-card class="app-square-button-1">
   <ion-card-header class="ion-text-center" (click)="draggableIsOn ? null : open(menuItem)">
     <ion-col>
-      <app-custom-icon [icon]="menuItem.icon" [iconSourceSvg]="menuItem.iconSourceSvg"></app-custom-icon>
+      <app-custom-icon
+      [icon]="menuItem.icon"
+      [color]="(isDarkTheme$ | async) === true ? 'icon-primary': 'icon-primary-contrast'"
+      [iconSourceSvgLightTheme]="menuItem.iconSourceSvgLightTheme"
+      [iconSourceSvgDarkTheme]="menuItem.iconSourceSvgDarkTheme"></app-custom-icon>
     </ion-col>
   </ion-card-header>
   <ion-card-content class="ion-text-center">

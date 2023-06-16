@@ -6,12 +6,20 @@
 // // // ---------------------
 
 // Button text type 1 with arrow icon on the right. Use it on ion-button tags
+// <ion-button (click)="onClick()" class="app-text-button-1">
+//   <ion-text class="app-text-5"> {{ item.label }} </ion-text>
+//   <ion-icon class="app-icon-5" name="arrow-right"></ion-icon>
+// </ion-button>
 .app-text-button-1 {
   text-transform: var(--app-text-button-1-text-transform);
-  --background: var(--app-text-button-1-background);
+  --background: var(--app-text-button-1-background) !important;
   --box-shadow: var(--app-text-button-1-box-shadow);
   color: var(--app-text-button-1-color);
   max-height: var(--app-text-button-1-max-height);
+
+  ion-icon {
+  margin-left: var(--app-text-button-1-icon-margin-left) !important;
+  }
 }
 
 // Button text type 2 with rotated arrow icon on the right. The icon will rotate when you click on the button. Use it on ion-button tags
@@ -23,13 +31,14 @@
 // </ion-button>
 .app-text-button-2 {
   text-transform: var(--app-text-button-2-text-transform);
-  --background: var(--app-text-button-2-background);
+  --background: var(--app-text-button-2-background) !important;
   --box-shadow: var(--app-text-button-2-box-shadow);
   color: var(--app-text-button-2-color);
   max-height: var(--app-text-button-2-max-height);
 
   ion-icon {
     margin-left: var(--app-text-button-2-icon-margin-left) !important;
+    color: var(--app-text-button-2-color) !important;
   }
 
   ion-icon.content-open {
@@ -63,7 +72,7 @@
   min-width: var(--app-rectangular-button-1-min-width);
 
   ion-label {
-    color: var(--app-font-color-primary);
+    color: var(--app-rectangular-button-1-font-color);
     margin-top: 0.2rem;
     font-family: var(--app-rectangular-button-1-font-family);
     font-size: var(--app-rectangular-button-1-font-size);
@@ -162,5 +171,6 @@
 
   ion-icon {
     font-size: --app-rounded-button-1-icon-size;
+    color: var(--app-rounded-button-1-icon-color) !important;
   }
 }

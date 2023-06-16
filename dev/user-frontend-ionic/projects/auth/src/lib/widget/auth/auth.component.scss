@@ -1,3 +1,8 @@
+ion-list {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
 ion-item.md {
     padding-left: 0.7rem;
 }
@@ -13,7 +18,7 @@ ion-label.ios {
 }
 
 ion-icon {
-  color: var(--ion-color-primary);
+  color: var(--ion-color-font-primary);
 }
 
 .multi-auth-widget {

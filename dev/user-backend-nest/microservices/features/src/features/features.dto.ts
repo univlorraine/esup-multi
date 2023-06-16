@@ -31,7 +31,8 @@ interface FeatureCommon<SBR> {
   settings_by_role: SBR[];
   menu: string | null;
   icon?: string;
-  iconSourceSvg?: string;
+  iconSourceSvgLightTheme?: string;
+  iconSourceSvgDarkTheme?: string;
   color?: string;
   statisticName?: string;
 }

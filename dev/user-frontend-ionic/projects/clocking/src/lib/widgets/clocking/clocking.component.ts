@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { getExpectedErrorMessage } from '@ul/shared';
+import { AfterViewInit, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { getExpectedErrorMessage, ThemeService } from '@ul/shared';
 import { Observable } from 'rxjs';
-import { finalize, first, catchError } from 'rxjs/operators';
+import { catchError, finalize, first } from 'rxjs/operators';
 import { Clocking, clocking$ } from '../../clocking.repository';
 import { ClockingService } from '../../clocking.service';
 
@@ -10,14 +10,18 @@ import { ClockingService } from '../../clocking.service';
   templateUrl: './clocking.component.html',
   styleUrls: ['./clocking.component.scss'],
 })
-export class ClockingComponent implements OnInit {
+export class ClockingComponent implements OnInit, AfterViewInit {
+
+  @Input() widgetColor: string;
 
   public isLoading = false;
   public clocking$: Observable<Clocking> = clocking$;
   public clockInLoading = false;
   public errorMessage: string | null = null;
 
-  constructor(private clockingService: ClockingService) { }
+  constructor(private clockingService: ClockingService,
+    private themeService: ThemeService,
+    private changeDetectorRef: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.isLoading = true;
@@ -30,6 +34,10 @@ export class ClockingComponent implements OnInit {
       .subscribe(() => this.errorMessage = null);
   }
 
+  ngAfterViewInit() {
+    this.changeDetectorRef.detectChanges();
+  }
+
   onClockIn(event: MouseEvent) {
     event.stopPropagation(); // prevent from triggering card click
 
@@ -40,6 +48,11 @@ export class ClockingComponent implements OnInit {
       finalize(() => this.clockInLoading = false)
     )
     .subscribe(() => this.errorMessage = null);
+  }
+
+  fontColor() {
+    return this.themeService.isBackgroundFromCmsDarkOrIsDarkTheme(this.widgetColor) ?
+      'light-font-color' : 'dark-font-color';
   }
 
   private catchExpectedError(err) {

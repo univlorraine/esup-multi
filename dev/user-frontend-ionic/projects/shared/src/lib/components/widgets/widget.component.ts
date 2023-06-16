@@ -1,8 +1,7 @@
-import { AfterViewInit, ChangeDetectorRef, Component, Input, ViewChild, ViewContainerRef,
-  OnDestroy } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy, ViewChild, ViewContainerRef } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { ProjectModuleService } from '../../project-module/project-module.service';
 import { WidgetLifecycleService } from './widget-lifecycle.service';
-import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-widget',
@@ -11,6 +10,7 @@ import { Subscription } from 'rxjs';
 })
 export class WidgetComponent implements AfterViewInit, OnDestroy {
   @Input() widgetId: string;
+  @Input() widgetColor: string;
   @ViewChild('widget', { read: ViewContainerRef }) widgetContainerRef: ViewContainerRef;
   private widgetViewWillEnterSubscription: Subscription;
   private widgetViewDidEnterSubscription: Subscription;
@@ -29,6 +29,9 @@ export class WidgetComponent implements AfterViewInit, OnDestroy {
     if (componentToCreate) {
       const widgetInstance = this.widgetContainerRef.createComponent(componentToCreate).instance;
       this.handleWidgetLifecycle(widgetInstance);
+
+      widgetInstance.widgetColor = this.widgetColor;
+
       this.cdr.detectChanges();
     } else {
       console.warn(`'${this.widgetId}' is not found`);

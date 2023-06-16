@@ -78,7 +78,8 @@
   --icon-2-size: 2.3rem !important;
   --icon-3-size: 1.5rem !important;
   --icon-4-size: 1.25rem !important;
-  --icon-5-size: 0.75rem !important;
+  --icon-5-size: 1.10rem !important;
+  --icon-6-size: 0.75rem !important;
 
   // // ---------------------
   // // Logo size variables (Change value here and use variables only in theme/logos/logos.scss)
@@ -100,6 +101,7 @@
   --app-text-button-1-text-transform: none;
   --app-text-button-1-max-height: 1.7rem;
   --app-text-button-1-color: var(--app-font-color-primary);
+  --app-text-button-1-icon-margin-left: 0.5rem;
 
   // Button simple text type 2
   --app-text-button-2-background: transparent;
@@ -107,7 +109,7 @@
   --app-text-button-2-text-transform: none;
   --app-text-button-2-max-height: 1.7rem;
   --app-text-button-2-color: var(--app-font-color-primary);
-  --app-text-button-2-icon-margin-left: 0.3rem;
+  --app-text-button-2-icon-margin-left: 0.5rem;
 
   // Button Rectangular type 1
   --app-rectangular-button-1-background-color: white;
@@ -134,6 +136,7 @@
 
   // Button Rounded type 1 (icon only or short text)
   --app-rounded-button-1-background-color: white;
+  --app-rounded-button-1-icon-color: rgb(0, 0, 0);
   --app-rounded-button-1-height: 2.5rem;
   --app-rounded-button-1-width: 2.5rem;
   --app-rounded-button-1-border-width: 0.1rem;
@@ -183,4 +186,17 @@
   // Chatbot variables (the name of the logo sent by the chatbot must be '_ully5.png'). If it isn't, this style won't be applied.
   // // // ---------------------
   --app-chatbot-first-image-margin-bottom: -1.25rem;
+}
+
+// Dark theme for this file variables.
+.dark {
+  --app-text-button-2-color: var(--app-font-color-primary);
+
+  --app-rectangular-button-1-background-color: rgb(255, 255, 255);
+  --app-rectangular-button-1-font-color: var(--app-font-color-primary-contrast);
+
+  --app-rounded-button-1-background-color: rgb(255, 255, 255);
+
+  --app-square-button-1-background-color: rgb(65, 65, 65);
+  --app-square-button-1-font-color: var(--app-font-color-primary);
 }

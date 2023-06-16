@@ -1,9 +1,12 @@
-import { Component, Inject, } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { App } from '@capacitor/app';
 import { Capacitor } from '@capacitor/core';
-import { MenuItem, MenuOpenerService, MenuService as SharedMenuService, setLanguage, authenticatedUser$,
-  AuthenticatedUser, WidgetLifecycleService } from '@ul/shared';
-import { Observable, from, of } from 'rxjs';
+import {
+  AuthenticatedUser, authenticatedUser$, isDarkTheme, isDarkTheme$, MenuItem, MenuOpenerService,
+  MenuService as SharedMenuService, setIsDarkTheme, setLanguage, setUserHaveSetThemeInApp,
+  WidgetLifecycleService
+} from '@ul/shared';
+import { from, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -23,6 +26,8 @@ export class BurgerMenuPage {
   public languages: Array<string> = [];
   appVersion$: Observable<string>;
   authenticatedUser$: Observable<AuthenticatedUser>;
+  public darkModeEnabled: boolean;
+  isDarkTheme$: Observable<boolean>;
 
   constructor(
     @Inject('environment')
@@ -40,10 +45,19 @@ export class BurgerMenuPage {
       map(menuItems => menuItems.filter(menuItem => menuItem.type === 'dynamic'))
     );
     this.appVersion$ = !Capacitor.isNativePlatform() ? of(null) : from(App.getInfo()).pipe(map(info => info.version));
+
+    this.isDarkTheme$ = isDarkTheme$;
   }
 
   useLanguage(language: string): void {
     setLanguage(language);
+  }
+
+  toggleDarkMode() {
+    this.darkModeEnabled = isDarkTheme();
+    this.darkModeEnabled = !this.darkModeEnabled;
+    setUserHaveSetThemeInApp(true);
+    setIsDarkTheme(this.darkModeEnabled);
   }
 
   ionViewWillEnter() {

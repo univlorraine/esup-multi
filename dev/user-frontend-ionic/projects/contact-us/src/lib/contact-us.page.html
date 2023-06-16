@@ -2,12 +2,12 @@
 
 <ng-container *ngIf="translatedPageContent$ | async as page">
   <ion-header [translucent]="true">
-    <ion-toolbar>
+    <ion-toolbar color="primary">
       <ion-buttons slot="start">
         <app-back-button></app-back-button>
       </ion-buttons>
 
-      <ion-title>{{ page.title }}</ion-title>
+      <ion-title class="app-centered-header-title app-title-4">{{ page.title }}</ion-title>
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding">
@@ -31,11 +31,12 @@
 
       <ion-toolbar>
         <ion-buttons slot="end">
-          <ion-button [disabled]="!contactForm.valid" type="submit">
-            {{ "CONTACT-US.SEND" | translate }}
+          <ion-button class="app-text-button-1" [disabled]="!contactForm.valid" type="submit">
+            <ion-text class="app-text-4"> {{ "CONTACT-US.SEND" | translate }} </ion-text>
+            <ion-icon class="app-icon-6" name="arrow-right"></ion-icon>
           </ion-button>
         </ion-buttons>
       </ion-toolbar>
-  </form>
+    </form>
   </ion-content>
-<ng-container>
+  <ng-container>

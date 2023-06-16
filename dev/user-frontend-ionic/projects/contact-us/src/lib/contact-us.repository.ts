@@ -48,18 +48,17 @@ export class ContactUsRepository {
   //eslint-disable-next-line @typescript-eslint/member-ordering
   public translatedPageContent$ = combineLatest([this.pageContent$, currentLanguage$]).pipe(
     filter(([pageContent]) => pageContent !== null),
-    map(([pageContent, currentLanguage]) =>
-      {
-        const translation = pageContent.translations.find((t) => t.languages_code === currentLanguage) ||
+    map(([pageContent, currentLanguage]) => {
+      const translation = pageContent.translations.find((t) => t.languages_code === currentLanguage) ||
         pageContent.translations.find((t) => t.languages_code === this.environment.defaultLanguage) ||
         pageContent.translations[0];
 
-        return {
-          title: translation.title,
-          content: translation.content,
-          icon: pageContent.icon
-        };
-      })
+      return {
+        title: translation.title,
+        content: translation.content,
+        icon: pageContent.icon,
+      };
+    })
   );
 
   constructor(

@@ -34,7 +34,7 @@ const initModule = (projectModuleService: ProjectModuleService) =>
   providers: [{
     provide: APP_INITIALIZER,
     useFactory: initModule,
-    deps:[ProjectModuleService],
+    deps: [ProjectModuleService],
     multi: true
   }],
 })

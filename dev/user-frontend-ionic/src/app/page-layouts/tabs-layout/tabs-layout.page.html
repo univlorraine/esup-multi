@@ -5,7 +5,7 @@
       <img src="/assets/logo/white-university-logo.svg" class="logo ion-padding-start app-logo-3"/>
       <ion-buttons slot="end">
         <ion-button *ngFor="let menu of (topMenuItems$ | async)" (click)="menuOpenerService.open(menu)">
-          <app-custom-icon [icon]="menu.icon" [iconSourceSvg]="menu.iconSourceSvg"></app-custom-icon>
+          <app-custom-icon [icon]="menu.icon" [iconSourceSvgLightTheme]="menu.iconSourceSvgLightTheme" [iconSourceSvgDarkTheme]="menu.iconSourceSvgDarkTheme"></app-custom-icon>
         </ion-button>
       </ion-buttons>
     </ion-toolbar>
@@ -22,7 +22,7 @@
       [routerLink]="menu.routerLink"
       routerLinkActive="tab-selected"
     >
-      <app-custom-icon [icon]="menu.icon" [iconSourceSvg]="menu.iconSourceSvg"></app-custom-icon>
+      <app-custom-icon [icon]="menu.icon" [iconSourceSvgLightTheme]="menu.iconSourceSvgLightTheme" [iconSourceSvgDarkTheme]="menu.iconSourceSvgDarkTheme"></app-custom-icon>
       <ion-text class="short-title">
         {{(menu.shortTitle || menu.title) |  translate}}
       </ion-text>

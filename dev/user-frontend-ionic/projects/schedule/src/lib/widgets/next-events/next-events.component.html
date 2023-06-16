@@ -5,21 +5,26 @@
 <ng-container *ngIf="isLoading === false">
   <ion-grid class="events-container">
     <ion-row *ngIf="(noNextEvents$ | async) === true" class="ion-padding-bottom">
-      <ion-note>{{ "SCHEDULE.WIDGET.NEXT_EVENTS.NO_EVENTS" | translate }}</ion-note>
+      <ion-note [ngClass]="fontColor()"
+      class="app-text-5"
+      >
+        {{ "SCHEDULE.WIDGET.NEXT_EVENTS.NO_EVENTS" | translate }}</ion-note>
     </ion-row>
 
     <ion-col *ngFor="let event of (nextEvents$ | async) let last = last" class="ion-no-padding">
       <ion-row *ngIf="shouldDisplayDay(event)" class="event-day">
-        <ion-text class="app-title-6 light">{{event.startDateTime |
+        <ion-text [ngClass]="fontColor()"
+          class="app-title-6 light">{{event.startDateTime |
           completeLocalDate}}</ion-text>
       </ion-row>
 
-      <ion-card color="quaternary" [ngClass]="{'last-card': last}">
+      <ion-card [ngClass]="{'last-card': last}">
         <div class="circle-top-left"></div>
         <div class="dashed-line"></div>
 
         <ion-card-header>
-          <ion-card-title class="app-title-5 light">
+          <ion-card-title [ngClass]="fontColor()"
+            class="app-title-5 light">
             {{event.startDateTime | localHour}} - {{event.endDateTime | localHour}}
           </ion-card-title>
         </ion-card-header>
@@ -27,23 +32,31 @@
         <ion-card-content>
           <ion-row>
             <ion-col>
-              <ion-text class="app-title-5">{{event.course.label}}</ion-text>
+              <ion-text [ngClass]="fontColor()"
+                class="app-title-5">{{event.course.label}}</ion-text>
               <ion-row>
                 <ion-row class="ion-align-items-center card-labels" *ngFor="let room of event.rooms">
                   <ion-icon class="card-labels-icons" name="business-outline"></ion-icon>
-                  <ion-text class="app-title-6 light">{{room.label}} - {{room.building}}</ion-text>
+                  <ion-text [ngClass]="fontColor()"
+                    class="app-title-6 light">{{room.label}} - {{room.building}}</ion-text>
                 </ion-row>
                 <ion-row class="ion-align-items-center card-labels" *ngFor="let teacher of event.teachers">
-                  <ion-icon class="card-labels-icons" name="man-outline"></ion-icon>
-                  <ion-text class="app-title-6 light">{{teacher.displayname}}</ion-text>
+                  <ion-icon [ngClass]="fontColor()"
+                    class="card-labels-icons" name="man-outline"></ion-icon>
+                  <ion-text [ngClass]="fontColor()"
+                    class="app-title-6 light">{{teacher.displayname}}</ion-text>
                 </ion-row>
                 <ion-row class="ion-align-items-center card-labels" *ngFor="let group of event.groups">
-                  <ion-icon class="card-labels-icons" name="people-circle-outline"></ion-icon>
-                  <ion-text class="app-title-6 light">{{group.label}}</ion-text>
+                  <ion-icon [ngClass]="fontColor()"
+                    class="card-labels-icons" name="people-circle-outline"></ion-icon>
+                  <ion-text [ngClass]="fontColor()"
+                    class="app-title-6 light">{{group.label}}</ion-text>
                 </ion-row>
                 <ion-row class="ion-align-items-center  card-labels" *ngIf="event.course.url">
-                  <ion-icon class="card-labels-icons" name="link-outline"></ion-icon>
-                  <ion-text class="app-title-6 light">{{ event.course.url | truncate:35 }}</ion-text>
+                  <ion-icon [ngClass]="fontColor()"
+                    class="card-labels-icons" name="link-outline"></ion-icon>
+                  <ion-text [ngClass]="fontColor()"
+                    class="app-title-6 light">{{ event.course.url | truncate:35 }}</ion-text>
                 </ion-row>
               </ion-row>
             </ion-col>

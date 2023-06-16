@@ -19,7 +19,8 @@ interface TranslatedFeatureCommon {
   searchKeywords?: string[];
   menu: FeatureMenuType;
   icon: string;
-  iconSourceSvg: string;
+  iconSourceSvgLightTheme?: string;
+  iconSourceSvgDarkTheme?: string;
   isNew: boolean;
   statisticName?: string;
 }

@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { isDarkTheme$ } from '../../theme/theme.repository';
 
 @Component({
   selector: 'app-custom-icon',
@@ -7,10 +8,13 @@ import { Component, Input } from '@angular/core';
 })
 export class CustomIconComponent {
   @Input() icon?: string;
-  @Input() iconSourceSvg?: string;
+  @Input() iconSourceSvgLightTheme?: string;
+  @Input() iconSourceSvgDarkTheme?: string;
   @Input() color?: string;
   @Input() size?: string;
   @Input() slot?: string;
+
+  public isDarkTheme$ = isDarkTheme$;
 
   constructor() {}
 }
