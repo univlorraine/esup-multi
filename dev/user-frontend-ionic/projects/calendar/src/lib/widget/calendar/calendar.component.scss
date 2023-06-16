@@ -1,0 +1,32 @@
+.ion-padding {
+  padding-top: 5px !important;
+}
+
+hr {
+  border-top: 2px dashed var(--ion-color-primary-contrast);
+  margin: 0;
+}
+
+.events-container {
+  padding: 0;
+}
+
+.event {
+  align-items: center;
+  padding: 0.5rem 0;
+}
+
+.event-part ion-text {
+  display: block
+}
+
+.event-part-date {
+  flex-grow: 1;
+  text-align: center;
+  border-right: 5px solid var(--ion-color-primary-contrast);
+  margin-right: 5px;
+}
+
+.event-part-info {
+  flex-grow: 3;
+}

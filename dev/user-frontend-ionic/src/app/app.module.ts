@@ -29,6 +29,8 @@ import { ErrorModule } from './error/error.module';
 import { PageLayoutsModule } from './page-layouts/page-layouts.module';
 import { ContactUsModule } from '@ul/contact-us';
 import { RestaurantsModule } from '@ul/restaurants';
+import { UnreadMailModule } from '@ul/unread-mail';
+import { CalendarModule } from '@ul/calendar';
 
 
 @NgModule({
@@ -94,7 +96,11 @@ import { RestaurantsModule } from '@ul/restaurants';
         deps: [HttpClient, ProjectModuleService]
       }
     }),
-    SocialNetworkModule
+    SocialNetworkModule,
+    UnreadMailModule,
+    CalendarModule.forRoot({
+      numberOfEventsLimit: 3
+    })
   ],
   providers: [
     { provide: 'environment', useValue: environment },

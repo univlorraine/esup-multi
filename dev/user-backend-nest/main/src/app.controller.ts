@@ -11,7 +11,7 @@ import {
   Query,
   Request,
   UseGuards,
-  UseInterceptors,
+  UseInterceptors
 } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { AuthGuard } from '@nestjs/passport';
@@ -39,7 +39,8 @@ export class AppController {
     @Inject('CONTACT_US_SERVICE') private contactUsClient: ClientProxy,
     @Inject('RESTAURANTS_SERVICE') private restaurantsClient: ClientProxy,
     @Inject('STATISTICS_SERVICE') private statisticsClient: ClientProxy,
-  ) {}
+    @Inject('MAIL_CALENDAR_SERVICE') private mailCalendarClient: ClientProxy,
+  ) { }
 
   @Post('/features')
   info(@Body() body) {
@@ -642,6 +643,29 @@ export class AppController {
             },
           );
         }),
+      );
+  }
+
+  @Post('/mail-calendar')
+  mailCalendar(@Body() body) {
+    return this.authClient
+      .send(
+        {
+          cmd: 'getUserOrThrowError',
+        },
+        body,
+      )
+      .pipe(
+        concatMap((user) =>
+          this.mailCalendarClient.send(
+            {
+              cmd: 'mailCalendar',
+            },
+            {
+              login: user.username,
+            },
+          ),
+        ),
       );
   }
 

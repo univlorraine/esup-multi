@@ -63,6 +63,12 @@
       ],
       "@ul/restaurants": [
         "dist/restaurants"
+      ],
+      "@ul/unread-mail": [
+        "dist/unread-mail"
+      ],
+      "@ul/calendar": [
+        "dist/calendar"
       ]
     },
     "downlevelIteration": true,

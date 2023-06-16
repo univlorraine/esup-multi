@@ -6,6 +6,7 @@
 - [Microservice cards](dev/user-backend-nest/microservices/cards/README.md)
 - [Microservice rss](dev/user-backend-nest/microservices/rss/README.md)
 - [Microservice clocking](dev/user-backend-nest/microservices/clocking/README.md)
+- [Microservice mail-calendar](dev/user-backend-nest/microservices/mail-calendar/README.md)
 
 ## Créer un nouveau microservice
 

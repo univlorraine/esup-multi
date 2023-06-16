@@ -20,6 +20,7 @@ import microserviceFeaturesConfig from './config/microservice-features.config';
 import microserviceContactUsConfig from './config/microservice-contact-us.config';
 import microserviceRestaurantsConfig from './config/microservice-restaurants.config';
 import microserviceStatisticsConfig from './config/microservice-statistics.config';
+import microserviceMailCalendarConfig from './config/microservice-mail-calendar.config';
 import { AuthJwtStrategy } from './security/auth-jwt.strategy';
 import { GlobalHealthController } from './global-health.controller';
 import { TerminusModule } from '@nestjs/terminus';
@@ -139,6 +140,13 @@ import { LogsMiddleware } from './logs.middleware';
         imports: [ConfigModule.forFeature(microserviceStatisticsConfig)],
         useFactory: (config: ConfigService) =>
           config.get('microservice-statistics'),
+        inject: [ConfigService],
+      },
+      {
+        name: 'MAIL_CALENDAR_SERVICE',
+        imports: [ConfigModule.forFeature(microserviceMailCalendarConfig)],
+        useFactory: (config: ConfigService) =>
+          config.get('microservice-mail-calendar'),
         inject: [ConfigService],
       },
     ]),

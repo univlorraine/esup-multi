@@ -4,7 +4,7 @@
 
 <ng-container *ngIf="isLoading === false">
   <ion-grid class="events-container">
-    <ion-row *ngIf="(noNextEvents$ | async) === true">
+    <ion-row *ngIf="(noNextEvents$ | async) === true" class="ion-padding-bottom">
       <ion-note>{{ "SCHEDULE.WIDGET.NEXT_EVENTS.NO_EVENTS" | translate }}</ion-note>
     </ion-row>
 
