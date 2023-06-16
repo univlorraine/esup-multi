@@ -38,3 +38,6 @@
 
 - `STATISTICS_SERVICE_PORT` : Hôte du microservice `statistics`
 - `STATISTICS_SERVICE_HOST` : Port du microservice `statistics`
+
+- `MAIL_CALENDAR_SERVICE_PORT` : Hôte du microservice `mail-calendar`
+- `MAIL_CALENDAR_SERVICE_HOST` : Port du microservice `mail-calendar`

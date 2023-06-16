@@ -1,0 +1,325 @@
+[
+	{
+		"id": 1,
+		"status": "published",
+		"widget": "important-news:important-news",
+		"icon": "newspaper",
+		"iconSourceSvg": null,
+		"iconSourceSvgDark": null,
+		"position": null,
+		"type": "external",
+		"routerLink": null,
+		"link": null,
+		"ssoService": null,
+		"color": null,
+		"statisticName": null,
+		"translations": [],
+		"settings_by_role": [],
+		"authorization": null
+	},
+	{
+		"id": 2,
+		"status": "published",
+		"widget": "schedule:next-events",
+		"icon": null,
+		"iconSourceSvg": null,
+		"iconSourceSvgDark": null,
+		"position": null,
+		"type": "internal",
+		"routerLink": "/schedule",
+		"link": null,
+		"ssoService": null,
+		"color": "#BADFEE",
+		"statisticName": null,
+		"translations": [
+			{
+				"widgets_id": 2,
+				"languages_code": "en",
+				"content": null,
+				"searchKeywords": null,
+				"shortTitle": null,
+				"title": "Courses to come"
+			},
+			{
+				"widgets_id": 2,
+				"languages_code": "fr",
+				"content": null,
+				"searchKeywords": null,
+				"shortTitle": null,
+				"title": "Vos prochains cours"
+			}
+		],
+		"settings_by_role": [],
+		"authorization": {
+			"roles": [
+				"phd-student",
+				"student",
+				"teacher"
+			],
+			"type": "ALLOW",
+			"id": 50
+		}
+	},
+	{
+		"id": 3,
+		"status": "published",
+		"widget": "clocking:clocking",
+		"icon": null,
+		"iconSourceSvg": null,
+		"iconSourceSvgDark": null,
+		"position": null,
+		"type": "internal",
+		"routerLink": "/clocking",
+		"link": null,
+		"ssoService": null,
+		"color": "#A0D0B0",
+		"statisticName": "clocking",
+		"translations": [
+			{
+				"widgets_id": 3,
+				"languages_code": "en",
+				"content": "My daily tops",
+				"searchKeywords": null,
+				"shortTitle": null,
+				"title": "Agatte"
+			},
+			{
+				"widgets_id": 3,
+				"languages_code": "fr",
+				"content": "Mes tops de la journée",
+				"searchKeywords": null,
+				"shortTitle": null,
+				"title": "Agatte"
+			}
+		],
+		"settings_by_role": [],
+		"authorization": {
+			"roles": [
+				"CB",
+				"FB"
+			],
+			"type": "ALLOW",
+			"id": 51
+		}
+	},
+	{
+		"id": 4,
+		"status": "published",
+		"widget": "auth:auth-not-authentified-widget",
+		"icon": null,
+		"iconSourceSvg": null,
+		"iconSourceSvgDark": null,
+		"position": -100,
+		"type": "internal",
+		"routerLink": "/auth",
+		"link": null,
+		"ssoService": null,
+		"color": null,
+		"statisticName": null,
+		"translations": [],
+		"settings_by_role": [],
+		"authorization": {
+			"roles": [
+				"anonymous"
+			],
+			"type": "ALLOW",
+			"id": 52
+		}
+	},
+	{
+		"id": 6,
+		"status": "published",
+		"widget": "unread-mail:unread-mail",
+		"icon": null,
+		"iconSourceSvg": null,
+		"iconSourceSvgDark": null,
+		"position": null,
+		"type": "external",
+		"routerLink": null,
+		"link": "https://mail.univ-lorraine.fr/zimbra/preauth/preauthUL_PERS.jsp?ticket={st}",
+		"ssoService": "https://mail.univ-lorraine.fr/zimbra/preauth/preauthUL_PERS.jsp",
+		"color": "#A4D0B2",
+		"statisticName": null,
+		"translations": [
+			{
+				"widgets_id": 6,
+				"languages_code": "en",
+				"content": null,
+				"searchKeywords": null,
+				"shortTitle": null,
+				"title": "Your mailbox"
+			},
+			{
+				"widgets_id": 6,
+				"languages_code": "fr",
+				"content": null,
+				"searchKeywords": null,
+				"shortTitle": null,
+				"title": "Votre messagerie"
+			}
+		],
+		"settings_by_role": [],
+		"authorization": {
+			"roles": [
+				"AT",
+				"CB",
+				"CE",
+				"FB",
+				"FE",
+				"HB",
+				"HC",
+				"HE",
+				"HM",
+				"PE",
+				"RE",
+				"ST",
+				"VA",
+				"VE",
+				"XE",
+				"XP",
+				"phd-student"
+			],
+			"type": "ALLOW",
+			"id": 54
+		}
+	},
+	{
+		"id": 7,
+		"status": "published",
+		"widget": "calendar:calendar",
+		"icon": null,
+		"iconSourceSvg": null,
+		"iconSourceSvgDark": null,
+		"position": null,
+		"type": "external",
+		"routerLink": null,
+		"link": "https://mail.univ-lorraine.fr/zimbra/preauth/preauthUL_PERS.jsp?ticket={st}",
+		"ssoService": "https://mail.univ-lorraine.fr/zimbra/preauth/preauthUL_PERS.jsp",
+		"color": "#C1DEEC",
+		"statisticName": null,
+		"translations": [
+			{
+				"widgets_id": 7,
+				"languages_code": "en",
+				"content": null,
+				"searchKeywords": null,
+				"shortTitle": null,
+				"title": "Your next events"
+			},
+			{
+				"widgets_id": 7,
+				"languages_code": "fr",
+				"content": null,
+				"searchKeywords": null,
+				"shortTitle": null,
+				"title": "Vos prochains évènements"
+			}
+		],
+		"settings_by_role": [],
+		"authorization": {
+			"roles": [
+				"AT",
+				"CB",
+				"CE",
+				"FB",
+				"FE",
+				"HB",
+				"HC",
+				"HE",
+				"HM",
+				"PE",
+				"RE",
+				"ST",
+				"VA",
+				"VE",
+				"XE",
+				"XP",
+				"phd-student"
+			],
+			"type": "ALLOW",
+			"id": 55
+		}
+	},
+	{
+		"id": 8,
+		"status": "published",
+		"widget": "unread-mail:unread-mail",
+		"icon": null,
+		"iconSourceSvg": null,
+		"iconSourceSvgDark": null,
+		"position": null,
+		"type": "external",
+		"routerLink": null,
+		"link": "https://mail.etu.univ-lorraine.fr/zimbra/preauth/preauthUL_ETU.jsp?ticket={st}",
+		"ssoService": "https://mail.etu.univ-lorraine.fr/zimbra/preauth/preauthUL_ETU.jsp",
+		"color": "#A4D0B2",
+		"statisticName": null,
+		"translations": [
+			{
+				"widgets_id": 8,
+				"languages_code": "en",
+				"content": null,
+				"searchKeywords": null,
+				"shortTitle": null,
+				"title": "Your mailbox"
+			},
+			{
+				"widgets_id": 8,
+				"languages_code": "fr",
+				"content": null,
+				"searchKeywords": null,
+				"shortTitle": null,
+				"title": "Votre messagerie"
+			}
+		],
+		"settings_by_role": [],
+		"authorization": {
+			"roles": [
+				"ET"
+			],
+			"type": "ALLOW",
+			"id": 56
+		}
+	},
+	{
+		"id": 9,
+		"status": "published",
+		"widget": "calendar:calendar",
+		"icon": null,
+		"iconSourceSvg": null,
+		"iconSourceSvgDark": null,
+		"position": null,
+		"type": "external",
+		"routerLink": null,
+		"link": "https://mail.etu.univ-lorraine.fr/zimbra/preauth/preauthUL_ETU.jsp?ticket={st}",
+		"ssoService": "https://mail.etu.univ-lorraine.fr/zimbra/preauth/preauthUL_ETU.jsp",
+		"color": "#C1DEEC",
+		"statisticName": null,
+		"translations": [
+			{
+				"widgets_id": 9,
+				"languages_code": "en",
+				"content": null,
+				"searchKeywords": null,
+				"shortTitle": null,
+				"title": "Your next events"
+			},
+			{
+				"widgets_id": 9,
+				"languages_code": "fr",
+				"content": null,
+				"searchKeywords": null,
+				"shortTitle": null,
+				"title": "Vos prochains évènements"
+			}
+		],
+		"settings_by_role": [],
+		"authorization": {
+			"roles": [
+				"ET"
+			],
+			"type": "ALLOW",
+			"id": 57
+		}
+	}
+]

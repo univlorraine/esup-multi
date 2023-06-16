@@ -34,6 +34,10 @@
   text-transform: none;
 }
 
+.app-title-1.strong {
+  font-weight: bold !important;
+}
+
 .app-title-1.contrast {
   color: var(--app-font-color-primary-contrast) !important;
 }
@@ -49,6 +53,10 @@
 .app-title-2.light {
   font-family: var(--app-font-primary-static-light) !important;
   text-transform: none;
+}
+
+.app-title-2.strong {
+  font-weight: bold !important;
 }
 
 .app-title-2.contrast {
@@ -68,6 +76,10 @@
   text-transform: none;
 }
 
+.app-title-3.strong {
+  font-weight: bold !important;
+}
+
 .app-title-3.contrast {
   color: var(--app-font-color-primary-contrast) !important;
 }
@@ -83,7 +95,10 @@
 .app-title-4.light {
   font-family: var(--app-font-primary-static-light) !important;
   text-transform: none;
+}
 
+.app-title-4.strong {
+  font-weight: bold !important;
 }
 
 .app-title-4.contrast {
@@ -103,6 +118,10 @@
   text-transform: none;
 }
 
+.app-title-5.strong {
+  font-weight: bold !important;
+}
+
 .app-title-5.contrast {
   color: var(--app-font-color-primary-contrast) !important;
 }
@@ -118,6 +137,10 @@
 .app-title-6.light {
   font-family: var(--app-font-primary-static-light) !important;
   text-transform: none;
+}
+
+.app-title-6.strong {
+  font-weight: bold !important;
 }
 
 .app-title-6.contrast {
@@ -137,6 +160,10 @@
   text-transform: none;
 }
 
+.app-title-7.strong {
+  font-weight: bold !important;
+}
+
 .app-title-7.contrast {
   color: var(--app-font-color-primary-contrast) !important;
 }
@@ -149,13 +176,16 @@
 .app-text-1 {
   font-size: var(--app-text-1-size) !important;
   font-family: var(--app-font-secondary) !important;
-  font-weight: 800 !important;
   color: var(--app-font-color-primary-medium) !important;
   font-weight: 500 !important;
 }
 
 .app-text-1.light {
   font-weight: normal !important;
+}
+
+.app-text-1.strong {
+  font-weight: bold !important;
 }
 
 .app-text-1.contrast {
@@ -174,6 +204,10 @@
   font-weight: normal !important;
 }
 
+.app-text-2.strong {
+  font-weight: bold !important;
+}
+
 .app-text-2.contrast {
   color: var(--app-font-color-primary-contrast) !important;
 }
@@ -188,6 +222,10 @@
 
 .app-text-3.light {
   font-weight: normal !important;
+}
+
+.app-text-3.strong {
+  font-weight: bold !important;
 }
 
 .app-text-3.contrast {
@@ -206,6 +244,10 @@
   font-weight: normal !important;
 }
 
+.app-text-4.strong {
+  font-weight: bold !important;
+}
+
 .app-text-4.contrast {
   color: var(--app-font-color-primary-contrast) !important;
 }
@@ -222,6 +264,10 @@
   font-weight: normal !important;
 }
 
+.app-text-5.strong {
+  font-weight: bold !important;
+}
+
 .app-text-5.contrast {
   color: var(--app-font-color-primary-contrast) !important;
 }
@@ -236,6 +282,10 @@
 
 .app-text-6.light {
   font-weight: normal !important;
+}
+
+.app-text-6.strong {
+  font-weight: bold !important;
 }
 
 .app-text-6.contrast {

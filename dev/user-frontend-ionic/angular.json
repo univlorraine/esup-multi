@@ -120,6 +120,16 @@
                 "output": "/assets/i18n/restaurants"
               },
               {
+                "glob": "**/*",
+                "input": "projects/unread-mail/assets/i18n",
+                "output": "/assets/i18n/unread-mail"
+              },
+              {
+                "glob": "**/*",
+                "input": "projects/calendar/assets/i18n",
+                "output": "/assets/i18n/calendar"
+              },
+              {
                 "glob": "**/*.svg",
                 "input": "src/assets/icon/flag",
                 "output": "./svg"
@@ -1091,6 +1101,86 @@
           }
         }
 
+      }
+    },
+    "unread-mail": {
+      "projectType": "library",
+      "root": "projects/unread-mail",
+      "sourceRoot": "projects/unread-mail/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/unread-mail/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/unread-mail/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/unread-mail/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/unread-mail/src/test.ts",
+            "tsConfig": "projects/unread-mail/tsconfig.spec.json",
+            "karmaConfig": "projects/unread-mail/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/unread-mail/**/*.ts",
+              "projects/unread-mail/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "calendar": {
+      "projectType": "library",
+      "root": "projects/calendar",
+      "sourceRoot": "projects/calendar/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/calendar/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/calendar/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/calendar/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/calendar/src/test.ts",
+            "tsConfig": "projects/calendar/tsconfig.spec.json",
+            "karmaConfig": "projects/calendar/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/calendar/**/*.ts",
+              "projects/calendar/**/*.html"
+            ]
+          }
+        }
       }
     }
   },

@@ -1,0 +1,23 @@
+<ion-row *ngIf="isLoading">
+  <ion-spinner class="ion-margin" name="dots"></ion-spinner>
+</ion-row>
+<ng-container *ngIf='!isLoading'>
+  <ng-container *ngIf='(nextEvents$ | async) as events'>
+    <ion-row *ngIf='events.length === 0' class="ion-padding">
+      <ion-text class='app-text-4'>{{'CALENDAR.NO_EVENTS' | translate}}</ion-text>
+    </ion-row>
+    <ion-col *ngFor='let event of events let i = index' class='events-container'>
+      <ion-row class='event'>
+        <ion-col class='event-part event-part-date'>
+          <ion-text class='app-text-1'>{{event.startDateTime | localDate}}</ion-text>
+          <ion-text class='app-text-6'>{{event.startDateTime | localTime}}-{{event.endDateTime | localTime}}</ion-text>
+        </ion-col>
+        <ion-col class='event-part event-part-info'>
+          <ion-text class='app-text-4 strong'>{{event.label}}</ion-text>
+          <ion-text class='app-text-4'>{{event.location}}</ion-text>
+        </ion-col>
+      </ion-row>
+      <hr *ngIf='i !== events.length - 1' />
+    </ion-col>
+  </ng-container>
+</ng-container>

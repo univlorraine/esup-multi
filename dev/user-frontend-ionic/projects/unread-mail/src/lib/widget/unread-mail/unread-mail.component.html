@@ -1,0 +1,13 @@
+<ion-row *ngIf="isLoading">
+  <ion-spinner class="ion-margin" name="dots"></ion-spinner>
+</ion-row>
+<ng-container *ngIf="!isLoading">
+  <ion-row *ngIf="mails$ | async as unreadMails" class="ion-padding">
+    <ion-text class='app-text-4'>
+      <ion-icon name='mail-unread' class='unread-icon app-icon-3'></ion-icon>
+      <span *ngIf='unreadMails' class='app-text-4 strong'>{{unreadMails + ' '}}</span>
+      {{ unreadMails === 0 ? ("UNREAD-MAIL.NO_UNREAD" | translate) :
+        (unreadMails === 1 ? "UNREAD-MAIL.ONE_UNREAD" : "UNREAD-MAIL.MULTIPLE_UNREAD" | translate) }}
+    </ion-text>
+  </ion-row>
+</ng-container>
