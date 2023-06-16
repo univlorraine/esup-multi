@@ -37,6 +37,10 @@ async function bootstrap() {
         host,
         port,
       },
+      logger:
+          process.env.EXTENDED_LOGS === 'true'
+              ? ['error', 'warn', 'log', 'debug', 'verbose']
+              : ['error', 'warn', 'log'],
     },
   );
   Logger.log(`Listening on host ${host}, port ${port}`);
@@ -49,8 +53,9 @@ Ne pas oublier de créer les différentes variables d'env:
 ```
 [NOM-DU-MICROSERVICE]_SERVICE_HOST=[NOM]
 [NOM-DU-MICROSERVICE]_SERVICE_PORT=[PORT]
+EXTENDED_LOGS=true //ou false
 ```
-Ces deux lignes sont à ajouter à la suite du `/main/.env` ainsi que du `/[NOM-DU-MICROSERVICE]/.env`
+Ces trois lignes sont à ajouter à la suite du `/main/.env` ainsi que du `/[NOM-DU-MICROSERVICE]/.env`
 
 ### Etat de santé des microservices
 

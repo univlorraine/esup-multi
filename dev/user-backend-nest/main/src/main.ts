@@ -5,7 +5,12 @@ import { EmptyResponseInterceptor } from './interceptors/empty-response.intercep
 
 async function bootstrap() {
   const logger = new Logger('Bootstrap');
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, {
+    logger:
+      process.env.EXTENDED_LOGS === 'true'
+        ? ['error', 'warn', 'log', 'debug', 'verbose']
+        : ['error', 'warn', 'log'],
+  });
   app.useGlobalInterceptors(new EmptyResponseInterceptor());
   const origin = (process.env.API_GATEWAY_CORS_ORIGIN || '')
     .split(',')
