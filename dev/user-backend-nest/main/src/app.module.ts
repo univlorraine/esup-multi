@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ClientsModule } from '@nestjs/microservices';
 import { PassportModule } from '@nestjs/passport';
@@ -23,6 +23,9 @@ import microserviceStatisticsConfig from './config/microservice-statistics.confi
 import { AuthJwtStrategy } from './security/auth-jwt.strategy';
 import { GlobalHealthController } from './global-health.controller';
 import { TerminusModule } from '@nestjs/terminus';
+import { LoggerModule } from 'nestjs-pino';
+import * as process from 'process';
+import { LogsMiddleware } from './logs.middleware';
 
 @Module({
   imports: [
@@ -141,8 +144,29 @@ import { TerminusModule } from '@nestjs/terminus';
     ]),
     PassportModule,
     TerminusModule,
+    ...(process.env.EXTENDED_LOGS === 'true'
+      ? [
+          LoggerModule.forRoot({
+            pinoHttp: {
+              transport: {
+                target: 'pino-pretty',
+                options: {
+                  singleLine: true,
+                  colorize: true,
+                  levelFirst: true,
+                },
+              },
+            },
+          }),
+        ]
+      : []),
   ],
   controllers: [AppController, GlobalHealthController],
   providers: [AuthJwtStrategy],
 })
-export class AppModule {}
+export class AppModule {
+  // Track HTTP requests with short log
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(LogsMiddleware).forRoutes('*');
+  }
+}
