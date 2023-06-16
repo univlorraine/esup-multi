@@ -4,12 +4,14 @@
       <app-back-button></app-back-button>
     </ion-buttons>
 
-    <ion-title class="app-centered-header-title app-title-4 contrast">{{ "NOTIFICATIONS.SETTINGS.TITLE" | translate }}</ion-title>
+    <ion-title class="app-centered-header-title app-title-4">{{ "NOTIFICATIONS.SETTINGS.TITLE" | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 <ng-container>
   <ion-content class="ion-padding">
-    <ion-label class="app-text-3 label">{{ "NOTIFICATIONS.SETTINGS.DESCRIPTION" | translate }}</ion-label>
+    <ion-row class="label">
+    <ion-label class="app-text-3">{{ "NOTIFICATIONS.SETTINGS.DESCRIPTION" | translate }}</ion-label>
+  </ion-row>
     <form [formGroup]="channelForm" *ngIf="(channelsSubscriptions$| async) as channelsSubscriptions">
       <ion-list>
         <ion-item *ngFor="let channelSubscription of channelsSubscriptions">

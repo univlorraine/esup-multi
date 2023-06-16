@@ -36,7 +36,8 @@ interface FeatureCommon {
   authorization?: Authorization;
   menu: FeatureMenuType;
   icon: string;
-  iconSourceSvg: string;
+  iconSourceSvgLightTheme: string;
+  iconSourceSvgDarkTheme: string;
   isNew: boolean;
 }
 

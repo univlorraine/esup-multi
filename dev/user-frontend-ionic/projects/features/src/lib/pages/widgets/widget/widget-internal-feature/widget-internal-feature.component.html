@@ -1,15 +1,15 @@
 <ion-card class="ion-no-margin" (click)="onClick()" [ngStyle]="{'background-color': feature.color}">
   <ion-card-header *ngIf="feature.title" class="ion-no-padding">
-    <ion-card-title class="feature-title app-title-5" >
+    <ion-card-title [ngClass]="fontColor(feature.color)" class="feature-title app-title-5">
       <ion-icon [name]="feature.icon" *ngIf="feature.icon"></ion-icon>
       {{feature.title}}
     </ion-card-title>
   </ion-card-header>
   <ion-card-content class="ion-no-padding">
     <ion-col *ngIf="feature.content" class="ion-padding">
-      <ion-label class="app-text-4">{{feature.content}}</ion-label>
+      <ion-label [ngClass]="fontColor(feature.color)" class="app-text-4">{{feature.content}}</ion-label>
     </ion-col>
-    <app-widget (click)="onClick()" [ngStyle]="{'background-color': feature.color}"
-      [widgetId]="feature.widget"></app-widget>
+    <app-widget (click)="onClick()" [ngStyle]="{'background-color': feature.color}" [widgetId]="feature.widget"
+      [widgetColor]="feature.color"></app-widget>
   </ion-card-content>
 </ion-card>

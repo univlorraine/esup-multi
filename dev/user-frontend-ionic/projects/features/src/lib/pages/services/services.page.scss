@@ -7,6 +7,7 @@ ion-searchbar {
   padding-bottom: 0px;
   --background: var(--app-color-component-background-primary);
 }
+
 ion-col {
   display: inline-block;
 }
@@ -92,6 +93,7 @@ app-service {
   margin: 0;
   top: -0.5rem;
   left: -0.2rem;
+  color: var(--ion-color-primary) !important;
 }
 
 .no-scroll {

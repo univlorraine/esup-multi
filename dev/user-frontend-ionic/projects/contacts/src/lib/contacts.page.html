@@ -28,16 +28,16 @@
       </ion-card-header>
       <ion-card-content class="border-bottom">
         <div class="ion-padding">
-          <ion-item class="ion-no-padding" *ngFor="let email of item.mailAdresses; last as isLast" [lines]="isLast ? 'inset' : 'none' ">
+          <ion-item class="contact-labels ion-no-padding" *ngFor="let email of item.mailAdresses; last as isLast" [lines]="isLast ? 'inset' : 'none' ">
             <a class="app-text-4" href="mailto:{{email}}" >{{email}}</a>
           </ion-item>
-          <ion-item class="ion-no-padding" *ngFor="let mobile of item.phoneNumbers; last as isLast" [lines]="isLast ? 'inset' : 'none' ">
+          <ion-item class="contact-labels ion-no-padding" *ngFor="let mobile of item.phoneNumbers; last as isLast" [lines]="isLast ? 'inset' : 'none' ">
             <a class="app-text-4" href="tel:{{mobile}}" >{{mobile}}</a>
           </ion-item>
         </div>
         <div class="ion-margin-top ion-text-end">
           <ion-button (click)="createContact(item)">
-            <ion-icon name="person-add-outline"></ion-icon>
+            <ion-icon class="add-icon" name="person-add-outline"></ion-icon>
           </ion-button>
         </div>
       </ion-card-content>

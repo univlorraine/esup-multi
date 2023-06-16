@@ -47,14 +47,20 @@ export class LoginRepository {
   public translatedPageContent$ = combineLatest([this.pageContent$, currentLanguage$]).pipe(
     filter(([pageContent]) => pageContent !== null),
     map(([pageContent, currentLanguage]) => {
-      const translation = pageContent.translations.find((t) => t.languages_code === currentLanguage) ||
-        pageContent.translations.find((t) => t.languages_code === this.environment.defaultLanguage) ||
-        pageContent.translations[0];
+      const translations = pageContent.translations;
+      if (translations && translations.length > 0) {
 
-      return {
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        connexion_text: translation.connexion_text,
-      };
+        const translation = pageContent.translations.find((t) => t.languages_code === currentLanguage) ||
+          pageContent.translations.find((t) => t.languages_code === this.environment.defaultLanguage) ||
+          pageContent.translations[0];
+
+        return {
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          connexion_text: translation.connexion_text,
+        };
+      } else {
+        return null;
+      }
     })
   );
 

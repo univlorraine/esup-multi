@@ -12,12 +12,11 @@ export * from './lib/components/back-button/back-button.component';
 export * from './lib/components/custom-icon/custom-icon.component';
 export * from './lib/components/header/header.component';
 export * from './lib/components/shared-components.module';
-export * from './lib/components/widgets/widget.component';
 export * from './lib/components/widgets/widget-lifecycle.service';
+export * from './lib/components/widgets/widget.component';
 export * from './lib/errors';
 export * from './lib/features/features.repository';
 export * from './lib/features/features.service';
-export * from './lib/statistics/statistics.service';
 export * from './lib/i18n/i18n.repository';
 export * from './lib/navigation/menu-opener.service';
 export * from './lib/navigation/menu.model';
@@ -33,6 +32,12 @@ export * from './lib/project-module/static-menu.service';
 export * from './lib/project-module/translations/translations-loader.factory';
 export * from './lib/shared.actions';
 export * from './lib/sso/sso.service';
+export * from './lib/statistics/statistics.service';
 export * from './lib/store/local-forage';
+export * from './lib/theme/theme.repository';
+export * from './lib/theme/theme.service';
+
+
+
 
 

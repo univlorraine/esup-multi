@@ -2,3 +2,10 @@ ion-chip {
     --background: var(--ion-color-dark-contrast);
 }
 
+.light-font-color{
+  color: var(--app-font-color-for-dark-background-from-cms) !important;
+}
+
+.dark-font-color{
+  color: var(--app-font-color-for-light-background-from-cms) !important;
+}

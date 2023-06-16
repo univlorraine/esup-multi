@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { CompleteLocalDatePipe } from '@ul/shared';
+import { AfterViewInit, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { CompleteLocalDatePipe, ThemeService } from '@ul/shared';
 import { Observable } from 'rxjs';
 import { finalize, first, map } from 'rxjs/operators';
 import { Event } from '../../schedule.repository';
@@ -11,7 +11,9 @@ import { NextEventsService } from './next-events.service';
   templateUrl: './next-events.component.html',
   styleUrls: ['./next-events.component.scss'],
 })
-export class NextEventsComponent implements OnInit {
+export class NextEventsComponent implements OnInit, AfterViewInit {
+
+  @Input() widgetColor: string;
 
   public isLoading = false;
   public nextEvents$: Observable<Event[]>;
@@ -21,7 +23,9 @@ export class NextEventsComponent implements OnInit {
   constructor(
     private nextEventsService: NextEventsService,
     private scheduleService: ScheduleService,
-    private completeLocalDatePipe: CompleteLocalDatePipe
+    private completeLocalDatePipe: CompleteLocalDatePipe,
+    private themeService: ThemeService,
+    private changeDetectorRef: ChangeDetectorRef
   ) {
     this.nextEvents$ = this.nextEventsService.getNextEvents$().pipe();
     this.noNextEvents$ = this.nextEvents$.pipe(
@@ -35,6 +39,14 @@ export class NextEventsComponent implements OnInit {
       first(),
       finalize(() => this.isLoading = false)
     ).subscribe();
+
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    prefersDark.removeEventListener('change', (mediaQuery) => this.changeDetectorRef.detectChanges());
+    prefersDark.addEventListener('change', (mediaQuery) => this.changeDetectorRef.detectChanges());
+  }
+
+  ngAfterViewInit() {
+    this.changeDetectorRef.detectChanges();
   }
 
   // Display the day date if the event day is different from the previous event
@@ -45,4 +57,10 @@ export class NextEventsComponent implements OnInit {
 
     return displayDate;
   }
+
+  fontColor() {
+    return this.themeService.isBackgroundFromCmsDarkOrIsDarkTheme(this.widgetColor) ?
+      'light-font-color' : 'dark-font-color';
+  }
 }
+

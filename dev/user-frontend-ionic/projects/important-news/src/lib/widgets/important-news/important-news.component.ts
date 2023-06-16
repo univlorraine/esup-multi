@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { Browser } from '@capacitor/browser';
 import { Router } from '@angular/router';
-import { currentLanguage$, StatisticsService } from '@ul/shared';
+import { Browser } from '@capacitor/browser';
+import { currentLanguage$, StatisticsService, ThemeService } from '@ul/shared';
 import { combineLatest, Observable } from 'rxjs';
 import { finalize, first, map } from 'rxjs/operators';
 import { ImportantNews, importantNewsList$, setImportantNews as setImportantNewsList } from '../../important-news.repository';
@@ -15,6 +15,7 @@ import { TranslatedImportantNews } from './../../important-news.repository';
   styleUrls: ['./important-news.component.scss'],
 })
 export class ImportantNewsComponent implements OnInit {
+
 
   public isLoading = false;
   public importantNewsList$: Observable<ImportantNews[]> = importantNewsList$;
@@ -30,6 +31,7 @@ export class ImportantNewsComponent implements OnInit {
     private importantNewsService: ImportantNewsService,
     private router: Router,
     private statisticsService: StatisticsService,
+    private themeService: ThemeService
   ) {
     this.noImportantNews$ = this.importantNewsList$.pipe(
       map(importantNewsList => !importantNewsList || importantNewsList.length === 0)
@@ -61,17 +63,22 @@ export class ImportantNewsComponent implements OnInit {
     });
   }
 
-  public onClick(importantNews: TranslatedImportantNews): Promise<void|boolean> {
+  public onClick(importantNews: TranslatedImportantNews): Promise<void | boolean> {
     if (!importantNews.link) {
       return;
     }
 
     this.statisticsService.onFunctionalityOpened(importantNews.statisticName);
 
-    if(importantNews.link.startsWith('/')) {
+    if (importantNews.link.startsWith('/')) {
       return this.router.navigateByUrl(importantNews.link);
     } else {
       return Browser.open({ url: importantNews.link });
     }
+  }
+
+  fontColor(backgroundColor) {
+    return this.themeService.isBackgroundFromCmsDarkOrIsDarkTheme(backgroundColor) ?
+      'light-font-color' : 'dark-font-color';
   }
 }

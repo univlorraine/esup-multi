@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <app-back-button></app-back-button>
     </ion-buttons>
-    <ion-title class="app-centered-header-title app-title-4 contrast">
+    <ion-title class="app-centered-header-title app-title-4">
       {{ "AUTH.MENU" | translate }}
     </ion-title>
   </ion-toolbar>
@@ -46,7 +46,7 @@
     </ion-item>
 
     <ion-row class="ion-margin-top ion-padding-horizontal ion-justify-content-center">
-      <ion-button class="app-rectangle-button-1 ion-padding-horizontal" type="submit" lines="none" [disabled]="!loginForm.valid || isLoading">
+      <ion-button class="app-rectangle-button-1" type="submit" lines="none" [disabled]="!loginForm.valid || isLoading">
         <ion-label>{{ 'AUTH.LOGIN.SUBMIT' | translate }}</ion-label>
       </ion-button>
     </ion-row>

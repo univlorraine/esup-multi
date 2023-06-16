@@ -5,8 +5,8 @@
   <ion-row *ngIf="errorMessage" class="ion-padding">
     <ion-note color="danger">{{errorMessage}}</ion-note>
   </ion-row>
-  <ion-row *ngIf="!errorMessage" class="ion-align-items-center ion-padding app-text-4">
-    {{ 'CLOCKING.YOUR_TIMES' | translate }}: <ion-chip *ngFor="let time of (clocking$ | async)?.times">{{ time
+  <ion-row *ngIf="!errorMessage" [ngClass]="fontColor()" class="ion-align-items-center ion-padding app-text-4" [ngClass]="fontColor()">
+    {{ 'CLOCKING.YOUR_TIMES' | translate }} : <ion-chip *ngFor="let time of (clocking$ | async)?.times" class="app-text-4 dark-font-color">{{ time
       }}</ion-chip>
   </ion-row>
   <ion-row class="ion-justify-content-center ion-padding">

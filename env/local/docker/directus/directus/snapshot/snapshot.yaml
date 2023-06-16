@@ -1124,7 +1124,7 @@ fields:
         languageField: code
       readonly: false
       required: false
-      sort: 4
+      sort: 6
       special:
         - translations
       translations: null
@@ -1339,7 +1339,7 @@ fields:
         template: '{{type}}:{{roles}}'
       readonly: false
       required: false
-      sort: 9
+      sort: 8
       special:
         - m2o
       translations: null
@@ -1378,7 +1378,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: 16
+      sort: 15
       special: null
       translations: null
       validation: null
@@ -1451,53 +1451,14 @@ fields:
       foreign_key_table: null
       foreign_key_column: null
   - collection: features
-    field: iconSourceSvg
+    field: iconSourceSvgDarkTheme
     type: text
     meta:
       collection: features
       conditions: null
       display: null
       display_options: null
-      field: iconSourceSvg
-      group: null
-      hidden: false
-      interface: input-code
-      note: null
-      options:
-        language: xml
-      readonly: false
-      required: false
-      sort: 5
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: half
-    schema:
-      name: iconSourceSvg
-      table: features
-      data_type: text
-      default_value: null
-      max_length: null
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: features
-    field: iconSourceSvgDark
-    type: text
-    meta:
-      collection: features
-      conditions: null
-      display: null
-      display_options: null
-      field: iconSourceSvgDark
+      field: iconSourceSvgDarkTheme
       group: null
       hidden: false
       interface: input-code
@@ -1513,7 +1474,46 @@ fields:
       validation_message: null
       width: half
     schema:
-      name: iconSourceSvgDark
+      name: iconSourceSvgDarkTheme
+      table: features
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: features
+    field: iconSourceSvgLightTheme
+    type: text
+    meta:
+      collection: features
+      conditions: null
+      display: null
+      display_options: null
+      field: iconSourceSvgLightTheme
+      group: null
+      hidden: false
+      interface: input-code
+      note: null
+      options:
+        language: xml
+      readonly: false
+      required: false
+      sort: 5
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: iconSourceSvgLightTheme
       table: features
       data_type: text
       default_value: null
@@ -1595,7 +1595,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: 14
+      sort: 13
       special: null
       translations: null
       validation: null
@@ -1643,7 +1643,7 @@ fields:
             value: service
       readonly: false
       required: false
-      sort: 8
+      sort: 7
       special: null
       translations: null
       validation: null
@@ -1681,7 +1681,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: 10
+      sort: 9
       special: null
       translations: null
       validation: null
@@ -1747,7 +1747,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: 13
+      sort: 12
       special: null
       translations: null
       validation: null
@@ -1785,7 +1785,7 @@ fields:
       options: {}
       readonly: false
       required: false
-      sort: 11
+      sort: 10
       special:
         - m2m
       translations: null
@@ -1821,7 +1821,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: 15
+      sort: 14
       special: null
       translations: null
       validation: null
@@ -1863,7 +1863,7 @@ fields:
           accesses the feature
       readonly: false
       required: false
-      sort: 17
+      sort: 16
       special: null
       translations: null
       validation: null
@@ -1991,7 +1991,7 @@ fields:
             value: external
       readonly: false
       required: true
-      sort: 12
+      sort: 11
       special: null
       translations: null
       validation: null
@@ -3222,7 +3222,8 @@ fields:
       hidden: false
       interface: input-rich-text-html
       note: null
-      options: null
+      options:
+        language: htmlmixed
       readonly: false
       required: false
       sort: null
@@ -3377,7 +3378,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: 6
+      sort: 4
       special: null
       translations: null
       validation: null
@@ -3400,53 +3401,14 @@ fields:
       foreign_key_table: null
       foreign_key_column: null
   - collection: pages
-    field: iconSourceSvg
+    field: iconSourceSvgDarkTheme
     type: text
     meta:
       collection: pages
       conditions: null
       display: null
       display_options: null
-      field: iconSourceSvg
-      group: null
-      hidden: false
-      interface: input-code
-      note: null
-      options:
-        language: xml
-      readonly: false
-      required: false
-      sort: 5
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: half
-    schema:
-      name: iconSourceSvg
-      table: pages
-      data_type: text
-      default_value: null
-      max_length: null
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: pages
-    field: iconSourceSvgDark
-    type: text
-    meta:
-      collection: pages
-      conditions: null
-      display: null
-      display_options: null
-      field: iconSourceSvgDark
+      field: iconSourceSvgDarkTheme
       group: null
       hidden: false
       interface: input-code
@@ -3462,7 +3424,46 @@ fields:
       validation_message: null
       width: half
     schema:
-      name: iconSourceSvgDark
+      name: iconSourceSvgDarkTheme
+      table: pages
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: pages
+    field: iconSourceSvgLightTheme
+    type: text
+    meta:
+      collection: pages
+      conditions: null
+      display: null
+      display_options: null
+      field: iconSourceSvgLightTheme
+      group: null
+      hidden: false
+      interface: input-code
+      note: null
+      options:
+        language: xml
+      readonly: false
+      required: false
+      sort: 5
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: iconSourceSvgLightTheme
       table: pages
       data_type: text
       default_value: null
@@ -3531,7 +3532,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: 5
+      sort: 3
       special: null
       translations: null
       validation: null
@@ -3573,7 +3574,7 @@ fields:
           accesses the feature
       readonly: false
       required: false
-      sort: null
+      sort: 7
       special: null
       translations: null
       validation: null
@@ -3632,7 +3633,7 @@ fields:
             value: archived
       readonly: false
       required: false
-      sort: 4
+      sort: 2
       special: null
       translations: null
       validation: null
@@ -3670,7 +3671,7 @@ fields:
       options: null
       readonly: false
       required: true
-      sort: null
+      sort: 8
       special:
         - translations
       translations: null
@@ -4263,53 +4264,14 @@ fields:
       foreign_key_table: null
       foreign_key_column: null
   - collection: widgets
-    field: iconSourceSvg
+    field: iconSourceSvgDarkTheme
     type: text
     meta:
       collection: widgets
       conditions: null
       display: null
       display_options: null
-      field: iconSourceSvg
-      group: null
-      hidden: false
-      interface: input-code
-      note: null
-      options:
-        language: xml
-      readonly: false
-      required: false
-      sort: 6
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: half
-    schema:
-      name: iconSourceSvg
-      table: widgets
-      data_type: text
-      default_value: null
-      max_length: null
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: widgets
-    field: iconSourceSvgDark
-    type: text
-    meta:
-      collection: widgets
-      conditions: null
-      display: null
-      display_options: null
-      field: iconSourceSvgDark
+      field: iconSourceSvgDarkTheme
       group: null
       hidden: false
       interface: input-code
@@ -4325,7 +4287,46 @@ fields:
       validation_message: null
       width: half
     schema:
-      name: iconSourceSvgDark
+      name: iconSourceSvgDarkTheme
+      table: widgets
+      data_type: text
+      default_value: null
+      max_length: null
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: widgets
+    field: iconSourceSvgLightTheme
+    type: text
+    meta:
+      collection: widgets
+      conditions: null
+      display: null
+      display_options: null
+      field: iconSourceSvgLightTheme
+      group: null
+      hidden: false
+      interface: input-code
+      note: null
+      options:
+        language: xml
+      readonly: false
+      required: false
+      sort: 6
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: half
+    schema:
+      name: iconSourceSvgLightTheme
       table: widgets
       data_type: text
       default_value: null

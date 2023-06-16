@@ -11,7 +11,8 @@ import { map } from 'rxjs/operators';
 export interface StaticPage {
   id: number;
   icon?: string;
-  iconSourceSvg?: string;
+  iconSourceSvgLightTheme?: string;
+  iconSourceSvgDarkTheme?: string;
   translations?: Translation[];
   statisticName?: string;
 }
@@ -21,7 +22,8 @@ export interface TranslatedStaticPage {
   title: string;
   content: string;
   icon?: string;
-  iconSourceSvg?: string;
+  iconSourceSvgLightTheme?: string;
+  iconSourceSvgDarkTheme?: string;
   statisticName?: string;
 }
 
@@ -58,7 +60,8 @@ export class StaticPagesRepository {
         title: translation.title,
         content: translation.content,
         icon: staticPage.icon,
-        iconSourceSvg: staticPage.iconSourceSvg,
+        iconSourceSvgLightTheme: staticPage.iconSourceSvgLightTheme,
+        iconSourceSvgDarkTheme: staticPage.iconSourceSvgDarkTheme,
         statisticName: staticPage.statisticName
       };
     }))

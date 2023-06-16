@@ -12,17 +12,17 @@
           <ion-col class="border-bottom news-content" [size]="randomImportantNews.image ? '6' : '12'"
           [ngClass]="{'without-image': !randomImportantNews.image}">
             <ion-label color="primary" class="ion-text-wrap text-title" >
-              <h2 class="app-title-6">{{ randomImportantNews.title }}</h2>
+              <h2 [ngClass]="fontColor(randomImportantNews.color)" class="app-title-6">{{ randomImportantNews.title }}</h2>
             </ion-label>
             <ion-label color="primary" class="ion-text-wrap text-content">
-              <h3 class="app-text-5">{{randomImportantNews.content}}</h3>
+              <h3 [ngClass]="fontColor(randomImportantNews.color)" class="app-text-5">{{randomImportantNews.content}}</h3>
             </ion-label>
             <ion-row *ngIf="randomImportantNews.link" class="ion-justify-content-end">
               <ion-button
                 (click)="onClick(randomImportantNews)"
                 class="app-text-button-1 link-button">
-                <ion-text class="app-text-5"> {{ randomImportantNews.buttonLabel }} </ion-text>
-                <ion-icon class="app-icon-5 link-icon" name="arrow-right"></ion-icon>
+                <ion-text [ngClass]="fontColor(randomImportantNews.color)" class="app-text-5"> {{ randomImportantNews.buttonLabel }} </ion-text>
+                <ion-icon [ngClass]="fontColor(randomImportantNews.color)" class="app-icon-6 link-icon" name="arrow-right"></ion-icon>
               </ion-button>
             </ion-row>
           </ion-col>
@@ -34,6 +34,6 @@
 
 <ng-container class="ion-padding" *ngIf="(noImportantNews$ | async)">
   <ion-row class="ion-margin-top">
-    <ion-note> {{ "IMPORTANT-NEWS.WIDGET.NO_DATA" | translate }} </ion-note>
+    <ion-note class="app-text-5"> {{ "IMPORTANT-NEWS.WIDGET.NO_DATA" | translate }} </ion-note>
   </ion-row>
 </ng-container>

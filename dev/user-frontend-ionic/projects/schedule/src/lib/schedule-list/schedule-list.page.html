@@ -4,11 +4,11 @@
 
     <ion-item-group *ngFor="let eventsByDay of (eventsByDays$ | async);">
 
-      <ion-item-divider sticky class="ion-text-center complete-date" [id]="eventsByDay.day">
+      <ion-item-divider sticky class="app-title-5 ion-text-center complete-date" [id]="eventsByDay.day">
         <ion-col>{{eventsByDay.day | completeLocalDate}}</ion-col>
       </ion-item-divider>
 
-      <ion-col class="ion-text-center" *ngIf="!eventsByDay.events.length">
+      <ion-col class="app-text-4 ion-text-center" *ngIf="!eventsByDay.events.length">
         <p>{{ "SCHEDULE.NO_EVENTS_THIS_DAY" | translate }}</p>
       </ion-col>
 
@@ -29,9 +29,9 @@
 </ion-content>
 
 <ion-content class="ion-padding" *ngIf="(areEventsFromActivePlannings$ | async) === false">
-  <ion-note> {{ "SCHEDULE.NO_EVENTS" | translate }} </ion-note>
+  <ion-note class="app-text-4"> {{ "SCHEDULE.NO_EVENTS" | translate }} </ion-note>
 </ion-content>
 
 <ion-content class="ion-padding" *ngIf="(schedule$ | async) === null">
-  <ion-note> {{ "SCHEDULE.NO_DATA" | translate }} </ion-note>
+  <ion-note class="app-text-4"> {{ "SCHEDULE.NO_DATA" | translate }} </ion-note>
 </ion-content>

@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <app-back-button [defaultHref]="backRouterLink"></app-back-button>
     </ion-buttons>
-    <ion-title class="app-centered-header-title app-title-4 contrast" *ngIf="(currentPageTitle$ | async) as title">{{ title.translated ? title.title : (title.title | translate) }}</ion-title>
+    <ion-title class="app-centered-header-title app-title-4" *ngIf="(currentPageTitle$ | async) as title">{{ title.translated ? title.title : (title.title | translate) }}</ion-title>
     <ng-content></ng-content>
   </ion-toolbar>
 </ion-header>
