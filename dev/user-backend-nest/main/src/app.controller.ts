@@ -4,12 +4,14 @@ import {
   Delete,
   Get,
   Inject,
+  NotFoundException,
+  Param,
   Patch,
   Post,
   Query,
   Request,
   UseGuards,
-  UseInterceptors
+  UseInterceptors,
 } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { AuthGuard } from '@nestjs/passport';
@@ -578,7 +580,7 @@ export class AppController {
                 username: user ? user.username : 'anonymous',
                 userAgent: request.headers['user-agent'],
                 ...(({ authToken, ...rest }) => rest)(body.userData),
-              }
+              },
             },
           );
         }),
@@ -611,7 +613,7 @@ export class AppController {
       {
         cmd: 'restaurant/menus',
       },
-      queryParams
+      queryParams,
     );
   }
 
@@ -633,11 +635,27 @@ export class AppController {
             {
               uid: user ? user.username : null,
               userAgent: request.headers['user-agent'],
-              xForwardedFor: request.headers['x-forwarded-for'] || request.connection.remoteAddress,
+              xForwardedFor:
+                request.headers['x-forwarded-for'] ||
+                request.connection.remoteAddress,
               ...(({ authToken, ...rest }) => rest)(body.data),
-            }
+            },
           );
         }),
       );
+  }
+
+  @Get('/:service/health')
+  serviceCheckHealth(@Param('service') serviceName: string) {
+    const clientProxy = this.getClientProxy(serviceName);
+    return clientProxy.send({ cmd: 'health' }, {});
+  }
+
+  private getClientProxy(serviceName: string) {
+    if (this[`${serviceName}Client`]) {
+      return this[`${serviceName}Client`];
+    } else {
+      throw new NotFoundException(`Service '${serviceName}' not found.`);
+    }
   }
 }

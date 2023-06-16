@@ -21,6 +21,8 @@ import microserviceContactUsConfig from './config/microservice-contact-us.config
 import microserviceRestaurantsConfig from './config/microservice-restaurants.config';
 import microserviceStatisticsConfig from './config/microservice-statistics.config';
 import { AuthJwtStrategy } from './security/auth-jwt.strategy';
+import { GlobalHealthController } from './global-health.controller';
+import { TerminusModule } from '@nestjs/terminus';
 
 @Module({
   imports: [
@@ -132,13 +134,15 @@ import { AuthJwtStrategy } from './security/auth-jwt.strategy';
       {
         name: 'STATISTICS_SERVICE',
         imports: [ConfigModule.forFeature(microserviceStatisticsConfig)],
-        useFactory: (config: ConfigService) => config.get('microservice-statistics'),
+        useFactory: (config: ConfigService) =>
+          config.get('microservice-statistics'),
         inject: [ConfigService],
       },
     ]),
     PassportModule,
+    TerminusModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController, GlobalHealthController],
   providers: [AuthJwtStrategy],
 })
 export class AppModule {}

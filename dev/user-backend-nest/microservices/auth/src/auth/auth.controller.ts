@@ -11,6 +11,7 @@ import {
   SsoServiceTokenQueryDto,
 } from './auth.dto';
 import { AuthService } from './auth.service';
+import * as infosJsonData from '../infos.json';
 
 @Controller()
 export class AuthController {
@@ -44,5 +45,13 @@ export class AuthController {
   @MessagePattern({ cmd: 'loginPageContent' })
   getLoginPageContent(): Observable<LoginPageContentResultDto> {
     return this.authService.getPageContent();
+  }
+  @MessagePattern({ cmd: 'health' })
+  getHealthStatus() {
+    return {
+      message: 'up',
+      name: infosJsonData.name,
+      version: infosJsonData.version,
+    };
   }
 }
