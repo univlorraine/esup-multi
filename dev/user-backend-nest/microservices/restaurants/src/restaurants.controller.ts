@@ -7,6 +7,7 @@ import {
   RestaurantMenusQueryDto
 } from './restaurants.dto';
 import { RestaurantsService } from './restaurants.service';
+import * as infosJsonData from './infos.json';
 
 @Controller()
 export class RestaurantsController {
@@ -20,5 +21,14 @@ export class RestaurantsController {
   @MessagePattern({ cmd: 'restaurant/menus' })
   getRestaurantMenus(data: RestaurantMenusQueryDto): Observable<RestaurantMenu[]> {
     return this.restaurantsService.getRestaurantMenus(data);
+  }
+
+  @MessagePattern({ cmd: 'health' })
+  getHealthStatus() {
+    return {
+      message: 'up',
+      name: infosJsonData.name,
+      version: infosJsonData.version,
+    };
   }
 }

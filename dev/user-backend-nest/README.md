@@ -45,10 +45,50 @@ async function bootstrap() {
 bootstrap();
 ```
 
-
 Ne pas oublier de créer les différentes variables d'env:
 ```
 [NOM-DU-MICROSERVICE]_SERVICE_HOST=[NOM]
 [NOM-DU-MICROSERVICE]_SERVICE_PORT=[PORT]
 ```
 Ces deux lignes sont à ajouter à la suite du `/main/.env` ainsi que du `/[NOM-DU-MICROSERVICE]/.env`
+
+### Etat de santé des microservices
+
+Ajouter le code suivant dans le controller du microservice :
+```typescript
+import * as infosJsonData from './infos.json';
+...
+
+@MessagePattern({ cmd: 'health' })
+getHealthStatus() {
+    return {
+        message: 'up',
+        name: infosJsonData.name,
+        version: infosJsonData.version,
+    };
+}
+```
+Ajouter  `"resolveJsonModule": true`dans `tsconfig.json`
+
+Créer un fichier `update-infos.js` à la racine du microservice avec le code suivant
+```typescript
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const fs = require('fs');
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const packageData = require('./package.json');
+
+const version = packageData.version;
+const name = packageData.name;
+const info = {
+    name,
+    version,
+};
+
+const infoJson = JSON.stringify(info, null, 2);
+fs.writeFileSync('src/infos.json', infoJson);
+```
+
+Mofifier `package.json` pour ajouter un script prebuild :
+`"prebuild": "node update-infos.js"`
+
+Ajouter également la vérification de l'état de santé au niveau global, dans `global-health.controller.ts`
