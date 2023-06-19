@@ -24,6 +24,7 @@ echo "Determination du basehref..."
 if [[ "$CI_PLATFORM" == "web" ]]; then
   BASE_HREF="--base-href=/pwa/"
   echo "La valeur du basehref est $BASE_HREF"
+  mkdir -p src/assets/stubs && cp -v src/environments/firebase/web/firebase-environment.$BUILD_ENV.json "src/assets/stubs/firebase-environment.json"
 else
   echo "La valeur du basehref est /"
 fi

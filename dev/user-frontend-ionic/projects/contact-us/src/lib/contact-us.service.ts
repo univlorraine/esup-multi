@@ -7,6 +7,7 @@ import { getAuthToken } from '@ul/shared';
 import { App } from '@capacitor/app';
 import { Capacitor } from '@capacitor/core';
 import { Network } from '@capacitor/network';
+import { Platform } from '@ionic/angular';
 
 export interface ContactMessageQueryDto {
   from: string;
@@ -29,7 +30,8 @@ export class ContactUsService {
     @Inject('environment')
     private environment: any,
     private http: HttpClient,
-    private contactUsRepository: ContactUsRepository
+    private contactUsRepository: ContactUsRepository,
+    private platform: Platform,
   ) {}
 
   public loadAndStoreContactUsPageContent(): Observable<ContactUsPageContent> {
@@ -50,7 +52,7 @@ export class ContactUsService {
       switchMap(([authToken, version, connectionStatus]) => {
         query.userData = {
           authToken,
-          platform: Capacitor.getPlatform(),
+          platform: this.platform.platforms().join(','),
           appVersion: version,
           connectionType: connectionStatus.connectionType
         };

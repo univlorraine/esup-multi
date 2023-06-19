@@ -3,9 +3,9 @@ import { Inject, Injectable } from '@angular/core';
 import { combineLatest, from, Observable, of } from 'rxjs';
 import { catchError, first, switchMap } from 'rxjs/operators';
 import { getAuthToken } from '../auth/auth.repository';
-import { Capacitor } from '@capacitor/core';
 import { Network } from '@capacitor/network';
 import { Device } from '@capacitor/device';
+import { Platform } from '@ionic/angular';
 
 interface UserActionRequestData {
   authToken: string;
@@ -23,7 +23,6 @@ interface UserActionDetails {
   functionality: string;
 }
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -32,6 +31,7 @@ export class StatisticsService {
     @Inject('environment')
     private environment: any,
     private http: HttpClient,
+    private platform: Platform
   ) {}
 
   public onFunctionalityOpened(statisticName: string) {
@@ -57,7 +57,7 @@ export class StatisticsService {
             duid: deviceId.uuid,
             action: userActionDetails.action,
             functionality: userActionDetails.functionality,
-            platform: Capacitor.getPlatform(),
+            platform: this.platform.platforms().join(','),
             connectionType: connectionStatus.connectionType
           }
         };
