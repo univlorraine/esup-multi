@@ -3,7 +3,17 @@
 @media screen and (min-width: 320px) {
   .app-centered-header-title {
     position: absolute;
-    width: auto;
+    height: 100%;
+    left: 50%;
+    top: 0%;
+    transform: translate(-50%, 0%);
+    text-align: center;
+  }
+}
+
+@media screen and (min-width: 380px) {
+  .app-centered-header-long-title {
+    position: absolute;
     height: 100%;
     left: 50%;
     top: 0%;
