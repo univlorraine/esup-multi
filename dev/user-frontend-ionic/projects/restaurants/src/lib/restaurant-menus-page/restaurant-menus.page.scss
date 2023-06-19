@@ -45,3 +45,9 @@ h5 {
 .swiper-container {
   height: 98%;
 }
+
+.swiper-button-next,
+.swiper-button-prev {
+  --swiper-navigation-size: 1.5rem;
+  --swiper-navigation-color: var(--ion-color-medium-light);
+}

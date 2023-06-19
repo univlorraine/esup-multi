@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Network } from '@capacitor/network';
 import { Observable } from 'rxjs';
@@ -13,7 +13,7 @@ import { RestaurantMenusService } from './restaurant-menus.service';
   templateUrl: './restaurant-menus.page.html',
   styleUrls: ['./restaurant-menus.page.scss'],
 })
-export class RestaurantMenusPage implements OnInit, AfterViewInit {
+export class RestaurantMenusPage implements OnInit, AfterViewChecked {
   @ViewChild('swiperContainer') swiperContainer: ElementRef;
 
   public restaurantMenusIsEmpty$: Observable<boolean>;
@@ -58,10 +58,35 @@ export class RestaurantMenusPage implements OnInit, AfterViewInit {
 
   }
 
-  ngAfterViewInit() {
-    const swiperContainer: HTMLElement = this.swiperContainer.nativeElement;
+  ngAfterViewChecked() {
+    if (this.swiper === undefined) {
+      const swiperContainer: HTMLElement = this.swiperContainer.nativeElement;
+      const swiperSlides = swiperContainer.querySelectorAll('.swiper-slide');
+
+      if (swiperSlides.length > 0) {
+        this.initializeSwiper(swiperContainer);
+      }
+    }
+  }
+
+  initializeSwiper(swiperContainer: HTMLElement) {
     this.swiper = new Swiper(swiperContainer, {
-      // options du swiper
+      // Swiper options :
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+
+    const nextButton = swiperContainer.querySelector('.swiper-button-next');
+    const prevButton = swiperContainer.querySelector('.swiper-button-prev');
+
+    nextButton.addEventListener('click', () => {
+      this.swiper.slideNext();
+    });
+
+    prevButton.addEventListener('click', () => {
+      this.swiper.slidePrev();
     });
   }
 }
