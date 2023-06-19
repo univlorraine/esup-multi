@@ -1,0 +1,10 @@
+export const firebasePwaEnvironment = {
+  apiKey: "",
+  authDomain: "",
+  projectId: "",
+  storageBucket: "",
+  messagingSenderId: "",
+  appId: "",
+  measurementId: "",
+  vapidKey: ""
+};

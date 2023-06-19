@@ -8,6 +8,8 @@ import {
 } from '@ul/shared';
 import { combineLatest, Observable, of, Subscription } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+import { initializeApp } from 'firebase/app';
+import { Capacitor } from '@capacitor/core';
 
 @Component({
   selector: 'app-root',
@@ -70,6 +72,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
       this.toggleDarkTheme(isDarkTheme);
     });
+
+    this.initializeFirebase();
   }
 
   toggleDarkTheme(isDarkTheme: boolean): void {
@@ -90,5 +94,12 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(s => s.unsubscribe());
+  }
+
+  public async initializeFirebase(): Promise<void> {
+    if (Capacitor.isNativePlatform()) {
+      return;
+    }
+    initializeApp(this.environment.firebase);
   }
 }

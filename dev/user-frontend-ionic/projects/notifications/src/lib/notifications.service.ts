@@ -7,6 +7,7 @@ import { filter, first, switchMap, take, tap } from 'rxjs/operators';
 import { Channel, Notification, NotificationsRepository, TranslatedChannel } from './notifications.repository';
 import { PushNotifications, Token } from '@capacitor/push-notifications';
 import { Capacitor } from '@capacitor/core';
+import { FirebaseMessaging, GetTokenOptions } from '@capacitor-firebase/messaging';
 
 @Injectable({
   providedIn: 'root'
@@ -43,7 +44,6 @@ export class NotificationsService {
   }
 
   public loadNotifications(offset: number, length: number): Observable<Notification[]> {
-
     return getAuthToken().pipe(
       filter(authToken => authToken != null),
       switchMap(authToken => this.getNotifications(authToken, offset, length)),
@@ -114,9 +114,6 @@ export class NotificationsService {
   }
 
   public async saveFCMToken() {
-    if (!Capacitor.isNativePlatform()) {
-      return;
-    }
     this.registerPushNotifications();
     combineLatest([getAuthToken(), this.notificationRepository.fcmToken$])
       .pipe(
@@ -137,7 +134,7 @@ export class NotificationsService {
   }
 
   public async unregisterFCMToken(authToken: string) {
-    if (!Capacitor.isNativePlatform() || !authToken) {
+    if (!authToken) {
       return;
     }
     this.notificationRepository.fcmToken$
@@ -175,16 +172,36 @@ export class NotificationsService {
   }
 
   private registerPushNotifications() {
-    PushNotifications.requestPermissions().then(result => {
-      if (result.receive === 'granted') {
-        PushNotifications.register();
-      }
-    });
+    if (!this.platform.is('capacitor')) { // Web
+      FirebaseMessaging.requestPermissions();
 
-    PushNotifications.addListener('registration',
-      (token: Token) => {
-        this.notificationRepository.setFcmToken(token);
-      }
-    );
+      const options: GetTokenOptions = {
+        vapidKey: this.environment.firebase.vapidKey,
+      };
+
+      navigator.serviceWorker.register('firebase-messaging-sw.js').then(registration => {
+        options.serviceWorkerRegistration = registration;
+        FirebaseMessaging.getToken(options).then(tokenResult => {
+          // NOTE: when the user resets the notifications authorisation and wants to allow it again, this will trigger
+          // a 404 error from firebase followed by this message in the console: "FirebaseError: Messaging: A problem
+          // occured while unsubscribing the user from FCM", it has been reported since 2019 in this thread but hasn't
+          // been solved since: https://github.com/firebase/firebase-js-sdk/issues/2364
+          // It could be fixed by firebase in a future release
+          this.notificationRepository.setFcmToken({ value: tokenResult.token });
+        });
+      });
+    } else { // Mobile
+      PushNotifications.requestPermissions().then(result => {
+        if (result.receive === 'granted') {
+          PushNotifications.register();
+        }
+      });
+
+      PushNotifications.addListener('registration',
+        (token: Token) => {
+          this.notificationRepository.setFcmToken(token);
+        }
+      );
+    }
   }
 }

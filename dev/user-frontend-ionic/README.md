@@ -95,13 +95,25 @@ Ajouter un dossier `firebase` dans `src/environnements` :
 ├── firebase
 │   ├── android
 │   └── ios
+│   └── pwa
 ```
 
 Ajouter au dossier android tous les fichiers de configuration Firebase : `google-service-[environement].json`.
 
 Ajouter au dossier ios tous les fichiers de configuration Firebase : `GoogleServices-info-[environement].plist`.
 
-Veillez à ne pas commiter ce dossier et ses fichiers.
+Ajouter au dossier web tous les fichiers de configuration Firebase : `firebase-environment.[environement].json`.
+
+Ajouter au dossier src/assets/stubs/ un fichier qui reprend la configuration à utiliser : `firebase-environment.json`
+
+Pour que le projet puisse quand même build sans avoir les fichiers réels de la pwa sous la main, une config d'exemple peut être déplacée
+depuis les chemins suivants : 
+
+`/env/production/frontend/firebase/firebase-environment.pwa-prod.json.example` et `/env/development/frontend/firebase/firebase-environment.pwa-development.json.example` 
+
+vers `src/environnements/firebase/pwa/` (ne pas oublier d'enlever les .example des fichiers)
+
+Veillez à ne pas commiter le dossier firebase et ses fichiers.
 
 En exécutant la commande npx `cap sync`, les fichiers de configuration Firebase seront injectés lors du build dans la platforme visée, grâce à la librairie "trapeze".
 
