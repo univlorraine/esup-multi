@@ -14,6 +14,14 @@
 {{- end }}
 {{- end }}
 
+{{- define "helpers.get-common-health-probe"}}
+{{- $servicePath := .servicePath -}}
+httpGet:
+  path: {{ $servicePath }}/health
+  port: {{ .Values.images.services.main.containerPort }}
+initialDelaySeconds: {{ .Values.commonHealthProbe.initialDelaySeconds }}
+{{- end }}
+
 {{/*
 Expand the name of the chart.
 */}}

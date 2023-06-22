@@ -46,6 +46,11 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.images.repositoryUrl }}/{{ .Values.images.services.auth.repositoryName }}:{{ .Values.images.tag }}"
           imagePullPolicy: {{ .Values.images.pullPolicy }}
+          {{ $data := dict "Values" .Values "servicePath" .Values.images.services.auth.path }}
+          livenessProbe:
+            {{- include "helpers.get-common-health-probe" $data | nindent 12 }}
+          readinessProbe:
+            {{- include "helpers.get-common-health-probe" $data | nindent 12 }}
           command:
             {{  range .Values.images.nodeBaseCommand }}
             - {{ . | quote }}
@@ -67,6 +72,11 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.images.repositoryUrl }}/{{ .Values.images.services.cards.repositoryName }}:{{ .Values.images.tag }}"
           imagePullPolicy: {{ .Values.images.pullPolicy }}
+          {{ $data := dict "Values" .Values "servicePath" .Values.images.services.cards.path }}
+          livenessProbe:
+            {{- include "helpers.get-common-health-probe" $data | nindent 12 }}
+          readinessProbe:
+            {{- include "helpers.get-common-health-probe" $data | nindent 12 }}
           env:
             {{ $data := dict "Values" .Values "env" .Values.images.services.cards.env }}
             {{- include "helpers.list-env-variables" $data | indent 12 }}
@@ -81,6 +91,11 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.images.repositoryUrl }}/{{ .Values.images.services.chatbot.repositoryName }}:{{ .Values.images.tag }}"
           imagePullPolicy: {{ .Values.images.pullPolicy }}
+          {{ $data := dict "Values" .Values "servicePath" .Values.images.services.chatbot.path }}
+          livenessProbe:
+            {{- include "helpers.get-common-health-probe" $data | nindent 12 }}
+          readinessProbe:
+            {{- include "helpers.get-common-health-probe" $data | nindent 12 }}
           env:
             {{ $data := dict "Values" .Values "env" .Values.images.services.chatbot.env }}
             {{- include "helpers.list-env-variables" $data | indent 12 }}
@@ -95,6 +110,11 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.images.repositoryUrl }}/{{ .Values.images.services.clocking.repositoryName }}:{{ .Values.images.tag }}"
           imagePullPolicy: {{ .Values.images.pullPolicy }}
+          {{ $data := dict "Values" .Values "servicePath" .Values.images.services.clocking.path }}
+          livenessProbe:
+            {{- include "helpers.get-common-health-probe" $data | nindent 12 }}
+          readinessProbe:
+            {{- include "helpers.get-common-health-probe" $data | nindent 12 }}
           env:
             {{ $data := dict "Values" .Values "env" .Values.images.services.clocking.env }}
             {{- include "helpers.list-env-variables" $data | indent 12 }}
@@ -109,6 +129,11 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.images.repositoryUrl }}/{{ index .Values "images" "services" "contact-us" "repositoryName" }}:{{ .Values.images.tag }}"
           imagePullPolicy: {{ .Values.images.pullPolicy }}
+          {{ $data := dict "Values" .Values "servicePath" index .Values "images" "services" "contact-us" "path" }}
+          livenessProbe:
+            {{- include "helpers.get-common-health-probe" $data | nindent 12 }}
+          readinessProbe:
+            {{- include "helpers.get-common-health-probe" $data | nindent 12 }}
           env:
             {{ $data := dict "Values" .Values "env" (index .Values "images" "services" "contact-us" "env") }}
             {{- include "helpers.list-env-variables" $data | indent 12 }}
@@ -123,6 +148,11 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.images.repositoryUrl }}/{{ .Values.images.services.contacts.repositoryName }}:{{ .Values.images.tag }}"
           imagePullPolicy: {{ .Values.images.pullPolicy }}
+          {{ $data := dict "Values" .Values "servicePath" .Values.images.services.contacts.path }}
+          livenessProbe:
+            {{- include "helpers.get-common-health-probe" $data | nindent 12 }}
+          readinessProbe:
+            {{- include "helpers.get-common-health-probe" $data | nindent 12 }}
           env:
             {{ $data := dict "Values" .Values "env" .Values.images.services.contacts.env }}
             {{- include "helpers.list-env-variables" $data | indent 12 }}
@@ -137,6 +167,11 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.images.repositoryUrl }}/{{ .Values.images.services.features.repositoryName }}:{{ .Values.images.tag }}"
           imagePullPolicy: {{ .Values.images.pullPolicy }}
+          {{ $data := dict "Values" .Values "servicePath" .Values.images.services.features.path }}
+          livenessProbe:
+            {{- include "helpers.get-common-health-probe" $data | nindent 12 }}
+          readinessProbe:
+            {{- include "helpers.get-common-health-probe" $data | nindent 12 }}
           env:
             {{ $data := dict "Values" .Values "env" .Values.images.services.features.env }}
             {{- include "helpers.list-env-variables" $data | indent 12 }}
@@ -151,6 +186,11 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.images.repositoryUrl }}/{{ index .Values "images" "services" "important-news" "repositoryName" }}:{{ .Values.images.tag }}"
           imagePullPolicy: {{ .Values.images.pullPolicy }}
+          {{ $data := dict "Values" .Values "servicePath" (index .Values "images" "services" "important-news" "path") }}
+          livenessProbe:
+            {{- include "helpers.get-common-health-probe" $data | nindent 12 }}
+          readinessProbe:
+            {{- include "helpers.get-common-health-probe" $data | nindent 12 }}
           env:
             {{ $data := dict "Values" .Values "env" (index .Values "images" "services" "important-news" "env") }}
             {{- include "helpers.list-env-variables" $data | indent 12 }}
@@ -164,16 +204,11 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.images.repositoryUrl }}/{{ .Values.images.services.main.repositoryName }}:{{ .Values.images.tag }}"
           imagePullPolicy: {{ .Values.images.pullPolicy }}
+          {{ $data := dict "Values" .Values }}
           livenessProbe:
-            httpGet:
-              path: /map
-              port: {{ .Values.images.services.main.containerPort }}
-            initialDelaySeconds: 120
+            {{- include "helpers.get-common-health-probe" $data | nindent 12 }}
           readinessProbe:
-            httpGet:
-              path: /map
-              port: {{ .Values.images.services.main.containerPort }}
-            initialDelaySeconds: 120
+            {{- include "helpers.get-common-health-probe" $data | nindent 12 }}
           env:
             {{ $data := dict "Values" .Values "env" .Values.images.services.main.env }}
             {{- include "helpers.list-env-variables" $data | indent 12 }}
@@ -193,11 +228,16 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.images.repositoryUrl }}/{{ .Values.images.services.map.repositoryName }}:{{ .Values.images.tag }}"
           imagePullPolicy: {{ .Values.images.pullPolicy }}
+          {{ $data := dict "Values" .Values "servicePath" .Values.images.services.map.path }}
+          livenessProbe:
+            {{- include "helpers.get-common-health-probe" $data | nindent 12 }}
+          readinessProbe:
+            {{- include "helpers.get-common-health-probe" $data | nindent 12 }}
           env:
             {{ $data := dict "Values" .Values "env" .Values.images.services.map.env }}
             {{- include "helpers.list-env-variables" $data | indent 12 }}
           command:
-            {{  range .Values.images.nodeBaseCommand }}
+            {{ range .Values.images.nodeBaseCommand }}
             - {{ . | quote }}
             {{ end }}
           volumeMounts:
@@ -210,6 +250,11 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.images.repositoryUrl }}/{{ .Values.images.services.notifications.repositoryName }}:{{ .Values.images.tag }}"
           imagePullPolicy: {{ .Values.images.pullPolicy }}
+          {{ $data := dict "Values" .Values "servicePath" .Values.images.services.notifications.path }}
+          livenessProbe:
+            {{- include "helpers.get-common-health-probe" $data | nindent 12 }}
+          readinessProbe:
+            {{- include "helpers.get-common-health-probe" $data | nindent 12 }}
           env:
             {{ $data := dict "Values" .Values "env" .Values.images.services.notifications.env }}
             {{- include "helpers.list-env-variables" $data | indent 12 }}
@@ -224,6 +269,11 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.images.repositoryUrl }}/{{ .Values.images.services.restaurants.repositoryName }}:{{ .Values.images.tag }}"
           imagePullPolicy: {{ .Values.images.pullPolicy }}
+          {{ $data := dict "Values" .Values "servicePath" .Values.images.services.restaurants.path }}
+          livenessProbe:
+            {{- include "helpers.get-common-health-probe" $data | nindent 12 }}
+          readinessProbe:
+            {{- include "helpers.get-common-health-probe" $data | nindent 12 }}
           env:
             {{ $data := dict "Values" .Values "env" .Values.images.services.restaurants.env }}
             {{- include "helpers.list-env-variables" $data | indent 12 }}
@@ -238,6 +288,11 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.images.repositoryUrl }}/{{ .Values.images.services.rss.repositoryName }}:{{ .Values.images.tag }}"
           imagePullPolicy: {{ .Values.images.pullPolicy }}
+          {{ $data := dict "Values" .Values "servicePath" .Values.images.services.rss.path }}
+          livenessProbe:
+            {{- include "helpers.get-common-health-probe" $data | nindent 12 }}
+          readinessProbe:
+            {{- include "helpers.get-common-health-probe" $data | nindent 12 }}
           env:
             {{ $data := dict "Values" .Values "env" .Values.images.services.rss.env }}
             {{- include "helpers.list-env-variables" $data | indent 12 }}
@@ -252,6 +307,11 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.images.repositoryUrl }}/{{ .Values.images.services.schedule.repositoryName }}:{{ .Values.images.tag }}"
           imagePullPolicy: {{ .Values.images.pullPolicy }}
+          {{ $data := dict "Values" .Values "servicePath" .Values.images.services.schedule.path }}
+          livenessProbe:
+            {{- include "helpers.get-common-health-probe" $data | nindent 12 }}
+          readinessProbe:
+            {{- include "helpers.get-common-health-probe" $data | nindent 12 }}
           env:
             {{ $data := dict "Values" .Values "env" .Values.images.services.schedule.env }}
             {{- include "helpers.list-env-variables" $data | indent 12 }}
@@ -266,6 +326,11 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.images.repositoryUrl }}/{{ index .Values "images" "services" "social-network" "repositoryName" }}:{{ .Values.images.tag }}"
           imagePullPolicy: {{ .Values.images.pullPolicy }}
+          {{ $data := dict "Values" .Values "servicePath" (index .Values "images" "services" "social-network" "path") }}
+          livenessProbe:
+            {{- include "helpers.get-common-health-probe" $data | nindent 12 }}
+          readinessProbe:
+            {{- include "helpers.get-common-health-probe" $data | nindent 12 }}
           env:
             {{ $data := dict "Values" .Values "env" (index .Values "images" "services" "social-network" "env") }}
             {{- include "helpers.list-env-variables" $data | indent 12 }}
@@ -280,6 +345,11 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.images.repositoryUrl }}/{{ index .Values "images" "services" "static-pages" "repositoryName" }}:{{ .Values.images.tag }}"
           imagePullPolicy: {{ .Values.images.pullPolicy }}
+          {{ $data := dict "Values" .Values "servicePath" (index .Values "images" "services" "static-pages" "path") }}
+          livenessProbe:
+            {{- include "helpers.get-common-health-probe" $data | nindent 12 }}
+          readinessProbe:
+            {{- include "helpers.get-common-health-probe" $data | nindent 12 }}
           env:
             {{ $data := dict "Values" .Values "env" (index .Values "images" "services" "static-pages" "env") }}
             {{- include "helpers.list-env-variables" $data | indent 12 }}

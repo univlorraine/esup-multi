@@ -25,6 +25,7 @@ images:
   services:
     auth:
       repositoryName: multi-auth
+      path: /auth
       env:
         normal:
           AUTH_SERVICE_HOST: "0.0.0.0"
@@ -43,6 +44,7 @@ images:
           AUTH_SERVICE_JWT_SECRET: "changeit"
     cards:
       repositoryName: multi-cards
+      path: /cards
       env:
         normal:
           CARDS_SERVICE_HOST: "0.0.0.0"
@@ -52,6 +54,7 @@ images:
           CARDS_SERVICE_UL_API_BEARER_TOKEN: "changeit"
     chatbot:
       repositoryName: multi-chatbot
+      path: /chatbot
       env:
         normal:
           CHATBOT_SERVICE_HOST: "0.0.0.0"
@@ -59,6 +62,7 @@ images:
           CHATBOT_SERVICE_UL_API_TOCK_URL: "changeit"
     clocking:
       repositoryName: multi-clocking
+      path: /clocking
       env:
         normal:
           CLOCKING_SERVICE_HOST: "0.0.0.0"
@@ -68,6 +72,7 @@ images:
           CLOCKING_SERVICE_UL_API_BEARER_TOKEN: "changeit"
     contact-us:
       repositoryName: multi-contact-us
+      path: /contact-us
       disabled: true
       env:
         normal:
@@ -79,6 +84,7 @@ images:
           CONTACT_US_SERVICE_DIRECTUS_API_BEARER_TOKEN: *directusApiBearerToken
     contacts:
       repositoryName: multi-contacts
+      path: /contacts
       env:
         normal:
           CONTACT_SERVICE_HOST: "0.0.0.0"
@@ -88,6 +94,7 @@ images:
           CONTACTS_SERVICE_UL_API_BEARER_TOKEN: "changeit"
     features:
       repositoryName: multi-features
+      path: /features
       env:
         normal:
           FEATURES_SERVICE_HOST: "0.0.0.0"
@@ -97,6 +104,7 @@ images:
           FEATURES_SERVICE_DIRECTUS_API_BEARER_TOKEN: *directusApiBearerToken
     important-news:
       repositoryName: multi-important-news
+      path: /important-news
       env:
         normal:
           IMPORTANT_NEWS_SERVICE_HOST: "0.0.0.0"
@@ -146,12 +154,14 @@ images:
           AUTH_SERVICE_JWT_SECRET: "changeit"
     map:
       repositoryName: multi-map
+      path: /map
       env:
         normal:
           MAP_SERVICE_HOST: "0.0.0.0"
           MAP_SERVICE_PORT: "3005"
     notifications:
       repositoryName: multi-notifications
+      path: /notifications
       env:
         normal:
           NOTIFICATIONS_SERVICE_HOST: "0.0.0.0"
@@ -164,6 +174,7 @@ images:
           NOTIFICATIONS_SERVICE_DIRECTUS_API_BEARER_TOKEN: *directusApiBearerToken
     restaurants:
       repositoryName: multi-restaurants
+      path: /restaurants
       disabled: true
       env:
         normal:
@@ -174,6 +185,7 @@ images:
           RESTAURANTS_UL_API_BEARER_TOKEN: "changeit"
     rss:
       repositoryName: multi-rss
+      path: /rss
       env:
         normal:
           RSS_SERVICE_HOST: "0.0.0.0"
@@ -182,6 +194,7 @@ images:
           RSS_SERVICE_ALLOWED_HTML_TAGS: "b,strong,i,italic,ol,ul,li"
     schedule:
       repositoryName: multi-schedule
+      path: /schedule
       env:
         normal:
           SCHEDULE_SERVICE_HOST: "0.0.0.0"
@@ -191,6 +204,7 @@ images:
           SCHEDULE_SERVICE_UL_API_BEARER_TOKEN: "changeit"
     social-network:
       repositoryName: multi-social-network
+      path: /social-network
       env:
         normal:
           SOCIAL_NETWORK_SERVICE_HOST: "0.0.0.0"
@@ -200,6 +214,7 @@ images:
           SOCIAL_NETWORK_SERVICE_DIRECTUS_API_BEARER_TOKEN: *directusApiBearerToken
     static-pages:
       repositoryName: multi-static-pages
+      path: /static-pages
       env:
         normal:
           STATIC_PAGES_SERVICE_HOST: "0.0.0.0"
@@ -300,3 +315,6 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+commonHealthProbe:
+  initialDelaySeconds: 120
