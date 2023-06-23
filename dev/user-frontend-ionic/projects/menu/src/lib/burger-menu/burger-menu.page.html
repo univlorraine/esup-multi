@@ -3,7 +3,7 @@
   <ion-list lines="none" class="menu-section">
     <ion-item button *ngFor="let menu of (staticMenuItems$ | async)" (click)="menuOpenerService.open(menu)">
       <ion-icon class="app-icon-4" name="{{menu.icon}}" slot="start"></ion-icon>
-      <ion-label class="app-title-5 light">{{menu.title | translate}}</ion-label>
+      <ion-label class="app-text-3 light">{{menu.title | translate}}</ion-label>
     </ion-item>
   </ion-list>
   <ion-list lines="none" class="menu-section">
@@ -14,7 +14,7 @@
   <ion-list lines="none" class="menu-section">
     <ion-item button *ngFor="let menu of (dynamicMenuItems$ | async)" (click)="menuOpenerService.open(menu)">
       <ion-icon class="app-icon-4" name="{{menu.icon}}" slot="start"></ion-icon>
-      <ion-label class="app-title-5 light">{{menu.title}}</ion-label>
+      <ion-label class="app-text-3 light">{{menu.title}}</ion-label>
     </ion-item>
   </ion-list>
 
