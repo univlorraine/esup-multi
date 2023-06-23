@@ -10,7 +10,7 @@
 
 <ion-content #scrollContent [ngClass]="isLoading ? 'ion-hide' : ''">
   <ion-list #messages>
-    <ion-item-group *ngFor="let message of messages$ | async">
+    <ion-item-group *ngFor="let message of messages$ | async; let last = last">
       <div class="message-container ion-margin">
         <div [ngClass]="message.messageType === messageType.bot ? message.card && isChatbotLogo(message) ? 'image-bot' : 'message-bot' : 'message-user'">
             <ion-row *ngIf="message.messageType === messageType.bot">
@@ -21,7 +21,7 @@
               <ion-label class="app-text-4" [innerHTML]="message.text" text-wrap></ion-label>
             </ion-row>
         </div>
-        <ion-item lines="none" *ngIf="message.messageType === messageType.bot && message.buttons" class="ion-margin-top">
+        <ion-item lines="none" *ngIf="message.messageType === messageType.bot && message.buttons && last" class="ion-margin-top">
           <ion-col>
             <ion-item  *ngFor="let button of message.buttons" (click)="onButtonClick(button)"
               class="app-text-4 buttonRequest ion-margin-bottom">
