@@ -136,7 +136,6 @@ export class MapPage implements OnDestroy {
   }
 
   private async refreshUserPosition() {
-
     await Geolocation.getCurrentPosition().then(position => {
       const latLng: Leaflet.LatLngTuple = [position.coords.latitude, position.coords.longitude];
       const circle = Leaflet.circle(latLng, position.coords.accuracy);
@@ -150,8 +149,7 @@ export class MapPage implements OnDestroy {
       }
 
       this.positionLayerGroup = Leaflet.layerGroup([circle, marker]).addTo(this.map);
-      this.map.setView(latLng);
-      this.map.setZoom(11);
+      this.map.setView(latLng, 11);
     },
       error => {
         const latLngOfTheUniversity: Leaflet.LatLngTuple = [this.config.defaultMapLocation.latitude,
