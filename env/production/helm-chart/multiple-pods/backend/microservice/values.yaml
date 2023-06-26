@@ -23,7 +23,7 @@ image:
       DIRECTUS_API_BEARER_TOKEN: &directusApiBearerToken "changeit"
 
 service:
-  type: NodePort
+  type: ClusterIP
   port: 3005
 
 microService:
