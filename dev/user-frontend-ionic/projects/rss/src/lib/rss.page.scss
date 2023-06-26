@@ -8,37 +8,9 @@ ion-card {
   background-color: var(--app-color-component-background-primary);
 }
 
-.rss-news-header {
-  --border-bottom: 0.3rem;
-}
-
-.title-col {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.title {
-  margin-top: 2rem;
-  margin-left: 0.625rem;
-  margin-right: 0.7rem;
-  margin-bottom: 1.5rem;
-}
-
-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
 .open-link-button {
   width: 100%;
 }
-
-.border-bottom {
-  border-bottom: var(--app-border-width-5) solid var(--ion-color-secondary) !important;
-}
-
 
 .rss-news-content {
   overflow: hidden;
