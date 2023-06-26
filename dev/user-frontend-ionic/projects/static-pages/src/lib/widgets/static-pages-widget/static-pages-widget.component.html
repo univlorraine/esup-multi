@@ -1,9 +1,10 @@
 <ion-item button *ngFor="let page of translatedStaticPages$ | async" (click)="onClick(page)">
   <app-custom-icon
-  [icon]="page.icon"
-  [iconSourceSvgLightTheme]="page.iconSourceSvgLightTheme"
-  [iconSourceSvgDarkTheme]="page.iconSourceSvgDarkTheme"
-  class="app-icon-4"
-  slot="start"></app-custom-icon>
-  <ion-label class="app-title-5 light">{{ page.title }}</ion-label>
+    [icon]="page.icon"
+    [iconSourceSvgLightTheme]="page.iconSourceSvgLightTheme"
+    [iconSourceSvgDarkTheme]="page.iconSourceSvgDarkTheme"
+    class="app-icon-4"
+    slot="start"
+  ></app-custom-icon>
+  <ion-label class="app-text-3 light">{{ page.title }}</ion-label>
 </ion-item>
