@@ -6,7 +6,7 @@ import {
 } from '@nestjs/terminus';
 import { Transport } from '@nestjs/microservices';
 
-@Controller('health')
+@Controller('health-all')
 export class GlobalHealthController {
   constructor(
     private healthCheckService: HealthCheckService,
