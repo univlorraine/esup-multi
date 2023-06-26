@@ -9,4 +9,4 @@ spec:
       protocol: TCP
       name: microservice
   selector:
-    app: multi-map
+    app.kubernetes.io/name: multi-map
