@@ -2,7 +2,7 @@
 
   <ion-header [translucent]="true">
     <ion-toolbar color="primary">
-      <img src="/assets/logo/white-university-logo.svg" class="logo ion-padding-start app-logo-3"/>
+      <img src="assets/logo/white-university-logo.svg" class="logo ion-padding-start app-logo-3"/>
       <ion-buttons slot="end">
         <ion-button *ngFor="let menu of (topMenuItems$ | async)" (click)="menuOpenerService.open(menu)">
           <app-custom-icon [icon]="menu.icon" [iconSourceSvgLightTheme]="menu.iconSourceSvgLightTheme" [iconSourceSvgDarkTheme]="menu.iconSourceSvgDarkTheme"></app-custom-icon>
