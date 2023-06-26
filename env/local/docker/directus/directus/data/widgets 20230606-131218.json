@@ -127,6 +127,24 @@
 		}
 	},
 	{
+		"id": 5,
+		"status": "published",
+		"widget": "auth:greeting-widget",
+		"icon": null,
+		"iconSourceSvg": null,
+		"iconSourceSvgDark": null,
+		"authorization": null,
+		"position": -101,
+		"type": "internal",
+		"routerLink": null,
+		"link": null,
+		"ssoService": null,
+		"color": null,
+		"statisticName": null,
+		"translations": [],
+		"settings_by_role": []
+	},
+	{
 		"id": 6,
 		"status": "published",
 		"widget": "unread-mail:unread-mail",

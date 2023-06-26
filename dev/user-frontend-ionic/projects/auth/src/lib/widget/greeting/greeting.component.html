@@ -1,0 +1,15 @@
+<ion-row>
+  <ion-label>
+    <h1 class="app-title-4 ion-padding-horizontal" [class.underline]="authenticatedUser$ | async">
+      <span class="greeting-underline">
+        <ng-container *ngIf="authenticatedUser$ | async as authenticatedUser; else notAuthenticated">
+          {{ 'AUTH.WIDGET.GREETING.HELLO_AUTHENTICATED' | translate:{username: authenticatedUser.firstname} }}
+        </ng-container>
+      </span>
+    </h1>
+
+    <ng-template #notAuthenticated>
+      {{ 'AUTH.WIDGET.GREETING.HELLO_NOT_AUTHENTICATED' | translate }}
+    </ng-template>
+  </ion-label>
+</ion-row>
