@@ -28,13 +28,14 @@
 
 </app-header>
 
-<ion-list class="chip-list" *ngIf="(channelsSelected$ | async)?.length > 0">
-  <ion-chip *ngFor="let channel of channelsSelected$ | async" (click)="removeChannelFromFilter(channel.code)">
-    {{channel.label}}
-    <ion-icon name="close-circle-outline"></ion-icon>
-  </ion-chip>
-</ion-list>
-
+<ng-container *ngIf="channelsSelected$ | async as channelsSelected">
+  <ion-list class="chip-list" *ngIf="channelsSelected.length > 0">
+    <ion-chip *ngFor="let channel of channelsSelected" (click)="removeChannelFromFilter(channel.code)">
+      {{ channel.label }}
+      <ion-icon name="close-circle-outline"></ion-icon>
+    </ion-chip>
+  </ion-list>
+</ng-container>
 
 <ion-content *ngIf="(filteredNotifications$ | async) as filteredNotifications">
   <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
