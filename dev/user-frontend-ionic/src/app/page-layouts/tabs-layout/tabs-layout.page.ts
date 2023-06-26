@@ -1,7 +1,8 @@
 import { AfterViewInit, Component } from '@angular/core';
-import { Network } from '@capacitor/network';
-import { MenuItem, MenuItemLinkType, MenuItemRouterLink, MenuOpenerService, MenuService, FeaturesService,
-  StatisticsService } from '@ul/shared';
+import {
+  FeaturesService, MenuItem, MenuItemLinkType, MenuItemRouterLink,
+  MenuOpenerService, MenuService, NetworkService, StatisticsService
+} from '@ul/shared';
 import { Observable } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
 
@@ -25,6 +26,7 @@ export class TabsLayoutPage implements AfterViewInit {
     private featuresService: FeaturesService,
     private statisticsService: StatisticsService,
     public menuOpenerService: MenuOpenerService,
+    private networkService: NetworkService,
   ) {
     this.tabsMenuItems$ = this.menuService.tabsMenuItems$.pipe(
       map(menuItems => menuItems.map(menuItem => {
@@ -59,7 +61,7 @@ export class TabsLayoutPage implements AfterViewInit {
 
   private async loadFeatures(): Promise<void> {
     // skip if network is not available
-    if (!(await Network.getStatus()).connected) {
+    if (!(await this.networkService.getConnectionStatus()).connected) {
       return;
     }
 

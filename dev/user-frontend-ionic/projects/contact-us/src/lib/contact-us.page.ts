@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { ContactUsRepository, TranslatedContactUsPageContent } from './contact-us.repository';
-import { ContactMessageQueryDto, ContactUsService } from './contact-us.service';
-import { filter, finalize, first } from 'rxjs/operators';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
-import { authenticatedUser$ } from '@ul/shared';
+import { authenticatedUser$, NetworkService } from '@ul/shared';
+import { Observable } from 'rxjs';
+import { filter, finalize, first } from 'rxjs/operators';
+import { ContactUsRepository, TranslatedContactUsPageContent } from './contact-us.repository';
+import { ContactMessageQueryDto, ContactUsService } from './contact-us.service';
 
 @Component({
   selector: 'app-contact-us',
@@ -31,14 +31,13 @@ export class ContactUsPage implements OnInit {
     private contactUsRepository: ContactUsRepository,
     private toastController: ToastController,
     private translateService: TranslateService,
+    private networkService: NetworkService,
   ) {
     this.translatedPageContent$ = this.contactUsRepository.translatedPageContent$;
-   }
+  }
 
   ngOnInit(): void {
-    this.contactUsService.loadAndStoreContactUsPageContent()
-      .pipe(first())
-      .subscribe();
+    this.loadContentIfNetworkAvailable();
 
     authenticatedUser$
       .pipe(
@@ -50,6 +49,19 @@ export class ContactUsPage implements OnInit {
         this.contactForm.get('from').setValue(this.defaultFrom);
       });
   }
+
+
+  public async loadContentIfNetworkAvailable(): Promise<void> {
+    if (!(await this.networkService.getConnectionStatus()).connected) {
+      return;
+    }
+
+    this.contactUsService.loadAndStoreContactUsPageContent()
+      .pipe(first())
+      .subscribe();
+  }
+
+
 
   onSubmit(): void {
     this.isLoading = true;

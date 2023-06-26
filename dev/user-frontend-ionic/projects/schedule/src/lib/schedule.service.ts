@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { Network } from '@capacitor/network';
-import { getAuthToken } from '@ul/shared';
+import { getAuthToken, NetworkService } from '@ul/shared';
 import { add, format, startOfWeek, sub } from 'date-fns';
 import { BehaviorSubject, combineLatest, from, Observable, of, Subject } from 'rxjs';
 import { filter, finalize, first, map, mergeMap, switchMap, tap } from 'rxjs/operators';
@@ -32,7 +31,8 @@ export class ScheduleService {
     @Inject('environment')
     private environment: any,
     private http: HttpClient,
-    @Inject(SCHEDULE_CONFIG) private config: ScheduleModuleConfig
+    @Inject(SCHEDULE_CONFIG) private config: ScheduleModuleConfig,
+    private networkService: NetworkService,
   ) {
     this.isLoading$ = this.isLoadingSubject.asObservable();
     this.asUser.subscribe(() => {
@@ -59,7 +59,7 @@ export class ScheduleService {
 
   loadSchedule(startDate: string, endDate: string): Observable<Schedule> {
 
-    return from(Network.getStatus()).pipe(
+    return from(this.networkService.getConnectionStatus()).pipe(
       filter(status => status.connected),
       tap(() => this.isLoadingSubject.next(true)),
       mergeMap(() => getAuthToken().pipe(

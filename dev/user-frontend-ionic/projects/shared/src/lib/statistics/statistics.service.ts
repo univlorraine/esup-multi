@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
+import { Device } from '@capacitor/device';
+import { Platform } from '@ionic/angular';
 import { combineLatest, from, Observable, of } from 'rxjs';
 import { catchError, first, switchMap } from 'rxjs/operators';
 import { getAuthToken } from '../auth/auth.repository';
-import { Network } from '@capacitor/network';
-import { Device } from '@capacitor/device';
-import { Platform } from '@ionic/angular';
+import { NetworkService } from '../network/network.service';
 
 interface UserActionRequestData {
   authToken: string;
@@ -31,11 +31,16 @@ export class StatisticsService {
     @Inject('environment')
     private environment: any,
     private http: HttpClient,
+    private networkService: NetworkService,
     private platform: Platform
   ) {}
 
-  public onFunctionalityOpened(statisticName: string) {
+  public async onFunctionalityOpened(statisticName: string) {
     if(!statisticName) {
+      return;
+    }
+
+    if (!(await this.networkService.getConnectionStatus()).connected) {
       return;
     }
 
@@ -48,7 +53,7 @@ export class StatisticsService {
   private postUserActionStatistic(userActionDetails: UserActionDetails): Observable<void> {
     const url = `${this.environment.apiEndpoint}/statistics/user-action`;
 
-    return combineLatest([getAuthToken(), from(Device.getId()), from(Network.getStatus())]).pipe(
+    return combineLatest([getAuthToken(), from(Device.getId()), from(this.networkService.getConnectionStatus())]).pipe(
       first(),
       switchMap(([authToken, deviceId, connectionStatus]) => {
         const data: UserActionRequestData = {

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Browser } from '@capacitor/browser';
-import { Network } from '@capacitor/network';
+import { NetworkService } from '@ul/shared';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
@@ -22,7 +22,8 @@ export class RssPage {
 
   constructor(
     private rssService: RssService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private networkService: NetworkService,
   ) {
     this.rssFeedIsEmpty$ = this.rssFeed$.pipe(map(rssFeed => rssFeed.length === 0));
   }
@@ -54,7 +55,7 @@ export class RssPage {
 
   private async loadRssFeedIfNetworkAvailable() {
     // skip if network is not available
-    if (!(await Network.getStatus()).connected) {
+    if (!(await this.networkService.getConnectionStatus()).connected) {
       return;
     }
     this.isLoading = true;

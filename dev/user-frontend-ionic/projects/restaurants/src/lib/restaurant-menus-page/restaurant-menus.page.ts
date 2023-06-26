@@ -1,6 +1,6 @@
 import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Network } from '@capacitor/network';
+import { NetworkService } from '@ul/shared';
 import { Observable } from 'rxjs';
 import { finalize, first, map } from 'rxjs/operators';
 import Swiper from 'swiper';
@@ -26,11 +26,11 @@ export class RestaurantMenusPage implements OnInit, AfterViewChecked {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private restaurantMenusService: RestaurantMenusService
+    private restaurantMenusService: RestaurantMenusService,
+    private networkService: NetworkService,
   ) { }
 
-  async ngOnInit() {
-
+  ngOnInit() {
     this.restaurantId = Number.parseInt(this.activatedRoute.snapshot.paramMap.get('id'), 10);
     this.restaurant$ = getRestaurantById(this.restaurantId);
     this.menus$ = getMenusByRestaurantId(this.restaurantId);
@@ -38,7 +38,11 @@ export class RestaurantMenusPage implements OnInit, AfterViewChecked {
       map(menus => menus?.length === 0)
     );
 
-    if (!(await Network.getStatus()).connected) {
+    this.loadMenusIfNetworkAvailable();
+  }
+
+  async loadMenusIfNetworkAvailable() {
+    if (!(await this.networkService.getConnectionStatus()).connected) {
       return;
     }
 
@@ -55,7 +59,6 @@ export class RestaurantMenusPage implements OnInit, AfterViewChecked {
         this.isLoading = false;
       })
     ).subscribe();
-
   }
 
   ngAfterViewChecked() {

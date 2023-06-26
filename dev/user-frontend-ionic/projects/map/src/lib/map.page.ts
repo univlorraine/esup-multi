@@ -1,14 +1,14 @@
-import {Component, Inject, OnDestroy, ViewChild} from '@angular/core';
+import { Component, Inject, OnDestroy, ViewChild } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Geolocation } from '@capacitor/geolocation';
-import { Network } from '@capacitor/network';
 import { TranslateService } from '@ngx-translate/core';
+import { NetworkService } from '@ul/shared';
 import * as Leaflet from 'leaflet';
+import { Subject } from 'rxjs';
 import { finalize, first, takeUntil } from 'rxjs/operators';
 import { MapModuleConfig, MAP_CONFIG } from './map.config';
 import { Marker, markersList$, setMarkers } from './map.repository';
 import { MapService } from './map.service';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { Subject } from 'rxjs';
 
 const CATEGORIES = [
   'presidences_points',
@@ -44,7 +44,8 @@ export class MapPage implements OnDestroy {
     private mapService: MapService,
     private translateService: TranslateService,
     private formBuilder: FormBuilder,
-    @Inject(MAP_CONFIG) private config: MapModuleConfig
+    @Inject(MAP_CONFIG) private config: MapModuleConfig,
+    private networkService: NetworkService,
   ) {
     this.initCategoriesForm();
 
@@ -163,7 +164,7 @@ export class MapPage implements OnDestroy {
 
   private async loadMarkersInNetworkAvailable() {
     // skip if network is not available
-    if (!(await Network.getStatus()).connected) {
+    if (!(await this.networkService.getConnectionStatus()).connected) {
       return;
     }
 

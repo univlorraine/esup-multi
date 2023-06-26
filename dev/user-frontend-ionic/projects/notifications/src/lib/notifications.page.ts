@@ -1,13 +1,14 @@
 import { Component, Inject, OnDestroy, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { InfiniteScrollCustomEvent, IonContent, IonModal, Platform } from '@ionic/angular';
-import { PageLayoutService } from '@ul/shared';
+import { NetworkService, PageLayoutService } from '@ul/shared';
 import { combineLatest, Observable, Subscription } from 'rxjs';
-import { catchError, finalize, first, map, filter, mergeMap, startWith } from 'rxjs/operators';
+import { catchError, filter, finalize, first, map, mergeMap, startWith } from 'rxjs/operators';
 import { NotificationsModuleConfig, NOTIFICATIONS_CONFIG } from './notifications.config';
-import { Channel,
-  Notification,
-  TranslatedChannel, NotificationsRepository } from './notifications.repository';
+import {
+  Channel,
+  Notification, NotificationsRepository, TranslatedChannel
+} from './notifications.repository';
 
 import { NotificationsService } from './notifications.service';
 import { ToastService } from './toast.service';
@@ -23,7 +24,7 @@ export class NotificationsPage implements OnDestroy {
 
   @ViewChild('popover') popover;
   @ViewChild('modal') modal: IonModal;
-  @ViewChild(IonContent, {static: false}) private content: IonContent;
+  @ViewChild(IonContent, { static: false }) private content: IonContent;
 
   public isOpen = false;
   public channels$: Observable<Channel[]>;
@@ -51,6 +52,8 @@ export class NotificationsPage implements OnDestroy {
     public platform: Platform,
     public notificationRepository: NotificationsRepository,
     private toastService: ToastService,
+    private networkService: NetworkService,
+
   ) {
     this.translatedChannels$ = this.notificationRepository.translatedChannels$;
     this.channels$ = this.notificationRepository.channels$;
@@ -104,7 +107,6 @@ export class NotificationsPage implements OnDestroy {
         }),
       );
 
-    this.subscriptions.push(this.notificationsService.loadAndStoreUnsubscribedChannels().pipe(first()).subscribe());
   }
 
   get channelsForm() {
@@ -121,35 +123,21 @@ export class NotificationsPage implements OnDestroy {
     this.endOfNotifications = false;
     this.loadMoreNotificationsError = false;
 
-    this.notificationsService.loadAndStoreChannels().pipe(first()).subscribe();
-
-
-    this.isLoading = true;
-
-    this.notificationsService.loadNotifications(0, this.config.numberOfNotificationsOnFirstLoad)
-      .pipe(
-        first(),
-        mergeMap((notifications) => {
-          const notificationIds = notifications
-            .filter((notification) => notification.state === 'UNREAD')
-            .map((notification) => notification.id);
-
-          return this.notificationsService.markUnreadNotificationsAsRead(notificationIds);
-        }),
-        finalize(() => this.isLoading = false),
-      ).subscribe();
+    this.loadDataIfNetworkAvailable();
 
     this.subscriptions.push(this.platform.resize.subscribe(async () => {
       this.updateBreakpoints();
     }));
   }
 
+
+
   async checkForScrollbar() {
     const scrollElement = await this.content.getScrollElement();
     this.hasScrollbar = scrollElement.scrollHeight > scrollElement.clientHeight;
   }
 
-  handleRefresh(event) {
+  async handleRefresh(event) {
     this.notificationsService.loadNotifications(0, this.config.numberOfNotificationsOnFirstLoad).pipe(
       first(),
       finalize(() => {
@@ -227,6 +215,30 @@ export class NotificationsPage implements OnDestroy {
   presentPopover(e: Event) {
     this.popover.event = e;
     this.isOpen = true;
+  }
+
+  private async loadDataIfNetworkAvailable() {
+    if (!(await this.networkService.getConnectionStatus()).connected) {
+      return;
+    }
+
+    this.isLoading = true;
+
+    this.notificationsService.loadAndStoreChannels().pipe(first()).subscribe();
+    this.notificationsService.loadAndStoreUnsubscribedChannels().pipe(first()).subscribe();
+
+    this.notificationsService.loadNotifications(0, this.config.numberOfNotificationsOnFirstLoad)
+      .pipe(
+        first(),
+        mergeMap((notifications) => {
+          const notificationIds = notifications
+            .filter((notification) => notification.state === 'UNREAD')
+            .map((notification) => notification.id);
+
+          return this.notificationsService.markUnreadNotificationsAsRead(notificationIds);
+        }),
+        finalize(() => this.isLoading = false),
+      ).subscribe();
   }
 
   private updateBreakpoints() {

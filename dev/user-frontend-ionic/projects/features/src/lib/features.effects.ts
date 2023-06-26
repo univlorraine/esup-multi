@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
-import { createEffect, ofType} from '@ngneat/effects';
-import { FeaturesService, cleanupPrivateData } from '@ul/shared';
+import { createEffect, ofType } from '@ngneat/effects';
+import { cleanupPrivateData, clearFeatures, FeaturesService, NetworkService } from '@ul/shared';
 import { tap } from 'rxjs/operators';
-import { clearFeatures } from '@ul/shared';
-import { Network } from '@capacitor/network';
 
 @Injectable({ providedIn: 'root' })
 export class FeaturesEffects {
@@ -13,7 +11,7 @@ export class FeaturesEffects {
     tap(clearFeatures),
     tap(async () =>  {
       // skip if network is not available
-      if (!(await Network.getStatus()).connected) {
+      if (!(await this.networkService.getConnectionStatus()).connected) {
         return;
       }
 
@@ -21,6 +19,7 @@ export class FeaturesEffects {
     })
   ));
 
-  constructor(private featuresService: FeaturesService) {}
+  constructor(private featuresService: FeaturesService,
+    private networkService: NetworkService,) {}
 
 }

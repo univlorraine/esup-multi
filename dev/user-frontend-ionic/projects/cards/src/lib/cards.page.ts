@@ -1,12 +1,11 @@
-import {Component, ViewChild} from '@angular/core';
-import { AuthenticatedUser, getAuthToken } from '@ul/shared';
-import { setUserAndCardsData, UserAndCardsData, userAndCardsData$ } from './cards.repository';
-import { Network } from '@capacitor/network';
+import { Component, ViewChild } from '@angular/core';
+import { AuthenticatedUser, getAuthToken, NetworkService } from '@ul/shared';
 import { Observable, Subscription } from 'rxjs';
 import { filter, finalize, first, switchMap } from 'rxjs/operators';
+import { CardModalComponent } from './card/card-modal.component';
+import { setUserAndCardsData, UserAndCardsData, userAndCardsData$ } from './cards.repository';
 import { CardsService } from './cards.service';
 import { ScreenService } from './screen.service';
-import { CardModalComponent } from './card/card-modal.component';
 
 @Component({
   selector: 'app-cards',
@@ -24,6 +23,7 @@ export class CardsPage {
   constructor(
     private cardsService: CardsService,
     private screenService: ScreenService,
+    private networkService: NetworkService,
   ) {}
 
   openModal(cardType) {
@@ -50,7 +50,7 @@ export class CardsPage {
   }
 
   private async loadUserCardsData() {
-    if (!(await Network.getStatus()).connected) {
+    if (!(await this.networkService.getConnectionStatus()).connected){
       return;
     }
 

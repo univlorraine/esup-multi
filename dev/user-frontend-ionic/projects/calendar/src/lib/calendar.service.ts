@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { Network } from '@capacitor/network';
-import { getAuthToken } from '@ul/shared';
+import { getAuthToken, NetworkService } from '@ul/shared';
 import { isAfter } from 'date-fns';
 import { from, iif, Observable, of } from 'rxjs';
 import { first, map, switchMap, tap } from 'rxjs/operators';
@@ -17,11 +16,12 @@ export class CalendarService {
     @Inject(CALENDAR_CONFIG) private config: CalendarModuleConfig,
     @Inject('environment')
     private environment: any,
-    private http: HttpClient
+    private http: HttpClient,
+    private networkService: NetworkService
   ) { }
 
   public loadCalendarIfNetworkAvailable(): Observable<void> {
-    return from(Network.getStatus()).pipe(
+    return from(this.networkService.getConnectionStatus()).pipe(
       switchMap(status => iif(
         () => status.connected,
         this.getAndStoreCalendarEvents(),
