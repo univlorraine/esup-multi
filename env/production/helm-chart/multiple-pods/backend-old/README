@@ -1,5 +1,0 @@
-### Chart Helm UL 
-#Installation des dépendances
-helm dep update
-#Installation du package
-helm install v1 ./path_to_helm
