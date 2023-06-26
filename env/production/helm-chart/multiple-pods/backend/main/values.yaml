@@ -64,7 +64,7 @@ image:
         AUTH_SERVICE_JWT_SECRET: "changeit"
 
 service:
-  type: LoadBalancer
+  type: ClusterIP
   port: 3000
 
 defaultEnvVolumeMountParams:
