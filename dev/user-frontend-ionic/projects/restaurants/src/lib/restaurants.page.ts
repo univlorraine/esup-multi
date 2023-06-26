@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Geolocation, Position } from '@capacitor/geolocation';
-import { Network } from '@capacitor/network';
+import { NetworkService } from '@ul/shared';
 import { getDistance } from 'geolib';
 import { combineLatest, from, Observable, of } from 'rxjs';
 import { catchError, first, map, tap } from 'rxjs/operators';
@@ -36,11 +36,12 @@ export class RestaurantsPage implements OnInit {
 
   constructor(
     private restaurantsService: RestaurantsService,
-    private router: Router
+    private router: Router,
+    private networkService: NetworkService,
   ) { }
 
   async ngOnInit() {
-    if (!(await Network.getStatus()).connected) {
+    if (!(await this.networkService.getConnectionStatus()).connected) {
       return;
     }
 

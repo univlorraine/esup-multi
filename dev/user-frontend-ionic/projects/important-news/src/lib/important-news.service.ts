@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { Network } from '@capacitor/network';
-import { getAuthToken } from '@ul/shared';
+import { getAuthToken, NetworkService } from '@ul/shared';
 import { from, Observable } from 'rxjs';
 import { filter, first, switchMap } from 'rxjs/operators';
 import { ImportantNews, TranslatedImportantNews } from './important-news.repository';
@@ -15,11 +14,12 @@ export class ImportantNewsService {
     @Inject('environment')
     private environment: any,
     private http: HttpClient,
+    private networkService: NetworkService,
   ) {
   }
 
   public loadImportantNewsList(): Observable<ImportantNews[]> {
-    return from(Network.getStatus()).pipe(
+    return from(this.networkService.getConnectionStatus()).pipe(
       filter(status => status.connected),
       switchMap(() => getAuthToken()),
       first(),

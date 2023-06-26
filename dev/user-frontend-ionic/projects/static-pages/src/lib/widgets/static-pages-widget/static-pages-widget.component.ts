@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { StatisticsService } from '@ul/shared';
+import { NetworkService, StatisticsService } from '@ul/shared';
 import { Observable } from 'rxjs';
 import { first } from 'rxjs/operators';
 import { StaticPagesRepository, TranslatedStaticPage } from '../../static-pages.repository';
 import { StaticPagesService } from '../../static-pages.service';
-import { Network } from '@capacitor/network';
 
 @Component({
   selector: 'app-static-pages-widget',
@@ -21,12 +20,13 @@ export class StaticPagesWidgetComponent implements OnInit {
     private staticPagesRepository: StaticPagesRepository,
     private router: Router,
     private statisticsService: StatisticsService,
+    private networkService: NetworkService,
   ) {
     this.translatedStaticPages$ = this.staticPagesRepository.translatedStaticPages$;
   }
 
   async ngOnInit() {
-    if (!(await Network.getStatus()).connected) {
+    if (!(await this.networkService.getConnectionStatus()).connected) {
       return;
     }
 

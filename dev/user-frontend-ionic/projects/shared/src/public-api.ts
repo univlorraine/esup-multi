@@ -23,6 +23,7 @@ export * from './lib/navigation/menu.model';
 export * from './lib/navigation/menu.service';
 export * from './lib/navigation/navigation.service';
 export * from './lib/navigation/page-layout.service';
+export * from './lib/network/network.service';
 export * from './lib/pipe/complete-local-date-pipe';
 export * from './lib/pipe/relative-time-pipe';
 export * from './lib/pipe/shared-pipe.module';

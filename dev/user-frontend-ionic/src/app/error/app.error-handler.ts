@@ -1,10 +1,9 @@
-import { Injectable, ErrorHandler, Injector } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ErrorHandler, Injectable, Injector } from '@angular/core';
 import { AlertController } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
-import { cleanupPrivateData, getAuthToken, getExpectedErrorMessage } from '@ul/shared';
 import { Actions } from '@ngneat/effects-ng';
-import { Network } from '@capacitor/network';
+import { TranslateService } from '@ngx-translate/core';
+import { cleanupPrivateData, getAuthToken, getExpectedErrorMessage, NetworkService } from '@ul/shared';
 import { first } from 'rxjs/operators';
 
 @Injectable({
@@ -18,6 +17,7 @@ export class AppErrorHandler implements ErrorHandler {
     private actions: Actions,
     private alertController: AlertController,
     private injector: Injector,
+    private networkService: NetworkService,
   ) {}
 
   async handleError(error: Error | HttpErrorResponse) {
@@ -26,11 +26,13 @@ export class AppErrorHandler implements ErrorHandler {
         await this.handleHttpError(error as HttpErrorResponse);
     }
 
-    console.error(error);
+    if(error){
+      console.error(error);
+    }
   }
 
   private async handleHttpError(error: HttpErrorResponse) {
-    if (!(await Network.getStatus()).connected) {
+    if (!(await this.networkService.getConnectionStatus()).connected) {
       return this.displayError('NO_NETWORK');
     }
 
