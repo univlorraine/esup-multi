@@ -18,6 +18,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { concatMap, map } from 'rxjs';
 import { ErrorsInterceptor } from './interceptors/errors.interceptor';
 import { AuthorizationHelper } from './security/authorization.helper';
+import * as infosJsonData from './infos.json';
 
 @UseInterceptors(new ErrorsInterceptor())
 @Controller()
@@ -40,7 +41,7 @@ export class AppController {
     @Inject('RESTAURANTS_SERVICE') private restaurantsClient: ClientProxy,
     @Inject('STATISTICS_SERVICE') private statisticsClient: ClientProxy,
     @Inject('MAIL_CALENDAR_SERVICE') private mailCalendarClient: ClientProxy,
-  ) { }
+  ) {}
 
   @Post('/features')
   info(@Body() body) {
@@ -675,6 +676,15 @@ export class AppController {
   serviceCheckHealth(@Param('service') serviceName: string) {
     const clientProxy = this.getClientProxy(serviceName);
     return clientProxy.send({ cmd: 'health' }, {});
+  }
+
+  @Get('/health')
+  mainCheckHealth() {
+    return {
+      message: 'up',
+      name: infosJsonData.name,
+      version: infosJsonData.version,
+    };
   }
 
   private getClientProxy(serviceName: string) {
