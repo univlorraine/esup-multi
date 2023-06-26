@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "backend.fullname" . }}
+  labels:
+    {{- include "backend.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "backend.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "backend.selectorLabels" . | nindent 8 }}
+    spec:
+#      initContainers:
+#        - name: wait-for-db
+#          image: "{{ .Values.initContainerWaitForDB.imageName }}"
+#          command:
+#            - 'sh'
+#            - '-c'
+#            - >
+#              until nc -z -w 2 {{ .Release.Name }}-{{ .Values.initContainerWaitForDB.waitServiceName }} {{ .Values.initContainerWaitForDB.waitServicePort }} && echo {{ .Values.initContainerWaitForDB.waitServiceName }} ok;
+#                do sleep 2;
+#              done
+
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "backend.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+
+      containers:
+        - name: {{ .Chart.Name }}-main
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repositoryUrl }}/{{ .Values.image.service.repositoryName }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{ $data := dict "Values" .Values }}
+          livenessProbe:
+            {{- include "helpers.get-common-health-probe" $data | nindent 12 }}
+          readinessProbe:
+            {{- include "helpers.get-common-health-probe" $data | nindent 12 }}
+          env:
+            {{ $data := dict "Values" .Values "env" .Values.image.service.env }}
+            {{- include "helpers.list-env-variables" $data | indent 12 }}
+          command:
+            {{  range .Values.image.nodeBaseCommand }}
+            - {{ . | quote }}
+            {{ end }}
+          volumeMounts:
+            - name: main-env-volume
+              {{- toYaml .Values.defaultEnvVolumeMountParams | default "" | nindent 14 }} 
+          ports:
+            - name: http
+              containerPort: {{ .Values.image.service.containerPort }}
+      volumes:
+        - name: main-env-volume
+          configMap:
+            name: "multi-backend-configmap-main"
+            items:
+              - key: main.env
+                path: .env

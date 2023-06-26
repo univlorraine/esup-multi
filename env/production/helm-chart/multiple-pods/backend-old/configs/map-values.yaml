@@ -1,0 +1,8 @@
+microService:
+  name: map
+  repositoryName: multi-map
+  path: /map
+  env:
+    normal:
+      MAP_SERVICE_HOST: "127.0.0.1"
+      MAP_SERVICE_PORT: "3005"

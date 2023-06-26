@@ -1,0 +1,149 @@
+# Default values for backend.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+app:
+  name: "multi-backend-main"
+
+initContainerWaitForDB:
+  imageName: "alpine"
+  waitServiceName: "mongodb"
+  waitServicePort: 27017
+
+image:
+  tag: sandbox
+  pullPolicy: IfNotPresent
+  repositoryUrl: registry-ul.jnesis.com
+  nodeBaseCommand: ["node", "main.js"]
+  common:
+    config:
+      DIRECTUS_API_URL: &directusApiUrl "changeit"
+      DIRECTUS_API_BEARER_TOKEN: &directusApiBearerToken "changeit"
+
+  service:
+    repositoryName: multi-main
+    containerPort: 3000
+    env:
+      normal:
+        API_GATEWAY_SERVER_HOST: "0.0.0.0"
+        API_GATEWAY_SERVER_PORT: "3000"
+        API_GATEWAY_CORS_ORIGIN: "http://localhost:8100,http://127.0.0.1:8100,http://localhost,capacitor://localhost"
+        FEATURES_SERVICE_HOST: "0.0.0.0"
+        FEATURES_SERVICE_PORT: "3003"
+        AUTH_SERVICE_HOST: "0.0.0.0"
+        AUTH_SERVICE_PORT: "3004"
+        MAP_SERVICE_HOST: "multi-backend-map-service"
+        MAP_SERVICE_PORT: "3005"
+        RSS_SERVICE_HOST: "0.0.0.0"
+        RSS_SERVICE_PORT: "3006"
+        CARDS_SERVICE_HOST: "0.0.0.0"
+        CARDS_SERVICE_PORT: "3007"
+        SCHEDULE_SERVICE_HOST: "0.0.0.0"
+        SCHEDULE_SERVICE_PORT: "3008"
+        CONTACTS_SERVICE_HOST: "0.0.0.0"
+        CONTACTS_SERVICE_PORT: "3009"
+        NOTIFICATIONS_SERVICE_HOST: "0.0.0.0"
+        NOTIFICATIONS_SERVICE_PORT: "3010"
+        IMPORTANT_NEWS_SERVICE_HOST: "0.0.0.0"
+        IMPORTANT_NEWS_SERVICE_PORT: "3011"
+        CLOCKING_SERVICE_HOST: "0.0.0.0"
+        CLOCKING_SERVICE_PORT: "3012"
+        SOCIAL_NETWORK_SERVICE_HOST: "0.0.0.0"
+        SOCIAL_NETWORK_SERVICE_PORT: "3013"
+        CHATBOT_SERVICE_HOST: "0.0.0.0"
+        CHATBOT_SERVICE_PORT: "3014"
+        STATIC_PAGES_SERVICE_HOST: "0.0.0.0"
+        STATIC_PAGES_SERVICE_PORT: "3015"
+        CONTACT_US_SERVICE_HOST: "0.0.0.0"
+        CONTACT_US_SERVICE_PORT: "3016"
+        RESTAURANTS_SERVICE_HOST: "0.0.0.0"
+        RESTAURANTS_SERVICE_PORT: "3017"
+      secret:
+        AUTH_SERVICE_JWT_SECRET: "changeit"
+
+service:
+  type: LoadBalancer
+  port: 3000
+
+defaultEnvVolumeMountParams:
+  mountPath: /usr/app/.env
+  subPath: .env
+  readOnly: true
+
+mongodb:
+  ports:
+    - "27017"
+  persistence:
+    mountPath: /bitnami/mongodb
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+# fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+# runAsNonRoot: true
+# runAsUser: 1000
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+  # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+#   memory: 128Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+commonHealthProbe:
+  initialDelaySeconds: 1
