@@ -321,5 +321,40 @@
 			"type": "ALLOW",
 			"id": 57
 		}
+	},
+	{
+		"id": 10,
+		"status": "published",
+		"widget": "rss:latest-news",
+		"icon": null,
+		"iconSourceSvgLightTheme": null,
+		"iconSourceSvgDarkTheme": null,
+		"position": null,
+		"type": "external",
+		"routerLink": "/rss",
+		"link": null,
+		"ssoService": null,
+		"color": null,
+		"statisticName": null,
+		"translations": [
+			{
+				"widgets_id": 10,
+				"languages_code": "en",
+				"content": null,
+				"searchKeywords": null,
+				"shortTitle": null,
+				"title": "Latest news"
+			},
+			{
+				"widgets_id": 10,
+				"languages_code": "fr",
+				"content": null,
+				"searchKeywords": null,
+				"shortTitle": null,
+				"title": "Dernière actualité"
+			}
+		],
+		"settings_by_role": [],
+		"authorization": null
 	}
 ]

@@ -3,4 +3,5 @@ export interface FeedItem {
   content: string;
   link: string;
   pubDate: Date;
+  guid: string;
 }

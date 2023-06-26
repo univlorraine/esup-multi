@@ -1,0 +1,23 @@
+<ion-card-header class="ion-no-padding">
+  <ion-grid class="ion-no-padding">
+    <ion-row>
+      <ion-col>
+        <ion-row class="rss-news-header">
+          <ion-col *ngIf="item.enclosure && isMediaAnImage(item.enclosure)">
+            <img alt="{{ item.enclosure.url }}" src="{{ item.enclosure.url }}"/>
+          </ion-col>
+          <ion-col [size]="item.enclosure && isMediaAnImage(item.enclosure) ? '7' : '12'"
+                   class="border-bottom title-col">
+            <ion-label class="ion-text-wrap title" color="primary">
+              <h2 class="app-text-3">{{item.title}}</h2>
+            </ion-label>
+
+            <ion-row class="ion-justify-content-end">
+              <ng-template [ngTemplateOutlet]="rssItemHeaderAction"></ng-template>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-card-header>

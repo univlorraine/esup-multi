@@ -22,6 +22,7 @@ export interface FeedItem {
   content: string;
   link: string;
   pubDate: string;
+  guid: string;
 }
 
 const rssFeedStore = createStore(
