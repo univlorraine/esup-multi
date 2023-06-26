@@ -20,7 +20,12 @@ export class ScheduleService {
 
   public getSchedule(query: UserScheduleQueryDto): Observable<Schedule> {
     const url = this.ulApiConfig.userScheduleUrl
-      .replace(/\{username\}/g, query.username)
+      .replace(
+        /\{username\}/g,
+        this.isUserScheduleManager(query.roles) && query.asUser
+          ? query.asUser
+          : query.username,
+      )
       .replace(/\{startDate\}/g, query.startDate)
       .replace(/\{endDate\}/g, query.endDate);
 
@@ -41,5 +46,14 @@ export class ScheduleService {
           return res.data;
         }),
       );
+  }
+
+  private isUserScheduleManager(userRoles: string[]) {
+    return (
+      userRoles?.length > 0 &&
+      this.ulApiConfig.scheduleAdminRoles.some((role) =>
+        userRoles.includes(role),
+      )
+    );
   }
 }

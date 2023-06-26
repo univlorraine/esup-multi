@@ -66,7 +66,8 @@ import { CalendarModule } from '@ul/calendar';
         numberOfDaysLimit: 7
       },
       previousWeeksInCache: 1,
-      nextWeeksInCache: 2
+      nextWeeksInCache: 2,
+      managerRoles: ['schedule-manager', 'multi-admin']
     }),
     ImportantNewsModule,
     FeaturesModule,

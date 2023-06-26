@@ -1,7 +1,9 @@
 export interface UserScheduleQueryDto {
   username: string;
+  roles: string[];
   startDate: string;
   endDate: string;
+  asUser?: string;
 }
 
 export interface Schedule {

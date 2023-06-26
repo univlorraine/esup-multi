@@ -30,6 +30,11 @@
     "LIST": {
         "SEE_MORE": "Voir plus"
     },
+    "MANAGEMENT": {
+        "AS_USER_LABEL": "Emploi du temps de",
+        "USERNAME_FORM_LABEL": "Login ou code etu",
+        "VALIDATE_FORM_BUTTON": "Valider"
+    },
     "WIDGET": {
         "NEXT_EVENTS": {
             "NO_EVENTS": "Pas de cours prochainement"

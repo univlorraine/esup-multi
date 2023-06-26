@@ -3,7 +3,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { format } from 'date-fns';
 import * as locale from 'date-fns/locale';
 
-
 @Pipe({
     name: 'localHour',
     pure: false

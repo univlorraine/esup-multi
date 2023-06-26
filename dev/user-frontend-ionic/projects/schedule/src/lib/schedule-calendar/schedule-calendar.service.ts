@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { EventInput } from 'fullcalendar';
-import { Event } from './../schedule.repository';
+import { Event } from '../schedule.repository';
 
 @Injectable({
   providedIn: 'root'
@@ -15,16 +15,14 @@ export class ScheduleCalendarService {
       return [];
     }
 
-    const eventsInput = events
-      .map(event =>
-       ({
-              start: event.startDateTime,
-              end: event.endDateTime,
-              extendedProps: {
-                event
-              }
-            }));
-
-      return eventsInput;
+    return events
+        .map(event =>
+          ({
+            start: event.startDateTime,
+            end: event.endDateTime,
+            extendedProps: {
+              event
+            }
+          }));
   }
 }

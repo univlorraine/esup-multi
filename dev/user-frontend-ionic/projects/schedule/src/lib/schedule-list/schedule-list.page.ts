@@ -2,9 +2,14 @@ import { Component, ViewChild } from '@angular/core';
 import { IonContent } from '@ionic/angular';
 import { AuthenticatedUser } from '@ul/shared';
 import { add, isAfter, startOfWeek } from 'date-fns';
-import { Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { eventsFromActivePlannings$, Schedule, schedule$ } from '../schedule.repository';
+import { combineLatest, Observable, of, Subscription } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs/operators';
+import {
+  impersonatedScheduleStoreManager,
+  Schedule,
+  scheduleStoreManager,
+  ScheduleStoreManager
+} from '../schedule.repository';
 import { formatDay, ScheduleService } from '../schedule.service';
 import { EventsByDay, ScheduleListService } from './schedule-list.service';
 
@@ -18,20 +23,18 @@ export class ScheduleListPage {
   @ViewChild('scrollContent') content: IonContent;
 
   public authenticatedUser$: Observable<AuthenticatedUser>;
-  public schedule$: Observable<Schedule> = schedule$;
   public areEventsFromActivePlannings$: Observable<boolean>;
   public eventsByDays$: Observable<EventsByDay[]>;
   public currentDay: string;
   public viewStartDate: Date;
   public viewEndDate: Date;
+  public storeManager: ScheduleStoreManager = scheduleStoreManager;
   private subscriptions: Subscription[] = [];
 
   constructor(
     private scheduleListService: ScheduleListService,
     private scheduleService: ScheduleService,
-  ) {
-    this.areEventsFromActivePlannings$ = eventsFromActivePlannings$.pipe(map(eventList => eventList.length > 0));
-  }
+  ) { }
 
   async ionViewWillEnter() {
     const now = new Date();
@@ -39,13 +42,26 @@ export class ScheduleListPage {
     this.viewStartDate = startOfWeek(now, { weekStartsOn: 1 });
     this.viewEndDate = this.scheduleService.getStateEndDate();
 
-    this.subscriptions.push(schedule$.subscribe(() => {
-      setTimeout(() => {
-        this.scrollToCurrentDate();
-      }, 300);
-    }));
+    this.subscriptions.push(
+      this.scheduleService.asUser.pipe(
+        tap(() => this.storeManager = this.scheduleService.getStoreManager()),
+        switchMap(() => this.storeManager.eventsFromActivePlannings$),
+        map(eventList => eventList.length > 0)
+      ).subscribe(result => {
+        this.areEventsFromActivePlannings$ = of(result);
+        this.eventsByDays$ = this.scheduleListService.loadEventsByDays(this.viewStartDate, this.viewEndDate);
+      }),
 
-    this.eventsByDays$ = this.scheduleListService.loadEventsByDays(this.viewStartDate, this.viewEndDate);
+      combineLatest([
+        scheduleStoreManager.schedule$,
+        impersonatedScheduleStoreManager.schedule$,
+        this.scheduleService.asUser
+      ]).subscribe(() => {
+        setTimeout(() => {
+          this.scrollToCurrentDate();
+        }, 300);
+      })
+    );
 
     this.subscriptions.push(this.scheduleListService.showEventEvt.subscribe(() => {
       this.keepScrollPosition();
@@ -93,7 +109,7 @@ export class ScheduleListPage {
 
     this.eventsByDays$ = this.scheduleListService.loadEventsByDays(this.viewStartDate, endDateToLoad, outOfStateSchedule);
 
-    this.keepScrollPosition(scrollPosition);
+    await this.keepScrollPosition(scrollPosition);
     this.viewEndDate = endDateToLoad;
 
   }

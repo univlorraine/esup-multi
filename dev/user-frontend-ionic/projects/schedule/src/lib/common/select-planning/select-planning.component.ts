@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { Observable, zip } from 'rxjs';
-import { activePlanningIds$, HiddenCourse, hiddenCourseList$, schedule$, setActivePlanningIds } from '../../schedule.repository';
+import { switchMap, filter } from 'rxjs/operators';
+import { HiddenCourse, scheduleStoreManager } from '../../schedule.repository';
+import { ScheduleService } from '../../schedule.service';
 
 interface AvailablePlanningFormInput extends AvailablePlanning {
   checked: boolean;
@@ -24,18 +26,21 @@ const atLeastOneCheckedValidator = (): ValidatorFn =>
 })
 export class SelectPlanningComponent {
 
-
   form: FormGroup;
   public isSelectPlanningModalOpen = false;
   public isHiddenCourseModalOpen = false;
   public isLoading = false;
   public availablePlanningList: AvailablePlanning[] = [];
   public lastSelectedPlanningIndex: number | null = null;
-  public hiddenCourseList$: Observable<HiddenCourse[]> = hiddenCourseList$;
+  public hiddenCourseList$: Observable<HiddenCourse[]> = scheduleStoreManager.hiddenCourseList$;
 
   constructor(
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private scheduleService: ScheduleService
   ) {
+    this.scheduleService.asUser.subscribe(
+      () => this.hiddenCourseList$ = this.scheduleService.getStoreManager().hiddenCourseList$
+    );
     this.form = this.formBuilder.group({
       planningList: this.formBuilder.array([], atLeastOneCheckedValidator())
     });
@@ -64,16 +69,17 @@ export class SelectPlanningComponent {
     this.isLoading = true;
     this.isSelectPlanningModalOpen = true;
 
-    zip(schedule$, activePlanningIds$)
+    zip(this.scheduleService.getStoreManager().schedule$, this.scheduleService.getStoreManager().activePlanningIds$)
+      .pipe(filter(([schedule]) => schedule !== null && schedule !== undefined))
       .subscribe(([schedule, activePlanningIds]) => {
-        const availablePlanningFormInputs = schedule.plannings.map(p => ({
-          id: p.id,
-          label: p.label,
-          checked: activePlanningIds.includes(p.id)
-        }));
-        this.buildForm(availablePlanningFormInputs);
-        this.isLoading = false;
-      });
+          const availablePlanningFormInputs = schedule.plannings.map(p => ({
+            id: p.id,
+            label: p.label,
+            checked: activePlanningIds.includes(p.id)
+          }));
+          this.buildForm(availablePlanningFormInputs);
+          this.isLoading = false;
+        });
   }
 
   openHiddenCourseModal(){
@@ -90,6 +96,7 @@ export class SelectPlanningComponent {
   }
 
   private buildForm(availablePlanningFormInputs: AvailablePlanningFormInput[]) {
+    this.planningList.clear();
     availablePlanningFormInputs.forEach(formInput => this.planningList.push(new FormControl(formInput.checked)));
     this.availablePlanningList = availablePlanningFormInputs.map(formInput => ({
       id: formInput.id,
@@ -104,9 +111,7 @@ export class SelectPlanningComponent {
         selectedPlanningIds.push(this.availablePlanningList[i].id);
       }
     }
-    setActivePlanningIds(selectedPlanningIds);
+
+    this.scheduleService.getStoreManager().setActivePlanningIds(selectedPlanningIds);
   }
-
-
-
 }

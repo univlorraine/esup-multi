@@ -11,7 +11,7 @@ import {
   Query,
   Request,
   UseGuards,
-  UseInterceptors
+  UseInterceptors,
 } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { AuthGuard } from '@nestjs/passport';
@@ -230,8 +230,10 @@ export class AppController {
             },
             {
               username: user.username,
+              roles: user.roles,
               startDate: body.startDate,
               endDate: body.endDate,
+              asUser: body.asUser,
             },
           ),
         ),
