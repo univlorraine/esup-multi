@@ -7,17 +7,21 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import { IonModal, Platform } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
-import { currentLanguage$ } from '@ul/shared';
 import { format, isAfter, isBefore, sub } from 'date-fns';
 import * as locale from 'date-fns/locale';
 import { EventInput } from 'fullcalendar';
 import { Observable, Subscription } from 'rxjs';
 import { filter, first, map, mergeMap, tap } from 'rxjs/operators';
-import { displayedEvents$, Schedule } from '../schedule.repository';
+import { currentLanguage$ } from '@ul/shared';
+import {
+  Event,
+  impersonatedScheduleStoreManager,
+  Schedule,
+  scheduleStoreManager,
+  ScheduleStoreManager
+} from '../schedule.repository';
 import { formatDay, ScheduleService } from '../schedule.service';
-import { Event } from './../schedule.repository';
 import { ScheduleCalendarService } from './schedule-calendar.service';
-
 
 const defaultBreakpoint = 0.60;
 
@@ -40,6 +44,7 @@ export class ScheduleCalendarComponent {
   public errorIsBefore: boolean;
   public calendarDisplaySomeDateOutOfState: boolean;
   public initialBreakpoint: number;
+  public storeManager: ScheduleStoreManager = scheduleStoreManager;
   public calendarOptions: CalendarOptions = {
     plugins: [timeGridPlugin, dayGridPlugin],
     height: '100%',
@@ -70,20 +75,19 @@ export class ScheduleCalendarComponent {
       this.isEventDetailOpen = true;
     },
     events: (fetchInfo, successCallback) => {
-
       this.loadScheduleOutOfStateError = false;
       fetchInfo.end = sub(fetchInfo.end, { days: 1 });
 
       this.calendarDisplaySomeDateOutOfState = isBefore(fetchInfo.start, this.scheduleService.getStateStartDate())
         || isAfter(fetchInfo.end, this.scheduleService.getStateEndDate());
 
-
       if (!this.calendarDisplaySomeDateOutOfState) {
-        displayedEvents$.pipe(
+        this.storeManager.displayedEvents$.pipe(
           first(),
           map((events: Event[]) => this.scheduleCalendarService.eventsToCalendarEvents(events))
         ).subscribe((events: EventInput[]) => successCallback(events));
         return;
+
       }
 
       this.scheduleService.loadScheduleOutOfStateInterval(formatDay(fetchInfo.start), formatDay(fetchInfo.end))
@@ -108,7 +112,7 @@ export class ScheduleCalendarComponent {
               }
             }
 
-            displayedEvents$.pipe(
+            this.storeManager.displayedEvents$.pipe(
               first(),
               map((events: Event[]) => this.scheduleCalendarService.eventsToCalendarEvents(events))
             ).subscribe((events: EventInput[]) => successCallback(events));
@@ -135,22 +139,14 @@ export class ScheduleCalendarComponent {
   async ionViewDidEnter() {
     this.initCalendar();
 
-    this.subscriptions.push(this.viewType$.subscribe(viewType => {
-      this.viewType = viewType;
-      this.changeViewType(viewType);
-    }));
-
     this.subscriptions.push(
-      displayedEvents$.pipe(
-        tap(() => this.getCalendar().refetchEvents()),
-      ).subscribe());
-    this.subscriptions.push(this.scheduleService.hideEventEvt.subscribe(() => {
-      this.dismissModal();
-    }));
-
-    this.subscriptions.push(this.platform.resize.subscribe(async () => {
-      this.updateBreakpoints();
-    }));
+      this.subscribeToViewType(),
+      this.subscribeToDisplayedEvents(scheduleStoreManager),
+      this.subscribeToDisplayedEvents(impersonatedScheduleStoreManager),
+      this.subscribeToAsUser(),
+      this.subscribeToHideEvent(),
+      this.subscribeToResizeScreen()
+    );
   }
 
   ionViewDidLeave() {
@@ -213,5 +209,32 @@ export class ScheduleCalendarComponent {
       this.modal.initialBreakpoint = breakpoint;
       this.modal.setCurrentBreakpoint(breakpoint);
     });
+  }
+
+  private subscribeToViewType(): Subscription {
+    return this.viewType$.subscribe(viewType => {
+      this.viewType = viewType;
+      this.changeViewType(viewType);
+    });
+  }
+
+  private subscribeToDisplayedEvents(storeManager: ScheduleStoreManager): Subscription {
+    return storeManager.displayedEvents$.pipe(
+      tap(() => this.getCalendar()?.refetchEvents())
+    ).subscribe();
+  }
+
+  private subscribeToAsUser(): Subscription {
+    return this.scheduleService.asUser.pipe(
+      tap(() => this.storeManager = this.scheduleService.getStoreManager())
+    ).subscribe(() => this.getCalendar()?.refetchEvents());
+  }
+
+  private subscribeToHideEvent(): Subscription {
+    return this.scheduleService.hideEventEvt.subscribe(() => this.dismissModal());
+  }
+
+  private subscribeToResizeScreen(): Subscription {
+    return this.platform.resize.subscribe(() => this.updateBreakpoints());
   }
 }

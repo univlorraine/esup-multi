@@ -30,6 +30,11 @@
     "LIST": {
         "SEE_MORE": "See more"
     },
+    "MANAGEMENT": {
+        "AS_USER_LABEL": "Schedule for",
+        "USERNAME": "Login or Student code",
+        "VALIDATE": "Validate"
+    },
     "WIDGET": {
         "NEXT_EVENTS": {
             "NO_EVENTS": "No courses soon"

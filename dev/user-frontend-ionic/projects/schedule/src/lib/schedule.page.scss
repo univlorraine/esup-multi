@@ -1,10 +1,22 @@
+ion-progress-bar {
+  z-index: 2;
+}
+
+ion-toolbar, ion-tabs {
+  position: relative;
+}
+
 ion-tab-bar {
   height: 2.4rem;
 }
-
 
 .tab-selected {
   ion-label{
     color: var(--ion-color-secondary) !important;
   }
+}
+
+ion-title.schedule-as-user-title {
+  padding: 0;
+  padding-inline: 0;
 }

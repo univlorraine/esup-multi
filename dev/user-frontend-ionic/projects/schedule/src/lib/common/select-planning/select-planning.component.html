@@ -2,8 +2,7 @@
   <ion-button (click)="openSelectPlanningModal()" fill="clear" class="ion-no-padding">
     <ion-icon name="layers-outline"></ion-icon>
   </ion-button>
-  <ion-button *ngIf="(hiddenCourseList$ | async).length > 0" (click)="openHiddenCourseModal()" fill="clear"
-    class="ion-no-padding">
+  <ion-button *ngIf="(hiddenCourseList$ | async)?.length > 0" (click)="openHiddenCourseModal()" fill="clear" class="ion-no-padding">
     <ion-icon name="eye-off-outline"></ion-icon>
   </ion-button>
 </ion-buttons>
@@ -43,8 +42,7 @@
 </ion-modal>
 
 
-<ion-modal [isOpen]="isHiddenCourseModalOpen && (hiddenCourseList$ | async).length > 0"
-  (willDismiss)="onDismissHiddenCourseModal()">
+<ion-modal [isOpen]="isHiddenCourseModalOpen && ((hiddenCourseList$ | async)?.length > 0)" (willDismiss)="onDismissHiddenCourseModal()">
   <ng-template>
     <ion-progress-bar *ngIf="isLoading" type="indeterminate" color="primary"></ion-progress-bar>
 

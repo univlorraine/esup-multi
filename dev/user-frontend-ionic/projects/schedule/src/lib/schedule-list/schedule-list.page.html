@@ -1,4 +1,4 @@
-<ion-content *ngIf="(schedule$ | async) as schedule" #scrollContent>
+<ion-content *ngIf="(storeManager.schedule$ | async) as schedule" #scrollContent>
 
   <ng-container *ngIf="(areEventsFromActivePlannings$ | async) === true">
 
@@ -32,6 +32,6 @@
   <ion-note class="app-text-4"> {{ "SCHEDULE.NO_EVENTS" | translate }} </ion-note>
 </ion-content>
 
-<ion-content class="ion-padding" *ngIf="(schedule$ | async) === null">
+<ion-content class="ion-padding" *ngIf="(storeManager.schedule$ | async) === null">
   <ion-note class="app-text-4"> {{ "SCHEDULE.NO_DATA" | translate }} </ion-note>
 </ion-content>
