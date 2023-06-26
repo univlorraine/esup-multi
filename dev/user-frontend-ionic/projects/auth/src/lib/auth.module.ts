@@ -11,6 +11,7 @@ import { LoginPage } from './login/login.page';
 import { PreferencesComponent } from './preferences/preferences.component';
 import { AuthComponent } from './widget/auth/auth.component';
 import { NotAuthentifiedComponent } from './widget/not-authentified/not-authentified.component';
+import { GreetingComponent } from './widget/greeting/greeting.component';
 
 const initModule = (projectModuleService: ProjectModuleService) =>
   () => projectModuleService.initProjectModule({
@@ -22,6 +23,9 @@ const initModule = (projectModuleService: ProjectModuleService) =>
     }, {
       id: 'auth-not-authentified-widget',
       component: NotAuthentifiedComponent
+    }, {
+      id: 'greeting-widget',
+      component: GreetingComponent
     }],
     preferencesComponent: PreferencesComponent
   });
@@ -31,6 +35,7 @@ const initModule = (projectModuleService: ProjectModuleService) =>
     PreferencesComponent,
     AuthComponent,
     NotAuthentifiedComponent,
+    GreetingComponent,
   ],
   imports: [
     CommonModule,
