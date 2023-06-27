@@ -28,9 +28,6 @@ service:
 secret:
   name: multi-pwa-env-secrets
 
-configMap:
-  name: multi-pwa-config-map
-
 defaultEnvVolumeMountParams:
   mountPath: /usr/app/.env
   subPath: .env

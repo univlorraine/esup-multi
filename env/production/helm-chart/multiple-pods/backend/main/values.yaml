@@ -127,5 +127,5 @@ tolerations: []
 affinity: {}
 
 commonHealthProbe:
-  initialDelaySeconds: 1
+  initialDelaySeconds: 20
   port: 3000

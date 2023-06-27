@@ -38,17 +38,11 @@ spec:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
 
       containers:
-        {{- if not .Values.appService.disabled }}
         - name: {{ .Chart.Name }}-{{ .Values.appService.name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repositoryUrl }}/{{ .Values.appService.repositoryName }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          {{ $data := dict "Values" .Values }}
-          livenessProbe:
-            {{- include "helpers.get-common-health-probe" $data | nindent 12 }}
-          readinessProbe:
-            {{- include "helpers.get-common-health-probe" $data | nindent 12 }}
           env:
             {{- if and .Values.appService.env }}
             {{ $data := dict "Values" .Values "env" .Values.appService.env }}
@@ -60,5 +54,4 @@ spec:
             {{ end }}
           ports:
             - name: microservice
-              containerPort: {{ .Values.service.port }}
-        {{- end }}
+              containerPort: {{ .Values.appService.containerPort }}

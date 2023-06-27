@@ -91,7 +91,3 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
-
-commonHealthProbe:
-  initialDelaySeconds: 1
-  port: 3000
