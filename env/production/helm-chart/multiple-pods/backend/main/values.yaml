@@ -138,5 +138,5 @@ global:
 
   commonHealthProbe:
     initialDelaySeconds: 50
-    host: "https://multi-staging.jnesis.com"
+    host: "multi-staging.jnesis.com"
     port: 3000
