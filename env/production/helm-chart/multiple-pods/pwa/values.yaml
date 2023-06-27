@@ -16,9 +16,10 @@ image:
   tag: develop
   pullPolicy: IfNotPresent
   repositoryUrl: registry-ul.jnesis.com
-  service:
-    name: pwa
-    repositoryName: multi-pwa
+
+appService:
+  name: pwa
+  repositoryName: multi-pwa
 
 service:
   type: ClusterIP

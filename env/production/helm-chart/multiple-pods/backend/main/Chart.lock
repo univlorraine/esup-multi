@@ -2,5 +2,8 @@ dependencies:
 - name: multi-pwa
   repository: file://../../pwa
   version: 0.1.0
-digest: sha256:a91bf88148299141340548c6e78b72d4b2730406b85fdb07c68a81c99d196b09
-generated: "2023-06-27T11:36:10.768907+02:00"
+- name: multi-backend-microservice
+  repository: file://../microservice
+  version: 0.1.0
+digest: sha256:431cdcaf53b4fa488a0b0a16b4369bc8a9041512c76706d92db2cf1c3e2bccb4
+generated: "2023-06-27T14:16:42.983094+02:00"

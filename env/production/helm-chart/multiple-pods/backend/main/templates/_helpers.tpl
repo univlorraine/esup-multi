@@ -1,5 +1,5 @@
 {{- define "helpers.list-env-variables"}}
-{{- $secretName := printf "multi-backend-secrets-%s" .Values.image.service.name -}}
+{{- $secretName := printf "multi-backend-secrets-%s" .Values.appService.name -}}
 {{- $env := .env -}}
 {{- range $key, $val := $env.secret }}
 - name: {{ $key }}
@@ -18,7 +18,7 @@
 {{- $servicePath := .servicePath -}}
 httpGet:
   path: {{ $servicePath }}/health
-  port: {{ .Values.image.service.containerPort }}
+  port: {{ .Values.commonHealthProbe.port }}
 initialDelaySeconds: {{ .Values.commonHealthProbe.initialDelaySeconds }}
 {{- end }}
 

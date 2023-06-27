@@ -9,3 +9,7 @@ dependencies:
     name: multi-pwa
     version: "0.1.0"
     repository: file://../../pwa
+  - alias: multi-microservice-map
+    name: multi-backend-microservice
+    version: "0.1.0"
+    repository: file://../microservice

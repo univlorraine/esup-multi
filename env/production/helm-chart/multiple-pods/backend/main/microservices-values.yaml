@@ -1,9 +1,9 @@
-multi-map:
-  microService:
+multi-microservice-map:
+  appService:
     name: map
     repositoryName: multi-map
     path: /map
-    port: 3045
+    containerPort: 3005
     env:
       normal:
         MAP_SERVICE_HOST: "0.0.0.0"

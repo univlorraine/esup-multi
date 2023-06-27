@@ -29,10 +29,10 @@ spec:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
 
       containers:
-        - name: {{ .Chart.Name }}-{{ .Values.image.service.name }}
+        - name: {{ .Chart.Name }}-{{ .Values.appService.name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repositoryUrl }}/{{ .Values.image.service.repositoryName }}:{{ .Values.image.tag }}"
+          image: "{{ .Values.image.repositoryUrl }}/{{ .Values.appService.repositoryName }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           {{ $data := dict "Values" .Values }}
           livenessProbe:
@@ -40,7 +40,7 @@ spec:
           readinessProbe:
             {{- include "helpers.get-common-health-probe" $data | nindent 12 }}
           env:
-            {{ $data := dict "Values" .Values "env" .Values.image.service.env }}
+            {{ $data := dict "Values" .Values "env" .Values.appService.env }}
             {{- include "helpers.list-env-variables" $data | indent 12 }}
           command:
             {{  range .Values.image.nodeBaseCommand }}
@@ -48,4 +48,4 @@ spec:
             {{ end }}
           ports:
             - name: http
-              containerPort: {{ .Values.image.service.containerPort }}
+              containerPort: {{ .Values.appService.containerPort }}

@@ -38,14 +38,20 @@ spec:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
 
       containers:
-        - name: {{ .Chart.Name }}-{{ .Values.microService.name }}
+        {{- if not .Values.appService.disabled }}
+        - name: {{ .Chart.Name }}-{{ .Values.appService.name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repositoryUrl }}/{{ .Values.microService.repositoryName }}:{{ .Values.image.tag }}"
+          image: "{{ .Values.image.repositoryUrl }}/{{ .Values.appService.repositoryName }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{ $data := dict "Values" .Values }}
+          livenessProbe:
+            {{- include "helpers.get-common-health-probe" $data | nindent 12 }}
+          readinessProbe:
+            {{- include "helpers.get-common-health-probe" $data | nindent 12 }}
           env:
-            {{- if and .Values.microService.env }}
-            {{ $data := dict "Values" .Values "env" .Values.microService.env }}
+            {{- if and .Values.appService.env }}
+            {{ $data := dict "Values" .Values "env" .Values.appService.env }}
             {{- include "helpers.list-env-variables" $data | indent 12 }}
             {{ end }}
           command:
@@ -54,4 +60,5 @@ spec:
             {{ end }}
           ports:
             - name: microservice
-              containerPort: {{ .Values.microService.port }}
+              containerPort: {{ .Values.service.port }}
+        {{- end }}
