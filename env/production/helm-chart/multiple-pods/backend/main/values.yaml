@@ -7,22 +7,14 @@ replicaCount: 1
 app:
   name: "multi-backend-main"
 
-initContainerWaitForDB:
-  imageName: "alpine"
-  waitServiceName: "mongodb"
-  waitServicePort: 27017
-
 image:
   tag: sandbox
   pullPolicy: IfNotPresent
   repositoryUrl: registry-ul.jnesis.com
   nodeBaseCommand: ["node", "main.js"]
-  common:
-    config:
-      DIRECTUS_API_URL: &directusApiUrl "changeit"
-      DIRECTUS_API_BEARER_TOKEN: &directusApiBearerToken "changeit"
 
   service:
+    name: main
     repositoryName: multi-main
     containerPort: 3000
     env:
@@ -66,17 +58,6 @@ image:
 service:
   type: ClusterIP
   port: 3000
-
-defaultEnvVolumeMountParams:
-  mountPath: /usr/app/.env
-  subPath: .env
-  readOnly: true
-
-mongodb:
-  ports:
-    - "27017"
-  persistence:
-    mountPath: /bitnami/mongodb
 
 imagePullSecrets: []
 nameOverride: ""
@@ -147,5 +128,3 @@ affinity: {}
 
 commonHealthProbe:
   initialDelaySeconds: 1
-
-test: "jnesis"

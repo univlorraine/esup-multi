@@ -5,11 +5,7 @@ type: application
 version: 0.1.0
 appVersion: "1.0.0"
 dependencies:
-  - alias: multi-map
-    name: multi-backend-microservice
+  - alias: multi-pwa
+    name: multi-pwa
     version: "0.1.0"
-    repository: file://../microservice
-  - alias: multi-static-pages
-    name: multi-backend-microservice
-    version: "0.1.0"
-    repository: file://../microservice
+    repository: file://../../pwa

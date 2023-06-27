@@ -8,14 +8,3 @@ multi-map:
       normal:
         MAP_SERVICE_HOST: "0.0.0.0"
         MAP_SERVICE_PORT: "3005"
-
-multi-static-pages:
-  microService:
-    name: static-pages
-    repositoryName: multi-static-pages
-    path: /static-pages
-    port: 3015
-    env:
-      normal:
-        STATIC_PAGES_SERVICE_HOST: "0.0.0.0"
-        STATIC_PAGES_SERVICE_PORT: "3015"

@@ -1,18 +1,3 @@
-{{- define "helpers.list-env-variables"}}
-{{- $secretName := .Values.secret.name -}}
-{{- range $key, $val := .Values.env.secret }}
-- name: {{ $key }}
-  valueFrom:
-    secretKeyRef:
-      name: {{ $secretName }}
-      key: {{ $key }}
-{{- end}}
-{{- range $key, $val := .Values.env.normal }}
-- name: {{ $key }}
-  value: {{ $val | quote }}
-{{- end}}
-{{- end }}
-
 {{/*
 Expand the name of the chart.
 */}}

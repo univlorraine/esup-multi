@@ -20,17 +20,6 @@ spec:
       labels:
         {{- include "backend.selectorLabels" . | nindent 8 }}
     spec:
-#      initContainers:
-#        - name: wait-for-db
-#          image: "{{ .Values.initContainerWaitForDB.imageName }}"
-#          command:
-#            - 'sh'
-#            - '-c'
-#            - >
-#              until nc -z -w 2 {{ .Release.Name }}-{{ .Values.initContainerWaitForDB.waitServiceName }} {{ .Values.initContainerWaitForDB.waitServicePort }} && echo {{ .Values.initContainerWaitForDB.waitServiceName }} ok;
-#                do sleep 2;
-#              done
-
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
@@ -40,7 +29,7 @@ spec:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
 
       containers:
-        - name: {{ .Chart.Name }}-main
+        - name: {{ .Chart.Name }}-{{ .Values.image.service.name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repositoryUrl }}/{{ .Values.image.service.repositoryName }}:{{ .Values.image.tag }}"
@@ -57,16 +46,6 @@ spec:
             {{  range .Values.image.nodeBaseCommand }}
             - {{ . | quote }}
             {{ end }}
-          volumeMounts:
-            - name: main-env-volume
-              {{- toYaml .Values.defaultEnvVolumeMountParams | default "" | nindent 14 }} 
           ports:
             - name: http
               containerPort: {{ .Values.image.service.containerPort }}
-      volumes:
-        - name: main-env-volume
-          configMap:
-            name: "multi-backend-configmap-main"
-            items:
-              - key: main.env
-                path: .env

@@ -9,16 +9,16 @@ app:
 
 initContainerWaitForBackend:
   imageName: "alpine"
-  waitServiceName: "multi-backend-service"
+  waitServiceName: "multi-backend-main-service"
   waitServicePort: 3000
 
-images:
+image:
   tag: develop
   pullPolicy: IfNotPresent
   repositoryUrl: registry-ul.jnesis.com
-  services:
-    pwa:
-      repositoryName: multi-pwa
+  service:
+    name: pwa
+    repositoryName: multi-pwa
 
 service:
   type: ClusterIP

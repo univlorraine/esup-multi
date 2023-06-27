@@ -1,6 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: multi-backend-configmap-main
-data:
-{{ (.Files.Glob "envs/*").AsConfig | indent 2 }}

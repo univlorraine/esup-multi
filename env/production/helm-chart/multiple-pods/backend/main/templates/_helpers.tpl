@@ -1,5 +1,5 @@
 {{- define "helpers.list-env-variables"}}
-{{- $secretName := "multi-backend-secrets-main" -}}
+{{- $secretName := printf "multi-backend-secrets-%s" .Values.image.service.name -}}
 {{- $env := .env -}}
 {{- range $key, $val := $env.secret }}
 - name: {{ $key }}

@@ -27,7 +27,7 @@ spec:
             - 'sh'
             - '-c'
             - >
-              until nc -z -w 2 {{ .Release.Name }}-{{ .Values.initContainerWaitForBackend.waitServiceName }} {{ .Values.initContainerWaitForBackend.waitServicePort }} && echo {{ .Values.initContainerWaitForBackend.waitServiceName }} ok;
+              until nc -z -w 2 {{ .Release.Name }}-{{ .Values.initContainerWaitForBackend.waitServiceName }} {{ .Values.initContainerWaitForBackend.waitServicePort }} && echo {{ .Release.Name }}-{{ .Values.initContainerWaitForBackend.waitServiceName }} ok;
                 do sleep 2;
               done
 
@@ -43,25 +43,11 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.images.repositoryUrl }}/{{ .Values.images.services.pwa.repositoryName }}:{{ .Values.images.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.images.pullPolicy }}
+          image: "{{ .Values.image.repositoryUrl }}/{{ .Values.image.service.repositoryName }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             {{- include "helpers.list-env-variables" . | indent 12 }}
-          volumeMounts:
-            - name: pwa-env-volume
-              {{- toYaml .Values.defaultEnvVolumeMountParams | default "" | nindent 14 }}
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
               protocol: TCP
-
-      volumes:
-      {{- $configMapName := .Values.configMap.name -}}
-      {{- range $val := .Values.envFilesToMount }}
-        - name: {{ $val }}-env-volume
-          configMap:
-            name: {{ $configMapName }}
-            items:
-              - key: {{ $val }}.env
-                path: .env
-      {{- end}}
