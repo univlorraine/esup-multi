@@ -4,6 +4,7 @@ common:
     DIRECTUS_API_BEARER_TOKEN: &directusApiBearerToken "changeit"
 
 multi-microservice-auth:
+  replicaCount: 1  # Can be overloaded here
   waitForDB: true
   appService:
     name: auth
@@ -139,6 +140,7 @@ multi-microservice-mail-calendar:
         MAIL_CALENDAR_SERVICE_UL_BEARER_TOKEN: "changeit"
 
 multi-microservice-map:
+  replicaCount: 5
   appService:
     name: map
     repositoryName: multi-map
