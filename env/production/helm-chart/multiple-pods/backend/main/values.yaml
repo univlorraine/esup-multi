@@ -140,3 +140,4 @@ global:
     initialDelaySeconds: 50
     host: "multi-staging.jnesis.com"
     port: 3000
+    scheme: https
