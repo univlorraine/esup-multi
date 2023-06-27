@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Release.Name }}-multi-backend-{{ .Values.appService.name }}-service
+  name: multi-backend-{{ .Values.appService.name }}-service
 spec:
   type: {{ .Values.service.type }}
   ports:

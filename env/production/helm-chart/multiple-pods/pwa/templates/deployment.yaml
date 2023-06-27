@@ -27,7 +27,7 @@ spec:
             - 'sh'
             - '-c'
             - >
-              until nc -z -w 2 {{ .Release.Name }}-{{ .Values.initContainerWaitForBackend.waitServiceName }} {{ .Values.initContainerWaitForBackend.waitServicePort }} && echo {{ .Release.Name }}-{{ .Values.initContainerWaitForBackend.waitServiceName }} ok;
+              until nc -z -w 2 {{ .Values.initContainerWaitForBackend.waitServiceName }} {{ .Values.initContainerWaitForBackend.waitServicePort }} && echo {{ .Values.initContainerWaitForBackend.waitServiceName }} ok;
                 do sleep 2;
               done
 
