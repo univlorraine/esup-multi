@@ -10,7 +10,7 @@ initContainerWaitForBackend:
   waitServicePort: 3000
 
 image:
-  tag: develop
+  tag: staging
   pullPolicy: IfNotPresent
   repositoryUrl: registry-ul.jnesis.com
 
