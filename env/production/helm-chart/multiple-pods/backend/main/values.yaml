@@ -139,5 +139,5 @@ global:
   commonHealthProbe:
     initialDelaySeconds: 50
     host: "multi-staging.jnesis.com"
-    port: 3000
+    port: 443
     scheme: HTTPS
