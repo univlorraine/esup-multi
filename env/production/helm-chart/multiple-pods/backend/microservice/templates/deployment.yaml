@@ -2,14 +2,11 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: {{ include "backend.fullname" . }}
-  labels:
-    app: map
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
-    app: map
     matchLabels:
       {{- include "backend.selectorLabels" . | nindent 6 }}
   template:
@@ -57,4 +54,4 @@ spec:
             {{ end }}
           ports:
             - name: microservice
-              containerPort: {{ .Values.service.port }}
+              containerPort: {{ .Values.microService.port }}

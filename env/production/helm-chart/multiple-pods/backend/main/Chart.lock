@@ -2,5 +2,8 @@ dependencies:
 - name: multi-backend-microservice
   repository: file://../microservice
   version: 0.1.0
-digest: sha256:69ceccbd249218e6ae3bc97e74d7384db554f2c1a0476223c815b69079087afc
-generated: "2023-06-26T17:40:15.63338+02:00"
+- name: multi-backend-microservice
+  repository: file://../microservice
+  version: 0.1.0
+digest: sha256:08e74df5750cdaac4602bad7a83daa906ff4924a13f655cb1a70244da281623e
+generated: "2023-06-27T10:00:44.725192+02:00"

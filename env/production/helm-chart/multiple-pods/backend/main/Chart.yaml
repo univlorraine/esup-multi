@@ -9,3 +9,7 @@ dependencies:
     name: multi-backend-microservice
     version: "0.1.0"
     repository: file://../microservice
+  - alias: multi-static-pages
+    name: multi-backend-microservice
+    version: "0.1.0"
+    repository: file://../microservice

@@ -3,10 +3,11 @@ kind: Service
 metadata:
   name: multi-backend-{{ .Values.microService.name }}-service
 spec:
+  type: {{ .Values.service.type }}
   ports:
-    - port: {{ .Values.service.port }}
+    - port: {{ .Values.microService.port }}
       targetPort: microservice
       protocol: TCP
       name: microservice
   selector:
-    app.kubernetes.io/name: multi-map
+    {{- include "backend.selectorLabels" . | nindent 6 }}
