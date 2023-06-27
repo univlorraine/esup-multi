@@ -5,6 +5,8 @@ common:
 
 multi-microservice-features:
   replicaCount: 1  # Can be overloaded here
+  image: # Can be overloaded here
+    tag: "sandbox"
   appService:
     name: features
     repositoryName: multi-features

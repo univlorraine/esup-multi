@@ -43,7 +43,7 @@ spec:
         - name: {{ .Chart.Name }}-{{ .Values.appService.name }}
           securityContext:
             {{- toYaml .Values.global.securityContext | nindent 12 }}
-          image: "{{ .Values.global.image.repositoryUrl }}/{{ .Values.appService.repositoryName }}:{{ .Values.global.image.tag }}"
+          image: "{{ .Values.global.image.repositoryUrl }}/{{ .Values.appService.repositoryName }}:{{ default .Values.global.image.tag (.Values.image).tag }}"
           imagePullPolicy: {{ .Values.global.image.pullPolicy }}
           env:
             {{- if .Values.enableDB }}
