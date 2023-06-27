@@ -4,9 +4,6 @@
 
 replicaCount: 1
 
-app:
-  name: "multi-pwa"
-
 initContainerWaitForBackend:
   imageName: "alpine"
   waitServiceName: "multi-backend-main-service"
