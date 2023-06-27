@@ -18,16 +18,18 @@ spec:
       labels:
         {{- include "backend.selectorLabels" . | nindent 8 }}
     spec:
-#      initContainers:
-#        - name: wait-for-db
-#          image: "{{ .Values.initContainerWaitForDB.imageName }}"
-#          command:
-#            - 'sh'
-#            - '-c'
-#            - >
-#              until nc -z -w 2 {{ .Release.Name }}-{{ .Values.initContainerWaitForDB.waitServiceName }} {{ .Values.initContainerWaitForDB.waitServicePort }} && echo {{ .Values.initContainerWaitForDB.waitServiceName }} ok;
-#                do sleep 2;
-#              done
+      {{- if .Values.waitForDB }}
+      initContainers:
+        - name: wait-for-db
+          image: "{{ .Values.initContainerWaitForDB.imageName }}"
+          command:
+            - 'sh'
+            - '-c'
+            - >
+              until nc -z -w 2 {{ .Release.Name }}-{{ .Values.initContainerWaitForDB.waitServiceName }} {{ .Values.initContainerWaitForDB.waitServicePort }} && echo {{ .Values.initContainerWaitForDB.waitServiceName }} ok;
+                do sleep 2;
+              done
+      {{- end }}
 
       {{- with .Values.global.imagePullSecrets }}
       imagePullSecrets:

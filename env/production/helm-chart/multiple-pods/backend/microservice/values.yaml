@@ -9,6 +9,12 @@ initContainerWaitForDB:
   waitServiceName: "mongodb"
   waitServicePort: 27017
 
+mongodb:
+  ports:
+    - "27017"
+  persistence:
+    mountPath: /bitnami/mongodb
+
 service:
   type: ClusterIP
 
