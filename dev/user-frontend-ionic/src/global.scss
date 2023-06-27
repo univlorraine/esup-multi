@@ -51,8 +51,8 @@
 @import "./theme/external-ui-library/fullcalendar/fullcalendar.scss";
 
 body.scanner-active {
-  --background: transparent;
-  --ion-background-color: transparent;
+  --background: transparent !important;
+  --ion-background-color: transparent !important;
 }
 
 body {
