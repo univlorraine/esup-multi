@@ -137,5 +137,6 @@ global:
   affinity: {}
 
   commonHealthProbe:
-    initialDelaySeconds: 20
+    initialDelaySeconds: 50
+    host: "https://multi-staging.jnesis.com"
     port: 3000

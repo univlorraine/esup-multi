@@ -17,6 +17,7 @@
 {{- define "helpers.get-common-health-probe"}}
 {{- $servicePath := .servicePath -}}
 httpGet:
+  host: {{ .Values.global.commonHealthProbe.host }}
   path: {{ $servicePath }}/health
   port: {{ .Values.global.commonHealthProbe.port }}
 initialDelaySeconds: {{ .Values.global.commonHealthProbe.initialDelaySeconds }}

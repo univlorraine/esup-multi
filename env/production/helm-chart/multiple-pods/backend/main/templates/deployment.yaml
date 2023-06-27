@@ -37,8 +37,6 @@ spec:
           {{ $data := dict "Values" .Values }}
           livenessProbe:
             {{- include "helpers.get-common-health-probe" $data | nindent 12 }}
-          readinessProbe:
-            {{- include "helpers.get-common-health-probe" $data | nindent 12 }}
           env:
             {{ $data := dict "Values" .Values "env" .Values.appService.env }}
             {{- include "helpers.list-env-variables" $data | indent 12 }}

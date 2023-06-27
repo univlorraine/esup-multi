@@ -45,6 +45,11 @@ spec:
             {{- toYaml .Values.global.securityContext | nindent 12 }}
           image: "{{ .Values.global.image.repositoryUrl }}/{{ .Values.appService.repositoryName }}:{{ default .Values.global.image.tag (.Values.image).tag }}"
           imagePullPolicy: {{ .Values.global.image.pullPolicy }}
+          {{ $data := dict "Values" .Values "servicePath" .Values.appService.path }}
+          livenessProbe:
+            {{- include "helpers.get-common-health-probe" $data | nindent 12 }}
+          readinessProbe:
+            {{- include "helpers.get-common-health-probe" $data | nindent 12 }}
           env:
             {{- if .Values.enableDB }}
             - name: MONGODB_ROOT_PASSWORD
