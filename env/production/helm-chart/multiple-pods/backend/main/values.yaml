@@ -147,3 +147,5 @@ affinity: {}
 
 commonHealthProbe:
   initialDelaySeconds: 1
+
+test: "jnesis"
