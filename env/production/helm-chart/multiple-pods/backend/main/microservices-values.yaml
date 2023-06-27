@@ -3,8 +3,7 @@ multi-map:
     name: map
     repositoryName: multi-map
     path: /map
-    port: 3005
-    test: jnesis
+    port: 3045
     env:
       normal:
         MAP_SERVICE_HOST: "0.0.0.0"
