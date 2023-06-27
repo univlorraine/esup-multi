@@ -16,9 +16,6 @@ multi-microservice-features:
       normal:
         FEATURES_SERVICE_HOST: "0.0.0.0"
         FEATURES_SERVICE_PORT: "3003"
-        FEATURES_SERVICE_DIRECTUS_API_URL: *directusApiUrl
-      secret:
-        FEATURES_SERVICE_DIRECTUS_API_BEARER_TOKEN: *directusApiBearerToken
 
 multi-microservice-auth:
   enableDB: true
@@ -31,18 +28,6 @@ multi-microservice-auth:
       normal:
         AUTH_SERVICE_HOST: "0.0.0.0"
         AUTH_SERVICE_PORT: "3004"
-        AUTH_SERVICE_CAS_URL_REQUEST_TGT: "changeit"
-        AUTH_SERVICE_CAS_URL_REQUEST_ST: "changeit"
-        AUTH_SERVICE_CAS_URL_VALIDATE_ST: "changeit"
-        AUTH_SERVICE_CAS_URL_LOGOUT: "changeit"
-        AUTH_SERVICE_UL_API_URL_USER_PROFILE: "changeit"
-        AUTH_SERVICE_USERNAMES_CLEANUP_SCHEDULE: "0 0 * * * *"
-        AUTH_SERVICE_USERNAMES_CLEANUP_NOT_USED_SINCE_IN_DAYS: "1"
-        AUTH_SERVICE_CREDENTIALS_CLEANUP_SCHEDULE: "0 0 * * * *"
-        AUTH_SERVICE_CREDENTIALS_CLEANUP_NOT_USED_SINCE_IN_DAYS: "30"
-      secret:
-        AUTH_SERVICE_UL_API_BEARER_TOKEN: "changeit"
-        AUTH_SERVICE_JWT_SECRET: "changeit"
 
 multi-microservice-map:
   appService:
@@ -65,8 +50,6 @@ multi-microservice-rss:
       normal:
         RSS_SERVICE_HOST: "0.0.0.0"
         RSS_SERVICE_PORT: "3006"
-        RSS_SERVICE_FEED_URL: "changeit"
-        RSS_SERVICE_ALLOWED_HTML_TAGS: "b,strong,i,italic,ol,ul,li"
 
 multi-microservice-cards:
   appService:
@@ -78,9 +61,6 @@ multi-microservice-cards:
       normal:
         CARDS_SERVICE_HOST: "0.0.0.0"
         CARDS_SERVICE_PORT: "3007"
-        CARDS_SERVICE_UL_API_URL_USER_CARDS: "changeit"
-      secret:
-        CARDS_SERVICE_UL_API_BEARER_TOKEN: "changeit"
 
 multi-microservice-schedule:
   appService:
@@ -92,9 +72,6 @@ multi-microservice-schedule:
       normal:
         SCHEDULE_SERVICE_HOST: "0.0.0.0"
         SCHEDULE_SERVICE_PORT: "3008"
-        SCHEDULE_SERVICE_UL_API_USER_SCHEDULE_URL: "changeit"
-      secret:
-        SCHEDULE_SERVICE_UL_API_BEARER_TOKEN: "changeit"
 
 multi-microservice-contacts:
   appService:
@@ -106,9 +83,6 @@ multi-microservice-contacts:
       normal:
         CONTACT_SERVICE_HOST: "0.0.0.0"
         CONTACT_SERVICE_PORT: "3009"
-        CONTACTS_SERVICE_UL_API_URL_USER_PROFILE: "changeit"
-      secret:
-        CONTACTS_SERVICE_UL_API_BEARER_TOKEN: "changeit"
 
 multi-microservice-notifications:
   appService:
@@ -120,12 +94,6 @@ multi-microservice-notifications:
       normal:
         NOTIFICATIONS_SERVICE_HOST: "0.0.0.0"
         NOTIFICATIONS_SERVICE_PORT: "3010"
-        NOTIFICATIONS_SERVICE_UL_API_NOTIFICATIONS_URL: "changeit"
-        NOTIFICATIONS_SERVICE_UL_API_CHANNELS_URL: "changeit"
-        NOTIFICATIONS_SERVICE_DIRECTUS_API_URL: *directusApiUrl
-      secret:
-        NOTIFICATIONS_SERVICE_UL_API_BEARER_TOKEN: "changeit"
-        NOTIFICATIONS_SERVICE_DIRECTUS_API_BEARER_TOKEN: *directusApiBearerToken
 
 multi-microservice-important-news:
   appService:
@@ -137,9 +105,6 @@ multi-microservice-important-news:
       normal:
         IMPORTANT_NEWS_SERVICE_HOST: "0.0.0.0"
         IMPORTANT_NEWS_SERVICE_PORT: "3011"
-        IMPORTANT_NEWS_SERVICE_DIRECTUS_API_URL: *directusApiUrl
-      secret:
-        IMPORTANT_NEWS_SERVICE_DIRECTUS_API_BEARER_TOKEN: *directusApiBearerToken
 
 multi-microservice-clocking:
   appService:
@@ -151,9 +116,6 @@ multi-microservice-clocking:
       normal:
         CLOCKING_SERVICE_HOST: "0.0.0.0"
         CLOCKING_SERVICE_PORT: "3012"
-        CLOCKING_SERVICE_UL_API_CLOCKING_URL: "changeit"
-      secret:
-        CLOCKING_SERVICE_UL_API_BEARER_TOKEN: "changeit"
 
 multi-microservice-social-network:
   appService:
@@ -165,9 +127,6 @@ multi-microservice-social-network:
       normal:
         SOCIAL_NETWORK_SERVICE_HOST: "0.0.0.0"
         SOCIAL_NETWORK_SERVICE_PORT: "3013"
-        SOCIAL_NETWORK_SERVICE_DIRECTUS_API_URL: *directusApiUrl
-      secret:
-        SOCIAL_NETWORK_SERVICE_DIRECTUS_API_BEARER_TOKEN: *directusApiBearerToken
 
 multi-microservice-chatbot:
   appService:
@@ -179,7 +138,6 @@ multi-microservice-chatbot:
       normal:
         CHATBOT_SERVICE_HOST: "0.0.0.0"
         CHATBOT_SERVICE_PORT: "3014"
-        CHATBOT_SERVICE_UL_API_TOCK_URL: "changeit"
 
 multi-microservice-static-pages:
   appService:
@@ -191,9 +149,6 @@ multi-microservice-static-pages:
       normal:
         STATIC_PAGES_SERVICE_HOST: "0.0.0.0"
         STATIC_PAGES_SERVICE_PORT: "3015"
-        STATIC_PAGES_SERVICE_DIRECTUS_API_URL: *directusApiUrl
-      secret:
-        STATIC_PAGES_SERVICE_DIRECTUS_API_BEARER_TOKEN: *directusApiBearerToken
 
 multi-microservice-contact-us:
   appService:
@@ -205,10 +160,6 @@ multi-microservice-contact-us:
       normal:
         CONTACT_US_SERVICE_PORT: "3016"
         CONTACT_US_SERVICE_HOST: "0.0.0.0"
-        CONTACT_US_SERVICE_SMTP: "changeit"
-        CONTACT_US_SERVICE_DIRECTUS_API_URL: *directusApiUrl
-      secret:
-        CONTACT_US_SERVICE_DIRECTUS_API_BEARER_TOKEN: *directusApiBearerToken
 
 multi-microservice-restaurants:
   appService:
@@ -220,9 +171,6 @@ multi-microservice-restaurants:
       normal:
         RESTAURANTS_SERVICE_HOST: "0.0.0.0"
         RESTAURANTS_SERVICE_PORT: "3017"
-        RESTAURANTS_UL_API_URL: "changeit"
-      secret:
-        RESTAURANTS_UL_API_BEARER_TOKEN: "changeit"
 
 multi-microservice-statistics:
   appService:
@@ -234,9 +182,6 @@ multi-microservice-statistics:
       normal:
         STATISTICS_SERVICE_HOST: 0.0.0.0
         STATISTICS_SERVICE_PORT: "3018"
-        STATISTICS_SERVICE_UL_API_URL: "changeit"
-      secret:
-        STATISTICS_SERVICE_UL_API_BEARER_TOKEN: "changeit"
 
 multi-microservice-mail-calendar:
   appService:
@@ -248,6 +193,3 @@ multi-microservice-mail-calendar:
       normal:
         MAIL_CALENDAR_SERVICE_HOST: 0.0.0.0
         MAIL_CALENDAR_SERVICE_PORT: 3019
-        MAIL_CALENDAR_SERVICE_UL_API_URL: "changeit"
-      secret:
-        MAIL_CALENDAR_SERVICE_UL_BEARER_TOKEN: "changeit"
