@@ -20,6 +20,7 @@ httpGet:
   host: {{ .Values.global.commonHealthProbe.host }}
   path: {{ $servicePath }}/health
   port: {{ .Values.global.commonHealthProbe.port }}
+  scheme: {{ .Values.global.commonHealthProbe.scheme }}
 initialDelaySeconds: {{ .Values.global.commonHealthProbe.initialDelaySeconds }}
 {{- end }}
 
