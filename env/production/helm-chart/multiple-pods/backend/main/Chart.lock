@@ -11,5 +11,50 @@ dependencies:
 - name: multi-backend-microservice
   repository: file://../microservice
   version: 0.1.0
-digest: sha256:c953a5e4061cd1b844fe26a77913155d44a6d06d75c0e4ceb01a7ff980b77ac3
-generated: "2023-06-27T16:49:19.847643+02:00"
+- name: multi-backend-microservice
+  repository: file://../microservice
+  version: 0.1.0
+- name: multi-backend-microservice
+  repository: file://../microservice
+  version: 0.1.0
+- name: multi-backend-microservice
+  repository: file://../microservice
+  version: 0.1.0
+- name: multi-backend-microservice
+  repository: file://../microservice
+  version: 0.1.0
+- name: multi-backend-microservice
+  repository: file://../microservice
+  version: 0.1.0
+- name: multi-backend-microservice
+  repository: file://../microservice
+  version: 0.1.0
+- name: multi-backend-microservice
+  repository: file://../microservice
+  version: 0.1.0
+- name: multi-backend-microservice
+  repository: file://../microservice
+  version: 0.1.0
+- name: multi-backend-microservice
+  repository: file://../microservice
+  version: 0.1.0
+- name: multi-backend-microservice
+  repository: file://../microservice
+  version: 0.1.0
+- name: multi-backend-microservice
+  repository: file://../microservice
+  version: 0.1.0
+- name: multi-backend-microservice
+  repository: file://../microservice
+  version: 0.1.0
+- name: multi-backend-microservice
+  repository: file://../microservice
+  version: 0.1.0
+- name: multi-backend-microservice
+  repository: file://../microservice
+  version: 0.1.0
+- name: multi-backend-microservice
+  repository: file://../microservice
+  version: 0.1.0
+digest: sha256:edb19a231a4da461a78e2d0b8a5da9924675f25cfd11992fa7bd2579441cbe70
+generated: "2023-06-27T17:41:28.648428+02:00"

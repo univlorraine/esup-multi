@@ -13,11 +13,71 @@ dependencies:
     version: "0.1.0"
     repository: file://../../pwa
   # ------ Micro services ------
+  - alias: multi-microservice-features
+    name: multi-backend-microservice
+    version: "0.1.0"
+    repository: file://../microservice
   - alias: multi-microservice-auth
     name: multi-backend-microservice
     version: "0.1.0"
     repository: file://../microservice
   - alias: multi-microservice-map
+    name: multi-backend-microservice
+    version: "0.1.0"
+    repository: file://../microservice
+  - alias: multi-microservice-rss
+    name: multi-backend-microservice
+    version: "0.1.0"
+    repository: file://../microservice
+  - alias: multi-microservice-cards
+    name: multi-backend-microservice
+    version: "0.1.0"
+    repository: file://../microservice
+  - alias: multi-microservice-schedule
+    name: multi-backend-microservice
+    version: "0.1.0"
+    repository: file://../microservice
+  - alias: multi-microservice-contacts
+    name: multi-backend-microservice
+    version: "0.1.0"
+    repository: file://../microservice
+  - alias: multi-microservice-notifications
+    name: multi-backend-microservice
+    version: "0.1.0"
+    repository: file://../microservice
+  - alias: multi-microservice-important-news
+    name: multi-backend-microservice
+    version: "0.1.0"
+    repository: file://../microservice
+  - alias: multi-microservice-clocking
+    name: multi-backend-microservice
+    version: "0.1.0"
+    repository: file://../microservice
+  - alias: multi-microservice-social-network
+    name: multi-backend-microservice
+    version: "0.1.0"
+    repository: file://../microservice
+  - alias: multi-microservice-chatbot
+    name: multi-backend-microservice
+    version: "0.1.0"
+    repository: file://../microservice
+  - alias: multi-microservice-static-pages
+    name: multi-backend-microservice
+    version: "0.1.0"
+    repository: file://../microservice
+  - alias: multi-microservice-contact-us
+    name: multi-backend-microservice
+    version: "0.1.0"
+    repository: file://../microservice
+  - alias: multi-microservice-restaurants
+    name: multi-backend-microservice
+    version: "0.1.0"
+    repository: file://../microservice
+  - alias: multi-microservice-statistics
+    name: multi-backend-microservice
+    version: "0.1.0"
+    repository: file://../microservice
+  - alias: multi-microservice-mail-calendar
     name: multi-backend-microservice
     version: "0.1.0"
     repository: file://../microservice
