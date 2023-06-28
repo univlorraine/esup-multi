@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { finalize, first } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { UnreadMailService } from '../../unread-mail.service';
-import { mails$, MailCalendarMails } from '../../unread-mail.repository';
+import { mails$, MailCalendar } from '../../unread-mail.repository';
 
 @Component({
   selector: 'app-unread-mail-widget',
@@ -11,7 +11,7 @@ import { mails$, MailCalendarMails } from '../../unread-mail.repository';
 })
 export class UnreadMailComponent implements OnInit {
   public isLoading = false;
-  public mails$: Observable<MailCalendarMails> = mails$;
+  public mails$: Observable<MailCalendar> = mails$;
 
   constructor(private unreadMailService: UnreadMailService) {
   }
