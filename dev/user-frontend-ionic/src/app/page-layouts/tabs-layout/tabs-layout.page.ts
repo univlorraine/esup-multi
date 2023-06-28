@@ -5,6 +5,7 @@ import {
 } from '@ul/shared';
 import { Observable } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
+import { NavController } from '@ionic/angular';
 
 interface MenuItemWithOptionalRouterLink extends MenuItem {
   routerLink: string;
@@ -22,6 +23,7 @@ export class TabsLayoutPage implements AfterViewInit {
   public tabsMenuItems$: Observable<MenuItemWithOptionalRouterLink[]>;
 
   constructor(
+    private navController: NavController,
     private menuService: MenuService,
     private featuresService: FeaturesService,
     private statisticsService: StatisticsService,
@@ -53,6 +55,7 @@ export class TabsLayoutPage implements AfterViewInit {
   public async openExternalOrSsoLinkOnly(menuItem: MenuItem) {
     if (menuItem.link.type === MenuItemLinkType.router) {
       this.statisticsService.onFunctionalityOpened(menuItem.statisticName);
+      this.navController.setDirection('forward', false);
       return;
     }
 
