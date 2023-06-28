@@ -9,6 +9,8 @@ mongodb:
     - "27017"
   persistence:
     mountPath: /bitnami/mongodb
+  auth:
+    existingSecret: "{{ .Release.Name }}-mongodb"
 
 appService:
   name: main
