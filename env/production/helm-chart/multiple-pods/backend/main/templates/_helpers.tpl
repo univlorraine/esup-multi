@@ -15,6 +15,7 @@
 {{- end }}
 
 {{- define "helpers.get-common-health-livenessprobe"}}
+{{- if not .Values.disableLivenessProbe }}
 httpGet:
   host: {{ .Values.global.commonHealthLivenessProbe.host }}
   path: {{ .Values.appService.path }}/health
@@ -23,12 +24,15 @@ httpGet:
 initialDelaySeconds: {{ .Values.global.commonHealthLivenessProbe.initialDelaySeconds }}
 periodSeconds: {{ .Values.global.commonHealthLivenessProbe.periodSeconds }}
 {{- end }}
+{{- end }}
 
 {{- define "helpers.get-common-health-readinessprobe"}}
+{{- if not .Values.disableReadinessProbe }}
 tcpSocket:
   port: {{ .Values.appService.containerPort }}
 initialDelaySeconds: {{ .Values.global.commonHealthReadinessProbe.initialDelaySeconds }}
 periodSeconds: {{ .Values.global.commonHealthReadinessProbe.periodSeconds }}
+{{- end }}
 {{- end }}
 
 {{/*

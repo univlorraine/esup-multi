@@ -96,6 +96,7 @@ multi-microservice-notifications:
         NOTIFICATIONS_SERVICE_PORT: "3010"
 
 multi-microservice-important-news:
+  disableLivenessProbe: true
   appService:
     name: important-news
     repositoryName: multi-important-news
@@ -118,6 +119,7 @@ multi-microservice-clocking:
         CLOCKING_SERVICE_PORT: "3012"
 
 multi-microservice-social-network:
+  disableLivenessProbe: true
   appService:
     name: social-network
     repositoryName: multi-social-network
@@ -140,6 +142,7 @@ multi-microservice-chatbot:
         CHATBOT_SERVICE_PORT: "3014"
 
 multi-microservice-static-pages:
+  disableLivenessProbe: true
   appService:
     name: static-pages
     repositoryName: multi-static-pages
@@ -151,6 +154,7 @@ multi-microservice-static-pages:
         STATIC_PAGES_SERVICE_PORT: "3015"
 
 multi-microservice-contact-us:
+  disableLivenessProbe: true
   appService:
     name: contact-us
     repositoryName: multi-contact-us
@@ -184,6 +188,7 @@ multi-microservice-statistics:
         STATISTICS_SERVICE_PORT: "3018"
 
 multi-microservice-mail-calendar:
+  disableLivenessProbe: true
   appService:
     name: mail-calendar
     repositoryName: multi-mail-calendar
