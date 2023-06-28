@@ -297,3 +297,9 @@
 .danger {
   color: var(--ion-color-danger) !important;
 }
+
+
+// This class can be used to force the links rendered inside innerHTML to inherit the color of their container
+.link-inherit-color a {
+  color: inherit !important;
+}
