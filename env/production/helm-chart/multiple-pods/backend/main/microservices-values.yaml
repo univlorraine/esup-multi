@@ -20,7 +20,7 @@ multi-microservice-features:
 multi-microservice-auth:
   enableDB: true
   appService:
-    name: auth1
+    name: auth
     repositoryName: multi-auth
     path: /auth
     containerPort: 3004

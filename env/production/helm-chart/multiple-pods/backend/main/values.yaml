@@ -10,7 +10,7 @@ mongodb:
   persistence:
     mountPath: /bitnami/mongodb
   auth:
-    existingSecret: "{{ .Release.Name }}-mongodbtest"
+    existingSecret: "mongodb-secrets"
 
 appService:
   name: main
