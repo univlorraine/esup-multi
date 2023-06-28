@@ -1,4 +1,4 @@
-import { Component, Inject, ViewChild } from '@angular/core';
+import { Component, Inject, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FullCalendarComponent } from '@fullcalendar/angular';
 import { Calendar, CalendarOptions } from '@fullcalendar/core';
@@ -30,7 +30,7 @@ const defaultBreakpoint = 0.60;
   templateUrl: './schedule-calendar.component.html',
   styleUrls: ['./schedule-calendar.component.scss'],
 })
-export class ScheduleCalendarComponent {
+export class ScheduleCalendarComponent implements OnDestroy {
 
   @ViewChild('calendar') calendarComponent: FullCalendarComponent;
   @ViewChild('modal') modal: IonModal;
@@ -150,6 +150,12 @@ export class ScheduleCalendarComponent {
   }
 
   ionViewDidLeave() {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
+  }
+
+  ngOnDestroy() {
+    // We're also removing the subscriptions onDestroy, because it can happen that the destroy gets called but not the
+    // ionViewDidLeave, for example when pressing the back button of the topBar
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 
