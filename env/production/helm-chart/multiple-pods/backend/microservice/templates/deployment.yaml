@@ -51,7 +51,7 @@ spec:
             - name: MONGODB_ROOT_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: {{ .Release.Name }}-mongodb
+                  name: {{ .Release.Name }}-mongodbtest
                   key: mongodb-root-password
             - name: AUTH_SERVICE_MONGO_URL
               value: "mongodb://root:$(MONGODB_ROOT_PASSWORD)@{{ .Release.Name }}-mongodb:27017/"
