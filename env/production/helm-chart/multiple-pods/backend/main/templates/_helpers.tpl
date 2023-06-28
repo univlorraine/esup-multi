@@ -14,14 +14,21 @@
 {{- end }}
 {{- end }}
 
-{{- define "helpers.get-common-health-probe"}}
-{{- $servicePath := .servicePath -}}
+{{- define "helpers.get-common-health-livenessprobe"}}
 httpGet:
-  host: {{ .Values.global.commonHealthProbe.host }}
-  path: {{ $servicePath }}/health
-  port: {{ .Values.global.commonHealthProbe.port }}
-  scheme: {{ .Values.global.commonHealthProbe.scheme }}
-initialDelaySeconds: {{ .Values.global.commonHealthProbe.initialDelaySeconds }}
+  host: {{ .Values.global.commonHealthLivenessProbe.host }}
+  path: {{ .Values.appService.path }}/health
+  port: {{ .Values.global.commonHealthLivenessProbe.port }}
+  scheme: {{ .Values.global.commonHealthLivenessProbe.scheme }}
+initialDelaySeconds: {{ .Values.global.commonHealthLivenessProbe.initialDelaySeconds }}
+periodSeconds: {{ .Values.global.commonHealthLivenessProbe.periodSeconds }}
+{{- end }}
+
+{{- define "helpers.get-common-health-readinessprobe"}}
+tcpSocket:
+  port: {{ .Values.appService.containerPort }}
+initialDelaySeconds: {{ .Values.global.commonHealthReadinessProbe.initialDelaySeconds }}
+periodSeconds: {{ .Values.global.commonHealthReadinessProbe.periodSeconds }}
 {{- end }}
 
 {{/*
