@@ -60,6 +60,14 @@ export class LoginPage implements OnInit {
       username: ['', [Validators.required]],
       password: ['', [Validators.required]]
     });
+
+    // We update the username value with its lowercase version
+    this.loginForm.controls.username.valueChanges.subscribe(value => {
+      if(!value) {
+        return;
+      }
+      this.loginForm.controls.username.setValue(value.toLowerCase(), { emitEvent: false });
+    });
   }
 
   ionViewWillEnter() {
