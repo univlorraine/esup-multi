@@ -23,7 +23,7 @@ multi-microservice-auth:
     name: auth
     repositoryName: multi-auth
     path: /auth
-    containerPort: 3004
+    containerPort: 30045
     env:
       normal:
         AUTH_SERVICE_HOST: "0.0.0.0"
