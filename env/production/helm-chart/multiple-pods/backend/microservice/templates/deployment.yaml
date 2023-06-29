@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "backend.fullname" . }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "backend.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.global.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "backend.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- if .Values.enableDB }}
+      initContainers:
+        - name: wait-for-db
+          image: "{{ .Values.initContainerWaitForDB.imageName }}"
+          command:
+            - 'sh'
+            - '-c'
+            - >
+              until nc -z -w 2 {{ .Release.Name }}-{{ .Values.initContainerWaitForDB.waitServiceName }} {{ .Values.initContainerWaitForDB.waitServicePort }} && echo {{ .Values.initContainerWaitForDB.waitServiceName }} ok;
+                do sleep 2;
+              done
+      {{- end }}
+
+      {{- with .Values.global.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "backend.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.global.podSecurityContext | nindent 8 }}
+
+      containers:
+        - name: {{ .Chart.Name }}-{{ .Values.appService.name }}
+          securityContext:
+            {{- toYaml .Values.global.securityContext | nindent 12 }}
+          image: "{{ .Values.global.image.repositoryUrl }}/{{ .Values.appService.repositoryName }}:{{ default .Values.global.image.tag (.Values.image).tag }}"
+          imagePullPolicy: {{ .Values.global.image.pullPolicy }}
+          {{ $data := dict "Values" .Values }}
+          livenessProbe:
+            {{- include "helpers.get-common-health-livenessprobe" $data | nindent 12 }}
+          readinessProbe:
+            {{- include "helpers.get-common-health-readinessprobe" $data | nindent 12 }}
+          env:
+            {{- if .Values.enableDB }}
+            - name: MONGODB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-secrets
+                  key: mongodb-root-password
+            - name: AUTH_SERVICE_MONGO_URL
+              value: "mongodb://root:$(MONGODB_ROOT_PASSWORD)@{{ .Release.Name }}-mongodb:27017/"
+            {{ end }}
+            {{- if and .Values.appService.env }}
+            {{ $data := dict "Values" .Values "env" .Values.appService.env }}
+            {{- include "helpers.list-env-variables" $data | indent 12 }}
+            {{ end }}
+          command:
+            {{  range .Values.global.image.nodeBaseCommand }}
+            - {{ . | quote }}
+            {{ end }}
+          ports:
+            - name: microservice
+              containerPort: {{ .Values.appService.containerPort }}
