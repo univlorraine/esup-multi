@@ -145,6 +145,14 @@ export class GlobalHealthController {
             port: process.env.STATISTICS_SERVICE_PORT,
           },
         }),
+      () =>
+        this.microservice.pingCheck('mail-calendar', {
+          transport: Transport.TCP,
+          options: {
+            host: process.env.MAIL_CALENDAR_SERVICE_HOST,
+            port: process.env.MAIL_CALENDAR_SERVICE_PORT,
+          },
+        }),
     ]);
   }
 }
