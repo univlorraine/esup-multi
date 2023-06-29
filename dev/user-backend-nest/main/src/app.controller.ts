@@ -688,10 +688,18 @@ export class AppController {
   }
 
   private getClientProxy(serviceName: string) {
-    if (this[`${serviceName}Client`]) {
-      return this[`${serviceName}Client`];
+    const name = serviceName && this.convertToCamelCase(serviceName);
+    if (this[`${name}Client`]) {
+      return this[`${name}Client`];
     } else {
       throw new NotFoundException(`Service '${serviceName}' not found.`);
     }
+  }
+
+  private convertToCamelCase(str: string): string {
+    if (!str) {
+      return;
+    }
+    return str.replace(/-([a-zA-Z])/g, (_, letter) => letter.toUpperCase());
   }
 }
