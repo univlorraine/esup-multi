@@ -16,11 +16,8 @@
 
 {{- define "helpers.get-common-health-livenessprobe"}}
 {{- if not .Values.disableLivenessProbe }}
-httpGet:
-  host: {{ .Values.global.commonHealthLivenessProbe.host }}
-  path: {{ .Values.appService.path }}/health
-  port: {{ .Values.global.commonHealthLivenessProbe.port }}
-  scheme: {{ .Values.global.commonHealthLivenessProbe.scheme }}
+tcpSocket:
+  port: {{ .Values.appService.containerPort }}
 initialDelaySeconds: {{ .Values.global.commonHealthLivenessProbe.initialDelaySeconds }}
 periodSeconds: {{ .Values.global.commonHealthLivenessProbe.periodSeconds }}
 {{- end }}

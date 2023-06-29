@@ -139,12 +139,9 @@ global:
   affinity: {}
 
   commonHealthLivenessProbe:
-    initialDelaySeconds: 50
+    initialDelaySeconds: 30
     periodSeconds: 10
-    host: "multi-staging.jnesis.com"
-    port: 443
-    scheme: HTTPS
 
   commonHealthReadinessProbe:
-    initialDelaySeconds: 10
+    initialDelaySeconds: 5
     periodSeconds: 10
