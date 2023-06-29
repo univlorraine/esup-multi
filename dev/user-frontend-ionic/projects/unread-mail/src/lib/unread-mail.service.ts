@@ -36,7 +36,7 @@ export class UnreadMailService {
 
   private getAndStoreMailStats(): Observable<void> {
     return this.getMailCalendar().pipe(
-      tap(mailCalendar => setMails(mailCalendar.unreadMails)),
+      tap(setMails),
       map(() => null)
     );
   }

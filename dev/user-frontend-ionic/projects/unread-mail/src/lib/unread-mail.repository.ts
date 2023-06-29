@@ -8,8 +8,6 @@ export interface MailCalendar {
   unreadMails: number;
 }
 
-export type MailCalendarMails = MailCalendar['unreadMails'];
-
 export const store = createStore({ name: STORE_NAME }, withProps<MailCalendar>({ unreadMails: null }));
 
 export const persist = persistState(store, {
@@ -17,11 +15,11 @@ export const persist = persistState(store, {
   storage: localForageStore,
 });
 
-export const mails$ = store.pipe(select((state) => state.unreadMails));
+export const mails$ = store.pipe(select((state) => state));
 
-export const setMails = (unreadMails: MailCalendarMails) => {
+export const setMails = (mailCalendar: MailCalendar) => {
   store.update((state) => ({
     ...state,
-    unreadMails,
+    unreadMails: mailCalendar.unreadMails,
   }));
 };
