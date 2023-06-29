@@ -66,7 +66,7 @@ export class LoginPage implements OnInit {
       if(!value) {
         return;
       }
-      this.loginForm.controls.username.setValue(value.toLowerCase(), { emitEvent: false });
+      this.loginForm.controls.username.setValue(value.trim().toLowerCase(), { emitEvent: false });
     });
   }
 
