@@ -1,5 +1,5 @@
 <ion-content *ngIf="(featuresIsEmpty$ | async) === false">
-  <app-feature-widget *ngFor="let translatedFeature of (translatedFeatures$ | async)" [feature]="translatedFeature"></app-feature-widget>  
+  <app-feature-widget *ngFor="let translatedFeature of (translatedFeatures$ | async)" [feature]="translatedFeature"></app-feature-widget>
 </ion-content>
 
 <ion-content class="ion-padding" *ngIf="(featuresIsEmpty$ | async)">

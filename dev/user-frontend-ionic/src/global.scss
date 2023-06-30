@@ -50,6 +50,9 @@
 /* FullCalendar */
 @import "./theme/external-ui-library/fullcalendar/fullcalendar.scss";
 
+/* Shepherd.js */
+@import "./theme/external-ui-library/shepherd/shepherd.scss";
+
 body.scanner-active {
   --background: transparent !important;
   --ion-background-color: transparent !important;

@@ -1,4 +1,5 @@
 import UIKit
+import SwiftKeychainWrapper
 import Capacitor
 import Firebase
 
@@ -10,6 +11,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
+
+        // Remove keys in secure storage after app uninstall then app install
+        // https://github.com/martinkasa/capacitor-secure-storage-plugin/issues/70
+        if !UserDefaults.standard.bool(forKey: "firstTimeLaunchOccurred") {
+            // capacitor secure storage plugin stores with custom keychain instance
+            let keychainWrapper =  KeychainWrapper.init(serviceName: "cap_sec")
+            keychainWrapper.removeAllKeys()
+            UserDefaults.standard.set(true, forKey:  "firstTimeLaunchOccurred")
+        }
         return true
     }
 

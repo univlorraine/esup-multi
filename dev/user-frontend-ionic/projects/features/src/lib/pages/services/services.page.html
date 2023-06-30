@@ -1,5 +1,5 @@
 <ion-content id="scrollContent" *ngIf="(featuresIsEmpty$ | async) === false && (menuItems$ | async)">
-  <ion-row class="searchbar-row">
+  <ion-row data-service-id="searchbar" class="searchbar-row">
     <ion-searchbar show-clear-button="focus" [placeholder]="'FEATURES.SEARCHBAR_MESSAGE' | translate"
       (ionChange)="handleChange($event)" [disabled]="draggableIsOn"></ion-searchbar>
   </ion-row>

@@ -9,7 +9,8 @@ export const environment = {
   languages: ['fr', 'en'],
   defaultLanguage: 'fr',
   cmsPublicAssetsEndpoint: 'http://localhost:8055/assets/',
-  firebase: firebasePwaEnvironment
+  firebase: firebasePwaEnvironment,
+  guidedTourEnabled: true
 };
 
 /*

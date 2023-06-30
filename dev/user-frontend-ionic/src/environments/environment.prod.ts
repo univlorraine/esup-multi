@@ -5,5 +5,6 @@ export const environment = {
   apiEndpoint: 'https://myproddomain.com/api',
   languages: ['fr', 'en'],
   defaultLanguage: 'fr',
-  firebase: firebasePwaEnvironment
+  firebase: firebasePwaEnvironment,
+  guidedTourEnabled: true
 };

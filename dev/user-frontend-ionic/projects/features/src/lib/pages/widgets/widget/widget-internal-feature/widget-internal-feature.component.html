@@ -1,4 +1,4 @@
-<ion-card class="ion-no-margin" (click)="onClick()" [ngStyle]="{'background-color': feature.color}">
+<ion-card [attr.data-widget-id]="feature.widget" class="ion-no-margin" (click)="onClick()" [ngStyle]="{'background-color': feature.color}">
   <ion-card-header *ngIf="feature.title" class="ion-no-padding">
     <ion-card-title [ngClass]="fontColor(feature.color)" class="feature-title app-title-5">
       <ion-icon [name]="feature.icon" *ngIf="feature.icon"></ion-icon>
