@@ -76,7 +76,7 @@ getHealthStatus() {
 ```
 Ajouter  `"resolveJsonModule": true`dans `tsconfig.json`
 
-Créer un fichier `update-infos.js` à la racine du microservice avec le code suivant
+Créer un fichier `update-infos.ts` à la racine du microservice avec le code suivant
 ```typescript
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const fs = require('fs');
@@ -84,17 +84,18 @@ const fs = require('fs');
 const packageData = require('./package.json');
 
 const version = packageData.version;
-const name = packageData.name;
+const serviceName = packageData.name;
 const info = {
-    name,
+    name: serviceName,
     version,
 };
 
 const infoJson = JSON.stringify(info, null, 2);
 fs.writeFileSync('src/infos.json', infoJson);
+
 ```
 
 Mofifier `package.json` pour ajouter un script prebuild :
-`"prebuild": "node update-infos.js"`
+`"prebuild": "node update-infos.ts"`
 
 Ajouter également la vérification de l'état de santé au niveau global, dans `global-health.controller.ts`

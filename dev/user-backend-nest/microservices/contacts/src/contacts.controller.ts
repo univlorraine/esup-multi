@@ -22,4 +22,11 @@ export class ContactsController {
       version: infosJsonData.version,
     };
   }
+
+  @MessagePattern({ cmd: 'version' })
+  getVersion() {
+    return {
+      version: infosJsonData.version,
+    };
+  }
 }

@@ -9,7 +9,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "prebuild": "npm run module:build-all",
+    "prebuild": "node update-infos.js && npm run module:build-all",
     "build": "ng build",
     "appflow:build": "./appflow.sh",
     "test": "ng test",

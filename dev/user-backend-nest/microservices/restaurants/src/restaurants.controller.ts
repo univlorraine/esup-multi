@@ -31,4 +31,11 @@ export class RestaurantsController {
       version: infosJsonData.version,
     };
   }
+
+  @MessagePattern({ cmd: 'version' })
+  getVersion() {
+    return {
+      version: infosJsonData.version,
+    };
+  }
 }

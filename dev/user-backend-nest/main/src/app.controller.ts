@@ -672,12 +672,24 @@ export class AppController {
       );
   }
 
+  @Get('/:service/version')
+  serviceVersion(@Param('service') serviceName: string) {
+    const clientProxy = this.getClientProxy(serviceName);
+    return clientProxy.send({ cmd: 'version' }, {});
+  }
+
   @Get('/:service/health')
   serviceCheckHealth(@Param('service') serviceName: string) {
     const clientProxy = this.getClientProxy(serviceName);
     return clientProxy.send({ cmd: 'health' }, {});
   }
 
+  @Get('/version')
+  mainVersion() {
+    return {
+      version: infosJsonData.version,
+    };
+  }
   @Get('/health')
   mainCheckHealth() {
     return {

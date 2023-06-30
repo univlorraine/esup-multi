@@ -22,4 +22,11 @@ export class MapController {
       version: infosJsonData.version,
     };
   }
+
+  @MessagePattern({ cmd: 'version' })
+  getVersion() {
+    return {
+      version: infosJsonData.version,
+    };
+  }
 }
