@@ -637,7 +637,7 @@ export class AppController {
               cmd: 'postUserActionStatistic',
             },
             {
-              uid: user ? user.username : null,
+              uid: user ? user.username : 'anonymous',
               userAgent: request.headers['user-agent'],
               xForwardedFor:
                 request.headers['x-forwarded-for'] ||
