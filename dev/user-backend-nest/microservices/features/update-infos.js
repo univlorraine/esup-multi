@@ -4,9 +4,9 @@ const fs = require('fs');
 const packageData = require('./package.json');
 
 const version = packageData.version;
-const name = packageData.name;
+const serviceName = packageData.name;
 const info = {
-  name,
+  name: serviceName,
   version,
 };
 

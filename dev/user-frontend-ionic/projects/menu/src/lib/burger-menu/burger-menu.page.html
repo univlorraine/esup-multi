@@ -38,15 +38,12 @@
       <ion-icon name="{{language}}"></ion-icon>
     </ion-button>
   </ion-row>
-  <ion-row class="ion-justify-content-center ion-padding-bottom">
+  <ion-row
+    *ngIf="appVersion$ | async as version"
+    class="ion-justify-content-center ion-padding-bottom"
+  >
     <ion-label class="app-title-6 light ion-no-padding">
-      {{ 'MENU.VERSION' | translate }}
-      <ng-container *ngIf="appVersion$ | async as version else notFound">
-        {{ version }}
-      </ng-container>
-      <ng-template #notFound>
-        {{ 'MENU.VERSION_NOT_FOUND' | translate }}
-      </ng-template>
+      {{ 'MENU.VERSION' | translate }} {{ version }}
     </ion-label>
   </ion-row>
 </ion-footer>
