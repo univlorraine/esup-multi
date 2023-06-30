@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import {first, map} from 'rxjs/operators';
-import { TranslatedFeature, FeaturesService, WidgetLifecycleService } from '@ul/shared';
+import { first, map } from 'rxjs/operators';
+import { TranslatedFeature, FeaturesService, WidgetLifecycleService, GuidedTourService } from '@ul/shared';
 
 @Component({
   selector: 'app-widgets',
@@ -15,6 +15,7 @@ export class WidgetsPage {
   constructor(
     private featuresService: FeaturesService,
     private widgetLifecycleService: WidgetLifecycleService,
+    private guidedTourService: GuidedTourService
   ) {
     this.translatedFeatures$ = this.featuresService.translatedFeatures$.pipe(
       map(features => features.filter(t => t.widget))
@@ -36,6 +37,8 @@ export class WidgetsPage {
     ).subscribe(features => {
       this.widgetLifecycleService.sendWidgetViewDidEnter(features.map(feature => feature.widget));
     });
+
+    this.guidedTourService.startGlobalTour();
   }
 
   ionViewWillLeave() {

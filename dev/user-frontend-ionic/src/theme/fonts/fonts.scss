@@ -214,9 +214,9 @@
 
 // Text-3
 .app-text-3 {
-  font-size: var(--app-text-3-size) !important;
+  font-size: var(--app-text-2-size) !important;
   font-family: var(--app-font-secondary) !important;
-  color: var(--app-font-color-primary-medium);
+  color: var(--app-font-color-primary-medium) !important;
   font-weight: 500 !important;
 }
 

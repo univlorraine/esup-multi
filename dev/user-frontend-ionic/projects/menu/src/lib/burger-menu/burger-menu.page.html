@@ -1,12 +1,17 @@
 <ion-content>
   <app-widget [widgetId]="widgetIds.auth"></app-widget>
   <ion-list lines="none" class="menu-section">
-    <ion-item button *ngFor="let menu of (staticMenuItems$ | async)" (click)="menuOpenerService.open(menu)">
+    <ion-item
+      button
+      *ngFor="let menu of (staticMenuItems$ | async)"
+      (click)="menuOpenerService.open(menu)"
+      [attr.data-burger-id]="getMenuId(menu)"
+    >
       <ion-icon class="app-icon-4" name="{{menu.icon}}" slot="start"></ion-icon>
       <ion-label class="app-text-3 light">{{menu.title | translate}}</ion-label>
     </ion-item>
   </ion-list>
-  <ion-list lines="none" class="menu-section">
+  <ion-list data-burger-id="menu-help" lines="none" class="menu-section">
     <app-widget [widgetId]="widgetIds.contactUs"></app-widget>
     <app-widget [widgetId]="widgetIds.staticPages"></app-widget>
   </ion-list>
@@ -21,7 +26,7 @@
   <app-widget  [widgetId]="widgetIds.socialNetwork"></app-widget>
 
 </ion-content>
-<ion-footer class="ion-no-border">
+<ion-footer data-burger-id="menu-footer" class="ion-no-border">
   <ion-row class="ion-justify-content-center">
     <ion-button shape="round" class="app-round-button-1 ion-no-padding ion-no-margin" (click)="toggleDarkMode()">
       <ion-icon *ngIf="(isDarkTheme$ | async) === false" name="moon" slot="icon-only"></ion-icon>

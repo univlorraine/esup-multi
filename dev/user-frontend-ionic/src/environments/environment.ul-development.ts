@@ -6,5 +6,6 @@ export const environment = {
   languages: ['fr', 'en'],
   defaultLanguage: 'fr',
   cmsPublicAssetsEndpoint: 'https://multi2-directus-test.univ-lorraine.fr/assets/',
-  firebase: firebasePwaEnvironment
+  firebase: firebasePwaEnvironment,
+  guidedTourEnabled: true
 };

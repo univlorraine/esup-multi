@@ -1,7 +1,8 @@
 import { AfterViewInit, Component } from '@angular/core';
+import { Network } from '@capacitor/network';
 import {
   FeaturesService, MenuItem, MenuItemLinkType, MenuItemRouterLink,
-  MenuOpenerService, MenuService, NetworkService, StatisticsService
+  MenuOpenerService, MenuService, NetworkService, StatisticsService, GuidedTourService
 } from '@ul/shared';
 import { Observable } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
@@ -27,6 +28,7 @@ export class TabsLayoutPage implements AfterViewInit {
     private menuService: MenuService,
     private featuresService: FeaturesService,
     private statisticsService: StatisticsService,
+    private guidedTourService: GuidedTourService,
     public menuOpenerService: MenuOpenerService,
     private networkService: NetworkService,
   ) {
@@ -60,6 +62,17 @@ export class TabsLayoutPage implements AfterViewInit {
     }
 
     return this.menuOpenerService.open(menuItem);
+  }
+
+  public generateMenuItemIdFromRouterLink(menuItem: MenuItemWithOptionalRouterLink){
+    if(!menuItem.routerLink) {
+      return;
+    }
+    return menuItem.routerLink.substring(1).replace('/', '-');
+  }
+
+  public getMenuId(menuItem: MenuItem){
+    return this.guidedTourService.generateMenuItemIdFromTitle(menuItem);
   }
 
   private async loadFeatures(): Promise<void> {

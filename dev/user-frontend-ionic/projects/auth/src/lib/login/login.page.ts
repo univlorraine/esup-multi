@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
-import { AuthenticatedUser, NavigationService } from '@ul/shared';
+import { AuthenticatedUser, NavigationService, isLoggedTourViewed } from '@ul/shared';
 import { Observable } from 'rxjs';
 import { finalize, first, tap } from 'rxjs/operators';
 import { AuthService } from '../common/auth.service';
@@ -9,6 +9,7 @@ import { saveCredentialsOnAuthentication$ } from '../preferences/preferences.rep
 import { PreferencesService } from '../preferences/preferences.service';
 import { LoginRepository, TranslatedLoginPageContent } from './login.repository';
 import { LoginService } from './login.service';
+import { Router } from '@angular/router';
 
 interface AuthenticatedUserToken extends AuthenticatedUser {
   authToken: string;
@@ -35,6 +36,7 @@ export class LoginPage implements OnInit {
     private navigationService: NavigationService,
     private loginService: LoginService,
     private loginRepository: LoginRepository,
+    private router: Router,
   ) {
     this.translatedPageContent$ = this.loginRepository.translatedPageContent$;
   }
@@ -92,7 +94,11 @@ export class LoginPage implements OnInit {
           return;
         }
         this.authService.dispatchLoginAction();
-        this.navigationService.navigateBack();
+        if(!isLoggedTourViewed()) {
+          this.router.navigate(['/features/widgets']);
+        } else {
+          this.navigationService.navigateBack();
+        }
       });
   }
 
