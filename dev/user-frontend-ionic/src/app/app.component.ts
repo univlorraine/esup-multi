@@ -13,6 +13,8 @@ import { Capacitor } from '@capacitor/core';
 import { App } from '@capacitor/app';
 import { PluginListenerHandle } from '@capacitor/core';
 import { ModalController, PopoverController } from '@ionic/angular';
+import { StatusBar, Style } from '@capacitor/status-bar';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-root',
@@ -29,6 +31,7 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(
     @Inject('environment')
     private environment: any,
+    private platform: Platform,
     private translateService: TranslateService,
     private pageLayoutService: PageLayoutService,
     private navigationService: NavigationService,
@@ -49,6 +52,14 @@ export class AppComponent implements OnInit, OnDestroy {
     this.translateService.addLangs(this.languages);
 
     this.currentPageLayout$ = this.pageLayoutService.currentPageLayout$;
+
+    this.platform.ready().then(() => {
+      if (!Capacitor.isNativePlatform()) {
+        return;
+      }
+
+      StatusBar.setStyle({style: Style.Dark});
+    });
   }
 
   ngOnInit() {

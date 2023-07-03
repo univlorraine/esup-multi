@@ -1,7 +1,7 @@
 <ion-progress-bar *ngIf="isLoading" type="indeterminate" color="primary"></ion-progress-bar>
 
 <ng-container *ngIf="translatedPageContent$ | async as page">
-  <ion-header [translucent]="true">
+  <ion-header>
     <ion-toolbar color="primary">
       <ion-buttons slot="start">
         <app-back-button></app-back-button>
