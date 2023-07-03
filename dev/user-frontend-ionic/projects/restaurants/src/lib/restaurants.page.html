@@ -34,12 +34,12 @@
               <ion-icon color="medium" size="large" name="pin-outline" class="pin"></ion-icon>
             </ion-col>
           </ion-row>
-          <ion-label *ngIf="restaurant.open" class="opening">
+          <ion-label *ngIf="getCurrentOpening(restaurant.opening)?.isOpen" class="opening">
             <h2 class="app-text-6">
-              {{ restaurant.opening }}
+              {{ getCurrentOpening(restaurant.opening).label }}
             </h2>
           </ion-label>
-          <ion-label *ngIf="!restaurant.open" class="opening">
+          <ion-label *ngIf="!getCurrentOpening(restaurant.opening)?.isOpen" class="opening">
             <h2 class="app-text-6 danger">
               {{ 'RESTAURANTS.CLOSED' | translate }}
             </h2>
