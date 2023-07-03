@@ -7,7 +7,7 @@
     <app-rss-item-header [item]="item">
       <ng-template appRssItemHeaderButton>
         <ion-button
-        (click)="openContent(i)" class="app-text-button-2 link-button">
+        (click)="openContent(i)" class="app-text-button-2 link-button" fill="clear">
         <ion-text class="app-text-5" *ngIf="!isContentVisible[i]" >{{ "RSS.SEE_MORE" | translate }}</ion-text>
         <ion-text class="app-text-5" *ngIf="isContentVisible[i]" >{{ "RSS.SEE_LESS" | translate }}</ion-text>
         <ion-icon class="app-icon-5" [class.content-open]="!isContentVisible[i]"
