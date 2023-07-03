@@ -1,20 +1,24 @@
-ion-row {
-  ion-text:not(.course-label) {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    max-width: 85%;
-  }
+ion-card {
+  border-width: var(--app-border-width-8);
+  border-color: var(--ion-color-primary);
+  border-style: solid;
+  border-radius: var(--app-border-no-radius);
+  box-shadow: var(--app-border-no-box-shadow);
+}
+
+.course-label {
+  margin-bottom: 0.8rem !important;
+  max-width: 90%;
 }
 
 ion-icon {
   margin-right: 0.5rem;
   margin-left: 0.2rem;
+  padding-top: 0.19rem;
   color: var(--app-font-color-primary);
 }
 
-
-.card-labels{
+.card-labels {
   margin-bottom: 0.3rem;
 }
 
@@ -22,7 +26,7 @@ ion-icon {
   max-width: 10px;
 }
 
-.hide-event-icon{
+.hide-event-icon {
   position: absolute;
   right: 0;
   top: 0.2rem;

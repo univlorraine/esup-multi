@@ -6,31 +6,32 @@ import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { AuthModule } from '@ul/auth';
+import { CalendarModule } from '@ul/calendar';
 import { CardsPageModule } from '@ul/cards';
+import { ChatbotModule } from '@ul/chatbot';
 import { ClockingModule } from '@ul/clocking';
+import { ContactUsModule } from '@ul/contact-us';
 import { ContactsModule } from '@ul/contacts';
+import { FeaturesModule } from '@ul/features';
 import { ImportantNewsModule } from '@ul/important-news';
 import { MapModule } from '@ul/map';
 import { MenuModule } from '@ul/menu';
 import { NotificationsModule } from '@ul/notifications';
 import { PreferencesPageModule } from '@ul/preferences';
 import { ReservationModule } from '@ul/reservation';
+import { RestaurantsModule } from '@ul/restaurants';
 import { RssPageModule } from '@ul/rss';
 import { ScheduleModule } from '@ul/schedule';
-import { SocialNetworkModule } from '@ul/social-network';
 import { ProjectModuleService, translationsLoaderFactory } from '@ul/shared';
+import { SocialNetworkModule } from '@ul/social-network';
 import { StaticPagesModule } from '@ul/static-pages';
-import { FeaturesModule } from '@ul/features';
+import { UnreadMailModule } from '@ul/unread-mail';
+
 import { environment } from '../environments/environment';
-import { ChatbotModule } from '@ul/chatbot';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ErrorModule } from './error/error.module';
 import { PageLayoutsModule } from './page-layouts/page-layouts.module';
-import { ContactUsModule } from '@ul/contact-us';
-import { RestaurantsModule } from '@ul/restaurants';
-import { UnreadMailModule } from '@ul/unread-mail';
-import { CalendarModule } from '@ul/calendar';
 
 
 @NgModule({

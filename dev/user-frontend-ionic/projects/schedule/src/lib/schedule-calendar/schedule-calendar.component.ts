@@ -5,14 +5,14 @@ import { Calendar, CalendarOptions } from '@fullcalendar/core';
 import allLocales from '@fullcalendar/core/locales-all';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
-import { IonModal, Platform } from '@ionic/angular';
+import { GestureController, IonModal, Platform } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
+import { currentLanguage$ } from '@ul/shared';
 import { format, isAfter, isBefore, sub } from 'date-fns';
 import * as locale from 'date-fns/locale';
 import { EventInput } from 'fullcalendar';
 import { Observable, Subscription } from 'rxjs';
 import { filter, first, map, mergeMap, tap } from 'rxjs/operators';
-import { currentLanguage$ } from '@ul/shared';
 import {
   Event,
   impersonatedScheduleStoreManager,
@@ -44,6 +44,9 @@ export class ScheduleCalendarComponent implements OnDestroy {
   public errorIsBefore: boolean;
   public calendarDisplaySomeDateOutOfState: boolean;
   public initialBreakpoint: number;
+  public zoomLevel = 0;
+  public previousZoomLevel = 0;
+
   public storeManager: ScheduleStoreManager = scheduleStoreManager;
   public calendarOptions: CalendarOptions = {
     plugins: [timeGridPlugin, dayGridPlugin],
@@ -75,6 +78,11 @@ export class ScheduleCalendarComponent implements OnDestroy {
       this.isEventDetailOpen = true;
     },
     events: (fetchInfo, successCallback) => {
+
+      if (this.viewType === 'week') {
+        this.resetZoomLevel();
+      }
+
       this.loadScheduleOutOfStateError = false;
       fetchInfo.end = sub(fetchInfo.end, { days: 1 });
 
@@ -85,7 +93,22 @@ export class ScheduleCalendarComponent implements OnDestroy {
         this.storeManager.displayedEvents$.pipe(
           first(),
           map((events: Event[]) => this.scheduleCalendarService.eventsToCalendarEvents(events))
-        ).subscribe((events: EventInput[]) => successCallback(events));
+        ).subscribe((events: EventInput[]) => {
+
+          if (this.viewType === 'week') {
+
+            setTimeout(() => {
+              successCallback(events);
+
+              this.zoomLevel = this.previousZoomLevel;
+              this.updateZoomLevel();
+
+            }, 300);
+          }
+          if (this.viewType !== 'week') {
+            return successCallback(events);
+          }
+        });
         return;
 
       }
@@ -97,9 +120,16 @@ export class ScheduleCalendarComponent implements OnDestroy {
           map((events: Event[]) => this.scheduleCalendarService.eventsToCalendarEvents(events))
         )
         .subscribe(
-          (events: EventInput[]) => successCallback(events),
-          () => {
+          (events: EventInput[]) => {
 
+            if (this.viewType === 'week') {
+              setTimeout(() => {
+                this.setPreviousZoomLevel();
+              }, 0);
+            }
+            return successCallback(events);
+          },
+          () => {
             if (this.calendarDisplaySomeDateOutOfState) {
               this.loadScheduleOutOfStateError = true;
 
@@ -115,7 +145,16 @@ export class ScheduleCalendarComponent implements OnDestroy {
             this.storeManager.displayedEvents$.pipe(
               first(),
               map((events: Event[]) => this.scheduleCalendarService.eventsToCalendarEvents(events))
-            ).subscribe((events: EventInput[]) => successCallback(events));
+            ).subscribe((events: EventInput[]) => {
+
+              if (this.viewType === 'week') {
+                setTimeout(() => {
+                  this.setPreviousZoomLevel();
+                }, 500);
+              }
+              return successCallback(events);
+            }
+            );
           }
         );
     }
@@ -129,7 +168,8 @@ export class ScheduleCalendarComponent implements OnDestroy {
     private scheduleCalendarService: ScheduleCalendarService,
     private scheduleService: ScheduleService,
     public platform: Platform,
-    private translate: TranslateService) {
+    private translate: TranslateService,
+    private gestureCtrl: GestureController) {
     this.viewType$ = this.route.fragment
       .pipe(
         filter(f => f !== null)
@@ -183,10 +223,38 @@ export class ScheduleCalendarComponent implements OnDestroy {
     this.isEventDetailOpen = false;
   }
 
+  public updateZoomLevel() {
+    const element = document.querySelector('.fc-dayGridMonth-view');
+    const element2 = document.querySelector('.fc-timeGridWeek-view');
+
+    if (this.zoomLevel === 0) {
+      if (element) {
+        element.classList.remove('zoom1', 'zoom2');
+      }
+      if (element2) {
+        element2.classList.remove('zoom1', 'zoom2');
+      }
+      return;
+    }
+
+    if (element) {
+      element.classList.remove('zoom1', 'zoom2');
+      element.classList.add(`zoom${this.zoomLevel}`);
+    }
+
+    if (element2) {
+      element2.classList.remove('zoom1', 'zoom2');
+      element2.classList.add(`zoom${this.zoomLevel}`);
+    }
+  }
+
   private changeViewType(viewType: string) {
     if (!this.getCalendar()) {
       return;
     }
+
+    this.resetZoomLevel();
+
     this.getCalendar().changeView(this.getCalendarView(viewType));
   }
 
@@ -214,7 +282,21 @@ export class ScheduleCalendarComponent implements OnDestroy {
     requestAnimationFrame(() => {
       this.modal.initialBreakpoint = breakpoint;
       this.modal.setCurrentBreakpoint(breakpoint);
+      setTimeout(() => {
+        this.setPreviousZoomLevel();
+      }, 500);
     });
+  }
+
+  private resetZoomLevel() {
+    this.previousZoomLevel = this.zoomLevel;
+    this.zoomLevel = 0;
+    this.updateZoomLevel();
+  }
+
+  private setPreviousZoomLevel() {
+    this.zoomLevel = this.previousZoomLevel;
+    this.updateZoomLevel();
   }
 
   private subscribeToViewType(): Subscription {
@@ -241,6 +323,9 @@ export class ScheduleCalendarComponent implements OnDestroy {
   }
 
   private subscribeToResizeScreen(): Subscription {
-    return this.platform.resize.subscribe(() => this.updateBreakpoints());
+    return this.platform.resize.subscribe(() => {
+      this.resetZoomLevel();
+      this.updateBreakpoints();}
+    );
   }
 }

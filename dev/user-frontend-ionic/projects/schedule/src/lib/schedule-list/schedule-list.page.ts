@@ -82,6 +82,8 @@ export class ScheduleListPage {
       return;
     }
 
+    element.classList.add('current-date');
+
     const y = element.offsetTop;
     this.content.scrollToPoint(0, y);
   }
