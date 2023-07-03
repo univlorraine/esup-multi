@@ -20,7 +20,9 @@
             <ion-row *ngIf="randomImportantNews.link" class="ion-justify-content-end">
               <ion-button
                 (click)="onClick(randomImportantNews)"
-                class="app-text-button-1 link-button">
+                class="app-text-button-1 link-button"
+                fill="clear"
+              >
                 <ion-text [ngClass]="fontColor(randomImportantNews.color)" class="app-text-5"> {{ randomImportantNews.buttonLabel }} </ion-text>
                 <ion-icon [ngClass]="fontColor(randomImportantNews.color)" class="app-icon-6 link-icon" name="arrow-right"></ion-icon>
               </ion-button>

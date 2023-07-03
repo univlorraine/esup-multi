@@ -28,7 +28,7 @@
 </ion-content>
 <ion-footer data-burger-id="menu-footer" class="ion-no-border">
   <ion-row class="ion-justify-content-center">
-    <ion-button shape="round" class="app-round-button-1 ion-no-padding ion-no-margin" (click)="toggleDarkMode()">
+    <ion-button fill="clear" shape="round" class="app-round-button-1 ion-no-padding ion-no-margin" (click)="toggleDarkMode()">
       <ion-icon *ngIf="(isDarkTheme$ | async) === false" name="moon" slot="icon-only"></ion-icon>
       <ion-icon *ngIf="(isDarkTheme$ | async) === true" name="sunny-outline" slot="icon-only"></ion-icon>
     </ion-button>
