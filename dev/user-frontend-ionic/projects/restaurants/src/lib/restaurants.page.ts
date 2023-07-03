@@ -5,7 +5,7 @@ import { NetworkService } from '@ul/shared';
 import { getDistance } from 'geolib';
 import { combineLatest, from, Observable, of } from 'rxjs';
 import { catchError, first, map, tap } from 'rxjs/operators';
-import { favoriteRestaurantId$, restaurants$, setFavoriteRestaurant } from './restaurants.repository';
+import { favoriteRestaurantId$, RestaurantOpening, restaurants$, setFavoriteRestaurant } from './restaurants.repository';
 import { RestaurantsService } from './restaurants.service';
 
 export interface PositionDto {
@@ -17,8 +17,7 @@ export interface RestaurantDto {
   title: string;
   thumbnailUrl: string;
   shortDesc: string;
-  opening: string;
-  open: boolean;
+  opening: Record<string, RestaurantOpening>;
   distance: number;
   favorite: boolean;
 }
@@ -66,6 +65,10 @@ export class RestaurantsPage implements OnInit {
     this.router.navigate(['restaurants', restaurantId, 'menu']);
   }
 
+  public getCurrentOpening(opening: Record<string, RestaurantOpening>): RestaurantOpening | undefined {
+    return opening[1 + (new Date().getDay() + 6) % 7]; // 1 = monday, 7 = sunday
+  }
+
   private getMyCurrentPosition(): Observable<PositionDto> {
     return from(Geolocation.getCurrentPosition()).pipe(
       map((position: Position) => {
@@ -106,7 +109,6 @@ export class RestaurantsPage implements OnInit {
               thumbnailUrl: restaurant.thumbnailUrl,
               shortDesc: restaurant.shortDesc,
               opening: restaurant.opening,
-              open: restaurant.open,
               distance,
               favorite: restaurant.id === favoriteRestaurantId
             };

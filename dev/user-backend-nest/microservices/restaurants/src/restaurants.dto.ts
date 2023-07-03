@@ -2,7 +2,7 @@ export interface RestaurantExternalApiDTO {
   id: number;
   title: string;
   short_desc: string;
-  opening: string;
+  opening: Record<string, RestaurantOpeningExternalApi>;
   lat: number;
   lon: number;
   thumbnail_url: string;
@@ -15,8 +15,7 @@ export interface RestaurantDTO {
   id: number;
   title: string;
   shortDesc: string;
-  opening: string;
-  open: boolean;
+  opening: Record<string, RestaurantOpening>;
   latitude: number;
   longitude: number;
   thumbnailUrl: string;
@@ -43,4 +42,14 @@ export interface Meal {
 export interface FoodCategory {
   name: string;
   dishes: string[];
+}
+
+export interface RestaurantOpeningExternalApi {
+  label: string;
+  is_open: boolean;
+}
+
+export interface RestaurantOpening {
+  label: string;
+  isOpen: boolean;
 }

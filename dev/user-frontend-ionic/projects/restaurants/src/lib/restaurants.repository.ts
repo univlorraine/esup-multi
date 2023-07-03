@@ -12,10 +12,14 @@ export interface Restaurant {
     title: string;
     thumbnailUrl: string;
     shortDesc: string;
-    open: boolean;
-    opening: string;
+    opening: Record<string, RestaurantOpening>;
     latitude: number;
     longitude: number;
+}
+
+export interface RestaurantOpening {
+    label: string;
+    isOpen: boolean;
 }
 
 const STORE_NAME = 'restaurants';
