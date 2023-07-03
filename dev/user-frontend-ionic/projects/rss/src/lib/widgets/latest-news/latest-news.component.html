@@ -9,7 +9,7 @@
       <app-rss-item-header *ngIf="!isLoading" [item]="item">
         <ng-template appRssItemHeaderButton>
           <ion-button
-            [queryParams]="{guid: item.guid}" class="app-text-button-2 link-button" routerLink="/rss">
+            [queryParams]="{guid: item.guid}" class="app-text-button-2 link-button" fill="clear" routerLink="/rss">
             <ion-text class="app-text-5">{{ "RSS.SEE_MORE" | translate }}</ion-text>
             <ion-icon class="app-icon-5" name="arrow-right"></ion-icon>
           </ion-button>
