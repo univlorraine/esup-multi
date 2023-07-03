@@ -2,19 +2,18 @@
   <app-select-user slot="end"></app-select-user>
   <app-select-planning slot="end"></app-select-planning>
 </app-header>
+<ion-progress-bar *ngIf="isLoading$ | async" type="indeterminate" color="primary"></ion-progress-bar>
+
+<ion-toolbar color="secondary" *ngIf="!!asUser">
+  <ion-title class="ion-text-center schedule-as-user-title">{{ 'SCHEDULE.MANAGEMENT.AS_USER_LABEL' | translate }} : {{ asUser }}</ion-title>
+  <ion-buttons slot="end">
+    <ion-button (click)="clearAsUserLogin()" fill="clear">
+      <ion-icon name="close"></ion-icon>
+    </ion-button>
+  </ion-buttons>
+</ion-toolbar>
 
 <ion-content>
-  <ion-progress-bar *ngIf="isLoading$ | async" type="indeterminate" color="primary"></ion-progress-bar>
-
-  <ion-toolbar color="secondary" *ngIf="!!asUser">
-    <ion-title class="ion-text-center schedule-as-user-title">{{ 'SCHEDULE.MANAGEMENT.AS_USER_LABEL' | translate }} : {{ asUser }}</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="clearAsUserLogin()" fill="clear">
-        <ion-icon name="close"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-
   <ion-tabs>
     <ion-tab-bar slot="top" color="medium">
       <ion-tab-button [class.tab-selected]="isTabActive('schedule/calendar#month')" tab="calendar#month">
