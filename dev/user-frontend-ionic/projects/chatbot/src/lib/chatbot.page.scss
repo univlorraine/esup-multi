@@ -2,9 +2,12 @@
   display: flex;
 }
 
+ion-item {
+  --background: transparent;
+}
+
 .message-bot {
   background-color: var(--ion-color-medium-tint);
-  color: var(--ion-color-primary-contrast);
   border-radius: 0.938rem;
   border-bottom-left-radius: 0px;
   width: fit-content;
@@ -33,21 +36,34 @@
 }
 
 .buttonRequest {
-  border-width: 0.125rem;
+  border-width: 0.1rem;
   border-style: solid;
-  border-color: var(--ion-color-dark-tint);
+  border-color: var(--app-border-color-secondary);
 }
 
 
 ion-item.footer {
   --inner-border-width: 0;
-  --ion-item-background: var(--ion-color-medium);
+  background: var(--ion-color-dark);
+  padding-left: 0.8rem !important;
+  padding-top: 0.3rem !important;
+  padding-bottom: 0.3rem !important;
+}
+
+ion-item.ios.footer {
+  padding-left: 0.8rem !important;
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+}
+
+ion-buttons {
+  margin-inline-start: 0px;
 }
 
 ion-input.input {
   --padding-start: 0.625rem;
   border: none;
-  height: 2.49rem;
+  border-radius: 0.15rem;
   --ion-item-background: var(--app-color-component-background-primary);
   background-color: var(--app-color-component-background-primary);
 }
@@ -58,6 +74,7 @@ ion-input.input {
 
 ion-list {
   min-height: 100%;
+  background: transparent;
 }
 
 

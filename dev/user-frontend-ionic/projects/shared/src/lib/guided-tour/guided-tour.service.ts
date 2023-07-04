@@ -70,6 +70,6 @@ export class GuidedTourService {
     if(!menuItem.title) {
       return;
     }
-    return menuItem.title.replace(/\./g, "-").toLowerCase();
+    return menuItem.title.replace(/\./g, '-').toLowerCase();
   }
 }

@@ -10,6 +10,10 @@ ion-tab-bar {
   height: 2.4rem;
 }
 
+ion-label {
+  color: var(--app-font-color-topbar) !important;
+}
+
 .tab-selected {
   ion-label{
     color: var(--ion-color-secondary) !important;

@@ -47,8 +47,12 @@
 @import "./theme/components/header.scss";
 
 /* External library */
-/* FullCalendar */
+/* FullCalendar (Calendar in schedule module) */
 @import "./theme/external-ui-library/fullcalendar/fullcalendar.scss";
+
+/* External library */
+/* Leaflet (Map in map module) */
+@import "./theme/external-ui-library/leaflet/leaflet.scss";
 
 /* Shepherd.js */
 @import "./theme/external-ui-library/shepherd/shepherd.scss";
@@ -61,3 +65,4 @@ body.scanner-active {
 body {
   --ion-background-color: var(--app-color-background) !important;
 }
+

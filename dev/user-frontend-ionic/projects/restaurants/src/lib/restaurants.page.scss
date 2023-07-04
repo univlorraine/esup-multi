@@ -22,12 +22,21 @@
   height: 100%;
   left: -0.3rem;
   width: 0.13rem;
-  background-color: var(--ion-color-dark);
-  --background: var(--ion-color-dark);
+  background-color: var(--app-border-color-secondary);
+  --background: var(--app-border-color-secondary);
   margin-right: -4px;
 }
 
 .opening {
   text-align: right;
   margin-top: -2%;
+}
+
+ion-item {
+  --background: transparent;
+  --border-color: var(--app-border-color-secondary);
+}
+
+ion-list {
+  background: transparent;
 }

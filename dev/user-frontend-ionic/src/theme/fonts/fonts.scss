@@ -1,22 +1,31 @@
 // // ---------------------
-// // Font css classes (Use these CSS classes in HTML for all text tags throughout the app).
+// // Font css classes (Use these CSS classes in HTML on all text tags throughout the app).
 // // ---------------------
 
-// Note :
-/* Don't use the color attribute of Ionic components on ion-label tags and don't use a class bellow
+/* HOW TO USE VARIABLES
+
+   Don't use the color attribute of Ionic components on ion-label tags and don't use a class bellow
    on ion-button or on a parent of a text tag.
 
    How not to do it: <ion-label color="primary"> <h1> text </h1> <p> text </p> </ion-label>
    How not to do it: <ion-button class="app-text-1"> text </ion-button>
 
    How to do it: Use the following font classes directly on the text tags.
-   Example: <ion-label> <h1 class="app-title-1"></h1> <p class="app-text-1"></p> </ion-label>
-   <ion-button> <ion-text class="app-text-1"> text </ion-text> </ion-button>
+   - <ion-label> <h1 class="app-title-1"></h1> <p class="app-text-1"></p> </ion-label>
+   - <ion-button> <ion-text class="app-text-1"> text </ion-text> </ion-button>
    Because Ionic handles the styling for tags inside ion-label and for the text inside ion-button. */
 
-/* At the bottom of the file, you will find the danger color (use this class in addition to the other classes above).
+/* DANGER VARIABLE
+
+   At the bottom of the file, you will find the .danger class color (use this class in addition to the other classes above).
    Don't use the color="danger" attribute, but instead use: <ion-text class="app-title-1 light danger"> */
 
+
+/* FIXED FONT COLOR VARIABLES (fix color even if light or dark theme)
+
+   At the bottom of the file : you will find classes fixed-light/dark-color. Use with app-text-. app-title-. classes if
+   the font color must be the same in light and dark theme. Typicaly if a background component is the
+   same in light and dark theme the font color must be fixed and this classes are used. */
 
 // // // --------------------
 // // // Title level
@@ -292,12 +301,21 @@
   color: var(--app-font-color-primary-contrast) !important;
 }
 
+//________________________________________________________
+
+.app-fixed-light-color {
+  color: var(--app-font-fix-light-color) !important;
+}
+
+.app-fixed-dark-color {
+  color: var(--app-font-fix-dark-color) !important;
+}
+
 // danger color (use this class in adition with other class above.
 // Don't use the color="danger" attribute, but instead use: <ion-text class="app-title-1 light danger">
 .danger {
   color: var(--ion-color-danger) !important;
 }
-
 
 // This class can be used to force the links rendered inside innerHTML to inherit the color of their container
 .link-inherit-color a {

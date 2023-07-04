@@ -16,7 +16,7 @@
       <ng-container *ngIf="restaurant$ | async">
         <ion-card class="swiper-slide" *ngFor="let menu of (menus$ | async)">
           <ion-card-header color="medium" class="ion-text-center">
-            <ion-text class="app-title-5 contrast">{{ menu.date | completeLocalDate}}</ion-text>
+            <ion-text class="app-title-5 app-fixed-light-color">{{ menu.date | completeLocalDate}}</ion-text>
           </ion-card-header>
           <ion-card-content>
             <ion-list *ngFor="let meal of menu.meal">

@@ -2,10 +2,7 @@
   padding-top: 5px !important;
 }
 
-hr {
-  border-top: 2px dashed var(--ion-color-primary-contrast);
-  margin: 0;
-}
+
 
 .events-container {
   padding: 0;
@@ -14,6 +11,11 @@ hr {
 .event {
   align-items: center;
   padding: 0.5rem 0;
+}
+
+hr {
+  border-top: 2px dashed var(--ion-color-primary-contrast);
+  margin: 0;
 }
 
 .event-part ion-text {
@@ -29,4 +31,29 @@ hr {
 
 .event-part-info {
   flex-grow: 3;
+}
+
+.light-font-color{
+  color: var(--app-font-color-for-dark-background-from-cms) !important;
+
+  hr {
+    border-top: 2px dashed var(--app-font-color-for-dark-background-from-cms);
+    margin: 0;
+  }
+
+  .event-part-date {
+    border-right: 5px solid var(--app-font-color-for-dark-background-from-cms);
+  }
+}
+
+.dark-font-color{
+  color: var(--app-font-color-for-light-background-from-cms) !important;
+
+  hr {
+    border-top: 2px dashed var(--app-font-color-for-light-background-from-cms);
+  }
+
+  .event-part-date {
+    border-right: 5px solid var(--app-font-color-for-light-background-from-cms);
+  }
 }
