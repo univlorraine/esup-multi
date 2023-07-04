@@ -1,5 +1,5 @@
 ion-title {
-  color: var(--app-font-color-topbar);
+  color: var(--app-font-color-topbar) !important;
 }
 
 ion-item {
@@ -7,6 +7,19 @@ ion-item {
   padding-right: 0px;
   --padding-start: 0px;
   --inner-padding-end: 0px;
+}
+
+ion-item:last-child {
+  --inner-border-width: 0;
+}
+
+ion-item {
+  --background: transparent !important;
+  --border-color: var(--ion-color-medium-light-tint);
+}
+
+ion-list {
+  background: transparent !important;
 }
 
 .label {
@@ -30,7 +43,6 @@ ion-list {
 }
 
 ion-toggle {
-
   --track-background: #f9f9f9;
   --track-background-checked: #ffffff;
 
@@ -42,7 +54,6 @@ ion-toggle {
   --handle-spacing: -1px;
   --handle-border-radius: 6px;
   --handle-box-shadow: none;
-
 }
 
 ion-toggle.md {

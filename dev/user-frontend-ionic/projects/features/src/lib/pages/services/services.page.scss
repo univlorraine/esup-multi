@@ -1,11 +1,11 @@
 ion-content {
-  --background: var(--ion-color-quaternary);
+  --background: var(--app-services-color-background);
 }
 
 ion-searchbar {
-  padding-top: 0px;
-  padding-bottom: 0px;
   --background: var(--app-color-component-background-primary);
+  --box-shadow: none !important;
+  --border-radius: 0.15rem !important;
 }
 
 ion-col {
@@ -13,7 +13,7 @@ ion-col {
 }
 
 .searchbar-row {
-  background: var(--ion-color-medium);
+  background: var(--ion-color-dark);
   margin-bottom: 1.9rem;
   display: flex;
   align-items: center;

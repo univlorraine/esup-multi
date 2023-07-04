@@ -1,19 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import { finalize, first } from 'rxjs/operators';
+import { AfterViewInit, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ThemeService } from '@ul/shared';
 import { Observable } from 'rxjs';
+import { finalize, first } from 'rxjs/operators';
+import { MailCalendar, mails$ } from '../../unread-mail.repository';
 import { UnreadMailService } from '../../unread-mail.service';
-import { mails$, MailCalendar } from '../../unread-mail.repository';
 
 @Component({
   selector: 'app-unread-mail-widget',
   templateUrl: './unread-mail.component.html',
   styleUrls: ['./unread-mail.component.scss'],
 })
-export class UnreadMailComponent implements OnInit {
+export class UnreadMailComponent implements OnInit, AfterViewInit {
+
+  @Input() widgetColor: string;
+
   public isLoading = false;
   public mails$: Observable<MailCalendar> = mails$;
 
-  constructor(private unreadMailService: UnreadMailService) {
+  constructor(private unreadMailService: UnreadMailService,
+    private themeService: ThemeService,
+    private changeDetectorRef: ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
@@ -24,5 +30,14 @@ export class UnreadMailComponent implements OnInit {
         finalize(() => this.isLoading = false)
       )
       .subscribe();
+  }
+
+  ngAfterViewInit() {
+    this.changeDetectorRef.detectChanges();
+  }
+
+  fontColor() {
+    return this.themeService.isBackgroundFromCmsDarkOrIsDarkTheme(this.widgetColor) ?
+      'light-font-color' : 'dark-font-color';
   }
 }

@@ -1,10 +1,14 @@
 .notifications-list {
-  background-color: var(--ion-color-medium-light);
+  background-color: var(--app-color-background);
   padding-top: 0px;
 }
 
 .notifications {
   --background: var(--app-color-component-background-primary);
+}
+
+.notification-container {
+  border: 1px solid var(--app-border-color-primary);
 }
 
 .notifications-col {
@@ -52,14 +56,13 @@
   padding-right: 0.4rem;
 }
 
-.channel-list{
+.channel-list {
   --background: var(--app-color-component-background-primary) !important;
 }
 
-ion-item:last-child {
+ion-item {
   --inner-border-width: 0;
 }
-
 
 .chip-list {
   background-color: var(--ion-color-medium-light);
@@ -70,5 +73,5 @@ ion-chip {
 }
 
 .notifications-option {
-margin-bottom: 0.1rem;
+  margin-bottom: 0.1rem;
 }

@@ -17,7 +17,8 @@
           <ion-text class="app-title-5">{{ "NOTIFICATIONS.FILTERS" | translate }}</ion-text>
         </ion-row>
         <form [formGroup]="form" *ngIf="(filterableChannels$ | async) as filterableChannels">
-          <ion-item class="channel-list" formArrayName="channelsForm" *ngFor="let channel of channelsForm.controls; let i = index">
+          <ion-item class="channel-list" formArrayName="channelsForm"
+            *ngFor="let channel of channelsForm.controls; let i = index">
             <ion-label class="app-text-3 light ion-text-wrap" for="terms">{{filterableChannels[i].label}}</ion-label>
             <ion-checkbox mode="md" [formControlName]="i"></ion-checkbox>
           </ion-item>
@@ -45,7 +46,8 @@
 
   <ng-container *ngIf="filteredNotifications.length > 0">
     <ion-list class="notifications-list">
-      <ion-item-sliding class="ion-margin-bottom" *ngFor="let notification of (filteredNotifications$ | async)">
+      <ion-item-sliding class="ion-margin-bottom notification-container"
+        *ngFor="let notification of (filteredNotifications$ | async)">
 
         <div *ngIf="notification.color" class="notifications-color-bar"
           [ngStyle]="{'background-color': notification.color}"></div>
@@ -113,8 +115,10 @@
         <ion-header>
           <ion-toolbar>
             <ion-buttons slot="end">
-              <ion-button class="app-title-6" (click)="dismissModal()">{{ 'NOTIFICATIONS.CLOSE' | translate
-                }}</ion-button>
+              <ion-button (click)="dismissModal()">
+                <ion-text class="app-title-6">
+                  {{ 'NOTIFICATIONS.CLOSE' | translate }}</ion-text>
+              </ion-button>
             </ion-buttons>
           </ion-toolbar>
         </ion-header>

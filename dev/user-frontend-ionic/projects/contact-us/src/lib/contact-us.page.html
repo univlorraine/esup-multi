@@ -16,15 +16,15 @@
     <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
       <ion-list>
         <ion-item>
-          <ion-label position="floating">{{ "CONTACT-US.YOUR_EMAIL" | translate }}</ion-label>
+          <ion-label class="input-label" position="floating">{{ "CONTACT-US.YOUR_EMAIL" | translate }}</ion-label>
           <ion-input formControlName="from"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label position="floating">{{ "CONTACT-US.SUBJECT" | translate }}</ion-label>
+          <ion-label class="input-label" position="floating">{{ "CONTACT-US.SUBJECT" | translate }}</ion-label>
           <ion-input formControlName="subject"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label position="floating">{{ "CONTACT-US.MESSAGE" | translate }}</ion-label>
+          <ion-label class="input-label" position="floating">{{ "CONTACT-US.MESSAGE" | translate }}</ion-label>
           <ion-textarea [autoGrow]="true" formControlName="text"></ion-textarea>
         </ion-item>
       </ion-list>

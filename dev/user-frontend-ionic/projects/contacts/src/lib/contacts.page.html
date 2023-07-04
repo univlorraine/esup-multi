@@ -1,6 +1,6 @@
 <app-header></app-header>
 <div class="search-and-filters">
-  <ion-row>
+  <ion-row class="searchbar-row">
     <ion-searchbar (ionChange)="saveSearchBar($event)" placeholder="{{ 'CONTACTS.PLACEHOLDER' | translate }}"></ion-searchbar>
   </ion-row>
   <ion-radio-group [value]="this.filterChecked" (ionChange)="selectedCategory($event)">

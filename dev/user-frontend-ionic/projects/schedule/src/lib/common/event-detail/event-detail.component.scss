@@ -1,9 +1,10 @@
 ion-card {
   border-width: var(--app-border-width-8);
-  border-color: var(--ion-color-primary);
+  border-color: var(--app-border-color-primary);
   border-style: solid;
   border-radius: var(--app-border-no-radius);
   box-shadow: var(--app-border-no-box-shadow);
+  background: transparent;
 }
 
 .course-label {

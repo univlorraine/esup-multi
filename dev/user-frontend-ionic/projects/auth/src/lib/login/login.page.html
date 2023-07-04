@@ -19,7 +19,7 @@
 
 
     <ion-item lines="full">
-      <ion-label position="floating" class="ajust-padding">{{ 'AUTH.LOGIN.USERNAME' | translate }}</ion-label>
+      <ion-label position="floating" class="input-label app-text-3">{{ 'AUTH.LOGIN.USERNAME' | translate }}</ion-label>
       <ion-input type="text" formControlName="username" class="form-control" id="username" required></ion-input>
       <ion-note slot="error" *ngIf="username && username.errors && (username.dirty && username.touched)">
         {{ 'AUTH.LOGIN.REQUIRED.USERNAME' | translate }}
@@ -27,7 +27,7 @@
     </ion-item>
 
     <ion-item lines="full">
-      <ion-label position="floating" class="ajust-padding">{{ 'AUTH.LOGIN.PASSWORD' | translate }}</ion-label>
+      <ion-label position="floating" class="input-label">{{ 'AUTH.LOGIN.PASSWORD' | translate }}</ion-label>
       <ion-input type="password" formControlName="password" class="form-control" id="password" required></ion-input>
       <ion-note slot="error" *ngIf="password && password.errors && (password.dirty && password.touched)">
         {{ 'AUTH.LOGIN.REQUIRED.PASSWORD' | translate }}

@@ -10,3 +10,7 @@ ion-card-content {
 ion-card-content > * {
   display: flex;
 }
+
+ion-back-button {
+  color: var(--app-font-color-topbar);
+}

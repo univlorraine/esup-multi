@@ -97,8 +97,12 @@
   }
 }
 
+.fc-daygrid-day {
+  background-color: white;
+}
+
 .fc-day-disabled {
-  background: var(--ion-color-light-shade) !important;
+  background: var(-ion-color-light-shade) !important;
 }
 
 .fc-daygrid-day {
@@ -108,6 +112,7 @@
 
 .fc-daygrid-day-number {
   font-size: 0.8rem;
+  color: var(--app-font-color-primary);
 }
 
 .fc-daygrid-event-harness {
@@ -119,8 +124,14 @@
 }
 
 .fc-v-event .fc-event-main {
+  color: red !important;
+}
+
+.fc-col-header-cell-cushion {
   color: var(--app-font-color-primary) !important;
 }
+
+
 
 // Week/Month common style
 
@@ -253,4 +264,46 @@
 
 .fc-view-harness {
   border-top: 1px solid black !important;
+}
+
+// // ---------------------
+
+// //  DARK theme for fullcalendar
+
+// // ---------------------
+
+body.dark {
+
+  // Month style
+
+  .fc-daygrid-day {
+    background-color: var(--app-color-component-background-primary);
+  }
+
+  .fc-day-disabled {
+    background: var(--ion-color-dark) !important;
+  }
+
+  .fc-daygrid-day-top {
+    background-color: #383838 !important;
+  }
+
+  // Month / Week / Day common style
+
+  .fc-col-header-cell {
+    background-color: var(--app-color-component-background-primary);
+  }
+
+  .fc-scrollgrid {
+    border-color: var(--ion-color-medium);
+  }
+
+  .fc-theme-standard td,
+  .fc-theme-standard th {
+    border-color: var(--ion-color-medium);
+  }
+
+  .fc-view-harness {
+    border-top: 1px solid var(--ion-color-medium) !important;
+  }
 }
