@@ -10,7 +10,7 @@ export interface Contact {
   firstname: string;
   phoneNumbers: string[];
   mobileNumbers: string[];
-  mailAdresses: string[];
+  mailAddresses: string[];
   assignments: string[];
 }
 
@@ -40,7 +40,7 @@ export class ContactsService {
   public async contactAlreadyExists(user: Contact): Promise<boolean> {
     const { contacts: allContacts } = await Contacts.getContacts({projection: {emails: true}});
     const contactExists = allContacts.find((contact) => contact.emails?.find((email) =>
-    user.mailAdresses.includes(email.address))) !== undefined;
+    user.mailAddresses.includes(email.address))) !== undefined;
     return contactExists;
   }
 
@@ -54,7 +54,7 @@ export class ContactsService {
           number: phone,
         })
       ));
-      user.mailAdresses.map(email => (
+      user.mailAddresses.map(email => (
         emails.push({
           type: EmailType.Work,
           address: email,

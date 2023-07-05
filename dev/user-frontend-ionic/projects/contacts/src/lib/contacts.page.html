@@ -28,7 +28,7 @@
       </ion-card-header>
       <ion-card-content class="border-bottom">
         <div class="ion-padding">
-          <ion-item class="contact-labels ion-no-padding" *ngFor="let email of item.mailAdresses; last as isLast" [lines]="isLast ? 'inset' : 'none' ">
+          <ion-item class="contact-labels ion-no-padding" *ngFor="let email of item.mailAddresses; last as isLast" [lines]="isLast ? 'inset' : 'none' ">
             <a class="app-text-4" href="mailto:{{email}}" >{{email}}</a>
           </ion-item>
           <ion-item class="contact-labels ion-no-padding" *ngFor="let mobile of item.phoneNumbers; last as isLast" [lines]="isLast ? 'inset' : 'none' ">
