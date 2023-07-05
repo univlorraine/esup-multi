@@ -2,18 +2,25 @@
 
   <ion-header>
     <ion-toolbar color="primary">
-      <img src="assets/logo/white-university-logo.svg" class="logo ion-padding-start app-logo-3"/>
+      <img src="assets/logo/white-university-logo.svg" class="logo ion-padding-start app-logo-3" />
       <ion-buttons slot="end">
-        <ion-button
-          *ngFor="let menu of (topMenuItems$ | async)"
-          (click)="menuOpenerService.open(menu)"
-          [attr.data-menu-id]="getMenuId(menu)"
-        >
-          <app-custom-icon [icon]="menu.icon" [iconSourceSvgLightTheme]="menu.iconSourceSvgLightTheme" [iconSourceSvgDarkTheme]="menu.iconSourceSvgDarkTheme"></app-custom-icon>
+        <ion-button *ngFor="let menu of (topMenuItems$ | async)"
+        (click)="menuOpenerService.open(menu)"
+        [attr.data-menu-id]="getMenuId(menu)">
+          <app-custom-icon [icon]="menu.icon"
+          [iconSourceSvgLightTheme]="menu.iconSourceSvgLightTheme"
+          [iconSourceSvgDarkTheme]="menu.iconSourceSvgDarkTheme"></app-custom-icon>
         </ion-button>
       </ion-buttons>
     </ion-toolbar>
     <ion-progress-bar *ngIf="isLoading" type="indeterminate" color="primary"></ion-progress-bar>
+
+    <ion-row class="ion-text-center network-toolbar" *ngIf="(isOnline$ | async) === false">
+      <ion-col>
+        <ion-text class="no-network-label app-text-5">{{"ERROR.NO_NETWORK.TOP_BAR_LABEL" | translate}}</ion-text>
+      </ion-col>
+    </ion-row>
+
   </ion-header>
   <ion-tab-bar data-menu-id="main-tab-bar" color="primary" slot="bottom">
     <!--
@@ -27,9 +34,11 @@
       routerLinkActive="tab-selected"
       [attr.data-menu-id]="generateMenuItemIdFromRouterLink(menu)"
     >
-      <app-custom-icon [icon]="menu.icon" [iconSourceSvgLightTheme]="menu.iconSourceSvgLightTheme" [iconSourceSvgDarkTheme]="menu.iconSourceSvgDarkTheme"></app-custom-icon>
+      <app-custom-icon [icon]="menu.icon"
+      [iconSourceSvgLightTheme]="menu.iconSourceSvgLightTheme"
+      [iconSourceSvgDarkTheme]="menu.iconSourceSvgDarkTheme"></app-custom-icon>
       <ion-text class="short-title">
-        {{(menu.shortTitle || menu.title) |  translate}}
+        {{(menu.shortTitle || menu.title) | translate}}
       </ion-text>
     </ion-tab-button>
   </ion-tab-bar>

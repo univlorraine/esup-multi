@@ -14,3 +14,13 @@ app-custom-icon {
     color: var(--ion-color-secondary);
   }
 }
+
+.network-toolbar {
+  height: 1.8rem;
+  background-color: var(--ion-color-warning);
+}
+
+.no-network-label {
+    color: black !important;
+}
+

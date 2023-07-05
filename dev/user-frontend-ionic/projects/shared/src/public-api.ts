@@ -35,13 +35,10 @@ export * from './lib/shared.actions';
 export * from './lib/sso/sso.service';
 export * from './lib/statistics/statistics.service';
 export * from './lib/store/local-forage';
+export * from './lib/store/user-store-helper';
 export * from './lib/theme/theme.repository';
 export * from './lib/theme/theme.service';
 export * from './lib/infos/infos.service';
 export * from './lib/guided-tour/guided-tour.repository';
 export * from './lib/guided-tour/guided-tour.service';
-
-
-
-
 

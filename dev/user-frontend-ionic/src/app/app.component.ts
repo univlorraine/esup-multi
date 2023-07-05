@@ -1,20 +1,19 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, Inject, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { App } from '@capacitor/app';
+import { Capacitor, PluginListenerHandle } from '@capacitor/core';
 import { SplashScreen } from '@capacitor/splash-screen';
+import { StatusBar, Style } from '@capacitor/status-bar';
+import { ModalController, Platform, PopoverController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import {
-  currentLanguage$, isDarkTheme$, PageLayout, PageLayoutService, setIsDarkTheme,
-  themeRepoInitialized$, userHadSetThemeInApp, userHadSetThemeInApp$, NavigationService
+  currentLanguage$, features$, FeaturesService, initializedUserRepo$,
+  isDarkTheme$, NavigationService, NetworkService, PageLayout, PageLayoutService, setIsDarkTheme,
+  themeRepoInitialized$, userHadSetThemeInApp, userHadSetThemeInApp$
 } from '@ul/shared';
-import { combineLatest, Observable, of, Subscription } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
 import { initializeApp } from 'firebase/app';
-import { Capacitor } from '@capacitor/core';
-import { App } from '@capacitor/app';
-import { PluginListenerHandle } from '@capacitor/core';
-import { ModalController, PopoverController } from '@ionic/angular';
-import { StatusBar, Style } from '@capacitor/status-bar';
-import { Platform } from '@ionic/angular';
+import { combineLatest, Observable, of, Subscription } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -25,6 +24,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
   public languages: Array<string> = [];
   public currentPageLayout$: Observable<PageLayout>;
+  public isOnline$: Observable<boolean>;
+  public isNothingToShow$: Observable<boolean>;
+  private featuresIsEmpty$: Observable<boolean>;
   private subscriptions: Subscription[] = [];
   private backButtonListener: Promise<PluginListenerHandle>;
 
@@ -38,8 +40,41 @@ export class AppComponent implements OnInit, OnDestroy {
     private modalController: ModalController,
     private popoverController: PopoverController,
     private renderer: Renderer2,
-    @Inject(DOCUMENT) private document: Document
+    @Inject(DOCUMENT) private document: Document,
+    private networkService: NetworkService,
+    private featuresService: FeaturesService,
+
   ) {
+
+    this.featuresIsEmpty$ = features$.pipe(
+      map((val) => val.length === 0)
+    );
+
+    this.isNothingToShow$ = initializedUserRepo$.pipe(
+      switchMap(isInitialized => {
+        if (isInitialized) {
+          return combineLatest([
+            this.featuresIsEmpty$,
+            this.networkService.isOnline$
+          ]);
+        } else {
+          return of([null, null]);
+        }
+      }),
+      switchMap(([featuresIsEmpty, isOnline]) => {
+        const nothingToShowButLoadFeatures = featuresIsEmpty && isOnline;
+        const isNothingToShow = (featuresIsEmpty === true || featuresIsEmpty === null) && (isOnline === false || isOnline === null);
+
+        if (nothingToShowButLoadFeatures) {
+          return this.featuresService.loadAndStoreFeatures().pipe(
+            map(() => true)
+          );
+        } else{
+          return of(isNothingToShow);
+        }
+      }));
+
+    this.isNothingToShow$.subscribe();
 
     SplashScreen.show({
       showDuration: 1500,
@@ -58,19 +93,19 @@ export class AppComponent implements OnInit, OnDestroy {
         return;
       }
 
-      StatusBar.setStyle({style: Style.Dark});
+      StatusBar.setStyle({ style: Style.Dark });
     });
   }
 
   ngOnInit() {
     this.backButtonListener = App.addListener('backButton', () => {
       this.popoverController.getTop().then(popover => {
-        if(popover) {
+        if (popover) {
           popover.dismiss();
           return;
         }
         this.modalController.getTop().then(modal => {
-          if(modal) {
+          if (modal) {
             modal.dismiss();
             return;
           }

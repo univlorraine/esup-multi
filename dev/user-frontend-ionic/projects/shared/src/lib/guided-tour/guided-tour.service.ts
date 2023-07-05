@@ -1,31 +1,38 @@
 import { Inject, Injectable } from '@angular/core';
-import { ShepherdService } from 'angular-shepherd';
-import { isAnonymousTourViewed, isLoggedTourViewed, setAnonymousTourViewed, setLoggedTourViewed } from './guided-tour.repository';
 import { Router } from '@angular/router';
-import { anonymousSteps } from './config/anonymous-guided-tour.config';
 import { TranslateService } from '@ngx-translate/core';
-import { loggedSteps } from './config/logged-guided-tour.config';
+import { ShepherdService } from 'angular-shepherd';
+import { Observable } from 'rxjs';
+import { filter, first, switchMap } from 'rxjs/operators';
 import { userIsAuthenticated$ } from '../auth/authenticated-user.repository';
-import { first } from 'rxjs/operators';
 import { MenuItem } from '../navigation/menu.model';
+import { NetworkService } from '../network/network.service';
+import { anonymousSteps } from './config/anonymous-guided-tour.config';
+import { loggedSteps } from './config/logged-guided-tour.config';
+import { isAnonymousTourViewed, isLoggedTourViewed, setAnonymousTourViewed, setLoggedTourViewed } from './guided-tour.repository';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GuidedTourService {
 
+  private isOnline$: Observable<boolean>;
+
   constructor(
     @Inject('environment')
     private environment: any,
     private shepherdService: ShepherdService,
     private router: Router,
-    private translateService: TranslateService
+    private translateService: TranslateService,
+    private networkService: NetworkService
   ) {
+    this.isOnline$ = this.networkService.isOnline$;
+
     this.shepherdService.defaultStepOptions = {
       scrollTo: false,
       canClickTarget: false,
       showOn(): boolean {
-        if(!this.attachTo) {
+        if (!this.attachTo) {
           return true;
         }
         //If attachTo element is not present, the step is skipped
@@ -39,19 +46,27 @@ export class GuidedTourService {
   }
 
   startGlobalTour() {
-    if(!this.environment.guidedTourEnabled) {
+    if (!this.environment.guidedTourEnabled) {
       return;
     }
 
-    userIsAuthenticated$.pipe(
-      first()
-    ).subscribe(userIsAuthenticated => {
-      if(!isLoggedTourViewed() && !isAnonymousTourViewed() && !userIsAuthenticated){
-        this.startAnonymousTour();
-      } else if(!isLoggedTourViewed() && userIsAuthenticated) {
-        this.startLoggedTour();
-      }
-    });
+    this.isOnline$
+      .pipe(
+        filter(isOnline => isOnline),
+        first(),
+        switchMap(() => userIsAuthenticated$.pipe(first()))
+      )
+      .subscribe(userIsAuthenticated => {
+        if (
+          !isLoggedTourViewed() &&
+          !isAnonymousTourViewed() &&
+          !userIsAuthenticated
+        ) {
+          this.startAnonymousTour();
+        } else if (!isLoggedTourViewed() && userIsAuthenticated) {
+          this.startLoggedTour();
+        }
+      });
   }
 
   startAnonymousTour() {
@@ -66,8 +81,8 @@ export class GuidedTourService {
     this.shepherdService.start();
   }
 
-  generateMenuItemIdFromTitle(menuItem: MenuItem){
-    if(!menuItem.title) {
+  generateMenuItemIdFromTitle(menuItem: MenuItem) {
+    if (!menuItem.title) {
       return;
     }
     return menuItem.title.replace(/\./g, '-').toLowerCase();

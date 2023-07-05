@@ -1,9 +1,9 @@
 import { select, withProps } from '@ngneat/elf';
 import { getAllEntities, getEntity, selectAllEntities, setEntities, updateEntities, withEntities } from '@ngneat/elf-entities';
+import { mergeMap } from 'rxjs/operators';
 import { Authorization } from '../authorization/authorization.helper';
 import { ServiceMenuItem } from '../navigation/menu.model';
 import { registerUserStore } from '../store/user-store-helper';
-import { mergeMap } from 'rxjs/operators';
 
 
 const STORE_NAME = 'features';

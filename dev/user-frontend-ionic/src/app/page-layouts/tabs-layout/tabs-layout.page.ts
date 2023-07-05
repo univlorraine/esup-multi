@@ -1,12 +1,11 @@
 import { AfterViewInit, Component } from '@angular/core';
-import { Network } from '@capacitor/network';
+import { NavController } from '@ionic/angular';
 import {
-  FeaturesService, MenuItem, MenuItemLinkType, MenuItemRouterLink,
-  MenuOpenerService, MenuService, NetworkService, StatisticsService, GuidedTourService
+  FeaturesService, GuidedTourService, MenuItem, MenuItemLinkType, MenuItemRouterLink,
+  MenuOpenerService, MenuService, NetworkService, StatisticsService
 } from '@ul/shared';
 import { Observable } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
-import { NavController } from '@ionic/angular';
 
 interface MenuItemWithOptionalRouterLink extends MenuItem {
   routerLink: string;
@@ -22,6 +21,7 @@ export class TabsLayoutPage implements AfterViewInit {
   public isLoading = false;
   public topMenuItems$: Observable<MenuItem[]>;
   public tabsMenuItems$: Observable<MenuItemWithOptionalRouterLink[]>;
+  public isOnline$: Observable<boolean>;
 
   constructor(
     private navController: NavController,
@@ -32,6 +32,7 @@ export class TabsLayoutPage implements AfterViewInit {
     public menuOpenerService: MenuOpenerService,
     private networkService: NetworkService,
   ) {
+    this.isOnline$ = this.networkService.isOnline$;
     this.tabsMenuItems$ = this.menuService.tabsMenuItems$.pipe(
       map(menuItems => menuItems.map(menuItem => {
         if (menuItem.link.type !== MenuItemLinkType.router) {
