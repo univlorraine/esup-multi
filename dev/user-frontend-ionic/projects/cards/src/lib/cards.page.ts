@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import {Component, Inject, ViewChild} from '@angular/core';
 import { AuthenticatedUser, getAuthToken, NetworkService } from '@ul/shared';
 import { Observable, Subscription } from 'rxjs';
 import { filter, finalize, first, switchMap } from 'rxjs/operators';
@@ -6,6 +6,7 @@ import { CardModalComponent } from './card/card-modal.component';
 import { setUserAndCardsData, UserAndCardsData, userAndCardsData$ } from './cards.repository';
 import { CardsService } from './cards.service';
 import { ScreenService } from './screen.service';
+import { CARDS_CONFIG, CardsModuleConfig } from './cards.config';
 
 @Component({
   selector: 'app-cards',
@@ -24,6 +25,7 @@ export class CardsPage {
     private cardsService: CardsService,
     private screenService: ScreenService,
     private networkService: NetworkService,
+    @Inject(CARDS_CONFIG) private config: CardsModuleConfig,
   ) {}
 
   openModal(cardType) {
@@ -47,6 +49,15 @@ export class CardsPage {
   ionViewWillLeave() {
     this.userAndCardsDataSubscription?.unsubscribe();
     this.screenService.restorePreviousBrightness();
+  }
+
+  hasKnownError(errors: string[]) {
+    const commonErrors = errors.filter(error => this.isKnownError(error));
+    return commonErrors.length > 0;
+  }
+
+  isKnownError(error: string) {
+    return this.config.knownErrors.includes(error);
   }
 
   private async loadUserCardsData() {

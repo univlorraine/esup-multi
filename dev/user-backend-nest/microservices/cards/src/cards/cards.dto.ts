@@ -5,7 +5,7 @@ export interface UserCardsDto {
   gender: string;
   photo: string;
   ine?: number;
-  errors: [];
+  errors: string[];
   cards: {
     studentCard?: StudentCard;
     euStudentCard?: EuStudentCard;

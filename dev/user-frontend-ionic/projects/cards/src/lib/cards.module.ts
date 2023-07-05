@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import {APP_INITIALIZER, ModuleWithProviders, NgModule} from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { EffectsNgModule } from '@ngneat/effects-ng';
 import { TranslateModule } from '@ngx-translate/core';
@@ -12,6 +12,7 @@ import { CardsPage } from './cards.page';
 import { EuStudentCardComponent } from './eu-student-card/eu-student-card.component';
 import { StaffCardComponent } from './staff-card/staff-card.component';
 import { StudentCardComponent } from './student-card/student-card.component';
+import { CARDS_CONFIG, CardsModuleConfig } from './cards.config';
 
 const initModule = (projectModuleService: ProjectModuleService) =>
   () => projectModuleService.initProjectModule({
@@ -46,5 +47,15 @@ const initModule = (projectModuleService: ProjectModuleService) =>
 
 export class CardsPageModule {
   static routerLink = '/cards';
+
+  static forRoot(config: CardsModuleConfig): ModuleWithProviders<CardsPageModule> {
+    return {
+      ngModule: CardsPageModule,
+      providers: [
+        { provide: CARDS_CONFIG, useValue: config }
+      ]
+    };
+  }
+
 }
 
