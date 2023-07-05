@@ -60,7 +60,9 @@ import { PageLayoutsModule } from './page-layouts/page-layouts.module';
       }
     }),
     RssPageModule,
-    CardsPageModule,
+    CardsPageModule.forRoot({
+      knownErrors: ['NO_PHOTO', 'NO_ACTIVE_CARD', 'UNPAID_FEES']
+    }),
     ScheduleModule.forRoot({
       nextEventsWidget: {
         numberOfEventsLimit: 2,
