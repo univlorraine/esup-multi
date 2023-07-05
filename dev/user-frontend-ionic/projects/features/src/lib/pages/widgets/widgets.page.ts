@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
+import { FeaturesService, GuidedTourService, TranslatedFeature, WidgetLifecycleService } from '@ul/shared';
 import { Observable } from 'rxjs';
 import { first, map } from 'rxjs/operators';
-import { TranslatedFeature, FeaturesService, WidgetLifecycleService, GuidedTourService } from '@ul/shared';
 
 @Component({
   selector: 'app-widgets',

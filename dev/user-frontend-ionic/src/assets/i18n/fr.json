@@ -9,8 +9,10 @@
             "MESSAGE": "Vous devez être authentifié pour accéder à cette fonctionnalité"
         },
         "NO_NETWORK": {
-            "TITLE": "Pas de réseau",
-            "MESSAGE": "Vous ne pouvez pas accéder à cette fonctionnalité sans réseau"
+            "TITLE": "Absence de réseau",
+            "MESSAGE": "Vous ne pouvez pas accéder à cette fonctionnalité sans réseau",
+            "FIRST_LAUNCH": "Veuillez activer votre réseau pour votre premier accès à l'application",
+            "TOP_BAR_LABEL": "Vous êtes hors connexion, fonctionnalités limitées"
         },
         "SERVICE_UNREACHABLE": {
             "TITLE": "Service injoignable",

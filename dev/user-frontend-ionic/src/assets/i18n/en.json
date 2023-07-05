@@ -10,7 +10,9 @@
         },
         "NO_NETWORK": {
             "TITLE": "No network",
-            "MESSAGE": "You cannot access this feature without network"
+            "MESSAGE": "You cannot access this feature without network",
+            "FIRST_LAUNCH": "Please activate your network for your first access to the application.",
+            "TOP_BAR_LABEL": "You are offline, limited functionality."
         },
         "SERVICE_UNREACHABLE": {
             "TITLE": "Service unreachable",
