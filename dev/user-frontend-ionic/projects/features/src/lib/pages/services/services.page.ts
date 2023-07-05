@@ -78,6 +78,10 @@ export class ServicesPage implements OnInit, OnDestroy {
     updateFeaturesListIsNewToFalse();
   }
 
+  handleScrollStart() {
+    clearTimeout(this.activateDragTimeOut);
+  }
+
   private initMenuItems() {
     const translatedServices$ = this.featuresService.translatedFeatures$.pipe(
       map(features => features.filter(feature => !feature.widget && feature.menu === 'service'))
