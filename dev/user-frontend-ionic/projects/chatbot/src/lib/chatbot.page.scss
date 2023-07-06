@@ -9,7 +9,7 @@ ion-item {
 .message-bot {
   background-color: var(--ion-color-medium-tint);
   border-radius: 0.938rem;
-  border-bottom-left-radius: 0px;
+  border-bottom-left-radius: 0;
   width: fit-content;
   padding: 0.813rem;
 }
@@ -25,7 +25,7 @@ ion-item {
 .message-user {
   background-color: var(--ion-color-quaternary-shade);
   border-radius: 0.938rem;
-  border-bottom-right-radius: 0px;
+  border-bottom-right-radius: 0;
   width: fit-content;
   margin-left: auto;
   padding: 0.813rem;
@@ -57,7 +57,7 @@ ion-item.ios.footer {
 }
 
 ion-buttons {
-  margin-inline-start: 0px;
+  margin-inline-start: 0;
 }
 
 ion-input.input {
@@ -66,6 +66,7 @@ ion-input.input {
   border-radius: 0.15rem;
   --ion-item-background: var(--app-color-component-background-primary);
   background-color: var(--app-color-component-background-primary);
+  caret-color: auto;
 }
 
 .icon {
@@ -76,5 +77,3 @@ ion-list {
   min-height: 100%;
   background: transparent;
 }
-
-
