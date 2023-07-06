@@ -1,13 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
+import { FirebaseMessaging, GetTokenOptions } from '@capacitor-firebase/messaging';
+import { PushNotifications, Token } from '@capacitor/push-notifications';
 import { Platform } from '@ionic/angular';
 import { getAuthToken } from '@ul/shared';
 import { combineLatest, Observable, of } from 'rxjs';
-import { filter, first, switchMap, take, tap } from 'rxjs/operators';
-import { Channel, Notification, NotificationsRepository, TranslatedChannel } from './notifications.repository';
-import { PushNotifications, Token } from '@capacitor/push-notifications';
-import { Capacitor } from '@capacitor/core';
-import { FirebaseMessaging, GetTokenOptions } from '@capacitor-firebase/messaging';
+import { filter, first, switchMap, tap } from 'rxjs/operators';
+import { Channel, Notification, NotificationsRepository } from './notifications.repository';
 
 @Injectable({
   providedIn: 'root'
@@ -139,9 +138,10 @@ export class NotificationsService {
     }
     this.notificationRepository.fcmToken$
       .pipe(
+        first(),
         switchMap((fcmToken) => {
           if (!fcmToken) {
-            return;
+            return of(null);
           }
           const url = `${this.environment.apiEndpoint}/notifications/unregister`;
           const data = {
