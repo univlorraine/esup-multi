@@ -10,6 +10,7 @@ import { NetworkService } from '../network/network.service';
 import { anonymousSteps } from './config/anonymous-guided-tour.config';
 import { loggedSteps } from './config/logged-guided-tour.config';
 import { isAnonymousTourViewed, isLoggedTourViewed, setAnonymousTourViewed, setLoggedTourViewed } from './guided-tour.repository';
+import { ScreenOrientation, OrientationType } from '@capawesome/capacitor-screen-orientation';
 
 @Injectable({
   providedIn: 'root'
@@ -69,14 +70,24 @@ export class GuidedTourService {
       });
   }
 
-  startAnonymousTour() {
-    const stepsConfig = anonymousSteps(this.router, this.translateService, setAnonymousTourViewed);
+  async startAnonymousTour() {
+    await ScreenOrientation.lock({type: OrientationType.PORTRAIT});
+    const onCompleteFn = () => {
+      setAnonymousTourViewed();
+      ScreenOrientation.unlock();
+    };
+    const stepsConfig = anonymousSteps(this.router, this.translateService, onCompleteFn);
     this.shepherdService.addSteps(stepsConfig);
     this.shepherdService.start();
   }
 
-  startLoggedTour() {
-    const stepsConfig = loggedSteps(this.router, this.translateService, setLoggedTourViewed);
+  async startLoggedTour() {
+    await ScreenOrientation.lock({type: OrientationType.PORTRAIT});
+    const onCompleteFn = () => {
+      setLoggedTourViewed();
+      ScreenOrientation.unlock();
+    };
+    const stepsConfig = loggedSteps(this.router, this.translateService, onCompleteFn);
     this.shepherdService.addSteps(stepsConfig);
     this.shepherdService.start();
   }
