@@ -66,3 +66,36 @@ body {
   --ion-background-color: var(--app-color-background) !important;
 }
 
+// Add safe area margin on left and right
+.safe-area-margin-lr {
+  @supports (margin-right: env(safe-area-inset-right)) {
+    margin-right: env(safe-area-inset-right)
+  }
+
+  @supports (margin-left: env(safe-area-inset-left)) {
+    margin-left: env(safe-area-inset-left)
+  }
+}
+
+// Add safe area padding on left and right
+.safe-area-padding-lr {
+  @supports (padding-right: env(safe-area-inset-right)) {
+    padding-right: env(safe-area-inset-right)
+  }
+
+  @supports (padding-left: env(safe-area-inset-left)) {
+    padding-left: env(safe-area-inset-left)
+  }
+}
+
+// Add safe area margin on left and right on top of ionic default margin
+.safe-area-lr-ionic-margin {
+  @supports (margin-right: env(safe-area-inset-right)) {
+    margin-right: calc(16px + env(safe-area-inset-right)); // 16px is default margin for ion-card, ion-spinner...
+  }
+
+  @supports (margin-left: env(safe-area-inset-left)) {
+    margin-left: calc(16px + env(safe-area-inset-left)); // 16px is default margin for ion-card, ion-spinner...
+  }
+}
+

@@ -9,7 +9,7 @@
     </ion-header>
     <ion-content>
       <ion-content *ngIf="cardType === 'studentCard'">
-        <ion-card>
+        <ion-card class="safe-area-lr-ionic-margin">
           <ion-card-content>
             <app-student-card [userAndCardsData]="userAndCardsData"></app-student-card>
           </ion-card-content>
@@ -21,7 +21,7 @@
       </ion-content>
 
       <ion-content *ngIf="cardType === 'euStudentCard'">
-        <ion-card>
+        <ion-card class="safe-area-lr-ionic-margin">
           <ion-card-content>
             <app-eu-student-card [userAndCardsData]="userAndCardsData"></app-eu-student-card>
           </ion-card-content>

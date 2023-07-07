@@ -48,12 +48,20 @@ ion-item.footer {
   padding-left: 0.8rem !important;
   padding-top: 0.3rem !important;
   padding-bottom: 0.3rem !important;
+
+  @supports (padding-left: env(safe-area-inset-left)) {
+    padding-left: calc(0.8rem + env(safe-area-inset-left)) !important;
+  }
 }
 
 ion-item.ios.footer {
   padding-left: 0.8rem !important;
   padding-top: 0.5rem !important;
   padding-bottom: 0.5rem !important;
+
+  @supports (padding-left: env(safe-area-inset-left)) {
+    padding-left: calc(0.8rem + env(safe-area-inset-left)) !important;
+  }
 }
 
 ion-buttons {

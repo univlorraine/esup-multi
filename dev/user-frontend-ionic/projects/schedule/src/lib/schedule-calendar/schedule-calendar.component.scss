@@ -28,6 +28,10 @@ ion-range {
 
   --knob-background: var(--app-ion-range-knob-background);
   --knob-size: 1rem;
+
+  @supports (left: env(safe-area-inset-right)) {
+    left: calc(75% - env(safe-area-inset-right))
+  }
 }
 
 ion-range::part(bar) {

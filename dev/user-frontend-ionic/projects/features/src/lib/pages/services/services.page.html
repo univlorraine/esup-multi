@@ -4,7 +4,7 @@
 (ionScrollStart)="handleScrollStart()">
   <ion-row data-service-id="searchbar" class="searchbar-row">
     <ion-searchbar show-clear-button="focus" [placeholder]="'FEATURES.SEARCHBAR_MESSAGE' | translate"
-      (ionChange)="handleChange($event)" [disabled]="draggableIsOn"></ion-searchbar>
+      (ionChange)="handleChange($event)" [disabled]="draggableIsOn" class="safe-area-margin-lr"></ion-searchbar>
   </ion-row>
 
   <ion-fab *ngIf="draggableIsOn" slot="fixed" vertical="bottom" horizontal="end">

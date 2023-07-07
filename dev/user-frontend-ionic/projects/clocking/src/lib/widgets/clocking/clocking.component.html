@@ -1,5 +1,5 @@
 <ion-row *ngIf="isLoading">
-  <ion-spinner name="dots"></ion-spinner>
+  <ion-spinner  class="safe-area-lr-ionic-margin" name="dots"></ion-spinner>
 </ion-row>
 <ng-container *ngIf="!isLoading">
   <ion-row *ngIf="errorMessage" class="ion-padding">

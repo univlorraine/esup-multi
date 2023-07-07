@@ -22,3 +22,8 @@ ion-item::part(native) {
 ion-item:last-child {
   --inner-border-width: 0;
 }
+
+ion-item {
+  --ion-safe-area-right: 0;
+  --ion-safe-area-left: 0;
+}
