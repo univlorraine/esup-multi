@@ -38,7 +38,15 @@ ion-img {
 }
 
 .news-content.without-image {
-  padding-left: 1rem;
+  padding-left: 1em;
+
+  @supports (padding-left: env(safe-area-inset-left)) {
+    padding-left: calc(1em + env(safe-area-inset-left));
+  }
+
+  @supports (padding-right: env(safe-area-inset-right)) {
+    padding-right: env(safe-area-inset-right);
+  }
 
   .text-content {
     margin-left: 0rem;

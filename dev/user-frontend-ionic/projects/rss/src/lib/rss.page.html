@@ -4,7 +4,7 @@
 
 <ion-content *ngIf="(rssFeedIsEmpty$ | async) === false">
   <ion-card *ngFor="let item of (rssFeed$ | async); let i = index">
-    <div class="border-card">
+    <div class="border-card safe-area-margin-lr">
 
       <app-rss-item-header [item]="item">
         <ng-template appRssItemHeaderButton>
@@ -19,7 +19,7 @@
 
     </div>
 
-    <div class="rss-news-content" [ngClass]="{'visible': isContentVisible[i]}">
+    <div class="rss-news-content safe-area-margin-lr" [ngClass]="{'visible': isContentVisible[i]}">
       <div class="border-content">
 
         <ion-row>

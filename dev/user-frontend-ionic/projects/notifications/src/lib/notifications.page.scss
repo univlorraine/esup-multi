@@ -58,6 +58,8 @@
 
 .channel-list {
   --background: var(--app-color-component-background-primary) !important;
+  --ion-safe-area-right: 0;
+  --ion-safe-area-left: 0;
 }
 
 ion-item {

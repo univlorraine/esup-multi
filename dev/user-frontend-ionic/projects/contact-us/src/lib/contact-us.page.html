@@ -11,7 +11,7 @@
     </ion-toolbar>
   </ion-header>
   <ion-content class="ion-padding">
-    <div [innerHTML]="page.content"></div>
+    <div [innerHTML]="page.content" class="safe-area-padding-lr"></div>
 
     <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
       <ion-list>

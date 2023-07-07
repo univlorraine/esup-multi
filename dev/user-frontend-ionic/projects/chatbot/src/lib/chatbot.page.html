@@ -9,7 +9,7 @@
 <ion-progress-bar *ngIf="isFetchingAnswer" type="indeterminate" color="primary"></ion-progress-bar>
 
 <ion-content #scrollContent [ngClass]="isLoading ? 'ion-hide' : ''">
-  <ion-list #messages>
+  <ion-list #messages class="safe-area-padding-lr">
     <ion-item-group *ngFor="let message of messages$ | async; let last = last">
       <div class="message-container ion-margin">
         <div [ngClass]="message.messageType === messageType.bot ? message.card && isChatbotLogo(message) ? 'image-bot' : 'message-bot' : 'message-user'">

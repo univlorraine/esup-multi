@@ -4,7 +4,7 @@
 <ion-content *ngIf="(userAndCardsData$ | async) as userCards">
   <ion-content *ngIf="!userCards.errors || userCards.errors.length === 0">
     <ion-content *ngIf="!userCards.cards.staffCard">
-      <ion-card class="card" *ngFor="let card of userCards.cards | keyvalue" (click)="openModal(card.key)">
+      <ion-card class="card safe-area-lr-ionic-margin" *ngFor="let card of userCards.cards | keyvalue" (click)="openModal(card.key)">
         <ion-card-header>
           <ion-card-subtitle> </ion-card-subtitle>
           <ion-card-title class="app-title-5">
@@ -21,7 +21,7 @@
     </ion-content>
 
     <ion-content *ngIf="userCards.cards.staffCard">
-      <ion-card>
+      <ion-card class="safe-area-lr-ionic-margin">
         <ion-card-content>
           <app-staff-card [userAndCardsData]="userCards"></app-staff-card>
         </ion-card-content>

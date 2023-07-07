@@ -28,7 +28,7 @@
 
     <ion-content>
       <ion-row class="ion-margin">
-        <ion-label class="app-text-4">{{'SCHEDULE.SELECT_PLANNING.SUBTITLE' | translate }}</ion-label>
+        <ion-label class="app-text-4 safe-area-padding-lr">{{'SCHEDULE.SELECT_PLANNING.SUBTITLE' | translate }}</ion-label>
       </ion-row>
       <form [formGroup]="form">
         <ion-item formArrayName="planningList" *ngFor="let planning of planningList.controls; let i = index">
