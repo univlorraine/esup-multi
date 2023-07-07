@@ -11,7 +11,7 @@ initContainerWaitForBackend:
 
 image:
   tag: staging
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
   repositoryUrl: registry-ul.jnesis.com
 
 appService:
