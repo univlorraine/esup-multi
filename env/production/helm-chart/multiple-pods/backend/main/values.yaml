@@ -74,7 +74,7 @@ autoscaling:
 global:
   image:
     tag: sandbox
-    pullPolicy: IfNotPresent
+    pullPolicy: Always
     repositoryUrl: registry-ul.jnesis.com
     nodeBaseCommand: ["node", "main.js"]
 
