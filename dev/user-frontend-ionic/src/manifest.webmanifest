@@ -1,4 +1,5 @@
 {
+  "background_color": "#FFEF65",
   "icons": [
     {
       "src": "../../icons/icon-48.webp",
@@ -42,6 +43,5 @@
       "sizes": "512x512",
       "purpose": "any maskable"
     }
-  ],
-  "background_color": "#F9F044"
+  ]
 }
