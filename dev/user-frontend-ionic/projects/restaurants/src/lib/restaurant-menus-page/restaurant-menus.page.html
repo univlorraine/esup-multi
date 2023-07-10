@@ -11,7 +11,7 @@
 <ion-content>
   <ion-progress-bar *ngIf="isLoading" type="indeterminate" color="primary"></ion-progress-bar>
 
-  <div #swiperContainer class="swiper-container">
+  <div #swiperContainer class="swiper-container" [ngClass]="{'empty': (restaurantMenusIsEmpty$ | async) && !isLoading}">
     <div class="swiper-wrapper">
       <ng-container *ngIf="restaurant$ | async">
         <ion-card class="swiper-slide" *ngFor="let menu of (menus$ | async)">
