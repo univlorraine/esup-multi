@@ -1,5 +1,5 @@
 import { createStore } from '@ngneat/elf';
-import { selectManyByPredicate, upsertEntities, withEntities } from '@ngneat/elf-entities';
+import { selectManyByPredicate, setEntities, upsertEntities, withEntities } from '@ngneat/elf-entities';
 import { persistState } from '@ngneat/elf-persist-state';
 import { localForageStore } from '@ul/shared';
 
@@ -37,6 +37,20 @@ export const persist = persistState(store, {
 export const getMenusByRestaurantId = (restaurantId: number) =>
   store.pipe(selectManyByPredicate((menu) => menu.restaurant_id === restaurantId));
 
-export const upsertMenus = (menus: Menu[]) => store.update(upsertEntities(menus));
+export const upsertMenus = (menus: Menu[]) => {
+  store.update(upsertEntities(menus));
+  cleanMenus();
+};
 
-//@TODO quand l'API de l'UL sera en place, prévoir une méthode qui nettoie les menus dont la date est dans le passé
+export const cleanMenus = () => {
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  store.update(setEntities(Object.values(store.state.entities)
+    .filter((menu) => {
+      const date = new Date(menu.date);
+      const dateWithoutTime = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+      return today <= dateWithoutTime;
+    })
+    .sort((a, b) => new Date(a.date) > new Date(b.date) ? 1 : -1)
+  ));
+};

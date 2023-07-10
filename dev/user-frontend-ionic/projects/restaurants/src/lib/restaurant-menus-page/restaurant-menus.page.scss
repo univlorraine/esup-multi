@@ -7,6 +7,7 @@ ion-card{
   margin: 0;
   border-radius: var(--app-border-no-radius);
   box-shadow: var(--app-border-no-box-shadow);
+  overflow: scroll;
 }
 
 ion-card-content{
@@ -43,7 +44,12 @@ h5 {
 }
 
 .swiper-container {
-  height: 98%;
+  height: 100%;
+  overflow: clip;
+}
+
+.swiper-container.empty {
+  display: none; // hide container without deleting it, to prevent swiper error
 }
 
 .swiper-button-next,
