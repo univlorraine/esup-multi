@@ -137,7 +137,13 @@ export class MapPage implements OnDestroy {
   }
 
   private async refreshUserPosition() {
+    const permissionAlreadyGranted = (await Geolocation.checkPermissions()).location === 'granted';
+
     await Geolocation.getCurrentPosition().then(position => {
+      let zoomLevel = 11;
+      if(!permissionAlreadyGranted) { // Permission has just been granted now
+        zoomLevel = 16;
+      }
       const latLng: Leaflet.LatLngTuple = [position.coords.latitude, position.coords.longitude];
       const circle = Leaflet.circle(latLng, position.coords.accuracy);
 
@@ -150,7 +156,7 @@ export class MapPage implements OnDestroy {
       }
 
       this.positionLayerGroup = Leaflet.layerGroup([circle, marker]).addTo(this.map);
-      this.map.setView(latLng, 11);
+      this.map.setView(latLng, zoomLevel);
     },
       error => {
         const latLngOfTheUniversity: Leaflet.LatLngTuple = [this.config.defaultMapLocation.latitude,
