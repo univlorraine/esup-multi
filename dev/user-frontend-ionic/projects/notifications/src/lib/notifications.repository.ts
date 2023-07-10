@@ -1,5 +1,4 @@
 import { Inject, Injectable } from '@angular/core';
-import { Token } from '@capacitor/push-notifications';
 import { createStore, select, withProps } from '@ngneat/elf';
 import { addEntities, deleteEntities, selectAllEntities, setEntities, withEntities } from '@ngneat/elf-entities';
 import {
@@ -16,7 +15,7 @@ const defaultNotificationColor = 'black';
 const defaultNotificationIcon = 'information-circle';
 
 export interface NotificationsProps {
-  fcmToken: Token;
+  fcmToken: string;
 }
 
 export interface ChannelsProps {
@@ -118,7 +117,7 @@ export class NotificationsRepository {
     private environment: any,) {
   }
 
-  public setFcmToken(fcmToken: Token) {
+  public setFcmToken(fcmToken: string) {
     notificationsStore.update((state) => ({
       ...state,
       fcmToken,
