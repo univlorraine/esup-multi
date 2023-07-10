@@ -9,11 +9,10 @@ import { localForageStore } from './local-forage';
 type PropsFactories = [PropsFactory<any, any>, ...PropsFactory<any, any>[]];
 
 const storeMapByName: Map<string, Store> = new Map();
+const storeInitializedMapByName: Map<string, Observable<boolean>> = new Map();
 const storePropsFactoriesMapByName: Map<string, PropsFactories> = new Map();
 
 const buildStoreNameWithUsername = (storeName: string, username: string) => `${storeName}:${username || 'anonymous'}`;
-
-export let initializedUserRepo$: Observable<any>;
 
 const createUserStoreWithPersistence = (
   rawStoreName: string,
@@ -31,17 +30,17 @@ const createUserStoreWithPersistence = (
   storePropsFactoriesMapByName.set(rawStoreName, propsFactories);
   storeMapByName.set(storeNameWithUsername, store);
 
-  persistState(store, {
+  storeInitializedMapByName.set(storeNameWithUsername, persistState(store, {
     key: storeNameWithUsername,
     storage: localForageStore,
-  });
-
-  initializedUserRepo$ = persistState(store, {
-    key: storeNameWithUsername,
-    storage: localForageStore,
-  }).initialized$;
+  }).initialized$);
 
   return store;
+};
+
+export const isUserStoreInitialized$ = (rawStoreName: string): Observable<boolean> => {
+  const storeNameWithUsername = buildStoreNameWithUsername(rawStoreName, getAuthenticatedUsername());
+  return storeInitializedMapByName.get(storeNameWithUsername);
 };
 
 const getOrCreateUserStore = (rawStoreName: string, username: string): Store => {

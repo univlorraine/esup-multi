@@ -7,7 +7,7 @@ import { StatusBar, Style } from '@capacitor/status-bar';
 import { ModalController, Platform, PopoverController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import {
-  currentLanguage$, features$, FeaturesService, initializedUserRepo$,
+  currentLanguage$, features$, FeaturesService, isFeatureStoreInitialized$,
   isDarkTheme$, NavigationService, NetworkService, PageLayout, PageLayoutService, setIsDarkTheme,
   themeRepoInitialized$, userHadSetThemeInApp, userHadSetThemeInApp$
 } from '@ul/shared';
@@ -50,7 +50,7 @@ export class AppComponent implements OnInit, OnDestroy {
       map((val) => val.length === 0)
     );
 
-    this.isNothingToShow$ = initializedUserRepo$.pipe(
+    this.isNothingToShow$ = isFeatureStoreInitialized$.pipe(
       switchMap(isInitialized => {
         if (isInitialized) {
           return combineLatest([

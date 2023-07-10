@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
-import { first, map, share, switchMap, tap } from 'rxjs/operators';
+import { combineLatest, Observable, ReplaySubject} from 'rxjs';
+import { filter, first, map, share, switchMap, tap } from 'rxjs/operators';
 import { getAuthToken } from '../auth/auth.repository';
 import { Authorization } from '../authorization/authorization.helper';
 import { currentLanguage$ } from '../i18n/i18n.repository';
-import { Feature, FeatureMenuType, features$, FeatureType, setFeatures } from './features.repository';
+import { Feature, FeatureMenuType, features$, FeatureType, setFeatures, isFeatureStoreInitialized$ } from './features.repository';
 
 interface TranslatedFeatureCommon {
   id: string;
@@ -43,7 +43,7 @@ export type TranslatedFeature = TranslatedExternalFeature | TranslatedInternalFe
 export class FeaturesService {
 
   public translatedFeatures$: Observable<TranslatedFeature[]>;
-  private translatedFeaturesSubject$ = new BehaviorSubject<TranslatedFeature[]>([]);
+  private translatedFeaturesSubject$ = new ReplaySubject<TranslatedFeature[]>();
 
   constructor(
     @Inject('environment')
@@ -52,9 +52,13 @@ export class FeaturesService {
   ) {
     this.translatedFeatures$ = this.translatedFeaturesSubject$;
 
-    combineLatest([features$, currentLanguage$])
+    combineLatest([
+      features$,
+      currentLanguage$,
+      isFeatureStoreInitialized$.pipe(filter(initialized => initialized === true))
+    ])
       .pipe(
-        map(featuresAndCurrentLang => this.translate(featuresAndCurrentLang)),
+        map(([features, currentLanguage]) => this.translate(features, currentLanguage)),
         share(),
     ).subscribe(this.translatedFeaturesSubject$);
   }
@@ -77,7 +81,7 @@ export class FeaturesService {
     return this.http.post<Feature[]>(url, data);
   }
 
-  private translate([features, currentLanguage]: [Feature[], string]): TranslatedFeature[] {
+  private translate(features: Feature[], currentLanguage: string): TranslatedFeature[] {
     return features.map(feature => {
       // On recherche le contenu du service en fonction de la langue choisie par l'utilisateur
       // Si le contenu traduit n'est pas trouvé dans la langue souhaitée, on prend le contenu dans la langue par défaut

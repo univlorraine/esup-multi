@@ -5,8 +5,7 @@ import { NavigationService } from './navigation.service';
 import { MenuService } from './menu.service';
 import { MenuItemLinkType, MenuItemRouterLink } from './menu.model';
 
-
-export type PageLayout = 'tabs' | 'full';
+export type PageLayout = 'tabs' | 'full' | '' ;
 export interface PageTitle {
   title: string;
   translated: boolean;
@@ -25,14 +24,16 @@ export class PageLayoutService {
       private menuService: MenuService,
     ) {
         this.currentPageLayout$ = combineLatest([
-          this.navigationService.currentRouterLink$,
+          this.navigationService.currentRouterLink$.pipe(filter(routerLink => routerLink !== '/')),
           this.menuService.tabsMenuItems$,
         ]).pipe(
-          map(([routerLink, tabsMenuItems]) =>
+          map(([routerLink, tabsMenuItems]) => (
             tabsMenuItems
-            .filter(menuItem => menuItem.link.type === MenuItemLinkType.router)
-            .map(menuItem => menuItem.link as MenuItemRouterLink)
-            .find(link => routerLink.startsWith(link.routerLink)) ? 'tabs' : 'full')
+              .filter(menuItem => menuItem.link.type === MenuItemLinkType.router)
+              .map(menuItem => menuItem.link as MenuItemRouterLink)
+              .find(link => routerLink.startsWith(link.routerLink))
+              ? 'tabs' : 'full')
+          )
         );
 
         this.currentPageLayout$.pipe(
