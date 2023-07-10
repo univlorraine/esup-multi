@@ -1,6 +1,6 @@
-import { AfterViewInit, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { CompleteLocalDatePipe, ThemeService } from '@ul/shared';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { finalize, first, map } from 'rxjs/operators';
 import { Event } from '../../schedule.repository';
 import { ScheduleService } from '../../schedule.service';
@@ -11,14 +11,15 @@ import { NextEventsService } from './next-events.service';
   templateUrl: './next-events.component.html',
   styleUrls: ['./next-events.component.scss'],
 })
-export class NextEventsComponent implements OnInit, AfterViewInit {
+export class NextEventsComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @Input() widgetColor: string;
 
   public isLoading = false;
   public nextEvents$: Observable<Event[]>;
   public noNextEvents$: Observable<boolean>;
-  private previousEventDay: string;
+  public displayDateForIds: string[];
+  private nextEventsSubscription: Subscription;
 
   constructor(
     private nextEventsService: NextEventsService,
@@ -28,6 +29,20 @@ export class NextEventsComponent implements OnInit, AfterViewInit {
     private changeDetectorRef: ChangeDetectorRef
   ) {
     this.nextEvents$ = this.nextEventsService.getNextEvents$().pipe();
+
+    // If two events occurs the same day, we only want to display the date once
+    // below we update an array to know for which event we want to show the date
+    this.nextEventsSubscription = this.nextEvents$.subscribe(events => {
+      const idsToDisplay = {};
+      events.forEach(event => {
+        const eventDay = this.completeLocalDatePipe.transform(event.startDateTime);
+        if(!idsToDisplay[eventDay]) {
+          idsToDisplay[eventDay] = event.id;
+        }
+      });
+      this.displayDateForIds = Object.values(idsToDisplay);
+    });
+
     this.noNextEvents$ = this.nextEvents$.pipe(
       map(events => !events || events.length === 0)
     );
@@ -49,18 +64,13 @@ export class NextEventsComponent implements OnInit, AfterViewInit {
     this.changeDetectorRef.detectChanges();
   }
 
-  // Display the day date if the event day is different from the previous event
-  shouldDisplayDay(event: Event): boolean {
-    const eventDay = this.completeLocalDatePipe.transform(event.startDateTime);
-    const displayDate = eventDay !== this.previousEventDay;
-    this.previousEventDay = eventDay;
-
-    return displayDate;
-  }
-
   fontColor() {
     return this.themeService.isBackgroundFromCmsDarkOrIsDarkTheme(this.widgetColor) ?
       'light-font-color' : 'dark-font-color';
+  }
+
+  ngOnDestroy() {
+    this.nextEventsSubscription.unsubscribe();
   }
 }
 
