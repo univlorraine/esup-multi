@@ -59,5 +59,7 @@
 	<string>Pour scanner les codes-barres</string>
 	<key>NSContactsUsageDescription</key>
 	<string>Pour ajouter des contacts depuis un annuaire</string>
+  <key>FirebaseMessagingAutoInitEnabled</key>
+	<string>NO</string>
 </dict>
 </plist>
