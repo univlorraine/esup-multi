@@ -4,7 +4,7 @@ common:
     DIRECTUS_API_BEARER_TOKEN: &directusApiBearerToken "changeit"
 
 multi-microservice-features:
-  replicaCount: 1  # Can be overloaded here
+  #replicaCount: 1   Can be overloaded here
   image: # Can be overloaded here
     tag: "sandbox"
   appService:
