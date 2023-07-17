@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticatedUser, authenticatedUser$ } from '@ul/shared';
 import { Observable } from 'rxjs';
-import { finalize, first } from 'rxjs/operators';
+import { finalize, take } from 'rxjs/operators';
 import { AuthService } from '../../common/auth.service';
 
 @Component({
@@ -25,7 +25,7 @@ export class AuthComponent implements OnInit {
     this.isLoading = true;
     this.authService.logout()
       .pipe(
-        first(),
+        take(1),
         finalize(() => this.isLoading = false),
       )
       .subscribe();

@@ -1,9 +1,9 @@
 import { Component, OnDestroy, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { first } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import { ScheduleCalendarComponent } from './schedule-calendar/schedule-calendar.component';
-import { ScheduleService } from './schedule.service';
 import { impersonatedScheduleStoreManager } from './schedule.repository';
+import { ScheduleService } from './schedule.service';
 
 type ViewType = 'month' | 'week' | 'day' | 'list';
 
@@ -31,7 +31,7 @@ export class SchedulePage implements OnDestroy {
 
   ionViewDidEnter() {
     this.calendarRef?.initCalendar();
-    this.scheduleService.loadScheduleToState().pipe(first()).subscribe();
+    this.scheduleService.loadScheduleToState().pipe(take(1)).subscribe();
     this.scheduleService.asUser.subscribe((asUser) => this.asUser = asUser);
   }
 

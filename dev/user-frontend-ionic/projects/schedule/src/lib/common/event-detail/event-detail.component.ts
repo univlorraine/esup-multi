@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { first } from 'rxjs/operators';
 import { Browser } from '@capacitor/browser';
+import { take } from 'rxjs/operators';
 import { Course, Event, HiddenCourse } from '../../schedule.repository';
 import { ScheduleService } from '../../schedule.service';
 
@@ -23,7 +23,7 @@ export class EventDetailComponent {
     this.disableHideCourseButton = true;
 
     this.scheduleService.getStoreManager().hiddenCourseList$.pipe(
-      first()
+      take(1)
     ).subscribe((hiddenCourseList) => {
       const hiddenCourseObj: HiddenCourse = {
         id: course.id,

@@ -3,7 +3,7 @@ import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { InfiniteScrollCustomEvent, IonContent, IonModal, Platform } from '@ionic/angular';
 import { NetworkService, PageLayoutService } from '@ul/shared';
 import { combineLatest, Observable, Subscription } from 'rxjs';
-import { catchError, filter, finalize, first, map, mergeMap, startWith } from 'rxjs/operators';
+import { catchError, filter, finalize, map, mergeMap, startWith, take } from 'rxjs/operators';
 import { NotificationsModuleConfig, NOTIFICATIONS_CONFIG } from './notifications.config';
 import {
   Channel,
@@ -139,7 +139,7 @@ export class NotificationsPage implements OnDestroy {
 
   async handleRefresh(event) {
     this.notificationsService.loadNotifications(0, this.config.numberOfNotificationsOnFirstLoad).pipe(
-      first(),
+      take(1),
       finalize(() => {
         event.target.complete();
         this.endOfNotifications = false;
@@ -150,7 +150,7 @@ export class NotificationsPage implements OnDestroy {
   async onIonInfinite(ev: Event) {
     const infiniteScrollEvent = ev as InfiniteScrollCustomEvent;
 
-    const offset = (await this.filteredNotifications$.pipe(first()).toPromise()).length - 1;
+    const offset = (await this.filteredNotifications$.pipe(take(1)).toPromise()).length - 1;
 
     if (!ev.isTrusted) {
       infiniteScrollEvent.target.complete();
@@ -160,7 +160,7 @@ export class NotificationsPage implements OnDestroy {
     }
 
     this.notificationsService.loadNotifications(offset, this.config.numberOfNotificationsToLoadOnScroll).pipe(
-      first(),
+      take(1),
       catchError((error) => {
         this.loadMoreNotificationsError = true;
         throw new Error(error);
@@ -177,7 +177,7 @@ export class NotificationsPage implements OnDestroy {
   deleteNotification(id: string) {
     this.notificationsService.deleteNotification(id)
       .pipe(
-        first(),
+        take(1),
       ).subscribe(async (status) => {
         this.notificationRepository.deletNotification(id);
         this.toastService.displayToast('NOTIFICATIONS.ALERT.DELETED');
@@ -187,7 +187,7 @@ export class NotificationsPage implements OnDestroy {
 
   async removeChannelFromFilter(channelCode: string) {
     this.filterableChannels$
-      .pipe(first())
+      .pipe(take(1))
       .subscribe(channels => {
         const index = channels.findIndex(channel => channel.code === channelCode);
         const newValue = [...this.channelsForm.value];
@@ -203,7 +203,7 @@ export class NotificationsPage implements OnDestroy {
 
   async openModal(notificationId: string) {
     this.selectedNotificationOption = await this.filteredNotifications$.pipe(
-      first(),
+      take(1),
       map(notifications => notifications.find(notification => notification.id === notificationId))
     ).toPromise();
 
@@ -224,12 +224,12 @@ export class NotificationsPage implements OnDestroy {
 
     this.isLoading = true;
 
-    this.notificationsService.loadAndStoreChannels().pipe(first()).subscribe();
-    this.notificationsService.loadAndStoreUnsubscribedChannels().pipe(first()).subscribe();
+    this.notificationsService.loadAndStoreChannels().pipe(take(1)).subscribe();
+    this.notificationsService.loadAndStoreUnsubscribedChannels().pipe(take(1)).subscribe();
 
     this.notificationsService.loadNotifications(0, this.config.numberOfNotificationsOnFirstLoad)
       .pipe(
-        first(),
+        take(1),
         mergeMap((notifications) => {
           const notificationIds = notifications
             .filter((notification) => notification.state === 'UNREAD')

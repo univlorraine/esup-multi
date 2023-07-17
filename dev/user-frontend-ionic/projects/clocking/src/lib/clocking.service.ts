@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { getAuthToken, NetworkService } from '@ul/shared';
 import { from, iif, Observable, of } from 'rxjs';
-import { first, map, switchMap, tap } from 'rxjs/operators';
+import { map, switchMap, take, tap } from 'rxjs/operators';
 import { Clocking, setClocking } from './clocking.repository';
 
 @Injectable({
@@ -37,7 +37,7 @@ export class ClockingService {
   private getClocking(): Observable<Clocking> {
     const url = `${this.environment.apiEndpoint}/clocking`;
     return getAuthToken().pipe(
-      first(),
+      take(1),
       switchMap(authToken => this.http.post<Clocking>(url, { authToken }))
     );
   }
@@ -52,7 +52,7 @@ export class ClockingService {
   private addClocking(): Observable<Clocking> {
     const url = `${this.environment.apiEndpoint}/clock-in`;
     return getAuthToken().pipe(
-      first(),
+      take(1),
       switchMap(authToken => this.http.post<Clocking>(url, { authToken }))
     );
   }

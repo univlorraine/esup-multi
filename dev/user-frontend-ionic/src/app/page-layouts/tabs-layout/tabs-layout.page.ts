@@ -5,7 +5,7 @@ import {
   MenuOpenerService, MenuService, NetworkService, StatisticsService
 } from '@ul/shared';
 import { Observable } from 'rxjs';
-import { finalize, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 interface MenuItemWithOptionalRouterLink extends MenuItem {
   routerLink: string;
@@ -83,9 +83,6 @@ export class TabsLayoutPage implements AfterViewInit {
     }
 
     this.isLoading = true;
-    this.featuresService.loadAndStoreFeatures().pipe(
-      finalize(() => this.isLoading = false)
-    ).subscribe();
+    this.featuresService.loadAndStoreFeatures().subscribe(() => this.isLoading = false);
   }
-
 }

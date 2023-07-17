@@ -3,7 +3,7 @@ import { Inject, Injectable } from '@angular/core';
 import { Device } from '@capacitor/device';
 import { Platform } from '@ionic/angular';
 import { combineLatest, from, Observable, of } from 'rxjs';
-import { catchError, first, switchMap } from 'rxjs/operators';
+import { catchError, switchMap, take } from 'rxjs/operators';
 import { getAuthToken } from '../auth/auth.repository';
 import { NetworkService } from '../network/network.service';
 
@@ -54,7 +54,7 @@ export class StatisticsService {
     const url = `${this.environment.apiEndpoint}/statistics/user-action`;
 
     return combineLatest([getAuthToken(), from(Device.getId()), from(this.networkService.getConnectionStatus())]).pipe(
-      first(),
+      take(1),
       switchMap(([authToken, deviceId, connectionStatus]) => {
         const data: UserActionRequestData = {
           authToken,

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { combineLatest, Observable } from 'rxjs';
-import { first, map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { Notification, NotificationsRepository, TranslatedChannel } from '../notifications.repository';
 import { NotificationsService } from '../notifications.service';
 import { ToastService } from '../toast.service';
@@ -52,7 +52,7 @@ export class NotificationOptionsComponent {
   deleteNotification(id: string) {
     this.notificationsService.deleteNotification(id)
       .pipe(
-        first(),
+        take(1),
       ).subscribe(async () => {
         this.notificationRepository.deletNotification(id);
         this.toastService.displayToast('NOTIFICATIONS.ALERT.DELETED');
@@ -82,7 +82,7 @@ export class NotificationOptionsComponent {
     this.notificationsService.subscribeOrUnsubscribeUserToChannels({
       channelCodes: this.unsubscribedChannelsCodes
     }).pipe(
-      first()
+      take(1)
     ).subscribe(async (status) => {
       if (isSubscription) {
         this.notificationRepository.subscribeChannel(channel.code);

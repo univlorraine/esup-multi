@@ -84,13 +84,19 @@ export class NotificationsRepository {
     notificationsStore.pipe(selectAllEntities()),
     this.channels$
   ]).pipe(
-    map(([notifications, channels]) => notifications.map(notification => {
-        const matchedChannel = channels.find(channel => notification.channel === channel.code);
+    map(([notifications, channels]) => {
+
+      if (notifications.length === 0 || channels.length === 0) {
+        return []; // Retourner un tableau vide si l'une des valeurs est vide
+      }
+
+      return notifications.map(notification => {
+        const matchedChannel = channels?.find(channel => notification.channel === channel.code);
         notification.color = matchedChannel?.color ? matchedChannel.color : defaultNotificationColor;
         notification.icon = matchedChannel?.icon ? matchedChannel.icon : defaultNotificationIcon;
         notification.routerLink = matchedChannel?.routerLink ? matchedChannel.routerLink : null;
         return notification;
-      }))
+      });})
   );
 
   public translatedChannels$ = combineLatest([this.channels$, currentLanguage$]).pipe(

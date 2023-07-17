@@ -1,7 +1,7 @@
-import { AfterViewInit, ChangeDetectorRef, Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { CompleteLocalDatePipe, ThemeService } from '@ul/shared';
 import { Observable, Subscription } from 'rxjs';
-import { finalize, first, map } from 'rxjs/operators';
+import { finalize, map, take } from 'rxjs/operators';
 import { Event } from '../../schedule.repository';
 import { ScheduleService } from '../../schedule.service';
 import { NextEventsService } from './next-events.service';
@@ -51,7 +51,7 @@ export class NextEventsComponent implements OnInit, OnDestroy, AfterViewInit {
   ngOnInit(): void {
     this.isLoading = true;
     this.scheduleService.loadScheduleToState().pipe(
-      first(),
+      take(1),
       finalize(() => this.isLoading = false)
     ).subscribe();
 

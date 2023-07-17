@@ -3,7 +3,7 @@ import { Inject, Injectable } from '@angular/core';
 import { getAuthToken, NetworkService } from '@ul/shared';
 import { add, format, startOfWeek, sub } from 'date-fns';
 import { BehaviorSubject, combineLatest, from, Observable, of, Subject } from 'rxjs';
-import { filter, finalize, first, map, mergeMap, switchMap, tap } from 'rxjs/operators';
+import { filter, finalize, map, mergeMap, switchMap, take, tap } from 'rxjs/operators';
 import { ScheduleModuleConfig, SCHEDULE_CONFIG } from './schedule.config';
 import {
   Event,
@@ -63,7 +63,7 @@ export class ScheduleService {
       filter(status => status.connected),
       tap(() => this.isLoadingSubject.next(true)),
       mergeMap(() => getAuthToken().pipe(
-        first(),
+        take(1),
         filter(authToken => authToken != null),
         switchMap(authToken =>
           this.getSchedule(

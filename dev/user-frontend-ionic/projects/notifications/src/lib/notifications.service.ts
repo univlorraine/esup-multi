@@ -4,7 +4,7 @@ import { FirebaseMessaging, GetTokenOptions } from '@capacitor-firebase/messagin
 import { Platform } from '@ionic/angular';
 import { getAuthToken } from '@ul/shared';
 import { combineLatest, Observable, of } from 'rxjs';
-import { filter, first, switchMap, tap } from 'rxjs/operators';
+import { filter, switchMap, take, tap } from 'rxjs/operators';
 import { Channel, Notification, NotificationsRepository } from './notifications.repository';
 
 @Injectable({
@@ -57,7 +57,7 @@ export class NotificationsService {
 
   public deleteNotification(id: string) {
     return getAuthToken().pipe(
-      first(),
+      take(1),
       filter(authToken => authToken != null),
       switchMap(authToken => this.removeNotification(authToken, id)),
     );
@@ -116,7 +116,7 @@ export class NotificationsService {
     combineLatest([getAuthToken(), this.notificationRepository.fcmToken$])
       .pipe(
         filter(([authToken, fcmToken]) => !!fcmToken),
-        first(),
+        take(1),
         switchMap(([authToken, fcmToken]) => {
           const url = `${this.environment.apiEndpoint}/notifications/register`;
 
@@ -138,7 +138,7 @@ export class NotificationsService {
     }
     this.notificationRepository.fcmToken$
       .pipe(
-        first(),
+        take(1),
         switchMap((fcmToken) => {
           if (!fcmToken) {
             return of(null);

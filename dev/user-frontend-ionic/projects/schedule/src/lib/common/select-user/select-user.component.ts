@@ -1,11 +1,11 @@
 import { Component, Inject } from '@angular/core';
-import { Observable } from 'rxjs';
-import { filter, first, map } from 'rxjs/operators';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthenticatedUser, authenticatedUser$, AuthorizationHelper } from '@ul/shared';
-import { ScheduleService } from '../../schedule.service';
+import { Observable } from 'rxjs';
+import { filter, map, take } from 'rxjs/operators';
+import { ScheduleModuleConfig, SCHEDULE_CONFIG } from '../../schedule.config';
 import { impersonatedScheduleStoreManager } from '../../schedule.repository';
-import { SCHEDULE_CONFIG, ScheduleModuleConfig } from '../../schedule.config';
+import { ScheduleService } from '../../schedule.service';
 
 @Component({
   selector: 'app-select-user',
@@ -21,7 +21,7 @@ export class SelectUserComponent {
   constructor(@Inject(SCHEDULE_CONFIG) private config: ScheduleModuleConfig, private scheduleService: ScheduleService) {
     this.isAuthorizedUser$ = authenticatedUser$.pipe(
       filter((authenticatedUser: AuthenticatedUser) => !!authenticatedUser),
-      first(),
+      take(1),
       map((authenticatedUser: AuthenticatedUser) => {
         const authorizationHelper = new AuthorizationHelper(authenticatedUser.roles);
         return authorizationHelper.filter([
@@ -58,6 +58,6 @@ export class SelectUserComponent {
     this.isSelectUserModalOpen = false;
     impersonatedScheduleStoreManager.resetStore();
     this.scheduleService.setAsUser(login);
-    this.scheduleService.loadScheduleToState().pipe(first()).subscribe();
+    this.scheduleService.loadScheduleToState().pipe(take(1)).subscribe();
   }
 }

@@ -10,8 +10,8 @@ import { AuthEffects } from './auth.effects';
 import { LoginPage } from './login/login.page';
 import { PreferencesComponent } from './preferences/preferences.component';
 import { AuthComponent } from './widget/auth/auth.component';
-import { NotAuthentifiedComponent } from './widget/not-authentified/not-authentified.component';
 import { GreetingComponent } from './widget/greeting/greeting.component';
+import { NotAuthentifiedComponent } from './widget/not-authentified/not-authentified.component';
 
 const initModule = (projectModuleService: ProjectModuleService) =>
   () => projectModuleService.initProjectModule({
@@ -35,7 +35,7 @@ const initModule = (projectModuleService: ProjectModuleService) =>
     PreferencesComponent,
     AuthComponent,
     NotAuthentifiedComponent,
-    GreetingComponent,
+    GreetingComponent
   ],
   imports: [
     CommonModule,

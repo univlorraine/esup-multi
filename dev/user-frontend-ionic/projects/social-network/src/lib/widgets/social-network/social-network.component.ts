@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Browser } from '@capacitor/browser';
 import { NetworkService } from '@ul/shared';
 import { Observable } from 'rxjs';
-import { first } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import { SocialNetwork, socialNetworks$ } from '../../social-network.repository';
 import { SocialNetworkService } from '../../social-network.service';
 
@@ -24,7 +24,7 @@ export class SocialNetworkComponent implements OnInit {
       return;
     }
     this.socialNetworkService.loadAndStoreSocialNetworks()
-      .pipe(first()).subscribe();
+      .pipe(take(1)).subscribe();
   }
 
   async openExternalLink(link: string) {

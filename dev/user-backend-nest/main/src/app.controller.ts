@@ -9,16 +9,15 @@ import {
   Patch,
   Post,
   Query,
-  Request,
-  UseGuards,
-  UseInterceptors,
+  Request, UnauthorizedException, UseGuards,
+  UseInterceptors
 } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { AuthGuard } from '@nestjs/passport';
 import { concatMap, map } from 'rxjs';
+import * as infosJsonData from './infos.json';
 import { ErrorsInterceptor } from './interceptors/errors.interceptor';
 import { AuthorizationHelper } from './security/authorization.helper';
-import * as infosJsonData from './infos.json';
 
 @UseInterceptors(new ErrorsInterceptor())
 @Controller()
@@ -54,7 +53,13 @@ export class AppController {
       )
       .pipe(
         concatMap((user) => {
+
+          if (body.authToken && user === null) {
+            throw new UnauthorizedException('User not found');
+          }
+
           const roles = user ? user.roles : ['anonymous'];
+
           return this.featuresClient
             .send(
               {
