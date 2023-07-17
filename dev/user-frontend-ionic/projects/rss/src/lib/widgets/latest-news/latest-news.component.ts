@@ -1,7 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Network } from '@capacitor/network';
-import { Observable, Subscription } from 'rxjs';
-import { finalize, first, map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { finalize, map, take } from 'rxjs/operators';
 import { FeedItem, rssFeed$, setRssFeed } from '../../rss.repository';
 import { RssService } from '../../rss.service';
 
@@ -32,7 +32,7 @@ export class LatestNewsComponent implements OnInit {
     this.isLoading = true;
     this.rssService.getRssFeed()
       .pipe(
-        first(),
+        take(1),
         finalize(() => this.isLoading = false)
       ).subscribe(setRssFeed);
   }

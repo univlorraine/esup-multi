@@ -1,7 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { ThemeService } from '@ul/shared';
 import { Observable } from 'rxjs';
-import { finalize, first } from 'rxjs/operators';
+import { finalize, take } from 'rxjs/operators';
 import { MailCalendar, mails$ } from '../../unread-mail.repository';
 import { UnreadMailService } from '../../unread-mail.service';
 
@@ -26,7 +26,7 @@ export class UnreadMailComponent implements OnInit, AfterViewInit {
     this.isLoading = true;
     this.unreadMailService.loadUnreadMailIfNetworkAvailable()
       .pipe(
-        first(),
+        take(1),
         finalize(() => this.isLoading = false)
       )
       .subscribe();

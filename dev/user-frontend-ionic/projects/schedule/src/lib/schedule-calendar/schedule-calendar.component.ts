@@ -12,7 +12,7 @@ import { format, isAfter, isBefore, sub } from 'date-fns';
 import * as locale from 'date-fns/locale';
 import { EventInput } from 'fullcalendar';
 import { Observable, Subscription } from 'rxjs';
-import { filter, first, map, mergeMap, tap } from 'rxjs/operators';
+import { filter, map, mergeMap, take, tap } from 'rxjs/operators';
 import {
   Event,
   impersonatedScheduleStoreManager,
@@ -91,7 +91,7 @@ export class ScheduleCalendarComponent implements OnDestroy {
 
       if (!this.calendarDisplaySomeDateOutOfState) {
         this.storeManager.displayedEvents$.pipe(
-          first(),
+          take(1),
           map((events: Event[]) => this.scheduleCalendarService.eventsToCalendarEvents(events))
         ).subscribe((events: EventInput[]) => {
 
@@ -116,7 +116,7 @@ export class ScheduleCalendarComponent implements OnDestroy {
       this.scheduleService.loadScheduleOutOfStateInterval(formatDay(fetchInfo.start), formatDay(fetchInfo.end))
         .pipe(
           mergeMap((outOfStateSchedule: Schedule) => this.scheduleService.outOfStateScheduleToDisplayedEvents(outOfStateSchedule)),
-          first(),
+          take(1),
           map((events: Event[]) => this.scheduleCalendarService.eventsToCalendarEvents(events))
         )
         .subscribe(
@@ -143,7 +143,7 @@ export class ScheduleCalendarComponent implements OnDestroy {
             }
 
             this.storeManager.displayedEvents$.pipe(
-              first(),
+              take(1),
               map((events: Event[]) => this.scheduleCalendarService.eventsToCalendarEvents(events))
             ).subscribe((events: EventInput[]) => {
 

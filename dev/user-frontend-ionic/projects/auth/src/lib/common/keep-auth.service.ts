@@ -1,8 +1,8 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { AuthenticatedUser, updateUser, updateRefreshAuthToken, getAuthToken, updateAuthToken } from '@ul/shared';
-import { Observable, of, throwError, EMPTY, zip } from 'rxjs';
-import { catchError, concatMap, delayWhen, first } from 'rxjs/operators';
+import { AuthenticatedUser, getAuthToken, updateAuthToken, updateRefreshAuthToken, updateUser } from '@ul/shared';
+import { EMPTY, Observable, of, throwError, zip } from 'rxjs';
+import { catchError, concatMap, delayWhen, take } from 'rxjs/operators';
 
 interface KeepAuthenticatedUser extends AuthenticatedUser {
   refreshAuthToken: string;
@@ -64,7 +64,7 @@ export class KeepAuthService {
     };
 
     return getAuthToken().pipe(
-      first(),
+      take(1),
       concatMap((authToken) => {
         if(!authToken) {
           return EMPTY;

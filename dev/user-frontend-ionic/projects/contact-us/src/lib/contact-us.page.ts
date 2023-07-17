@@ -4,7 +4,7 @@ import { ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { authenticatedUser$, NetworkService } from '@ul/shared';
 import { Observable } from 'rxjs';
-import { filter, finalize, first } from 'rxjs/operators';
+import { filter, finalize, take } from 'rxjs/operators';
 import { ContactUsRepository, TranslatedContactUsPageContent } from './contact-us.repository';
 import { ContactMessageQueryDto, ContactUsService } from './contact-us.service';
 
@@ -42,7 +42,7 @@ export class ContactUsPage implements OnInit {
     authenticatedUser$
       .pipe(
         filter(au => au !== null),
-        first(),
+        take(1),
       )
       .subscribe(authenticatedUser => {
         this.defaultFrom = authenticatedUser.email;
@@ -57,7 +57,7 @@ export class ContactUsPage implements OnInit {
     }
 
     this.contactUsService.loadAndStoreContactUsPageContent()
-      .pipe(first())
+      .pipe(take(1))
       .subscribe();
   }
 
@@ -73,7 +73,7 @@ export class ContactUsPage implements OnInit {
     };
     this.contactForm.disable();
     this.contactUsService.sendContactMessage(query).pipe(
-      first(),
+      take(1),
       finalize(() => {
         this.contactForm.enable();
         this.isLoading = false;

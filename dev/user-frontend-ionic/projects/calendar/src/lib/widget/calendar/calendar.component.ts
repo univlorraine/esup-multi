@@ -1,7 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { ThemeService } from '@ul/shared';
 import { Observable } from 'rxjs';
-import { finalize, first } from 'rxjs/operators';
+import { finalize, take } from 'rxjs/operators';
 import { MailCalendarEvents } from '../../calendar.repository';
 import { CalendarService } from '../../calendar.service';
 
@@ -27,7 +27,7 @@ export class CalendarComponent implements OnInit, AfterViewInit {
     this.isLoading = true;
     this.calendarService.loadCalendarIfNetworkAvailable()
       .pipe(
-        first(),
+        take(1),
         finalize(() => this.isLoading = false)
       )
       .subscribe();

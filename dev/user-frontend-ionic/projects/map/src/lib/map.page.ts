@@ -5,7 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { NetworkService } from '@ul/shared';
 import * as Leaflet from 'leaflet';
 import { Subject } from 'rxjs';
-import { finalize, first, takeUntil } from 'rxjs/operators';
+import { finalize, take, takeUntil } from 'rxjs/operators';
 import { MapModuleConfig, MAP_CONFIG } from './map.config';
 import { Marker, markersList$, setMarkers } from './map.repository';
 import { MapService } from './map.service';
@@ -67,7 +67,7 @@ export class MapPage implements OnDestroy {
     await this.leafletMapInit();
     markersList$
       .pipe(
-        first(),
+        take(1),
         finalize(() => this.isLoading = false)
       )
       .subscribe(markers => this.initMarkers(markers));

@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { first } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import { ScheduleListService } from '../../../schedule-list/schedule-list.service';
 import { HiddenCourse } from '../../../schedule.repository';
 import { ScheduleService } from '../../../schedule.service';
@@ -16,7 +16,7 @@ export class HiddenCourseComponent {
   constructor(private scheduleListService: ScheduleListService, private scheduleService: ScheduleService) { }
 
   showAllSimilarCourse(courseToShow: HiddenCourse) {
-    this.scheduleService.getStoreManager().hiddenCourseList$.pipe(first()).subscribe(hiddenCourseList => {
+    this.scheduleService.getStoreManager().hiddenCourseList$.pipe(take(1)).subscribe(hiddenCourseList => {
       const filteredHiddenCourseList = hiddenCourseList.filter(hiddenCourse => hiddenCourse.id !== courseToShow.id);
       this.scheduleService.getStoreManager().setHiddenCourseList(filteredHiddenCourseList);
 

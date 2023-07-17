@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { createEffect, ofType} from '@ngneat/effects';
+import { createEffect, ofType } from '@ngneat/effects';
 import {
   cleanupPrivateData,
   clearAuthenticatedUser,
@@ -7,7 +7,7 @@ import {
   deleteAuthToken,
   deleteRefreshAuthToken
 } from '@ul/shared';
-import { first, tap } from 'rxjs/operators';
+import { take, tap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })
 export class AuthEffects {
@@ -16,7 +16,7 @@ export class AuthEffects {
     ofType(cleanupPrivateData),
     tap(clearAuthenticatedUser),
     tap(clearAuthenticatedUsername),
-    tap(() => deleteAuthToken().pipe(first()).subscribe()),
-    tap(() => deleteRefreshAuthToken().pipe(first()).subscribe()),
+    tap(() => deleteAuthToken().pipe(take(1)).subscribe()),
+    tap(() => deleteRefreshAuthToken().pipe(take(1)).subscribe()),
   ));
 }

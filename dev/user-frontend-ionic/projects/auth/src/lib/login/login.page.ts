@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
-import { AuthenticatedUser, NavigationService, isLoggedTourViewed } from '@ul/shared';
+import { AuthenticatedUser, isLoggedTourViewed, NavigationService } from '@ul/shared';
 import { Observable } from 'rxjs';
-import { finalize, first, tap } from 'rxjs/operators';
+import { finalize, take, tap } from 'rxjs/operators';
 import { AuthService } from '../common/auth.service';
 import { saveCredentialsOnAuthentication$ } from '../preferences/preferences.repository';
 import { PreferencesService } from '../preferences/preferences.service';
 import { LoginRepository, TranslatedLoginPageContent } from './login.repository';
 import { LoginService } from './login.service';
-import { Router } from '@angular/router';
 
 interface AuthenticatedUserToken extends AuthenticatedUser {
   authToken: string;
@@ -55,7 +55,7 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
     this.loginService.loadAndStoreLoginPageContent()
-    .pipe(first())
+    .pipe(take(1))
     .subscribe();
 
     this.loginForm = this.fb.group({

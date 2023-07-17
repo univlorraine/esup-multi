@@ -50,6 +50,7 @@ export class CasService {
       })
       .pipe(
         catchError((err) => {
+          if(err.response){
           switch (err.response.status) {
             case 401:
               throw new RpcException(
@@ -60,6 +61,8 @@ export class CasService {
 
             default:
               throw new RpcException(err);
+          }}else {
+            throw new RpcException(err);
           }
         }),
         map((res) => res.data),

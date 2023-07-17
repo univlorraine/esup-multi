@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NetworkService } from '@ul/shared';
 import { Observable } from 'rxjs';
-import { first } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import { ContactUsRepository, TranslatedContactUsPageContent } from '../../contact-us.repository';
 import { ContactUsService } from '../../contact-us.service';
 
@@ -28,7 +28,7 @@ export class ContactUsMenuItemComponent implements OnInit {
     }
 
     this.contactUsService.loadAndStoreContactUsPageContent()
-      .pipe(first())
+      .pipe(take(1))
       .subscribe();
   }
 

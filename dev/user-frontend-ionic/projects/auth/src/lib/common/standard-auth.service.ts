@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { AuthenticatedUser, getAuthToken, updateAuthToken, updateUser } from '@ul/shared';
 import { Observable, of, throwError } from 'rxjs';
-import { catchError, concatMap, delayWhen, first } from 'rxjs/operators';
+import { catchError, concatMap, delayWhen, take } from 'rxjs/operators';
 
 interface LoginResult extends AuthenticatedUser {
   authToken: string;
@@ -49,7 +49,7 @@ export class StandardAuthService {
     const url = `${this.environment.apiEndpoint}/auth`;
 
     return getAuthToken().pipe(
-      first(),
+      take(1),
       concatMap(authToken => this.http.delete<boolean>(url, {
         body: { authToken }
       }))

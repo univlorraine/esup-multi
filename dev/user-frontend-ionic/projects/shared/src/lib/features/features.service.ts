@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { combineLatest, Observable, ReplaySubject} from 'rxjs';
-import { filter, first, map, share, switchMap, tap } from 'rxjs/operators';
+import { combineLatest, Observable, ReplaySubject } from 'rxjs';
+import { filter, map, share, switchMap, take, tap } from 'rxjs/operators';
 import { getAuthToken } from '../auth/auth.repository';
 import { Authorization } from '../authorization/authorization.helper';
 import { currentLanguage$ } from '../i18n/i18n.repository';
-import { Feature, FeatureMenuType, features$, FeatureType, setFeatures, isFeatureStoreInitialized$ } from './features.repository';
+import { Feature, FeatureMenuType, features$, FeatureType, isFeatureStoreInitialized$, setFeatures } from './features.repository';
 
 interface TranslatedFeatureCommon {
   id: string;
@@ -60,12 +60,13 @@ export class FeaturesService {
       .pipe(
         map(([features, currentLanguage]) => this.translate(features, currentLanguage)),
         share(),
-    ).subscribe(this.translatedFeaturesSubject$);
+      ).subscribe(this.translatedFeaturesSubject$);
   }
 
   loadAndStoreFeatures(): Observable<void> {
+
     return getAuthToken().pipe(
-      first(),
+      take(1),
       switchMap((authToken) => this.getFeatures(authToken)),
       tap(features => setFeatures(features)),
       map(() => null)
@@ -75,9 +76,9 @@ export class FeaturesService {
   private getFeatures(authToken: string): Observable<Feature[]> {
     const url = `${this.environment.apiEndpoint}/features`;
     const data = {
-      authToken
-    };
+      authToken,
 
+    };
     return this.http.post<Feature[]>(url, data);
   }
 

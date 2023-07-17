@@ -1,10 +1,10 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { KeepAuthService } from '../auth/keep-auth.service';
 import { Observable, throwError } from 'rxjs';
-import { catchError, concatMap, filter, first, map, switchMap } from 'rxjs/operators';
-import { SsoExternalLinkQueryDto, SsoServiceTokenQueryDto } from './sso.dto';
+import { catchError, concatMap, filter, map, switchMap, take } from 'rxjs/operators';
 import { getAuthToken } from '../auth/auth.repository';
+import { KeepAuthService } from '../auth/keep-auth.service';
+import { SsoExternalLinkQueryDto, SsoServiceTokenQueryDto } from './sso.dto';
 
 @Injectable({
     providedIn: 'root'
@@ -20,7 +20,7 @@ export class SsoService {
 
     public getSsoExternalLink(query: SsoExternalLinkQueryDto): Observable<string> {
         return getAuthToken().pipe(
-            first(),
+            take(1),
             filter(authToken => authToken != null),
             switchMap(authToken => this.requestSsoServiceToken({
                 service: query.service,

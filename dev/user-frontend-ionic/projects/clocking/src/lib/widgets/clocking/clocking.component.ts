@@ -1,7 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { getExpectedErrorMessage, ThemeService } from '@ul/shared';
 import { Observable } from 'rxjs';
-import { catchError, finalize, first } from 'rxjs/operators';
+import { catchError, finalize, take } from 'rxjs/operators';
 import { Clocking, clocking$ } from '../../clocking.repository';
 import { ClockingService } from '../../clocking.service';
 
@@ -27,7 +27,7 @@ export class ClockingComponent implements OnInit, AfterViewInit {
     this.isLoading = true;
     this.clockingService.loadClockingIfNetworkAvailable()
       .pipe(
-        first(),
+        take(1),
         catchError(err => this.catchExpectedError(err)),
         finalize(() => this.isLoading = false)
       )
@@ -43,7 +43,7 @@ export class ClockingComponent implements OnInit, AfterViewInit {
 
     this.clockInLoading = true;
     this.clockingService.clockIn().pipe(
-      first(),
+      take(1),
       catchError(err => this.catchExpectedError(err)),
       finalize(() => this.clockInLoading = false)
     )

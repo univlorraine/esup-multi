@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NetworkService, StatisticsService } from '@ul/shared';
 import { Observable } from 'rxjs';
-import { first } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import { StaticPagesRepository, TranslatedStaticPage } from '../../static-pages.repository';
 import { StaticPagesService } from '../../static-pages.service';
 
@@ -32,7 +32,7 @@ export class StaticPagesWidgetComponent implements OnInit {
 
     this.staticPagesService.loadAndStoreStaticPages()
       .pipe(
-        first()
+        take(1)
       ).subscribe();
   }
 

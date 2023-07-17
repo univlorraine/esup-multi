@@ -2,7 +2,7 @@ import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@ang
 import { ActivatedRoute } from '@angular/router';
 import { NetworkService } from '@ul/shared';
 import { Observable } from 'rxjs';
-import { finalize, first, map } from 'rxjs/operators';
+import { finalize, map, take } from 'rxjs/operators';
 import Swiper from 'swiper';
 import { getRestaurantById, Restaurant } from '../restaurants.repository';
 import { getMenusByRestaurantId, Menu } from './menus.repository';
@@ -54,7 +54,7 @@ export class RestaurantMenusPage implements OnInit, AfterViewChecked {
     // @TODO à décommenter une fois l'api de l'ul en place
     // return this.restaurantsService.loadAndStoreRestaurantMenus(restaurantId, currentDate)...
     this.restaurantMenusService.loadAndStoreMenus(this.restaurantId).pipe(
-      first(),
+      take(1),
       finalize(() => {
         this.isLoading = false;
       })

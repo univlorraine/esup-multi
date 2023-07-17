@@ -1,4 +1,4 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -22,7 +22,7 @@ import { ReservationModule } from '@ul/reservation';
 import { RestaurantsModule } from '@ul/restaurants';
 import { RssPageModule } from '@ul/rss';
 import { ScheduleModule } from '@ul/schedule';
-import { ProjectModuleService, translationsLoaderFactory } from '@ul/shared';
+import { AuthInterceptor, ProjectModuleService, translationsLoaderFactory } from '@ul/shared';
 import { SocialNetworkModule } from '@ul/social-network';
 import { StaticPagesModule } from '@ul/static-pages';
 import { UnreadMailModule } from '@ul/unread-mail';
@@ -108,7 +108,12 @@ import { PageLayoutsModule } from './page-layouts/page-layouts.module';
   ],
   providers: [
     { provide: 'environment', useValue: environment },
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })

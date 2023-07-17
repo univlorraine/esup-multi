@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
+import { Contacts, EmailType, PhoneType } from '@capacitor-community/contacts';
 import { getAuthToken } from '@ul/shared';
 import { Observable } from 'rxjs';
-import { filter, first, switchMap } from 'rxjs/operators';
-import { Contacts, EmailType, PhoneType } from '@capacitor-community/contacts';
+import { filter, switchMap, take } from 'rxjs/operators';
 
 export interface Contact {
   name: string;
@@ -32,7 +32,7 @@ export class ContactsService {
 
   public getContacts(body: ContactsBody): Observable<Contact[]> {
     return getAuthToken().pipe(
-      first(),
+      take(1),
       filter(authToken => authToken != null),
       switchMap(authToken => this.fetchContacts(body, authToken)),
     );

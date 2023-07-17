@@ -5,7 +5,7 @@ import { Capacitor } from '@capacitor/core';
 import { Platform } from '@ionic/angular';
 import { getAuthToken, NetworkService } from '@ul/shared';
 import { combineLatest, from, Observable, of } from 'rxjs';
-import { first, map, switchMap, tap } from 'rxjs/operators';
+import { map, switchMap, take, tap } from 'rxjs/operators';
 import { ContactUsPageContent, ContactUsRepository } from './contact-us.repository';
 
 export interface ContactMessageQueryDto {
@@ -48,7 +48,7 @@ export class ContactUsService {
 
     const appVersion = !Capacitor.isNativePlatform() ? of(null) : from(App.getInfo()).pipe(map(info => info.version));
     return combineLatest([getAuthToken(), appVersion, from(this.networkService.getConnectionStatus())]).pipe(
-      first(),
+      take(1),
       switchMap(([authToken, version, connectionStatus]) => {
         query.userData = {
           authToken,

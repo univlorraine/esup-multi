@@ -1,16 +1,18 @@
 import { Inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Capacitor } from '@capacitor/core';
+import { OrientationType, ScreenOrientation } from '@capawesome/capacitor-screen-orientation';
+import { Platform } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { ShepherdService } from 'angular-shepherd';
 import { Observable } from 'rxjs';
-import { filter, first, switchMap } from 'rxjs/operators';
+import { filter, switchMap, take } from 'rxjs/operators';
 import { userIsAuthenticated$ } from '../auth/authenticated-user.repository';
 import { MenuItem } from '../navigation/menu.model';
 import { NetworkService } from '../network/network.service';
 import { anonymousSteps } from './config/anonymous-guided-tour.config';
 import { loggedSteps } from './config/logged-guided-tour.config';
 import { isAnonymousTourViewed, isLoggedTourViewed, setAnonymousTourViewed, setLoggedTourViewed } from './guided-tour.repository';
-import { ScreenOrientation, OrientationType } from '@capawesome/capacitor-screen-orientation';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +27,8 @@ export class GuidedTourService {
     private shepherdService: ShepherdService,
     private router: Router,
     private translateService: TranslateService,
-    private networkService: NetworkService
+    private networkService: NetworkService,
+    private platform: Platform
   ) {
     this.isOnline$ = this.networkService.isOnline$;
 
@@ -54,8 +57,8 @@ export class GuidedTourService {
     this.isOnline$
       .pipe(
         filter(isOnline => isOnline),
-        first(),
-        switchMap(() => userIsAuthenticated$.pipe(first()))
+        take(1),
+        switchMap(() => userIsAuthenticated$.pipe(take(1)))
       )
       .subscribe(userIsAuthenticated => {
         if (
@@ -71,10 +74,12 @@ export class GuidedTourService {
   }
 
   async startAnonymousTour() {
-    await ScreenOrientation.lock({type: OrientationType.PORTRAIT});
+
+    if (Capacitor.isNativePlatform()) { await ScreenOrientation.lock({ type: OrientationType.PORTRAIT }); }
+
     const onCompleteFn = () => {
       setAnonymousTourViewed();
-      ScreenOrientation.unlock();
+      if (Capacitor.isNativePlatform()) { ScreenOrientation.unlock(); }
     };
     const stepsConfig = anonymousSteps(this.router, this.translateService, onCompleteFn);
     this.shepherdService.addSteps(stepsConfig);
@@ -82,10 +87,12 @@ export class GuidedTourService {
   }
 
   async startLoggedTour() {
-    await ScreenOrientation.lock({type: OrientationType.PORTRAIT});
+
+    if (Capacitor.isNativePlatform()) { await ScreenOrientation.lock({ type: OrientationType.PORTRAIT }); }
+
     const onCompleteFn = () => {
       setLoggedTourViewed();
-      ScreenOrientation.unlock();
+      if (Capacitor.isNativePlatform()) { ScreenOrientation.unlock(); }
     };
     const stepsConfig = loggedSteps(this.router, this.translateService, onCompleteFn);
     this.shepherdService.addSteps(stepsConfig);
