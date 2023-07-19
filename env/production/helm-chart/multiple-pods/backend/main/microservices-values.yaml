@@ -117,7 +117,6 @@ multi-microservice-clocking:
         CLOCKING_SERVICE_PORT: "3012"
 
 multi-microservice-social-network:
-  replicaCount: 4   #Can be overloaded here
   disableLivenessProbe: true
   appService:
     name: social-network
