@@ -465,4 +465,8 @@ body.dark {
   .button-solid {
     --background: rgb(255, 255, 255);
   }
+
+  .alert-button.sc-ion-alert-md:last-child {
+    color: white;
+  }
 }
