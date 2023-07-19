@@ -124,7 +124,7 @@ multi-microservice-social-network:
     containerPort: 3013
     env:
       normal:
-        SOCIAL_NETWORK_SERVICE_HOST: "multi-nats"
+        SOCIAL_NETWORK_SERVICE_HOST: "10.244.1.36"
         SOCIAL_NETWORK_SERVICE_PORT: "4222"
 
 multi-microservice-chatbot:
