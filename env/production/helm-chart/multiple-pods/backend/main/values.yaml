@@ -41,7 +41,7 @@ appService:
       IMPORTANT_NEWS_SERVICE_PORT: "3011"
       CLOCKING_SERVICE_HOST: "multi-backend-clocking-service"
       CLOCKING_SERVICE_PORT: "3012"
-      SOCIAL_NETWORK_SERVICE_HOST: "multi-nats"
+      SOCIAL_NETWORK_SERVICE_HOST: "10.244.1.36"
       SOCIAL_NETWORK_SERVICE_PORT: "4222"
       CHATBOT_SERVICE_HOST: "multi-backend-chatbot-service"
       CHATBOT_SERVICE_PORT: "3014"
