@@ -12,6 +12,7 @@ async function bootstrap() {
       transport: Transport.NATS,
       options: {
         servers: [`nats://${host}:${port}`],
+        queue: 'social_network_queue',
       },
       logger:
         process.env.EXTENDED_LOGS === 'true'
