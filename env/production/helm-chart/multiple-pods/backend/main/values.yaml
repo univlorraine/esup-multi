@@ -139,9 +139,9 @@ global:
   affinity: {}
 
   commonHealthLivenessProbe:
-    initialDelaySeconds: 30
+    initialDelaySeconds: 120
     periodSeconds: 10
 
   commonHealthReadinessProbe:
-    initialDelaySeconds: 5
+    initialDelaySeconds: 60
     periodSeconds: 10
