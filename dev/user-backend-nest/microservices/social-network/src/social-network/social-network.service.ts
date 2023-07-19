@@ -18,6 +18,7 @@ export class SocialNetworkService {
   }
 
   public getSocialNetworks(): Observable<SocialNetworkDto[]> {
+    this.logger.log('get social networks');
     const url = `${this.directusApiConfig.apiUrl}/items/social_networks`;
     return this.httpService
       .get<DirectusResponse<SocialNetworkDto[]>>(url, {
