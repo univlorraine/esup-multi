@@ -1,7 +1,7 @@
 <ion-modal [isOpen]="isModalOpen">
   <ng-template>
     <ion-header>
-      <ion-toolbar>
+      <ion-toolbar color="primary" >
         <ion-buttons slot="start">
           <ion-back-button defaultHref="cards" (click)="closeModal()"></ion-back-button>
         </ion-buttons>
@@ -9,7 +9,7 @@
     </ion-header>
     <ion-content>
       <ion-content *ngIf="cardType === 'studentCard'">
-        <ion-card>
+        <ion-card class="safe-area-lr-ionic-margin">
           <ion-card-content>
             <app-student-card [userAndCardsData]="userAndCardsData"></app-student-card>
           </ion-card-content>
@@ -21,7 +21,7 @@
       </ion-content>
 
       <ion-content *ngIf="cardType === 'euStudentCard'">
-        <ion-card>
+        <ion-card class="safe-area-lr-ionic-margin">
           <ion-card-content>
             <app-eu-student-card [userAndCardsData]="userAndCardsData"></app-eu-student-card>
           </ion-card-content>

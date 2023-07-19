@@ -13,7 +13,6 @@ export class CardModalComponent {
   @Input() userAndCardsData;
   public cardType: string;
   public isModalOpen = false;
-  private listener: Promise<PluginListenerHandle>;
 
   constructor(
     private screenService: ScreenService,
@@ -23,19 +22,11 @@ export class CardModalComponent {
     this.screenService.fullBrightness();
     this.cardType = cardType;
     this.isModalOpen = true;
-    this.listener = App.addListener('backButton', () => {
-      if (this.isModalOpen) {
-        this.closeModal();
-      }
-    });
   }
 
   closeModal = () => {
     this.screenService.restorePreviousBrightness();
     this.isModalOpen = false;
-    this.listener.then((listener) => {
-      listener.remove();
-    });
   };
 }
 

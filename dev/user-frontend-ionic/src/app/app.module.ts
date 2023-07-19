@@ -1,4 +1,4 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -6,31 +6,32 @@ import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { AuthModule } from '@ul/auth';
+import { CalendarModule } from '@ul/calendar';
 import { CardsPageModule } from '@ul/cards';
+import { ChatbotModule } from '@ul/chatbot';
 import { ClockingModule } from '@ul/clocking';
+import { ContactUsModule } from '@ul/contact-us';
 import { ContactsModule } from '@ul/contacts';
+import { FeaturesModule } from '@ul/features';
 import { ImportantNewsModule } from '@ul/important-news';
 import { MapModule } from '@ul/map';
 import { MenuModule } from '@ul/menu';
 import { NotificationsModule } from '@ul/notifications';
 import { PreferencesPageModule } from '@ul/preferences';
 import { ReservationModule } from '@ul/reservation';
+import { RestaurantsModule } from '@ul/restaurants';
 import { RssPageModule } from '@ul/rss';
 import { ScheduleModule } from '@ul/schedule';
+import { AuthInterceptor, ProjectModuleService, translationsLoaderFactory } from '@ul/shared';
 import { SocialNetworkModule } from '@ul/social-network';
-import { ProjectModuleService, translationsLoaderFactory } from '@ul/shared';
 import { StaticPagesModule } from '@ul/static-pages';
-import { FeaturesModule } from '@ul/features';
+import { UnreadMailModule } from '@ul/unread-mail';
+
 import { environment } from '../environments/environment';
-import { ChatbotModule } from '@ul/chatbot';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ErrorModule } from './error/error.module';
 import { PageLayoutsModule } from './page-layouts/page-layouts.module';
-import { ContactUsModule } from '@ul/contact-us';
-import { RestaurantsModule } from '@ul/restaurants';
-import { UnreadMailModule } from '@ul/unread-mail';
-import { CalendarModule } from '@ul/calendar';
 
 
 @NgModule({
@@ -59,14 +60,17 @@ import { CalendarModule } from '@ul/calendar';
       }
     }),
     RssPageModule,
-    CardsPageModule,
+    CardsPageModule.forRoot({
+      knownErrors: ['NO_PHOTO', 'NO_ACTIVE_CARD', 'UNPAID_FEES']
+    }),
     ScheduleModule.forRoot({
       nextEventsWidget: {
         numberOfEventsLimit: 2,
         numberOfDaysLimit: 7
       },
       previousWeeksInCache: 1,
-      nextWeeksInCache: 2
+      nextWeeksInCache: 2,
+      managerRoles: ['schedule-manager', 'multi-admin']
     }),
     ImportantNewsModule,
     FeaturesModule,
@@ -104,7 +108,12 @@ import { CalendarModule } from '@ul/calendar';
   ],
   providers: [
     { provide: 'environment', useValue: environment },
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })

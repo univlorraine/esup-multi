@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { combineLatest, Observable } from 'rxjs';
-import { catchError, filter, finalize, first, map, tap } from 'rxjs/operators';
+import { catchError, filter, finalize, map, take } from 'rxjs/operators';
 import { NotificationsRepository, TranslatedChannel } from '../notifications.repository';
 import { NotificationsService } from '../notifications.service';
 import { ToastService } from '../toast.service';
@@ -81,7 +81,7 @@ export class SettingsPage implements OnInit {
     this.notificationsService.subscribeOrUnsubscribeUserToChannels({
       channelCodes: unsubChannels,
     }).pipe(
-      first(),
+      take(1),
       catchError(err => {
         // Si une erreur a lieu, on replace le toggle à sa position initiale
         control.setValue(!controlValue, { emitEvent: false });

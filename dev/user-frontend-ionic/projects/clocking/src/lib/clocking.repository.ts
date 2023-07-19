@@ -35,4 +35,4 @@ export const setClocking = (clocking: ClockingProps['clocking']) => {
   }));
 };
 
-export const clearUserAndCardsData = () => store.reset();
+export const clearUserClockingData = () => store.reset();

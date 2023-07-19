@@ -9,13 +9,13 @@ import {
   Patch,
   Post,
   Query,
-  Request,
-  UseGuards,
+  Request, UnauthorizedException, UseGuards,
   UseInterceptors
 } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { AuthGuard } from '@nestjs/passport';
 import { concatMap, map } from 'rxjs';
+import * as infosJsonData from './infos.json';
 import { ErrorsInterceptor } from './interceptors/errors.interceptor';
 import { AuthorizationHelper } from './security/authorization.helper';
 
@@ -40,7 +40,7 @@ export class AppController {
     @Inject('RESTAURANTS_SERVICE') private restaurantsClient: ClientProxy,
     @Inject('STATISTICS_SERVICE') private statisticsClient: ClientProxy,
     @Inject('MAIL_CALENDAR_SERVICE') private mailCalendarClient: ClientProxy,
-  ) { }
+  ) {}
 
   @Post('/features')
   info(@Body() body) {
@@ -53,7 +53,13 @@ export class AppController {
       )
       .pipe(
         concatMap((user) => {
+
+          if (body.authToken && user === null) {
+            throw new UnauthorizedException('User not found');
+          }
+
           const roles = user ? user.roles : ['anonymous'];
+
           return this.featuresClient
             .send(
               {
@@ -230,8 +236,10 @@ export class AppController {
             },
             {
               username: user.username,
+              roles: user.roles,
               startDate: body.startDate,
               endDate: body.endDate,
+              asUser: body.asUser,
             },
           ),
         ),
@@ -634,7 +642,7 @@ export class AppController {
               cmd: 'postUserActionStatistic',
             },
             {
-              uid: user ? user.username : null,
+              uid: user ? user.username : 'anonymous',
               userAgent: request.headers['user-agent'],
               xForwardedFor:
                 request.headers['x-forwarded-for'] ||
@@ -669,17 +677,46 @@ export class AppController {
       );
   }
 
+  @Get('/:service/version')
+  serviceVersion(@Param('service') serviceName: string) {
+    const clientProxy = this.getClientProxy(serviceName);
+    return clientProxy.send({ cmd: 'version' }, {});
+  }
+
   @Get('/:service/health')
   serviceCheckHealth(@Param('service') serviceName: string) {
     const clientProxy = this.getClientProxy(serviceName);
     return clientProxy.send({ cmd: 'health' }, {});
   }
 
+  @Get('/version')
+  mainVersion() {
+    return {
+      version: infosJsonData.version,
+    };
+  }
+  @Get('/health')
+  mainCheckHealth() {
+    return {
+      message: 'up',
+      name: infosJsonData.name,
+      version: infosJsonData.version,
+    };
+  }
+
   private getClientProxy(serviceName: string) {
-    if (this[`${serviceName}Client`]) {
-      return this[`${serviceName}Client`];
+    const name = serviceName && this.convertToCamelCase(serviceName);
+    if (this[`${name}Client`]) {
+      return this[`${name}Client`];
     } else {
       throw new NotFoundException(`Service '${serviceName}' not found.`);
     }
+  }
+
+  private convertToCamelCase(str: string): string {
+    if (!str) {
+      return;
+    }
+    return str.replace(/-([a-zA-Z])/g, (_, letter) => letter.toUpperCase());
   }
 }

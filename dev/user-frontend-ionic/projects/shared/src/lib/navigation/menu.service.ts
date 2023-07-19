@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, ReplaySubject, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FeatureType } from '../features/features.repository';
 import { FeaturesService, TranslatedExternalFeature, TranslatedFeature, TranslatedInternalFeature } from '../features/features.service';
@@ -7,14 +7,11 @@ import { ProjectModuleService } from '../project-module/project-module.service';
 import { StaticMenuItem, StaticMenuType } from '../project-module/static-menu.service';
 import { MenuItem, MenuItemLink, MenuItemLinkType, ServiceMenuItem } from './menu.model';
 
-
-
 @Injectable({
     providedIn: 'root'
 })
 export class MenuService {
-
-    public tabsMenuItems$ = new BehaviorSubject<MenuItem[]>([]);
+    public tabsMenuItems$ = new ReplaySubject<MenuItem[]>();
     public topMenuItems$ = new BehaviorSubject<MenuItem[]>([]);
     public burgerMenuItems$ = new BehaviorSubject<MenuItem[]>([]);
     public allMenuItems$ = new BehaviorSubject<MenuItem[]>([]);
@@ -31,10 +28,6 @@ export class MenuService {
       this.tabsStaticMenuItemsStart = this.getStaticMenuItemsByType('tabs:start');
       this.tabsStaticMenuItemsEnd = this.getStaticMenuItemsByType('tabs:end');
       this.burgerStaticMenuItems = this.getStaticMenuItemsByType('burger');
-      this.tabsMenuItems$.next([
-        ...this.tabsStaticMenuItemsStart,
-        ...this.tabsStaticMenuItemsEnd,
-      ]);
 
       // all menu items are a merge between static (from modules) and dynamic (from CMS) menu items
       this.featuresService.translatedFeatures$.pipe(
@@ -56,15 +49,14 @@ export class MenuService {
         ])
       ).subscribe(this.burgerMenuItems$);
 
-
       // tabs menu items are a merge between static (from modules) and dynamic (from CMS) menu items
       this.featuresService.translatedFeatures$.pipe(
         map(features => features.filter(feature => feature.menu === 'tabs' && !feature.widget)),
         map(features => features.map((app: TranslatedFeature) => this.convertTranslatedFeature(app))),
         map((dynamicMenuItems: MenuItem[]) => [
-            ...this.tabsStaticMenuItemsStart,
-            ...dynamicMenuItems,
-            ...this.tabsStaticMenuItemsEnd,
+          ...this.tabsStaticMenuItemsStart,
+          ...dynamicMenuItems,
+          ...this.tabsStaticMenuItemsEnd,
         ])
       ).subscribe(this.tabsMenuItems$);
 

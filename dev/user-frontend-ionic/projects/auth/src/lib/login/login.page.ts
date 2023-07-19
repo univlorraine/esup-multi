@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
-import { AuthenticatedUser, NavigationService } from '@ul/shared';
+import { AuthenticatedUser, isLoggedTourViewed, NavigationService } from '@ul/shared';
 import { Observable } from 'rxjs';
-import { finalize, first, tap } from 'rxjs/operators';
+import { finalize, take, tap } from 'rxjs/operators';
 import { AuthService } from '../common/auth.service';
 import { saveCredentialsOnAuthentication$ } from '../preferences/preferences.repository';
 import { PreferencesService } from '../preferences/preferences.service';
@@ -35,6 +36,7 @@ export class LoginPage implements OnInit {
     private navigationService: NavigationService,
     private loginService: LoginService,
     private loginRepository: LoginRepository,
+    private router: Router,
   ) {
     this.translatedPageContent$ = this.loginRepository.translatedPageContent$;
   }
@@ -53,12 +55,20 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
     this.loginService.loadAndStoreLoginPageContent()
-    .pipe(first())
+    .pipe(take(1))
     .subscribe();
 
     this.loginForm = this.fb.group({
       username: ['', [Validators.required]],
       password: ['', [Validators.required]]
+    });
+
+    // We update the username value with its lowercase version
+    this.loginForm.controls.username.valueChanges.subscribe(value => {
+      if(!value) {
+        return;
+      }
+      this.loginForm.controls.username.setValue(value.trim().toLowerCase(), { emitEvent: false });
     });
   }
 
@@ -84,7 +94,11 @@ export class LoginPage implements OnInit {
           return;
         }
         this.authService.dispatchLoginAction();
-        this.navigationService.navigateBack();
+        if(!isLoggedTourViewed()) {
+          this.router.navigate(['/features/widgets']);
+        } else {
+          this.navigationService.navigateBack();
+        }
       });
   }
 

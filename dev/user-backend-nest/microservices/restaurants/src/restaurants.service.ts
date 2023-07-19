@@ -8,7 +8,8 @@ import {
   RestaurantDTO,
   RestaurantExternalApiDTO,
   RestaurantMenu,
-  RestaurantMenusQueryDto
+  RestaurantMenusQueryDto,
+  RestaurantOpening,
 } from './restaurants.dto';
 
 @Injectable()
@@ -38,13 +39,17 @@ export class RestaurantsService {
         }),
         map((res) =>
           res.data.map((restaurant) => {
-            const open =
-              restaurant.opening?.trim()?.toLocaleLowerCase() !== 'fermé';
+            const opening: Record<string, RestaurantOpening> = {};
+            Object.keys(restaurant.opening).forEach((key) => {
+              opening[key] = {
+                label: restaurant.opening[key].label,
+                isOpen: restaurant.opening[key].is_open,
+              };
+            });
             return {
               id: restaurant.id,
               title: restaurant.title,
-              opening: restaurant.opening,
-              open,
+              opening,
               contact: restaurant.contact,
               infos: restaurant.infos,
               zone: restaurant.zone,
@@ -58,7 +63,9 @@ export class RestaurantsService {
       );
   }
 
-  getRestaurantMenus(query: RestaurantMenusQueryDto): Observable<RestaurantMenu[]> {
+  getRestaurantMenus(
+    query: RestaurantMenusQueryDto,
+  ): Observable<RestaurantMenu[]> {
     const url = `${this.ulApiConfig.url}/${query.id}`;
     const params = query.date ? `/defaultMeal?datetime=${query.date}` : '';
 
@@ -75,5 +82,7 @@ export class RestaurantsService {
           this.logger.error(errorMessage, err);
           throw new RpcException(errorMessage);
         }),
-        map((res) => res.data))}
+        map((res) => res.data),
+      );
+  }
 }

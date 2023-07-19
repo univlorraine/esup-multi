@@ -1,7 +1,7 @@
 <app-header></app-header>
 <div class="search-and-filters">
-  <ion-row>
-    <ion-searchbar (ionChange)="saveSearchBar($event)" placeholder="{{ 'CONTACTS.PLACEHOLDER' | translate }}"></ion-searchbar>
+  <ion-row class="searchbar-row">
+    <ion-searchbar (ionChange)="saveSearchBar($event)" placeholder="{{ 'CONTACTS.PLACEHOLDER' | translate }}" class="safe-area-margin-lr"></ion-searchbar>
   </ion-row>
   <ion-radio-group [value]="this.filterChecked" (ionChange)="selectedCategory($event)">
     <ion-item lines="none" *ngFor="let filter of this.filtersList">
@@ -20,15 +20,15 @@
     <ion-spinner></ion-spinner>
   </ion-row>
   <div *ngIf="!loading">
-    <ion-text class="ion-padding app-text-4" *ngIf="searchButtonPressed">{{contacts.length}} {{ 'CONTACTS.RESULTS' | translate }}</ion-text>
-    <ion-card class="ion-margin-top ion-margin-bottom" *ngFor="let item of contacts">
+    <ion-text class="ion-padding app-text-4 safe-area-margin-lr" *ngIf="searchButtonPressed">{{contacts.length}} {{ 'CONTACTS.RESULTS' | translate }}</ion-text>
+    <ion-card class="ion-margin-top ion-margin-bottom safe-area-lr-ionic-margin" *ngFor="let item of contacts">
       <ion-card-header>
         <ion-card-title class="ion-padding-bottom app-title-4">{{item.name}} {{item.firstname}}</ion-card-title>
         <ion-card-subtitle class="app-text-4 light" *ngFor="let assignment of item.assignments">{{assignment}}</ion-card-subtitle>
       </ion-card-header>
       <ion-card-content class="border-bottom">
         <div class="ion-padding">
-          <ion-item class="contact-labels ion-no-padding" *ngFor="let email of item.mailAdresses; last as isLast" [lines]="isLast ? 'inset' : 'none' ">
+          <ion-item class="contact-labels ion-no-padding" *ngFor="let email of item.mailAddresses; last as isLast" [lines]="isLast ? 'inset' : 'none' ">
             <a class="app-text-4" href="mailto:{{email}}" >{{email}}</a>
           </ion-item>
           <ion-item class="contact-labels ion-no-padding" *ngFor="let mobile of item.phoneNumbers; last as isLast" [lines]="isLast ? 'inset' : 'none' ">

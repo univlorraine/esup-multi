@@ -1,12 +1,17 @@
 <ion-content>
   <app-widget [widgetId]="widgetIds.auth"></app-widget>
   <ion-list lines="none" class="menu-section">
-    <ion-item button *ngFor="let menu of (staticMenuItems$ | async)" (click)="menuOpenerService.open(menu)">
+    <ion-item
+      button
+      *ngFor="let menu of (staticMenuItems$ | async)"
+      (click)="menuOpenerService.open(menu)"
+      [attr.data-burger-id]="getMenuId(menu)"
+    >
       <ion-icon class="app-icon-4" name="{{menu.icon}}" slot="start"></ion-icon>
-      <ion-label class="app-title-5 light">{{menu.title | translate}}</ion-label>
+      <ion-label class="app-text-3 light">{{menu.title | translate}}</ion-label>
     </ion-item>
   </ion-list>
-  <ion-list lines="none" class="menu-section">
+  <ion-list data-burger-id="menu-help" lines="none" class="menu-section">
     <app-widget [widgetId]="widgetIds.contactUs"></app-widget>
     <app-widget [widgetId]="widgetIds.staticPages"></app-widget>
   </ion-list>
@@ -14,16 +19,16 @@
   <ion-list lines="none" class="menu-section">
     <ion-item button *ngFor="let menu of (dynamicMenuItems$ | async)" (click)="menuOpenerService.open(menu)">
       <ion-icon class="app-icon-4" name="{{menu.icon}}" slot="start"></ion-icon>
-      <ion-label class="app-title-5 light">{{menu.title}}</ion-label>
+      <ion-label class="app-text-3 light">{{menu.title}}</ion-label>
     </ion-item>
   </ion-list>
 
   <app-widget  [widgetId]="widgetIds.socialNetwork"></app-widget>
 
 </ion-content>
-<ion-footer class="ion-no-border">
+<ion-footer data-burger-id="menu-footer" class="ion-no-border">
   <ion-row class="ion-justify-content-center">
-    <ion-button shape="round" class="app-round-button-1 ion-no-padding ion-no-margin" (click)="toggleDarkMode()">
+    <ion-button fill="clear" shape="round" class="app-round-button-1 ion-no-padding ion-no-margin" (click)="toggleDarkMode()">
       <ion-icon *ngIf="(isDarkTheme$ | async) === false" name="moon" slot="icon-only"></ion-icon>
       <ion-icon *ngIf="(isDarkTheme$ | async) === true" name="sunny-outline" slot="icon-only"></ion-icon>
     </ion-button>
@@ -33,15 +38,12 @@
       <ion-icon name="{{language}}"></ion-icon>
     </ion-button>
   </ion-row>
-  <ion-row class="ion-justify-content-center ion-padding-bottom">
+  <ion-row
+    *ngIf="appVersion$ | async as version"
+    class="ion-justify-content-center ion-padding-bottom"
+  >
     <ion-label class="app-title-6 light ion-no-padding">
-      {{ 'MENU.VERSION' | translate }}
-      <ng-container *ngIf="appVersion$ | async as version else notFound">
-        {{ version }}
-      </ng-container>
-      <ng-template #notFound>
-        {{ 'MENU.VERSION_NOT_FOUND' | translate }}
-      </ng-template>
+      {{ 'MENU.VERSION' | translate }} {{ version }}
     </ion-label>
   </ion-row>
 </ion-footer>

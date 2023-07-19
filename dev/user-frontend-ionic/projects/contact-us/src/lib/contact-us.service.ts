@@ -1,13 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { ContactUsPageContent, ContactUsRepository } from './contact-us.repository';
-import { combineLatest, from, Observable, of } from 'rxjs';
-import { first, map, switchMap, tap } from 'rxjs/operators';
-import { getAuthToken } from '@ul/shared';
 import { App } from '@capacitor/app';
 import { Capacitor } from '@capacitor/core';
-import { Network } from '@capacitor/network';
 import { Platform } from '@ionic/angular';
+import { getAuthToken, NetworkService } from '@ul/shared';
+import { combineLatest, from, Observable, of } from 'rxjs';
+import { map, switchMap, take, tap } from 'rxjs/operators';
+import { ContactUsPageContent, ContactUsRepository } from './contact-us.repository';
 
 export interface ContactMessageQueryDto {
   from: string;
@@ -31,6 +30,7 @@ export class ContactUsService {
     private environment: any,
     private http: HttpClient,
     private contactUsRepository: ContactUsRepository,
+    private networkService: NetworkService,
     private platform: Platform,
   ) {}
 
@@ -47,8 +47,8 @@ export class ContactUsService {
     const url = `${this.environment.apiEndpoint}/contact-us`;
 
     const appVersion = !Capacitor.isNativePlatform() ? of(null) : from(App.getInfo()).pipe(map(info => info.version));
-    return combineLatest([getAuthToken(), appVersion, from(Network.getStatus())]).pipe(
-      first(),
+    return combineLatest([getAuthToken(), appVersion, from(this.networkService.getConnectionStatus())]).pipe(
+      take(1),
       switchMap(([authToken, version, connectionStatus]) => {
         query.userData = {
           authToken,

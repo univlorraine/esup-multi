@@ -3,7 +3,13 @@
     <ion-buttons slot="start">
       <app-back-button [defaultHref]="backRouterLink"></app-back-button>
     </ion-buttons>
-    <ion-title class="app-centered-header-title app-title-4" *ngIf="(currentPageTitle$ | async) as title">{{ title.translated ? title.title : (title.title | translate) }}</ion-title>
+    <ion-title class="app-centered-header-title app-title-4" *ngIf="(currentPageTitle$ | async) as title">{{
+      title.translated ? title.title : (title.title | translate) }}</ion-title>
     <ng-content></ng-content>
   </ion-toolbar>
+  <ion-row class="ion-text-center network-toolbar" *ngIf="(isOnline$ | async) === false">
+    <ion-col>
+      <ion-text class="no-network-label app-text-5">{{"ERROR.NO_NETWORK.TOP_BAR_LABEL" | translate}}</ion-text>
+    </ion-col>
+  </ion-row>
 </ion-header>

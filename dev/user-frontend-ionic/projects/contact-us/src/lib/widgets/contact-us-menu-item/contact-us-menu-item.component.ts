@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ContactUsService } from '../../contact-us.service';
-import { first } from 'rxjs/operators';
-import { ContactUsRepository, TranslatedContactUsPageContent } from '../../contact-us.repository';
+import { NetworkService } from '@ul/shared';
 import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
+import { ContactUsRepository, TranslatedContactUsPageContent } from '../../contact-us.repository';
+import { ContactUsService } from '../../contact-us.service';
 
 @Component({
   selector: 'app-contact-us-menu-item-widget',
@@ -16,13 +17,18 @@ export class ContactUsMenuItemComponent implements OnInit {
   constructor(
     private contactUsService: ContactUsService,
     private contactUsRepository: ContactUsRepository,
+    private networkService: NetworkService,
   ) {
     this.translatedPageContent$ = this.contactUsRepository.translatedPageContent$;
    }
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
+    if (!(await this.networkService.getConnectionStatus()).connected) {
+      return;
+    }
+
     this.contactUsService.loadAndStoreContactUsPageContent()
-      .pipe(first())
+      .pipe(take(1))
       .subscribe();
   }
 

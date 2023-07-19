@@ -4,10 +4,10 @@
 <ion-content *ngIf="(userAndCardsData$ | async) as userCards">
   <ion-content *ngIf="!userCards.errors || userCards.errors.length === 0">
     <ion-content *ngIf="!userCards.cards.staffCard">
-      <ion-card class="card" *ngFor="let card of userCards.cards | keyvalue" (click)="openModal(card.key)">
+      <ion-card class="card safe-area-lr-ionic-margin" *ngFor="let card of userCards.cards | keyvalue" (click)="openModal(card.key)">
         <ion-card-header>
           <ion-card-subtitle> </ion-card-subtitle>
-          <ion-card-title class="warning">
+          <ion-card-title class="app-title-5">
             {{card.value.title}}
           </ion-card-title>
         </ion-card-header>
@@ -21,7 +21,7 @@
     </ion-content>
 
     <ion-content *ngIf="userCards.cards.staffCard">
-      <ion-card>
+      <ion-card class="safe-area-lr-ionic-margin">
         <ion-card-content>
           <app-staff-card [userAndCardsData]="userCards"></app-staff-card>
         </ion-card-content>
@@ -33,13 +33,17 @@
     </ion-content>
   </ion-content>
 
-  <ion-content *ngIf="userCards.errors && userCards.errors.length > 0">
+  <ion-content *ngIf="userCards.errors && userCards.errors.length > 0 && hasKnownError(userCards.errors); else unknowError">
     <ion-content class="ion-padding" *ngIf="!userCards.cards.staffCard">
-      <ion-note class="column" *ngFor="let error of userCards.errors"> {{ 'CARDS.ERRORS_STUDENT.' + error | translate}}</ion-note>
+      <ng-container *ngFor="let error of userCards.errors">
+        <ion-note *ngIf="isKnownError(error)" class="column app-text-2" > {{ 'CARDS.ERRORS_STUDENT.' + error | translate}}</ion-note>
+      </ng-container>
     </ion-content>
 
     <ion-content class="ion-padding" *ngIf="userCards.cards.staffCard">
-      <ion-note class="column" *ngFor="let error of userCards.errors"> {{ 'CARDS.ERRORS_STAFF.' + error | translate}}</ion-note>
+      <ng-container *ngFor="let error of userCards.errors">
+        <ion-note *ngIf="isKnownError(error)" class="column app-text-2" > {{ 'CARDS.ERRORS_STAFF.' + error | translate}}</ion-note>
+      </ng-container>
     </ion-content>
   </ion-content>
 </ion-content>
@@ -47,3 +51,9 @@
 <ion-content class="ion-padding" *ngIf="(userAndCardsData$ | async) === null && !isLoading">
   <ion-note> {{ "CARDS.ERRORS.NO_DATA" | translate }} </ion-note>
 </ion-content>
+
+<ng-template #unknowError>
+  <ion-content class="ion-padding">
+    <ion-note class="column app-text-2"> {{ 'CARDS.ERRORS.UNKNOWN' | translate}}</ion-note>
+  </ion-content>
+</ng-template>

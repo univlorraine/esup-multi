@@ -3,11 +3,11 @@ import { Capacitor } from '@capacitor/core';
 import { Keyboard } from '@capacitor/keyboard';
 import { IonContent } from '@ionic/angular';
 import { BehaviorSubject } from 'rxjs';
-import { finalize, first } from 'rxjs/operators';
+import { finalize, take } from 'rxjs/operators';
+import { ChatbotModuleConfig, CHATBOT_CONFIG } from './chatbot.config';
 import { ChatbotMessage, ChatButton, Message, MessageType, UserMessage } from './chatbot.dto';
 import { ChatbotService } from './chatbot.service';
 import { UserIdGeneratorService } from './user-id-generator.service';
-import { CHATBOT_CONFIG, ChatbotModuleConfig } from './chatbot.config';
 
 @Component({
   selector: 'app-chatbot',
@@ -36,7 +36,7 @@ export class ChatbotPage implements OnInit {
 
   ngOnInit() {
     this.chatbotService.textRequest('Hello', ChatbotPage.userChatId)
-      .pipe(first(), finalize(() => this.isLoading = false))
+      .pipe(take(1), finalize(() => this.isLoading = false))
       .subscribe((chatBotResponse) => {
           this.addMessageToChat(chatBotResponse);
         }
@@ -76,7 +76,7 @@ export class ChatbotPage implements OnInit {
     this.isFetchingAnswer = true;
     this.chatbotService.textRequest(text, ChatbotPage.userChatId)
       .pipe(
-        first(),
+        take(1),
         finalize(() => this.isFetchingAnswer = false)
       ).subscribe((chatbotResponses: ChatbotMessage[]) => {
         this.addMessageToChat(chatbotResponses);
@@ -91,7 +91,7 @@ export class ChatbotPage implements OnInit {
     this.isFetchingAnswer = true;
     this.chatbotService.buttonPayloadRequest(buttonPayload, ChatbotPage.userChatId)
       .pipe(
-        first(),
+        take(1),
         finalize(() => this.isFetchingAnswer = false)
       ).subscribe((chatbotResponses: ChatbotMessage[]) => {
         this.addMessageToChat(chatbotResponses);

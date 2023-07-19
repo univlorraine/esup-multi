@@ -1,14 +1,15 @@
-import { PropsFactory, Store, StoreConfig, createStore } from '@ngneat/elf';
+import { createStore, PropsFactory, Store, StoreConfig } from '@ngneat/elf';
 import { persistState } from '@ngneat/elf-persist-state';
-import { localForageStore } from './local-forage';
-import { authenticatedUsername$, getAuthenticatedUsername } from '../auth/authenticated-username.repository';
-import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { authenticatedUsername$, getAuthenticatedUsername } from '../auth/authenticated-username.repository';
+import { localForageStore } from './local-forage';
 
 
 type PropsFactories = [PropsFactory<any, any>, ...PropsFactory<any, any>[]];
 
 const storeMapByName: Map<string, Store> = new Map();
+const storeInitializedMapByName: Map<string, Observable<boolean>> = new Map();
 const storePropsFactoriesMapByName: Map<string, PropsFactories> = new Map();
 
 const buildStoreNameWithUsername = (storeName: string, username: string) => `${storeName}:${username || 'anonymous'}`;
@@ -29,12 +30,17 @@ const createUserStoreWithPersistence = (
   storePropsFactoriesMapByName.set(rawStoreName, propsFactories);
   storeMapByName.set(storeNameWithUsername, store);
 
-  persistState(store, {
+  storeInitializedMapByName.set(storeNameWithUsername, persistState(store, {
     key: storeNameWithUsername,
     storage: localForageStore,
-  });
+  }).initialized$);
 
   return store;
+};
+
+export const isUserStoreInitialized$ = (rawStoreName: string): Observable<boolean> => {
+  const storeNameWithUsername = buildStoreNameWithUsername(rawStoreName, getAuthenticatedUsername());
+  return storeInitializedMapByName.get(storeNameWithUsername);
 };
 
 const getOrCreateUserStore = (rawStoreName: string, username: string): Store => {

@@ -1,0 +1,26 @@
+.custom-alert{
+  position: absolute;
+  width: 101%;
+  height: 101%;
+  top: 0px;
+  left: 0px;
+  background-color: rgba(255, 255, 255, 0.933);
+}
+
+ion-card{
+  box-shadow: var(--app-border-no-box-shadow);
+  border: 1px solid black;
+  border-radius: var(--app-border-no-radius);
+}
+
+.flex-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.center-card {
+  margin-left: 2rem;
+  margin-right: 2rem;
+}

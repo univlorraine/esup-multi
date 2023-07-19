@@ -1,9 +1,9 @@
 import { select, withProps } from '@ngneat/elf';
 import { getAllEntities, getEntity, selectAllEntities, setEntities, updateEntities, withEntities } from '@ngneat/elf-entities';
+import { mergeMap } from 'rxjs/operators';
 import { Authorization } from '../authorization/authorization.helper';
 import { ServiceMenuItem } from '../navigation/menu.model';
-import { registerUserStore } from '../store/user-store-helper';
-import { mergeMap } from 'rxjs/operators';
+import { registerUserStore, isUserStoreInitialized$ } from '../store/user-store-helper';
 
 
 const STORE_NAME = 'features';
@@ -69,6 +69,7 @@ export const features$ = userStore$.pipe(
 export const featuresUserOrder$ = userStore$.pipe(
   mergeMap(select((state: any) => state.userOrder))
 );
+export const isFeatureStoreInitialized$ = isUserStoreInitialized$(STORE_NAME);
 
 export const setFeatures = (features: Feature[]) => {
   const previousFeatures = getUserStore().query(getAllEntities());

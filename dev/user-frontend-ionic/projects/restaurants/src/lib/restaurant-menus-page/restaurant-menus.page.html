@@ -1,4 +1,4 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <app-back-button></app-back-button>
@@ -11,12 +11,12 @@
 <ion-content>
   <ion-progress-bar *ngIf="isLoading" type="indeterminate" color="primary"></ion-progress-bar>
 
-  <div #swiperContainer class="swiper-container">
+  <div #swiperContainer class="swiper-container" [ngClass]="{'empty': (restaurantMenusIsEmpty$ | async) && !isLoading}">
     <div class="swiper-wrapper">
       <ng-container *ngIf="restaurant$ | async">
         <ion-card class="swiper-slide" *ngFor="let menu of (menus$ | async)">
           <ion-card-header color="medium" class="ion-text-center">
-            <ion-text class="app-title-5 contrast">{{ menu.date | completeLocalDate}}</ion-text>
+            <ion-text class="app-title-5 app-fixed-light-color">{{ menu.date | completeLocalDate}}</ion-text>
           </ion-card-header>
           <ion-card-content>
             <ion-list *ngFor="let meal of menu.meal">

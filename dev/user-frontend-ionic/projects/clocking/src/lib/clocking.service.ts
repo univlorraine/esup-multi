@@ -1,9 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { Network } from '@capacitor/network';
-import { getAuthToken } from '@ul/shared';
+import { getAuthToken, NetworkService } from '@ul/shared';
 import { from, iif, Observable, of } from 'rxjs';
-import { first, map, switchMap, tap } from 'rxjs/operators';
+import { map, switchMap, take, tap } from 'rxjs/operators';
 import { Clocking, setClocking } from './clocking.repository';
 
 @Injectable({
@@ -15,10 +14,11 @@ export class ClockingService {
     @Inject('environment')
     private environment: any,
     private http: HttpClient,
+    private networkService: NetworkService,
   ) {}
 
   public loadClockingIfNetworkAvailable(): Observable<void> {
-    return from(Network.getStatus()).pipe(
+    return from(this.networkService.getConnectionStatus()).pipe(
       switchMap(status => iif(
         () => status.connected,
         this.getAndStoreClocking(),
@@ -37,7 +37,7 @@ export class ClockingService {
   private getClocking(): Observable<Clocking> {
     const url = `${this.environment.apiEndpoint}/clocking`;
     return getAuthToken().pipe(
-      first(),
+      take(1),
       switchMap(authToken => this.http.post<Clocking>(url, { authToken }))
     );
   }
@@ -52,7 +52,7 @@ export class ClockingService {
   private addClocking(): Observable<Clocking> {
     const url = `${this.environment.apiEndpoint}/clock-in`;
     return getAuthToken().pipe(
-      first(),
+      take(1),
       switchMap(authToken => this.http.post<Clocking>(url, { authToken }))
     );
   }

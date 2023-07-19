@@ -5,11 +5,18 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ProjectModuleService, SharedComponentsModule, SharedPipeModule } from '@ul/shared';
 import { RssPageRoutingModule } from './rss-routing.module';
 import { RssPage } from './rss.page';
+import { LatestNewsComponent } from './widgets/latest-news/latest-news.component';
+import { RssItemHeaderComponent } from './common/rss-item-header/rss-item-header.component';
+import { RssItemHeaderButtonDirective } from './common/rss-item-header/rss-item-header-button.directive';
 
 const initModule = (projectModuleService: ProjectModuleService) =>
   () => projectModuleService.initProjectModule({
     name: 'rss',
-    translation: true
+    translation: true,
+    widgets: [{
+      id: 'latest-news',
+      component: LatestNewsComponent
+    }]
   });
 @NgModule({
   imports: [
@@ -21,7 +28,10 @@ const initModule = (projectModuleService: ProjectModuleService) =>
     SharedPipeModule
   ],
   declarations: [
-    RssPage
+    RssPage,
+    LatestNewsComponent,
+    RssItemHeaderComponent,
+    RssItemHeaderButtonDirective
   ],
   providers: [{
     provide: APP_INITIALIZER,

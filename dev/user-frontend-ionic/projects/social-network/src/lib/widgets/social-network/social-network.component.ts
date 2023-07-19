@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { Browser } from '@capacitor/browser';
+import { NetworkService } from '@ul/shared';
+import { Observable } from 'rxjs';
+import { take } from 'rxjs/operators';
 import { SocialNetwork, socialNetworks$ } from '../../social-network.repository';
-import { Network } from '@capacitor/network';
-import { first } from 'rxjs/operators';
 import { SocialNetworkService } from '../../social-network.service';
 
 @Component({
@@ -16,18 +16,18 @@ export class SocialNetworkComponent implements OnInit {
 
   constructor(
     private socialNetworkService: SocialNetworkService,
+    private networkService: NetworkService,
   ) { }
 
   async ngOnInit() {
-    if (!(await Network.getStatus()).connected) {
+    if (!(await this.networkService.getConnectionStatus()).connected) {
       return;
     }
     this.socialNetworkService.loadAndStoreSocialNetworks()
-      .pipe(first()).subscribe();
+      .pipe(take(1)).subscribe();
   }
 
   async openExternalLink(link: string) {
     await Browser.open({ url: link });
   }
-
 }

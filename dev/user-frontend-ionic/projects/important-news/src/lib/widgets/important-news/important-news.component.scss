@@ -38,7 +38,15 @@ ion-img {
 }
 
 .news-content.without-image {
-  padding-left: 1rem;
+  padding-left: 1em;
+
+  @supports (padding-left: env(safe-area-inset-left)) {
+    padding-left: calc(1em + env(safe-area-inset-left));
+  }
+
+  @supports (padding-right: env(safe-area-inset-right)) {
+    padding-right: env(safe-area-inset-right);
+  }
 
   .text-content {
     margin-left: 0rem;
@@ -54,8 +62,8 @@ ion-img {
 }
 
 .border {
-  border-top: var(--app-border-width-7) solid var(--ion-color-primary) !important;
-  border-bottom: var(--app-border-width-7) solid var(--ion-color-primary) !important;
+  border-top: var(--app-border-width-7) solid var(--app-border-color-primary) !important;
+  border-bottom: var(--app-border-width-7) solid var(--app-border-color-primary) !important;
 }
 
 .light-font-color{

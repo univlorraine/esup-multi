@@ -2,26 +2,31 @@
 	{
 		"icon": "facebook",
 		"link": "https://www.facebook.com/UnivLorraine",
-		"title": "facebook"
+		"title": "facebook",
+		"sort": 1
 	},
 	{
 		"icon": "logo-twitter",
 		"link": "https://twitter.com/univ_Lorraine",
-		"title": "twitter"
+		"title": "twitter",
+		"sort": 2
 	},
 	{
 		"icon": "instagram",
 		"link": "https://www.linkedin.com/company/universit-de-lorraine",
-		"title": "instagram"
+		"title": "instagram",
+		"sort": 3
 	},
 	{
 		"icon": "linkedin",
 		"link": "https://www.linkedin.com/company/universit-de-lorraine/",
-		"title": "linkedin"
+		"title": "linkedin",
+		"sort": 4
 	},
 	{
 		"icon": "logo-twitch",
 		"link": "https://www.twitch.tv/vie_etudiante_ul",
-		"title": "Twitch"
+		"title": "Twitch",
+		"sort": 5
 	}
 ]

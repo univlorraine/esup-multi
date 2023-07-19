@@ -2,6 +2,11 @@ ion-card {
   box-shadow: var(--app-border-no-box-shadow);
   border-radius: var(--app-border-no-radius) !important;
   margin-top: 1.8rem !important;
+  background: transparent;
+
+  @supports (padding-left: env(safe-area-inset-left)) {
+    padding-left: env(safe-area-inset-left)
+  }
 }
 
 .feature-title {

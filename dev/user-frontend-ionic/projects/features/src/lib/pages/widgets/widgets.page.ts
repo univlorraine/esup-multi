@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
+import { FeaturesService, GuidedTourService, TranslatedFeature, WidgetLifecycleService } from '@ul/shared';
 import { Observable } from 'rxjs';
-import {first, map} from 'rxjs/operators';
-import { TranslatedFeature, FeaturesService, WidgetLifecycleService } from '@ul/shared';
+import { map, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-widgets',
@@ -15,6 +15,7 @@ export class WidgetsPage {
   constructor(
     private featuresService: FeaturesService,
     private widgetLifecycleService: WidgetLifecycleService,
+    private guidedTourService: GuidedTourService
   ) {
     this.translatedFeatures$ = this.featuresService.translatedFeatures$.pipe(
       map(features => features.filter(t => t.widget))
@@ -24,7 +25,7 @@ export class WidgetsPage {
 
   ionViewWillEnter() {
     this.translatedFeatures$.pipe(
-      first(),
+      take(1),
     ).subscribe(features => {
       this.widgetLifecycleService.sendWidgetViewWillEnter(features.map(feature => feature.widget));
     });
@@ -32,15 +33,17 @@ export class WidgetsPage {
 
   ionViewDidEnter() {
     this.translatedFeatures$.pipe(
-      first(),
+      take(1),
     ).subscribe(features => {
       this.widgetLifecycleService.sendWidgetViewDidEnter(features.map(feature => feature.widget));
     });
+
+    this.guidedTourService.startGlobalTour();
   }
 
   ionViewWillLeave() {
     this.translatedFeatures$.pipe(
-      first(),
+      take(1),
     ).subscribe(features => {
       this.widgetLifecycleService.sendWidgetViewWillLeave(features.map(feature => feature.widget));
     });
@@ -48,7 +51,7 @@ export class WidgetsPage {
 
   ionViewDidLeave() {
     this.translatedFeatures$.pipe(
-      first(),
+      take(1),
     ).subscribe(features => {
       this.widgetLifecycleService.sendWidgetViewDidLeave(features.map(feature => feature.widget));
     });

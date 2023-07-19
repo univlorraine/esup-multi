@@ -2,25 +2,32 @@
 // http://ionicframework.com/docs/theming/
 
 :root {
+
   /**  Our custom app colors variables **/
 
-  // // ---------------------
-
-  // // ---------------------
   // // // ---------------------
-  // // // Font color variables (Change value here and use variables only in css)
+  // // // Font color variables
   // // // ---------------------
 
   --app-font-color-primary: #000000;
   --app-font-color-primary-medium: #1b1b1b;
   --app-font-color-primary-contrast: #ffffff;
 
-  --app-font-color-topbar: #ffffff;
+  // The next colors are fixed and not inverted in dark theme
+  // Don't change the next value in dark theme
+  //______________________________________________
+
+  // If a component have the same background in light/dark theme this variable are used (in font.scss)
+  --app-font-fix-light-color: #ffffff;
+  --app-font-fix-dark-color: #000000;
+
+  --app-font-color-topbar: #ffffff; // Change in body.dark{...} only if ion-color-primary becomes light in dark theme
 
   // If a widget have a particular background color set by the administrator in the CMS
   //  the app check if the background color is dark and put the contrasted font color bellow
   --app-font-color-for-dark-background-from-cms: #ffffff;
   --app-font-color-for-light-background-from-cms: #000000;
+  //______________________________________________
 
 
   // // // ---------------------
@@ -28,12 +35,19 @@
   // Example usage: .css-class { --ion-background-color: var(--app-component-background-primary) !important; }
   // // // ---------------------
 
-  /** Background of the app **/
+  /** App background**/
   --app-color-background: #ffffff;
+
+  /** Pages background  : If the background is different from the app background. **/
+  // services.page in Features module
+  --app-services-color-background: var(--ion-color-quaternary);
+
   /** Component background (if color is different from Ionic colors Theming below). Add colors if necessary**/
   --app-color-component-background-primary: #ffffff;
   --app-color-component-background-secondary: var(--ion-color-light);
+  --app-color-component-background-tertiary: #383838;
 
+  /** Box and button color variables: see app-theme-variables.scss (exception)
 
   /** Ionic CSS colors variables theming **/
 
@@ -94,12 +108,12 @@
   --ion-color-danger-tint: #ed576b;
 
   /** dark **/
-  --ion-color-dark: #222222;
-  --ion-color-dark-rgb: 34, 34, 34;
+  --ion-color-dark: #252525;
+  --ion-color-dark-rgb: 37,37,37;
   --ion-color-dark-contrast: #ffffff;
-  --ion-color-dark-contrast-rgb: 255, 255, 255;
-  --ion-color-dark-shade: #1e1e1e;
-  --ion-color-dark-tint: #383838;
+  --ion-color-dark-contrast-rgb: 255,255,255;
+  --ion-color-dark-shade: #212121;
+  --ion-color-dark-tint: #3b3b3b;
 
   /** medium **/
   --ion-color-medium: #575760;
@@ -213,9 +227,6 @@ body.dark {
 
   /**  Our custom app colors variables **/
 
-  // // ---------------------
-
-  // // ---------------------
   // // // ---------------------
   // // // Font color variables (Change value here and use variables only in css)
   // // // ---------------------
@@ -223,24 +234,25 @@ body.dark {
   --app-font-color-primary: #ffffff;
   --app-font-color-primary-medium: #f9f9f9;
   --app-font-color-primary-contrast: #000000;
+
   --app-font-color-topbar: #ffffff;
-
-
-  // If a widget have a particular background color set by the administrator in the CMS
-  //  the app check if the background color is dark and put the contrasted font color bellow
-  --app-font-color-for-dark-background-from-cms: #ffffff;
-  --app-font-color-for-light-background-from-cms: #000000;
 
   // // // ---------------------
   // // // Background variables (Change value here and use variables in SCSS files on all CSS classes needed throughout the app)
   // Example usage: .css-class { --ion-background-color: var(--app-component-background-primary) !important; }
   // // // ---------------------
 
-  /** Background of the app **/
-  --app-color-background: #575760;
+  /** App background **/
+  --app-color-background: #383838;
+
+  /** Pages background  : If the background is different from the app background. **/
+  // services.page in Features module
+  --app-services-color-background: var(--app-color-background);
+
   /** Component background (if color is different from Ionic colors Theming below). Add colors if necessary**/
   --app-color-component-background-primary: #383838;
   --app-color-component-background-secondary: var(--ion-color-dark);
+  --app-color-component-background-tertiary: #383838;
   /** Ionic CSS colors variables theming **/
 
   // ---------------------
@@ -300,12 +312,12 @@ body.dark {
   --ion-color-danger-tint: #ed576b;
 
   /** dark **/
-  --ion-color-dark: #222222;
-  --ion-color-dark-rgb: 34, 34, 34;
+  --ion-color-dark: #252525;
+  --ion-color-dark-rgb: 37,37,37;
   --ion-color-dark-contrast: #ffffff;
-  --ion-color-dark-contrast-rgb: 255, 255, 255;
-  --ion-color-dark-shade: #1e1e1e;
-  --ion-color-dark-tint: #383838;
+  --ion-color-dark-contrast-rgb: 255,255,255;
+  --ion-color-dark-shade: #212121;
+  --ion-color-dark-tint: #3b3b3b;
 
   /** medium **/
   --ion-color-medium: #575760;
@@ -331,11 +343,11 @@ body.dark {
  */
 
   /** quaternary **/
-  --ion-color-quaternary: #44565f;
+  --ion-color-quaternary: #badfee;
   --ion-color-quaternary-rgb: 186, 223, 238;
   --ion-color-quaternary-contrast: #000000;
   --ion-color-quaternary-contrast-rgb: 0, 0, 0;
-  --ion-color-quaternary-shade: #51636b;
+  --ion-color-quaternary-shade: #a4c4d1;
   --ion-color-quaternary-tint: #c1e2f0;
 
   /** medium-light **/

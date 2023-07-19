@@ -13,6 +13,9 @@ const config: CapacitorConfig = {
       splashImmersive: false,
       backgroundColor: '#ffffff',
     },
+    FirebaseMessaging: {
+      presentationOptions: ["badge", "sound", "alert"],
+    },
   },
 };
 

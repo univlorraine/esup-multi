@@ -1,12 +1,12 @@
-import {Component, ViewChild} from '@angular/core';
-import { AuthenticatedUser, getAuthToken } from '@ul/shared';
-import { setUserAndCardsData, UserAndCardsData, userAndCardsData$ } from './cards.repository';
-import { Network } from '@capacitor/network';
+import { Component, Inject, ViewChild } from '@angular/core';
+import { AuthenticatedUser, getAuthToken, NetworkService } from '@ul/shared';
 import { Observable, Subscription } from 'rxjs';
-import { filter, finalize, first, switchMap } from 'rxjs/operators';
+import { filter, finalize, switchMap, take } from 'rxjs/operators';
+import { CardModalComponent } from './card/card-modal.component';
+import { CardsModuleConfig, CARDS_CONFIG } from './cards.config';
+import { setUserAndCardsData, UserAndCardsData, userAndCardsData$ } from './cards.repository';
 import { CardsService } from './cards.service';
 import { ScreenService } from './screen.service';
-import { CardModalComponent } from './card/card-modal.component';
 
 @Component({
   selector: 'app-cards',
@@ -24,6 +24,8 @@ export class CardsPage {
   constructor(
     private cardsService: CardsService,
     private screenService: ScreenService,
+    private networkService: NetworkService,
+    @Inject(CARDS_CONFIG) private config: CardsModuleConfig,
   ) {}
 
   openModal(cardType) {
@@ -49,14 +51,23 @@ export class CardsPage {
     this.screenService.restorePreviousBrightness();
   }
 
+  hasKnownError(errors: string[]) {
+    const commonErrors = errors.filter(error => this.isKnownError(error));
+    return commonErrors.length > 0;
+  }
+
+  isKnownError(error: string) {
+    return this.config.knownErrors.includes(error);
+  }
+
   private async loadUserCardsData() {
-    if (!(await Network.getStatus()).connected) {
+    if (!(await this.networkService.getConnectionStatus()).connected){
       return;
     }
 
     this.isLoading = true;
     getAuthToken().pipe(
-      first(),
+      take(1),
       filter(authToken => authToken != null),
       switchMap(authToken => this.cardsService.getUserAndCardsData(authToken)),
       finalize(() => this.isLoading = false)

@@ -159,7 +159,8 @@
             "styles": [
               "src/theme/variables.scss",
               "src/global.scss",
-              "node_modules/swiper/swiper-bundle.min.css"
+              "node_modules/swiper/swiper-bundle.min.css",
+              "node_modules/shepherd.js/dist/css/shepherd.css"
             ],
             "scripts": [
               "node_modules/swiper/swiper-bundle.min.js"

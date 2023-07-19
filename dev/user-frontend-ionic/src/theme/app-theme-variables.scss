@@ -147,6 +147,9 @@
   // Example usage: .container { border: var(--app-border-3-width) solid var(--ion-color-primary);}
   // // ---------------------
 
+  --app-border-color-primary: #000000;
+  --app-border-color-secondary: var(--ion-color-medium);
+
   // // // Border width variables
   --app-border-width-1: 1rem;
   --app-border-width-2: 0.7rem;
@@ -186,10 +189,20 @@
   // Chatbot variables (the name of the logo sent by the chatbot must be '_ully5.png'). If it isn't, this style won't be applied.
   // // // ---------------------
   --app-chatbot-first-image-margin-bottom: -1.25rem;
+
+  // // // ---------------------
+  // ion-range variables (cursor on a bar)
+  // // // ---------------------
+
+  --app-ion-range-background: var(--ion-color-light-tint) !important; // componant background
+  --app-ion-range-knob-background: #000000; // cursor background
 }
 
 // Dark theme for this file variables.
 .dark {
+  --app-border-color-primary: #ffffff;
+  --app-border-color-secondary: #ffffff;
+
   --app-text-button-2-color: var(--app-font-color-primary);
 
   --app-rectangular-button-1-background-color: rgb(255, 255, 255);
@@ -197,6 +210,10 @@
 
   --app-rounded-button-1-background-color: rgb(255, 255, 255);
 
-  --app-square-button-1-background-color: rgb(65, 65, 65);
+  --app-square-button-1-background-color: #252525 ;
   --app-square-button-1-font-color: var(--app-font-color-primary);
+
+  //@TODO mettre variable si couleur issue de variable.scss (prochain ticket MULTI-351)
+  --app-ion-range-background: #252525 !important;
+  --app-ion-range-knob-background: var(--ion-color-light); // cursor background
 }

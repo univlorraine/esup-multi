@@ -1,19 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import { CalendarService } from '../../calendar.service';
-import { finalize, first } from 'rxjs/operators';
+import { AfterViewInit, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ThemeService } from '@ul/shared';
 import { Observable } from 'rxjs';
+import { finalize, take } from 'rxjs/operators';
 import { MailCalendarEvents } from '../../calendar.repository';
+import { CalendarService } from '../../calendar.service';
 
 @Component({
   selector: 'app-calendar-widget',
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss'],
 })
-export class CalendarComponent implements OnInit {
+export class CalendarComponent implements OnInit, AfterViewInit {
+
+  @Input() widgetColor: string;
+
   public isLoading = false;
   public nextEvents$: Observable<MailCalendarEvents>;
 
-  constructor(private calendarService: CalendarService) {
+  constructor(private calendarService: CalendarService,
+    private themeService: ThemeService,
+    private changeDetectorRef: ChangeDetectorRef) {
     this.nextEvents$ = this.calendarService.getNextEvents$();
   }
 
@@ -21,9 +27,18 @@ export class CalendarComponent implements OnInit {
     this.isLoading = true;
     this.calendarService.loadCalendarIfNetworkAvailable()
       .pipe(
-        first(),
+        take(1),
         finalize(() => this.isLoading = false)
       )
       .subscribe();
+  }
+
+  ngAfterViewInit() {
+    this.changeDetectorRef.detectChanges();
+  }
+
+  fontColor() {
+    return this.themeService.isBackgroundFromCmsDarkOrIsDarkTheme(this.widgetColor) ?
+      'light-font-color' : 'dark-font-color';
   }
 }

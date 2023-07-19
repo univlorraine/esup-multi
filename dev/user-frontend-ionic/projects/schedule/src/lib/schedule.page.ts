@@ -1,7 +1,8 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnDestroy, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { first } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import { ScheduleCalendarComponent } from './schedule-calendar/schedule-calendar.component';
+import { impersonatedScheduleStoreManager } from './schedule.repository';
 import { ScheduleService } from './schedule.service';
 
 type ViewType = 'month' | 'week' | 'day' | 'list';
@@ -13,11 +14,12 @@ const DEFAULT_VIEW_TYPE: ViewType = 'month';
   templateUrl: './schedule.page.html',
   styleUrls: ['./schedule.page.scss'],
 })
-export class SchedulePage {
+export class SchedulePage implements OnDestroy {
 
   @ViewChild(ScheduleCalendarComponent) calendarRef: ScheduleCalendarComponent;
   viewType: ViewType = DEFAULT_VIEW_TYPE;
   public isLoading$ = this.scheduleService.isLoading$;
+  public asUser: string;
 
   constructor(
     private scheduleService: ScheduleService,
@@ -29,10 +31,21 @@ export class SchedulePage {
 
   ionViewDidEnter() {
     this.calendarRef?.initCalendar();
-    this.scheduleService.loadScheduleToState().pipe(first()).subscribe();
+    this.scheduleService.loadScheduleToState().pipe(take(1)).subscribe();
+    this.scheduleService.asUser.subscribe((asUser) => this.asUser = asUser);
+  }
+
+  ngOnDestroy() {
+    this.clearAsUserLogin();
   }
 
   isTabActive(anchor: string): boolean {
     return this.router.routerState.snapshot.url.includes(anchor);
+  }
+
+  clearAsUserLogin() {
+    this.asUser = null;
+    this.scheduleService.setAsUser(null);
+    impersonatedScheduleStoreManager.resetStore();
   }
 }

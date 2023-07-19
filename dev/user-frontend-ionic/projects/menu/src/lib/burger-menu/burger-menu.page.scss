@@ -4,30 +4,27 @@ ion-list {
 }
 
 .menu-section {
-    border-bottom: var(--app-border-width-7) solid var(--ion-color-primary);
+  border-bottom: var(--app-border-width-7) solid var(--ion-color-primary);
 
-    &:last-of-type {
-        border-bottom: none;
-    }
+  &:last-of-type {
+    border-bottom: none;
+  }
 }
 
 .menu-section.ios {
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+  margin-bottom: 2px;
 }
 
 .menu-section:nth-of-type(1) {
-    padding-top: 0 !important;
+  padding-top: 0 !important;
 }
 
 ion-item.md {
-    padding-left: 0.7rem;
+  padding-left: 0.7rem;
 }
 
 ion-item.ios {
-    padding-top: 0.2rem;
-    padding-bottom: 0.2rem;
-    padding-left: 0.5rem !important;
+  padding-left: 0.5rem !important;
 }
 
 ion-label.ios {

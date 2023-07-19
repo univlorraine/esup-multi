@@ -1,14 +1,14 @@
-import {Component, Inject, OnDestroy, ViewChild} from '@angular/core';
+import { Component, Inject, OnDestroy, ViewChild } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Geolocation } from '@capacitor/geolocation';
-import { Network } from '@capacitor/network';
 import { TranslateService } from '@ngx-translate/core';
+import { NetworkService } from '@ul/shared';
 import * as Leaflet from 'leaflet';
-import { finalize, first, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { finalize, take, takeUntil } from 'rxjs/operators';
 import { MapModuleConfig, MAP_CONFIG } from './map.config';
 import { Marker, markersList$, setMarkers } from './map.repository';
 import { MapService } from './map.service';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { Subject } from 'rxjs';
 
 const CATEGORIES = [
   'presidences_points',
@@ -44,7 +44,8 @@ export class MapPage implements OnDestroy {
     private mapService: MapService,
     private translateService: TranslateService,
     private formBuilder: FormBuilder,
-    @Inject(MAP_CONFIG) private config: MapModuleConfig
+    @Inject(MAP_CONFIG) private config: MapModuleConfig,
+    private networkService: NetworkService,
   ) {
     this.initCategoriesForm();
 
@@ -66,7 +67,7 @@ export class MapPage implements OnDestroy {
     await this.leafletMapInit();
     markersList$
       .pipe(
-        first(),
+        take(1),
         finalize(() => this.isLoading = false)
       )
       .subscribe(markers => this.initMarkers(markers));
@@ -136,8 +137,13 @@ export class MapPage implements OnDestroy {
   }
 
   private async refreshUserPosition() {
+    const permissionAlreadyGranted = (await Geolocation.checkPermissions()).location === 'granted';
 
     await Geolocation.getCurrentPosition().then(position => {
+      let zoomLevel = 11;
+      if(!permissionAlreadyGranted) { // Permission has just been granted now
+        zoomLevel = 16;
+      }
       const latLng: Leaflet.LatLngTuple = [position.coords.latitude, position.coords.longitude];
       const circle = Leaflet.circle(latLng, position.coords.accuracy);
 
@@ -150,8 +156,7 @@ export class MapPage implements OnDestroy {
       }
 
       this.positionLayerGroup = Leaflet.layerGroup([circle, marker]).addTo(this.map);
-      this.map.setView(latLng);
-      this.map.setZoom(11);
+      this.map.setView(latLng, zoomLevel);
     },
       error => {
         const latLngOfTheUniversity: Leaflet.LatLngTuple = [this.config.defaultMapLocation.latitude,
@@ -165,7 +170,7 @@ export class MapPage implements OnDestroy {
 
   private async loadMarkersInNetworkAvailable() {
     // skip if network is not available
-    if (!(await Network.getStatus()).connected) {
+    if (!(await this.networkService.getConnectionStatus()).connected) {
       return;
     }
 

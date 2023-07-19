@@ -6,5 +6,6 @@ export const environment = {
   languages: ['fr', 'en'],
   defaultLanguage: 'fr',
   cmsPublicAssetsEndpoint: 'https://multi-development.jnesis.com/assets/',
-  firebase: firebasePwaEnvironment
+  firebase: firebasePwaEnvironment,
+  guidedTourEnabled: true
 };

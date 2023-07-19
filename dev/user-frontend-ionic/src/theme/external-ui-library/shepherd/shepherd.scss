@@ -1,0 +1,92 @@
+.shepherd-element {
+  background: var(--app-color-background) !important;
+  border-radius: 0 !important;
+  border: var(--app-border-width-7) solid var(--ion-color-medium)  !important;
+  width: 80% !important;
+}
+
+.shepherd-text {
+  color: var(--app-font-color-primary-medium) !important;
+  font-family: var(--app-font-secondary) !important;
+  font-size: var(--app-text-2-size) !important;
+  font-weight: 500 !important;
+}
+
+.shepherd-button-primary {
+  background: var(--ion-color-primary) !important;
+}
+
+.shepherd-button-secondary {
+  background: none  !important;
+  color: var(--app-font-color-primary-medium) !important;
+  text-decoration: underline;
+}
+
+.shepherd-footer {
+  border-radius: unset !important;
+  border-bottom:  var(--app-border-width-5) solid var(--ion-color-secondary);
+}
+
+.dark {
+  .shepherd-element {
+    border: var(--app-border-width-7) solid var(--ion-color-primary-contrast)  !important;
+  }
+
+  .shepherd-button-primary {
+    background: var(--ion-color-primary-contrast) !important;
+    color: var(--ion-color-primary)  !important; ;
+  }
+
+  .shepherd-cancel-icon {
+    color: var(--ion-color-primary-contrast) !important;
+  }
+
+  .shepherd-modal-overlay-container {
+    &.shepherd-modal-is-visible {
+      opacity: .7 !important;
+    }
+  }
+}
+
+.shepherd-arrow {
+  width: 25px !important;
+  height: 25px !important;
+
+  &:before {
+    background: none !important;
+    content: url("../../../assets/icon/chevron-outline.svg") !important;
+    width: 25px !important;
+    height: 25px !important;
+  }
+}
+
+
+.shepherd-element[data-popper-placement^=top] {
+  margin-bottom: 1rem !important;
+
+  &>.shepherd-arrow {
+    position: relative;
+    bottom: -1.4rem !important;
+  }
+
+  &>.shepherd-arrow:before {
+    transform: rotate(0deg) !important;
+  }
+
+}
+
+.shepherd-element[data-popper-placement^=bottom] {
+  margin-top: 1rem !important;
+
+  &>.shepherd-arrow {
+    top: -1.4rem !important;
+  }
+
+  &>.shepherd-arrow:before {
+    transform: rotate(180deg) !important;
+  }
+}
+
+.shepherd-image {
+  padding: 1rem 0;
+}

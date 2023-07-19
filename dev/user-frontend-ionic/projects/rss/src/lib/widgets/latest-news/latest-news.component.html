@@ -1,0 +1,20 @@
+<ion-row *ngIf="isLoading">
+  <ion-spinner class="ion-margin safe-area-lr-ionic-margin" name="dots"></ion-spinner>
+</ion-row>
+
+<ng-container *ngIf="!isLoading">
+  <ion-text *ngIf="(latestNews$ | async) === undefined" class="ion-padding app-text-4">{{'RSS.NO_DATA' | translate}}</ion-text>
+  <div *ngIf="(latestNews$ | async) as item" class="latest-news-container ion-padding">
+    <ion-card class="ion-no-margin safe-area-margin-lr">
+      <app-rss-item-header *ngIf="!isLoading" [item]="item">
+        <ng-template appRssItemHeaderButton>
+          <ion-button
+            [queryParams]="{guid: item.guid}" class="app-text-button-2 link-button" fill="clear" routerLink="/rss">
+            <ion-text class="app-text-5">{{ "RSS.SEE_MORE" | translate }}</ion-text>
+            <ion-icon class="app-icon-6" name="arrow-right"></ion-icon>
+          </ion-button>
+        </ng-template>
+      </app-rss-item-header>
+    </ion-card>
+  </div>
+</ng-container>

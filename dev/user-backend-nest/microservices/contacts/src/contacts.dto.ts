@@ -3,7 +3,7 @@ export interface Contact {
   firstname: string;
   phoneNumbers: string[];
   mobileNumbers: string[];
-  mailAdresses: string[];
+  mailAddresses: string[];
   assignments: string[];
 }
 

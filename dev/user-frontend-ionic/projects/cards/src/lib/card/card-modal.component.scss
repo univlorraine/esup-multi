@@ -1,0 +1,16 @@
+ion-card {
+  border-bottom: var(--app-border-width-5) solid var(--ion-color-secondary);
+  border-radius: 10px;
+}
+
+ion-card-content {
+  padding: 0;
+}
+
+ion-card-content > * {
+  display: flex;
+}
+
+ion-back-button {
+  color: var(--app-font-color-topbar);
+}

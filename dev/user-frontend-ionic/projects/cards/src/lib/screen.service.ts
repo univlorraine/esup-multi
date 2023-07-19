@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ScreenBrightness } from '@capacitor-community/screen-brightness';
 import { Platform } from '@ionic/angular';
 import { from } from 'rxjs';
-import { filter, finalize, first, switchMap } from 'rxjs/operators';
+import { filter, finalize, switchMap, take } from 'rxjs/operators';
 import { brightness$, setBrightness } from './screen.repository';
 
 @Injectable({
@@ -42,7 +42,7 @@ export class ScreenService {
     }
 
     return brightness$.pipe(
-      first(),
+      take(1),
       filter(brightness => brightness !== null),
       switchMap(brightness => from(ScreenBrightness.setBrightness({brightness}))),
       finalize(() => this.fullBrightnessEnabled = false)

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Browser } from '@capacitor/browser';
 import { currentLanguage$, StatisticsService, ThemeService } from '@ul/shared';
 import { combineLatest, Observable } from 'rxjs';
-import { finalize, first, map } from 'rxjs/operators';
+import { finalize, map, take } from 'rxjs/operators';
 import { ImportantNews, importantNewsList$, setImportantNews as setImportantNewsList } from '../../important-news.repository';
 import { ImportantNewsService } from '../../important-news.service';
 import { TranslatedImportantNews } from './../../important-news.repository';
@@ -56,7 +56,7 @@ export class ImportantNewsComponent implements OnInit {
   ngOnInit(): void {
     this.isLoading = true;
     this.importantNewsService.loadImportantNewsList().pipe(
-      first(),
+      take(1),
       finalize(() => this.isLoading = false)
     ).subscribe(importantNewsList => {
       setImportantNewsList(importantNewsList);

@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { updateAuthToken } from './auth.repository';
+import { Actions } from '@ngneat/effects-ng';
 import { Observable, of } from 'rxjs';
-import { concatMap, delayWhen, tap } from 'rxjs/operators';
+import { concatMap, delayWhen } from 'rxjs/operators';
+import { cleanupPrivateData } from '../shared.actions';
+import { updateAuthToken } from './auth.repository';
 import { AuthenticatedUser, updateUser } from './authenticated-user.repository';
 import { getRefreshAuthToken } from './keep-auth.repository';
-import { Actions } from '@ngneat/effects-ng';
-import { cleanupPrivateData } from '../shared.actions';
 
 
 interface ReauthResult extends AuthenticatedUser {

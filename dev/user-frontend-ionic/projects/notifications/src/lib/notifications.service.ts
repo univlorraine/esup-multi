@@ -1,13 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
+import { FirebaseMessaging, GetTokenOptions } from '@capacitor-firebase/messaging';
 import { Platform } from '@ionic/angular';
 import { getAuthToken } from '@ul/shared';
 import { combineLatest, Observable, of } from 'rxjs';
-import { filter, first, switchMap, take, tap } from 'rxjs/operators';
-import { Channel, Notification, NotificationsRepository, TranslatedChannel } from './notifications.repository';
-import { PushNotifications, Token } from '@capacitor/push-notifications';
-import { Capacitor } from '@capacitor/core';
-import { FirebaseMessaging, GetTokenOptions } from '@capacitor-firebase/messaging';
+import { filter, switchMap, take, tap } from 'rxjs/operators';
+import { Channel, Notification, NotificationsRepository } from './notifications.repository';
 
 @Injectable({
   providedIn: 'root'
@@ -59,7 +57,7 @@ export class NotificationsService {
 
   public deleteNotification(id: string) {
     return getAuthToken().pipe(
-      first(),
+      take(1),
       filter(authToken => authToken != null),
       switchMap(authToken => this.removeNotification(authToken, id)),
     );
@@ -118,12 +116,13 @@ export class NotificationsService {
     combineLatest([getAuthToken(), this.notificationRepository.fcmToken$])
       .pipe(
         filter(([authToken, fcmToken]) => !!fcmToken),
-        first(),
+        take(1),
         switchMap(([authToken, fcmToken]) => {
           const url = `${this.environment.apiEndpoint}/notifications/register`;
+
           const data = {
             authToken,
-            token: fcmToken.value,
+            token: fcmToken,
             platform: this.platform.platforms().join(',')
           };
           return this.http.post(url, data);
@@ -139,14 +138,16 @@ export class NotificationsService {
     }
     this.notificationRepository.fcmToken$
       .pipe(
+        take(1),
         switchMap((fcmToken) => {
           if (!fcmToken) {
-            return;
+            return of(null);
           }
           const url = `${this.environment.apiEndpoint}/notifications/unregister`;
+
           const data = {
             authToken,
-            fcmToken: fcmToken.value,
+            fcmToken,
           };
           return this.http.post(url, data);
         })
@@ -155,7 +156,7 @@ export class NotificationsService {
         this.deleteFCMToken();
         return;
       });
-}
+  }
 
   public async deleteFCMToken() {
     this.notificationRepository.clearNotifications();
@@ -171,7 +172,7 @@ export class NotificationsService {
     return this.http.delete(url, { body: data });
   }
 
-  private registerPushNotifications() {
+  private async registerPushNotifications() {
     if (!this.platform.is('capacitor')) { // Web
       FirebaseMessaging.requestPermissions();
 
@@ -187,21 +188,20 @@ export class NotificationsService {
           // occured while unsubscribing the user from FCM", it has been reported since 2019 in this thread but hasn't
           // been solved since: https://github.com/firebase/firebase-js-sdk/issues/2364
           // It could be fixed by firebase in a future release
-          this.notificationRepository.setFcmToken({ value: tokenResult.token });
+          this.notificationRepository.setFcmToken(tokenResult.token);
         });
       });
     } else { // Mobile
-      PushNotifications.requestPermissions().then(result => {
-        if (result.receive === 'granted') {
-          PushNotifications.register();
-        }
+
+      await FirebaseMessaging.addListener('tokenReceived', (result) => {
+        this.notificationRepository.setFcmToken(result.token);
       });
 
-      PushNotifications.addListener('registration',
-        (token: Token) => {
-          this.notificationRepository.setFcmToken(token);
+      await FirebaseMessaging.requestPermissions().then(result => {
+        if (result.receive === 'granted') {
+          FirebaseMessaging.getToken();
         }
-      );
+      });
     }
   }
 }

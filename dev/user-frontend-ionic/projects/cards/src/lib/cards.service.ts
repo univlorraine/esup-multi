@@ -15,8 +15,7 @@ export class CardsService {
   ) {
   }
 
-  public getUserAndCardsData( authToken: string): Observable<UserAndCardsData> {
-
+  public getUserAndCardsData(authToken: string): Observable<UserAndCardsData> {
     const url = `${this.environment.apiEndpoint}/cards`;
     const data = {
       authToken

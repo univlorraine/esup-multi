@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Geolocation, Position } from '@capacitor/geolocation';
-import { Network } from '@capacitor/network';
+import { NetworkService } from '@ul/shared';
 import { getDistance } from 'geolib';
 import { combineLatest, from, Observable, of } from 'rxjs';
-import { catchError, first, map, tap } from 'rxjs/operators';
-import { favoriteRestaurantId$, restaurants$, setFavoriteRestaurant } from './restaurants.repository';
+import { catchError, map, take, tap } from 'rxjs/operators';
+import { favoriteRestaurantId$, RestaurantOpening, restaurants$, setFavoriteRestaurant } from './restaurants.repository';
 import { RestaurantsService } from './restaurants.service';
 
 export interface PositionDto {
@@ -17,8 +17,7 @@ export interface RestaurantDto {
   title: string;
   thumbnailUrl: string;
   shortDesc: string;
-  opening: string;
-  open: boolean;
+  opening: Record<string, RestaurantOpening>;
   distance: number;
   favorite: boolean;
 }
@@ -36,16 +35,17 @@ export class RestaurantsPage implements OnInit {
 
   constructor(
     private restaurantsService: RestaurantsService,
-    private router: Router
+    private router: Router,
+    private networkService: NetworkService,
   ) { }
 
   async ngOnInit() {
-    if (!(await Network.getStatus()).connected) {
+    if (!(await this.networkService.getConnectionStatus()).connected) {
       return;
     }
 
     this.restaurantsService.loadAndStoreRestaurants()
-      .pipe(first())
+      .pipe(take(1))
       .subscribe();
   }
 
@@ -63,6 +63,10 @@ export class RestaurantsPage implements OnInit {
 
   navigateToRestaurantMenus(restaurantId: number) {
     this.router.navigate(['restaurants', restaurantId, 'menu']);
+  }
+
+  public getCurrentOpening(opening: Record<string, RestaurantOpening>): RestaurantOpening | undefined {
+    return opening[1 + (new Date().getDay() + 6) % 7]; // 1 = monday, 7 = sunday
   }
 
   private getMyCurrentPosition(): Observable<PositionDto> {
@@ -105,7 +109,6 @@ export class RestaurantsPage implements OnInit {
               thumbnailUrl: restaurant.thumbnailUrl,
               shortDesc: restaurant.shortDesc,
               opening: restaurant.opening,
-              open: restaurant.open,
               distance,
               favorite: restaurant.id === favoriteRestaurantId
             };

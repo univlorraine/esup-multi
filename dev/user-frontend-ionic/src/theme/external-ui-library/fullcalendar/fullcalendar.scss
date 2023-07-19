@@ -2,6 +2,8 @@
 
 .fc-timeGridWeek-view {
   width: 130% !important;
+  transform-origin: top left;
+  overflow-x: scroll;
 
   .week-view-column-header-day {
     font-size: 0.67rem !important;
@@ -10,16 +12,97 @@
   .week-view-column-header-number {
     font-size: 1.1rem !important;
   }
+
+  .fc-col-header,
+  .fc-timegrid-body,
+  .fc-scrollgrid-sync-table,
+  .fc-timegrid-cols,
+  .fc-timegrid-slots {
+    width: 100% !important;
+  }
+
+  .fc-timegrid-cols table,
+  .fc-timegrid-slots table {
+    width: 100% !important;
+  }
 }
+
+.fc-timeGridWeek-view.zoom1 {
+  transform: scale(1.1);
+
+  .fc-view-harness-active,
+  .fc-scroller-harness-liquid,
+  .fc-scrollgrid-section-body {
+    height: 91% !important;
+  }
+}
+
+
+.fc-timeGridWeek-view.zoom2 {
+  transform: scale(1.3);
+
+  .fc-view-harness,
+  .fc-view-harness-active,
+  .fc-scroller-harness-liquid,
+  .fc-scrollgrid-section-body {
+    height: 76% !important;
+  }
+}
+
+
 
 // Month style
 
 .fc-dayGridMonth-view {
+  overflow-x: scroll;
   width: 130% !important;
+  transition: transform 0.3s ease-in-out;
+  transform-origin: top left;
+  height: 100%;
+
+  .fc-daygrid-body,
+  .fc-scrollgrid-sync-table,
+  .fc-col-header {
+    width: 100% !important;
+  }
+
+  .fc-view-harness,
+  .fc-view-harness-active,
+  .fc-scroller-harness-liquid,
+  .fc-scrollgrid-section-body {
+    transition: height 0.3s ease-in-out;
+    height: 100% !important;
+  }
+}
+
+.fc-dayGridMonth-view.zoom1 {
+  transform: scale(1.2);
+
+  .fc-view-harness,
+  .fc-view-harness-active,
+  .fc-scroller-harness-liquid,
+  .fc-scrollgrid-section-body {
+    height: 90% !important;
+  }
+}
+
+.fc-dayGridMonth-view.zoom2 {
+  transform: scale(1.4);
+
+  .fc-view-harness,
+  .fc-view-harness-active,
+  .fc-scroller-harness-liquid,
+  .fc-scrollgrid-section-body {
+    height: 80% !important;
+  }
+}
+
+.fc-daygrid-day {
+  background-color: white;
 }
 
 .fc-day-disabled {
-  background: var(--ion-color-light-shade) !important;
+  background: var(-ion-color-light-shade) !important;
 }
 
 .fc-daygrid-day {
@@ -29,6 +112,7 @@
 
 .fc-daygrid-day-number {
   font-size: 0.8rem;
+  color: var(--app-font-color-primary);
 }
 
 .fc-daygrid-event-harness {
@@ -40,13 +124,31 @@
 }
 
 .fc-v-event .fc-event-main {
+  color: red !important;
+}
+
+.fc-col-header-cell-cushion {
   color: var(--app-font-color-primary) !important;
 }
+
+
 
 // Week/Month common style
 
 .fc-view-harness-active {
   overflow-x: scroll;
+}
+
+.fc-view-harness {
+  overflow-y: hidden !important;
+
+  @supports (margin-right: env(safe-area-inset-right)) {
+    margin-right: env(safe-area-inset-right)
+  }
+
+  @supports (margin-left: env(safe-area-inset-left)) {
+    margin-left: env(safe-area-inset-left)
+  }
 }
 
 // Week / Day common style
@@ -80,7 +182,7 @@
   border-color: var(--ion-color-medium-light) !important;
 }
 
-.dark{
+.dark {
   .fc .fc-timegrid-now-indicator-arrow {
     border-color: var(--ion-color-light) !important;
   }
@@ -138,6 +240,15 @@
 
 .fc-toolbar.fc-header-toolbar {
   margin-bottom: 0rem !important;
+  border-bottom: 1px solid var(--ion-color-medium) !important;
+
+  @supports (padding-right: env(safe-area-inset-right)) {
+    padding-right: env(safe-area-inset-right)
+  }
+
+  @supports (padding-left: env(safe-area-inset-left)) {
+    padding-left: env(safe-area-inset-left)
+  }
 }
 
 .fc-toolbar-title:first-letter {
@@ -160,7 +271,7 @@
 }
 
 .fc-day-today {
-  background-color: var(--ion-color-quaternary) !important;
+  background-color: var(--ion-color-tertiary) !important;
 }
 
 .fc-col-header-cell {
@@ -168,6 +279,44 @@
   font-size: 0.9rem;
 }
 
-.fc-view-harness {
-  border-top: 1px solid black !important;
+// // ---------------------
+
+// //  DARK theme for fullcalendar
+
+// // ---------------------
+
+body.dark {
+
+  // Month style
+
+  .fc-daygrid-day {
+    background-color: var(--app-color-component-background-primary);
+  }
+
+  .fc-day-disabled {
+    background: var(--ion-color-dark) !important;
+  }
+
+  .fc-daygrid-day-top {
+    background-color: #383838 !important;
+  }
+
+  // Month / Week / Day common style
+
+  .fc-col-header-cell {
+    background-color: var(--app-color-component-background-primary);
+  }
+
+  .fc-scrollgrid {
+    border-color: var(--ion-color-medium);
+  }
+
+  .fc-theme-standard td,
+  .fc-theme-standard th {
+    border-color: var(--ion-color-medium);
+  }
+
+  .fc-toolbar.fc-header-toolbar {
+    border-bottom: 1px solid var(--ion-color-medium) !important;
+  }
 }

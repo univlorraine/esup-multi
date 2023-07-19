@@ -23,6 +23,10 @@
         "NOT_LOGGED_IN": "Anonymous user",
         "NOT_AUTHENTIFIED": {
             "MESSAGE": "Please log in"
+        },
+        "GREETING": {
+          "HELLO_NOT_AUTHENTICATED": "Hello!",
+          "HELLO_AUTHENTICATED": "Hello {{username}}!"
         }
     }
 }

@@ -1,7 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { first } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import { ScheduleListService } from '../../../schedule-list/schedule-list.service';
-import { HiddenCourse, hiddenCourseList$, setHiddenCourseList } from '../../../schedule.repository';
+import { HiddenCourse } from '../../../schedule.repository';
+import { ScheduleService } from '../../../schedule.service';
 
 @Component({
   selector: 'app-hidden-course',
@@ -12,17 +13,14 @@ export class HiddenCourseComponent {
 
   @Input() hiddenCourse: HiddenCourse;
 
-  constructor(private scheduleListService: ScheduleListService) { }
+  constructor(private scheduleListService: ScheduleListService, private scheduleService: ScheduleService) { }
 
   showAllSimilarCourse(courseToShow: HiddenCourse) {
+    this.scheduleService.getStoreManager().hiddenCourseList$.pipe(take(1)).subscribe(hiddenCourseList => {
+      const filteredHiddenCourseList = hiddenCourseList.filter(hiddenCourse => hiddenCourse.id !== courseToShow.id);
+      this.scheduleService.getStoreManager().setHiddenCourseList(filteredHiddenCourseList);
 
-    hiddenCourseList$.pipe(first()).subscribe(hiddenCourseList => {
-      if (hiddenCourseList.some(hiddenCourse => hiddenCourse.id === courseToShow.id)) {
-        const filteredHiddenCourseList = hiddenCourseList.filter(hiddenCourse => hiddenCourse.id !== courseToShow.id);
-        setHiddenCourseList(filteredHiddenCourseList);
-      }
       this.scheduleListService.emitShowCourseEvt();
     });
-
   }
 }

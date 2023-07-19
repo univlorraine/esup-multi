@@ -2,8 +2,7 @@
   <ion-button (click)="openSelectPlanningModal()" fill="clear" class="ion-no-padding">
     <ion-icon name="layers-outline"></ion-icon>
   </ion-button>
-  <ion-button *ngIf="(hiddenCourseList$ | async).length > 0" (click)="openHiddenCourseModal()" fill="clear"
-    class="ion-no-padding">
+  <ion-button *ngIf="(hiddenCourseList$ | async)?.length > 0" (click)="openHiddenCourseModal()" fill="clear" class="ion-no-padding">
     <ion-icon name="eye-off-outline"></ion-icon>
   </ion-button>
 </ion-buttons>
@@ -29,7 +28,7 @@
 
     <ion-content>
       <ion-row class="ion-margin">
-        <ion-label class="app-text-4">{{'SCHEDULE.SELECT_PLANNING.SUBTITLE' | translate }}</ion-label>
+        <ion-label class="app-text-4 safe-area-padding-lr">{{'SCHEDULE.SELECT_PLANNING.SUBTITLE' | translate }}</ion-label>
       </ion-row>
       <form [formGroup]="form">
         <ion-item formArrayName="planningList" *ngFor="let planning of planningList.controls; let i = index">
@@ -43,8 +42,7 @@
 </ion-modal>
 
 
-<ion-modal [isOpen]="isHiddenCourseModalOpen && (hiddenCourseList$ | async).length > 0"
-  (willDismiss)="onDismissHiddenCourseModal()">
+<ion-modal [isOpen]="isHiddenCourseModalOpen && ((hiddenCourseList$ | async)?.length > 0)" (willDismiss)="onDismissHiddenCourseModal()">
   <ng-template>
     <ion-progress-bar *ngIf="isLoading" type="indeterminate" color="primary"></ion-progress-bar>
 
@@ -53,7 +51,7 @@
         <ion-title class="app-title-5">{{ 'SCHEDULE.SELECT_PLANNING.HIDDEN_COURSE' | translate }}</ion-title>
         <ion-buttons slot="primary">
           <ion-button fill="solid" (click)="closeHiddenCourseModal()">
-            <ion-text class="app-text-4 contrast">
+            <ion-text class="app-title-7 contrast">
               {{ 'SCHEDULE.CLOSE'
               | translate }}</ion-text></ion-button>
         </ion-buttons>

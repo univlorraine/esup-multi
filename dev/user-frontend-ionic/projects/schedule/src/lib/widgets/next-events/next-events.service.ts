@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { addDays, isAfter, isBefore, startOfDay } from 'date-fns';
 import { map } from 'rxjs/operators';
 import { ScheduleModuleConfig, SCHEDULE_CONFIG } from '../../schedule.config';
-import { displayedEvents$ } from '../../schedule.repository';
+import { scheduleStoreManager } from '../../schedule.repository';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class NextEventsService {
   ) {}
 
   public getNextEvents$() {
-    return displayedEvents$.pipe(
+    return scheduleStoreManager.displayedEvents$.pipe(
       map(events => {
         const startDate = new Date();
         const endDate = startOfDay(addDays(startDate, this.config.nextEventsWidget.numberOfDaysLimit + 1));
@@ -30,5 +30,4 @@ export class NextEventsService {
       })
     );
   }
-
 }

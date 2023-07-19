@@ -9,22 +9,22 @@
 <ion-progress-bar *ngIf="isFetchingAnswer" type="indeterminate" color="primary"></ion-progress-bar>
 
 <ion-content #scrollContent [ngClass]="isLoading ? 'ion-hide' : ''">
-  <ion-list #messages>
-    <ion-item-group *ngFor="let message of messages$ | async">
+  <ion-list #messages class="safe-area-padding-lr">
+    <ion-item-group *ngFor="let message of messages$ | async; let last = last">
       <div class="message-container ion-margin">
         <div [ngClass]="message.messageType === messageType.bot ? message.card && isChatbotLogo(message) ? 'image-bot' : 'message-bot' : 'message-user'">
-            <ion-row *ngIf="message.messageType === messageType.bot">
-              <ion-label class="app-text-4" *ngIf="!message.card" [innerHTML]="message.text" text-wrap></ion-label>
-              <ion-img *ngIf="message.card" [src]="message.card.file.url"></ion-img>
-            </ion-row>
-            <ion-row *ngIf="message.messageType === messageType.user">
-              <ion-label class="app-text-4" [innerHTML]="message.text" text-wrap></ion-label>
-            </ion-row>
+          <ion-row *ngIf="message.messageType === messageType.bot">
+            <ion-label class="app-text-4 app-fixed-light-color link-inherit-color" *ngIf="!message.card" [innerHTML]="message.text" text-wrap></ion-label>
+            <ion-img *ngIf="message.card" [src]="message.card.file.url"></ion-img>
+          </ion-row>
+          <ion-row *ngIf="message.messageType === messageType.user">
+            <ion-label class="app-text-4" [innerHTML]="message.text" text-wrap></ion-label>
+          </ion-row>
         </div>
-        <ion-item lines="none" *ngIf="message.messageType === messageType.bot && message.buttons" class="ion-margin-top">
+        <ion-item lines="none" *ngIf="message.messageType === messageType.bot && message.buttons && last" class="ion-margin-top" lines="none">
           <ion-col>
             <ion-item  *ngFor="let button of message.buttons" (click)="onButtonClick(button)"
-              class="app-text-4 buttonRequest ion-margin-bottom">
+              class="app-text-4 buttonRequest ion-margin-bottom" lines="none">
               {{button.title}}
             </ion-item>
           </ion-col>
@@ -35,8 +35,8 @@
 </ion-content>
 
 <ion-footer>
-  <ion-item class="footer">
-        <ion-input [(ngModel)]="userInput" class="form-control ion-margin input app-text-4" placeholder="{{'CHATBOT.MESSAGE_PROMPT' | translate}}"
+  <ion-item lines="none" class="footer ion-no-padding">
+        <ion-input [(ngModel)]="userInput" class="form-control input app-text-4" placeholder="{{'CHATBOT.MESSAGE_PROMPT' | translate}}"
         (keyup.enter)="onMessageInputEnter()"></ion-input>
 
     <ion-buttons slot="end">

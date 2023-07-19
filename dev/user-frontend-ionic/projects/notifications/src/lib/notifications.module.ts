@@ -1,10 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { APP_INITIALIZER, ModuleWithProviders, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Capacitor } from '@capacitor/core';
+import { FirebaseMessaging, Notification as NotificationCapacitor } from '@capacitor-firebase/messaging';
 import { Device } from '@capacitor/device';
-import { PushNotifications, PushNotificationSchema, Token } from '@capacitor/push-notifications';
-import {IonicModule, Platform, ToastController} from '@ionic/angular';
+import { IonicModule, Platform, ToastController } from '@ionic/angular';
 import { EffectsNgModule } from '@ngneat/effects-ng';
 import { TranslateModule } from '@ngx-translate/core';
 import { ProjectModuleService, SharedComponentsModule, SharedPipeModule } from '@ul/shared';
@@ -63,7 +62,7 @@ export class NotificationsModule {
 
   static routerLink = '/notifications';
 
-  constructor() {}
+  constructor() { }
 
   static forRoot(config: NotificationsModuleConfig): ModuleWithProviders<NotificationsModule> {
     return {
@@ -79,7 +78,8 @@ export class NotificationsModule {
     toastController: ToastController,
     platform: Platform
   ) {
-    const createToast = (notification: PushNotificationSchema) => (
+
+    const createToast = (notification: Notification | NotificationCapacitor) => (
       toastController.create({
         header: notification.title,
         message: notification.body.length >= 110 ? notification.body.slice(0, 110) + '...' : notification.body,
@@ -88,20 +88,13 @@ export class NotificationsModule {
       })
     );
 
-    if(!platform.is('capacitor')) { // Web
+    if (!platform.is('capacitor')) { // Web
 
       navigator.serviceWorker.addEventListener('message', (event: any) => {
-        const notification = new Notification(event.data.notification.title, {
-          body: event.data.notification.body,
-        });
-
         createToast(event.data.notification).then(toast => toast.present());
       });
 
     } else { // Mobile
-
-      const isPushNotificationsAvailable = Capacitor.isPluginAvailable('PushNotifications');
-      if (!isPushNotificationsAvailable) { return; }
 
       // @TODO à supprimer une fois la mise à jour vers capacitor 5 effectuée =>
       // Android 13 = pas de demande d'autorisation de notification avant la première notification reçue qui, elle, ne sera pas affichée.
@@ -110,7 +103,7 @@ export class NotificationsModule {
 
       const info = await Device.getInfo();
       if (info.platform === 'android' && parseInt(info.osVersion, 10) >= 13) {
-        PushNotifications.createChannel({
+        FirebaseMessaging.createChannel({
           id: 'fcm_default_channel',
           name: 'multi',
           description: 'Channel pour demande autorisation Android 13+',
@@ -120,20 +113,12 @@ export class NotificationsModule {
           vibration: true,
         });
       }
-      //_______________________________________
+      // _______________________________________
 
-      PushNotifications.addListener('registrationError',
-        (error: any) => {
-          throw new Error(error);
-        }
-      );
+      await FirebaseMessaging.addListener('notificationReceived', event => {
+        createToast(event.notification).then(toast => toast.present());
+      });
 
-      PushNotifications.addListener('pushNotificationReceived',
-        async (notification: PushNotificationSchema) => {
-          const toast = await createToast(notification);
-          return toast.present();
-        }
-      );
     }
   }
 }

@@ -6,7 +6,7 @@ import {
 } from '@ul/shared';
 import { DragulaService } from 'ng2-dragula';
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
-import { concatMap, first, map, switchMap, tap } from 'rxjs/operators';
+import { concatMap, map, switchMap, take, tap } from 'rxjs/operators';
 import { ServicesService } from './services.service';
 
 @Component({
@@ -78,6 +78,10 @@ export class ServicesPage implements OnInit, OnDestroy {
     updateFeaturesListIsNewToFalse();
   }
 
+  handleScrollStart() {
+    clearTimeout(this.activateDragTimeOut);
+  }
+
   private initMenuItems() {
     const translatedServices$ = this.featuresService.translatedFeatures$.pipe(
       map(features => features.filter(feature => !feature.widget && feature.menu === 'service'))
@@ -93,7 +97,7 @@ export class ServicesPage implements OnInit, OnDestroy {
         })),
         // Sort feature with featureUserOrder
         switchMap(({ features }) => featuresUserOrder$.pipe(
-          first(),
+          take(1),
           map(userOrder => {
             //  Sort feature with IsNews first
             if (!userOrder || userOrder.length === 0) {
@@ -139,7 +143,7 @@ export class ServicesPage implements OnInit, OnDestroy {
       this.dragulaService.dropModel('SERVICES')
         .pipe(
           concatMap(dragulaAfterDragResponse => featuresUserOrder$.pipe(
-            first(),
+            take(1),
             map(featuresUserOrder => [dragulaAfterDragResponse.sourceModel, featuresUserOrder])))
         ).subscribe(([dragulaDomAfterDrag, featuresUserOrder]) => {
           const userOrderFeature = dragulaDomAfterDrag.map(elem => elem.id);

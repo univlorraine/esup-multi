@@ -1,8 +1,9 @@
 {
     "ERRORS":{
-        "NO_DATA": "Données indisponibles"
+        "NO_DATA": "Données indisponibles",
+        "UNKNOWN" : "Impossible d'afficher votre carte"
     },
-    
+
     "ERRORS_STUDENT": {
         "NO_PHOTO": "L'accès à votre carte sera disponible après avoir fourni une photo d'identité à la scolarité de la formation",
         "NO_ACTIVE_CARD" : "Vous ne disposez pas de carte active à l'Université",

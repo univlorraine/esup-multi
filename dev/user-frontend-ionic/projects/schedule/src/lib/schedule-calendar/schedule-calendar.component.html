@@ -1,32 +1,42 @@
-<ion-content>
+<div #ionContent class="div-content">
+  <ion-content class="zoomable-content">
 
-  <ion-item lines="none" *ngIf="loadScheduleOutOfStateError === true">
-    <ion-note *ngIf="errorIsBefore" class="ion-padding app-text-4 danger"> {{ "SCHEDULE.REQUEST_ERROR.BEFORE" | translate }} {{dateError |
-      completeLocalDate}}.</ion-note>
-    <ion-note *ngIf="!errorIsBefore" class="ion-padding app-text-4 danger"> {{ "SCHEDULE.REQUEST_ERROR.AFTER" | translate }} {{dateError |
-      completeLocalDate}}.</ion-note>
-  </ion-item>
+    <ion-item lines="none" *ngIf="loadScheduleOutOfStateError === true">
+      <ion-note *ngIf="errorIsBefore" class="ion-padding app-text-4 danger"> {{ "SCHEDULE.REQUEST_ERROR.BEFORE" |
+        translate }} {{dateError |
+        completeLocalDate}}.</ion-note>
+      <ion-note *ngIf="!errorIsBefore" class="ion-padding app-text-4 danger"> {{ "SCHEDULE.REQUEST_ERROR.AFTER" |
+        translate }} {{dateError |
+        completeLocalDate}}.</ion-note>
+    </ion-item>
 
-  <full-calendar #calendar [options]="calendarOptions">
-    <ng-template #eventContent let-arg>
-      <app-calendar-event [event]="arg.event.extendedProps.event" [viewType]="viewType"
-        ></app-calendar-event>
-    </ng-template>
-  </full-calendar>
+    <ion-range *ngIf="viewType !== 'day'" [(ngModel)]="zoomLevel" (ionChange)="updateZoomLevel()" min="0" max="2" step="1" pin="true" snaps="true">
+      <ion-label class="app-text-6" slot="start">0</ion-label>
+      <ion-label class="app-text-6" slot="end">x2</ion-label>
+      <ion-label class="app-text-6" slot="tick" value="1">1</ion-label>
+    </ion-range>
+    <full-calendar #calendar [options]="calendarOptions">
+      <ng-template #eventContent let-arg>
+        <app-calendar-event [event]="arg.event.extendedProps.event" [viewType]="viewType"></app-calendar-event>
+      </ng-template>
+    </full-calendar>
 
-  <ion-modal #modal [isOpen]="isEventDetailOpen" [initialBreakpoint]="0.6" [breakpoints]="[0, 0.6, 1]" (willDismiss)="dismissModal()">
-    <ng-template>
-      <ion-header>
-        <ion-toolbar>
-          <ion-buttons slot="end">
-            <ion-button (click)="dismissModal()"><ion-text class="app-title-5">{{ 'SCHEDULE.CALENDAR.CLOSE' | translate }}</ion-text></ion-button>
-          </ion-buttons>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content class="ion-padding">
-        <app-event-detail *ngIf="selectedEvent" [event]="selectedEvent"></app-event-detail>
-      </ion-content>
-    </ng-template>
-  </ion-modal>
+    <ion-modal #modal [isOpen]="isEventDetailOpen" [initialBreakpoint]="0.6" [breakpoints]="[0, 0.6, 1]"
+      (willDismiss)="dismissModal()">
+      <ng-template>
+        <ion-header>
+          <ion-toolbar>
+            <ion-buttons slot="end">
+              <ion-button (click)="dismissModal()"><ion-text class="app-title-5">{{ 'SCHEDULE.CALENDAR.CLOSE' |
+                  translate }}</ion-text></ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding">
+          <app-event-detail *ngIf="selectedEvent" [event]="selectedEvent"></app-event-detail>
+        </ion-content>
+      </ng-template>
+    </ion-modal>
 
-</ion-content>
+  </ion-content>
+</div>

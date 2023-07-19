@@ -1,6 +1,8 @@
 import UIKit
+import SwiftKeychainWrapper
 import Capacitor
 import Firebase
+import CapawesomeCapacitorScreenOrientation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -10,6 +12,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
+
+        // Remove keys in secure storage after app uninstall then app install
+        // https://github.com/martinkasa/capacitor-secure-storage-plugin/issues/70
+        if !UserDefaults.standard.bool(forKey: "firstTimeLaunchOccurred") {
+            // capacitor secure storage plugin stores with custom keychain instance
+            let keychainWrapper =  KeychainWrapper.init(serviceName: "cap_sec")
+            keychainWrapper.removeAllKeys()
+            UserDefaults.standard.set(true, forKey:  "firstTimeLaunchOccurred")
+        }
         return true
     }
 
@@ -61,5 +72,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
       NotificationCenter.default.post(name: .capacitorDidFailToRegisterForRemoteNotifications, object: error)
+    }
+
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+      NotificationCenter.default.post(name: Notification.Name.init("didReceiveRemoteNotification"), object: completionHandler, userInfo: userInfo)
+    }
+
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+      return ScreenOrientation.getSupportedInterfaceOrientations()
     }
 }

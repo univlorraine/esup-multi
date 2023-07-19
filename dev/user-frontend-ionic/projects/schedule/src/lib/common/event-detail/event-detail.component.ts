@@ -1,9 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { first } from 'rxjs/operators';
+import { Browser } from '@capacitor/browser';
+import { take } from 'rxjs/operators';
 import { Course, Event, HiddenCourse } from '../../schedule.repository';
 import { ScheduleService } from '../../schedule.service';
-import { hiddenCourseList$, setHiddenCourseList } from './../../schedule.repository';
-import { Browser } from '@capacitor/browser';
 
 @Component({
   selector: 'app-event-detail',
@@ -23,15 +22,18 @@ export class EventDetailComponent {
   hideAllSimilarCourse(course: Course) {
     this.disableHideCourseButton = true;
 
-    hiddenCourseList$.pipe(first()).subscribe(hiddenCourseList => {
+    this.scheduleService.getStoreManager().hiddenCourseList$.pipe(
+      take(1)
+    ).subscribe((hiddenCourseList) => {
       const hiddenCourseObj: HiddenCourse = {
         id: course.id,
         title: course.label
       };
 
       if (!hiddenCourseList.some(hiddenCourse => hiddenCourse.id === hiddenCourseObj.id)) {
-        setHiddenCourseList([...hiddenCourseList, hiddenCourseObj]);
+        this.scheduleService.getStoreManager().setHiddenCourseList([...hiddenCourseList, hiddenCourseObj]);
       }
+
       this.scheduleService.emitHideCourseEvt();
     });
   }

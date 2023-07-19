@@ -1,5 +1,5 @@
 ion-title {
-  color: var(--app-font-color-topbar);
+  color: var(--app-font-color-topbar) !important;
 }
 
 ion-card{
@@ -7,6 +7,7 @@ ion-card{
   margin: 0;
   border-radius: var(--app-border-no-radius);
   box-shadow: var(--app-border-no-box-shadow);
+  overflow: scroll;
 }
 
 ion-card-content{
@@ -43,7 +44,12 @@ h5 {
 }
 
 .swiper-container {
-  height: 98%;
+  height: 100%;
+  overflow: clip;
+}
+
+.swiper-container.empty {
+  display: none; // hide container without deleting it, to prevent swiper error
 }
 
 .swiper-button-next,
@@ -51,3 +57,17 @@ h5 {
   --swiper-navigation-size: 1.5rem;
   --swiper-navigation-color: var(--ion-color-medium-light);
 }
+
+.swiper-button-next {
+  @supports (padding-right: env(safe-area-inset-right)) {
+    padding-right: env(safe-area-inset-right)
+  }
+}
+
+.swiper-button-prev {
+  @supports (padding-left: env(safe-area-inset-left)) {
+    padding-left: env(safe-area-inset-left)
+  }
+}
+
+

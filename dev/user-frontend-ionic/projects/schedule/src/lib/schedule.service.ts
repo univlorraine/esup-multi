@@ -1,12 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { Network } from '@capacitor/network';
-import { getAuthToken } from '@ul/shared';
+import { getAuthToken, NetworkService } from '@ul/shared';
 import { add, format, startOfWeek, sub } from 'date-fns';
-import { combineLatest, from, Observable, of, Subject } from 'rxjs';
-import { filter, finalize, first, map, mergeMap, switchMap, tap } from 'rxjs/operators';
+import { BehaviorSubject, combineLatest, from, Observable, of, Subject } from 'rxjs';
+import { filter, finalize, map, mergeMap, switchMap, take, tap } from 'rxjs/operators';
 import { ScheduleModuleConfig, SCHEDULE_CONFIG } from './schedule.config';
-import { activePlanningIds$, Event, hiddenCourseList$, Schedule, setSchedule } from './schedule.repository';
+import {
+  Event,
+  HiddenCourse,
+  impersonatedScheduleStoreManager,
+  Schedule,
+  ScheduleStoreManager,
+  scheduleStoreManager
+} from './schedule.repository';
 
 export const formatDay = (date: Date) => format(date, 'yyyy-MM-dd');
 
@@ -17,16 +23,25 @@ export class ScheduleService {
 
   public isLoading$: Observable<boolean>;
   public hideEventEvt = new Subject();
+  public asUser: BehaviorSubject<string> = new BehaviorSubject<string | null>(null);
+  private storeManager: ScheduleStoreManager = scheduleStoreManager;
   private isLoadingSubject = new Subject<boolean>();
-
 
   constructor(
     @Inject('environment')
     private environment: any,
     private http: HttpClient,
-    @Inject(SCHEDULE_CONFIG) private config: ScheduleModuleConfig
+    @Inject(SCHEDULE_CONFIG) private config: ScheduleModuleConfig,
+    private networkService: NetworkService,
   ) {
     this.isLoading$ = this.isLoadingSubject.asObservable();
+    this.asUser.subscribe(() => {
+      this.storeManager = this.getStoreManager();
+    });
+  }
+
+  public getStoreManager(): ScheduleStoreManager {
+    return this.asUser.value ? impersonatedScheduleStoreManager : scheduleStoreManager;
   }
 
   public getSchedule(authToken: string, startDate: string, endDate: string): Observable<Schedule> {
@@ -35,7 +50,8 @@ export class ScheduleService {
     const data = {
       authToken,
       startDate,
-      endDate
+      endDate,
+      asUser: this.asUser.value
     };
 
     return this.http.post<Schedule>(url, data);
@@ -43,11 +59,11 @@ export class ScheduleService {
 
   loadSchedule(startDate: string, endDate: string): Observable<Schedule> {
 
-    return from(Network.getStatus()).pipe(
+    return from(this.networkService.getConnectionStatus()).pipe(
       filter(status => status.connected),
       tap(() => this.isLoadingSubject.next(true)),
       mergeMap(() => getAuthToken().pipe(
-        first(),
+        take(1),
         filter(authToken => authToken != null),
         switchMap(authToken =>
           this.getSchedule(
@@ -63,7 +79,7 @@ export class ScheduleService {
 
   loadScheduleToState(): Observable<Schedule> {
     return this.loadSchedule(formatDay(this.getStateStartDate()), formatDay(this.getStateEndDate())).pipe(
-      tap(schedule => setSchedule(schedule))
+      tap(schedule => this.storeManager.setSchedule(schedule))
     );
   }
 
@@ -76,7 +92,7 @@ export class ScheduleService {
   }
 
   getStateEndDate(): Date {
-    return add(this.getStartOfCurrentWeek(), { weeks: this.config.nextWeeksInCache });;
+    return add(this.getStartOfCurrentWeek(), { weeks: this.config.nextWeeksInCache });
   }
 
   getStartOfCurrentWeek(): Date {
@@ -89,24 +105,29 @@ export class ScheduleService {
        return of([]);
     }
     const eventIds = [];
-    return combineLatest([activePlanningIds$, hiddenCourseList$]).pipe(
-      map(([activPlanningIds, hiddenCourseList]) => schedule.plannings.filter(planning => activPlanningIds.includes(planning.id))
-        .reduce((events, planning) => {
-          planning.events.forEach(event => {
-            if (!eventIds.includes(event.id)) {
-              eventIds.push(event.id);
-              events.push(event);
-            }
-          });
-          return events;
-        }, [])
-        .sort((a: Event, b: Event) => new Date(a.startDateTime).getTime() - new Date(b.startDateTime).getTime())
-        .filter((event: Event) => !hiddenCourseList.some(hiddenCourse => hiddenCourse.id === event.course.id)
-        )),
+    return combineLatest([this.storeManager.activePlanningIds$, this.storeManager.hiddenCourseList$]).pipe(
+      map(([activePlanningIds, hiddenCourseList]: [string[], HiddenCourse[]]) =>
+        schedule.plannings.filter(planning => activePlanningIds.includes(planning.id))
+          .reduce((events, planning) => {
+            planning.events.forEach(event => {
+              if (!eventIds.includes(event.id)) {
+                eventIds.push(event.id);
+                events.push(event);
+              }
+            });
+            return events;
+          }, [])
+          .sort((a: Event, b: Event) => new Date(a.startDateTime).getTime() - new Date(b.startDateTime).getTime())
+          .filter((event: Event) => !hiddenCourseList.some(hiddenCourse => hiddenCourse.id === event.course.id)
+          )),
     );
   }
 
   emitHideCourseEvt() {
     this.hideEventEvt.next();
+  }
+
+  setAsUser(asUser: string) {
+    this.asUser.next(asUser);
   }
 }

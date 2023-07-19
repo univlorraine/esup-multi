@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Network } from '@capacitor/network';
 import { getAuthToken } from '@ul/shared';
-import { from, Observable, of, iif } from 'rxjs';
-import { first, map, switchMap, tap } from 'rxjs/operators';
+import { from, iif, Observable, of } from 'rxjs';
+import { map, switchMap, take, tap } from 'rxjs/operators';
 import { MailCalendar, setMails } from './unread-mail.repository';
 
 @Injectable({
@@ -29,14 +29,14 @@ export class UnreadMailService {
   private getMailCalendar(): Observable<MailCalendar> {
     const url = `${this.environment.apiEndpoint}/mail-calendar`;
     return getAuthToken().pipe(
-      first(),
+      take(1),
       switchMap(authToken => this.http.post<MailCalendar>(url, { authToken }))
     );
   }
 
   private getAndStoreMailStats(): Observable<void> {
     return this.getMailCalendar().pipe(
-      tap(mailCalendar => setMails(mailCalendar.unreadMails)),
+      tap(setMails),
       map(() => null)
     );
   }

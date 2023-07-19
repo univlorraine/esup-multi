@@ -1,7 +1,7 @@
 .content {
   height: 100%;
   overflow: hidden;
-  border: var(--app-border-width-8) solid var(--ion-color-medium);
+  border: var(--app-border-width-8) solid var(--app-border-color-secondary);
   background-color: var(--app-color-component-background-primary);
   border-radius: var(--app-border-no-radius);
   padding-bottom: 0.7rem;
@@ -32,4 +32,8 @@ ion-col {
 .detail-text{
   margin-left: 0.2rem;
   margin-right: 0.4rem;
+}
+
+.current-date{
+  color: black !important;
 }

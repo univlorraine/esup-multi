@@ -22,4 +22,11 @@ export class StatisticsController {
       version: infosJsonData.version,
     };
   }
+
+  @MessagePattern({ cmd: 'version' })
+  getVersion() {
+    return {
+      version: infosJsonData.version,
+    };
+  }
 }

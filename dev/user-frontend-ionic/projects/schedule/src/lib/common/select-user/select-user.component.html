@@ -1,0 +1,19 @@
+<ion-buttons>
+  <ion-button *ngIf="isAuthorizedUser$ | async" (click)="openSelectUserModal()" fill="clear" class="ion-no-padding">
+    <ion-icon slot="icon-only" name="people-circle-outline"></ion-icon>
+  </ion-button>
+</ion-buttons>
+
+<ion-modal *ngIf="isAuthorizedUser$ | async" [isOpen]="isSelectUserModalOpen" [initialBreakpoint]="0.35" [breakpoints]="[0, 0.35]" (willDismiss)="onDismissSelectUserModal()">
+  <ng-template>
+    <ion-content>
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <ion-item>
+          <ion-label class="app-text-4" position="floating">{{ 'SCHEDULE.MANAGEMENT.USERNAME_FORM_LABEL' | translate }}</ion-label>
+          <ion-input formControlName="login"></ion-input>
+        </ion-item>
+        <ion-button expand="full" type="submit" [disabled]="!form.valid"><ion-text class="app-text-3 contrast">{{ 'SCHEDULE.MANAGEMENT.VALIDATE_FORM_BUTTON' | translate }}</ion-text></ion-button>
+      </form>
+    </ion-content>
+  </ng-template>
+</ion-modal>

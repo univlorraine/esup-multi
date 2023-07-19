@@ -4,7 +4,7 @@ import { Capacitor } from '@capacitor/core';
 import {
   AuthenticatedUser, authenticatedUser$, isDarkTheme, isDarkTheme$, MenuItem, MenuOpenerService,
   MenuService as SharedMenuService, setIsDarkTheme, setLanguage, setUserHaveSetThemeInApp,
-  WidgetLifecycleService
+  WidgetLifecycleService, InfosService, GuidedTourService
 } from '@ul/shared';
 import { from, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -34,7 +34,9 @@ export class BurgerMenuPage {
     private environment: any,
     private sharedMenuService: SharedMenuService,
     private widgetLifecycleService: WidgetLifecycleService,
+    private guidedTourService: GuidedTourService,
     public menuOpenerService: MenuOpenerService,
+    public infosService: InfosService
   ) {
     this.languages = this.environment.languages;
     this.authenticatedUser$ = authenticatedUser$;
@@ -44,7 +46,9 @@ export class BurgerMenuPage {
     this.dynamicMenuItems$ = this.sharedMenuService.burgerMenuItems$.pipe(
       map(menuItems => menuItems.filter(menuItem => menuItem.type === 'dynamic'))
     );
-    this.appVersion$ = !Capacitor.isNativePlatform() ? of(null) : from(App.getInfo()).pipe(map(info => info.version));
+    this.appVersion$ = !Capacitor.isNativePlatform()
+      ? of(this.infosService.getAppVersion())
+      : from(App.getInfo()).pipe(map(info => info.version));
 
     this.isDarkTheme$ = isDarkTheme$;
   }
@@ -74,5 +78,9 @@ export class BurgerMenuPage {
 
   ionViewDidLeave() {
     this.widgetLifecycleService.sendWidgetViewDidLeave(Object.values(this.widgetIds));
+  }
+
+  getMenuId(menuItem: MenuItem){
+    return this.guidedTourService.generateMenuItemIdFromTitle(menuItem);
   }
 }

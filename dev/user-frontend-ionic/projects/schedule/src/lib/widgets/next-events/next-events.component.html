@@ -1,21 +1,20 @@
 <ion-row *ngIf="isLoading === true">
-  <ion-spinner class="ion-margin" name="dots"></ion-spinner>
+  <ion-spinner class="safe-area-lr-ionic-margin" name="dots"></ion-spinner>
 </ion-row>
 
 <ng-container *ngIf="isLoading === false">
   <ion-grid class="events-container">
     <ion-row *ngIf="(noNextEvents$ | async) === true" class="ion-padding-bottom">
-      <ion-note [ngClass]="fontColor()"
-      class="app-text-5"
-      >
-        {{ "SCHEDULE.WIDGET.NEXT_EVENTS.NO_EVENTS" | translate }}</ion-note>
+      <ion-note [ngClass]="fontColor()" class="app-text-5">
+        {{ "SCHEDULE.WIDGET.NEXT_EVENTS.NO_EVENTS" | translate }}
+      </ion-note>
     </ion-row>
 
     <ion-col *ngFor="let event of (nextEvents$ | async) let last = last" class="ion-no-padding">
-      <ion-row *ngIf="shouldDisplayDay(event)" class="event-day">
-        <ion-text [ngClass]="fontColor()"
-          class="app-title-6 light">{{event.startDateTime |
-          completeLocalDate}}</ion-text>
+      <ion-row *ngIf="displayDateForIds.includes(event.id)" class="event-day">
+        <ion-text [ngClass]="fontColor()" class="app-title-6 light">
+          {{ event.startDateTime | completeLocalDate }}
+        </ion-text>
       </ion-row>
 
       <ion-card [ngClass]="{'last-card': last}">

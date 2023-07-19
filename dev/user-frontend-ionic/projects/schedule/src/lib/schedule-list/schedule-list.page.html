@@ -1,14 +1,14 @@
-<ion-content *ngIf="(schedule$ | async) as schedule" #scrollContent>
+<ion-content *ngIf="(storeManager.schedule$ | async) as schedule" #scrollContent>
 
   <ng-container *ngIf="(areEventsFromActivePlannings$ | async) === true">
 
     <ion-item-group *ngFor="let eventsByDay of (eventsByDays$ | async);">
 
-      <ion-item-divider sticky class="app-title-5 ion-text-center complete-date" [id]="eventsByDay.day">
+      <ion-item-divider sticky class="app-text-2 ion-text-center complete-date" [id]="eventsByDay.day">
         <ion-col>{{eventsByDay.day | completeLocalDate}}</ion-col>
       </ion-item-divider>
 
-      <ion-col class="app-text-4 ion-text-center" *ngIf="!eventsByDay.events.length">
+      <ion-col class="app-text-4 ion-text-center safe-area-padding-lr" *ngIf="!eventsByDay.events.length">
         <p>{{ "SCHEDULE.NO_EVENTS_THIS_DAY" | translate }}</p>
       </ion-col>
 
@@ -29,9 +29,9 @@
 </ion-content>
 
 <ion-content class="ion-padding" *ngIf="(areEventsFromActivePlannings$ | async) === false">
-  <ion-note class="app-text-4"> {{ "SCHEDULE.NO_EVENTS" | translate }} </ion-note>
+  <ion-note class="app-text-4 safe-area-padding-lr"> {{ "SCHEDULE.NO_EVENTS" | translate }} </ion-note>
 </ion-content>
 
-<ion-content class="ion-padding" *ngIf="(schedule$ | async) === null">
-  <ion-note class="app-text-4"> {{ "SCHEDULE.NO_DATA" | translate }} </ion-note>
+<ion-content class="ion-padding" *ngIf="(storeManager.schedule$ | async) === null">
+  <ion-note class="app-text-4 safe-area-padding-lr"> {{ "SCHEDULE.NO_DATA" | translate }} </ion-note>
 </ion-content>

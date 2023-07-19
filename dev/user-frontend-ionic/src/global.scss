@@ -47,14 +47,55 @@
 @import "./theme/components/header.scss";
 
 /* External library */
-/* FullCalendar */
+/* FullCalendar (Calendar in schedule module) */
 @import "./theme/external-ui-library/fullcalendar/fullcalendar.scss";
 
+/* External library */
+/* Leaflet (Map in map module) */
+@import "./theme/external-ui-library/leaflet/leaflet.scss";
+
+/* Shepherd.js */
+@import "./theme/external-ui-library/shepherd/shepherd.scss";
+
 body.scanner-active {
-  --background: transparent;
-  --ion-background-color: transparent;
+  --background: transparent !important;
+  --ion-background-color: transparent !important;
 }
 
 body {
   --ion-background-color: var(--app-color-background) !important;
 }
+
+// Add safe area margin on left and right
+.safe-area-margin-lr {
+  @supports (margin-right: env(safe-area-inset-right)) {
+    margin-right: env(safe-area-inset-right)
+  }
+
+  @supports (margin-left: env(safe-area-inset-left)) {
+    margin-left: env(safe-area-inset-left)
+  }
+}
+
+// Add safe area padding on left and right
+.safe-area-padding-lr {
+  @supports (padding-right: env(safe-area-inset-right)) {
+    padding-right: env(safe-area-inset-right)
+  }
+
+  @supports (padding-left: env(safe-area-inset-left)) {
+    padding-left: env(safe-area-inset-left)
+  }
+}
+
+// Add safe area margin on left and right on top of ionic default margin
+.safe-area-lr-ionic-margin {
+  @supports (margin-right: env(safe-area-inset-right)) {
+    margin-right: calc(16px + env(safe-area-inset-right)); // 16px is default margin for ion-card, ion-spinner...
+  }
+
+  @supports (margin-left: env(safe-area-inset-left)) {
+    margin-left: calc(16px + env(safe-area-inset-left)); // 16px is default margin for ion-card, ion-spinner...
+  }
+}
+

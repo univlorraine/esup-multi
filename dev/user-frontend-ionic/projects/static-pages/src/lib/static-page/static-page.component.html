@@ -1,5 +1,5 @@
 <ng-container *ngIf="page$ | async as page">
-  <ion-header [translucent]="true">
+  <ion-header>
     <ion-toolbar color="primary">
       <ion-buttons slot="start">
         <app-back-button></app-back-button>
@@ -9,6 +9,6 @@
   </ion-header>
 
   <ion-content class="ion-padding">
-    <div [innerHTML]="page.content"></div>
+    <div [innerHTML]="page.content" class="safe-area-padding-lr"></div>
   </ion-content>
 </ng-container>

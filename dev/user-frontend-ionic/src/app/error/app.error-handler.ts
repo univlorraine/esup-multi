@@ -1,11 +1,10 @@
-import { Injectable, ErrorHandler, Injector } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ErrorHandler, Injectable, Injector } from '@angular/core';
 import { AlertController } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
-import { cleanupPrivateData, getAuthToken, getExpectedErrorMessage } from '@ul/shared';
 import { Actions } from '@ngneat/effects-ng';
-import { Network } from '@capacitor/network';
-import { first } from 'rxjs/operators';
+import { TranslateService } from '@ngx-translate/core';
+import { cleanupPrivateData, getAuthToken, getExpectedErrorMessage, NetworkService } from '@ul/shared';
+import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -18,32 +17,38 @@ export class AppErrorHandler implements ErrorHandler {
     private actions: Actions,
     private alertController: AlertController,
     private injector: Injector,
-  ) {}
+    private networkService: NetworkService,
+  ) { }
 
   async handleError(error: Error | HttpErrorResponse) {
     this.loadTranslateService();
     if (error instanceof HttpErrorResponse) {
-        await this.handleHttpError(error as HttpErrorResponse);
+      await this.handleHttpError(error as HttpErrorResponse);
     }
 
-    console.error(error);
+    if (error) {
+      console.error(error);
+    }
   }
 
   private async handleHttpError(error: HttpErrorResponse) {
-    if (!(await Network.getStatus()).connected) {
+    if (!(await this.networkService.getConnectionStatus()).connected) {
       return this.displayError('NO_NETWORK');
     }
 
-    switch(error.status) {
+    switch (error.status) {
       case 0:
         return this.displayError('SERVICE_UNREACHABLE');
+
+      // 401 errors are handled by auth.interceptor.ts in the shared module. The following code is not
+      // executed if auth.interceptor is enabled.
       case 401:
-        getAuthToken().pipe(first()).subscribe(token => this.actions.dispatch(cleanupPrivateData({authToken: token})));
+        getAuthToken().pipe(take(1)).subscribe(token => this.actions.dispatch(cleanupPrivateData({ authToken: token })));
         return this.displayError('UNAUTHENTICATED');
       case 500:
         // expected errors (business error case which should display a specific message)
         const expectedErrorMessage = getExpectedErrorMessage(error);
-        if(expectedErrorMessage) {
+        if (expectedErrorMessage) {
           return this.displayWarning(expectedErrorMessage);
         }
         // unexpected errors

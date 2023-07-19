@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { add, eachDayOfInterval, Interval, isAfter } from 'date-fns';
 import { Observable, Subject } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { displayedEvents$, Event, Schedule } from '../schedule.repository';
+import { Event, Schedule } from '../schedule.repository';
 import { formatDay } from '../schedule.service';
-import { ScheduleService } from './../schedule.service';
+import { ScheduleService } from '../schedule.service';
 
 export interface EventsByDay {
   day: string;
@@ -48,7 +48,6 @@ export class ScheduleListService {
       );
   }
 
-
   loadEventsByDays(viewStartDate, endDateToLoad, outOfStateSchedule?: Schedule): Observable<EventsByDay[]> {
 
     const intervalViewForStateEvents = { start: viewStartDate, end: this.scheduleService.getStateEndDate() };
@@ -58,7 +57,7 @@ export class ScheduleListService {
       const nextDateAfterStateEndDate = add(this.scheduleService.getStateEndDate(), { days: 1 });
       const outOfStateInterval = { start: nextDateAfterStateEndDate, end: endDateToLoad };
 
-      return displayedEvents$.pipe(
+      return this.scheduleService.getStoreManager().displayedEvents$.pipe(
         map(events => this.eventsToEventsByDay(events, intervalViewForStateEvents)),
         switchMap(stateEventsByDay => this.scheduleService.outOfStateScheduleToDisplayedEvents(outOfStateSchedule).pipe(
             map(events => {
@@ -73,7 +72,7 @@ export class ScheduleListService {
 
     } else {
 
-      return displayedEvents$.pipe(
+      return this.scheduleService.getStoreManager().displayedEvents$.pipe(
         map(events => {
           const dateInterval = { start: viewStartDate, end: endDateToLoad };
 
