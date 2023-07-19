@@ -150,7 +150,7 @@ export class MapPage implements OnDestroy {
       const icon = this.buildSimpleMarkerIcon();
       const popupContent = this.translateService.instant('MAP.YOUR_POSITION');
       const marker = Leaflet.marker(latLng, { icon })
-        .bindPopup(popupContent);
+        .bindPopup(`<div class="app-text-5">${popupContent}</div>`);
       if (this.positionLayerGroup) {
         this.positionLayerGroup.remove();
       }
