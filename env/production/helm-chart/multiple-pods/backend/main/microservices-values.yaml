@@ -61,6 +61,7 @@ multi-microservice-cards:
         CARDS_SERVICE_PORT: "3007"
 
 multi-microservice-schedule:
+  replicaCount: 2
   appService:
     name: schedule
     repositoryName: multi-schedule
@@ -116,7 +117,7 @@ multi-microservice-clocking:
         CLOCKING_SERVICE_PORT: "3012"
 
 multi-microservice-social-network:
-  replicaCount: 5   #Can be overloaded here
+  replicaCount: 4   #Can be overloaded here
   disableLivenessProbe: true
   appService:
     name: social-network
