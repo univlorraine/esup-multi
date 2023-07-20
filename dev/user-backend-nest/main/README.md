@@ -24,8 +24,7 @@
 - `NOTIFICATIONS_SERVICE_PORT` : Hôte du microservice `notifications`
 - `NOTIFICATIONS_SERVICE_HOST` : Port du microservice `notifications`
 
-- `SOCIAL_NETWORK_SERVICE_PORT` : Hôte du microservice `social-network`
-- `SOCIAL_NETWORK_SERVICE_HOST` : Port du microservice `social-network`
+- `SOCIAL_NETWORK_SERVICE_NATS_SERVERS` : Addresses complètes des serveurs NATS pour communiquer avec le microservice `social-network`, séparées par des virgules (ex: nats://localhost:4222).
 
 - `CONTACT_US_SERVICE_PORT` : Hôte du microservice `contact-us`
 - `CONTACT_US_SERVICE_HOST` : Port du microservice `contact-us`
