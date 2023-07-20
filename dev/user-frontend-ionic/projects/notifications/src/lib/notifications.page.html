@@ -105,8 +105,9 @@
       </ion-item-sliding>
     </ion-list>
     <ion-row class="ion-padding ion-justify-content-center">
-      <ion-button *ngIf="!hasScrollbar && !this.endOfNotifications" (click)="onIonInfinite($event)">{{
-        "NOTIFICATIONS.LOAD_MORE" | translate }}</ion-button>
+      <ion-button class="app-rectangle-button-1" *ngIf="!hasScrollbar && !this.endOfNotifications" (click)="onIonInfinite($event)">
+        <ion-label>{{"NOTIFICATIONS.LOAD_MORE" | translate }}</ion-label>
+      </ion-button>
     </ion-row>
 
     <ion-modal #modal [isOpen]="isNotificationOptionsOpen" [initialBreakpoint]="0.5" [breakpoints]="[0, 0.5, 0.75, 1]"
