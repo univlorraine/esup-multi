@@ -7,10 +7,9 @@ import { catchError, filter, finalize, map, mergeMap, startWith, take } from 'rx
 import { NotificationsModuleConfig, NOTIFICATIONS_CONFIG } from './notifications.config';
 import {
   Channel,
-  Notification, NotificationsRepository, TranslatedChannel
-} from './notifications.repository';
+  Notification, NotificationsRepository, TranslatedChannel, NotificationsService
+} from '@ul/shared';
 
-import { NotificationsService } from './notifications.service';
 import { ToastService } from './toast.service';
 
 const defaultBreakpoint = 0.50;
