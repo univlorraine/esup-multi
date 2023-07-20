@@ -6,13 +6,12 @@ import { Device } from '@capacitor/device';
 import { IonicModule, Platform, ToastController } from '@ionic/angular';
 import { EffectsNgModule } from '@ngneat/effects-ng';
 import { TranslateModule } from '@ngx-translate/core';
-import { ProjectModuleService, SharedComponentsModule, SharedPipeModule } from '@ul/shared';
+import { NotificationsRepository, ProjectModuleService, SharedComponentsModule, SharedPipeModule } from '@ul/shared';
 import { NotificationOptionsComponent } from './notification-options/notification-options.component';
 import { NotificationsRoutingModule } from './notifications-routing.module';
 import { NotificationsModuleConfig, NOTIFICATIONS_CONFIG } from './notifications.config';
 import { NotificationsEffects } from './notifications.effects';
 import { NotificationsPage } from './notifications.page';
-import { NotificationsRepository } from './notifications.repository';
 import { SettingsPage } from './settings/settings.page';
 
 

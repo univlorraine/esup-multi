@@ -2,8 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { combineLatest, Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-import { Notification, NotificationsRepository, TranslatedChannel } from '../notifications.repository';
-import { NotificationsService } from '../notifications.service';
+import { Notification, NotificationsRepository, TranslatedChannel, NotificationsService } from '@ul/shared';
 import { ToastService } from '../toast.service';
 
 interface NotificationOptions {

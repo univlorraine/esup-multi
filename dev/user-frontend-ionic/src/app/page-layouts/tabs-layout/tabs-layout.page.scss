@@ -24,3 +24,12 @@ app-custom-icon {
     color: black !important;
 }
 
+.menu-icon-badge {
+  padding: calc(var(--icon-4-size) / 4);
+  border-radius: 50%;
+  background-color: var(--ion-color-danger);
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+

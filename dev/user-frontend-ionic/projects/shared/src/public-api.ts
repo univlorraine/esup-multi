@@ -42,4 +42,5 @@ export * from './lib/store/local-forage';
 export * from './lib/store/user-store-helper';
 export * from './lib/theme/theme.repository';
 export * from './lib/theme/theme.service';
-
+export * from './lib/notifications/notifications.service';
+export * from './lib/notifications/notifications.repository';
