@@ -16,7 +16,7 @@ multi-microservice-features:
         FEATURES_SERVICE_PORT: "3003"
 
 multi-microservice-auth:
-  replicaCount: 3   #Can be overloaded here
+  replicaCount: 8   #Can be overloaded here
   enableDB: true
   appService:
     name: auth
@@ -58,7 +58,7 @@ multi-microservice-cards:
         CARDS_SERVICE_PORT: "3007"
 
 multi-microservice-schedule:
-  replicaCount: 3
+  replicaCount: 8
   appService:
     name: schedule
     repositoryName: multi-schedule
@@ -110,7 +110,7 @@ multi-microservice-clocking:
         CLOCKING_SERVICE_PORT: "3012"
 
 multi-microservice-social-network:
-  replicaCount: 3   #Can be overloaded here
+  replicaCount: 8   #Can be overloaded here
   #disableLivenessProbe: true
   appService:
     name: social-network
