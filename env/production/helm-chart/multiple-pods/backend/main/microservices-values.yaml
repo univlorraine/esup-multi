@@ -4,7 +4,6 @@ common:
     DIRECTUS_API_BEARER_TOKEN: &directusApiBearerToken "changeit"
 
 multi-microservice-features:
-  replicaCount: 1   #Can be overloaded here
   image: # Can be overloaded here
     tag: "sandbox"
   appService:
@@ -17,6 +16,7 @@ multi-microservice-features:
         FEATURES_SERVICE_PORT: "3003"
 
 multi-microservice-auth:
+  replicaCount: 3   #Can be overloaded here
   enableDB: true
   appService:
     name: auth
@@ -28,7 +28,6 @@ multi-microservice-auth:
         AUTH_SERVICE_PORT: "3004"
 
 multi-microservice-map:
-  replicaCount: 1   #Can be overloaded here
   appService:
     name: map
     repositoryName: multi-map
@@ -39,7 +38,6 @@ multi-microservice-map:
         MAP_SERVICE_PORT: "3005"
 
 multi-microservice-rss:
-  replicaCount: 1   #Can be overloaded here
   appService:
     name: rss
     repositoryName: multi-rss
@@ -50,7 +48,6 @@ multi-microservice-rss:
         RSS_SERVICE_PORT: "3006"
 
 multi-microservice-cards:
-  replicaCount: 1   #Can be overloaded here
   appService:
     name: cards
     repositoryName: multi-cards
@@ -61,7 +58,7 @@ multi-microservice-cards:
         CARDS_SERVICE_PORT: "3007"
 
 multi-microservice-schedule:
-  replicaCount: 2
+  replicaCount: 3
   appService:
     name: schedule
     repositoryName: multi-schedule
@@ -72,7 +69,6 @@ multi-microservice-schedule:
         SCHEDULE_SERVICE_PORT: "3008"
 
 multi-microservice-contacts:
-  replicaCount: 1   #Can be overloaded here
   appService:
     name: contacts
     repositoryName: multi-contacts
@@ -83,7 +79,6 @@ multi-microservice-contacts:
         CONTACT_SERVICE_PORT: "3009"
 
 multi-microservice-notifications:
-  replicaCount: 1   #Can be overloaded here
   appService:
     name: notifications
     repositoryName: multi-notifications
@@ -94,8 +89,7 @@ multi-microservice-notifications:
         NOTIFICATIONS_SERVICE_PORT: "3010"
 
 multi-microservice-important-news:
-  replicaCount: 1   #Can be overloaded here
-  disableLivenessProbe: true
+  #disableLivenessProbe: true
   appService:
     name: important-news
     repositoryName: multi-important-news
@@ -106,7 +100,6 @@ multi-microservice-important-news:
         IMPORTANT_NEWS_SERVICE_PORT: "3011"
 
 multi-microservice-clocking:
-  replicaCount: 1   #Can be overloaded here
   appService:
     name: clocking
     repositoryName: multi-clocking
@@ -117,18 +110,19 @@ multi-microservice-clocking:
         CLOCKING_SERVICE_PORT: "3012"
 
 multi-microservice-social-network:
-  disableLivenessProbe: true
+  replicaCount: 3   #Can be overloaded here
+  #disableLivenessProbe: true
   appService:
     name: social-network
     repositoryName: multi-social-network
     containerPort: 3013
     env:
       normal:
-        SOCIAL_NETWORK_SERVICE_HOST: "multi-nats"
-        SOCIAL_NETWORK_SERVICE_PORT: "4222"
+        SOCIAL_NETWORK_SERVICE_NATS_SERVERS: "nats://multi-nats:4222"
+        SOCIAL_NETWORK_SERVICE_HOST: "0.0.0.0"
+        SOCIAL_NETWORK_SERVICE_PORT: "3013"
 
 multi-microservice-chatbot:
-  replicaCount: 1   #Can be overloaded here
   appService:
     name: chatbot
     repositoryName: multi-chatbot
@@ -139,8 +133,7 @@ multi-microservice-chatbot:
         CHATBOT_SERVICE_PORT: "3014"
 
 multi-microservice-static-pages:
-  replicaCount: 1   #Can be overloaded here
-  disableLivenessProbe: true
+  #disableLivenessProbe: true
   appService:
     name: static-pages
     repositoryName: multi-static-pages
@@ -151,8 +144,7 @@ multi-microservice-static-pages:
         STATIC_PAGES_SERVICE_PORT: "3015"
 
 multi-microservice-contact-us:
-  replicaCount: 1   #Can be overloaded here
-  disableLivenessProbe: true
+  #disableLivenessProbe: true
   appService:
     name: contact-us
     repositoryName: multi-contact-us
@@ -163,7 +155,6 @@ multi-microservice-contact-us:
         CONTACT_US_SERVICE_HOST: "0.0.0.0"
 
 multi-microservice-restaurants:
-  replicaCount: 1   #Can be overloaded here
   appService:
     name: restaurants
     repositoryName: multi-restaurants
@@ -174,7 +165,6 @@ multi-microservice-restaurants:
         RESTAURANTS_SERVICE_PORT: "3017"
 
 multi-microservice-statistics:
-  replicaCount: 1   #Can be overloaded here
   appService:
     name: statistics
     repositoryName: multi-statistics
@@ -185,8 +175,7 @@ multi-microservice-statistics:
         STATISTICS_SERVICE_PORT: "3018"
 
 multi-microservice-mail-calendar:
-  replicaCount: 1   #Can be overloaded here
-  disableLivenessProbe: true
+  #disableLivenessProbe: true
   appService:
     name: mail-calendar
     repositoryName: multi-mail-calendar
