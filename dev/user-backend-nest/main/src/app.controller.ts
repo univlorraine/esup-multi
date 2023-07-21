@@ -9,8 +9,10 @@ import {
   Patch,
   Post,
   Query,
-  Request, UnauthorizedException, UseGuards,
-  UseInterceptors
+  Request,
+  UnauthorizedException,
+  UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { AuthGuard } from '@nestjs/passport';
@@ -53,7 +55,6 @@ export class AppController {
       )
       .pipe(
         concatMap((user) => {
-
           if (body.authToken && user === null) {
             throw new UnauthorizedException('User not found');
           }
