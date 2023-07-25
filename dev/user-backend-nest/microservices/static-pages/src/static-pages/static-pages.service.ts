@@ -6,7 +6,7 @@ import { catchError, map, Observable } from 'rxjs';
 import { DirectusApi } from 'src/config/configuration.interface';
 import {
   DirectusResponse,
-  DirectusStaticPageResultDto,
+  DirectusStaticPageResultDto
 } from './static-pages.dto';
 
 @Injectable()
@@ -27,6 +27,7 @@ export class StaticPagesService {
     return this.httpService
       .get<DirectusResponse<DirectusStaticPageResultDto[]>>(url, {
         params: {
+          'filter[status][_eq]': 'published',
           fields: '*,translations.*',
         },
         headers: {
