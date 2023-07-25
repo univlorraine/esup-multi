@@ -5,7 +5,7 @@
 <ng-container *ngIf="isLoading === false">
   <ion-grid class="events-container">
     <ion-row *ngIf="(noNextEvents$ | async) === true" class="ion-padding-bottom">
-      <ion-note [ngClass]="fontColor()" class="app-text-5">
+      <ion-note [ngClass]="fontColor()" class="app-text-4">
         {{ "SCHEDULE.WIDGET.NEXT_EVENTS.NO_EVENTS" | translate }}
       </ion-note>
     </ion-row>
