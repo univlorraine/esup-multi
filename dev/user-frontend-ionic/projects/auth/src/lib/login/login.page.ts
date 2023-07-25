@@ -8,8 +8,8 @@ import { finalize, take, tap } from 'rxjs/operators';
 import { AuthService } from '../common/auth.service';
 import { saveCredentialsOnAuthentication$ } from '../preferences/preferences.repository';
 import { PreferencesService } from '../preferences/preferences.service';
-import { LoginRepository, TranslatedLoginPageContent } from './login.repository';
-import { LoginService } from './login.service';
+import { LoginRepository, TranslatedLoginPageContent } from '../common/login.repository';
+import { LoginService } from '../common/login.service';
 
 interface AuthenticatedUserToken extends AuthenticatedUser {
   authToken: string;

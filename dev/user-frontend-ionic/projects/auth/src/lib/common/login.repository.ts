@@ -15,14 +15,17 @@ export interface LoginPageContent {
 }
 
 export interface TranslatedLoginPageContent {
-  // eslint-disable-next-line @typescript-eslint/naming-convention
+  /* eslint-disable @typescript-eslint/naming-convention */
   connexion_text: string;
+  not_authentified_text: string;
+  /* eslint-enable @typescript-eslint/naming-convention */
 }
 
 interface Translation {
   /* eslint-disable @typescript-eslint/naming-convention */
   languages_code: string;
   connexion_text: string;
+  not_authentified_text: string;
   /* eslint-enable @typescript-eslint/naming-convention */
 }
 
@@ -55,8 +58,10 @@ export class LoginRepository {
           pageContent.translations[0];
 
         return {
-          // eslint-disable-next-line @typescript-eslint/naming-convention
+          /* eslint-disable @typescript-eslint/naming-convention */
           connexion_text: translation.connexion_text,
+          not_authentified_text: translation.not_authentified_text,
+          /* eslint-enable @typescript-eslint/naming-convention */
         };
       } else {
         return null;

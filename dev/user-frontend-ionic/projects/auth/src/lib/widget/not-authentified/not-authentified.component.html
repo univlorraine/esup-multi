@@ -1,10 +1,10 @@
 <ion-col data-widget-id="auth-button">
-  <ion-row class="ion-justify-content-center">
-    <ion-label class="app-text-3 ion-margin-bottom">{{ 'AUTH.WIDGET.NOT_AUTHENTIFIED.MESSAGE' | translate }}</ion-label>
+  <ion-row *ngIf='translatedPageContent$ | async as page' class="ion-justify-content-center ion-text-center">
+    <ion-label [innerText]="page.not_authentified_text" class="app-text-3 ion-margin-bottom ion-margin-horizontal"></ion-label>
   </ion-row>
-    <ion-row class="ion-padding-horizontal ion-justify-content-center">
-      <ion-button class="app-rectangle-button-1" routerLink="/auth" lines="none">
-        <ion-label>{{'AUTH.MENU' | translate}}</ion-label>
-      </ion-button>
-    </ion-row>
+  <ion-row class="ion-padding-horizontal ion-justify-content-center">
+    <ion-button class="app-rectangle-button-1" routerLink="/auth" lines="none">
+      <ion-label>{{'AUTH.MENU' | translate}}</ion-label>
+    </ion-button>
+  </ion-row>
 </ion-col>
