@@ -1,6 +1,7 @@
 interface LoginPageContentTranslation {
   languages_code: string;
   connexion_text: string;
+  not_authentified_text: string;
 }
 
 export interface LoginPageContentResultDto {
