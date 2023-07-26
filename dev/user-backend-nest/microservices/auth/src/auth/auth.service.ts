@@ -16,7 +16,7 @@ import {
   IsAuthenticationValidQueryDto,
   LogoutQueryDto,
   SsoServiceTokenQueryDto,
-  UserProfileDto
+  UserProfileDto,
 } from './auth.dto';
 import { AuthenticatedUserRepository } from './authenticated-user/authenticated-user.repository';
 import { CasService } from './cas.service';

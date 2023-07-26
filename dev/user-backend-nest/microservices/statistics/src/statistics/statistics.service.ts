@@ -1,10 +1,13 @@
-import { Injectable, Logger } from '@nestjs/common';
-import { StatisticsUserActionDto, StatisticsExternalApiUserActionDto } from './statistics.dto';
-import { UlApi } from './config/configuration.interfaces';
-import { ConfigService } from '@nestjs/config';
 import { HttpService } from '@nestjs/axios';
+import { Injectable, Logger } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { RpcException } from '@nestjs/microservices';
 import { catchError, map } from 'rxjs';
-import { RpcException } from "@nestjs/microservices";
+import { UlApi } from '../config/configuration.interfaces';
+import {
+  StatisticsExternalApiUserActionDto,
+  StatisticsUserActionDto,
+} from './statistics.dto';
 
 @Injectable()
 export class StatisticsService {
@@ -20,7 +23,7 @@ export class StatisticsService {
 
   postUserActionStatistic(statData: StatisticsUserActionDto) {
     let mappedAction: string;
-    switch(statData.action) {
+    switch (statData.action) {
       case 'OPEN':
         mappedAction = 'service_access';
         break;
@@ -44,12 +47,16 @@ export class StatisticsService {
       action: mappedAction,
       service: statData.functionality,
       platform: statData.platform,
-      connection: statData.connectionType
-    }
+      connection: statData.connectionType,
+    };
 
     return this.httpService.post<any>(url, requestData, options).pipe(
       catchError((err) => {
-        const errorMessage = `Unable to send statistics for user '${requestData.uid ? requestData.uid : 'anonymous'}', action: ${statData.action}, functionality: ${statData.functionality}`;
+        const errorMessage = `Unable to send statistics for user '${
+          requestData.uid ? requestData.uid : 'anonymous'
+        }', action: ${statData.action}, functionality: ${
+          statData.functionality
+        }`;
         this.logger.error(errorMessage, err);
         throw new RpcException(errorMessage);
       }),

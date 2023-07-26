@@ -13,7 +13,6 @@ import {
   UnsubscribedChannelsQueryDto,
 } from './notifications.dto';
 import { NotificationsService } from './notifications.service';
-import * as infosJsonData from '../infos.json';
 
 @Controller()
 export class NotificationsController {
@@ -65,21 +64,5 @@ export class NotificationsController {
   @MessagePattern({ cmd: 'unregisterFCMToken' })
   unregisterFCMToken(data: UnregisterFCMTokenQueryDto) {
     return this.notificationsService.unregisterFCMToken(data);
-  }
-
-  @MessagePattern({ cmd: 'health' })
-  getHealthStatus() {
-    return {
-      message: 'up',
-      name: infosJsonData.name,
-      version: infosJsonData.version,
-    };
-  }
-
-  @MessagePattern({ cmd: 'version' })
-  getVersion() {
-    return {
-      version: infosJsonData.version,
-    };
   }
 }

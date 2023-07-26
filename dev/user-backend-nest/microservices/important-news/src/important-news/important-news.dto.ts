@@ -21,5 +21,5 @@ export interface DirectusImportantNewsTranslation {
   language_code: string;
   title: string;
   content: string;
-  buttonLabel?:string;
+  buttonLabel?: string;
 }

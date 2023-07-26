@@ -2,11 +2,15 @@ import { registerAs } from '@nestjs/config';
 import { Transport } from '@nestjs/microservices';
 
 export default registerAs('microservice-static-pages', () => {
+  const natsServers = (
+    process.env.STATIC_PAGES_SERVICE_NATS_SERVERS || 'nats://localhost:4222'
+  )
+    .split(',')
+    .map((server) => server.trim());
   return {
-    transport: Transport.TCP,
+    transport: Transport.NATS,
     options: {
-      port: process.env.STATIC_PAGES_SERVICE_PORT,
-      host: process.env.STATIC_PAGES_SERVICE_HOST,
+      servers: natsServers,
     },
   };
 });

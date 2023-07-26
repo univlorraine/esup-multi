@@ -27,6 +27,7 @@
     "@nestjs/core": "^9.0.0",
     "@nestjs/microservices": "^9.3.11",
     "@nestjs/platform-express": "^9.0.0",
+    "nats": "^2.15.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.2.0"
   },

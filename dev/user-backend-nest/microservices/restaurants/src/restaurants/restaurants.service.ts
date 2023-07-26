@@ -3,7 +3,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { RpcException } from '@nestjs/microservices';
 import { catchError, map, Observable } from 'rxjs';
-import { UlApi } from './config/configuration.interfaces';
+import { UlApi } from '../config/configuration.interfaces';
 import {
   RestaurantDTO,
   RestaurantExternalApiDTO,

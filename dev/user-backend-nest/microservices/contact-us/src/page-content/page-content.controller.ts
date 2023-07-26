@@ -1,9 +1,8 @@
 import { Controller } from '@nestjs/common';
-import { PageContentService } from './page-content.service';
 import { MessagePattern } from '@nestjs/microservices';
-import { Observable, from } from 'rxjs';
+import { from, Observable } from 'rxjs';
 import { PageContentResultDto } from './page-content.dto';
-import * as infosJsonData from '../infos.json';
+import { PageContentService } from './page-content.service';
 
 @Controller()
 export class PageContentController {
@@ -12,21 +11,5 @@ export class PageContentController {
   @MessagePattern({ cmd: 'contactUsPageContent' })
   getContactUsPageContent(): Observable<PageContentResultDto> {
     return from(this.pageContentService.getPageContent());
-  }
-
-  @MessagePattern({ cmd: 'health' })
-  getHealthStatus() {
-    return {
-      message: 'up',
-      name: infosJsonData.name,
-      version: infosJsonData.version,
-    };
-  }
-
-  @MessagePattern({ cmd: 'version' })
-  getVersion() {
-    return {
-      version: infosJsonData.version,
-    };
   }
 }

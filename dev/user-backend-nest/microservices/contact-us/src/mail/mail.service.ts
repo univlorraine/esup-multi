@@ -23,7 +23,10 @@ export class MailService {
 
   public async sendMail(query: SendMailQueryDto) {
     const userDataString = Object.entries(query.userData)
-      .map(([key, value]) => `${key.charAt(0).toUpperCase() + key.slice(1)}: ${value}`)
+      .map(
+        ([key, value]) =>
+          `${key.charAt(0).toUpperCase() + key.slice(1)}: ${value}`,
+      )
       .join('\n');
     query.text += `\n\n[User information]\n${userDataString}`;
 

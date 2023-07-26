@@ -4,23 +4,32 @@ import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
+  const natsServers = (
+    process.env.MAP_SERVICE_NATS_SERVERS || 'nats://localhost:4222'
+  )
+    .split(',')
+    .map((server) => server.trim());
+  Logger.log(`Using nats servers: ${natsServers}`);
+
+  const app = await NestFactory.create(AppModule, {
+    logger:
+      process.env.EXTENDED_LOGS === 'true'
+        ? ['error', 'warn', 'log', 'debug', 'verbose']
+        : ['error', 'warn', 'log'],
+  });
+
+  app.connectMicroservice<MicroserviceOptions>({
+    transport: Transport.NATS,
+    options: {
+      servers: natsServers,
+      queue: 'map',
+    },
+  });
+  await app.startAllMicroservices();
+
   const host = process.env.MAP_SERVICE_HOST || '127.0.0.1';
   const port = parseInt(process.env.MAP_SERVICE_PORT) || 3005;
-  const app = await NestFactory.createMicroservice<MicroserviceOptions>(
-    AppModule,
-    {
-      transport: Transport.TCP,
-      options: {
-        host,
-        port,
-      },
-      logger:
-        process.env.EXTENDED_LOGS === 'true'
-          ? ['error', 'warn', 'log', 'debug', 'verbose']
-          : ['error', 'warn', 'log'],
-    },
-  );
   Logger.log(`Listening on host ${host}, port ${port}`);
-  await app.listen();
+  await app.listen(port, host);
 }
 bootstrap();
