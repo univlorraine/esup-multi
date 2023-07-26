@@ -5,14 +5,13 @@ import {
   Get,
   Inject,
   NotFoundException,
-  Param,
   Patch,
   Post,
   Query,
   Request,
   UnauthorizedException,
   UseGuards,
-  UseInterceptors,
+  UseInterceptors
 } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { AuthGuard } from '@nestjs/passport';
@@ -676,18 +675,6 @@ export class AppController {
           ),
         ),
       );
-  }
-
-  @Get('/:service/version')
-  serviceVersion(@Param('service') serviceName: string) {
-    const clientProxy = this.getClientProxy(serviceName);
-    return clientProxy.send({ cmd: 'version' }, {});
-  }
-
-  @Get('/:service/health')
-  serviceCheckHealth(@Param('service') serviceName: string) {
-    const clientProxy = this.getClientProxy(serviceName);
-    return clientProxy.send({ cmd: 'health' }, {});
   }
 
   @Get('/version')

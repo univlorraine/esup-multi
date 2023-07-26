@@ -22,7 +22,6 @@ import microserviceRestaurantsConfig from './config/microservice-restaurants.con
 import microserviceStatisticsConfig from './config/microservice-statistics.config';
 import microserviceMailCalendarConfig from './config/microservice-mail-calendar.config';
 import { AuthJwtStrategy } from './security/auth-jwt.strategy';
-import { GlobalHealthController } from './global-health.controller';
 import { TerminusModule } from '@nestjs/terminus';
 import { LoggerModule } from 'nestjs-pino';
 import * as process from 'process';
@@ -169,7 +168,7 @@ import { LogsMiddleware } from './logs.middleware';
         ]
       : []),
   ],
-  controllers: [AppController, GlobalHealthController],
+  controllers: [AppController],
   providers: [AuthJwtStrategy],
 })
 export class AppModule {

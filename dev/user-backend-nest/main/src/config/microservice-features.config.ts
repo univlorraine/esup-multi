@@ -2,11 +2,15 @@ import { registerAs } from '@nestjs/config';
 import { Transport } from '@nestjs/microservices';
 
 export default registerAs('microservice-features', () => {
+  const natsServers = (
+    process.env.FEATURES_SERVICE_NATS_SERVERS || 'nats://localhost:4222'
+  )
+    .split(',')
+    .map((server) => server.trim());
   return {
-    transport: Transport.TCP,
+    transport: Transport.NATS,
     options: {
-      port: process.env.FEATURES_SERVICE_PORT,
-      host: process.env.FEATURES_SERVICE_HOST,
+      servers: natsServers,
     },
   };
 });

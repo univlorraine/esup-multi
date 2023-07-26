@@ -29,6 +29,7 @@
     "@nestjs/platform-express": "^9.0.0",
     "feed-reader": "^6.1.2",
     "html-entities": "^2.3.3",
+    "nats": "^2.15.1",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rss-parser": "^3.12.0",

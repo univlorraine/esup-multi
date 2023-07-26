@@ -50,18 +50,19 @@ export class CasService {
       })
       .pipe(
         catchError((err) => {
-          if(err.response){
-          switch (err.response.status) {
-            case 401:
-              throw new RpcException(
-                new UnauthorizedException(
-                  `Invalid authentication for '${query.username}'`,
-                ),
-              );
+          if (err.response) {
+            switch (err.response.status) {
+              case 401:
+                throw new RpcException(
+                  new UnauthorizedException(
+                    `Invalid authentication for '${query.username}'`,
+                  ),
+                );
 
-            default:
-              throw new RpcException(err);
-          }}else {
+              default:
+                throw new RpcException(err);
+            }
+          } else {
             throw new RpcException(err);
           }
         }),

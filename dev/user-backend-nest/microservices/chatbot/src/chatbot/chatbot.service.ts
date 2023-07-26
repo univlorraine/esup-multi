@@ -5,8 +5,10 @@ import { RpcException } from '@nestjs/microservices';
 import { catchError, map, Observable } from 'rxjs';
 import { UlApi } from '../config/configuration.interface';
 import {
-    ChatbotApiResponse, ChatbotButtonPayloadRequestDto,
-    ChatbotResponseDto, ChatbotTextRequestDto
+  ChatbotApiResponse,
+  ChatbotButtonPayloadRequestDto,
+  ChatbotResponseDto,
+  ChatbotTextRequestDto,
 } from './chatbot.dto';
 
 @Injectable()
