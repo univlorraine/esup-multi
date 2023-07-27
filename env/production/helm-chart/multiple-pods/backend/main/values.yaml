@@ -132,7 +132,7 @@ global:
   #   memory: 128Mi
 
   nodeSelector: {
-    node-name: "agentpoold2s"
+    agentpool: "agentpoold2s"
   }
 
   tolerations: []
