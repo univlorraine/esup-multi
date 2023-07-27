@@ -132,7 +132,7 @@ global:
   #   memory: 128Mi
 
   nodeSelector: {
-    agentpool: "agentpoold2s"
+    kubernetes.azure.com/agentpool: "agentpoold2s"
   }
 
   tolerations: []
