@@ -131,7 +131,9 @@ global:
   #   cpu: 100m
   #   memory: 128Mi
 
-  nodeSelector: {}
+  nodeSelector: {
+    node-name: "agentpoold2s"
+  }
 
   tolerations: []
 
