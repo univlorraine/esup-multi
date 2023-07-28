@@ -4,12 +4,13 @@
     <ion-toolbar color="primary">
       <img src="assets/logo/white-university-logo.svg" class="logo ion-padding-start app-logo-3" />
       <ion-buttons slot="end">
-        <ion-button *ngFor="let menu of (topMenuItems$ | async)"
+        <ion-button *ngFor="let menu of (topMenuItems$ | async) ; let i = index"
         (click)="menuOpenerService.open(menu)"
         [attr.data-menu-id]="getMenuId(menu)">
           <app-custom-icon [icon]="menu.icon"
           [iconSourceSvgLightTheme]="menu.iconSourceSvgLightTheme"
           [iconSourceSvgDarkTheme]="menu.iconSourceSvgDarkTheme"></app-custom-icon>
+          <span class="menu-icon-badge" *ngIf="hasBadge(i)"></span>
         </ion-button>
       </ion-buttons>
     </ion-toolbar>

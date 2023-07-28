@@ -6,7 +6,6 @@ import {
   MailCalendarReplyDto,
 } from './mail-calendar.dto';
 import { MailCalendarService } from './mail-calendar.service';
-import * as infosJsonData from '../infos.json';
 
 @Controller()
 export class MailCalendarController {
@@ -17,21 +16,5 @@ export class MailCalendarController {
     query: MailCalendarQueryDto,
   ): Observable<MailCalendarReplyDto> {
     return this.mailCalendarService.getMailCalendar(query);
-  }
-
-  @MessagePattern({ cmd: 'health' })
-  getHealthStatus() {
-    return {
-      message: 'up',
-      name: infosJsonData.name,
-      version: infosJsonData.version,
-    };
-  }
-
-  @MessagePattern({ cmd: 'version' })
-  getVersion() {
-    return {
-      version: infosJsonData.version,
-    };
   }
 }

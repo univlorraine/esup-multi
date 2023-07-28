@@ -1,12 +1,11 @@
+import { HttpModule } from '@nestjs/axios';
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { RestaurantsController } from './restaurants.controller';
 import { RestaurantsService } from './restaurants.service';
-import { ConfigModule } from '@nestjs/config';
-import configuration from './config/configuration';
-import { HttpModule } from '@nestjs/axios';
 
 @Module({
-  imports: [ConfigModule.forRoot({ load: [configuration] }), HttpModule],
+  imports: [ConfigModule, HttpModule],
   controllers: [RestaurantsController],
   providers: [RestaurantsService],
 })

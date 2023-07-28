@@ -3,10 +3,9 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { ContactsController } from './contacts.controller';
 import { ContactsService } from './contacts.service';
-import configuration from './config/configuration';
 
 @Module({
-  imports: [ConfigModule.forRoot({ load: [configuration] }), HttpModule],
+  imports: [ConfigModule, HttpModule],
   controllers: [ContactsController],
   providers: [ContactsService],
 })

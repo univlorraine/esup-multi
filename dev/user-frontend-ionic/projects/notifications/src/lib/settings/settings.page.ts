@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { combineLatest, Observable } from 'rxjs';
-import { catchError, filter, finalize, map, take } from 'rxjs/operators';
-import { NotificationsRepository, TranslatedChannel } from '../notifications.repository';
-import { NotificationsService } from '../notifications.service';
+import { catchError, filter, finalize, take, map, tap } from 'rxjs/operators';
+import { NotificationsRepository, NotificationsService, TranslatedChannel } from '@ul/shared';
 import { ToastService } from '../toast.service';
 
 interface ChannelSubscription extends TranslatedChannel {

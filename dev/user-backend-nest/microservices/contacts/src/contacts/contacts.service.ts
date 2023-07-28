@@ -4,7 +4,7 @@ import { ConfigService } from '@nestjs/config';
 import { RpcException } from '@nestjs/microservices';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { UlApi } from './config/configuration.interfaces';
+import { UlApi } from '../config/configuration.interfaces';
 import { Contact, ContactQueryDto } from './contacts.dto';
 
 @Injectable()

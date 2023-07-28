@@ -5,6 +5,7 @@ import { ScheduleModule } from '@nestjs/schedule';
 import { AuthModule } from './auth/auth.module';
 import configuration from './config/configuration';
 import { KeepAuthModule } from './keep-auth/keep-auth.module';
+import { MonitoringModule } from './monitoring/monitoring.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { KeepAuthModule } from './keep-auth/keep-auth.module';
     ScheduleModule.forRoot(),
     AuthModule,
     KeepAuthModule,
+    MonitoringModule,
   ],
   controllers: [],
   providers: [],

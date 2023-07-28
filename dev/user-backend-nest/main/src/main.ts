@@ -2,15 +2,17 @@ import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { EmptyResponseInterceptor } from './interceptors/empty-response.interceptor';
+import { NestExpressApplication } from '@nestjs/platform-express';
 
 async function bootstrap() {
   const logger = new Logger('Bootstrap');
-  const app = await NestFactory.create(AppModule, {
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     logger:
       process.env.EXTENDED_LOGS === 'true'
         ? ['error', 'warn', 'log', 'debug', 'verbose']
         : ['error', 'warn', 'log'],
   });
+  app.enable('trust proxy');
   app.useGlobalInterceptors(new EmptyResponseInterceptor());
   const origin = (process.env.API_GATEWAY_CORS_ORIGIN || '')
     .split(',')

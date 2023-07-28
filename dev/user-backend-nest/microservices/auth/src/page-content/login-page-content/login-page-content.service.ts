@@ -6,7 +6,7 @@ import { catchError, map, Observable } from 'rxjs';
 import { DirectusApi } from '../../config/configuration.interface';
 import {
   DirectusResponse,
-  LoginPageContentResultDto
+  LoginPageContentResultDto,
 } from './login-page-content.dto';
 
 @Injectable()

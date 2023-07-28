@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { createEffect, ofType} from '@ngneat/effects';
-import { authenticate, cleanupPrivateData } from '@ul/shared';
+import { authenticate, cleanupPrivateData, NotificationsService } from '@ul/shared';
 import { concatMap, filter, tap } from 'rxjs/operators';
-import { NotificationsService } from './notifications.service';
 
 @Injectable({ providedIn: 'root' })
 export class NotificationsEffects {

@@ -1,7 +1,9 @@
 # Backend utilisateur - Module auth
 Ce module est en charge d'interagir avec le CAS serveur et autres services tiers qui fournissent authentification et autorisations.
 ## Configuration
-- `AUTH_SERVICE_PORT`: Port d'écoute du service
+- `AUTH_SERVICE_HOST`: L'hôte d'écoute pour le monitoring du service
+- `AUTH_SERVICE_PORT`: Port d'écoute pour le monitoring du service
+- `AUTH_SERVICE_NATS_SERVERS` : Addresses complètes des serveurs NATS séparées par des virgules (ex: nats://localhost:4222)
 - `AUTH_SERVICE_CAS_URL_REQUEST_TGT`: L'URL d'obtention d'un ticket CAS TGT.
 - `AUTH_SERVICE_CAS_URL_REQUEST_ST`: L'URL d'obtention d'un ticket CAS ST (ticket de service) contenant `{tgt}` qui sera remplacé par la valeur du ticket CAS TGT.
 - `AUTH_SERVICE_CAS_URL_LOGOUT`: L'URL de logout du CAS contenant `{tgt}` qui sera remplacé par la valeur du ticket CAS TGT.

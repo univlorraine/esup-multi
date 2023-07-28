@@ -8,7 +8,7 @@ import { AuthService } from './auth.service';
 import { AuthenticatedUserRepository } from './authenticated-user/authenticated-user.repository';
 import {
   AuthenticatedUser,
-  AuthenticatedUserSchema
+  AuthenticatedUserSchema,
 } from './authenticated-user/authenticated-user.schema';
 import { CasService } from './cas.service';
 import { UserService } from './user.service';

@@ -1,10 +1,9 @@
 import { Inject, Injectable } from '@angular/core';
 import { createStore, select, withProps } from '@ngneat/elf';
 import { addEntities, deleteEntities, selectAllEntities, setEntities, withEntities } from '@ngneat/elf-entities';
-import {
-  persistState
-} from '@ngneat/elf-persist-state';
-import { currentLanguage$, localForageStore } from '@ul/shared';
+import { persistState } from '@ngneat/elf-persist-state';
+import { currentLanguage$ } from '../i18n/i18n.repository';
+import { localForageStore } from '../store/local-forage';
 import { combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
