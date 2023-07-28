@@ -15,7 +15,6 @@ async function bootstrap() {
   });
   app.enable('trust proxy');
   app.useGlobalInterceptors(new EmptyResponseInterceptor());
-  logger.log(`UV_THREADPOOL_SIZE before auto-tuning: ${process.env.UV_THREADPOOL_SIZE}`);
   process.env.UV_THREADPOOL_SIZE = os.cpus().length
   logger.log(`UV_THREADPOOL_SIZE after auto-tuning: ${os.cpus().length}`);
   const origin = (process.env.API_GATEWAY_CORS_ORIGIN || '')
