@@ -12,6 +12,14 @@ mongodb:
   auth:
     existingSecret: "mongodb-secrets"
 
+directus:
+  admin:
+    email: test@jnesis.com
+    password: test
+  mariadb:
+    auth:
+      rootPassword: secret
+
 appService:
   name: main
   repositoryName: multi-main
