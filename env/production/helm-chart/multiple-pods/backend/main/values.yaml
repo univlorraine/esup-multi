@@ -19,6 +19,9 @@ directus:
   mariadb:
     auth:
       rootPassword: secret
+  extraEnvVars:
+    - name: CACHE_ENABLED
+      value: "true"
 
 appService:
   name: main
