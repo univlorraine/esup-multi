@@ -4,7 +4,8 @@ import { Transport, MicroserviceOptions } from '@nestjs/microservices';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
-
+  
+  const os = require('os');
   process.env.UV_THREADPOOL_SIZE = os.cpus().length
   logger.log(`UV_THREADPOOL_SIZE after auto-tuning: ${os.cpus().length}`);
 
