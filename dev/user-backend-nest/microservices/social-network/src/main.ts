@@ -4,6 +4,10 @@ import { Transport, MicroserviceOptions } from '@nestjs/microservices';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
+
+  process.env.UV_THREADPOOL_SIZE = os.cpus().length
+  logger.log(`UV_THREADPOOL_SIZE after auto-tuning: ${os.cpus().length}`);
+
   const natsServers = (
     process.env.SOCIAL_NETWORK_SERVICE_NATS_SERVERS || 'nats://localhost:4222'
   )
