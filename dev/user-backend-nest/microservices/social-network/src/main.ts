@@ -7,7 +7,7 @@ async function bootstrap() {
   
   const os = require('os');
   process.env.UV_THREADPOOL_SIZE = os.cpus().length
-  logger.log(`UV_THREADPOOL_SIZE after auto-tuning: ${os.cpus().length}`);
+  Logger.log(`UV_THREADPOOL_SIZE after auto-tuning: ${os.cpus().length}`);
 
   const natsServers = (
     process.env.SOCIAL_NETWORK_SERVICE_NATS_SERVERS || 'nats://localhost:4222'
