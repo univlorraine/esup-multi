@@ -134,7 +134,7 @@ multi-microservice-social-network:
         SOCIAL_NETWORK_SERVICE_PORT: "3013"
         SOCIAL_NETWORK_SERVICE_DIRECTUS_API_URL: "http://multi-directus"
         SOCIAL_NETWORK_SERVICE_DIRECTUS_API_BEARER_TOKEN: "rPrBvaY6W2XGR3z8Tv6WB01pVyohdIlU"
-        #EXTENDED_LOGS: true
+        EXTENDED_LOGS: true
 
 multi-microservice-chatbot:
   appService:
