@@ -82,9 +82,9 @@ multi-microservice-contacts:
     containerPort: 3009
     env:
       normal:
-        CONTACT_SERVICE_NATS_SERVERS: "nats://multi-nats:4222"
-        CONTACT_SERVICE_HOST: "0.0.0.0"
-        CONTACT_SERVICE_PORT: "3009"
+        CONTACTS_SERVICE_NATS_SERVERS: "nats://multi-nats:4222"
+        CONTACTS_SERVICE_HOST: "0.0.0.0"
+        CONTACTS_SERVICE_PORT: "3009"
 
 multi-microservice-notifications:
   appService:
