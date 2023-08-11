@@ -13,6 +13,7 @@ mongodb:
     existingSecret: "mongodb-secrets"
 
 directus:
+  replicaCount: 8
   admin:
     email: test@jnesis.com
     password: test
