@@ -11,6 +11,10 @@ mongodb:
     mountPath: /bitnami/mongodb
   auth:
     existingSecret: "mongodb-secrets"
+  nodeSelector: {
+    kubernetes.azure.com/agentpool: "agentpoold2s"
+  }
+
 
 directus:
   replicaCount: 8
@@ -20,6 +24,9 @@ directus:
   mariadb:
     auth:
       rootPassword: secret
+  nodeSelector: {
+    kubernetes.azure.com/agentpool: "agentpoold2s"
+  }
   extraEnvVars:
     - name: CACHE_ENABLED
       value: "true"
