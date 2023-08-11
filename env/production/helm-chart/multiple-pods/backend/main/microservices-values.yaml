@@ -64,7 +64,7 @@ multi-microservice-cards:
         CARDS_SERVICE_PORT: "3007"
 
 multi-microservice-schedule:
-  replicaCount: 8
+  replicaCount: 1
   appService:
     name: schedule
     repositoryName: multi-schedule
