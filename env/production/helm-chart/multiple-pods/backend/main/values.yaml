@@ -34,6 +34,8 @@ directus:
       value: "0"
     - name: SERVER_HEADERS_TIMEOUT
       value: "0"
+    - name: PRESSURE_LIMITER_ENABLED
+      value: "false"
 
 appService:
   name: main
