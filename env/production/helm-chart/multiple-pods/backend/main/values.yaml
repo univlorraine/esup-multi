@@ -35,7 +35,7 @@ appService:
   env:
     normal:
       API_GATEWAY_SERVER_HOST: "0.0.0.0"
-      API_GATEWAY_SERVER_PORT: "3001"
+      API_GATEWAY_SERVER_PORT: "3000"
       API_GATEWAY_CORS_ORIGIN: "http://localhost:8100,http://127.0.0.1:8100,http://localhost,capacitor://localhost"
       FEATURES_SERVICE_NATS_SERVERS: "nats://multi-nats:4222"
       AUTH_SERVICE_NATS_SERVERS: "nats://multi-nats:4222"
