@@ -17,7 +17,7 @@ mongodb:
 
 
 directus:
-  replicaCount: 8
+  replicaCount: 10
   admin:
     email: test@jnesis.com
     password: test
