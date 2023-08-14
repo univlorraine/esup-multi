@@ -100,7 +100,9 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
-nodeSelector: {}
+nodeSelector: {
+  kubernetes.azure.com/agentpool: "userpool1"
+}
 
 tolerations: []
 
