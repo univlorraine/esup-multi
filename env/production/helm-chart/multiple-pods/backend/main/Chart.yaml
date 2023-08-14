@@ -10,7 +10,7 @@ dependencies:
     repository: https://charts.bitnami.com/bitnami
     condition: mongodb.enabled
   - name: directus
-    version: "0.7.18"
+    version: "0.7.22"
     repository: "https://digitalist-se.github.io/directus-helm-chart"
   - name: multi-pwa
     version: "0.1.0"
