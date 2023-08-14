@@ -62,7 +62,7 @@ appService:
       CONTACT_US_SERVICE_NATS_SERVERS: "nats://multi-nats:4222"
       RESTAURANTS_SERVICE_NATS_SERVERS: "nats://multi-nats:4222"
       STATISTICS_SERVICE_NATS_SERVERS: "nats://multi-nats:4222"
-      MAIL_CALENDAR_SERVICE_NATS_SERVERS: "nats://multi-nats:4222"
+      MAIL_CALENDAR_SERVICE_NATS_SERVERS: "nats://multi-nats:4223"
     secret:
       AUTH_SERVICE_JWT_SECRET: "changeit"
 
