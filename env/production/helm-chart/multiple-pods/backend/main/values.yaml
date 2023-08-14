@@ -20,7 +20,7 @@ directus:
   replicaCount: 10
   admin:
     email: test@jnesis.com
-    password: test
+    password: test2
   mariadb:
     auth:
       rootPassword: secret
