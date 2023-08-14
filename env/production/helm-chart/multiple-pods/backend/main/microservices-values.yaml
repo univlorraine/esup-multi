@@ -133,7 +133,7 @@ multi-microservice-social-network:
         SOCIAL_NETWORK_SERVICE_HOST: "0.0.0.0"
         SOCIAL_NETWORK_SERVICE_PORT: "3013"
         SOCIAL_NETWORK_SERVICE_DIRECTUS_API_URL: "http://multi-directus"
-        SOCIAL_NETWORK_SERVICE_DIRECTUS_API_BEARER_TOKEN: "rPrBvaY6W2XGR3z8Tv6WB01pVyohdIlU"
+        SOCIAL_NETWORK_SERVICE_DIRECTUS_API_BEARER_TOKEN: "n9HZ-FP0NIUlsAAREjx9fQyHjuMVpeGt"
         EXTENDED_LOGS: true
 
 multi-microservice-chatbot:
