@@ -25,7 +25,7 @@ directus:
     auth:
       rootPassword: secret
   nodeSelector: {
-    kubernetes.azure.com/agentpool: "agentpoold2s"
+    kubernetes.azure.com/agentpool: "userpool1"
   }
   extraEnvVars:
     - name: CACHE_ENABLED
@@ -62,7 +62,7 @@ appService:
       CONTACT_US_SERVICE_NATS_SERVERS: "nats://multi-nats:4222"
       RESTAURANTS_SERVICE_NATS_SERVERS: "nats://multi-nats:4222"
       STATISTICS_SERVICE_NATS_SERVERS: "nats://multi-nats:4222"
-      MAIL_CALENDAR_SERVICE_NATS_SERVERS: "nats://multi-nats:4223"
+      MAIL_CALENDAR_SERVICE_NATS_SERVERS: "nats://multi-nats:4222"
     secret:
       AUTH_SERVICE_JWT_SECRET: "changeit"
 
@@ -141,7 +141,7 @@ global:
   #   memory: 128Mi
 
   nodeSelector: {
-    kubernetes.azure.com/agentpool: "agentpoold2s"
+    kubernetes.azure.com/agentpool: "userpool1"
   }
 
   tolerations: []
