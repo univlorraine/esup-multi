@@ -12,7 +12,7 @@ mongodb:
   auth:
     existingSecret: "mongodb-secrets"
   nodeSelector: {
-    kubernetes.azure.com/agentpool: "agentpoold2s"
+    kubernetes.azure.com/agentpool: "userpool1"
   }
 
 
