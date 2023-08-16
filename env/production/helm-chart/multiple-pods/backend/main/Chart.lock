@@ -4,7 +4,7 @@ dependencies:
   version: 13.9.4
 - name: directus
   repository: https://digitalist-se.github.io/directus-helm-chart
-  version: 0.7.18
+  version: 0.7.22
 - name: multi-pwa
   repository: file://../../pwa
   version: 0.1.0
