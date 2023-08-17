@@ -2,13 +2,13 @@ import { Module } from '@nestjs/common';
 import { MailService } from './mail.service';
 import { MailController } from './mail.controller';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { HttpModule } from '@nestjs/axios';
 import { MailerModule } from '@nestjs-modules/mailer';
+import { KeepaliveHttpModule } from '../keepalive-http.module';
 
 @Module({
   imports: [
     ConfigModule,
-    HttpModule,
+    KeepaliveHttpModule,
     MailerModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
