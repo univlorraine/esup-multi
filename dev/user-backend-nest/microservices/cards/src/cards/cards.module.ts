@@ -1,11 +1,11 @@
-import { HttpModule } from '@nestjs/axios';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { CardsController } from './cards.controller';
 import { CardsService } from './cards.service';
+import { KeepaliveHttpModule } from '../keepalive-http.module';
 
 @Module({
-  imports: [ConfigModule, HttpModule],
+  imports: [ConfigModule, KeepaliveHttpModule],
   providers: [CardsService],
   controllers: [CardsController],
 })
