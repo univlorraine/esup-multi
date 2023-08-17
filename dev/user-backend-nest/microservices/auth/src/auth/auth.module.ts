@@ -1,4 +1,3 @@
-import { HttpModule } from '@nestjs/axios';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
@@ -12,11 +11,12 @@ import {
 } from './authenticated-user/authenticated-user.schema';
 import { CasService } from './cas.service';
 import { UserService } from './user.service';
+import { KeepaliveHttpModule } from '../keepalive-http.module';
 
 @Module({
   imports: [
     ConfigModule,
-    HttpModule,
+    KeepaliveHttpModule,
     MongooseModule.forFeature([
       { name: AuthenticatedUser.name, schema: AuthenticatedUserSchema },
     ]),

@@ -17,3 +17,13 @@ Ce module est en charge d'interagir avec le CAS serveur et autres services tiers
 - `AUTH_SERVICE_CREDENTIALS_CLEANUP_NOT_USED_SINCE_IN_DAYS`: Le nombre de jours d'inactivité après lesquels une authentification sauvegardée est considérée comme étant obsolète.
 - `AUTH_SERVICE_DIRECTUS_API_BEARER_TOKEN`: Bearer token permettant l'accès à l'API du CMS Directus
 - `AUTH_SERVICE_DIRECTUS_API_URL`: L'URL d'accès à l'API Directus
+
+### Agentkeepalive configuration
+Look at [official documentation](https://github.com/node-modules/agentkeepalive#new-agentoptions) for each of the following options :
+- `AUTH_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVE`: Option `keepAlive`
+- `AUTH_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVEMSECS`: Option `keepAliveMsecs`
+- `AUTH_SERVICE_AGENTKEEPALIVE_OPTION_FREESOCKETTIMEOUT`: Option `freeSocketTimeout`
+- `AUTH_SERVICE_AGENTKEEPALIVE_OPTION_TIMEOUT`: Option `timeout`
+- `AUTH_SERVICE_AGENTKEEPALIVE_OPTION_MAXSOCKETS`: Option `maxSockets`
+- `AUTH_SERVICE_AGENTKEEPALIVE_OPTION_MAXFREESOCKETS`: Option `maxFreeSockets`
+- `AUTH_SERVICE_AGENTKEEPALIVE_OPTION_SOCKETACTIVETTL`: Option `socketActiveTTL`

@@ -9,7 +9,7 @@ Ce module est en charge de remonter les liens vers différents réseaux sociaux.
 - `SOCIAL_NETWORK_SERVICE_DIRECTUS_API_URL`: L'URL de l'API du CMS Directus
 - `SOCIAL_NETWORK_SERVICE_DIRECTUS_API_BEARER_TOKEN`: Bearer token permettant l'accès à l'API du CMS Directus
 
-## Agentkeepalive configuration
+### Agentkeepalive configuration
 Look at [official documentation](https://github.com/node-modules/agentkeepalive#new-agentoptions) for each of the following options :
 - `SOCIAL_NETWORK_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVE`: Option `keepAlive`
 - `SOCIAL_NETWORK_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVEMSECS`: Option `keepAliveMsecs`
