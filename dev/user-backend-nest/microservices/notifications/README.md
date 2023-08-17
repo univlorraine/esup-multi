@@ -11,3 +11,13 @@ Ce module est en charge de remonter les notifications de l'utilisateur en proven
 - `NOTIFICATIONS_SERVICE_UL_API_BEARER_TOKEN`: Le token d'accès à l'API permettant d'obtenir les notifications et les channels.
 - `NOTIFICATIONS_SERVICE_DIRECTUS_API_URL`: L'URL de l'API Directus des channels
 - `NOTIFICATIONS_SERVICE_DIRECTUS_API_BEARER_TOKEN`: Bearer token permettant l'accès à l'API du CMS Directus
+
+### Agentkeepalive configuration
+Look at [official documentation](https://github.com/node-modules/agentkeepalive#new-agentoptions) for each of the following options :
+- `NOTIFICATIONS_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVE`: Option `keepAlive`
+- `NOTIFICATIONS_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVEMSECS`: Option `keepAliveMsecs`
+- `NOTIFICATIONS_SERVICE_AGENTKEEPALIVE_OPTION_FREESOCKETTIMEOUT`: Option `freeSocketTimeout`
+- `NOTIFICATIONS_SERVICE_AGENTKEEPALIVE_OPTION_TIMEOUT`: Option `timeout`
+- `NOTIFICATIONS_SERVICE_AGENTKEEPALIVE_OPTION_MAXSOCKETS`: Option `maxSockets`
+- `NOTIFICATIONS_SERVICE_AGENTKEEPALIVE_OPTION_MAXFREESOCKETS`: Option `maxFreeSockets`
+- `NOTIFICATIONS_SERVICE_AGENTKEEPALIVE_OPTION_SOCKETACTIVETTL`: Option `socketActiveTTL`
