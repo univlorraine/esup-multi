@@ -15,7 +15,7 @@ import { KeepAliveOptions } from './config/configuration.interfaces';
         Logger.log('Using agentkeepalive options', keepAliveOptions);
         return {
           httpAgent: new Agent(keepAliveOptions),
-          httpsAgent: new Agent(keepAliveOptions),
+          httpsAgent: new Agent.HttpsAgent(keepAliveOptions),
         };
       },
       inject: [ConfigService],
