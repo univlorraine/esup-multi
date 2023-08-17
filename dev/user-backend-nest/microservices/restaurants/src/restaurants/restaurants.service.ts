@@ -24,6 +24,7 @@ export class RestaurantsService {
     this.ulApiConfig = this.configService.get<UlApi>('ulApi');
   }
   getRestaurants(): Observable<RestaurantDTO[]> {
+    this.logger.log('*** get restaurants');
     return this.httpService
       .get<RestaurantExternalApiDTO[]>(this.ulApiConfig.url, {
         headers: {
