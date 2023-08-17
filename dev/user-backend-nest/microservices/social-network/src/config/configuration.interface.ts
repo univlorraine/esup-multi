@@ -3,7 +3,7 @@ export interface DirectusApi {
   bearerToken: string;
 }
 
-export interface keepAliveOptions {
+export interface KeepAliveOptions {
   keepAlive?: boolean;
   keepAliveMsecs?: number;
   freeSocketTimeout?: number;

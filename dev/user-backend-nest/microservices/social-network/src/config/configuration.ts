@@ -1,13 +1,14 @@
-import { DirectusApi, keepAliveOptions } from './configuration.interface';
+import { DirectusApi, KeepAliveOptions } from './configuration.interface';
 
 const applyIfNotBlank = (param: string, applyFn: (value: string) => void) => {
   if (param && param.trim().length > 0) {
     applyFn(param);
   }
 };
+
 export default (): {
   directusApi: DirectusApi;
-  keepAliveOptions: keepAliveOptions;
+  keepAliveOptions: KeepAliveOptions;
 } => {
   const keepAliveOptions = {};
 
