@@ -16,6 +16,10 @@ mongodb:
 
 directus:
   replicaCount: 1
+  persistence:
+    enabled: true
+    annotations:
+      helm.sh/resource-policy: keep
   admin:
     email: changeit
     password: changeit
