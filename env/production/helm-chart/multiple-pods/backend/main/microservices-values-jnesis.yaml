@@ -1,7 +1,7 @@
 common:
   config:
     DIRECTUS_API_URL: &directusApiUrl "http://multi-directus"
-    DIRECTUS_API_BEARER_TOKEN: &directusApiBearerToken "FcxjEGkTARy8rnLeuWARhR66GLsb-jrY"
+    DIRECTUS_API_BEARER_TOKEN: &directusApiBearerToken "RssDJcZUVWX9yOSx-2pVsQq85UUSasEt"
     NATS_URL: &natsUrl "nats://multi-nats:4222"
     KEEP_ALIVE: &keepAlive true
 
@@ -131,6 +131,7 @@ multi-microservice-social-network:
         SOCIAL_NETWORK_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVE: *keepAlive
       secret:
         SOCIAL_NETWORK_SERVICE_DIRECTUS_API_BEARER_TOKEN: *directusApiBearerToken
+
 
 multi-microservice-chatbot:
   appService:
