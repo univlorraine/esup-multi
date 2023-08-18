@@ -6,8 +6,8 @@ common:
     KEEP_ALIVE: &keepAlive false
 
 multi-microservice-features:
-  #replicaCount: 1  # Can be overloaded here
-  image: # Can be overloaded here
+  #replicaCount: 1  # Can be overriden here
+  image: # Can be overriden here
     tag: "sandbox"
   appService:
     name: features
@@ -130,7 +130,6 @@ multi-microservice-notifications:
         NOTIFICATIONS_SERVICE_DIRECTUS_API_BEARER_TOKEN: *directusApiBearerToken
 
 multi-microservice-important-news:
-  disableLivenessProbe: true
   appService:
     name: important-news
     repositoryName: multi-important-news
@@ -159,7 +158,6 @@ multi-microservice-clocking:
         CLOCKING_SERVICE_UL_API_BEARER_TOKEN: "changeit"
 
 multi-microservice-social-network:
-  disableLivenessProbe: true
   appService:
     name: social-network
     repositoryName: multi-social-network
@@ -186,7 +184,6 @@ multi-microservice-chatbot:
         CHATBOT_SERVICE_UL_API_TOCK_URL: "changeit"
 
 multi-microservice-static-pages:
-  disableLivenessProbe: true
   appService:
     name: static-pages
     repositoryName: multi-static-pages
@@ -201,7 +198,6 @@ multi-microservice-static-pages:
         STATIC_PAGES_SERVICE_DIRECTUS_API_BEARER_TOKEN: *directusApiBearerToken
 
 multi-microservice-contact-us:
-  disableLivenessProbe: true
   appService:
     name: contact-us
     repositoryName: multi-contact-us
@@ -245,7 +241,6 @@ multi-microservice-statistics:
         STATISTICS_SERVICE_UL_API_BEARER_TOKEN: "changeit"
 
 multi-microservice-mail-calendar:
-  disableLivenessProbe: true
   appService:
     name: mail-calendar
     repositoryName: multi-mail-calendar

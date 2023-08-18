@@ -6,8 +6,8 @@ common:
     KEEP_ALIVE: &keepAlive true
 
 multi-microservice-features:
-  replicaCount: 8  # Can be overloaded here
-  image: # Can be overloaded here
+  replicaCount: 8  
+  image: 
     tag: "sandbox"
   appService:
     name: features
@@ -94,8 +94,8 @@ multi-microservice-notifications:
         NOTIFICATIONS_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVE: *keepAlive
       secret:
         NOTIFICATIONS_SERVICE_DIRECTUS_API_BEARER_TOKEN: *directusApiBearerToken
+
 multi-microservice-important-news:
-  #disableLivenessProbe: true
   appService:
     name: important-news
     repositoryName: multi-important-news
@@ -107,6 +107,7 @@ multi-microservice-important-news:
         IMPORTANT_NEWS_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVE: *keepAlive
       secret:
         IMPORTANT_NEWS_SERVICE_DIRECTUS_API_BEARER_TOKEN: *directusApiBearerToken
+
 multi-microservice-clocking:
   appService:
     name: clocking
@@ -118,8 +119,7 @@ multi-microservice-clocking:
         CLOCKING_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVE: *keepAlive
 
 multi-microservice-social-network:
-  replicaCount: 8   #Can be overloaded here
-  #disableLivenessProbe: true
+  replicaCount: 8   
   appService:
     name: social-network
     repositoryName: multi-social-network
@@ -143,7 +143,6 @@ multi-microservice-chatbot:
         CHATBOT_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVE: *keepAlive
 
 multi-microservice-static-pages:
-  #disableLivenessProbe: true
   appService:
     name: static-pages
     repositoryName: multi-static-pages
@@ -155,8 +154,8 @@ multi-microservice-static-pages:
         STATIC_PAGES_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVE: *keepAlive
       secret:
         STATIC_PAGES_SERVICE_DIRECTUS_API_BEARER_TOKEN: *directusApiBearerToken
+
 multi-microservice-contact-us:
-  #disableLivenessProbe: true
   appService:
     name: contact-us
     repositoryName: multi-contact-us
@@ -168,6 +167,7 @@ multi-microservice-contact-us:
         CONTACT_US_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVE: *keepAlive
       secret:
         CONTACT_US_SERVICE_DIRECTUS_API_BEARER_TOKEN: *directusApiBearerToken
+        
 multi-microservice-restaurants:
   appService:
     name: restaurants
@@ -189,7 +189,6 @@ multi-microservice-statistics:
         STATISTICS_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVE: *keepAlive
 
 multi-microservice-mail-calendar:
-  #disableLivenessProbe: true
   appService:
     name: mail-calendar
     repositoryName: multi-mail-calendar
