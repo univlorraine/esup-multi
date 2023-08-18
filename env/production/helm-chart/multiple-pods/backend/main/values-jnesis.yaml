@@ -15,9 +15,6 @@ directus:
   admin:
     email: test@jnesis.com
     password: test2
-  mariadb:
-    auth:
-      rootPassword: secret
   nodeSelector: {
     kubernetes.azure.com/agentpool: "userpool1"
   }
