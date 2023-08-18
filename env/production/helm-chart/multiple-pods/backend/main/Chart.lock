@@ -5,6 +5,9 @@ dependencies:
 - name: directus
   repository: https://digitalist-se.github.io/directus-helm-chart
   version: 0.7.22
+- name: nats
+  repository: https://nats-io.github.io/k8s/helm/charts/
+  version: 1.0.2
 - name: multi-pwa
   repository: file://../../pwa
   version: 0.1.0
@@ -59,5 +62,5 @@ dependencies:
 - name: multi-backend-microservice
   repository: file://../microservice
   version: 0.1.0
-digest: sha256:afbe965bfd21377b1d1505b025538dbc66744c3c39b008a85b360f6743aa8faf
-generated: "2023-08-16T15:52:34.510169+02:00"
+digest: sha256:f0325245306ee2e7047efa3527a588ac6398edbf7250e84e5f52292827a50387
+generated: "2023-08-18T11:44:24.214979+02:00"
