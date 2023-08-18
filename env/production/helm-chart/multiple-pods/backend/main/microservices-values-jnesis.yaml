@@ -6,7 +6,7 @@ common:
     KEEP_ALIVE: &keepAlive true
 
 multi-microservice-features:
-  #replicaCount: 1  # Can be overloaded here
+  replicaCount: 8  # Can be overloaded here
   image: # Can be overloaded here
     tag: "sandbox"
   appService:
@@ -17,6 +17,7 @@ multi-microservice-features:
       normal:
         FEATURES_SERVICE_NATS_SERVERS: *natsUrl
         FEATURES_SERVICE_DIRECTUS_API_URL: *directusApiUrl
+        FEATURES_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVE: *keepAlive
       secret:
         FEATURES_SERVICE_DIRECTUS_API_BEARER_TOKEN: *directusApiBearerToken
 multi-microservice-auth:
@@ -28,6 +29,7 @@ multi-microservice-auth:
     env:
       normal:
         AUTH_SERVICE_NATS_SERVERS: *natsUrl
+        AUTH_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVE: *keepAlive
 
 multi-microservice-map:
   appService:
@@ -37,6 +39,7 @@ multi-microservice-map:
     env:
       normal:
         MAP_SERVICE_NATS_SERVERS: *natsUrl
+        MAP_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVE: *keepAlive
 
 multi-microservice-rss:
   appService:
@@ -46,6 +49,7 @@ multi-microservice-rss:
     env:
       normal:
         RSS_SERVICE_NATS_SERVERS: *natsUrl
+        RSS_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVE: *keepAlive
 
 multi-microservice-cards:
   appService:
@@ -55,9 +59,10 @@ multi-microservice-cards:
     env:
       normal:
         CARDS_SERVICE_NATS_SERVERS: *natsUrl
+        CARDS_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVE: *keepAlive
 
 multi-microservice-schedule:
-  replicaCount: 1
+  replicaCount: 8
   appService:
     name: schedule
     repositoryName: multi-schedule
@@ -65,6 +70,7 @@ multi-microservice-schedule:
     env:
       normal:
         SCHEDULE_SERVICE_NATS_SERVERS: *natsUrl
+        SCHEDULE_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVE: *keepAlive
 
 multi-microservice-contacts:
   appService:
@@ -74,6 +80,7 @@ multi-microservice-contacts:
     env:
       normal:
         CONTACTS_SERVICE_NATS_SERVERS: *natsUrl
+        CONTACTS_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVE: *keepAlive
 
 multi-microservice-notifications:
   appService:
@@ -84,6 +91,7 @@ multi-microservice-notifications:
       normal:
         NOTIFICATIONS_SERVICE_NATS_SERVERS: *natsUrl
         NOTIFICATIONS_SERVICE_DIRECTUS_API_URL: *directusApiUrl
+        NOTIFICATIONS_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVE: *keepAlive
       secret:
         NOTIFICATIONS_SERVICE_DIRECTUS_API_BEARER_TOKEN: *directusApiBearerToken
 multi-microservice-important-news:
@@ -96,6 +104,7 @@ multi-microservice-important-news:
       normal:
         IMPORTANT_NEWS_SERVICE_NATS_SERVERS: *natsUrl
         IMPORTANT_NEWS_SERVICE_DIRECTUS_API_URL: *directusApiUrl
+        IMPORTANT_NEWS_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVE: *keepAlive
       secret:
         IMPORTANT_NEWS_SERVICE_DIRECTUS_API_BEARER_TOKEN: *directusApiBearerToken
 multi-microservice-clocking:
@@ -106,6 +115,7 @@ multi-microservice-clocking:
     env:
       normal:
         CLOCKING_SERVICE_NATS_SERVERS: *natsUrl
+        CLOCKING_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVE: *keepAlive
 
 multi-microservice-social-network:
   replicaCount: 8   #Can be overloaded here
@@ -118,7 +128,7 @@ multi-microservice-social-network:
       normal:
         SOCIAL_NETWORK_SERVICE_NATS_SERVERS: *natsUrl
         SOCIAL_NETWORK_SERVICE_DIRECTUS_API_URL: *directusApiUrl
-        SOCIAL_NETWORK_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVE: true
+        SOCIAL_NETWORK_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVE: *keepAlive
       secret:
         SOCIAL_NETWORK_SERVICE_DIRECTUS_API_BEARER_TOKEN: *directusApiBearerToken
 
@@ -130,6 +140,7 @@ multi-microservice-chatbot:
     env:
       normal:
         CHATBOT_SERVICE_NATS_SERVERS: *natsUrl
+        CHATBOT_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVE: *keepAlive
 
 multi-microservice-static-pages:
   #disableLivenessProbe: true
@@ -141,6 +152,7 @@ multi-microservice-static-pages:
       normal:
         STATIC_PAGES_SERVICE_NATS_SERVERS: *natsUrl
         STATIC_PAGES_SERVICE_DIRECTUS_API_URL: *directusApiUrl
+        STATIC_PAGES_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVE: *keepAlive
       secret:
         STATIC_PAGES_SERVICE_DIRECTUS_API_BEARER_TOKEN: *directusApiBearerToken
 multi-microservice-contact-us:
@@ -153,6 +165,7 @@ multi-microservice-contact-us:
       normal:
         CONTACT_US_SERVICE_NATS_SERVERS: *natsUrl
         CONTACT_US_SERVICE_DIRECTUS_API_URL: *directusApiUrl
+        CONTACT_US_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVE: *keepAlive
       secret:
         CONTACT_US_SERVICE_DIRECTUS_API_BEARER_TOKEN: *directusApiBearerToken
 multi-microservice-restaurants:
@@ -163,6 +176,7 @@ multi-microservice-restaurants:
     env:
       normal:
         RESTAURANTS_SERVICE_NATS_SERVERS: *natsUrl
+        RESTAURANTS_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVE: *keepAlive
 
 multi-microservice-statistics:
   appService:
@@ -172,6 +186,7 @@ multi-microservice-statistics:
     env:
       normal:
         STATISTICS_SERVICE_NATS_SERVERS: *natsUrl
+        STATISTICS_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVE: *keepAlive
 
 multi-microservice-mail-calendar:
   #disableLivenessProbe: true
@@ -182,3 +197,4 @@ multi-microservice-mail-calendar:
     env:
       normal:
         MAIL_CALENDAR_SERVICE_NATS_SERVERS: *natsUrl
+        MAIL_CALENDAR_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVE: *keepAlive

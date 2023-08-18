@@ -2,6 +2,8 @@ common:
   config:
     DIRECTUS_API_URL: &directusApiUrl "changeit"
     DIRECTUS_API_BEARER_TOKEN: &directusApiBearerToken "changeit"
+    NATS_URL: &natsUrl "changeit (for example nats://my_nats_hosts:4222)"
+    KEEP_ALIVE: &keepAlive false
 
 multi-microservice-features:
   #replicaCount: 1  # Can be overloaded here
@@ -13,7 +15,7 @@ multi-microservice-features:
     containerPort: 3003
     env:
       normal:
-        FEATURES_SERVICE_NATS_SERVERS: "nats://my_nats_hosts:4222"
+        FEATURES_SERVICE_NATS_SERVERS: *natsUrl
         FEATURES_SERVICE_HOST: "0.0.0.0"
         FEATURES_SERVICE_PORT: "3003"
         FEATURES_SERVICE_DIRECTUS_API_URL: *directusApiUrl
@@ -28,7 +30,7 @@ multi-microservice-auth:
     containerPort: 3004
     env:
       normal:
-        AUTH_SERVICE_NATS_SERVERS: "nats://my_nats_hosts:4222"
+        AUTH_SERVICE_NATS_SERVERS: *natsUrl
         AUTH_SERVICE_HOST: "0.0.0.0"
         AUTH_SERVICE_PORT: "3004"
         AUTH_SERVICE_CAS_URL_REQUEST_TGT: "changeit"
@@ -51,7 +53,7 @@ multi-microservice-map:
     containerPort: 3005
     env:
       normal:
-        MAP_SERVICE_NATS_SERVERS: "nats://my_nats_hosts:4222"
+        MAP_SERVICE_NATS_SERVERS: *natsUrl
         MAP_SERVICE_HOST: "0.0.0.0"
         MAP_SERVICE_PORT: "3005"
 
@@ -62,7 +64,7 @@ multi-microservice-rss:
     containerPort: 3006
     env:
       normal:
-        RSS_SERVICE_NATS_SERVERS: "nats://my_nats_hosts:4222"
+        RSS_SERVICE_NATS_SERVERS: *natsUrl
         RSS_SERVICE_HOST: "0.0.0.0"
         RSS_SERVICE_PORT: "3006"
         RSS_SERVICE_FEED_URL: "changeit"
@@ -75,7 +77,7 @@ multi-microservice-cards:
     containerPort: 3007
     env:
       normal:
-        CARDS_SERVICE_NATS_SERVERS: "nats://my_nats_hosts:4222"
+        CARDS_SERVICE_NATS_SERVERS: *natsUrl
         CARDS_SERVICE_HOST: "0.0.0.0"
         CARDS_SERVICE_PORT: "3007"
         CARDS_SERVICE_UL_API_URL_USER_CARDS: "changeit"
@@ -89,7 +91,7 @@ multi-microservice-schedule:
     containerPort: 3008
     env:
       normal:
-        SCHEDULE_SERVICE_NATS_SERVERS: "nats://my_nats_hosts:4222"
+        SCHEDULE_SERVICE_NATS_SERVERS: *natsUrl
         SCHEDULE_SERVICE_HOST: "0.0.0.0"
         SCHEDULE_SERVICE_PORT: "3008"
         SCHEDULE_SERVICE_UL_API_USER_SCHEDULE_URL: "changeit"
@@ -103,7 +105,7 @@ multi-microservice-contacts:
     containerPort: 3009
     env:
       normal:
-        CONTACT_SERVICE_NATS_SERVERS: "nats://my_nats_hosts:4222"
+        CONTACT_SERVICE_NATS_SERVERS: *natsUrl
         CONTACT_SERVICE_HOST: "0.0.0.0"
         CONTACT_SERVICE_PORT: "3009"
         CONTACTS_SERVICE_UL_API_URL_USER_PROFILE: "changeit"
@@ -117,7 +119,7 @@ multi-microservice-notifications:
     containerPort: 3010
     env:
       normal:
-        NOTIFICATIONS_SERVICE_NATS_SERVERS: "nats://my_nats_hosts:4222"
+        NOTIFICATIONS_SERVICE_NATS_SERVERS: *natsUrl
         NOTIFICATIONS_SERVICE_HOST: "0.0.0.0"
         NOTIFICATIONS_SERVICE_PORT: "3010"
         NOTIFICATIONS_SERVICE_UL_API_NOTIFICATIONS_URL: "changeit"
@@ -135,7 +137,7 @@ multi-microservice-important-news:
     containerPort: 3011
     env:
       normal:
-        IMPORTANT_NEWS_SERVICE_NATS_SERVERS: "nats://my_nats_hosts:4222"
+        IMPORTANT_NEWS_SERVICE_NATS_SERVERS: *natsUrl
         IMPORTANT_NEWS_SERVICE_HOST: "0.0.0.0"
         IMPORTANT_NEWS_SERVICE_PORT: "3011"
         IMPORTANT_NEWS_SERVICE_DIRECTUS_API_URL: *directusApiUrl
@@ -149,7 +151,7 @@ multi-microservice-clocking:
     containerPort: 3012
     env:
       normal:
-        CLOCKING_SERVICE_NATS_SERVERS: "nats://my_nats_hosts:4222"
+        CLOCKING_SERVICE_NATS_SERVERS: *natsUrl
         CLOCKING_SERVICE_HOST: "0.0.0.0"
         CLOCKING_SERVICE_PORT: "3012"
         CLOCKING_SERVICE_UL_API_CLOCKING_URL: "changeit"
@@ -164,7 +166,7 @@ multi-microservice-social-network:
     containerPort: 3013
     env:
       normal:
-        SOCIAL_NETWORK_SERVICE_NATS_SERVERS: "nats://my_nats_hosts:4222"
+        SOCIAL_NETWORK_SERVICE_NATS_SERVERS: *natsUrl
         SOCIAL_NETWORK_SERVICE_HOST: "0.0.0.0"
         SOCIAL_NETWORK_SERVICE_PORT: "3013"
         SOCIAL_NETWORK_SERVICE_DIRECTUS_API_URL: *directusApiUrl
@@ -178,7 +180,7 @@ multi-microservice-chatbot:
     containerPort: 3014
     env:
       normal:
-        CHATBOT_SERVICE_NATS_SERVERS: "nats://my_nats_hosts:4222"
+        CHATBOT_SERVICE_NATS_SERVERS: *natsUrl
         CHATBOT_SERVICE_HOST: "0.0.0.0"
         CHATBOT_SERVICE_PORT: "3014"
         CHATBOT_SERVICE_UL_API_TOCK_URL: "changeit"
@@ -191,7 +193,7 @@ multi-microservice-static-pages:
     containerPort: 3015
     env:
       normal:
-        STATIC_PAGES_SERVICE_NATS_SERVERS: "nats://my_nats_hosts:4222"
+        STATIC_PAGES_SERVICE_NATS_SERVERS: *natsUrl
         STATIC_PAGES_SERVICE_HOST: "0.0.0.0"
         STATIC_PAGES_SERVICE_PORT: "3015"
         STATIC_PAGES_SERVICE_DIRECTUS_API_URL: *directusApiUrl
@@ -206,7 +208,7 @@ multi-microservice-contact-us:
     containerPort: 3016
     env:
       normal:
-        CONTACT_US_SERVICE_NATS_SERVERS: "nats://my_nats_hosts:4222"
+        CONTACT_US_SERVICE_NATS_SERVERS: *natsUrl
         CONTACT_US_SERVICE_PORT: "3016"
         CONTACT_US_SERVICE_HOST: "0.0.0.0"
         CONTACT_US_SERVICE_SMTP: "changeit"
@@ -221,7 +223,7 @@ multi-microservice-restaurants:
     containerPort: 3017
     env:
       normal:
-        RESTAURANTS_SERVICE_NATS_SERVERS: "nats://my_nats_hosts:4222"
+        RESTAURANTS_SERVICE_NATS_SERVERS: *natsUrl
         RESTAURANTS_SERVICE_HOST: "0.0.0.0"
         RESTAURANTS_SERVICE_PORT: "3017"
         RESTAURANTS_UL_API_URL: "changeit"
@@ -235,7 +237,7 @@ multi-microservice-statistics:
     containerPort: 3018
     env:
       normal:
-        STATISTICS_SERVICE_NATS_SERVERS: "nats://my_nats_hosts:4222"
+        STATISTICS_SERVICE_NATS_SERVERS: *natsUrl
         STATISTICS_SERVICE_HOST: 0.0.0.0
         STATISTICS_SERVICE_PORT: "3018"
         STATISTICS_SERVICE_UL_API_URL: "changeit"
@@ -250,7 +252,7 @@ multi-microservice-mail-calendar:
     containerPort: 3019
     env:
       normal:
-        MAIL_CALENDAR_SERVICE_NATS_SERVERS: "nats://my_nats_hosts:4222"
+        MAIL_CALENDAR_SERVICE_NATS_SERVERS: *natsUrl
         MAIL_CALENDAR_SERVICE_HOST: 0.0.0.0
         MAIL_CALENDAR_SERVICE_PORT: 3019
         MAIL_CALENDAR_SERVICE_UL_API_URL: "changeit"
