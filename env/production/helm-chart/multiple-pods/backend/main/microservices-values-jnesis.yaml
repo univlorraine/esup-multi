@@ -129,9 +129,7 @@ multi-microservice-social-network:
         SOCIAL_NETWORK_SERVICE_NATS_SERVERS: *natsUrl
         SOCIAL_NETWORK_SERVICE_DIRECTUS_API_URL: *directusApiUrl
         SOCIAL_NETWORK_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVE: *keepAlive
-      secret:
         SOCIAL_NETWORK_SERVICE_DIRECTUS_API_BEARER_TOKEN: *directusApiBearerToken
-
 
 multi-microservice-chatbot:
   appService:
