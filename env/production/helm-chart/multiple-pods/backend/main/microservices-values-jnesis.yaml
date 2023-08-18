@@ -1,0 +1,121 @@
+common:
+  config:
+    DIRECTUS_API_URL: &directusApiUrl "http://multi-directus"
+    DIRECTUS_API_BEARER_TOKEN: &directusApiBearerToken "_bqKLYsiVcmMiX3bUS-USxaaM46sxbEY"
+    NATS_URL: &natsUrl "nats://multi-nats:4222"
+    KEEP_ALIVE: &keepAlive true
+
+multi-microservice-features:
+  #replicaCount: 1  # Can be overloaded here
+  appService:
+    env:
+      normal:
+        FEATURES_SERVICE_NATS_SERVERS: *natsUrl
+
+multi-microservice-auth:
+  replicaCount: 8   #Can be overloaded here
+  appService:
+    env:
+      normal:
+        AUTH_SERVICE_NATS_SERVERS: *natsUrl
+
+multi-microservice-map:
+  appService:
+    env:
+      normal:
+        MAP_SERVICE_NATS_SERVERS: *natsUrl
+
+multi-microservice-rss:
+  appService:
+    env:
+      normal:
+        RSS_SERVICE_NATS_SERVERS: *natsUrl
+
+multi-microservice-cards:
+  appService:
+    env:
+      normal:
+        CARDS_SERVICE_NATS_SERVERS: *natsUrl
+
+multi-microservice-schedule:
+  replicaCount: 1
+  appService:
+    env:
+      normal:
+        SCHEDULE_SERVICE_NATS_SERVERS: *natsUrl
+
+multi-microservice-contacts:
+  appService:
+    env:
+      normal:
+        CONTACTS_SERVICE_NATS_SERVERS: *natsUrl
+
+multi-microservice-notifications:
+  appService:
+    env:
+      normal:
+        NOTIFICATIONS_SERVICE_NATS_SERVERS: *natsUrl
+
+multi-microservice-important-news:
+  #disableLivenessProbe: true
+  appService:
+    env:
+      normal:
+        IMPORTANT_NEWS_SERVICE_NATS_SERVERS: *natsUrl
+
+multi-microservice-clocking:
+  appService:
+    env:
+      normal:
+        CLOCKING_SERVICE_NATS_SERVERS: *natsUrl
+
+multi-microservice-social-network:
+  replicaCount: 8   #Can be overloaded here
+  #disableLivenessProbe: true
+  appService:
+    env:
+      normal:
+        SOCIAL_NETWORK_SERVICE_NATS_SERVERS: *natsUrl
+        SOCIAL_NETWORK_SERVICE_DIRECTUS_API_URL: *directusApiUrl
+        SOCIAL_NETWORK_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVE: true
+      secret:
+        SOCIAL_NETWORK_SERVICE_DIRECTUS_API_BEARER_TOKEN: *directusApiBearerToken
+
+multi-microservice-chatbot:
+  appService:
+    env:
+      normal:
+        CHATBOT_SERVICE_NATS_SERVERS: *natsUrl
+
+multi-microservice-static-pages:
+  #disableLivenessProbe: true
+  appService:
+    env:
+      normal:
+        STATIC_PAGES_SERVICE_NATS_SERVERS: *natsUrl
+
+multi-microservice-contact-us:
+  #disableLivenessProbe: true
+  appService:
+    env:
+      normal:
+        CONTACT_US_SERVICE_NATS_SERVERS: *natsUrl
+
+multi-microservice-restaurants:
+  appService:
+    env:
+      normal:
+        RESTAURANTS_SERVICE_NATS_SERVERS: *natsUrl
+
+multi-microservice-statistics:
+  appService:
+    env:
+      normal:
+        STATISTICS_SERVICE_NATS_SERVERS: *natsUrl
+
+multi-microservice-mail-calendar:
+  #disableLivenessProbe: true
+  appService:
+    env:
+      normal:
+        MAIL_CALENDAR_SERVICE_NATS_SERVERS: *natsUrl

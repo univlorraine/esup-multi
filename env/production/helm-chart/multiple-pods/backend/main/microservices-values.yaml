@@ -13,12 +13,14 @@ multi-microservice-features:
     containerPort: 3003
     env:
       normal:
-        FEATURES_SERVICE_NATS_SERVERS: "nats://multi-nats:4222"
+        FEATURES_SERVICE_NATS_SERVERS: "nats://my_nats_hosts:4222"
         FEATURES_SERVICE_HOST: "0.0.0.0"
         FEATURES_SERVICE_PORT: "3003"
+        FEATURES_SERVICE_DIRECTUS_API_URL: *directusApiUrl
+      secret:
+        FEATURES_SERVICE_DIRECTUS_API_BEARER_TOKEN: *directusApiBearerToken
 
 multi-microservice-auth:
-  replicaCount: 8   #Can be overloaded here
   enableDB: true
   appService:
     name: auth
@@ -26,9 +28,21 @@ multi-microservice-auth:
     containerPort: 3004
     env:
       normal:
-        AUTH_SERVICE_NATS_SERVERS: "nats://multi-nats:4222"
+        AUTH_SERVICE_NATS_SERVERS: "nats://my_nats_hosts:4222"
         AUTH_SERVICE_HOST: "0.0.0.0"
         AUTH_SERVICE_PORT: "3004"
+        AUTH_SERVICE_CAS_URL_REQUEST_TGT: "changeit"
+        AUTH_SERVICE_CAS_URL_REQUEST_ST: "changeit"
+        AUTH_SERVICE_CAS_URL_VALIDATE_ST: "changeit"
+        AUTH_SERVICE_CAS_URL_LOGOUT: "changeit"
+        AUTH_SERVICE_UL_API_URL_USER_PROFILE: "changeit"
+        AUTH_SERVICE_USERNAMES_CLEANUP_SCHEDULE: "0 0 * * * *"
+        AUTH_SERVICE_USERNAMES_CLEANUP_NOT_USED_SINCE_IN_DAYS: "1"
+        AUTH_SERVICE_CREDENTIALS_CLEANUP_SCHEDULE: "0 0 * * * *"
+        AUTH_SERVICE_CREDENTIALS_CLEANUP_NOT_USED_SINCE_IN_DAYS: "30"
+      secret:
+        AUTH_SERVICE_UL_API_BEARER_TOKEN: "changeit"
+        AUTH_SERVICE_JWT_SECRET: "changeit"
 
 multi-microservice-map:
   appService:
@@ -37,7 +51,7 @@ multi-microservice-map:
     containerPort: 3005
     env:
       normal:
-        MAP_SERVICE_NATS_SERVERS: "nats://multi-nats:4222"
+        MAP_SERVICE_NATS_SERVERS: "nats://my_nats_hosts:4222"
         MAP_SERVICE_HOST: "0.0.0.0"
         MAP_SERVICE_PORT: "3005"
 
@@ -48,9 +62,11 @@ multi-microservice-rss:
     containerPort: 3006
     env:
       normal:
-        RSS_SERVICE_NATS_SERVERS: "nats://multi-nats:4222"
+        RSS_SERVICE_NATS_SERVERS: "nats://my_nats_hosts:4222"
         RSS_SERVICE_HOST: "0.0.0.0"
         RSS_SERVICE_PORT: "3006"
+        RSS_SERVICE_FEED_URL: "changeit"
+        RSS_SERVICE_ALLOWED_HTML_TAGS: "b,strong,i,italic,ol,ul,li"
 
 multi-microservice-cards:
   appService:
@@ -59,21 +75,26 @@ multi-microservice-cards:
     containerPort: 3007
     env:
       normal:
-        CARDS_SERVICE_NATS_SERVERS: "nats://multi-nats:4222"
+        CARDS_SERVICE_NATS_SERVERS: "nats://my_nats_hosts:4222"
         CARDS_SERVICE_HOST: "0.0.0.0"
         CARDS_SERVICE_PORT: "3007"
+        CARDS_SERVICE_UL_API_URL_USER_CARDS: "changeit"
+      secret:
+        CARDS_SERVICE_UL_API_BEARER_TOKEN: "changeit"
 
 multi-microservice-schedule:
-  replicaCount: 1
   appService:
     name: schedule
     repositoryName: multi-schedule
     containerPort: 3008
     env:
       normal:
-        SCHEDULE_SERVICE_NATS_SERVERS: "nats://multi-nats:4222"
+        SCHEDULE_SERVICE_NATS_SERVERS: "nats://my_nats_hosts:4222"
         SCHEDULE_SERVICE_HOST: "0.0.0.0"
         SCHEDULE_SERVICE_PORT: "3008"
+        SCHEDULE_SERVICE_UL_API_USER_SCHEDULE_URL: "changeit"
+      secret:
+        SCHEDULE_SERVICE_UL_API_BEARER_TOKEN: "changeit"
 
 multi-microservice-contacts:
   appService:
@@ -82,9 +103,12 @@ multi-microservice-contacts:
     containerPort: 3009
     env:
       normal:
-        CONTACTS_SERVICE_NATS_SERVERS: "nats://multi-nats:4222"
-        CONTACTS_SERVICE_HOST: "0.0.0.0"
-        CONTACTS_SERVICE_PORT: "3009"
+        CONTACT_SERVICE_NATS_SERVERS: "nats://my_nats_hosts:4222"
+        CONTACT_SERVICE_HOST: "0.0.0.0"
+        CONTACT_SERVICE_PORT: "3009"
+        CONTACTS_SERVICE_UL_API_URL_USER_PROFILE: "changeit"
+      secret:
+        CONTACTS_SERVICE_UL_API_BEARER_TOKEN: "changeit"
 
 multi-microservice-notifications:
   appService:
@@ -93,21 +117,30 @@ multi-microservice-notifications:
     containerPort: 3010
     env:
       normal:
-        NOTIFICATIONS_SERVICE_NATS_SERVERS: "nats://multi-nats:4222"
+        NOTIFICATIONS_SERVICE_NATS_SERVERS: "nats://my_nats_hosts:4222"
         NOTIFICATIONS_SERVICE_HOST: "0.0.0.0"
         NOTIFICATIONS_SERVICE_PORT: "3010"
+        NOTIFICATIONS_SERVICE_UL_API_NOTIFICATIONS_URL: "changeit"
+        NOTIFICATIONS_SERVICE_UL_API_CHANNELS_URL: "changeit"
+        NOTIFICATIONS_SERVICE_DIRECTUS_API_URL: *directusApiUrl
+      secret:
+        NOTIFICATIONS_SERVICE_UL_API_BEARER_TOKEN: "changeit"
+        NOTIFICATIONS_SERVICE_DIRECTUS_API_BEARER_TOKEN: *directusApiBearerToken
 
 multi-microservice-important-news:
-  #disableLivenessProbe: true
+  disableLivenessProbe: true
   appService:
     name: important-news
     repositoryName: multi-important-news
     containerPort: 3011
     env:
       normal:
-        IMPORTANT_NEWS_SERVICE_NATS_SERVERS: "nats://multi-nats:4222"
+        IMPORTANT_NEWS_SERVICE_NATS_SERVERS: "nats://my_nats_hosts:4222"
         IMPORTANT_NEWS_SERVICE_HOST: "0.0.0.0"
         IMPORTANT_NEWS_SERVICE_PORT: "3011"
+        IMPORTANT_NEWS_SERVICE_DIRECTUS_API_URL: *directusApiUrl
+      secret:
+        IMPORTANT_NEWS_SERVICE_DIRECTUS_API_BEARER_TOKEN: *directusApiBearerToken
 
 multi-microservice-clocking:
   appService:
@@ -116,27 +149,27 @@ multi-microservice-clocking:
     containerPort: 3012
     env:
       normal:
-        CLOCKING_SERVICE_NATS_SERVERS: "nats://multi-nats:4222"
+        CLOCKING_SERVICE_NATS_SERVERS: "nats://my_nats_hosts:4222"
         CLOCKING_SERVICE_HOST: "0.0.0.0"
         CLOCKING_SERVICE_PORT: "3012"
+        CLOCKING_SERVICE_UL_API_CLOCKING_URL: "changeit"
+      secret:
+        CLOCKING_SERVICE_UL_API_BEARER_TOKEN: "changeit"
 
 multi-microservice-social-network:
-  replicaCount: 8   #Can be overloaded here
-  #disableLivenessProbe: true
+  disableLivenessProbe: true
   appService:
     name: social-network
     repositoryName: multi-social-network
     containerPort: 3013
     env:
       normal:
-        SOCIAL_NETWORK_SERVICE_NATS_SERVERS: "nats://multi-nats:4222"
+        SOCIAL_NETWORK_SERVICE_NATS_SERVERS: "nats://my_nats_hosts:4222"
         SOCIAL_NETWORK_SERVICE_HOST: "0.0.0.0"
         SOCIAL_NETWORK_SERVICE_PORT: "3013"
-        SOCIAL_NETWORK_SERVICE_DIRECTUS_API_URL: "http://multi-directus"
-        SOCIAL_NETWORK_SERVICE_DIRECTUS_API_BEARER_TOKEN: "_bqKLYsiVcmMiX3bUS-USxaaM46sxbEY"
-        SOCIAL_NETWORK_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVE: true
-        SOCIAL_NETWORK_SERVICE_AGENTKEEPALIVE_OPTION_MAXSOCKETS: "15"
-        #EXTENDED_LOGS: true
+        SOCIAL_NETWORK_SERVICE_DIRECTUS_API_URL: *directusApiUrl
+      secret:
+        SOCIAL_NETWORK_SERVICE_DIRECTUS_API_BEARER_TOKEN: *directusApiBearerToken
 
 multi-microservice-chatbot:
   appService:
@@ -145,33 +178,41 @@ multi-microservice-chatbot:
     containerPort: 3014
     env:
       normal:
-        CHATBOT_SERVICE_NATS_SERVERS: "nats://multi-nats:4222"
+        CHATBOT_SERVICE_NATS_SERVERS: "nats://my_nats_hosts:4222"
         CHATBOT_SERVICE_HOST: "0.0.0.0"
         CHATBOT_SERVICE_PORT: "3014"
+        CHATBOT_SERVICE_UL_API_TOCK_URL: "changeit"
 
 multi-microservice-static-pages:
-  #disableLivenessProbe: true
+  disableLivenessProbe: true
   appService:
     name: static-pages
     repositoryName: multi-static-pages
     containerPort: 3015
     env:
       normal:
-        STATIC_PAGES_SERVICE_NATS_SERVERS: "nats://multi-nats:4222"
+        STATIC_PAGES_SERVICE_NATS_SERVERS: "nats://my_nats_hosts:4222"
         STATIC_PAGES_SERVICE_HOST: "0.0.0.0"
         STATIC_PAGES_SERVICE_PORT: "3015"
+        STATIC_PAGES_SERVICE_DIRECTUS_API_URL: *directusApiUrl
+      secret:
+        STATIC_PAGES_SERVICE_DIRECTUS_API_BEARER_TOKEN: *directusApiBearerToken
 
 multi-microservice-contact-us:
-  #disableLivenessProbe: true
+  disableLivenessProbe: true
   appService:
     name: contact-us
     repositoryName: multi-contact-us
     containerPort: 3016
     env:
       normal:
-        CONTACT_US_SERVICE_NATS_SERVERS: "nats://multi-nats:4222"
+        CONTACT_US_SERVICE_NATS_SERVERS: "nats://my_nats_hosts:4222"
         CONTACT_US_SERVICE_PORT: "3016"
         CONTACT_US_SERVICE_HOST: "0.0.0.0"
+        CONTACT_US_SERVICE_SMTP: "changeit"
+        CONTACT_US_SERVICE_DIRECTUS_API_URL: *directusApiUrl
+      secret:
+        CONTACT_US_SERVICE_DIRECTUS_API_BEARER_TOKEN: *directusApiBearerToken
 
 multi-microservice-restaurants:
   appService:
@@ -180,9 +221,12 @@ multi-microservice-restaurants:
     containerPort: 3017
     env:
       normal:
-        RESTAURANTS_SERVICE_NATS_SERVERS: "nats://multi-nats:4222"
+        RESTAURANTS_SERVICE_NATS_SERVERS: "nats://my_nats_hosts:4222"
         RESTAURANTS_SERVICE_HOST: "0.0.0.0"
         RESTAURANTS_SERVICE_PORT: "3017"
+        RESTAURANTS_UL_API_URL: "changeit"
+      secret:
+        RESTAURANTS_UL_API_BEARER_TOKEN: "changeit"
 
 multi-microservice-statistics:
   appService:
@@ -191,18 +235,24 @@ multi-microservice-statistics:
     containerPort: 3018
     env:
       normal:
-        STATISTICS_SERVICE_NATS_SERVERS: "nats://multi-nats:4222"
+        STATISTICS_SERVICE_NATS_SERVERS: "nats://my_nats_hosts:4222"
         STATISTICS_SERVICE_HOST: 0.0.0.0
         STATISTICS_SERVICE_PORT: "3018"
+        STATISTICS_SERVICE_UL_API_URL: "changeit"
+      secret:
+        STATISTICS_SERVICE_UL_API_BEARER_TOKEN: "changeit"
 
 multi-microservice-mail-calendar:
-  #disableLivenessProbe: true
+  disableLivenessProbe: true
   appService:
     name: mail-calendar
     repositoryName: multi-mail-calendar
     containerPort: 3019
     env:
       normal:
-        MAIL_CALENDAR_SERVICE_NATS_SERVERS: "nats://multi-nats:4222"
+        MAIL_CALENDAR_SERVICE_NATS_SERVERS: "nats://my_nats_hosts:4222"
         MAIL_CALENDAR_SERVICE_HOST: 0.0.0.0
         MAIL_CALENDAR_SERVICE_PORT: 3019
+        MAIL_CALENDAR_SERVICE_UL_API_URL: "changeit"
+      secret:
+        MAIL_CALENDAR_SERVICE_UL_BEARER_TOKEN: "changeit"
