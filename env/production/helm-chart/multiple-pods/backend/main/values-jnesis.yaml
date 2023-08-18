@@ -11,7 +11,7 @@ mongodb:
 
 
 directus:
-  replicaCount: 9
+  replicaCount: 10
   admin:
     email: test@jnesis.com
     password: test2
@@ -19,6 +19,8 @@ directus:
     kubernetes.azure.com/agentpool: "userpool1"
   }
   extraEnvVars:
+    - name: TEST_MAX
+      value: "Test"
 #    - name: SERVER_KEEP_ALIVE_TIMEOUT
 #      value: "0"
 #    - name: SERVER_HEADERS_TIMEOUT
