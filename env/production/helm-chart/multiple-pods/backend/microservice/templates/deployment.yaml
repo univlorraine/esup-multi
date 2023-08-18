@@ -18,18 +18,11 @@ spec:
       labels:
         {{- include "backend.selectorLabels" . | nindent 8 }}
     spec:
-      {{- if .Values.enableDB }}
       initContainers:
-        - name: wait-for-db
-          image: "{{ .Values.initContainerWaitForDB.imageName }}"
-          command:
-            - 'sh'
-            - '-c'
-            - >
-              until nc -z -w 2 {{ .Release.Name }}-{{ .Values.initContainerWaitForDB.waitServiceName }} {{ .Values.initContainerWaitForDB.waitServicePort }} && echo {{ .Values.initContainerWaitForDB.waitServiceName }} ok;
-                do sleep 2;
-              done
-      {{- end }}
+        {{- if .Values.enableDB }}
+        {{- include "helpers.wait-for-service" (list . "db") | nindent 8 }}
+        {{- end }}
+        {{- include "helpers.wait-for-service" (list . "nats") | nindent 8 }}
 
       {{- with .Values.global.imagePullSecrets }}
       imagePullSecrets:

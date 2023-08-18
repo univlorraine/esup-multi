@@ -21,15 +21,7 @@ spec:
         {{- include "pwa.selectorLabels" . | nindent 8 }}
     spec:
       initContainers:
-        - name: wait-for-backend
-          image: "{{ .Values.initContainerWaitForBackend.imageName }}"
-          command:
-            - 'sh'
-            - '-c'
-            - >
-              until nc -z -w 2 {{ .Values.initContainerWaitForBackend.waitServiceName }} {{ .Values.initContainerWaitForBackend.waitServicePort }} && echo {{ .Values.initContainerWaitForBackend.waitServiceName }} ok;
-                do sleep 2;
-              done
+        {{- include "helpers.wait-for-service" (list . "backend") | nindent 8 }}
 
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:

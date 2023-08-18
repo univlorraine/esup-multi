@@ -4,10 +4,10 @@
 
 replicaCount: 1
 
-initContainerWaitForBackend:
-  imageName: "alpine"
-  waitServiceName: "multi-backend-main-service"
-  waitServicePort: 3000
+initContainerWaits:
+  backend:
+    serviceName: backend-main-service
+    servicePort: 3000
 
 image:
   tag: staging

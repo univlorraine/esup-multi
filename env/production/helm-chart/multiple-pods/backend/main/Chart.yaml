@@ -12,6 +12,9 @@ dependencies:
   - name: directus
     version: "0.7.22"
     repository: "https://digitalist-se.github.io/directus-helm-chart"
+  - name: nats
+    version: "1.0.2"
+    repository: "https://nats-io.github.io/k8s/helm/charts/"
   - name: multi-pwa
     version: "0.1.0"
     repository: file://../../pwa

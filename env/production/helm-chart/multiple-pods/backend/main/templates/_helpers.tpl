@@ -32,6 +32,21 @@ periodSeconds: {{ .Values.global.commonHealthReadinessProbe.periodSeconds }}
 {{- end }}
 {{- end }}
 
+{{- define "helpers.wait-for-service"}}
+{{- $context := index . 0 }}
+{{- $serviceConfig := index . 1 }}
+{{- $serviceToWait := index $context.Values "initContainerWaits" $serviceConfig }}
+- name: wait-for-{{ $serviceConfig }}
+  image: "alpine"
+  command:
+    - 'sh'
+    - '-c'
+    - >
+      until nc -z -w 2 {{ $context.Release.Name }}-{{ $serviceToWait.serviceName }} {{ $serviceToWait.servicePort }} && echo {{ $serviceToWait.serviceName }} ok;
+        do sleep 2;
+      done
+{{- end }}
+
 {{/*
 Expand the name of the chart.
 */}}

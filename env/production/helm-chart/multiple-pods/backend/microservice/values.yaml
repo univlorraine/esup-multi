@@ -4,10 +4,13 @@
 
 replicaCount: 1
 
-initContainerWaitForDB:
-  imageName: "alpine"
-  waitServiceName: "mongodb"
-  waitServicePort: 27017
+initContainerWaits:
+  db:
+    serviceName: mongodb
+    servicePort: 27017
+  nats:
+    serviceName: nats
+    servicePort: 4222
 
 service:
   type: ClusterIP
