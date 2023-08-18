@@ -19,8 +19,8 @@ directus:
     kubernetes.azure.com/agentpool: "userpool1"
   }
   extraEnvVars:
-#    - name: SERVER_KEEP_ALIVE_TIMEOUT
-#      value: "0"
+    - name: SERVER_KEEP_ALIVE_TIMEOUT
+      value: "0"
 #    - name: SERVER_HEADERS_TIMEOUT
 #      value: "0"
     - name: PRESSURE_LIMITER_ENABLED
