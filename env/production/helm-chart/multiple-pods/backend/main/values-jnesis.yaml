@@ -21,8 +21,8 @@ directus:
   extraEnvVars:
     - name: SERVER_KEEP_ALIVE_TIMEOUT
       value: "0"
-#    - name: SERVER_HEADERS_TIMEOUT
-#      value: "0"
+    - name: SERVER_HEADERS_TIMEOUT
+      value: "0"
     - name: PRESSURE_LIMITER_ENABLED
       value: "false"
 
