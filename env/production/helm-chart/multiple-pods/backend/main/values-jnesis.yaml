@@ -6,6 +6,7 @@ replicaCount: 8
 
 mongodb:
   architecture: "replicaset"
+  auth.replicaSetKey: "DYUX9AUNLvSD43PHk4hX"
   nodeSelector: {
     kubernetes.azure.com/agentpool: "userpool1"
   }
