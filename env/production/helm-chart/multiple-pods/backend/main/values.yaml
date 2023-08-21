@@ -18,6 +18,7 @@ directus:
   replicaCount: 10
   persistence:
     enabled: true
+    accessModes: ReadWriteMany
     annotations:
       helm.sh/resource-policy: "keep"
   admin:
