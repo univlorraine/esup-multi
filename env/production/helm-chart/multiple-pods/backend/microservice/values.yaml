@@ -2,15 +2,17 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-replicaCount: 1
+global:
+  microServices:
+    initContainerWaits:
+      db:
+        serviceName: mongodb
+        servicePort: 27017
+      nats:
+        serviceName: nats
+        servicePort: 4222
 
-initContainerWaits:
-  db:
-    serviceName: mongodb
-    servicePort: 27017
-  nats:
-    serviceName: nats
-    servicePort: 4222
+replicaCount: 1
 
 service:
   type: ClusterIP

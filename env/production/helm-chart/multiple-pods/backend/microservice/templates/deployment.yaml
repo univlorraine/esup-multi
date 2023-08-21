@@ -51,7 +51,7 @@ spec:
                   name: mongodb-secrets
                   key: mongodb-root-password
             - name: AUTH_SERVICE_MONGO_URL
-              value: "mongodb://root:$(MONGODB_ROOT_PASSWORD)@{{ .Release.Name }}-mongodb:27017/"
+              value: "mongodb-headless://root:$(MONGODB_ROOT_PASSWORD)@{{ .Release.Name }}-mongodb-headless:27017/"
             {{ end }}
             {{- if and .Values.appService.env }}
             {{ $data := dict "Values" .Values "env" .Values.appService.env }}

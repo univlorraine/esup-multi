@@ -1,3 +1,9 @@
+global:
+  microServices:
+    initContainerWaits:
+      db:
+        serviceName: mongodb-headless
+
 common:
   config:
     DIRECTUS_API_URL: &directusApiUrl "http://multi-directus"
@@ -119,7 +125,7 @@ multi-microservice-clocking:
         CLOCKING_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVE: *keepAlive
 
 multi-microservice-social-network:
-  replicaCount: 8   
+  replicaCount: 1
   appService:
     name: social-network
     repositoryName: multi-social-network
