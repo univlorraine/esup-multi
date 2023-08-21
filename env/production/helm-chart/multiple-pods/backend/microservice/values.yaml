@@ -7,10 +7,10 @@ global:
     serviceNameToConnect: mongodb
   microServices:
     initContainerWaits:
-      microServicesDB:
+      micro-services-db:
         serviceName: mongodb
         servicePort: 27017
-      microServicesNats:
+      micro-services-nats:
         serviceName: nats
         servicePort: 4222
 

@@ -2,7 +2,7 @@ global:
   mongodb:
     serviceNameToConnect: mongodb-headless
   initContainerWaits:
-    microServicesDB:
+    micro-services-db:
       serviceName: mongodb-headless
 
 common:
