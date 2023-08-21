@@ -18,7 +18,6 @@ directus:
   replicaCount: 10
   persistence:
     enabled: true
-    storageClass: "longhorn" #or any other class supporting ReadWriteMany
     annotations:
       helm.sh/resource-policy: "keep"
   admin:
