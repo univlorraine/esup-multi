@@ -21,7 +21,7 @@ appService:
 
 service:
   type: ClusterIP
-  port: 81
+  port: 80
 
 secret:
   name: multi-pwa-env-secrets

@@ -63,4 +63,4 @@ dependencies:
   repository: file://../microservice
   version: 0.1.0
 digest: sha256:f0325245306ee2e7047efa3527a588ac6398edbf7250e84e5f52292827a50387
-generated: "2023-08-18T11:44:24.214979+02:00"
+generated: "2023-08-21T17:27:17.329617+02:00"
