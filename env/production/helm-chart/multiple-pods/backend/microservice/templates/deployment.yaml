@@ -20,9 +20,9 @@ spec:
     spec:
       initContainers:
         {{- if .Values.enableDB }}
-        {{- include "helpers.wait-for-service" (list . "db") | nindent 8 }}
+        {{- include "helpers.wait-for-service" (list . "microServicesDB") | nindent 8 }}
         {{- end }}
-        {{- include "helpers.wait-for-service" (list . "nats") | nindent 8 }}
+        {{- include "helpers.wait-for-service" (list . "microServicesNats") | nindent 8 }}
 
       {{- with .Values.global.imagePullSecrets }}
       imagePullSecrets:

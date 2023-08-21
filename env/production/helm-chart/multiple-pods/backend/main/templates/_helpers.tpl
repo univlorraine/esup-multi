@@ -35,7 +35,7 @@ periodSeconds: {{ .Values.global.commonHealthReadinessProbe.periodSeconds }}
 {{- define "helpers.wait-for-service"}}
 {{- $context := index . 0 }}
 {{- $serviceConfig := index . 1 }}
-{{- $serviceToWait := index $context.Values "global" "microServices" "initContainerWaits" $serviceConfig }}
+{{- $serviceToWait := index $context.Values "global" "initContainerWaits" $serviceConfig }}
 - name: wait-for-{{ $serviceConfig }}
   image: "alpine"
   command:

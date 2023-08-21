@@ -1,10 +1,9 @@
 global:
   mongodb:
     serviceNameToConnect: mongodb-headless
-  microServices:
-    initContainerWaits:
-      db:
-        serviceName: mongodb-headless
+  initContainerWaits:
+    microServicesDB:
+      serviceName: mongodb-headless
 
 common:
   config:
@@ -127,7 +126,7 @@ multi-microservice-clocking:
         CLOCKING_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVE: *keepAlive
 
 multi-microservice-social-network:
-  replicaCount: 1
+  replicaCount: 8
   appService:
     name: social-network
     repositoryName: multi-social-network
