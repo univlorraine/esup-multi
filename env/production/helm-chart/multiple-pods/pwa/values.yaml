@@ -2,12 +2,13 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-replicaCount: 1
+global:
+  initContainerWaits:
+    backend:
+      serviceName: backend-main-service
+      servicePort: 3000
 
-initContainerWaits:
-  backend:
-    serviceName: backend-main-service
-    servicePort: 3000
+replicaCount: 1
 
 image:
   tag: staging
