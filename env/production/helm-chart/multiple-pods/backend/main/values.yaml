@@ -9,16 +9,9 @@ mongodb:
     - "27017"
   persistence:
     mountPath: /bitnami/mongodb
-    annotations:
-      helm.sh/resource-policy: "keep"
   auth:
     existingSecret: "mongodb-secrets"
   nodeSelector: {}
-
-redis:
-  persistence:
-    annotations:
-      helm.sh/resource-policy: "keep"
 
 directus:
   replicaCount: 10
@@ -32,6 +25,8 @@ directus:
     email: changeit
     password: changeit
   mariadb:
+    annotations:
+      helm.sh/resource-policy: "keep"
     auth:
       rootPassword: secret
       username: directus
