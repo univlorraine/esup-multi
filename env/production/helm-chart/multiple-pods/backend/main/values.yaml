@@ -25,9 +25,10 @@ directus:
     email: changeit
     password: changeit
   mariadb:
-    persistence:
-      annotations:
-        helm.sh/resource-policy: "keep"
+    primary:
+      persistence:
+        annotations:
+          helm.sh/resource-policy: "keep"
     auth:
       rootPassword: secret
       username: directus

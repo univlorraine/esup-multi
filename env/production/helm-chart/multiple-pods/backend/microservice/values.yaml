@@ -5,14 +5,13 @@
 global:
   mongodb:
     serviceNameToConnect: mongodb
-  microServices:
-    initContainerWaits:
-      micro-services-db:
-        serviceName: mongodb
-        servicePort: 27017
-      micro-services-nats:
-        serviceName: nats
-        servicePort: 4222
+  initContainerWaits:
+    micro-services-db:
+      serviceName: mongodb
+      servicePort: 27017
+    micro-services-nats:
+      serviceName: nats
+      servicePort: 4222
 
 replicaCount: 1
 
