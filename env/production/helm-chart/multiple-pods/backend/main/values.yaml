@@ -15,13 +15,20 @@ mongodb:
 
 
 directus:
-  replicaCount: 1
+  replicaCount: 10
+  persistence:
+    enabled: true
+    storageClass: "longhorn" #or any other class supporting ReadWriteMany
+    annotations:
+      helm.sh/resource-policy: "keep"
   admin:
     email: changeit
     password: changeit
   mariadb:
     auth:
       rootPassword: secret
+      username: directus
+      password: directusPassword
   nodeSelector: {}
   extraEnvVars:
     - name: CACHE_ENABLED
