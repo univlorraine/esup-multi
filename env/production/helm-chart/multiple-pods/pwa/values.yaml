@@ -6,7 +6,7 @@ global:
   initContainerWaits:
     backend:
       serviceName: backend-main-service
-      servicePort: 3001
+      servicePort: 3000
 
 replicaCount: 1
 
@@ -21,7 +21,7 @@ appService:
 
 service:
   type: ClusterIP
-  port: 80
+  port: 81
 
 secret:
   name: multi-pwa-env-secrets
