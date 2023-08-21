@@ -1,4 +1,6 @@
 global:
+  mongodb:
+    serviceNameToConnect: mongodb-headless
   microServices:
     initContainerWaits:
       db:
