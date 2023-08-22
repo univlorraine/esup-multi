@@ -16,11 +16,9 @@ mongodb:
   nodeSelector: {}
 
 directus:
-  replicaCount: 10
+  replicaCount: 1
   persistence:
     enabled: true
-    storageClass: azurefile
-    accessModes: ReadWriteMany
     annotations:
       helm.sh/resource-policy: "keep"
   admin:
