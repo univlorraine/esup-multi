@@ -19,7 +19,6 @@ multi-microservice-features:
         FEATURES_SERVICE_HOST: "0.0.0.0"
         FEATURES_SERVICE_PORT: "3003"
         FEATURES_SERVICE_DIRECTUS_API_URL: *directusApiUrl
-      secret:
         FEATURES_SERVICE_DIRECTUS_API_BEARER_TOKEN: *directusApiBearerToken
 
 multi-microservice-auth:
@@ -125,9 +124,10 @@ multi-microservice-notifications:
         NOTIFICATIONS_SERVICE_UL_API_NOTIFICATIONS_URL: "changeit"
         NOTIFICATIONS_SERVICE_UL_API_CHANNELS_URL: "changeit"
         NOTIFICATIONS_SERVICE_DIRECTUS_API_URL: *directusApiUrl
+        NOTIFICATIONS_SERVICE_DIRECTUS_API_BEARER_TOKEN: *directusApiBearerToken
       secret:
         NOTIFICATIONS_SERVICE_UL_API_BEARER_TOKEN: "changeit"
-        NOTIFICATIONS_SERVICE_DIRECTUS_API_BEARER_TOKEN: *directusApiBearerToken
+        
 
 multi-microservice-important-news:
   appService:
@@ -140,7 +140,6 @@ multi-microservice-important-news:
         IMPORTANT_NEWS_SERVICE_HOST: "0.0.0.0"
         IMPORTANT_NEWS_SERVICE_PORT: "3011"
         IMPORTANT_NEWS_SERVICE_DIRECTUS_API_URL: *directusApiUrl
-      secret:
         IMPORTANT_NEWS_SERVICE_DIRECTUS_API_BEARER_TOKEN: *directusApiBearerToken
 
 multi-microservice-clocking:
@@ -168,8 +167,7 @@ multi-microservice-social-network:
         SOCIAL_NETWORK_SERVICE_HOST: "0.0.0.0"
         SOCIAL_NETWORK_SERVICE_PORT: "3013"
         SOCIAL_NETWORK_SERVICE_DIRECTUS_API_URL: *directusApiUrl
-      secret:
-        SOCIAL_NETWORK_SERVICE_DIRECTUS_API_BEARER_TOKEN: *directusApiBearerToken
+        SOCIAL_NETWORK_SERVICE_DIRECTUS_API_BEARER_TOKEN: *directusApiBearerToken       
 
 multi-microservice-chatbot:
   appService:
@@ -194,7 +192,6 @@ multi-microservice-static-pages:
         STATIC_PAGES_SERVICE_HOST: "0.0.0.0"
         STATIC_PAGES_SERVICE_PORT: "3015"
         STATIC_PAGES_SERVICE_DIRECTUS_API_URL: *directusApiUrl
-      secret:
         STATIC_PAGES_SERVICE_DIRECTUS_API_BEARER_TOKEN: *directusApiBearerToken
 
 multi-microservice-contact-us:
@@ -209,7 +206,6 @@ multi-microservice-contact-us:
         CONTACT_US_SERVICE_HOST: "0.0.0.0"
         CONTACT_US_SERVICE_SMTP: "changeit"
         CONTACT_US_SERVICE_DIRECTUS_API_URL: *directusApiUrl
-      secret:
         CONTACT_US_SERVICE_DIRECTUS_API_BEARER_TOKEN: *directusApiBearerToken
 
 multi-microservice-restaurants:
