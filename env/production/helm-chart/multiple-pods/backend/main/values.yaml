@@ -9,6 +9,8 @@ mongodb:
     - "27017"
   persistence:
     mountPath: /bitnami/mongodb
+    annotations:
+      helm.sh/resource-policy: "keep"
   auth:
     existingSecret: "mongodb-secrets"
   nodeSelector: {}
