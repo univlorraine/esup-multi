@@ -8,7 +8,7 @@ global:
 common:
   config:
     DIRECTUS_API_URL: &directusApiUrl "http://multi-directus"
-    DIRECTUS_API_BEARER_TOKEN: &directusApiBearerToken "jujrfKv-Z7W0CBkLYfp_lZlI6nU9_X9Z"
+    DIRECTUS_API_BEARER_TOKEN: &directusApiBearerToken "etHc0NncsOFstW6ZiTKYsX6fiH1BwfFT"
     NATS_URL: &natsUrl "nats://multi-nats:4222"
     KEEP_ALIVE: &keepAlive true
 
