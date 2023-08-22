@@ -13,8 +13,9 @@ mongodb:
 
 directus:
   replicaCount: 10
-  storageClass: azurefile
-  accessModes: ReadWriteMany
+  persistence:
+    storageClass: azurefile
+    accessModes: ReadWriteMany
   admin:
     email: test@jnesis.com
     password: test2
