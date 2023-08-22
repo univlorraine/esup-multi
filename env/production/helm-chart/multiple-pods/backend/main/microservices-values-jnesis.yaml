@@ -25,8 +25,8 @@ multi-microservice-features:
         FEATURES_SERVICE_NATS_SERVERS: *natsUrl
         FEATURES_SERVICE_DIRECTUS_API_URL: *directusApiUrl
         FEATURES_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVE: *keepAlive
-      secret:
         FEATURES_SERVICE_DIRECTUS_API_BEARER_TOKEN: *directusApiBearerToken
+
 multi-microservice-auth:
   enableDB: true
   appService:
@@ -99,8 +99,7 @@ multi-microservice-notifications:
         NOTIFICATIONS_SERVICE_NATS_SERVERS: *natsUrl
         NOTIFICATIONS_SERVICE_DIRECTUS_API_URL: *directusApiUrl
         NOTIFICATIONS_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVE: *keepAlive
-      secret:
-        NOTIFICATIONS_SERVICE_DIRECTUS_API_BEARER_TOKEN: *directusApiBearerToken
+        NOTIFICATIONS_SERVICE_DIRECTUS_API_BEARER_TOKEN: *directusApiBearerToken  
 
 multi-microservice-important-news:
   appService:
@@ -112,7 +111,6 @@ multi-microservice-important-news:
         IMPORTANT_NEWS_SERVICE_NATS_SERVERS: *natsUrl
         IMPORTANT_NEWS_SERVICE_DIRECTUS_API_URL: *directusApiUrl
         IMPORTANT_NEWS_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVE: *keepAlive
-      secret:
         IMPORTANT_NEWS_SERVICE_DIRECTUS_API_BEARER_TOKEN: *directusApiBearerToken
 
 multi-microservice-clocking:
@@ -158,7 +156,6 @@ multi-microservice-static-pages:
         STATIC_PAGES_SERVICE_NATS_SERVERS: *natsUrl
         STATIC_PAGES_SERVICE_DIRECTUS_API_URL: *directusApiUrl
         STATIC_PAGES_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVE: *keepAlive
-      secret:
         STATIC_PAGES_SERVICE_DIRECTUS_API_BEARER_TOKEN: *directusApiBearerToken
 
 multi-microservice-contact-us:
@@ -171,7 +168,6 @@ multi-microservice-contact-us:
         CONTACT_US_SERVICE_NATS_SERVERS: *natsUrl
         CONTACT_US_SERVICE_DIRECTUS_API_URL: *directusApiUrl
         CONTACT_US_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVE: *keepAlive
-      secret:
         CONTACT_US_SERVICE_DIRECTUS_API_BEARER_TOKEN: *directusApiBearerToken
         
 multi-microservice-restaurants:
