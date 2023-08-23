@@ -2,12 +2,13 @@ import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { Transport, MicroserviceOptions } from '@nestjs/microservices';
 import { AppModule } from './app.module';
+import * as os from 'os';
 
 async function bootstrap() {
-  
-  const os = require('os');
-  process.env.UV_THREADPOOL_SIZE = os.cpus().length
-  Logger.log(`UV_THREADPOOL_SIZE after auto-tuning: ${os.cpus().length}`);
+  process.env.UV_THREADPOOL_SIZE = os.cpus().length.toString();
+  Logger.log(
+    `UV_THREADPOOL_SIZE after auto-tuning: ${process.env.UV_THREADPOOL_SIZE}`,
+  );
 
   const natsServers = (
     process.env.SOCIAL_NETWORK_SERVICE_NATS_SERVERS || 'nats://localhost:4222'
