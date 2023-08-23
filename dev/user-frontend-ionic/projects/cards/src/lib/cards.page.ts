@@ -36,7 +36,7 @@ export class CardsPage {
     this.userAndCardsDataSubscription = userAndCardsData$.subscribe(userAndCardsData => {
       if (
         userAndCardsData &&
-        userAndCardsData.cards.staffCard &&
+        userAndCardsData.cards?.staffCard &&
         !userAndCardsData.errors
       ) {
         this.screenService.fullBrightness();
