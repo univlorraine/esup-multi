@@ -3,10 +3,11 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { EmptyResponseInterceptor } from './interceptors/empty-response.interceptor';
 import { NestExpressApplication } from '@nestjs/platform-express';
+import * as os from 'os';
 
 async function bootstrap() {
   const logger = new Logger('Bootstrap');
-  const os = require('os');
+
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     logger:
       process.env.EXTENDED_LOGS === 'true'
@@ -15,8 +16,10 @@ async function bootstrap() {
   });
   app.enable('trust proxy');
   app.useGlobalInterceptors(new EmptyResponseInterceptor());
-  process.env.UV_THREADPOOL_SIZE = os.cpus().length
-  logger.log(`UV_THREADPOOL_SIZE after auto-tuning: ${os.cpus().length}`);
+  process.env.UV_THREADPOOL_SIZE = os.cpus().length.toString();
+  logger.log(
+    `UV_THREADPOOL_SIZE after auto-tuning: ${process.env.UV_THREADPOOL_SIZE}`,
+  );
   const origin = (process.env.API_GATEWAY_CORS_ORIGIN || '')
     .split(',')
     .map((origin) => origin.trim());

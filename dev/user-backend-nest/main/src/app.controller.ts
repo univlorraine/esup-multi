@@ -11,7 +11,7 @@ import {
   Request,
   UnauthorizedException,
   UseGuards,
-  UseInterceptors
+  UseInterceptors,
 } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { AuthGuard } from '@nestjs/passport';
@@ -588,7 +588,7 @@ export class AppController {
               userData: {
                 username: user ? user.username : 'anonymous',
                 userAgent: request.headers['user-agent'],
-                ...(({ authToken, ...rest }) => rest)(body.userData),
+                ...(({ authToken, ...rest }) => rest)(body.userData), //eslint-disable-line @typescript-eslint/no-unused-vars
               },
             },
           );
@@ -647,7 +647,7 @@ export class AppController {
               xForwardedFor:
                 request.headers['x-forwarded-for'] ||
                 request.connection.remoteAddress,
-              ...(({ authToken, ...rest }) => rest)(body.data),
+              ...(({ authToken, ...rest }) => rest)(body.data), //eslint-disable-line @typescript-eslint/no-unused-vars
             },
           );
         }),
