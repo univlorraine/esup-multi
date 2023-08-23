@@ -17,8 +17,9 @@ export interface UserAndCardsData {
   gender: string;
   photo: string;
   ine?: number;
+  affiliation: string;
   errors: [];
-  cards: {
+  cards?: {
     studentCard?: StudentCard;
     euStudentCard?: EuStudentCard;
     staffCard?: StaffCard;
