@@ -6,7 +6,11 @@ const applyIfNotBlank = (param: string, applyFn: (value: string) => void) => {
   }
 };
 
-export default (): { ulApi: UlApi; keepAliveOptions: KeepAliveOptions } => {
+export default (): {
+  ulApi: UlApi;
+  keepAliveOptions: KeepAliveOptions;
+  cacheTtl: number;
+} => {
   const keepAliveOptions = {};
 
   applyIfNotBlank(
@@ -53,5 +57,6 @@ export default (): { ulApi: UlApi; keepAliveOptions: KeepAliveOptions } => {
         : [],
     },
     keepAliveOptions,
+    cacheTtl: parseInt(process.env.SCHEDULE_SERVICE_CACHE_TTL_MS),
   };
 };

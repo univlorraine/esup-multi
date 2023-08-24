@@ -1,4 +1,4 @@
-import { KeepAliveOptions, UlApi } from './configuration.interfaces';
+import { CacheTtl, KeepAliveOptions, UlApi } from './configuration.interfaces';
 
 const applyIfNotBlank = (param: string, applyFn: (value: string) => void) => {
   if (param && param.trim().length > 0) {
@@ -6,7 +6,11 @@ const applyIfNotBlank = (param: string, applyFn: (value: string) => void) => {
   }
 };
 
-export default (): { ulApi: UlApi; keepAliveOptions: KeepAliveOptions } => {
+export default (): {
+  ulApi: UlApi;
+  keepAliveOptions: KeepAliveOptions;
+  cacheTtl: CacheTtl;
+} => {
   const keepAliveOptions = {};
 
   applyIfNotBlank(
@@ -50,5 +54,11 @@ export default (): { ulApi: UlApi; keepAliveOptions: KeepAliveOptions } => {
       bearerToken: process.env.RESTAURANTS_SERVICE_UL_API_BEARER_TOKEN,
     },
     keepAliveOptions,
+    cacheTtl: {
+      restaurants: parseInt(
+        process.env.RESTAURANTS_SERVICE_CACHE_TTL_MS_RESTAURANTS,
+      ),
+      menus: parseInt(process.env.RESTAURANTS_SERVICE_CACHE_TTL_MS_MENUS),
+    },
   };
 };

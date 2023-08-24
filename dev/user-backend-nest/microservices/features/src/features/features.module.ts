@@ -1,4 +1,5 @@
 import { HttpModule } from '@nestjs/axios';
+import { CacheModule } from '@nestjs/cache-manager';
 import { Logger, Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { FeaturesController } from './features.controller';
@@ -22,6 +23,7 @@ import * as Agent from 'agentkeepalive';
       },
       inject: [ConfigService],
     }),
+    CacheModule.register(),
   ],
   providers: [FeaturesService],
   controllers: [FeaturesController],

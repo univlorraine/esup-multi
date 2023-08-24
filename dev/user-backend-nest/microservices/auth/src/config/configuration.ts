@@ -15,6 +15,7 @@ interface Configuration {
   credentialsCleanup: ScheduledCleanup;
   directusApi: DirectusApi;
   keepAliveOptions: KeepAliveOptions;
+  cacheTtl: number;
 }
 
 const applyIfNotBlank = (param: string, applyFn: (value: string) => void) => {
@@ -94,5 +95,6 @@ export default (): Configuration => {
       bearerToken: process.env.AUTH_SERVICE_DIRECTUS_API_BEARER_TOKEN,
     },
     keepAliveOptions,
+    cacheTtl: parseInt(process.env.AUTH_SERVICE_CACHE_TTL_MS),
   };
 };

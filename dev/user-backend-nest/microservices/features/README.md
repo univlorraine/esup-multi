@@ -7,6 +7,7 @@ Ce module est en charge de remonter les services internes et externes de l'appli
 - `FEATURES_SERVICE_NATS_SERVERS`: Addresses complètes des serveurs NATS séparées par des virgules (ex: nats://localhost:4222)
 - `FEATURES_SERVICE_DIRECTUS_API_URL`: L'URL de l'API du CMS Directus
 - `FEATURES_SERVICE_DIRECTUS_API_BEARER_TOKEN`: Bearer token permettant l'accès à l'API du CMS Directus
+- `FEATURES_SERVICE_CACHE_TTL_MS`: Durée de vie du cache en millisecondes (default: 300)
 
 ### Agentkeepalive configuration
 Look at [official documentation](https://github.com/node-modules/agentkeepalive#new-agentoptions) for each of the following options :

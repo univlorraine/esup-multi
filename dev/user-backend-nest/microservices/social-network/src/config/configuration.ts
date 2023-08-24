@@ -9,6 +9,7 @@ const applyIfNotBlank = (param: string, applyFn: (value: string) => void) => {
 export default (): {
   directusApi: DirectusApi;
   keepAliveOptions: KeepAliveOptions;
+  cacheTtl: number;
 } => {
   const keepAliveOptions = {};
 
@@ -53,5 +54,6 @@ export default (): {
       bearerToken: process.env.SOCIAL_NETWORK_SERVICE_DIRECTUS_API_BEARER_TOKEN,
     },
     keepAliveOptions,
+    cacheTtl: parseInt(process.env.SOCIAL_NETWORK_SERVICE_CACHE_TTL_MS),
   };
 };

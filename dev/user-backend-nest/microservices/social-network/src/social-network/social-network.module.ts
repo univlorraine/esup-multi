@@ -1,11 +1,11 @@
 import { HttpModule } from '@nestjs/axios';
+import { CacheModule } from '@nestjs/cache-manager';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { Module } from '@nestjs/common';
+import { Logger, Module } from '@nestjs/common';
 import { SocialNetworkController } from './social-network.controller';
 import { SocialNetworkService } from './social-network.service';
 import * as Agent from 'agentkeepalive';
 import { KeepAliveOptions } from '../config/configuration.interface';
-import { Logger } from '@nestjs/common';
 
 @Module({
   imports: [
@@ -21,6 +21,13 @@ import { Logger } from '@nestjs/common';
           httpsAgent: new Agent.HttpsAgent(keepAliveOptions),
         };
       },
+      inject: [ConfigService],
+    }),
+    CacheModule.registerAsync({
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => ({
+        ttl: configService.get<number>('cacheTtl') || 300,
+      }),
       inject: [ConfigService],
     }),
   ],

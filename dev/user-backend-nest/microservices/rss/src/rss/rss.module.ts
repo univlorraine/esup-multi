@@ -1,11 +1,22 @@
 import { HttpModule } from '@nestjs/axios';
+import { CacheModule } from '@nestjs/cache-manager';
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { RssController } from './rss.controller';
 import { RssService } from './rss.service';
 
 @Module({
-  imports: [ConfigModule, HttpModule],
+  imports: [
+    ConfigModule,
+    HttpModule,
+    CacheModule.registerAsync({
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => ({
+        ttl: configService.get<number>('cacheTtl') || 300,
+      }),
+      inject: [ConfigService],
+    }),
+  ],
   providers: [RssService],
   controllers: [RssController],
 })

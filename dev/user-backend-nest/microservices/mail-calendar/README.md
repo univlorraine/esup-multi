@@ -7,6 +7,7 @@ Ce module est en charge de remonter les informations liées aux mails et calendr
 - `MAIL_CALENDAR_SERVICE_NATS_SERVERS`: Addresses complètes des serveurs NATS séparées par des virgules (ex: nats://localhost:4222)
 - `MAIL_CALENDAR_SERVICE_UL_API_URL`: L'URL de l'API permettant d'interagir avec le service externe de mail et calendrier.
 - `MAIL_CALENDAR_SERVICE_UL_API_BEARER_TOKEN`: La clef d'authentification à l'API de l'Université.
+- `MAIL_CALENDAR_SERVICE_CACHE_TTL_MS`: Durée de vie du cache en millisecondes (default: 300)
 
 ### Agentkeepalive configuration
 Look at [official documentation](https://github.com/node-modules/agentkeepalive#new-agentoptions) for each of the following options :

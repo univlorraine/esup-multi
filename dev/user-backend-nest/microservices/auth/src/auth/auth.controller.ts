@@ -1,4 +1,5 @@
-import { Controller } from '@nestjs/common';
+import { CacheInterceptor, CacheKey } from '@nestjs/cache-manager';
+import { Controller, UseInterceptors } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
 import { Observable } from 'rxjs';
 import { LoginPageContentResultDto } from 'src/page-content/login-page-content/login-page-content.dto';
@@ -42,6 +43,8 @@ export class AuthController {
   }
 
   @MessagePattern({ cmd: 'loginPageContent' })
+  @CacheKey('auth_loginPageContent')
+  @UseInterceptors(CacheInterceptor)
   getLoginPageContent(): Observable<LoginPageContentResultDto> {
     return this.authService.getPageContent();
   }

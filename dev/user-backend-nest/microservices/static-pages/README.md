@@ -8,6 +8,7 @@ Ce module est en charge de remonter les pages statiques en provenance du CMS.
 - `STATIC_PAGES_SERVICE_NATS_SERVERS`: Addresses complètes des serveurs NATS séparées par des virgules (ex: nats://localhost:4222)
 - `STATIC_PAGES_SERVICE_DIRECTUS_API_URL`: L'URL de l'API Directus des pages statiques
 - `STATIC_PAGES_SERVICE_DIRECTUS_API_BEARER_TOKEN`: Bearer token permettant l'accès à l'API du CMS Directus
+- `STATIC_PAGES_SERVICE_CACHE_TTL_MS`: Durée de vie du cache en millisecondes (default: 300)
 
 ### Agentkeepalive configuration
 Look at [official documentation](https://github.com/node-modules/agentkeepalive#new-agentoptions) for each of the following options :

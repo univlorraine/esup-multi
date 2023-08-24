@@ -12,3 +12,8 @@ export interface KeepAliveOptions {
   maxFreeSockets?: number;
   socketActiveTTL?: number;
 }
+
+export interface CacheTtl {
+  restaurants: number;
+  menus: number;
+}
