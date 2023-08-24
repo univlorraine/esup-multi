@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { CacheModule } from '@nestjs/cache-manager';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { LoginPageContentService } from '../page-content/login-page-content/login-page-content.service';
 import { AuthController } from './auth.controller';
@@ -20,6 +21,13 @@ import { KeepaliveHttpModule } from '../keepalive-http.module';
     MongooseModule.forFeature([
       { name: AuthenticatedUser.name, schema: AuthenticatedUserSchema },
     ]),
+    CacheModule.registerAsync({
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => ({
+        ttl: configService.get<number>('cacheTtl') || 300,
+      }),
+      inject: [ConfigService],
+    }),
   ],
   providers: [
     AuthService,

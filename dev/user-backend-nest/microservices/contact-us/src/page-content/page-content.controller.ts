@@ -1,4 +1,5 @@
-import { Controller } from '@nestjs/common';
+import { CacheInterceptor, CacheKey } from '@nestjs/cache-manager';
+import { Controller, UseInterceptors } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
 import { from, Observable } from 'rxjs';
 import { PageContentResultDto } from './page-content.dto';
@@ -9,6 +10,8 @@ export class PageContentController {
   constructor(private readonly pageContentService: PageContentService) {}
 
   @MessagePattern({ cmd: 'contactUsPageContent' })
+  @CacheKey('contactUs_pageContent')
+  @UseInterceptors(CacheInterceptor)
   getContactUsPageContent(): Observable<PageContentResultDto> {
     return from(this.pageContentService.getPageContent());
   }

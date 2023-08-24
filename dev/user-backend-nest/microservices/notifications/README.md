@@ -11,6 +11,7 @@ Ce module est en charge de remonter les notifications de l'utilisateur en proven
 - `NOTIFICATIONS_SERVICE_UL_API_BEARER_TOKEN`: Le token d'accès à l'API permettant d'obtenir les notifications et les channels.
 - `NOTIFICATIONS_SERVICE_DIRECTUS_API_URL`: L'URL de l'API Directus des channels
 - `NOTIFICATIONS_SERVICE_DIRECTUS_API_BEARER_TOKEN`: Bearer token permettant l'accès à l'API du CMS Directus
+- `NOTIFICATIONS_SERVICE_CACHE_TTL_MS`: Durée de vie du cache en millisecondes (default: 300)
 
 ### Agentkeepalive configuration
 Look at [official documentation](https://github.com/node-modules/agentkeepalive#new-agentoptions) for each of the following options :

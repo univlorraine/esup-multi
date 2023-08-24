@@ -9,6 +9,7 @@ Ce module est en charge de remonter les contenus d'emplois du temps en provenanc
 - `SCHEDULE_SERVICE_UL_API_USER_SCHEDULE_URL`: L'URL de l'API de l'UL permettant d'obtenir les emplois du temps d'un utilisateur. `{username}` sera remplacé par la valeur de l'identifiant de l'utilisateur.
 - `SCHEDULE_SERVICE_UL_API_BEARER_TOKEN`: Bearer token permettant l'accès à l'API de l'Université
 - `SCHEDULE_SERVICE_ADMIN_ROLES`: Liste des rôles uilisateur autorisés à afficher l'emploi du temps d'une tierce personne
+- `SCHEDULE_SERVICE_CACHE_TTL_MS`: Durée de vie du cache en millisecondes (default: 300)
 
 ### Agentkeepalive configuration
 Look at [official documentation](https://github.com/node-modules/agentkeepalive#new-agentoptions) for each of the following options :

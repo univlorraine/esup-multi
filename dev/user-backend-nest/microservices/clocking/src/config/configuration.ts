@@ -6,7 +6,11 @@ const applyIfNotBlank = (param: string, applyFn: (value: string) => void) => {
   }
 };
 
-export default (): { ulApi: UlApi; keepAliveOptions: KeepAliveOptions } => {
+export default (): {
+  ulApi: UlApi;
+  keepAliveOptions: KeepAliveOptions;
+  cacheTtl: number;
+} => {
   const keepAliveOptions = {};
 
   applyIfNotBlank(
@@ -50,5 +54,6 @@ export default (): { ulApi: UlApi; keepAliveOptions: KeepAliveOptions } => {
       bearerToken: process.env.CLOCKING_SERVICE_UL_API_BEARER_TOKEN,
     },
     keepAliveOptions,
+    cacheTtl: parseInt(process.env.CLOCKING_SERVICE_CACHE_TTL_MS),
   };
 };

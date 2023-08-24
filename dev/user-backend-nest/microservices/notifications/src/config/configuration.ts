@@ -14,6 +14,7 @@ export default (): {
   ulApi: UlApi;
   directusApi: DirectusApi;
   keepAliveOptions: KeepAliveOptions;
+  cacheTtl: number;
 } => {
   const keepAliveOptions = {};
 
@@ -63,5 +64,6 @@ export default (): {
       bearerToken: process.env.NOTIFICATIONS_SERVICE_DIRECTUS_API_BEARER_TOKEN,
     },
     keepAliveOptions,
+    cacheTtl: parseInt(process.env.NOTIFICATIONS_SERVICE_CACHE_TTL_MS),
   };
 };
