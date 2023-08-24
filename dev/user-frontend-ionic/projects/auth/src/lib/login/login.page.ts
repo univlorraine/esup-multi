@@ -82,6 +82,12 @@ export class LoginPage implements OnInit {
     this.preferencesService.saveCredentialsOnAuthenticationChange(saveCredentials);
   }
 
+  keyboardEnter() {
+    if (this.loginForm.valid && !this.isLoading) {
+      this.submit();
+    }
+  }
+
   submit() {
     this.isLoading = true;
     this.authService
