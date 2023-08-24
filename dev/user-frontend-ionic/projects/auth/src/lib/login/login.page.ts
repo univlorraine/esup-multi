@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { IonInput, ToastController } from '@ionic/angular';
 import { AuthenticatedUser, isLoggedTourViewed, NavigationService } from '@ul/shared';
 import { Observable } from 'rxjs';
 import { finalize, take, tap } from 'rxjs/operators';
@@ -82,10 +82,14 @@ export class LoginPage implements OnInit {
     this.preferencesService.saveCredentialsOnAuthenticationChange(saveCredentials);
   }
 
-  keyboardEnter() {
+  keyboardSubmit() {
     if (this.loginForm.valid && !this.isLoading) {
       this.submit();
     }
+  }
+
+  gotoField(field: IonInput) {
+    field.setFocus();
   }
 
   submit() {

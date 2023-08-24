@@ -19,7 +19,7 @@
 
     <ion-item lines="full">
       <ion-label position="floating" class="input-label app-text-3 light">{{ 'AUTH.LOGIN.USERNAME' | translate }}</ion-label>
-      <ion-input (keyup.enter)="keyboardEnter()" type="text" formControlName="username" class="form-control" id="username" required></ion-input>
+      <ion-input (keyup.enter)="gotoField(passwordField)" type="text" formControlName="username" class="form-control" id="username" required></ion-input>
       <ion-note class="app-text-5 danger" slot="error" *ngIf="username && username.errors && (username.dirty && username.touched)">
         {{ 'AUTH.LOGIN.REQUIRED.USERNAME' | translate }}
       </ion-note>
@@ -27,7 +27,7 @@
 
     <ion-item lines="full">
       <ion-label position="floating" class="input-label app-text-3 light">{{ 'AUTH.LOGIN.PASSWORD' | translate }}</ion-label>
-      <ion-input (keyup.enter)="keyboardEnter()" class="form-control" formControlName="password" id="password"
+      <ion-input #passwordField (keyup.enter)="keyboardSubmit()" class="form-control" formControlName="password" id="password"
                  required type="password"></ion-input>
       <ion-note class="app-text-5 danger" slot="error" *ngIf="password && password.errors && (password.dirty && password.touched)">
         {{ 'AUTH.LOGIN.REQUIRED.PASSWORD' | translate }}
