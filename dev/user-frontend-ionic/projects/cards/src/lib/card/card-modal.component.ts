@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { ScreenService } from '../screen.service';
 import { App } from '@capacitor/app';
 import { PluginListenerHandle } from '@capacitor/core';
@@ -9,14 +9,25 @@ import { PluginListenerHandle } from '@capacitor/core';
   styleUrls: ['./card-modal.component.scss']
 })
 
-export class CardModalComponent {
+export class CardModalComponent implements OnInit, OnDestroy {
   @Input() userAndCardsData;
   public cardType: string;
   public isModalOpen = false;
+  private backButtonListener: Promise<PluginListenerHandle>;
 
   constructor(
     private screenService: ScreenService,
   ) {}
+
+  ngOnInit() {
+    this.backButtonListener = App.addListener('backButton', this.closeModal);
+  }
+
+  ngOnDestroy() {
+    this.backButtonListener.then((listener) => {
+      listener.remove();
+    });
+  }
 
   openModal(cardType) {
     this.screenService.fullBrightness();
@@ -29,4 +40,3 @@ export class CardModalComponent {
     this.isModalOpen = false;
   };
 }
-
