@@ -13,6 +13,9 @@ ion-card {
   border-left: var(--app-border-width-7) solid var(--app-border-color-primary) !important;
   border-right: var(--app-border-width-7) solid var(--app-border-color-primary) !important;
   border-bottom: var(--app-border-width-7) solid var(--app-border-color-primary) !important;
+  display: flex;
+  flex-direction: column;
+  max-height: inherit;
 }
 
 .open-link-button {
@@ -25,6 +28,12 @@ ion-card {
   transition: max-height 0.5s ease-in-out;
   max-height: 0px !important;
 }
+
+.rss-news-description {
+  flex-grow: 1;
+  overflow: scroll;
+}
+
 .rss-news-content.visible {
   max-height: 500px !important;
 }
