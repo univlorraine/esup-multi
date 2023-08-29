@@ -471,7 +471,7 @@ export class AppController {
             },
             {
               username: user.username,
-              token: body.token,
+              token: body.fcmToken,
             },
           ),
         ),
