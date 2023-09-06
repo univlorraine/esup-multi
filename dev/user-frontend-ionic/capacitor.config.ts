@@ -13,8 +13,9 @@ const config: CapacitorConfig = {
       splashImmersive: false,
       backgroundColor: '#ffffff',
     },
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     FirebaseMessaging: {
-      presentationOptions: ["badge", "sound", "alert"],
+      presentationOptions: ['badge', 'sound', 'alert'],
     },
   },
 };
