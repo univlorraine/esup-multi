@@ -1,4 +1,4 @@
-import firebasePwaEnvironment from './firebase/web/firebase-environment.pwa-development.json';
+import firebasePwaEnvironment from './firebase/web/firebase-environment.pwa-production.json';
 
 export const environment = {
   production: true,
