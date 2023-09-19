@@ -1,3 +1,7 @@
+ion-title {
+  color: var(--app-font-color-topbar) !important;
+}
+
 body.scanner-active {
     --background: transparent;
     --ion-background-color: transparent;

@@ -8,8 +8,8 @@
   </ion-row>
 
   <ion-fab *ngIf="draggableIsOn" slot="fixed" vertical="bottom" horizontal="end">
-    <ion-fab-button size="small" (click)="deactivateDrag()" color="secondary">
-      <ion-icon name="checkmark-circle-outline" color="primary"></ion-icon>
+    <ion-fab-button size="small" (click)="deactivateDrag()">
+      <ion-icon name="checkmark-circle-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 
@@ -17,7 +17,7 @@
 
     <div #draggableServices class="not-draggable draggable-container" *ngFor="let menuItem of menuItems;">
       <div class="inner-draggable-container">
-        <ion-button shape="round" size="small" *ngIf="draggableIsOn" color="light"
+        <ion-button shape="round" size="small" *ngIf="draggableIsOn"
           class="drag-button ion-no-padding ion-no-margin" dragHandle>
           <ion-icon class="drag-button-icon" name="move-outline" dragHandle slot="icon-only"
             size="small"></ion-icon></ion-button>

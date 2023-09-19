@@ -9,7 +9,7 @@
 
 <ion-modal [isOpen]="isSelectPlanningModalOpen" (willDismiss)="onDismissSelectPlanningModal()">
   <ng-template>
-    <ion-progress-bar *ngIf="isLoading" type="indeterminate" color="primary"></ion-progress-bar>
+    <ion-progress-bar *ngIf="isLoading" type="indeterminate"></ion-progress-bar>
 
     <ion-header>
       <ion-toolbar>
@@ -44,7 +44,7 @@
 
 <ion-modal [isOpen]="isHiddenCourseModalOpen && ((hiddenCourseList$ | async)?.length > 0)" (willDismiss)="onDismissHiddenCourseModal()">
   <ng-template>
-    <ion-progress-bar *ngIf="isLoading" type="indeterminate" color="primary"></ion-progress-bar>
+    <ion-progress-bar *ngIf="isLoading" type="indeterminate"></ion-progress-bar>
 
     <ion-header>
       <ion-toolbar>

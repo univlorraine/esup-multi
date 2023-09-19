@@ -2,13 +2,20 @@ ion-progress-bar {
   z-index: 2;
 }
 
-ion-toolbar, ion-tabs {
+ion-toolbar {
+  position: relative;
+  --ion-toolbar-background: var(--ion-color-secondary);
+  --ion-toolbar-color: var(--ion-color-secondary-contrast);
+}
+
+ion-tabs {
   position: relative;
 }
 
 ion-tab-bar {
   height: 2.4rem;
   padding-top: 0 !important;
+  --background: var(--ion-color-medium);
 }
 
 ion-label {

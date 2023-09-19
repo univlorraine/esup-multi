@@ -1,7 +1,7 @@
 <ion-tabs>
 
   <ion-header>
-    <ion-toolbar color="primary">
+    <ion-toolbar>
       <img src="assets/logo/white-university-logo.svg" class="logo ion-padding-start app-logo-3" />
       <ion-buttons slot="end">
         <ion-button *ngFor="let menu of (topMenuItems$ | async) ; let i = index"
@@ -14,7 +14,7 @@
         </ion-button>
       </ion-buttons>
     </ion-toolbar>
-    <ion-progress-bar *ngIf="isLoading" type="indeterminate" color="primary"></ion-progress-bar>
+    <ion-progress-bar *ngIf="isLoading" type="indeterminate"></ion-progress-bar>
 
     <ion-row class="ion-text-center network-toolbar" *ngIf="(isOnline$ | async) === false">
       <ion-col>

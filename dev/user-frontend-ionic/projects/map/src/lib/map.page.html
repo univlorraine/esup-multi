@@ -25,7 +25,7 @@
     </ng-template>
   </ion-popover>
 </app-header>
-<ion-progress-bar *ngIf="isLoading" type="indeterminate" color="primary"></ion-progress-bar>
+<ion-progress-bar *ngIf="isLoading" type="indeterminate"></ion-progress-bar>
 
 <ion-list class="chip-list" *ngIf="categoriesSelected?.length > 0">
   <ion-chip *ngFor="let category of categoriesSelected; let i = index" (click)="removeSelectedCategory(category, i)">

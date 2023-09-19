@@ -2,11 +2,11 @@
 
 <ion-item-group *ngIf="isLoading" class="spinner-container ion-align-items-center ion-justify-content-center">
   <ion-row class="ion-margin">
-    <ion-spinner name="circular" color="primary"></ion-spinner>
+    <ion-spinner name="circular"></ion-spinner>
   </ion-row>
 </ion-item-group>
 
-<ion-progress-bar *ngIf="isFetchingAnswer" type="indeterminate" color="primary"></ion-progress-bar>
+<ion-progress-bar *ngIf="isFetchingAnswer" type="indeterminate"></ion-progress-bar>
 
 <ion-content #scrollContent [ngClass]="isLoading ? 'ion-hide' : ''">
   <ion-list #messages class="safe-area-padding-lr">

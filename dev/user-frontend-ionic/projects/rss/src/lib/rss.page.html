@@ -1,6 +1,5 @@
-<ion-progress-bar *ngIf="isLoading" type="indeterminate" color="primary"></ion-progress-bar>
-
 <app-header></app-header>
+<ion-progress-bar *ngIf="isLoading" type="indeterminate"></ion-progress-bar>
 
 <ion-content *ngIf="(rssFeedIsEmpty$ | async) === false">
   <ion-card *ngFor="let item of (rssFeed$ | async); let i = index">
@@ -23,7 +22,7 @@
       <div class="border-content">
 
         <ion-row class="rss-news-description">
-          <ion-text color="primary" class="ion-text-wrap ion-margin">
+          <ion-text class="ion-text-wrap ion-margin">
             <div class="app-text-4" [innerHTML]="item.content"></div>
           </ion-text>
         </ion-row>

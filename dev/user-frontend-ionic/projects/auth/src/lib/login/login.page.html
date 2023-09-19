@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="primary">
+  <ion-toolbar>
     <ion-buttons slot="start">
       <app-back-button></app-back-button>
     </ion-buttons>
@@ -9,7 +9,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-progress-bar *ngIf="isLoading" type="indeterminate" color="primary"></ion-progress-bar>
+<ion-progress-bar *ngIf="isLoading" type="indeterminate"></ion-progress-bar>
 
 <ion-content class="ion-padding" *ngIf="translatedPageContent$ | async as page">
   <form [formGroup]="loginForm" (ngSubmit)="submit()">
