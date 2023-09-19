@@ -4,7 +4,7 @@
       <ion-col>
         <ion-row class="rss-news-header">
           <ion-col *ngIf="item.enclosure && isMediaAnImage(item.enclosure)">
-            <img alt="{{ item.enclosure.url }}" src="{{ item.enclosure.url }}"/>
+            <img alt="" src="{{ item.enclosure.url }}"/>
           </ion-col>
           <ion-col [size]="item.enclosure && isMediaAnImage(item.enclosure) ? '7' : '12'"
                    class="border-bottom title-col">
