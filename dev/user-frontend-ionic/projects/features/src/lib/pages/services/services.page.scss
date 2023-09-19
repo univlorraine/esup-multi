@@ -100,6 +100,16 @@ app-service {
   --overflow: hidden;
 }
 
+ion-fab-button {
+  --background: var(--ion-color-secondary);
+  --color: var(--ion-color-primary);
+}
+
+ion-button {
+  --background: var(--ion-color-light);
+  --color: var(--ion-color-primary);
+}
+
 /*
 Dragula drag and drop documentation CSS
 */

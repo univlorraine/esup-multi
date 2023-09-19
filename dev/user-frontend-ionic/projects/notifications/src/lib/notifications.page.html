@@ -42,7 +42,7 @@
   <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
-  <ion-progress-bar *ngIf="isLoading" type="indeterminate" color="primary"></ion-progress-bar>
+  <ion-progress-bar *ngIf="isLoading" type="indeterminate"></ion-progress-bar>
 
   <ng-container *ngIf="filteredNotifications.length > 0">
     <ion-list class="notifications-list">
@@ -140,7 +140,7 @@
           </ion-note>
         </ng-container>
         <ng-container *ngIf="loadMoreNotificationsError">
-          <ion-note class="ion-text-center" color="danger">
+          <ion-note class="ion-text-center danger">
             {{ "NOTIFICATIONS.LOAD_MORE_ERROR" | translate }}
           </ion-note>
         </ng-container>

@@ -3,7 +3,7 @@
 </ion-row>
 <ng-container *ngIf="!isLoading">
   <ion-row *ngIf="errorMessage" class="ion-padding">
-    <ion-note color="danger">{{errorMessage}}</ion-note>
+    <ion-note class="danger">{{errorMessage}}</ion-note>
   </ion-row>
   <ion-row *ngIf="!errorMessage" [ngClass]="fontColor()" class="ion-align-items-center ion-padding app-text-4" [ngClass]="fontColor()">
     {{ 'CLOCKING.YOUR_TIMES' | translate }} : <ion-chip *ngFor="let time of (clocking$ | async)?.times" class="app-text-4 dark-font-color">{{ time

@@ -1,3 +1,7 @@
+ion-icon {
+  color: var(--ion-color-icon-primary-contrast);
+}
+
 .favorite-icon {
   position: absolute;
   top: 0.5rem;
@@ -9,6 +13,7 @@
 
 .pin {
   padding-top: 8%;
+  color: var(--ion-color-medium-light);
 }
 
 .description {
