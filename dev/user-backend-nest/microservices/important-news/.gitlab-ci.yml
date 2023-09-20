@@ -1,0 +1,6 @@
+variables:
+  CURRENT_DIR: "dev/user-backend-nest/microservices/important-news/"
+  CURRENT_PROJECT: "important-news"
+  IMAGE_NAME: "backend/multi-important-news"
+
+include: "${CI_PROJET_DIR}/dev/user-backend-nest/template-ci.yml"

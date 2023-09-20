@@ -1,0 +1,177 @@
+variables:
+  CURRENT_DIR: "dev/user-frontend-ionic"
+  IMAGE_NAME: "frontend/multi-pwa"
+#  IMAGE_NAME_2: "frontend/frontend-web"
+  DOCKERFILE_PATH: "${CI_PROJECT_DIR}/${CURRENT_DIR}/Dockerfile"
+  SECURE_FILES_DOWNLOAD_PATH: "src/environments/firebase/web"
+
+cache:
+  key:
+    files:
+      - ${CI_PROJECT_DIR}/${CURRENT_DIR}/package-lock.json
+  paths:
+    - ${CI_PROJECT_DIR}/${CURRENT_DIR}/node_modules/
+
+build-dev:
+  stage: build
+  image: node:$NODE_VERSION
+  before_script:
+    - cd $CURRENT_DIR
+    - apk add --update --no-cache python3 build-base gcc && ln -sf /usr/bin/python3 /usr/bin/python
+    - npm install -g @ionic/cli
+    - npm install
+    - mkdir -p ${SECURE_FILES_DOWNLOAD_PATH} && curl --silent "https://gitlab.com/gitlab-org/incubation-engineering/mobile-devops/download-secure-files/-/raw/main/installer" | bash
+    - mkdir -p src/assets/stubs && cp -v ${SECURE_FILES_DOWNLOAD_PATH}/firebase-environment.pwa-development.json "src/assets/stubs/firebase-environment.json"
+  script:
+    - npm run build -- --configuration=ul-pwa-development
+  artifacts:
+    paths:
+      - ${CI_PROJECT_DIR}/${CURRENT_DIR}/www/
+    expire_in: 1 hour
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "develop-sied"'
+
+build-preprod:
+  stage: build
+  image: node:$NODE_VERSION
+  before_script:
+    - cd $CURRENT_DIR
+    - apk add --update --no-cache python3 build-base gcc && ln -sf /usr/bin/python3 /usr/bin/python
+    - npm install -g @ionic/cli
+    - npm install
+    - mkdir -p ${SECURE_FILES_DOWNLOAD_PATH} && curl --silent "https://gitlab.com/gitlab-org/incubation-engineering/mobile-devops/download-secure-files/-/raw/main/installer" | bash
+    - mkdir -p src/assets/stubs && cp -v ${SECURE_FILES_DOWNLOAD_PATH}/firebase-environment.pwa-production.json "src/assets/stubs/firebase-environment.json"
+  script:
+    - npm run build -- --configuration=ul-pwa-preprod
+  artifacts:
+    paths:
+      - ${CI_PROJECT_DIR}/${CURRENT_DIR}/www/
+    expire_in: 1 hour
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "develop-sied"'
+
+build-prod:
+  stage: build
+  image: node:$NODE_VERSION
+  before_script:
+    - cd $CURRENT_DIR
+    - apk add --update --no-cache python3 build-base gcc && ln -sf /usr/bin/python3 /usr/bin/python
+    - npm install -g @ionic/cli
+    - npm install
+    - mkdir -p ${SECURE_FILES_DOWNLOAD_PATH} && curl --silent "https://gitlab.com/gitlab-org/incubation-engineering/mobile-devops/download-secure-files/-/raw/main/installer" | bash
+    - mkdir -p src/assets/stubs && cp -v ${SECURE_FILES_DOWNLOAD_PATH}/firebase-environment.pwa-production.json "src/assets/stubs/firebase-environment.json"
+  script:
+    - npm run build -- --configuration=ul-pwa-prod
+  artifacts:
+    paths:
+      - ${CI_PROJECT_DIR}/${CURRENT_DIR}/www/
+    expire_in: 1 hour
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "develop-sied"'
+
+#build-dev-portainer:
+#  stage: build
+#  image: node:$NODE_VERSION
+#  before_script:
+#    - cd $CURRENT_DIR
+#    - apk add --update --no-cache python3 build-base gcc && ln -sf /usr/bin/python3 /usr/bin/python
+#    - npm install -g @ionic/cli
+#    - npm install
+#    - mkdir -p ${SECURE_FILES_DOWNLOAD_PATH} && curl --silent "https://gitlab.com/gitlab-org/incubation-engineering/mobile-devops/download-secure-files/-/raw/main/installer" | bash
+#    - mkdir -p src/assets/stubs && cp -v ${SECURE_FILES_DOWNLOAD_PATH}/firebase-environment.pwa-development.json "src/assets/stubs/firebase-environment.json"
+#  script:
+#    - npm run build -- --configuration=ul-development
+#  artifacts:
+#    paths:
+#      - ${CI_PROJECT_DIR}/${CURRENT_DIR}/www/
+#    expire_in: 1 hour
+#  rules:
+#    - if: '$CI_COMMIT_BRANCH == "develop-sied"'
+
+deploy-dev:
+  stage: deploy
+  needs:
+    - build-dev
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  before_script:
+    # On renseigne les informations de connexion au registry Harbor dans un fichier de conf Kaniko
+    - mkdir -p /kaniko/.docker
+    - echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "${CI_REGISTRY_USER}" "${CI_REGISTRY_PASSWORD}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
+  script:
+    # On compile l'image Docker et on la push dans le registry avec Kaniko
+    - /kaniko/executor
+      --context "${CI_PROJECT_DIR}/${CURRENT_DIR}"
+      --dockerfile $DOCKERFILE_PATH
+      --destination "${CI_REGISTRY_IMAGE}/${IMAGE_NAME}:${CI_COMMIT_SHORT_SHA}"
+      --destination "${CI_REGISTRY_IMAGE}/${IMAGE_NAME}:develop"
+  when: manual
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "develop-sied"'
+
+deploy-preprod:
+  stage: deploy
+  needs:
+    - build-preprod
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  before_script:
+    # On renseigne les informations de connexion au registry Harbor dans un fichier de conf Kaniko
+    - mkdir -p /kaniko/.docker
+    - echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "${CI_REGISTRY_USER}" "${CI_REGISTRY_PASSWORD}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
+  script:
+    # On compile l'image Docker et on la push dans le registry avec Kaniko
+    - /kaniko/executor
+      --context "${CI_PROJECT_DIR}/${CURRENT_DIR}"
+      --dockerfile $DOCKERFILE_PATH
+      --destination "${CI_REGISTRY_IMAGE}/${IMAGE_NAME}:${CI_COMMIT_SHORT_SHA}"
+      --destination "${CI_REGISTRY_IMAGE}/${IMAGE_NAME}:preprod"
+  when: manual
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "develop-sied"'
+
+deploy-prod:
+  stage: deploy
+  needs:
+    - build-prod
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  before_script:
+    # On renseigne les informations de connexion au registry Harbor dans un fichier de conf Kaniko
+    - mkdir -p /kaniko/.docker
+    - echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "${CI_REGISTRY_USER}" "${CI_REGISTRY_PASSWORD}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
+  script:
+    # On compile l'image Docker et on la push dans le registry avec Kaniko
+    - /kaniko/executor
+      --context "${CI_PROJECT_DIR}/${CURRENT_DIR}"
+      --dockerfile $DOCKERFILE_PATH
+      --destination "${CI_REGISTRY_IMAGE}/${IMAGE_NAME}:${CI_COMMIT_SHORT_SHA}"
+      --destination "${CI_REGISTRY_IMAGE}/${IMAGE_NAME}:prod"
+  when: manual
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "develop-sied"'
+
+#deploy-dev-portainer:
+#  stage: deploy
+#  needs:
+#    - build-dev-portainer
+#  image:
+#    name: gcr.io/kaniko-project/executor:debug
+#    entrypoint: [ "" ]
+#  before_script:
+#    # On renseigne les informations de connexion au registry Harbor dans un fichier de conf Kaniko
+#    - mkdir -p /kaniko/.docker
+#    - echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "${CI_REGISTRY_USER}" "${CI_REGISTRY_PASSWORD}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
+#  script:
+#    # On compile l'image Docker et on la push dans le registry avec Kaniko
+#    - /kaniko/executor
+#      --context "${CI_PROJECT_DIR}/${CURRENT_DIR}"
+#      --dockerfile $DOCKERFILE_PATH
+#      --destination "${CI_REGISTRY_IMAGE}/${IMAGE_NAME_2}:${CI_COMMIT_SHORT_SHA}"
+#      --destination "${CI_REGISTRY_IMAGE}/${IMAGE_NAME_2}:develop"
+#  when: manual
+#  rules:
+#    - if: '$CI_COMMIT_BRANCH == "develop-sied"'

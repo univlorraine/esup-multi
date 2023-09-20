@@ -1,14 +1,10 @@
-<ion-card class="app-square-button-1">
-  <ion-card-header class="ion-text-center" (click)="draggableIsOn ? null : open(menuItem)">
-    <ion-col>
+<div class="app-square-button-1" (click)="draggableIsOn ? null : open(menuItem)">
+  <div class="icon-container">
       <app-custom-icon
       [icon]="menuItem.icon"
       [color]="(isDarkTheme$ | async) === true ? 'icon-primary': 'icon-primary-contrast'"
       [iconSourceSvgLightTheme]="menuItem.iconSourceSvgLightTheme"
       [iconSourceSvgDarkTheme]="menuItem.iconSourceSvgDarkTheme"></app-custom-icon>
-    </ion-col>
-  </ion-card-header>
-  <ion-card-content class="ion-text-center">
-    <ion-label>{{menuItem.title}}</ion-label>
-  </ion-card-content>
-</ion-card>
+  </div>
+  <ion-label>{{menuItem.title}}</ion-label>
+</div>
