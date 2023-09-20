@@ -1,4 +1,4 @@
-// // // CSS classes (Use this css classes in HTML tags descripted below throughout the app).
+// // // CSS classes (Use this css classes in HTML tags described below throughout the app).
 
 
 // // // ---------------------
@@ -81,72 +81,61 @@
 }
 
 // // // ---------------------
-// // // Square Button
+// // // Square Button with label below
 // // // ---------------------
 
 // Button Square type 1 (with label below)
 // app-square-button-1 css class is for square button with ion-icon only
 // and label below. Use it like this exemple (respect dom and class) :
 
-// <ion-card class="app-square-button-1">
-//   <ion-card-header class="ion-text-center" (click)="action()">
-//   <ion-col>
+// <div class="app-square-button-1" (click)="action()">
+//   <div class="icon-container">
 //     <ion-icon name="icon-name"></ion-icon>
-//   </ion-col>
-// </ion-card-header>
-// <ion-card-content class="ion-text-center">
-//   <ion-label>{{title}}</ion-label>
-// </ion-card-content>
-// </ion-card>
+//   </div>
+//   <ion-label>{{menuItem.title}}</ion-label>
+// </div>
+
 
 .app-square-button-1 {
   width: 6rem;
-  height: 6rem;
+  height: 9rem;
   overflow: visible;
   margin: auto;
   background: none;
   box-shadow: none;
   user-select: none;
-  display: grid;
   justify-items: center;
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  text-align: center;
+
+  .icon-container {
+    padding: 0;
+    background-color: var(--app-square-button-1-background-color);
+    border-radius: var(--app-square-button-1-border-radius) !important;
+    height: 5rem;
+    width: 5rem;
+    display: grid;
+    align-content: center;
+    justify-content: center;
+
+    ion-icon {
+      // @TODO color A supprimer une fois que la couleur viendra de directus
+      color: var(--ion-color-primary);
+      font-size: var(--app-square-button-1-icon-size) !important;
+    }
+  }
 
   ion-label {
     user-select: none;
     font-family: var(--app-square-button-1-font-family);
+    font-weight: var(--app-square-button-1-font-weight);
     color: var(--app-square-button-1-font-color);
     letter-spacing: var(--app-square-button-1-letter-spacing);
     font-size: var(--app-square-button-1-font-size);
-  }
-
-  ion-card-header {
-    padding-bottom: var(--app-square-button-1-label-margin-top);
-    padding-left: 0;
-    padding-right: 0;
-    padding-top: 0;
-  }
-
-  ion-col {
-    width: 5rem;
-    height: 5rem;
-    border-radius: var(--app-square-button-1-border-radius) !important;
-    background-color: var(--app-square-button-1-background-color);
-    display: grid;
-    grid-template-columns: 1fr;
-    justify-items: center;
-    align-items: center;
-  }
-
-  ion-card-content {
-    padding: 0;
-    font-weight: var(--app-square-button-1-font-weight);
-    max-width: 6rem;
-  }
-
-  ion-icon {
-    // @TODO color A supprimer une fois que la couleur viendra de directus
-    color: var(--ion-color-primary);
-    font-size: var(--app-square-button-1-icon-size) !important;
+    margin-top: var(--app-square-button-1-label-margin-top);
+    line-height: var(--app-square-button-1-label-line-height);
   }
 }
 
@@ -168,9 +157,11 @@
   border-radius: 50%;
   --box-shadow: 0px;
   --background: var(--app-rounded-button-1-background-color) !important;
+  min-height: var(--app-rounded-button-1-height);
+  box-sizing: content-box;
 
   ion-icon {
-    font-size: --app-rounded-button-1-icon-size;
+    font-size: var(--app-rounded-button-1-icon-size);
     color: var(--app-rounded-button-1-icon-color) !important;
   }
 }

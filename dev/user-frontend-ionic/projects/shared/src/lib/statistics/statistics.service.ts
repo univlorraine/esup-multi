@@ -59,7 +59,7 @@ export class StatisticsService {
         const data: UserActionRequestData = {
           authToken,
           data: {
-            duid: deviceId.uuid,
+            duid: deviceId.identifier,
             action: userActionDetails.action,
             functionality: userActionDetails.functionality,
             platform: this.platform.platforms().join(','),

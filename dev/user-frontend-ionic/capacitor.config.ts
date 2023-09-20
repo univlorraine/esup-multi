@@ -4,7 +4,6 @@ const config: CapacitorConfig = {
   appId: 'fr.univlorraine.mobile.multitest',
   appName: 'UnivLorraine',
   webDir: 'www',
-  bundledWebRuntime: false,
   plugins: {
     // eslint-disable-next-line @typescript-eslint/naming-convention
     SplashScreen: {

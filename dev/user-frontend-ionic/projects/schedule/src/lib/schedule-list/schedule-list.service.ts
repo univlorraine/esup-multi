@@ -16,7 +16,7 @@ export interface EventsByDay {
 })
 export class ScheduleListService {
 
-  public showEventEvt = new Subject();
+  public showEventEvt: Subject<void> = new Subject();
 
   constructor(private scheduleService: ScheduleService) { }
 

@@ -1,0 +1,6 @@
+variables:
+  CURRENT_DIR: "dev/user-backend-nest/microservices/auth/"
+  CURRENT_PROJECT: "auth"
+  IMAGE_NAME: "backend/multi-auth"
+
+include: "${CI_PROJET_DIR}/dev/user-backend-nest/template-ci.yml"

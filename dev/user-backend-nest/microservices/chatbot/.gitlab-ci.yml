@@ -1,0 +1,6 @@
+variables:
+  CURRENT_DIR: "dev/user-backend-nest/microservices/chatbot/"
+  CURRENT_PROJECT: "chatbot"
+  IMAGE_NAME: "backend/multi-chatbot"
+
+include: "${CI_PROJET_DIR}/dev/user-backend-nest/template-ci.yml"

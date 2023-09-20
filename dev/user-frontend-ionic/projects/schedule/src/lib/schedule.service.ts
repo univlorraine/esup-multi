@@ -22,7 +22,7 @@ export const formatDay = (date: Date) => format(date, 'yyyy-MM-dd');
 export class ScheduleService {
 
   public isLoading$: Observable<boolean>;
-  public hideEventEvt = new Subject();
+  public hideEventEvt: Subject<void> = new Subject();
   public asUser: BehaviorSubject<string> = new BehaviorSubject<string | null>(null);
   private storeManager: ScheduleStoreManager = scheduleStoreManager;
   private isLoadingSubject = new Subject<boolean>();
