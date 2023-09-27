@@ -20,7 +20,7 @@ export class RestaurantMenusPage implements OnInit, AfterViewChecked {
   public restaurant$: Observable<Restaurant>;
   public menus$: Observable<Menu[]>;
   public isLoading = false;
-  private swiper: Swiper;
+  protected swiper: Swiper;
   private restaurantId: number;
 
 

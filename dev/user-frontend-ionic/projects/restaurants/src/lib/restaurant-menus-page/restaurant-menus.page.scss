@@ -7,7 +7,6 @@ ion-card{
   margin: 0;
   border-radius: var(--app-border-no-radius);
   box-shadow: var(--app-border-no-box-shadow);
-  overflow: visible;
 }
 
 ion-card-content{
@@ -48,8 +47,12 @@ h5 {
   padding-bottom: 0.4rem;
 }
 
-.swiper-container {
-  height: 100%;
+.swiper-slide {
+  min-height: calc(100vh - 44px);
+}
+
+.hide-other-slides {
+  display: none;
 }
 
 .swiper-container.empty {
@@ -58,6 +61,8 @@ h5 {
 
 .swiper-button-next,
 .swiper-button-prev {
+  top: 50%;
+  position: fixed;
   --swiper-navigation-size: 1.5rem;
   --swiper-navigation-color: var(--ion-color-medium-light);
 }
