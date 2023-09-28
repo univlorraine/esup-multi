@@ -32,6 +32,9 @@ export class NetworkService {
   private initNetworkStatusListener() {
     Network.addListener('networkStatusChange', (status) => {
       this.zone.run(() => {
+        if (status.connectionType === 'unknown') {
+          status.connected = true;
+        }
         this.isOnlineStatusSubject.next(status.connected);
       });
     });
