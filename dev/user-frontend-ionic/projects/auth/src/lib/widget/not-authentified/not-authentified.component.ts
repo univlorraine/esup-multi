@@ -26,7 +26,5 @@ export class NotAuthentifiedComponent implements OnInit {
     this.loginService.loadAndStoreLoginPageContent()
       .pipe(take(1))
       .subscribe();
-
-    this.translatedPageContent$.subscribe(page => console.log(page));
   }
 }
