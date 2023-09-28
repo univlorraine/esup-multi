@@ -8,6 +8,7 @@ describe('FeaturesPositionHelper', () => {
       'r2',
     ]);
     const feature: Feature = {
+      authorization: undefined,
       routerLink: '',
       type: FeatureType.Internal,
       id: '',
