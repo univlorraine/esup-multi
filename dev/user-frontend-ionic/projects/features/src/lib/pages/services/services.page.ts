@@ -31,6 +31,7 @@ export class ServicesPage implements OnInit, OnDestroy {
   private dragulaSubscriptions: Subscription[] = [];
   private onPressBound = this.onPress.bind(this);
   private onUpBound = this.onUp.bind(this);
+  private onVisibilityChangeBound = this.onVisibilityChange.bind(this);
 
   constructor(
     private featuresService: FeaturesService,
@@ -40,6 +41,8 @@ export class ServicesPage implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
+    document.addEventListener('visibilitychange', (event) => this.onVisibilityChange(event));
+
     this.initMenuItems();
     this.initDragula();
 
@@ -49,12 +52,17 @@ export class ServicesPage implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    document.removeEventListener('visibilitychange', this.onVisibilityChangeBound);
     this.subscriptions.forEach(subscription => {
       subscription.unsubscribe();
     });
     this.dragulaSubscriptions.forEach(subscription => {
       subscription.unsubscribe();
     });
+  }
+
+  onVisibilityChange(event) {
+    clearTimeout(this.activateDragTimeOut);
   }
 
   handleChange(event) {
@@ -135,7 +143,7 @@ export class ServicesPage implements OnInit, OnDestroy {
     this.dragulaService.createGroup('SERVICES', {
       moves: (el, container, handle) =>
         // Allow drag and drop on tags with dragHandle attribute (ion-button only)
-        // && if not contain "not-draggable" (when drag and drop is disable)
+        // && if not contain "not-draggable" (when drag and drop is disabled)
         handle.hasAttribute('dragHandle') && !el.classList.contains('not-draggable')
     });
 
@@ -169,6 +177,7 @@ export class ServicesPage implements OnInit, OnDestroy {
 
   private onPress(event) {
     if (this.dragIsAllowed && !this.draggableIsOn && this.searchQuery$.getValue().length === 0) {
+      clearTimeout(this.activateDragTimeOut);
       this.activateDragTimeOut = window.setTimeout(() => {
         this.activateDrag();
       }, 1100);
@@ -184,7 +193,7 @@ export class ServicesPage implements OnInit, OnDestroy {
   private activateDrag() {
     this.draggableIsOn = true;
 
-    setTimeout(() => {
+    window.setTimeout(() => {
       const dragButtons = document.querySelectorAll('.drag-button');
 
       dragButtons.forEach((dragButton) => {
