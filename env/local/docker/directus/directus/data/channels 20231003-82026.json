@@ -2,21 +2,21 @@
 	{
 		"code": "ALERT",
 		"routerLink": null,
-		"color": "#FB3737",
+		"filterable": false,
+		"color": "#FFEF65",
 		"icon": "warning-outline",
 		"id": 7,
-		"filterable": false,
 		"translations": [
 			{
 				"id": 1,
-				"channels_id": 7,
 				"label": "ALERT",
+				"channels_id": 7,
 				"languages_code": "en"
 			},
 			{
 				"id": 2,
-				"channels_id": 7,
 				"label": "ALERTE",
+				"channels_id": 7,
 				"languages_code": "fr"
 			}
 		]
@@ -24,21 +24,21 @@
 	{
 		"code": "ETAB",
 		"routerLink": null,
-		"color": "#12F86A",
+		"filterable": true,
+		"color": "#A0D0B0",
 		"icon": "home-outline",
 		"id": 8,
-		"filterable": true,
 		"translations": [
 			{
 				"id": 3,
-				"channels_id": 8,
 				"label": "Establishment info",
+				"channels_id": 8,
 				"languages_code": "en"
 			},
 			{
 				"id": 4,
-				"channels_id": 8,
 				"label": "Infos établissement",
+				"channels_id": 8,
 				"languages_code": "fr"
 			}
 		]
@@ -46,21 +46,21 @@
 	{
 		"code": "EDT",
 		"routerLink": "/schedule",
-		"color": "#4F4DFF",
+		"filterable": true,
+		"color": "#BADFEE",
 		"icon": "calendar-outline",
 		"id": 9,
-		"filterable": true,
 		"translations": [
 			{
 				"id": 5,
-				"channels_id": 9,
 				"label": "Infos emploi du temps",
+				"channels_id": 9,
 				"languages_code": "fr"
 			},
 			{
 				"id": 6,
-				"channels_id": 9,
 				"label": "Schedule  info",
+				"channels_id": 9,
 				"languages_code": "en"
 			}
 		]
@@ -68,21 +68,21 @@
 	{
 		"code": "CMP",
 		"routerLink": null,
-		"color": "#7AFF95",
+		"filterable": true,
+		"color": "#A0D0B0",
 		"icon": "home-outline",
 		"id": 10,
-		"filterable": true,
 		"translations": [
 			{
 				"id": 7,
-				"channels_id": 10,
 				"label": "Infos composante",
+				"channels_id": 10,
 				"languages_code": "fr"
 			},
 			{
 				"id": 8,
-				"channels_id": 10,
 				"label": " Component Info",
+				"channels_id": 10,
 				"languages_code": "en"
 			}
 		]
@@ -90,21 +90,21 @@
 	{
 		"code": "SUAPS",
 		"routerLink": null,
-		"color": "#FFCF24",
+		"filterable": true,
+		"color": "#BADFEE",
 		"icon": "barbell-outline",
 		"id": 11,
-		"filterable": true,
 		"translations": [
 			{
 				"id": 9,
-				"channels_id": 11,
 				"label": "Sports",
+				"channels_id": 11,
 				"languages_code": "fr"
 			},
 			{
 				"id": 10,
-				"channels_id": 11,
 				"label": "Sports",
+				"channels_id": 11,
 				"languages_code": "en"
 			}
 		]
@@ -112,21 +112,21 @@
 	{
 		"code": "SCOL",
 		"routerLink": null,
-		"color": "#B02BEE",
+		"filterable": true,
+		"color": "#A0D0B0",
 		"icon": "school-outline",
 		"id": 12,
-		"filterable": true,
 		"translations": [
 			{
 				"id": 11,
-				"channels_id": 12,
 				"label": "Scolarité",
+				"channels_id": 12,
 				"languages_code": "fr"
 			},
 			{
 				"id": 12,
-				"channels_id": 12,
 				"label": "Schooling",
+				"channels_id": 12,
 				"languages_code": "en"
 			}
 		]

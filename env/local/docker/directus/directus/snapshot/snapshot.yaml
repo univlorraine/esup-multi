@@ -1,6 +1,6 @@
 version: 1
-directus: 12.0.3
-vendor: postgres
+directus: 13.1.1
+vendor: mysql
 collections:
   - collection: authorization
     meta:
@@ -243,7 +243,7 @@ collections:
       color: null
       display_template: null
       group: null
-      hidden: false
+      hidden: true
       icon: null
       item_duplication_fields: null
       note: null
@@ -490,13 +490,13 @@ fields:
     schema:
       name: id
       table: authorization
-      data_type: integer
-      default_value: nextval('authorization_id_seq'::regclass)
+      data_type: int unsigned
+      default_value: null
       max_length: null
-      numeric_precision: 32
+      numeric_precision: 10
       numeric_scale: 0
       is_nullable: false
-      is_unique: true
+      is_unique: false
       is_primary_key: true
       is_generated: false
       generation_expression: null
@@ -530,9 +530,9 @@ fields:
     schema:
       name: roles
       table: authorization
-      data_type: json
+      data_type: longtext
       default_value: null
-      max_length: null
+      max_length: 4294967295
       numeric_precision: null
       numeric_scale: null
       is_nullable: true
@@ -573,7 +573,7 @@ fields:
     schema:
       name: type
       table: authorization
-      data_type: character varying
+      data_type: varchar
       default_value: null
       max_length: 255
       numeric_precision: null
@@ -598,7 +598,7 @@ fields:
       group: null
       hidden: false
       interface: input
-      note: null
+      note: Code système du canal de notification
       options: null
       readonly: false
       required: true
@@ -611,7 +611,7 @@ fields:
     schema:
       name: code
       table: channels
-      data_type: character varying
+      data_type: varchar
       default_value: null
       max_length: 255
       numeric_precision: null
@@ -636,11 +636,18 @@ fields:
       group: null
       hidden: false
       interface: select-color
-      note: null
-      options: null
+      note: Couleur de thème associée au canal de notification
+      options:
+        presets:
+          - name: Jaune
+            color: '#FFEF65'
+          - name: Vert
+            color: '#A0D0B0'
+          - name: Bleu
+            color: '#BADFEE'
       readonly: false
       required: false
-      sort: 3
+      sort: 4
       special: null
       translations: null
       validation: null
@@ -649,7 +656,7 @@ fields:
     schema:
       name: color
       table: channels
-      data_type: character varying
+      data_type: varchar
       default_value: null
       max_length: 255
       numeric_precision: null
@@ -674,7 +681,9 @@ fields:
       group: null
       hidden: false
       interface: boolean
-      note: null
+      note: >-
+        Indique si les notifications liées à ce canal peuvent être filtrées à
+        l'affichage par l'utilisateur ou non
       options: null
       readonly: false
       required: false
@@ -691,9 +700,9 @@ fields:
       data_type: boolean
       default_value: false
       max_length: null
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: false
+      numeric_precision: 3
+      numeric_scale: 0
+      is_nullable: true
       is_unique: false
       is_primary_key: false
       is_generated: false
@@ -713,11 +722,13 @@ fields:
       group: null
       hidden: false
       interface: input
-      note: null
+      note: >-
+        Nom 'ion-icon' de l'icône associée au canal de notification. Liste des
+        icônes disponibles : https://ionic.io/ionicons
       options: null
       readonly: false
       required: false
-      sort: 4
+      sort: 5
       special: null
       translations: null
       validation: null
@@ -726,7 +737,7 @@ fields:
     schema:
       name: icon
       table: channels
-      data_type: character varying
+      data_type: varchar
       default_value: null
       max_length: 255
       numeric_precision: null
@@ -755,7 +766,7 @@ fields:
       options: null
       readonly: true
       required: false
-      sort: 5
+      sort: 6
       special: null
       translations: null
       validation: null
@@ -764,13 +775,13 @@ fields:
     schema:
       name: id
       table: channels
-      data_type: integer
-      default_value: nextval('channels_id_seq'::regclass)
+      data_type: int unsigned
+      default_value: null
       max_length: null
-      numeric_precision: 32
+      numeric_precision: 10
       numeric_scale: 0
       is_nullable: false
-      is_unique: true
+      is_unique: false
       is_primary_key: true
       is_generated: false
       generation_expression: null
@@ -789,11 +800,14 @@ fields:
       group: null
       hidden: false
       interface: input
-      note: null
+      note: >-
+        Chemin vers la route Ionic du service interne vers laquelle rediriger
+        l'utilisateur lorsqu'il clique sur une notification associée à ce canal
+        (exemple : /schedule)
       options: null
       readonly: false
       required: false
-      sort: 2
+      sort: 3
       special: null
       translations: null
       validation: null
@@ -802,7 +816,7 @@ fields:
     schema:
       name: routerLink
       table: channels
-      data_type: character varying
+      data_type: varchar
       default_value: null
       max_length: 255
       numeric_precision: null
@@ -820,27 +834,28 @@ fields:
     type: alias
     meta:
       collection: channels
-      conditions: null
+      field: translations
+      special:
+        - translations
+      interface: translations
+      options:
+        defaultLanguage: fr
       display: translations
       display_options:
         template: '{{label}}'
         userLanguage: true
-      field: translations
-      group: null
-      hidden: false
-      interface: translations
-      note: null
-      options:
-        userLanguage: true
+        defaultLanguage: fr
       readonly: false
-      required: false
-      sort: 6
-      special:
-        - translations
+      hidden: false
+      sort: 2
+      width: full
       translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
       validation: null
       validation_message: null
-      width: full
   - collection: channels_translations
     field: channels_id
     type: integer
@@ -857,7 +872,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: 2
+      sort: 3
       special: null
       translations: null
       validation: null
@@ -866,10 +881,10 @@ fields:
     schema:
       name: channels_id
       table: channels_translations
-      data_type: integer
+      data_type: int unsigned
       default_value: null
       max_length: null
-      numeric_precision: 32
+      numeric_precision: 10
       numeric_scale: 0
       is_nullable: true
       is_unique: false
@@ -904,13 +919,13 @@ fields:
     schema:
       name: id
       table: channels_translations
-      data_type: integer
-      default_value: nextval('channels_translations_id_seq'::regclass)
+      data_type: int unsigned
+      default_value: null
       max_length: null
-      numeric_precision: 32
+      numeric_precision: 10
       numeric_scale: 0
       is_nullable: false
-      is_unique: true
+      is_unique: false
       is_primary_key: true
       is_generated: false
       generation_expression: null
@@ -929,11 +944,11 @@ fields:
       group: null
       hidden: false
       interface: input
-      note: null
+      note: Label du canal de notification
       options: null
       readonly: false
       required: false
-      sort: 3
+      sort: 2
       special: null
       translations: null
       validation: null
@@ -942,7 +957,7 @@ fields:
     schema:
       name: label
       table: channels_translations
-      data_type: character varying
+      data_type: varchar
       default_value: null
       max_length: 255
       numeric_precision: null
@@ -980,7 +995,7 @@ fields:
     schema:
       name: languages_code
       table: channels_translations
-      data_type: character varying
+      data_type: varchar
       default_value: null
       max_length: 255
       numeric_precision: null
@@ -1005,7 +1020,9 @@ fields:
       group: null
       hidden: false
       interface: input
-      note: null
+      note: >-
+        Nom 'ion-icon' de l'icône de la page de contact (associée au titre dans
+        le menu). Liste des icônes disponibles : https://ionic.io/ionicons
       options: null
       readonly: false
       required: false
@@ -1018,7 +1035,7 @@ fields:
     schema:
       name: icon
       table: contact_us
-      data_type: character varying
+      data_type: varchar
       default_value: null
       max_length: 255
       numeric_precision: null
@@ -1056,13 +1073,13 @@ fields:
     schema:
       name: id
       table: contact_us
-      data_type: integer
-      default_value: nextval('contact_us_id_seq'::regclass)
+      data_type: int unsigned
+      default_value: null
       max_length: null
-      numeric_precision: 32
+      numeric_precision: 10
       numeric_scale: 0
       is_nullable: false
-      is_unique: true
+      is_unique: false
       is_primary_key: true
       is_generated: false
       generation_expression: null
@@ -1094,7 +1111,7 @@ fields:
     schema:
       name: to
       table: contact_us
-      data_type: character varying
+      data_type: varchar
       default_value: null
       max_length: 255
       numeric_precision: null
@@ -1112,25 +1129,26 @@ fields:
     type: alias
     meta:
       collection: contact_us
-      conditions: null
-      display: null
-      display_options: null
       field: translations
-      group: null
-      hidden: false
-      interface: translations
-      note: null
-      options:
-        languageField: code
-      readonly: false
-      required: false
-      sort: 6
       special:
         - translations
+      interface: translations
+      options:
+        languageField: code
+        defaultLanguage: fr
+      display: null
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: 4
+      width: full
       translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
       validation: null
       validation_message: null
-      width: full
   - collection: contact_us_translations
     field: contact_us_id
     type: integer
@@ -1147,7 +1165,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: null
+      sort: 4
       special: null
       translations: null
       validation: null
@@ -1156,10 +1174,10 @@ fields:
     schema:
       name: contact_us_id
       table: contact_us_translations
-      data_type: integer
+      data_type: int unsigned
       default_value: null
       max_length: null
-      numeric_precision: 32
+      numeric_precision: 10
       numeric_scale: 0
       is_nullable: true
       is_unique: false
@@ -1181,11 +1199,11 @@ fields:
       group: null
       hidden: false
       interface: input-rich-text-html
-      note: null
+      note: Texte accompagnant le formulaire de contact
       options: null
       readonly: false
       required: true
-      sort: null
+      sort: 3
       special: null
       translations: null
       validation: null
@@ -1196,7 +1214,7 @@ fields:
       table: contact_us_translations
       data_type: text
       default_value: null
-      max_length: null
+      max_length: 65535
       numeric_precision: null
       numeric_scale: null
       is_nullable: true
@@ -1223,7 +1241,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: null
+      sort: 1
       special: null
       translations: null
       validation: null
@@ -1232,13 +1250,13 @@ fields:
     schema:
       name: id
       table: contact_us_translations
-      data_type: integer
-      default_value: nextval('contact_us_translations_id_seq'::regclass)
+      data_type: int unsigned
+      default_value: null
       max_length: null
-      numeric_precision: 32
+      numeric_precision: 10
       numeric_scale: 0
       is_nullable: false
-      is_unique: true
+      is_unique: false
       is_primary_key: true
       is_generated: false
       generation_expression: null
@@ -1261,7 +1279,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: null
+      sort: 5
       special: null
       translations: null
       validation: null
@@ -1270,7 +1288,7 @@ fields:
     schema:
       name: languages_code
       table: contact_us_translations
-      data_type: character varying
+      data_type: varchar
       default_value: null
       max_length: 255
       numeric_precision: null
@@ -1295,11 +1313,11 @@ fields:
       group: null
       hidden: false
       interface: input
-      note: null
+      note: Titre de la page de contact (affiché dans le menu)
       options: null
       readonly: false
       required: true
-      sort: null
+      sort: 2
       special: null
       translations: null
       validation: null
@@ -1308,7 +1326,7 @@ fields:
     schema:
       name: title
       table: contact_us_translations
-      data_type: character varying
+      data_type: varchar
       default_value: null
       max_length: 255
       numeric_precision: null
@@ -1333,13 +1351,16 @@ fields:
       group: null
       hidden: false
       interface: select-dropdown-m2o
-      note: null
+      note: >-
+        Permet de créer des autorisations d'accès à partir d'une liste blanche
+        (=personne sauf xxx) ou d'une liste noire (=tout le monde sauf xxx) sur
+        les rôles utilisateur
       options:
         enableSelect: false
         template: '{{type}}:{{roles}}'
       readonly: false
       required: false
-      sort: 8
+      sort: 9
       special:
         - m2o
       translations: null
@@ -1349,10 +1370,10 @@ fields:
     schema:
       name: authorization
       table: features
-      data_type: integer
+      data_type: int unsigned
       default_value: null
       max_length: null
-      numeric_precision: 32
+      numeric_precision: 10
       numeric_scale: 0
       is_nullable: true
       is_unique: true
@@ -1363,31 +1384,34 @@ fields:
       foreign_key_table: authorization
       foreign_key_column: id
   - collection: features
-    field: color
+    field: description
     type: string
     meta:
       collection: features
       conditions: null
       display: null
       display_options: null
-      field: color
+      field: description
       group: null
       hidden: false
-      interface: select-color
-      note: null
-      options: null
+      interface: input
+      note: >-
+        Décrit ce que fait le service dans l'application (information à titre
+        indicatif dans Directus, la valeur saisie ne sera pas utilisée)
+      options:
+        placeholder: Descriptif du service
       readonly: false
       required: false
-      sort: 15
+      sort: 3
       special: null
       translations: null
       validation: null
       validation_message: null
       width: full
     schema:
-      name: color
+      name: description
       table: features
-      data_type: character varying
+      data_type: varchar
       default_value: null
       max_length: 255
       numeric_precision: null
@@ -1411,24 +1435,26 @@ fields:
             _and:
               - widget:
                   _null: true
-          required: true
           options:
             font: sans-serif
-            trim: false
-            masked: false
-            clear: false
             slug: false
+            trim: false
+            clear: false
+            masked: false
+          required: true
       display: null
       display_options: null
       field: icon
       group: null
       hidden: false
       interface: input
-      note: null
+      note: >-
+        Nom 'ion-icon' de l'icône si aucune n'est définie dans les blocs SVG
+        ci-dessous. Liste des icônes disponibles : https://ionic.io/ionicons
       options: null
       readonly: false
       required: false
-      sort: 4
+      sort: 5
       special: null
       translations: null
       validation: null
@@ -1437,8 +1463,8 @@ fields:
     schema:
       name: icon
       table: features
-      data_type: character varying
-      default_value: warning
+      data_type: varchar
+      default_value: null
       max_length: 255
       numeric_precision: null
       numeric_scale: null
@@ -1462,12 +1488,12 @@ fields:
       group: null
       hidden: false
       interface: input-code
-      note: null
+      note: Code SVG de l'icône du service affichée avec le thème 'Dark'
       options:
         language: xml
       readonly: false
       required: false
-      sort: 6
+      sort: 7
       special: null
       translations: null
       validation: null
@@ -1478,7 +1504,7 @@ fields:
       table: features
       data_type: text
       default_value: null
-      max_length: null
+      max_length: 65535
       numeric_precision: null
       numeric_scale: null
       is_nullable: true
@@ -1501,12 +1527,12 @@ fields:
       group: null
       hidden: false
       interface: input-code
-      note: null
+      note: Code SVG de l'icône du service affichée avec le thème 'Light'
       options:
         language: xml
       readonly: false
       required: false
-      sort: 5
+      sort: 6
       special: null
       translations: null
       validation: null
@@ -1517,7 +1543,7 @@ fields:
       table: features
       data_type: text
       default_value: null
-      max_length: null
+      max_length: 65535
       numeric_precision: null
       numeric_scale: null
       is_nullable: true
@@ -1553,13 +1579,13 @@ fields:
     schema:
       name: id
       table: features
-      data_type: integer
-      default_value: nextval('features_id_seq'::regclass)
+      data_type: int unsigned
+      default_value: null
       max_length: null
-      numeric_precision: 32
+      numeric_precision: 10
       numeric_scale: 0
       is_nullable: false
-      is_unique: true
+      is_unique: false
       is_primary_key: true
       is_generated: false
       generation_expression: null
@@ -1577,25 +1603,29 @@ fields:
             _and:
               - type:
                   _eq: internal
-          readonly: true
           hidden: true
           options:
             font: sans-serif
-            trim: false
-            masked: false
-            clear: false
             slug: false
+            trim: false
+            clear: false
+            masked: false
+          readonly: true
       display: null
       display_options: null
       field: link
       group: null
       hidden: false
       interface: input
-      note: null
+      note: >-
+        Lien http vers le service externe. Si une authentification CAS est
+        requise, penser à ajouter le ticket ST avec un marqueur {st} qui sera
+        dynamiquement remplacé. Exemple =
+        https://mon-service.edu/auth?ticket={st}
       options: null
       readonly: false
       required: false
-      sort: 13
+      sort: 14
       special: null
       translations: null
       validation: null
@@ -1604,7 +1634,7 @@ fields:
     schema:
       name: link
       table: features
-      data_type: character varying
+      data_type: varchar
       default_value: null
       max_length: 255
       numeric_precision: null
@@ -1629,7 +1659,10 @@ fields:
       group: null
       hidden: false
       interface: select-dropdown
-      note: null
+      note: >-
+        Emplacement du service dans l'application. Top = barre du haut - Tabs =
+        barre du bas - Burger = liste de la page menu - Service = page des
+        services
       options:
         allowNone: true
         choices:
@@ -1641,9 +1674,10 @@ fields:
             value: burger
           - text: service
             value: service
+        placeholder: null
       readonly: false
       required: false
-      sort: 7
+      sort: 8
       special: null
       translations: null
       validation: null
@@ -1652,7 +1686,7 @@ fields:
     schema:
       name: menu
       table: features
-      data_type: character varying
+      data_type: varchar
       default_value: null
       max_length: 255
       numeric_precision: null
@@ -1677,11 +1711,14 @@ fields:
       group: null
       hidden: false
       interface: input
-      note: null
+      note: >-
+        Poids de la position par défaut du service au sein de l'élément dans
+        lequel il est affiché (ordre d'affichage par poids croissant : 1 =
+        premier)
       options: null
       readonly: false
       required: false
-      sort: 9
+      sort: 10
       special: null
       translations: null
       validation: null
@@ -1690,10 +1727,10 @@ fields:
     schema:
       name: position
       table: features
-      data_type: integer
+      data_type: int
       default_value: null
       max_length: null
-      numeric_precision: 32
+      numeric_precision: 10
       numeric_scale: 0
       is_nullable: true
       is_unique: false
@@ -1714,40 +1751,40 @@ fields:
             _and:
               - type:
                   _eq: internal
-          readonly: false
           hidden: false
-          required: true
           options:
             font: sans-serif
-            trim: false
-            masked: false
-            clear: false
             slug: false
+            trim: false
+            clear: false
+            masked: false
+          readonly: false
+          required: true
         - name: if external
           rule:
             _and:
               - type:
                   _eq: external
-          readonly: true
           hidden: true
-          required: false
           options:
             font: sans-serif
-            trim: false
-            masked: false
-            clear: false
             slug: false
+            trim: false
+            clear: false
+            masked: false
+          readonly: true
+          required: false
       display: null
       display_options: null
       field: routerLink
       group: null
       hidden: false
       interface: input
-      note: null
+      note: Chemin vers la route interne du module Ionic à appeler
       options: null
       readonly: false
       required: false
-      sort: 12
+      sort: 13
       special: null
       translations: null
       validation: null
@@ -1756,7 +1793,7 @@ fields:
     schema:
       name: routerLink
       table: features
-      data_type: character varying
+      data_type: varchar
       default_value: null
       max_length: 255
       numeric_precision: null
@@ -1774,24 +1811,26 @@ fields:
     type: alias
     meta:
       collection: features
-      conditions: null
-      display: null
-      display_options: null
       field: settings_by_role
-      group: null
-      hidden: false
-      interface: list-m2m
-      note: null
-      options: {}
-      readonly: false
-      required: false
-      sort: 10
       special:
         - m2m
+      interface: list-m2m
+      options: {}
+      display: null
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: 11
+      width: full
       translations: null
+      note: >-
+        Permet de définir un poids de position par défaut du service au sein de
+        l'élément dans lequel il est affiché pour un rôle utilisateur donné
+      conditions: null
+      required: false
+      group: null
       validation: null
       validation_message: null
-      width: full
   - collection: features
     field: ssoService
     type: string
@@ -1803,25 +1842,25 @@ fields:
             _and:
               - type:
                   _eq: internal
-          readonly: true
           hidden: true
           options:
             font: sans-serif
-            trim: false
-            masked: false
-            clear: false
             slug: false
+            trim: false
+            clear: false
+            masked: false
+          readonly: true
       display: null
       display_options: null
       field: ssoService
       group: null
       hidden: false
       interface: input
-      note: null
+      note: Lien vers la validation du ticket SSO du service en question
       options: null
       readonly: false
       required: false
-      sort: 14
+      sort: 15
       special: null
       translations: null
       validation: null
@@ -1830,7 +1869,7 @@ fields:
     schema:
       name: ssoService
       table: features
-      data_type: character varying
+      data_type: varchar
       default_value: null
       max_length: 255
       numeric_precision: null
@@ -1855,7 +1894,7 @@ fields:
       group: null
       hidden: false
       interface: input
-      note: null
+      note: Code du service pour la génération des statistiques d'accès
       options:
         iconLeft: auto_graph
         placeholder: >-
@@ -1872,7 +1911,7 @@ fields:
     schema:
       name: statisticName
       table: features
-      data_type: character varying
+      data_type: varchar
       default_value: null
       max_length: 255
       numeric_precision: null
@@ -1896,16 +1935,16 @@ fields:
         choices:
           - text: Published
             value: published
-            foreground: '#FFFFFF'
             background: var(--primary)
+            foreground: '#FFFFFF'
           - text: Draft
             value: draft
-            foreground: '#18222F'
             background: '#D3DAE4'
+            foreground: '#18222F'
           - text: Archived
             value: archived
-            foreground: '#FFFFFF'
             background: var(--warning)
+            foreground: '#FFFFFF'
         showAsDot: true
       field: status
       group: null
@@ -1931,7 +1970,7 @@ fields:
     schema:
       name: status
       table: features
-      data_type: character varying
+      data_type: varchar
       default_value: draft
       max_length: 255
       numeric_precision: null
@@ -1949,27 +1988,28 @@ fields:
     type: alias
     meta:
       collection: features
-      conditions: null
-      display: translations
-      display_options:
-        languageField: code
-        template: '{{title}}'
       field: translations
-      group: null
-      hidden: false
-      interface: translations
-      note: null
-      options:
-        languageField: code
-      readonly: false
-      required: false
-      sort: 3
       special:
         - translations
+      interface: translations
+      options:
+        languageField: code
+        defaultLanguage: fr
+      display: translations
+      display_options:
+        template: '{{title}}'
+        languageField: code
+      readonly: false
+      hidden: false
+      sort: 4
+      width: full
       translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
       validation: null
       validation_message: null
-      width: full
   - collection: features
     field: type
     type: string
@@ -1982,7 +2022,9 @@ fields:
       group: null
       hidden: false
       interface: select-radio
-      note: null
+      note: >-
+        Type de service. Internal = service interne à l'application - External 
+        = service externe (url web à appeler)
       options:
         choices:
           - text: internal
@@ -1991,7 +2033,7 @@ fields:
             value: external
       readonly: false
       required: true
-      sort: 11
+      sort: 12
       special: null
       translations: null
       validation: null
@@ -2000,7 +2042,7 @@ fields:
     schema:
       name: type
       table: features
-      data_type: character varying
+      data_type: varchar
       default_value: internal
       max_length: 255
       numeric_precision: null
@@ -2038,10 +2080,10 @@ fields:
     schema:
       name: features_id
       table: features_settings_by_role
-      data_type: integer
+      data_type: int unsigned
       default_value: null
       max_length: null
-      numeric_precision: 32
+      numeric_precision: 10
       numeric_scale: 0
       is_nullable: true
       is_unique: false
@@ -2076,13 +2118,13 @@ fields:
     schema:
       name: id
       table: features_settings_by_role
-      data_type: integer
-      default_value: nextval('features_settings_by_role_id_seq'::regclass)
+      data_type: int unsigned
+      default_value: null
       max_length: null
-      numeric_precision: 32
+      numeric_precision: 10
       numeric_scale: 0
       is_nullable: false
-      is_unique: true
+      is_unique: false
       is_primary_key: true
       is_generated: false
       generation_expression: null
@@ -2114,10 +2156,10 @@ fields:
     schema:
       name: settings_by_role_id
       table: features_settings_by_role
-      data_type: integer
+      data_type: int unsigned
       default_value: null
       max_length: null
-      numeric_precision: 32
+      numeric_precision: 10
       numeric_scale: 0
       is_nullable: true
       is_unique: false
@@ -2152,49 +2194,11 @@ fields:
     schema:
       name: sort
       table: features_settings_by_role
-      data_type: integer
+      data_type: int
       default_value: null
       max_length: null
-      numeric_precision: 32
+      numeric_precision: 10
       numeric_scale: 0
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: features_translations
-    field: content
-    type: text
-    meta:
-      collection: features_translations
-      conditions: null
-      display: null
-      display_options: null
-      field: content
-      group: null
-      hidden: false
-      interface: input-multiline
-      note: null
-      options: null
-      readonly: false
-      required: false
-      sort: null
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: content
-      table: features_translations
-      data_type: text
-      default_value: null
-      max_length: null
-      numeric_precision: null
-      numeric_scale: null
       is_nullable: true
       is_unique: false
       is_primary_key: false
@@ -2219,7 +2223,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: null
+      sort: 6
       special: null
       translations: null
       validation: null
@@ -2228,10 +2232,10 @@ fields:
     schema:
       name: features_id
       table: features_translations
-      data_type: integer
+      data_type: int unsigned
       default_value: null
       max_length: null
-      numeric_precision: 32
+      numeric_precision: 10
       numeric_scale: 0
       is_nullable: true
       is_unique: false
@@ -2257,7 +2261,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: null
+      sort: 1
       special: null
       translations: null
       validation: null
@@ -2266,13 +2270,13 @@ fields:
     schema:
       name: id
       table: features_translations
-      data_type: integer
-      default_value: nextval('features_translations_id_seq'::regclass)
+      data_type: int unsigned
+      default_value: null
       max_length: null
-      numeric_precision: 32
+      numeric_precision: 10
       numeric_scale: 0
       is_nullable: false
-      is_unique: true
+      is_unique: false
       is_primary_key: true
       is_generated: false
       generation_expression: null
@@ -2295,7 +2299,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: null
+      sort: 7
       special: null
       translations: null
       validation: null
@@ -2304,7 +2308,7 @@ fields:
     schema:
       name: languages_code
       table: features_translations
-      data_type: character varying
+      data_type: varchar
       default_value: null
       max_length: 255
       numeric_precision: null
@@ -2329,12 +2333,12 @@ fields:
       group: null
       hidden: false
       interface: tags
-      note: null
+      note: Tags qui serviront pour la recherche dans les services
       options:
         alphabetize: true
       readonly: false
       required: false
-      sort: null
+      sort: 5
       special:
         - cast-json
       translations: null
@@ -2344,9 +2348,9 @@ fields:
     schema:
       name: searchKeywords
       table: features_translations
-      data_type: json
+      data_type: longtext
       default_value: null
-      max_length: null
+      max_length: 4294967295
       numeric_precision: null
       numeric_scale: null
       is_nullable: true
@@ -2369,12 +2373,12 @@ fields:
       group: null
       hidden: false
       interface: input
-      note: null
+      note: Titre du service s'il est affiché dans une barre de menu
       options:
         softLength: 25
       readonly: false
       required: false
-      sort: null
+      sort: 3
       special: null
       translations: null
       validation: null
@@ -2383,7 +2387,7 @@ fields:
     schema:
       name: shortTitle
       table: features_translations
-      data_type: character varying
+      data_type: varchar
       default_value: null
       max_length: 255
       numeric_precision: null
@@ -2408,11 +2412,12 @@ fields:
       group: null
       hidden: false
       interface: input
-      note: null
-      options: null
+      note: Titre du service qui sera affiché sur la page des services
+      options:
+        trim: true
       readonly: false
       required: false
-      sort: null
+      sort: 2
       special: null
       translations: null
       validation: null
@@ -2421,7 +2426,7 @@ fields:
     schema:
       name: title
       table: features_translations
-      data_type: character varying
+      data_type: varchar
       default_value: null
       max_length: 255
       numeric_precision: null
@@ -2446,13 +2451,16 @@ fields:
       group: null
       hidden: false
       interface: select-dropdown-m2o
-      note: null
+      note: >-
+        Permet de limiter l'affichage de l'information à partir d'une liste
+        blanche (=personne sauf xxx) ou d'une liste noire (=tout le monde sauf
+        xxx) sur les rôles utilisateur 
       options:
         enableSelect: false
         template: '{{type}}{{roles}}'
       readonly: false
       required: false
-      sort: 9
+      sort: 5
       special:
         - m2o
       translations: null
@@ -2462,10 +2470,10 @@ fields:
     schema:
       name: authorization
       table: important_news
-      data_type: integer
+      data_type: int unsigned
       default_value: null
       max_length: null
-      numeric_precision: 32
+      numeric_precision: 10
       numeric_scale: 0
       is_nullable: true
       is_unique: false
@@ -2487,11 +2495,18 @@ fields:
       group: null
       hidden: false
       interface: select-color
-      note: null
-      options: null
+      note: Couleur de fond de l'information importante en page d'accueil
+      options:
+        presets:
+          - name: Bleu
+            color: '#BADFEE'
+          - name: Vert
+            color: '#A0D0B0'
+          - name: Jaune
+            color: '#FFEF65'
       readonly: false
       required: false
-      sort: null
+      sort: 7
       special: null
       translations: null
       validation: null
@@ -2500,7 +2515,7 @@ fields:
     schema:
       name: color
       table: important_news
-      data_type: character varying
+      data_type: varchar
       default_value: null
       max_length: 255
       numeric_precision: null
@@ -2538,13 +2553,13 @@ fields:
     schema:
       name: id
       table: important_news
-      data_type: integer
-      default_value: nextval('important_news_id_seq'::regclass)
+      data_type: int unsigned
+      default_value: null
       max_length: null
-      numeric_precision: 32
+      numeric_precision: 10
       numeric_scale: 0
       is_nullable: false
-      is_unique: true
+      is_unique: false
       is_primary_key: true
       is_generated: false
       generation_expression: null
@@ -2563,12 +2578,12 @@ fields:
       group: null
       hidden: false
       interface: file-image
-      note: null
+      note: Image illustrant l'information importante
       options:
-        folder: null
+        folder: 53b53d3b-4693-4680-a363-f00097b22b98
       readonly: false
       required: false
-      sort: 7
+      sort: 4
       special:
         - file
       translations: null
@@ -2578,9 +2593,9 @@ fields:
     schema:
       name: image
       table: important_news
-      data_type: uuid
+      data_type: char
       default_value: null
-      max_length: null
+      max_length: 36
       numeric_precision: null
       numeric_scale: null
       is_nullable: true
@@ -2603,11 +2618,14 @@ fields:
       group: null
       hidden: false
       interface: input
-      note: null
+      note: >-
+        Lien du service vers lequel rediriger l'utilisateur lorsqu'il clique sur
+        le bouton associé. Peut être un service interne (exemple : /rss) ou bien
+        un service externe (exemple : https://mon-service.edu)
       options: null
       readonly: false
       required: false
-      sort: null
+      sort: 8
       special: null
       translations: null
       validation: null
@@ -2616,7 +2634,7 @@ fields:
     schema:
       name: link
       table: important_news
-      data_type: character varying
+      data_type: varchar
       default_value: null
       max_length: 255
       numeric_precision: null
@@ -2645,7 +2663,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: 3
+      sort: 6
       special: null
       translations: null
       validation: null
@@ -2654,10 +2672,10 @@ fields:
     schema:
       name: sort
       table: important_news
-      data_type: integer
+      data_type: int
       default_value: null
       max_length: null
-      numeric_precision: 32
+      numeric_precision: 10
       numeric_scale: 0
       is_nullable: true
       is_unique: false
@@ -2679,7 +2697,9 @@ fields:
       group: null
       hidden: false
       interface: input
-      note: null
+      note: >-
+        Code de l'information importante pour la génération des statistiques
+        d'accès
       options:
         iconLeft: auto_graph
         placeholder: >-
@@ -2687,7 +2707,7 @@ fields:
           accesses the feature
       readonly: false
       required: false
-      sort: null
+      sort: 9
       special: null
       translations: null
       validation: null
@@ -2696,7 +2716,7 @@ fields:
     schema:
       name: statisticName
       table: important_news
-      data_type: character varying
+      data_type: varchar
       default_value: null
       max_length: 255
       numeric_precision: null
@@ -2720,16 +2740,16 @@ fields:
         choices:
           - text: $t:published
             value: published
-            foreground: '#FFFFFF'
             background: var(--primary)
+            foreground: '#FFFFFF'
           - text: $t:draft
             value: draft
-            foreground: '#18222F'
             background: '#D3DAE4'
+            foreground: '#18222F'
           - text: $t:archived
             value: archived
-            foreground: '#FFFFFF'
             background: var(--warning)
+            foreground: '#FFFFFF'
         showAsDot: true
       field: status
       group: null
@@ -2755,7 +2775,7 @@ fields:
     schema:
       name: status
       table: important_news
-      data_type: character varying
+      data_type: varchar
       default_value: draft
       max_length: 255
       numeric_precision: null
@@ -2773,28 +2793,28 @@ fields:
     type: alias
     meta:
       collection: important_news
-      conditions: null
-      display: translations
-      display_options:
-        languageField: code
-        template: '{{title}}{{content}}'
       field: translations
-      group: null
-      hidden: false
-      interface: translations
-      note: null
-      options:
-        languageField: code
-        userLanguage: true
-      readonly: false
-      required: false
-      sort: 6
       special:
         - translations
+      interface: translations
+      options:
+        languageField: code
+        defaultLanguage: fr
+      display: translations
+      display_options:
+        template: '{{title}}{{content}}'
+        languageField: code
+      readonly: false
+      hidden: false
+      sort: 3
+      width: full
       translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
       validation: null
       validation_message: null
-      width: full
   - collection: important_news_translations
     field: buttonLabel
     type: string
@@ -2807,11 +2827,13 @@ fields:
       group: null
       hidden: false
       interface: input
-      note: null
+      note: >-
+        Label de l'éventuel bouton permettant de rediriger l'utilisateur vers un
+        service lié à l'information (exemple : En savoir plus)
       options: null
       readonly: false
       required: false
-      sort: null
+      sort: 4
       special: null
       translations: null
       validation: null
@@ -2820,7 +2842,7 @@ fields:
     schema:
       name: buttonLabel
       table: important_news_translations
-      data_type: character varying
+      data_type: varchar
       default_value: null
       max_length: 255
       numeric_precision: null
@@ -2845,11 +2867,11 @@ fields:
       group: null
       hidden: false
       interface: input-multiline
-      note: null
+      note: Contenu de l'information importante
       options: null
       readonly: false
       required: true
-      sort: 2
+      sort: 3
       special: null
       translations: null
       validation: null
@@ -2860,7 +2882,7 @@ fields:
       table: important_news_translations
       data_type: text
       default_value: null
-      max_length: null
+      max_length: 65535
       numeric_precision: null
       numeric_scale: null
       is_nullable: true
@@ -2887,7 +2909,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: 3
+      sort: 1
       special: null
       translations: null
       validation: null
@@ -2896,13 +2918,13 @@ fields:
     schema:
       name: id
       table: important_news_translations
-      data_type: integer
-      default_value: nextval('important_news_translations_id_seq'::regclass)
+      data_type: int unsigned
+      default_value: null
       max_length: null
-      numeric_precision: 32
+      numeric_precision: 10
       numeric_scale: 0
       is_nullable: false
-      is_unique: true
+      is_unique: false
       is_primary_key: true
       is_generated: false
       generation_expression: null
@@ -2925,7 +2947,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: 4
+      sort: 5
       special: null
       translations: null
       validation: null
@@ -2934,10 +2956,10 @@ fields:
     schema:
       name: important_news_id
       table: important_news_translations
-      data_type: integer
+      data_type: int unsigned
       default_value: null
       max_length: null
-      numeric_precision: 32
+      numeric_precision: 10
       numeric_scale: 0
       is_nullable: true
       is_unique: false
@@ -2963,7 +2985,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: 5
+      sort: 6
       special: null
       translations: null
       validation: null
@@ -2972,7 +2994,7 @@ fields:
     schema:
       name: languages_code
       table: important_news_translations
-      data_type: character varying
+      data_type: varchar
       default_value: null
       max_length: 255
       numeric_precision: null
@@ -2997,11 +3019,11 @@ fields:
       group: null
       hidden: false
       interface: input
-      note: null
+      note: Titre de l'information importante
       options: null
       readonly: false
       required: true
-      sort: 1
+      sort: 2
       special: null
       translations: null
       validation: null
@@ -3010,7 +3032,7 @@ fields:
     schema:
       name: title
       table: important_news_translations
-      data_type: character varying
+      data_type: varchar
       default_value: null
       max_length: 255
       numeric_precision: null
@@ -3048,13 +3070,13 @@ fields:
     schema:
       name: code
       table: languages
-      data_type: character varying
+      data_type: varchar
       default_value: null
       max_length: 255
       numeric_precision: null
       numeric_scale: null
       is_nullable: false
-      is_unique: true
+      is_unique: false
       is_primary_key: true
       is_generated: false
       generation_expression: null
@@ -3097,7 +3119,7 @@ fields:
     schema:
       name: direction
       table: languages
-      data_type: character varying
+      data_type: varchar
       default_value: ltr
       max_length: 255
       numeric_precision: null
@@ -3135,7 +3157,7 @@ fields:
     schema:
       name: name
       table: languages
-      data_type: character varying
+      data_type: varchar
       default_value: null
       max_length: 255
       numeric_precision: null
@@ -3173,13 +3195,13 @@ fields:
     schema:
       name: id
       table: login
-      data_type: integer
-      default_value: nextval('login_id_seq'::regclass)
+      data_type: int unsigned
+      default_value: null
       max_length: null
-      numeric_precision: 32
+      numeric_precision: 10
       numeric_scale: 0
       is_nullable: false
-      is_unique: true
+      is_unique: false
       is_primary_key: true
       is_generated: false
       generation_expression: null
@@ -3191,24 +3213,25 @@ fields:
     type: alias
     meta:
       collection: login
-      conditions: null
-      display: null
-      display_options: null
       field: translations
-      group: null
-      hidden: false
-      interface: translations
-      note: null
-      options: null
-      readonly: false
-      required: false
-      sort: null
       special:
         - translations
+      interface: translations
+      options:
+        defaultLanguage: fr
+      display: null
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: null
+      width: full
       translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
       validation: null
       validation_message: null
-      width: full
   - collection: login_translations
     field: connexion_text
     type: text
@@ -3221,7 +3244,7 @@ fields:
       group: null
       hidden: false
       interface: input-rich-text-html
-      note: null
+      note: Texte accompagnant le formulaire d'authentification
       options:
         language: htmlmixed
       readonly: false
@@ -3237,7 +3260,7 @@ fields:
       table: login_translations
       data_type: text
       default_value: null
-      max_length: null
+      max_length: 65535
       numeric_precision: null
       numeric_scale: null
       is_nullable: true
@@ -3273,13 +3296,13 @@ fields:
     schema:
       name: id
       table: login_translations
-      data_type: integer
-      default_value: nextval('login_translations_id_seq'::regclass)
+      data_type: int unsigned
+      default_value: null
       max_length: null
-      numeric_precision: 32
+      numeric_precision: 10
       numeric_scale: 0
       is_nullable: false
-      is_unique: true
+      is_unique: false
       is_primary_key: true
       is_generated: false
       generation_expression: null
@@ -3311,7 +3334,7 @@ fields:
     schema:
       name: languages_code
       table: login_translations
-      data_type: character varying
+      data_type: varchar
       default_value: null
       max_length: 255
       numeric_precision: null
@@ -3349,10 +3372,10 @@ fields:
     schema:
       name: login_id
       table: login_translations
-      data_type: integer
+      data_type: int unsigned
       default_value: null
       max_length: null
-      numeric_precision: 32
+      numeric_precision: 10
       numeric_scale: 0
       is_nullable: true
       is_unique: false
@@ -3363,18 +3386,18 @@ fields:
       foreign_key_table: login
       foreign_key_column: id
   - collection: login_translations
-    field: not_authentified_text
-    type: text
+    field: not_authenticated_text
+    type: string
     meta:
       collection: login_translations
       conditions: null
       display: null
       display_options: null
-      field: not_authentified_text
+      field: not_authenticated_text
       group: null
       hidden: false
-      interface: input-multiline
-      note: null
+      interface: input
+      note: Phrase en page d'accueil invitant l'utilisateur à s'authentifier
       options: null
       readonly: false
       required: false
@@ -3385,11 +3408,11 @@ fields:
       validation_message: null
       width: full
     schema:
-      name: not_authentified_text
+      name: not_authenticated_text
       table: login_translations
-      data_type: text
+      data_type: varchar
       default_value: null
-      max_length: null
+      max_length: 255
       numeric_precision: null
       numeric_scale: null
       is_nullable: true
@@ -3412,7 +3435,9 @@ fields:
       group: null
       hidden: false
       interface: input
-      note: null
+      note: >-
+        Nom 'ion-icon' de l'icône si aucune n'est définie dans les blocs SVG
+        ci-dessous. Liste des icônes disponibles : https://ionic.io/ionicons
       options: null
       readonly: false
       required: false
@@ -3425,7 +3450,7 @@ fields:
     schema:
       name: icon
       table: pages
-      data_type: character varying
+      data_type: varchar
       default_value: null
       max_length: 255
       numeric_precision: null
@@ -3450,7 +3475,7 @@ fields:
       group: null
       hidden: false
       interface: input-code
-      note: null
+      note: Code SVG de l'icône du service affichée avec le thème 'Dark'
       options:
         language: xml
       readonly: false
@@ -3466,7 +3491,7 @@ fields:
       table: pages
       data_type: text
       default_value: null
-      max_length: null
+      max_length: 65535
       numeric_precision: null
       numeric_scale: null
       is_nullable: true
@@ -3489,7 +3514,7 @@ fields:
       group: null
       hidden: false
       interface: input-code
-      note: null
+      note: Code SVG de l'icône du service affichée avec le thème 'Light'
       options:
         language: xml
       readonly: false
@@ -3505,7 +3530,7 @@ fields:
       table: pages
       data_type: text
       default_value: null
-      max_length: null
+      max_length: 65535
       numeric_precision: null
       numeric_scale: null
       is_nullable: true
@@ -3541,13 +3566,13 @@ fields:
     schema:
       name: id
       table: pages
-      data_type: integer
-      default_value: nextval('pages_id_seq'::regclass)
+      data_type: int unsigned
+      default_value: null
       max_length: null
-      numeric_precision: 32
+      numeric_precision: 10
       numeric_scale: 0
       is_nullable: false
-      is_unique: true
+      is_unique: false
       is_primary_key: true
       is_generated: false
       generation_expression: null
@@ -3570,7 +3595,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: 3
+      sort: 7
       special: null
       translations: null
       validation: null
@@ -3579,10 +3604,10 @@ fields:
     schema:
       name: sort
       table: pages
-      data_type: integer
+      data_type: int
       default_value: null
       max_length: null
-      numeric_precision: 32
+      numeric_precision: 10
       numeric_scale: 0
       is_nullable: true
       is_unique: false
@@ -3604,7 +3629,7 @@ fields:
       group: null
       hidden: false
       interface: input
-      note: null
+      note: Code de la page statique pour la génération des statistiques d'accès
       options:
         iconLeft: auto_graph
         placeholder: >-
@@ -3612,7 +3637,7 @@ fields:
           accesses the feature
       readonly: false
       required: false
-      sort: 7
+      sort: 8
       special: null
       translations: null
       validation: null
@@ -3621,7 +3646,7 @@ fields:
     schema:
       name: statisticName
       table: pages
-      data_type: character varying
+      data_type: varchar
       default_value: null
       max_length: 255
       numeric_precision: null
@@ -3645,16 +3670,16 @@ fields:
         choices:
           - text: $t:published
             value: published
-            foreground: '#FFFFFF'
             background: var(--primary)
+            foreground: '#FFFFFF'
           - text: $t:draft
             value: draft
-            foreground: '#18222F'
             background: '#D3DAE4'
+            foreground: '#18222F'
           - text: $t:archived
             value: archived
-            foreground: '#FFFFFF'
             background: var(--warning)
+            foreground: '#FFFFFF'
         showAsDot: true
       field: status
       group: null
@@ -3680,7 +3705,7 @@ fields:
     schema:
       name: status
       table: pages
-      data_type: character varying
+      data_type: varchar
       default_value: draft
       max_length: 255
       numeric_precision: null
@@ -3698,24 +3723,25 @@ fields:
     type: alias
     meta:
       collection: pages
-      conditions: null
-      display: null
-      display_options: null
       field: translations
-      group: null
-      hidden: false
-      interface: translations
-      note: null
-      options: null
-      readonly: false
-      required: true
-      sort: 8
       special:
         - translations
+      interface: translations
+      options:
+        defaultLanguage: fr
+      display: null
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: 3
+      width: full
       translations: null
+      note: null
+      conditions: null
+      required: true
+      group: null
       validation: null
       validation_message: null
-      width: full
   - collection: pages_translations
     field: content
     type: text
@@ -3728,7 +3754,7 @@ fields:
       group: null
       hidden: false
       interface: input-rich-text-html
-      note: null
+      note: Contenu de la page statique
       options: null
       readonly: false
       required: true
@@ -3743,7 +3769,7 @@ fields:
       table: pages_translations
       data_type: text
       default_value: null
-      max_length: null
+      max_length: 65535
       numeric_precision: null
       numeric_scale: null
       is_nullable: true
@@ -3779,13 +3805,13 @@ fields:
     schema:
       name: id
       table: pages_translations
-      data_type: integer
-      default_value: nextval('pages_translations_id_seq'::regclass)
+      data_type: int unsigned
+      default_value: null
       max_length: null
-      numeric_precision: 32
+      numeric_precision: 10
       numeric_scale: 0
       is_nullable: false
-      is_unique: true
+      is_unique: false
       is_primary_key: true
       is_generated: false
       generation_expression: null
@@ -3817,7 +3843,7 @@ fields:
     schema:
       name: languages_code
       table: pages_translations
-      data_type: character varying
+      data_type: varchar
       default_value: null
       max_length: 255
       numeric_precision: null
@@ -3855,10 +3881,10 @@ fields:
     schema:
       name: pages_id
       table: pages_translations
-      data_type: integer
+      data_type: int unsigned
       default_value: null
       max_length: null
-      numeric_precision: 32
+      numeric_precision: 10
       numeric_scale: 0
       is_nullable: true
       is_unique: false
@@ -3880,7 +3906,7 @@ fields:
       group: null
       hidden: false
       interface: input
-      note: null
+      note: Titre de la page statique
       options: null
       readonly: false
       required: true
@@ -3893,7 +3919,7 @@ fields:
     schema:
       name: title
       table: pages_translations
-      data_type: character varying
+      data_type: varchar
       default_value: null
       max_length: 255
       numeric_precision: null
@@ -3931,13 +3957,13 @@ fields:
     schema:
       name: id
       table: settings_by_role
-      data_type: integer
-      default_value: nextval('settings_by_role_id_seq'::regclass)
+      data_type: int unsigned
+      default_value: null
       max_length: null
-      numeric_precision: 32
+      numeric_precision: 10
       numeric_scale: 0
       is_nullable: false
-      is_unique: true
+      is_unique: false
       is_primary_key: true
       is_generated: false
       generation_expression: null
@@ -3969,10 +3995,10 @@ fields:
     schema:
       name: position
       table: settings_by_role
-      data_type: integer
+      data_type: int
       default_value: null
       max_length: null
-      numeric_precision: 32
+      numeric_precision: 10
       numeric_scale: 0
       is_nullable: false
       is_unique: false
@@ -4007,7 +4033,7 @@ fields:
     schema:
       name: role
       table: settings_by_role
-      data_type: character varying
+      data_type: varchar
       default_value: null
       max_length: 255
       numeric_precision: null
@@ -4032,11 +4058,13 @@ fields:
       group: null
       hidden: false
       interface: input
-      note: null
+      note: >-
+        Nom 'ion-icon' de l'icône du réseau social. Liste des icônes disponibles
+        : https://ionic.io/ionicons
       options: null
       readonly: false
       required: false
-      sort: null
+      sort: 3
       special: null
       translations:
         - language: en-US
@@ -4049,7 +4077,7 @@ fields:
     schema:
       name: icon
       table: social_networks
-      data_type: character varying
+      data_type: varchar
       default_value: null
       max_length: 255
       numeric_precision: null
@@ -4078,7 +4106,7 @@ fields:
       options: null
       readonly: true
       required: false
-      sort: null
+      sort: 1
       special: null
       translations: null
       validation: null
@@ -4087,13 +4115,13 @@ fields:
     schema:
       name: id
       table: social_networks
-      data_type: integer
-      default_value: nextval('social_networks_id_seq'::regclass)
+      data_type: int unsigned
+      default_value: null
       max_length: null
-      numeric_precision: 32
+      numeric_precision: 10
       numeric_scale: 0
       is_nullable: false
-      is_unique: true
+      is_unique: false
       is_primary_key: true
       is_generated: false
       generation_expression: null
@@ -4112,11 +4140,11 @@ fields:
       group: null
       hidden: false
       interface: input
-      note: null
+      note: Lien http vers le réseau social
       options: null
       readonly: false
       required: false
-      sort: null
+      sort: 4
       special: null
       translations:
         - language: en-US
@@ -4129,7 +4157,7 @@ fields:
     schema:
       name: link
       table: social_networks
-      data_type: character varying
+      data_type: varchar
       default_value: null
       max_length: 255
       numeric_precision: null
@@ -4158,7 +4186,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: null
+      sort: 5
       special: null
       translations: null
       validation: null
@@ -4167,10 +4195,10 @@ fields:
     schema:
       name: sort
       table: social_networks
-      data_type: integer
+      data_type: int
       default_value: null
       max_length: null
-      numeric_precision: 32
+      numeric_precision: 10
       numeric_scale: 0
       is_nullable: true
       is_unique: false
@@ -4192,11 +4220,11 @@ fields:
       group: null
       hidden: false
       interface: input
-      note: null
+      note: Titre du réseau social
       options: null
       readonly: false
       required: false
-      sort: null
+      sort: 2
       special: null
       translations:
         - language: en-US
@@ -4209,7 +4237,7 @@ fields:
     schema:
       name: title
       table: social_networks
-      data_type: character varying
+      data_type: varchar
       default_value: null
       max_length: 255
       numeric_precision: null
@@ -4234,13 +4262,16 @@ fields:
       group: null
       hidden: false
       interface: select-dropdown-m2o
-      note: null
+      note: >-
+        Permet de gérer l'affichage ou non de la widget en page d'accueil à
+        partir d'une liste blanche (=personne sauf xxx) ou d'une liste noire
+        (=tout le monde sauf xxx) sur les rôles utilisateur
       options:
         enableSelect: false
         template: '{{type}}:{{roles}}'
       readonly: false
       required: false
-      sort: 8
+      sort: 9
       special:
         - m2o
       translations: null
@@ -4250,10 +4281,10 @@ fields:
     schema:
       name: authorization
       table: widgets
-      data_type: integer
+      data_type: int unsigned
       default_value: null
       max_length: null
-      numeric_precision: 32
+      numeric_precision: 10
       numeric_scale: 0
       is_nullable: true
       is_unique: true
@@ -4275,11 +4306,18 @@ fields:
       group: null
       hidden: false
       interface: select-color
-      note: null
-      options: null
+      note: Couleur de fond du widget en page d'accueil
+      options:
+        presets:
+          - name: Bleu
+            color: '#BADFEE'
+          - name: Vert
+            color: '#A0D0B0'
+          - name: Jaune
+            color: '#FFEF65'
       readonly: false
       required: false
-      sort: 15
+      sort: 16
       special: null
       translations: null
       validation: null
@@ -4288,7 +4326,46 @@ fields:
     schema:
       name: color
       table: widgets
-      data_type: character varying
+      data_type: varchar
+      default_value: null
+      max_length: 255
+      numeric_precision: null
+      numeric_scale: null
+      is_nullable: true
+      is_unique: false
+      is_primary_key: false
+      is_generated: false
+      generation_expression: null
+      has_auto_increment: false
+      foreign_key_table: null
+      foreign_key_column: null
+  - collection: widgets
+    field: description
+    type: string
+    meta:
+      collection: widgets
+      conditions: null
+      display: null
+      display_options: null
+      field: description
+      group: null
+      hidden: false
+      interface: input
+      note: null
+      options:
+        placeholder: Description du widget
+      readonly: false
+      required: false
+      sort: 3
+      special: null
+      translations: null
+      validation: null
+      validation_message: null
+      width: full
+    schema:
+      name: description
+      table: widgets
+      data_type: varchar
       default_value: null
       max_length: 255
       numeric_precision: null
@@ -4313,11 +4390,13 @@ fields:
       group: null
       hidden: false
       interface: input
-      note: null
+      note: >-
+        Éventuelle icône 'ion-icon' à afficher à côté du titre dans la widget en
+        page d'accueil. Liste des icônes disponibles : https://ionic.io/ionicons
       options: null
       readonly: false
       required: false
-      sort: 5
+      sort: 6
       special: null
       translations: null
       validation: null
@@ -4326,7 +4405,7 @@ fields:
     schema:
       name: icon
       table: widgets
-      data_type: character varying
+      data_type: varchar
       default_value: null
       max_length: 255
       numeric_precision: null
@@ -4351,12 +4430,14 @@ fields:
       group: null
       hidden: false
       interface: input-code
-      note: null
+      note: >-
+        Code SVG de l'icône à afficher à côté du titre dans la widget en page
+        d'accueil avec le thème 'Dark'
       options:
         language: xml
       readonly: false
       required: false
-      sort: 7
+      sort: 8
       special: null
       translations: null
       validation: null
@@ -4367,7 +4448,7 @@ fields:
       table: widgets
       data_type: text
       default_value: null
-      max_length: null
+      max_length: 65535
       numeric_precision: null
       numeric_scale: null
       is_nullable: true
@@ -4390,12 +4471,14 @@ fields:
       group: null
       hidden: false
       interface: input-code
-      note: null
+      note: >-
+        Code SVG de l'icône à afficher à côté du titre dans la widget en page
+        d'accueil avec le thème 'Light'
       options:
         language: xml
       readonly: false
       required: false
-      sort: 6
+      sort: 7
       special: null
       translations: null
       validation: null
@@ -4406,7 +4489,7 @@ fields:
       table: widgets
       data_type: text
       default_value: null
-      max_length: null
+      max_length: 65535
       numeric_precision: null
       numeric_scale: null
       is_nullable: true
@@ -4442,13 +4525,13 @@ fields:
     schema:
       name: id
       table: widgets
-      data_type: integer
-      default_value: nextval('widgets_id_seq'::regclass)
+      data_type: int unsigned
+      default_value: null
       max_length: null
-      numeric_precision: 32
+      numeric_precision: 10
       numeric_scale: 0
       is_nullable: false
-      is_unique: true
+      is_unique: false
       is_primary_key: true
       is_generated: false
       generation_expression: null
@@ -4466,25 +4549,29 @@ fields:
             _and:
               - type:
                   _eq: internal
-          readonly: true
           hidden: true
           options:
             font: sans-serif
-            trim: false
-            masked: false
-            clear: false
             slug: false
+            trim: false
+            clear: false
+            masked: false
+          readonly: true
       display: null
       display_options: null
       field: link
       group: null
       hidden: false
       interface: input
-      note: null
+      note: >-
+        Lien http vers le service externe. Si une authentification CAS est
+        requise, penser à ajouter le ticket ST avec un marqueur {st} qui sera
+        dynamiquement remplacé. Exemple =
+        https://mon-service.edu/auth?ticket={st}
       options: null
       readonly: false
       required: false
-      sort: 13
+      sort: 14
       special: null
       translations: null
       validation: null
@@ -4493,7 +4580,7 @@ fields:
     schema:
       name: link
       table: widgets
-      data_type: character varying
+      data_type: varchar
       default_value: null
       max_length: 255
       numeric_precision: null
@@ -4518,11 +4605,13 @@ fields:
       group: null
       hidden: false
       interface: input
-      note: null
+      note: >-
+        Poids de la position par défaut du widget sur la page d'accueil (ordre
+        d'affichage par poids croissant : 1 = premier)
       options: null
       readonly: false
       required: false
-      sort: 9
+      sort: 10
       special: null
       translations: null
       validation: null
@@ -4531,10 +4620,10 @@ fields:
     schema:
       name: position
       table: widgets
-      data_type: integer
+      data_type: int
       default_value: null
       max_length: null
-      numeric_precision: 32
+      numeric_precision: 10
       numeric_scale: 0
       is_nullable: true
       is_unique: false
@@ -4555,40 +4644,40 @@ fields:
             _and:
               - type:
                   _eq: internal
-          readonly: false
           hidden: false
-          required: true
           options:
             font: sans-serif
-            trim: false
-            masked: false
-            clear: false
             slug: false
+            trim: false
+            clear: false
+            masked: false
+          readonly: false
+          required: true
         - name: if external
           rule:
             _and:
               - type:
                   _eq: external
-          readonly: true
           hidden: true
-          required: false
           options:
             font: sans-serif
-            trim: false
-            masked: false
-            clear: false
             slug: false
+            trim: false
+            clear: false
+            masked: false
+          readonly: true
+          required: false
       display: null
       display_options: null
       field: routerLink
       group: null
       hidden: false
       interface: input
-      note: null
+      note: Chemin vers la route interne du module Ionic à appeler
       options: null
       readonly: false
       required: false
-      sort: 12
+      sort: 13
       special: null
       translations: null
       validation: null
@@ -4597,7 +4686,7 @@ fields:
     schema:
       name: routerLink
       table: widgets
-      data_type: character varying
+      data_type: varchar
       default_value: null
       max_length: 255
       numeric_precision: null
@@ -4615,24 +4704,26 @@ fields:
     type: alias
     meta:
       collection: widgets
-      conditions: null
-      display: null
-      display_options: null
       field: settings_by_role
-      group: null
-      hidden: false
-      interface: list-m2m
-      note: null
-      options: null
-      readonly: false
-      required: false
-      sort: 10
       special:
         - m2m
+      interface: list-m2m
+      options: null
+      display: null
+      display_options: null
+      readonly: false
+      hidden: false
+      sort: 11
+      width: full
       translations: null
+      note: >-
+        Permet de définir un poids de position par défaut pour l'affichage du
+        widget pour un rôle utilisateur donné
+      conditions: null
+      required: false
+      group: null
       validation: null
       validation_message: null
-      width: full
   - collection: widgets
     field: ssoService
     type: string
@@ -4644,25 +4735,25 @@ fields:
             _and:
               - type:
                   _eq: internal
-          readonly: true
           hidden: true
           options:
             font: sans-serif
-            trim: false
-            masked: false
-            clear: false
             slug: false
+            trim: false
+            clear: false
+            masked: false
+          readonly: true
       display: null
       display_options: null
       field: ssoService
       group: null
       hidden: false
       interface: input
-      note: null
+      note: Lien vers la validation du ticket SSO du service en question
       options: null
       readonly: false
       required: false
-      sort: 14
+      sort: 15
       special: null
       translations: null
       validation: null
@@ -4671,7 +4762,7 @@ fields:
     schema:
       name: ssoService
       table: widgets
-      data_type: character varying
+      data_type: varchar
       default_value: null
       max_length: 255
       numeric_precision: null
@@ -4696,7 +4787,7 @@ fields:
       group: null
       hidden: false
       interface: input
-      note: null
+      note: Code du service pour la génération des statistiques d'accès
       options:
         iconLeft: auto_graph
         placeholder: >-
@@ -4704,7 +4795,7 @@ fields:
           accesses the feature
       readonly: false
       required: false
-      sort: 16
+      sort: 17
       special: null
       translations: null
       validation: null
@@ -4713,7 +4804,7 @@ fields:
     schema:
       name: statisticName
       table: widgets
-      data_type: character varying
+      data_type: varchar
       default_value: null
       max_length: 255
       numeric_precision: null
@@ -4737,16 +4828,16 @@ fields:
         choices:
           - text: $t:published
             value: published
-            foreground: '#FFFFFF'
             background: var(--primary)
+            foreground: '#FFFFFF'
           - text: $t:draft
             value: draft
-            foreground: '#18222F'
             background: '#D3DAE4'
+            foreground: '#18222F'
           - text: $t:archived
             value: archived
-            foreground: '#FFFFFF'
             background: var(--warning)
+            foreground: '#FFFFFF'
         showAsDot: true
       field: status
       group: null
@@ -4772,7 +4863,7 @@ fields:
     schema:
       name: status
       table: widgets
-      data_type: character varying
+      data_type: varchar
       default_value: draft
       max_length: 255
       numeric_precision: null
@@ -4790,27 +4881,28 @@ fields:
     type: alias
     meta:
       collection: widgets
-      conditions: null
-      display: translations
-      display_options:
-        languageField: code
-        template: '{{title}}'
       field: translations
-      group: null
-      hidden: false
-      interface: translations
-      note: null
-      options:
-        languageField: code
-      readonly: false
-      required: false
-      sort: 4
       special:
         - translations
+      interface: translations
+      options:
+        languageField: code
+        defaultLanguage: fr
+      display: translations
+      display_options:
+        template: '{{title}}'
+        languageField: code
+      readonly: false
+      hidden: false
+      sort: 5
+      width: full
       translations: null
+      note: null
+      conditions: null
+      required: false
+      group: null
       validation: null
       validation_message: null
-      width: full
   - collection: widgets
     field: type
     type: string
@@ -4823,7 +4915,10 @@ fields:
       group: null
       hidden: false
       interface: select-radio
-      note: null
+      note: >-
+        Type de service vers lequel redirige le widget si l'utilisateur clique
+        dessus. Internal = service interne à l'application - External  = service
+        externe (url web à appeler)
       options:
         choices:
           - text: internal
@@ -4832,7 +4927,7 @@ fields:
             value: external
       readonly: false
       required: true
-      sort: 11
+      sort: 12
       special: null
       translations: null
       validation: null
@@ -4841,7 +4936,7 @@ fields:
     schema:
       name: type
       table: widgets
-      data_type: character varying
+      data_type: varchar
       default_value: internal
       max_length: 255
       numeric_precision: null
@@ -4866,11 +4961,13 @@ fields:
       group: null
       hidden: false
       interface: input
-      note: null
+      note: >-
+        Code système du widget à afficher. Se référer au Readme du projet pour
+        connaître les codes des différents widgets
       options: null
       readonly: false
       required: false
-      sort: 3
+      sort: 4
       special: null
       translations: null
       validation: null
@@ -4879,7 +4976,7 @@ fields:
     schema:
       name: widget
       table: widgets
-      data_type: character varying
+      data_type: varchar
       default_value: null
       max_length: 255
       numeric_precision: null
@@ -4917,13 +5014,13 @@ fields:
     schema:
       name: id
       table: widgets_settings_by_role
-      data_type: integer
-      default_value: nextval('widgets_settings_by_role_id_seq'::regclass)
+      data_type: int unsigned
+      default_value: null
       max_length: null
-      numeric_precision: 32
+      numeric_precision: 10
       numeric_scale: 0
       is_nullable: false
-      is_unique: true
+      is_unique: false
       is_primary_key: true
       is_generated: false
       generation_expression: null
@@ -4955,10 +5052,10 @@ fields:
     schema:
       name: settings_by_role_id
       table: widgets_settings_by_role
-      data_type: integer
+      data_type: int unsigned
       default_value: null
       max_length: null
-      numeric_precision: 32
+      numeric_precision: 10
       numeric_scale: 0
       is_nullable: true
       is_unique: false
@@ -4993,10 +5090,10 @@ fields:
     schema:
       name: sort
       table: widgets_settings_by_role
-      data_type: integer
+      data_type: int
       default_value: null
       max_length: null
-      numeric_precision: 32
+      numeric_precision: 10
       numeric_scale: 0
       is_nullable: true
       is_unique: false
@@ -5031,10 +5128,10 @@ fields:
     schema:
       name: widgets_id
       table: widgets_settings_by_role
-      data_type: integer
+      data_type: int unsigned
       default_value: null
       max_length: null
-      numeric_precision: 32
+      numeric_precision: 10
       numeric_scale: 0
       is_nullable: true
       is_unique: false
@@ -5056,11 +5153,13 @@ fields:
       group: null
       hidden: false
       interface: input-multiline
-      note: null
+      note: >-
+        Éventuel contenu ou descriptif à afficher dans la widget en page
+        d'accueil
       options: null
       readonly: false
       required: false
-      sort: null
+      sort: 3
       special: null
       translations: null
       validation: null
@@ -5071,7 +5170,7 @@ fields:
       table: widgets_translations
       data_type: text
       default_value: null
-      max_length: null
+      max_length: 65535
       numeric_precision: null
       numeric_scale: null
       is_nullable: true
@@ -5098,7 +5197,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: null
+      sort: 1
       special: null
       translations: null
       validation: null
@@ -5107,13 +5206,13 @@ fields:
     schema:
       name: id
       table: widgets_translations
-      data_type: integer
-      default_value: nextval('widgets_translations_id_seq'::regclass)
+      data_type: int unsigned
+      default_value: null
       max_length: null
-      numeric_precision: 32
+      numeric_precision: 10
       numeric_scale: 0
       is_nullable: false
-      is_unique: true
+      is_unique: false
       is_primary_key: true
       is_generated: false
       generation_expression: null
@@ -5136,7 +5235,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: null
+      sort: 4
       special: null
       translations: null
       validation: null
@@ -5145,7 +5244,7 @@ fields:
     schema:
       name: languages_code
       table: widgets_translations
-      data_type: character varying
+      data_type: varchar
       default_value: null
       max_length: 255
       numeric_precision: null
@@ -5159,85 +5258,6 @@ fields:
       foreign_key_table: languages
       foreign_key_column: code
   - collection: widgets_translations
-    field: searchKeywords
-    type: json
-    meta:
-      collection: widgets_translations
-      conditions: null
-      display: null
-      display_options: null
-      field: searchKeywords
-      group: null
-      hidden: false
-      interface: tags
-      note: null
-      options:
-        alphabetize: true
-      readonly: false
-      required: false
-      sort: null
-      special:
-        - cast-json
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: searchKeywords
-      table: widgets_translations
-      data_type: json
-      default_value: null
-      max_length: null
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: widgets_translations
-    field: shortTitle
-    type: string
-    meta:
-      collection: widgets_translations
-      conditions: null
-      display: null
-      display_options: null
-      field: shortTitle
-      group: null
-      hidden: false
-      interface: input
-      note: null
-      options:
-        softLength: 25
-      readonly: false
-      required: false
-      sort: null
-      special: null
-      translations: null
-      validation: null
-      validation_message: null
-      width: full
-    schema:
-      name: shortTitle
-      table: widgets_translations
-      data_type: character varying
-      default_value: null
-      max_length: 255
-      numeric_precision: null
-      numeric_scale: null
-      is_nullable: true
-      is_unique: false
-      is_primary_key: false
-      is_generated: false
-      generation_expression: null
-      has_auto_increment: false
-      foreign_key_table: null
-      foreign_key_column: null
-  - collection: widgets_translations
     field: title
     type: string
     meta:
@@ -5249,11 +5269,11 @@ fields:
       group: null
       hidden: false
       interface: input
-      note: null
+      note: Éventuel titre pour la widget en page d'accueil
       options: null
       readonly: false
       required: false
-      sort: null
+      sort: 2
       special: null
       translations: null
       validation: null
@@ -5262,7 +5282,7 @@ fields:
     schema:
       name: title
       table: widgets_translations
-      data_type: character varying
+      data_type: varchar
       default_value: null
       max_length: 255
       numeric_precision: null
@@ -5291,7 +5311,7 @@ fields:
       options: null
       readonly: false
       required: false
-      sort: null
+      sort: 6
       special: null
       translations: null
       validation: null
@@ -5300,10 +5320,10 @@ fields:
     schema:
       name: widgets_id
       table: widgets_translations
-      data_type: integer
+      data_type: int unsigned
       default_value: null
       max_length: null
-      numeric_precision: 32
+      numeric_precision: 10
       numeric_scale: 0
       is_nullable: true
       is_unique: false
@@ -5333,7 +5353,7 @@ relations:
       foreign_key_table: channels
       foreign_key_column: id
       constraint_name: channels_translations_channels_id_foreign
-      on_update: NO ACTION
+      on_update: RESTRICT
       on_delete: SET NULL
   - collection: channels_translations
     field: languages_code
@@ -5354,7 +5374,7 @@ relations:
       foreign_key_table: languages
       foreign_key_column: code
       constraint_name: channels_translations_languages_code_foreign
-      on_update: NO ACTION
+      on_update: RESTRICT
       on_delete: SET NULL
   - collection: contact_us_translations
     field: contact_us_id
@@ -5375,7 +5395,7 @@ relations:
       foreign_key_table: contact_us
       foreign_key_column: id
       constraint_name: contact_us_translations_contact_us_id_foreign
-      on_update: NO ACTION
+      on_update: RESTRICT
       on_delete: SET NULL
   - collection: contact_us_translations
     field: languages_code
@@ -5396,7 +5416,7 @@ relations:
       foreign_key_table: languages
       foreign_key_column: code
       constraint_name: contact_us_translations_languages_code_foreign
-      on_update: NO ACTION
+      on_update: RESTRICT
       on_delete: SET NULL
   - collection: features
     field: authorization
@@ -5417,7 +5437,7 @@ relations:
       foreign_key_table: authorization
       foreign_key_column: id
       constraint_name: features_authorization_foreign
-      on_update: NO ACTION
+      on_update: RESTRICT
       on_delete: CASCADE
   - collection: features_settings_by_role
     field: features_id
@@ -5438,7 +5458,7 @@ relations:
       foreign_key_table: features
       foreign_key_column: id
       constraint_name: features_settings_by_role_features_id_foreign
-      on_update: NO ACTION
+      on_update: RESTRICT
       on_delete: CASCADE
   - collection: features_settings_by_role
     field: settings_by_role_id
@@ -5459,7 +5479,7 @@ relations:
       foreign_key_table: settings_by_role
       foreign_key_column: id
       constraint_name: features_settings_by_role_settings_by_role_id_foreign
-      on_update: NO ACTION
+      on_update: RESTRICT
       on_delete: CASCADE
   - collection: features_translations
     field: features_id
@@ -5480,7 +5500,7 @@ relations:
       foreign_key_table: features
       foreign_key_column: id
       constraint_name: features_translations_features_id_foreign
-      on_update: NO ACTION
+      on_update: RESTRICT
       on_delete: SET NULL
   - collection: features_translations
     field: languages_code
@@ -5501,7 +5521,7 @@ relations:
       foreign_key_table: languages
       foreign_key_column: code
       constraint_name: features_translations_languages_code_foreign
-      on_update: NO ACTION
+      on_update: RESTRICT
       on_delete: SET NULL
   - collection: important_news
     field: authorization
@@ -5522,7 +5542,7 @@ relations:
       foreign_key_table: authorization
       foreign_key_column: id
       constraint_name: important_news_authorization_foreign
-      on_update: NO ACTION
+      on_update: RESTRICT
       on_delete: SET NULL
   - collection: important_news
     field: image
@@ -5543,7 +5563,7 @@ relations:
       foreign_key_table: directus_files
       foreign_key_column: id
       constraint_name: important_news_image_foreign
-      on_update: NO ACTION
+      on_update: RESTRICT
       on_delete: SET NULL
   - collection: important_news_translations
     field: important_news_id
@@ -5564,7 +5584,7 @@ relations:
       foreign_key_table: important_news
       foreign_key_column: id
       constraint_name: important_news_translations_important_news_id_foreign
-      on_update: NO ACTION
+      on_update: RESTRICT
       on_delete: SET NULL
   - collection: important_news_translations
     field: languages_code
@@ -5585,7 +5605,7 @@ relations:
       foreign_key_table: languages
       foreign_key_column: code
       constraint_name: important_news_translations_languages_code_foreign
-      on_update: NO ACTION
+      on_update: RESTRICT
       on_delete: SET NULL
   - collection: login_translations
     field: languages_code
@@ -5606,7 +5626,7 @@ relations:
       foreign_key_table: languages
       foreign_key_column: code
       constraint_name: login_translations_languages_code_foreign
-      on_update: NO ACTION
+      on_update: RESTRICT
       on_delete: SET NULL
   - collection: login_translations
     field: login_id
@@ -5627,7 +5647,7 @@ relations:
       foreign_key_table: login
       foreign_key_column: id
       constraint_name: login_translations_login_id_foreign
-      on_update: NO ACTION
+      on_update: RESTRICT
       on_delete: SET NULL
   - collection: pages_translations
     field: languages_code
@@ -5648,7 +5668,7 @@ relations:
       foreign_key_table: languages
       foreign_key_column: code
       constraint_name: pages_translations_languages_code_foreign
-      on_update: NO ACTION
+      on_update: RESTRICT
       on_delete: SET NULL
   - collection: pages_translations
     field: pages_id
@@ -5669,7 +5689,7 @@ relations:
       foreign_key_table: pages
       foreign_key_column: id
       constraint_name: pages_translations_pages_id_foreign
-      on_update: NO ACTION
+      on_update: RESTRICT
       on_delete: SET NULL
   - collection: widgets
     field: authorization
@@ -5690,7 +5710,7 @@ relations:
       foreign_key_table: authorization
       foreign_key_column: id
       constraint_name: widgets_authorization_foreign
-      on_update: NO ACTION
+      on_update: RESTRICT
       on_delete: CASCADE
   - collection: widgets_settings_by_role
     field: settings_by_role_id
@@ -5711,7 +5731,7 @@ relations:
       foreign_key_table: settings_by_role
       foreign_key_column: id
       constraint_name: widgets_settings_by_role_settings_by_role_id_foreign
-      on_update: NO ACTION
+      on_update: RESTRICT
       on_delete: CASCADE
   - collection: widgets_settings_by_role
     field: widgets_id
@@ -5732,7 +5752,7 @@ relations:
       foreign_key_table: widgets
       foreign_key_column: id
       constraint_name: widgets_settings_by_role_widgets_id_foreign
-      on_update: NO ACTION
+      on_update: RESTRICT
       on_delete: CASCADE
   - collection: widgets_translations
     field: languages_code
@@ -5753,7 +5773,7 @@ relations:
       foreign_key_table: languages
       foreign_key_column: code
       constraint_name: widgets_translations_languages_code_foreign
-      on_update: NO ACTION
+      on_update: RESTRICT
       on_delete: SET NULL
   - collection: widgets_translations
     field: widgets_id
@@ -5774,5 +5794,5 @@ relations:
       foreign_key_table: widgets
       foreign_key_column: id
       constraint_name: widgets_translations_widgets_id_foreign
-      on_update: NO ACTION
+      on_update: RESTRICT
       on_delete: SET NULL

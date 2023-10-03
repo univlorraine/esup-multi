@@ -1,32 +1,37 @@
 [
 	{
+		"title": "facebook",
 		"icon": "facebook",
 		"link": "https://www.facebook.com/UnivLorraine",
-		"title": "facebook",
+		"id": 1,
 		"sort": 1
 	},
 	{
+		"title": "X",
 		"icon": "logo-twitter",
-		"link": "https://twitter.com/univ_Lorraine",
-		"title": "twitter",
+		"link": "https://x.com/univ_Lorraine",
+		"id": 2,
 		"sort": 2
 	},
 	{
-		"icon": "instagram",
-		"link": "https://www.linkedin.com/company/universit-de-lorraine",
 		"title": "instagram",
+		"icon": "instagram",
+		"link": "https://www.instagram.com/univlorraine/",
+		"id": 3,
 		"sort": 3
 	},
 	{
+		"title": "linkedin",
 		"icon": "linkedin",
 		"link": "https://www.linkedin.com/company/universit-de-lorraine/",
-		"title": "linkedin",
+		"id": 4,
 		"sort": 4
 	},
 	{
+		"title": "Twitch",
 		"icon": "logo-twitch",
 		"link": "https://www.twitch.tv/vie_etudiante_ul",
-		"title": "Twitch",
+		"id": 5,
 		"sort": 5
 	}
 ]
