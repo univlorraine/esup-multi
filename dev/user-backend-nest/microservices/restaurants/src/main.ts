@@ -30,6 +30,19 @@ async function bootstrap() {
   const host = process.env.RESTAURANTS_SERVICE_HOST || '127.0.0.1';
   const port = parseInt(process.env.RESTAURANTS_SERVICE_PORT) || 3017;
   Logger.log(`Listening on host ${host}, port ${port}`);
+  Logger.log(
+    `Cache enabled for restaurants. TTL: ${
+      process.env.RESTAURANTS_SERVICE_CACHE_TTL_MS_RESTAURANTS || 300
+    }ms`,
+  );
+  Logger.log(
+    `Cache enabled for menus. TTL: ${
+      process.env.RESTAURANTS_SERVICE_CACHE_TTL_MS_MENUS || 300
+    }ms`,
+  );
+  Logger.log(
+    `Max cache entries: ${process.env.RESTAURANTS_SERVICE_CACHE_MAX || 200}`,
+  );
   await app.listen(port, host);
 }
 bootstrap();

@@ -30,6 +30,12 @@ async function bootstrap() {
   const host = process.env.SCHEDULE_SERVICE_HOST || '127.0.0.1';
   const port = parseInt(process.env.SCHEDULE_SERVICE_PORT) || 3008;
   Logger.log(`Listening on host ${host}, port ${port}`);
+  Logger.log(
+    `Cache enabled. TTL: ${process.env.SCHEDULE_SERVICE_CACHE_TTL_MS || 300}ms`,
+  );
+  Logger.log(
+    `Max cache entries: ${process.env.SCHEDULE_SERVICE_CACHE_MAX || 200}`,
+  );
   await app.listen(port, host);
 }
 bootstrap();

@@ -18,6 +18,7 @@ Ce module est en charge d'interagir avec le CAS serveur et autres services tiers
 - `AUTH_SERVICE_DIRECTUS_API_BEARER_TOKEN`: Bearer token permettant l'accès à l'API du CMS Directus
 - `AUTH_SERVICE_DIRECTUS_API_URL`: L'URL d'accès à l'API Directus
 - `AUTH_SERVICE_CACHE_TTL_MS`: Durée de vie du cache en millisecondes (default: 300)
+- `AUTH_SERVICE_CACHE_MAX`: Max des entrées enregistrées en cache (default: 200)
 
 ### Agentkeepalive configuration
 Look at [official documentation](https://github.com/node-modules/agentkeepalive#new-agentoptions) for each of the following options :
