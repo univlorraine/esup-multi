@@ -8,6 +8,7 @@ Ce module est en charge de gérer les différentes opérations de pointage horai
 - `CLOCKING_SERVICE_UL_API_CLOCKING_URL`: L'URL de l'API permettant d'interagir avec le service externe de pointage.
 - `CLOCKING_SERVICE_UL_API_BEARER_TOKEN`: Le token d'accès à l'API permettant d'interagir avec le service externe de pointage.
 - `CLOCKING_SERVICE_CACHE_TTL_MS`: Durée de vie du cache en millisecondes (default: 300)
+- `CLOCKING_SERVICE_CACHE_MAX`: Max des entrées enregistrées en cache (default: 200)
 
 ### Agentkeepalive configuration
 Look at [official documentation](https://github.com/node-modules/agentkeepalive#new-agentoptions) for each of the following options :

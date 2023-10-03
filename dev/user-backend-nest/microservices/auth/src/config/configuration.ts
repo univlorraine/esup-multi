@@ -16,6 +16,7 @@ interface Configuration {
   directusApi: DirectusApi;
   keepAliveOptions: KeepAliveOptions;
   cacheTtl: number;
+  cacheMax: number;
 }
 
 const applyIfNotBlank = (param: string, applyFn: (value: string) => void) => {
@@ -96,5 +97,6 @@ export default (): Configuration => {
     },
     keepAliveOptions,
     cacheTtl: parseInt(process.env.AUTH_SERVICE_CACHE_TTL_MS),
+    cacheMax: parseInt(process.env.AUTH_SERVICE_CACHE_MAX),
   };
 };

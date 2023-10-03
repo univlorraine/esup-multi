@@ -10,6 +10,7 @@ Ce module est en charge de la récupération des restaurants dans l'API de l'Uni
 - `RESTAURANTS_SERVICE_UL_API_BEARER_TOKEN`: Le token d'accès à l'API de l'Université permettant d'obtenir les informations liées aux restaurant.
 - `RESTAURANTS_SERVICE_CACHE_TTL_MS_RESTAURANTS`: Durée de vie du cache en millisecondes pour les restaurants (default: 300)
 - `RESTAURANTS_SERVICE_CACHE_TTL_MS_MENUS`: Durée de vie du cache en millisecondes pour les menus (default: 300)
+- `RESTAURANTS_SERVICE_CACHE_MAX`: Max des entrées enregistrées en cache pour les restaurants et les menus (default: 200)
 
 ### Agentkeepalive configuration
 Look at [official documentation](https://github.com/node-modules/agentkeepalive#new-agentoptions) for each of the following options :

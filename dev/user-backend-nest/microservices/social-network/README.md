@@ -9,6 +9,7 @@ Ce module est en charge de remonter les liens vers différents réseaux sociaux.
 - `SOCIAL_NETWORK_SERVICE_DIRECTUS_API_URL`: L'URL de l'API du CMS Directus
 - `SOCIAL_NETWORK_SERVICE_DIRECTUS_API_BEARER_TOKEN`: Bearer token permettant l'accès à l'API du CMS Directus
 - `SOCIAL_NETWORK_SERVICE_CACHE_TTL_MS`: Durée de vie du cache en millisecondes (default: 300)
+- `SOCIAL_NETWORK_SERVICE_CACHE_MAX`: Max des entrées enregistrées en cache (default: 200)
 
 ### Agentkeepalive configuration
 Look at [official documentation](https://github.com/node-modules/agentkeepalive#new-agentoptions) for each of the following options :

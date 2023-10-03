@@ -10,6 +10,7 @@ export default (): {
   directusApi: DirectusApi;
   keepAliveOptions: KeepAliveOptions;
   cacheTtl: number;
+  cacheMax: number;
 } => {
   const keepAliveOptions = {};
 
@@ -55,5 +56,6 @@ export default (): {
     },
     keepAliveOptions,
     cacheTtl: parseInt(process.env.SOCIAL_NETWORK_SERVICE_CACHE_TTL_MS),
+    cacheMax: parseInt(process.env.SOCIAL_NETWORK_SERVICE_CACHE_MAX),
   };
 };

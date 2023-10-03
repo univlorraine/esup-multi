@@ -10,6 +10,7 @@ export default (): {
   ulApi: UlApi;
   keepAliveOptions: KeepAliveOptions;
   cacheTtl: CacheTtl;
+  cacheMax: number;
 } => {
   const keepAliveOptions = {};
 
@@ -60,5 +61,6 @@ export default (): {
       ),
       menus: parseInt(process.env.RESTAURANTS_SERVICE_CACHE_TTL_MS_MENUS),
     },
+    cacheMax: parseInt(process.env.RESTAURANTS_SERVICE_CACHE_MAX),
   };
 };

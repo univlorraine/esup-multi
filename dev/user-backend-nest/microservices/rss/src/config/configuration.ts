@@ -4,4 +4,5 @@ export default () => ({
     ? process.env.RSS_SERVICE_ALLOWED_HTML_TAGS.split(',')
     : [],
   cacheTtl: parseInt(process.env.RSS_SERVICE_CACHE_TTL_MS),
+  cacheMax: parseInt(process.env.RSS_SERVICE_CACHE_MAX),
 });

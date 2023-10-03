@@ -10,6 +10,7 @@ export default (): {
   ulApi: UlApi;
   keepAliveOptions: KeepAliveOptions;
   cacheTtl: number;
+  cacheMax: number;
 } => {
   const keepAliveOptions = {};
 
@@ -55,5 +56,6 @@ export default (): {
     },
     keepAliveOptions,
     cacheTtl: parseInt(process.env.MAIL_CALENDAR_SERVICE_CACHE_TTL_MS),
+    cacheMax: parseInt(process.env.MAIL_CALENDAR_SERVICE_CACHE_MAX),
   };
 };
