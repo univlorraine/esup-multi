@@ -1,6 +1,4 @@
 vars:
-  APP_NAME:
-    default: UnivLorraine
   BUNDLE_ID:
     default: fr.univlorraine.mobile.appUnivLorraine
   PACKAGE_NAME:
@@ -15,23 +13,6 @@ platforms:
     packageName: $PACKAGE_NAME
     versionName: $VERSION_NAME
     versionCode: $BUILD_NUMBER
-    xml:
-      - resFile: values/strings.xml
-        target: resources/string[@name="app_name"]
-        replace: |
-          <string name="app_name">$APP_NAME</string>
-      - resFile: values/strings.xml
-        target: resources/string[@name="title_activity_main"]
-        replace: |
-          <string name="title_activity_main">$APP_NAME</string>
-      - resFile: values/strings.xml
-        target: resources/string[@name="package_name"]
-        replace: |
-          <string name="package_name">$PACKAGE_NAME</string>
-      - resFile: values/strings.xml
-        target: resources/string[@name="custom_url_scheme"]
-        replace: |
-          <string name="custom_url_scheme">$PACKAGE_NAME</string>
     copy:
       - src: ../src/environments/firebase/android/google-services-dev.json
         dest: app/google-services.json

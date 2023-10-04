@@ -2,10 +2,10 @@ import firebasePwaEnvironment from './firebase/web/firebase-environment.pwa-prod
 
 export const environment = {
   production: true,
-  apiEndpoint: 'https://multi-backend.sied-prod.paas.univ-lorraine.fr',
+  apiEndpoint: 'https://mobile-back.univ-lorraine.fr',
   languages: ['fr', 'en'],
   defaultLanguage: 'fr',
-  cmsPublicAssetsEndpoint: 'https://directus.sied-prod.paas.univ-lorraine.fr/assets/',
+  cmsPublicAssetsEndpoint: 'https://mobile-cms.univ-lorraine.fr/assets/',
   firebase: firebasePwaEnvironment,
   guidedTourEnabled: true
 };
