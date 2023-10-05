@@ -10,13 +10,14 @@
 <ng-container>
   <ion-content class="ion-padding">
     <ion-row class="label">
-    <ion-label class="app-text-3 safe-area-padding-lr">{{ "NOTIFICATIONS.SETTINGS.DESCRIPTION" | translate }}</ion-label>
-  </ion-row>
+      <ion-label class="app-text-3 safe-area-padding-lr">{{ "NOTIFICATIONS.SETTINGS.DESCRIPTION" | translate }}</ion-label>
+    </ion-row>
     <form [formGroup]="channelForm" *ngIf="(channelsSubscriptions$| async) as channelsSubscriptions">
       <ion-list>
         <ion-item *ngFor="let channelSubscription of channelsSubscriptions">
-          <ion-label class="app-text-3 light">{{ channelSubscription.label }}</ion-label>
-          <ion-toggle [formControlName]="channelSubscription.code"></ion-toggle>
+          <ion-toggle [formControlName]="channelSubscription.code" class="app-text-3 light" justify="space-between">
+            {{ channelSubscription.label }}
+          </ion-toggle>
         </ion-item>
       </ion-list>
     </form>
