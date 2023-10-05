@@ -292,7 +292,7 @@ export class AppController {
             {
               type: body.type,
               value: body.value,
-              userId: user.username,
+              userId: user?.username || null,
             },
           ),
         ),
