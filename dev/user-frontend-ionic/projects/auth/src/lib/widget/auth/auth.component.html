@@ -9,7 +9,7 @@
   </ion-grid>
   <ion-list>
     <ion-item button *ngIf="authenticatedUser$ | async" (click)="logout()" lines="none" [disabled]="isLoading">
-      <ion-icon class="app-icon-4" name="deconnect" slot="start"></ion-icon>
+      <ion-icon class="app-icon-4" name="logout" slot="start"></ion-icon>
       <ion-label class="app-text-3 light">{{'AUTH.CONNECTED.LOGOUT' | translate}}</ion-label>
     </ion-item>
   </ion-list>
@@ -25,7 +25,7 @@
   </ion-grid>
   <ion-list>
     <ion-item routerLink="/auth" lines="none">
-      <ion-icon class="app-icon-4" name="log-in" slot="start"></ion-icon>
+      <ion-icon class="app-icon-4" name="login" slot="start"></ion-icon>
       <ion-label class="app-text-3 light">{{'AUTH.MENU' | translate}}</ion-label>
     </ion-item>
   </ion-list>
