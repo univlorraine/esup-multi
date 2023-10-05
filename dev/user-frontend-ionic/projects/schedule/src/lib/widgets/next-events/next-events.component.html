@@ -45,13 +45,7 @@
                   <ion-text [ngClass]="fontColor()"
                     class="app-title-6 light">{{teacher.displayname}}</ion-text>
                 </ion-row>
-                <ion-row class="ion-align-items-center card-labels" *ngFor="let group of event.groups">
-                  <ion-icon [ngClass]="fontColor()"
-                    class="card-labels-icons" name="people-circle-outline"></ion-icon>
-                  <ion-text [ngClass]="fontColor()"
-                    class="app-title-6 light">{{group.label}}</ion-text>
-                </ion-row>
-                <ion-row class="ion-align-items-center  card-labels" *ngIf="event.course.url">
+                <ion-row class="ion-align-items-center card-labels" *ngIf="event.course.url">
                   <ion-icon [ngClass]="fontColor()"
                     class="card-labels-icons" name="link-outline"></ion-icon>
                   <ion-text [ngClass]="fontColor()"
