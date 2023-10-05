@@ -1,6 +1,5 @@
 <ion-grid class="ion-margin-start safe-area-margin-lr">
-  <ion-row>
-    <ion-row class="ion-align-items-center ion-margin-bottom ion-nowrap">
+    <ion-row class="ion-align-items-center ion-margin-bottom">
       <ion-icon [name]="notification.icon" size="large"></ion-icon>
       <ion-label class="ion-margin-start">
         <h2 class="app-text-2 ion-text-wrap">{{notification.title}}</h2>
@@ -9,7 +8,6 @@
     <ion-row class="ion-margin-bottom">
       <ion-text class="app-text-4">{{notification.message}}</ion-text>
     </ion-row>
-  </ion-row>
 </ion-grid>
 
 <ng-container *ngIf="(notificationOptions$ | async) as options">

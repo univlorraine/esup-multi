@@ -48,6 +48,7 @@ export class ContactsService {
       user.phoneNumbers.map(phone => (
         phones.push({
           type: PhoneType.Work,
+          // eslint-disable-next-line id-blacklist
           number: phone,
         })
       ));
