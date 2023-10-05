@@ -1,8 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { Network } from '@capacitor/network';
-import { getAuthToken } from '@ul/shared';
-import { from, iif, Observable, of } from 'rxjs';
+import { getAuthToken, NetworkService } from '@ul/shared';
+import { filter, first, Observable } from 'rxjs';
 import { map, switchMap, take, tap } from 'rxjs/operators';
 import { MailCalendar, setMails } from './unread-mail.repository';
 
@@ -14,15 +13,14 @@ export class UnreadMailService {
     @Inject('environment')
     private environment: any,
     private http: HttpClient,
+    private networkService: NetworkService
   ) { }
 
   public loadUnreadMailIfNetworkAvailable(): Observable<void> {
-    return from(Network.getStatus()).pipe(
-      switchMap(status => iif(
-        () => status.connected,
-        this.getAndStoreMailStats(),
-        of(null),
-      )),
+    return this.networkService.isOnline$.pipe(
+      first(),
+      filter(isOnline => isOnline),
+      switchMap(() => this.getAndStoreMailStats()),
     );
   }
 
