@@ -68,8 +68,9 @@
   outline: var(--app-rectangular-button-1-outline-width) solid var(--app-rectangular-button-1-outline-color);
   --box-shadow: none;
   --border-radius: 0px !important;
-  height: var(--app-rectangular-button-1-height);
-  min-width: var(--app-rectangular-button-1-min-width);
+  padding: 0 0.1em;
+  //height: var(--app-rectangular-button-1-height);
+  //min-width: var(--app-rectangular-button-1-min-width);
 
   ion-label {
     color: var(--app-rectangular-button-1-font-color);
