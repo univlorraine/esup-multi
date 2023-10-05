@@ -37,7 +37,7 @@ export class CardsPage {
       if (
         userAndCardsData &&
         userAndCardsData.cards?.staffCard &&
-        !userAndCardsData.errors
+        (!userAndCardsData.errors || userAndCardsData.errors.length === 0)
       ) {
         this.screenService.fullBrightness();
       }
