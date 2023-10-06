@@ -2,12 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-		<string>mailto</string>
-	</array>
 	<key>CFBundleDevelopmentRegion</key>
-	<string>en</string>
+	<string>fr</string>
 	<key>CFBundleDisplayName</key>
 	<string>UnivLorraine</string>
 	<key>CFBundleExecutable</key>
@@ -24,10 +20,24 @@
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>FirebaseMessagingAutoInitEnabled</key>
+	<string>NO</string>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>mailto</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>Pour scanner les code-barres</string>
+	<string>L'application a besoin de l'appareil photo pour permettre le scan de code-barre</string>
+	<key>NSContactsUsageDescription</key>
+	<string>L'application a besoin d'accèder à votre répertoire pour vous permettre d'ajouter un contact depuis la recherche dans l'annuaire</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>L'application a besoin de connaitre votre position afin d'améliorer la présentation des services</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>L'application a besoin de la bibliothèque de photos pour permettre de stocker temporairement le scan de code-barre</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
@@ -51,15 +61,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Pour déterminer la position sur le plan</string>
-	<key>ITSAppUsesNonExemptEncryption</key>
-	<false/>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Pour scanner les codes-barres</string>
-	<key>NSContactsUsageDescription</key>
-	<string>Pour ajouter des contacts depuis un annuaire</string>
-	<key>FirebaseMessagingAutoInitEnabled</key>
-	<string>NO</string>
 </dict>
 </plist>
