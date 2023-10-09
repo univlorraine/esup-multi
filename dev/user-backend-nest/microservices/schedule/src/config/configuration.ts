@@ -1,4 +1,8 @@
-import { KeepAliveOptions, UlApi } from './configuration.interface';
+import {
+  KeepAliveOptions,
+  RedisSocket,
+  UlApi,
+} from './configuration.interface';
 
 const applyIfNotBlank = (param: string, applyFn: (value: string) => void) => {
   if (param && param.trim().length > 0) {
@@ -9,6 +13,8 @@ const applyIfNotBlank = (param: string, applyFn: (value: string) => void) => {
 export default (): {
   ulApi: UlApi;
   keepAliveOptions: KeepAliveOptions;
+  redisSocket: RedisSocket;
+  redisPassword: string;
   cacheTtl: number;
   cacheMax: number;
 } => {
@@ -58,6 +64,11 @@ export default (): {
         : [],
     },
     keepAliveOptions,
+    redisSocket: {
+      host: process.env.SCHEDULE_SERVICE_CACHE_REDIS_HOST,
+      port: parseInt(process.env.SCHEDULE_SERVICE_CACHE_REDIS_PORT),
+    },
+    redisPassword: process.env.SCHEDULE_SERVICE_CACHE_REDIS_PASSWORD,
     cacheTtl: parseInt(process.env.SCHEDULE_SERVICE_CACHE_TTL_MS),
     cacheMax: parseInt(process.env.SCHEDULE_SERVICE_CACHE_MAX),
   };

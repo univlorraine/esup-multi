@@ -10,6 +10,13 @@ Ce module est en charge de remonter les informations liées aux mails et calendr
 - `MAIL_CALENDAR_SERVICE_CACHE_TTL_MS`: Durée de vie du cache en millisecondes (default: 300)
 - `MAIL_CALENDAR_SERVICE_CACHE_MAX`: Max des entrées enregistrées en cache (default: 200)
 
+### Configuration Cache
+- `MAIL_CALENDAR_SERVICE_CACHE_REDIS_HOST`: Hostname du serveur Redis pour le partage de cache entre les différentes instances du microservice
+- `MAIL_CALENDAR_SERVICE_CACHE_REDIS_PORT`: Port du serveur Redis
+- `MAIL_CALENDAR_SERVICE_CACHE_REDIS_PASSWORD`: Mot de passe d'accès à la base Redis
+- `MAIL_CALENDAR_SERVICE_CACHE_TTL_MS`: Durée de vie du cache en millisecondes (default: 300)
+- `MAIL_CALENDAR_SERVICE_CACHE_MAX`: Max des entrées enregistrées en cache (default: 200)
+
 ### Agentkeepalive configuration
 Look at [official documentation](https://github.com/node-modules/agentkeepalive#new-agentoptions) for each of the following options :
 - `MAIL_CALENDAR_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVE`: Option `keepAlive`
