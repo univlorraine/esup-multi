@@ -1,0 +1,8 @@
+version: "3.7"
+services:
+  redis:
+    image: redis:latest
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+
