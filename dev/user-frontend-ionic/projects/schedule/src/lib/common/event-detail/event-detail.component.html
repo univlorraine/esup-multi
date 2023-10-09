@@ -37,7 +37,7 @@
           </ng-container>
 
           <ion-row *ngIf="event.groups.length > 0" class="ion-justify-content-end">
-            <ion-button class="app-text-button-2" (click)="toggleExpandGroups()">
+            <ion-button class="app-text-button-2" fill="clear" (click)="toggleExpandGroups()">
               <ion-text class="app-text-4" *ngIf="!isGroupsVisible" >{{ "SCHEDULE.SEE_GROUPS" | translate }}</ion-text>
               <ion-text class="app-text-4" *ngIf="isGroupsVisible" >{{ "SCHEDULE.HIDE_GROUPS" | translate }}</ion-text>
               <ion-icon class="app-icon-6" [class.content-open]="!isGroupsVisible"
