@@ -42,7 +42,7 @@
           "MESSAGE": "Vous êtes désormais authentifié et vous allez pouvoir accéder à des informations personnalisées."
         },
         "STEP_20" : {
-          "MESSAGE": "Cet écran vous propose un accès direct et rapide à vos informations immédiates : prochains cours, rendez-vous, nombre d’e-mail à lire."
+          "MESSAGE": "Cet écran vous propose un accès direct et rapide à vos informations immédiates : prochains cours, rendez-vous, nombre d’e-mails à lire."
         },
         "STEP_30" : {
           "MESSAGE": "Vous retrouverez ici vos notifications…"
@@ -63,7 +63,7 @@
           "MESSAGE": "Vous trouverez ici une version dématérialisée de vos cartes d'étudiant ou de personnel."
         },
         "STEP_90" : {
-          "MESSAGE": "Notre robot Ully se chargera de répondre à vos questions concernant votre compte informatique, votre connexion ou votre d’emploi du temps."
+          "MESSAGE": "Notre robot Ully se chargera de répondre à vos questions concernant votre compte informatique, votre connexion ou votre emploi du temps."
         },
         "STEP_100" : {
           "MESSAGE": "Enfin ce menu vous permettra d’accéder aux paramètres de l’application…"
