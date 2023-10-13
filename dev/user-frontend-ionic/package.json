@@ -49,6 +49,7 @@
     "@capacitor/network": "^5.0.6",
     "@capacitor/splash-screen": "^5.0.6",
     "@capacitor/status-bar": "^5.0.6",
+    "@capawesome/capacitor-badge": "^5.0.0",
     "@capawesome/capacitor-screen-orientation": "5.0.0",
     "@fullcalendar/angular": "^6.0.0",
     "@ionic/angular": "^7.3.3",

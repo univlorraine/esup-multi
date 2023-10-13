@@ -34,6 +34,8 @@ PODS:
     - Capacitor
   - CapacitorStatusBar (5.0.6):
     - Capacitor
+  - CapawesomeCapacitorBadge (5.0.0):
+    - Capacitor
   - CapawesomeCapacitorScreenOrientation (5.0.0):
     - Capacitor
   - CordovaPlugins (5.3.0):
@@ -110,6 +112,7 @@ DEPENDENCIES:
   - CapacitorSecureStoragePlugin (from `../../node_modules/capacitor-secure-storage-plugin`)
   - "CapacitorSplashScreen (from `../../node_modules/@capacitor/splash-screen`)"
   - "CapacitorStatusBar (from `../../node_modules/@capacitor/status-bar`)"
+  - "CapawesomeCapacitorBadge (from `../../node_modules/@capawesome/capacitor-badge`)"
   - "CapawesomeCapacitorScreenOrientation (from `../../node_modules/@capawesome/capacitor-screen-orientation`)"
   - CordovaPlugins (from `../capacitor-cordova-ios-plugins`)
   - Firebase/Messaging
@@ -162,6 +165,8 @@ EXTERNAL SOURCES:
     :path: "../../node_modules/@capacitor/splash-screen"
   CapacitorStatusBar:
     :path: "../../node_modules/@capacitor/status-bar"
+  CapawesomeCapacitorBadge:
+    :path: "../../node_modules/@capawesome/capacitor-badge"
   CapawesomeCapacitorScreenOrientation:
     :path: "../../node_modules/@capawesome/capacitor-screen-orientation"
   CordovaPlugins:
@@ -185,6 +190,7 @@ SPEC CHECKSUMS:
   CapacitorSecureStoragePlugin: e91d7df060f2495a1acff9583641a6953e3aacba
   CapacitorSplashScreen: 5fa2ab5e46cf5cc530cf16a51c80c7a986579ccd
   CapacitorStatusBar: 565c0a1ebd79bb40d797606a8992b4a105885309
+  CapawesomeCapacitorBadge: 2b9919ea79b85bdc5455143cf6607c9e25bec9ae
   CapawesomeCapacitorScreenOrientation: 5b7cfb76348775e4b824bf460e5c52212b94c8d1
   CordovaPlugins: 88b8fabef13dad2289280c64fa30e0fc71bf87db
   Firebase: b49ef44e5ec9a3d0c1f6450f410337e97872279c
@@ -198,6 +204,6 @@ SPEC CHECKSUMS:
   PromisesObjC: c50d2056b5253dadbd6c2bea79b0674bd5a52fa4
   SwiftKeychainWrapper: 807ba1d63c33a7d0613288512399cd1eda1e470c
 
-PODFILE CHECKSUM: 3a262e27308bd5615cd04315e244e4ebf1211772
+PODFILE CHECKSUM: 816bd55887292d03ba0bacf74dc983983783c669
 
 COCOAPODS: 1.12.1
