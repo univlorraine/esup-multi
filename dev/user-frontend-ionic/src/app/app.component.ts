@@ -14,6 +14,9 @@ import {
 import { initializeApp } from 'firebase/app';
 import { combineLatest, Observable, of, Subscription } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
+import { Device } from '@capacitor/device';
+import { Badge } from '@capawesome/capacitor-badge';
+import { FirebaseMessaging } from '@capacitor-firebase/messaging';
 
 @Component({
   selector: 'app-root',
@@ -143,6 +146,7 @@ export class AppComponent implements OnInit, OnDestroy {
     });
 
     this.initializeFirebase();
+    this.handleBadge();
   }
 
   toggleDarkTheme(isDarkTheme: boolean): void {
@@ -173,5 +177,36 @@ export class AppComponent implements OnInit, OnDestroy {
       return;
     }
     initializeApp(this.environment.firebase);
+  }
+
+  /**
+   * On iOs, the badge for the number of notification that is on the app icon is not well updated when the notifications
+   * are read / deleted from the notification center, this function is used to fix that, by synchronizing the badge
+   * with the number of notifications in notification center
+   */
+  private async handleBadge(): Promise<void> {
+    const isIos = (await Device.getInfo()).platform === 'ios';
+    const notSupported = !(await Badge.isSupported());
+    if(notSupported || !isIos) { // The badge is already well handled on android, no need to do it manually
+      return;
+    }
+
+    // Will be called when the user launches the app, then each time the app enters or exits background
+    const fixBadgeCount = async () => {
+      const notificationList = await FirebaseMessaging.getDeliveredNotifications();
+      return Badge.set({
+        count: notificationList.notifications.length
+      });
+    };
+
+    this.subscriptions.push(this.platform.pause.subscribe(async () => {
+      await fixBadgeCount();
+    }));
+
+    this.subscriptions.push(this.platform.resume.subscribe(async () => {
+      await fixBadgeCount();
+    }));
+
+    await fixBadgeCount();
   }
 }
