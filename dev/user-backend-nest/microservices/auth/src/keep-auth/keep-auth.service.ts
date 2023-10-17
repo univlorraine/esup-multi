@@ -81,6 +81,7 @@ export class KeepAuthService {
   public reauthenticate(
     query: ReauthenticateQueryDto,
   ): Observable<AuthenticatedDto> {
+    this.logger.debug(`Re-authentication for uuid : ${query.uuid}`);
     return from(this.userCredentialsRepository.getCredentials(query.uuid)).pipe(
       concatMap((userCredentials) => {
         if(!userCredentials) { // UserCredentials must have been cleared
@@ -98,9 +99,14 @@ export class KeepAuthService {
           encryptionParameters,
           userCredentials.encryptedUsername,
         );
+
         const password = this.encryptionService.decrypt(
           encryptionParameters,
           userCredentials.encryptedPassword,
+        );
+
+        this.logger.debug(
+          `Credentials found in Mongo for uuid ${query.uuid} : ${username}`,
         );
 
         return this.authService.authenticate({
