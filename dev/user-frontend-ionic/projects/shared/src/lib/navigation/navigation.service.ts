@@ -37,4 +37,8 @@ export class NavigationService {
         const previousUrl = this.history.pop() || '/'; // pop previous url
         this.router.navigateByUrl(previousUrl, { replaceUrl: true });
     }
+
+    navigateToAuth() {
+      this.router.navigateByUrl('/auth');
+    }
 }
