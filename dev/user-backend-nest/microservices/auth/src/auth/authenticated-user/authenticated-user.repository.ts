@@ -9,6 +9,7 @@ import {
 
 @Injectable()
 export class AuthenticatedUserRepository {
+  private readonly logger = new Logger(AuthenticatedUserRepository.name);
   constructor(
     @InjectModel(AuthenticatedUser.name)
     private authenticatedUserModel: Model<AuthenticatedUserDocument>,
@@ -45,7 +46,7 @@ export class AuthenticatedUserRepository {
     if (outOfDate.length === 0) {
       return;
     }
-    Logger.debug(
+    this.logger.debug(
       'Following authenticated users data will be removed : ',
       outOfDate,
     );

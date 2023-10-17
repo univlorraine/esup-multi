@@ -84,12 +84,11 @@ export class KeepAuthService {
     this.logger.debug(`Re-authentication for uuid : ${query.uuid}`);
     return from(this.userCredentialsRepository.getCredentials(query.uuid)).pipe(
       concatMap((userCredentials) => {
-        if(!userCredentials) { // UserCredentials must have been cleared
-            throw new RpcException(
-                new UnauthorizedException(
-                    `Invalid authentication`,
-                ),
-            );
+        if (!userCredentials) {
+          // UserCredentials must have been cleared
+          throw new RpcException(
+            new UnauthorizedException(`Invalid authentication`),
+          );
         }
         const encryptionParameters = {
           iv: query.iv,
