@@ -1,4 +1,4 @@
-import { Injectable, Logger } from '@nestjs/common';
+import { Injectable, Logger, UnauthorizedException } from '@nestjs/common';
 import {
   ReauthenticateQueryDto,
   KeepAuthenticatedDto,
@@ -16,6 +16,7 @@ import { JwtService } from '@nestjs/jwt';
 import { Cron } from '@nestjs/schedule';
 import { ConfigService } from '@nestjs/config';
 import * as dotenv from 'dotenv';
+import { RpcException } from '@nestjs/microservices';
 
 dotenv.config(); // used to get process.env access prior to AppModule instanciation (typically in @Cron decorators)
 @Injectable()
@@ -82,6 +83,13 @@ export class KeepAuthService {
   ): Observable<AuthenticatedDto> {
     return from(this.userCredentialsRepository.getCredentials(query.uuid)).pipe(
       concatMap((userCredentials) => {
+        if(!userCredentials) { // UserCredentials must have been cleared
+            throw new RpcException(
+                new UnauthorizedException(
+                    `Invalid authentication`,
+                ),
+            );
+        }
         const encryptionParameters = {
           iv: query.iv,
           key: query.key,
