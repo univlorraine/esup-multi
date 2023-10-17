@@ -1,14 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-  namespace "fr.univlorraine.mobile.multitest"
+  namespace "fr.univlorraine.mobile.appUnivLorraine"
   compileSdk project.hasProperty('compileSdkVersion') ? rootProject.ext.compileSdkVersion : 33
   defaultConfig {
-        applicationId "fr.univlorraine.mobile.multitest"
+        applicationId "fr.univlorraine.mobile.appUnivLorraine"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion project.hasProperty('targetSdkVersion') ? rootProject.ext.targetSdkVersion : 33
-        versionCode 1
-        versionName "2.0.0"
+        versionCode 110011
+        versionName "11.0.11"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.

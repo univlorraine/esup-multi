@@ -1,7 +1,7 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'fr.univlorraine.mobile.multitest',
+  appId: 'fr.univlorraine.mobile.appUnivLorraine',
   appName: 'UnivLorraine',
   webDir: 'www',
   plugins: {

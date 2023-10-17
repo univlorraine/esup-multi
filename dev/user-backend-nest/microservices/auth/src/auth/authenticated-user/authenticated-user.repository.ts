@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { AuthenticatedUserDto } from './authenticated-user.dto';
@@ -39,6 +39,17 @@ export class AuthenticatedUserRepository {
   }
 
   public async removeAuthenticatedUserLastUsedBefore(limitDate: Date) {
+    const outOfDate = await this.authenticatedUserModel.find({
+      lastUsedAt: { $lt: limitDate },
+    });
+    if (outOfDate.length === 0) {
+      return;
+    }
+    Logger.debug(
+      'Following authenticated users data will be removed : ',
+      outOfDate,
+    );
+
     return this.authenticatedUserModel
       .deleteMany({
         lastUsedAt: { $lt: limitDate },
