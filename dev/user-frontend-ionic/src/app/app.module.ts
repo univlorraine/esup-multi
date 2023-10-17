@@ -5,6 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { MatomoModule } from 'ngx-matomo';
 import { AuthModule } from '@ul/auth';
 import { CalendarModule } from '@ul/calendar';
 import { CardsPageModule } from '@ul/cards';
@@ -26,7 +27,6 @@ import { AuthInterceptor, ProjectModuleService, translationsLoaderFactory } from
 import { SocialNetworkModule } from '@ul/social-network';
 import { StaticPagesModule } from '@ul/static-pages';
 import { UnreadMailModule } from '@ul/unread-mail';
-
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -104,6 +104,18 @@ import { PageLayoutsModule } from './page-layouts/page-layouts.module';
     UnreadMailModule,
     CalendarModule.forRoot({
       numberOfEventsLimit: 3
+    }),
+    MatomoModule.forRoot({
+      scriptUrl: 'https://webstats.univ-lorraine.fr/matomo.js',
+      trackers: [
+        {
+          trackerUrl: 'https://webstats.univ-lorraine.fr/matomo.php',
+          siteId: 453
+        }
+      ],
+      routeTracking: {
+        enable: true
+      }
     })
   ],
   providers: [

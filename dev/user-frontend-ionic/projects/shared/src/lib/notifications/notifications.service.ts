@@ -6,6 +6,7 @@ import { getAuthToken} from '../auth/auth.repository';
 import { combineLatest, Observable, of } from 'rxjs';
 import { filter, switchMap, take, tap } from 'rxjs/operators';
 import { Channel, Notification, NotificationsRepository } from './notifications.repository';
+import { Badge } from '@capawesome/capacitor-badge';
 
 @Injectable({
   providedIn: 'root'
@@ -96,6 +97,9 @@ export class NotificationsService {
   }
 
   public markUnreadNotificationsAsRead(notificationIds: string[]): Observable<void> {
+    Badge.clear();
+    FirebaseMessaging.removeAllDeliveredNotifications();
+
     return getAuthToken().pipe(
       // On ne balance la requête au serveur que si la liste des notifications à marquer comme lues n'est pas vide
       filter(authToken => authToken != null && notificationIds.length > 0),
