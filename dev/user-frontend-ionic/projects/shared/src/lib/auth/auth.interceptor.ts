@@ -9,6 +9,7 @@ import { catchError, concatMap, finalize, take } from 'rxjs/operators';
 import { cleanupPrivateData } from '../shared.actions';
 import { getAuthToken } from './auth.repository';
 import { KeepAuthService } from './keep-auth.service';
+import { NavigationService } from '../navigation/navigation.service';
 
 
 @Injectable()
