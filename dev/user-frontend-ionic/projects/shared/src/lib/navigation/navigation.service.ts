@@ -44,10 +44,6 @@ export class NavigationService {
         this.router.navigateByUrl(previousUrl, { replaceUrl: true });
     }
 
-    navigateToAuth() {
-      this.router.navigateByUrl('/auth');
-    }
-
     private setupInactiveRefresh() {
         this.platform.ready().then(() => {
             this.platform.pause.subscribe(() => {
