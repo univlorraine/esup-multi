@@ -7,8 +7,6 @@ import { cleanupPrivateData } from '../shared.actions';
 import { updateAuthToken } from './auth.repository';
 import { AuthenticatedUser, updateUser } from './authenticated-user.repository';
 import { getRefreshAuthToken } from './keep-auth.repository';
-import { NavigationService } from '../navigation/navigation.service';
-
 
 interface ReauthResult extends AuthenticatedUser {
     authToken: string;
@@ -24,7 +22,6 @@ export class KeepAuthService {
         private environment: any,
         private http: HttpClient,
         private actions: Actions,
-        private navigationService: NavigationService,
     ) {}
 
     public reauthenticateIfAvailable(): Observable<ReauthResult | null> {
@@ -35,8 +32,8 @@ export class KeepAuthService {
             ),
             delayWhen(reauthResult => {
                 if (!reauthResult) {
+                    // Reauth failed, we activate anonymous mode
                     this.actions.dispatch(cleanupPrivateData({authToken: null}));
-                    this.navigationService.navigateToAuth();
                     return;
                 }
 

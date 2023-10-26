@@ -9,7 +9,6 @@ import { catchError, concatMap, finalize, take } from 'rxjs/operators';
 import { cleanupPrivateData } from '../shared.actions';
 import { getAuthToken } from './auth.repository';
 import { KeepAuthService } from './keep-auth.service';
-import { NavigationService } from '../navigation/navigation.service';
 
 
 @Injectable()
@@ -19,7 +18,6 @@ export class AuthInterceptor implements HttpInterceptor {
   private refreshTokenTrigger$ = new Subject<string>();
 
   constructor(
-    private navigationService: NavigationService,
     private keepAuthService: KeepAuthService,
     private actions: Actions
   ) {}
@@ -39,11 +37,6 @@ export class AuthInterceptor implements HttpInterceptor {
         }
 
         if (err.status !== 401 && err.status !== 423) {
-          return throwError(err);
-        }
-
-        if (err.status === 401 && request.url.includes('/reauth')) { // We tried to reauth but still got 401, we redirect to login page
-          this.navigationService.navigateToAuth();
           return throwError(err);
         }
 
