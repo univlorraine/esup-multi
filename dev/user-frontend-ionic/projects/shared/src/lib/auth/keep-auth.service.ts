@@ -32,7 +32,7 @@ export class KeepAuthService {
             ),
             delayWhen(reauthResult => {
                 if (!reauthResult) {
-                    // Reauth failed, we activate anonymous mode
+                    // We activate anonymous mode
                     this.actions.dispatch(cleanupPrivateData({authToken: null}));
                     return;
                 }
