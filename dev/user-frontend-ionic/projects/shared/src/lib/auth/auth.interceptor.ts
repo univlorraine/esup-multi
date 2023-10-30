@@ -19,9 +19,9 @@ export class AuthInterceptor implements HttpInterceptor {
   private refreshTokenTrigger$ = new Subject<string>();
 
   constructor(
-    private navigationService: NavigationService,
     private keepAuthService: KeepAuthService,
-    private actions: Actions
+    private actions: Actions,
+    private navigationService: NavigationService,
   ) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -42,7 +42,8 @@ export class AuthInterceptor implements HttpInterceptor {
           return throwError(err);
         }
 
-        if (err.status === 401 && request.url.includes('/reauth')) { // We tried to reauth but still got 401, we redirect to login page
+        if (err.status === 401 && request.url.includes('/reauth')) {
+          // We tried to reauth but still got 401, we redirect to login page
           this.navigationService.navigateToAuth();
           return throwError(err);
         }
