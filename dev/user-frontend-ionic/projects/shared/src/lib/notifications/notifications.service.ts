@@ -196,14 +196,11 @@ export class NotificationsService {
         });
       });
     } else { // Mobile
-
-      await FirebaseMessaging.addListener('tokenReceived', (result) => {
-        this.notificationRepository.setFcmToken(result.token);
-      });
-
       await FirebaseMessaging.requestPermissions().then(result => {
         if (result.receive === 'granted') {
-          FirebaseMessaging.getToken();
+          FirebaseMessaging.getToken().then(tokenResult => {
+            this.notificationRepository.setFcmToken(tokenResult.token);
+          });
         }
       });
     }
