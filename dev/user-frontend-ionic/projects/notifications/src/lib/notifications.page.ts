@@ -11,6 +11,7 @@ import {
 } from '@ul/shared';
 
 import { ToastService } from './toast.service';
+import { Browser } from "@capacitor/browser";
 
 const defaultBreakpoint = 0.50;
 
@@ -128,8 +129,6 @@ export class NotificationsPage implements OnDestroy {
       this.updateBreakpoints();
     }));
   }
-
-
 
   async checkForScrollbar() {
     const scrollElement = await this.content.getScrollElement();
@@ -249,4 +248,13 @@ export class NotificationsPage implements OnDestroy {
     this.modal.initialBreakpoint = breakpoint;
     this.modal.setCurrentBreakpoint(breakpoint);
   }
+
+  public onClickLink(notification: Notification) {
+    if (!notification.url) {
+      return;
+    }
+    return Browser.open({ url: notification.url });
+  }
 }
+
+

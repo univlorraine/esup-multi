@@ -29,6 +29,7 @@ export interface Notification {
   icon: string;
   title: string;
   message: string;
+  url: string;
   state: string;
   creationDate: string;
   color: string;

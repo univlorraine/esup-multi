@@ -81,6 +81,13 @@
                   <ion-text class="app-text-4 light">{{notification.message}}</ion-text>
                 </ion-row>
 
+                <ion-row class="ion-justify-content-end" *ngIf="notification.url">
+                  <ion-button class="app-text-button-2 link-button" (click)="onClickLink(notification)" fill="clear">
+                    <ion-text class="app-text-5">{{ "NOTIFICATIONS.LEARN_MORE" | translate }}</ion-text>
+                    <ion-icon class="app-icon-6" name="arrow-right"></ion-icon>
+                  </ion-button>
+                </ion-row>
+
               </ion-col>
 
             </ion-row>
