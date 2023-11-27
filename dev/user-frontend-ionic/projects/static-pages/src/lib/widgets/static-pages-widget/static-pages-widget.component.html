@@ -1,4 +1,4 @@
-<ion-item button *ngFor="let page of translatedStaticPages$ | async" (click)="onClick(page)">
+<ion-item button="true" mode="md" detail="true" *ngFor="let page of translatedStaticPages$ | async" (click)="onClick(page)">
   <app-custom-icon
     [icon]="page.icon"
     [iconSourceSvgLightTheme]="page.iconSourceSvgLightTheme"

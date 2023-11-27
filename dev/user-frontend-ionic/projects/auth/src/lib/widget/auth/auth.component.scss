@@ -1,24 +1,14 @@
-ion-list {
+.menu-section {
   padding-top: 0;
   padding-bottom: 0;
-}
 
-ion-item.md {
+  ion-item {
     padding-left: 0.7rem;
-}
 
-ion-item.ios {
-    padding-top: 0.7rem;
-    padding-bottom: 0.2rem;
-    padding-left: 0.5rem !important;
-}
-
-ion-label.ios {
-    padding-left: 0.7rem;
-}
-
-ion-icon {
-  color: var(--ion-color-font-primary);
+    ion-icon {
+      color: var(--ion-color-font-primary);
+    }
+  }
 }
 
 .multi-auth-widget {

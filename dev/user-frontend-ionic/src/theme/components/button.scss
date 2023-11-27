@@ -68,16 +68,17 @@
   outline: var(--app-rectangular-button-1-outline-width) solid var(--app-rectangular-button-1-outline-color);
   --box-shadow: none;
   --border-radius: 0px !important;
-  padding: 0 0.1em;
-  //height: var(--app-rectangular-button-1-height);
-  //min-width: var(--app-rectangular-button-1-min-width);
+  --padding-bottom: 0.5rem;
+  --padding-top: 0.5rem;
+  min-height: var(--app-rectangular-button-1-min-height);
 
   ion-label {
     color: var(--app-rectangular-button-1-font-color);
-    margin-top: 0.2rem;
+    margin-top:  var(--app-rectangular-button-1-bottom-border-width);
     font-family: var(--app-rectangular-button-1-font-family);
     font-size: var(--app-rectangular-button-1-font-size);
     text-transform: uppercase;
+    letter-spacing: 0.052rem;
   }
 }
 
