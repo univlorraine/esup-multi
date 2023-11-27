@@ -9,3 +9,8 @@ ion-chip {
 .dark-font-color{
   color: var(--app-font-color-for-light-background-from-cms) !important;
 }
+
+.ion-padding {
+  padding-top: 5px !important;
+  padding-bottom: 5px !important;
+}

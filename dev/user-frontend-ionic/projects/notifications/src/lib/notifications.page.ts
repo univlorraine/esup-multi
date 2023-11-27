@@ -11,7 +11,7 @@ import {
 } from '@ul/shared';
 
 import { ToastService } from './toast.service';
-import { Browser } from "@capacitor/browser";
+import { Browser } from '@capacitor/browser';
 
 const defaultBreakpoint = 0.50;
 
@@ -215,6 +215,13 @@ export class NotificationsPage implements OnDestroy {
     this.isOpen = true;
   }
 
+  onClickLink(notification: Notification) {
+    if (!notification.url) {
+      return;
+    }
+    return Browser.open({ url: notification.url });
+  }
+
   private async loadDataIfNetworkAvailable() {
     if (!(await this.networkService.getConnectionStatus()).connected) {
       return;
@@ -247,13 +254,6 @@ export class NotificationsPage implements OnDestroy {
 
     this.modal.initialBreakpoint = breakpoint;
     this.modal.setCurrentBreakpoint(breakpoint);
-  }
-
-  public onClickLink(notification: Notification) {
-    if (!notification.url) {
-      return;
-    }
-    return Browser.open({ url: notification.url });
   }
 }
 
