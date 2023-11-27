@@ -2,23 +2,27 @@
   <app-widget [widgetId]="widgetIds.auth"></app-widget>
   <ion-list lines="none" class="menu-section">
     <ion-item
-      button
+      button="true"
+      mode="md"
+      detail="true"
       *ngFor="let menu of (staticMenuItems$ | async)"
       (click)="menuOpenerService.open(menu)"
       [attr.data-burger-id]="getMenuId(menu)"
     >
-      <ion-icon class="app-icon-4" name="{{menu.icon}}" slot="start"></ion-icon>
+      <ion-icon slot="start" class="app-icon-4" name="{{menu.icon}}"></ion-icon>
       <ion-label class="app-text-3 light">{{menu.title | translate}}</ion-label>
     </ion-item>
   </ion-list>
+
   <ion-list data-burger-id="menu-help" lines="none" class="menu-section">
     <app-widget [widgetId]="widgetIds.contactUs"></app-widget>
     <app-widget [widgetId]="widgetIds.staticPages"></app-widget>
   </ion-list>
 
   <ion-list lines="none" class="menu-section">
-    <ion-item button *ngFor="let menu of (dynamicMenuItems$ | async)" (click)="menuOpenerService.open(menu)">
+    <ion-item button="true" mode="md" detail="true" *ngFor="let menu of (dynamicMenuItems$ | async)" (click)="menuOpenerService.open(menu)">
       <app-custom-icon class="app-icon-4"
+        slot="start"
         [icon]="menu.icon"
         [color]="(isDarkTheme$ | async) === true ? 'icon-primary': 'icon-primary-contrast'"
         [iconSourceSvgLightTheme]="menu.iconSourceSvgLightTheme"
@@ -28,8 +32,8 @@
   </ion-list>
 
   <app-widget  [widgetId]="widgetIds.socialNetwork"></app-widget>
-
 </ion-content>
+
 <ion-footer data-burger-id="menu-footer" class="ion-no-border">
   <ion-row class="ion-justify-content-center">
     <ion-button fill="clear" shape="round" class="app-round-button-1 ion-no-padding ion-no-margin" (click)="toggleDarkMode()">

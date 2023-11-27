@@ -7,13 +7,14 @@
       </ion-label>
     </ion-col>
   </ion-grid>
-  <ion-list>
-    <ion-item button *ngIf="authenticatedUser$ | async" (click)="logout()" lines="none" [disabled]="isLoading">
-      <ion-icon class="app-icon-4" name="logout" slot="start"></ion-icon>
+  <ion-list class="menu-section" lines="none">
+    <ion-item button="true" mode="md" detail="true" *ngIf="authenticatedUser$ | async" (click)="logout()" [disabled]="isLoading">
+      <ion-icon slot="start" class="app-icon-4" name="logout"></ion-icon>
       <ion-label class="app-text-3 light">{{'AUTH.CONNECTED.LOGOUT' | translate}}</ion-label>
     </ion-item>
   </ion-list>
 </ng-container>
+
 <ng-template #notAuthenticated>
   <ion-grid class="ion-text-center ion-padding-top ion-padding-bottom menu-section multi-auth-widget">
     <ion-col>
@@ -23,9 +24,9 @@
       </ion-label>
     </ion-col>
   </ion-grid>
-  <ion-list>
-    <ion-item routerLink="/auth" lines="none">
-      <ion-icon class="app-icon-4" name="login" slot="start"></ion-icon>
+  <ion-list class="menu-section" lines="none">
+    <ion-item routerLink="/auth" mode="md" detail="true">
+      <ion-icon slot="start" class="app-icon-4" name="login"></ion-icon>
       <ion-label class="app-text-3 light">{{'AUTH.MENU' | translate}}</ion-label>
     </ion-item>
   </ion-list>
