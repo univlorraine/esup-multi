@@ -29,10 +29,12 @@ check-nodejs-version:
       dotenv: vars.env
   rules:
     # On ne déclenche ce job que lorsqu'il y a eu du changement au niveau du backend
-    - changes:
+    - if: '$CI_COMMIT_BRANCH == "develop-sied"'
+      changes:
         - ${BACKEND_PATH}/main/**/*
         - ${BACKEND_PATH}/microservices/**/*
         - ${FRONTEND_PATH}/**/*
+
 
 
 ########################################################################################################################
@@ -50,7 +52,8 @@ backend:main:
     strategy: depend
   rules:
     # On ne déclenche ce job que lorsqu'il y a eu du changement au niveau de backend/main
-    - changes:
+    - if: '$CI_COMMIT_BRANCH == "develop-sied"'
+      changes:
         - ${BACKEND_PATH}/main/**/*
 
 # CI du microservice auth
@@ -65,7 +68,8 @@ backend:microservice:auth:
     strategy: depend
   rules:
     # On ne déclenche ce job que lorsqu'il y a eu du changement au niveau de backend/microservices/auth
-    - changes:
+    - if: '$CI_COMMIT_BRANCH == "develop-sied"'
+      changes:
         - ${BACKEND_PATH}/microservices/auth/**/*
 
 # CI du microservice cards
@@ -80,7 +84,8 @@ backend:microservice:cards:
     strategy: depend
   rules:
     # On ne déclenche ce job que lorsqu'il y a eu du changement au niveau de backend/microservices/cards
-    - changes:
+    - if: '$CI_COMMIT_BRANCH == "develop-sied"'
+      changes:
         - ${BACKEND_PATH}/microservices/cards/**/*
 
 # CI du microservice chatbot
@@ -95,7 +100,8 @@ backend:microservice:chatbot:
     strategy: depend
   rules:
     # On ne déclenche ce job que lorsqu'il y a eu du changement au niveau de backend/microservices/chatbot
-    - changes:
+    - if: '$CI_COMMIT_BRANCH == "develop-sied"'
+      changes:
         - ${BACKEND_PATH}/microservices/chatbot/**/*
 
 # CI du microservice clocking
@@ -125,7 +131,8 @@ backend:microservice:contact-us:
     strategy: depend
   rules:
     # On ne déclenche ce job que lorsqu'il y a eu du changement au niveau de backend/microservices/contact-us
-    - changes:
+    - if: '$CI_COMMIT_BRANCH == "develop-sied"'
+      changes:
         - ${BACKEND_PATH}/microservices/contact-us/**/*
 
 # CI du microservice contacts
@@ -140,7 +147,8 @@ backend:microservice:contacts:
     strategy: depend
   rules:
     # On ne déclenche ce job que lorsqu'il y a eu du changement au niveau de backend/microservices/contacts
-    - changes:
+    - if: '$CI_COMMIT_BRANCH == "develop-sied"'
+      changes:
         - ${BACKEND_PATH}/microservices/contacts/**/*
 
 # CI du microservice features
@@ -155,7 +163,8 @@ backend:microservice:features:
     strategy: depend
   rules:
     # On ne déclenche ce job que lorsqu'il y a eu du changement au niveau de backend/microservices/features
-    - changes:
+    - if: '$CI_COMMIT_BRANCH == "develop-sied"'
+      changes:
         - ${BACKEND_PATH}/microservices/features/**/*
 
 # CI du microservice important-news
@@ -170,7 +179,8 @@ backend:microservice:important-news:
     strategy: depend
   rules:
     # On ne déclenche ce job que lorsqu'il y a eu du changement au niveau de backend/microservices/important-news
-    - changes:
+    - if: '$CI_COMMIT_BRANCH == "develop-sied"'
+      changes:
         - ${BACKEND_PATH}/microservices/important-news/**/*
 
 # CI du microservice mail-calendar
@@ -185,7 +195,8 @@ backend:microservice:mail-calendar:
     strategy: depend
   rules:
     # On ne déclenche ce job que lorsqu'il y a eu du changement au niveau de backend/microservices/mail-calendar
-    - changes:
+    - if: '$CI_COMMIT_BRANCH == "develop-sied"'
+      changes:
         - ${BACKEND_PATH}/microservices/mail-calendar/**/*
 
 # CI du microservice map
@@ -200,7 +211,8 @@ backend:microservice:map:
     strategy: depend
   rules:
     # On ne déclenche ce job que lorsqu'il y a eu du changement au niveau de backend/microservices/map
-    - changes:
+    - if: '$CI_COMMIT_BRANCH == "develop-sied"'
+      changes:
         - ${BACKEND_PATH}/microservices/map/**/*
 
 # CI du microservice notifications
@@ -215,7 +227,8 @@ backend:microservice:notifications:
     strategy: depend
   rules:
     # On ne déclenche ce job que lorsqu'il y a eu du changement au niveau de backend/microservices/map
-    - changes:
+    - if: '$CI_COMMIT_BRANCH == "develop-sied"'
+      changes:
         - ${BACKEND_PATH}/microservices/notifications/**/*
 
 # CI du microservice restaurants
@@ -230,7 +243,8 @@ backend:microservice:restaurants:
     strategy: depend
   rules:
     # On ne déclenche ce job que lorsqu'il y a eu du changement au niveau de backend/microservices/rss
-    - changes:
+    - if: '$CI_COMMIT_BRANCH == "develop-sied"'
+      changes:
         - ${BACKEND_PATH}/microservices/restaurants/**/*
 
 # CI du microservice rss
@@ -245,7 +259,8 @@ backend:microservice:rss:
     strategy: depend
   rules:
     # On ne déclenche ce job que lorsqu'il y a eu du changement au niveau de backend/microservices/rss
-    - changes:
+    - if: '$CI_COMMIT_BRANCH == "develop-sied"'
+      changes:
         - ${BACKEND_PATH}/microservices/rss/**/*
 
 # CI du microservice schedule
@@ -260,7 +275,8 @@ backend:microservice:schedule:
     strategy: depend
   rules:
     # On ne déclenche ce job que lorsqu'il y a eu du changement au niveau de backend/microservices/schedule
-    - changes:
+    - if: '$CI_COMMIT_BRANCH == "develop-sied"'
+      changes:
         - ${BACKEND_PATH}/microservices/schedule/**/*
 
 # CI du microservice social-network
@@ -275,7 +291,8 @@ backend:microservice:social-network:
     strategy: depend
   rules:
     # On ne déclenche ce job que lorsqu'il y a eu du changement au niveau de backend/microservices/social-network
-    - changes:
+    - if: '$CI_COMMIT_BRANCH == "develop-sied"'
+      changes:
         - ${BACKEND_PATH}/microservices/social-network/**/*
 
 # CI du microservice static-pages
@@ -290,7 +307,8 @@ backend:microservice:static-pages:
     strategy: depend
   rules:
     # On ne déclenche ce job que lorsqu'il y a eu du changement au niveau de backend/microservices/static-pages
-    - changes:
+    - if: '$CI_COMMIT_BRANCH == "develop-sied"'
+      changes:
         - ${BACKEND_PATH}/microservices/static-pages/**/*
 
 # CI du microservice statistics
@@ -305,7 +323,8 @@ backend:microservice:statistics:
     strategy: depend
   rules:
     # On ne déclenche ce job que lorsqu'il y a eu du changement au niveau de backend/microservices/statistics
-    - changes:
+    - if: '$CI_COMMIT_BRANCH == "develop-sied"'
+      changes:
         - ${BACKEND_PATH}/microservices/statistics/**/*
 
 ########################################################################################################################
@@ -322,7 +341,8 @@ frontend:
     include: ${FRONTEND_PATH}/.gitlab-ci.yml
     strategy: depend
   rules:
-    - changes:
+    - if: '$CI_COMMIT_BRANCH == "develop-sied"'
+      changes:
         - ${FRONTEND_PATH}/src/**/*
         - ${FRONTEND_PATH}/project/**/*
 
