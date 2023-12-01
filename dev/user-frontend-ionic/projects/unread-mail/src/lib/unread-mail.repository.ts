@@ -5,6 +5,7 @@ import { localForageStore } from '@ul/shared';
 const STORE_NAME = 'unread-mail';
 
 export interface MailCalendar {
+  error?: string;
   unreadMails: number;
 }
 
@@ -20,6 +21,7 @@ export const mails$ = store.pipe(select((state) => state));
 export const setMails = (mailCalendar: MailCalendar) => {
   store.update((state) => ({
     ...state,
+    error: mailCalendar.error || null,
     unreadMails: mailCalendar.unreadMails,
   }));
 };

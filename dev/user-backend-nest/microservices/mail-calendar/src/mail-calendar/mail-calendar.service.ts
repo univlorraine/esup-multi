@@ -2,7 +2,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { UlApi } from '../config/configuration.interface';
 import { ConfigService } from '@nestjs/config';
 import { HttpService } from '@nestjs/axios';
-import { catchError, map, Observable } from 'rxjs';
+import { catchError, map, Observable, of } from 'rxjs';
 import {
   MailCalendarQueryDto,
   MailCalendarReplyDto,
@@ -35,6 +35,15 @@ export class MailCalendarService {
       })
       .pipe(
         catchError((err: any) => {
+          if (err.response && err.response.status === 404) {
+            const data: MailCalendarReplyDto = {
+              error: 'NO_MAIL_ACCOUNT',
+              unreadMails: null,
+              events: [],
+            };
+            return of({ data });
+          }
+
           const errorMessage = `Unable to get mails and calendar data with username '${query.login}'`;
           this.logger.error(errorMessage, err);
           throw new RpcException(errorMessage);

@@ -3,6 +3,7 @@ export interface MailCalendarQueryDto {
 }
 
 export interface MailCalendarReplyDto {
+  error?: string;
   unreadMails: number;
   events: MailCalendarEventDto[];
 }

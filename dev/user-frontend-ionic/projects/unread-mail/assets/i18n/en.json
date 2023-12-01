@@ -1,5 +1,6 @@
 {
   "NO_UNREAD": "No unread messages",
   "ONE_UNREAD": "unread message",
-  "MULTIPLE_UNREAD": "unread messages"
+  "MULTIPLE_UNREAD": "unread messages",
+  "NO_MAIL_ACCOUNT": "You do not have e-mail account"
 }

@@ -2,7 +2,7 @@
   <ion-spinner class="ion-margin safe-area-lr-ionic-margin" name="dots"></ion-spinner>
 </ion-row>
 <ng-container *ngIf='!isLoading'>
-  <ng-container  *ngIf='(nextEvents$ | async) as events;'>
+  <ng-container *ngIf='(nextEvents$ | async) as events'>
     <ion-row *ngIf='events.length === 0' class="ion-padding">
       <ion-text [ngClass]="fontColor()" class='app-text-4 safe-area-padding-lr'>{{'CALENDAR.NO_EVENTS' | translate}}</ion-text>
     </ion-row>
@@ -17,7 +17,7 @@
           <ion-text [ngClass]="fontColor()" class='app-text-4'>{{event.location}}</ion-text>
         </ion-col>
       </ion-row>
-      <hr  *ngIf='i !== events.length - 1' />
+      <hr  *ngIf='i !== events.length - 1'>
     </ion-col>
   </ng-container>
 </ng-container>
