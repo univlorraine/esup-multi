@@ -4,7 +4,7 @@
   "description": "",
   "author": "",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "CECILL-2.1",
   "scripts": {
     "prebuild": "rimraf dist && node update-infos.js",
     "build": "nest build",
