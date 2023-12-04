@@ -46,7 +46,7 @@
   <ion-radio-group [value]="this.filterChecked" (ionChange)="selectedCategory($event)">
     <ion-item lines="none" *ngFor="let filter of this.filtersList">
       <ion-label class="app-text-4">{{ 'CONTACTS.CONTACT_TYPES.' + filter | translate }}</ion-label>
-      <ion-radio [value]="filter"></ion-radio>
+      <ion-radio mode="md" [value]="filter"></ion-radio>
     </ion-item>
   </ion-radio-group>
   <ion-row class="ion-padding ion-justify-content-center">
