@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Component, Inject, Injector } from '@angular/core';
+import { Component, ElementRef, Inject, Injector, ViewChild } from '@angular/core';
 import { Capacitor } from '@capacitor/core';
 import { ActionSheetController, AlertController, ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
@@ -53,13 +53,17 @@ import { Contact, ContactsBody, ContactsService } from './contacts.service';
 
 export class ContactsComponent {
 
+  @ViewChild('searchBlock') viewBlock: ElementRef;
   public contacts: Contact[] = [];
   public loading = false;
   public filterChecked: string;
   public filtersList: string[];
   public searchBarText = '';
   public searchButtonPressed = false;
+  public searchFixed = false;
+  private lastScrollTop = 0;
   private translateService: TranslateService;
+  private deltaSearchDisplay = 10; // number of pixels to scroll down/up before display the search block
 
   constructor(
     private contactsService: ContactsService,
@@ -91,8 +95,13 @@ export class ContactsComponent {
     this.contactsService.getContacts(searchBody)
     .pipe(take(1), finalize(() => this.loading = false))
     .subscribe(contacts => {
-      this.contacts = contacts;
-     this.searchButtonPressed = true;
+      this.contacts = contacts.map(contact => ({
+        ...contact,
+        phoneNumbers: contact.phoneNumbers?.filter(phoneNumber => phoneNumber && phoneNumber.trim() !== ''),
+        mobileNumbers: contact.mobileNumbers?.filter(mobileNumber => mobileNumber && mobileNumber.trim() !== ''),
+        mailAddresses: contact.mailAddresses?.filter(mailAddresse => mailAddresse && mailAddresse.trim() !== '')
+      }));
+      this.searchButtonPressed = true;
     });
 
   }
@@ -130,5 +139,17 @@ export class ContactsComponent {
 
   selectedCategory(item) {
    this.filterChecked = item.detail.value;
+  }
+
+  handleScroll(event: Event) {
+    const scrollTop = (event as CustomEvent).detail.scrollTop;
+    if (Math.abs(scrollTop - this.lastScrollTop) > this.deltaSearchDisplay) {
+      this.searchFixed = scrollTop <= this.lastScrollTop && scrollTop > 0;
+      this.lastScrollTop = scrollTop;
+    }
+  }
+
+  getSearchBlockHeight() {
+    return this.viewBlock.nativeElement.offsetHeight;
   }
 }

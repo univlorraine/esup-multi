@@ -42,62 +42,87 @@ ion-searchbar {
   --box-shadow: none !important;
   --border-radius: 0.15rem !important;
 }
-
-.searchbar-row {
-  background: var(--ion-color-dark);
-  margin-bottom: 1.9rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 4rem;
-}
-
 .search-and-filters {
   --ion-item-background: var(--app-color-component-background-secondary);
+  background: var(--app-color-component-background-secondary);
   border-bottom: var(--app-border-width-7) solid var(--ion-color-primary);
+
+  &.search-fixed {
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+  }
+
+  ion-row.searchbar-row {
+    background: var(--ion-color-dark);
+    padding-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 4rem;
+
+    ion-searchbar {
+      --background: var(--app-color-component-background-primary);
+      --box-shadow: none !important;
+      --border-radius: 0.15rem !important;
+    }
+  }
+
+  ion-item {
+    --min-height: 2rem;
+
+    ion-radio {
+      --color: var(--app-font-color-primary) !important;
+      --color-checked: var(--app-font-color-primary) !important;
+    }
+  }
 }
 
-.search-and-filters ion-item {
-  --min-height: 2rem;
+.search-results {
+  ion-card.contact-card {
+    border-top: var(--app-border-width-7) solid var(--ion-color-dark) !important;
+    border-left: var(--app-border-width-7) solid var(--ion-color-dark) !important;
+    border-right: var(--app-border-width-7) solid var(--ion-color-dark) !important;
+    border-bottom: var(--app-border-width-7) solid var(--ion-color-dark) !important;
+    border-radius: var(--app-border-no-radius);
+    box-shadow: var(--app-border-no-box-shadow);
+
+    ion-item.contact-header {
+      --background: transparent;
+
+      ion-avatar {
+        span {
+          display: inline-block;
+          height: 2.5rem;
+          line-height: 2.5rem;
+          width: 2.5rem;
+          text-align: center;
+          border-radius: 100%;
+          padding: 0;
+          font-size: var(--app-text-2-size) !important;
+          text-transform: uppercase;
+          background: var(--ion-color-primary);
+        }
+      }
+    }
+
+    ion-card-content.contact-content {
+      padding-top: 0;
+      border-radius: var(--app-border-no-radius);
+      border-bottom: var(--app-border-width-5) solid var(--ion-color-secondary) !important;
+
+      ion-list {
+        background: transparent !important;
+
+        ion-item {
+          --background: transparent;
+        }
+      }
+
+      .add-icon{
+        color: var(--app-font-color-primary-contrast);
+      }
+    }
+  }
 }
 
-ion-card {
-  border-top: var(--app-border-width-7) solid var(--app-border-color-primary) !important;
-  border-left: var(--app-border-width-7) solid var(--app-border-color-primary) !important;
-  border-right: var(--app-border-width-7) solid var(--app-border-color-primary) !important;
-  border-bottom: var(--app-border-width-7) solid var(--app-border-color-primary) !important;
-  border-radius: var(--app-border-no-radius);
-  box-shadow: var(--app-border-no-box-shadow);
-  --background: transparent;
-}
-
-.border-bottom {
-  border-radius: var(--app-border-no-radius);
-  border-bottom: var(--app-border-width-5) solid var(--ion-color-secondary) !important;
-}
-
-.contact-labels {
-  --background: none;
-}
-
-ion-radio.md{
-  --color: var(--app-font-color-primary) !important;
-  --color-checked: var(--app-font-color-primary) !important;
-}
-
-ion-radio.ios{
-  --color: var(--app-font-color-primary) !important;
-  --color-checked: black !important;
-  border-radius: 50%;
-  background-color: var(--ion-color-medium-light);
-  height: 1rem;
-  width: 1rem;
-}
-
-.add-icon{
-  color: var(--app-font-color-primary-contrast);
-}
-
-ion-item {
-  --background: transparent;
-}
