@@ -86,7 +86,7 @@
   <ng-container *ngIf="filteredNotifications.length > 0">
     <ion-list class="notifications-list">
       <ion-item-sliding class="ion-margin-bottom notification-container"
-        *ngFor="let notification of (filteredNotifications$ | async)">
+        *ngFor="let notification of filteredNotifications">
 
         <div *ngIf="notification.color" class="notifications-color-bar"
           [ngStyle]="{'background-color': notification.color}"></div>
