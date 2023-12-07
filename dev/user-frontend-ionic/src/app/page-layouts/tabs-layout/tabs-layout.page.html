@@ -41,7 +41,7 @@
 
   <ion-header>
     <ion-toolbar>
-      <img src="assets/logo/white-university-logo.svg" class="logo ion-padding-start app-logo-3" />
+      <img src="assets/logo/white-university-logo.svg" class="logo ion-padding-start app-logo-3" aria-label="" />
       <ion-buttons slot="end">
         <ion-button *ngFor="let menu of (topMenuItems$ | async) ; let i = index"
         (click)="menuOpenerService.open(menu)"
