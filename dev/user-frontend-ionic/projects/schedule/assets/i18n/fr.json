@@ -1,43 +1,44 @@
 {
-    "NO_DATA": "Pas de données disponibles",
-    "NO_EVENTS": "Pas de cours dans vos plannings",
-    "NO_EVENTS_THIS_DAY": "Pas de cours à cette date",
-    "SEE_GROUPS": "Voir les groupes",
-    "HIDE_GROUPS": "Cacher les groupes",
-    "COURSE_URL_TEXT": "Lien vers le cours / support",
+  "NO_DATA": "Pas de données disponibles",
+  "NO_EVENTS": "Pas de cours dans vos plannings",
+  "NO_EVENTS_THIS_DAY": "Pas de cours à cette date",
+  "SEE_GROUPS": "Voir les groupes",
+  "HIDE_GROUPS": "Cacher les groupes",
+  "COURSE_URL_TEXT": "Lien vers le cours / support",
+  "CLOSE": "Fermer",
+  "REQUEST_ERROR": {
+    "BEFORE": "Veuillez réessayer plus tard. Une erreur s'est produite lors de la récupération des événements avant le",
+    "AFTER": "Veuillez réessayer plus tard. Une erreur s'est produite lors de la récupération des événements après le"
+  },
+  "VIEW_TYPE": {
+    "MONTH": "Mois",
+    "WEEK": "Semaine",
+    "DAY": "Jour",
+    "LIST": "Liste"
+  },
+  "SELECT_PLANNING": {
+    "TITLE": "Sélection de planning",
+    "SUBTITLE": "Sélectionner les plannings que vous souhaitez voir s'afficher",
+    "CANCEL": "Annuler",
+    "VALIDATE": "Valider",
+    "HIDDEN_COURSE": "Cours Masqués",
+    "NO_PLANNING": "Pas de planning attribué sur cette periode"
+  },
+  "CALENDAR": {
     "CLOSE": "Fermer",
-    "REQUEST_ERROR": {
-        "BEFORE": "Veuillez réessayer plus tard. Une erreur s'est produite lors de la récupération des événements avant le",
-        "AFTER": "Veuillez réessayer plus tard. Une erreur s'est produite lors de la récupération des événements après le"
-    },
-    "VIEW_TYPE": {
-        "MONTH": "Mois",
-        "WEEK": "Semaine",
-        "DAY": "Jour",
-        "LIST": "Liste"
-    },
-    "SELECT_PLANNING": {
-        "TITLE": "Sélection de planning",
-        "SUBTITLE": "Sélectionner les plannings que vous souhaitez voir s'afficher",
-        "CANCEL": "Annuler",
-        "VALIDATE": "Valider",
-        "HIDDEN_COURSE": "Cours Masqués"
-    },
-    "CALENDAR": {
-        "CLOSE": "Fermer",
-        "TODAY_ABBREVIATION": "Auj."
-    },
-    "LIST": {
-        "SEE_MORE": "Voir plus"
-    },
-    "MANAGEMENT": {
-        "AS_USER_LABEL": "Emploi du temps de",
-        "USERNAME_FORM_LABEL": "Login ou code etu",
-        "VALIDATE_FORM_BUTTON": "Valider"
-    },
-    "WIDGET": {
-        "NEXT_EVENTS": {
-            "NO_EVENTS": "Pas de cours prochainement"
-        }
+    "TODAY_ABBREVIATION": "Auj."
+  },
+  "LIST": {
+    "SEE_MORE": "Voir plus"
+  },
+  "MANAGEMENT": {
+    "AS_USER_LABEL": "Emploi du temps de",
+    "USERNAME_FORM_LABEL": "Login ou code etu",
+    "VALIDATE_FORM_BUTTON": "Valider"
+  },
+  "WIDGET": {
+    "NEXT_EVENTS": {
+      "NO_EVENTS": "Pas de cours prochainement"
     }
+  }
 }

@@ -42,6 +42,7 @@ import { APP_INITIALIZER, ModuleWithProviders, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FullCalendarModule } from '@fullcalendar/angular'; // must go before plugins
 import { IonicModule } from '@ionic/angular';
+import { EffectsNgModule } from '@ngneat/effects-ng';
 import { TranslateModule } from '@ngx-translate/core';
 import { CompleteLocalDatePipe, ProjectModuleService, SharedComponentsModule, SharedPipeModule } from '@ul/shared';
 import { EventDetailComponent } from './common/event-detail/event-detail.component';
@@ -55,6 +56,7 @@ import { ScheduleCalendarComponent } from './schedule-calendar/schedule-calendar
 import { ScheduleListPage } from './schedule-list/schedule-list.page';
 import { SchedulePageRoutingModule } from './schedule-routing.module';
 import { ScheduleModuleConfig, SCHEDULE_CONFIG } from './schedule.config';
+import { ScheduleEffects } from './schedule.effects';
 import { SchedulePage } from './schedule.page';
 import { NextEventsComponent } from './widgets/next-events/next-events.component';
 
@@ -96,7 +98,8 @@ const initModule = (projectModuleService: ProjectModuleService) =>
     ReactiveFormsModule,
     FullCalendarModule,
     SharedComponentsModule,
-    SharedPipeModule
+    SharedPipeModule,
+    EffectsNgModule.forFeature([ScheduleEffects]),
   ],
   providers: [{
     provide: APP_INITIALIZER,

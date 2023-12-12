@@ -39,9 +39,10 @@
 
 import { Component } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
-import { Observable, zip } from 'rxjs';
-import { switchMap, filter } from 'rxjs/operators';
-import { HiddenCourse, scheduleStoreManager } from '../../schedule.repository';
+import { distinctUntilArrayItemChanged } from '@ngneat/elf';
+import { Observable } from 'rxjs';
+import { filter } from 'rxjs/operators';
+import { HiddenCourse, PlanningData, scheduleStoreManager } from '../../schedule.repository';
 import { ScheduleService } from '../../schedule.service';
 
 interface AvailablePlanningFormInput extends AvailablePlanning {
@@ -108,13 +109,16 @@ export class SelectPlanningComponent {
     this.isLoading = true;
     this.isSelectPlanningModalOpen = true;
 
-    zip(this.scheduleService.getStoreManager().schedule$, this.scheduleService.getStoreManager().activePlanningIds$)
-      .pipe(filter(([schedule]) => schedule !== null && schedule !== undefined))
-      .subscribe(([schedule, activePlanningIds]) => {
-          const availablePlanningFormInputs = schedule.plannings.map(p => ({
+    this.scheduleService.getStoreManager().allPlanningsData$
+      .pipe(
+        distinctUntilArrayItemChanged(),
+        filter((allPlanningsData) => allPlanningsData !== null && allPlanningsData !== undefined))
+      .subscribe((allPlanningsData) => {
+          const availablePlanningFormInputs = allPlanningsData.map((p: PlanningData)  => (
+            {
             id: p.id,
             label: p.label,
-            checked: activePlanningIds.includes(p.id)
+            checked: p.isSelected ? true : false
           }));
           this.buildForm(availablePlanningFormInputs);
           this.isLoading = false;
@@ -150,7 +154,6 @@ export class SelectPlanningComponent {
         selectedPlanningIds.push(this.availablePlanningList[i].id);
       }
     }
-
     this.scheduleService.getStoreManager().setActivePlanningIds(selectedPlanningIds);
   }
 }

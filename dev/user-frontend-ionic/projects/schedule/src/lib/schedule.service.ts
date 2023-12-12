@@ -48,6 +48,7 @@ import {
   Event,
   HiddenCourse,
   impersonatedScheduleStoreManager,
+  PlanningData,
   Schedule,
   ScheduleStoreManager,
   scheduleStoreManager
@@ -123,7 +124,9 @@ export class ScheduleService {
   }
 
   loadScheduleOutOfStateInterval(startDate: string, endDate: string): Observable<Schedule> {
-    return this.loadSchedule(startDate, endDate);
+    return this.loadSchedule(startDate, endDate).pipe(
+      tap(schedule => this.storeManager.updateAllPlanningsData(schedule.plannings)),
+    );
   }
 
   getStateStartDate(): Date {
@@ -141,12 +144,14 @@ export class ScheduleService {
 
   outOfStateScheduleToDisplayedEvents(schedule: Schedule): Observable<Event[]> {
     if (!schedule) {
-       return of([]);
+      return of([]);
     }
     const eventIds = [];
-    return combineLatest([this.storeManager.activePlanningIds$, this.storeManager.hiddenCourseList$]).pipe(
-      map(([activePlanningIds, hiddenCourseList]: [string[], HiddenCourse[]]) =>
-        schedule.plannings.filter(planning => activePlanningIds.includes(planning.id))
+    return combineLatest([this.storeManager.allPlanningsData$, this.storeManager.hiddenCourseList$]).pipe(
+      map(([allPlanningsData, hiddenCourseList]: [PlanningData[], HiddenCourse[]]) =>
+        schedule.plannings.filter(planning =>
+          allPlanningsData.some(planningData => planningData.id === planning.id && planningData.isSelected)
+        )
           .reduce((events, planning) => {
             planning.events.forEach(event => {
               if (!eventIds.includes(event.id)) {

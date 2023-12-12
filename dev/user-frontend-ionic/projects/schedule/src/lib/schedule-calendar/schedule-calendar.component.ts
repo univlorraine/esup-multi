@@ -45,6 +45,7 @@ import allLocales from '@fullcalendar/core/locales-all';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import { GestureController, IonModal, Platform } from '@ionic/angular';
+import { distinctUntilArrayItemChanged } from '@ngneat/elf';
 import { TranslateService } from '@ngx-translate/core';
 import { currentLanguage$ } from '@ul/shared';
 import { format, isAfter, isBefore, sub } from 'date-fns';
@@ -149,7 +150,6 @@ export class ScheduleCalendarComponent implements OnDestroy {
           }
         });
         return;
-
       }
 
       this.scheduleService.loadScheduleOutOfStateInterval(formatDay(fetchInfo.start), formatDay(fetchInfo.end))
@@ -158,17 +158,17 @@ export class ScheduleCalendarComponent implements OnDestroy {
           take(1),
           map((events: Event[]) => this.scheduleCalendarService.eventsToCalendarEvents(events))
         )
-        .subscribe(
-          (events: EventInput[]) => {
-
+        .subscribe({
+          next: (events: EventInput[]) => {
             if (this.viewType === 'week') {
               setTimeout(() => {
                 this.setPreviousZoomLevel();
               }, 0);
             }
+
             return successCallback(events);
           },
-          () => {
+          error: (error) => {
             if (this.calendarDisplaySomeDateOutOfState) {
               this.loadScheduleOutOfStateError = true;
 
@@ -180,7 +180,6 @@ export class ScheduleCalendarComponent implements OnDestroy {
                 this.dateError = formatDay(this.scheduleService.getStateEndDate());
               }
             }
-
             this.storeManager.displayedEvents$.pipe(
               take(1),
               map((events: Event[]) => this.scheduleCalendarService.eventsToCalendarEvents(events))
@@ -192,10 +191,9 @@ export class ScheduleCalendarComponent implements OnDestroy {
                 }, 500);
               }
               return successCallback(events);
-            }
-            );
+            });
           }
-        );
+        });
     }
   };
   private subscriptions: Subscription[] = [];
@@ -221,6 +219,8 @@ export class ScheduleCalendarComponent implements OnDestroy {
     this.subscriptions.push(
       this.subscribeToViewType(),
       this.subscribeToDisplayedEvents(scheduleStoreManager),
+      this.subscribeToSelectedPlannings(scheduleStoreManager),
+      this.subscribeToHiddenCourseList(scheduleStoreManager),
       this.subscribeToDisplayedEvents(impersonatedScheduleStoreManager),
       this.subscribeToAsUser(),
       this.subscribeToHideEvent(),
@@ -347,6 +347,21 @@ export class ScheduleCalendarComponent implements OnDestroy {
 
   private subscribeToDisplayedEvents(storeManager: ScheduleStoreManager): Subscription {
     return storeManager.displayedEvents$.pipe(
+      distinctUntilArrayItemChanged(),
+      tap(() => this.getCalendar()?.refetchEvents())
+    ).subscribe();
+  }
+
+  private subscribeToSelectedPlannings(storeManager: ScheduleStoreManager): Subscription {
+    return storeManager.allPlanningsData$.pipe(
+      distinctUntilArrayItemChanged(),
+      tap(() => this.getCalendar()?.refetchEvents())
+    ).subscribe();
+  }
+
+  private subscribeToHiddenCourseList(storeManager: ScheduleStoreManager): Subscription {
+    return storeManager.hiddenCourseList$.pipe(
+      distinctUntilArrayItemChanged(),
       tap(() => this.getCalendar()?.refetchEvents())
     ).subscribe();
   }
@@ -364,7 +379,8 @@ export class ScheduleCalendarComponent implements OnDestroy {
   private subscribeToResizeScreen(): Subscription {
     return this.platform.resize.subscribe(() => {
       this.resetZoomLevel();
-      this.updateBreakpoints();}
+      this.updateBreakpoints();
+    }
     );
   }
 }

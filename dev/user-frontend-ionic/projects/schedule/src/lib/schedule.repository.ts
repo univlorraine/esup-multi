@@ -39,9 +39,9 @@
 
 import { createStore, select, Store, withProps } from '@ngneat/elf';
 import { persistState } from '@ngneat/elf-persist-state';
+import { localForageStore } from '@ul/shared';
 import { combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { localForageStore } from '@ul/shared';
 
 const STORE_NAME = 'schedule';
 const STORE_NAME_2 = 'impersonated-schedule';
@@ -51,8 +51,8 @@ const STORE_NAME_2 = 'impersonated-schedule';
  ****************************************************** */
 export interface ScheduleProps {
   schedule: Schedule;
-  activePlanningIds: string[];
   hiddenCourseList: HiddenCourse[];
+  allPlanningsData: PlanningData[];
 }
 export interface Schedule {
   messages: [Message?];
@@ -75,7 +75,12 @@ export interface Planning {
     }
   ] | [];
   events?: Event[];
-  isSelected: boolean;
+}
+export interface PlanningData {
+  id: string,
+  label: string,
+  default: boolean,
+  isSelected: boolean
 }
 export interface Event {
   id: string;
@@ -116,9 +121,6 @@ export interface HiddenCourse {
   id: string;
   title: string;
 }
-export interface SelectedPlanningProps {
-  selectedPlanning: string[];
-}
 
 /* ******************************************************
  * Filters
@@ -130,8 +132,8 @@ const mapPlanningId = (planning: Planning): string => planning.id;
  * Store Manager
  ****************************************************** */
 export class ScheduleStoreManager {
-  public schedule$: Observable<Schedule>;                   // Ensemble des plannings de l'utilisateur
-  public activePlanningIds$: Observable<string[]>;          // ids des plannings marqués comme actifs
+  public schedule$: Observable<Schedule>;                   // Plannings de l'utilisateur disposant d'events dans la plage de date sauvegardés dans le state
+  public allPlanningsData$: Observable<PlanningData[]>;     // Données des plannings (dont isSelected:boolean) dans et hors plage des dates sauvegardées dans le state. Sans les events. Les plannings s'ajoutent à la navigation de l'utilisateur.
   public eventsFromActivePlannings$: Observable<Event[]>;   // Tous les events des plannings actifs
   public hiddenCourseList$: Observable<HiddenCourse[]>;     // Liste des cours masqués par l'utilisateur
   public displayedEvents$: Observable<Event[]>;             // Events à afficher (= eventsFromActivePlannings$ - hiddenCourseList$)
@@ -140,18 +142,52 @@ export class ScheduleStoreManager {
   constructor(private storeName: string) {
     this.store = this.createStore(storeName);
     this.schedule$ = this.getSchedule();
-    this.activePlanningIds$ = this.getActivePlanningIds();
     this.eventsFromActivePlannings$ = this.getEventsFromActivePlannings();
     this.hiddenCourseList$ = this.getHiddenCourseList();
     this.displayedEvents$ = this.getDisplayedEvents();
+    this.allPlanningsData$ = this.getAllPlanningsData();
+  }
+
+  public updateAllPlanningsData(plannings: Planning[]) {
+    this.store.update((state) => {
+
+      const mappedPlannings = plannings.map((newPlanning) => ({
+        id: newPlanning.id,
+        label: newPlanning.label,
+        default: newPlanning.default,
+        isSelected: newPlanning.default,
+      }));
+
+      const uniqueNewPlannings = mappedPlannings.filter((newPlanning) => {
+        return !state.allPlanningsData.some(
+          (existingPlanning) => existingPlanning.id === newPlanning.id
+        );
+      });
+
+      const updatedPlannings = [...state.allPlanningsData, ...uniqueNewPlannings];
+      updatedPlannings.sort((a, b) => (b.default ? 1 : 0) - (a.default ? 1 : 0));
+
+      return {
+        ...state,
+        allPlanningsData: updatedPlannings,
+      };
+    });
   }
 
   public setSchedule(schedule: ScheduleProps['schedule']) {
+
+    this.updateAllPlanningsData(schedule.plannings);
+
+
     this.store.update((state) => {
       const activePlanningIdsInSchedule = schedule.plannings
         .map(mapPlanningId)
-        .filter(planningId => state.activePlanningIds.includes(planningId));
-      const noActivePlanningIds = state.activePlanningIds.length === 0;
+        .filter(planningId => {
+          const planningData = state.allPlanningsData.find(data => data.id === planningId);
+          return planningData?.isSelected === true;
+        });
+
+      const noActivePlanningIds = !state.allPlanningsData.find(data => data?.isSelected === true);
       const noActivePlanningIdsInSchedule = activePlanningIdsInSchedule.length === 0;
       const applyDefaultPlanning = noActivePlanningIds || noActivePlanningIdsInSchedule;
 
@@ -161,19 +197,37 @@ export class ScheduleStoreManager {
           .map(mapPlanningId) :
         activePlanningIdsInSchedule;
 
+      const  updatedAllPlanningsData = state.allPlanningsData.map(planningData => {
+          const isActive = activePlanningIds.includes(planningData.id);
+          const isSelected = planningData.isSelected === null && isActive ? isActive : planningData.isSelected;
+
+          return {
+            ...planningData,
+            isSelected,
+          };
+        });
+
       return {
         ...state,
         schedule,
-        activePlanningIds
+        allPlanningsData: updatedAllPlanningsData,
       };
     });
   }
+  public setActivePlanningIds(activePlanningIds) {
+    this.store.update((state) => {
+      const updatedPlanningsData = state.allPlanningsData.map((planningData: PlanningData) => {
+        return {
+          ...planningData,
+          isSelected: activePlanningIds.includes(planningData.id)
+        };
+      });
 
-  public setActivePlanningIds(activePlanningIds: ScheduleProps['activePlanningIds']) {
-    this.store.update((state: ScheduleProps) => ({
-      ...state,
-      activePlanningIds,
-    }));
+      return {
+        ...state,
+        allPlanningsData: updatedPlanningsData
+      };
+    });
   }
 
   public setHiddenCourseList(hiddenCourseList: ScheduleProps['hiddenCourseList']) {
@@ -186,7 +240,8 @@ export class ScheduleStoreManager {
     this.store.update(() => ({
       schedule: null,
       activePlanningIds: [],
-      hiddenCourseList: []
+      hiddenCourseList: [],
+      allPlanningsData: []
     }));
   }
 
@@ -199,8 +254,8 @@ export class ScheduleStoreManager {
       { name: storeName },
       withProps<ScheduleProps>({
         schedule: null,
-        activePlanningIds: [],
-        hiddenCourseList: []
+        hiddenCourseList: [],
+        allPlanningsData: [],
       })
     );
   }
@@ -209,26 +264,30 @@ export class ScheduleStoreManager {
     return this.store.pipe(select((state: ScheduleProps) => state.schedule));
   }
 
-  private getActivePlanningIds(): Observable<string[]> {
-    return this.store.pipe(select((state: ScheduleProps) => state.activePlanningIds));
+  private getAllPlanningsData(): Observable<PlanningData[]> {
+    return this.store.pipe(select((state: ScheduleProps) => state.allPlanningsData));
   }
 
   private getEventsFromActivePlannings(): Observable<Event[]> {
-    return this.store.pipe(select((state: ScheduleProps) => {
-      const eventIds = [];
-      return state.schedule?.plannings?.filter(planning => state.activePlanningIds.includes(mapPlanningId(planning)))
-        .reduce((events, planning) => {
-          planning.events.forEach(event => {
-            /* eslint-enable no-underscore-dangle */
-            if (!eventIds.includes(event.id)) {
-              eventIds.push(event.id);
-              events.push(event);
-            }
-          });
-          return events;
-        }, [])
-        .sort((a: Event, b: Event) => new Date(a.startDateTime).getTime() - new Date(b.startDateTime).getTime()) || [];
-    }));
+    return this.store.pipe(
+      select((state: ScheduleProps) => {
+        const eventIds = [];
+        return state.schedule?.plannings?.filter(planning => {
+          const planningData = state.allPlanningsData.find(data => data.id === planning.id);
+          return planningData?.isSelected === true;
+        })
+          .reduce((events, planning) => {
+            planning.events.forEach(event => {
+              if (!eventIds.includes(event.id)) {
+                eventIds.push(event.id);
+                events.push(event);
+              }
+            });
+            return events;
+          }, [])
+          .sort((a: Event, b: Event) => new Date(a.startDateTime).getTime() - new Date(b.startDateTime).getTime()) || [];
+      })
+    );
   }
 
   private getHiddenCourseList(): Observable<HiddenCourse[]> {
@@ -253,3 +312,5 @@ scheduleStoreManager.persistStore(STORE_NAME);
 // Store pour l'EDT d'une personne tierce
 export const impersonatedScheduleStoreManager = new ScheduleStoreManager(STORE_NAME_2);
 impersonatedScheduleStoreManager.persistStore(STORE_NAME_2);
+
+export const clearScheduleData = () => scheduleStoreManager.resetStore();
