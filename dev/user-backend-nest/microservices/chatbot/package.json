@@ -1,12 +1,12 @@
 {
   "name": "chatbot",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "author": "",
   "private": true,
   "license": "CECILL-2.1",
   "scripts": {
-    "prebuild": "node update-infos.js",
+    "prebuild": "rimraf dist && node update-infos.js",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
@@ -30,6 +30,7 @@
     "agentkeepalive": "^4.5.0",
     "nats": "^2.15.1",
     "reflect-metadata": "^0.1.13",
+    "rimraf": "^3.0.2",
     "rxjs": "^7.2.0"
   },
   "devDependencies": {
