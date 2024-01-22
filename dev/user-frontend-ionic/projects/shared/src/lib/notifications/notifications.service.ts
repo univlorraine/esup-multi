@@ -46,6 +46,7 @@ import { combineLatest, Observable, of } from 'rxjs';
 import { filter, switchMap, take, tap } from 'rxjs/operators';
 import { Channel, Notification, NotificationsRepository } from './notifications.repository';
 import { Badge } from '@capawesome/capacitor-badge';
+import { Capacitor } from '@capacitor/core';
 
 @Injectable({
   providedIn: 'root'
@@ -166,7 +167,11 @@ export class NotificationsService {
           const data = {
             authToken,
             token: fcmToken,
-            platform: this.platform.platforms().join(',')
+            platform: Capacitor.getPlatform() === 'ios'
+              ? 'iOS'
+              : Capacitor.getPlatform() === 'android'
+                ? 'Android'
+                : 'web',
           };
           return this.http.post(url, data);
         })
