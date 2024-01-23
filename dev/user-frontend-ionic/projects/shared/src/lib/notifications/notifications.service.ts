@@ -41,11 +41,12 @@ import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { FirebaseMessaging, GetTokenOptions } from '@capacitor-firebase/messaging';
 import { Platform } from '@ionic/angular';
-import { getAuthToken} from '../auth/auth.repository';
+import { getAuthToken } from '../auth/auth.repository';
 import { combineLatest, Observable, of } from 'rxjs';
 import { filter, switchMap, take, tap } from 'rxjs/operators';
 import { Channel, Notification, NotificationsRepository } from './notifications.repository';
 import { Badge } from '@capawesome/capacitor-badge';
+import { NetworkService } from '../network/network.service';
 import { Capacitor } from '@capacitor/core';
 
 @Injectable({
@@ -58,7 +59,8 @@ export class NotificationsService {
     private environment: any,
     private http: HttpClient,
     public notificationRepository: NotificationsRepository,
-    private platform: Platform
+    private platform: Platform,
+    private networkService: NetworkService
   ) {
   }
 
@@ -83,9 +85,12 @@ export class NotificationsService {
   }
 
   public loadNotifications(offset: number, length: number): Observable<Notification[]> {
-    return getAuthToken().pipe(
-      filter(authToken => authToken != null),
-      switchMap(authToken => this.getNotifications(authToken, offset, length)),
+    return combineLatest([
+      getAuthToken(),
+      this.networkService.getConnectionStatus()
+    ]).pipe(
+      filter(([authToken, status]) => authToken != null && status.connected),
+      switchMap(([authToken]) => this.getNotifications(authToken, offset, length)),
       tap((notifications) => {
         if (offset === 0) {
           this.notificationRepository.setNotifications(notifications);
@@ -116,8 +121,8 @@ export class NotificationsService {
         return this.http.post<string[]>(url, data);
       }),
       tap((userChannels) => {
-        this.notificationRepository.setUnsubscribedChannels(userChannels);
-      }
+          this.notificationRepository.setUnsubscribedChannels(userChannels);
+        }
       ));
   }
 
@@ -125,14 +130,14 @@ export class NotificationsService {
     return getAuthToken().pipe(
       filter(authToken => authToken != null),
       switchMap(authToken => {
-        const url = `${this.environment.apiEndpoint}/notifications/channels`;
-        const data = {
-          authToken,
-          channelCodes: options.channelCodes,
-        };
+          const url = `${this.environment.apiEndpoint}/notifications/channels`;
+          const data = {
+            authToken,
+            channelCodes: options.channelCodes,
+          };
 
-        return this.http.patch(url, data);
-      }
+          return this.http.patch(url, data);
+        }
       ));
   }
 
@@ -177,7 +182,6 @@ export class NotificationsService {
         })
       )
       .subscribe(res => res);
-
   }
 
   public async unregisterFCMToken(authToken: string) {

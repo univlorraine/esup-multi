@@ -42,14 +42,14 @@
   <ion-header>
     <ion-toolbar>
       <img src="assets/logo/white-university-logo.svg" class="logo ion-padding-start app-logo-3" aria-label="" />
-      <ion-buttons slot="end">
+      <ion-buttons slot="end" *ngFor="let menuItemHasBadge of [(menuItemHasBadge$ | async) ?? []]">
         <ion-button *ngFor="let menu of (topMenuItems$ | async) ; let i = index"
         (click)="menuOpenerService.open(menu)"
         [attr.data-menu-id]="getMenuId(menu)">
           <app-custom-icon [icon]="menu.icon"
           [iconSourceSvgLightTheme]="menu.iconSourceSvgLightTheme"
           [iconSourceSvgDarkTheme]="menu.iconSourceSvgDarkTheme"></app-custom-icon>
-          <span class="menu-icon-badge" *ngIf="hasBadge(i)"></span>
+          <span class="menu-icon-badge" *ngIf="menuItemHasBadge[i] ?? false"></span>
         </ion-button>
       </ion-buttons>
     </ion-toolbar>
