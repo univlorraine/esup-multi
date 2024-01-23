@@ -41,7 +41,7 @@
   <ion-card-header *ngIf="feature.title" class="ion-no-padding">
     <ion-card-title [ngClass]="fontColor(feature.color)"
      class="feature-title app-title-5">
-      <ion-icon [name]="feature.icon" *ngIf="feature.icon"></ion-icon>
+      <ion-icon [name]="feature.icon" *ngIf="feature.icon" aria-label=""></ion-icon>
       {{feature.title}}
     </ion-card-title>
   </ion-card-header>

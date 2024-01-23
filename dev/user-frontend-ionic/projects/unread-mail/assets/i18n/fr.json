@@ -1,6 +1,6 @@
 {
   "NO_UNREAD": "Aucun message non lu",
-  "ONE_UNREAD": "message non lu",
-  "MULTIPLE_UNREAD": "messages non lus",
+  "ONE_UNREAD": "{{nb}} message non lu",
+  "MULTIPLE_UNREAD": "{{nb}} messages non lus",
   "NO_MAIL_ACCOUNT": "Vous ne disposez pas de messagerie"
 }

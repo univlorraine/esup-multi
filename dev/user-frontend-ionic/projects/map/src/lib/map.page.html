@@ -39,12 +39,12 @@
 
 <app-header>
   <ion-buttons slot="end">
-    <ion-button (click)="presentPopover($event)" fill="clear" class="ion-no-padding">
-      <ion-icon name="filter-outline"></ion-icon>
+    <ion-button (click)="presentPopover($event)" fill="clear" class="ion-no-padding" [attr.aria-label]="'MAP.FILTER' | translate">
+      <ion-icon name="filter-outline" aria-label=""></ion-icon>
     </ion-button>
 
-    <ion-button fill="clear" (click)="onLocateUserClick()">
-      <ion-icon slot="icon-only" name="locate"></ion-icon>
+    <ion-button fill="clear" (click)="onLocateUserClick()" [attr.aria-label]="'MAP.LOCATE' | translate">
+      <ion-icon slot="icon-only" name="locate" aria-label=""></ion-icon>
     </ion-button>
   </ion-buttons>
 
@@ -67,10 +67,14 @@
 <ion-progress-bar *ngIf="isLoading" type="indeterminate"></ion-progress-bar>
 
 <ion-list class="chip-list" *ngIf="categoriesSelected?.length > 0">
-  <ion-chip *ngFor="let category of categoriesSelected; let i = index" (click)="removeSelectedCategory(category, i)">
-    {{ getCategoryTranslation(category) | translate }}
-    <ion-icon name="close-circle-outline"></ion-icon>
-  </ion-chip>
+  <button *ngFor="let category of categoriesSelected; let i = index" (click)="removeSelectedCategory(category, i)"
+          [attr.aria-label]="'MAP.REMOVE_FROM_FILTERS' | translate:{category: getCategoryTranslation(category) | translate}"
+          class="chip-item">
+    <ion-chip>
+      {{ getCategoryTranslation(category) | translate }}
+      <ion-icon name="close-circle-outline" aria-label=""></ion-icon>
+    </ion-chip>
+  </button>
 </ion-list>
 
 <ion-content scroll="false">

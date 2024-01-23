@@ -4,6 +4,8 @@
     "END_OF_NOTIFICATIONS": "End of notifications",
     "LOAD_MORE_ERROR": "Error loading notifications",
     "FILTERS": "Filters",
+    "REMOVE_FROM_FILTERS": "Remove '{{channel}}' from filters",
+    "OPEN_MENU": "Show available actions for this notification",
     "CLOSE": "Close",
     "SETTINGS": {
         "TITLE": "Manage my alerts",
@@ -15,6 +17,7 @@
     "DELETE_THIS_NOTIFICATION": "Delete this notification",
     "LOAD_MORE": "Load more",
     "LEARN_MORE": "Learn more",
+    "NAVIGATE_APP_PAGE": "Navigate to the relevant page",
     "ALERT": {
         "DELETED": "Notification deleted",
         "CHANNEL": {

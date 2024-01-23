@@ -48,7 +48,7 @@
       (click)="menuOpenerService.open(menu)"
       [attr.data-burger-id]="getMenuId(menu)"
     >
-      <ion-icon slot="start" class="app-icon-4" name="{{menu.icon}}"></ion-icon>
+      <ion-icon slot="start" class="app-icon-4" name="{{menu.icon}}" aria-label=""></ion-icon>
       <ion-label class="app-text-3 light">{{menu.title | translate}}</ion-label>
     </ion-item>
   </ion-list>
@@ -75,14 +75,19 @@
 
 <ion-footer data-burger-id="menu-footer" class="ion-no-border">
   <ion-row class="ion-justify-content-center">
-    <ion-button fill="clear" shape="round" class="app-round-button-1 ion-no-padding ion-no-margin" (click)="toggleDarkMode()">
-      <ion-icon *ngIf="(isDarkTheme$ | async) === false" name="moon" slot="icon-only"></ion-icon>
-      <ion-icon *ngIf="(isDarkTheme$ | async) === true" name="sunny-outline" slot="icon-only"></ion-icon>
+    <ion-button (click)="toggleDarkMode()"
+                [attr.aria-label]="'MENU.THEME.CHANGE' | translate: {theme: ((isDarkTheme$ | async) === true ? 'MENU.THEME.DARK' : 'MENU.THEME.LIGHT') | translate}"
+                class="app-round-button-1 ion-no-padding ion-no-margin"
+                fill="clear" shape="round">
+      <ion-icon *ngIf="(isDarkTheme$ | async) === false" aria-label="" name="moon" slot="icon-only"></ion-icon>
+      <ion-icon *ngIf="(isDarkTheme$ | async) === true" aria-label="" name="sunny-outline" slot="icon-only"></ion-icon>
     </ion-button>
   </ion-row>
   <ion-row class="ion-justify-content-center">
-    <ion-button *ngFor="let language of languages" fill=“clear” (click)="useLanguage(language)">
-      <ion-icon name="{{language}}"></ion-icon>
+    <ion-button (click)="useLanguage(language)" *ngFor="let language of languages"
+                [attr.aria-label]="'MENU.LANGUAGE.CHANGE' | translate: {language: ('MENU.LANGUAGE.' + language) | translate}"
+                fill=“clear”>
+      <ion-icon aria-label="" name="{{language}}"></ion-icon>
     </ion-button>
   </ion-row>
   <ion-row

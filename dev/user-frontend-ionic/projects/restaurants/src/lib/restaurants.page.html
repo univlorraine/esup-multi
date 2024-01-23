@@ -50,11 +50,13 @@
               <div class="border"></div>
 
               <ion-img [src]="restaurant.thumbnailUrl"></ion-img>
-              <ion-icon *ngIf="restaurant.favorite" name="heart"
-                (click)="unsetFavoriteRestaurant(restaurant.id)" class="app-icon-4 favorite-icon">
+              <ion-icon (click)="unsetFavoriteRestaurant(restaurant.id)" *ngIf="restaurant.favorite"
+                        [attr.aria-label]="'RESTAURANTS.REMOVE_FROM_FAVORITES' | translate: { name: restaurant.title }"
+                        class="app-icon-4 favorite-icon" name="heart">
               </ion-icon>
-              <ion-icon *ngIf="!restaurant.favorite" name="heart-outline"
-                (click)="setFavoriteRestaurant(restaurant.id)" class="app-icon-4 favorite-icon">
+              <ion-icon (click)="setFavoriteRestaurant(restaurant.id)" *ngIf="!restaurant.favorite"
+                        [attr.aria-label]="'RESTAURANTS.ADD_TO_FAVORITES' | translate: { name: restaurant.title }"
+                        class="app-icon-4 favorite-icon" name="heart-outline">
               </ion-icon>
             </ion-col>
             <ion-col size="6" class="ion-text-start">
@@ -70,7 +72,7 @@
                 <h2 class="app-title-7">{{ restaurant.distance | number : '1.1-1' }} {{ "RESTAURANTS.KILOMETERS" |
                   translate }} </h2>
               </ion-label>
-              <ion-icon size="large" name="pin-outline" class="pin"></ion-icon>
+              <ion-icon size="large" name="pin-outline" class="pin" aria-label=""></ion-icon>
             </ion-col>
           </ion-row>
           <ion-label *ngIf="getCurrentOpening(restaurant.opening)?.isOpen" class="opening">

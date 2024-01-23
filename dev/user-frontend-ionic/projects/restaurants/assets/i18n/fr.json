@@ -5,5 +5,7 @@
     "MENUS":{
         "NO_DATA": "Pas de menus disponibles",
         "DEFAULT_TOP_BAR_TITLE": "Menus"
-    }
+    },
+    "ADD_TO_FAVORITES": "Ajouter '{{name}}' aux favoris",
+    "REMOVE_FROM_FAVORITES": "Retirer '{{name}}' des favoris"
 }

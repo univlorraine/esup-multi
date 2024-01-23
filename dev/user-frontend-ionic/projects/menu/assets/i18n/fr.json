@@ -1,5 +1,15 @@
 {
     "MENU": "Menu",
     "VERSION": "Version:",
-    "VERSION_NOT_FOUND": "Indisponible"
+    "VERSION_NOT_FOUND": "Indisponible",
+    "THEME": {
+      "CHANGE": "Passer au thème {{theme}}",
+      "LIGHT": "clair",
+      "DARK": "sombre"
+    },
+    "LANGUAGE": {
+      "CHANGE": "Utiliser {{language}}",
+      "en": "l'anglais",
+      "fr": "le français"
+    }
 }

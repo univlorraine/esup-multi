@@ -46,8 +46,8 @@
 <ion-toolbar *ngIf="!!asUser">
   <ion-title class="ion-text-center schedule-as-user-title">{{ 'SCHEDULE.MANAGEMENT.AS_USER_LABEL' | translate }} : {{ asUser }}</ion-title>
   <ion-buttons slot="end">
-    <ion-button (click)="clearAsUserLogin()" fill="clear">
-      <ion-icon name="close"></ion-icon>
+    <ion-button (click)="clearAsUserLogin()" fill="clear" [attr.aria-label]="'SCHEDULE.MANAGEMENT.QUIT' | translate">
+      <ion-icon name="close" aria-label=""></ion-icon>
     </ion-button>
   </ion-buttons>
 </ion-toolbar>

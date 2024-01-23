@@ -79,17 +79,18 @@
       <ion-card-content class="contact-content">
         <ion-list lines="none">
           <ion-item *ngFor="let mobile of item.phoneNumbers">
-            <ion-icon size="small" name="call" slot="start"></ion-icon>
+            <ion-icon size="small" name="call" slot="start" aria-label=""></ion-icon>
             <ion-label><a class="app-text-4" href="tel:{{ mobile }}">{{ mobile }}</a></ion-label>
           </ion-item>
           <ion-item *ngFor="let email of item.mailAddresses">
-            <ion-icon size="small" name="mail" slot="start"></ion-icon>
+            <ion-icon size="small" name="mail" slot="start" aria-label=""></ion-icon>
             <ion-label><a class="app-text-4" href="mailto:{{ email }}" >{{ email }}</a></ion-label>
           </ion-item>
         </ion-list>
         <div class="ion-margin-top ion-text-end">
-          <ion-button (click)="createContact(item)" size="small">
-            <ion-icon class="add-icon" name="person-add-outline"></ion-icon>
+          <ion-button (click)="createContact(item)" size="small"
+                      [attr.aria-label]="'CONTACTS.ADD' | translate: {name: item.firstname + ' ' + item.name}">
+            <ion-icon aria-label="" class="add-icon" name="person-add-outline"></ion-icon>
           </ion-button>
         </div>
       </ion-card-content>

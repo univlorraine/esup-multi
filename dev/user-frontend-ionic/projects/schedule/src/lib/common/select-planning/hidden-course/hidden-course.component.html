@@ -46,8 +46,9 @@
           </ion-text>
         </ion-col>
         <ion-col size="2">
-          <ion-button fill="clear" size="small" class="ion-text-center" (click)="showAllSimilarCourse(hiddenCourse)">
-            <ion-icon name="eye-outline"></ion-icon>
+          <ion-button fill="clear" size="small" class="ion-text-center" (click)="showAllSimilarCourse(hiddenCourse)"
+                      [attr.aria-label]="'SCHEDULE.SHOW_SIMILAR_COURSES' | translate">
+            <ion-icon name="eye-outline" aria-label=""></ion-icon>
           </ion-button>
         </ion-col>
       </ion-row>
