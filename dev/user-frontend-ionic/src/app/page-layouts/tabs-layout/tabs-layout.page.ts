@@ -43,8 +43,8 @@ import {
   FeaturesService, GuidedTourService, MenuItem, MenuItemLinkType, MenuItemRouterLink,
   MenuOpenerService, MenuService, NetworkService, NotificationsService, StatisticsService
 } from '@ul/shared';
-import { Observable } from 'rxjs';
-import { map, take, tap } from 'rxjs/operators';
+import { combineLatestWith, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 interface MenuItemWithOptionalRouterLink extends MenuItem {
   routerLink: string;
@@ -61,7 +61,7 @@ export class TabsLayoutPage implements AfterViewInit {
   public topMenuItems$: Observable<MenuItem[]>;
   public tabsMenuItems$: Observable<MenuItemWithOptionalRouterLink[]>;
   public isOnline$: Observable<boolean>;
-  public menuItemHasBadge: boolean[];
+  public menuItemHasBadge$: Observable<boolean[]>;
 
   constructor(
     private navController: NavController,
@@ -89,24 +89,14 @@ export class TabsLayoutPage implements AfterViewInit {
         };
       }))
     );
+
     this.topMenuItems$ = this.menuService.topMenuItems$;
-
-    this.topMenuItems$.pipe(
-      tap(menuItems => {
-        this.menuItemHasBadge = menuItems.map(() => false);
-
-        const indexNotifMenuItem = menuItems.findIndex(menuItem =>
-          menuItem.link.type === MenuItemLinkType.router && (menuItem.link as MenuItemRouterLink).routerLink === '/notifications');
-        if (indexNotifMenuItem !== -1) {
-          this.notificationsService.loadNotifications(0, 10).pipe(
-            take(1),
-            tap((notifications) => {
-              this.menuItemHasBadge[indexNotifMenuItem] = notifications.find(notification => notification.state === 'UNREAD') !== undefined;
-            })
-          ).subscribe();
-        }
-      })
-    ).subscribe();
+    this.menuItemHasBadge$ = this.topMenuItems$.pipe(
+      combineLatestWith(this.notificationsService.loadNotifications(0, 10)),
+      map(([menuItems, notifications]) => menuItems.map(menuItem => menuItem.link.type === MenuItemLinkType.router
+        && (menuItem.link as MenuItemRouterLink).routerLink === '/notifications'
+        && notifications.find(notification => notification.state === 'UNREAD') !== undefined))
+    );
   }
 
   ngAfterViewInit() {
@@ -132,10 +122,6 @@ export class TabsLayoutPage implements AfterViewInit {
 
   public getMenuId(menuItem: MenuItem){
     return this.guidedTourService.generateMenuItemIdFromTitle(menuItem);
-  }
-
-  public hasBadge(index: number): boolean {
-    return this.menuItemHasBadge[index] ?? false;
   }
 
   private async loadFeatures(): Promise<void> {
