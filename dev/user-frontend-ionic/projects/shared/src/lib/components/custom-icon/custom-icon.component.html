@@ -42,16 +42,19 @@
           [slot]="slot"
           [size]="size"
           [color]="color"
+          aria-label=""
 ></ion-icon>
 <ion-icon *ngIf="iconSourceSvgLightTheme && (isDarkTheme$ | async) === false"
           [src]="'data:image/svg+xml;utf8, ' + iconSourceSvgLightTheme"
           [slot]="slot"
           [size]="size"
           [color]="color"
+          aria-label=""
 ></ion-icon>
 <ion-icon *ngIf="iconSourceSvgDarkTheme && (isDarkTheme$ | async) === true"
           [src]="'data:image/svg+xml;utf8, ' + iconSourceSvgDarkTheme"
           [slot]="slot"
           [size]="size"
           [color]="color"
+          aria-label=""
 ></ion-icon>

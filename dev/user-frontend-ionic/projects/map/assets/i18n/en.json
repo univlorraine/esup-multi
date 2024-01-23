@@ -9,5 +9,8 @@
         "CITES": "University building",
         "SANTES": "Health services",
         "SUAPS": "SUAPS"
-    }
+    },
+    "FILTER": "Filter markers",
+    "LOCATE": "Locate me",
+    "REMOVE_FROM_FILTERS": "Remove '{{category}}' from filters"
 }

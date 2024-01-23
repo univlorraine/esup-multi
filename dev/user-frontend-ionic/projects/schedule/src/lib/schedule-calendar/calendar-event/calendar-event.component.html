@@ -45,11 +45,11 @@
 
     <ion-row *ngIf="viewType === 'day'">
       <ion-row class="eventRows" *ngFor="let room of event.rooms">
-        <ion-icon [ngClass]="getCurrentDateClass()" name="business-outline" size="small"></ion-icon>
+        <ion-icon [ngClass]="getCurrentDateClass()" name="business-outline" size="small" aria-label=""></ion-icon>
         <ion-text [ngClass]="getCurrentDateClass()" class="detail-text ion-text-justify app-text-5">{{room.label}}</ion-text>
       </ion-row>
       <ion-row class="eventRows ion-text-center" *ngFor="let teacher of event.teachers">
-        <ion-icon [ngClass]="getCurrentDateClass()" name="man-outline" size="small"></ion-icon>
+        <ion-icon [ngClass]="getCurrentDateClass()" name="man-outline" size="small" aria-label=""></ion-icon>
         <ion-text [ngClass]="getCurrentDateClass()" class="detail-text app-text-5">{{teacher.displayname}}</ion-text>
       </ion-row>
     </ion-row>

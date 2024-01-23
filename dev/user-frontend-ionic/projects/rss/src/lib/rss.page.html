@@ -50,7 +50,7 @@
             <ion-text class="app-text-5" *ngIf="!isContentVisible[i]">{{ "RSS.SEE_MORE" | translate }}</ion-text>
             <ion-text class="app-text-5" *ngIf="isContentVisible[i]">{{ "RSS.SEE_LESS" | translate }}</ion-text>
             <ion-icon class="app-icon-6" [class.content-open]="!isContentVisible[i]"
-              [class.content-close]="isContentVisible[i]" name="arrow-right"></ion-icon>
+              [class.content-close]="isContentVisible[i]" name="arrow-right" aria-label=""></ion-icon>
           </ion-button>
         </ng-template>
       </app-rss-item-header>

@@ -38,11 +38,13 @@
   -->
 
 <ion-buttons>
-  <ion-button (click)="openSelectPlanningModal()" fill="clear" class="ion-no-padding">
-    <ion-icon name="layers-outline"></ion-icon>
+  <ion-button (click)="openSelectPlanningModal()" fill="clear" class="ion-no-padding"
+              [attr.aria-label]="'SCHEDULE.SELECT_PLANNING.TITLE' | translate">
+    <ion-icon name="layers-outline" aria-label=""></ion-icon>
   </ion-button>
-  <ion-button *ngIf="(hiddenCourseList$ | async)?.length > 0" (click)="openHiddenCourseModal()" fill="clear" class="ion-no-padding">
-    <ion-icon name="eye-off-outline"></ion-icon>
+  <ion-button *ngIf="(hiddenCourseList$ | async)?.length > 0" (click)="openHiddenCourseModal()" fill="clear" class="ion-no-padding"
+              [attr.aria-label]="'SCHEDULE.SELECT_PLANNING.HIDDEN_COURSE' | translate">
+    <ion-icon name="eye-off-outline" aria-label=""></ion-icon>
   </ion-button>
 </ion-buttons>
 

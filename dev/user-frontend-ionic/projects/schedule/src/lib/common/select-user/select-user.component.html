@@ -38,8 +38,9 @@
   -->
 
 <ion-buttons>
-  <ion-button *ngIf="isAuthorizedUser$ | async" (click)="openSelectUserModal()" fill="clear" class="ion-no-padding">
-    <ion-icon slot="icon-only" name="people-circle-outline"></ion-icon>
+  <ion-button *ngIf="isAuthorizedUser$ | async" (click)="openSelectUserModal()" fill="clear" class="ion-no-padding"
+              [attr.aria-label]="'SCHEDULE.MANAGEMENT.TITLE' | translate">
+    <ion-icon slot="icon-only" name="people-circle-outline" aria-label=""></ion-icon>
   </ion-button>
 </ion-buttons>
 

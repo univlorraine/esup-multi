@@ -19,5 +19,6 @@
         "SUCCESS": {
             "MESSAGE": "Contact créé"
         }
-    }
+    },
+    "ADD": "Ajouter {{name}} au carnet d'adresse"
 }

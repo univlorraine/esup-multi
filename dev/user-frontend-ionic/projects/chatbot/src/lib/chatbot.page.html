@@ -74,17 +74,18 @@
 </ion-content>
 
 <ion-footer>
-  <ion-item lines="none" class="footer ion-no-padding">
-        <ion-input [(ngModel)]="userInput" class="form-control input app-text-4" placeholder="{{'CHATBOT.MESSAGE_PROMPT' | translate}}"
-        (keyup.enter)="onMessageInputEnter()"></ion-input>
+  <ion-item class="footer ion-no-padding" lines="none">
+    <ion-input (keyup.enter)="onMessageInputEnter()" [(ngModel)]="userInput"
+               class="form-control input app-text-4"
+               placeholder="{{'CHATBOT.MESSAGE_PROMPT' | translate}}"></ion-input>
 
     <ion-buttons slot="end">
-      <ion-button (click)="clearUserInput()">
-        <ion-icon name="trash" class="icon"></ion-icon>
+      <ion-button (click)="clearUserInput()" [attr.aria-label]="'CHATBOT.CLEAR_INPUT' | translate">
+        <ion-icon aria-label="" class="icon" name="trash"></ion-icon>
       </ion-button>
 
-      <ion-button (click)="textRequest(userInput)">
-        <ion-icon name="send" class="icon"></ion-icon>
+      <ion-button (click)="textRequest(userInput)" [attr.aria-label]="'CHATBOT.SEND' | translate">
+        <ion-icon aria-label="" class="icon" name="send"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-item>

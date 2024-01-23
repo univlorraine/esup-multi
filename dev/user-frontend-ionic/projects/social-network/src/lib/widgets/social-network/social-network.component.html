@@ -38,7 +38,8 @@
   -->
 
 <ion-row *ngIf="(socialNetworks$ | async) as socialNetworks" class="ion-justify-content-center ion-padding socialNetworks ">
-  <ion-icon *ngFor="let social_network of socialNetworks" class="app-icon-4" [name]="social_network.icon"
-     (click)="openExternalLink(social_network.link)">
-  </ion-icon>
+  <button *ngFor="let social_network of socialNetworks" class="app-button-4" (click)="openExternalLink(social_network.link)"
+          [attr.aria-label]="social_network.title">
+    <ion-icon class="app-icon-4" slot="icon-only" [name]="social_network.icon" aria-label=""></ion-icon>
+  </button>
 </ion-row>

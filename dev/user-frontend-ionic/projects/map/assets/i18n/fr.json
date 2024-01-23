@@ -9,5 +9,8 @@
         "CITES": "Cités U",
         "SANTES": "Services de Santé",
         "SUAPS": "SUAPS"
-    }
+    },
+    "FILTER": "Filtrer les marqueurs",
+    "LOCATE": "Me localiser",
+    "REMOVE_FROM_FILTERS": "Retirer '{{category}}' des filtres"
 }

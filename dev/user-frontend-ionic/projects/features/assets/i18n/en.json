@@ -5,5 +5,6 @@
     },
     "NO_DATA": "No data available",
     "SEARCHBAR_MESSAGE": "Search a service",
-    "NEW": "NEW !"
+    "NEW": "NEW !",
+    "DRAG_DEACTIVATION": "Deactivate modification of the order of services"
 }

@@ -6,6 +6,8 @@
   "HIDE_GROUPS": "Cacher les groupes",
   "COURSE_URL_TEXT": "Lien vers le cours / support",
   "CLOSE": "Fermer",
+  "HIDE_SIMILAR_COURSES": "Cacher les cours similaires",
+  "SHOW_SIMILAR_COURSES": "Afficher les cours similaires",
   "REQUEST_ERROR": {
     "BEFORE": "Veuillez réessayer plus tard. Une erreur s'est produite lors de la récupération des événements avant le",
     "AFTER": "Veuillez réessayer plus tard. Une erreur s'est produite lors de la récupération des événements après le"
@@ -21,7 +23,7 @@
     "SUBTITLE": "Sélectionner les plannings que vous souhaitez voir s'afficher",
     "CANCEL": "Annuler",
     "VALIDATE": "Valider",
-    "HIDDEN_COURSE": "Cours Masqués",
+    "HIDDEN_COURSE": "Cours masqués",
     "NO_PLANNING": "Pas de planning attribué sur cette periode"
   },
   "CALENDAR": {
@@ -32,9 +34,11 @@
     "SEE_MORE": "Voir plus"
   },
   "MANAGEMENT": {
+    "TITLE": "Consulter en tant que...",
     "AS_USER_LABEL": "Emploi du temps de",
     "USERNAME_FORM_LABEL": "Login ou code etu",
-    "VALIDATE_FORM_BUTTON": "Valider"
+    "VALIDATE_FORM_BUTTON": "Valider",
+    "QUIT": "Quitter le mode gestion"
   },
   "WIDGET": {
     "NEXT_EVENTS": {

@@ -4,6 +4,8 @@
     "END_OF_NOTIFICATIONS": "Fin des notifications",
     "LOAD_MORE_ERROR": "Erreur lors du chargement des notifications",
     "FILTERS": "Filtres",
+    "REMOVE_FROM_FILTERS": "Retirer '{{channel}}' des filtres",
+    "OPEN_MENU": "Afficher les actions disponibles pour cette notification",
     "CLOSE": "Fermer",
     "SETTINGS": {
         "TITLE": "Gérer mes alertes",
@@ -15,6 +17,7 @@
     "DELETE_THIS_NOTIFICATION": "Supprimer cette notification",
     "LOAD_MORE": "Charger plus",
     "LEARN_MORE": "En savoir plus",
+    "NAVIGATE_APP_PAGE": "Naviguer vers la page concernée",
     "ALERT": {
         "DELETED": "Notification supprimée",
         "CHANNEL": {

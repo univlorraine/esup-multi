@@ -74,19 +74,19 @@
                 class="app-title-5">{{event.course.label}}</ion-text>
               <ion-row>
                 <ion-row class="ion-align-items-center card-labels" *ngFor="let room of event.rooms">
-                  <ion-icon class="card-labels-icons" name="business-outline"></ion-icon>
+                  <ion-icon class="card-labels-icons" name="business-outline" aria-label=""></ion-icon>
                   <ion-text [ngClass]="fontColor()"
                     class="app-title-6 light">{{room.label}} - {{room.building}}</ion-text>
                 </ion-row>
                 <ion-row class="ion-align-items-center card-labels" *ngFor="let teacher of event.teachers">
                   <ion-icon [ngClass]="fontColor()"
-                    class="card-labels-icons" name="man-outline"></ion-icon>
+                    class="card-labels-icons" name="man-outline" aria-label=""></ion-icon>
                   <ion-text [ngClass]="fontColor()"
                     class="app-title-6 light">{{teacher.displayname}}</ion-text>
                 </ion-row>
                 <ion-row class="ion-align-items-center card-labels" *ngIf="event.course.url">
                   <ion-icon [ngClass]="fontColor()"
-                    class="card-labels-icons" name="link-outline"></ion-icon>
+                    class="card-labels-icons" name="link-outline" aria-label=""></ion-icon>
                   <ion-text [ngClass]="fontColor()"
                     class="app-title-6 light">{{ event.course.url | truncate:35 }}</ion-text>
                 </ion-row>

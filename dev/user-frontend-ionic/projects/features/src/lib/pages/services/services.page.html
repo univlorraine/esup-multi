@@ -47,8 +47,8 @@
   </ion-row>
 
   <ion-fab *ngIf="draggableIsOn" slot="fixed" vertical="bottom" horizontal="end">
-    <ion-fab-button size="small" (click)="deactivateDrag()">
-      <ion-icon name="checkmark-circle-outline"></ion-icon>
+    <ion-fab-button size="small" (click)="deactivateDrag()" [attr.aria-label]="'FEATURES.DRAG_DEACTIVATION' | translate">
+      <ion-icon name="checkmark-circle-outline" aria-label=""></ion-icon>
     </ion-fab-button>
   </ion-fab>
 
@@ -59,7 +59,8 @@
         <ion-button shape="round" size="small" *ngIf="draggableIsOn"
           class="drag-button ion-no-padding ion-no-margin" dragHandle>
           <ion-icon class="drag-button-icon" name="move-outline" dragHandle slot="icon-only"
-            size="small"></ion-icon></ion-button>
+            size="small" aria-label=""></ion-icon>
+        </ion-button>
 
         <ion-badge class="new app-title-7" *ngIf="menuItem.isNew">{{ "FEATURES.NEW" | translate }}</ion-badge>
 
