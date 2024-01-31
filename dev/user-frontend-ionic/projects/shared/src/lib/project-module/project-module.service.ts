@@ -38,11 +38,11 @@
  */
 
 import { Injectable, Type } from '@angular/core';
-import { StaticMenuItem, StaticMenuService, StaticMenuType } from './static-menu.service';
+import { HistoryBlacklistService } from './history-blacklist.service';
 import { PreferencesService } from './preferences.service';
+import { StaticMenuItem, StaticMenuService, StaticMenuType } from './static-menu.service';
 import { TranslationsService } from './translations/translations.service';
 import { Widget, WidgetsService } from './widgets.service';
-import { HistoryBlacklistService } from './history-blacklist.service';
 
 export interface InitProjectModuleOptions {
     name: string;

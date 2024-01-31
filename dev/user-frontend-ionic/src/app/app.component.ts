@@ -39,23 +39,23 @@
 
 import { DOCUMENT } from '@angular/common';
 import { Component, Inject, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { FirebaseMessaging } from '@capacitor-firebase/messaging';
 import { App } from '@capacitor/app';
 import { Capacitor, PluginListenerHandle } from '@capacitor/core';
+import { Device } from '@capacitor/device';
 import { SplashScreen } from '@capacitor/splash-screen';
 import { StatusBar, Style } from '@capacitor/status-bar';
+import { Badge } from '@capawesome/capacitor-badge';
 import { ModalController, Platform, PopoverController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import {
-  currentLanguage$, features$, FeaturesService, isFeatureStoreInitialized$,
-  isDarkTheme$, NavigationService, NetworkService, PageLayout, PageLayoutService, setIsDarkTheme,
-  themeRepoInitialized$, userHadSetThemeInApp, userHadSetThemeInApp$
+  currentLanguage$, features$, FeaturesService, isDarkTheme$, isFeatureStoreInitialized$, NavigationService,
+  NetworkService, PageLayout, PageLayoutService, setIsDarkTheme, themeRepoInitialized$, userHadSetThemeInApp,
+  userHadSetThemeInApp$
 } from '@ul/shared';
 import { initializeApp } from 'firebase/app';
 import { combineLatest, Observable, of, Subscription } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
-import { Device } from '@capacitor/device';
-import { Badge } from '@capawesome/capacitor-badge';
-import { FirebaseMessaging } from '@capacitor-firebase/messaging';
 
 @Component({
   selector: 'app-root',
@@ -85,7 +85,6 @@ export class AppComponent implements OnInit, OnDestroy {
     @Inject(DOCUMENT) private document: Document,
     private networkService: NetworkService,
     private featuresService: FeaturesService,
-
   ) {
 
     this.featuresIsEmpty$ = features$.pipe(
@@ -111,7 +110,7 @@ export class AppComponent implements OnInit, OnDestroy {
           return this.featuresService.loadAndStoreFeatures().pipe(
             map(() => true)
           );
-        } else{
+        } else {
           return of(isNothingToShow);
         }
       }));
@@ -226,7 +225,7 @@ export class AppComponent implements OnInit, OnDestroy {
   private async handleBadge(): Promise<void> {
     const isIos = (await Device.getInfo()).platform === 'ios';
     const notSupported = !(await Badge.isSupported());
-    if(notSupported || !isIos) { // The badge is already well handled on android, no need to do it manually
+    if (notSupported || !isIos) { // The badge is already well handled on android, no need to do it manually
       return;
     }
 

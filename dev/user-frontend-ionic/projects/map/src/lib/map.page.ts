@@ -149,7 +149,7 @@ export class MapPage implements OnDestroy {
     }
   }
 
-  removeSelectedCategory(category: string, selectedCatIndex: number ) {
+  removeSelectedCategory(category: string, selectedCatIndex: number) {
     this.categoriesSelected.splice(selectedCatIndex, 1);
     this.refreshMap();
 
@@ -180,7 +180,7 @@ export class MapPage implements OnDestroy {
 
     await Geolocation.getCurrentPosition().then(position => {
       let zoomLevel = 11;
-      if(!permissionAlreadyGranted) { // Permission has just been granted now
+      if (!permissionAlreadyGranted) { // Permission has just been granted now
         zoomLevel = 16;
       }
       const latLng: Leaflet.LatLngTuple = [position.coords.latitude, position.coords.longitude];
@@ -199,7 +199,7 @@ export class MapPage implements OnDestroy {
     },
       error => {
         const latLngOfTheUniversity: Leaflet.LatLngTuple = [this.config.defaultMapLocation.latitude,
-          this.config.defaultMapLocation.longitude];
+        this.config.defaultMapLocation.longitude];
         if (this.positionLayerGroup) {
           this.positionLayerGroup.remove();
         }
@@ -291,7 +291,7 @@ export class MapPage implements OnDestroy {
 
   private initCategoriesForm() {
     this.form = this.formBuilder.group({
-      categoriesForm: this.formBuilder.array([]) ,
+      categoriesForm: this.formBuilder.array([]),
     });
 
     this.categoriesForm.clear();

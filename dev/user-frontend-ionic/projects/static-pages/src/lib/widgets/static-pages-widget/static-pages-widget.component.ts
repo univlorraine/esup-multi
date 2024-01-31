@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NetworkService, StatisticsService } from '@ul/shared';
 import { Observable } from 'rxjs';
@@ -50,7 +50,7 @@ import { StaticPagesService } from '../../static-pages.service';
   templateUrl: './static-pages-widget.component.html',
   styleUrls: ['./static-pages-widget.component.scss'],
 })
-export class StaticPagesWidgetComponent implements OnInit {
+export class StaticPagesWidgetComponent {
 
   public translatedStaticPages$: Observable<TranslatedStaticPage[]>;
 
@@ -64,7 +64,7 @@ export class StaticPagesWidgetComponent implements OnInit {
     this.translatedStaticPages$ = this.staticPagesRepository.translatedStaticPages$;
   }
 
-  async ngOnInit() {
+  async widgetViewDidEnter(): Promise<void> {
     if (!(await this.networkService.getConnectionStatus()).connected) {
       return;
     }

@@ -37,19 +37,19 @@
  * termes.
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { NetworkService } from '@ul/shared';
 import { filter, first, Observable, switchMap } from 'rxjs';
 import { finalize, map, take } from 'rxjs/operators';
 import { FeedItem, rssFeed$, setRssFeed } from '../../rss.repository';
 import { RssService } from '../../rss.service';
-import { NetworkService } from '@ul/shared';
 
 @Component({
   selector: 'app-latest-news-widget',
   templateUrl: './latest-news.component.html',
   styleUrls: ['latest-news.component.scss'],
 })
-export class LatestNewsComponent implements OnInit {
+export class LatestNewsComponent {
   public isLoading = false;
   public latestNews$: Observable<FeedItem>;
 
@@ -62,7 +62,7 @@ export class LatestNewsComponent implements OnInit {
     );
   }
 
-  ngOnInit(): void {
+  widgetViewDidEnter(): void {
     this.loadRssFeedIfNetworkAvailable();
   }
 

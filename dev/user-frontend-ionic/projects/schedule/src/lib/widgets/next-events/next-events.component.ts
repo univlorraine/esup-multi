@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy } from '@angular/core';
 import { CompleteLocalDatePipe, ThemeService } from '@ul/shared';
 import { Observable, Subscription } from 'rxjs';
 import { finalize, map, take } from 'rxjs/operators';
@@ -50,7 +50,7 @@ import { NextEventsService } from './next-events.service';
   templateUrl: './next-events.component.html',
   styleUrls: ['./next-events.component.scss'],
 })
-export class NextEventsComponent implements OnInit, OnDestroy, AfterViewInit {
+export class NextEventsComponent implements OnDestroy, AfterViewInit {
 
   @Input() widgetColor: string;
 
@@ -87,7 +87,7 @@ export class NextEventsComponent implements OnInit, OnDestroy, AfterViewInit {
     );
   }
 
-  ngOnInit(): void {
+  widgetViewDidEnter(): void {
     this.isLoading = true;
     this.scheduleService.loadScheduleToState().pipe(
       take(1),

@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NetworkService } from '@ul/shared';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -49,7 +49,7 @@ import { ContactUsService } from '../../contact-us.service';
   templateUrl: './contact-us-menu-item.component.html',
   styleUrls: ['./contact-us-menu-item.component.scss'],
 })
-export class ContactUsMenuItemComponent implements OnInit {
+export class ContactUsMenuItemComponent {
 
   public translatedPageContent$: Observable<TranslatedContactUsPageContent>;
 
@@ -61,7 +61,7 @@ export class ContactUsMenuItemComponent implements OnInit {
     this.translatedPageContent$ = this.contactUsRepository.translatedPageContent$;
    }
 
-  async ngOnInit(): Promise<void> {
+  async widgetViewDidEnter(): Promise<void> {
     if (!(await this.networkService.getConnectionStatus()).connected) {
       return;
     }
@@ -70,5 +70,4 @@ export class ContactUsMenuItemComponent implements OnInit {
       .pipe(take(1))
       .subscribe();
   }
-
 }

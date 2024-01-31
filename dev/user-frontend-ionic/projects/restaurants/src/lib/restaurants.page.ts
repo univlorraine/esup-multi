@@ -75,9 +75,9 @@ export class RestaurantsPage implements OnInit {
   constructor(
     private restaurantsService: RestaurantsService,
     private router: Router,
-    private networkService: NetworkService,
-  ) { }
-
+    private networkService: NetworkService
+  ) {
+  }
   async ngOnInit() {
     if (!(await this.networkService.getConnectionStatus()).connected) {
       return;

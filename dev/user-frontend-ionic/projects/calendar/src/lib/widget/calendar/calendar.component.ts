@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { AfterViewInit, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Input } from '@angular/core';
 import { ThemeService } from '@ul/shared';
 import { Observable } from 'rxjs';
 import { finalize, take } from 'rxjs/operators';
@@ -49,7 +49,7 @@ import { CalendarService } from '../../calendar.service';
   templateUrl: './calendar.component.html',
   styleUrls: ['./calendar.component.scss'],
 })
-export class CalendarComponent implements OnInit, AfterViewInit {
+export class CalendarComponent implements AfterViewInit{
 
   @Input() widgetColor: string;
 
@@ -62,7 +62,7 @@ export class CalendarComponent implements OnInit, AfterViewInit {
     this.nextEvents$ = this.calendarService.getNextEvents$();
   }
 
-  ngOnInit(): void {
+  widgetViewDidEnter(): void {
     this.isLoading = true;
     this.calendarService.loadCalendarIfNetworkAvailable()
       .pipe(

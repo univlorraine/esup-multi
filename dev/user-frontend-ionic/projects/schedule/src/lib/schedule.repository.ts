@@ -77,10 +77,10 @@ export interface Planning {
   events?: Event[];
 }
 export interface PlanningData {
-  id: string,
-  label: string,
-  default: boolean,
-  isSelected: boolean
+  id: string;
+  label: string;
+  default: boolean;
+  isSelected: boolean;
 }
 export interface Event {
   id: string;
@@ -132,11 +132,17 @@ const mapPlanningId = (planning: Planning): string => planning.id;
  * Store Manager
  ****************************************************** */
 export class ScheduleStoreManager {
-  public schedule$: Observable<Schedule>;                   // Plannings de l'utilisateur disposant d'events dans la plage de date sauvegardés dans le state
-  public allPlanningsData$: Observable<PlanningData[]>;     // Données des plannings (dont isSelected:boolean) dans et hors plage des dates sauvegardées dans le state. Sans les events. Les plannings s'ajoutent à la navigation de l'utilisateur.
-  public eventsFromActivePlannings$: Observable<Event[]>;   // Tous les events des plannings actifs
-  public hiddenCourseList$: Observable<HiddenCourse[]>;     // Liste des cours masqués par l'utilisateur
-  public displayedEvents$: Observable<Event[]>;             // Events à afficher (= eventsFromActivePlannings$ - hiddenCourseList$)
+  // Plannings de l'utilisateur disposant d'events dans la plage de date sauvegardés dans le state
+  public schedule$: Observable<Schedule>;
+  // Données des plannings (dont isSelected:boolean) dans et hors plage des dates sauvegardées dans le state.
+  // Sans les events. Les plannings s'ajoutent à la navigation de l'utilisateur.
+  public allPlanningsData$: Observable<PlanningData[]>;
+  // Tous les events des plannings actifs
+  public eventsFromActivePlannings$: Observable<Event[]>;
+  // Liste des cours masqués par l'utilisateur
+  public hiddenCourseList$: Observable<HiddenCourse[]>;
+  // Events à afficher (= eventsFromActivePlannings$ - hiddenCourseList$)
+  public displayedEvents$: Observable<Event[]>;
   private store: Store;
 
   constructor(private storeName: string) {
@@ -158,11 +164,10 @@ export class ScheduleStoreManager {
         isSelected: newPlanning.default,
       }));
 
-      const uniqueNewPlannings = mappedPlannings.filter((newPlanning) => {
-        return !state.allPlanningsData.some(
-          (existingPlanning) => existingPlanning.id === newPlanning.id
+      const uniqueNewPlannings = mappedPlannings
+        .filter((newPlanning) => !state.allPlanningsData
+          .some((existingPlanning) => existingPlanning.id === newPlanning.id)
         );
-      });
 
       const updatedPlannings = [...state.allPlanningsData, ...uniqueNewPlannings];
       updatedPlannings.sort((a, b) => (b.default ? 1 : 0) - (a.default ? 1 : 0));
@@ -216,12 +221,12 @@ export class ScheduleStoreManager {
   }
   public setActivePlanningIds(activePlanningIds) {
     this.store.update((state) => {
-      const updatedPlanningsData = state.allPlanningsData.map((planningData: PlanningData) => {
-        return {
+      const updatedPlanningsData = state.allPlanningsData
+        .map((planningData: PlanningData) => ({
           ...planningData,
           isSelected: activePlanningIds.includes(planningData.id)
-        };
-      });
+        })
+      );
 
       return {
         ...state,

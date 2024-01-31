@@ -37,15 +37,14 @@
  * termes.
  */
 
-import { IonicModule } from '@ionic/angular';
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { TabsLayoutPage } from './tabs-layout/tabs-layout.page';
-import { FullLayoutPage } from './full-layout/full-layout.page';
-import { TranslateModule } from '@ngx-translate/core';
 import { RouterModule } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
+import { TranslateModule } from '@ngx-translate/core';
 import { SharedComponentsModule } from 'projects/shared/src/public-api';
+import { LayoutPage } from './layout.page';
 
 @NgModule({
   imports: [
@@ -57,12 +56,10 @@ import { SharedComponentsModule } from 'projects/shared/src/public-api';
     SharedComponentsModule,
   ],
   declarations: [
-    TabsLayoutPage,
-    FullLayoutPage,
+    LayoutPage
   ],
   exports: [
-    TabsLayoutPage,
-    FullLayoutPage,
+    LayoutPage
   ],
 })
 export class PageLayoutsModule {}

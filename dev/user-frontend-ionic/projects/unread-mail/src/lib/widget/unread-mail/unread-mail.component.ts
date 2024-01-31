@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { AfterViewInit, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Input } from '@angular/core';
 import { ThemeService } from '@ul/shared';
 import { Observable } from 'rxjs';
 import { finalize, take } from 'rxjs/operators';
@@ -49,7 +49,7 @@ import { UnreadMailService } from '../../unread-mail.service';
   templateUrl: './unread-mail.component.html',
   styleUrls: ['./unread-mail.component.scss'],
 })
-export class UnreadMailComponent implements OnInit, AfterViewInit {
+export class UnreadMailComponent implements AfterViewInit {
 
   @Input() widgetColor: string;
 
@@ -61,8 +61,9 @@ export class UnreadMailComponent implements OnInit, AfterViewInit {
     private changeDetectorRef: ChangeDetectorRef) {
   }
 
-  ngOnInit(): void {
+   widgetViewDidEnter(): void {
     this.isLoading = true;
+
     this.unreadMailService.loadUnreadMailIfNetworkAvailable()
       .pipe(
         take(1),

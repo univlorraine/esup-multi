@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Browser } from '@capacitor/browser';
 import { NetworkService } from '@ul/shared';
 import { Observable } from 'rxjs';
@@ -50,7 +50,7 @@ import { SocialNetworkService } from '../../social-network.service';
   templateUrl: './social-network.component.html',
   styleUrls: ['./social-network.component.scss'],
 })
-export class SocialNetworkComponent implements OnInit {
+export class SocialNetworkComponent {
   public socialNetworks$: Observable<SocialNetwork[]> = socialNetworks$;
 
   constructor(
@@ -58,7 +58,7 @@ export class SocialNetworkComponent implements OnInit {
     private networkService: NetworkService,
   ) { }
 
-  async ngOnInit() {
+  async widgetViewDidEnter(): Promise<void> {
     if (!(await this.networkService.getConnectionStatus()).connected) {
       return;
     }
