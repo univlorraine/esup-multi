@@ -67,6 +67,8 @@ export * from './lib/navigation/menu.service';
 export * from './lib/navigation/navigation.service';
 export * from './lib/navigation/page-layout.service';
 export * from './lib/network/network.service';
+export * from './lib/notifications/notifications.repository';
+export * from './lib/notifications/notifications.service';
 export * from './lib/pipe/complete-local-date-pipe';
 export * from './lib/pipe/relative-time-pipe';
 export * from './lib/pipe/shared-pipe.module';
@@ -81,5 +83,4 @@ export * from './lib/store/local-forage';
 export * from './lib/store/user-store-helper';
 export * from './lib/theme/theme.repository';
 export * from './lib/theme/theme.service';
-export * from './lib/notifications/notifications.service';
-export * from './lib/notifications/notifications.repository';
+

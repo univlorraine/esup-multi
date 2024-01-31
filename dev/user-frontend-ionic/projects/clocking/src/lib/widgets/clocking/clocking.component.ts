@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { AfterViewInit, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Input } from '@angular/core';
 import { getExpectedErrorMessage, ThemeService } from '@ul/shared';
 import { Observable } from 'rxjs';
 import { catchError, finalize, take } from 'rxjs/operators';
@@ -49,7 +49,7 @@ import { ClockingService } from '../../clocking.service';
   templateUrl: './clocking.component.html',
   styleUrls: ['./clocking.component.scss'],
 })
-export class ClockingComponent implements OnInit, AfterViewInit {
+export class ClockingComponent implements AfterViewInit {
 
   @Input() widgetColor: string;
 
@@ -62,7 +62,7 @@ export class ClockingComponent implements OnInit, AfterViewInit {
     private themeService: ThemeService,
     private changeDetectorRef: ChangeDetectorRef) { }
 
-  ngOnInit(): void {
+  widgetViewDidEnter(): void {
     this.isLoading = true;
     this.clockingService.loadClockingIfNetworkAvailable()
       .pipe(

@@ -38,8 +38,8 @@
   -->
 
 <ion-tabs>
+    <ion-header *ngIf="currentPageLayout === 'tabs'">
 
-  <ion-header>
     <ion-toolbar>
       <img src="assets/logo/white-university-logo.svg" class="logo ion-padding-start app-logo-3" aria-label="" />
       <ion-buttons slot="end" *ngFor="let menuItemHasBadge of [(menuItemHasBadge$ | async) ?? []]">
@@ -62,7 +62,8 @@
     </ion-row>
 
   </ion-header>
-  <ion-tab-bar data-menu-id="main-tab-bar" color="primary" slot="bottom">
+  <ion-tab-bar data-menu-id="main-tab-bar" color="primary" slot="bottom" *ngIf="currentPageLayout === 'tabs'">
+
     <!--
       We must set 'tab-selected' class manually because ion-tab-bar has troubles to mark tab as selected
       when current route contains '/'. It doesn't work with selected attribute either.

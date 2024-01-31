@@ -40,7 +40,7 @@
 import { Component } from '@angular/core';
 import { FeaturesService, GuidedTourService, TranslatedFeature, WidgetLifecycleService } from '@ul/shared';
 import { Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, filter, map, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-widgets',
@@ -57,7 +57,10 @@ export class WidgetsPage {
     private guidedTourService: GuidedTourService
   ) {
     this.translatedFeatures$ = this.featuresService.translatedFeatures$.pipe(
-      map(features => features.filter(t => t.widget))
+      debounceTime(0), // Only get the last value of the replay subject
+      filter(features => features && features.length > 0),
+      map(features => features.filter(t => t.widget)),
+      distinctUntilChanged((prev, current)=> JSON.stringify(prev) === JSON.stringify(current)),
     );
     this.featuresIsEmpty$ = this.translatedFeatures$.pipe(map(features => features.length === 0));
   }

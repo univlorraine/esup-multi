@@ -48,9 +48,6 @@ import { filter, shareReplay } from 'rxjs/operators';
  * - widgetViewDidEnter(void)
  * - widgetViewWillLeave(void)
  * - widgetViewDidLeave(void)
- *
- * [NOTE] We need MULTI-258 to be fixed before some of the widgets can use that, if the widget is instanced two times
- * on the same page only the methods of the first instantiation will be triggered, which is what happens on some pages
  */
 @Injectable({
   providedIn: 'root'

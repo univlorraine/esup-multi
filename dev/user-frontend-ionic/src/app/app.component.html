@@ -38,8 +38,7 @@
   -->
 
 <ion-app *ngIf="(currentPageLayout$ | async) as currentPageLayout">
-  <app-tabs-layout *ngIf="currentPageLayout === 'tabs'"></app-tabs-layout>
-  <app-full-layout *ngIf="currentPageLayout === 'full'"></app-full-layout>
+  <app-layout [currentPageLayout]='currentPageLayout'></app-layout>
 </ion-app>
 
 <div *ngIf="(isNothingToShow$ | async) === true" class="custom-alert">

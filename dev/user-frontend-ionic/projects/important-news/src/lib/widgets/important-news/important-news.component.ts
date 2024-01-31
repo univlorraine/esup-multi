@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Browser } from '@capacitor/browser';
 import { currentLanguage$, StatisticsService, ThemeService } from '@ul/shared';
@@ -53,7 +53,7 @@ import { TranslatedImportantNews } from './../../important-news.repository';
   templateUrl: './important-news.component.html',
   styleUrls: ['./important-news.component.scss'],
 })
-export class ImportantNewsComponent implements OnInit {
+export class ImportantNewsComponent {
 
 
   public isLoading = false;
@@ -92,7 +92,7 @@ export class ImportantNewsComponent implements OnInit {
     );
   }
 
-  ngOnInit(): void {
+  widgetViewDidEnter(): void {
     this.isLoading = true;
     this.importantNewsService.loadImportantNewsList().pipe(
       take(1),
