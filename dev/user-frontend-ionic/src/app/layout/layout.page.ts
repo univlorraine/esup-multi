@@ -40,11 +40,21 @@
 import { AfterViewInit, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import {
-  FeaturesService, GuidedTourService, MenuItem, MenuItemLinkType, MenuItemRouterLink,
-  MenuOpenerService, MenuService, NetworkService, NotificationsService, PageLayout, StatisticsService
+  FeaturesService,
+  GuidedTourService,
+  MenuItem,
+  MenuItemLinkType,
+  MenuItemRouterLink,
+  MenuOpenerService,
+  MenuService,
+  NetworkService,
+  NotificationsRepository,
+  NotificationsService,
+  PageLayout,
+  StatisticsService
 } from '@ul/shared';
-import { combineLatest, Observable, Subject } from 'rxjs';
-import { distinctUntilChanged, filter, map, tap } from 'rxjs/operators';
+import { combineLatest, Observable, Subject, withLatestFrom } from 'rxjs';
+import { distinctUntilChanged, filter, map } from 'rxjs/operators';
 
 interface MenuItemWithOptionalRouterLink extends MenuItem {
   routerLink: string;
@@ -74,6 +84,7 @@ export class LayoutPage implements AfterViewInit, OnChanges {
     private guidedTourService: GuidedTourService,
     public menuOpenerService: MenuOpenerService,
     private networkService: NetworkService,
+    private notificationsRepository: NotificationsRepository,
     private notificationsService: NotificationsService
   ) {
     this.isOnline$ = this.networkService.isOnline$;
@@ -112,13 +123,16 @@ export class LayoutPage implements AfterViewInit, OnChanges {
       map(([menuItems]) => menuItems),
     )
     .subscribe(menuItems => { // Triggers when either layout has gone from full to tabs or when the topMenuItems have changed
-      this.notificationsService.loadNotifications(0, 10).pipe(
-        map((notifications) => menuItems.map(menuItem => menuItem.link.type === MenuItemLinkType.router
-          && (menuItem.link as MenuItemRouterLink).routerLink === '/notifications'
-          && notifications.find(notification => notification.state === 'UNREAD') !== undefined)),
-      ).subscribe(values => {
-        this.menuItemHasBadgeSubject$.next(values);
-      });
+      this.notificationsService.loadNotifications(0, 10).subscribe();
+    });
+
+    this.notificationsRepository.notifications$.pipe(
+        withLatestFrom(this.topMenuItems$),
+        map(([notifications, menuItems]) => menuItems.map(menuItem => menuItem.link.type === MenuItemLinkType.router
+            && (menuItem.link as MenuItemRouterLink).routerLink === '/notifications'
+            && notifications.find(notification => notification.state === 'UNREAD') !== undefined)),
+    ).subscribe(values => {
+      this.menuItemHasBadgeSubject$.next(values);
     });
   }
 
