@@ -50,8 +50,8 @@ import { ModalController, Platform, PopoverController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import {
   currentLanguage$, features$, FeaturesService, isDarkTheme$, isFeatureStoreInitialized$, NavigationService,
-  NetworkService, PageLayout, PageLayoutService, setIsDarkTheme, themeRepoInitialized$, userHadSetThemeInApp,
-  userHadSetThemeInApp$
+  NotificationsService, NetworkService, PageLayout, PageLayoutService, setIsDarkTheme, themeRepoInitialized$,
+  userHadSetThemeInApp, userHadSetThemeInApp$
 } from '@ul/shared';
 import { initializeApp } from 'firebase/app';
 import { combineLatest, Observable, of, Subscription } from 'rxjs';
@@ -71,6 +71,7 @@ export class AppComponent implements OnInit, OnDestroy {
   private featuresIsEmpty$: Observable<boolean>;
   private subscriptions: Subscription[] = [];
   private backButtonListener: Promise<PluginListenerHandle>;
+  private appResumeListener: Promise<PluginListenerHandle>;
 
   constructor(
     @Inject('environment')
@@ -85,6 +86,7 @@ export class AppComponent implements OnInit, OnDestroy {
     @Inject(DOCUMENT) private document: Document,
     private networkService: NetworkService,
     private featuresService: FeaturesService,
+    private notificationsService: NotificationsService
   ) {
 
     this.featuresIsEmpty$ = features$.pipe(
@@ -155,6 +157,11 @@ export class AppComponent implements OnInit, OnDestroy {
       });
     });
 
+    // reload notifications when app is resumed (back to foreground)
+    this.appResumeListener = App.addListener('resume', () => {
+      this.notificationsService.loadNotifications(0, 10).subscribe();
+    });
+
     // apply language saved in persistent state
     this.subscriptions.push(currentLanguage$
       .subscribe(language => this.translateService.use(language || this.environment.defaultLanguage))
@@ -206,6 +213,9 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscriptions.forEach(s => s.unsubscribe());
     this.backButtonListener.then((listener) => {
+      listener.remove();
+    });
+    this.appResumeListener.then((listener) => {
       listener.remove();
     });
   }
