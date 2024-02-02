@@ -86,6 +86,9 @@ export class AppComponent implements OnInit, OnDestroy {
     private networkService: NetworkService,
     private featuresService: FeaturesService,
   ) {
+    currentLanguage$.subscribe((language) => {
+      document.documentElement.lang = language || environment.defaultLanguage;
+    });
 
     this.featuresIsEmpty$ = features$.pipe(
       map((val) => val.length === 0)
