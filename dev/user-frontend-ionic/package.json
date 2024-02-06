@@ -120,5 +120,10 @@
   "overrides": {
     "semver": "^7.5.2"
   },
-  "description": "An Ionic project"
+  "description": "An Ionic project",
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
+  }
 }
