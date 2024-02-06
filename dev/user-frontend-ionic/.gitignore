@@ -33,3 +33,8 @@ npm-debug.log*
 
 /src/environments/firebase/*
 /src/assets/stubs/firebase-environment.json
+
+/src/environments/*
+!/src/environments/environment.ts.dist
+capacitor.config*
+!capacitor.config.ts.dist

@@ -37,14 +37,29 @@
  * termes.
  */
 
-import firebasePwaEnvironment from './firebase/web/firebase-environment.pwa-development.json';
+// This file can be replaced during build by using the `fileReplacements` array.
+// `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
+// The list of file replacements can be found in `angular.json`.
+
+// Décommenter si utilisation des notifications
+// import firebasePwaEnvironment from './firebase/web/firebase-environment.pwa-development.json';
 
 export const environment = {
-  production: true,
-  apiEndpoint: 'https://mobile-back-dev.univ-lorraine.fr',
+  production: false,
+  apiEndpoint: 'http://localhost:3000',
   languages: ['fr', 'en'],
   defaultLanguage: 'fr',
-  cmsPublicAssetsEndpoint: 'https://mobile-cms-dev.univ-lorraine.fr/assets/',
-  firebase: firebasePwaEnvironment,
+  cmsPublicAssetsEndpoint: 'http://localhost:8055/assets/',
+  // Décommenter si utilisation des notifications
+  // firebase: firebasePwaEnvironment,
   guidedTourEnabled: true
 };
+
+/*
+ * For easier debugging in development mode, you can import the following file
+ * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
+ *
+ * This import should be commented out in production mode because it will have a negative impact
+ * on performance if an error is thrown.
+ */
+// import 'zone.js/dist/zone-error';  // Included with Angular CLI.

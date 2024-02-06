@@ -37,14 +37,25 @@
  * termes.
  */
 
-import firebasePwaEnvironment from './firebase/web/firebase-environment.pwa-production.json';
+import { CapacitorConfig } from '@capacitor/cli';
 
-export const environment = {
-  production: true,
-  apiEndpoint: 'https://mobile-back.univ-lorraine.fr',
-  languages: ['fr', 'en'],
-  defaultLanguage: 'fr',
-  cmsPublicAssetsEndpoint: 'https://mobile-cms.univ-lorraine.fr/assets/',
-  firebase: firebasePwaEnvironment,
-  guidedTourEnabled: true
+const config: CapacitorConfig = {
+  appId: 'fr.esupportail.mobile.multi',
+  appName: 'Esup-Multi',
+  webDir: 'www',
+  plugins: {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    SplashScreen: {
+      androidScaleType: 'CENTER_CROP',
+      splashFullScreen: true,
+      splashImmersive: false,
+      backgroundColor: '#ffffff',
+    },
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    FirebaseMessaging: {
+      presentationOptions: ['badge', 'sound', 'alert'],
+    },
+  },
 };
+
+export default config;
