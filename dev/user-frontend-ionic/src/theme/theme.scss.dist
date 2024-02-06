@@ -37,95 +37,34 @@
  * termes.
  */
 
-.shepherd-element {
-  background: var(--app-color-background) !important;
-  border-radius: 0 !important;
-  border: var(--app-border-width-7) solid var(--ion-color-medium)  !important;
-  width: 80% !important;
-}
+/* Custom CSS variables theming */
+@import "./default/app-theme-variables.scss";
 
-.shepherd-text {
-  color: var(--app-font-color-primary-medium) !important;
-  font-family: var(--app-font-secondary) !important;
-  font-size: var(--app-text-2-size) !important;
-  font-weight: 500 !important;
-}
+/* variables theming */
+@import "./default/variables.scss";
 
-.shepherd-button-primary {
-  background: var(--ion-color-primary) !important;
-}
+/* Font CSS classes */
+@import "./default/fonts/fonts.scss";
 
-.shepherd-button-secondary {
-  background: none  !important;
-  color: var(--app-font-color-primary-medium) !important;
-  text-decoration: underline;
-}
+/* Icons CSS classes */
+@import "./default/icons/icons.scss";
 
-.shepherd-footer {
-  border-radius: unset !important;
-  border-bottom:  var(--app-border-width-5) solid var(--ion-color-secondary);
-}
+/* Logos CSS classes */
+@import "./default/logos/logos.scss";
 
-.dark {
-  .shepherd-element {
-    border: var(--app-border-width-7) solid var(--ion-color-primary-contrast)  !important;
-  }
+/* Button CSS classes */
+@import "./default/components/button.scss";
 
-  .shepherd-button-primary {
-    background: var(--ion-color-primary-contrast) !important;
-    color: var(--ion-color-primary)  !important; ;
-  }
+/* Header CSS classes */
+@import "./default/components/header.scss";
 
-  .shepherd-cancel-icon {
-    color: var(--ion-color-primary-contrast) !important;
-  }
+/* External library */
+/* FullCalendar (Calendar in schedule module) */
+@import "./default/external-ui-library/fullcalendar/fullcalendar.scss";
 
-  .shepherd-modal-overlay-container {
-    &.shepherd-modal-is-visible {
-      opacity: .7 !important;
-    }
-  }
-}
+/* External library */
+/* Leaflet (Map in map module) */
+@import "./default/external-ui-library/leaflet/leaflet.scss";
 
-.shepherd-arrow {
-  width: 25px !important;
-  height: 25px !important;
-
-  &:before {
-    background: none !important;
-    content: url("../../../assets/icon/chevron-outline.svg") !important;
-    width: 25px !important;
-    height: 25px !important;
-  }
-}
-
-
-.shepherd-element[data-popper-placement^=top] {
-  margin-bottom: 1rem !important;
-
-  &>.shepherd-arrow {
-    position: relative;
-    bottom: -1.4rem !important;
-  }
-
-  &>.shepherd-arrow:before {
-    transform: rotate(0deg) !important;
-  }
-
-}
-
-.shepherd-element[data-popper-placement^=bottom] {
-  margin-top: 1rem !important;
-
-  &>.shepherd-arrow {
-    top: -1.4rem !important;
-  }
-
-  &>.shepherd-arrow:before {
-    transform: rotate(180deg) !important;
-  }
-}
-
-.shepherd-image {
-  padding: 1rem 0;
-}
+/* Shepherd.js */
+@import "./default/external-ui-library/shepherd/shepherd.scss";

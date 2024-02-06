@@ -33,3 +33,8 @@ npm-debug.log*
 
 /src/environments/firebase/*
 /src/assets/stubs/firebase-environment.json
+
+# Theme
+/src/theme/*
+!/src/theme/theme.scss.dist
+!/src/theme/default
