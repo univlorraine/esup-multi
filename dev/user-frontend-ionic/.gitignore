@@ -32,7 +32,7 @@ npm-debug.log*
 /www
 
 /src/environments/firebase/*
-/src/assets/stubs/firebase-environment.json
+/src/theme/default/assets/stubs/firebase-environment.json
 
 # Theme
 /src/theme/*

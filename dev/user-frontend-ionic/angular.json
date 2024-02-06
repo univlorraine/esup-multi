@@ -22,7 +22,7 @@
               "src/firebase-messaging-sw.js",
               {
                 "glob": "**/*",
-                "input": "src/assets",
+                "input": "src/theme/default/assets",
                 "output": "assets"
               },
               {
@@ -132,27 +132,27 @@
               },
               {
                 "glob": "**/*.svg",
-                "input": "src/assets/icon/flag",
+                "input": "src/theme/default/assets/icon/flag",
                 "output": "./svg"
               },
               {
                 "glob": "**/*.svg",
-                "input": "src/assets/icon/features",
+                "input": "src/theme/default/assets/icon/features",
                 "output": "./svg"
               },
               {
                 "glob": "**/*.svg",
-                "input": "src/assets/icon/navigation",
+                "input": "src/theme/default/assets/icon/navigation",
                 "output": "./svg"
               },
               {
                 "glob": "**/*.svg",
-                "input": "src/assets/icon/social-network",
+                "input": "src/theme/default/assets/icon/social-network",
                 "output": "./svg"
               },
               {
                 "glob": "**/*.svg",
-                "input": "src/assets/icon/static-pages",
+                "input": "src/theme/default/assets/icon/static-pages",
                 "output": "./svg"
               }
             ],
@@ -376,7 +376,7 @@
               },
               {
                 "glob": "**/*",
-                "input": "src/assets",
+                "input": "src/theme/default/assets",
                 "output": "/assets"
               }
             ]
