@@ -38,3 +38,5 @@ npm-debug.log*
 !/src/environments/environment.ts.dist
 capacitor.config*
 !capacitor.config.ts.dist
+trapeze*
+!trapeze-config.yml.dist
