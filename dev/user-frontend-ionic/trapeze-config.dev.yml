@@ -1,9 +1,0 @@
-platforms:
-  android:
-    copy:
-      - src: ../src/environments/firebase/android/google-services-dev.json
-        dest: app/google-services.json
-  ios:
-    copy:
-      - src: ../../src/environments/firebase/ios/GoogleService-Info-dev.plist
-        dest: App/GoogleService-Info.plist
