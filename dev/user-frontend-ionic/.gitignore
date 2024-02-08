@@ -39,6 +39,7 @@ npm-debug.log*
 !/src/theme/theme.scss.dist
 !/src/theme/default
 
+angular.json
 /src/environments/*
 !/src/environments/environment.ts.dist
 capacitor.config*
