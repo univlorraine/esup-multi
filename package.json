@@ -2,9 +2,6 @@
   "name": "multi",
   "version": "1.0.3",
   "description": "",
-  "scripts": {
-    "prepare": "husky"
-  },
   "private": true,
   "repository": {
     "type": "git",
