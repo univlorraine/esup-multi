@@ -46,6 +46,11 @@
         </intent>
     </queries>
 
+  <supports-screens android:smallScreens="false"
+                    android:normalScreens="true"
+                    android:largeScreens="true"
+                    android:xlargeScreens="true" />
+
     <!-- Permissions -->
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-feature android:name="android.hardware.camera" />
