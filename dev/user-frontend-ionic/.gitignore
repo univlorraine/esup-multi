@@ -39,11 +39,18 @@ npm-debug.log*
 !/src/theme/theme.scss.dist
 !/src/theme/default
 
+# Angular
 angular.json
 /src/environments/*
 !/src/environments/environment.ts.dist
+
+# Ionic
 capacitor.config*
 !capacitor.config.ts.dist
+ios/
+android/
+
+# Trapeze
 trapeze*
 !trapeze-config.yml.dist
 
