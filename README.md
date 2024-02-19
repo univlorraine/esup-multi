@@ -5,7 +5,7 @@
 
 ![https://img.shields.io/github/license/EsupPortail/Esup-Pod)](https://img.shields.io/badge/License-CeCILL%202.1-orange)
 
-Le projet Esup-Multi porté par l'université de Lorraine a pour objectif de proposer un socle technique opensource permettant la mise en oeuvre d'une application mobile institutionnelle Android, iOS et Web.
+Le projet **Esup-Multi** porté par l'université de Lorraine a pour objectif de proposer un socle technique opensource permettant la mise en oeuvre d'une application mobile institutionnelle Android, iOS et Web.
 
 Esup-Multi, financé en partie par le plan **France Relance** dans le cadre de l'appel à projets **Services Numériques aux Étudiants** offre une architecture modulaire permettant une personnalisation approfondie, garantissant ainsi que l'application Esup-Multi puisse s'interconnecter au système d'information de l'établissement. Elle s'accompagne d'un CMS Headless qui permet d'externaliser paramétrages et contenus.
 
@@ -35,7 +35,7 @@ Retrouvez toute la documentation sur [notre espace wiki](https://www.esup-portai
 
 ## Licence et contributions
 
-MULTI est sous la licence [CeCILL-2.1](LICENCE). Si vous souhaitez contribuer au projet vous pouvez contacter [esup-multi@esup-portail.org](mailto:esup-multi@esup-portail.org).
+**Esup-Multi** est sous la licence [CeCILL-2.1](LICENCE). Si vous souhaitez contribuer au projet vous pouvez contacter [esup-multi@esup-portail.org](mailto:esup-multi@esup-portail.org).
 
 ### Dépendances
 
