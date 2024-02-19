@@ -7,7 +7,7 @@
 
 Le projet Esup-Multi porté par l'université de Lorraine a pour objectif de proposer un socle technique opensource permettant la mise en oeuvre d'une application mobile institutionnelle Android, iOS et Web.
 
-Esup-Multi, financé en partie par le plan **France** Relance dans le cadre de l'appel à projets **Services Numériques aux Étudiants** offre une architecture modulaire permettant une personnalisation approfondie, garantissant ainsi que l'application Esup-Multi puisse s'interconnecter au système d'information de l'établissement. Elle s'accompagne d'un CMS Headless qui permet d'externaliser paramétrages et contenus.
+Esup-Multi, financé en partie par le plan **France Relance** dans le cadre de l'appel à projets **Services Numériques aux Étudiants** offre une architecture modulaire permettant une personnalisation approfondie, garantissant ainsi que l'application Esup-Multi puisse s'interconnecter au système d'information de l'établissement. Elle s'accompagne d'un CMS Headless qui permet d'externaliser paramétrages et contenus.
 
 Les sources du projet sont constituées :
 
