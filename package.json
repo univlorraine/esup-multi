@@ -13,6 +13,35 @@
     "url": "https://github.com/univlorraine/esup-multi/issues"
   },
   "homepage": "https://github.com/univlorraine/esup-multi#readme",
+  "scripts": {
+    "build:back": "npm run back:main -- ci && concurrently \"npm run back:*(!main) -- ci\" && concurrently \"npm run back:* -- run build\"",
+    "build:front": "cd dev/user-frontend-ionic && npm ci && npm run module:build-all",
+    "start:back": "concurrently \"npm run back:* -- run start\"",
+    "start:back:dev": "concurrently \"npm run back:* -- run start:dev\"",
+    "start:back:prod": "concurrently \"npm run back:* -- run start:prod\"",
+    "start:front": "cd dev/user-frontend-ionic && ionic serve",
+    "back:main": "cd dev/user-backend-nest/main && npm",
+    "back:auth": "cd dev/user-backend-nest/microservices/auth && npm",
+    "back:cards": "cd dev/user-backend-nest/microservices/cards && npm",
+    "back:chatbot": "cd dev/user-backend-nest/microservices/chatbot && npm",
+    "back:clocking": "cd dev/user-backend-nest/microservices/clocking && npm",
+    "back:contact-us": "cd dev/user-backend-nest/microservices/contact-us && npm",
+    "back:contacts": "cd dev/user-backend-nest/microservices/contacts && npm",
+    "back:features": "cd dev/user-backend-nest/microservices/features && npm",
+    "back:important-news": "cd dev/user-backend-nest/microservices/important-news && npm",
+    "back:mail-calendar": "cd dev/user-backend-nest/microservices/mail-calendar && npm",
+    "back:map": "cd dev/user-backend-nest/microservices/map && npm",
+    "back:notifications": "cd dev/user-backend-nest/microservices/notifications && npm",
+    "back:restaurants": "cd dev/user-backend-nest/microservices/restaurants && npm",
+    "back:rss": "cd dev/user-backend-nest/microservices/rss && npm",
+    "back:schedule": "cd dev/user-backend-nest/microservices/schedule && npm",
+    "back:social-network": "cd dev/user-backend-nest/microservices/social-network && npm",
+    "back:static-pages": "cd dev/user-backend-nest/microservices/static-pages && npm",
+    "back:statistics": "cd dev/user-backend-nest/microservices/statistics && npm"
+  },
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  },
   "devDependencies": {
     "@commitlint/cli": "^18.6.0",
     "@commitlint/config-conventional": "^18.6.0",
