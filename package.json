@@ -18,7 +18,6 @@
     "build:front": "cd dev/user-frontend-ionic && npm ci && npm run module:build-all",
     "start:back": "concurrently \"npm run back:* -- run start\"",
     "start:back:dev": "concurrently \"npm run back:* -- run start:dev\"",
-    "start:back:prod": "concurrently \"npm run back:* -- run start:prod\"",
     "start:front": "cd dev/user-frontend-ionic && ionic serve",
     "back:main": "cd dev/user-backend-nest/main && npm",
     "back:auth": "cd dev/user-backend-nest/microservices/auth && npm",
@@ -39,13 +38,11 @@
     "back:static-pages": "cd dev/user-backend-nest/microservices/static-pages && npm",
     "back:statistics": "cd dev/user-backend-nest/microservices/statistics && npm"
   },
-  "dependencies": {
-    "concurrently": "^8.2.2"
-  },
   "devDependencies": {
     "@commitlint/cli": "^18.6.0",
     "@commitlint/config-conventional": "^18.6.0",
     "commitizen": "^4.3.0",
+    "concurrently": "^8.2.2",
     "cz-conventional-changelog": "^3.3.0",
     "husky": "^9.0.10"
   },
