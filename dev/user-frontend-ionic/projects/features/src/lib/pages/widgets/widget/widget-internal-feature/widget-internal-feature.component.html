@@ -37,7 +37,8 @@
   ~ termes.
   -->
 
-<ion-card [attr.data-widget-id]="feature.widget" class="ion-no-margin" (click)="onClick()" [ngStyle]="{'background-color': feature.color}">
+<ion-card [attr.data-widget-id]="feature.widget" [ngClass]="{'ion-no-margin': true, 'widget-empty': isEmpty}"
+          (click)="onClick()" [ngStyle]="{'background-color': feature.color}">
   <ion-card-header *ngIf="feature.title" class="ion-no-padding">
     <ion-card-title [ngClass]="fontColor(feature.color)" class="feature-title app-title-5">
       <ion-icon [name]="feature.icon" *ngIf="feature.icon" aria-label=""></ion-icon>
@@ -49,6 +50,6 @@
       <ion-label [ngClass]="fontColor(feature.color)" class="app-text-4">{{feature.content}}</ion-label>
     </ion-col>
     <app-widget (click)="onClick()" [ngStyle]="{'background-color': feature.color}" [widgetId]="feature.widget"
-      [widgetColor]="feature.color"></app-widget>
+      [widgetColor]="feature.color" (widgetIsEmpty)="onWidgetIsEmpty($event)"></app-widget>
   </ion-card-content>
 </ion-card>

@@ -92,11 +92,6 @@
               },
               {
                 "glob": "**/*",
-                "input": "projects/important-news/assets/i18n",
-                "output": "/assets/i18n/important-news"
-              },
-              {
-                "glob": "**/*",
                 "input": "projects/clocking/assets/i18n",
                 "output": "/assets/i18n/clocking"
               },

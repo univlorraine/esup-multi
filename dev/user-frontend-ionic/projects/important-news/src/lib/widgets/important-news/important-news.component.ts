@@ -45,7 +45,7 @@ import { combineLatest, Observable } from 'rxjs';
 import { finalize, map, take } from 'rxjs/operators';
 import { ImportantNews, importantNewsList$, setImportantNews as setImportantNewsList } from '../../important-news.repository';
 import { ImportantNewsService } from '../../important-news.service';
-import { TranslatedImportantNews } from './../../important-news.repository';
+import { TranslatedImportantNews } from '../../important-news.repository';
 
 
 @Component({
@@ -58,7 +58,7 @@ export class ImportantNewsComponent {
 
   public isLoading = false;
   public importantNewsList$: Observable<ImportantNews[]> = importantNewsList$;
-  public noImportantNews$: Observable<boolean>;
+  public isEmpty$: Observable<boolean>;
   public translatedImportantNewsList$: Observable<TranslatedImportantNews[]>;
   public cmsPublicAssetsEndpoint = this.environment.cmsPublicAssetsEndpoint;
   public randomImportantNews$: Observable<TranslatedImportantNews | undefined>;
@@ -72,7 +72,7 @@ export class ImportantNewsComponent {
     private statisticsService: StatisticsService,
     private themeService: ThemeService
   ) {
-    this.noImportantNews$ = this.importantNewsList$.pipe(
+    this.isEmpty$ = this.importantNewsList$.pipe(
       map(importantNewsList => !importantNewsList || importantNewsList.length === 0)
     );
 
