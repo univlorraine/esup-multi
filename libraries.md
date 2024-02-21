@@ -1,32 +1,47 @@
 # Table of content
-* [Frontend](#frontend) [[summary](#summary-frontend)] [[details](#details-frontend)]
+* [Root directory](#root-directory)
+* [Frontend](#frontend)
 * [Backend](#backend)
-  * [main](#backend-main) [[summary](#summary-backend-main)] [[details](#details-backend-main)]
-  * [auth](#backend-auth) [[summary](#summary-backend-auth)] [[details](#details-backend-auth)]
-  * [cards](#backend-cards) [[summary](#summary-backend-cards)] [[details](#details-backend-cards)]
-  * [chatbot](#backend-chatbot) [[summary](#summary-backend-chatbot)] [[details](#details-backend-chatbot)]
-  * [clocking](#backend-clocking) [[summary](#summary-backend-clocking)] [[details](#details-backend-clocking)]
-  * [contact-us](#backend-contact-us) [[summary](#summary-backend-contact-us)] [[details](#details-backend-contact-us)]
-  * [contacts](#backend-contacts) [[summary](#summary-backend-contacts)] [[details](#details-backend-contacts)]
-  * [features](#backend-features) [[summary](#summary-backend-features)] [[details](#details-backend-features)]
-  * [important-news](#backend-important-news) [[summary](#summary-backend-important-news)] [[details](#details-backend-important-news)]
-  * [mail-calendar](#backend-mail-calendar) [[summary](#summary-backend-mail-calendar)] [[details](#details-backend-mail-calendar)]
-  * [map](#backend-map) [[summary](#summary-backend-map)] [[details](#details-backend-map)]
-  * [notifications](#backend-notifications) [[summary](#summary-backend-notifications)] [[details](#details-backend-notifications)]
-  * [restaurants](#backend-restaurants) [[summary](#summary-backend-restaurants)] [[details](#details-backend-restaurants)]
-  * [rss](#backend-rss) [[summary](#summary-backend-rss)] [[details](#details-backend-rss)]
-  * [schedule](#backend-schedule) [[summary](#summary-backend-schedule)] [[details](#details-backend-schedule)]
-  * [social-network](#backend-social-network) [[summary](#summary-backend-social-network)] [[details](#details-backend-social-network)]
-  * [static-pages](#backend-static-pages) [[summary](#summary-backend-static-pages)] [[details](#details-backend-static-pages)]
-  * [statistics](#backend-statistics) [[summary](#summary-backend-statistics)] [[details](#details-backend-statistics)]
+  * [main](#backend-main)
+  * [auth](#backend-auth)
+  * [cards](#backend-cards)
+  * [chatbot](#backend-chatbot)
+  * [clocking](#backend-clocking)
+  * [contact-us](#backend-contact-us)
+  * [contacts](#backend-contacts)
+  * [features](#backend-features)
+  * [important-news](#backend-important-news)
+  * [mail-calendar](#backend-mail-calendar)
+  * [map](#backend-map)
+  * [notifications](#backend-notifications)
+  * [restaurants](#backend-restaurants)
+  * [rss](#backend-rss)
+  * [schedule](#backend-schedule)
+  * [social-network](#backend-social-network)
+  * [static-pages](#backend-static-pages)
+  * [statistics](#backend-statistics)
 
 # Libraries
 The `*` next to the license name indicates that the license was *guessed* by [license-checker-rseidelsohn](https://www.npmjs.com/package/license-checker-rseidelsohn#how-licenses-are-found).
-## [Frontend](./dev/user-frontend-ionic)
-### Summary
-<span id="summary-frontend"></span>
+## [Root directory](.)
 ```
-├─ MIT: 76
+└─ MIT: 6
+```
+
+<details><summary>Détails</summary>
+
+- [@commitlint/cli@18.6.0](https://github.com/conventional-changelog/commitlint) - MIT
+- [@commitlint/config-conventional@18.6.0](https://github.com/conventional-changelog/commitlint) - MIT
+- [commitizen@4.3.0](https://github.com/commitizen/cz-cli) - MIT
+- [concurrently@8.2.2](https://github.com/open-cli-tools/concurrently) - MIT
+- [cz-conventional-changelog@3.3.0](https://github.com/commitizen/cz-conventional-changelog) - MIT
+- [husky@9.0.10](https://github.com/typicode/husky) - MIT
+
+</details>
+
+## [Frontend](./dev/user-frontend-ionic)
+```
+├─ MIT: 78
 ├─ Apache-2.0: 6
 ├─ BSD-2-Clause: 2
 ├─ MIT*: 1
@@ -35,8 +50,8 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 └─ 0BSD: 1
 ```
 
-### Details
-<span id="details-frontend"></span>
+<details><summary>Détails</summary>
+
 - [@angular-devkit/build-angular@14.2.10](https://github.com/angular/angular-cli) - MIT
 - [@angular-eslint/builder@13.0.1](https://github.com/angular-eslint/angular-eslint) - MIT
 - [@angular-eslint/eslint-plugin-template@13.0.1](https://github.com/angular-eslint/angular-eslint) - MIT
@@ -60,6 +75,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@capacitor-firebase/messaging@5.1.0](https://github.com/capawesome-team/capacitor-firebase) - Apache-2.0
 - [@capacitor/android@5.3.0](https://github.com/ionic-team/capacitor) - MIT
 - [@capacitor/app@5.0.6](https://github.com/ionic-team/capacitor-plugins) - MIT
+- [@capacitor/assets@3.0.4](https://github.com/ionic-team/capacitor-assets) - MIT
 - [@capacitor/browser@5.0.6](https://github.com/ionic-team/capacitor-plugins) - MIT
 - [@capacitor/camera@5.0.7](https://github.com/ionic-team/capacitor-plugins) - MIT
 - [@capacitor/cli@5.3.0](https://github.com/ionic-team/capacitor) - MIT
@@ -114,6 +130,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [karma@6.3.20](https://github.com/karma-runner/karma) - MIT
 - [leaflet@1.9.3](https://github.com/Leaflet/Leaflet) - BSD-2-Clause
 - [localforage@1.10.0](https://github.com/localForage/localForage) - Apache-2.0
+- [lodash@4.17.21](https://github.com/lodash/lodash) - MIT
 - [ng-packagr@14.2.2](https://github.com/ng-packagr/ng-packagr) - MIT
 - [ng2-dragula@3.2.0](https://github.com/valor-software/ng2-dragula) - MIT
 - [ngx-matomo@1.1.0](https://github.com/Arnaud73/ngx-matomo) - MIT
@@ -122,15 +139,15 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [swiper@9.3.2](https://github.com/nolimits4web/Swiper) - MIT
 - [tinycolor2@1.6.0](https://github.com/bgrins/TinyColor) - MIT
 - [ts-node@8.3.0](https://github.com/TypeStrong/ts-node) - MIT
-- [tslib@2.5.0](https://github.com/Microsoft/tslib) - 0BSD
+- [tslib@2.6.2](https://github.com/Microsoft/tslib) - 0BSD
 - [typescript@4.7.4](https://github.com/Microsoft/TypeScript) - Apache-2.0
 - [zone.js@0.11.8](https://github.com/angular/angular) - MIT
+
+</details>
 
 ## [Backend](./dev/user-backend-nest)
 ### [main](./dev/user-backend-nest/main)
 <span id="backend-main"></span>
-#### Summary
-<span id="summary-backend-main"></span>
 ```
 ├─ MIT: 33
 ├─ Apache-2.0: 4
@@ -138,8 +155,8 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 └─ ISC: 1
 ```
 
-#### Details
-<span id="details-backend-main"></span>
+<details><summary>Détails</summary>
+
 - [@nestjs/cli@10.1.17](https://github.com/nestjs/nest-cli) - MIT
 - [@nestjs/common@10.2.4](https://github.com/nestjs/nest) - MIT
 - [@nestjs/config@3.0.1](https://github.com/nestjs/config) - MIT
@@ -180,10 +197,10 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [tsconfig-paths@4.2.0](https://github.com/dividab/tsconfig-paths) - MIT
 - [typescript@5.2.2](https://github.com/Microsoft/TypeScript) - Apache-2.0
 
+</details>
+
 ### [auth](./dev/user-backend-nest/microservices/auth)
 <span id="backend-auth"></span>
-#### Summary
-<span id="summary-backend-auth"></span>
 ```
 ├─ MIT: 35
 ├─ Apache-2.0: 4
@@ -191,9 +208,9 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 └─ ISC: 1
 ```
 
-#### Details
-<span id="details-backend-auth"></span>
-- [@nestjs/axios@3.0.0](https://github.com/nestjs/axios) - MIT
+<details><summary>Détails</summary>
+
+- [@nestjs/axios@3.0.1](https://github.com/nestjs/axios) - MIT
 - [@nestjs/cache-manager@2.1.0](https://github.com/nestjs/cache-manager) - MIT
 - [@nestjs/cli@10.1.17](https://github.com/nestjs/nest-cli) - MIT
 - [@nestjs/common@10.2.4](https://github.com/nestjs/nest) - MIT
@@ -203,7 +220,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@nestjs/microservices@10.2.4](https://github.com/nestjs/nest) - MIT
 - [@nestjs/mongoose@10.0.1](https://github.com/nestjs/mongoose) - MIT
 - [@nestjs/platform-express@10.2.4](https://github.com/nestjs/nest) - MIT
-- [@nestjs/schedule@3.0.3](https://github.com/nestjs/schedule) - MIT
+- [@nestjs/schedule@3.0.4](https://github.com/nestjs/schedule) - MIT
 - [@nestjs/schematics@10.0.2](https://github.com/nestjs/schematics) - MIT
 - [@nestjs/testing@10.2.4](https://github.com/nestjs/nest) - MIT
 - [@types/cron@2.4.0](undefined) - MIT
@@ -214,7 +231,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@typescript-eslint/eslint-plugin@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
 - [@typescript-eslint/parser@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - BSD-2-Clause
 - [agentkeepalive@4.5.0](https://github.com/node-modules/agentkeepalive) - MIT
-- [axios@1.5.0](https://github.com/axios/axios) - MIT
+- [axios@1.6.7](https://github.com/axios/axios) - MIT
 - [cache-manager@5.2.3](https://github.com/node-cache-manager/node-cache-manager) - MIT
 - [cron@2.4.3](https://github.com/kelektiv/node-cron) - MIT
 - [eslint-config-prettier@8.10.0](https://github.com/prettier/eslint-config-prettier) - MIT
@@ -235,10 +252,10 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [tsconfig-paths@4.2.0](https://github.com/dividab/tsconfig-paths) - MIT
 - [typescript@4.9.5](https://github.com/Microsoft/TypeScript) - Apache-2.0
 
+</details>
+
 ### [cards](./dev/user-backend-nest/microservices/cards)
 <span id="backend-cards"></span>
-#### Summary
-<span id="summary-backend-cards"></span>
 ```
 ├─ MIT: 26
 ├─ Apache-2.0: 4
@@ -246,9 +263,9 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 └─ ISC: 1
 ```
 
-#### Details
-<span id="details-backend-cards"></span>
-- [@nestjs/axios@3.0.0](https://github.com/nestjs/axios) - MIT
+<details><summary>Détails</summary>
+
+- [@nestjs/axios@3.0.1](https://github.com/nestjs/axios) - MIT
 - [@nestjs/cli@10.1.17](https://github.com/nestjs/nest-cli) - MIT
 - [@nestjs/common@10.2.4](https://github.com/nestjs/nest) - MIT
 - [@nestjs/config@3.0.1](https://github.com/nestjs/config) - MIT
@@ -281,19 +298,20 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [tsconfig-paths@4.2.0](https://github.com/dividab/tsconfig-paths) - MIT
 - [typescript@4.9.5](https://github.com/Microsoft/TypeScript) - Apache-2.0
 
+</details>
+
 ### [chatbot](./dev/user-backend-nest/microservices/chatbot)
 <span id="backend-chatbot"></span>
-#### Summary
-<span id="summary-backend-chatbot"></span>
 ```
 ├─ MIT: 26
 ├─ Apache-2.0: 4
-└─ BSD-2-Clause: 1
+├─ BSD-2-Clause: 1
+└─ ISC: 1
 ```
 
-#### Details
-<span id="details-backend-chatbot"></span>
-- [@nestjs/axios@3.0.0](https://github.com/nestjs/axios) - MIT
+<details><summary>Détails</summary>
+
+- [@nestjs/axios@3.0.1](https://github.com/nestjs/axios) - MIT
 - [@nestjs/cli@10.1.17](https://github.com/nestjs/nest-cli) - MIT
 - [@nestjs/common@10.2.4](https://github.com/nestjs/nest) - MIT
 - [@nestjs/config@3.0.1](https://github.com/nestjs/config) - MIT
@@ -316,6 +334,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [nats@2.15.1](https://github.com/nats-io/nats.js) - Apache-2.0
 - [prettier@2.8.4](https://github.com/prettier/prettier) - MIT
 - [reflect-metadata@0.1.13](https://github.com/rbuckton/reflect-metadata) - Apache-2.0
+- [rimraf@3.0.2](https://github.com/isaacs/rimraf) - ISC
 - [rxjs@7.8.1](https://github.com/reactivex/rxjs) - Apache-2.0
 - [source-map-support@0.5.21](https://github.com/evanw/node-source-map-support) - MIT
 - [supertest@6.3.3](https://github.com/visionmedia/supertest) - MIT
@@ -325,10 +344,10 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [tsconfig-paths@4.1.1](https://github.com/dividab/tsconfig-paths) - MIT
 - [typescript@4.9.5](https://github.com/Microsoft/TypeScript) - Apache-2.0
 
+</details>
+
 ### [clocking](./dev/user-backend-nest/microservices/clocking)
 <span id="backend-clocking"></span>
-#### Summary
-<span id="summary-backend-clocking"></span>
 ```
 ├─ MIT: 30
 ├─ Apache-2.0: 4
@@ -336,9 +355,9 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 └─ ISC: 1
 ```
 
-#### Details
-<span id="details-backend-clocking"></span>
-- [@nestjs/axios@3.0.0](https://github.com/nestjs/axios) - MIT
+<details><summary>Détails</summary>
+
+- [@nestjs/axios@3.0.1](https://github.com/nestjs/axios) - MIT
 - [@nestjs/cache-manager@2.1.0](https://github.com/nestjs/cache-manager) - MIT
 - [@nestjs/cli@10.1.17](https://github.com/nestjs/nest-cli) - MIT
 - [@nestjs/common@10.2.4](https://github.com/nestjs/nest) - MIT
@@ -375,10 +394,10 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [tsconfig-paths@4.1.0](https://github.com/dividab/tsconfig-paths) - MIT
 - [typescript@4.9.5](https://github.com/Microsoft/TypeScript) - Apache-2.0
 
+</details>
+
 ### [contact-us](./dev/user-backend-nest/microservices/contact-us)
 <span id="backend-contact-us"></span>
-#### Summary
-<span id="summary-backend-contact-us"></span>
 ```
 ├─ MIT: 29
 ├─ Apache-2.0: 4
@@ -387,10 +406,10 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 └─ ISC: 1
 ```
 
-#### Details
-<span id="details-backend-contact-us"></span>
-- [@nestjs-modules/mailer@1.9.1](https://github.com/nest-modules/mailer) - MIT
-- [@nestjs/axios@3.0.0](https://github.com/nestjs/axios) - MIT
+<details><summary>Détails</summary>
+
+- [@nestjs-modules/mailer@1.10.3](https://github.com/nest-modules/mailer) - MIT
+- [@nestjs/axios@3.0.1](https://github.com/nestjs/axios) - MIT
 - [@nestjs/cache-manager@2.1.0](https://github.com/nestjs/cache-manager) - MIT
 - [@nestjs/cli@10.1.17](https://github.com/nestjs/nest-cli) - MIT
 - [@nestjs/common@10.2.4](https://github.com/nestjs/nest) - MIT
@@ -413,7 +432,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [eslint@8.48.0](https://github.com/eslint/eslint) - MIT
 - [jest@29.6.4](https://github.com/jestjs/jest) - MIT
 - [nats@2.15.1](https://github.com/nats-io/nats.js) - Apache-2.0
-- [nodemailer@6.9.3](https://github.com/nodemailer/nodemailer) - MIT-0
+- [nodemailer@6.9.9](https://github.com/nodemailer/nodemailer) - MIT-0
 - [prettier@2.8.7](https://github.com/prettier/prettier) - MIT
 - [reflect-metadata@0.1.13](https://github.com/rbuckton/reflect-metadata) - Apache-2.0
 - [rimraf@3.0.2](https://github.com/isaacs/rimraf) - ISC
@@ -426,10 +445,10 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [tsconfig-paths@4.1.0](https://github.com/dividab/tsconfig-paths) - MIT
 - [typescript@4.9.5](https://github.com/Microsoft/TypeScript) - Apache-2.0
 
+</details>
+
 ### [contacts](./dev/user-backend-nest/microservices/contacts)
 <span id="backend-contacts"></span>
-#### Summary
-<span id="summary-backend-contacts"></span>
 ```
 ├─ MIT: 26
 ├─ Apache-2.0: 4
@@ -437,9 +456,9 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 └─ ISC: 1
 ```
 
-#### Details
-<span id="details-backend-contacts"></span>
-- [@nestjs/axios@3.0.0](https://github.com/nestjs/axios) - MIT
+<details><summary>Détails</summary>
+
+- [@nestjs/axios@3.0.1](https://github.com/nestjs/axios) - MIT
 - [@nestjs/cli@10.1.17](https://github.com/nestjs/nest-cli) - MIT
 - [@nestjs/common@10.2.4](https://github.com/nestjs/nest) - MIT
 - [@nestjs/config@3.0.1](https://github.com/nestjs/config) - MIT
@@ -472,10 +491,10 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [tsconfig-paths@4.1.0](https://github.com/dividab/tsconfig-paths) - MIT
 - [typescript@4.9.5](https://github.com/Microsoft/TypeScript) - Apache-2.0
 
+</details>
+
 ### [features](./dev/user-backend-nest/microservices/features)
 <span id="backend-features"></span>
-#### Summary
-<span id="summary-backend-features"></span>
 ```
 ├─ MIT: 28
 ├─ Apache-2.0: 4
@@ -483,9 +502,9 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 └─ ISC: 1
 ```
 
-#### Details
-<span id="details-backend-features"></span>
-- [@nestjs/axios@3.0.0](https://github.com/nestjs/axios) - MIT
+<details><summary>Détails</summary>
+
+- [@nestjs/axios@3.0.1](https://github.com/nestjs/axios) - MIT
 - [@nestjs/cache-manager@2.1.0](https://github.com/nestjs/cache-manager) - MIT
 - [@nestjs/cli@10.1.17](https://github.com/nestjs/nest-cli) - MIT
 - [@nestjs/common@10.2.4](https://github.com/nestjs/nest) - MIT
@@ -520,10 +539,10 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [tsconfig-paths@4.2.0](https://github.com/dividab/tsconfig-paths) - MIT
 - [typescript@4.9.5](https://github.com/Microsoft/TypeScript) - Apache-2.0
 
+</details>
+
 ### [important-news](./dev/user-backend-nest/microservices/important-news)
 <span id="backend-important-news"></span>
-#### Summary
-<span id="summary-backend-important-news"></span>
 ```
 ├─ MIT: 28
 ├─ Apache-2.0: 4
@@ -531,9 +550,9 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 └─ ISC: 1
 ```
 
-#### Details
-<span id="details-backend-important-news"></span>
-- [@nestjs/axios@3.0.0](https://github.com/nestjs/axios) - MIT
+<details><summary>Détails</summary>
+
+- [@nestjs/axios@3.0.1](https://github.com/nestjs/axios) - MIT
 - [@nestjs/cache-manager@2.1.0](https://github.com/nestjs/cache-manager) - MIT
 - [@nestjs/cli@10.1.17](https://github.com/nestjs/nest-cli) - MIT
 - [@nestjs/common@10.2.4](https://github.com/nestjs/nest) - MIT
@@ -568,19 +587,20 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [tsconfig-paths@4.1.0](https://github.com/dividab/tsconfig-paths) - MIT
 - [typescript@4.9.5](https://github.com/Microsoft/TypeScript) - Apache-2.0
 
+</details>
+
 ### [mail-calendar](./dev/user-backend-nest/microservices/mail-calendar)
 <span id="backend-mail-calendar"></span>
-#### Summary
-<span id="summary-backend-mail-calendar"></span>
 ```
 ├─ MIT: 29
 ├─ Apache-2.0: 4
-└─ BSD-2-Clause: 1
+├─ BSD-2-Clause: 1
+└─ ISC: 1
 ```
 
-#### Details
-<span id="details-backend-mail-calendar"></span>
-- [@nestjs/axios@3.0.0](https://github.com/nestjs/axios) - MIT
+<details><summary>Détails</summary>
+
+- [@nestjs/axios@3.0.1](https://github.com/nestjs/axios) - MIT
 - [@nestjs/cache-manager@2.1.0](https://github.com/nestjs/cache-manager) - MIT
 - [@nestjs/cli@10.1.17](https://github.com/nestjs/nest-cli) - MIT
 - [@nestjs/common@10.2.4](https://github.com/nestjs/nest) - MIT
@@ -606,6 +626,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [nats@2.15.1](https://github.com/nats-io/nats.js) - Apache-2.0
 - [prettier@2.8.8](https://github.com/prettier/prettier) - MIT
 - [reflect-metadata@0.1.13](https://github.com/rbuckton/reflect-metadata) - Apache-2.0
+- [rimraf@3.0.2](https://github.com/isaacs/rimraf) - ISC
 - [rxjs@7.8.1](https://github.com/reactivex/rxjs) - Apache-2.0
 - [source-map-support@0.5.21](https://github.com/evanw/node-source-map-support) - MIT
 - [supertest@6.3.3](https://github.com/visionmedia/supertest) - MIT
@@ -615,10 +636,10 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [tsconfig-paths@4.2.0](https://github.com/dividab/tsconfig-paths) - MIT
 - [typescript@4.9.5](https://github.com/Microsoft/TypeScript) - Apache-2.0
 
+</details>
+
 ### [map](./dev/user-backend-nest/microservices/map)
 <span id="backend-map"></span>
-#### Summary
-<span id="summary-backend-map"></span>
 ```
 ├─ MIT: 23
 ├─ Apache-2.0: 4
@@ -626,8 +647,8 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 └─ ISC: 1
 ```
 
-#### Details
-<span id="details-backend-map"></span>
+<details><summary>Détails</summary>
+
 - [@nestjs/cli@10.1.17](https://github.com/nestjs/nest-cli) - MIT
 - [@nestjs/common@10.2.4](https://github.com/nestjs/nest) - MIT
 - [@nestjs/core@10.2.4](https://github.com/nestjs/nest) - MIT
@@ -658,10 +679,10 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [tsconfig-paths@4.2.0](https://github.com/dividab/tsconfig-paths) - MIT
 - [typescript@4.9.5](https://github.com/Microsoft/TypeScript) - Apache-2.0
 
+</details>
+
 ### [notifications](./dev/user-backend-nest/microservices/notifications)
 <span id="backend-notifications"></span>
-#### Summary
-<span id="summary-backend-notifications"></span>
 ```
 ├─ MIT: 28
 ├─ Apache-2.0: 4
@@ -669,9 +690,9 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 └─ ISC: 1
 ```
 
-#### Details
-<span id="details-backend-notifications"></span>
-- [@nestjs/axios@3.0.0](https://github.com/nestjs/axios) - MIT
+<details><summary>Détails</summary>
+
+- [@nestjs/axios@3.0.1](https://github.com/nestjs/axios) - MIT
 - [@nestjs/cache-manager@2.1.0](https://github.com/nestjs/cache-manager) - MIT
 - [@nestjs/cli@10.1.17](https://github.com/nestjs/nest-cli) - MIT
 - [@nestjs/common@10.2.4](https://github.com/nestjs/nest) - MIT
@@ -706,10 +727,10 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [tsconfig-paths@4.1.0](https://github.com/dividab/tsconfig-paths) - MIT
 - [typescript@4.9.5](https://github.com/Microsoft/TypeScript) - Apache-2.0
 
+</details>
+
 ### [restaurants](./dev/user-backend-nest/microservices/restaurants)
 <span id="backend-restaurants"></span>
-#### Summary
-<span id="summary-backend-restaurants"></span>
 ```
 ├─ MIT: 28
 ├─ Apache-2.0: 4
@@ -717,9 +738,9 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 └─ ISC: 1
 ```
 
-#### Details
-<span id="details-backend-restaurants"></span>
-- [@nestjs/axios@3.0.0](https://github.com/nestjs/axios) - MIT
+<details><summary>Détails</summary>
+
+- [@nestjs/axios@3.0.1](https://github.com/nestjs/axios) - MIT
 - [@nestjs/cache-manager@2.1.0](https://github.com/nestjs/cache-manager) - MIT
 - [@nestjs/cli@10.1.17](https://github.com/nestjs/nest-cli) - MIT
 - [@nestjs/common@10.2.4](https://github.com/nestjs/nest) - MIT
@@ -754,10 +775,10 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [tsconfig-paths@4.1.0](https://github.com/dividab/tsconfig-paths) - MIT
 - [typescript@4.9.5](https://github.com/Microsoft/TypeScript) - Apache-2.0
 
+</details>
+
 ### [rss](./dev/user-backend-nest/microservices/rss)
 <span id="backend-rss"></span>
-#### Summary
-<span id="summary-backend-rss"></span>
 ```
 ├─ MIT: 30
 ├─ Apache-2.0: 4
@@ -765,9 +786,9 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 └─ ISC: 1
 ```
 
-#### Details
-<span id="details-backend-rss"></span>
-- [@nestjs/axios@3.0.0](https://github.com/nestjs/axios) - MIT
+<details><summary>Détails</summary>
+
+- [@nestjs/axios@3.0.1](https://github.com/nestjs/axios) - MIT
 - [@nestjs/cache-manager@2.1.0](https://github.com/nestjs/cache-manager) - MIT
 - [@nestjs/cli@10.1.17](https://github.com/nestjs/nest-cli) - MIT
 - [@nestjs/common@10.2.4](https://github.com/nestjs/nest) - MIT
@@ -804,10 +825,10 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [tsconfig-paths@4.2.0](https://github.com/dividab/tsconfig-paths) - MIT
 - [typescript@4.9.5](https://github.com/Microsoft/TypeScript) - Apache-2.0
 
+</details>
+
 ### [schedule](./dev/user-backend-nest/microservices/schedule)
 <span id="backend-schedule"></span>
-#### Summary
-<span id="summary-backend-schedule"></span>
 ```
 ├─ MIT: 29
 ├─ Apache-2.0: 4
@@ -815,9 +836,9 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 └─ ISC: 1
 ```
 
-#### Details
-<span id="details-backend-schedule"></span>
-- [@nestjs/axios@3.0.0](https://github.com/nestjs/axios) - MIT
+<details><summary>Détails</summary>
+
+- [@nestjs/axios@3.0.1](https://github.com/nestjs/axios) - MIT
 - [@nestjs/cache-manager@2.1.0](https://github.com/nestjs/cache-manager) - MIT
 - [@nestjs/cli@10.1.17](https://github.com/nestjs/nest-cli) - MIT
 - [@nestjs/common@10.2.4](https://github.com/nestjs/nest) - MIT
@@ -853,10 +874,10 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [tsconfig-paths@4.2.0](https://github.com/dividab/tsconfig-paths) - MIT
 - [typescript@4.9.5](https://github.com/Microsoft/TypeScript) - Apache-2.0
 
+</details>
+
 ### [social-network](./dev/user-backend-nest/microservices/social-network)
 <span id="backend-social-network"></span>
-#### Summary
-<span id="summary-backend-social-network"></span>
 ```
 ├─ MIT: 28
 ├─ Apache-2.0: 4
@@ -864,9 +885,9 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 └─ ISC: 1
 ```
 
-#### Details
-<span id="details-backend-social-network"></span>
-- [@nestjs/axios@3.0.0](https://github.com/nestjs/axios) - MIT
+<details><summary>Détails</summary>
+
+- [@nestjs/axios@3.0.1](https://github.com/nestjs/axios) - MIT
 - [@nestjs/cache-manager@2.1.0](https://github.com/nestjs/cache-manager) - MIT
 - [@nestjs/cli@10.1.17](https://github.com/nestjs/nest-cli) - MIT
 - [@nestjs/common@10.2.4](https://github.com/nestjs/nest) - MIT
@@ -901,19 +922,20 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [tsconfig-paths@4.1.0](https://github.com/dividab/tsconfig-paths) - MIT
 - [typescript@4.9.5](https://github.com/Microsoft/TypeScript) - Apache-2.0
 
+</details>
+
 ### [static-pages](./dev/user-backend-nest/microservices/static-pages)
 <span id="backend-static-pages"></span>
-#### Summary
-<span id="summary-backend-static-pages"></span>
 ```
 ├─ MIT: 28
 ├─ Apache-2.0: 4
-└─ BSD-2-Clause: 1
+├─ BSD-2-Clause: 1
+└─ ISC: 1
 ```
 
-#### Details
-<span id="details-backend-static-pages"></span>
-- [@nestjs/axios@3.0.0](https://github.com/nestjs/axios) - MIT
+<details><summary>Détails</summary>
+
+- [@nestjs/axios@3.0.1](https://github.com/nestjs/axios) - MIT
 - [@nestjs/cache-manager@2.1.0](https://github.com/nestjs/cache-manager) - MIT
 - [@nestjs/cli@10.1.17](https://github.com/nestjs/nest-cli) - MIT
 - [@nestjs/common@10.2.4](https://github.com/nestjs/nest) - MIT
@@ -938,6 +960,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [nats@2.15.1](https://github.com/nats-io/nats.js) - Apache-2.0
 - [prettier@2.8.6](https://github.com/prettier/prettier) - MIT
 - [reflect-metadata@0.1.13](https://github.com/rbuckton/reflect-metadata) - Apache-2.0
+- [rimraf@3.0.2](https://github.com/isaacs/rimraf) - ISC
 - [rxjs@7.8.1](https://github.com/reactivex/rxjs) - Apache-2.0
 - [source-map-support@0.5.21](https://github.com/evanw/node-source-map-support) - MIT
 - [supertest@6.3.3](https://github.com/visionmedia/supertest) - MIT
@@ -947,10 +970,10 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [tsconfig-paths@4.1.1](https://github.com/dividab/tsconfig-paths) - MIT
 - [typescript@4.9.5](https://github.com/Microsoft/TypeScript) - Apache-2.0
 
+</details>
+
 ### [statistics](./dev/user-backend-nest/microservices/statistics)
 <span id="backend-statistics"></span>
-#### Summary
-<span id="summary-backend-statistics"></span>
 ```
 ├─ MIT: 26
 ├─ Apache-2.0: 4
@@ -958,9 +981,9 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 └─ ISC: 1
 ```
 
-#### Details
-<span id="details-backend-statistics"></span>
-- [@nestjs/axios@3.0.0](https://github.com/nestjs/axios) - MIT
+<details><summary>Détails</summary>
+
+- [@nestjs/axios@3.0.1](https://github.com/nestjs/axios) - MIT
 - [@nestjs/cli@10.1.17](https://github.com/nestjs/nest-cli) - MIT
 - [@nestjs/common@10.2.4](https://github.com/nestjs/nest) - MIT
 - [@nestjs/config@3.0.1](https://github.com/nestjs/config) - MIT
@@ -992,4 +1015,6 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [ts-node@10.9.1](https://github.com/TypeStrong/ts-node) - MIT
 - [tsconfig-paths@4.1.0](https://github.com/dividab/tsconfig-paths) - MIT
 - [typescript@4.9.5](https://github.com/Microsoft/TypeScript) - Apache-2.0
+
+</details>
 
