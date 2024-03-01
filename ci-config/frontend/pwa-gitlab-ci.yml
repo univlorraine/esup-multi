@@ -1,0 +1,15 @@
+# CI du frontend
+frontend:
+  stage: packages
+  needs:
+    - check-nodejs-version
+  variables:
+    NODE_VERSION: $NODE_VERSION
+  trigger:
+    include: ${FRONTEND_PATH}/.gitlab-ci.yml
+    strategy: depend
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "develop-sied"'
+      changes:
+        - ${FRONTEND_PATH}/src/**/*
+        - ${FRONTEND_PATH}/project/**/*

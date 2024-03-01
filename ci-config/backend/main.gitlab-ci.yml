@@ -1,0 +1,15 @@
+# CI du service API Gateway
+backend:main:
+  stage: packages
+  needs:
+    - check-nodejs-version
+  variables:
+    NODE_VERSION: $NODE_VERSION
+  trigger:
+    include: ${BACKEND_PATH}/main/.gitlab-ci.yml
+    strategy: depend
+  rules:
+    # On ne déclenche ce job que lorsqu'il y a eu du changement au niveau de backend/main
+    - if: '$CI_COMMIT_BRANCH == "develop-sied"'
+      changes:
+        - ${BACKEND_PATH}/main/**/*

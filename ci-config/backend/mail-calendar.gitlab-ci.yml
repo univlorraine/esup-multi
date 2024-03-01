@@ -1,0 +1,15 @@
+# CI du microservice mail-calendar
+backend:microservice:mail-calendar:
+  stage: packages
+  needs:
+    - check-nodejs-version
+  variables:
+    NODE_VERSION: $NODE_VERSION
+  trigger:
+    include: ${BACKEND_PATH}/microservices/mail-calendar/.gitlab-ci.yml
+    strategy: depend
+  rules:
+    # On ne déclenche ce job que lorsqu'il y a eu du changement au niveau de backend/microservices/mail-calendar
+    - if: '$CI_COMMIT_BRANCH == "develop-sied"'
+      changes:
+        - ${BACKEND_PATH}/microservices/mail-calendar/**/*
