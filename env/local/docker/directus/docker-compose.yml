@@ -8,7 +8,7 @@ services:
       - "3306:3306"
     # Uncomment to persist data on your local storage
     volumes:
-      - './mysql-data2:/var/lib/mysql'
+      - './mysql-data:/var/lib/mysql'
     command: mysqld --default-authentication-plugin=mysql_native_password
     networks:
       - directus
