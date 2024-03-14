@@ -1,30 +1,30 @@
-# CI du microservice contacts
+# CI du microservice map
 
-.contacts_service_variables:
+.map_service_variables:
   variables:
     # Chemin vers le répertoire du service depuis le backend
-    SERVICE_FOLDER: "microservices/contacts"
+    SERVICE_FOLDER: "microservices/map"
     # Nom qui sera donné à l'image Docker du service
-    SERVICE_IMAGE_NAME: "backend/multi-contacts"
+    SERVICE_IMAGE_NAME: "backend/multi-map"
     # Nom du service pour le déclenchement manuel dans GitLab
-    CI_SERVICE_NAME: "contacts"
+    CI_SERVICE_NAME: "map"
 
 include:
-  - local: '${CI_PROJECT_DIR}/ci-config/example/backend/templates-ci.yml'
+  - local: '${CI_PROJECT_DIR}/ci-config/gitlab-example/backend/templates-ci.yml'
 
-build-service-contacts:
+build-service-map:
   extends:
-    - .contacts_service_variables
+    - .map_service_variables
     - .template_build_microservice
     - .microservice_rules_template
   stage: build-package
 
-deploy-service-contacts:
+deploy-service-map:
   extends:
-    - .contacts_service_variables
+    - .map_service_variables
     - .template_docker_deploy_microservice
     - .microservice_rules_template
   stage: build-deploy-docker
   needs:
-    - job: build-service-contacts
+    - job: build-service-map
       artifacts: true

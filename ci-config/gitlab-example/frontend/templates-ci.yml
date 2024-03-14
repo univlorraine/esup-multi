@@ -45,7 +45,7 @@
 # Template pour le build et le déploiement des images Docker des services
 .template_docker_deploy_pwa:
   variables:
-    DOCKERFILE_PATH: '${CI_PROJECT_DIR}/ci-config/example/frontend/Dockerfile'
+    DOCKERFILE_PATH: '${CI_PROJECT_DIR}/ci-config/gitlab-example/frontend/Dockerfile'
   image:
     name: gcr.io/kaniko-project/executor:debug
     entrypoint: [""]

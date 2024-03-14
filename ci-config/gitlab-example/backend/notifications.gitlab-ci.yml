@@ -10,7 +10,7 @@
     CI_SERVICE_NAME: "notifications"
 
 include:
-  - local: '${CI_PROJECT_DIR}/ci-config/example/backend/templates-ci.yml'
+  - local: '${CI_PROJECT_DIR}/ci-config/gitlab-example/backend/templates-ci.yml'
 
 build-service-notifications:
   extends:

@@ -14,7 +14,7 @@
     PWA_BRANCH_NAME: "main"
 
 include:
-  - local: '${CI_PROJECT_DIR}/ci-config/example/frontend/templates-ci.yml'
+  - local: '${CI_PROJECT_DIR}/ci-config/gitlab-example/frontend/templates-ci.yml'
 
 build-pwa-prod:
   extends:

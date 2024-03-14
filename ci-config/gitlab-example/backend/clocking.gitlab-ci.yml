@@ -1,30 +1,30 @@
-# CI du microservice chatbot
+# CI du microservice clocking
 
-.chatbot_service_variables:
+.clocking_service_variables:
   variables:
     # Chemin vers le répertoire du service depuis le backend
-    SERVICE_FOLDER: "microservices/chatbot"
+    SERVICE_FOLDER: "microservices/clocking"
     # Nom qui sera donné à l'image Docker du service
-    SERVICE_IMAGE_NAME: "backend/multi-chatbot"
+    SERVICE_IMAGE_NAME: "backend/multi-clocking"
     # Nom du service pour le déclenchement manuel dans GitLab
-    CI_SERVICE_NAME: "chatbot"
+    CI_SERVICE_NAME: "clocking"
 
 include:
-  - local: '${CI_PROJECT_DIR}/ci-config/example/backend/templates-ci.yml'
+  - local: '${CI_PROJECT_DIR}/ci-config/gitlab-example/backend/templates-ci.yml'
 
-build-service-chatbot:
+build-service-clocking:
   extends:
-    - .chatbot_service_variables
+    - .clocking_service_variables
     - .template_build_microservice
     - .microservice_rules_template
   stage: build-package
 
-deploy-service-chatbot:
+deploy-service-clocking:
   extends:
-    - .chatbot_service_variables
+    - .clocking_service_variables
     - .template_docker_deploy_microservice
     - .microservice_rules_template
   stage: build-deploy-docker
   needs:
-    - job: build-service-chatbot
+    - job: build-service-clocking
       artifacts: true

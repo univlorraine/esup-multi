@@ -7,4 +7,4 @@ node_modules/
 
 
 /ci-config/*
-!/ci-config/example/
+!/ci-config/gitlab-example/
