@@ -21,6 +21,6 @@ workflow:
 
 include:
   # CI backend
-  - local: '${CI_PROJECT_DIR}/ci-config/backend/*.gitlab-ci.yml'
+  - local: '${CI_PROJECT_DIR}/ci-config/example/backend/*.gitlab-ci.yml'
   # CI frontend
-  - local: '${CI_PROJECT_DIR}/ci-config/frontend/*.gitlab-ci.yml'
+  - local: '${CI_PROJECT_DIR}/ci-config/example/frontend/*.gitlab-ci.yml'

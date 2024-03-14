@@ -41,7 +41,7 @@
 # Template pour le build et le déploiement des images Docker des services
 .template_docker_deploy_microservice:
   variables:
-    DOCKERFILE_PATH: '${CI_PROJECT_DIR}/ci-config/backend/Dockerfile'
+    DOCKERFILE_PATH: '${CI_PROJECT_DIR}/ci-config/example/backend/Dockerfile'
   image:
     name: gcr.io/kaniko-project/executor:debug
     entrypoint: [""]

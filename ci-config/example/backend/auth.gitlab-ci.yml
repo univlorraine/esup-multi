@@ -10,7 +10,7 @@
     CI_SERVICE_NAME: "auth"
 
 include:
-  - local: '${CI_PROJECT_DIR}/ci-config/backend/templates-ci.yml'
+  - local: '${CI_PROJECT_DIR}/ci-config/example/backend/templates-ci.yml'
 
 build-service-auth:
   extends:

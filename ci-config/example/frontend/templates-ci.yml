@@ -45,7 +45,7 @@
 # Template pour le build et le déploiement des images Docker des services
 .template_docker_deploy_pwa:
   variables:
-    DOCKERFILE_PATH: '${CI_PROJECT_DIR}/ci-config/frontend/Dockerfile'
+    DOCKERFILE_PATH: '${CI_PROJECT_DIR}/ci-config/example/frontend/Dockerfile'
   image:
     name: gcr.io/kaniko-project/executor:debug
     entrypoint: [""]
@@ -57,7 +57,7 @@
   script:
     # On build l'image Docker et on la push sur le repository
     - /kaniko/executor
-        --context "${CI_PROJECT_DIR}/${FRONTEND_PATH}"
+        --context "${CI_PROJECT_DIR}"
         --dockerfile ${DOCKERFILE_PATH}
         --destination "${CI_REGISTRY_IMAGE}/${PWA_IMAGE_NAME}:${PWA_IMAGE_TAG}"
         --destination "${CI_REGISTRY_IMAGE}/${PWA_IMAGE_NAME}:${PWA_IMAGE_LABEL}"
