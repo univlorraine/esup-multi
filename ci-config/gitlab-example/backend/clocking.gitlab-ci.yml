@@ -1,0 +1,30 @@
+# CI du microservice clocking
+
+.clocking_service_variables:
+  variables:
+    # Chemin vers le répertoire du service depuis le backend
+    SERVICE_FOLDER: "microservices/clocking"
+    # Nom qui sera donné à l'image Docker du service
+    SERVICE_IMAGE_NAME: "backend/multi-clocking"
+    # Nom du service pour le déclenchement manuel dans GitLab
+    CI_SERVICE_NAME: "clocking"
+
+include:
+  - local: '${CI_PROJECT_DIR}/ci-config/gitlab-example/backend/templates-ci.yml'
+
+build-service-clocking:
+  extends:
+    - .clocking_service_variables
+    - .template_build_microservice
+    - .microservice_rules_template
+  stage: build-package
+
+deploy-service-clocking:
+  extends:
+    - .clocking_service_variables
+    - .template_docker_deploy_microservice
+    - .microservice_rules_template
+  stage: build-deploy-docker
+  needs:
+    - job: build-service-clocking
+      artifacts: true

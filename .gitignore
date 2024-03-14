@@ -4,3 +4,7 @@
 .vscode
 *.code-workspace
 node_modules/
+
+
+/ci-config/*
+!/ci-config/gitlab-example/

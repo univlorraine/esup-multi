@@ -1,0 +1,30 @@
+# CI du microservice auth
+
+.auth_service_variables:
+  variables:
+    # Chemin vers le répertoire du service depuis le backend
+    SERVICE_FOLDER: "microservices/auth"
+    # Nom qui sera donné à l'image Docker du service
+    SERVICE_IMAGE_NAME: "backend/multi-auth"
+    # Nom du service pour le déclenchement manuel dans GitLab
+    CI_SERVICE_NAME: "auth"
+
+include:
+  - local: '${CI_PROJECT_DIR}/ci-config/gitlab-example/backend/templates-ci.yml'
+
+build-service-auth:
+  extends:
+    - .auth_service_variables
+    - .template_build_microservice
+    - .microservice_rules_template
+  stage: build-package
+
+deploy-service-auth:
+  extends:
+    - .auth_service_variables
+    - .template_docker_deploy_microservice
+    - .microservice_rules_template
+  stage: build-deploy-docker
+  needs:
+    - job: build-service-auth
+      artifacts: true
