@@ -1,0 +1,30 @@
+# CI du microservice notifications
+
+.notifications_service_variables:
+  variables:
+    # Chemin vers le répertoire du service depuis le backend
+    SERVICE_FOLDER: "microservices/notifications"
+    # Nom qui sera donné à l'image Docker du service
+    SERVICE_IMAGE_NAME: "backend/multi-notifications"
+    # Nom du service pour le déclenchement manuel dans GitLab
+    CI_SERVICE_NAME: "notifications"
+
+include:
+  - local: '${CI_PROJECT_DIR}/ci-config/backend/templates-ci.yml'
+
+build-service-notifications:
+  extends:
+    - .notifications_service_variables
+    - .template_build_microservice
+    - .microservice_rules_template
+  stage: build-package
+
+deploy-service-notifications:
+  extends:
+    - .notifications_service_variables
+    - .template_docker_deploy_microservice
+    - .microservice_rules_template
+  stage: build-deploy-docker
+  needs:
+    - job: build-service-notifications
+      artifacts: true

@@ -1,0 +1,26 @@
+variables:
+  # Chemin vers le backend
+  BACKEND_PATH: 'dev/user-backend-nest'
+  # Chemin vers le frontend
+  FRONTEND_PATH: 'dev/user-frontend-ionic'
+
+stages:
+  - build-package
+  - build-deploy-docker
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - '${CI_PROJECT_DIR}/.npm/'
+  policy: pull-push
+
+workflow:
+  # La pipeline ne se déclenchera que si les modifications ont eu lieu sur les branches suivantes
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "main" || $CI_COMMIT_BRANCH == "preprod" || $CI_COMMIT_BRANCH == "develop"'
+
+include:
+  # CI backend
+  - local: '${CI_PROJECT_DIR}/ci-config/backend/*.gitlab-ci.yml'
+  # CI frontend
+  - local: '${CI_PROJECT_DIR}/ci-config/frontend/*.gitlab-ci.yml'

@@ -1,0 +1,76 @@
+.pwa_update_version_script: &pwa_update_version_script
+  - node update-infos.js
+
+.pwa_get_full_image_tag: &pwa_get_full_image_tag
+  - apt-get update && apt-get install -y jq
+  - VERSION=$(jq -r '.version' ${CI_PROJECT_DIR}/${FRONTEND_PATH}/package.json)
+  - >
+    if [ ${CI_COMMIT_BRANCH} == "main" ]; then
+      PWA_IMAGE_TAG="${VERSION}"
+      PWA_IMAGE_LABEL="latest-prod"
+    elif [ ${CI_COMMIT_BRANCH} == "preprod" ]; then
+      PWA_IMAGE_TAG="${VERSION}-preprod"
+      PWA_IMAGE_LABEL="latest-preprod"
+    else
+      PWA_IMAGE_TAG="${VERSION}-dev"
+      PWA_IMAGE_LABEL="latest-develop"
+    fi
+  - echo "Tag complet pour l'image Docker = ${PWA_IMAGE_TAG}"
+  - echo "PWA_IMAGE_TAG=${PWA_IMAGE_TAG}" > ${CI_PROJECT_DIR}/${FRONTEND_PATH}/pwa_image_tag.env
+  - echo "Label pour l'image Docker = ${PWA_IMAGE_LABEL}"
+  - echo "PWA_IMAGE_LABEL=${PWA_IMAGE_LABEL}" >> ${CI_PROJECT_DIR}/${FRONTEND_PATH}/pwa_image_tag.env
+
+# Template pour le build JS de la PWA
+.template_build_pwa:
+  variables:
+    SECURE_FILES_DOWNLOAD_PATH: "./src/environments/firebase/web"
+  image: node:$NODE_VERSION
+  before_script:
+    - cd ${CI_PROJECT_DIR}/${FRONTEND_PATH}
+    - *pwa_update_version_script
+    - *pwa_get_full_image_tag
+    - npm ci --cache ${CI_PROJECT_DIR}/.npm --prefer-offline
+    - mkdir -p ${SECURE_FILES_DOWNLOAD_PATH} && curl --silent "https://gitlab.com/gitlab-org/incubation-engineering/mobile-devops/download-secure-files/-/raw/main/installer" | bash
+    - ls -al src/environments/firebase/web
+    - mkdir -p src/assets/stubs && cp -v ${SECURE_FILES_DOWNLOAD_PATH}/${FIREBASE_FILENAME} "src/assets/stubs/firebase-environment.json"
+  script:
+    - npm run build -- --configuration=${PWA_ENV_CONFIG_NAME}
+  artifacts:
+    paths:
+      - '${CI_PROJECT_DIR}/${FRONTEND_PATH}/www/'
+    expire_in: 1 hour
+    reports:
+      dotenv: ${CI_PROJECT_DIR}/${FRONTEND_PATH}/pwa_image_tag.env
+
+# Template pour le build et le déploiement des images Docker des services
+.template_docker_deploy_pwa:
+  variables:
+    DOCKERFILE_PATH: '${CI_PROJECT_DIR}/ci-config/frontend/Dockerfile'
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  before_script:
+    # On renseigne les informations de connexion au registry Harbor dans un fichier de conf Kaniko
+    - mkdir -p /kaniko/.docker
+    - echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "${CI_REGISTRY_USER}" "${CI_REGISTRY_PASSWORD}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
+    - echo "PWA_TAG = ${PWA_IMAGE_TAG}"
+  script:
+    # On build l'image Docker et on la push sur le repository
+    - /kaniko/executor
+        --context "${CI_PROJECT_DIR}/${FRONTEND_PATH}"
+        --dockerfile ${DOCKERFILE_PATH}
+        --destination "${CI_REGISTRY_IMAGE}/${PWA_IMAGE_NAME}:${PWA_IMAGE_TAG}"
+        --destination "${CI_REGISTRY_IMAGE}/${PWA_IMAGE_NAME}:${PWA_IMAGE_LABEL}"
+  when: manual
+
+# Template pour les règles d'exécution des jobs
+.pwa_rules_template:
+  rules:
+    # Si la pipeline est lancée manuellement depuis GitLab, on s'assure que le nom du service est renseigné pour lancer le job correspondant
+    - if: '$CI_PIPELINE_SOURCE == "web" && ($SERVICE == null || ($SERVICE != $PWA_CI_NAME && $SERVICE != "all" && $SERVICE != "all-pwa"))'
+      when: never
+    # Autrement, la pipeline se déclenche automatiquement si des modifications ont été apportées dans le répertoire du service concerné
+    - if: '$CI_COMMIT_BRANCH == $PWA_BRANCH_NAME'
+      changes:
+        - '${FRONTEND_PATH}/**/*'
+

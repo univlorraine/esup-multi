@@ -1,0 +1,30 @@
+# CI du microservice static-pages
+
+.static-pages_service_variables:
+  variables:
+    # Chemin vers le répertoire du service depuis le backend
+    SERVICE_FOLDER: "microservices/static-pages"
+    # Nom qui sera donné à l'image Docker du service
+    SERVICE_IMAGE_NAME: "backend/multi-static-pages"
+    # Nom du service pour le déclenchement manuel dans GitLab
+    CI_SERVICE_NAME: "static-pages"
+
+include:
+  - local: '${CI_PROJECT_DIR}/ci-config/backend/templates-ci.yml'
+
+build-service-static-pages:
+  extends:
+    - .static-pages_service_variables
+    - .template_build_microservice
+    - .microservice_rules_template
+  stage: build-package
+
+deploy-service-static-pages:
+  extends:
+    - .static-pages_service_variables
+    - .template_docker_deploy_microservice
+    - .microservice_rules_template
+  stage: build-deploy-docker
+  needs:
+    - job: build-service-static-pages
+      artifacts: true
