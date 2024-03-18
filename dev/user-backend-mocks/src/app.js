@@ -8,6 +8,7 @@ const notificationsRouter = require('./notifications/notifications.route');
 const chatbotRouter = require('./chatbot/chatbot.route');
 const mailCalendarRouter = require('./mail-calendar/mail-calendar.route');
 const scheduleRouter = require('./schedule/schedule.route');
+const restaurantsRouter = require('./restaurants/restaurants.route');
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.use('/mocking/notifications', notificationsRouter);
 app.use('/mocking/chatbot', chatbotRouter);
 app.use('/mocking/mail-calendar', mailCalendarRouter);
 app.use('/mocking/schedule', scheduleRouter);
+app.use('/mocking/restaurants', restaurantsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

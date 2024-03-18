@@ -80,6 +80,13 @@ SCHEDULE_SERVICE_UL_API_USER_SCHEDULE_URL=http://localhost:3099/mocking/schedule
 ```
 Relancer le service `schedule` pour prendre en compte les nouvelles variables.
 
+### Microservice restaurants
+Remplacer les variables dans le fichier `microservices/restaurants/.env` par les suivantes :
+```
+RESTAURANTS_SERVICE_UL_API_URL=http://localhost:3099/mocking/restaurants
+```
+Relancer le service `restaurants` pour prendre en compte les nouvelles variables.
+
 ## Les données bouchonnées
 
 - [auth](src/auth/auth.mock.js)
@@ -88,3 +95,4 @@ Relancer le service `schedule` pour prendre en compte les nouvelles variables.
 - [mail-calendar](src/mail-calendar/mail-calendar.mock.js)
 - [notifications](src/notifications/notifications.mock.js)
 - [schedule](src/schedule/schedule.mock.js)
+- [restaurants](src/restaurants/restaurants.mock.js)
