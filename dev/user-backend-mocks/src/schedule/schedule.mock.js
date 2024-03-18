@@ -1,4 +1,4 @@
-module.exports.scheduleData = {
+const schedule = {
     "messages": [],
     "plannings": [
         {
@@ -12519,3 +12519,32 @@ module.exports.scheduleData = {
         }
     ]
 };
+
+const msInWeek = 1000 * 60 * 60 * 24 * 7;
+
+let minDate = new Date(8_640_000_000_000_000);
+let maxDate = new Date(-8_640_000_000_000_000);
+schedule.plannings.forEach((planning) => {
+    planning.events.forEach((event) => {
+        const startDateTime = new Date(event.startDateTime);
+        const endDateTime = new Date(event.endDateTime);
+        if (startDateTime < minDate) {
+            minDate = startDateTime;
+        }
+        if (endDateTime > maxDate) {
+            maxDate = endDateTime;
+        }
+    });
+});
+
+const moyDate = new Date((minDate.getTime() + maxDate.getTime()) / 2);
+const delta = Math.ceil(Math.abs(new Date().getTime() - moyDate.getTime()) / msInWeek) * msInWeek;
+
+schedule.plannings.forEach((planning) => {
+    planning.events.forEach((event) => {
+        event.startDateTime = new Date(new Date(event.startDateTime).getTime() + delta).toISOString();
+        event.endDateTime = new Date(new Date(event.endDateTime).getTime() + delta).toISOString();
+    });
+});
+
+module.exports.scheduleData = schedule;
