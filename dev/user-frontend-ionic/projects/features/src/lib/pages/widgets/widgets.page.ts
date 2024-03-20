@@ -45,7 +45,7 @@ import { debounceTime, distinctUntilChanged, filter, map, take } from 'rxjs/oper
 @Component({
   selector: 'app-widgets',
   templateUrl: './widgets.page.html',
-  styleUrls: ['./widgets.page.scss'],
+  styleUrls: ['../../../../../../src/theme/app-theme/features/widgets.page.scss'],
 })
 export class WidgetsPage {
   public featuresIsEmpty$: Observable<boolean>;

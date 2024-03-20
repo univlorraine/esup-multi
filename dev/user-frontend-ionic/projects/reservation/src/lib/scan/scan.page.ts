@@ -46,7 +46,7 @@ import { NavigationService } from '@ul/shared';
 @Component({
   selector: 'app-scan',
   templateUrl: './scan.page.html',
-  styleUrls: ['./scan.page.scss'],
+  styleUrls: ['../../../../../src/theme/app-theme/reservation/scan.page.scss'],
 })
 
 export class QRScanPage {

@@ -55,7 +55,7 @@ import { EventsByDay, ScheduleListService } from './schedule-list.service';
 @Component({
   selector: 'app-schedule-list',
   templateUrl: './schedule-list.page.html',
-  styleUrls: ['./schedule-list.page.scss'],
+  styleUrls: ['../../../../../src/theme/app-theme/schedule/schedule-list.page.scss'],
 })
 export class ScheduleListPage {
 

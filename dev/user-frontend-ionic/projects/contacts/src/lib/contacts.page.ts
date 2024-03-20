@@ -48,7 +48,7 @@ import { Contact, ContactsBody, ContactsService } from './contacts.service';
 @Component({
   selector: 'app-contacts',
   templateUrl: './contacts.page.html',
-  styleUrls: ['./contacts.page.scss'],
+  styleUrls: ['../../../../src/theme/app-theme/contacts/contacts.page.scss'],
 })
 
 export class ContactsComponent {

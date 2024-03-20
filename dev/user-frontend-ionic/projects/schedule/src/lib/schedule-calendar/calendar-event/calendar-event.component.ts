@@ -44,7 +44,7 @@ import { Event } from '../../schedule.repository';
 @Component({
   selector: 'app-calendar-event',
   templateUrl: './calendar-event.component.html',
-  styleUrls: ['./calendar-event.component.scss'],
+  styleUrls: ['../../../../../../src/theme/app-theme/schedule/calendar-event.component.scss'],
 })
 export class CalendarEventComponent {
 

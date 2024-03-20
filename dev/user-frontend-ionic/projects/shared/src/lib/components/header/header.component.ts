@@ -45,7 +45,7 @@ import { NetworkService } from '../../network/network.service';
 @Component({
   selector: 'app-header',
   templateUrl: 'header.component.html',
-  styleUrls: ['header.component.scss']
+  styleUrls: ['../../../../../../src/theme/app-theme/shared/header.component.scss']
 })
 export class HeaderComponent {
 

@@ -43,7 +43,7 @@ import { NavigationService } from '../../navigation/navigation.service';
 @Component({
   selector: 'app-back-button',
   templateUrl: 'back-button.component.html',
-  styleUrls: ['back-button.component.scss']
+  styleUrls: ['../../../../../../src/theme/app-theme/shared/back-button.component.scss']
 })
 export class BackButtonComponent {
 

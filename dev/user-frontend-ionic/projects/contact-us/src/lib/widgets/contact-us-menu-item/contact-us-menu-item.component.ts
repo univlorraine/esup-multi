@@ -47,7 +47,7 @@ import { ContactUsService } from '../../contact-us.service';
 @Component({
   selector: 'app-contact-us-menu-item-widget',
   templateUrl: './contact-us-menu-item.component.html',
-  styleUrls: ['./contact-us-menu-item.component.scss'],
+  styleUrls: ['../../../../../../src/theme/app-theme/contact-us/contact-us-menu-item.component.scss'],
 })
 export class ContactUsMenuItemComponent {
 
