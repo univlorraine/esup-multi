@@ -44,7 +44,7 @@ import { PreferencesService } from './preferences.service';
 @Component({
   selector: 'app-auth-preferences',
   templateUrl: './preferences.component.html',
-  styleUrls: ['./preferences.component.scss'],
+  styleUrls: ['../../../../../src/theme/app-theme/auth/preferences.component.scss'],
 })
 export class PreferencesComponent {
 

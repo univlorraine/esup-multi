@@ -44,7 +44,7 @@ import { RssItemHeaderButtonDirective } from './rss-item-header-button.directive
 @Component({
   selector: 'app-rss-item-header',
   templateUrl: './rss-item-header.component.html',
-  styleUrls: ['rss-item-header.component.scss'],
+  styleUrls: ['../../../../../../src/theme/app-theme/rss/rss-item-header.component.scss'],
 })
 export class RssItemHeaderComponent {
   @Input() item: FeedItem;

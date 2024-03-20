@@ -51,7 +51,7 @@ import { ServicesService } from './services.service';
 @Component({
   selector: 'app-services',
   templateUrl: './services.page.html',
-  styleUrls: ['./services.page.scss'],
+  styleUrls: ['../../../../../../src/theme/app-theme/features/services.page.scss'],
 })
 export class ServicesPage implements OnInit, OnDestroy {
 
