@@ -87,6 +87,13 @@ RESTAURANTS_SERVICE_UL_API_URL=http://localhost:3099/mocking/restaurants
 ```
 Relancer le service `restaurants` pour prendre en compte les nouvelles variables.
 
+### Microservice cards
+Remplacer les variables dans le fichier `microservices/cards/.env` par les suivantes :
+```
+CARDS_SERVICE_UL_API_URL=http://localhost:3099/mocking/cards
+```
+Relancer le service `cards` pour prendre en compte les nouvelles variables.
+
 ## Les données bouchonnées
 
 - [auth](src/auth/auth.mock.js)
@@ -96,3 +103,4 @@ Relancer le service `restaurants` pour prendre en compte les nouvelles variables
 - [notifications](src/notifications/notifications.mock.js)
 - [schedule](src/schedule/schedule.mock.js)
 - [restaurants](src/restaurants/restaurants.mock.js)
+- [cards](src/cards/cards.mock.js)
