@@ -4,7 +4,7 @@ module.exports.chatbotData = {
             "type": "WebMessage",
             "card": {
                 "file": {
-                    "url": "http://localhost:3099/robot.jpg",
+                    "url": `http://localhost:${process.env.PORT}/robot.jpg`,
                     "name": "_nono6.png",
                     "type": "image"
                 },

@@ -40,6 +40,7 @@ Pour la suite, se placer dans le dossier [user-backend-nest](../user-backend-nes
 Remplacer les variables dans le fichier `microservices/auth/.env` par les suivantes :
 ```
 AUTH_SERVICE_CAS_URL_REQUEST_TGT=http://localhost:3099/mocking/auth
+AUTH_SERVICE_CAS_URL_LOGOUT=http://localhost:3099/mocking/auth
 
 AUTH_SERVICE_UL_API_URL_USER_PROFILE=http://localhost:3099/mocking/auth/multi-user-provider
 ```
@@ -94,6 +95,12 @@ CARDS_SERVICE_UL_API_URL=http://localhost:3099/mocking/cards
 ```
 Relancer le service `cards` pour prendre en compte les nouvelles variables.
 
+### Microservice rss
+Remplacer les variables dans le fichier `microservices/rss/.env` par les suivantes :
+```
+RSS_SERVICE_UL_API_URL=http://localhost:3099/mocking/rss
+```
+
 ## Les données bouchonnées
 
 - [auth](src/auth/auth.mock.js)
@@ -104,3 +111,4 @@ Relancer le service `cards` pour prendre en compte les nouvelles variables.
 - [schedule](src/schedule/schedule.mock.js)
 - [restaurants](src/restaurants/restaurants.mock.js)
 - [cards](src/cards/cards.mock.js)
+- [rss](src/rss/rss.mock.js)
