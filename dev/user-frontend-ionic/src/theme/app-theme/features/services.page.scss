@@ -165,7 +165,7 @@ Dragula drag and drop documentation CSS
   left: -9999px !important;
 }
 
-/* added to mirrorContainer (default = body) while dragging */
+/* added to mirrorContainer (app-theme-dist = body) while dragging */
 .gu-unselectable {
   -webkit-user-select: none !important;
   -moz-user-select: none !important;

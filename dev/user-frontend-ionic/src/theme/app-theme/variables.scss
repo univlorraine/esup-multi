@@ -98,7 +98,7 @@
 
   /** Pages background  : If the background is different from the app background. **/
   // services.page in Features module
-  --app-services-color-background: var(--ion-color-quaternary);
+  --app-services-color-background: var(--ion-color-light);
 
   /** Component background (if color is different from Ionic colors Theming below). Add colors if necessary**/
   --app-color-component-background-primary: #ffffff;
@@ -114,7 +114,7 @@
   //  Two ways to use this variables :
   // - In SCSS files on all CSS classes needed throughout the app. Example: background-color: var(--ion-color-primary);
   // - On Ionic HTML components when they have a color property. Example: <ion-toolbar color="primary">
-  // To add a new default color, please see below.
+  // To add a new app-theme-dist color, please see below.
   // ---------------------
 
   /** primary **/
@@ -190,9 +190,9 @@
   --ion-color-light-tint: #f8f9fa;
 
   /**
- * The next colors are added as a new Ionic default color parameter.
+ * The next colors are added as a new Ionic app-theme-dist color parameter.
  * You can name it anything you want, for example: quaternary.
- * You can use it in a component just like the default Ionic colors above by specifying
+ * You can use it in a component just like the app-theme-dist Ionic colors above by specifying
  * the color attribute: <ion-toolbar color='quaternary'> or with var() in scss files
  */
 
@@ -337,7 +337,7 @@ body.dark {
   //  Two ways to use this variables :
   // - In SCSS files on all CSS classes needed throughout the app. Example: background-color: var(--ion-color-primary);
   // - On Ionic HTML components when they have a color property. Example: <ion-toolbar color="primary">
-  // To add a new default color, please see below.
+  // To add a new app-theme-dist color, please see below.
   // ---------------------
 
   /** primary **/
@@ -413,9 +413,9 @@ body.dark {
   --ion-color-light-tint: #f8f9fa;
 
   /**
- * The next colors are added as a new Ionic default color parameter.
+ * The next colors are added as a new Ionic app-theme-dist color parameter.
  * You can name it anything you want, for example: quaternary.
- * You can use it in a component just like the default Ionic colors above by specifying
+ * You can use it in a component just like the app-theme-dist Ionic colors above by specifying
  * the color attribute: <ion-toolbar color='quaternary'> or with var() in scss files
  */
 

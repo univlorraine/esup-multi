@@ -32,12 +32,12 @@ npm-debug.log*
 /www
 
 /src/environments/firebase/*
-/src/theme/default/assets/stubs/firebase-environment.json
+/src/theme/app-theme/assets/stubs/firebase-environment.json
 
 # Theme
 /src/theme/*
 !/src/theme/theme.scss.dist
-!/src/theme/default
+!/src/theme/app-theme
 
 # Angular
 angular.json

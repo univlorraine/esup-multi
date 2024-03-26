@@ -37,8 +37,27 @@
  * termes.
  */
 
-.greeting-underline {
-  border-bottom-width: var(--app-border-2-width);
-  border-bottom-style: solid;
-  border-bottom-color: var(--ion-color-secondary);
+.title-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
+
+.title {
+  margin: 2rem 0.7rem 1.5rem 0.625rem;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.rss-news-header {
+  --border-bottom: 0.3rem;
+}
+
+/* add a line in the frame
+.border-bottom {
+  border-bottom: var(--app-border-width-5) solid var(--ion-color-secondary) !important;
+}*/

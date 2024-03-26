@@ -60,7 +60,7 @@ import { map, switchMap } from 'rxjs/operators';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
-  styleUrls: ['../theme/default/app/app.component.scss'],
+  styleUrls: ['../theme/app-theme/app/app.component.scss'],
 })
 export class AppComponent implements OnInit, OnDestroy {
 
