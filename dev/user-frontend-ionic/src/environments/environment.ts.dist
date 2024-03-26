@@ -83,13 +83,13 @@ export const environment = {
     {
       moduleName: 'auth',
       module: AuthModule,
-      config: { numberOfEventsLimit: 3 },
+      config: {},
       enabled: true,
     },
     {
       moduleName: 'calendar',
       module: CalendarModule,
-      config: {},
+      config: { numberOfEventsLimit: 3 },
       enabled: true,
     },
     {
