@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Component, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import { Browser } from '@capacitor/browser';
 import { SsoService, StatisticsService, ThemeService, TranslatedExternalFeature } from '@ul/shared';
 
@@ -48,11 +48,13 @@ import { SsoService, StatisticsService, ThemeService, TranslatedExternalFeature 
 })
 export class WidgetExternalFeatureComponent {
   @Input() feature: TranslatedExternalFeature;
+  isEmpty = false;
 
   constructor(
     private ssoService: SsoService,
     private statisticsService: StatisticsService,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    private changeDetector: ChangeDetectorRef
   ) { }
 
   public onClick(): Promise<void> {
@@ -76,5 +78,10 @@ export class WidgetExternalFeatureComponent {
   fontColor(backgroundColor) {
     return this.themeService.isBackgroundFromCmsDarkOrIsDarkTheme(backgroundColor) ?
       'light-font-color' : 'dark-font-color';
+  }
+
+  onWidgetIsEmpty(isEmpty: boolean) {
+    this.isEmpty = isEmpty;
+    this.changeDetector.detectChanges();
   }
 }

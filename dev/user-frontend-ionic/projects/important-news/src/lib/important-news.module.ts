@@ -48,7 +48,6 @@ import { ImportantNewsComponent } from './widgets/important-news/important-news.
 const initModule = (projectModuleService: ProjectModuleService) =>
   () => projectModuleService.initProjectModule({
     name: 'important-news',
-    translation: true,
     widgets: [{
       id: 'important-news',
       component: ImportantNewsComponent,

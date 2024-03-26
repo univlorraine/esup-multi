@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Component, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { StatisticsService, ThemeService, TranslatedInternalFeature } from '@ul/shared';
 
@@ -48,11 +48,13 @@ import { StatisticsService, ThemeService, TranslatedInternalFeature } from '@ul/
 })
 export class WidgetInternalFeatureComponent {
   @Input() feature: TranslatedInternalFeature;
+  isEmpty = false;
 
   constructor(
     private router: Router,
     private statisticsService: StatisticsService,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    private changeDetector: ChangeDetectorRef
   ) { }
 
   public onClick() {
@@ -63,5 +65,10 @@ export class WidgetInternalFeatureComponent {
   fontColor(backgroundColor) {
     return this.themeService.isBackgroundFromCmsDarkOrIsDarkTheme(backgroundColor) ?
       'light-font-color' : 'dark-font-color';
+  }
+
+  onWidgetIsEmpty(isEmpty: boolean) {
+    this.isEmpty = isEmpty;
+    this.changeDetector.detectChanges();
   }
 }

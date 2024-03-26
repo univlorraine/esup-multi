@@ -1,0 +1,34 @@
+# CI de la PWA de preprod
+
+.pwa_preprod_variables:
+  variables:
+    # Nom de la variable de conf pour le build Angular
+    PWA_ENV_CONFIG_NAME: "pwa-preprod"
+    # Nom du fichier firebase à inclure à l'environnement
+    FIREBASE_FILENAME: "firebase-environment.pwa-production.json"
+    # Nom qui sera donné à l'image Docker du service
+    PWA_IMAGE_NAME: "frontend/multi-pwa"
+    # Nom de la PWA pour le déclenchement manuel dans GitLab
+    PWA_CI_NAME: "pwa-preprod"
+    # Nom de la branche correspondant à l'app de preprod
+    PWA_BRANCH_NAME: "preprod"
+
+include:
+  - local: '${CI_PROJECT_DIR}/ci-config/gitlab-example/frontend/templates-ci.yml'
+
+build-pwa-preprod:
+  extends:
+    - .pwa_preprod_variables
+    - .template_build_pwa
+    - .pwa_rules_template
+  stage: build-package
+
+deploy-pwa-preprod:
+  extends:
+    - .pwa_preprod_variables
+    - .template_docker_deploy_pwa
+    - .pwa_rules_template
+  stage: build-deploy-docker
+  needs:
+    - job: build-pwa-preprod
+      artifacts: true

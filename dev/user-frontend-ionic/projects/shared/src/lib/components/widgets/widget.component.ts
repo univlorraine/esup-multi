@@ -37,7 +37,17 @@
  * termes.
  */
 
-import { AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy, ViewChild, ViewContainerRef } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  Output,
+  ViewChild,
+  ViewContainerRef
+} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ProjectModuleService } from '../../project-module/project-module.service';
 import { WidgetLifecycleService } from './widget-lifecycle.service';
@@ -51,6 +61,7 @@ export class WidgetComponent implements AfterViewInit, OnDestroy {
   @Input() widgetId: string;
   @Input() widgetColor: string;
   @ViewChild('widget', { read: ViewContainerRef }) widgetContainerRef: ViewContainerRef;
+  @Output() widgetIsEmpty = new EventEmitter<boolean>();
   private widgetViewWillEnterSubscription: Subscription;
   private widgetViewDidEnterSubscription: Subscription;
   private widgetViewWillLeaveSubscription: Subscription;
@@ -70,6 +81,11 @@ export class WidgetComponent implements AfterViewInit, OnDestroy {
       this.handleWidgetLifecycle(widgetInstance);
 
       widgetInstance.widgetColor = this.widgetColor;
+      if (widgetInstance.isEmpty$) {
+        widgetInstance.isEmpty$.subscribe((isEmpty: boolean) => {
+          this.widgetIsEmpty.emit(isEmpty);
+        });
+      }
 
       this.cdr.detectChanges();
     } else {

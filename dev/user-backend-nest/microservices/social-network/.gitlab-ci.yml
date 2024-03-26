@@ -1,6 +1,0 @@
-variables:
-  CURRENT_DIR: "dev/user-backend-nest/microservices/social-network/"
-  CURRENT_PROJECT: "social-network"
-  IMAGE_NAME: "backend/multi-social-network"
-
-include: "${CI_PROJET_DIR}/dev/user-backend-nest/template-ci.yml"

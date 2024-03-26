@@ -1,0 +1,72 @@
+.microservice_get_full_image_tag: &microservice_get_full_image_tag
+  - apt-get update && apt-get install -y jq
+  - VERSION=$(jq -r '.version' ${SERVICE_PATH}/package.json)
+  - >
+    if [ ${CI_COMMIT_BRANCH} == "main" ]; then
+      MS_IMAGE_TAG="${VERSION}"
+      MS_IMAGE_LABEL="latest-prod"
+    elif [ ${CI_COMMIT_BRANCH} == "preprod" ]; then
+      MS_IMAGE_TAG="${VERSION}-preprod"
+      MS_IMAGE_LABEL="latest-preprod"
+    else
+      MS_IMAGE_TAG="${VERSION}-dev"
+      MS_IMAGE_LABEL="latest-develop"
+    fi
+  - echo "Tag complet pour l'image Docker = ${MS_IMAGE_TAG}"
+  - echo "MS_IMAGE_TAG=${MS_IMAGE_TAG}" > ${SERVICE_PATH}/ms_image_tag.env
+  - echo "Label pour l'image Docker = ${MS_IMAGE_LABEL}"
+  - echo "MS_IMAGE_LABEL=${MS_IMAGE_LABEL}" >> ${SERVICE_PATH}/ms_image_tag.env
+
+# Template pour le build JS des services
+.template_build_microservice:
+  variables:
+    SERVICE_PATH: '${CI_PROJECT_DIR}/${BACKEND_PATH}/${SERVICE_FOLDER}'
+  image: node:$NODE_VERSION
+  before_script:
+    - cd ${SERVICE_PATH}
+    - *microservice_get_full_image_tag
+    - npm ci --cache ${CI_PROJECT_DIR}/.npm --prefer-offline
+  script:
+    - npm run lint
+    - npm run build
+    - npm ci --cache ${CI_PROJECT_DIR}/.npm --prefer-offline --omit=dev
+  artifacts:
+    paths:
+      - '${SERVICE_PATH}/node_modules'
+      - '${SERVICE_PATH}/dist'
+    expire_in: 1 hour
+    reports:
+      dotenv: ${SERVICE_PATH}/ms_image_tag.env
+
+# Template pour le build et le déploiement des images Docker des services
+.template_docker_deploy_microservice:
+  variables:
+    DOCKERFILE_PATH: '${CI_PROJECT_DIR}/ci-config/gitlab-example/backend/Dockerfile'
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  before_script:
+    # On renseigne les informations de connexion au registry Harbor dans un fichier de conf Kaniko
+    - mkdir -p /kaniko/.docker
+    - echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "${CI_REGISTRY_USER}" "${CI_REGISTRY_PASSWORD}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
+  script:
+    # On build l'image Docker et on la push sur le repository
+    - /kaniko/executor
+      --context "${CI_PROJECT_DIR}/${BACKEND_PATH}/${SERVICE_FOLDER}"
+      --build-arg NODE_VERSION=${NODE_VERSION:-16}
+      --dockerfile ${DOCKERFILE_PATH}
+      --destination "${CI_REGISTRY_IMAGE}/${SERVICE_IMAGE_NAME}:${MS_IMAGE_TAG}"
+      --destination "${CI_REGISTRY_IMAGE}/${SERVICE_IMAGE_NAME}:${MS_IMAGE_LABEL}"
+  when: manual
+
+# Template pour les règles d'exécution des jobs
+.microservice_rules_template:
+  rules:
+    # Si la pipeline est lancée manuellement depuis GitLab, on s'assure que le nom du service est renseigné pour lancer le job correspondant
+    - if: '$CI_PIPELINE_SOURCE == "web" && ($SERVICE == null || ($SERVICE != $CI_SERVICE_NAME && $SERVICE != "all" && $SERVICE != "all-ms"))'
+      when: never
+    # Autrement, la pipeline se déclenche automatiquement si des modifications ont été apportées dans le répertoire du service concerné
+    - if: '$CI_COMMIT_BRANCH == "develop" || $CI_COMMIT_BRANCH == "preprod" || $CI_COMMIT_BRANCH == "prod"'
+      changes:
+        - '${BACKEND_PATH}/${SERVICE_FOLDER}/**/*'
+

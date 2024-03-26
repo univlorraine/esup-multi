@@ -1,6 +1,0 @@
-variables:
-  CURRENT_DIR: "dev/user-backend-nest/microservices/cards/"
-  CURRENT_PROJECT: "cards"
-  IMAGE_NAME: "backend/multi-cards"
-
-include: "${CI_PROJET_DIR}/dev/user-backend-nest/template-ci.yml"

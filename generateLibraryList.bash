@@ -64,7 +64,7 @@ then
 fi
 
 # Count number of tasks
-NB_TASKS=5 # toc + frontend + backend/main
+NB_TASKS=7 # toc + frontend + backend/main + root
 NB_DONE=0
 for d in ./dev/user-backend-nest/microservices/*; do
   if [ -d "$d" ]; then
@@ -81,14 +81,15 @@ function tableOfContent() {
   # generate table of content
   echo "# Table of content" > $OUTPUT_FILE
   {
-    echo "* [Frontend](#frontend) [[summary](#summary-frontend)] [[details](#details-frontend)]"
+    echo "* [Root directory](#root-directory)"
+    echo "* [Frontend](#frontend)"
     echo "* [Backend](#backend)"
-    echo "  * [main](#backend-main) [[summary](#summary-backend-main)] [[details](#details-backend-main)]"
+    echo "  * [main](#backend-main)"
   } >> $OUTPUT_FILE
   for d in ./dev/user-backend-nest/microservices/*; do
     if [ -d "$d" ]; then
       {
-        echo "  * [$(basename "$d")](#backend-$(basename "$d")) [[summary](#summary-backend-$(basename "$d"))] [[details](#details-backend-$(basename "$d"))]"
+        echo "  * [$(basename "$d")](#backend-$(basename "$d"))"
       } >> $OUTPUT_FILE
     fi
   done
@@ -133,36 +134,55 @@ echo "Generating library list..."
 
 tableOfContent
 
-# Generate for frontend
+# Generate for root directory
 {
   echo ""
   echo "# Libraries"
   echo "The \`*\` next to the license name indicates that the license was *guessed* by [license-checker-rseidelsohn](https://www.npmjs.com/package/license-checker-rseidelsohn#how-licenses-are-found)."
+  echo "## [Root directory](.)"
+} >> $OUTPUT_FILE
+licenseSummary .
+{
+  echo "<details><summary>Détails</summary>"
+  echo ""
+} >> $OUTPUT_FILE
+licenseMarkdown .
+{
+  echo "</details>"
+  echo ""
+} >> $OUTPUT_FILE
+
+# Generate for frontend
+{
   echo "## [Frontend](./dev/user-frontend-ionic)"
-  echo "### Summary"
-  echo "<span id=\"summary-frontend\"></span>"
 } >> $OUTPUT_FILE
 licenseSummary ./dev/user-frontend-ionic
 {
-  echo "### Details"
-  echo "<span id=\"details-frontend\"></span>"
+  echo "<details><summary>Détails</summary>"
+  echo ""
 } >> $OUTPUT_FILE
 licenseMarkdown ./dev/user-frontend-ionic
+{
+  echo "</details>"
+  echo ""
+} >> $OUTPUT_FILE
 
 # Generate for backend/main
 {
   echo "## [Backend](./dev/user-backend-nest)"
   echo "### [main](./dev/user-backend-nest/main)"
   echo "<span id=\"backend-main\"></span>"
-  echo "#### Summary"
-  echo "<span id=\"summary-backend-main\"></span>"
 } >> libraries.md
 licenseSummary ./dev/user-backend-nest/main
 {
-  echo "#### Details"
-  echo "<span id=\"details-backend-main\"></span>"
+  echo "<details><summary>Détails</summary>"
+  echo ""
 } >> $OUTPUT_FILE
 licenseMarkdown ./dev/user-backend-nest/main
+{
+  echo "</details>"
+  echo ""
+} >> $OUTPUT_FILE
 
 # Generate for each backend microservice
 for d in ./dev/user-backend-nest/microservices/*; do
@@ -170,15 +190,17 @@ for d in ./dev/user-backend-nest/microservices/*; do
     {
       echo "### [$(basename "$d")](./dev/user-backend-nest/microservices/$(basename "$d"))"
       echo "<span id=\"backend-$(basename "$d")\"></span>"
-      echo "#### Summary"
-      echo "<span id=\"summary-backend-$(basename "$d")\"></span>"
     } >> libraries.md
     licenseSummary "$d"
     {
-      echo "#### Details"
-      echo "<span id=\"details-backend-$(basename "$d")\"></span>"
+      echo "<details><summary>Détails</summary>"
+      echo ""
     } >> $OUTPUT_FILE
     licenseMarkdown "$d"
+    {
+      echo "</details>"
+      echo ""
+    } >> $OUTPUT_FILE
   fi
 done
 
