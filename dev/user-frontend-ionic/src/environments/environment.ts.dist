@@ -42,7 +42,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 // Décommenter si utilisation des notifications
-// import firebasePwaEnvironment from './firebase/web/firebase-environment.pwa-development.json';
+// import firebasePwaEnvironment from './firebase/web/firebase-environment.pwa.json';
 
 export const environment = {
   production: false,

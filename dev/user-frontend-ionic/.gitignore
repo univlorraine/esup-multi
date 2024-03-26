@@ -31,7 +31,10 @@ npm-debug.log*
 /plugins
 /www
 
-#firebase
+#environnement et firebase
+/src/environments/*
+!/src/environments/firebase
+!/src/environments/environment.ts.dist
 /src/environments/firebase/web/*
 /src/environments/firebase/ios/*
 /src/environments/firebase/android/*
@@ -44,14 +47,12 @@ npm-debug.log*
 
 # Angular
 angular.json
-/src/environments/*
-!/src/environments/environment.ts.dist
 
 # Ionic
 capacitor.config*
 !capacitor.config.ts.dist
-ios/
-android/
+/ios/
+/android/
 
 # Trapeze
 trapeze*
