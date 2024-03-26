@@ -31,8 +31,11 @@ npm-debug.log*
 /plugins
 /www
 
-/src/environments/firebase/*
-/src/theme/default/assets/stubs/firebase-environment.json
+#firebase
+/src/environments/firebase/web/*
+/src/environments/firebase/ios/*
+/src/environments/firebase/android/*
+!/src/environments/firebase/web/firebase-environment.pwa.json.dist
 
 # Theme
 /src/theme/*

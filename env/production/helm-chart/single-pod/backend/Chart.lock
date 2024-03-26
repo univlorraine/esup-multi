@@ -1,9 +1,0 @@
-dependencies:
-- name: mongodb
-  repository: https://charts.bitnami.com/bitnami
-  version: 13.9.4
-- name: multi-pwa
-  repository: file://../pwa
-  version: 0.1.0
-digest: sha256:38466b9f788cbf05f2ddd9bee064f90312a82185ebded30b58821e85662785b3
-generated: "2023-04-26T14:31:56.609686+02:00"
