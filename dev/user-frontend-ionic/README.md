@@ -14,13 +14,13 @@ L'application est organisée sous la forme d'un monorepo "léger" :
 npm run module:create [nom du module]
 ```
 
-Puis mettre à jour le "path" du module dans le fichier `tsconfig.json` pour préfixer par `@ul/`.
+Puis mettre à jour le "path" du module dans le fichier `tsconfig.json` pour préfixer par `@multi/`.
 ```json
     "paths": {
-      "@ul/hello": [
+      "@multi/hello": [
         "dist/hello"
       ],
-      "@ul/shared": [
+      "@multi/shared": [
         "dist/shared"
       ]
     },
@@ -28,7 +28,7 @@ Puis mettre à jour le "path" du module dans le fichier `tsconfig.json` pour pr�
 
 A partir de là le module peut être importé dans l'application hôte :
 ```ts
-import { HelloPageModule } from '@ul/hello';
+import { HelloPageModule } from '@multi/hello';
 ```
 
 Il faut également ajouter le module au script npm `module:build-all` :
@@ -147,7 +147,7 @@ L'exception est le module `shared` qui héberge le code partagé entre l'applica
 Pour qu'un module dépende du module `shared` il faut le déclarer dans les `peerDependencies` du `package.json` au niveau du module.
 ```json
   "peerDependencies": {
-    "@ul/shared": "^0.0.1"
+    "@multi/shared": "^0.0.1"
   },
 ```
 

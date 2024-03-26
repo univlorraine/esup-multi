@@ -39,7 +39,7 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { getAuthToken, NetworkService } from '@ul/shared';
+import { getAuthToken, NetworkService } from '@multi/shared';
 import { add, format, startOfWeek, sub } from 'date-fns';
 import { BehaviorSubject, combineLatest, from, Observable, of, Subject } from 'rxjs';
 import { filter, finalize, map, mergeMap, switchMap, take, tap } from 'rxjs/operators';

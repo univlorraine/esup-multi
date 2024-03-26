@@ -39,7 +39,7 @@
 
 import { createStore, select, withProps } from '@ngneat/elf';
 import { persistState } from '@ngneat/elf-persist-state';
-import { localForageStore } from '@ul/shared';
+import { localForageStore } from '@multi/shared';
 
 const STORE_NAME = 'calendar';
 

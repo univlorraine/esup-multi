@@ -39,7 +39,7 @@
 
 import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { StatisticsService, ThemeService, TranslatedInternalFeature } from '@ul/shared';
+import { StatisticsService, ThemeService, TranslatedInternalFeature } from '@multi/shared';
 
 @Component({
   selector: 'app-widget-internal-feature',

@@ -40,7 +40,7 @@
 import { createStore, select, setProps, withProps } from '@ngneat/elf';
 import { selectAllEntities, selectEntity, setEntities, withEntities } from '@ngneat/elf-entities';
 import { persistState } from '@ngneat/elf-persist-state';
-import { localForageStore } from '@ul/shared';
+import { localForageStore } from '@multi/shared';
 
 interface RestaurantsProps {
   favoriteRestaurantId: number | null;

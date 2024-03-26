@@ -42,7 +42,7 @@ import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
-import { ProjectModuleService } from '@ul/shared';
+import { ProjectModuleService } from '@multi/shared';
 import { ImportantNewsComponent } from './widgets/important-news/important-news.component';
 
 const initModule = (projectModuleService: ProjectModuleService) =>

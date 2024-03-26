@@ -42,7 +42,7 @@ import {APP_INITIALIZER, ModuleWithProviders, NgModule} from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { EffectsNgModule } from '@ngneat/effects-ng';
 import { TranslateModule } from '@ngx-translate/core';
-import { ProjectModuleService, SharedComponentsModule } from '@ul/shared';
+import { ProjectModuleService, SharedComponentsModule } from '@multi/shared';
 import { QRCodeModule } from 'angularx-qrcode';
 import { CardModalComponent } from './card/card-modal.component';
 import { CardsRoutingModule } from './cards-routing.module';

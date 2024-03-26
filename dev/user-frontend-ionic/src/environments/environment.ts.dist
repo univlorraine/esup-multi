@@ -42,23 +42,23 @@
 // The list of file replacements can be found in `angular.json`.
 
 
-import { AuthModule } from '@ul/auth';
-import { CalendarModule } from '@ul/calendar';
-import { CardsPageModule } from '@ul/cards';
-import { ChatbotModule } from '@ul/chatbot';
-import { ClockingModule } from '@ul/clocking';
-import { ContactUsModule } from '@ul/contact-us';
-import { ContactsModule } from '@ul/contacts';
-import { ImportantNewsModule } from '@ul/important-news';
-import { MapModule } from '@ul/map';
-import { NotificationsModule } from '@ul/notifications';
-import { ReservationModule } from '@ul/reservation';
-import { RestaurantsModule } from '@ul/restaurants';
-import { RssPageModule } from '@ul/rss';
-import { ScheduleModule } from '@ul/schedule';
-import { SocialNetworkModule } from '@ul/social-network';
-import { StaticPagesModule } from '@ul/static-pages';
-import { UnreadMailModule } from '@ul/unread-mail';
+import { AuthModule } from '@multi/auth';
+import { CalendarModule } from '@multi/calendar';
+import { CardsPageModule } from '@multi/cards';
+import { ChatbotModule } from '@multi/chatbot';
+import { ClockingModule } from '@multi/clocking';
+import { ContactUsModule } from '@multi/contact-us';
+import { ContactsModule } from '@multi/contacts';
+import { ImportantNewsModule } from '@multi/important-news';
+import { MapModule } from '@multi/map';
+import { NotificationsModule } from '@multi/notifications';
+import { ReservationModule } from '@multi/reservation';
+import { RestaurantsModule } from '@multi/restaurants';
+import { RssPageModule } from '@multi/rss';
+import { ScheduleModule } from '@multi/schedule';
+import { SocialNetworkModule } from '@multi/social-network';
+import { StaticPagesModule } from '@multi/static-pages';
+import { UnreadMailModule } from '@multi/unread-mail';
 import { MatomoModule } from 'ngx-matomo';
 
 

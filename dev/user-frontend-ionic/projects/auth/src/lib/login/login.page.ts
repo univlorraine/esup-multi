@@ -41,7 +41,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IonInput, ToastController } from '@ionic/angular';
-import { AuthenticatedUser, isLoggedTourViewed, NavigationService } from '@ul/shared';
+import { AuthenticatedUser, isLoggedTourViewed, NavigationService } from '@multi/shared';
 import { Observable } from 'rxjs';
 import { finalize, take, tap } from 'rxjs/operators';
 import { AuthService } from '../common/auth.service';

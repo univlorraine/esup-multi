@@ -42,7 +42,7 @@ import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
-import { ProjectModuleService, SharedComponentsModule } from '@ul/shared';
+import { ProjectModuleService, SharedComponentsModule } from '@multi/shared';
 import { ContactUsMenuItemComponent } from './widgets/contact-us-menu-item/contact-us-menu-item.component';
 import { ContactUsRoutingModule } from './contact-us-routing.module';
 import { ContactUsPage } from './contact-us.page';

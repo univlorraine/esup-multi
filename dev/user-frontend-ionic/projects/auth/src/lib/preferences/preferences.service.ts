@@ -38,7 +38,7 @@
  */
 
 import { Injectable } from '@angular/core';
-import { deleteRefreshAuthToken, getRefreshAuthToken } from '@ul/shared';
+import { deleteRefreshAuthToken, getRefreshAuthToken } from '@multi/shared';
 import { concatMap, filter, finalize, take } from 'rxjs/operators';
 import { KeepAuthService } from '../common/keep-auth.service';
 import { setSaveCredentialsOnAuthentication } from './preferences.repository';
