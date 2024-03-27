@@ -1,10 +1,9 @@
 [
 	{
-		"position": null,
-		"description": "Widget affichant les informations importantes",
-		"status": "published",
-		"id": 1,
+		"position": 10,
 		"widget": "important-news:important-news",
+		"status": "published",
+		"description": "Widget affichant les informations importantes",
 		"icon": null,
 		"iconSourceSvgLightTheme": null,
 		"iconSourceSvgDarkTheme": null,
@@ -19,11 +18,10 @@
 		"settings_by_role": []
 	},
 	{
-		"position": null,
-		"description": "Widget affichant les prochains cours dans l'EDT",
-		"status": "published",
-		"id": 2,
+		"position": 20,
 		"widget": "schedule:next-events",
+		"status": "published",
+		"description": "Widget affichant les prochains cours dans l'EDT",
 		"icon": null,
 		"iconSourceSvgLightTheme": null,
 		"iconSourceSvgDarkTheme": null,
@@ -35,37 +33,30 @@
 		"statisticName": null,
 		"translations": [
 			{
-				"id": 1,
 				"title": "Courses to come",
 				"content": null,
-				"languages_code": "en",
-				"widgets_id": 2
+				"languages_code": "en"
 			},
 			{
-				"id": 2,
 				"title": "Vos prochains cours",
 				"content": null,
-				"languages_code": "fr",
-				"widgets_id": 2
+				"languages_code": "fr"
 			}
 		],
 		"authorization": {
 			"type": "ALLOW",
 			"roles": [
-				"phd-student",
 				"student",
 				"teacher"
-			],
-			"id": 50
+			]
 		},
 		"settings_by_role": []
 	},
 	{
-		"position": null,
-		"description": "Widget affichant les tops Agatte",
-		"status": "published",
-		"id": 3,
+		"position": 30,
 		"widget": "clocking:clocking",
+		"status": "draft",
+		"description": "Widget affichant les tops Agatte",
 		"icon": null,
 		"iconSourceSvgLightTheme": null,
 		"iconSourceSvgDarkTheme": null,
@@ -77,36 +68,29 @@
 		"statisticName": "clocking",
 		"translations": [
 			{
-				"id": 3,
 				"title": "Agatte",
 				"content": null,
-				"languages_code": "en",
-				"widgets_id": 3
+				"languages_code": "en"
 			},
 			{
-				"id": 4,
 				"title": "Agatte",
 				"content": null,
-				"languages_code": "fr",
-				"widgets_id": 3
+				"languages_code": "fr"
 			}
 		],
 		"authorization": {
 			"type": "ALLOW",
 			"roles": [
-				"CB",
-				"FB"
-			],
-			"id": 51
+				"staff"
+			]
 		},
 		"settings_by_role": []
 	},
 	{
 		"position": -100,
-		"description": "Widget invitant l'utilisateur non connecté à s'authentifier",
-		"status": "published",
-		"id": 4,
 		"widget": "auth:auth-not-authentified-widget",
+		"status": "published",
+		"description": "Widget invitant l'utilisateur non connecté à s'authentifier",
 		"icon": null,
 		"iconSourceSvgLightTheme": null,
 		"iconSourceSvgDarkTheme": null,
@@ -121,17 +105,15 @@
 			"type": "ALLOW",
 			"roles": [
 				"anonymous"
-			],
-			"id": 52
+			]
 		},
 		"settings_by_role": []
 	},
 	{
 		"position": -101,
-		"description": "Widget affichant un message de bienvenue à l'utilisateur connecté",
-		"status": "published",
-		"id": 5,
 		"widget": "auth:greeting-widget",
+		"status": "published",
+		"description": "Widget affichant un message de bienvenue à l'utilisateur connecté",
 		"icon": null,
 		"iconSourceSvgLightTheme": null,
 		"iconSourceSvgDarkTheme": null,
@@ -146,123 +128,10 @@
 		"settings_by_role": []
 	},
 	{
-		"position": null,
-		"description": "Widget affichant le nombre de mails non lus (personnels)",
-		"status": "published",
-		"id": 6,
+		"position": 40,
 		"widget": "unread-mail:unread-mail",
-		"icon": "mail",
-		"iconSourceSvgLightTheme": null,
-		"iconSourceSvgDarkTheme": null,
-		"type": "external",
-		"routerLink": null,
-		"link": "https://mail.univ-lorraine.fr/zimbra/preauth/preauthUL_PERS.jsp?ticket={st}",
-		"ssoService": "https://mail.univ-lorraine.fr/zimbra/preauth/preauthUL_PERS.jsp",
-		"color": "#A4D0B2",
-		"statisticName": null,
-		"translations": [
-			{
-				"id": 5,
-				"title": "Your mailbox",
-				"content": null,
-				"languages_code": "en",
-				"widgets_id": 6
-			},
-			{
-				"id": 6,
-				"title": "Votre messagerie",
-				"content": null,
-				"languages_code": "fr",
-				"widgets_id": 6
-			}
-		],
-		"authorization": {
-			"type": "ALLOW",
-			"roles": [
-				"AT",
-				"CB",
-				"CE",
-				"FB",
-				"FE",
-				"HB",
-				"HC",
-				"HE",
-				"HM",
-				"PE",
-				"RE",
-				"ST",
-				"VA",
-				"VE",
-				"XE",
-				"XP",
-				"phd-student"
-			],
-			"id": 54
-		},
-		"settings_by_role": []
-	},
-	{
-		"position": null,
-		"description": "Widget affichant les prochains événements dans le calendrier (personnels)",
 		"status": "published",
-		"id": 7,
-		"widget": "calendar:calendar",
-		"icon": null,
-		"iconSourceSvgLightTheme": null,
-		"iconSourceSvgDarkTheme": null,
-		"type": "external",
-		"routerLink": null,
-		"link": "https://mail.univ-lorraine.fr/zimbra/preauth/preauthUL_PERS.jsp?ticket={st}",
-		"ssoService": "https://mail.univ-lorraine.fr/zimbra/preauth/preauthUL_PERS.jsp",
-		"color": "#C1DEEC",
-		"statisticName": null,
-		"translations": [
-			{
-				"id": 7,
-				"title": "Your next events",
-				"content": null,
-				"languages_code": "en",
-				"widgets_id": 7
-			},
-			{
-				"id": 8,
-				"title": "Vos prochains évènements",
-				"content": null,
-				"languages_code": "fr",
-				"widgets_id": 7
-			}
-		],
-		"authorization": {
-			"type": "ALLOW",
-			"roles": [
-				"AT",
-				"CB",
-				"CE",
-				"FB",
-				"FE",
-				"HB",
-				"HC",
-				"HE",
-				"HM",
-				"PE",
-				"RE",
-				"ST",
-				"VA",
-				"VE",
-				"XE",
-				"XP",
-				"phd-student"
-			],
-			"id": 55
-		},
-		"settings_by_role": []
-	},
-	{
-		"position": null,
 		"description": "Widget affichant le nombre de mails non lus (étudiants)",
-		"status": "published",
-		"id": 8,
-		"widget": "unread-mail:unread-mail",
 		"icon": null,
 		"iconSourceSvgLightTheme": null,
 		"iconSourceSvgDarkTheme": null,
@@ -274,35 +143,29 @@
 		"statisticName": null,
 		"translations": [
 			{
-				"id": 9,
 				"title": "Your mailbox",
 				"content": null,
-				"languages_code": "en",
-				"widgets_id": 8
+				"languages_code": "en"
 			},
 			{
-				"id": 10,
 				"title": "Votre messagerie",
 				"content": null,
-				"languages_code": "fr",
-				"widgets_id": 8
+				"languages_code": "fr"
 			}
 		],
 		"authorization": {
-			"type": "ALLOW",
+			"type": "DISALLOW",
 			"roles": [
-				"ET"
-			],
-			"id": 56
+				"anonymous"
+			]
 		},
 		"settings_by_role": []
 	},
 	{
-		"position": null,
-		"description": "Widget affichant les prochains événements dans le calendrier (étudiants)",
-		"status": "published",
-		"id": 9,
+		"position": 50,
 		"widget": "calendar:calendar",
+		"status": "published",
+		"description": "Widget affichant les prochains événements dans le calendrier (étudiants)",
 		"icon": null,
 		"iconSourceSvgLightTheme": null,
 		"iconSourceSvgDarkTheme": null,
@@ -314,35 +177,29 @@
 		"statisticName": null,
 		"translations": [
 			{
-				"id": 11,
 				"title": "Your next events",
 				"content": null,
-				"languages_code": "en",
-				"widgets_id": 9
+				"languages_code": "en"
 			},
 			{
-				"id": 12,
 				"title": "Vos prochains évènements",
 				"content": null,
-				"languages_code": "fr",
-				"widgets_id": 9
+				"languages_code": "fr"
 			}
 		],
 		"authorization": {
-			"type": "ALLOW",
+			"type": "DISALLOW",
 			"roles": [
-				"ET"
-			],
-			"id": 57
+				"anonymous"
+			]
 		},
 		"settings_by_role": []
 	},
 	{
-		"position": null,
-		"description": "Widget affichant la dernière actu Factuel",
-		"status": "published",
-		"id": 10,
+		"position": 60,
 		"widget": "rss:latest-news",
+		"status": "published",
+		"description": "Widget affichant la dernière actu Factuel",
 		"icon": null,
 		"iconSourceSvgLightTheme": null,
 		"iconSourceSvgDarkTheme": null,
@@ -354,18 +211,14 @@
 		"statisticName": null,
 		"translations": [
 			{
-				"id": 13,
 				"title": "Latest news",
 				"content": null,
-				"languages_code": "en",
-				"widgets_id": 10
+				"languages_code": "en"
 			},
 			{
-				"id": 14,
 				"title": "Dernière actualité",
 				"content": null,
-				"languages_code": "fr",
-				"widgets_id": 10
+				"languages_code": "fr"
 			}
 		],
 		"authorization": null,
