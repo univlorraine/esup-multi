@@ -39,7 +39,7 @@
 
 import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthenticatedUser, authenticatedUser$, AuthorizationHelper } from '@ul/shared';
+import { AuthenticatedUser, authenticatedUser$, AuthorizationHelper } from '@multi/shared';
 import { Observable } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
 import { ScheduleModuleConfig, SCHEDULE_CONFIG } from '../../schedule.config';

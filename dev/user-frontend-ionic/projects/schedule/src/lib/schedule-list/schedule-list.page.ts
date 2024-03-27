@@ -39,7 +39,7 @@
 
 import { Component, ViewChild } from '@angular/core';
 import { IonContent } from '@ionic/angular';
-import { AuthenticatedUser } from '@ul/shared';
+import { AuthenticatedUser } from '@multi/shared';
 import { add, isAfter, startOfWeek } from 'date-fns';
 import { combineLatest, Observable, of, Subscription } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';

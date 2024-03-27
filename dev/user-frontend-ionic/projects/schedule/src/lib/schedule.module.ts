@@ -44,7 +44,7 @@ import { FullCalendarModule } from '@fullcalendar/angular'; // must go before pl
 import { IonicModule } from '@ionic/angular';
 import { EffectsNgModule } from '@ngneat/effects-ng';
 import { TranslateModule } from '@ngx-translate/core';
-import { CompleteLocalDatePipe, ProjectModuleService, SharedComponentsModule, SharedPipeModule } from '@ul/shared';
+import { CompleteLocalDatePipe, ProjectModuleService, SharedComponentsModule, SharedPipeModule } from '@multi/shared';
 import { EventDetailComponent } from './common/event-detail/event-detail.component';
 import { LocalHourPipe } from './common/pipe/local-hour.pipe';
 import { ShortenedDatePipe } from './common/pipe/shortened-date.pipe';

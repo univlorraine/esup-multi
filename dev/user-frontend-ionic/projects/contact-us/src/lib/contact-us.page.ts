@@ -41,7 +41,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
-import { authenticatedUser$, NetworkService } from '@ul/shared';
+import { authenticatedUser$, NetworkService } from '@multi/shared';
 import { Observable } from 'rxjs';
 import { filter, finalize, take } from 'rxjs/operators';
 import { ContactUsRepository, TranslatedContactUsPageContent } from './contact-us.repository';

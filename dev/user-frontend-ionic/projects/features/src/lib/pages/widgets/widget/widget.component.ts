@@ -38,7 +38,7 @@
  */
 
 import { Component, Input } from '@angular/core';
-import { TranslatedFeature } from '@ul/shared';
+import { TranslatedFeature } from '@multi/shared';
 
 @Component({
 selector: 'app-feature-widget',

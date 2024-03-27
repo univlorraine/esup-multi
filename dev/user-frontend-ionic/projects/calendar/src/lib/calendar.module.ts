@@ -38,7 +38,7 @@
  */
 
 import { APP_INITIALIZER, ModuleWithProviders, NgModule } from '@angular/core';
-import { ProjectModuleService } from '@ul/shared';
+import { ProjectModuleService } from '@multi/shared';
 import { CalendarComponent } from './widget/calendar/calendar.component';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';

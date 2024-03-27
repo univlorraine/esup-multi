@@ -39,7 +39,7 @@
 
 import { Inject, Injectable } from '@angular/core';
 import { Browser } from '@capacitor/browser';
-import { SsoService } from '@ul/shared';
+import { SsoService } from '@multi/shared';
 import { ReservationModuleConfig, RESERVATION_CONFIG } from './reservation.config';
 
 @Injectable({

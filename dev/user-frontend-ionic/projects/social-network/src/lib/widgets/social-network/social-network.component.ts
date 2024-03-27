@@ -39,7 +39,7 @@
 
 import { Component } from '@angular/core';
 import { Browser } from '@capacitor/browser';
-import { NetworkService } from '@ul/shared';
+import { NetworkService } from '@multi/shared';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { SocialNetwork, socialNetworks$ } from '../../social-network.repository';

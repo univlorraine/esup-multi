@@ -42,7 +42,7 @@ import { ErrorHandler, Injectable, Injector } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { Actions } from '@ngneat/effects-ng';
 import { TranslateService } from '@ngx-translate/core';
-import { cleanupPrivateData, getAuthToken, getExpectedErrorMessage, NetworkService } from '@ul/shared';
+import { cleanupPrivateData, getAuthToken, getExpectedErrorMessage, NetworkService } from '@multi/shared';
 import { take } from 'rxjs/operators';
 
 @Injectable({

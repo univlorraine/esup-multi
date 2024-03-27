@@ -38,7 +38,7 @@
  */
 
 import { Component } from '@angular/core';
-import { NetworkService } from '@ul/shared';
+import { NetworkService } from '@multi/shared';
 import { filter, first, Observable, switchMap } from 'rxjs';
 import { finalize, map, take } from 'rxjs/operators';
 import { FeedItem, rssFeed$, setRssFeed } from '../../rss.repository';

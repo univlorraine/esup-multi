@@ -52,7 +52,7 @@ import {
   NotificationsService,
   PageLayout,
   StatisticsService
-} from '@ul/shared';
+} from '@multi/shared';
 import { combineLatest, Observable, Subject, withLatestFrom } from 'rxjs';
 import { distinctUntilChanged, filter, map } from 'rxjs/operators';
 
