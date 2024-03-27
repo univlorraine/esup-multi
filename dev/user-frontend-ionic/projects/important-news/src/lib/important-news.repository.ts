@@ -42,7 +42,7 @@ import { selectAllEntities, setEntities, withEntities } from '@ngneat/elf-entiti
 import {
   persistState
 } from '@ngneat/elf-persist-state';
-import { Authorization, localForageStore } from '@ul/shared';
+import { Authorization, localForageStore } from '@multi/shared';
 
 const STORE_NAME = 'important-news';
 

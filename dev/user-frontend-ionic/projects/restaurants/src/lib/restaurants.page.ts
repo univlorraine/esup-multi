@@ -40,7 +40,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Geolocation, Position } from '@capacitor/geolocation';
-import { NetworkService } from '@ul/shared';
+import { NetworkService } from '@multi/shared';
 import { getDistance } from 'geolib';
 import { combineLatest, from, Observable, of } from 'rxjs';
 import { catchError, map, take, tap } from 'rxjs/operators';

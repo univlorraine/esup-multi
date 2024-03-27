@@ -39,7 +39,7 @@
 
 import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import { Browser } from '@capacitor/browser';
-import { SsoService, StatisticsService, ThemeService, TranslatedExternalFeature } from '@ul/shared';
+import { SsoService, StatisticsService, ThemeService, TranslatedExternalFeature } from '@multi/shared';
 
 @Component({
   selector: 'app-widget-external-feature',

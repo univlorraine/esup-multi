@@ -47,7 +47,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import { GestureController, IonModal, Platform } from '@ionic/angular';
 import { distinctUntilArrayItemChanged } from '@ngneat/elf';
 import { TranslateService } from '@ngx-translate/core';
-import { currentLanguage$ } from '@ul/shared';
+import { currentLanguage$ } from '@multi/shared';
 import { format, isAfter, isBefore, sub } from 'date-fns';
 import * as locale from 'date-fns/locale';
 import { EventInput } from 'fullcalendar';

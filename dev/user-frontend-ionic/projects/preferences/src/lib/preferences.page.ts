@@ -38,7 +38,7 @@
  */
 
 import { Component, OnInit, QueryList, Type, ViewChildren, ViewContainerRef } from '@angular/core';
-import { ProjectModuleService } from '@ul/shared';
+import { ProjectModuleService } from '@multi/shared';
 
 @Component({
   selector: 'app-preferences',

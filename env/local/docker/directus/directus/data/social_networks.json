@@ -1,0 +1,20 @@
+[
+	{
+		"title": "github",
+		"icon": "logo-github",
+		"link": "https://github.com/EsupPortail",
+		"sort": 1
+	},
+	{
+		"title": "X",
+		"icon": "logo-twitter",
+		"link": "https://x.com/EsupPortail",
+		"sort": 2
+	},
+	{
+		"title": "Rocket chat",
+		"icon": "rocket",
+		"link": "https://rocket.esup-portail.org",
+		"sort": 3
+	}
+]

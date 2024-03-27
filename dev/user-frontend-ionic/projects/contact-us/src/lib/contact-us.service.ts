@@ -42,7 +42,7 @@ import { Inject, Injectable } from '@angular/core';
 import { App } from '@capacitor/app';
 import { Capacitor } from '@capacitor/core';
 import { Platform } from '@ionic/angular';
-import { getAuthToken, NetworkService } from '@ul/shared';
+import { getAuthToken, NetworkService } from '@multi/shared';
 import { combineLatest, from, Observable, of } from 'rxjs';
 import { map, switchMap, take, tap } from 'rxjs/operators';
 import { ContactUsPageContent, ContactUsRepository } from './contact-us.repository';

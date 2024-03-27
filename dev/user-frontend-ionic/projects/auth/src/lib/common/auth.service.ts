@@ -42,7 +42,7 @@ import { Actions } from '@ngneat/effects-ng';
 import {
   authenticate, AuthenticatedUser,
   cleanupPrivateData, getAuthToken, getRefreshAuthToken, updateAuthenticatedUsername
-} from '@ul/shared';
+} from '@multi/shared';
 import { Observable } from 'rxjs';
 import { concatMap, take, tap } from 'rxjs/operators';
 import { saveCredentialsOnAuthentication$ } from '../preferences/preferences.repository';

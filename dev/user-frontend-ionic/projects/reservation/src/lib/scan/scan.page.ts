@@ -41,7 +41,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
 import { ReservationService } from '../reservation.service';
-import { NavigationService } from '@ul/shared';
+import { NavigationService } from '@multi/shared';
 
 @Component({
   selector: 'app-scan',

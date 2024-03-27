@@ -39,7 +39,7 @@
 
 import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NetworkService } from '@ul/shared';
+import { NetworkService } from '@multi/shared';
 import { Observable } from 'rxjs';
 import { finalize, map, take } from 'rxjs/operators';
 import Swiper from 'swiper';

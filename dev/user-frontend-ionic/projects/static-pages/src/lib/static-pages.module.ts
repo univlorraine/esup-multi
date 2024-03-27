@@ -40,7 +40,7 @@
 import { CommonModule } from '@angular/common';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
-import { ProjectModuleService, SharedComponentsModule } from '@ul/shared';
+import { ProjectModuleService, SharedComponentsModule } from '@multi/shared';
 import { StaticPageComponent } from './static-page/static-page.component';
 import { StaticPagesRoutingModule } from './static-pages-routing.module';
 import { StaticPagesWidgetComponent } from './widgets/static-pages-widget/static-pages-widget.component';

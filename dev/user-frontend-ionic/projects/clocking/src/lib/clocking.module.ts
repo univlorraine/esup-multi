@@ -42,7 +42,7 @@ import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { EffectsNgModule } from '@ngneat/effects-ng';
-import { ProjectModuleService } from '@ul/shared';
+import { ProjectModuleService } from '@multi/shared';
 import { ClockingComponent } from './widgets/clocking/clocking.component';
 import { ClockingEffects } from './clocking.effects';
 

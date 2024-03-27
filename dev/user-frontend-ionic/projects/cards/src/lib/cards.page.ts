@@ -38,7 +38,7 @@
  */
 
 import { Component, Inject, ViewChild } from '@angular/core';
-import { AuthenticatedUser, getAuthToken, NetworkService } from '@ul/shared';
+import { AuthenticatedUser, getAuthToken, NetworkService } from '@multi/shared';
 import { Observable, Subscription } from 'rxjs';
 import { filter, finalize, switchMap, take } from 'rxjs/operators';
 import { CardModalComponent } from './card/card-modal.component';

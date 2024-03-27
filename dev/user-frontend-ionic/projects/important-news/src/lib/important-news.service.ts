@@ -39,7 +39,7 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { getAuthToken, NetworkService } from '@ul/shared';
+import { getAuthToken, NetworkService } from '@multi/shared';
 import { from, Observable } from 'rxjs';
 import { filter, switchMap, take } from 'rxjs/operators';
 import { ImportantNews, TranslatedImportantNews } from './important-news.repository';

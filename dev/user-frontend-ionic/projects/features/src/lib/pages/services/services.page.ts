@@ -42,7 +42,7 @@ import { IonContent } from '@ionic/angular';
 import {
   FeaturesService, featuresUserOrder$, MenuService, ServiceMenuItem, setFeaturesUserOrder,
   TranslatedFeature, updateFeaturesListIsNewToFalse, userIsAuthenticated$
-} from '@ul/shared';
+} from '@multi/shared';
 import { DragulaService } from 'ng2-dragula';
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { concatMap, map, switchMap, take, tap } from 'rxjs/operators';

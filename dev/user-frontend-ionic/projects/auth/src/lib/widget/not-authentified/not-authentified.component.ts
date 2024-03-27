@@ -38,7 +38,7 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { AuthenticatedUser, authenticatedUser$ } from '@ul/shared';
+import { AuthenticatedUser, authenticatedUser$ } from '@multi/shared';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { LoginRepository, TranslatedLoginPageContent } from '../../common/login.repository';

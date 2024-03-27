@@ -38,7 +38,7 @@
  */
 
 import { Component } from '@angular/core';
-import { NetworkService } from '@ul/shared';
+import { NetworkService } from '@multi/shared';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { ContactUsRepository, TranslatedContactUsPageContent } from '../../contact-us.repository';

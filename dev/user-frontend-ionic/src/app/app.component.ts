@@ -52,7 +52,7 @@ import {
   currentLanguage$, features$, FeaturesService, isDarkTheme$, isFeatureStoreInitialized$, NavigationService,
   NotificationsService, NetworkService, PageLayout, PageLayoutService, setIsDarkTheme, themeRepoInitialized$,
   userHadSetThemeInApp, userHadSetThemeInApp$
-} from '@ul/shared';
+} from '@multi/shared';
 import { initializeApp } from 'firebase/app';
 import { combineLatest, Observable, of, Subscription } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';

@@ -40,7 +40,7 @@
 import { Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Browser } from '@capacitor/browser';
-import { currentLanguage$, StatisticsService, ThemeService } from '@ul/shared';
+import { currentLanguage$, StatisticsService, ThemeService } from '@multi/shared';
 import { combineLatest, Observable } from 'rxjs';
 import { finalize, map, take } from 'rxjs/operators';
 import { ImportantNews, importantNewsList$, setImportantNews as setImportantNewsList } from '../../important-news.repository';

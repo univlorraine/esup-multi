@@ -40,7 +40,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Contacts, EmailType, PhoneType } from '@capacitor-community/contacts';
-import { getAuthToken } from '@ul/shared';
+import { getAuthToken } from '@multi/shared';
 import { Observable } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
 

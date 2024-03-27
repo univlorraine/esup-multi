@@ -1,0 +1,81 @@
+[
+	{
+		"status": "published",
+		"sort": null,
+		"color": "#2272b9",
+		"link": "https://www.esup-portail.org/conference/",
+		"statisticName": null,
+		"translations": [
+			{
+				"title": "Esup-Days #37",
+				"content": "Les prochains Esup-Days auront lieu les 3 et 4 avril prochains à Lyon !",
+				"buttonLabel": "M'inscrire",
+				"languages_code": "fr"
+			},
+			{
+				"title": "Esup-Days #37",
+				"content": "The next Esup-Days will take place on 3 and 4 April in Lyon!",
+				"buttonLabel": "Register",
+				"languages_code": "en"
+			}
+		],
+		"authorization": null,
+		"image": null
+	},
+	{
+		"status": "published",
+		"sort": null,
+		"color": "#F4E648",
+		"link": "/cards",
+		"statisticName": "cards",
+		"translations": [
+			{
+				"title": "Cartes étudiant",
+				"content": "Vos cartes d'étudiant sont disponibles !",
+				"buttonLabel": "Voir vos cartes",
+				"languages_code": "fr"
+			},
+			{
+				"title": "Student cards",
+				"content": "Your student cards are available.",
+				"buttonLabel": "See your cards",
+				"languages_code": "en"
+			}
+		],
+		"authorization": {
+			"type": "ALLOW",
+			"roles": [
+				"student"
+			]
+		},
+		"image": null
+	},
+	{
+		"status": "published",
+		"sort": null,
+		"color": "#A0D0B0",
+		"link": null,
+		"statisticName": null,
+		"translations": [
+			{
+				"title": "Elections professionnelles",
+				"content": "Tous les personnels sont chaleureusement invités à venir voter aux élections professionnelles qui se dérouleront le 31 avril 2024. ",
+				"buttonLabel": null,
+				"languages_code": "fr"
+			},
+			{
+				"title": "Professional elections",
+				"content": "All staff are warmly invited to come and vote in the professional elections to be held on 31 April 2024.",
+				"buttonLabel": "See more",
+				"languages_code": "en"
+			}
+		],
+		"authorization": {
+			"type": "ALLOW",
+			"roles": [
+				"staff"
+			]
+		},
+		"image": null
+	}
+]

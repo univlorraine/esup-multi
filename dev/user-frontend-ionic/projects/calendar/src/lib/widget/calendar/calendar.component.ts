@@ -38,7 +38,7 @@
  */
 
 import { AfterViewInit, ChangeDetectorRef, Component, Input } from '@angular/core';
-import { ThemeService } from '@ul/shared';
+import { ThemeService } from '@multi/shared';
 import { Observable } from 'rxjs';
 import { finalize, take } from 'rxjs/operators';
 import { MailCalendarEvents } from '../../calendar.repository';
