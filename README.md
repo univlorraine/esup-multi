@@ -1,32 +1,43 @@
-# Université de Lorraine - Application MULTI
+| ![Logo MESRI](./doc/logo-mesri.jpg) | ![Logo Esup](./doc/logo-esupportail.png) |
+| :---------------: |:---------------:|
 
-## Application utilisateur
+# Projet Esup-Multi
 
-- [Frontend Ionic](dev/user-frontend-ionic/README.md)
-- [Backend Nest](dev/user-backend-nest/README.md)
+![https://img.shields.io/github/license/EsupPortail/Esup-Pod)](https://img.shields.io/badge/License-CeCILL%202.1-orange)
 
-## Licence
+Le projet **Esup-Multi** porté par l'université de Lorraine a pour objectif de proposer un socle technique opensource permettant la mise en oeuvre d'une application mobile institutionnelle Android, iOS et Web.
 
-MULTI est sous la licence [CeCILL-2.1](LICENCE).
+Esup-Multi, financé en partie par le plan **France Relance** dans le cadre de l'appel à projets **Services Numériques aux Étudiants** offre une architecture modulaire permettant une personnalisation approfondie, garantissant ainsi que l'application Esup-Multi puisse s'interconnecter au système d'information de l'établissement. Elle s'accompagne d'un CMS Headless qui permet d'externaliser paramétrages et contenus.
 
-### En cas de changement de licence
+Les sources du projet sont constituées :
 
-> Cette section destinée à la Direction du Numérique de l'Université de Lorraine.
+- D'un **front-end** qui permet de générer les applications iOs et Android ([Read me](dev/user-frontend-ionic/README.md))
+- D'un **back-end** basé sur une archtecture micro-services et composée de 17 modules ([Read me](dev/user-backend-nest/README.md))
 
-Si le projet doit être distribué sous une autre licence, il est nécessaire
-de modifier le fichier [LICENCE](LICENCE) et de mettre à jour l'en-tête
-de tous les fichiers du projet (votre IDE devrait pouvoir le faire pour vous).
+## Installation quickstart
 
-Pensez également à mettre à jour les fichiers `package.json` indiquant
-l'identifiant [SPDX](https://spdx.org/licenses/) de la licence du projet,
-l'IDE ne le fera probablement pas.
+Plus d'information dans la [documentation d'installation](https://www.esup-portail.org/wiki/x/F4DoTw)
 
-Des informations complémentaires sont disponibles sur la page
-[Vademecum licences](https://wikidocs.univ-lorraine.fr/display/dnsigdoctechdev/Vademecum+licences#Vademecumlicences-IDEJetBrains)
-du wiki de l'Université de Lorraine (notamment la procédure pour les en-têtes
-avec un IDE JetBrains).
+## Technologies utilisées
 
-## Dépendances
+Côté front-end :
+
+- Ionic
+- Angular
+
+Côté back-end :
+- NodeJS avec Express et NestJS
+- Nats
+- Directus
+- MongoDB
+
+Retrouvez toute la documentation sur [notre espace wiki](https://www.esup-portail.org/wiki/x/EYDoTw)
+
+## Licence et contributions
+
+**Esup-Multi** est sous la licence [CeCILL-2.1](LICENCE). Si vous souhaitez contribuer au projet vous pouvez contacter [esup-multi@esup-portail.org](mailto:esup-multi@esup-portail.org).
+
+### Dépendances
 
 La liste des dépendances et du code tiers utilisé est disponible
 dans le fichier [libraries.md](libraries.md).\
@@ -47,3 +58,5 @@ Le script utilise [license-checker-rseidelsohn](https://www.npmjs.com/package/li
 (license [BSD-3-Clause](https://spdx.org/licenses/BSD-3-Clause.html))
 pour générer la liste des dépendances à partir des fichiers `package.json`
 du projet.
+
+![Logo France Relance](./doc/logo-france-relance.png)
