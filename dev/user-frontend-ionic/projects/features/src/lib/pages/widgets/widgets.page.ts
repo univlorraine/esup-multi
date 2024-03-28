@@ -38,7 +38,7 @@
  */
 
 import { Component } from '@angular/core';
-import { FeaturesService, GuidedTourService, TranslatedFeature, WidgetLifecycleService } from '@ul/shared';
+import { FeaturesService, GuidedTourService, TranslatedFeature, WidgetLifecycleService } from '@multi/shared';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, take } from 'rxjs/operators';
 

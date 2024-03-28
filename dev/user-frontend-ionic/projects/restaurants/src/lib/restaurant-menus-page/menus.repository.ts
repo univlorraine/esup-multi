@@ -40,7 +40,7 @@
 import { createStore } from '@ngneat/elf';
 import { selectManyByPredicate, setEntities, upsertEntities, withEntities } from '@ngneat/elf-entities';
 import { persistState } from '@ngneat/elf-persist-state';
-import { localForageStore } from '@ul/shared';
+import { localForageStore } from '@multi/shared';
 
 
 export interface Menu {

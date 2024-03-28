@@ -39,7 +39,7 @@
 
 import { createStore, select, Store, withProps } from '@ngneat/elf';
 import { persistState } from '@ngneat/elf-persist-state';
-import { localForageStore } from '@ul/shared';
+import { localForageStore } from '@multi/shared';
 import { combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 

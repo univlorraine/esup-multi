@@ -39,7 +39,7 @@
 
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NetworkService, StatisticsService } from '@ul/shared';
+import { NetworkService, StatisticsService } from '@multi/shared';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { StaticPagesRepository, TranslatedStaticPage } from '../../static-pages.repository';

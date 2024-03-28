@@ -7,67 +7,67 @@
     "sourceMap": true,
     "declaration": false,
     "paths": {
-      "@ul/shared": [
+      "@multi/shared": [
         "dist/shared"
       ],
-      "@ul/auth": [
+      "@multi/auth": [
         "dist/auth"
       ],
-      "@ul/preferences": [
+      "@multi/preferences": [
         "dist/preferences"
       ],
-      "@ul/map": [
+      "@multi/map": [
         "dist/map"
       ],
-      "@ul/rss": [
+      "@multi/rss": [
         "dist/rss"
       ],
-      "@ul/cards": [
+      "@multi/cards": [
         "dist/cards"
       ],
-      "@ul/schedule": [
+      "@multi/schedule": [
         "dist/schedule"
       ],
-      "@ul/features": [
+      "@multi/features": [
         "dist/features"
       ],
-      "@ul/contacts": [
+      "@multi/contacts": [
         "dist/contacts"
       ],
-      "@ul/notifications": [
+      "@multi/notifications": [
         "dist/notifications"
       ],
-      "@ul/reservation": [
+      "@multi/reservation": [
         "dist/reservation"
       ],
-      "@ul/important-news": [
+      "@multi/important-news": [
         "dist/important-news"
       ],
-      "@ul/clocking": [
+      "@multi/clocking": [
         "dist/clocking"
       ],
-      "@ul/menu": [
+      "@multi/menu": [
         "dist/menu"
       ],
-      "@ul/chatbot": [
+      "@multi/chatbot": [
         "dist/chatbot"
       ],
-      "@ul/static-pages": [
+      "@multi/static-pages": [
         "dist/static-pages"
       ],
-      "@ul/social-network": [
+      "@multi/social-network": [
         "dist/social-network"
       ],
-      "@ul/contact-us": [
+      "@multi/contact-us": [
         "dist/contact-us"
       ],
-      "@ul/restaurants": [
+      "@multi/restaurants": [
         "dist/restaurants"
       ],
-      "@ul/unread-mail": [
+      "@multi/unread-mail": [
         "dist/unread-mail"
       ],
-      "@ul/calendar": [
+      "@multi/calendar": [
         "dist/calendar"
       ]
     },

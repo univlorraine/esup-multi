@@ -45,7 +45,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { PreferencesPageRoutingModule } from './preferences-routing.module';
 
-import { ProjectModuleService, SharedComponentsModule } from '@ul/shared';
+import { ProjectModuleService, SharedComponentsModule } from '@multi/shared';
 import { PreferencesPage } from './preferences.page';
 
 const initModule = (projectModuleService: ProjectModuleService) =>

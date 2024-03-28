@@ -38,7 +38,7 @@
  */
 
 import { AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy } from '@angular/core';
-import { CompleteLocalDatePipe, ThemeService } from '@ul/shared';
+import { CompleteLocalDatePipe, ThemeService } from '@multi/shared';
 import { Observable, Subscription } from 'rxjs';
 import { finalize, map, take } from 'rxjs/operators';
 import { Event } from '../../schedule.repository';

@@ -8,4 +8,7 @@ node_modules/
 
 /ci-config/*
 !/ci-config/gitlab-example/
+
+/env/*
+!/env/local
 /env/local/docker/directus/mysql-data/

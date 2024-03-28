@@ -39,7 +39,7 @@
 
 import { Injectable } from '@angular/core';
 import { createEffect, ofType } from '@ngneat/effects';
-import { cleanupPrivateData, clearFeatures, FeaturesService, NetworkService } from '@ul/shared';
+import { cleanupPrivateData, clearFeatures, FeaturesService, NetworkService } from '@multi/shared';
 import { tap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })

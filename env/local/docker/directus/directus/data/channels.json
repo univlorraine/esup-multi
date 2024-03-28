@@ -1,0 +1,62 @@
+[
+	{
+		"code": "ALERT",
+		"color": "#FFEF65",
+		"routerLink": null,
+		"translations": [
+			{
+				"languages_code": "en",
+				"label": "ALERT"
+			},
+			{
+				"languages_code": "fr",
+				"label": "ALERTE"
+			}
+		]
+	},
+	{
+		"code": "ETAB",
+		"color": "#A0D0B0",
+		"routerLink": null,
+		"translations": [
+			{
+				"languages_code": "en",
+				"label": "Establishment info"
+			},
+			{
+				"languages_code": "fr",
+				"label": "Infos établissement"
+			}
+		]
+	},
+	{
+		"code": "EDT",
+		"color": "#BADFEE",
+		"routerLink": "/schedule",
+		"translations": [
+			{
+				"languages_code": "fr",
+				"label": "Infos emploi du temps"
+			},
+			{
+				"languages_code": "en",
+				"label": "Schedule  info"
+			}
+		]
+	},
+	{
+		"code": "SUAPS",
+		"color": "#BADFEE",
+		"routerLink": null,
+		"translations": [
+			{
+				"languages_code": "fr",
+				"label": "Sports"
+			},
+			{
+				"languages_code": "en",
+				"label": "Sports"
+			}
+		]
+	}
+]
