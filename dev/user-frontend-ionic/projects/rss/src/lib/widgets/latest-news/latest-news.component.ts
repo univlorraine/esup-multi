@@ -47,7 +47,7 @@ import { RssService } from '../../rss.service';
 @Component({
   selector: 'app-latest-news-widget',
   templateUrl: './latest-news.component.html',
-  styleUrls: ['latest-news.component.scss'],
+  styleUrls: ['../../../../../../src/theme/app-theme/styles/rss/latest-news.component.scss'],
 })
 export class LatestNewsComponent {
   public isLoading = false;

@@ -45,7 +45,7 @@ import { NavController } from '@ionic/angular';
 @Component({
   selector: 'app-reservation',
   templateUrl: './reservation.page.html',
-  styleUrls: ['./reservation.page.scss'],
+  styleUrls: ['../../../../src/theme/app-theme/styles/reservation/reservation.page.scss'],
 })
 export class ReservationPage {
 

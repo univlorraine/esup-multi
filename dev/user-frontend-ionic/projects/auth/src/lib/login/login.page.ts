@@ -57,7 +57,7 @@ interface AuthenticatedUserToken extends AuthenticatedUser {
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
-  styleUrls: ['./login.page.scss'],
+  styleUrls: ['../../../../../src/theme/app-theme/styles/auth/login.page.scss'],
 })
 export class LoginPage implements OnInit {
 

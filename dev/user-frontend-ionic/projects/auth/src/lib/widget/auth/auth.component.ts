@@ -46,7 +46,7 @@ import { AuthService } from '../../common/auth.service';
 @Component({
   selector: 'app-auth-widget',
   templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.scss'],
+  styleUrls: ['../../../../../../src/theme/app-theme/styles/auth/auth.component.scss'],
 })
 export class AuthComponent implements OnInit {
   isLoading = false;

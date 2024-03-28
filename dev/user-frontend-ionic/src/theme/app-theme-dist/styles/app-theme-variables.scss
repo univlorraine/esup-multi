@@ -1,0 +1,258 @@
+/*!
+ * Copyright ou © ou Copr. Université de Lorraine, (2022)
+ *
+ * Direction du Numérique de l'Université de Lorraine - SIED
+ *  (dn-mobile-dev@univ-lorraine.fr)
+ * JNESIS (contact@jnesis.com)
+ *
+ * Ce logiciel est un programme informatique servant à rendre accessible
+ * sur mobile divers services universitaires aux étudiants et aux personnels
+ * de l'université.
+ *
+ * Ce logiciel est régi par la licence CeCILL 2.1, soumise au droit français
+ * et respectant les principes de diffusion des logiciels libres. Vous pouvez
+ * utiliser, modifier et/ou redistribuer ce programme sous les conditions
+ * de la licence CeCILL telle que diffusée par le CEA, le CNRS et INRIA
+ * sur le site "http://cecill.info".
+ *
+ * En contrepartie de l'accessibilité au code source et des droits de copie,
+ * de modification et de redistribution accordés par cette licence, il n'est
+ * offert aux utilisateurs qu'une garantie limitée. Pour les mêmes raisons,
+ * seule une responsabilité restreinte pèse sur l'auteur du programme, le
+ * titulaire des droits patrimoniaux et les concédants successifs.
+ *
+ * À cet égard, l'attention de l'utilisateur est attirée sur les risques
+ * associés au chargement, à l'utilisation, à la modification et/ou au
+ * développement et à la reproduction du logiciel par l'utilisateur étant
+ * donné sa spécificité de logiciel libre, qui peut le rendre complexe à
+ * manipuler et qui le réserve donc à des développeurs et des professionnels
+ * avertis possédant des connaissances informatiques approfondies. Les
+ * utilisateurs sont donc invités à charger et à tester l'adéquation du
+ * logiciel à leurs besoins dans des conditions permettant d'assurer la
+ * sécurité de leurs systèmes et/ou de leurs données et, plus généralement,
+ * à l'utiliser et à l'exploiter dans les mêmes conditions de sécurité.
+ *
+ * Le fait que vous puissiez accéder à cet en-tête signifie que vous avez
+ * pris connaissance de la licence CeCILL 2.1, et que vous en avez accepté les
+ * termes.
+ */
+
+@font-face {
+  font-family: "MavenProVariableFont";
+  src: url('../assets/fonts/Maven_Pro/MavenPro-VariableFont_wght.ttf');
+}
+
+@font-face {
+  font-family: 'RobotoCondensedRegular';
+  src: url('../assets/fonts/Roboto_Condensed/RobotoCondensed-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'RobotoCondensedBold';
+  src: url('../assets/fonts/Roboto_Condensed/RobotoCondensed-Bold.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'RobotoCondensedLight';
+  src: url('../assets/fonts/Roboto_Condensed/RobotoCondensed-Light.ttf') format('truetype');
+}
+
+:root {
+
+  // // // ---------------------
+  // // // Font CSS variables (Change value here and use variables only in this file or theme/fonts/.. files).
+  // // // ---------------------
+
+  // // // Font family definition variables
+
+  --app-font-family-base: 'RobotoCondensedRegular',
+    sans-serif;
+
+  // Set base font to global application
+  --ion-font-family: var(--app-font-family-base), sans-serif;
+
+  // This next font have static weight in multiple files :
+  --app-font-primary-static-regular: 'RobotoCondensedRegular',
+    sans-serif;
+  --app-font-primary-static-bold: 'RobotoCondensedBold',
+    sans-serif;
+  --app-font-primary-static-light: 'RobotoCondensedLight',
+    sans-serif;
+
+  // MavenPro is a weight dynamic font  (one file for multiple weight),
+  // if your font-family is static you must to do like the static font method above
+  // exemple : --app-font-secondary-regular, ...
+  --app-font-secondary: 'MavenProVariableFont',
+    sans-serif;
+
+
+  // // // ---------------------
+  // // // Title size variables (Change value here but use variables only in theme/fonts/fonts.scss)
+  // // // ---------------------
+
+  --app-title-1-size: 2rem;
+  --app-title-2-size: 1.75rem;
+  --app-title-3-size: 1.5rem;
+  --app-title-4-size: 1.325rem;
+  --app-title-5-size: 1rem;
+  --app-title-6-size: 0.9rem;
+  --app-title-7-size: 0.7rem;
+
+  // // // ---------------------
+  // // // Texte size variables (Change value here but use variables only in theme/fonts/fonts.scss)
+  // // // ---------------------
+
+  --app-text-1-size: 1.5rem;
+  --app-text-2-size: 1.15rem;
+  --app-text-3-size: 1rem;
+  --app-text-4-size: 0.875rem;
+  --app-text-5-size: 0.75rem;
+  --app-text-6-size: 0.7rem;
+
+  // // ---------------------
+  // // Icon size variables (Change value here and use variables only here (Button section) and in theme/icons/icons.scss)
+  // // ---------------------
+
+  --icon-1-size: 3.2rem !important;
+  --icon-2-size: 2.3rem !important;
+  --icon-3-size: 1.5rem !important;
+  --icon-4-size: 1.25rem !important;
+  --icon-5-size: 1.10rem !important;
+  --icon-6-size: 0.75rem !important;
+
+  // // ---------------------
+  // // Logo size variables (Change value here and use variables only in theme/logos/logos.scss)
+  // // ---------------------
+
+  --logo-1-size: 5rem;
+  --logo-2-size: 4rem;
+  --logo-3-size: 3rem;
+  --logo-4-size: 2rem;
+  --logo-5-size: 1rem;
+
+  // // ---------------------
+  // Button styling variables (Change value here and use variables only in theme/components/button.scss)
+  // // ---------------------
+
+  // Button simple text type 1
+  --app-text-button-1-background: transparent;
+  --app-text-button-1-box-shadow: none;
+  --app-text-button-1-text-transform: none;
+  --app-text-button-1-max-height: 1.7rem;
+  --app-text-button-1-color: var(--app-font-color-primary);
+  --app-text-button-1-icon-margin-left: 0.5rem;
+
+  // Button simple text type 2
+  --app-text-button-2-background: transparent;
+  --app-text-button-2-box-shadow: none;
+  --app-text-button-2-text-transform: none;
+  --app-text-button-2-max-height: 1.7rem;
+  --app-text-button-2-color: var(--app-font-color-primary);
+  --app-text-button-2-icon-margin-left: 0.5rem;
+
+  // Button Rectangular type 1
+  --app-rectangular-button-1-background-color: white;
+  --app-rectangular-button-1-bottom-border-width: 0.4rem;
+  --app-rectangular-button-1-border-bottom-color: var(--ion-color-secondary);
+  --app-rectangular-button-1-outline-width: 0.12rem;
+  --app-rectangular-button-1-outline-color: var(--ion-color-primary);
+  --app-rectangular-button-1-font-family: var(--app-font-primary-static-regular);
+  --app-rectangular-button-1-font-size: 0.8rem;
+  --app-rectangular-button-1-font-color: var(--app-font-color-primary);
+  --app-rectangular-button-1-min-height: 2.25rem;
+
+  // Button Square type 1 (icon only with label bellow)
+  --app-square-button-1-background-color: white;
+  --app-square-button-1-font-family: var(--app-font-primary-static-regular);
+  --app-square-button-1-font-size: 0.875rem;
+  --app-square-button-1-font-color: var(--app-font-color-primary);
+  --app-square-button-1-font-weight: bolder;
+  --app-square-button-1-label-margin-top: 0.2rem;
+  --app-square-button-1-letter-spacing: 0rem;
+  --app-square-button-1-border-radius: var(--app-border-radius-4);
+  --app-square-button-1-icon-size: var(--icon-1-size);
+  --app-square-button-1-label-line-height: 1.4rem;
+
+  // Button Rounded type 1 (icon only or short text)
+  --app-rounded-button-1-background-color: white;
+  --app-rounded-button-1-icon-color: rgb(0, 0, 0);
+  --app-rounded-button-1-height: 2.4rem;
+  --app-rounded-button-1-width: 2.4rem;
+  --app-rounded-button-1-border-width: 0.1rem;
+  --app-rounded-button-1-icon-size: var(--icon-3-size);
+
+  // // ---------------------
+  // Box styling variables (Change value here and use variables here and in SCSS files on all CSS classes needed throughout the app)
+  // Example usage: .container { border: var(--app-border-3-width) solid var(--ion-color-primary);}
+  // // ---------------------
+
+  --app-border-color-primary: #000000;
+  --app-border-color-secondary: var(--ion-color-medium);
+
+  // // // Border width variables
+  --app-border-width-1: 1rem;
+  --app-border-width-2: 0.7rem;
+  --app-border-width-3: 0.5rem;
+  --app-border-width-4: 0.4rem;
+  --app-border-width-5: 0.3rem;
+  --app-border-width-6: 0.2rem;
+  --app-border-width-7: 0.1rem;
+  --app-border-width-8: 0.063rem; // = 1px
+
+  // // // ---------------------
+  // // // Radius level variables (set to 0 on all variables for no border-radius)
+  // // // ---------------------
+
+  --app-border-radius-1: 2rem;
+  --app-border-radius-2: 1rem;
+  --app-border-radius-3: 0.5rem;
+  --app-border-radius-4: 0.25rem;
+  // Search for the next variable in all app folders if you want to set another radius variable.
+  // Do not modify this value (=> 0rem).
+  --app-border-no-radius: 0rem;
+
+  // // // ---------------------
+  // // // Box shadow variables
+  // // // ---------------------
+
+  --app-box-shadow-1: 0.5rem;
+  --app-box-shadow-2: 0.3rem;
+  --app-box-shadow-3: 0.2rem;
+  --app-box-shadow-4: 0.1rem;
+
+  // Search for the next variable in all app folders if you want to set a different box shadow variable.
+  // Do not modify this value (=> 0rem).
+  --app-border-no-box-shadow: 0rem;
+
+  // // // ---------------------
+  // Chatbot variables (the name of the logo sent by the chatbot must be '_ully5.png'). If it isn't, this style won't be applied.
+  // // // ---------------------
+  --app-chatbot-first-image-margin-bottom: -1.25rem;
+
+  // // // ---------------------
+  // ion-range variables (cursor on a bar)
+  // // // ---------------------
+
+  --app-ion-range-background: var(--ion-color-light-tint) !important; // componant background
+  --app-ion-range-knob-background: #000000; // cursor background
+}
+
+// Dark theme for this file variables.
+.dark {
+  --app-border-color-primary: #ffffff;
+  --app-border-color-secondary: #ffffff;
+
+  --app-text-button-2-color: var(--app-font-color-primary);
+
+  --app-rectangular-button-1-background-color: rgb(255, 255, 255);
+  --app-rectangular-button-1-font-color: var(--app-font-color-primary-contrast);
+
+  --app-rounded-button-1-background-color: rgb(255, 255, 255);
+
+  --app-square-button-1-background-color: #252525 ;
+  --app-square-button-1-font-color: var(--app-font-color-primary);
+
+  //@TODO mettre variable si couleur issue de variable.scss (prochain ticket MULTI-351)
+  --app-ion-range-background: #252525 !important;
+  --app-ion-range-knob-background: var(--ion-color-light); // cursor background
+}

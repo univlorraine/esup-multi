@@ -48,7 +48,7 @@ import { NextEventsService } from './next-events.service';
 @Component({
   selector: 'app-schedule-widget-next-events',
   templateUrl: './next-events.component.html',
-  styleUrls: ['./next-events.component.scss'],
+  styleUrls: ['../../../../../../src/theme/app-theme/styles/schedule/next-events.component.scss'],
 })
 export class NextEventsComponent implements OnDestroy, AfterViewInit {
 
