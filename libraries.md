@@ -1,6 +1,7 @@
 # Table of content
 * [Root directory](#root-directory)
 * [Frontend](#frontend)
+* [Mocks (backend)](#backend-mocks)
 * [Backend](#backend)
   * [main](#backend-main)
   * [auth](#backend-auth)
@@ -142,6 +143,24 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [tslib@2.6.2](https://github.com/Microsoft/tslib) - 0BSD
 - [typescript@4.7.4](https://github.com/Microsoft/TypeScript) - Apache-2.0
 - [zone.js@0.11.8](https://github.com/angular/angular) - MIT
+
+</details>
+
+## [Mocks (backend)](./dev/user-backend-mocks)
+<span id="backend-mocks"></span>
+```
+├─ MIT: 5
+└─ BSD-2-Clause: 1
+```
+
+<details><summary>Détails</summary>
+
+- [debug@2.6.9](https://github.com/visionmedia/debug) - MIT
+- [dotenv@16.4.5](https://github.com/motdotla/dotenv) - BSD-2-Clause
+- [express@4.16.4](https://github.com/expressjs/express) - MIT
+- [http-errors@1.6.3](https://github.com/jshttp/http-errors) - MIT
+- [morgan@1.9.1](https://github.com/expressjs/morgan) - MIT
+- [uuid@9.0.1](https://github.com/uuidjs/uuid) - MIT
 
 </details>
 
