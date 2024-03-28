@@ -56,6 +56,7 @@ import {
 import { initializeApp } from 'firebase/app';
 import { combineLatest, Observable, of, Subscription } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -86,7 +87,8 @@ export class AppComponent implements OnInit, OnDestroy {
     @Inject(DOCUMENT) private document: Document,
     private networkService: NetworkService,
     private featuresService: FeaturesService,
-    private notificationsService: NotificationsService
+    private notificationsService: NotificationsService,
+    private titleService: Title
   ) {
     currentLanguage$.subscribe((language) => {
       document.documentElement.lang = language || environment.defaultLanguage;
@@ -144,6 +146,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.titleService.setTitle(this.environment.appTitle);
     this.backButtonListener = App.addListener('backButton', () => {
       this.popoverController.getTop().then(popover => {
         if (popover) {
