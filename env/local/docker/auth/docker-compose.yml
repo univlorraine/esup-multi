@@ -9,8 +9,8 @@ services:
     networks:
       - auth
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_ROOT_USERNAME: multi
+      MONGO_INITDB_ROOT_PASSWORD: multi
 
   mongo-express:
     image: mongo-express
