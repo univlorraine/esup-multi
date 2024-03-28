@@ -1,4 +1,4 @@
-# Application de "bouchonnage" des données utilisateurs (multi-tenant / INSA)
+# Application de "bouchonnage" des données utilisateurs
 
 ## Installation
 
@@ -27,7 +27,15 @@ Se placer dans le dossier [user-backend-mocks](.) et exécuter :
 npm start
 ```
 
-## Modifications de l'application multi-tenant 
+### Comptes utilisateurs
+Trois comptes utilisateurs sont disponibles pour les tests :
+- `etu` : étudiant
+- `staff` : personnel
+- `prof` : enseignant
+
+Les mots de passe sont identiques aux identifiants.
+
+## Modifications de l'application multi
 Il est nécessaire de modifier les fichiers d'environnement de l'application multi-tenant pour associer les microservices
 aux web-services de bouchonnage du projet
 ```
