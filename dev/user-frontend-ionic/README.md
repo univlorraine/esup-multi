@@ -167,10 +167,25 @@ npm run module:build-all
 
 - [Module shared](dev/user-frontend-ionic/projects/shared/README.md)
 - [Module auth](dev/user-frontend-ionic/projects/auth/README.md)
-- [Module info](dev/user-frontend-ionic/projects/info/README.md)
-- [Module preferences](dev/user-frontend-ionic/projects/preferences/README.md)
+- [Module calendar](dev/user-frontend-ionic/projects/calendar/README.md)
+- [Module cards](dev/user-frontend-ionic/projects/cards/README.md)
+- [Module chatbot](dev/user-frontend-ionic/projects/chatbot/README.md)
+- [Module clocking](dev/user-frontend-ionic/projects/clocking/README.md)
+- [Module contact-us](dev/user-frontend-ionic/projects/contact-us/README.md)
+- [Module contacts](dev/user-frontend-ionic/projects/contacts/README.md)
+- [Module features](dev/user-frontend-ionic/projects/features/README.md)
+- [Module important-news](dev/user-frontend-ionic/projects/important-news/README.md)
 - [Module map](dev/user-frontend-ionic/projects/map/README.md)
-- [Module contact](dev/user-frontend-ionic/projects/contact/README.md)
+- [Module menu](dev/user-frontend-ionic/projects/menu/README.md)
+- [Module notifications](dev/user-frontend-ionic/projects/notifications/README.md)
+- [Module preferences](dev/user-frontend-ionic/projects/preferences/README.md)
+- [Module reservation](dev/user-frontend-ionic/projects/reservation/README.md)
+- [Module restaurants](dev/user-frontend-ionic/projects/restaurants/README.md)
+- [Module rss](dev/user-frontend-ionic/projects/rss/README.md)
+- [Module schedule](dev/user-frontend-ionic/projects/schedule/README.md)
+- [Module social-network](dev/user-frontend-ionic/projects/social-network/README.md)
+- [Module static-pages](dev/user-frontend-ionic/projects/static-pages/README.md)
+- [Module unread-mail](dev/user-frontend-ionic/projects/unread-mail/README.md)
 
 ## Personnalisation du style de l'application
 

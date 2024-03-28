@@ -1,12 +1,22 @@
 # Application MULTI - Backend utilisateur
 - [Gateway API](dev/user-backend-nest/main/README.md)
 - [Microservice auth](dev/user-backend-nest/microservices/auth/README.md)
-- [Microservice info](dev/user-backend-nest/microservices/info/README.md)
-- [Microservice map](dev/user-backend-nest/microservices/map/README.md)
 - [Microservice cards](dev/user-backend-nest/microservices/cards/README.md)
-- [Microservice rss](dev/user-backend-nest/microservices/rss/README.md)
+- [Microservice chatbot](dev/user-backend-nest/microservices/chatbot/README.md)
 - [Microservice clocking](dev/user-backend-nest/microservices/clocking/README.md)
+- [Microservice contact-us](dev/user-backend-nest/microservices/contact-us/README.md)
+- [Microservice contacts](dev/user-backend-nest/microservices/contacts/README.md)
+- [Microservice features](dev/user-backend-nest/microservices/features/README.md)
+- [Microservice important-news](dev/user-backend-nest/microservices/important-news/README.md)
 - [Microservice mail-calendar](dev/user-backend-nest/microservices/mail-calendar/README.md)
+- [Microservice map](dev/user-backend-nest/microservices/map/README.md)
+- [Microservice notifications](dev/user-backend-nest/microservices/notifications/README.md)
+- [Microservice restaurants](dev/user-backend-nest/restaurants/README.md)
+- [Microservice rss](dev/user-backend-nest/microservices/rss/README.md)
+- [Microservice schedule](dev/user-backend-nest/microservices/schedule/README.md)
+- [Microservice social-network](dev/user-backend-nest/microservices/social-network/README.md)
+- [Microservice static-pages](dev/user-backend-nest/microservices/static-pages/README.md)
+- [Microservice statistics](dev/user-backend-nest/microservices/statistics/README.md)
 
 ## Créer un nouveau microservice
 
