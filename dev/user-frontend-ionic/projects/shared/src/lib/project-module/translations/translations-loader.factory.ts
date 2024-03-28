@@ -42,7 +42,7 @@ import { IModuleTranslationOptions, ModuleTranslateLoader } from '@larscom/ngx-t
 import { ProjectModuleService } from '../project-module.service';
 
 export const translationsLoaderFactory = (http: HttpClient, projectModuleService: ProjectModuleService) => {
-    const baseTranslateUrl = './assets/i18n';
+    const baseTranslateUrl = './i18n';
 
     const translations = projectModuleService.getTranslatedProjectModules().map(projectModule => ({
       baseTranslateUrl, moduleName: projectModule

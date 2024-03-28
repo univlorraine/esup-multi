@@ -49,7 +49,7 @@ import { ScheduleService } from '../../schedule.service';
 @Component({
   selector: 'app-select-user',
   templateUrl: './select-user.component.html',
-  styleUrls: ['./select-user.component.scss'],
+  styleUrls: ['../../../../../../src/theme/app-theme/styles/schedule/select-user.component.scss'],
 })
 export class SelectUserComponent {
 

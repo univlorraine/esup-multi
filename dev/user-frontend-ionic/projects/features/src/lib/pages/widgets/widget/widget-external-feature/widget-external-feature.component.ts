@@ -44,7 +44,7 @@ import { SsoService, StatisticsService, ThemeService, TranslatedExternalFeature 
 @Component({
   selector: 'app-widget-external-feature',
   templateUrl: './widget-external-feature.component.html',
-  styleUrls: ['./widget-external-feature.component.scss'],
+  styleUrls: ['../../../../../../../../src/theme/app-theme/styles/features/widget-external-feature.component.scss'],
 })
 export class WidgetExternalFeatureComponent {
   @Input() feature: TranslatedExternalFeature;

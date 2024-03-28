@@ -53,7 +53,7 @@ interface NotificationOptions {
 @Component({
   selector: 'app-notification-options',
   templateUrl: './notification-options.component.html',
-  styleUrls: ['./notification-options.component.scss'],
+  styleUrls: ['../../../../../src/theme/app-theme/styles/notifications/notification-options.component.scss'],
 })
 export class NotificationOptionsComponent {
 
