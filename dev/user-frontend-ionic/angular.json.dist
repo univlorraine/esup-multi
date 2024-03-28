@@ -22,8 +22,13 @@
               "src/firebase-messaging-sw.js",
               {
                 "glob": "**/*",
-                "input": "src/theme/default/assets",
+                "input": "src/theme/app-theme/assets",
                 "output": "assets"
+              },
+              {
+                "glob": "**/*",
+                "input": "src/theme/app-theme/i18n",
+                "output": "i18n"
               },
               {
                 "glob": "**/*.svg",
@@ -31,123 +36,33 @@
                 "output": "./svg"
               },
               {
-                "glob": "**/*",
-                "input": "projects/features/assets/i18n",
-                "output": "/assets/i18n/features"
-              },
-              {
-                "glob": "**/*",
-                "input": "projects/preferences/assets/i18n",
-                "output": "/assets/i18n/preferences"
-              },
-              {
-                "glob": "**/*",
-                "input": "projects/auth/assets/i18n",
-                "output": "/assets/i18n/auth"
-              },
-              {
-                "glob": "**/*",
-                "input": "projects/map/assets/i18n",
-                "output": "/assets/i18n/map"
-              },
-              {
-                "glob": "**/*",
-                "input": "projects/map/assets/markers",
-                "output": "/assets/map/markers"
-              },
-              {
                 "glob": "*.png",
                 "input": "node_modules/leaflet/dist/images",
-                "output": "assets/map/leaflet"
-              },
-              {
-                "glob": "**/*",
-                "input": "projects/rss/assets/i18n",
-                "output": "/assets/i18n/rss"
-              },
-              {
-                "glob": "**/*",
-                "input": "projects/cards/assets/i18n",
-                "output": "/assets/i18n/cards"
-              },
-              {
-                "glob": "**/*",
-                "input": "projects/schedule/assets/i18n",
-                "output": "/assets/i18n/schedule"
-              },
-              {
-                "glob": "**/*",
-                "input": "projects/contacts/assets/i18n",
-                "output": "/assets/i18n/contacts"
-              },
-              {
-                "glob": "**/*",
-                "input": "projects/notifications/assets/i18n",
-                "output": "/assets/i18n/notifications"
-              },
-              {
-                "glob": "**/*",
-                "input": "projects/reservation/assets/i18n",
-                "output": "/assets/i18n/reservation"
-              },
-              {
-                "glob": "**/*",
-                "input": "projects/clocking/assets/i18n",
-                "output": "/assets/i18n/clocking"
-              },
-              {
-                "glob": "**/*",
-                "input": "projects/menu/assets/i18n",
-                "output": "/assets/i18n/menu"
-              },
-              {
-                "glob": "**/*",
-                "input": "projects/chatbot/assets/i18n",
-                "output": "/assets/i18n/chatbot"
-              },
-              {
-                "glob": "**/*",
-                "input": "projects/contact-us/assets/i18n",
-                "output": "/assets/i18n/contact-us"
-              },
-              {
-                "glob": "**/*",
-                "input": "projects/restaurants/assets/i18n",
-                "output": "/assets/i18n/restaurants"
-              },
-              {
-                "glob": "**/*",
-                "input": "projects/unread-mail/assets/i18n",
-                "output": "/assets/i18n/unread-mail"
-              },
-              {
-                "glob": "**/*",
-                "input": "projects/calendar/assets/i18n",
-                "output": "/assets/i18n/calendar"
+                "output": "assets/icons/leaflet"
               },
               {
                 "glob": "**/*.svg",
-                "input": "src/theme/default/assets/icon/flag",
+                "input": "src/theme/app-theme/assets/icons/flag",
                 "output": "./svg"
               },
               {
                 "glob": "**/*.svg",
-                "input": "src/theme/default/assets/icon/features",
+                "input": "src/theme/app-theme/assets/icons/features",
                 "output": "./svg"
               },
               {
                 "glob": "**/*.svg",
-                "input": "src/theme/default/assets/icon/navigation",
+                "input": "src/theme/app-theme/assets/icons/navigation",
                 "output": "./svg"
               },
               {
                 "glob": "**/*.svg",
-                "input": "src/theme/default/assets/icon/social-network",
+                "input": "src/theme/app-theme/assets/icons/social-network",
                 "output": "./svg"
               },
               {
                 "glob": "**/*.svg",
-                "input": "src/theme/default/assets/icon/static-pages",
+                "input": "src/theme/app-theme/assets/icons/static-pages",
                 "output": "./svg"
               }
             ],

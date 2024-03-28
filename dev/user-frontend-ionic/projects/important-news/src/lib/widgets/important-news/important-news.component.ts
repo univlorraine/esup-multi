@@ -51,7 +51,7 @@ import { TranslatedImportantNews } from '../../important-news.repository';
 @Component({
   selector: 'app-important-news-widget',
   templateUrl: './important-news.component.html',
-  styleUrls: ['../../../../../../src/theme/app-theme/important-news/important-news.component.scss'],
+  styleUrls: ['../../../../../../src/theme/app-theme/styles/important-news/important-news.component.scss'],
 })
 export class ImportantNewsComponent {
 

@@ -50,7 +50,7 @@ import { ScreenService } from './screen.service';
 @Component({
   selector: 'app-cards',
   templateUrl: './cards.page.html',
-  styleUrls: ['../../../../src/theme/app-theme/cards/cards.page.scss']
+  styleUrls: ['../../../../src/theme/app-theme/styles/cards/cards.page.scss']
 })
 export class CardsPage {
   @ViewChild(CardModalComponent) cardModalComponent: CardModalComponent;

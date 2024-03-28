@@ -68,7 +68,7 @@ const defaultBreakpoint = 0.60;
 @Component({
   selector: 'app-schedule-calendar',
   templateUrl: './schedule-calendar.component.html',
-  styleUrls: ['../../../../../src/theme/app-theme/schedule/schedule-calendar.component.scss'],
+  styleUrls: ['../../../../../src/theme/app-theme/styles/schedule/schedule-calendar.component.scss'],
 })
 export class ScheduleCalendarComponent implements OnDestroy {
 

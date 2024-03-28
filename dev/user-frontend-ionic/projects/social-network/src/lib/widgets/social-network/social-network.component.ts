@@ -48,7 +48,7 @@ import { SocialNetworkService } from '../../social-network.service';
 @Component({
   selector: 'lib-social-network',
   templateUrl: './social-network.component.html',
-  styleUrls: ['../../../../../../src/theme/app-theme/social-network/social-network.component.scss'],
+  styleUrls: ['../../../../../../src/theme/app-theme/styles/social-network/social-network.component.scss'],
 })
 export class SocialNetworkComponent {
   public socialNetworks$: Observable<SocialNetwork[]> = socialNetworks$;

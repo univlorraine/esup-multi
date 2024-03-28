@@ -63,7 +63,7 @@ interface MenuItemWithOptionalRouterLink extends MenuItem {
 @Component({
   selector: 'app-layout',
   templateUrl: 'layout.page.html',
-  styleUrls: ['../../theme/app-theme/app/layout.page.scss']
+  styleUrls: ['../../theme/app-theme/styles/app/layout.page.scss']
 })
 export class LayoutPage implements AfterViewInit, OnChanges {
   @Input() currentPageLayout: PageLayout;

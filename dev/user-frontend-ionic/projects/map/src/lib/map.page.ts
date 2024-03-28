@@ -62,7 +62,7 @@ const CATEGORIES = [
 @Component({
   selector: 'app-map',
   templateUrl: './map.page.html',
-  styleUrls: ['../../../../src/theme/app-theme/map/map.page.scss'],
+  styleUrls: ['../../../../src/theme/app-theme/styles/map/map.page.scss'],
 })
 export class MapPage implements OnDestroy {
 
@@ -266,7 +266,7 @@ export class MapPage implements OnDestroy {
 
   private buildIconForCategory(category: string) {
     const iconFile = this.getIconFileByCategory(category);
-    const iconUrl = `./assets/map/markers/${iconFile}`;
+    const iconUrl = `./assets/icons/markers/${iconFile}`;
 
     return Leaflet.icon({
       iconUrl,
@@ -279,9 +279,9 @@ export class MapPage implements OnDestroy {
     return Leaflet.icon({
       iconSize: [25, 41],
       iconAnchor: [13, 41],
-      iconUrl: './assets/map/leaflet/marker-icon.png',
-      iconRetinaUrl: './assets/map/leaflet/marker-icon-2x.png',
-      shadowUrl: './assets/map/leaflet/marker-shadow.png'
+      iconUrl: './assets/icons/leaflet/marker-icon.png',
+      iconRetinaUrl: './assets/icons/leaflet/marker-icon-2x.png',
+      shadowUrl: './assets/icons/leaflet/marker-shadow.png'
     });
   }
 

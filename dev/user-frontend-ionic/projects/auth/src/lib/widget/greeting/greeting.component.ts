@@ -43,7 +43,7 @@ import { Observable } from 'rxjs';
 @Component({
   selector: 'app-auth-greeting-widget',
   templateUrl: './greeting.component.html',
-  styleUrls: ['../../../../../../src/theme/app-theme/auth/greeting.component.scss'],
+  styleUrls: ['../../../../../../src/theme/app-theme/styles/auth/greeting.component.scss'],
 })
 export class GreetingComponent implements OnInit {
   authenticatedUser$: Observable<AuthenticatedUser>;

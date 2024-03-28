@@ -48,7 +48,7 @@ npm-debug.log*
 # Theme
 /src/theme/*
 !/src/theme/theme.scss.dist
-!/src/theme/app-theme
+!/src/theme/app-theme-dist
 
 # Angular
 angular.json
@@ -62,4 +62,3 @@ capacitor.config*
 # Trapeze
 trapeze*
 !trapeze-config.yml.dist
-

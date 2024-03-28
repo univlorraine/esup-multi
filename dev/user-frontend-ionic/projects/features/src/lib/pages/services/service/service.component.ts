@@ -43,7 +43,7 @@ import { isDarkTheme$, MenuOpenerService, ServiceMenuItem, updateFeatureIsNewToF
 @Component({
   selector: 'app-service',
   templateUrl: './service.component.html',
-  styleUrls: ['../../../../../../../src/theme/app-theme/features/service.component.scss'],
+  styleUrls: ['../../../../../../../src/theme/app-theme/styles/features/service.component.scss'],
 })
 export class ServiceComponent {
   @Input() menuItem: ServiceMenuItem;

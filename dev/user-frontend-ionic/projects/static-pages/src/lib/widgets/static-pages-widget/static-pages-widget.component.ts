@@ -48,7 +48,7 @@ import { StaticPagesService } from '../../static-pages.service';
 @Component({
   selector: 'app-static-pages-widget',
   templateUrl: './static-pages-widget.component.html',
-  styleUrls: ['../../../../../../src/theme/app-theme/static-pages/static-pages-widget.component.scss'],
+  styleUrls: ['../../../../../../src/theme/app-theme/styles/static-pages/static-pages-widget.component.scss'],
 })
 export class StaticPagesWidgetComponent {
 

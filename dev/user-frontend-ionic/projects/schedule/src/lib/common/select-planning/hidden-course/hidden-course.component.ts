@@ -46,7 +46,7 @@ import { ScheduleService } from '../../../schedule.service';
 @Component({
   selector: 'app-hidden-course',
   templateUrl: './hidden-course.component.html',
-  styleUrls: ['../../../../../../../src/theme/app-theme/schedule/hidden-course.component.scss'],
+  styleUrls: ['../../../../../../../src/theme/app-theme/styles/schedule/hidden-course.component.scss'],
 })
 export class HiddenCourseComponent {
 

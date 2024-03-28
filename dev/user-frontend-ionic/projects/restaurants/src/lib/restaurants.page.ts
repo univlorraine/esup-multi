@@ -63,7 +63,7 @@ export interface RestaurantDto {
 @Component({
   selector: 'app-restaurants',
   templateUrl: './restaurants.page.html',
-  styleUrls: ['../../../../src/theme/app-theme/restaurants/restaurants.page.scss'],
+  styleUrls: ['../../../../src/theme/app-theme/styles/restaurants/restaurants.page.scss'],
 })
 export class RestaurantsPage implements OnInit {
 

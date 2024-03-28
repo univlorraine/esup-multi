@@ -47,7 +47,7 @@ import { ClockingService } from '../../clocking.service';
 @Component({
   selector: 'app-clocking-widget',
   templateUrl: './clocking.component.html',
-  styleUrls: ['../../../../../../src/theme/app-theme/clocking/clocking.component.scss'],
+  styleUrls: ['../../../../../../src/theme/app-theme/styles/clocking/clocking.component.scss'],
 })
 export class ClockingComponent implements AfterViewInit {
 

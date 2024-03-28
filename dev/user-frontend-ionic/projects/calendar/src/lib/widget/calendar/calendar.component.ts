@@ -47,7 +47,7 @@ import { CalendarService } from '../../calendar.service';
 @Component({
   selector: 'app-calendar-widget',
   templateUrl: './calendar.component.html',
-  styleUrls: ['../../../../../../src/theme/app-theme/calendar/calendar.component.scss'],
+  styleUrls: ['../../../../../../src/theme/app-theme/styles/calendar/calendar.component.scss'],
 })
 export class CalendarComponent implements AfterViewInit{
 

@@ -55,7 +55,7 @@ import { WidgetLifecycleService } from './widget-lifecycle.service';
 @Component({
   selector: 'app-widget',
   templateUrl: './widget.component.html',
-  styleUrls: ['../../../../../../src/theme/app-theme/shared/widget.component.scss'],
+  styleUrls: ['../../../../../../src/theme/app-theme/styles/shared/widget.component.scss'],
 })
 export class WidgetComponent implements AfterViewInit, OnDestroy {
   @Input() widgetId: string;

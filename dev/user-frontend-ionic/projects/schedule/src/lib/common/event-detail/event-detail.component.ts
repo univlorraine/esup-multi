@@ -46,7 +46,7 @@ import { ScheduleService } from '../../schedule.service';
 @Component({
   selector: 'app-event-detail',
   templateUrl: './event-detail.component.html',
-  styleUrls: ['../../../../../../src/theme/app-theme/schedule/event-detail.component.scss'],
+  styleUrls: ['../../../../../../src/theme/app-theme/styles/schedule/event-detail.component.scss'],
 })
 export class EventDetailComponent {
   @Input() event: Event;

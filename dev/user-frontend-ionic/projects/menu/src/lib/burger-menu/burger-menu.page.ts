@@ -51,7 +51,7 @@ import { map } from 'rxjs/operators';
 @Component({
   selector: 'app-menu',
   templateUrl: './burger-menu.page.html',
-  styleUrls: ['../../../../../src/theme/app-theme/menu/burger-menu.page.scss'],
+  styleUrls: ['../../../../../src/theme/app-theme/styles/menu/burger-menu.page.scss'],
 })
 export class BurgerMenuPage {
   public widgetIds = {

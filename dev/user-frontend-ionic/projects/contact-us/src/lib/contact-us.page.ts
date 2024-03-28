@@ -50,7 +50,7 @@ import { ContactMessageQueryDto, ContactUsService } from './contact-us.service';
 @Component({
   selector: 'app-contact-us',
   templateUrl: './contact-us.page.html',
-  styleUrls: ['../../../../src/theme/app-theme/contact-us/contact-us.page.scss'],
+  styleUrls: ['../../../../src/theme/app-theme/styles/contact-us/contact-us.page.scss'],
 })
 export class ContactUsPage implements OnInit {
 
