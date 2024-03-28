@@ -101,6 +101,12 @@ Remplacer les variables dans le fichier `microservices/rss/.env` par les suivant
 RSS_SERVICE_UL_API_URL=http://localhost:3099/mocking/rss
 ```
 
+### Microservice statistics
+Remplacer les variables dans le fichier `microservices/statistics/.env` par les suivantes :
+```
+STATISTICS_SERVICE_UL_API_URL=http://localhost:3099/mocking/statistics
+```
+
 ## Les données bouchonnées
 
 - [auth](src/auth/auth.mock.js)
