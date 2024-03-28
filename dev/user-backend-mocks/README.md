@@ -107,6 +107,12 @@ Remplacer les variables dans le fichier `microservices/statistics/.env` par les 
 STATISTICS_SERVICE_UL_API_URL=http://localhost:3099/mocking/statistics
 ```
 
+### Microservice clocking
+Remplacer les variables dans le fichier `microservices/clocking/.env` par les suivantes :
+```
+CLOCKING_SERVICE_UL_API_URL=http://localhost:3099/mocking/clocking
+```
+
 ## Les données bouchonnées
 
 - [auth](src/auth/auth.mock.js)
@@ -118,3 +124,4 @@ STATISTICS_SERVICE_UL_API_URL=http://localhost:3099/mocking/statistics
 - [restaurants](src/restaurants/restaurants.mock.js)
 - [cards](src/cards/cards.mock.js)
 - [rss](src/rss/rss.mock.js)
+- [clocking](src/clocking/clocking.mock.js)

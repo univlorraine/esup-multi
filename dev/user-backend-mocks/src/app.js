@@ -12,6 +12,7 @@ const restaurantsRouter = require('./restaurants/restaurants.route');
 const cardsRouter = require('./cards/cards.route');
 const rssRouter = require('./rss/rss.route');
 const statisticsRouter = require('./statistics/statistics.route');
+const clockingRouter = require('./clocking/clocking.route');
 
 const app = express();
 
@@ -30,6 +31,7 @@ app.use('/mocking/restaurants', restaurantsRouter);
 app.use('/mocking/cards', cardsRouter);
 app.use('/mocking/rss', rssRouter);
 app.use('/mocking/statistics', statisticsRouter);
+app.use('/mocking/clocking', clockingRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

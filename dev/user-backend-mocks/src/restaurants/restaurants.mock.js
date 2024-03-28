@@ -1,11 +1,8 @@
-const now = new Date().getTime();
-const msInDay = 1000 * 60 * 60 * 24;
-
 function getDate(day) {
-    return (new Date(now + day * msInDay)).toISOString().split('T')[0];
+    return (new Date(new Date().getTime() + day * 1000 * 60 * 60 * 24)).toISOString().split('T')[0];
 }
 
-module.exports.menusData = [
+module.exports.menusData = () => [
     {
         "id": 1372995,
         "date": getDate(0),
