@@ -36,3 +36,10 @@
  * pris connaissance de la licence CeCILL 2.1, et que vous en avez accepté les
  * termes.
  */
+
+/* add a line under the welcome text
+.greeting-underline {
+  border-bottom-width: var(--app-border-2-width);
+  border-bottom-style: solid;
+  border-bottom-color: var(--ion-color-secondary);
+}*/

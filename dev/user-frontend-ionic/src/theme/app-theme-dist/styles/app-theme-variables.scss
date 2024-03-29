@@ -38,23 +38,18 @@
  */
 
 @font-face {
-  font-family: "MavenProVariableFont";
-  src: url('../assets/fonts/Maven_Pro/MavenPro-VariableFont_wght.ttf');
+  font-family: 'ArialRegular';
+  src: url('../assets/fonts/Arial/Arial-Regular.TTF') format('truetype');
 }
 
 @font-face {
-  font-family: 'RobotoCondensedRegular';
-  src: url('../assets/fonts/Roboto_Condensed/RobotoCondensed-Regular.ttf') format('truetype');
+  font-family: 'ArialBold';
+  src: url('../assets/fonts/Arial/Arial-Bold.TTF') format('truetype');
 }
 
 @font-face {
-  font-family: 'RobotoCondensedBold';
-  src: url('../assets/fonts/Roboto_Condensed/RobotoCondensed-Bold.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'RobotoCondensedLight';
-  src: url('../assets/fonts/Roboto_Condensed/RobotoCondensed-Light.ttf') format('truetype');
+  font-family: 'ArialLight';
+  src: url('../assets/fonts/Arial/Arial-Light.TTF') format('truetype');
 }
 
 :root {
@@ -65,24 +60,24 @@
 
   // // // Font family definition variables
 
-  --app-font-family-base: 'RobotoCondensedRegular',
+  --app-font-family-base: 'ArialRegular',
     sans-serif;
 
   // Set base font to global application
   --ion-font-family: var(--app-font-family-base), sans-serif;
 
   // This next font have static weight in multiple files :
-  --app-font-primary-static-regular: 'RobotoCondensedRegular',
+  --app-font-primary-static-regular: 'ArialRegular',
     sans-serif;
-  --app-font-primary-static-bold: 'RobotoCondensedBold',
+  --app-font-primary-static-bold: 'ArialBold',
     sans-serif;
-  --app-font-primary-static-light: 'RobotoCondensedLight',
+  --app-font-primary-static-light: 'ArialLight',
     sans-serif;
 
   // MavenPro is a weight dynamic font  (one file for multiple weight),
   // if your font-family is static you must to do like the static font method above
   // exemple : --app-font-secondary-regular, ...
-  --app-font-secondary: 'MavenProVariableFont',
+  --app-font-secondary: 'ArialRegular',
     sans-serif;
 
 
