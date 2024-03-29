@@ -2,7 +2,7 @@ version: "3.7"
 services:
 
   mongo:
-    image: mongo:7.0
+    image: mongo:6.0
     container_name: auth-mongo
     ports:
       - 27017:27017
