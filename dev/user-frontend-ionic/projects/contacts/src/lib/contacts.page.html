@@ -1,0 +1,99 @@
+<!--
+  ~ Copyright ou © ou Copr. Université de Lorraine, (2022)
+  ~
+  ~ Direction du Numérique de l'Université de Lorraine - SIED
+  ~  (dn-mobile-dev@univ-lorraine.fr)
+  ~ JNESIS (contact@jnesis.com)
+  ~
+  ~ Ce logiciel est un programme informatique servant à rendre accessible
+  ~ sur mobile divers services universitaires aux étudiants et aux personnels
+  ~ de l'université.
+  ~
+  ~ Ce logiciel est régi par la licence CeCILL 2.1, soumise au droit français
+  ~ et respectant les principes de diffusion des logiciels libres. Vous pouvez
+  ~ utiliser, modifier et/ou redistribuer ce programme sous les conditions
+  ~ de la licence CeCILL telle que diffusée par le CEA, le CNRS et INRIA
+  ~ sur le site "http://cecill.info".
+  ~
+  ~ En contrepartie de l'accessibilité au code source et des droits de copie,
+  ~ de modification et de redistribution accordés par cette licence, il n'est
+  ~ offert aux utilisateurs qu'une garantie limitée. Pour les mêmes raisons,
+  ~ seule une responsabilité restreinte pèse sur l'auteur du programme, le
+  ~ titulaire des droits patrimoniaux et les concédants successifs.
+  ~
+  ~ À cet égard, l'attention de l'utilisateur est attirée sur les risques
+  ~ associés au chargement, à l'utilisation, à la modification et/ou au
+  ~ développement et à la reproduction du logiciel par l'utilisateur étant
+  ~ donné sa spécificité de logiciel libre, qui peut le rendre complexe à
+  ~ manipuler et qui le réserve donc à des développeurs et des professionnels
+  ~ avertis possédant des connaissances informatiques approfondies. Les
+  ~ utilisateurs sont donc invités à charger et à tester l'adéquation du
+  ~ logiciel à leurs besoins dans des conditions permettant d'assurer la
+  ~ sécurité de leurs systèmes et/ou de leurs données et, plus généralement,
+  ~ à l'utiliser et à l'exploiter dans les mêmes conditions de sécurité.
+  ~
+  ~ Le fait que vous puissiez accéder à cet en-tête signifie que vous avez
+  ~ pris connaissance de la licence CeCILL 2.1, et que vous en avez accepté les
+  ~ termes.
+  -->
+
+<app-header></app-header>
+<ion-content scroll-events="true" (ionScroll)="handleScroll($event)">
+  <div class="search-and-filters" [ngClass]="{'search-fixed': searchFixed}" #searchBlock>
+    <ion-row class="searchbar-row">
+      <ion-searchbar (ionChange)="saveSearchBar($event)" (keyup.enter)="searchContacts()"
+                     class="safe-area-margin-lr" placeholder="{{ 'CONTACTS.PLACEHOLDER' | translate }}"></ion-searchbar>
+    </ion-row>
+    <ion-radio-group [value]="this.filterChecked" (ionChange)="selectedCategory($event)">
+      <ion-item lines="none" *ngFor="let filter of this.filtersList">
+        <ion-label class="app-text-4">{{ 'CONTACTS.CONTACT_TYPES.' + filter | translate }}</ion-label>
+        <ion-radio mode="md" [value]="filter"></ion-radio>
+      </ion-item>
+    </ion-radio-group>
+    <ion-row class="ion-padding ion-justify-content-center">
+      <ion-button class="app-rectangle-button-1" (click)="searchContacts()">
+        <ion-label>{{ 'CONTACTS.SEARCH' | translate }}</ion-label>
+      </ion-button>
+    </ion-row>
+  </div>
+
+  <ion-row *ngIf="loading" class="ion-justify-content-center ion-padding">
+    <ion-spinner></ion-spinner>
+  </ion-row>
+
+  <div *ngIf="!loading" class="search-results" [ngStyle]="{'margin-top.px': searchFixed ? getSearchBlockHeight() : 0 }">
+    <ion-text class="ion-padding app-text-4 safe-area-margin-lr" *ngIf="searchButtonPressed">{{contacts.length}} {{ 'CONTACTS.RESULTS' | translate }}</ion-text>
+
+    <ion-card mode="ios" class="contact-card" *ngFor="let item of contacts">
+      <ion-item lines="none" class="contact-header">
+        <ion-avatar slot="start">
+          <span class="app-fixed-light-color">{{ item.firstname.charAt(0) + item.name.charAt(0) }}</span>
+        </ion-avatar>
+        <ion-label>
+          <h3 class="app-title-4 light strong ion-text-wrap">{{ item.firstname + " " + item.name }}</h3>
+          <p class="app-text-4 light ion-text-wrap" *ngFor="let assignment of item.assignments">
+            {{ assignment }}
+          </p>
+        </ion-label>
+      </ion-item>
+      <ion-card-content class="contact-content">
+        <ion-list lines="none">
+          <ion-item *ngFor="let mobile of item.phoneNumbers">
+            <ion-icon size="small" name="call" slot="start" aria-label=""></ion-icon>
+            <ion-label><a class="app-text-4" href="tel:{{ mobile }}">{{ mobile }}</a></ion-label>
+          </ion-item>
+          <ion-item *ngFor="let email of item.mailAddresses">
+            <ion-icon size="small" name="mail" slot="start" aria-label=""></ion-icon>
+            <ion-label><a class="app-text-4" href="mailto:{{ email }}" >{{ email }}</a></ion-label>
+          </ion-item>
+        </ion-list>
+        <div class="ion-margin-top ion-text-end">
+          <ion-button (click)="createContact(item)" size="small"
+                      [attr.aria-label]="'CONTACTS.ADD' | translate: {name: item.firstname + ' ' + item.name}">
+            <ion-icon aria-label="" class="add-icon" name="person-add-outline"></ion-icon>
+          </ion-button>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

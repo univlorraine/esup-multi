@@ -1,0 +1,2124 @@
+{
+    "presidences_points": {
+        "type": "FeatureCollection",
+        "features": [{
+            "type": "Feature",
+            "properties": {
+                "Nom": "Présidence - Site du Saulcy",
+                "Descriptif": "Agence comptable\nDirection des achats\nDirection des affaires juridiques\nDirection du budget et des finances\nDirection de la communication\nDirection de la formation, de l'orientation et de l'insertion professionnelle\nDirection hygiène, sécurité, environnement\nDirection de la logistique interne\nDirection du numérique\nDirection du patrimoine immobilier\nDirection de la recherche et de la valorisation\nDirection des relations internationales et européennes\nDirection des ressources humaines\nDirection de la vie universitaire et de la culture",
+                "Adresse": "Île du Saulcy  57000 Metz",
+                "Telephone": "03 72 74 00 08",
+                "Web": "http://univ-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.166585,
+                    49.119536
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Présidence - Site Brabois",
+                "Descriptif": "Direction des achats\nDirection hygiène, sécurité, environnement\nDirection de la logistique interne\nDirection du numérique\nDirection de la recherche et de la valorisation",
+                "Adresse": "2 avenue de la Forêt de Haye  54500 Vandœuvre-lès-Nancy",
+                "Telephone": "03 72 74 00 06",
+                "Web": "http://univ-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.147338,
+                    48.653133
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Présidence – Site Jacquinot",
+                "Descriptif": "Agence comptable\nDirection des affaires juridiques\nDirection du budget et des finances\nDirection de la logistique interne",
+                "Adresse": "60 rue Jacquinot  54000 Nancy",
+                "Telephone": "03 54 50 46 00",
+                "Web": "http://univ-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.167407,
+                    48.699847
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Présidence – Site Léopold",
+                "Descriptif": "Direction générale des services\nDélégation à l'aide au pilotage et à la qualité\nDirection des achats\nDirection du budget et des finances\nDirection de la communication\nDirection de la logistique interne\nDirection des ressources humaines",
+                "Adresse": "34 cours Léopold  54000 Nancy",
+                "Telephone": "03 72 74 00 00",
+                "Web": "http://univ-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.176552,
+                    48.696288
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Présidence – Site Libération",
+                "Descriptif": "Direction de la formation, de l'orientation et de l'insertion professionnelle\nDirection de la logistique interne\nDirection de la recherche et de la valorisation\nDirection des relations internationales et européennes\nDirection de la vie universitaire et de la culture",
+                "Adresse": "91 avenue de la Libération  54000 Nancy",
+                "Telephone": "03 72 74 00 02",
+                "Web": "http://univ-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.165105,
+                    48.694018
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Présidence – Site Lionnois",
+                "Descriptif": "Direction de la formation, de l'orientation et de l'insertion professionnelle\nDirection de la logistique interne\nDirection du numérique\nDirection des ressources humaines",
+                "Adresse": "24-30 rue Lionnois  54000 Nancy",
+                "Telephone": "03 72 74 00 04",
+                "Web": "http://univ-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.193118,
+                    48.683779
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Présidence – Site Montet",
+                "Descriptif": "Direction de la logistique interne\nDirection des partenariats",
+                "Adresse": "Rue du doyen Marcel Roubault  54500 Vandœuvre-lès-Nancy",
+                "Telephone": "03 83 68 24 00",
+                "Web": "http://univ-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.153511,
+                    48.657918
+                ]
+            }
+        }]
+    },
+
+    "composantes_points": {
+        "type": "FeatureCollection",
+        "features": [{
+            "type": "Feature",
+            "properties": {
+                "Nom": "École Nationale Supérieure des Technologies et Industries du Bois (ENSTIB)",
+                "Adresse": "27 rue Philippe Seguin  88000 Épinal",
+                "Téléphone": "03 72 74 96 00",
+                "Lien": "https://formations.univ-lorraine.fr/fr/diplome-d-ingenieur/1899-ingenieur-enstib-ecole-nationale-superieure-des-technologies-et-industries-du-bois.html",
+                "Web": "http://www.enstib.univ-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.465064,
+                    48.194615
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "IUT Épinal-Hubert Curien",
+                "Adresse": "7 rue des Fusillés de la Résistance  88000 Épinal",
+                "Téléphone": "03 72 74 18 00",
+                "Lien": "https://formations.univ-lorraine.fr/fr/50__iut-hubert-curien-epinal",
+                "Web": "http://iut-epinal.univ-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.452748,
+                    48.167915
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Faculté de Droit, Sciences Économiques et de Gestion - Site d'Épinal",
+                "Adresse": "2 rue de la Maix  88000 Épinal",
+                "Téléphone": "03 72 74 20 44",
+                "Lien": "http://www.univ-lorraine.fr/content/facult%C3%A9-de-droit-sciences-economiques-et-gestion-de-nancy",
+                "Web": "https://fac-droit.univ-lorraine.fr/content/la-faculte-de-droit-epinal/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.452159,
+                    48.175273
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "IUT de Longwy",
+                "Adresse": "186 rue de Lorraine  54400 Cosnes-et-Romain",
+                "Téléphone": "03 72 74 99 00",
+                "Lien": "https://formations.univ-lorraine.fr/fr/49__iut-henri-poincare-longwy",
+                "Web": "http://www.iut-longwy.univ-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    5.752671,
+                    49.526511
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "UFR Lettres et Langues",
+                "Adresse": "Île du Saulcy  57000 Metz",
+                "Téléphone": "03 72 74 31 00",
+                "Lien": "https://formations.univ-lorraine.fr/fr/32-arts-lettres-et-langues",
+                "Web": "http://all-nancy.univ-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.162373,
+                    49.121572
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "UFR Sciences Humaines et Arts",
+                "Adresse": "Île du Saulcy  57000 Metz",
+                "Téléphone": "03 87 31 56 38",
+                "Lien": "https://formations.univ-lorraine.fr/fr/6__faculte-de-droit-metz",
+                "Web": "https://shs-metz.univ-lorraine.fr/ufr-sciences-humaines-et-sociales-metz"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.164744,
+                    49.121186
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "UFR Droit, Économie et Administration",
+                "Adresse": "Île du Saulcy  57000 Metz",
+                "Téléphone": "03 87 31 50 51",
+                "Lien": "http://www.univ-lorraine.fr/content/ufr-droit-economie-et-administration-de-metz",
+                "Web": "UFR Droit, Économie et Administration"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.160904,
+                    49.121053
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "UFR Mathématiques, Informatique, Mécanique (MIM)",
+                "Adresse": "Île du Saulcy  57000 Metz",
+                "Téléphone": "03 72 74 80 00",
+                "Lien": "https://formations.univ-lorraine.fr/fr/36__ufr-mim",
+                "Web": "http://www.mim.univ-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.165571,
+                    49.120933
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "UFR Sciences Fondamentales et Appliquées (SciFa)",
+                "Adresse": "Campus Bridoux  rue du Général Delestraint  57000 Metz",
+                "Téléphone": "03 72 74 89 00",
+                "Lien": "https://formations.univ-lorraine.fr/fr/37__ufr-scifa",
+                "Web": "http://www.scifa.univ-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.213937,
+                    49.116225
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "UFR Études Supérieures de Management - IAE",
+                "Adresse": "1 rue Augustin Fresnel  57000 Metz",
+                "Téléphone": "03 72 74 88 40",
+                "Lien": "https://formations.univ-lorraine.fr/fr/32__iae-metz-school-of-managament",
+                "Web": "https://iaemetz.univ-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.230394,
+                    49.094258
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Institut Supérieur Franco-Allemand de Techniques, d'Économie et de Sciences (ISFATES)",
+                "Adresse": "2 rue Augustin Fresnel  57000 Metz",
+                "Téléphone": "03 72 74 88 85",
+                "Lien": "https://formations.univ-lorraine.fr/fr/18__isfates",
+                "Web": "https://www.dfhi-isfates.eu/fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.230888,
+                    49.094532
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Campus Lettres et Sciences Humaines\n- UFR Arts, Lettres et Langues (UFR ALL-Nancy)\n- UFR Sciences Humaines et Sociales-Nancy (UFR SHS-Nancy)\n- Département de Français Langue Étrangère (DéFLE)\n- Études et Ressources Universitaires à Distance (ERUDI)\n- Pôle d'Enseignement, d'Auto-formation et de Ressources en Langues (PEARL)",
+                "Adresse": "23 boulevard Albert 1er  54000 Nancy",
+                "Téléphone": "03 72 74 30 00",
+                "Lien": "http://www.univ-lorraine.fr/content/campus-lettres-et-sciences-humaines",
+                "Web": "https://www.univ-lorraine.fr/campus-lettres-sciences-humaines-nancy/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.166033,
+                    48.695068
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Centre Européen Universitaire (CEU)",
+                "Adresse": "15 place Carnot  54000 Nancy",
+                "Téléphone": "03 72 74 17 80",
+                "Lien": "https://formations.univ-lorraine.fr/fr/4__ceu",
+                "Web": "http://ceu.univ-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.176322,
+                    48.693656
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Cycle Préparatoire Polytechnique (CPP)",
+                "Adresse": "2 rue du Doyen Roubault  54500 Vandœuvre-lès-Nancy",
+                "Téléphone": "03 72 74 42 00",
+                "Lien": "https://formations.univ-lorraine.fr/fr/20__la-prepa-des-inp",
+                "Web": "http://www.la-prepa-des-inp.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.153614,
+                    48.655889
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "École Européenne d Ingénieurs en Génie des Matériaux (EEIGM)",
+                "Adresse": "6 rue Bastien Lepage  54000 Nancy",
+                "Téléphone": "03 72 74 39 00",
+                "Lien": "https://formations.univ-lorraine.fr/fr/diplome-d-ingenieur/2222-ingenieur-eeigm-ecole-europeenne-dingenieurs-en-genie-des-materiaux.html",
+                "Web": "https://ensem.univ-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.19355,
+                    48.695653
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "École Nationale Supérieure d’Électricité et de Mécanique (ENSEM)",
+                "Adresse": "2 avenue de la Forêt de Haye  54500 Vandœuvre-lès-Nancy",
+                "Téléphone": "03 72 74 44 00",
+                "Lien": "https://formations.univ-lorraine.fr/fr/24__ensem",
+                "Web": "https://ensem.univ-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.147906,
+                    48.652403
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "École Nationale Supérieure de Géologie (ENSG)",
+                "Adresse": "2 rue du Doyen Roubault  54500 Vandœuvre-lès-Nancy",
+                "Téléphone": "03 72 74 46 00",
+                "Lien": "https://formations.univ-lorraine.fr/fr/diplome-d-ingenieur/1901-ingenieur-ensg-ecole-nationale-superieure-de-geologie.html",
+                "Web": "https://ensg.univ-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.149269,
+                    48.653397
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "École Nationale Supérieure des Industries Chimiques (ENSIC)",
+                "Adresse": "1 rue Grandville  54000 Nancy",
+                "Téléphone": "03 72 74 36 00",
+                "Lien": "https://formations.univ-lorraine.fr/fr/27__ensic",
+                "Web": "http://ensic.univ-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.17998,
+                    48.699473
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "École Nationale Supérieure des Mines de Nancy (ENSMN)",
+                "Adresse": "Campus Artem  Rue Sergent Blandan  54000 Nancy",
+                "Téléphone": "03 72 74 48 00",
+                "Lien": "https://formations.univ-lorraine.fr/fr/24__ensem",
+                "Web": "http://mines-nancy.univ-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.171537,
+                    48.672937
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "École Nationale Supérieure en Agronomie et Industries Alimentaires (ENSAIA)",
+                "Adresse": "2 avenue de la Forêt de Haye  54500 Vandœuvre-lès-Nancy",
+                "Téléphone": "03 72 74 40 00",
+                "Lien": "https://formations.univ-lorraine.fr/fr/23__ensaia",
+                "Web": "http://www.ensaia.univ-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.147193,
+                    48.652021
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "École Nationale Supérieure en Génie des Systèmes Industriels (ENSGSI)",
+                "Adresse": "8 rue Bastien Lepage  54000 Nancy",
+                "Téléphone": "03 72 74 35 00",
+                "Lien": "https://formations.univ-lorraine.fr/fr/diplome-d-ingenieur/1900-ingenieur-ensgsi-ecole-nationale-superieure-en-genie-des-systemes-et-de-linnovation.html",
+                "Web": "http://www.ensgsi.univ-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.193788,
+                    48.695122
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "École Supérieure des Sciences et Technologies de lIngénieur de Nancy (ESSTIN)",
+                "Adresse": "2 rue Jean Lamour  54500 Vandœuvre-lès-Nancy",
+                "Téléphone": "03 72 74 69 00",
+                "Lien": "https://formations.univ-lorraine.fr/fr/diplome-d-ingenieur/2221-ingenieur-polytech-nancy.html",
+                "Web": "https://polytech-nancy.univ-lorraine.fr/fr"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.187796,
+                    48.659567
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Faculté d’Odontologie",
+                "Adresse": "96 avenue De Lattre de Tassigny  54000 Nancy",
+                "Téléphone": "03 72 74 67 60",
+                "Lien": "https://formations.univ-lorraine.fr/fr/41__faculte-d-odontologie",
+                "Web": "http://www.odonto.univ-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.191018,
+                    48.682734
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Faculté de Droit, Sciences Économiques et de Gestion",
+                "Adresse": "13 place Carnot  54000 Nancy",
+                "Téléphone": "03 72 74 19 00",
+                "Lien": "http://www.univ-lorraine.fr/content/facult%C3%A9-de-droit-sciences-economiques-et-gestion-de-nancy",
+                "Web": "http://fac-droit.univ-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.176279,
+                    48.693336
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Faculté de Médecine",
+                "Adresse": "9 avenue de la Forêt de Haye  54500 Vandœuvre-lès-Nancy",
+                "Téléphone": "03 72 74 60 00",
+                "Lien": "https://formations.univ-lorraine.fr/fr/38__faculte-de-medecine-maieutique-et-metiers-de-la-sante-a-nancy",
+                "Web": "http://www.medecine.univ-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.141817,
+                    48.650362
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Faculté de Pharmacie",
+                "Adresse": "5 rue Albert Lebrun  54000 Nancy",
+                "Téléphone": "03 72 74 73 00",
+                "Lien": "https://formations.univ-lorraine.fr/fr/39__faculte-de-pharmacie",
+                "Web": "http://www.pharma.univ-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.189475,
+                    48.685236
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Faculté de Pharmacie - Site Lionnois",
+                "Adresse": "18 rue Lionnois  54000 Nancy",
+                "Téléphone": "03 72 74 73 00",
+                "Lien": "https://formations.univ-lorraine.fr/fr/39__faculte-de-pharmacie",
+                "Web": "http://www.pharma.univ-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.193101,
+                    48.683353
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Faculté des Sciences et Technologies",
+                "Adresse": "Boulevard des Aiguillettes  54500 Vandœuvre-lès-Nancy",
+                "Téléphone": "03 72 74 50 00",
+                "Lien": "https://formations.univ-lorraine.fr/fr/35__faculte-des-sc-et-technologies",
+                "Web": "http://www.fst.univ-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.159284,
+                    48.664699
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Faculté du Sport",
+                "Adresse": "30 rue du Jardin Botanique  54600 Villers-lès-Nancy",
+                "Téléphone": "03 72 74 67 10",
+                "Lien": "https://formations.univ-lorraine.fr/fr/40__faculte-des-sciences-du-sport",
+                "Web": "http://staps-nancy.univ-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.156515,
+                    48.667576
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Institut de Préparation à l’Administration Générale (IPAG)",
+                "Adresse": "4 rue de la Ravinelle  54000 Nancy",
+                "Téléphone": "03 72 74 18 66",
+                "Lien": "https://formations.univ-lorraine.fr/fr/7__ipag",
+                "Web": "https://www.ipag.univ-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.175028,
+                    48.693452
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Institut Européen de Cinéma et d'Audiovisuel (IECA)",
+                "Adresse": "10 rue Michel Ney  54000 Nancy",
+                "Téléphone": "03 72 74 17 57",
+                "Lien": "https://formations.univ-lorraine.fr/fr/1__ieca",
+                "Web": "http://www.ieca.univ-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.172197,
+                    48.697228
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Institut Régional du Travail (IRT)",
+                "Adresse": "138 avenue de la Libération  54000 Nancy",
+                "Téléphone": "03 72 74 17 60",
+                "Lien": "https://formations.univ-lorraine.fr/fr/8__irt",
+                "Web": "https://irt.univ-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.159489,
+                    48.696928
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Institut Supérieur d Administration et de Management (ISAM-IAE)",
+                "Adresse": "25 rue Baron Louis  54000 Nancy",
+                "Téléphone": "03 72 74 16 40",
+                "Lien": "https://formations.univ-lorraine.fr/fr/33__iae-nancy",
+                "Web": "https://iae-nancy.univ-lorraine.fr/fr"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.171189,
+                    48.695729
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "École Supérieure du Professorat et de l'Éducation (ESPE) - Site de Nancy-Maxéville",
+                "Adresse": "5 rue Paul Richard  54320 Maxéville",
+                "Téléphone": "03 72 74 22 00",
+                "Lien": "https://formations.univ-lorraine.fr/fr/17__inspe-de-lorraine",
+                "Web": "https://inspe.univ-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.16444,
+                    48.710452
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "École Supérieure du Professorat et de l'Éducation (ESPE) - Site de Bar-le-Duc",
+                "Adresse": "Place de l'École Normale  55000 Bar-le-Duc",
+                "Téléphone": "03 72 74 21 00",
+                "Lien": "https://formations.univ-lorraine.fr/fr/17__inspe-de-lorraine",
+                "Web": "http://inspe.univ-lorraine.fr/bar-le-duc/le-campus-de-bar-le-duc"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    5.154679,
+                    48.762335
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "École Supérieure du Professorat et de l'Éducation (ESPE) - Site d'Épinal",
+                "Adresse": "1 rue Charles Perrault  88000 Épinal",
+                "Téléphone": "03 72 74 21 30",
+                "Lien": "https://formations.univ-lorraine.fr/fr/17__inspe-de-lorraine",
+                "Web": "http://inspe.univ-lorraine.fr/epinal/page-daccueil-epinal"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.457171,
+                    48.184244
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "École Supérieure du Professorat et de l'Éducation (ESPE) - Site de Metz-Montigny",
+                "Adresse": "16 rue de la Victoire  57950 Montigny-lès-Metz",
+                "Téléphone": "03 72 74 23 50",
+                "Lien": "https://formations.univ-lorraine.fr/fr/17__inspe-de-lorraine",
+                "Web": "http://inspe.univ-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.150675,
+                    49.100454
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "École Supérieure du Professorat et de l'Éducation (ESPE) - Site de Sarreguemines",
+                "Adresse": "Place Jeanne d'Arc  57200 Sarreguemines",
+                "Téléphone": "03 72 74 23 94",
+                "Lien": "https://formations.univ-lorraine.fr/fr/17__inspe-de-lorraine",
+                "Web": "http://inspe.univ-lorraine.fr/sarreguemines/le-campus-de-sarreguemines"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    7.07086,
+                    49.114743
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "IUT de Nancy-Brabois",
+                "Adresse": "Rue du Doyen Urion  54600 Villers-lès-Nancy",
+                "Téléphone": "03 72 74 70 00",
+                "Lien": "https://formations.univ-lorraine.fr/fr/51__iut-nancy-brabois",
+                "Web": "https://iutnb.univ-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.151537,
+                    48.659448
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "IUT Nancy-Charlemagne",
+                "Adresse": "2 ter boulevard Charlemagne  54000 Nancy",
+                "Téléphone": "03 72 74 33 40",
+                "Lien": "https://formations.univ-lorraine.fr/fr/52__iut-nancy-charlemagne",
+                "Web": "http://iut-charlemagne.univ-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.161049,
+                    48.68296
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "TELECOM Nancy",
+                "Adresse": "193 avenue Paul Muller  54600 Villers-lès-Nancy",
+                "Téléphone": "03 72 74 59 00",
+                "Lien": "https://formations.univ-lorraine.fr/fr/31__telecom-nancy",
+                "Web": "http://www.telecomnancy.eu/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.155272,
+                    48.669532
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Pôle Lorrain de Gestion (UFR Mathématiques et Informatique)",
+                "Adresse": "13 rue Michel Ney  54000 Nancy",
+                "Téléphone": "03 54 50 35 35",
+                "Lien": "https://formations.univ-lorraine.fr/fr/65-mathematiques-informatique",
+                "Web": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.171653,
+                    48.697535
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "IUT de Saint-Dié-des-Vosges",
+                "Adresse": "11 rue de l'Université  88100 Saint-Dié-des-Vosges",
+                "Téléphone": "03 72 74 95 00 ",
+                "Lien": "https://formations.univ-lorraine.fr/fr/47__iut-de-saint-die-des-vosges",
+                "Web": "http://www.iutsd.univ-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.941932,
+                    48.289986
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "https://iut-moselle-est.univ-lorraine.fr/",
+                "Adresse": "7 rue Alexandre de Geiger  57200 Sarreguemines",
+                "Téléphone": "03 72 74 98 80",
+                "Lien": "https://formations.univ-lorraine.fr/fr/46__iut-de-moselle-est",
+                "Web": "http://iut-moselle-est.univ-lorraine.fr/fr/gacomlt/sarreguemines"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    7.071365,
+                    49.114194
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "IUT de Moselle-Est - Site de Saint-Avold",
+                "Adresse": "Rue Victor Demange  57500 Saint-Avold",
+                "Téléphone": "03 72 74 98 50",
+                "Lien": "https://formations.univ-lorraine.fr/fr/46__iut-de-moselle-est",
+                "Web": "http://www.iut-moselle-est.univ-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.709553,
+                    49.099709
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "IUT de Moselle-Est - Site de Forbach",
+                "Adresse": "Rue Camille Weiss  57600 Forbach",
+                "Téléphone": "03 87 13 07 67",
+                "Lien": "https://formations.univ-lorraine.fr/fr/46__iut-de-moselle-est",
+                "Web": "http://iut-moselle-est.univ-lorraine.fr/fr/sgm/forbach"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.906384,
+                    49.194339
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "IUT Thionville-Yutz",
+                "Adresse": "Espace Cormontaigne  57970 Yutz",
+                "Téléphone": "03 72 74 98 00",
+                "Lien": "https://formations.univ-lorraine.fr/fr/48__iut-de-thionville-yutz",
+                "Web": "https://iut-thionville-yutz.univ-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.17307,
+                    49.350149
+                ]
+            }
+        }]
+    },
+
+    "bus_points": {
+        "type": "FeatureCollection",
+        "features": [{
+            "type": "Feature",
+            "properties": {
+                "Nom": "Bibliothèque Universitaire ESPE Bar-le-Duc",
+                "Horaires": "Du Mercredi au vendredi : 9h00-12h00 - 12h45-16h15\n Vendredi 8h30-13h00",
+                "Adresse": "1 place de l'École Normale 55014 Bar-le-Duc cedex",
+                "Telephone": "03 72 74 21 08",
+                "Web": "http://bu.univ-lorraine.fr/",
+                "Lien": "http://bu.univ-lorraine.fr/bibliotheques/bu-inspe-bar-le-duc"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    5.154454,
+                    48.762098
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Bibliothèque Universitaire ESPE Épinal",
+                "Horaires": "Du lundi au jeudi : 8h30-12h00 - 13h00-17h30\nVendredi 8h30\n Vendredi 8h30-13h00",
+                "Adresse": "12 avenue Kennedy 88025 Épinal cedex",
+                "Telephone": "03 72 74 10 80",
+                "Web": "http://bu.univ-lorraine.fr/",
+                "Lien": "http://bu.univ-lorraine.fr/bibliotheques/bu-inspe-epinal"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.453678,
+                    48.184723
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Bibliothèque Universitaire IUT Épinal-Hubert Curien",
+                "Horaires": "Lundi - Mardi - Jeudi : 8h00-17h30\nMercredi : 8h00-12h00\nVendredi : 8h00-16h15",
+                "Adresse": "7 rue des Fusillés de la Résistance BP 392 88010 Épinal cedex",
+                "Telephone": "03.72.74.18.08",
+                "Web": "http://bu.univ-lorraine.fr/",
+                "Lien": "https://iut-epinal.univ-lorraine.fr/presentation-de-liut/la-bibliotheque-de-liut"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.452997,
+                    48.167771
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Bibliothèque Universitaire IUT Longwy",
+                "Horaires": "Lundi au Vendredi: 8h45-17h30 - 12h45-18h30\nMercredi 11h00-19h",
+                "Adresse": "186 rue de Lorraine 54400 Cosnes-et-Romain",
+                "Telephone": "03 72 74 99 12",
+                "Web": "http://bu.univ-lorraine.fr/",
+                "Lien": "https://bu.univ-lorraine.fr/bibliotheques/bu-iut-longwy-henri-poincare"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    5.751446,
+                    49.527479
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Bibliothèque Universitaire Saulcy",
+                "Horaires": "Du lundi au vendredi : 8h00-19h00\nLe samedi : 9h00-18h00",
+                "Adresse": "Île du Saulcy 57045 Metz cedex 1",
+                "Telephone": "03 72 74 10 40",
+                "Web": "http://bu.univ-lorraine.fr/",
+                "Lien": "https://bu.univ-lorraine.fr/bibliotheques/bu-saulcy"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.164976,
+                    49.119824
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Bibliothèque Universitaire Bridoux",
+                "Horaires": "Du lundi au vendredi : 9h00-19h00\nFermeture durant les vacances universitaires de Noël, d'hiver, de printemps et d'été.",
+                "Adresse": "Rue du Général Delestraint 57070 Metz",
+                "Telephone": "03 72 74 10 65",
+                "Web": "http://bu.univ-lorraine.fr/",
+                "Lien": "http://bu.univ-lorraine.fr/bibliotheques/bu-bridoux"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.215482,
+                    49.11612
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Bibliothèque Universitaire Technopôle",
+                "Horaires": "Mardi et mercredi : 9h00-17h30\nJeudi : 9h00-13h00\nFermeture durant les vacances universitaire de la Toussaint, de Noël, d'hiver, de printemps et d'été.",
+                "Adresse": "Bâtiment ISEA 7 rue Marconi 57070 Metz",
+                "Telephone": "",
+                "Web": "http://bu.univ-lorraine.fr/",
+                "Lien": ""
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.217011,
+                    49.099762
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Bibliothèque Universitaire ESPE Montigny-lès-Metz",
+                "Horaires": "Du lundi au Vendredi : 8h00-18h00",
+                "Adresse": "16 rue de la Victoire 57950 Montigny-lès-Metz",
+                "Telephone": " 03 72 74 10 79",
+                "Web": "http://bu.univ-lorraine.fr/",
+                "Lien": "http://bu.univ-lorraine.fr/bibliotheques/bu-inspe-metz-montigny"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.150753,
+                    49.100419
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Bibliothèque Universitaire Lettres et Sciences Humaines",
+                "Horaires": "Du lundi au jeudi : 8h00-19h00\nVendredi : 8h00-18h00",
+                "Adresse": "46 avenue de la Libération BP 33408 54015 Nancy Cedex",
+                "Telephone": "03 72 74 09 80",
+                "Web": "http://bu.univ-lorraine.fr/",
+                "Lien": "http://bu.univ-lorraine.fr/bibliotheques/bu-lettres-sciences-humaines-et-sociales"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.165695,
+                    48.694518
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Bibliothèque américaine",
+                "Horaires": "Lundi et vendredi : 13h00-18h00",
+                "Adresse": "34 cours Léopold 54000 Nancy ",
+                "Telephone": "03.72.74.09.08",
+                "Web": "http://bu.univ-lorraine.fr/",
+                "Lien": "http://bu.univ-lorraine.fr/bibliotheques/americaine"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.176295,
+                    48.696298
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Bibliothèque Universitaire Droit Sciences éco",
+                "Horaires": "Du lundi au vendredi : 8h00-19h00\nSamedi : 8h00-17h00",
+                "Adresse": "11 place Carnot CS 84232 54042 Nancy Cedex",
+                "Telephone": "03.72.74.09.60",
+                "Web": "http://bu.univ-lorraine.fr/",
+                "Lien": "http://bu.univ-lorraine.fr/bibliotheques/bu-droit-et-sciences-economiques"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.17688,
+                    48.692872
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "E-BU Campus Manufacture",
+                "Horaires": "Du lundi au vendredi : 8h30-17h30",
+                "Adresse": "13 rue Michel Ney 54000 Nancy",
+                "Telephone": "03 72 74 09 72",
+                "Web": "http://bu.univ-lorraine.fr/",
+                "Lien": "http://bu.univ-lorraine.fr/bibliotheques/e-bu-campus-manufacture"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.171787,
+                    48.69737
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Bibliothèque Universitaire Sciences et techniques",
+                "Horaires": "Du lundi au jeudi : 9h00-17h00",
+                "Adresse": "Rue du Jardin Botanique CS 20148 54601 Villers-lès-Nancy Cedex",
+                "Telephone": "03 72 74 09 21",
+                "Web": "http://bu.univ-lorraine.fr/",
+                "Lien": "http://bu.univ-lorraine.fr/bibliotheques/bu-sciences-et-techniques"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.158146,
+                    48.666506
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Bibliothèque Universitaire Médecine",
+                "Horaires": "Du lundi au vendredi : 8h00-19h00\nSamedi : 9h00-12h00",
+                "Adresse": "9 avenue de la Forêt de Haye 54500 Vandœuvre-lès-Nancy",
+                "Telephone": "03.72.74.09.50",
+                "Web": "http://bu.univ-lorraine.fr/",
+                "Lien": "http://bu.univ-lorraine.fr/bibliotheques/bu-sante"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.144403,
+                    48.64959
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Bibliothèque Universitaire Pharmacie-Odontologie",
+                "Horaires": "Du lundi au Vendredi : 8h00-19h00",
+                "Adresse": "30 rue Lionnois 54000 Nancy",
+                "Telephone": "03.72.74.09.50",
+                "Web": "http://bu.univ-lorraine.fr/",
+                "Lien": "http://bu.univ-lorraine.fr/bibliotheques/bu-sante"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.194373,
+                    48.684148
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Bibliothèque Universitaire Ingénieurs – Brabois",
+                "Horaires": "Du lundi au vendredi : 8h00-21h00",
+                "Adresse": "2 avenue de la Forêt de Haye TSA 50603 54518 Vandœuvre-lès-Nancy Cedex",
+                "Telephone": "03.72.74.10.11",
+                "Web": "http://bu.univ-lorraine.fr/",
+                "Lien": "http://bu.univ-lorraine.fr/bibliotheques/bu-ingenieurs-brabois"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.148073,
+                    48.652962
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Bibliothèque Universitaire Ingénieurs ENSIC",
+                "Horaires": "Du lundi au jeudi : 8h00-20h00\nVendredi : 8h00-18h15",
+                "Adresse": "1 rue Grandville BP 20451 54001 Nancy Cedex 1",
+                "Telephone": "03.72.74.10.71",
+                "Web": "http://bu.univ-lorraine.fr/",
+                "Lien": "http://bu.univ-lorraine.fr/bibliotheques/ensic"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.179569,
+                    48.699563
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Bibliothèque Universitaire Ingénieurs  GM-GSI",
+                "Horaires": "Du lundi au vendredi : 8h30-18h30",
+                "Adresse": "6 rue Bastien Lepage BP 630 54010 Nancy Cedex",
+                "Telephone": "03.72.74.10.69",
+                "Web": "http://bu.univ-lorraine.fr/",
+                "Lien": "http://bu.univ-lorraine.fr/bibliotheques/bu-ingenieurs-gm-gsi"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.193547,
+                    48.69564
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Bibliothèque Universitaire Ingénieurs  Mines",
+                "Horaires": "Du lundi au mercredi : 8h30-17h15\nJeudi au vendredi : 8h30-16h00",
+                "Adresse": "Campus Artem Rue Sergent Blandan CS 14234 54042 Nancy Cedex",
+                "Telephone": "03.72.74.11.05",
+                "Web": "http://bu.univ-lorraine.fr/",
+                "Lien": "http://bu.univ-lorraine.fr/bibliotheques/bu-ingenieurs-enim"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.171269,
+                    48.673294
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "http://bu.univ-lorraine.fr/bibliotheques/bu-inspe-nancy-maxeville",
+                "Horaires": "Du lundi au jeudi : 8h30-18h00\nVendredi : 8h30-17h00",
+                "Adresse": "5 rue Paul Richard CS 90003 Maxéville 54527 Laxou",
+                "Telephone": "03.72.74.23.25",
+                "Web": "http://bu.univ-lorraine.fr/",
+                "Lien": "http://bu.univ-lorraine.fr/bibliotheques/bu-inspe-nancy-maxeville"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.16426,
+                    48.710428
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Bibliothèque Universitaire IUT Nancy-Charlemagne",
+                "Horaires": "Du lundi au Vendredi : 8h00-18h30",
+                "Adresse": "2 ter boulevard Charlemagne CS 5227 54002 Nancy",
+                "Telephone": "03.72.74.10.63",
+                "Web": "http://bu.univ-lorraine.fr/",
+                "Lien": "http://bu.univ-lorraine.fr/bibliotheques/bu-iut-nancy-charlemagne"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.161275,
+                    48.682986
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Bibliothèque Universitaire Saint-Avold",
+                "Horaires": "Lundi : 09h00-12h00 - 13h30-16h00\nMardi :00h00-12h00",
+                "Adresse": "Rue Victor Demange 57500 Saint-Avold",
+                "Telephone": "03 72 74 98 50",
+                "Web": "http://bu.univ-lorraine.fr/",
+                "Lien": "http://bu.univ-lorraine.fr/taxonomy/term/57"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.709458,
+                    49.099667
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Bibliothèque Universitaire IUT Saint-Dié",
+                "Horaires": "Du lundi au Jeudi : 8h15-12h00 - 13h00-17h00\nVendredi : 8h15-12h00",
+                "Adresse": "11 rue de l'Université 88100 Saint-Dié-des-Vosges",
+                "Telephone": "03.72.74.10.94",
+                "Web": "http://bu.univ-lorraine.fr/",
+                "Lien": "http://www.iutsd.univ-lorraine.fr/fr/bibliotheque.html"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.94264,
+                    48.290382
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Bibliothèque Universitaire ESPE Sarreguemines",
+                "Horaires": "Lundi au jeudi : 9h00-12h00 - 13h00-17h00\nVendredi : 9h00-12h00 - 13h00-16h00",
+                "Adresse": "Place Jeanne d'Arc 57200 Sarreguemines",
+                "Telephone": "03.72.74.23.95",
+                "Web": "http://bu.univ-lorraine.fr/",
+                "Lien": "http://bu.univ-lorraine.fr/bibliotheques/bu-sarreguemines-centre-holderith"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    7.072995,
+                    49.115505
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Bibliothèque Universitaire Thionville-Yutz",
+                "Horaires": "Lundi au Vendredi : 8h15-11h45 - 12h30-16h00",
+                "Adresse": "Impasse Alfred Kastler 57970 Yutz",
+                "Telephone": "03.72.74.10.95",
+                "Web": "http://bu.univ-lorraine.fr/",
+                "Lien": "http://bu.univ-lorraine.fr/bibliotheques/bu-iut-thionville-yutz"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.173222,
+                    49.350176
+                ]
+            }
+        }]
+    },
+
+    "restos_points": {
+        "type": "FeatureCollection",
+        "features": [{
+            "type": "Feature",
+            "properties": {
+                "Nom": "Restaurant Universitaire Campus Fibres",
+                "Adresse": "27 bis rue Philippe Séguin  88000 Épinal",
+                "Telephone": "03 29 29 74 42",
+                "Horaires": "Lundi-Vendredi 11h30 – 13h30",
+                "Lien": "https://www.crous-lorraine.fr/restaurant/resto-u-campus-fibres/",
+                "Web": "https://www.crous-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.46401,
+                    48.193968
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Restaurant Universitaire La Louvière",
+                "Adresse": "9 rue de la Louvière  88000 Épinal",
+                "Telephone": "03 29 32 47 12",
+                "Horaires": "Lundi-Vendredi : 11h30 - 13h30",
+                "Lien": "https://www.crous-lorraine.fr/restaurant/resto-u-la-louviere/",
+                "Web": "https://www.crous-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.452321,
+                    48.17294
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Restaurant Universitaire Jean Monnet",
+                "Adresse": "8 avenue du Bivaque  BP 50059  54405 Longwy cedex",
+                "Telephone": "03 82 44 82 00 ",
+                "Horaires": "Lundi-Vendredi : 11h30 - 13h30",
+                "Lien": "https://www.crous-lorraine.fr/restaurant/resto-u-jean-monnet/",
+                "Web": "https://www.crous-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    5.755525,
+                    49.523941
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Restaurant Universitaire Bridoux",
+                "Adresse": "88 rue Claude Bernard  57070 Metz",
+                "Telephone": "03 87 37 50 00",
+                "Horaires": "Lundi-Vendredi : 11h30 – 13h30",
+                "Lien": "https://www.crous-lorraine.fr/restaurant/resto-u-bridoux/",
+                "Web": "https://www.crous-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.211062,
+                    49.116229
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Restaurant Universitaire Rimbaud",
+                "Adresse": "Île du Saulcy  BP 60587  57010 Metz cedex 1",
+                "Telephone": "03 87 31 62 84",
+                "Horaires": "Lundi-Vendredi : 9h30 à 15h30",
+                "Lien": "https://www.crous-lorraine.fr/restaurant/market-rimbaud/",
+                "Web": "https://www.crous-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.164204,
+                    49.118851
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Restaurant Universitaire Technopôle",
+                "Adresse": "4 boulevard Arago  57070 Metz cedex",
+                "Telephone": "03 87 20 47 08",
+                "Horaires": "Lundi-Jeudi : 11h30 -13h30 et 18h30 20h15\nVendredi : 11h30 et 13h30",
+                "Lien": "https://www.crous-lorraine.fr/restaurant/resto-u-technopole/",
+                "Web": "https://www.crous-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.223228,
+                    49.099966
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Restaurant Universitaire Verlaine",
+                "Adresse": "Île du Saulcy  BP 60587  57010 Metz cedex 1",
+                "Telephone": "03 87 31 62 84",
+                "Horaires": "lundi - vendredi 11h30 - 13h30 ",
+                "Lien": "https://www.crous-lorraine.fr/restaurant/resto-u-verlaine/",
+                "Web": "https://www.crous-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.166159,
+                    49.119783
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Restaurant Universitaire Brabois",
+                "Adresse": "9 avenue de la Forêt de Haye  54500 Vandœuvre",
+                "Telephone": "03 83 44 61 00",
+                "Horaires": "lundi - vendredi 11h30 - 13h30",
+                "Lien": "https://www.crous-lorraine.fr/restaurant/space-brabois-2/",
+                "Web": "https://www.crous-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.140858,
+                    48.648676
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Restaurant Universitaire Médreville",
+                "Adresse": "73 rue de Laxou  54000 Nancy",
+                "Telephone": "03 83 91 88 99",
+                "Horaires": "lundi – Vendredi : 11h30 – 13h30",
+                "Lien": "https://www.crous-lorraine.fr/restaurant/resto-u-medreville/",
+                "Web": "https://www.crous-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.158983,
+                    48.684501
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Restaurant Universitaire Cours Léopold",
+                "Adresse": "16 cours Léopold  54000 Nancy",
+                "Telephone": "03 83 32 70 60",
+                "Horaires": "Lundi vendredi: 11h30-13h30 et 18h30-20h00\nSamedi 11h30-13h30",
+                "Lien": "https://www.crous-lorraine.fr/restaurant/resto-u-cours-leopold/",
+                "Web": "https://www.crous-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.177222,
+                    48.695082
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Restaurant Universitaire Saurupt",
+                "Adresse": "26 rue de Saurupt  54000 Nancy",
+                "Telephone": "03 83 53 28 62",
+                "Horaires": "Lundi-Vendredi 11h30 - 13h30",
+                "Lien": "https://www.crous-lorraine.fr/restaurant/resto-u-saurupt/",
+                "Web": "https://www.crous-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.18439,
+                    48.680361
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Restaurant Universitaire Stanislas-Meurthe",
+                "Adresse": "17 boulevard d'Austrasie  54000 Nancy",
+                "Telephone": "03 83 19 21 43",
+                "Horaires": "Lundi-Jeudi 11h30 – 13h30 & 18h30 – 20h00\nVendredi 11h30 – 13h30 ",
+                "Lien": "https://www.crous-lorraine.fr/restaurant/resto-u-stanislas-meurthe/",
+                "Web": "https://www.crous-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.19683,
+                    48.695087
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Restaurant Universitaire Vandœuvre",
+                "Adresse": "Boulevard des Aiguillettes  54500 Vandœuvre-lès-Nancy",
+                "Telephone": "03 83 53 33 50",
+                "Horaires": "Lundi Jeudi 11h30 – 13h30 & 18h30 – 20h00\nVendredi 11h30-13h30",
+                "Lien": "https://www.crous-lorraine.fr/restaurant/resto-u-velodrome/",
+                "Web": "https://www.crous-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.165201,
+                    48.66668
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Restaurant Universitaire Ville-Haute",
+                "Adresse": "201 avenue Pinchard  54000 Nancy",
+                "Telephone": "03 83 93 36 59",
+                "Horaires": "A partir de 11h15",
+                "Lien": "https://www.crous-lorraine.fr/restaurant/ville-haute/",
+                "Web": "https://www.crous-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.157724,
+                    48.704871
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Restaurant Universitaire Cormontaigne",
+                "Adresse": "Impasse Louis de Broglie  57970 Yutz",
+                "Telephone": "03 82 83 26 85",
+                "Horaires": "Lundi - Vendredi : 11h30 – 13h30 ",
+                "Lien": "https://www.crous-lorraine.fr/restaurant/resto-u-cormontaigne/",
+                "Web": "https://www.crous-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.170995,
+                    49.351055
+                ]
+            }
+        }]
+    },
+
+    "cites_points": {
+        "type": "FeatureCollection",
+        "features": [{
+            "type": "Feature",
+            "properties": {
+                "Nom": "Cité Universitaire Jean Monnet",
+                "Adresse": "8 avenue de Bivaque  BP 50059 54405 Longwy cedex",
+                "Telephone": "03 82 44 82 00",
+                "Lien": "https://www.crous-lorraine.fr/logement/jean-monnet/",
+                "Web": "https://www.crous-lorraine.fr"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    5.755472,
+                    49.523453
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Cité Universitaire Bridoux",
+                "Adresse": "2 rue du Général Delestraint  CS 15250 57076 Metz cedex 03",
+                "Telephone": "03 87 37 50 00",
+                "Lien": "https://www.crous-lorraine.fr/logement/bridoux/",
+                "Web": "https://www.crous-lorraine.fr"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.214044,
+                    49.115084
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Cité Universitaire Saint-Quentin",
+                "Adresse": "45 avenue du Général De Gaulle  57050 Le Ban-Saint-Martin",
+                "Telephone": "03 22 71 91 00",
+                "Lien": "",
+                "Web": "https://www.crous-lorraine.fr"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.144049,
+                    49.119964
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Cité Universitaire Saulcy",
+                "Adresse": "Île dy Saulcy  BP 60587  57010 Metz cedex 1",
+                "Telephone": "03 87 31 60 00",
+                "Lien": "https://www.crous-lorraine.fr/logement/saulcy/",
+                "Web": "https://www.crous-lorraine.fr"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.158414,
+                    49.119304
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Cité Universitaire Technopôle",
+                "Adresse": "4 boulevard Arago  57070 Metz",
+                "Telephone": "03 87 20 47 00",
+                "Lien": "https://www.crous-lorraine.fr/logement/technopole/",
+                "Web": "https://www.crous-lorraine.fr"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.221575,
+                    49.100637
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Cité Universitaire Aristide Briand",
+                "Adresse": "24 bis rue Aristide Briand  54524 Laxou cedex",
+                "Telephone": "03 83 91 88 10",
+                "Lien": "https://www.crous-lorraine.fr/logement/aristide-briand/",
+                "Web": "https://www.crous-lorraine.fr"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.157268,
+                    48.684556
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Cité Universitaire Bâtelière",
+                "Adresse": "7/15 route de Metz  54320 Maxéville",
+                "Telephone": "03 83 17 60 00",
+                "Lien": "https://www.crous-lorraine.fr/logement/bateliere/",
+                "Web": "https://www.crous-lorraine.fr"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.167696,
+                    48.706164
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Cité Universitaire Boudonville",
+                "Adresse": "61 rue de Boudonville  CS 5207  54052 Nancy cedex",
+                "Telephone": "03 83 95 10 66",
+                "Lien": "https://www.crous-lorraine.fr/logement/boudonville/",
+                "Web": "https://www.crous-lorraine.fr"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.165524,
+                    48.697785
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Cité Universitaire Charmois",
+                "Adresse": "Avenue du Charmois  54500 Vandœuvre-lès-Nancy",
+                "Telephone": "03 83 53 33 80",
+                "Lien": "https://www.crous-lorraine.fr/logement/charmois/",
+                "Web": "https://www.crous-lorraine.fr"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.171902,
+                    48.667582
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Cité Universitaire Foyer AGI",
+                "Adresse": "Avenue du Charmois  54500 Vandœuvre-lès-Nancy",
+                "Telephone": "03 83 51 49 43",
+                "Lien": "",
+                "Web": "https://www.crous-lorraine.fr"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.185993,
+                    48.665076
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Cité Universitaire Haute-Malgrange",
+                "Adresse": "Rue Jean Lamour  54500 Vandœuvre-lès-Nancy",
+                "Telephone": "03 83 53 33 60",
+                "Lien": "https://www.crous-lorraine.fr/logement/haute-malgrange/",
+                "Web": "https://www.crous-lorraine.fr"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.188161,
+                    48.660538
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Cité Universitaire Haute-Malgrange HLM",
+                "Adresse": "Studios Étoile Bâtiment « Les Corneilles »  rue d'Amsterdam  54500 Vandœuvre-lès-Nancy",
+                "Telephone": "03 83 53 33 60",
+                "Lien": "https://www.crous-lorraine.fr/logement/haute-malgrange/",
+                "Web": "https://www.crous-lorraine.fr"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.188435,
+                    48.660067
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Cité Universitaire Médreville",
+                "Adresse": "28 rue Aristide Briand  54524 Laxou cedex",
+                "Telephone": "03 83 91 88 10",
+                "Lien": "https://www.crous-lorraine.fr/logement/medreville/",
+                "Web": "https://www.crous-lorraine.fr"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.15793,
+                    48.684441
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Cité Universitaire Monbois",
+                "Adresse": "2 rue Ludovic Beauchet  CS 5208  54052 Nancy cedex",
+                "Telephone": "03 83 95 10 33",
+                "Lien": "https://www.crous-lorraine.fr/logement/monbois/",
+                "Web": "https://www.crous-lorraine.fr"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.162512,
+                    48.69685
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Cité Universitaire Monplaisir",
+                "Adresse": "Rue Jacques Callot  54500 Vandœuvre-lès-Nancy",
+                "Telephone": "03 83 53 33 30",
+                "Lien": "https://www.crous-lorraine.fr/logement/monplaisir/",
+                "Web": "https://www.crous-lorraine.fr"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.162511,
+                    48.666024
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Cité Universitaire Notre-Dame de Lourdes",
+                "Adresse": "3 rue Notre-Dame de Lourdes  54000 Nancy",
+                "Telephone": "03 83 53 29 55",
+                "Lien": "https://www.crous-lorraine.fr/logement/notre-dame-de-lourdes/",
+                "Web": "https://www.crous-lorraine.fr"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.177277,
+                    48.67607
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Cité Universitaire Placieux",
+                "Adresse": "39 boulevard Maréchal Lyautey  54600 Villers-lès-Nancy",
+                "Telephone": "03 83 28 86 01",
+                "Lien": "https://www.crous-lorraine.fr/logement/placieux/",
+                "Web": "https://www.crous-lorraine.fr"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.156388,
+                    48.672624
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Cité Universitaire Provençal",
+                "Adresse": "3 rue Mademoiselle  54052 Nancy cedex",
+                "Telephone": "03 83 17 20 00",
+                "Lien": "https://www.crous-lorraine.fr/logement/provencal/",
+                "Web": "https://www.crous-lorraine.fr"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.195481,
+                    48.677526
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Cité Universitaire Saurupt",
+                "Adresse": "26 rue de Saurupt  54000 Nancy",
+                "Telephone": "03 83 53 33 70",
+                "Lien": "https://www.crous-lorraine.fr/logement/saurupt/",
+                "Web": "https://www.crous-lorraine.fr"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.184374,
+                    48.680176
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Cité Universitaire Vélodrome",
+                "Adresse": "4-6-8 rue Jacques Callot  54500 Vandœuvre-lès-Nancy",
+                "Telephone": "03 83 53 33 30",
+                "Lien": "https://www.crous-lorraine.fr/logement/velodrome/",
+                "Web": "https://www.crous-lorraine.fr"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.164128,
+                    48.666327
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Cité Universitaire Douaumont",
+                "Adresse": "17 rue de Douaumont  57200 Sarreguemines",
+                "Telephone": "",
+                "Lien": "https://www.crous-lorraine.fr/logement/douaumont/",
+                "Web": "https://www.crous-lorraine.fr"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    7.077528,
+                    49.118567
+                ]
+            }
+        }]
+    },
+
+    "santes_points": {
+        "type": "FeatureCollection",
+        "features": [{
+            "type": "Feature",
+            "properties": {
+                "Nom": "SUMPPS Nancy - Vélodrome",
+                "Adresse": "Rond-point du Vélodrome - 6 rue Jacques Callot  BP 40042  54502 Vandoeuvre-lès-Nancy Cedex",
+                "Horaires": "Du lundi au jeudi : 7h45-17h00\nVendredi : 7h45-16h30",
+                "Téléphone": "03 72 74 05 51",
+                "Web": "http://www.univ-lorraine.fr/santesocial"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.164944,
+                    48.666687
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "SUMPPS Nancy - Campus Lettres et Sciences Humaines",
+                "Adresse": "Maison de l'étudiant - Pôle Santé  23 boulevard Albert 1er  545015 Nancy",
+                "Horaires": "Du lundi au vendredi : 8h00-17h00",
+                "Téléphone": "03 72 74 05 51",
+                "Web": "http://www.univ-lorraine.fr/santesocial"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.166215,
+                    48.693701
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Infirmerie IUT Nancy Brabois",
+                "Adresse": "Le Montet - Rue du Doyen Urion  CS 90137  54601 Villers-lès-Nancy",
+                "Horaires": "",
+                "Téléphone": "03.72.74.71.12",
+                "Web": "http://www.univ-lorraine.fr/santesocial"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.152138,
+                    48.659746
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Infirmerie Faculté des Sciences et Techniques",
+                "Adresse": "Boulevard des Aiguillettes - Bâtiment ESA  BP 239  54506 Vandoeuvre-lès-Nancy",
+                "Horaires": "Du lundi au jeudi : 8h15-17h00\nVendredi : 8h15-12h50",
+                "Téléphone": "03 72 74 50 00",
+                "Web": "http://www.univ-lorraine.fr/santesocial"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.159451,
+                    48.667293
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "SUMPPS Metz - Saulcy",
+                "Adresse": "Île du Saulcy  57012 Metz Cedex 01",
+                "Horaires": "Du lundi au vendredi : 8h00-12h30 - 13h00-17h00",
+                "Téléphone": "03 87 31 50 35",
+                "Web": "http://www.univ-lorraine.fr/santesocial"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.165549,
+                    49.121074
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "SUMPPS Metz - Bridoux",
+                "Adresse": "Campus Bridoux  Rue du Général Delestraint  57070 Metz",
+                "Horaires": "Lundi, mardi, vendredi : 8h00-12h00\nMercredi : 9h00-12h00\nJeudi : 13h00-17h00",
+                "Téléphone": "03 72 74 05 42",
+                "Web": "http://www.univ-lorraine.fr/santesocial"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.214525,
+                    49.116425
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "SUMPPS Longwy",
+                "Adresse": "Infirmerie IUT Longwy  186 rue de Lorraine  54400 Cosnes-et-Romain",
+                "Horaires": "",
+                "Téléphone": "03 72 74 05 48",
+                "Web": "http://www.univ-lorraine.fr/santesocial"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    5.753091,
+                    49.527524
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "SUMPPS Épinal",
+                "Adresse": "Maison de l'étudiant  Espace Louvière  88000 Épinal",
+                "Horaires": "",
+                "Téléphone": "03 29 64 14 40",
+                "Web": "http://www.univ-lorraine.fr/santesocial"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.452633,
+                    48.172928
+                ]
+            }
+        }]
+    },
+
+    "suaps_points": {
+        "type": "FeatureCollection",
+        "features": [{
+            "type": "Feature",
+            "properties": {
+                "Nom": "Complexe Sportif Universitaire du Saulcy",
+                "Descriptif": "",
+                "Adresse": "Île du Saulcy  57000 Metz",
+                "Telephone": "",
+                "Web": "http://www.suaps.univ-lorraine.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.155889,
+                    49.119273
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Complexe Sportif Les Océanautes",
+                "Descriptif": "Piscine de 25m, 6 lignes d'eau grande profondeur sur toute la longueur\nGymnase polyvalent",
+                "Adresse": "Rue de Verdun  54000 Nancy",
+                "Telephone": "03 72 74 06 27",
+                "Web": "http://www.siuap.u-nancy.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.166053,
+                    48.69635
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Ensemble Sportif A. Lefèbvre",
+                "Descriptif": "Grand gymnase polyvalent\nSalle de danse\nSalle de combat\nSalle d'escrime",
+                "Adresse": "1 bis boulevard Albert 1er  54000 Nancy",
+                "Telephone": "03 72 74 06 00",
+                "Web": "http://www.siuap.u-nancy.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.167122,
+                    48.693969
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Complexe Sportif des Aiguillettes",
+                "Descriptif": "Grande Hall polyvalente\nGymnase J. Callot\nPiste d'athlétisme\nTerrain de foot stabilisé\nTerrain d'herbe (football et rugby)\n7 courts de tennis",
+                "Adresse": "Boulevard des Aiguillettes  54600 Villers-lès-Nancy",
+                "Telephone": "",
+                "Web": "http://www.siuap.u-nancy.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.157705,
+                    48.669015
+                ]
+            }
+        }, {
+            "type": "Feature",
+            "properties": {
+                "Nom": "Complexe Sportif Inter-Universitaire de Brabois",
+                "Descriptif": "Grande Hall multisports : 2 basket, 3 volley, 1 hand, 10 badminton…\nSalle musculation\nSalle expression - danse\nMur d'escalade (le plus grand de la région)",
+                "Adresse": "11 Avenue de la Forêt de Haye  54500 Vandœuvre-lès-Nancy",
+                "Telephone": "03 72 74 06 16",
+                "Web": "http://www.siuap.u-nancy.fr/"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    6.138328,
+                    48.65032
+                ]
+            }
+        }]
+    }
+}

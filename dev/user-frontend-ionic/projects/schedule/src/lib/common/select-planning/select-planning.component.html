@@ -1,0 +1,113 @@
+<!--
+  ~ Copyright ou © ou Copr. Université de Lorraine, (2022)
+  ~
+  ~ Direction du Numérique de l'Université de Lorraine - SIED
+  ~  (dn-mobile-dev@univ-lorraine.fr)
+  ~ JNESIS (contact@jnesis.com)
+  ~
+  ~ Ce logiciel est un programme informatique servant à rendre accessible
+  ~ sur mobile divers services universitaires aux étudiants et aux personnels
+  ~ de l'université.
+  ~
+  ~ Ce logiciel est régi par la licence CeCILL 2.1, soumise au droit français
+  ~ et respectant les principes de diffusion des logiciels libres. Vous pouvez
+  ~ utiliser, modifier et/ou redistribuer ce programme sous les conditions
+  ~ de la licence CeCILL telle que diffusée par le CEA, le CNRS et INRIA
+  ~ sur le site "http://cecill.info".
+  ~
+  ~ En contrepartie de l'accessibilité au code source et des droits de copie,
+  ~ de modification et de redistribution accordés par cette licence, il n'est
+  ~ offert aux utilisateurs qu'une garantie limitée. Pour les mêmes raisons,
+  ~ seule une responsabilité restreinte pèse sur l'auteur du programme, le
+  ~ titulaire des droits patrimoniaux et les concédants successifs.
+  ~
+  ~ À cet égard, l'attention de l'utilisateur est attirée sur les risques
+  ~ associés au chargement, à l'utilisation, à la modification et/ou au
+  ~ développement et à la reproduction du logiciel par l'utilisateur étant
+  ~ donné sa spécificité de logiciel libre, qui peut le rendre complexe à
+  ~ manipuler et qui le réserve donc à des développeurs et des professionnels
+  ~ avertis possédant des connaissances informatiques approfondies. Les
+  ~ utilisateurs sont donc invités à charger et à tester l'adéquation du
+  ~ logiciel à leurs besoins dans des conditions permettant d'assurer la
+  ~ sécurité de leurs systèmes et/ou de leurs données et, plus généralement,
+  ~ à l'utiliser et à l'exploiter dans les mêmes conditions de sécurité.
+  ~
+  ~ Le fait que vous puissiez accéder à cet en-tête signifie que vous avez
+  ~ pris connaissance de la licence CeCILL 2.1, et que vous en avez accepté les
+  ~ termes.
+  -->
+
+<ion-buttons>
+  <ion-button (click)="openSelectPlanningModal()" fill="clear" class="ion-no-padding"
+              [attr.aria-label]="'SCHEDULE.SELECT_PLANNING.TITLE' | translate">
+    <ion-icon name="layers-outline" aria-label=""></ion-icon>
+  </ion-button>
+  <ion-button *ngIf="(hiddenCourseList$ | async)?.length > 0" (click)="openHiddenCourseModal()" fill="clear" class="ion-no-padding"
+              [attr.aria-label]="'SCHEDULE.SELECT_PLANNING.HIDDEN_COURSE' | translate">
+    <ion-icon name="eye-off-outline" aria-label=""></ion-icon>
+  </ion-button>
+</ion-buttons>
+
+<ion-modal [isOpen]="isSelectPlanningModalOpen" (willDismiss)="onDismissSelectPlanningModal()">
+  <ng-template>
+    <ion-progress-bar *ngIf="isLoading" type="indeterminate"></ion-progress-bar>
+
+    <ion-header>
+      <ion-toolbar>
+        <ion-buttons slot="secondary">
+          <ion-button (click)="closeSelectPlanningModal()">
+            <ion-text class="app-title-7">{{ 'SCHEDULE.SELECT_PLANNING.CANCEL' | translate }}</ion-text></ion-button>
+        </ion-buttons>
+        <ion-title class="app-title-5">{{ 'SCHEDULE.SELECT_PLANNING.TITLE' | translate }}</ion-title>
+        <ion-buttons slot="primary">
+          <ion-button [disabled]="!form.valid" fill="solid" (click)="validate()">
+            <ion-text class="app-title-7 contrast">
+              {{ 'SCHEDULE.SELECT_PLANNING.VALIDATE' | translate }}</ion-text></ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+      <ion-row class="ion-margin">
+        <ion-label *ngIf="availablePlanningList.length > 0" class="app-text-4 safe-area-padding-lr">{{'SCHEDULE.SELECT_PLANNING.SUBTITLE' | translate }}</ion-label>
+        <ion-label *ngIf="availablePlanningList.length === 0" class="app-text-4 safe-area-padding-lr">{{'SCHEDULE.SELECT_PLANNING.NO_PLANNING' | translate }}</ion-label>
+      </ion-row>
+      <form [formGroup]="form">
+        <ion-item formArrayName="planningList" *ngFor="let planning of planningList.controls; let i = index">
+          <ion-label class="app-text-4 ion-text-wrap" for="terms">{{availablePlanningList[i].label}}</ion-label>
+          <ion-checkbox [formControlName]="i"></ion-checkbox>
+        </ion-item>
+      </form>
+    </ion-content>
+
+  </ng-template>
+</ion-modal>
+
+
+<ion-modal [isOpen]="isHiddenCourseModalOpen && ((hiddenCourseList$ | async)?.length > 0)" (willDismiss)="onDismissHiddenCourseModal()">
+  <ng-template>
+    <ion-progress-bar *ngIf="isLoading" type="indeterminate"></ion-progress-bar>
+
+    <ion-header>
+      <ion-toolbar>
+        <ion-title class="app-title-5">{{ 'SCHEDULE.SELECT_PLANNING.HIDDEN_COURSE' | translate }}</ion-title>
+        <ion-buttons slot="primary">
+          <ion-button fill="solid" (click)="closeHiddenCourseModal()">
+            <ion-text class="app-title-7 contrast">
+              {{ 'SCHEDULE.CLOSE'
+              | translate }}</ion-text></ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+      <ion-row class="ion-margin" *ngIf="(hiddenCourseList$ | async)?.length > 0;">
+        <ion-col class="ion-margin-bottom">
+          <app-hidden-course *ngFor="let course of (hiddenCourseList$ | async);"
+            [hiddenCourse]="course"></app-hidden-course>
+        </ion-col>
+      </ion-row>
+    </ion-content>
+
+  </ng-template>
+</ion-modal>

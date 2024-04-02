@@ -1,0 +1,64 @@
+# Specifies intentionally untracked files to ignore when using Git
+# http://git-scm.com/docs/gitignore
+
+*~
+*.sw[mnpcod]
+.tmp
+*.tmp
+*.tmp.*
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+Thumbs.db
+UserInterfaceState.xcuserstate
+$RECYCLE.BIN/
+
+*.log
+log.txt
+npm-debug.log*
+
+/.angular
+/.idea
+/.ionic
+/.sass-cache
+/.sourcemaps
+/.versions
+/.vscode
+/coverage
+/dist
+/node_modules
+/platforms
+/plugins
+/www
+
+# Environnement et firebase
+/src/environments/*
+!/src/environments/environment.ts.dist
+!/src/environments/firebase
+/src/environments/firebase/*
+!/src/environments/firebase/android
+/src/environments/firebase/android/*
+!/src/environments/firebase/ios
+/src/environments/firebase/ios/*
+!/src/environments/firebase/web
+/src/environments/firebase/web/*
+!/src/environments/firebase/web/firebase-environment.pwa.json.dist
+/src/theme/app-theme/assets/stubs/firebase-environment.json
+
+# Theme
+/src/theme/*
+!/src/theme/theme.scss.dist
+!/src/theme/app-theme-dist
+
+# Angular
+angular.json
+
+# Ionic
+capacitor.config*
+!capacitor.config.ts.dist
+/ios/
+/android/
+
+# Trapeze
+trapeze*
+!trapeze-config.yml.dist

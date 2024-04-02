@@ -1,0 +1,90 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "paths": {
+      "@multi/shared": [
+        "dist/shared"
+      ],
+      "@multi/auth": [
+        "dist/auth"
+      ],
+      "@multi/preferences": [
+        "dist/preferences"
+      ],
+      "@multi/map": [
+        "dist/map"
+      ],
+      "@multi/rss": [
+        "dist/rss"
+      ],
+      "@multi/cards": [
+        "dist/cards"
+      ],
+      "@multi/schedule": [
+        "dist/schedule"
+      ],
+      "@multi/features": [
+        "dist/features"
+      ],
+      "@multi/contacts": [
+        "dist/contacts"
+      ],
+      "@multi/notifications": [
+        "dist/notifications"
+      ],
+      "@multi/reservation": [
+        "dist/reservation"
+      ],
+      "@multi/important-news": [
+        "dist/important-news"
+      ],
+      "@multi/clocking": [
+        "dist/clocking"
+      ],
+      "@multi/menu": [
+        "dist/menu"
+      ],
+      "@multi/chatbot": [
+        "dist/chatbot"
+      ],
+      "@multi/static-pages": [
+        "dist/static-pages"
+      ],
+      "@multi/social-network": [
+        "dist/social-network"
+      ],
+      "@multi/contact-us": [
+        "dist/contact-us"
+      ],
+      "@multi/restaurants": [
+        "dist/restaurants"
+      ],
+      "@multi/unread-mail": [
+        "dist/unread-mail"
+      ],
+      "@multi/calendar": [
+        "dist/calendar"
+      ]
+    },
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "es2020",
+    "lib": ["es2018", "dom"],
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true
+  },
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
+}

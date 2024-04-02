@@ -1,0 +1,61 @@
+{
+  "name": "multi",
+  "version": "1.0.3",
+  "description": "",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/univlorraine/esup-multi.git"
+  },
+  "author": "Université de Lorraine",
+  "license": "CeCILL-2.1",
+  "bugs": {
+    "url": "https://github.com/univlorraine/esup-multi/issues"
+  },
+  "homepage": "https://github.com/univlorraine/esup-multi#readme",
+  "scripts": {
+    "build:back": "npm run back:main -- ci && concurrently \"npm run back:*(!main) -- ci\" && concurrently \"npm run back:* -- run build\"",
+    "build:front": "cd dev/user-frontend-ionic && npm ci && npm run module:build-all",
+    "build:mocks": "cd dev/user-backend-mocks && npm ci",
+    "start:back": "concurrently \"npm run back:* -- run start\"",
+    "start:back:dev": "concurrently \"npm run back:* -- run start:dev\"",
+    "start:front": "cd dev/user-frontend-ionic && ionic serve",
+    "start:mocks": "cd dev/user-backend-mocks && npm run start",
+    "back:main": "cd dev/user-backend-nest/main && npm",
+    "back:auth": "cd dev/user-backend-nest/microservices/auth && npm",
+    "back:cards": "cd dev/user-backend-nest/microservices/cards && npm",
+    "back:chatbot": "cd dev/user-backend-nest/microservices/chatbot && npm",
+    "back:clocking": "cd dev/user-backend-nest/microservices/clocking && npm",
+    "back:contact-us": "cd dev/user-backend-nest/microservices/contact-us && npm",
+    "back:contacts": "cd dev/user-backend-nest/microservices/contacts && npm",
+    "back:features": "cd dev/user-backend-nest/microservices/features && npm",
+    "back:important-news": "cd dev/user-backend-nest/microservices/important-news && npm",
+    "back:mail-calendar": "cd dev/user-backend-nest/microservices/mail-calendar && npm",
+    "back:map": "cd dev/user-backend-nest/microservices/map && npm",
+    "back:notifications": "cd dev/user-backend-nest/microservices/notifications && npm",
+    "back:restaurants": "cd dev/user-backend-nest/microservices/restaurants && npm",
+    "back:rss": "cd dev/user-backend-nest/microservices/rss && npm",
+    "back:schedule": "cd dev/user-backend-nest/microservices/schedule && npm",
+    "back:social-network": "cd dev/user-backend-nest/microservices/social-network && npm",
+    "back:static-pages": "cd dev/user-backend-nest/microservices/static-pages && npm",
+    "back:statistics": "cd dev/user-backend-nest/microservices/statistics && npm"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^18.6.0",
+    "@commitlint/config-conventional": "^18.6.0",
+    "commitizen": "^4.3.0",
+    "concurrently": "^8.2.2",
+    "cz-conventional-changelog": "^3.3.0",
+    "husky": "^9.0.10"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
+  }
+}

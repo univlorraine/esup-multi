@@ -1,0 +1,28 @@
+vars:
+  BUNDLE_ID:
+    default: fr.esupportail.mobile.multi
+  PACKAGE_NAME:
+    default: fr.esupportail.mobile.multi
+  VERSION_NAME:
+    default: "1.0.0"
+  BUILD_NUMBER:
+    default: "000001"
+
+platforms:
+  android:
+    packageName: $PACKAGE_NAME
+    versionName: $VERSION_NAME
+    versionCode: $BUILD_NUMBER
+    # Décommenter le bloc si utilisation des notifications
+    #copy:
+    #  - src: ../src/environments/firebase/android/google-services-prod.json
+    #    dest: app/google-services.json
+
+  ios:
+    bundleId: $BUNDLE_ID
+    version: $VERSION_NAME
+    buildNumber: $BUILD_NUMBER
+    # Décommenter le bloc si utilisation des notifications
+    #copy:
+    #  - src: ../../src/environments/firebase/ios/GoogleService-Info-prod.plist
+    #    dest: App/GoogleService-Info.plist

@@ -1,0 +1,227 @@
+[
+	{
+		"position": 10,
+		"widget": "important-news:important-news",
+		"status": "published",
+		"description": "Widget affichant les informations importantes",
+		"icon": null,
+		"iconSourceSvgLightTheme": null,
+		"iconSourceSvgDarkTheme": null,
+		"type": "external",
+		"routerLink": null,
+		"link": null,
+		"ssoService": null,
+		"color": null,
+		"statisticName": null,
+		"translations": [],
+		"authorization": null,
+		"settings_by_role": []
+	},
+	{
+		"position": 20,
+		"widget": "schedule:next-events",
+		"status": "published",
+		"description": "Widget affichant les prochains cours dans l'EDT",
+		"icon": null,
+		"iconSourceSvgLightTheme": null,
+		"iconSourceSvgDarkTheme": null,
+		"type": "internal",
+		"routerLink": "/schedule",
+		"link": null,
+		"ssoService": null,
+		"color": "#BADFEE",
+		"statisticName": null,
+		"translations": [
+			{
+				"title": "Courses to come",
+				"content": null,
+				"languages_code": "en"
+			},
+			{
+				"title": "Vos prochains cours",
+				"content": null,
+				"languages_code": "fr"
+			}
+		],
+		"authorization": {
+			"type": "ALLOW",
+			"roles": [
+				"student",
+				"teacher"
+			]
+		},
+		"settings_by_role": []
+	},
+	{
+		"position": 30,
+		"widget": "clocking:clocking",
+		"status": "draft",
+		"description": "Widget affichant les tops Agatte",
+		"icon": null,
+		"iconSourceSvgLightTheme": null,
+		"iconSourceSvgDarkTheme": null,
+		"type": "external",
+		"routerLink": "/clocking",
+		"link": "https://agatte.univ-lorraine.fr/login/cas?ticket={st}",
+		"ssoService": "https://agatte.univ-lorraine.fr/login/cas",
+		"color": "#A0D0B0",
+		"statisticName": "clocking",
+		"translations": [
+			{
+				"title": "Agatte",
+				"content": null,
+				"languages_code": "en"
+			},
+			{
+				"title": "Agatte",
+				"content": null,
+				"languages_code": "fr"
+			}
+		],
+		"authorization": {
+			"type": "ALLOW",
+			"roles": [
+				"staff"
+			]
+		},
+		"settings_by_role": []
+	},
+	{
+		"position": -100,
+		"widget": "auth:auth-not-authentified-widget",
+		"status": "published",
+		"description": "Widget invitant l'utilisateur non connecté à s'authentifier",
+		"icon": null,
+		"iconSourceSvgLightTheme": null,
+		"iconSourceSvgDarkTheme": null,
+		"type": "internal",
+		"routerLink": "/auth",
+		"link": null,
+		"ssoService": null,
+		"color": null,
+		"statisticName": null,
+		"translations": [],
+		"authorization": {
+			"type": "ALLOW",
+			"roles": [
+				"anonymous"
+			]
+		},
+		"settings_by_role": []
+	},
+	{
+		"position": -101,
+		"widget": "auth:greeting-widget",
+		"status": "published",
+		"description": "Widget affichant un message de bienvenue à l'utilisateur connecté",
+		"icon": null,
+		"iconSourceSvgLightTheme": null,
+		"iconSourceSvgDarkTheme": null,
+		"type": "external",
+		"routerLink": null,
+		"link": null,
+		"ssoService": null,
+		"color": null,
+		"statisticName": null,
+		"translations": [],
+		"authorization": null,
+		"settings_by_role": []
+	},
+	{
+		"position": 40,
+		"widget": "unread-mail:unread-mail",
+		"status": "published",
+		"description": "Widget affichant le nombre de mails non lus (étudiants)",
+		"icon": null,
+		"iconSourceSvgLightTheme": null,
+		"iconSourceSvgDarkTheme": null,
+		"type": "external",
+		"routerLink": null,
+		"link": "https://mail.etu.univ-lorraine.fr/zimbra/preauth/preauthUL_ETU.jsp?ticket={st}",
+		"ssoService": "https://mail.etu.univ-lorraine.fr/zimbra/preauth/preauthUL_ETU.jsp",
+		"color": "#A4D0B2",
+		"statisticName": null,
+		"translations": [
+			{
+				"title": "Your mailbox",
+				"content": null,
+				"languages_code": "en"
+			},
+			{
+				"title": "Votre messagerie",
+				"content": null,
+				"languages_code": "fr"
+			}
+		],
+		"authorization": {
+			"type": "DISALLOW",
+			"roles": [
+				"anonymous"
+			]
+		},
+		"settings_by_role": []
+	},
+	{
+		"position": 50,
+		"widget": "calendar:calendar",
+		"status": "published",
+		"description": "Widget affichant les prochains événements dans le calendrier (étudiants)",
+		"icon": null,
+		"iconSourceSvgLightTheme": null,
+		"iconSourceSvgDarkTheme": null,
+		"type": "external",
+		"routerLink": null,
+		"link": "https://mail.etu.univ-lorraine.fr/zimbra/preauth/preauthUL_ETU.jsp?ticket={st}",
+		"ssoService": "https://mail.etu.univ-lorraine.fr/zimbra/preauth/preauthUL_ETU.jsp",
+		"color": "#C1DEEC",
+		"statisticName": null,
+		"translations": [
+			{
+				"title": "Your next events",
+				"content": null,
+				"languages_code": "en"
+			},
+			{
+				"title": "Vos prochains évènements",
+				"content": null,
+				"languages_code": "fr"
+			}
+		],
+		"authorization": {
+			"type": "DISALLOW",
+			"roles": [
+				"anonymous"
+			]
+		},
+		"settings_by_role": []
+	},
+	{
+		"position": 60,
+		"widget": "rss:latest-news",
+		"status": "published",
+		"description": "Widget affichant la dernière actu Factuel",
+		"icon": null,
+		"iconSourceSvgLightTheme": null,
+		"iconSourceSvgDarkTheme": null,
+		"type": "external",
+		"routerLink": "/rss",
+		"link": null,
+		"ssoService": null,
+		"color": null,
+		"statisticName": null,
+		"translations": [
+			{
+				"title": "Latest news",
+				"content": null,
+				"languages_code": "en"
+			},
+			{
+				"title": "Dernière actualité",
+				"content": null,
+				"languages_code": "fr"
+			}
+		],
+		"authorization": null,
+		"settings_by_role": []
+	}
+]

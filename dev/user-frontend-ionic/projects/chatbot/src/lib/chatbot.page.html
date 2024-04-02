@@ -1,0 +1,92 @@
+<!--
+  ~ Copyright ou © ou Copr. Université de Lorraine, (2022)
+  ~
+  ~ Direction du Numérique de l'Université de Lorraine - SIED
+  ~  (dn-mobile-dev@univ-lorraine.fr)
+  ~ JNESIS (contact@jnesis.com)
+  ~
+  ~ Ce logiciel est un programme informatique servant à rendre accessible
+  ~ sur mobile divers services universitaires aux étudiants et aux personnels
+  ~ de l'université.
+  ~
+  ~ Ce logiciel est régi par la licence CeCILL 2.1, soumise au droit français
+  ~ et respectant les principes de diffusion des logiciels libres. Vous pouvez
+  ~ utiliser, modifier et/ou redistribuer ce programme sous les conditions
+  ~ de la licence CeCILL telle que diffusée par le CEA, le CNRS et INRIA
+  ~ sur le site "http://cecill.info".
+  ~
+  ~ En contrepartie de l'accessibilité au code source et des droits de copie,
+  ~ de modification et de redistribution accordés par cette licence, il n'est
+  ~ offert aux utilisateurs qu'une garantie limitée. Pour les mêmes raisons,
+  ~ seule une responsabilité restreinte pèse sur l'auteur du programme, le
+  ~ titulaire des droits patrimoniaux et les concédants successifs.
+  ~
+  ~ À cet égard, l'attention de l'utilisateur est attirée sur les risques
+  ~ associés au chargement, à l'utilisation, à la modification et/ou au
+  ~ développement et à la reproduction du logiciel par l'utilisateur étant
+  ~ donné sa spécificité de logiciel libre, qui peut le rendre complexe à
+  ~ manipuler et qui le réserve donc à des développeurs et des professionnels
+  ~ avertis possédant des connaissances informatiques approfondies. Les
+  ~ utilisateurs sont donc invités à charger et à tester l'adéquation du
+  ~ logiciel à leurs besoins dans des conditions permettant d'assurer la
+  ~ sécurité de leurs systèmes et/ou de leurs données et, plus généralement,
+  ~ à l'utiliser et à l'exploiter dans les mêmes conditions de sécurité.
+  ~
+  ~ Le fait que vous puissiez accéder à cet en-tête signifie que vous avez
+  ~ pris connaissance de la licence CeCILL 2.1, et que vous en avez accepté les
+  ~ termes.
+  -->
+
+<app-header></app-header>
+
+<ion-item-group *ngIf="isLoading" class="spinner-container ion-align-items-center ion-justify-content-center">
+  <ion-row class="ion-margin">
+    <ion-spinner name="circular"></ion-spinner>
+  </ion-row>
+</ion-item-group>
+
+<ion-progress-bar *ngIf="isFetchingAnswer" type="indeterminate"></ion-progress-bar>
+
+<ion-content #scrollContent [ngClass]="isLoading ? 'ion-hide' : ''">
+  <ion-list #messages class="safe-area-padding-lr">
+    <ion-item-group *ngFor="let message of messages$ | async; let last = last">
+      <div class="message-container ion-margin">
+        <div [ngClass]="message.messageType === messageType.bot ? message.card && isChatbotLogo(message) ? 'image-bot' : 'message-bot' : 'message-user'">
+          <ion-row *ngIf="message.messageType === messageType.bot">
+            <ion-label class="app-text-4 ion-text-wrap app-fixed-light-color link-inherit-color" *ngIf="!message.card" [innerHTML]="message.text" text-wrap></ion-label>
+            <ion-img *ngIf="message.card" [src]="message.card.file.url"></ion-img>
+          </ion-row>
+          <ion-row *ngIf="message.messageType === messageType.user">
+            <ion-label class="app-text-4 ion-text-wrap" [innerHTML]="message.text"></ion-label>
+          </ion-row>
+        </div>
+        <ion-item lines="none" *ngIf="message.messageType === messageType.bot && message.buttons && last" class="ion-margin-top" lines="none">
+          <ion-col>
+            <ion-item  *ngFor="let button of message.buttons" (click)="onButtonClick(button)"
+              class="app-text-4 buttonRequest ion-margin-bottom" lines="none">
+              {{button.title}}
+            </ion-item>
+          </ion-col>
+        </ion-item>
+      </div>
+    </ion-item-group>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-item class="footer ion-no-padding" lines="none">
+    <ion-input (keyup.enter)="onMessageInputEnter()" [(ngModel)]="userInput"
+               class="form-control input app-text-4"
+               placeholder="{{'CHATBOT.MESSAGE_PROMPT' | translate}}"></ion-input>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="clearUserInput()" [attr.aria-label]="'CHATBOT.CLEAR_INPUT' | translate">
+        <ion-icon aria-label="" class="icon" name="trash"></ion-icon>
+      </ion-button>
+
+      <ion-button (click)="textRequest(userInput)" [attr.aria-label]="'CHATBOT.SEND' | translate">
+        <ion-icon aria-label="" class="icon" name="send"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-item>
+</ion-footer>

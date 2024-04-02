@@ -1,0 +1,10 @@
+{
+    "MENU": {
+        "WIDGETS": "Accueil",
+        "SERVICES": "Services"
+    },
+    "NO_DATA": "Aucune donnée disponible",
+    "SEARCHBAR_MESSAGE": "Rechercher un service",
+    "NEW": "Nouveau !",
+    "DRAG_DEACTIVATION": "Désactiver la modification de l'ordre des services"
+}

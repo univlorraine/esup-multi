@@ -1,0 +1,16 @@
+{
+    "YOUR_POSITION": "Votre localisation",
+    "FILTERS": "Filtres",
+    "CATEGORY": {
+        "PRESIDENCES": "Présidences",
+        "COMPOSANTES": "Composantes",
+        "BUS": "Bibliothèques",
+        "RESTOS": "Restos U",
+        "CITES": "Cités U",
+        "SANTES": "Services de Santé",
+        "SUAPS": "SUAPS"
+    },
+    "FILTER": "Filtrer les marqueurs",
+    "LOCATE": "Me localiser",
+    "REMOVE_FROM_FILTERS": "Retirer '{{category}}' des filtres"
+}

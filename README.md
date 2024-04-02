@@ -14,6 +14,12 @@ Les sources du projet sont constituées :
 - D'un **front-end** qui permet de générer les applications iOs et Android ([Read me](dev/user-frontend-ionic/README.md))
 - D'un **back-end** basé sur une archtecture micro-services et composée de 17 modules ([Read me](dev/user-backend-nest/README.md))
 
+## Contacts et échanges
+
+- **Liste de diffusion :** esup-multi@esup-portail.org
+- **Rocket Chat :** https://rocket.esup-portail.org/channel/esup-multi
+- **Mail :** benjamin.lemoine@univ-lorraine.fr, celine.didier@univ-lorraine.fr
+
 ## Installation quickstart
 
 Plus d'information dans la [documentation d'installation](https://www.esup-portail.org/wiki/x/F4DoTw)

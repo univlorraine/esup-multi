@@ -1,0 +1,77 @@
+<!--
+  ~ Copyright ou © ou Copr. Université de Lorraine, (2022)
+  ~
+  ~ Direction du Numérique de l'Université de Lorraine - SIED
+  ~  (dn-mobile-dev@univ-lorraine.fr)
+  ~ JNESIS (contact@jnesis.com)
+  ~
+  ~ Ce logiciel est un programme informatique servant à rendre accessible
+  ~ sur mobile divers services universitaires aux étudiants et aux personnels
+  ~ de l'université.
+  ~
+  ~ Ce logiciel est régi par la licence CeCILL 2.1, soumise au droit français
+  ~ et respectant les principes de diffusion des logiciels libres. Vous pouvez
+  ~ utiliser, modifier et/ou redistribuer ce programme sous les conditions
+  ~ de la licence CeCILL telle que diffusée par le CEA, le CNRS et INRIA
+  ~ sur le site "http://cecill.info".
+  ~
+  ~ En contrepartie de l'accessibilité au code source et des droits de copie,
+  ~ de modification et de redistribution accordés par cette licence, il n'est
+  ~ offert aux utilisateurs qu'une garantie limitée. Pour les mêmes raisons,
+  ~ seule une responsabilité restreinte pèse sur l'auteur du programme, le
+  ~ titulaire des droits patrimoniaux et les concédants successifs.
+  ~
+  ~ À cet égard, l'attention de l'utilisateur est attirée sur les risques
+  ~ associés au chargement, à l'utilisation, à la modification et/ou au
+  ~ développement et à la reproduction du logiciel par l'utilisateur étant
+  ~ donné sa spécificité de logiciel libre, qui peut le rendre complexe à
+  ~ manipuler et qui le réserve donc à des développeurs et des professionnels
+  ~ avertis possédant des connaissances informatiques approfondies. Les
+  ~ utilisateurs sont donc invités à charger et à tester l'adéquation du
+  ~ logiciel à leurs besoins dans des conditions permettant d'assurer la
+  ~ sécurité de leurs systèmes et/ou de leurs données et, plus généralement,
+  ~ à l'utiliser et à l'exploiter dans les mêmes conditions de sécurité.
+  ~
+  ~ Le fait que vous puissiez accéder à cet en-tête signifie que vous avez
+  ~ pris connaissance de la licence CeCILL 2.1, et que vous en avez accepté les
+  ~ termes.
+  -->
+
+<ion-grid class="ion-margin-start safe-area-margin-lr">
+    <ion-row class="ion-align-items-center ion-margin-bottom">
+      <ion-icon [name]="notification.icon" aria-label="" size="large"></ion-icon>
+      <ion-label class="ion-margin-start">
+        <h2 class="app-text-2 ion-text-wrap">{{notification.title}}</h2>
+      </ion-label>
+    </ion-row>
+    <ion-row class="ion-margin-bottom">
+      <ion-text class="app-text-4">{{notification.message}}</ion-text>
+    </ion-row>
+</ion-grid>
+
+<ng-container *ngIf="(notificationOptions$ | async) as options">
+  <ion-item button *ngIf="options.isSubscribed && options.filterable"
+    (click)="onUnsubscribeFromChannel(options.channel)">
+    <ion-icon aria-label="" name="close-circle-outline" slot="start"></ion-icon>
+    <ion-label class="app-text-4 ion-text-wrap">
+      {{ 'NOTIFICATIONS.UNSUBSCRIBE_TO_CHANNEL' | translate }}
+      <ion-text> '{{ options.channel.label }}' </ion-text>
+    </ion-label>
+  </ion-item>
+
+  <ion-item button *ngIf="!options.isSubscribed && options.filterable"
+    (click)="onSubscribeToChannel(options.channel)">
+    <ion-icon aria-label="" name="notifications-outline" slot="start"></ion-icon>
+    <ion-label class="app-text-4 ion-text-wrap">
+      {{ 'NOTIFICATIONS.SUBSCRIBE_TO_CHANNEL' | translate }}
+      <ion-text> '{{ options.channel.label }}' </ion-text>
+    </ion-label>
+  </ion-item>
+</ng-container>
+
+<ion-item button (click)="deleteNotification(notification.id)">
+  <ion-icon aria-label="" name="trash-outline" slot="start"></ion-icon>
+  <ion-label class="app-text-4 ion-text-wrap">
+    {{ 'NOTIFICATIONS.DELETE_THIS_NOTIFICATION' | translate }}
+  </ion-label>
+</ion-item>

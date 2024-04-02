@@ -1,0 +1,55 @@
+version: "3.7"
+services:
+
+  directus-db:
+    container_name: directus-db
+    image: mysql:8.0
+    ports:
+      - '3306:3306'
+    volumes:
+      - './mysql-data:/var/lib/mysql'
+    command: mysqld --default-authentication-plugin=mysql_native_password
+    networks:
+      - directus
+    environment:
+      MYSQL_USER: 'directus'
+      MYSQL_PASSWORD: 'directus'
+      MYSQL_DATABASE: 'directus'
+      MYSQL_ROOT_PASSWORD: 'directus'
+
+  directus:
+    container_name: directus
+    image: directus/directus:9
+    restart: on-failure
+    ports:
+      - '8055:8055'
+    # Uncomment to persist uploads on your local storage
+    volumes:
+    # By default, uploads are stored in /directus/uploads
+    # Always make sure your volumes matches the storage root when using
+    # local driver
+    # - ./uploads:/directus/uploads
+    # Make sure to also mount the volume when using SQLite
+      -  ./directus/snapshot:/directus/snapshot
+    # If you want to load extensions from the host
+    # - ./extensions:/directus/extensions
+    networks:
+      - directus
+    depends_on:
+      - directus-db
+    environment:
+      KEY: '255d861b-5ea1-5996-9aa3-922530ec40b1'
+      SECRET: '6116487b-cda1-52c2-b5b5-c8022c45e263'
+
+      ADMIN_EMAIL: 'admin@admin.com'
+      ADMIN_PASSWORD: 'admin'
+
+      DB_CLIENT: 'mysql'
+      DB_HOST: 'directus-db'
+      DB_PORT: '3306'
+      DB_DATABASE: 'directus'
+      DB_USER: 'directus'
+      DB_PASSWORD: 'directus'
+
+networks:
+  directus:

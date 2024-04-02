@@ -1,0 +1,9 @@
+{
+  "apps":
+  [
+    {
+      "appId": "136ca432",
+      "root": "dev/user-frontend-ionic"
+    }
+  ]
+}

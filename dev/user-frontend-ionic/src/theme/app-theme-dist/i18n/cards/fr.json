@@ -1,0 +1,17 @@
+{
+    "ERRORS":{
+        "NO_DATA": "Données indisponibles",
+        "UNKNOWN" : "Impossible d'afficher votre carte"
+    },
+
+    "ERRORS_STUDENT": {
+        "NO_PHOTO": "L'accès à votre carte sera disponible après avoir fourni une photo d'identité à la scolarité de la formation",
+        "NO_ACTIVE_CARD" : "Vous ne disposez pas de carte active à l'Université",
+        "UNPAID_FEES" : "Vous ne pouvez pas disposer de carte d'étudiant car vous n'avez pas encore réglé vos droits d'inscription"
+    },
+    "ERRORS_STAFF": {
+        "NO_PHOTO": "L'accès à votre carte sera disponible après avoir fourni une photo d'identité aux ressources humaines de l'Université",
+        "NO_ACTIVE_CARD" : "Vous ne disposez pas de carte active à l'Université",
+        "UNPAID_FEES" : "Vous ne pouvez pas disposer de carte d'étudiant car vous n'avez pas encore réglé vos droits d'inscription"
+    }
+}

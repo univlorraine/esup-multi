@@ -1,0 +1,235 @@
+/*
+ * Copyright ou © ou Copr. Université de Lorraine, (2022)
+ *
+ * Direction du Numérique de l'Université de Lorraine - SIED
+ *  (dn-mobile-dev@univ-lorraine.fr)
+ * JNESIS (contact@jnesis.com)
+ *
+ * Ce logiciel est un programme informatique servant à rendre accessible
+ * sur mobile divers services universitaires aux étudiants et aux personnels
+ * de l'université.
+ *
+ * Ce logiciel est régi par la licence CeCILL 2.1, soumise au droit français
+ * et respectant les principes de diffusion des logiciels libres. Vous pouvez
+ * utiliser, modifier et/ou redistribuer ce programme sous les conditions
+ * de la licence CeCILL telle que diffusée par le CEA, le CNRS et INRIA
+ * sur le site "http://cecill.info".
+ *
+ * En contrepartie de l'accessibilité au code source et des droits de copie,
+ * de modification et de redistribution accordés par cette licence, il n'est
+ * offert aux utilisateurs qu'une garantie limitée. Pour les mêmes raisons,
+ * seule une responsabilité restreinte pèse sur l'auteur du programme, le
+ * titulaire des droits patrimoniaux et les concédants successifs.
+ *
+ * À cet égard, l'attention de l'utilisateur est attirée sur les risques
+ * associés au chargement, à l'utilisation, à la modification et/ou au
+ * développement et à la reproduction du logiciel par l'utilisateur étant
+ * donné sa spécificité de logiciel libre, qui peut le rendre complexe à
+ * manipuler et qui le réserve donc à des développeurs et des professionnels
+ * avertis possédant des connaissances informatiques approfondies. Les
+ * utilisateurs sont donc invités à charger et à tester l'adéquation du
+ * logiciel à leurs besoins dans des conditions permettant d'assurer la
+ * sécurité de leurs systèmes et/ou de leurs données et, plus généralement,
+ * à l'utiliser et à l'exploiter dans les mêmes conditions de sécurité.
+ *
+ * Le fait que vous puissiez accéder à cet en-tête signifie que vous avez
+ * pris connaissance de la licence CeCILL 2.1, et que vous en avez accepté les
+ * termes.
+ */
+
+// This file can be replaced during build by using the `fileReplacements` array.
+// `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
+// The list of file replacements can be found in `angular.json`.
+
+
+import { AuthModule } from '@multi/auth';
+import { CalendarModule } from '@multi/calendar';
+import { CardsPageModule } from '@multi/cards';
+import { ChatbotModule } from '@multi/chatbot';
+import { ClockingModule } from '@multi/clocking';
+import { ContactUsModule } from '@multi/contact-us';
+import { ContactsModule } from '@multi/contacts';
+import { ImportantNewsModule } from '@multi/important-news';
+import { MapModule } from '@multi/map';
+import { NotificationsModule } from '@multi/notifications';
+import { ReservationModule } from '@multi/reservation';
+import { RestaurantsModule } from '@multi/restaurants';
+import { RssPageModule } from '@multi/rss';
+import { ScheduleModule } from '@multi/schedule';
+import { SocialNetworkModule } from '@multi/social-network';
+import { StaticPagesModule } from '@multi/static-pages';
+import { UnreadMailModule } from '@multi/unread-mail';
+import { MatomoModule } from 'ngx-matomo';
+
+
+// Décommenter si utilisation des notifications
+// import firebasePwaEnvironment from './firebase/web/firebase-environment.pwa.json';
+
+interface ModuleConfig {
+  moduleName: string;
+  module: any;
+  config?: any;
+  enabled: boolean;
+}
+
+export const environment = {
+  production: false,
+  apiEndpoint: 'http://localhost:3000',
+  languages: ['fr', 'en'],
+  defaultLanguage: 'fr',
+  cmsPublicAssetsEndpoint: 'http://localhost:8055/assets/',
+  guidedTourEnabled: true,
+  appTitle: 'Esup-Multi',
+  moduleConfigs: [
+    {
+      moduleName: 'auth',
+      module: AuthModule,
+      config: {},
+      enabled: true,
+    },
+    {
+      moduleName: 'calendar',
+      module: CalendarModule,
+      config: { numberOfEventsLimit: 3 },
+      enabled: true,
+    },
+    {
+      moduleName: 'cardsPage',
+      module: CardsPageModule,
+      config: { knownErrors: ['NO_PHOTO', 'NO_ACTIVE_CARD', 'UNPAID_FEES'] },
+      enabled: true,
+    },
+    {
+      moduleName: 'chatbot',
+      module: ChatbotModule,
+      config: { chatbotLogoRegex: /_ully5/i },
+      enabled: true,
+    },
+    {
+      moduleName: 'clocking',
+      module: ClockingModule,
+      config: {},
+      enabled: true,
+    },
+    {
+      moduleName: 'contactUs',
+      module: ContactUsModule,
+      config: {},
+      enabled: true,
+    },
+    {
+      moduleName: 'contacts',
+      module: ContactsModule,
+      config: { contactTypes: ['STUDENT', 'STAFF', 'STANDIN'] },
+      enabled: true,
+    },
+    {
+      moduleName: 'importantNews',
+      module: ImportantNewsModule,
+      config: {},
+      enabled: true,
+    },
+    {
+      moduleName: 'map',
+      module: MapModule,
+      config: {
+        defaultMapLocation: {
+          longitude: 6.183309429175067,
+          latitude: 48.69137200828818
+        }
+      },
+      enabled: true,
+    },
+    {
+      moduleName: 'notifications',
+      module: NotificationsModule,
+      config: {
+        numberOfNotificationsOnFirstLoad: 20,
+        numberOfNotificationsToLoadOnScroll: 10
+      },
+      enabled: true,
+    },
+    {
+      moduleName: 'reservation',
+      module: ReservationModule,
+      config: {
+        reservationSsoServiceName: 'https://resa-espace.univ-lorraine.fr/reservationsalles/Authentification.aspx',
+        reservationSsoUrlTemplate: 'https://resa-espace.univ-lorraine.fr/reservationsalles/Authentification.aspx?ticket={st}',
+      },
+      enabled: true,
+    },
+    {
+      moduleName: 'restaurants',
+      module: RestaurantsModule,
+      config: {},
+      enabled: true,
+    },
+    {
+      moduleName: 'rss',
+      module: RssPageModule,
+      config: {},
+      enabled: true,
+    },
+    {
+      moduleName: 'schedule',
+      module: ScheduleModule,
+      config: {
+        nextEventsWidget: {
+          numberOfEventsLimit: 2,
+          numberOfDaysLimit: 7
+        },
+        previousWeeksInCache: 1,
+        nextWeeksInCache: 2,
+        managerRoles: ['schedule-manager', 'multi-admin']
+      },
+      enabled: true,
+    },
+    {
+      moduleName: 'socialNetwork',
+      module: SocialNetworkModule,
+      config: {},
+      enabled: true,
+    },
+    {
+      moduleName: 'staticPages',
+      module: StaticPagesModule,
+      config: {},
+      enabled: true,
+    },
+    {
+      moduleName: 'unreadMail',
+      module: UnreadMailModule,
+      config: {},
+      enabled: true,
+    },
+    {
+      moduleName: 'matomo',
+      module: MatomoModule,
+      config: {
+        scriptUrl: 'https://webstats.univ-lorraine.fr/matomo.js',
+        trackers: [
+          {
+            trackerUrl: 'https://webstats.univ-lorraine.fr/matomo.php',
+            siteId: 453
+          }
+        ],
+        routeTracking: {
+          enable: true
+        }
+      },
+      enabled: true,
+    },
+  ] as ModuleConfig[],
+
+  // Décommenter si utilisation des notifications
+  // firebase: firebasePwaEnvironment,
+};
+
+/*
+ * For easier debugging in development mode, you can import the following file
+ * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
+ *
+ * This import should be commented out in production mode because it will have a negative impact
+ * on performance if an error is thrown.
+ */
+// import 'zone.js/dist/zone-error';  // Included with Angular CLI.

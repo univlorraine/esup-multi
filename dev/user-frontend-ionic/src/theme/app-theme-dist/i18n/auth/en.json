@@ -1,0 +1,29 @@
+{
+    "MENU": "Login",
+    "PREFERENCES": {
+        "TITLE": "Authentication",
+        "SAVE_CREDENTIALS": "Save credentials during authentication"
+    },
+    "LOGIN": {
+        "USERNAME": "Username",
+        "PASSWORD": "Password",
+        "SUBMIT": "Log in",
+        "REQUIRED": {
+            "USERNAME": "Username required",
+            "PASSWORD": "Password required"
+        },
+        "SAVE_CREDENTIALS": "Save credentials"
+    },
+    "CONNECTED": {
+        "HELLO": "Hello",
+        "LOGOUT": "Log out"
+    },
+    "WIDGET": {
+        "SUBTITLE": "University of Lorraine",
+        "NOT_LOGGED_IN": "Anonymous user",
+        "GREETING": {
+          "HELLO_NOT_AUTHENTICATED": "Hello!",
+          "HELLO_AUTHENTICATED": "Hello {{username}}!"
+        }
+    }
+}

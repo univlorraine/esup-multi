@@ -1,0 +1,87 @@
+<!--
+  ~ Copyright ou © ou Copr. Université de Lorraine, (2022)
+  ~
+  ~ Direction du Numérique de l'Université de Lorraine - SIED
+  ~  (dn-mobile-dev@univ-lorraine.fr)
+  ~ JNESIS (contact@jnesis.com)
+  ~
+  ~ Ce logiciel est un programme informatique servant à rendre accessible
+  ~ sur mobile divers services universitaires aux étudiants et aux personnels
+  ~ de l'université.
+  ~
+  ~ Ce logiciel est régi par la licence CeCILL 2.1, soumise au droit français
+  ~ et respectant les principes de diffusion des logiciels libres. Vous pouvez
+  ~ utiliser, modifier et/ou redistribuer ce programme sous les conditions
+  ~ de la licence CeCILL telle que diffusée par le CEA, le CNRS et INRIA
+  ~ sur le site "http://cecill.info".
+  ~
+  ~ En contrepartie de l'accessibilité au code source et des droits de copie,
+  ~ de modification et de redistribution accordés par cette licence, il n'est
+  ~ offert aux utilisateurs qu'une garantie limitée. Pour les mêmes raisons,
+  ~ seule une responsabilité restreinte pèse sur l'auteur du programme, le
+  ~ titulaire des droits patrimoniaux et les concédants successifs.
+  ~
+  ~ À cet égard, l'attention de l'utilisateur est attirée sur les risques
+  ~ associés au chargement, à l'utilisation, à la modification et/ou au
+  ~ développement et à la reproduction du logiciel par l'utilisateur étant
+  ~ donné sa spécificité de logiciel libre, qui peut le rendre complexe à
+  ~ manipuler et qui le réserve donc à des développeurs et des professionnels
+  ~ avertis possédant des connaissances informatiques approfondies. Les
+  ~ utilisateurs sont donc invités à charger et à tester l'adéquation du
+  ~ logiciel à leurs besoins dans des conditions permettant d'assurer la
+  ~ sécurité de leurs systèmes et/ou de leurs données et, plus généralement,
+  ~ à l'utiliser et à l'exploiter dans les mêmes conditions de sécurité.
+  ~
+  ~ Le fait que vous puissiez accéder à cet en-tête signifie que vous avez
+  ~ pris connaissance de la licence CeCILL 2.1, et que vous en avez accepté les
+  ~ termes.
+  -->
+
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <app-back-button></app-back-button>
+    </ion-buttons>
+    <ion-title class="app-centered-header-title app-title-4">
+      {{ (restaurant$ | async)?.title || ("RESTAURANTS.MENUS.DEFAULT_TOP_BAR_TITLE" | translate) }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-progress-bar *ngIf="isLoading" type="indeterminate"></ion-progress-bar>
+
+  <div #swiperContainer class="swiper-container" [ngClass]="{'empty': (restaurantMenusIsEmpty$ | async) && !isLoading}">
+    <div class="swiper-wrapper">
+      <ng-container *ngIf="restaurant$ | async">
+        <ion-card class="swiper-slide" *ngFor="let menu of (menus$ | async); index as i">
+          <ion-card-header class="ion-text-center">
+            <ion-text class="app-title-5 app-fixed-light-color">{{ menu.date | completeLocalDate}}</ion-text>
+          </ion-card-header>
+          <ion-card-content [ngClass]="{'hide-other-slides': swiper?.activeIndex !== i}">
+            <ion-list *ngFor="let meal of menu.meal">
+              <ion-row class="meal-name ion-justify-content-center">
+                <ion-text class="app-title-6 contrast">{{ meal.name }} </ion-text>
+              </ion-row>
+              <ion-item *ngFor="let category of meal.foodcategory" lines="none">
+                <ion-label>
+                  <h5 class="app-title-6 ion-text-center">{{ category.name }}</h5>
+                  <p class="app-text-4 light ion-text-center" *ngFor="let dish of category.dishes">{{ dish }}</p>
+                </ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-card-content>
+        </ion-card>
+      </ng-container>
+    </div>
+
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div>
+
+  <ng-container *ngIf="(restaurantMenusIsEmpty$| async) && !isLoading">
+    <ion-row class="ion-margin ion-justify-content-center">
+      <ion-text class="app-text-4">{{ "RESTAURANTS.MENUS.NO_DATA" | translate }}</ion-text>
+    </ion-row>
+  </ng-container>
+
+</ion-content>

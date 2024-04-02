@@ -1,0 +1,85 @@
+{
+  "name": "clocking",
+  "version": "1.0.3",
+  "description": "",
+  "author": "",
+  "private": true,
+  "license": "CECILL-2.1",
+  "scripts": {
+    "prebuild": "rimraf dist && node update-infos.js",
+    "build": "nest build",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "start": "nest start",
+    "start:dev": "nest start --watch",
+    "start:debug": "nest start --debug --watch",
+    "start:prod": "node dist/main",
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:e2e": "jest --config ./test/jest-e2e.json"
+  },
+  "dependencies": {
+    "@nestjs/axios": "^3.0.1",
+    "@nestjs/cache-manager": "^2.1.0",
+    "@nestjs/common": "^10.2.4",
+    "@nestjs/config": "^3.0.1",
+    "@nestjs/core": "^10.2.4",
+    "@nestjs/microservices": "^10.2.4",
+    "@nestjs/platform-express": "^10.2.4",
+    "agentkeepalive": "^4.5.0",
+    "cache-manager": "^5.2.3",
+    "cache-manager-redis-yet": "^4.1.2",
+    "date-fns": "^2.29.3",
+    "nats": "^2.15.1",
+    "reflect-metadata": "^0.1.13",
+    "rimraf": "^3.0.2",
+    "rxjs": "^7.2.0"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "^10.1.17",
+    "@nestjs/schematics": "^10.0.2",
+    "@nestjs/testing": "^10.2.4",
+    "@types/express": "^4.17.13",
+    "@types/jest": "28.1.8",
+    "@types/node": "^16.0.0",
+    "@types/supertest": "^2.0.11",
+    "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "@typescript-eslint/parser": "^5.62.0",
+    "eslint": "^8.48.0",
+    "eslint-config-prettier": "^8.10.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "jest": "28.1.3",
+    "prettier": "^2.3.2",
+    "source-map-support": "^0.5.20",
+    "supertest": "^6.1.3",
+    "ts-jest": "28.0.8",
+    "ts-loader": "^9.2.3",
+    "ts-node": "^10.0.0",
+    "tsconfig-paths": "4.1.0",
+    "typescript": "^4.7.4"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": "src",
+    "testRegex": ".*\\.spec\\.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "collectCoverageFrom": [
+      "**/*.(t|j)s"
+    ],
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
+  }
+}

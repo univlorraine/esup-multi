@@ -1,0 +1,15 @@
+{
+    "MENU": "Menu",
+    "VERSION": "Version:",
+    "VERSION_NOT_FOUND": "Not available",
+    "THEME": {
+      "CHANGE": "Switch to {{theme}} theme",
+      "LIGHT": "light",
+      "DARK": "dark"
+    },
+    "LANGUAGE": {
+      "CHANGE": "Use {{language}}",
+      "en": "English",
+      "fr": "French"
+    }
+}

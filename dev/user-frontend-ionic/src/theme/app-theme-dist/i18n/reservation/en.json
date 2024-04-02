@@ -1,0 +1,8 @@
+{
+    "TITLE": "Workspace Reservation",
+    "SCAN_TEXT": "Quick: Scan the QR code located at the entrance of the room you want to reserve.",
+    "SCAN_BUTTON": "Scan QR Code",
+    "SCAN_PAGE_TITLE": "Scan QR Code",
+    "BOOKING_SERVICE_TEXT": "You can find all available rooms directly on the reservation platform",
+    "BOOKING_SERVICE_BUTTON": "Go to booking service"
+}
