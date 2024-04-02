@@ -16,9 +16,11 @@
   "scripts": {
     "build:back": "npm run back:main -- ci && concurrently \"npm run back:*(!main) -- ci\" && concurrently \"npm run back:* -- run build\"",
     "build:front": "cd dev/user-frontend-ionic && npm ci && npm run module:build-all",
+    "build:mocks": "cd dev/user-backend-mocks && npm ci",
     "start:back": "concurrently \"npm run back:* -- run start\"",
     "start:back:dev": "concurrently \"npm run back:* -- run start:dev\"",
     "start:front": "cd dev/user-frontend-ionic && ionic serve",
+    "start:mocks": "cd dev/user-backend-mocks && npm run start",
     "back:main": "cd dev/user-backend-nest/main && npm",
     "back:auth": "cd dev/user-backend-nest/microservices/auth && npm",
     "back:cards": "cd dev/user-backend-nest/microservices/cards && npm",
