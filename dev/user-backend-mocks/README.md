@@ -50,9 +50,16 @@ Remplacer les variables dans le fichier `microservices/auth/.env` par les suivan
 AUTH_SERVICE_CAS_URL_REQUEST_TGT=http://localhost:3099/mocking/auth
 AUTH_SERVICE_CAS_URL_LOGOUT=http://localhost:3099/mocking/auth
 
-AUTH_SERVICE_UL_API_URL_USER_PROFILE=http://localhost:3099/mocking/auth/multi-user-provider
+AUTH_SERVICE_UL_API_URL_USER_PROFILE=http://localhost:3099/mocking/auth/multi-user-provider/{username}
 ```
 Relancer le service `auth` pour prendre en compte les nouvelles variables.
+
+### Microservice cards
+Remplacer les variables dans le fichier `microservices/cards/.env` par les suivantes :
+```
+CARDS_SERVICE_UL_API_URL=http://localhost:3099/mocking/cards/{username}
+```
+Relancer le service `cards` pour prendre en compte les nouvelles variables.
 
 ### Microservice chatbot
 Remplacer les variables dans le fichier `microservices/chatbot/.env` par les suivantes :
@@ -60,6 +67,12 @@ Remplacer les variables dans le fichier `microservices/chatbot/.env` par les sui
 CHATBOT_SERVICE_UL_API_TOCK_URL=http://localhost:3099/mocking/chatbot
 ```
 Relancer le service `chatbot` pour prendre en compte les nouvelles variables.
+
+### Microservice clocking
+Remplacer les variables dans le fichier `microservices/clocking/.env` par les suivantes :
+```
+CLOCKING_SERVICE_UL_API_URL=http://localhost:3099/mocking/clocking
+```
 
 ### Microservice contacts
 Remplacer les variables dans le fichier `microservices/contacts/.env` par les suivantes :
@@ -82,13 +95,6 @@ NOTIFICATIONS_SERVICE_UL_API_NOTIFICATIONS_URL=http://localhost:3099/mocking/not
 ```
 Relancer le service `notifications` pour prendre en compte les nouvelles variables.
 
-### Microservice schedule
-Remplacer les variables dans le fichier `microservices/schedule/.env` par les suivantes :
-```
-SCHEDULE_SERVICE_UL_API_USER_SCHEDULE_URL=http://localhost:3099/mocking/schedule
-```
-Relancer le service `schedule` pour prendre en compte les nouvelles variables.
-
 ### Microservice restaurants
 Remplacer les variables dans le fichier `microservices/restaurants/.env` par les suivantes :
 ```
@@ -96,29 +102,23 @@ RESTAURANTS_SERVICE_UL_API_URL=http://localhost:3099/mocking/restaurants
 ```
 Relancer le service `restaurants` pour prendre en compte les nouvelles variables.
 
-### Microservice cards
-Remplacer les variables dans le fichier `microservices/cards/.env` par les suivantes :
-```
-CARDS_SERVICE_UL_API_URL=http://localhost:3099/mocking/cards
-```
-Relancer le service `cards` pour prendre en compte les nouvelles variables.
-
 ### Microservice rss
 Remplacer les variables dans le fichier `microservices/rss/.env` par les suivantes :
 ```
-RSS_SERVICE_UL_API_URL=http://localhost:3099/mocking/rss
+RSS_SERVICE_FEED_URL=http://localhost:3099/mocking/rss
 ```
+
+### Microservice schedule
+Remplacer les variables dans le fichier `microservices/schedule/.env` par les suivantes :
+```
+SCHEDULE_SERVICE_UL_API_USER_SCHEDULE_URL=http://localhost:3099/mocking/schedule/{username}?startDate={startDate}&endDate={endDate}
+```
+Relancer le service `schedule` pour prendre en compte les nouvelles variables.
 
 ### Microservice statistics
 Remplacer les variables dans le fichier `microservices/statistics/.env` par les suivantes :
 ```
 STATISTICS_SERVICE_UL_API_URL=http://localhost:3099/mocking/statistics
-```
-
-### Microservice clocking
-Remplacer les variables dans le fichier `microservices/clocking/.env` par les suivantes :
-```
-CLOCKING_SERVICE_UL_API_URL=http://localhost:3099/mocking/clocking
 ```
 
 ## Les données bouchonnées
