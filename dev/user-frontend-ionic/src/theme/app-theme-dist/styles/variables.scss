@@ -118,28 +118,28 @@
   // ---------------------
 
   /** primary **/
-  --ion-color-primary: #050301;
-  --ion-color-primary-rgb: 5, 3, 1;
+  --ion-color-primary: #76787c;
+  --ion-color-primary-rgb: 118, 120, 124;
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 255, 255, 255;
-  --ion-color-primary-shade: #040301;
-  --ion-color-primary-tint: #1e1c1a;
+  --ion-color-primary-shade: #000000;
+  --ion-color-primary-tint: #454649;
 
   /** secondary **/
-  --ion-color-secondary: #0163aa;
-  --ion-color-secondary-rgb: 1, 99, 170;
+  --ion-color-secondary: #6e0924;
+  --ion-color-secondary-rgb: 110, 9, 36;
   --ion-color-secondary-contrast: #000000;
   --ion-color-secondary-contrast-rgb: 0, 0, 0;
-  --ion-color-secondary-shade: #015796;
-  --ion-color-secondary-tint: #1a73b3;
+  --ion-color-secondary-shade: #cc1129;
+  --ion-color-secondary-tint: #ff1634;
 
   /** tertiary **/
-  --ion-color-tertiary: #a0d0b0;
-  --ion-color-tertiary-rgb: 160, 208, 176;
+  --ion-color-tertiary: #3771c1;
+  --ion-color-tertiary-rgb: 55, 113, 193;
   --ion-color-tertiary-contrast: #000000;
   --ion-color-tertiary-contrast-rgb: 0, 0, 0;
-  --ion-color-tertiary-shade: #8db79b;
-  --ion-color-tertiary-tint: #aad5b8;
+  --ion-color-tertiary-shade: #015796;
+  --ion-color-tertiary-tint: #28538e;
 
   /** success **/
   --ion-color-success: #2dd36f;
@@ -182,8 +182,8 @@
   --ion-color-medium-tint: #686870;
 
   /** light **/
-  --ion-color-light: #f5f8fb;
-  --ion-color-light-rgb: 247, 248, 249;
+  --ion-color-light: #e2e7ee;
+  --ion-color-light-rgb: 226, 231, 238;
   --ion-color-light-contrast: #000000;
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d9dadb;
@@ -320,7 +320,7 @@ body.dark {
   // // // ---------------------
 
   /** App background **/
-  --app-color-background: #383838;
+  --app-color-background: #75787c;
 
   /** Pages background  : If the background is different from the app background. **/
   // services.page in Features module
