@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 /*
  * Copyright ou © ou Copr. Université de Lorraine, (2022)
  *
@@ -36,8 +38,6 @@
  * pris connaissance de la licence CeCILL 2.1, et que vous en avez accepté les
  * termes.
  */
-
-#!/usr/bin/env node
 
 /**
  * Module dependencies.
