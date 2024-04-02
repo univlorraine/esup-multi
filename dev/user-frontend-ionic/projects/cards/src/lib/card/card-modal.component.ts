@@ -45,7 +45,7 @@ import { PluginListenerHandle } from '@capacitor/core';
 @Component({
   selector: 'app-card-modal',
   templateUrl: './card-modal.component.html',
-  styleUrls: ['./card-modal.component.scss']
+  styleUrls: ['../../../../../src/theme/app-theme/styles/cards/card-modal.component.scss']
 })
 
 export class CardModalComponent implements OnInit, OnDestroy {

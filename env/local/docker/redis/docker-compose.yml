@@ -7,7 +7,6 @@ services:
     ports:
       - "6379:6379"
 
-  # https://github.com/joeferner/redis-commander/blob/master/docker-compose.yml
   redis-commander:
     container_name: redis-commander
     hostname: redis-commander
@@ -15,8 +14,6 @@ services:
     restart: always
     environment:
       - REDIS_HOSTS=local:redis:6379
-      - HTTP_USER=rcommander
-      - HTTP_PASSWORD=rcommander
     ports:
       - "8082:8081"
     depends_on:

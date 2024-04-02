@@ -49,7 +49,7 @@ import { RssService } from './rss.service';
 @Component({
   selector: 'app-rss',
   templateUrl: './rss.page.html',
-  styleUrls: ['./rss.page.scss'],
+  styleUrls: ['../../../../src/theme/app-theme/styles/rss/rss.page.scss'],
 })
 export class RssPage {
   public rssFeed$: Observable<FeedItem[]> = rssFeed$;

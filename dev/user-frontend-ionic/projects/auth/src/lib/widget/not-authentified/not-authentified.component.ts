@@ -46,7 +46,7 @@ import { LoginService } from '../../common/login.service';
 @Component({
   selector: 'app-auth-not-authentified-widget',
   templateUrl: './not-authentified.component.html',
-  styleUrls: ['./not-authentified.component.scss'],
+  styleUrls: ['../../../../../../src/theme/app-theme/styles/auth/not-authentified.component.scss'],
 })
 export class NotAuthentifiedComponent implements OnInit {
   authenticatedUser$: Observable<AuthenticatedUser>;

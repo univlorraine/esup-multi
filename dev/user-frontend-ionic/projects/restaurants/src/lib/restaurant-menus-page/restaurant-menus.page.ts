@@ -50,7 +50,7 @@ import { RestaurantMenusService } from './restaurant-menus.service';
 @Component({
   selector: 'app-restaurant-menus',
   templateUrl: './restaurant-menus.page.html',
-  styleUrls: ['./restaurant-menus.page.scss'],
+  styleUrls: ['../../../../../src/theme/app-theme/styles/restaurants/restaurant-menus.page.scss'],
 })
 export class RestaurantMenusPage implements OnInit, AfterViewChecked {
   @ViewChild('swiperContainer') swiperContainer: ElementRef;

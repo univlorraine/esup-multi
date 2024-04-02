@@ -47,7 +47,7 @@ import { UnreadMailService } from '../../unread-mail.service';
 @Component({
   selector: 'app-unread-mail-widget',
   templateUrl: './unread-mail.component.html',
-  styleUrls: ['./unread-mail.component.scss'],
+  styleUrls: ['../../../../../../src/theme/app-theme/styles/unread-mail/unread-mail.component.scss'],
 })
 export class UnreadMailComponent implements AfterViewInit {
 

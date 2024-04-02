@@ -51,7 +51,7 @@ import { UserIdGeneratorService } from './user-id-generator.service';
 @Component({
   selector: 'app-chatbot',
   templateUrl: './chatbot.page.html',
-  styleUrls: ['./chatbot.page.scss'],
+  styleUrls: ['../../../../src/theme/app-theme/styles/chatbot/chatbot.page.scss'],
 })
 export class ChatbotPage implements OnInit {
 

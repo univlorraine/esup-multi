@@ -79,6 +79,7 @@ export const environment = {
   defaultLanguage: 'fr',
   cmsPublicAssetsEndpoint: 'http://localhost:8055/assets/',
   guidedTourEnabled: true,
+  appTitle: 'Esup-Multi',
   moduleConfigs: [
     {
       moduleName: 'auth',
