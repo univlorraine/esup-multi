@@ -40,14 +40,14 @@
 import { Component, Inject, OnDestroy, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { InfiniteScrollCustomEvent, IonContent, IonModal, Platform } from '@ionic/angular';
-import { NetworkService, PageLayoutService } from '@ul/shared';
+import { NetworkService, PageLayoutService } from '@multi/shared';
 import { combineLatest, Observable, Subscription } from 'rxjs';
 import { catchError, filter, finalize, map, mergeMap, startWith, take } from 'rxjs/operators';
 import { NotificationsModuleConfig, NOTIFICATIONS_CONFIG } from './notifications.config';
 import {
   Channel,
   Notification, NotificationsRepository, TranslatedChannel, NotificationsService
-} from '@ul/shared';
+} from '@multi/shared';
 
 import { ToastService } from './toast.service';
 import { Browser } from '@capacitor/browser';
@@ -57,7 +57,7 @@ const defaultBreakpoint = 0.50;
 @Component({
   selector: 'app-notifications',
   templateUrl: './notifications.page.html',
-  styleUrls: ['./notifications.page.scss'],
+  styleUrls: ['../../../../src/theme/app-theme/styles/notifications/notifications.page.scss'],
 })
 export class NotificationsPage implements OnDestroy {
 

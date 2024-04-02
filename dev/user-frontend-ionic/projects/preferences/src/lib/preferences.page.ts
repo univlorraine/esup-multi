@@ -38,12 +38,12 @@
  */
 
 import { Component, OnInit, QueryList, Type, ViewChildren, ViewContainerRef } from '@angular/core';
-import { ProjectModuleService } from '@ul/shared';
+import { ProjectModuleService } from '@multi/shared';
 
 @Component({
   selector: 'app-preferences',
   templateUrl: './preferences.page.html',
-  styleUrls: ['./preferences.page.scss'],
+  styleUrls: ['../../../../src/theme/app-theme/styles/preferences/preferences.page.scss'],
 })
 export class PreferencesPage implements OnInit {
 

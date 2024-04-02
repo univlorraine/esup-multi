@@ -40,7 +40,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Browser } from '@capacitor/browser';
-import { NetworkService } from '@ul/shared';
+import { NetworkService } from '@multi/shared';
 import { Observable, Subscription } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
 import { FeedItem, rssFeed$, setRssFeed } from './rss.repository';
@@ -49,7 +49,7 @@ import { RssService } from './rss.service';
 @Component({
   selector: 'app-rss',
   templateUrl: './rss.page.html',
-  styleUrls: ['./rss.page.scss'],
+  styleUrls: ['../../../../src/theme/app-theme/styles/rss/rss.page.scss'],
 })
 export class RssPage {
   public rssFeed$: Observable<FeedItem[]> = rssFeed$;

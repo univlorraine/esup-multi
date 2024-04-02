@@ -39,7 +39,7 @@
 
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { AuthenticatedUser, getAuthToken, updateAuthToken, updateRefreshAuthToken, updateUser } from '@ul/shared';
+import { AuthenticatedUser, getAuthToken, updateAuthToken, updateRefreshAuthToken, updateUser } from '@multi/shared';
 import { EMPTY, Observable, of, throwError, zip } from 'rxjs';
 import { catchError, concatMap, delayWhen, take } from 'rxjs/operators';
 

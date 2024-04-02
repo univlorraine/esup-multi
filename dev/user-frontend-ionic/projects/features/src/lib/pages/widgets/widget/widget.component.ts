@@ -38,12 +38,12 @@
  */
 
 import { Component, Input } from '@angular/core';
-import { TranslatedFeature } from '@ul/shared';
+import { TranslatedFeature } from '@multi/shared';
 
 @Component({
 selector: 'app-feature-widget',
 templateUrl: './widget.component.html',
-styleUrls: ['./widget.component.scss'],
+styleUrls: ['../../../../../../../src/theme/app-theme/styles/features/widget.component.scss'],
 })
 export class WidgetComponent {
     @Input() feature: TranslatedFeature;

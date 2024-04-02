@@ -41,7 +41,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { combineLatest, Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-import { Notification, NotificationsRepository, TranslatedChannel, NotificationsService } from '@ul/shared';
+import { Notification, NotificationsRepository, TranslatedChannel, NotificationsService } from '@multi/shared';
 import { ToastService } from '../toast.service';
 
 interface NotificationOptions {
@@ -53,7 +53,7 @@ interface NotificationOptions {
 @Component({
   selector: 'app-notification-options',
   templateUrl: './notification-options.component.html',
-  styleUrls: ['./notification-options.component.scss'],
+  styleUrls: ['../../../../../src/theme/app-theme/styles/notifications/notification-options.component.scss'],
 })
 export class NotificationOptionsComponent {
 

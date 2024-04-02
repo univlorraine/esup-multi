@@ -44,14 +44,14 @@ import {
   AuthenticatedUser, authenticatedUser$, isDarkTheme, isDarkTheme$, MenuItem, MenuOpenerService,
   MenuService as SharedMenuService, setIsDarkTheme, setLanguage, setUserHaveSetThemeInApp,
   WidgetLifecycleService, InfosService, GuidedTourService
-} from '@ul/shared';
+} from '@multi/shared';
 import { from, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-menu',
   templateUrl: './burger-menu.page.html',
-  styleUrls: ['./burger-menu.page.scss'],
+  styleUrls: ['../../../../../src/theme/app-theme/styles/menu/burger-menu.page.scss'],
 })
 export class BurgerMenuPage {
   public widgetIds = {

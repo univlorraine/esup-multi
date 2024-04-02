@@ -3,24 +3,26 @@ services:
 
   directus-db:
     container_name: directus-db
-    image: postgis/postgis:14-master
+    image: mysql:8.0
     ports:
-      - "5432:5432"
-    # Uncomment to persist data on your local storage
-    # volumes:
-    #   - './postgres-data:/var/lib/postgresql/data'
+      - '3306:3306'
+    volumes:
+      - './mysql-data:/var/lib/mysql'
+    command: mysqld --default-authentication-plugin=mysql_native_password
     networks:
       - directus
     environment:
-      POSTGRES_USER: 'directus'
-      POSTGRES_PASSWORD: 'directus'
-      POSTGRES_DB: 'directus'
+      MYSQL_USER: 'directus'
+      MYSQL_PASSWORD: 'directus'
+      MYSQL_DATABASE: 'directus'
+      MYSQL_ROOT_PASSWORD: 'directus'
 
   directus:
     container_name: directus
-    image: directus/directus:latest 
+    image: directus/directus:9
+    restart: on-failure
     ports:
-      - 8055:8055
+      - '8055:8055'
     # Uncomment to persist uploads on your local storage
     volumes:
     # By default, uploads are stored in /directus/uploads
@@ -42,9 +44,9 @@ services:
       ADMIN_EMAIL: 'admin@admin.com'
       ADMIN_PASSWORD: 'admin'
 
-      DB_CLIENT: 'pg'
+      DB_CLIENT: 'mysql'
       DB_HOST: 'directus-db'
-      DB_PORT: '5432'
+      DB_PORT: '3306'
       DB_DATABASE: 'directus'
       DB_USER: 'directus'
       DB_PASSWORD: 'directus'

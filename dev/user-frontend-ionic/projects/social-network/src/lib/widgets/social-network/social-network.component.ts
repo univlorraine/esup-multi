@@ -39,7 +39,7 @@
 
 import { Component } from '@angular/core';
 import { Browser } from '@capacitor/browser';
-import { NetworkService } from '@ul/shared';
+import { NetworkService } from '@multi/shared';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { SocialNetwork, socialNetworks$ } from '../../social-network.repository';
@@ -48,7 +48,7 @@ import { SocialNetworkService } from '../../social-network.service';
 @Component({
   selector: 'lib-social-network',
   templateUrl: './social-network.component.html',
-  styleUrls: ['./social-network.component.scss'],
+  styleUrls: ['../../../../../../src/theme/app-theme/styles/social-network/social-network.component.scss'],
 })
 export class SocialNetworkComponent {
   public socialNetworks$: Observable<SocialNetwork[]> = socialNetworks$;

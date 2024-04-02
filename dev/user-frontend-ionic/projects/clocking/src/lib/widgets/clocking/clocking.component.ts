@@ -38,7 +38,7 @@
  */
 
 import { AfterViewInit, ChangeDetectorRef, Component, Input } from '@angular/core';
-import { getExpectedErrorMessage, ThemeService } from '@ul/shared';
+import { getExpectedErrorMessage, ThemeService } from '@multi/shared';
 import { Observable } from 'rxjs';
 import { catchError, finalize, take } from 'rxjs/operators';
 import { Clocking, clocking$ } from '../../clocking.repository';
@@ -47,7 +47,7 @@ import { ClockingService } from '../../clocking.service';
 @Component({
   selector: 'app-clocking-widget',
   templateUrl: './clocking.component.html',
-  styleUrls: ['./clocking.component.scss'],
+  styleUrls: ['../../../../../../src/theme/app-theme/styles/clocking/clocking.component.scss'],
 })
 export class ClockingComponent implements AfterViewInit {
 

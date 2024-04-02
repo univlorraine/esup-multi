@@ -52,15 +52,16 @@ import {
   currentLanguage$, features$, FeaturesService, isDarkTheme$, isFeatureStoreInitialized$, NavigationService,
   NotificationsService, NetworkService, PageLayout, PageLayoutService, setIsDarkTheme, themeRepoInitialized$,
   userHadSetThemeInApp, userHadSetThemeInApp$
-} from '@ul/shared';
+} from '@multi/shared';
 import { initializeApp } from 'firebase/app';
 import { combineLatest, Observable, of, Subscription } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
-  styleUrls: ['app.component.scss'],
+  styleUrls: ['../theme/app-theme/styles/app/app.component.scss'],
 })
 export class AppComponent implements OnInit, OnDestroy {
 
@@ -86,7 +87,8 @@ export class AppComponent implements OnInit, OnDestroy {
     @Inject(DOCUMENT) private document: Document,
     private networkService: NetworkService,
     private featuresService: FeaturesService,
-    private notificationsService: NotificationsService
+    private notificationsService: NotificationsService,
+    private titleService: Title
   ) {
     currentLanguage$.subscribe((language) => {
       document.documentElement.lang = language || environment.defaultLanguage;
@@ -144,6 +146,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.titleService.setTitle(this.environment.appTitle);
     this.backButtonListener = App.addListener('backButton', () => {
       this.popoverController.getTop().then(popover => {
         if (popover) {

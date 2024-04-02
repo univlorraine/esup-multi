@@ -52,7 +52,7 @@ import {
   NotificationsService,
   PageLayout,
   StatisticsService
-} from '@ul/shared';
+} from '@multi/shared';
 import { combineLatest, Observable, Subject, withLatestFrom } from 'rxjs';
 import { distinctUntilChanged, filter, map } from 'rxjs/operators';
 
@@ -63,7 +63,7 @@ interface MenuItemWithOptionalRouterLink extends MenuItem {
 @Component({
   selector: 'app-layout',
   templateUrl: 'layout.page.html',
-  styleUrls: ['layout.page.scss']
+  styleUrls: ['../../theme/app-theme/styles/app/layout.page.scss']
 })
 export class LayoutPage implements AfterViewInit, OnChanges {
   @Input() currentPageLayout: PageLayout;

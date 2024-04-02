@@ -43,7 +43,7 @@ import { isDarkTheme$ } from '../../theme/theme.repository';
 @Component({
   selector: 'app-custom-icon',
   templateUrl: 'custom-icon.component.html',
-  styleUrls: ['custom-icon.component.scss']
+  styleUrls: ['../../../../../../src/theme/app-theme/styles/shared/custom-icon.component.scss']
 })
 export class CustomIconComponent {
   @Input() icon?: string;

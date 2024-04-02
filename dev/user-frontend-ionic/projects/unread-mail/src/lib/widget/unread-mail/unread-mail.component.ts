@@ -38,7 +38,7 @@
  */
 
 import { AfterViewInit, ChangeDetectorRef, Component, Input } from '@angular/core';
-import { ThemeService } from '@ul/shared';
+import { ThemeService } from '@multi/shared';
 import { Observable } from 'rxjs';
 import { finalize, take } from 'rxjs/operators';
 import { MailCalendar, mails$ } from '../../unread-mail.repository';
@@ -47,7 +47,7 @@ import { UnreadMailService } from '../../unread-mail.service';
 @Component({
   selector: 'app-unread-mail-widget',
   templateUrl: './unread-mail.component.html',
-  styleUrls: ['./unread-mail.component.scss'],
+  styleUrls: ['../../../../../../src/theme/app-theme/styles/unread-mail/unread-mail.component.scss'],
 })
 export class UnreadMailComponent implements AfterViewInit {
 

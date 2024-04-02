@@ -39,12 +39,12 @@
 
 import { ChangeDetectorRef, Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { StatisticsService, ThemeService, TranslatedInternalFeature } from '@ul/shared';
+import { StatisticsService, ThemeService, TranslatedInternalFeature } from '@multi/shared';
 
 @Component({
   selector: 'app-widget-internal-feature',
   templateUrl: './widget-internal-feature.component.html',
-  styleUrls: ['./widget-internal-feature.component.scss'],
+  styleUrls: ['../../../../../../../../src/theme/app-theme/styles/features/widget-internal-feature.component.scss'],
 })
 export class WidgetInternalFeatureComponent {
   @Input() feature: TranslatedInternalFeature;

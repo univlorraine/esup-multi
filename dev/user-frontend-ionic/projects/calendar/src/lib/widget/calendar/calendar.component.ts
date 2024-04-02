@@ -38,7 +38,7 @@
  */
 
 import { AfterViewInit, ChangeDetectorRef, Component, Input } from '@angular/core';
-import { ThemeService } from '@ul/shared';
+import { ThemeService } from '@multi/shared';
 import { Observable } from 'rxjs';
 import { finalize, take } from 'rxjs/operators';
 import { MailCalendarEvents } from '../../calendar.repository';
@@ -47,7 +47,7 @@ import { CalendarService } from '../../calendar.service';
 @Component({
   selector: 'app-calendar-widget',
   templateUrl: './calendar.component.html',
-  styleUrls: ['./calendar.component.scss'],
+  styleUrls: ['../../../../../../src/theme/app-theme/styles/calendar/calendar.component.scss'],
 })
 export class CalendarComponent implements AfterViewInit{
 

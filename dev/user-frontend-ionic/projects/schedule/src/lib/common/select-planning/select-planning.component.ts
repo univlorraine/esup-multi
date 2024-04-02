@@ -62,7 +62,7 @@ const atLeastOneCheckedValidator = (): ValidatorFn =>
 @Component({
   selector: 'app-select-planning',
   templateUrl: './select-planning.component.html',
-  styleUrls: ['./select-planning.component.scss'],
+  styleUrls: ['../../../../../../src/theme/app-theme/styles/schedule/select-planning.component.scss'],
 })
 export class SelectPlanningComponent {
 

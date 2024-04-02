@@ -41,7 +41,7 @@ import { CommonModule } from '@angular/common';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
-import { ProjectModuleService, SharedComponentsModule, SharedPipeModule } from '@ul/shared';
+import { ProjectModuleService, SharedComponentsModule, SharedPipeModule } from '@multi/shared';
 import { RssPageRoutingModule } from './rss-routing.module';
 import { RssPage } from './rss.page';
 import { LatestNewsComponent } from './widgets/latest-news/latest-news.component';

@@ -39,7 +39,7 @@
 
 import { CommonModule } from '@angular/common';
 import { ErrorHandler, NgModule } from '@angular/core';
-import { AuthInterceptor } from '@ul/shared';
+import { AuthInterceptor } from '@multi/shared';
 import { AppErrorHandler } from './app.error-handler';
 
 @NgModule({

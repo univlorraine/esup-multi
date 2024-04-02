@@ -1,5 +1,5 @@
 version: 1
-directus: 13.1.1
+directus: 9.26.0
 vendor: mysql
 collections:
   - collection: authorization
@@ -17,7 +17,6 @@ collections:
       icon: null
       item_duplication_fields: null
       note: null
-      preview_url: null
       singleton: false
       sort: 8
       sort_field: null
@@ -40,7 +39,6 @@ collections:
       icon: null
       item_duplication_fields: null
       note: null
-      preview_url: null
       singleton: false
       sort: 5
       sort_field: null
@@ -63,7 +61,6 @@ collections:
       icon: import_export
       item_duplication_fields: null
       note: null
-      preview_url: null
       singleton: false
       sort: 1
       sort_field: null
@@ -86,7 +83,6 @@ collections:
       icon: null
       item_duplication_fields: null
       note: null
-      preview_url: null
       singleton: true
       sort: 9
       sort_field: null
@@ -109,7 +105,6 @@ collections:
       icon: import_export
       item_duplication_fields: null
       note: null
-      preview_url: null
       singleton: false
       sort: 1
       sort_field: null
@@ -132,7 +127,6 @@ collections:
       icon: null
       item_duplication_fields: null
       note: null
-      preview_url: null
       singleton: false
       sort: 1
       sort_field: null
@@ -155,7 +149,6 @@ collections:
       icon: import_export
       item_duplication_fields: null
       note: null
-      preview_url: null
       singleton: false
       sort: 2
       sort_field: null
@@ -178,7 +171,6 @@ collections:
       icon: import_export
       item_duplication_fields: null
       note: null
-      preview_url: null
       singleton: false
       sort: 1
       sort_field: null
@@ -201,7 +193,6 @@ collections:
       icon: null
       item_duplication_fields: null
       note: null
-      preview_url: null
       singleton: false
       sort: 3
       sort_field: sort
@@ -224,7 +215,6 @@ collections:
       icon: import_export
       item_duplication_fields: null
       note: null
-      preview_url: null
       singleton: false
       sort: 1
       sort_field: null
@@ -247,7 +237,6 @@ collections:
       icon: null
       item_duplication_fields: null
       note: null
-      preview_url: null
       singleton: false
       sort: 6
       sort_field: null
@@ -270,7 +259,6 @@ collections:
       icon: null
       item_duplication_fields: null
       note: null
-      preview_url: null
       singleton: true
       sort: null
       sort_field: null
@@ -293,7 +281,6 @@ collections:
       icon: import_export
       item_duplication_fields: null
       note: null
-      preview_url: null
       singleton: false
       sort: null
       sort_field: null
@@ -316,7 +303,6 @@ collections:
       icon: null
       item_duplication_fields: null
       note: null
-      preview_url: null
       singleton: false
       sort: 2
       sort_field: sort
@@ -339,7 +325,6 @@ collections:
       icon: import_export
       item_duplication_fields: null
       note: null
-      preview_url: null
       singleton: false
       sort: 1
       sort_field: null
@@ -364,7 +349,6 @@ collections:
         - position
         - role
       note: null
-      preview_url: null
       singleton: false
       sort: 7
       sort_field: null
@@ -387,7 +371,6 @@ collections:
       icon: null
       item_duplication_fields: null
       note: null
-      preview_url: null
       singleton: false
       sort: 4
       sort_field: sort
@@ -410,7 +393,6 @@ collections:
       icon: null
       item_duplication_fields: null
       note: null
-      preview_url: null
       singleton: false
       sort: 10
       sort_field: null
@@ -433,7 +415,6 @@ collections:
       icon: import_export
       item_duplication_fields: null
       note: null
-      preview_url: null
       singleton: false
       sort: 2
       sort_field: null
@@ -456,7 +437,6 @@ collections:
       icon: import_export
       item_duplication_fields: null
       note: null
-      preview_url: null
       singleton: false
       sort: 1
       sort_field: null
@@ -530,9 +510,9 @@ fields:
     schema:
       name: roles
       table: authorization
-      data_type: longtext
+      data_type: json
       default_value: null
-      max_length: 4294967295
+      max_length: null
       numeric_precision: null
       numeric_scale: null
       is_nullable: true
@@ -1381,8 +1361,8 @@ fields:
       is_generated: false
       generation_expression: null
       has_auto_increment: false
-      foreign_key_table: authorization
-      foreign_key_column: id
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: features
     field: description
     type: string
@@ -2348,9 +2328,9 @@ fields:
     schema:
       name: searchKeywords
       table: features_translations
-      data_type: longtext
+      data_type: json
       default_value: null
-      max_length: 4294967295
+      max_length: null
       numeric_precision: null
       numeric_scale: null
       is_nullable: true
@@ -2580,7 +2560,7 @@ fields:
       interface: file-image
       note: Image illustrant l'information importante
       options:
-        folder: 53b53d3b-4693-4680-a363-f00097b22b98
+        folder: f35eeccf-dfe9-4468-80c7-13e9cebdd714
       readonly: false
       required: false
       sort: 4
@@ -4292,8 +4272,8 @@ fields:
       is_generated: false
       generation_expression: null
       has_auto_increment: false
-      foreign_key_table: authorization
-      foreign_key_column: id
+      foreign_key_table: null
+      foreign_key_column: null
   - collection: widgets
     field: color
     type: string
@@ -5353,7 +5333,7 @@ relations:
       foreign_key_table: channels
       foreign_key_column: id
       constraint_name: channels_translations_channels_id_foreign
-      on_update: RESTRICT
+      on_update: NO ACTION
       on_delete: SET NULL
   - collection: channels_translations
     field: languages_code
@@ -5374,7 +5354,7 @@ relations:
       foreign_key_table: languages
       foreign_key_column: code
       constraint_name: channels_translations_languages_code_foreign
-      on_update: RESTRICT
+      on_update: NO ACTION
       on_delete: SET NULL
   - collection: contact_us_translations
     field: contact_us_id
@@ -5395,7 +5375,7 @@ relations:
       foreign_key_table: contact_us
       foreign_key_column: id
       constraint_name: contact_us_translations_contact_us_id_foreign
-      on_update: RESTRICT
+      on_update: NO ACTION
       on_delete: SET NULL
   - collection: contact_us_translations
     field: languages_code
@@ -5416,7 +5396,7 @@ relations:
       foreign_key_table: languages
       foreign_key_column: code
       constraint_name: contact_us_translations_languages_code_foreign
-      on_update: RESTRICT
+      on_update: NO ACTION
       on_delete: SET NULL
   - collection: features
     field: authorization
@@ -5437,7 +5417,7 @@ relations:
       foreign_key_table: authorization
       foreign_key_column: id
       constraint_name: features_authorization_foreign
-      on_update: RESTRICT
+      on_update: NO ACTION
       on_delete: CASCADE
   - collection: features_settings_by_role
     field: features_id
@@ -5458,7 +5438,7 @@ relations:
       foreign_key_table: features
       foreign_key_column: id
       constraint_name: features_settings_by_role_features_id_foreign
-      on_update: RESTRICT
+      on_update: NO ACTION
       on_delete: CASCADE
   - collection: features_settings_by_role
     field: settings_by_role_id
@@ -5479,7 +5459,7 @@ relations:
       foreign_key_table: settings_by_role
       foreign_key_column: id
       constraint_name: features_settings_by_role_settings_by_role_id_foreign
-      on_update: RESTRICT
+      on_update: NO ACTION
       on_delete: CASCADE
   - collection: features_translations
     field: features_id
@@ -5500,7 +5480,7 @@ relations:
       foreign_key_table: features
       foreign_key_column: id
       constraint_name: features_translations_features_id_foreign
-      on_update: RESTRICT
+      on_update: NO ACTION
       on_delete: SET NULL
   - collection: features_translations
     field: languages_code
@@ -5521,7 +5501,7 @@ relations:
       foreign_key_table: languages
       foreign_key_column: code
       constraint_name: features_translations_languages_code_foreign
-      on_update: RESTRICT
+      on_update: NO ACTION
       on_delete: SET NULL
   - collection: important_news
     field: authorization
@@ -5542,7 +5522,7 @@ relations:
       foreign_key_table: authorization
       foreign_key_column: id
       constraint_name: important_news_authorization_foreign
-      on_update: RESTRICT
+      on_update: NO ACTION
       on_delete: SET NULL
   - collection: important_news
     field: image
@@ -5563,7 +5543,7 @@ relations:
       foreign_key_table: directus_files
       foreign_key_column: id
       constraint_name: important_news_image_foreign
-      on_update: RESTRICT
+      on_update: NO ACTION
       on_delete: SET NULL
   - collection: important_news_translations
     field: important_news_id
@@ -5584,7 +5564,7 @@ relations:
       foreign_key_table: important_news
       foreign_key_column: id
       constraint_name: important_news_translations_important_news_id_foreign
-      on_update: RESTRICT
+      on_update: NO ACTION
       on_delete: SET NULL
   - collection: important_news_translations
     field: languages_code
@@ -5605,7 +5585,7 @@ relations:
       foreign_key_table: languages
       foreign_key_column: code
       constraint_name: important_news_translations_languages_code_foreign
-      on_update: RESTRICT
+      on_update: NO ACTION
       on_delete: SET NULL
   - collection: login_translations
     field: languages_code
@@ -5626,7 +5606,7 @@ relations:
       foreign_key_table: languages
       foreign_key_column: code
       constraint_name: login_translations_languages_code_foreign
-      on_update: RESTRICT
+      on_update: NO ACTION
       on_delete: SET NULL
   - collection: login_translations
     field: login_id
@@ -5647,7 +5627,7 @@ relations:
       foreign_key_table: login
       foreign_key_column: id
       constraint_name: login_translations_login_id_foreign
-      on_update: RESTRICT
+      on_update: NO ACTION
       on_delete: SET NULL
   - collection: pages_translations
     field: languages_code
@@ -5668,7 +5648,7 @@ relations:
       foreign_key_table: languages
       foreign_key_column: code
       constraint_name: pages_translations_languages_code_foreign
-      on_update: RESTRICT
+      on_update: NO ACTION
       on_delete: SET NULL
   - collection: pages_translations
     field: pages_id
@@ -5689,7 +5669,7 @@ relations:
       foreign_key_table: pages
       foreign_key_column: id
       constraint_name: pages_translations_pages_id_foreign
-      on_update: RESTRICT
+      on_update: NO ACTION
       on_delete: SET NULL
   - collection: widgets
     field: authorization
@@ -5710,7 +5690,7 @@ relations:
       foreign_key_table: authorization
       foreign_key_column: id
       constraint_name: widgets_authorization_foreign
-      on_update: RESTRICT
+      on_update: NO ACTION
       on_delete: CASCADE
   - collection: widgets_settings_by_role
     field: settings_by_role_id
@@ -5731,7 +5711,7 @@ relations:
       foreign_key_table: settings_by_role
       foreign_key_column: id
       constraint_name: widgets_settings_by_role_settings_by_role_id_foreign
-      on_update: RESTRICT
+      on_update: NO ACTION
       on_delete: CASCADE
   - collection: widgets_settings_by_role
     field: widgets_id
@@ -5752,7 +5732,7 @@ relations:
       foreign_key_table: widgets
       foreign_key_column: id
       constraint_name: widgets_settings_by_role_widgets_id_foreign
-      on_update: RESTRICT
+      on_update: NO ACTION
       on_delete: CASCADE
   - collection: widgets_translations
     field: languages_code
@@ -5773,7 +5753,7 @@ relations:
       foreign_key_table: languages
       foreign_key_column: code
       constraint_name: widgets_translations_languages_code_foreign
-      on_update: RESTRICT
+      on_update: NO ACTION
       on_delete: SET NULL
   - collection: widgets_translations
     field: widgets_id
@@ -5794,5 +5774,5 @@ relations:
       foreign_key_table: widgets
       foreign_key_column: id
       constraint_name: widgets_translations_widgets_id_foreign
-      on_update: RESTRICT
+      on_update: NO ACTION
       on_delete: SET NULL

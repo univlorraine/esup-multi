@@ -39,7 +39,7 @@
 
 import { Component, ViewChild } from '@angular/core';
 import { IonContent } from '@ionic/angular';
-import { AuthenticatedUser } from '@ul/shared';
+import { AuthenticatedUser } from '@multi/shared';
 import { add, isAfter, startOfWeek } from 'date-fns';
 import { combineLatest, Observable, of, Subscription } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
@@ -55,7 +55,7 @@ import { EventsByDay, ScheduleListService } from './schedule-list.service';
 @Component({
   selector: 'app-schedule-list',
   templateUrl: './schedule-list.page.html',
-  styleUrls: ['./schedule-list.page.scss'],
+  styleUrls: ['../../../../../src/theme/app-theme/styles/schedule/schedule-list.page.scss'],
 })
 export class ScheduleListPage {
 

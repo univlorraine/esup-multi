@@ -43,7 +43,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { EffectsNgModule } from '@ngneat/effects-ng';
 import { TranslateModule } from '@ngx-translate/core';
-import { ProjectModuleService, SharedComponentsModule } from '@ul/shared';
+import { ProjectModuleService, SharedComponentsModule } from '@multi/shared';
 import { DragulaModule } from 'ng2-dragula';
 import { FeaturesRoutingModule } from './features-routing.module';
 import { FeaturesEffects } from './features.effects';

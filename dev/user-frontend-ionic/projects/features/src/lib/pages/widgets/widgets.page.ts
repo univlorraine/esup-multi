@@ -38,14 +38,14 @@
  */
 
 import { Component } from '@angular/core';
-import { FeaturesService, GuidedTourService, TranslatedFeature, WidgetLifecycleService } from '@ul/shared';
+import { FeaturesService, GuidedTourService, TranslatedFeature, WidgetLifecycleService } from '@multi/shared';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-widgets',
   templateUrl: './widgets.page.html',
-  styleUrls: ['./widgets.page.scss'],
+  styleUrls: ['../../../../../../src/theme/app-theme/styles/features/widgets.page.scss'],
 })
 export class WidgetsPage {
   public featuresIsEmpty$: Observable<boolean>;

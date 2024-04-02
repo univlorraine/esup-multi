@@ -38,7 +38,7 @@
  */
 
 import { AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy } from '@angular/core';
-import { CompleteLocalDatePipe, ThemeService } from '@ul/shared';
+import { CompleteLocalDatePipe, ThemeService } from '@multi/shared';
 import { Observable, Subscription } from 'rxjs';
 import { finalize, map, take } from 'rxjs/operators';
 import { Event } from '../../schedule.repository';
@@ -48,7 +48,7 @@ import { NextEventsService } from './next-events.service';
 @Component({
   selector: 'app-schedule-widget-next-events',
   templateUrl: './next-events.component.html',
-  styleUrls: ['./next-events.component.scss'],
+  styleUrls: ['../../../../../../src/theme/app-theme/styles/schedule/next-events.component.scss'],
 })
 export class NextEventsComponent implements OnDestroy, AfterViewInit {
 

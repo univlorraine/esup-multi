@@ -38,12 +38,12 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { AuthenticatedUser, authenticatedUser$ } from '@ul/shared';
+import { AuthenticatedUser, authenticatedUser$ } from '@multi/shared';
 import { Observable } from 'rxjs';
 @Component({
   selector: 'app-auth-greeting-widget',
   templateUrl: './greeting.component.html',
-  styleUrls: ['./greeting.component.scss'],
+  styleUrls: ['../../../../../../src/theme/app-theme/styles/auth/greeting.component.scss'],
 })
 export class GreetingComponent implements OnInit {
   authenticatedUser$: Observable<AuthenticatedUser>;

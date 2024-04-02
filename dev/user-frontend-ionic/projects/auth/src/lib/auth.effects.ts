@@ -45,7 +45,7 @@ import {
   clearAuthenticatedUsername,
   deleteAuthToken,
   deleteRefreshAuthToken
-} from '@ul/shared';
+} from '@multi/shared';
 import { take, tap } from 'rxjs/operators';
 
 @Injectable({ providedIn: 'root' })

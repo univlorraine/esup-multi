@@ -39,7 +39,7 @@
 
 import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthenticatedUser, authenticatedUser$, AuthorizationHelper } from '@ul/shared';
+import { AuthenticatedUser, authenticatedUser$, AuthorizationHelper } from '@multi/shared';
 import { Observable } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
 import { ScheduleModuleConfig, SCHEDULE_CONFIG } from '../../schedule.config';
@@ -49,7 +49,7 @@ import { ScheduleService } from '../../schedule.service';
 @Component({
   selector: 'app-select-user',
   templateUrl: './select-user.component.html',
-  styleUrls: ['./select-user.component.scss'],
+  styleUrls: ['../../../../../../src/theme/app-theme/styles/schedule/select-user.component.scss'],
 })
 export class SelectUserComponent {
 

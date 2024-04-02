@@ -38,7 +38,7 @@
  */
 
 import { Injectable } from '@angular/core';
-import { TranslatedFeature } from '@ul/shared';
+import { TranslatedFeature } from '@multi/shared';
 
 
 @Injectable({

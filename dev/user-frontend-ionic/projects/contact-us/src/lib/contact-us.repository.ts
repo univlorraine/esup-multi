@@ -40,7 +40,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { createStore, select, withProps } from '@ngneat/elf';
 import { persistState } from '@ngneat/elf-persist-state';
-import { currentLanguage$, localForageStore } from '@ul/shared';
+import { currentLanguage$, localForageStore } from '@multi/shared';
 import { combineLatest } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 

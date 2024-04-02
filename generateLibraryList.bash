@@ -63,8 +63,9 @@ then
   fi
 fi
 
+
 # Count number of tasks
-NB_TASKS=7 # toc + frontend + backend/main + root
+NB_TASKS=9 # toc (1) + root (2) + frontend (2) + backend-mocks (2) + backend/main (2)
 NB_DONE=0
 for d in ./dev/user-backend-nest/microservices/*; do
   if [ -d "$d" ]; then
@@ -83,6 +84,7 @@ function tableOfContent() {
   {
     echo "* [Root directory](#root-directory)"
     echo "* [Frontend](#frontend)"
+    echo "* [Mocks (backend)](#backend-mocks)"
     echo "* [Backend](#backend)"
     echo "  * [main](#backend-main)"
   } >> $OUTPUT_FILE
@@ -162,6 +164,22 @@ licenseSummary ./dev/user-frontend-ionic
   echo ""
 } >> $OUTPUT_FILE
 licenseMarkdown ./dev/user-frontend-ionic
+{
+  echo "</details>"
+  echo ""
+} >> $OUTPUT_FILE
+
+# Generate for backend/mocks
+{
+  echo "## [Mocks (backend)](./dev/user-backend-mocks)"
+  echo "<span id=\"backend-mocks\"></span>"
+} >> $OUTPUT_FILE
+licenseSummary ./dev/user-backend-mocks
+{
+  echo "<details><summary>Détails</summary>"
+  echo ""
+} >> $OUTPUT_FILE
+licenseMarkdown ./dev/user-backend-mocks
 {
   echo "</details>"
   echo ""

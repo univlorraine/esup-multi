@@ -38,7 +38,7 @@
  */
 
 import { Component, Inject, ViewChild } from '@angular/core';
-import { AuthenticatedUser, getAuthToken, NetworkService } from '@ul/shared';
+import { AuthenticatedUser, getAuthToken, NetworkService } from '@multi/shared';
 import { Observable, Subscription } from 'rxjs';
 import { filter, finalize, switchMap, take } from 'rxjs/operators';
 import { CardModalComponent } from './card/card-modal.component';
@@ -50,7 +50,7 @@ import { ScreenService } from './screen.service';
 @Component({
   selector: 'app-cards',
   templateUrl: './cards.page.html',
-  styleUrls: ['./cards.page.scss']
+  styleUrls: ['../../../../src/theme/app-theme/styles/cards/cards.page.scss']
 })
 export class CardsPage {
   @ViewChild(CardModalComponent) cardModalComponent: CardModalComponent;

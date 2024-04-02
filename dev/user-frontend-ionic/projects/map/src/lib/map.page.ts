@@ -41,7 +41,7 @@ import { Component, Inject, OnDestroy, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Geolocation } from '@capacitor/geolocation';
 import { TranslateService } from '@ngx-translate/core';
-import { NetworkService } from '@ul/shared';
+import { NetworkService } from '@multi/shared';
 import * as Leaflet from 'leaflet';
 import { Subject } from 'rxjs';
 import { finalize, take, takeUntil } from 'rxjs/operators';
@@ -62,7 +62,7 @@ const CATEGORIES = [
 @Component({
   selector: 'app-map',
   templateUrl: './map.page.html',
-  styleUrls: ['./map.page.scss'],
+  styleUrls: ['../../../../src/theme/app-theme/styles/map/map.page.scss'],
 })
 export class MapPage implements OnDestroy {
 
@@ -266,7 +266,7 @@ export class MapPage implements OnDestroy {
 
   private buildIconForCategory(category: string) {
     const iconFile = this.getIconFileByCategory(category);
-    const iconUrl = `./assets/map/markers/${iconFile}`;
+    const iconUrl = `./assets/icons/markers/${iconFile}`;
 
     return Leaflet.icon({
       iconUrl,
@@ -279,9 +279,9 @@ export class MapPage implements OnDestroy {
     return Leaflet.icon({
       iconSize: [25, 41],
       iconAnchor: [13, 41],
-      iconUrl: './assets/map/leaflet/marker-icon.png',
-      iconRetinaUrl: './assets/map/leaflet/marker-icon-2x.png',
-      shadowUrl: './assets/map/leaflet/marker-shadow.png'
+      iconUrl: './assets/icons/leaflet/marker-icon.png',
+      iconRetinaUrl: './assets/icons/leaflet/marker-icon-2x.png',
+      shadowUrl: './assets/icons/leaflet/marker-shadow.png'
     });
   }
 

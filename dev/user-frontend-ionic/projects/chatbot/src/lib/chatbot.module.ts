@@ -42,7 +42,7 @@ import { APP_INITIALIZER, ModuleWithProviders, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
-import { ProjectModuleService, SharedComponentsModule } from '@ul/shared';
+import { ProjectModuleService, SharedComponentsModule } from '@multi/shared';
 import { ChatbotRoutingModule } from './chatbot-routing.module';
 import { ChatbotPage } from './chatbot.page';
 import { CHATBOT_CONFIG, ChatbotModuleConfig } from './chatbot.config';

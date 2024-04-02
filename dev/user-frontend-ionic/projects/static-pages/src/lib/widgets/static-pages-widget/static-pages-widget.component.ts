@@ -39,7 +39,7 @@
 
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NetworkService, StatisticsService } from '@ul/shared';
+import { NetworkService, StatisticsService } from '@multi/shared';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { StaticPagesRepository, TranslatedStaticPage } from '../../static-pages.repository';
@@ -48,7 +48,7 @@ import { StaticPagesService } from '../../static-pages.service';
 @Component({
   selector: 'app-static-pages-widget',
   templateUrl: './static-pages-widget.component.html',
-  styleUrls: ['./static-pages-widget.component.scss'],
+  styleUrls: ['../../../../../../src/theme/app-theme/styles/static-pages/static-pages-widget.component.scss'],
 })
 export class StaticPagesWidgetComponent {
 
