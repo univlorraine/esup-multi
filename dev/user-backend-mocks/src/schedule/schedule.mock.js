@@ -189,7 +189,7 @@ const schedule = {
                         {
                             "id": 174923,
                             "displayname": "POTTER Harry",
-                            "email": "harry.potter@univ-lorraine.fr"
+                            "email": "harry.potter@univ.fr"
                         }
                     ],
                     "groups": [
@@ -313,7 +313,7 @@ const schedule = {
                         {
                             "id": 168115,
                             "displayname": "GAUTIER Juliette",
-                            "email": "juliette.gautier@univ-lorraine.fr"
+                            "email": "juliette.gautier@univ.fr"
                         }
                     ],
                     "groups": [
@@ -374,12 +374,12 @@ const schedule = {
                         {
                             "id": 123580,
                             "displayname": "WILLIS Bruce",
-                            "email": "bruce.willis@univ-lorraine.fr"
+                            "email": "bruce.willis@univ.fr"
                         },
                         {
                             "id": 204316,
                             "displayname": "BLANCHARD Fabiene",
-                            "email": "fabiene.blanchard@univ-lorraine.fr"
+                            "email": "fabiene.blanchard@univ.fr"
                         }
                     ],
                     "groups": [
@@ -518,7 +518,7 @@ const schedule = {
                         {
                             "id": 174923,
                             "displayname": "POTTER Harry",
-                            "email": "harry.potter@univ-lorraine.fr"
+                            "email": "harry.potter@univ.fr"
                         }
                     ],
                     "groups": [
@@ -573,7 +573,7 @@ const schedule = {
                         {
                             "id": 168115,
                             "displayname": "GAUTIER Juliette",
-                            "email": "juliette.gautier@univ-lorraine.fr"
+                            "email": "juliette.gautier@univ.fr"
                         }
                     ],
                     "groups": [
@@ -661,7 +661,7 @@ const schedule = {
                         {
                             "id": 168115,
                             "displayname": "GAUTIER Juliette",
-                            "email": "juliette.gautier@univ-lorraine.fr"
+                            "email": "juliette.gautier@univ.fr"
                         }
                     ],
                     "groups": [
@@ -791,7 +791,7 @@ const schedule = {
                         {
                             "id": 174923,
                             "displayname": "POTTER Harry",
-                            "email": "harry.potter@univ-lorraine.fr"
+                            "email": "harry.potter@univ.fr"
                         }
                     ],
                     "groups": [
@@ -852,7 +852,7 @@ const schedule = {
                         {
                             "id": 168115,
                             "displayname": "GAUTIER Juliette",
-                            "email": "juliette.gautier@univ-lorraine.fr"
+                            "email": "juliette.gautier@univ.fr"
                         }
                     ],
                     "groups": [
@@ -1025,7 +1025,7 @@ const schedule = {
                         {
                             "id": 167656,
                             "displayname": "DUVAL René",
-                            "email": "rene.duval@univ-lorraine.fr"
+                            "email": "rene.duval@univ.fr"
                         }
                     ],
                     "groups": [
@@ -1059,7 +1059,7 @@ const schedule = {
                         {
                             "id": 9757,
                             "displayname": "DUPUYS Danielle",
-                            "email": "danielle.dupuys@univ-lorraine.fr"
+                            "email": "danielle.dupuys@univ.fr"
                         }
                     ],
                     "groups": [
@@ -1127,7 +1127,7 @@ const schedule = {
                         {
                             "id": 134963,
                             "displayname": "PELLETIER Lucas",
-                            "email": "lucas.pelletier@univ-lorraine.fr"
+                            "email": "lucas.pelletier@univ.fr"
                         }
                     ],
                     "groups": [
@@ -1161,7 +1161,7 @@ const schedule = {
                         {
                             "id": 11702,
                             "displayname": "DESROSIERS Dwayne",
-                            "email": "dwayne.desrosiers@univ-lorraine.fr"
+                            "email": "dwayne.desrosiers@univ.fr"
                         }
                     ],
                     "groups": [
@@ -1195,7 +1195,7 @@ const schedule = {
                         {
                             "id": 7195,
                             "displayname": "SCHNEIDER Isabelle",
-                            "email": "isabelle.schneider@univ-lorraine.fr"
+                            "email": "isabelle.schneider@univ.fr"
                         }
                     ],
                     "groups": [
@@ -1229,7 +1229,7 @@ const schedule = {
                         {
                             "id": 553,
                             "displayname": "COLLIN Valerie",
-                            "email": "valerie.collin@univ-lorraine.fr"
+                            "email": "valerie.collin@univ.fr"
                         }
                     ],
                     "groups": [
@@ -1263,7 +1263,7 @@ const schedule = {
                         {
                             "id": 134965,
                             "displayname": "ARNOUX Violette",
-                            "email": "violette.arnoux@univ-lorraine.fr"
+                            "email": "violette.arnoux@univ.fr"
                         }
                     ],
                     "groups": [
@@ -1433,7 +1433,7 @@ const schedule = {
                         {
                             "id": 125534,
                             "displayname": "JARDINE Alphonse",
-                            "email": "alphonse.jardine@univ-lorraine.fr"
+                            "email": "alphonse.jardine@univ.fr"
                         }
                     ],
                     "groups": [
@@ -1467,7 +1467,7 @@ const schedule = {
                         {
                             "id": 7493,
                             "displayname": "NATUREL Anne-Marie",
-                            "email": "anne-marie.naturel@univ-lorraine.fr"
+                            "email": "anne-marie.naturel@univ.fr"
                         }
                     ],
                     "groups": [
@@ -1501,7 +1501,7 @@ const schedule = {
                         {
                             "id": 10934,
                             "displayname": "GROSJEAN Lucie",
-                            "email": "lucie.grosjean@univ-lorraine.fr"
+                            "email": "lucie.grosjean@univ.fr"
                         }
                     ],
                     "groups": [
@@ -1573,7 +1573,7 @@ const schedule = {
                         {
                             "id": 201589,
                             "displayname": "JACQUIOT France",
-                            "email": "france.jacquiot@univ-lorraine.fr"
+                            "email": "france.jacquiot@univ.fr"
                         }
                     ],
                     "groups": [
@@ -1611,7 +1611,7 @@ const schedule = {
                         {
                             "id": 168226,
                             "displayname": "FAURE Jacques",
-                            "email": "jacques.faure@univ-lorraine.fr"
+                            "email": "jacques.faure@univ.fr"
                         }
                     ],
                     "groups": [
@@ -1631,7 +1631,7 @@ const schedule = {
                         "color": "#03ff3d",
                         "type": "CM",
                         "online": true,
-                        "url": "https://arche.univ-lorraine.fr/course/view.php?id=68137"
+                        "url": "https://arche.univ.fr/course/view.php?id=68137"
                     },
                     "rooms": [
                         {
@@ -1645,7 +1645,7 @@ const schedule = {
                         {
                             "id": 4792,
                             "displayname": "BOURGET Marjolaine",
-                            "email": "marjolaine.bourget@univ-lorraine.fr"
+                            "email": "marjolaine.bourget@univ.fr"
                         }
                     ],
                     "groups": [
@@ -1679,7 +1679,7 @@ const schedule = {
                         {
                             "id": 9757,
                             "displayname": "DUPUYS Danielle",
-                            "email": "danielle.dupuys@univ-lorraine.fr"
+                            "email": "danielle.dupuys@univ.fr"
                         }
                     ],
                     "groups": [
@@ -1713,7 +1713,7 @@ const schedule = {
                         {
                             "id": 311444,
                             "displayname": "PELLETIER Germain",
-                            "email": "germain.pelletier@univ-lorraine.fr"
+                            "email": "germain.pelletier@univ.fr"
                         }
                     ],
                     "groups": [
@@ -1751,7 +1751,7 @@ const schedule = {
                         {
                             "id": 198215,
                             "displayname": "BUSSON Baptiste",
-                            "email": "baptiste.busson@univ-lorraine.fr"
+                            "email": "baptiste.busson@univ.fr"
                         }
                     ],
                     "groups": [
@@ -1963,7 +1963,7 @@ const schedule = {
                         {
                             "id": 311444,
                             "displayname": "PELLETIER Germain",
-                            "email": "germain.pelletier@univ-lorraine.fr"
+                            "email": "germain.pelletier@univ.fr"
                         }
                     ],
                     "groups": [
@@ -2001,7 +2001,7 @@ const schedule = {
                         {
                             "id": 311444,
                             "displayname": "PELLETIER Germain",
-                            "email": "germain.pelletier@univ-lorraine.fr"
+                            "email": "germain.pelletier@univ.fr"
                         }
                     ],
                     "groups": [
@@ -2035,7 +2035,7 @@ const schedule = {
                         {
                             "id": 198465,
                             "displayname": "LACIEN Amélie",
-                            "email": "amelie.lacien@univ-lorraine.fr"
+                            "email": "amelie.lacien@univ.fr"
                         }
                     ],
                     "groups": [
@@ -2069,7 +2069,7 @@ const schedule = {
                         {
                             "id": 12709,
                             "displayname": "COLLIN Roland",
-                            "email": "roland.collin@univ-lorraine.fr"
+                            "email": "roland.collin@univ.fr"
                         }
                     ],
                     "groups": [
@@ -2109,7 +2109,7 @@ const schedule = {
                         {
                             "id": 144299,
                             "displayname": "LAKARIM Clarice",
-                            "email": "clarice.lakarim@univ-lorraine.fr"
+                            "email": "clarice.lakarim@univ.fr"
                         }
                     ],
                     "groups": [
@@ -2143,7 +2143,7 @@ const schedule = {
                         {
                             "id": 153203,
                             "displayname": "SOUCY Simon",
-                            "email": "simon.soucy@univ-lorraine.fr"
+                            "email": "simon.soucy@univ.fr"
                         }
                     ],
                     "groups": [
@@ -2177,7 +2177,7 @@ const schedule = {
                         {
                             "id": 134967,
                             "displayname": "BELLEFEUILLE Dwayne",
-                            "email": "dwayne.bellefeuille@univ-lorraine.fr"
+                            "email": "dwayne.bellefeuille@univ.fr"
                         }
                     ],
                     "groups": [
@@ -2211,7 +2211,7 @@ const schedule = {
                         {
                             "id": 186991,
                             "displayname": "POUCHARD Louis",
-                            "email": "louis.pouchard@univ-lorraine.fr"
+                            "email": "louis.pouchard@univ.fr"
                         }
                     ],
                     "groups": [
@@ -2273,7 +2273,7 @@ const schedule = {
                         {
                             "id": 496,
                             "displayname": "BERNARD Nicolas",
-                            "email": "nicolas.bernard@univ-lorraine.fr"
+                            "email": "nicolas.bernard@univ.fr"
                         }
                     ],
                     "groups": [
@@ -2307,7 +2307,7 @@ const schedule = {
                         {
                             "id": 311444,
                             "displayname": "PELLETIER Germain",
-                            "email": "germain.pelletier@univ-lorraine.fr"
+                            "email": "germain.pelletier@univ.fr"
                         }
                     ],
                     "groups": [
@@ -2406,7 +2406,7 @@ const schedule = {
                         {
                             "id": 496,
                             "displayname": "BERNARD Nicolas",
-                            "email": "nicolas.bernard@univ-lorraine.fr"
+                            "email": "nicolas.bernard@univ.fr"
                         }
                     ],
                     "groups": [
@@ -2440,7 +2440,7 @@ const schedule = {
                         {
                             "id": 12709,
                             "displayname": "COLLIN Roland",
-                            "email": "roland.collin@univ-lorraine.fr"
+                            "email": "roland.collin@univ.fr"
                         }
                     ],
                     "groups": [
@@ -2474,7 +2474,7 @@ const schedule = {
                         {
                             "id": 125534,
                             "displayname": "JARDINE Alphonse",
-                            "email": "alphonse.jardine@univ-lorraine.fr"
+                            "email": "alphonse.jardine@univ.fr"
                         }
                     ],
                     "groups": [
@@ -2508,7 +2508,7 @@ const schedule = {
                         {
                             "id": 12437,
                             "displayname": "LEFEBVRE Arthur",
-                            "email": "a.lefebvre@univ-lorraine.fr"
+                            "email": "a.lefebvre@univ.fr"
                         }
                     ],
                     "groups": [
@@ -2546,7 +2546,7 @@ const schedule = {
                         {
                             "id": 302765,
                             "displayname": "DUMON Sylvain",
-                            "email": "sylvain.dumon@univ-lorraine.fr"
+                            "email": "sylvain.dumon@univ.fr"
                         }
                     ],
                     "groups": [
@@ -2580,7 +2580,7 @@ const schedule = {
                         {
                             "id": 174923,
                             "displayname": "POTTER Harry",
-                            "email": "harry.potter@univ-lorraine.fr"
+                            "email": "harry.potter@univ.fr"
                         }
                     ],
                     "groups": [
@@ -2614,7 +2614,7 @@ const schedule = {
                         {
                             "id": 198369,
                             "displayname": "POULET Coralie",
-                            "email": "coralie.poulet@univ-lorraine.fr"
+                            "email": "coralie.poulet@univ.fr"
                         }
                     ],
                     "groups": [
@@ -2648,7 +2648,7 @@ const schedule = {
                         {
                             "id": 7195,
                             "displayname": "SCHNEIDER Isabelle",
-                            "email": "isabelle.schneider@univ-lorraine.fr"
+                            "email": "isabelle.schneider@univ.fr"
                         }
                     ],
                     "groups": [
@@ -2686,7 +2686,7 @@ const schedule = {
                         {
                             "id": 7493,
                             "displayname": "NATUREL Anne-Marie",
-                            "email": "anne-marie.naturel@univ-lorraine.fr"
+                            "email": "anne-marie.naturel@univ.fr"
                         }
                     ],
                     "groups": [
@@ -2720,7 +2720,7 @@ const schedule = {
                         {
                             "id": 302765,
                             "displayname": "DUMON Sylvain",
-                            "email": "sylvain.dumon@univ-lorraine.fr"
+                            "email": "sylvain.dumon@univ.fr"
                         }
                     ],
                     "groups": [
@@ -2754,7 +2754,7 @@ const schedule = {
                         {
                             "id": 299915,
                             "displayname": "CAPALDI Larry",
-                            "email": "larry.capaldi@univ-lorraine.fr"
+                            "email": "larry.capaldi@univ.fr"
                         }
                     ],
                     "groups": [
@@ -2788,7 +2788,7 @@ const schedule = {
                         {
                             "id": 12437,
                             "displayname": "LEFEBVRE Arthur",
-                            "email": "a.lefebvre@univ-lorraine.fr"
+                            "email": "a.lefebvre@univ.fr"
                         }
                     ],
                     "groups": [
@@ -2826,7 +2826,7 @@ const schedule = {
                         {
                             "id": 398293,
                             "displayname": "PARISEAU Olivier",
-                            "email": "olivier.pariseau@univ-lorraine.fr"
+                            "email": "olivier.pariseau@univ.fr"
                         }
                     ],
                     "groups": [
@@ -2860,7 +2860,7 @@ const schedule = {
                         {
                             "id": 198465,
                             "displayname": "LACIEN Amélie",
-                            "email": "amelie.lacien@univ-lorraine.fr"
+                            "email": "amelie.lacien@univ.fr"
                         }
                     ],
                     "groups": [
@@ -2894,7 +2894,7 @@ const schedule = {
                         {
                             "id": 186991,
                             "displayname": "POUCHARD Louis",
-                            "email": "louis.pouchard@univ-lorraine.fr"
+                            "email": "louis.pouchard@univ.fr"
                         }
                     ],
                     "groups": [
@@ -2928,7 +2928,7 @@ const schedule = {
                         {
                             "id": 144298,
                             "displayname": "LATOURELLE Charlyne",
-                            "email": "charlyne.latourelle@univ-lorraine.fr"
+                            "email": "charlyne.latourelle@univ.fr"
                         }
                     ],
                     "groups": [
@@ -2989,7 +2989,7 @@ const schedule = {
                         {
                             "id": 12709,
                             "displayname": "COLLIN Roland",
-                            "email": "roland.collin@univ-lorraine.fr"
+                            "email": "roland.collin@univ.fr"
                         }
                     ],
                     "groups": [
@@ -3023,7 +3023,7 @@ const schedule = {
                         {
                             "id": 167654,
                             "displayname": "FORTIER Astrid",
-                            "email": "astrid.fortier@univ-lorraine.fr"
+                            "email": "astrid.fortier@univ.fr"
                         }
                     ],
                     "groups": [
@@ -3057,7 +3057,7 @@ const schedule = {
                         {
                             "id": 510,
                             "displayname": "CHATIGNY Sébastien",
-                            "email": "sebastien.chatigny@univ-lorraine.fr"
+                            "email": "sebastien.chatigny@univ.fr"
                         }
                     ],
                     "groups": [
@@ -3125,7 +3125,7 @@ const schedule = {
                         {
                             "id": 167654,
                             "displayname": "FORTIER Astrid",
-                            "email": "astrid.fortier@univ-lorraine.fr"
+                            "email": "astrid.fortier@univ.fr"
                         }
                     ],
                     "groups": [
@@ -3159,7 +3159,7 @@ const schedule = {
                         {
                             "id": 302765,
                             "displayname": "DUMON Sylvain",
-                            "email": "sylvain.dumon@univ-lorraine.fr"
+                            "email": "sylvain.dumon@univ.fr"
                         }
                     ],
                     "groups": [
@@ -3193,7 +3193,7 @@ const schedule = {
                         {
                             "id": 168226,
                             "displayname": "FAURE Jacques",
-                            "email": "jacques.faure@univ-lorraine.fr"
+                            "email": "jacques.faure@univ.fr"
                         }
                     ],
                     "groups": [
@@ -3227,7 +3227,7 @@ const schedule = {
                         {
                             "id": 9757,
                             "displayname": "DUPUYS Danielle",
-                            "email": "danielle.dupuys@univ-lorraine.fr"
+                            "email": "danielle.dupuys@univ.fr"
                         }
                     ],
                     "groups": [
@@ -3261,7 +3261,7 @@ const schedule = {
                         {
                             "id": 510,
                             "displayname": "CHATIGNY Sébastien",
-                            "email": "sebastien.chatigny@univ-lorraine.fr"
+                            "email": "sebastien.chatigny@univ.fr"
                         }
                     ],
                     "groups": [
@@ -3295,7 +3295,7 @@ const schedule = {
                         {
                             "id": 134967,
                             "displayname": "BELLEFEUILLE Dwayne",
-                            "email": "dwayne.bellefeuille@univ-lorraine.fr"
+                            "email": "dwayne.bellefeuille@univ.fr"
                         }
                     ],
                     "groups": [
@@ -3329,7 +3329,7 @@ const schedule = {
                         {
                             "id": 186991,
                             "displayname": "POUCHARD Louis",
-                            "email": "louis.pouchard@univ-lorraine.fr"
+                            "email": "louis.pouchard@univ.fr"
                         }
                     ],
                     "groups": [
@@ -3384,7 +3384,7 @@ const schedule = {
                         {
                             "id": 297,
                             "displayname": "ROUX Lilian",
-                            "email": "lilian.roux@univ-lorraine.fr"
+                            "email": "lilian.roux@univ.fr"
                         }
                     ],
                     "groups": [
@@ -3452,7 +3452,7 @@ const schedule = {
                         {
                             "id": 144299,
                             "displayname": "LAKARIM Clarice",
-                            "email": "clarice.lakarim@univ-lorraine.fr"
+                            "email": "clarice.lakarim@univ.fr"
                         }
                     ],
                     "groups": [
@@ -3486,7 +3486,7 @@ const schedule = {
                         {
                             "id": 302765,
                             "displayname": "DUMON Sylvain",
-                            "email": "sylvain.dumon@univ-lorraine.fr"
+                            "email": "sylvain.dumon@univ.fr"
                         }
                     ],
                     "groups": [
@@ -3520,7 +3520,7 @@ const schedule = {
                         {
                             "id": 496,
                             "displayname": "BERNARD Nicolas",
-                            "email": "nicolas.bernard@univ-lorraine.fr"
+                            "email": "nicolas.bernard@univ.fr"
                         }
                     ],
                     "groups": [
@@ -3554,7 +3554,7 @@ const schedule = {
                         {
                             "id": 12709,
                             "displayname": "COLLIN Roland",
-                            "email": "roland.collin@univ-lorraine.fr"
+                            "email": "roland.collin@univ.fr"
                         }
                     ],
                     "groups": [
@@ -3588,7 +3588,7 @@ const schedule = {
                         {
                             "id": 398293,
                             "displayname": "PARISEAU Olivier",
-                            "email": "olivier.pariseau@univ-lorraine.fr"
+                            "email": "olivier.pariseau@univ.fr"
                         }
                     ],
                     "groups": [
@@ -3622,7 +3622,7 @@ const schedule = {
                         {
                             "id": 125534,
                             "displayname": "JARDINE Alphonse",
-                            "email": "alphonse.jardine@univ-lorraine.fr"
+                            "email": "alphonse.jardine@univ.fr"
                         }
                     ],
                     "groups": [
@@ -3656,7 +3656,7 @@ const schedule = {
                         {
                             "id": 125533,
                             "displayname": "LEPAGE Karim",
-                            "email": "karim.lepage@univ-lorraine.fr"
+                            "email": "karim.lepage@univ.fr"
                         }
                     ],
                     "groups": [
@@ -3694,7 +3694,7 @@ const schedule = {
                         {
                             "id": 10934,
                             "displayname": "GROSJEAN Lucie",
-                            "email": "lucie.grosjean@univ-lorraine.fr"
+                            "email": "lucie.grosjean@univ.fr"
                         }
                     ],
                     "groups": [
@@ -3732,7 +3732,7 @@ const schedule = {
                         {
                             "id": 12437,
                             "displayname": "LEFEBVRE Arthur",
-                            "email": "a.lefebvre@univ-lorraine.fr"
+                            "email": "a.lefebvre@univ.fr"
                         }
                     ],
                     "groups": [
@@ -3770,7 +3770,7 @@ const schedule = {
                         {
                             "id": 510,
                             "displayname": "CHATIGNY Sébastien",
-                            "email": "sebastien.chatigny@univ-lorraine.fr"
+                            "email": "sebastien.chatigny@univ.fr"
                         }
                     ],
                     "groups": [
@@ -3893,7 +3893,7 @@ const schedule = {
                         {
                             "id": 134965,
                             "displayname": "ARNOUX Violette",
-                            "email": "violette.arnoux@univ-lorraine.fr"
+                            "email": "violette.arnoux@univ.fr"
                         }
                     ],
                     "groups": [
@@ -3995,7 +3995,7 @@ const schedule = {
                         {
                             "id": 9757,
                             "displayname": "DUPUYS Danielle",
-                            "email": "danielle.dupuys@univ-lorraine.fr"
+                            "email": "danielle.dupuys@univ.fr"
                         }
                     ],
                     "groups": [
@@ -4033,7 +4033,7 @@ const schedule = {
                         {
                             "id": 168224,
                             "displayname": "PRUNEL Lina",
-                            "email": "lina.prunel@univ-lorraine.fr"
+                            "email": "lina.prunel@univ.fr"
                         }
                     ],
                     "groups": [
@@ -4053,7 +4053,7 @@ const schedule = {
                         "color": "#00ffff",
                         "type": "TP",
                         "online": true,
-                        "url": "https://arche.univ-lorraine.fr/course/view.php?id=68341"
+                        "url": "https://arche.univ.fr/course/view.php?id=68341"
                     },
                     "rooms": [
                         {
@@ -4067,7 +4067,7 @@ const schedule = {
                         {
                             "id": 339077,
                             "displayname": "TRUFFEAU Jacques",
-                            "email": "jacques.truffeau@univ-lorraine.fr"
+                            "email": "jacques.truffeau@univ.fr"
                         }
                     ],
                     "groups": [
@@ -4101,7 +4101,7 @@ const schedule = {
                         {
                             "id": 339172,
                             "displayname": "GARNIER Hugo",
-                            "email": "hugo.garnier@univ-lorraine.fr"
+                            "email": "hugo.garnier@univ.fr"
                         }
                     ],
                     "groups": [
@@ -4135,7 +4135,7 @@ const schedule = {
                         {
                             "id": 198465,
                             "displayname": "LACIEN Amélie",
-                            "email": "amelie.lacien@univ-lorraine.fr"
+                            "email": "amelie.lacien@univ.fr"
                         }
                     ],
                     "groups": [
@@ -4190,7 +4190,7 @@ const schedule = {
                         {
                             "id": 510,
                             "displayname": "CHATIGNY Sébastien",
-                            "email": "sebastien.chatigny@univ-lorraine.fr"
+                            "email": "sebastien.chatigny@univ.fr"
                         }
                     ],
                     "groups": [
@@ -4224,7 +4224,7 @@ const schedule = {
                         {
                             "id": 11702,
                             "displayname": "DESROSIERS Dwayne",
-                            "email": "dwayne.desrosiers@univ-lorraine.fr"
+                            "email": "dwayne.desrosiers@univ.fr"
                         }
                     ],
                     "groups": [
@@ -4258,7 +4258,7 @@ const schedule = {
                         {
                             "id": 12709,
                             "displayname": "COLLIN Roland",
-                            "email": "roland.collin@univ-lorraine.fr"
+                            "email": "roland.collin@univ.fr"
                         }
                     ],
                     "groups": [
@@ -4292,7 +4292,7 @@ const schedule = {
                         {
                             "id": 311444,
                             "displayname": "PELLETIER Germain",
-                            "email": "germain.pelletier@univ-lorraine.fr"
+                            "email": "germain.pelletier@univ.fr"
                         }
                     ],
                     "groups": [
@@ -4326,7 +4326,7 @@ const schedule = {
                         {
                             "id": 134965,
                             "displayname": "ARNOUX Violette",
-                            "email": "violette.arnoux@univ-lorraine.fr"
+                            "email": "violette.arnoux@univ.fr"
                         }
                     ],
                     "groups": [
@@ -4364,7 +4364,7 @@ const schedule = {
                         {
                             "id": 167656,
                             "displayname": "DUVAL René",
-                            "email": "rene.duval@univ-lorraine.fr"
+                            "email": "rene.duval@univ.fr"
                         }
                     ],
                     "groups": [
@@ -4398,7 +4398,7 @@ const schedule = {
                         {
                             "id": 398293,
                             "displayname": "PARISEAU Olivier",
-                            "email": "olivier.pariseau@univ-lorraine.fr"
+                            "email": "olivier.pariseau@univ.fr"
                         }
                     ],
                     "groups": [
@@ -4432,7 +4432,7 @@ const schedule = {
                         {
                             "id": 168115,
                             "displayname": "GAUTIER Juliette",
-                            "email": "juliette.gautier@univ-lorraine.fr"
+                            "email": "juliette.gautier@univ.fr"
                         }
                     ],
                     "groups": [
@@ -4466,7 +4466,7 @@ const schedule = {
                         {
                             "id": 1061,
                             "displayname": "JACKSON Alexis",
-                            "email": "alexis.jackson@univ-lorraine.fr"
+                            "email": "alexis.jackson@univ.fr"
                         }
                     ],
                     "groups": [
@@ -4500,7 +4500,7 @@ const schedule = {
                         {
                             "id": 11702,
                             "displayname": "DESROSIERS Dwayne",
-                            "email": "dwayne.desrosiers@univ-lorraine.fr"
+                            "email": "dwayne.desrosiers@univ.fr"
                         }
                     ],
                     "groups": [
@@ -4538,7 +4538,7 @@ const schedule = {
                         {
                             "id": 241,
                             "displayname": "PAULIN Victor",
-                            "email": "victor.paulin@univ-lorraine.fr"
+                            "email": "victor.paulin@univ.fr"
                         }
                     ],
                     "groups": [
@@ -4572,7 +4572,7 @@ const schedule = {
                         {
                             "id": 134965,
                             "displayname": "ARNOUX Violette",
-                            "email": "violette.arnoux@univ-lorraine.fr"
+                            "email": "violette.arnoux@univ.fr"
                         }
                     ],
                     "groups": [
@@ -4627,7 +4627,7 @@ const schedule = {
                         {
                             "id": 510,
                             "displayname": "CHATIGNY Sébastien",
-                            "email": "sebastien.chatigny@univ-lorraine.fr"
+                            "email": "sebastien.chatigny@univ.fr"
                         }
                     ],
                     "groups": [
@@ -4661,7 +4661,7 @@ const schedule = {
                         {
                             "id": 12709,
                             "displayname": "COLLIN Roland",
-                            "email": "roland.collin@univ-lorraine.fr"
+                            "email": "roland.collin@univ.fr"
                         }
                     ],
                     "groups": [
@@ -4695,7 +4695,7 @@ const schedule = {
                         {
                             "id": 168226,
                             "displayname": "FAURE Jacques",
-                            "email": "jacques.faure@univ-lorraine.fr"
+                            "email": "jacques.faure@univ.fr"
                         }
                     ],
                     "groups": [
@@ -4729,7 +4729,7 @@ const schedule = {
                         {
                             "id": 144297,
                             "displayname": "LEMOINE Tanguy",
-                            "email": "tanguy.lemoine@univ-lorraine.fr"
+                            "email": "tanguy.lemoine@univ.fr"
                         }
                     ],
                     "groups": [
@@ -4763,7 +4763,7 @@ const schedule = {
                         {
                             "id": 29670,
                             "displayname": "PICARD Louis",
-                            "email": "louis.picard@univ-lorraine.fr"
+                            "email": "louis.picard@univ.fr"
                         }
                     ],
                     "groups": [
@@ -4835,7 +4835,7 @@ const schedule = {
                         {
                             "id": 929,
                             "displayname": "RENAUD Baptiste",
-                            "email": "baptiste.renaud@univ-lorraine.fr"
+                            "email": "baptiste.renaud@univ.fr"
                         }
                     ],
                     "groups": [
@@ -4869,7 +4869,7 @@ const schedule = {
                         {
                             "id": 229668,
                             "displayname": "CLERC Axel",
-                            "email": "axel.clerc@univ-lorraine.fr"
+                            "email": "axel.clerc@univ.fr"
                         }
                     ],
                     "groups": [
@@ -4903,7 +4903,7 @@ const schedule = {
                         {
                             "id": 125533,
                             "displayname": "LEPAGE Karim",
-                            "email": "karim.lepage@univ-lorraine.fr"
+                            "email": "karim.lepage@univ.fr"
                         }
                     ],
                     "groups": [
@@ -4937,7 +4937,7 @@ const schedule = {
                         {
                             "id": 12709,
                             "displayname": "COLLIN Roland",
-                            "email": "roland.collin@univ-lorraine.fr"
+                            "email": "roland.collin@univ.fr"
                         }
                     ],
                     "groups": [
@@ -4971,7 +4971,7 @@ const schedule = {
                         {
                             "id": 144299,
                             "displayname": "LAKARIM Clarice",
-                            "email": "clarice.lakarim@univ-lorraine.fr"
+                            "email": "clarice.lakarim@univ.fr"
                         }
                     ],
                     "groups": [
@@ -5039,7 +5039,7 @@ const schedule = {
                         {
                             "id": 241,
                             "displayname": "PAULIN Victor",
-                            "email": "victor.paulin@univ-lorraine.fr"
+                            "email": "victor.paulin@univ.fr"
                         }
                     ],
                     "groups": [
@@ -5073,7 +5073,7 @@ const schedule = {
                         {
                             "id": 168224,
                             "displayname": "PRUNEL Lina",
-                            "email": "lina.prunel@univ-lorraine.fr"
+                            "email": "lina.prunel@univ.fr"
                         }
                     ],
                     "groups": [
@@ -5113,12 +5113,12 @@ const schedule = {
                         {
                             "id": 123580,
                             "displayname": "WILLIS Bruce",
-                            "email": "bruce.willis@univ-lorraine.fr"
+                            "email": "bruce.willis@univ.fr"
                         },
                         {
                             "id": 204316,
                             "displayname": "BLANCHARD Fabiene",
-                            "email": "fabiene.blanchard@univ-lorraine.fr"
+                            "email": "fabiene.blanchard@univ.fr"
                         }
                     ],
                     "groups": [
@@ -5152,7 +5152,7 @@ const schedule = {
                         {
                             "id": 144297,
                             "displayname": "LEMOINE Tanguy",
-                            "email": "tanguy.lemoine@univ-lorraine.fr"
+                            "email": "tanguy.lemoine@univ.fr"
                         }
                     ],
                     "groups": [
@@ -5207,7 +5207,7 @@ const schedule = {
                         {
                             "id": 186991,
                             "displayname": "POUCHARD Louis",
-                            "email": "louis.pouchard@univ-lorraine.fr"
+                            "email": "louis.pouchard@univ.fr"
                         }
                     ],
                     "groups": [
@@ -5241,7 +5241,7 @@ const schedule = {
                         {
                             "id": 125533,
                             "displayname": "LEPAGE Karim",
-                            "email": "karim.lepage@univ-lorraine.fr"
+                            "email": "karim.lepage@univ.fr"
                         }
                     ],
                     "groups": [
@@ -5275,7 +5275,7 @@ const schedule = {
                         {
                             "id": 198215,
                             "displayname": "BUSSON Baptiste",
-                            "email": "baptiste.busson@univ-lorraine.fr"
+                            "email": "baptiste.busson@univ.fr"
                         }
                     ],
                     "groups": [
@@ -5381,7 +5381,7 @@ const schedule = {
                         {
                             "id": 134965,
                             "displayname": "ARNOUX Violette",
-                            "email": "violette.arnoux@univ-lorraine.fr"
+                            "email": "violette.arnoux@univ.fr"
                         }
                     ],
                     "groups": [
@@ -5408,7 +5408,7 @@ const schedule = {
                         {
                             "id": 297,
                             "displayname": "ROUX Lilian",
-                            "email": "lilian.roux@univ-lorraine.fr"
+                            "email": "lilian.roux@univ.fr"
                         }
                     ],
                     "groups": [
@@ -5510,7 +5510,7 @@ const schedule = {
                         {
                             "id": 929,
                             "displayname": "RENAUD Baptiste",
-                            "email": "baptiste.renaud@univ-lorraine.fr"
+                            "email": "baptiste.renaud@univ.fr"
                         }
                     ],
                     "groups": [
@@ -5565,7 +5565,7 @@ const schedule = {
                         {
                             "id": 7493,
                             "displayname": "NATUREL Anne-Marie",
-                            "email": "anne-marie.naturel@univ-lorraine.fr"
+                            "email": "anne-marie.naturel@univ.fr"
                         }
                     ],
                     "groups": [
@@ -5599,7 +5599,7 @@ const schedule = {
                         {
                             "id": 198519,
                             "displayname": "LAVOIX Francis",
-                            "email": "francis.lavoix@univ-lorraine.fr"
+                            "email": "francis.lavoix@univ.fr"
                         }
                     ],
                     "groups": [
@@ -5701,7 +5701,7 @@ const schedule = {
                         {
                             "id": 302884,
                             "displayname": "FONTAINE Elodie",
-                            "email": "elodie.fontaine@univ-lorraine.fr"
+                            "email": "elodie.fontaine@univ.fr"
                         }
                     ],
                     "groups": [
@@ -5735,7 +5735,7 @@ const schedule = {
                         {
                             "id": 201589,
                             "displayname": "JACQUIOT France",
-                            "email": "france.jacquiot@univ-lorraine.fr"
+                            "email": "france.jacquiot@univ.fr"
                         }
                     ],
                     "groups": [
@@ -5773,7 +5773,7 @@ const schedule = {
                         {
                             "id": 168225,
                             "displayname": "LECLERC Dominique",
-                            "email": "dominique.leclerc@univ-lorraine.fr"
+                            "email": "dominique.leclerc@univ.fr"
                         }
                     ],
                     "groups": [
@@ -5866,7 +5866,7 @@ const schedule = {
                         {
                             "id": 669,
                             "displayname": "HARRIS Ernest",
-                            "email": "ernest.harris@univ-lorraine.fr"
+                            "email": "ernest.harris@univ.fr"
                         }
                     ],
                     "groups": [
@@ -5900,7 +5900,7 @@ const schedule = {
                         {
                             "id": 4792,
                             "displayname": "BOURGET Marjolaine",
-                            "email": "marjolaine.bourget@univ-lorraine.fr"
+                            "email": "marjolaine.bourget@univ.fr"
                         }
                     ],
                     "groups": [
@@ -6112,7 +6112,7 @@ const schedule = {
                         {
                             "id": 144297,
                             "displayname": "LEMOINE Tanguy",
-                            "email": "tanguy.lemoine@univ-lorraine.fr"
+                            "email": "tanguy.lemoine@univ.fr"
                         }
                     ],
                     "groups": [
@@ -6146,7 +6146,7 @@ const schedule = {
                         {
                             "id": 198465,
                             "displayname": "LACIEN Amélie",
-                            "email": "amelie.lacien@univ-lorraine.fr"
+                            "email": "amelie.lacien@univ.fr"
                         }
                     ],
                     "groups": [
@@ -6201,7 +6201,7 @@ const schedule = {
                         {
                             "id": 12709,
                             "displayname": "COLLIN Roland",
-                            "email": "roland.collin@univ-lorraine.fr"
+                            "email": "roland.collin@univ.fr"
                         }
                     ],
                     "groups": [
@@ -6269,7 +6269,7 @@ const schedule = {
                         {
                             "id": 302884,
                             "displayname": "FONTAINE Elodie",
-                            "email": "elodie.fontaine@univ-lorraine.fr"
+                            "email": "elodie.fontaine@univ.fr"
                         }
                     ],
                     "groups": [
@@ -6303,7 +6303,7 @@ const schedule = {
                         {
                             "id": 168224,
                             "displayname": "PRUNEL Lina",
-                            "email": "lina.prunel@univ-lorraine.fr"
+                            "email": "lina.prunel@univ.fr"
                         }
                     ],
                     "groups": [
@@ -6330,7 +6330,7 @@ const schedule = {
                         {
                             "id": 297,
                             "displayname": "ROUX Lilian",
-                            "email": "lilian.roux@univ-lorraine.fr"
+                            "email": "lilian.roux@univ.fr"
                         }
                     ],
                     "groups": [
@@ -6364,7 +6364,7 @@ const schedule = {
                         {
                             "id": 12709,
                             "displayname": "COLLIN Roland",
-                            "email": "roland.collin@univ-lorraine.fr"
+                            "email": "roland.collin@univ.fr"
                         }
                     ],
                     "groups": [
@@ -6398,7 +6398,7 @@ const schedule = {
                         {
                             "id": 125524,
                             "displayname": "VACK Roger",
-                            "email": "roger.vack@univ-lorraine.fr"
+                            "email": "roger.vack@univ.fr"
                         }
                     ],
                     "groups": [
@@ -6521,7 +6521,7 @@ const schedule = {
                         {
                             "id": 302765,
                             "displayname": "DUMON Sylvain",
-                            "email": "sylvain.dumon@univ-lorraine.fr"
+                            "email": "sylvain.dumon@univ.fr"
                         }
                     ],
                     "groups": [
@@ -6555,7 +6555,7 @@ const schedule = {
                         {
                             "id": 174923,
                             "displayname": "POTTER Harry",
-                            "email": "harry.potter@univ-lorraine.fr"
+                            "email": "harry.potter@univ.fr"
                         }
                     ],
                     "groups": [
@@ -6589,7 +6589,7 @@ const schedule = {
                         {
                             "id": 302884,
                             "displayname": "FONTAINE Elodie",
-                            "email": "elodie.fontaine@univ-lorraine.fr"
+                            "email": "elodie.fontaine@univ.fr"
                         }
                     ],
                     "groups": [
@@ -6623,7 +6623,7 @@ const schedule = {
                         {
                             "id": 302765,
                             "displayname": "DUMON Sylvain",
-                            "email": "sylvain.dumon@univ-lorraine.fr"
+                            "email": "sylvain.dumon@univ.fr"
                         }
                     ],
                     "groups": [
@@ -6657,7 +6657,7 @@ const schedule = {
                         {
                             "id": 7195,
                             "displayname": "SCHNEIDER Isabelle",
-                            "email": "isabelle.schneider@univ-lorraine.fr"
+                            "email": "isabelle.schneider@univ.fr"
                         }
                     ],
                     "groups": [
@@ -6695,7 +6695,7 @@ const schedule = {
                         {
                             "id": 7493,
                             "displayname": "NATUREL Anne-Marie",
-                            "email": "anne-marie.naturel@univ-lorraine.fr"
+                            "email": "anne-marie.naturel@univ.fr"
                         }
                     ],
                     "groups": [
@@ -6763,7 +6763,7 @@ const schedule = {
                         {
                             "id": 299915,
                             "displayname": "CAPALDI Larry",
-                            "email": "larry.capaldi@univ-lorraine.fr"
+                            "email": "larry.capaldi@univ.fr"
                         }
                     ],
                     "groups": [
@@ -6797,7 +6797,7 @@ const schedule = {
                         {
                             "id": 12437,
                             "displayname": "LEFEBVRE Arthur",
-                            "email": "a.lefebvre@univ-lorraine.fr"
+                            "email": "a.lefebvre@univ.fr"
                         }
                     ],
                     "groups": [
@@ -6865,7 +6865,7 @@ const schedule = {
                         {
                             "id": 186991,
                             "displayname": "POUCHARD Louis",
-                            "email": "louis.pouchard@univ-lorraine.fr"
+                            "email": "louis.pouchard@univ.fr"
                         }
                     ],
                     "groups": [
@@ -6899,7 +6899,7 @@ const schedule = {
                         {
                             "id": 398293,
                             "displayname": "PARISEAU Olivier",
-                            "email": "olivier.pariseau@univ-lorraine.fr"
+                            "email": "olivier.pariseau@univ.fr"
                         }
                     ],
                     "groups": [
@@ -6954,7 +6954,7 @@ const schedule = {
                         {
                             "id": 669,
                             "displayname": "HARRIS Ernest",
-                            "email": "ernest.harris@univ-lorraine.fr"
+                            "email": "ernest.harris@univ.fr"
                         }
                     ],
                     "groups": [
@@ -6988,7 +6988,7 @@ const schedule = {
                         {
                             "id": 198465,
                             "displayname": "LACIEN Amélie",
-                            "email": "amelie.lacien@univ-lorraine.fr"
+                            "email": "amelie.lacien@univ.fr"
                         }
                     ],
                     "groups": [
@@ -7090,7 +7090,7 @@ const schedule = {
                         {
                             "id": 7195,
                             "displayname": "SCHNEIDER Isabelle",
-                            "email": "isabelle.schneider@univ-lorraine.fr"
+                            "email": "isabelle.schneider@univ.fr"
                         }
                     ],
                     "groups": [
@@ -7128,7 +7128,7 @@ const schedule = {
                         {
                             "id": 12437,
                             "displayname": "LEFEBVRE Arthur",
-                            "email": "a.lefebvre@univ-lorraine.fr"
+                            "email": "a.lefebvre@univ.fr"
                         }
                     ],
                     "groups": [
@@ -7162,7 +7162,7 @@ const schedule = {
                         {
                             "id": 510,
                             "displayname": "CHATIGNY Sébastien",
-                            "email": "sebastien.chatigny@univ-lorraine.fr"
+                            "email": "sebastien.chatigny@univ.fr"
                         }
                     ],
                     "groups": [
@@ -7196,7 +7196,7 @@ const schedule = {
                         {
                             "id": 134967,
                             "displayname": "BELLEFEUILLE Dwayne",
-                            "email": "dwayne.bellefeuille@univ-lorraine.fr"
+                            "email": "dwayne.bellefeuille@univ.fr"
                         }
                     ],
                     "groups": [
@@ -7230,7 +7230,7 @@ const schedule = {
                         {
                             "id": 186991,
                             "displayname": "POUCHARD Louis",
-                            "email": "louis.pouchard@univ-lorraine.fr"
+                            "email": "louis.pouchard@univ.fr"
                         }
                     ],
                     "groups": [
@@ -7264,7 +7264,7 @@ const schedule = {
                         {
                             "id": 12709,
                             "displayname": "COLLIN Roland",
-                            "email": "roland.collin@univ-lorraine.fr"
+                            "email": "roland.collin@univ.fr"
                         }
                     ],
                     "groups": [
@@ -7304,7 +7304,7 @@ const schedule = {
                         {
                             "id": 134963,
                             "displayname": "PELLETIER Lucas",
-                            "email": "lucas.pelletier@univ-lorraine.fr"
+                            "email": "lucas.pelletier@univ.fr"
                         }
                     ],
                     "groups": [
@@ -7338,7 +7338,7 @@ const schedule = {
                         {
                             "id": 553,
                             "displayname": "COLLIN Valerie",
-                            "email": "valerie.collin@univ-lorraine.fr"
+                            "email": "valerie.collin@univ.fr"
                         }
                     ],
                     "groups": [
@@ -7372,7 +7372,7 @@ const schedule = {
                         {
                             "id": 168224,
                             "displayname": "PRUNEL Lina",
-                            "email": "lina.prunel@univ-lorraine.fr"
+                            "email": "lina.prunel@univ.fr"
                         }
                     ],
                     "groups": [
@@ -7440,7 +7440,7 @@ const schedule = {
                         {
                             "id": 198465,
                             "displayname": "LACIEN Amélie",
-                            "email": "amelie.lacien@univ-lorraine.fr"
+                            "email": "amelie.lacien@univ.fr"
                         }
                     ],
                     "groups": [
@@ -7474,7 +7474,7 @@ const schedule = {
                         {
                             "id": 10934,
                             "displayname": "GROSJEAN Lucie",
-                            "email": "lucie.grosjean@univ-lorraine.fr"
+                            "email": "lucie.grosjean@univ.fr"
                         }
                     ],
                     "groups": [
@@ -7546,7 +7546,7 @@ const schedule = {
                         {
                             "id": 302765,
                             "displayname": "DUMON Sylvain",
-                            "email": "sylvain.dumon@univ-lorraine.fr"
+                            "email": "sylvain.dumon@univ.fr"
                         }
                     ],
                     "groups": [
@@ -7580,7 +7580,7 @@ const schedule = {
                         {
                             "id": 168115,
                             "displayname": "GAUTIER Juliette",
-                            "email": "juliette.gautier@univ-lorraine.fr"
+                            "email": "juliette.gautier@univ.fr"
                         }
                     ],
                     "groups": [
@@ -7614,7 +7614,7 @@ const schedule = {
                         {
                             "id": 10934,
                             "displayname": "GROSJEAN Lucie",
-                            "email": "lucie.grosjean@univ-lorraine.fr"
+                            "email": "lucie.grosjean@univ.fr"
                         }
                     ],
                     "groups": [
@@ -7652,7 +7652,7 @@ const schedule = {
                         {
                             "id": 11702,
                             "displayname": "DESROSIERS Dwayne",
-                            "email": "dwayne.desrosiers@univ-lorraine.fr"
+                            "email": "dwayne.desrosiers@univ.fr"
                         }
                     ],
                     "groups": [
@@ -7718,7 +7718,7 @@ const schedule = {
                         {
                             "id": 134965,
                             "displayname": "ARNOUX Violette",
-                            "email": "violette.arnoux@univ-lorraine.fr"
+                            "email": "violette.arnoux@univ.fr"
                         }
                     ],
                     "groups": [
@@ -7779,7 +7779,7 @@ const schedule = {
                         {
                             "id": 12437,
                             "displayname": "LEFEBVRE Arthur",
-                            "email": "a.lefebvre@univ-lorraine.fr"
+                            "email": "a.lefebvre@univ.fr"
                         }
                     ],
                     "groups": [
@@ -7813,7 +7813,7 @@ const schedule = {
                         {
                             "id": 339172,
                             "displayname": "GARNIER Hugo",
-                            "email": "hugo.garnier@univ-lorraine.fr"
+                            "email": "hugo.garnier@univ.fr"
                         }
                     ],
                     "groups": [
@@ -7847,7 +7847,7 @@ const schedule = {
                         {
                             "id": 186991,
                             "displayname": "POUCHARD Louis",
-                            "email": "louis.pouchard@univ-lorraine.fr"
+                            "email": "louis.pouchard@univ.fr"
                         }
                     ],
                     "groups": [
@@ -7881,7 +7881,7 @@ const schedule = {
                         {
                             "id": 125533,
                             "displayname": "LEPAGE Karim",
-                            "email": "karim.lepage@univ-lorraine.fr"
+                            "email": "karim.lepage@univ.fr"
                         }
                     ],
                     "groups": [
@@ -7949,7 +7949,7 @@ const schedule = {
                         {
                             "id": 767,
                             "displayname": "CARROLLES Marceau",
-                            "email": "marceau.carrolles@univ-lorraine.fr"
+                            "email": "marceau.carrolles@univ.fr"
                         }
                     ],
                     "groups": [
@@ -8017,7 +8017,7 @@ const schedule = {
                         {
                             "id": 198465,
                             "displayname": "LACIEN Amélie",
-                            "email": "amelie.lacien@univ-lorraine.fr"
+                            "email": "amelie.lacien@univ.fr"
                         }
                     ],
                     "groups": [
@@ -8085,7 +8085,7 @@ const schedule = {
                         {
                             "id": 9757,
                             "displayname": "DUPUYS Danielle",
-                            "email": "danielle.dupuys@univ-lorraine.fr"
+                            "email": "danielle.dupuys@univ.fr"
                         }
                     ],
                     "groups": [
@@ -8116,7 +8116,7 @@ const schedule = {
                         {
                             "id": 12437,
                             "displayname": "LEFEBVRE Arthur",
-                            "email": "a.lefebvre@univ-lorraine.fr"
+                            "email": "a.lefebvre@univ.fr"
                         }
                     ],
                     "groups": [
@@ -8150,7 +8150,7 @@ const schedule = {
                         {
                             "id": 12709,
                             "displayname": "COLLIN Roland",
-                            "email": "roland.collin@univ-lorraine.fr"
+                            "email": "roland.collin@univ.fr"
                         }
                     ],
                     "groups": [
@@ -8184,7 +8184,7 @@ const schedule = {
                         {
                             "id": 510,
                             "displayname": "CHATIGNY Sébastien",
-                            "email": "sebastien.chatigny@univ-lorraine.fr"
+                            "email": "sebastien.chatigny@univ.fr"
                         }
                     ],
                     "groups": [
@@ -8218,7 +8218,7 @@ const schedule = {
                         {
                             "id": 553,
                             "displayname": "COLLIN Valerie",
-                            "email": "valerie.collin@univ-lorraine.fr"
+                            "email": "valerie.collin@univ.fr"
                         }
                     ],
                     "groups": [
@@ -8341,7 +8341,7 @@ const schedule = {
                         {
                             "id": 302884,
                             "displayname": "FONTAINE Elodie",
-                            "email": "elodie.fontaine@univ-lorraine.fr"
+                            "email": "elodie.fontaine@univ.fr"
                         }
                     ],
                     "groups": [
@@ -8375,7 +8375,7 @@ const schedule = {
                         {
                             "id": 302765,
                             "displayname": "DUMON Sylvain",
-                            "email": "sylvain.dumon@univ-lorraine.fr"
+                            "email": "sylvain.dumon@univ.fr"
                         }
                     ],
                     "groups": [
@@ -8409,7 +8409,7 @@ const schedule = {
                         {
                             "id": 168115,
                             "displayname": "GAUTIER Juliette",
-                            "email": "juliette.gautier@univ-lorraine.fr"
+                            "email": "juliette.gautier@univ.fr"
                         }
                     ],
                     "groups": [
@@ -8470,7 +8470,7 @@ const schedule = {
                         {
                             "id": 12437,
                             "displayname": "LEFEBVRE Arthur",
-                            "email": "a.lefebvre@univ-lorraine.fr"
+                            "email": "a.lefebvre@univ.fr"
                         }
                     ],
                     "groups": [
@@ -8504,7 +8504,7 @@ const schedule = {
                         {
                             "id": 201589,
                             "displayname": "JACQUIOT France",
-                            "email": "france.jacquiot@univ-lorraine.fr"
+                            "email": "france.jacquiot@univ.fr"
                         }
                     ],
                     "groups": [
@@ -8542,7 +8542,7 @@ const schedule = {
                         {
                             "id": 398293,
                             "displayname": "PARISEAU Olivier",
-                            "email": "olivier.pariseau@univ-lorraine.fr"
+                            "email": "olivier.pariseau@univ.fr"
                         }
                     ],
                     "groups": [
@@ -8576,7 +8576,7 @@ const schedule = {
                         {
                             "id": 134965,
                             "displayname": "ARNOUX Violette",
-                            "email": "violette.arnoux@univ-lorraine.fr"
+                            "email": "violette.arnoux@univ.fr"
                         }
                     ],
                     "groups": [
@@ -8637,7 +8637,7 @@ const schedule = {
                         {
                             "id": 510,
                             "displayname": "CHATIGNY Sébastien",
-                            "email": "sebastien.chatigny@univ-lorraine.fr"
+                            "email": "sebastien.chatigny@univ.fr"
                         }
                     ],
                     "groups": [
@@ -8671,7 +8671,7 @@ const schedule = {
                         {
                             "id": 12709,
                             "displayname": "COLLIN Roland",
-                            "email": "roland.collin@univ-lorraine.fr"
+                            "email": "roland.collin@univ.fr"
                         }
                     ],
                     "groups": [
@@ -8705,7 +8705,7 @@ const schedule = {
                         {
                             "id": 168224,
                             "displayname": "PRUNEL Lina",
-                            "email": "lina.prunel@univ-lorraine.fr"
+                            "email": "lina.prunel@univ.fr"
                         }
                     ],
                     "groups": [
@@ -8739,7 +8739,7 @@ const schedule = {
                         {
                             "id": 167656,
                             "displayname": "DUVAL René",
-                            "email": "rene.duval@univ-lorraine.fr"
+                            "email": "rene.duval@univ.fr"
                         }
                     ],
                     "groups": [
@@ -8773,7 +8773,7 @@ const schedule = {
                         {
                             "id": 198215,
                             "displayname": "BUSSON Baptiste",
-                            "email": "baptiste.busson@univ-lorraine.fr"
+                            "email": "baptiste.busson@univ.fr"
                         }
                     ],
                     "groups": [
@@ -8811,7 +8811,7 @@ const schedule = {
                         {
                             "id": 9757,
                             "displayname": "DUPUYS Danielle",
-                            "email": "danielle.dupuys@univ-lorraine.fr"
+                            "email": "danielle.dupuys@univ.fr"
                         }
                     ],
                     "groups": [
@@ -8845,7 +8845,7 @@ const schedule = {
                         {
                             "id": 125533,
                             "displayname": "LEPAGE Karim",
-                            "email": "karim.lepage@univ-lorraine.fr"
+                            "email": "karim.lepage@univ.fr"
                         }
                     ],
                     "groups": [
@@ -8865,7 +8865,7 @@ const schedule = {
                         "color": "#00ffff",
                         "type": "TP",
                         "online": true,
-                        "url": "https://arche.univ-lorraine.fr/course/view.php?id=68341"
+                        "url": "https://arche.univ.fr/course/view.php?id=68341"
                     },
                     "rooms": [
                         {
@@ -8879,7 +8879,7 @@ const schedule = {
                         {
                             "id": 339077,
                             "displayname": "TRUFFEAU Jacques",
-                            "email": "jacques.truffeau@univ-lorraine.fr"
+                            "email": "jacques.truffeau@univ.fr"
                         }
                     ],
                     "groups": [
@@ -8947,7 +8947,7 @@ const schedule = {
                         {
                             "id": 767,
                             "displayname": "CARROLLES Marceau",
-                            "email": "marceau.carrolles@univ-lorraine.fr"
+                            "email": "marceau.carrolles@univ.fr"
                         }
                     ],
                     "groups": [
@@ -9008,7 +9008,7 @@ const schedule = {
                         {
                             "id": 311444,
                             "displayname": "PELLETIER Germain",
-                            "email": "germain.pelletier@univ-lorraine.fr"
+                            "email": "germain.pelletier@univ.fr"
                         }
                     ],
                     "groups": [
@@ -9046,7 +9046,7 @@ const schedule = {
                         {
                             "id": 929,
                             "displayname": "RENAUD Baptiste",
-                            "email": "baptiste.renaud@univ-lorraine.fr"
+                            "email": "baptiste.renaud@univ.fr"
                         }
                     ],
                     "groups": [
@@ -9080,7 +9080,7 @@ const schedule = {
                         {
                             "id": 7195,
                             "displayname": "SCHNEIDER Isabelle",
-                            "email": "isabelle.schneider@univ-lorraine.fr"
+                            "email": "isabelle.schneider@univ.fr"
                         }
                     ],
                     "groups": [
@@ -9152,7 +9152,7 @@ const schedule = {
                         {
                             "id": 12437,
                             "displayname": "LEFEBVRE Arthur",
-                            "email": "a.lefebvre@univ-lorraine.fr"
+                            "email": "a.lefebvre@univ.fr"
                         }
                     ],
                     "groups": [
@@ -9258,7 +9258,7 @@ const schedule = {
                         {
                             "id": 11702,
                             "displayname": "DESROSIERS Dwayne",
-                            "email": "dwayne.desrosiers@univ-lorraine.fr"
+                            "email": "dwayne.desrosiers@univ.fr"
                         }
                     ],
                     "groups": [
@@ -9347,7 +9347,7 @@ const schedule = {
                         {
                             "id": 168224,
                             "displayname": "PRUNEL Lina",
-                            "email": "lina.prunel@univ-lorraine.fr"
+                            "email": "lina.prunel@univ.fr"
                         }
                     ],
                     "groups": [
@@ -9412,7 +9412,7 @@ const schedule = {
                         {
                             "id": 297,
                             "displayname": "ROUX Lilian",
-                            "email": "lilian.roux@univ-lorraine.fr"
+                            "email": "lilian.roux@univ.fr"
                         }
                     ],
                     "groups": [
@@ -9542,7 +9542,7 @@ const schedule = {
                         {
                             "id": 7493,
                             "displayname": "NATUREL Anne-Marie",
-                            "email": "anne-marie.naturel@univ-lorraine.fr"
+                            "email": "anne-marie.naturel@univ.fr"
                         }
                     ],
                     "groups": [
@@ -9610,7 +9610,7 @@ const schedule = {
                         {
                             "id": 510,
                             "displayname": "CHATIGNY Sébastien",
-                            "email": "sebastien.chatigny@univ-lorraine.fr"
+                            "email": "sebastien.chatigny@univ.fr"
                         }
                     ],
                     "groups": [
@@ -9678,7 +9678,7 @@ const schedule = {
                         {
                             "id": 11702,
                             "displayname": "DESROSIERS Dwayne",
-                            "email": "dwayne.desrosiers@univ-lorraine.fr"
+                            "email": "dwayne.desrosiers@univ.fr"
                         }
                     ],
                     "groups": [
@@ -9746,7 +9746,7 @@ const schedule = {
                         {
                             "id": 201589,
                             "displayname": "JACQUIOT France",
-                            "email": "france.jacquiot@univ-lorraine.fr"
+                            "email": "france.jacquiot@univ.fr"
                         }
                     ],
                     "groups": [
@@ -9911,7 +9911,7 @@ const schedule = {
                         {
                             "id": 134965,
                             "displayname": "ARNOUX Violette",
-                            "email": "violette.arnoux@univ-lorraine.fr"
+                            "email": "violette.arnoux@univ.fr"
                         }
                     ],
                     "groups": [
@@ -10017,7 +10017,7 @@ const schedule = {
                         {
                             "id": 10934,
                             "displayname": "GROSJEAN Lucie",
-                            "email": "lucie.grosjean@univ-lorraine.fr"
+                            "email": "lucie.grosjean@univ.fr"
                         }
                     ],
                     "groups": [
@@ -10055,7 +10055,7 @@ const schedule = {
                         {
                             "id": 9757,
                             "displayname": "DUPUYS Danielle",
-                            "email": "danielle.dupuys@univ-lorraine.fr"
+                            "email": "danielle.dupuys@univ.fr"
                         }
                     ],
                     "groups": [
@@ -10093,7 +10093,7 @@ const schedule = {
                         {
                             "id": 12709,
                             "displayname": "COLLIN Roland",
-                            "email": "roland.collin@univ-lorraine.fr"
+                            "email": "roland.collin@univ.fr"
                         }
                     ],
                     "groups": [
@@ -10189,7 +10189,7 @@ const schedule = {
                         {
                             "id": 174923,
                             "displayname": "POTTER Harry",
-                            "email": "harry.potter@univ-lorraine.fr"
+                            "email": "harry.potter@univ.fr"
                         }
                     ],
                     "groups": [
@@ -10223,7 +10223,7 @@ const schedule = {
                         {
                             "id": 11702,
                             "displayname": "DESROSIERS Dwayne",
-                            "email": "dwayne.desrosiers@univ-lorraine.fr"
+                            "email": "dwayne.desrosiers@univ.fr"
                         }
                     ],
                     "groups": [
@@ -10295,7 +10295,7 @@ const schedule = {
                         {
                             "id": 12709,
                             "displayname": "COLLIN Roland",
-                            "email": "roland.collin@univ-lorraine.fr"
+                            "email": "roland.collin@univ.fr"
                         }
                     ],
                     "groups": [
@@ -10329,7 +10329,7 @@ const schedule = {
                         {
                             "id": 299915,
                             "displayname": "CAPALDI Larry",
-                            "email": "larry.capaldi@univ-lorraine.fr"
+                            "email": "larry.capaldi@univ.fr"
                         }
                     ],
                     "groups": [
@@ -10383,7 +10383,7 @@ const schedule = {
                         "color": "#00ffff",
                         "type": "TP",
                         "online": true,
-                        "url": "https://arche.univ-lorraine.fr/course/view.php?id=68341"
+                        "url": "https://arche.univ.fr/course/view.php?id=68341"
                     },
                     "rooms": [
                         {
@@ -10397,7 +10397,7 @@ const schedule = {
                         {
                             "id": 339077,
                             "displayname": "TRUFFEAU Jacques",
-                            "email": "jacques.truffeau@univ-lorraine.fr"
+                            "email": "jacques.truffeau@univ.fr"
                         }
                     ],
                     "groups": [
@@ -10431,7 +10431,7 @@ const schedule = {
                         {
                             "id": 229668,
                             "displayname": "CLERC Axel",
-                            "email": "axel.clerc@univ-lorraine.fr"
+                            "email": "axel.clerc@univ.fr"
                         }
                     ],
                     "groups": [
@@ -10465,7 +10465,7 @@ const schedule = {
                         {
                             "id": 186991,
                             "displayname": "POUCHARD Louis",
-                            "email": "louis.pouchard@univ-lorraine.fr"
+                            "email": "louis.pouchard@univ.fr"
                         }
                     ],
                     "groups": [
@@ -10499,7 +10499,7 @@ const schedule = {
                         {
                             "id": 339172,
                             "displayname": "GARNIER Hugo",
-                            "email": "hugo.garnier@univ-lorraine.fr"
+                            "email": "hugo.garnier@univ.fr"
                         }
                     ],
                     "groups": [
@@ -10533,7 +10533,7 @@ const schedule = {
                         {
                             "id": 144298,
                             "displayname": "LATOURELLE Charlyne",
-                            "email": "charlyne.latourelle@univ-lorraine.fr"
+                            "email": "charlyne.latourelle@univ.fr"
                         }
                     ],
                     "groups": [
@@ -10553,7 +10553,7 @@ const schedule = {
                         "color": "#00ffff",
                         "type": "TP",
                         "online": true,
-                        "url": "https://arche.univ-lorraine.fr/course/view.php?id=66071"
+                        "url": "https://arche.univ.fr/course/view.php?id=66071"
                     },
                     "rooms": [
                         {
@@ -10567,7 +10567,7 @@ const schedule = {
                         {
                             "id": 144299,
                             "displayname": "LAKARIM Clarice",
-                            "email": "clarice.lakarim@univ-lorraine.fr"
+                            "email": "clarice.lakarim@univ.fr"
                         }
                     ],
                     "groups": [
@@ -10601,7 +10601,7 @@ const schedule = {
                         {
                             "id": 669,
                             "displayname": "HARRIS Ernest",
-                            "email": "ernest.harris@univ-lorraine.fr"
+                            "email": "ernest.harris@univ.fr"
                         }
                     ],
                     "groups": [
@@ -10635,7 +10635,7 @@ const schedule = {
                         {
                             "id": 168224,
                             "displayname": "PRUNEL Lina",
-                            "email": "lina.prunel@univ-lorraine.fr"
+                            "email": "lina.prunel@univ.fr"
                         }
                     ],
                     "groups": [
@@ -10669,7 +10669,7 @@ const schedule = {
                         {
                             "id": 134965,
                             "displayname": "ARNOUX Violette",
-                            "email": "violette.arnoux@univ-lorraine.fr"
+                            "email": "violette.arnoux@univ.fr"
                         }
                     ],
                     "groups": [
@@ -10771,7 +10771,7 @@ const schedule = {
                         {
                             "id": 9757,
                             "displayname": "DUPUYS Danielle",
-                            "email": "danielle.dupuys@univ-lorraine.fr"
+                            "email": "danielle.dupuys@univ.fr"
                         }
                     ],
                     "groups": [
@@ -10805,7 +10805,7 @@ const schedule = {
                         {
                             "id": 186991,
                             "displayname": "POUCHARD Louis",
-                            "email": "louis.pouchard@univ-lorraine.fr"
+                            "email": "louis.pouchard@univ.fr"
                         }
                     ],
                     "groups": [
@@ -10839,7 +10839,7 @@ const schedule = {
                         {
                             "id": 125533,
                             "displayname": "LEPAGE Karim",
-                            "email": "karim.lepage@univ-lorraine.fr"
+                            "email": "karim.lepage@univ.fr"
                         }
                     ],
                     "groups": [
@@ -10873,7 +10873,7 @@ const schedule = {
                         {
                             "id": 12709,
                             "displayname": "COLLIN Roland",
-                            "email": "roland.collin@univ-lorraine.fr"
+                            "email": "roland.collin@univ.fr"
                         }
                     ],
                     "groups": [
@@ -10913,7 +10913,7 @@ const schedule = {
                         {
                             "id": 134963,
                             "displayname": "PELLETIER Lucas",
-                            "email": "lucas.pelletier@univ-lorraine.fr"
+                            "email": "lucas.pelletier@univ.fr"
                         }
                     ],
                     "groups": [
@@ -10947,7 +10947,7 @@ const schedule = {
                         {
                             "id": 510,
                             "displayname": "CHATIGNY Sébastien",
-                            "email": "sebastien.chatigny@univ-lorraine.fr"
+                            "email": "sebastien.chatigny@univ.fr"
                         }
                     ],
                     "groups": [
@@ -11042,7 +11042,7 @@ const schedule = {
                         {
                             "id": 553,
                             "displayname": "COLLIN Valerie",
-                            "email": "valerie.collin@univ-lorraine.fr"
+                            "email": "valerie.collin@univ.fr"
                         }
                     ],
                     "groups": [
@@ -11110,7 +11110,7 @@ const schedule = {
                         {
                             "id": 168115,
                             "displayname": "GAUTIER Juliette",
-                            "email": "juliette.gautier@univ-lorraine.fr"
+                            "email": "juliette.gautier@univ.fr"
                         }
                     ],
                     "groups": [
@@ -11178,7 +11178,7 @@ const schedule = {
                         {
                             "id": 229668,
                             "displayname": "CLERC Axel",
-                            "email": "axel.clerc@univ-lorraine.fr"
+                            "email": "axel.clerc@univ.fr"
                         }
                     ],
                     "groups": [
@@ -11212,7 +11212,7 @@ const schedule = {
                         {
                             "id": 186991,
                             "displayname": "POUCHARD Louis",
-                            "email": "louis.pouchard@univ-lorraine.fr"
+                            "email": "louis.pouchard@univ.fr"
                         }
                     ],
                     "groups": [
@@ -11246,7 +11246,7 @@ const schedule = {
                         {
                             "id": 398293,
                             "displayname": "PARISEAU Olivier",
-                            "email": "olivier.pariseau@univ-lorraine.fr"
+                            "email": "olivier.pariseau@univ.fr"
                         }
                     ],
                     "groups": [
@@ -11266,7 +11266,7 @@ const schedule = {
                         "color": "#00ffff",
                         "type": "TP",
                         "online": true,
-                        "url": "https://arche.univ-lorraine.fr/course/view.php?id=68341"
+                        "url": "https://arche.univ.fr/course/view.php?id=68341"
                     },
                     "rooms": [
                         {
@@ -11280,7 +11280,7 @@ const schedule = {
                         {
                             "id": 339077,
                             "displayname": "TRUFFEAU Jacques",
-                            "email": "jacques.truffeau@univ-lorraine.fr"
+                            "email": "jacques.truffeau@univ.fr"
                         }
                     ],
                     "groups": [
@@ -11314,7 +11314,7 @@ const schedule = {
                         {
                             "id": 12709,
                             "displayname": "COLLIN Roland",
-                            "email": "roland.collin@univ-lorraine.fr"
+                            "email": "roland.collin@univ.fr"
                         }
                     ],
                     "groups": [
@@ -11448,7 +11448,7 @@ const schedule = {
                         {
                             "id": 10934,
                             "displayname": "GROSJEAN Lucie",
-                            "email": "lucie.grosjean@univ-lorraine.fr"
+                            "email": "lucie.grosjean@univ.fr"
                         }
                     ],
                     "groups": [
@@ -11486,7 +11486,7 @@ const schedule = {
                         {
                             "id": 9757,
                             "displayname": "DUPUYS Danielle",
-                            "email": "danielle.dupuys@univ-lorraine.fr"
+                            "email": "danielle.dupuys@univ.fr"
                         }
                     ],
                     "groups": [
@@ -11524,7 +11524,7 @@ const schedule = {
                         {
                             "id": 198465,
                             "displayname": "LACIEN Amélie",
-                            "email": "amelie.lacien@univ-lorraine.fr"
+                            "email": "amelie.lacien@univ.fr"
                         }
                     ],
                     "groups": [
@@ -11558,7 +11558,7 @@ const schedule = {
                         {
                             "id": 553,
                             "displayname": "COLLIN Valerie",
-                            "email": "valerie.collin@univ-lorraine.fr"
+                            "email": "valerie.collin@univ.fr"
                         }
                     ],
                     "groups": [
@@ -11626,7 +11626,7 @@ const schedule = {
                         {
                             "id": 929,
                             "displayname": "RENAUD Baptiste",
-                            "email": "baptiste.renaud@univ-lorraine.fr"
+                            "email": "baptiste.renaud@univ.fr"
                         }
                     ],
                     "groups": [
@@ -11687,7 +11687,7 @@ const schedule = {
                         {
                             "id": 12709,
                             "displayname": "COLLIN Roland",
-                            "email": "roland.collin@univ-lorraine.fr"
+                            "email": "roland.collin@univ.fr"
                         }
                     ],
                     "groups": [
@@ -11721,7 +11721,7 @@ const schedule = {
                         {
                             "id": 9757,
                             "displayname": "DUPUYS Danielle",
-                            "email": "danielle.dupuys@univ-lorraine.fr"
+                            "email": "danielle.dupuys@univ.fr"
                         }
                     ],
                     "groups": [
@@ -11759,7 +11759,7 @@ const schedule = {
                         {
                             "id": 168226,
                             "displayname": "FAURE Jacques",
-                            "email": "jacques.faure@univ-lorraine.fr"
+                            "email": "jacques.faure@univ.fr"
                         }
                     ],
                     "groups": [
@@ -11820,7 +11820,7 @@ const schedule = {
                         {
                             "id": 510,
                             "displayname": "CHATIGNY Sébastien",
-                            "email": "sebastien.chatigny@univ-lorraine.fr"
+                            "email": "sebastien.chatigny@univ.fr"
                         }
                     ],
                     "groups": [
@@ -11854,7 +11854,7 @@ const schedule = {
                         {
                             "id": 198465,
                             "displayname": "LACIEN Amélie",
-                            "email": "amelie.lacien@univ-lorraine.fr"
+                            "email": "amelie.lacien@univ.fr"
                         }
                     ],
                     "groups": [
@@ -11888,7 +11888,7 @@ const schedule = {
                         {
                             "id": 144298,
                             "displayname": "LATOURELLE Charlyne",
-                            "email": "charlyne.latourelle@univ-lorraine.fr"
+                            "email": "charlyne.latourelle@univ.fr"
                         }
                     ],
                     "groups": [
@@ -11922,7 +11922,7 @@ const schedule = {
                         {
                             "id": 134965,
                             "displayname": "ARNOUX Violette",
-                            "email": "violette.arnoux@univ-lorraine.fr"
+                            "email": "violette.arnoux@univ.fr"
                         }
                     ],
                     "groups": [
@@ -11956,7 +11956,7 @@ const schedule = {
                         {
                             "id": 929,
                             "displayname": "RENAUD Baptiste",
-                            "email": "baptiste.renaud@univ-lorraine.fr"
+                            "email": "baptiste.renaud@univ.fr"
                         }
                     ],
                     "groups": [
@@ -11990,7 +11990,7 @@ const schedule = {
                         {
                             "id": 510,
                             "displayname": "CHATIGNY Sébastien",
-                            "email": "sebastien.chatigny@univ-lorraine.fr"
+                            "email": "sebastien.chatigny@univ.fr"
                         }
                     ],
                     "groups": [
@@ -12024,7 +12024,7 @@ const schedule = {
                         {
                             "id": 9757,
                             "displayname": "DUPUYS Danielle",
-                            "email": "danielle.dupuys@univ-lorraine.fr"
+                            "email": "danielle.dupuys@univ.fr"
                         }
                     ],
                     "groups": [
@@ -12062,7 +12062,7 @@ const schedule = {
                         {
                             "id": 125533,
                             "displayname": "LEPAGE Karim",
-                            "email": "karim.lepage@univ-lorraine.fr"
+                            "email": "karim.lepage@univ.fr"
                         }
                     ],
                     "groups": [
@@ -12096,7 +12096,7 @@ const schedule = {
                         {
                             "id": 168224,
                             "displayname": "PRUNEL Lina",
-                            "email": "lina.prunel@univ-lorraine.fr"
+                            "email": "lina.prunel@univ.fr"
                         }
                     ],
                     "groups": [
@@ -12130,7 +12130,7 @@ const schedule = {
                         {
                             "id": 167656,
                             "displayname": "DUVAL René",
-                            "email": "rene.duval@univ-lorraine.fr"
+                            "email": "rene.duval@univ.fr"
                         }
                     ],
                     "groups": [
@@ -12232,7 +12232,7 @@ const schedule = {
                         {
                             "id": 9757,
                             "displayname": "DUPUYS Danielle",
-                            "email": "danielle.dupuys@univ-lorraine.fr"
+                            "email": "danielle.dupuys@univ.fr"
                         }
                     ],
                     "groups": [
@@ -12270,7 +12270,7 @@ const schedule = {
                         {
                             "id": 398293,
                             "displayname": "PARISEAU Olivier",
-                            "email": "olivier.pariseau@univ-lorraine.fr"
+                            "email": "olivier.pariseau@univ.fr"
                         }
                     ],
                     "groups": [
@@ -12476,7 +12476,7 @@ const schedule = {
                         {
                             "id": 7493,
                             "displayname": "NATUREL Anne-Marie",
-                            "email": "anne-marie.naturel@univ-lorraine.fr"
+                            "email": "anne-marie.naturel@univ.fr"
                         }
                     ],
                     "groups": [

@@ -45,30 +45,28 @@ module.exports.userProviderData = {
         "displayName": "John DOE",
         "name": "Doe",
         "firstname": "John",
-        "email": "john.doe@univ-lorraine.fr",
+        "email": "john.doe@univ.fr",
         "roles": [
-            "student",
-            "ET"
+            "student"
         ]
     },
     "staff": {
         "displayName": "Alice DUPONT",
         "name": "Dupont",
         "firstname": "Alice",
-        "email": "alice.dupont@univ-lorraine.fr",
+        "email": "alice.dupont@univ.fr",
         "roles": [
-            "FB",
             "staff",
+            "schedule-manager"
         ]
     },
     "prof": {
         "displayName": "Bruce WILLIS",
         "name": "Willis",
         "firstname": "Bruce",
-        "email": "bruce.willis@univ-lorraine.fr",
+        "email": "bruce.willis@univ.fr",
         "roles": [
-            "FE",
-            "teacher",
+            "teacher"
         ]
     }
 };

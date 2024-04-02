@@ -48,7 +48,7 @@ module.exports.userDirectoryData = [{
         "+33 6 78 90 12 34",
     ],
     "mailAddresses": [
-        "alice.dupont@univ-lorraine.fr"
+        "alice.dupont@univ.fr"
     ],
     "assignments": [
         "DN SIED - Sous-direction Système d'Information Etudes et Développement"
@@ -60,7 +60,7 @@ module.exports.userDirectoryData = [{
     "phoneNumbers": [],
     "mobileNumbers": [],
     "mailAddresses": [
-        "john.smith@univ-lorraine.fr"
+        "john.smith@univ.fr"
     ],
     "assignments": [
         "Institut d'Administration des Entreprises - Ecole Universitaire de Management",
