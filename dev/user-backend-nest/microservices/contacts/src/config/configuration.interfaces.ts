@@ -37,9 +37,9 @@
  * termes.
  */
 
-export interface UlApi {
+export interface ContactsProviderApi {
+  apiUrl: string;
   bearerToken: string;
-  userProfileUrl: string;
 }
 
 export interface KeepAliveOptions {

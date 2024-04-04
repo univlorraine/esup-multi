@@ -43,26 +43,27 @@ import { ConfigService } from '@nestjs/config';
 import { RpcException } from '@nestjs/microservices';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { UlApi } from '../config/configuration.interfaces';
+import { ContactsProviderApi } from '../config/configuration.interfaces';
 import { Contact, ContactQueryDto } from './contacts.dto';
 
 @Injectable()
 export class ContactsService {
   private readonly logger = new Logger(ContactsService.name);
-  private ulApiConfig: UlApi;
+  private contactsProviderApiConfig: ContactsProviderApi;
   constructor(
     private readonly httpService: HttpService,
     private readonly configService: ConfigService,
   ) {
-    this.ulApiConfig = this.configService.get<UlApi>('ulApi');
+    this.contactsProviderApiConfig =
+      this.configService.get<ContactsProviderApi>('contactsProviderApi');
   }
   getContacts(contact: ContactQueryDto): Observable<Contact[]> {
-    const url = this.ulApiConfig.userProfileUrl;
+    const url = this.contactsProviderApiConfig.apiUrl;
     return this.httpService
       .post<Contact[]>(`${url}`, contact, {
         headers: {
           Accept: 'application/json',
-          Authorization: `Bearer ${this.ulApiConfig.bearerToken}`,
+          Authorization: `Bearer ${this.contactsProviderApiConfig.bearerToken}`,
         },
       })
       .pipe(
