@@ -42,7 +42,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { RpcException } from '@nestjs/microservices';
 import { catchError, map, Observable } from 'rxjs';
-import { UlApi } from '../config/configuration.interface';
+import { ChatbotApi } from '../config/configuration.interface';
 import {
   ChatbotApiResponse,
   ChatbotButtonPayloadRequestDto,
@@ -53,19 +53,19 @@ import {
 @Injectable()
 export class ChatbotService {
   private readonly logger = new Logger(ChatbotService.name);
-  private ulApiConfig: UlApi;
+  private chatbotApiConfig: ChatbotApi;
 
   constructor(
     private readonly configService: ConfigService,
     private readonly httpService: HttpService,
   ) {
-    this.ulApiConfig = this.configService.get<UlApi>('ulApi');
+    this.chatbotApiConfig = this.configService.get<ChatbotApi>('chatbotApi');
   }
 
   public chatbotTextRequest(
     query: ChatbotTextRequestDto,
   ): Observable<ChatbotResponseDto[]> {
-    const url = this.ulApiConfig.tockUrl;
+    const url = this.chatbotApiConfig.url;
 
     return this.httpService
       .post<ChatbotApiResponse<ChatbotResponseDto[]>>(url, query)
@@ -82,7 +82,7 @@ export class ChatbotService {
   public chatbotButtonPayloadRequest(
     query: ChatbotButtonPayloadRequestDto,
   ): Observable<ChatbotResponseDto[]> {
-    const url = this.ulApiConfig.tockUrl;
+    const url = this.chatbotApiConfig.url;
 
     return this.httpService
       .post<ChatbotApiResponse<ChatbotResponseDto[]>>(url, query)
