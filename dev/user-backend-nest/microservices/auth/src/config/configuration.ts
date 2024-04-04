@@ -42,12 +42,12 @@ import {
   DirectusApi,
   KeepAliveOptions,
   ScheduledCleanup,
-  UlApi,
+  AuthProviderApi,
 } from './configuration.interface';
 
 interface Configuration {
   casUrl: CasUrl;
-  ulApi: UlApi;
+  authProviderApi: AuthProviderApi;
   mongoUrl: string;
   jwtSecret: string;
   usernamesCleanup: ScheduledCleanup;
@@ -110,8 +110,8 @@ export default (): Configuration => {
       validateSt: process.env.AUTH_SERVICE_CAS_URL_VALIDATE_ST,
       logout: process.env.AUTH_SERVICE_CAS_URL_LOGOUT,
     },
-    ulApi: {
-      userProfileUrl: process.env.AUTH_SERVICE_PROVIDER_API_URL,
+    authProviderApi: {
+      apiUrl: process.env.AUTH_SERVICE_PROVIDER_API_URL,
       bearerToken: process.env.AUTH_SERVICE_PROVIDER_API_BEARER_TOKEN,
     },
     mongoUrl: process.env.AUTH_SERVICE_MONGO_URL,
