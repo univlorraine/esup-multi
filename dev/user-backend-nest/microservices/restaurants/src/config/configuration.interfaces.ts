@@ -37,8 +37,8 @@
  * termes.
  */
 
-export interface UlApi {
-  url: string;
+export interface RestaurantsProviderApi {
+  apiUrl: string;
   bearerToken: string;
 }
 
