@@ -92,8 +92,8 @@ export default (): {
 
   return {
     ulApi: {
-      apiUrl: process.env.CLOCKING_SERVICE_UL_API_CLOCKING_URL,
-      bearerToken: process.env.CLOCKING_SERVICE_UL_API_BEARER_TOKEN,
+      apiUrl: process.env.CLOCKING_SERVICE_PROVIDER_API_URL,
+      bearerToken: process.env.CLOCKING_SERVICE_PROVIDER_API_BEARER_TOKEN,
     },
     keepAliveOptions,
     redisSocket: {

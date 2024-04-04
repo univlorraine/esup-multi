@@ -96,8 +96,8 @@ export default (): {
 
   return {
     ulApi: {
-      userScheduleUrl: process.env.SCHEDULE_SERVICE_UL_API_USER_SCHEDULE_URL,
-      bearerToken: process.env.SCHEDULE_SERVICE_UL_API_BEARER_TOKEN,
+      userScheduleUrl: process.env.SCHEDULE_SERVICE_PROVIDER_API_URL,
+      bearerToken: process.env.SCHEDULE_SERVICE_PROVIDER_API_BEARER_TOKEN,
       scheduleAdminRoles: process.env.SCHEDULE_SERVICE_ADMIN_ROLES
         ? process.env.SCHEDULE_SERVICE_ADMIN_ROLES.split(',')
         : [],

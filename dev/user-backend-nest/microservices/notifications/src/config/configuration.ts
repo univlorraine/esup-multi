@@ -95,9 +95,8 @@ export default (): {
 
   return {
     ulApi: {
-      notificationsUrl:
-        process.env.NOTIFICATIONS_SERVICE_UL_API_NOTIFICATIONS_URL,
-      bearerToken: process.env.NOTIFICATIONS_SERVICE_UL_API_BEARER_TOKEN,
+      notificationsUrl: process.env.NOTIFICATIONS_SERVICE_PROVIDER_API_URL,
+      bearerToken: process.env.NOTIFICATIONS_SERVICE_PROVIDER_API_BEARER_TOKEN,
     },
     directusApi: {
       url: process.env.NOTIFICATIONS_SERVICE_DIRECTUS_API_URL,

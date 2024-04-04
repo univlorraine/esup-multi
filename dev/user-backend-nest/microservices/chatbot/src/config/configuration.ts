@@ -85,7 +85,7 @@ export default (): { ulApi: UlApi; keepAliveOptions: KeepAliveOptions } => {
 
   return {
     ulApi: {
-      tockUrl: process.env.CHATBOT_SERVICE_UL_API_TOCK_URL,
+      tockUrl: process.env.CHATBOT_SERVICE_TOCK_API_URL,
     },
     keepAliveOptions,
   };

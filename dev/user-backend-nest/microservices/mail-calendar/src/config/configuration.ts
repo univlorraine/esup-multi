@@ -92,8 +92,8 @@ export default (): {
 
   return {
     ulApi: {
-      apiUrl: process.env.MAIL_CALENDAR_SERVICE_UL_API_URL,
-      bearerToken: process.env.MAIL_CALENDAR_SERVICE_UL_BEARER_TOKEN,
+      apiUrl: process.env.MAIL_CALENDAR_SERVICE_PROVIDER_API_URL,
+      bearerToken: process.env.MAIL_CALENDAR_SERVICE_PROVIDER_API_BEARER_TOKEN,
     },
     keepAliveOptions,
     redisSocket: {

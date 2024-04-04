@@ -85,8 +85,8 @@ export default (): { ulApi: UlApi; keepAliveOptions: KeepAliveOptions } => {
 
   return {
     ulApi: {
-      url: process.env.STATISTICS_SERVICE_UL_API_URL,
-      bearerToken: process.env.STATISTICS_SERVICE_UL_API_BEARER_TOKEN,
+      url: process.env.STATISTICS_SERVICE_COLLECTOR_API_URL,
+      bearerToken: process.env.STATISTICS_SERVICE_COLLECTOR_API_BEARER_TOKEN,
     },
     keepAliveOptions,
   };

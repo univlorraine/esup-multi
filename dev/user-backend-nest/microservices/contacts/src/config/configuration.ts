@@ -85,8 +85,8 @@ export default (): { ulApi: UlApi; keepAliveOptions: KeepAliveOptions } => {
 
   return {
     ulApi: {
-      userProfileUrl: process.env.CONTACTS_SERVICE_UL_API_URL_USER_PROFILE,
-      bearerToken: process.env.CONTACTS_SERVICE_UL_API_BEARER_TOKEN,
+      userProfileUrl: process.env.CONTACTS_SERVICE_PROVIDER_API_URL,
+      bearerToken: process.env.CONTACTS_SERVICE_PROVIDER_API_BEARER_TOKEN,
     },
     keepAliveOptions,
   };

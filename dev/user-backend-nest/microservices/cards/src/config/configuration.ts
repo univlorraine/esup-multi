@@ -85,8 +85,8 @@ export default (): { ulApi: UlApi; keepAliveOptions: KeepAliveOptions } => {
 
   return {
     ulApi: {
-      userCardsUrl: process.env.CARDS_SERVICE_UL_API_URL_USER_CARDS,
-      bearerToken: process.env.CARDS_SERVICE_UL_API_BEARER_TOKEN,
+      userCardsUrl: process.env.CARDS_SERVICE_PROVIDER_API_URL,
+      bearerToken: process.env.CARDS_SERVICE_PROVIDER_API_BEARER_TOKEN,
     },
     keepAliveOptions,
   };
