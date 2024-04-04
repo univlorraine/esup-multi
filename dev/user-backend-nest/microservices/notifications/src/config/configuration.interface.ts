@@ -37,9 +37,9 @@
  * termes.
  */
 
-export interface UlApi {
+export interface NotificationsProviderApi {
+  apiUrl: string;
   bearerToken: string;
-  notificationsUrl: string;
 }
 
 export interface DirectusApi {
