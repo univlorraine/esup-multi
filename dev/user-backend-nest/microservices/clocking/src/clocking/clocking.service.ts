@@ -43,7 +43,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { RpcException } from '@nestjs/microservices';
 import { catchError, map, Observable } from 'rxjs';
-import { UlApi } from '../config/configuration.interface';
+import { ClockingProviderApi } from '../config/configuration.interface';
 import { format } from 'date-fns';
 import {
   ClockingQueryDto,
@@ -56,20 +56,21 @@ const apiDayFormat = 'yyyy-MM-dd';
 @Injectable()
 export class ClockingService {
   private readonly logger = new Logger(ClockingService.name);
-  private ulApiConfig: UlApi;
+  private clockingProviderApiConfig: ClockingProviderApi;
 
   constructor(
     private readonly configService: ConfigService,
     private readonly httpService: HttpService,
   ) {
-    this.ulApiConfig = this.configService.get<UlApi>('ulApi');
+    this.clockingProviderApiConfig =
+      this.configService.get<ClockingProviderApi>('clockingProviderApi');
   }
 
   private externalApiClocking(
     query: ClockingQueryDto,
     top: boolean,
   ): Observable<ClockingReplyDto> {
-    const url = this.ulApiConfig.apiUrl;
+    const url = this.clockingProviderApiConfig.apiUrl;
 
     const now = new Date();
 
@@ -83,7 +84,7 @@ export class ClockingService {
       .post<ExternalApiClockingReplyDto>(url, postData, {
         headers: {
           accept: 'application/json',
-          Authorization: `Bearer ${this.ulApiConfig.bearerToken}`,
+          Authorization: `Bearer ${this.clockingProviderApiConfig.bearerToken}`,
         },
         responseType: 'json',
       })

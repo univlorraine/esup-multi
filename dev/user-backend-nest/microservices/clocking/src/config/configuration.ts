@@ -37,7 +37,11 @@
  * termes.
  */
 
-import { KeepAliveOptions, RedisSocket, UlApi } from './configuration.interface';
+import {
+  KeepAliveOptions,
+  RedisSocket,
+  ClockingProviderApi,
+} from './configuration.interface';
 
 const applyIfNotBlank = (param: string, applyFn: (value: string) => void) => {
   if (param && param.trim().length > 0) {
@@ -46,7 +50,7 @@ const applyIfNotBlank = (param: string, applyFn: (value: string) => void) => {
 };
 
 export default (): {
-  ulApi: UlApi;
+  clockingProviderApi: ClockingProviderApi;
   keepAliveOptions: KeepAliveOptions;
   redisSocket: RedisSocket;
   redisPassword: string;
@@ -91,7 +95,7 @@ export default (): {
   );
 
   return {
-    ulApi: {
+    clockingProviderApi: {
       apiUrl: process.env.CLOCKING_SERVICE_PROVIDER_API_URL,
       bearerToken: process.env.CLOCKING_SERVICE_PROVIDER_API_BEARER_TOKEN,
     },
