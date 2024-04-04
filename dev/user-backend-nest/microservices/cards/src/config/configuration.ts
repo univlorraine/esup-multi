@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { KeepAliveOptions, UlApi } from './configuration.interface';
+import { KeepAliveOptions, CardsProviderApi } from './configuration.interface';
 
 const applyIfNotBlank = (param: string, applyFn: (value: string) => void) => {
   if (param && param.trim().length > 0) {
@@ -45,7 +45,10 @@ const applyIfNotBlank = (param: string, applyFn: (value: string) => void) => {
   }
 };
 
-export default (): { ulApi: UlApi; keepAliveOptions: KeepAliveOptions } => {
+export default (): {
+  cardsProviderApi: CardsProviderApi;
+  keepAliveOptions: KeepAliveOptions;
+} => {
   const keepAliveOptions = {};
 
   applyIfNotBlank(
@@ -84,8 +87,8 @@ export default (): { ulApi: UlApi; keepAliveOptions: KeepAliveOptions } => {
   );
 
   return {
-    ulApi: {
-      userCardsUrl: process.env.CARDS_SERVICE_PROVIDER_API_URL,
+    cardsProviderApi: {
+      apiUrl: process.env.CARDS_SERVICE_PROVIDER_API_URL,
       bearerToken: process.env.CARDS_SERVICE_PROVIDER_API_BEARER_TOKEN,
     },
     keepAliveOptions,
