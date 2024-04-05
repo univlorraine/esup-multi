@@ -42,7 +42,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { RpcException } from '@nestjs/microservices';
 import { catchError, map } from 'rxjs';
-import { UlApi } from '../config/configuration.interfaces';
+import { StatisticsCollectorApi } from '../config/configuration.interfaces';
 import {
   StatisticsExternalApiUserActionDto,
   StatisticsUserActionDto,
@@ -51,13 +51,14 @@ import {
 @Injectable()
 export class StatisticsService {
   private readonly logger = new Logger(StatisticsService.name);
-  private ulApiConfig: UlApi;
+  private statisticsCollectorApiConfig: StatisticsCollectorApi;
 
   constructor(
     private readonly configService: ConfigService,
     private readonly httpService: HttpService,
   ) {
-    this.ulApiConfig = this.configService.get<UlApi>('ulApi');
+    this.statisticsCollectorApiConfig =
+      this.configService.get<StatisticsCollectorApi>('statisticsCollectorApi');
   }
 
   postUserActionStatistic(statData: StatisticsUserActionDto) {
@@ -70,11 +71,11 @@ export class StatisticsService {
         throw new RpcException(`Invalid action: ${statData.action}`);
     }
 
-    const url = `${this.ulApiConfig.url}`;
+    const url = `${this.statisticsCollectorApiConfig.apiUrl}`;
     const options = {
       headers: {
         Accept: 'application/json',
-        Authorization: `Bearer ${this.ulApiConfig.bearerToken}`,
+        Authorization: `Bearer ${this.statisticsCollectorApiConfig.bearerToken}`,
         'User-Agent': statData.userAgent,
         'X-Forwarded-For': statData.xForwardedFor,
       },

@@ -37,7 +37,10 @@
  * termes.
  */
 
-import { KeepAliveOptions, UlApi } from './configuration.interfaces';
+import {
+  KeepAliveOptions,
+  StatisticsCollectorApi,
+} from './configuration.interfaces';
 
 const applyIfNotBlank = (param: string, applyFn: (value: string) => void) => {
   if (param && param.trim().length > 0) {
@@ -45,7 +48,10 @@ const applyIfNotBlank = (param: string, applyFn: (value: string) => void) => {
   }
 };
 
-export default (): { ulApi: UlApi; keepAliveOptions: KeepAliveOptions } => {
+export default (): {
+  statisticsCollectorApi: StatisticsCollectorApi;
+  keepAliveOptions: KeepAliveOptions;
+} => {
   const keepAliveOptions = {};
 
   applyIfNotBlank(
@@ -84,8 +90,8 @@ export default (): { ulApi: UlApi; keepAliveOptions: KeepAliveOptions } => {
   );
 
   return {
-    ulApi: {
-      url: process.env.STATISTICS_SERVICE_COLLECTOR_API_URL,
+    statisticsCollectorApi: {
+      apiUrl: process.env.STATISTICS_SERVICE_COLLECTOR_API_URL,
       bearerToken: process.env.STATISTICS_SERVICE_COLLECTOR_API_BEARER_TOKEN,
     },
     keepAliveOptions,
