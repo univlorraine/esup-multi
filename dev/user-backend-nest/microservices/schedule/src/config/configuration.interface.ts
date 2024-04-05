@@ -37,8 +37,8 @@
  * termes.
  */
 
-export interface UlApi {
-  userScheduleUrl: string;
+export interface ScheduleProviderApi {
+  apiUrl: string;
   bearerToken: string;
   scheduleAdminRoles: string[];
 }

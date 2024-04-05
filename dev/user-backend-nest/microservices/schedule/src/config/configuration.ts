@@ -40,7 +40,7 @@
 import {
   KeepAliveOptions,
   RedisSocket,
-  UlApi,
+  ScheduleProviderApi,
 } from './configuration.interface';
 
 const applyIfNotBlank = (param: string, applyFn: (value: string) => void) => {
@@ -50,7 +50,7 @@ const applyIfNotBlank = (param: string, applyFn: (value: string) => void) => {
 };
 
 export default (): {
-  ulApi: UlApi;
+  scheduleProviderApi: ScheduleProviderApi;
   keepAliveOptions: KeepAliveOptions;
   redisSocket: RedisSocket;
   redisPassword: string;
@@ -95,8 +95,8 @@ export default (): {
   );
 
   return {
-    ulApi: {
-      userScheduleUrl: process.env.SCHEDULE_SERVICE_PROVIDER_API_URL,
+    scheduleProviderApi: {
+      apiUrl: process.env.SCHEDULE_SERVICE_PROVIDER_API_URL,
       bearerToken: process.env.SCHEDULE_SERVICE_PROVIDER_API_BEARER_TOKEN,
       scheduleAdminRoles: process.env.SCHEDULE_SERVICE_ADMIN_ROLES
         ? process.env.SCHEDULE_SERVICE_ADMIN_ROLES.split(',')
