@@ -42,7 +42,10 @@ import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { RpcException } from '@nestjs/microservices';
 import { catchError, map, Observable } from 'rxjs';
-import { DirectusApi, UlApi } from 'src/config/configuration.interface';
+import {
+  DirectusApi,
+  NotificationsProviderApi,
+} from 'src/config/configuration.interface';
 import {
   ChannelSubscriberQueryDto,
   DirectusChannelResultDto,
@@ -60,27 +63,30 @@ import {
 @Injectable()
 export class NotificationsService {
   private readonly logger = new Logger(NotificationsService.name);
-  private ulApiConfig: UlApi;
+  private notificationsProviderApiConfig: NotificationsProviderApi;
   private directusApiConfig: DirectusApi;
 
   constructor(
     private readonly configService: ConfigService,
     private readonly httpService: HttpService,
   ) {
-    this.ulApiConfig = this.configService.get<UlApi>('ulApi');
+    this.notificationsProviderApiConfig =
+      this.configService.get<NotificationsProviderApi>(
+        'notificationsProviderApi',
+      );
     this.directusApiConfig = this.configService.get<DirectusApi>('directusApi');
   }
 
   public getNotifications(
     query: NotificationsQueryDto,
   ): Observable<NotificationResultDto[]> {
-    const url = `${this.ulApiConfig.notificationsUrl}/notifications/${query.username}?offset=${query.offset}&length=${query.length}`;
+    const url = `${this.notificationsProviderApiConfig.apiUrl}/notifications/${query.username}?offset=${query.offset}&length=${query.length}`;
 
     return this.httpService
       .get<NotificationResultDto[]>(url, {
         headers: {
           Accept: 'application/json',
-          Authorization: `Bearer ${this.ulApiConfig.bearerToken}`,
+          Authorization: `Bearer ${this.notificationsProviderApiConfig.bearerToken}`,
         },
       })
       .pipe(
@@ -121,13 +127,13 @@ export class NotificationsService {
   public getUnsubscribedChannels(
     query: UnsubscribedChannelsQueryDto,
   ): Observable<string[]> {
-    const url = `${this.ulApiConfig.notificationsUrl}/channels/${query.username}`;
+    const url = `${this.notificationsProviderApiConfig.apiUrl}/channels/${query.username}`;
 
     return this.httpService
       .get<UnsubscribedChannelsResultDto>(url, {
         headers: {
           Accept: 'application/json',
-          Authorization: `Bearer ${this.ulApiConfig.bearerToken}`,
+          Authorization: `Bearer ${this.notificationsProviderApiConfig.bearerToken}`,
         },
       })
       .pipe(
@@ -143,13 +149,13 @@ export class NotificationsService {
   }
 
   public deleteNotification(query: NotificationDeleteQueryDto) {
-    const url = `${this.ulApiConfig.notificationsUrl}/notifications`;
+    const url = `${this.notificationsProviderApiConfig.apiUrl}/notifications`;
 
     return this.httpService
       .delete<NotificationResultDto[]>(url, {
         headers: {
           Accept: 'application/json',
-          Authorization: `Bearer ${this.ulApiConfig.bearerToken}`,
+          Authorization: `Bearer ${this.notificationsProviderApiConfig.bearerToken}`,
         },
         data: query,
       })
@@ -168,12 +174,12 @@ export class NotificationsService {
   markNotificationsAsRead(
     data: NotificationsMarkAsReadQueryDto,
   ): Observable<void> {
-    const url = `${this.ulApiConfig.notificationsUrl}/notifications/read`;
+    const url = `${this.notificationsProviderApiConfig.apiUrl}/notifications/read`;
     return this.httpService
       .post<void>(url, data, {
         headers: {
           Accept: 'application/json',
-          Authorization: `Bearer ${this.ulApiConfig.bearerToken}`,
+          Authorization: `Bearer ${this.notificationsProviderApiConfig.bearerToken}`,
         },
       })
       .pipe(
@@ -190,12 +196,12 @@ export class NotificationsService {
   subscribeOrUnsubscribeUserToChannels(
     query: ChannelSubscriberQueryDto,
   ): Observable<number> {
-    const url = `${this.ulApiConfig.notificationsUrl}/channels`;
+    const url = `${this.notificationsProviderApiConfig.apiUrl}/channels`;
     const body = { ...query };
     const options = {
       headers: {
         Accept: 'application/json',
-        Authorization: `Bearer ${this.ulApiConfig.bearerToken}`,
+        Authorization: `Bearer ${this.notificationsProviderApiConfig.bearerToken}`,
       },
     };
 
@@ -214,11 +220,11 @@ export class NotificationsService {
   }
 
   saveFCMToken(query: RegisterFCMTokenQueryDto) {
-    const url = `${this.ulApiConfig.notificationsUrl}/register`;
+    const url = `${this.notificationsProviderApiConfig.apiUrl}/register`;
     const options = {
       headers: {
         Accept: 'application/json',
-        Authorization: `Bearer ${this.ulApiConfig.bearerToken}`,
+        Authorization: `Bearer ${this.notificationsProviderApiConfig.bearerToken}`,
       },
     };
     return this.httpService.post<any>(url, query, options).pipe(
@@ -234,11 +240,11 @@ export class NotificationsService {
   }
 
   unregisterFCMToken(query: UnregisterFCMTokenQueryDto) {
-    const url = `${this.ulApiConfig.notificationsUrl}/unregister`;
+    const url = `${this.notificationsProviderApiConfig.apiUrl}/unregister`;
     const options = {
       headers: {
         Accept: 'application/json',
-        Authorization: `Bearer ${this.ulApiConfig.bearerToken}`,
+        Authorization: `Bearer ${this.notificationsProviderApiConfig.bearerToken}`,
       },
     };
     return this.httpService.post<any>(url, query, options).pipe(

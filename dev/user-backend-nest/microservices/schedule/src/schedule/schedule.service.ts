@@ -42,23 +42,24 @@ import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { RpcException } from '@nestjs/microservices';
 import { catchError, map, Observable } from 'rxjs';
-import { UlApi } from '../config/configuration.interface';
+import { ScheduleProviderApi } from '../config/configuration.interface';
 import { Schedule, UserScheduleQueryDto } from './schedule.dto';
 
 @Injectable()
 export class ScheduleService {
   private readonly logger = new Logger(ScheduleService.name);
-  private ulApiConfig: UlApi;
+  private scheduleProviderApiConfig: ScheduleProviderApi;
 
   constructor(
     private readonly configService: ConfigService,
     private readonly httpService: HttpService,
   ) {
-    this.ulApiConfig = this.configService.get<UlApi>('ulApi');
+    this.scheduleProviderApiConfig =
+      this.configService.get<ScheduleProviderApi>('shceduleProviderApi');
   }
 
   public getSchedule(query: UserScheduleQueryDto): Observable<Schedule> {
-    const url = this.ulApiConfig.userScheduleUrl
+    const url = this.scheduleProviderApiConfig.apiUrl
       .replace(
         /\{username\}/g,
         this.isUserScheduleManager(query.roles) && query.asUser
@@ -72,7 +73,7 @@ export class ScheduleService {
       .get<Schedule>(url, {
         headers: {
           Accept: 'application/json',
-          Authorization: `Bearer ${this.ulApiConfig.bearerToken}`,
+          Authorization: `Bearer ${this.scheduleProviderApiConfig.bearerToken}`,
         },
       })
       .pipe(
@@ -90,7 +91,7 @@ export class ScheduleService {
   private isUserScheduleManager(userRoles: string[]) {
     return (
       userRoles?.length > 0 &&
-      this.ulApiConfig.scheduleAdminRoles.some((role) =>
+      this.scheduleProviderApiConfig.scheduleAdminRoles.some((role) =>
         userRoles.includes(role),
       )
     );

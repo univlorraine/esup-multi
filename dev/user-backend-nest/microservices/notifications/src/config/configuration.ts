@@ -40,7 +40,7 @@
 import {
   DirectusApi,
   KeepAliveOptions,
-  UlApi,
+  NotificationsProviderApi,
 } from './configuration.interface';
 
 const applyIfNotBlank = (param: string, applyFn: (value: string) => void) => {
@@ -50,7 +50,7 @@ const applyIfNotBlank = (param: string, applyFn: (value: string) => void) => {
 };
 
 export default (): {
-  ulApi: UlApi;
+  notificationsProviderApi: NotificationsProviderApi;
   directusApi: DirectusApi;
   keepAliveOptions: KeepAliveOptions;
   cacheTtl: number;
@@ -94,10 +94,9 @@ export default (): {
   );
 
   return {
-    ulApi: {
-      notificationsUrl:
-        process.env.NOTIFICATIONS_SERVICE_UL_API_NOTIFICATIONS_URL,
-      bearerToken: process.env.NOTIFICATIONS_SERVICE_UL_API_BEARER_TOKEN,
+    notificationsProviderApi: {
+      apiUrl: process.env.NOTIFICATIONS_SERVICE_PROVIDER_API_URL,
+      bearerToken: process.env.NOTIFICATIONS_SERVICE_PROVIDER_API_BEARER_TOKEN,
     },
     directusApi: {
       url: process.env.NOTIFICATIONS_SERVICE_DIRECTUS_API_URL,

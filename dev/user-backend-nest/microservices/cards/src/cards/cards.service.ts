@@ -42,23 +42,24 @@ import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { RpcException } from '@nestjs/microservices';
 import { catchError, map, Observable } from 'rxjs';
-import { UlApi } from '../config/configuration.interface';
+import { CardsProviderApi } from '../config/configuration.interface';
 import { UserCardsDto } from './cards.dto';
 
 @Injectable()
 export class CardsService {
   private readonly logger = new Logger(CardsService.name);
-  private ulApiConfig: UlApi;
+  private cardsProviderApiConfig: CardsProviderApi;
 
   constructor(
     private readonly configService: ConfigService,
     private readonly httpService: HttpService,
   ) {
-    this.ulApiConfig = this.configService.get<UlApi>('ulApi');
+    this.cardsProviderApiConfig =
+      this.configService.get<CardsProviderApi>('cardsProviderApi');
   }
 
   public getUserCards(username: string): Observable<UserCardsDto> {
-    const url = this.ulApiConfig.userCardsUrl.replace(
+    const url = this.cardsProviderApiConfig.apiUrl.replace(
       /\{username\}/g,
       username,
     );
@@ -67,7 +68,7 @@ export class CardsService {
       .get<UserCardsDto>(url, {
         headers: {
           Accept: 'application/json',
-          Authorization: `Bearer ${this.ulApiConfig.bearerToken}`,
+          Authorization: `Bearer ${this.cardsProviderApiConfig.bearerToken}`,
         },
       })
       .pipe(

@@ -42,7 +42,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { RpcException } from '@nestjs/microservices';
 import { catchError, map, Observable } from 'rxjs';
-import { UlApi } from '../config/configuration.interfaces';
+import { RestaurantsProviderApi } from '../config/configuration.interfaces';
 import {
   RestaurantDTO,
   RestaurantExternalApiDTO,
@@ -54,23 +54,27 @@ import {
 @Injectable()
 export class RestaurantsService {
   private readonly logger = new Logger(RestaurantsService.name);
-  private ulApiConfig: UlApi;
+  private restaurantsProviderApiConfig: RestaurantsProviderApi;
 
   constructor(
     private readonly configService: ConfigService,
     private readonly httpService: HttpService,
   ) {
-    this.ulApiConfig = this.configService.get<UlApi>('ulApi');
+    this.restaurantsProviderApiConfig =
+      this.configService.get<RestaurantsProviderApi>('restaurantsProviderApi');
   }
   getRestaurants(): Observable<RestaurantDTO[]> {
     this.logger.log('*** get restaurants');
     return this.httpService
-      .get<RestaurantExternalApiDTO[]>(this.ulApiConfig.url, {
-        headers: {
-          Accept: 'application/json',
-          Authorization: `Bearer ${this.ulApiConfig.bearerToken}`,
+      .get<RestaurantExternalApiDTO[]>(
+        this.restaurantsProviderApiConfig.apiUrl,
+        {
+          headers: {
+            Accept: 'application/json',
+            Authorization: `Bearer ${this.restaurantsProviderApiConfig.bearerToken}`,
+          },
         },
-      })
+      )
       .pipe(
         catchError((err) => {
           const errorMessage = `Unable to get restaurants`;
@@ -106,14 +110,14 @@ export class RestaurantsService {
   getRestaurantMenus(
     query: RestaurantMenusQueryDto,
   ): Observable<RestaurantMenu[]> {
-    const url = `${this.ulApiConfig.url}/${query.id}`;
+    const url = `${this.restaurantsProviderApiConfig.apiUrl}/${query.id}`;
     const params = query.date ? `/defaultMeal?datetime=${query.date}` : '';
 
     return this.httpService
       .get<RestaurantMenu[]>(`${url}${params}`, {
         headers: {
           Accept: 'application/json',
-          Authorization: `Bearer ${this.ulApiConfig.bearerToken}`,
+          Authorization: `Bearer ${this.restaurantsProviderApiConfig.bearerToken}`,
         },
       })
       .pipe(

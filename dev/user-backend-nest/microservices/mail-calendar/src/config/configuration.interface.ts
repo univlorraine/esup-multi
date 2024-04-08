@@ -37,7 +37,7 @@
  * termes.
  */
 
-export interface UlApi {
+export interface MailCalendarProviderApi {
   apiUrl: string;
   bearerToken: string;
 }

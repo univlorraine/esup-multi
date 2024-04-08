@@ -37,7 +37,7 @@
  * termes.
  */
 
-export interface UlApi {
+export interface ClockingProviderApi {
   apiUrl: string;
   bearerToken: string;
 }

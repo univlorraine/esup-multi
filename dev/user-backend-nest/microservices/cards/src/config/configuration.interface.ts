@@ -37,9 +37,9 @@
  * termes.
  */
 
-export interface UlApi {
+export interface CardsProviderApi {
+  apiUrl: string;
   bearerToken: string;
-  userCardsUrl: string;
 }
 
 export interface KeepAliveOptions {

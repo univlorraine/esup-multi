@@ -38,7 +38,7 @@
  */
 
 import { Injectable, Logger } from '@nestjs/common';
-import { UlApi } from '../config/configuration.interface';
+import { MailCalendarProviderApi } from '../config/configuration.interface';
 import { ConfigService } from '@nestjs/config';
 import { HttpService } from '@nestjs/axios';
 import { catchError, map, Observable, of } from 'rxjs';
@@ -51,24 +51,27 @@ import { RpcException } from '@nestjs/microservices';
 @Injectable()
 export class MailCalendarService {
   private readonly logger = new Logger(MailCalendarService.name);
-  private ulApiConfig: UlApi;
+  private mailCalendarProviderApiConfig: MailCalendarProviderApi;
 
   constructor(
     private readonly configService: ConfigService,
     private readonly httpService: HttpService,
   ) {
-    this.ulApiConfig = this.configService.get<UlApi>('ulApi');
+    this.mailCalendarProviderApiConfig =
+      this.configService.get<MailCalendarProviderApi>(
+        'mailCalendarProviderApi',
+      );
   }
 
   public getMailCalendar(
     query: MailCalendarQueryDto,
   ): Observable<MailCalendarReplyDto> {
-    const url = `${this.ulApiConfig.apiUrl}/${query.login}`;
+    const url = `${this.mailCalendarProviderApiConfig.apiUrl}/${query.login}`;
 
     return this.httpService
       .get<MailCalendarReplyDto>(url, {
         headers: {
-          Authorization: `Bearer ${this.ulApiConfig.bearerToken}`,
+          Authorization: `Bearer ${this.mailCalendarProviderApiConfig.bearerToken}`,
         },
         responseType: 'json',
       })

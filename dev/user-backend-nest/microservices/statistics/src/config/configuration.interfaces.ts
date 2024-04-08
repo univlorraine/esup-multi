@@ -37,8 +37,8 @@
  * termes.
  */
 
-export interface UlApi {
-  url: string;
+export interface StatisticsCollectorApi {
+  apiUrl: string;
   bearerToken: string;
 }
 

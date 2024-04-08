@@ -44,9 +44,9 @@ export interface CasUrl {
   validateTgt: string;
   logout: string;
 }
-export interface UlApi {
+export interface AuthProviderApi {
+  apiUrl: string;
   bearerToken: string;
-  userProfileUrl: string;
 }
 
 export interface ScheduledCleanup {

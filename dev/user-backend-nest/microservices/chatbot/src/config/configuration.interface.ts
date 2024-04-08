@@ -37,8 +37,8 @@
  * termes.
  */
 
-export interface UlApi {
-  tockUrl: string;
+export interface ChatbotApi {
+  url: string;
 }
 
 export interface KeepAliveOptions {

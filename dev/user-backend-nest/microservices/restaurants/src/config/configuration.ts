@@ -37,7 +37,11 @@
  * termes.
  */
 
-import { CacheTtl, KeepAliveOptions, UlApi } from './configuration.interfaces';
+import {
+  CacheTtl,
+  KeepAliveOptions,
+  RestaurantsProviderApi,
+} from './configuration.interfaces';
 
 const applyIfNotBlank = (param: string, applyFn: (value: string) => void) => {
   if (param && param.trim().length > 0) {
@@ -46,7 +50,7 @@ const applyIfNotBlank = (param: string, applyFn: (value: string) => void) => {
 };
 
 export default (): {
-  ulApi: UlApi;
+  restaurantsProviderApi: RestaurantsProviderApi;
   keepAliveOptions: KeepAliveOptions;
   cacheTtl: CacheTtl;
   cacheMax: number;
@@ -89,9 +93,9 @@ export default (): {
   );
 
   return {
-    ulApi: {
-      url: process.env.RESTAURANTS_SERVICE_UL_API_URL,
-      bearerToken: process.env.RESTAURANTS_SERVICE_UL_API_BEARER_TOKEN,
+    restaurantsProviderApi: {
+      apiUrl: process.env.RESTAURANTS_SERVICE_PROVIDER_API_URL,
+      bearerToken: process.env.RESTAURANTS_SERVICE_PROVDER_API_BEARER_TOKEN,
     },
     keepAliveOptions,
     cacheTtl: {

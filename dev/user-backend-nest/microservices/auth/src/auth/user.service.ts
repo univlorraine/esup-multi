@@ -43,23 +43,24 @@ import { ConfigService } from '@nestjs/config';
 import { RpcException } from '@nestjs/microservices';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { UlApi } from '../config/configuration.interface';
+import { AuthProviderApi } from '../config/configuration.interface';
 import { UserProfileDto } from './auth.dto';
 
 @Injectable()
 export class UserService {
   private readonly logger = new Logger(UserService.name);
-  private ulApiConfig: UlApi;
+  private authProviderApiConfig: AuthProviderApi;
 
   constructor(
     private readonly configService: ConfigService,
     private readonly httpService: HttpService,
   ) {
-    this.ulApiConfig = this.configService.get<UlApi>('ulApi');
+    this.authProviderApiConfig =
+      this.configService.get<AuthProviderApi>('authProviderApi');
   }
 
   public getUserProfile(username: string): Observable<UserProfileDto> {
-    const url = this.ulApiConfig.userProfileUrl.replace(
+    const url = this.authProviderApiConfig.apiUrl.replace(
       /\{username\}/g,
       username,
     );
@@ -68,7 +69,7 @@ export class UserService {
       .get<UserProfileDto>(url, {
         headers: {
           Accept: 'application/json',
-          Authorization: `Bearer ${this.ulApiConfig.bearerToken}`,
+          Authorization: `Bearer ${this.authProviderApiConfig.bearerToken}`,
         },
       })
       .pipe(
