@@ -619,12 +619,12 @@ fields:
       note: Couleur de thème associée au canal de notification
       options:
         presets:
-          - name: Jaune
-            color: '#FFEF65'
-          - name: Vert
-            color: '#A0D0B0'
+          - name: Noir
+            color: '#000000'
+          - name: Rose
+            color: '#EF154E'
           - name: Bleu
-            color: '#BADFEE'
+            color: '#3771C1'
       readonly: false
       required: false
       sort: 4
@@ -2478,12 +2478,12 @@ fields:
       note: Couleur de fond de l'information importante en page d'accueil
       options:
         presets:
+          - name: Noir
+            color: '#000000'
+          - name: Rose
+            color: '#EF154E'
           - name: Bleu
-            color: '#BADFEE'
-          - name: Vert
-            color: '#A0D0B0'
-          - name: Jaune
-            color: '#FFEF65'
+            color: '#3771C1'
       readonly: false
       required: false
       sort: 7
@@ -4289,12 +4289,12 @@ fields:
       note: Couleur de fond du widget en page d'accueil
       options:
         presets:
+          - name: Noir
+            color: '#000000'
+          - name: Rose
+            color: '#EF154E'
           - name: Bleu
-            color: '#BADFEE'
-          - name: Vert
-            color: '#A0D0B0'
-          - name: Jaune
-            color: '#FFEF65'
+            color: '#3771C1'
       readonly: false
       required: false
       sort: 16

@@ -1,7 +1,7 @@
 [
 	{
 		"code": "ALERT",
-		"color": "#FFEF65",
+		"color": "#EF154E",
 		"routerLink": null,
 		"translations": [
 			{
@@ -16,7 +16,7 @@
 	},
 	{
 		"code": "ETAB",
-		"color": "#A0D0B0",
+		"color": "#3771C1",
 		"routerLink": null,
 		"translations": [
 			{
@@ -31,7 +31,7 @@
 	},
 	{
 		"code": "EDT",
-		"color": "#BADFEE",
+		"color": "#FDD33A",
 		"routerLink": "/schedule",
 		"translations": [
 			{
@@ -46,7 +46,7 @@
 	},
 	{
 		"code": "SUAPS",
-		"color": "#BADFEE",
+		"color": "#3771C1",
 		"routerLink": null,
 		"translations": [
 			{
