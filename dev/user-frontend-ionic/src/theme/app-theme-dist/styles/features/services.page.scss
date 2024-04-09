@@ -38,7 +38,7 @@
  */
 
 ion-content {
-  --background: var(--app-services-color-background);
+  --background: var(--app-services-color-background) url(assets/background/fond.png) no-repeat center center / cover;
 }
 
 ion-searchbar {
