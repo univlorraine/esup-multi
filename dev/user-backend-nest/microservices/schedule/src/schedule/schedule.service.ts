@@ -55,7 +55,7 @@ export class ScheduleService {
     private readonly httpService: HttpService,
   ) {
     this.scheduleProviderApiConfig =
-      this.configService.get<ScheduleProviderApi>('shceduleProviderApi');
+      this.configService.get<ScheduleProviderApi>('scheduleProviderApi');
   }
 
   public getSchedule(query: UserScheduleQueryDto): Observable<Schedule> {
