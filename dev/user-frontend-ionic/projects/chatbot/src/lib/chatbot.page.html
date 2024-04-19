@@ -57,7 +57,7 @@
             <ion-img *ngIf="message.card" [src]="message.card.file.url"></ion-img>
           </ion-row>
           <ion-row *ngIf="message.messageType === messageType.user">
-            <ion-label class="app-text-4 ion-text-wrap" [innerHTML]="message.text"></ion-label>
+            <ion-label class="app-text-4 ion-text-wrap app-fixed-light-color" [innerHTML]="message.text"></ion-label>
           </ion-row>
         </div>
         <ion-item lines="none" *ngIf="message.messageType === messageType.bot && message.buttons && last" class="ion-margin-top" lines="none">
