@@ -1,6 +1,3 @@
-.pwa_update_version_script: &pwa_update_version_script
-  - node update-infos.js
-
 .pwa_get_full_image_tag: &pwa_get_full_image_tag
   - apt-get update && apt-get install -y jq
   - VERSION=$(jq -r '.version' ${CI_PROJECT_DIR}/${FRONTEND_PATH}/package.json)
@@ -27,7 +24,6 @@
   image: node:$NODE_VERSION
   before_script:
     - cd ${CI_PROJECT_DIR}/${FRONTEND_PATH}
-    - *pwa_update_version_script
     - *pwa_get_full_image_tag
     - npm ci --cache ${CI_PROJECT_DIR}/.npm --prefer-offline
     - mkdir -p ${SECURE_FILES_DOWNLOAD_PATH} && curl --silent "https://gitlab.com/gitlab-org/incubation-engineering/mobile-devops/download-secure-files/-/raw/main/installer" | bash
