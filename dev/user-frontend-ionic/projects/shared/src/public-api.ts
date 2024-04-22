@@ -60,7 +60,6 @@ export * from './lib/features/features.service';
 export * from './lib/guided-tour/guided-tour.repository';
 export * from './lib/guided-tour/guided-tour.service';
 export * from './lib/i18n/i18n.repository';
-export * from './lib/infos/infos.service';
 export * from './lib/navigation/menu-opener.service';
 export * from './lib/navigation/menu.model';
 export * from './lib/navigation/menu.service';
