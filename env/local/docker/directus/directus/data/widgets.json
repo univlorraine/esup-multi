@@ -29,7 +29,7 @@
 		"routerLink": "/schedule",
 		"link": null,
 		"ssoService": null,
-		"color": "#BADFEE",
+		"color": "#3771C1",
 		"statisticName": null,
 		"translations": [
 			{
@@ -64,7 +64,7 @@
 		"routerLink": "/clocking",
 		"link": "https://agatte.univ-lorraine.fr/login/cas?ticket={st}",
 		"ssoService": "https://agatte.univ-lorraine.fr/login/cas",
-		"color": "#A0D0B0",
+		"color": "#EF154E",
 		"statisticName": "clocking",
 		"translations": [
 			{
@@ -139,7 +139,7 @@
 		"routerLink": null,
 		"link": "https://mail.etu.univ-lorraine.fr/zimbra/preauth/preauthUL_ETU.jsp?ticket={st}",
 		"ssoService": "https://mail.etu.univ-lorraine.fr/zimbra/preauth/preauthUL_ETU.jsp",
-		"color": "#A4D0B2",
+		"color": "#EF154E",
 		"statisticName": null,
 		"translations": [
 			{
@@ -173,7 +173,7 @@
 		"routerLink": null,
 		"link": "https://mail.etu.univ-lorraine.fr/zimbra/preauth/preauthUL_ETU.jsp?ticket={st}",
 		"ssoService": "https://mail.etu.univ-lorraine.fr/zimbra/preauth/preauthUL_ETU.jsp",
-		"color": "#C1DEEC",
+		"color": "#3771C1",
 		"statisticName": null,
 		"translations": [
 			{

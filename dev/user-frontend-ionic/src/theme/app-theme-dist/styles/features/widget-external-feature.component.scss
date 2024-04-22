@@ -39,8 +39,10 @@
 
 ion-card {
   box-shadow: var(--app-border-no-box-shadow);
-  border-radius: var(--app-border-no-radius) !important;
+  border-radius: var(--app-border-radius-3) !important;
   margin-top: 1.8rem !important;
+  margin-left: 1rem;
+  margin-right: 1rem;
   background: transparent;
 }
 

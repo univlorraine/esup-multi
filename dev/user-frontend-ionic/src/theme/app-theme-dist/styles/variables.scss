@@ -52,6 +52,10 @@
   --app-font-color-primary-medium: #1b1b1b;
   --app-font-color-primary-contrast: #ffffff;
 
+  --app-font-color-secondary: #EF154E;
+  --app-font-color-secondary-medium: #ee436d;
+  --app-font-color-secondary-contrast: #ffffff;
+
   // The next colors are fixed and not inverted in dark theme
   // Don't change the next value in dark theme
   //______________________________________________
@@ -118,28 +122,28 @@
   // ---------------------
 
   /** primary **/
-  --ion-color-primary: #76787c;
-  --ion-color-primary-rgb: 118, 120, 124;
+  --ion-color-primary: #000000;
+  --ion-color-primary-rgb: 0, 0, 0;
   --ion-color-primary-contrast: #ffffff;
   --ion-color-primary-contrast-rgb: 255, 255, 255;
   --ion-color-primary-shade: #000000;
   --ion-color-primary-tint: #454649;
 
   /** secondary **/
-  --ion-color-secondary: #6e0924;
-  --ion-color-secondary-rgb: 110, 9, 36;
-  --ion-color-secondary-contrast: #000000;
-  --ion-color-secondary-contrast-rgb: 0, 0, 0;
-  --ion-color-secondary-shade: #cc1129;
-  --ion-color-secondary-tint: #ff1634;
+  --ion-color-secondary: #EF154E;
+  --ion-color-secondary-rgb: 239, 21, 78;
+  --ion-color-secondary-contrast: #ffffff;
+  --ion-color-secondary-contrast-rgb: 255, 255, 255;
+  --ion-color-secondary-shade: #850c2a;
+  --ion-color-secondary-tint: #ee436d;
 
   /** tertiary **/
-  --ion-color-tertiary: #3771c1;
+  --ion-color-tertiary: #3771C1;
   --ion-color-tertiary-rgb: 55, 113, 193;
-  --ion-color-tertiary-contrast: #000000;
-  --ion-color-tertiary-contrast-rgb: 0, 0, 0;
-  --ion-color-tertiary-shade: #015796;
-  --ion-color-tertiary-tint: #28538e;
+  --ion-color-tertiary-contrast: #ffffff;
+  --ion-color-tertiary-contrast-rgb: 255, 255, 255;
+  --ion-color-tertiary-shade: #1a3459;
+  --ion-color-tertiary-tint: #6589bb;
 
   /** success **/
   --ion-color-success: #2dd36f;
@@ -293,6 +297,9 @@ body.dark {
   --app-font-color-primary-medium: #f9f9f9;
   --app-font-color-primary-contrast: #000000;
 
+  --app-font-color-secondary: #ffffff;
+  --app-font-color-secondary-medium: #f9f9f9;
+  --app-font-color-secondary-contrast: #000000;
   /** Top bar **/
   --ion-toolbar-background: var(--ion-color-primary);
   --ion-toolbar-color: var(--ion-color-primary-contrast);
@@ -349,20 +356,20 @@ body.dark {
   --ion-color-primary-tint: #1e1c1a;
 
   /** secondary **/
-  --ion-color-secondary: #0163aa;
-  --ion-color-secondary-rgb: 1, 99, 170;
-  --ion-color-secondary-contrast: #000000;
-  --ion-color-secondary-contrast-rgb: 0, 0, 0;
-  --ion-color-secondary-shade: #015796;
-  --ion-color-secondary-tint: #1a73b3;
+  --ion-color-secondary: #EF154E;
+  --ion-color-secondary-rgb: 239, 21, 78;
+  --ion-color-secondary-contrast: #ffffff;
+  --ion-color-secondary-contrast-rgb: 255, 255, 255;
+  --ion-color-secondary-shade: #850c2a;
+  --ion-color-secondary-tint: #ee436d;
 
   /** tertiary **/
-  --ion-color-tertiary: #a0d0b0;
-  --ion-color-tertiary-rgb: 160, 208, 176;
-  --ion-color-tertiary-contrast: #000000;
-  --ion-color-tertiary-contrast-rgb: 0, 0, 0;
-  --ion-color-tertiary-shade: #8db79b;
-  --ion-color-tertiary-tint: #aad5b8;
+  --ion-color-tertiary: #3771C1;
+  --ion-color-tertiary-rgb: 55, 113, 193;
+  --ion-color-tertiary-contrast: #ffffff;
+  --ion-color-tertiary-contrast-rgb: 255, 255, 255;
+  --ion-color-tertiary-shade: #1a3459;
+  --ion-color-tertiary-tint: #6589bb;
 
   /** success **/
   --ion-color-success: #2dd36f;
