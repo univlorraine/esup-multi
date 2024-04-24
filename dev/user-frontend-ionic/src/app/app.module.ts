@@ -54,11 +54,6 @@ import { AppComponent } from './app.component';
 import { ErrorModule } from './error/error.module';
 import { PageLayoutsModule } from './layout/layouts.module';
 
-// Permet d'importer dynamiquement les modules configurés à enabled = true dans le fichier environment.ts
-const enabledModules = environment.moduleConfigs
-  .filter(m => m.enabled)
-  .map(m => m.module.forRoot ? m.module.forRoot(m.config) : m.module);
-
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -86,7 +81,7 @@ const enabledModules = environment.moduleConfigs
         deps: [HttpClient, ProjectModuleService]
       }
     }),
-    ...enabledModules,
+    ...environment.enabledModules,
   ],
   providers: [
     { provide: 'environment', useValue: environment },
