@@ -41,7 +41,6 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-
 import { AuthModule } from '@multi/auth';
 import { CalendarModule } from '@multi/calendar';
 import { CardsPageModule } from '@multi/cards';
@@ -65,14 +64,9 @@ import { MatomoModule } from 'ngx-matomo';
 // Décommenter si utilisation des notifications
 // import firebasePwaEnvironment from './firebase/web/firebase-environment.pwa.json';
 
-interface ModuleConfig {
-  moduleName: string;
-  module: any;
-  config?: any;
-  enabled: boolean;
-}
-
-export const environment = {
+export const environment: any = {
+  // Décommenter si utilisation des notifications
+  // firebase: firebasePwaEnvironment,
   production: false,
   apiEndpoint: 'http://localhost:3000',
   languages: ['fr', 'en'],
@@ -80,149 +74,57 @@ export const environment = {
   cmsPublicAssetsEndpoint: 'http://localhost:8055/assets/',
   guidedTourEnabled: true,
   appTitle: 'Esup-Multi',
-  moduleConfigs: [
-    {
-      moduleName: 'auth',
-      module: AuthModule,
-      config: {},
-      enabled: true,
-    },
-    {
-      moduleName: 'calendar',
-      module: CalendarModule,
-      config: { numberOfEventsLimit: 3 },
-      enabled: true,
-    },
-    {
-      moduleName: 'cardsPage',
-      module: CardsPageModule,
-      config: { knownErrors: ['NO_PHOTO', 'NO_ACTIVE_CARD', 'UNPAID_FEES'] },
-      enabled: true,
-    },
-    {
-      moduleName: 'chatbot',
-      module: ChatbotModule,
-      config: { chatbotLogoRegex: /_ully5/i },
-      enabled: true,
-    },
-    {
-      moduleName: 'clocking',
-      module: ClockingModule,
-      config: {},
-      enabled: true,
-    },
-    {
-      moduleName: 'contactUs',
-      module: ContactUsModule,
-      config: {},
-      enabled: true,
-    },
-    {
-      moduleName: 'contacts',
-      module: ContactsModule,
-      config: { contactTypes: ['STUDENT', 'STAFF', 'STANDIN'] },
-      enabled: true,
-    },
-    {
-      moduleName: 'importantNews',
-      module: ImportantNewsModule,
-      config: {},
-      enabled: true,
-    },
-    {
-      moduleName: 'map',
-      module: MapModule,
-      config: {
-        defaultMapLocation: {
-          longitude: 6.183309429175067,
-          latitude: 48.69137200828818
+  appVersion: '1.0.0',
+  enabledModules: [
+    AuthModule,
+    CalendarModule.forRoot({ numberOfEventsLimit: 3 }),
+    CardsPageModule.forRoot({ knownErrors: ['NO_PHOTO', 'NO_ACTIVE_CARD', 'UNPAID_FEES'] }),
+    ChatbotModule.forRoot({ chatbotLogoRegex: /_chacha5/i }),
+    ClockingModule,
+    ContactUsModule,
+    ContactsModule.forRoot({ contactTypes: ['STUDENT', 'STAFF', 'STANDIN'] }),
+    ImportantNewsModule,
+    MapModule.forRoot({
+      defaultMapLocation: {
+        longitude: 2.3488596,
+        latitude: 48.8533249
+      }
+    }),
+    NotificationsModule.forRoot({
+      numberOfNotificationsOnFirstLoad: 20,
+      numberOfNotificationsToLoadOnScroll: 10
+    }),
+    ReservationModule.forRoot({
+      reservationSsoServiceName: 'https://mon-espace-de-resa.fr',
+      reservationSsoUrlTemplate: 'https://mon-espace-de-resa.fr/auth?ticket={st}',
+    }),
+    RestaurantsModule,
+    RssPageModule,
+    ScheduleModule.forRoot({
+      nextEventsWidget: {
+        numberOfEventsLimit: 2,
+        numberOfDaysLimit: 7
+      },
+      previousWeeksInCache: 1,
+      nextWeeksInCache: 2,
+      managerRoles: ['schedule-manager', 'multi-admin']
+    }),
+    SocialNetworkModule,
+    StaticPagesModule,
+    UnreadMailModule,
+    MatomoModule.forRoot({
+      scriptUrl: 'https://webstats.mon-univ.fr/matomo.js',
+      trackers: [
+        {
+          trackerUrl: 'https://webstats.mon-univ.fr/matomo.php',
+          siteId: 453
         }
-      },
-      enabled: true,
-    },
-    {
-      moduleName: 'notifications',
-      module: NotificationsModule,
-      config: {
-        numberOfNotificationsOnFirstLoad: 20,
-        numberOfNotificationsToLoadOnScroll: 10
-      },
-      enabled: true,
-    },
-    {
-      moduleName: 'reservation',
-      module: ReservationModule,
-      config: {
-        reservationSsoServiceName: 'https://resa-espace.univ-lorraine.fr/reservationsalles/Authentification.aspx',
-        reservationSsoUrlTemplate: 'https://resa-espace.univ-lorraine.fr/reservationsalles/Authentification.aspx?ticket={st}',
-      },
-      enabled: true,
-    },
-    {
-      moduleName: 'restaurants',
-      module: RestaurantsModule,
-      config: {},
-      enabled: true,
-    },
-    {
-      moduleName: 'rss',
-      module: RssPageModule,
-      config: {},
-      enabled: true,
-    },
-    {
-      moduleName: 'schedule',
-      module: ScheduleModule,
-      config: {
-        nextEventsWidget: {
-          numberOfEventsLimit: 2,
-          numberOfDaysLimit: 7
-        },
-        previousWeeksInCache: 1,
-        nextWeeksInCache: 2,
-        managerRoles: ['schedule-manager', 'multi-admin']
-      },
-      enabled: true,
-    },
-    {
-      moduleName: 'socialNetwork',
-      module: SocialNetworkModule,
-      config: {},
-      enabled: true,
-    },
-    {
-      moduleName: 'staticPages',
-      module: StaticPagesModule,
-      config: {},
-      enabled: true,
-    },
-    {
-      moduleName: 'unreadMail',
-      module: UnreadMailModule,
-      config: {},
-      enabled: true,
-    },
-    {
-      moduleName: 'matomo',
-      module: MatomoModule,
-      config: {
-        scriptUrl: 'https://webstats.univ-lorraine.fr/matomo.js',
-        trackers: [
-          {
-            trackerUrl: 'https://webstats.univ-lorraine.fr/matomo.php',
-            siteId: 453
-          }
-        ],
-        routeTracking: {
-          enable: true
-        }
-      },
-      enabled: true,
-    },
-  ] as ModuleConfig[],
-
-  // Décommenter si utilisation des notifications
-  // firebase: firebasePwaEnvironment,
+      ],
+      routeTracking: {
+        enable: true
+      }
+    }),
+  ],
 };
 
 /*

@@ -2,7 +2,7 @@
 	{
 		"status": "published",
 		"sort": null,
-		"color": "#2272b9",
+		"color": "#3771C1",
 		"link": "https://www.esup-portail.org/conference/",
 		"statisticName": null,
 		"translations": [
@@ -25,7 +25,7 @@
 	{
 		"status": "published",
 		"sort": null,
-		"color": "#F4E648",
+		"color": "#EF154E",
 		"link": "/cards",
 		"statisticName": "cards",
 		"translations": [
@@ -53,7 +53,7 @@
 	{
 		"status": "published",
 		"sort": null,
-		"color": "#A0D0B0",
+		"color": "#3771C1",
 		"link": null,
 		"statisticName": null,
 		"translations": [
