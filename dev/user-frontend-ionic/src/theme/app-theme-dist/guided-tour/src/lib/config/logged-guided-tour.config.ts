@@ -87,7 +87,7 @@ export const loggedSteps= (router: Router, translateService: TranslateService, o
       }
     ],
     text: `${translateService.instant('GUIDED_TOUR.LOGGED.STEP_20.MESSAGE')}
-            <br/> <img class="shepherd-image" src="theme/app-theme/assets/guided-tour/logged-guided-tour-step-20.png">`,
+            <br/> <img class="shepherd-image" src="assets/guided-tour/logged-guided-tour-step-20.png">`,
   },
   {
     id: 'logged-step-30',
@@ -113,7 +113,7 @@ export const loggedSteps= (router: Router, translateService: TranslateService, o
       }
     ],
     text: `${translateService.instant('GUIDED_TOUR.LOGGED.STEP_30.MESSAGE')}
-          <br/> <img class="shepherd-image" src="theme/app-theme/assets/guided-tour/logged-guided-tour-step-30.png">`,
+          <br/> <img class="shepherd-image" src="assets/guided-tour/logged-guided-tour-step-30.png">`,
   },
   {
     id: 'logged-step-40',
@@ -186,7 +186,7 @@ export const loggedSteps= (router: Router, translateService: TranslateService, o
       }
     ],
     text: `${translateService.instant('GUIDED_TOUR.LOGGED.STEP_60.MESSAGE')}
-        <br/> <img class="shepherd-image" src="theme/app-theme/assets/guided-tour/logged-guided-tour-step-60.png">`,
+        <br/> <img class="shepherd-image" src="assets/guided-tour/logged-guided-tour-step-60.png">`,
   },
   {
     id: 'logged-step-70',
@@ -237,7 +237,7 @@ export const loggedSteps= (router: Router, translateService: TranslateService, o
       }
     ],
     text: `${translateService.instant('GUIDED_TOUR.LOGGED.STEP_80.MESSAGE')}
-        <br/> <img class="shepherd-image" src="theme/app-theme/assets/guided-tour/logged-guided-tour-step-80.png">`,
+        <br/> <img class="shepherd-image" src="assets/guided-tour/logged-guided-tour-step-80.png">`,
   },
   {
     id: 'logged-step-90',
@@ -289,7 +289,7 @@ export const loggedSteps= (router: Router, translateService: TranslateService, o
       }
     ],
     text: `${translateService.instant('GUIDED_TOUR.LOGGED.STEP_100.MESSAGE')}
-        <br/> <img class="shepherd-image" src="theme/app-theme/assets/guided-tour/logged-guided-tour-step-100.png">`,
+        <br/> <img class="shepherd-image" src="assets/guided-tour/logged-guided-tour-step-100.png">`,
   },
   {
     id: 'logged-step-110',
