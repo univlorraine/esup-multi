@@ -76,8 +76,8 @@
 <ion-footer>
   <ion-item class="footer ion-no-padding" lines="none">
     <ion-input (keyup.enter)="onMessageInputEnter()" [(ngModel)]="userInput"
-               class="form-control input app-text-4"
-               placeholder="{{'CHATBOT.MESSAGE_PROMPT' | translate}}"></ion-input>
+               class="form-control input app-text-4" placeholder="{{'CHATBOT.MESSAGE_PROMPT' | translate}}"
+               [attr.aria-label]="'CHATBOT.MESSAGE_PROMPT' | translate"></ion-input>
 
     <ion-buttons slot="end">
       <ion-button (click)="clearUserInput()" [attr.aria-label]="'CHATBOT.CLEAR_INPUT' | translate">

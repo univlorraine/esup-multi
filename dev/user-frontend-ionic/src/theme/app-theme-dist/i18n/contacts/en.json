@@ -8,6 +8,7 @@
     "CANCEL": "Cancel",
     "RESULTS": "result(s)",
     "PLACEHOLDER": "Last Name/First Name/Phone",
+    "SEARCHBAR_MESSAGE": "Search someone by name or phone number",
     "ALERT": {
         "ERROR":  {
             "HEADER": "Error",

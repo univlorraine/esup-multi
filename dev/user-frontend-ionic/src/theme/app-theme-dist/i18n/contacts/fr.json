@@ -8,6 +8,7 @@
     "CANCEL": "Annuler",
     "RESULTS": "résultat(s)",
     "PLACEHOLDER": "Nom/Prénom/Téléphone",
+    "SEARCHBAR_MESSAGE": "Rechercher quelqu'un par nom, prénom ou numéro de téléphone",
     "ALERT": {
         "ERROR": {
             "HEADER": "Erreur",
