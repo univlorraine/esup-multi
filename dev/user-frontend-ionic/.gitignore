@@ -49,6 +49,7 @@ npm-debug.log*
 /src/theme/*
 !/src/theme/theme.scss.dist
 !/src/theme/app-theme-dist
+/icons/*
 
 # Angular
 angular.json
