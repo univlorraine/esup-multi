@@ -45,6 +45,12 @@ interface GpsCoordinate {
 }
 export interface MapModuleConfig {
     defaultMapLocation: GpsCoordinate;
+    mapType: "mapbox" | "osm";
+    accessToken: string;
+    minZoom: number;
+    maxZoom: number;
+    maxBounds: boolean;
+    highAccuracy: boolean;
 }
 
 export const MAP_CONFIG =

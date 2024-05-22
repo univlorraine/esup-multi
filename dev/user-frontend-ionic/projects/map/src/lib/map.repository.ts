@@ -43,34 +43,96 @@ import {
 } from '@ngneat/elf-persist-state';
 import { localForageStore } from '@multi/shared';
 
-const STORE_NAME = 'markers';
+const STORE_NAME = 'map_data';
 
 export interface MarkersProps {
     markers: Marker[];
 }
 export interface Marker {
-    title: string;
-    description: string;
+    title: Label[];
+    description: Label[];
+    title_translate?: string;
+    description_translate?: string;
     category: string;
     latitude: number;
     longitude: number;
+    icon: Icon;
 }
 
-const markersStore = createStore(
+export interface CategoriesProps {
+    categories: Categorie[];
+}
+export interface Categorie {
+    id: string;
+    sort: number;
+    label: Label[];
+    label_translate?: string;
+}
+
+export interface CampusProps {
+    campus: Campus[];
+}
+export interface Campus {
+    id: number;
+    sort: number;
+    name: string;
+    initial: GpsCoordinate;
+    southwest: GpsCoordinate;
+    northeast: GpsCoordinate;
+    photo: string;
+}
+
+export interface Label {
+    value: string;
+    langcode: string;
+}
+
+export interface GpsCoordinate {
+    lng: number;
+    lat: number;
+}
+
+export interface Icon {
+    svg: string;
+    width: number;
+    height: number;
+    x: number;
+    y: number;
+}
+
+const store = createStore(
     { name: STORE_NAME },
-    withProps<MarkersProps>({ markers: []})
+    withProps<MarkersProps>({ markers: []}),
+    withProps<CategoriesProps>({ categories: []}),
+    withProps<CampusProps>({ campus: []}),
   );
 
-export const persist = persistState(markersStore, {
+export const persist = persistState(store, {
     key: STORE_NAME,
     storage: localForageStore,
 });
 
-export const markersList$ = markersStore.pipe(select((state) => state.markers));
+export const markersList$ = store.pipe(select((state) => state.markers));
+export const categoriesList$ = store.pipe(select((state) => state.categories));
+export const campusList$ = store.pipe(select((state) => state.campus));
 
 export const setMarkers = (markers: MarkersProps['markers']) => {
-    markersStore.update((state) => ({
+    store.update((state) => ({
       ...state,
       markers,
+    }));
+};
+
+export const setCategories = (categories: CategoriesProps['categories']) => {
+    store.update((state) => ({
+      ...state,
+      categories,
+    }));
+};
+
+export const setCampus = (campus: CampusProps['campus']) => {
+    store.update((state) => ({
+      ...state,
+      campus,
     }));
 };
