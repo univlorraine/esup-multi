@@ -37,38 +37,27 @@
  * termes.
  */
 
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { ScheduleListPage } from './schedule-list/schedule-list.page';
-import { ScheduleCalendarComponent } from './schedule-calendar/schedule-calendar.component';
-import { SchedulePage } from './schedule.page';
-import { AuthGuard } from '@multi/shared';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from "@angular/router";
+import { getAuthToken } from './auth.repository';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
 
-const routes: Routes = [
-  {
-    path: 'schedule',
-    component: SchedulePage,
-    canActivate: [AuthGuard],
-    children: [
-      {
-        path: 'calendar',
-        component: ScheduleCalendarComponent,
-      },
-      {
-        path: 'list',
-        component: ScheduleListPage
-      },
-      {
-        path: '',
-        redirectTo: 'list',
-        pathMatch: 'full'
-      }
-    ]
-  },
-];
-
-@NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+@Injectable({
+  providedIn: 'root'
 })
-export class SchedulePageRoutingModule { }
+export class AuthGuard implements CanActivate {
+  constructor(private router: Router) {}
+
+  canActivate(route:ActivatedRouteSnapshot, state:RouterStateSnapshot): Observable<boolean> {
+    return getAuthToken().pipe(
+      map(authToken => {
+        if (!authToken) {
+          this.router.navigate(['/auth'], { queryParams: { returnUrl: state.url } } );
+          return false;
+        }
+        return true;
+      })
+    )
+  }
+}

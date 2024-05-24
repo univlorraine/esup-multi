@@ -39,9 +39,9 @@
 
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IonInput, ToastController } from '@ionic/angular';
-import { AuthenticatedUser, isLoggedTourViewed, NavigationService } from '@multi/shared';
+import { AuthenticatedUser, isLoggedTourViewed } from '@multi/shared';
 import { Observable } from 'rxjs';
 import { finalize, take, tap } from 'rxjs/operators';
 import { AuthService } from '../common/auth.service';
@@ -62,6 +62,7 @@ interface AuthenticatedUserToken extends AuthenticatedUser {
 export class LoginPage implements OnInit {
 
   loginForm: FormGroup;
+  returnUrl: string;
   public saveCredentialsOnAuthentication$ = saveCredentialsOnAuthentication$;
   public isLoading = false;
   public translatedPageContent$: Observable<TranslatedLoginPageContent>;
@@ -72,9 +73,9 @@ export class LoginPage implements OnInit {
     public authService: AuthService,
     private toastController: ToastController,
     private preferencesService: PreferencesService,
-    private navigationService: NavigationService,
     private loginService: LoginService,
     private loginRepository: LoginRepository,
+    private route: ActivatedRoute,
     private router: Router,
   ) {
     this.translatedPageContent$ = this.loginRepository.translatedPageContent$;
@@ -94,8 +95,8 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
     this.loginService.loadAndStoreLoginPageContent()
-    .pipe(take(1))
-    .subscribe();
+      .pipe(take(1))
+      .subscribe();
 
     this.loginForm = this.fb.group({
       username: ['', [Validators.required]],
@@ -112,6 +113,7 @@ export class LoginPage implements OnInit {
   }
 
   ionViewWillEnter() {
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/features/widgets';
     this.isLoading = false;
     this.loginForm.reset();
   }
@@ -135,9 +137,9 @@ export class LoginPage implements OnInit {
     this.isLoading = true;
     this.authService
       .login(this.username?.value, this.password?.value).pipe(
-        tap(val => !val && this.showToastConnectionFail()),
-        finalize(() => this.isLoading = false)
-      )
+      tap(val => !val && this.showToastConnectionFail()),
+      finalize(() => this.isLoading = false)
+    )
       .subscribe((token: AuthenticatedUserToken) => {
         if (!token) {
           return;
@@ -146,7 +148,7 @@ export class LoginPage implements OnInit {
         if(!isLoggedTourViewed()) {
           this.router.navigate(['/features/widgets']);
         } else {
-          this.navigationService.navigateBack();
+          this.router.navigateByUrl(this.returnUrl);
         }
       });
   }
