@@ -37,14 +37,60 @@
  * termes.
  */
 
-import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
-import configuration from './config/configuration';
-import { MapModule } from './map/map.module';
-import { MonitoringModule } from './monitoring/monitoring.module';
-@Module({
-  imports: [ConfigModule.forRoot({ load: [configuration] }), MapModule, MonitoringModule],
-  controllers: [],
-  providers: [],
-})
-export class AppModule {}
+import { ProviderOptions, KeepAliveOptions } from './configuration.interface';
+
+const applyIfNotBlank = (param: string, applyFn: (value: string) => void) => {
+  if (param && param.trim().length > 0) {
+    applyFn(param);
+  }
+};
+
+export default (): {
+  providerOptions: ProviderOptions;
+  keepAliveOptions: KeepAliveOptions;
+} => {
+  const keepAliveOptions = {};
+
+  applyIfNotBlank(
+    process.env.MAP_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVE,
+    (value) => (keepAliveOptions['keepAlive'] = value === 'true'),
+  );
+
+  applyIfNotBlank(
+    process.env.MAP_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVEMSECS,
+    (value) => (keepAliveOptions['keepAliveMsecs'] = parseInt(value)),
+  );
+
+  applyIfNotBlank(
+    process.env.MAP_SERVICE_AGENTKEEPALIVE_OPTION_FREESOCKETTIMEOUT,
+    (value) => (keepAliveOptions['freeSocketTimeout'] = parseInt(value)),
+  );
+
+  applyIfNotBlank(
+    process.env.MAP_SERVICE_AGENTKEEPALIVE_OPTION_TIMEOUT,
+    (value) => (keepAliveOptions['timeout'] = parseInt(value)),
+  );
+
+  applyIfNotBlank(
+    process.env.MAP_SERVICE_AGENTKEEPALIVE_OPTION_MAXSOCKETS,
+    (value) => (keepAliveOptions['maxSockets'] = parseInt(value)),
+  );
+
+  applyIfNotBlank(
+    process.env.MAP_SERVICE_AGENTKEEPALIVE_OPTION_MAXFREESOCKETS,
+    (value) => (keepAliveOptions['maxFreeSockets'] = parseInt(value)),
+  );
+
+  applyIfNotBlank(
+    process.env.MAP_SERVICE_AGENTKEEPALIVE_OPTION_SOCKETACTIVETTL,
+    (value) => (keepAliveOptions['socketActiveTTL'] = parseInt(value)),
+  );
+
+  return {
+    providerOptions: {
+      url: process.env.MAP_SERVICE_PROVIDER_API_URL,
+      bearerToken: process.env.MAP_SERVICE_PROVIDER_API_BEARER_TOKEN,
+    },
+    keepAliveOptions,
+  };
+};

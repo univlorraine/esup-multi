@@ -63,6 +63,6 @@ export class MapService {
   }
 
   getCampus(): Observable<Campus[]> {
-    return this.http.get<Campus[]>(`${this.environment.apiEndpoint}/map/campus`);
+    return this.http.get<Campus[]>(`${this.environment.apiEndpoint}/map/campuses`);
   }
 }

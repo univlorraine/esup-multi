@@ -37,14 +37,17 @@
  * termes.
  */
 
-import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
-import configuration from './config/configuration';
-import { MapModule } from './map/map.module';
-import { MonitoringModule } from './monitoring/monitoring.module';
-@Module({
-  imports: [ConfigModule.forRoot({ load: [configuration] }), MapModule, MonitoringModule],
-  controllers: [],
-  providers: [],
-})
-export class AppModule {}
+export interface ProviderOptions {
+  url: string;
+  bearerToken: string;
+}
+
+export interface KeepAliveOptions {
+  keepAlive?: boolean;
+  keepAliveMsecs?: number;
+  freeSocketTimeout?: number;
+  timeout?: number;
+  maxSockets?: number;
+  maxFreeSockets?: number;
+  socketActiveTTL?: number;
+}
