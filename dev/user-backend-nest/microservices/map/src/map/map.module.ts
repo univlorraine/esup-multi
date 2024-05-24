@@ -37,12 +37,31 @@
  * termes.
  */
 
-import { Module } from '@nestjs/common';
+import { Logger, Module } from '@nestjs/common';
 import { MapController } from './map.controller';
 import { MapService } from './map.service';
+import { HttpModule } from '@nestjs/axios';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { KeepAliveOptions } from '../config/configuration.interface';
+import * as Agent from 'agentkeepalive';
 
 @Module({
-  imports: [],
+  imports: [
+    ConfigModule,
+    HttpModule.registerAsync({
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => {
+        const keepAliveOptions =
+          configService.get<KeepAliveOptions>('keepAliveOptions');
+        Logger.log('Using agentkeepalive options', keepAliveOptions);
+        return {
+          httpAgent: new Agent(keepAliveOptions),
+          httpsAgent: new Agent.HttpsAgent(keepAliveOptions),
+        };
+      },
+      inject: [ConfigService],
+    }),
+  ],
   controllers: [MapController],
   providers: [MapService],
 })
