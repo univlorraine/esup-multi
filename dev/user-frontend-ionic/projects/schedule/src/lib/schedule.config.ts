@@ -42,6 +42,7 @@ import { InjectionToken } from '@angular/core';
 interface NextEventsWidgetConfig {
     numberOfEventsLimit: number;
     numberOfDaysLimit: number;
+    display: "list" | "slider";
 }
 
 export interface ScheduleModuleConfig {
