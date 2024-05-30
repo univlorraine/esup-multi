@@ -12,7 +12,8 @@ Exemple dans `app.module.ts` :
   declarations: [AppComponent],
   imports: [
     CalendarModule.forRoot({
-      numberOfEventsLimit: 3
+      numberOfEventsLimit: 3,
+      display: 'slider'
     })
   ]
 })
@@ -20,3 +21,4 @@ Exemple dans `app.module.ts` :
 
 ### Configuration du widget
 - `numberOfEventsLimit` : nombre maximum des prochains évènements à afficher.
+- `display` : ("list" | "slider") : choix de la vue, en liste ou en ligne
