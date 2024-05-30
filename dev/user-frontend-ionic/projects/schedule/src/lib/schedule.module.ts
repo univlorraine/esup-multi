@@ -44,9 +44,8 @@ import { FullCalendarModule } from '@fullcalendar/angular'; // must go before pl
 import { IonicModule } from '@ionic/angular';
 import { EffectsNgModule } from '@ngneat/effects-ng';
 import { TranslateModule } from '@ngx-translate/core';
-import { CompleteLocalDatePipe, ProjectModuleService, SharedComponentsModule, SharedPipeModule } from '@multi/shared';
+import { CompleteLocalDatePipe, LocalHourPipe, ProjectModuleService, SharedComponentsModule, SharedPipeModule } from '@multi/shared';
 import { EventDetailComponent } from './common/event-detail/event-detail.component';
-import { LocalHourPipe } from './common/pipe/local-hour.pipe';
 import { ShortenedDatePipe } from './common/pipe/shortened-date.pipe';
 import { HiddenCourseComponent } from './common/select-planning/hidden-course/hidden-course.component';
 import { SelectPlanningComponent } from './common/select-planning/select-planning.component';
@@ -81,7 +80,6 @@ const initModule = (projectModuleService: ProjectModuleService) =>
     SchedulePage,
     ScheduleListPage,
     ScheduleCalendarComponent,
-    LocalHourPipe,
     ShortenedDatePipe,
     EventDetailComponent,
     SelectPlanningComponent,
@@ -108,7 +106,8 @@ const initModule = (projectModuleService: ProjectModuleService) =>
     deps: [ProjectModuleService],
     multi: true
   },
-    CompleteLocalDatePipe
+    CompleteLocalDatePipe,
+    LocalHourPipe
   ],
 })
 export class ScheduleModule {

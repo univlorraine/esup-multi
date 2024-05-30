@@ -44,17 +44,20 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CompleteLocalDatePipe } from './complete-local-date-pipe';
 import { RelativeTimePipe } from './relative-time-pipe';
 import { TruncatePipe } from './truncate-pipe';
+import { LocalHourPipe } from './local-hour.pipe';
 
 @NgModule({
   declarations: [
     RelativeTimePipe,
     TruncatePipe,
-    CompleteLocalDatePipe
+    CompleteLocalDatePipe,
+    LocalHourPipe
   ],
   exports: [
     RelativeTimePipe,
     TruncatePipe,
-    CompleteLocalDatePipe
+    CompleteLocalDatePipe,
+    LocalHourPipe
   ],
   imports: [
     CommonModule,
