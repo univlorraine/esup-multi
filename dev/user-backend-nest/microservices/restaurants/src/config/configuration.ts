@@ -95,7 +95,7 @@ export default (): {
   return {
     restaurantsProviderApi: {
       apiUrl: process.env.RESTAURANTS_SERVICE_PROVIDER_API_URL,
-      bearerToken: process.env.RESTAURANTS_SERVICE_PROVDER_API_BEARER_TOKEN,
+      bearerToken: process.env.RESTAURANTS_SERVICE_PROVIDER_API_BEARER_TOKEN,
     },
     keepAliveOptions,
     cacheTtl: {
