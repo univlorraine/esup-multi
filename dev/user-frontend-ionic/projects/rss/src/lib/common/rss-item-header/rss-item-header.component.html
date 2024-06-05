@@ -37,15 +37,19 @@
   ~ termes.
   -->
 
-<ion-card-header class="ion-no-padding">
+<ion-card-header class="ion-no-padding"
+  [ngClass]="{'rss-news-header-vertically-style': display === 'vertically', 
+              'rss-news-header-horizontally-style': display === 'horizontally'}">
   <ion-grid class="ion-no-padding">
     <ion-row>
       <ion-col>
         <ion-row class="rss-news-header">
-          <ion-col *ngIf="item.enclosure && isMediaAnImage(item.enclosure)">
+          <ion-col *ngIf="item.enclosure && isMediaAnImage(item.enclosure)" 
+            [size]="display === 'vertically' ? '5' : '12'"
+            class="img-container">
             <img alt="" src="{{ item.enclosure.url }}"/>
           </ion-col>
-          <ion-col [size]="item.enclosure && isMediaAnImage(item.enclosure) ? '7' : '12'"
+          <ion-col [size]="item.enclosure && isMediaAnImage(item.enclosure) && display === 'vertically' ? '7' : '12'"
                    class="border-bottom title-col">
             <ion-label class="ion-text-wrap title">
               <h2 class="app-text-3">{{item.title}}</h2>

@@ -1,4 +1,4 @@
-/*!
+/*
  * Copyright ou © ou Copr. Université de Lorraine, (2022)
  *
  * Direction du Numérique de l'Université de Lorraine - SIED
@@ -37,43 +37,16 @@
  * termes.
  */
 
-.title-col {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+import { InjectionToken } from '@angular/core';
+
+interface LatestNewsWidgetConfig {
+    display: "vertically" | "horizontally";
 }
 
-.title {
-  margin: 2rem 0.7rem 1.5rem 0.625rem;
+export interface RssModuleConfig {
+    latestNewsWidget: LatestNewsWidgetConfig;
+    display: "vertically" | "horizontally";
 }
 
-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.rss-news-header {
-  --border-bottom: 0.3rem;
-}
-
-/* add a line in the frame
-.border-bottom {
-  border-bottom: var(--app-border-width-5) solid var(--ion-color-secondary) !important;
-}*/
-
-.rss-news-header-horizontally-style {
-
-  .img-container {
-    height: 170px;
-  }
-
-  .title {
-    margin: 1rem 0.7rem 0.5rem 0.7rem;
-  }
-
-  .title-col {
-    border-left: var(--app-border-width-5) solid var(--ion-color-secondary) !important;
-  }
-
-}
+export const RSS_CONFIG =
+  new InjectionToken<RssModuleConfig>('Rss module config');
