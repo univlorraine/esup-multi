@@ -81,5 +81,8 @@
         "MESSAGE": "Finally, these menus will allow you to report a bug or request assistance."
       }
     }
+  },
+  "GLOBAL" : {
+    "IOS_BACK_BUTTON": "Back"
   }
 }

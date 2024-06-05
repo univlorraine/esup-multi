@@ -42,7 +42,7 @@
     <ion-header>
       <ion-toolbar class="app-toolbar-as-on-page">
         <ion-buttons slot="start">
-          <ion-back-button defaultHref="cards" (click)="closeModal()"></ion-back-button>
+          <ion-back-button defaultHref="cards" (click)="closeModal()" [text]="(platform.is('ios') ? 'GLOBAL.IOS_BACK_BUTTON' : '') | translate"></ion-back-button>
         </ion-buttons>
       </ion-toolbar>
     </ion-header>

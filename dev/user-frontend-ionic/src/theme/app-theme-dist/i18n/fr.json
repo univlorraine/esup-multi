@@ -81,5 +81,8 @@
           "MESSAGE": "Enfin ces menus vous permettront de signaler un dysfonctionnement ou demander de l’aide."
         }
       }
+    },
+    "GLOBAL" : {
+      "IOS_BACK_BUTTON": "Retour"
     }
 }
