@@ -41,8 +41,9 @@ import { HttpClient } from '@angular/common/http';
 import { IModuleTranslationOptions, ModuleTranslateLoader } from '@larscom/ngx-translate-module-loader';
 import { ProjectModuleService } from '../project-module.service';
 
-export const translationsLoaderFactory = (http: HttpClient, projectModuleService: ProjectModuleService) => {
+export const translationsLoaderFactory = (http: HttpClient, projectModuleService: ProjectModuleService, environment: any) => {
     const baseTranslateUrl = './i18n';
+    const guidedTourTranslateUrl = { baseTranslateUrl: './i18n/guided-tour'};
 
     const translations = projectModuleService.getTranslatedProjectModules().map(projectModule => ({
       baseTranslateUrl, moduleName: projectModule
@@ -52,6 +53,7 @@ export const translationsLoaderFactory = (http: HttpClient, projectModuleService
       modules: [
         { baseTranslateUrl },
         ...translations,
+        ...(environment.guidedTourEnabled ? [guidedTourTranslateUrl] : [])
       ]
     };
 

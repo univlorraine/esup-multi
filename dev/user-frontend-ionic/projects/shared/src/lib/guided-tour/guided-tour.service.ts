@@ -66,7 +66,6 @@ export class GuidedTourService {
     private router: Router,
     private translateService: TranslateService,
     private networkService: NetworkService,
-    private platform: Platform
   ) {
     this.isOnline$ = this.networkService.isOnline$;
 
