@@ -120,3 +120,7 @@ ion-chip {
 .notifications-option {
   margin-bottom: 0.1rem;
 }
+
+.notifications-option h2 {
+  color: var(--ion-color-primary-contrast) !important;
+}

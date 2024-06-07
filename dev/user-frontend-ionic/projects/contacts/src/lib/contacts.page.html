@@ -42,7 +42,8 @@
   <div class="search-and-filters" [ngClass]="{'search-fixed': searchFixed}" #searchBlock>
     <ion-row class="searchbar-row">
       <ion-searchbar (ionChange)="saveSearchBar($event)" (keyup.enter)="searchContacts()"
-                     class="safe-area-margin-lr" placeholder="{{ 'CONTACTS.PLACEHOLDER' | translate }}"></ion-searchbar>
+                     class="safe-area-margin-lr" placeholder="{{ 'CONTACTS.PLACEHOLDER' | translate }}"
+                     [attr.aria-label]="'CONTACTS.SEARCHBAR_MESSAGE' | translate"></ion-searchbar>
     </ion-row>
     <ion-radio-group [value]="this.filterChecked" (ionChange)="selectedCategory($event)">
       <ion-item lines="none" *ngFor="let filter of this.filtersList">
