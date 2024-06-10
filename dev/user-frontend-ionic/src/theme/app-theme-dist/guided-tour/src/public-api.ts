@@ -37,25 +37,5 @@
  * termes.
  */
 
-import { HttpClient } from '@angular/common/http';
-import { IModuleTranslationOptions, ModuleTranslateLoader } from '@larscom/ngx-translate-module-loader';
-import { ProjectModuleService } from '../project-module.service';
-
-export const translationsLoaderFactory = (http: HttpClient, projectModuleService: ProjectModuleService, environment: any) => {
-    const baseTranslateUrl = './i18n';
-    const guidedTourTranslateUrl = { baseTranslateUrl: './i18n/guided-tour'};
-
-    const translations = projectModuleService.getTranslatedProjectModules().map(projectModule => ({
-      baseTranslateUrl, moduleName: projectModule
-    }));
-
-    const options: IModuleTranslationOptions = {
-      modules: [
-        { baseTranslateUrl },
-        ...translations,
-        ...(environment.guidedTourEnabled ? [guidedTourTranslateUrl] : [])
-      ]
-    };
-
-    return new ModuleTranslateLoader(http, options);
-};
+export * from './lib/config/logged-guided-tour.config';
+export * from './lib/config/anonymous-guided-tour.config';
