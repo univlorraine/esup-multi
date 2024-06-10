@@ -5,7 +5,7 @@
     "FINISH": "Terminer",
     "ANONYMOUS": {
       "STEP_10" : {
-        "MESSAGE": "Bienvenue sur la nouvelle version de l’application UnivLorraine."
+        "MESSAGE": "Bienvenue sur la nouvelle version de votre application mobile."
       },
       "STEP_20" : {
         "MESSAGE": "Une nouvelle ergonomie vous permet de naviguer dans les services qu’elle propose..."
@@ -40,7 +40,7 @@
         "MESSAGE": "Vous trouverez ici une version dématérialisée de vos cartes d'étudiant ou de personnel."
       },
       "STEP_90" : {
-        "MESSAGE": "Notre robot Ully se chargera de répondre à vos questions concernant votre compte informatique, votre connexion ou votre emploi du temps."
+        "MESSAGE": "Le chatbot se chargera de répondre à vos questions concernant votre compte informatique, votre connexion ou votre emploi du temps."
       },
       "STEP_100" : {
         "MESSAGE": "Enfin ce menu vous permettra d’accéder aux paramètres de l’application…"

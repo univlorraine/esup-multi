@@ -5,7 +5,7 @@
     "FINISH": "Finish",
     "ANONYMOUS": {
       "STEP_10" : {
-        "MESSAGE": "Welcome to the new version of UnivLorraine app."
+        "MESSAGE": "Welcome to the new version of your mobile application."
       },
       "STEP_20" : {
         "MESSAGE": "A new ergonomics allows you to navigate through the services it offers…"
@@ -40,7 +40,7 @@
         "MESSAGE": "Here you will find a dematerialized version of your student or staff cards"
       },
       "STEP_90" : {
-        "MESSAGE": "Our robot Ully will take care of answering your questions about your computer account, your connection or your schedule."
+        "MESSAGE": "The chatbot will take care of answering your questions about your computer account, your connection or your schedule."
       },
       "STEP_100" : {
         "MESSAGE": "Finally, this menu will allow you to access the application settings…"

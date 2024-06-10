@@ -263,7 +263,7 @@ export const loggedSteps= (router: Router, translateService: TranslateService, o
       }
     ],
     text: `${translateService.instant('GUIDED_TOUR.LOGGED.STEP_90.MESSAGE')}
-        <br/> <img class="shepherd-image" src="theme/app-theme/assets/guided-tour/logged-guided-tour-step-90.png">`,
+        <br/> <img class="shepherd-image" src="assets/guided-tour/logged-guided-tour-step-90.png">`,
   },
   {
     id: 'logged-step-100',
