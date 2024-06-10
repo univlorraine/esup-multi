@@ -99,6 +99,10 @@ export class CardsPage {
     return this.config.knownErrors.includes(error);
   }
 
+  getCardTitle(card) {
+    return card.value.title as string;
+  }
+
   private async loadUserCardsData() {
     if (!(await this.networkService.getConnectionStatus()).connected){
       return;
@@ -115,8 +119,3 @@ export class CardsPage {
     });
   }
 }
-
-
-
-
-
