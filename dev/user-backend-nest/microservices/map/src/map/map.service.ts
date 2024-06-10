@@ -50,61 +50,66 @@ import { RpcException } from '@nestjs/microservices';
 @Injectable()
 export class MapService {
   private readonly logger = new Logger(MapService.name);
-  private readonly providerOptions : ProviderOptions;
+  private readonly providerOptions: ProviderOptions;
 
   constructor(
     private readonly configService: ConfigService,
-    private readonly httpService: HttpService
+    private readonly httpService: HttpService,
   ) {
-    this.providerOptions = this.configService.get<ProviderOptions>("providerOptions");
+    this.providerOptions =
+      this.configService.get<ProviderOptions>('providerOptions');
   }
 
   getMarkers(): Observable<Marker[]> {
     return this.httpService
       .get<any>(`${this.providerOptions.url}/pois`, this.httpOptions)
       .pipe(
-        catchError(this.handleError('Unable to get map\'s POI')),
+        catchError(this.handleError("Unable to get map's POI")),
         map((res) => {
           const geoJsonData = res.data;
           const markersList: Marker[] = [];
           for (const category in geoJsonData) {
-            const markers: Marker[] = geoJsonData[category].features.map(feature => {
-               Object.entries(feature.properties).forEach(
-                 ([property, value]: [string, any]) => {
+            const markers: Marker[] = geoJsonData[category].features.map(
+              (feature) => {
+                Object.entries(feature.properties).forEach(
+                  ([property, value]: [string, any]) => {
                     if (property === 'Nom') {
                       return;
                     }
 
-                    if (typeof value == 'string'
-                          && (value.startsWith('https://') || value.startsWith('http://'))) {
+                    if (
+                      typeof value == 'string' &&
+                      (value.startsWith('https://') ||
+                        value.startsWith('http://'))
+                    ) {
                       value = `<a href="${value}" target="_blank">${value}</a>`;
                     }
 
                     if (property === 'Description') {
-                      value.forEach(d => {
-                        if (d.value)
-                          d.value += '<br />';
+                      value.forEach((d) => {
+                        if (d.value) d.value += '<br />';
                       });
                     }
-                },
-              );
+                  },
+                );
 
-              return {
-                category,
-                title: feature.properties.Nom,
-                description: feature.properties.Description,
-                latitude: feature.geometry.coordinates[1],
-                longitude: feature.geometry.coordinates[0],
-                icon: feature.properties.icon,
-              };
-            },
-          );
+                return {
+                  category,
+                  title: feature.properties.Nom,
+                  description: feature.properties.Description,
+                  latitude: feature.geometry.coordinates[1],
+                  longitude: feature.geometry.coordinates[0],
+                  icon: feature.properties.icon,
+                };
+              },
+            );
 
-          markersList.push(...markers);
-        }
+            markersList.push(...markers);
+          }
 
-        return markersList;
-    }));
+          return markersList;
+        }),
+      );
   }
 
   getCategories(): Observable<Category[]> {
@@ -112,7 +117,7 @@ export class MapService {
       .get<any>(`${this.providerOptions.url}/categories`, this.httpOptions)
       .pipe(
         catchError(this.handleError('Unable to get map categories')),
-        map(res => res.data)
+        map((res) => res.data),
       );
   }
 
@@ -121,7 +126,7 @@ export class MapService {
       .get<any>(`${this.providerOptions.url}/campuses`, this.httpOptions)
       .pipe(
         catchError(this.handleError('Unable to get map campuses')),
-        map(res => res.data)
+        map((res) => res.data),
       );
   }
 
@@ -129,10 +134,12 @@ export class MapService {
     return (err: any) => {
       this.logger.error(message, err);
       throw new RpcException(message);
-    }
+    };
   }
 
   private get httpOptions() {
-    return { headers: { "Authorization": `Bearer ${this.providerOptions.bearerToken}` }}
+    return {
+      headers: { Authorization: `Bearer ${this.providerOptions.bearerToken}` },
+    };
   }
 }
