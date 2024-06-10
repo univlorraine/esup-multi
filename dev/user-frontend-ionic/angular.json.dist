@@ -31,11 +31,6 @@
                 "output": "i18n"
               },
               {
-                "glob": "**/*",
-                "input": "src/theme/app-theme/guided-tour/src/assets",
-                "output": "assets/guided-tour"
-              },
-              {
                 "glob": "**/*.svg",
                 "input": "node_modules/ionicons/dist/ionicons/svg",
                 "output": "./svg"
