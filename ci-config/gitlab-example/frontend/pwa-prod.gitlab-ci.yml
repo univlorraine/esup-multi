@@ -3,7 +3,9 @@
 .pwa_prod_variables:
   variables:
     # Nom de la variable de conf pour le build Angular
-    PWA_ENV_CONFIG_NAME: "pwa-production"
+    PWA_ENV_CONFIG_NAME: "production"
+    # Nom du fichier d'environnement pour le build Angular
+    PWA_ENV_FILE_NAME: "environment.prod.ts"
     # Nom du fichier firebase à inclure à l'environnement
     FIREBASE_FILENAME: "firebase-environment.pwa-production.json"
     # Nom qui sera donné à l'image Docker du service

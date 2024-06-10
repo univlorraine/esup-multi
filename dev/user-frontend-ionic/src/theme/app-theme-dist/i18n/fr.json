@@ -1,85 +1,25 @@
 {
-    "HOME": {
-        "MENU": "Accueil"
+  "HOME": {
+    "MENU": "Accueil"
+  },
+  "ERROR": {
+    "UNKNOWN": "Erreur inattendue",
+    "UNAUTHENTICATED": {
+      "TITLE": "Accès protégé",
+      "MESSAGE": "Vous devez être authentifié pour accéder à cette fonctionnalité"
     },
-    "ERROR": {
-        "UNKNOWN": "Erreur inattendue",
-        "UNAUTHENTICATED": {
-            "TITLE": "Accès protégé",
-            "MESSAGE": "Vous devez être authentifié pour accéder à cette fonctionnalité"
-        },
-        "NO_NETWORK": {
-            "TITLE": "Absence de réseau",
-            "MESSAGE": "Vous ne pouvez pas accéder à cette fonctionnalité sans réseau",
-            "FIRST_LAUNCH": "Veuillez activer votre réseau pour votre premier accès à l'application",
-            "TOP_BAR_LABEL": "Vous êtes hors connexion, fonctionnalités limitées"
-        },
-        "SERVICE_UNREACHABLE": {
-            "TITLE": "Service injoignable",
-            "MESSAGE": "Le service que vous essayez de contacter n'est pas joignable"
-        },
-        "WARNING": {
-            "TITLE": "Attention"
-        }
+    "NO_NETWORK": {
+      "TITLE": "Absence de réseau",
+      "MESSAGE": "Vous ne pouvez pas accéder à cette fonctionnalité sans réseau",
+      "FIRST_LAUNCH": "Veuillez activer votre réseau pour votre premier accès à l'application",
+      "TOP_BAR_LABEL": "Vous êtes hors connexion, fonctionnalités limitées"
     },
-    "GUIDED_TOUR": {
-      "NEXT": "Suivant",
-      "CLOSE": "Fermer",
-      "FINISH": "Terminer",
-      "ANONYMOUS": {
-        "STEP_10" : {
-          "MESSAGE": "Bienvenue sur la nouvelle version de l’application UnivLorraine."
-        },
-        "STEP_20" : {
-          "MESSAGE": "Une nouvelle ergonomie vous permet de naviguer dans les services qu’elle propose..."
-        },
-        "STEP_30" : {
-          "MESSAGE": "…mais avant d’aller plus loin, vous êtes invité à vous authentifier."
-        }
-      },
-      "LOGGED": {
-        "STEP_10" : {
-          "MESSAGE": "Vous êtes désormais authentifié et vous allez pouvoir accéder à des informations personnalisées."
-        },
-        "STEP_20" : {
-          "MESSAGE": "Cet écran vous propose un accès direct et rapide à vos informations immédiates : prochains cours, rendez-vous, nombre d’e-mails à lire."
-        },
-        "STEP_30" : {
-          "MESSAGE": "Vous retrouverez ici vos notifications…"
-        },
-        "STEP_40" : {
-          "MESSAGE": "… et ici les actualités de l'établissement"
-        },
-        "STEP_50" : {
-          "MESSAGE": "Cet écran vous propose l’ensemble des services disponibles dans l’application."
-        },
-        "STEP_60" : {
-          "MESSAGE": "Vous pouvez trier les services comme vous le souhaitez par un appui long sur l’icône."
-        },
-        "STEP_70" : {
-          "MESSAGE": "Vous pouvez également filtrer les services grâce à une recherche."
-        },
-        "STEP_80" : {
-          "MESSAGE": "Vous trouverez ici une version dématérialisée de vos cartes d'étudiant ou de personnel."
-        },
-        "STEP_90" : {
-          "MESSAGE": "Notre robot Ully se chargera de répondre à vos questions concernant votre compte informatique, votre connexion ou votre emploi du temps."
-        },
-        "STEP_100" : {
-          "MESSAGE": "Enfin ce menu vous permettra d’accéder aux paramètres de l’application…"
-        },
-        "STEP_110" : {
-          "MESSAGE": "…il vous propose également des informations complémentaires."
-        },
-        "STEP_120" : {
-          "MESSAGE": "Vous avez la possibilité de changer le thème sombre/clair et la langue."
-        },
-        "STEP_130" : {
-          "MESSAGE": "Vous pouvez gérer vos paramètres de connexion."
-        },
-        "STEP_140" : {
-          "MESSAGE": "Enfin ces menus vous permettront de signaler un dysfonctionnement ou demander de l’aide."
-        }
-      }
+    "SERVICE_UNREACHABLE": {
+      "TITLE": "Service injoignable",
+      "MESSAGE": "Le service que vous essayez de contacter n'est pas joignable"
+    },
+    "WARNING": {
+      "TITLE": "Attention"
     }
+  }
 }

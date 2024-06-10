@@ -3,7 +3,9 @@
 .pwa_dev_variables:
   variables:
     # Nom de la variable de conf pour le build Angular
-    PWA_ENV_CONFIG_NAME: "pwa-development"
+    PWA_ENV_CONFIG_NAME: "development"
+    # Nom du fichier d'environnement pour le build Angular
+    PWA_ENV_FILE_NAME: "environment.development.ts"
     # Nom du fichier firebase à inclure à l'environnement
     FIREBASE_FILENAME: "firebase-environment.pwa-development.json"
     # Nom qui sera donné à l'image Docker du service

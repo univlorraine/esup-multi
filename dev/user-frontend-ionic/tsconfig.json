@@ -69,7 +69,10 @@
       ],
       "@multi/calendar": [
         "dist/calendar"
-      ]
+      ],
+      "@multi/guided-tour": [
+        "dist/guided-tour"
+      ],
     },
     "downlevelIteration": true,
     "experimentalDecorators": true,

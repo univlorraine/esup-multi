@@ -19,7 +19,7 @@
         "LOGOUT": "Log out"
     },
     "WIDGET": {
-        "SUBTITLE": "University of Lorraine",
+        "SUBTITLE": "Esup-Portail",
         "NOT_LOGGED_IN": "Anonymous user",
         "GREETING": {
           "HELLO_NOT_AUTHENTICATED": "Hello!",

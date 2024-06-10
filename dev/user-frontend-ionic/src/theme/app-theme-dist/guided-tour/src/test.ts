@@ -37,25 +37,30 @@
  * termes.
  */
 
-import { HttpClient } from '@angular/common/http';
-import { IModuleTranslationOptions, ModuleTranslateLoader } from '@larscom/ngx-translate-module-loader';
-import { ProjectModuleService } from '../project-module.service';
+// This file is required by karma.conf.js and loads recursively all the .spec and framework files
 
-export const translationsLoaderFactory = (http: HttpClient, projectModuleService: ProjectModuleService, environment: any) => {
-    const baseTranslateUrl = './i18n';
-    const guidedTourTranslateUrl = { baseTranslateUrl: './i18n/guided-tour'};
+import 'zone.js';
+import 'zone.js/testing';
+import { getTestBed } from '@angular/core/testing';
+import {
+  BrowserDynamicTestingModule,
+  platformBrowserDynamicTesting
+} from '@angular/platform-browser-dynamic/testing';
 
-    const translations = projectModuleService.getTranslatedProjectModules().map(projectModule => ({
-      baseTranslateUrl, moduleName: projectModule
-    }));
-
-    const options: IModuleTranslationOptions = {
-      modules: [
-        { baseTranslateUrl },
-        ...translations,
-        ...(environment.guidedTourEnabled ? [guidedTourTranslateUrl] : [])
-      ]
-    };
-
-    return new ModuleTranslateLoader(http, options);
+declare const require: {
+  context(path: string, deep?: boolean, filter?: RegExp): {
+    <T>(id: string): T;
+    keys(): string[];
+  };
 };
+
+// First, initialize the Angular testing environment.
+getTestBed().initTestEnvironment(
+  BrowserDynamicTestingModule,
+  platformBrowserDynamicTesting(),
+);
+
+// Then we find all the tests.
+const context = require.context('./', true, /\.spec\.ts$/);
+// And load the modules.
+context.keys().forEach(context);

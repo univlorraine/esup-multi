@@ -1,6 +1,6 @@
 ARG NODE_VERSION
 
-FROM node:$NODE_VERSION
+FROM node:${NODE_VERSION}-alpine
 
 ENV NODE_ENV="production"
 
