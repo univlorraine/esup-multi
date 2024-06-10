@@ -43,7 +43,11 @@ import configuration from './config/configuration';
 import { MapModule } from './map/map.module';
 import { MonitoringModule } from './monitoring/monitoring.module';
 @Module({
-  imports: [ConfigModule.forRoot({ load: [configuration] }), MapModule, MonitoringModule],
+  imports: [
+    ConfigModule.forRoot({ load: [configuration] }),
+    MapModule,
+    MonitoringModule,
+  ],
   controllers: [],
   providers: [],
 })
