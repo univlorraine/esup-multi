@@ -56,7 +56,7 @@
         </ion-row>
         <form [formGroup]="form">
           <ion-item formArrayName="categoriesForm" *ngFor="let category of categoriesForm.controls; let i = index">
-            <ion-label class="app-text-3 light ion-text-wrap">{{ categories[i].label_translate }}</ion-label>
+            <ion-label class="app-text-3 light ion-text-wrap">{{ categories[i].labelTranslate }}</ion-label>
             <ion-checkbox mode="md" [formControlName]="i"></ion-checkbox>
           </ion-item>
         </form>
@@ -87,8 +87,8 @@
         <ion-icon name="compass-outline"></ion-icon>
       </ion-fab-button>
       <ion-fab-list side="top" class="campus">
-        <ion-fab-button *ngFor="let oneCampus of campus" 
-        [attr.data-campus-name]="oneCampus.name" 
+        <ion-fab-button *ngFor="let oneCampus of campus"
+        [attr.data-campus-name]="oneCampus.name"
         [ngStyle]="{'--background': 'center / cover no-repeat url('+oneCampus.photo+')'}"
         (click)="flyTo(oneCampus)"></ion-fab-button>
       </ion-fab-list>

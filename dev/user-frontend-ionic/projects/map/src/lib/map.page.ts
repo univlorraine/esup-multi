@@ -46,7 +46,18 @@ import * as Leaflet from 'leaflet';
 import { Subject, combineLatest } from 'rxjs';
 import { finalize, map, take, takeUntil } from 'rxjs/operators';
 import { MapModuleConfig, MAP_CONFIG } from './map.config';
-import { Campus, Categorie, Label, Marker, campusList$, categoriesList$, markersList$, setCampus, setCategories, setMarkers } from './map.repository';
+import {
+  Campus,
+  Categorie,
+  Label,
+  Marker,
+  campusList$,
+  categoriesList$,
+  markersList$,
+  setCampus,
+  setCategories,
+  setMarkers
+} from './map.repository';
 import { MapService } from './map.service';
 
 
@@ -109,7 +120,7 @@ export class MapPage implements OnDestroy {
         take(1)
       )
       .subscribe(campus => this.campus = campus);
-      
+
     await this.leafletMapInit();
     combineLatest([markersList$, currentLanguage$])
       .pipe(
@@ -139,7 +150,7 @@ export class MapPage implements OnDestroy {
   }
 
   getCategoryTranslation(category: string) {
-    return this.categories.find(cat => cat.id === category).label_translate;
+    return this.categories.find(cat => cat.id === category).labelTranslate;
   }
 
   removeSelectedCategory(category: string, selectedCatIndex: number) {
@@ -151,6 +162,16 @@ export class MapPage implements OnDestroy {
     this.categoriesForm.setValue(newValue);
   }
 
+  flyTo(campus: Campus){
+    this.map.setView([campus.initial.lat,campus.initial.lng], this.config.minZoom > 16 ? this.config.minZoom : 16);
+    if(this.config.maxBounds){
+      const southWest = Leaflet.latLng(campus.southwest.lat, campus.southwest.lng);
+      const northEast = Leaflet.latLng(campus.northeast.lat, campus.northeast.lng);
+      const bounds = Leaflet.latLngBounds(southWest, northEast);
+      this.map.setMaxBounds(bounds);
+    }
+  }
+
   private async leafletMapInit() {
     this.map = Leaflet.map('map', {
       center: [0, 0],
@@ -158,18 +179,18 @@ export class MapPage implements OnDestroy {
       maxBoundsViscosity: 0.5
     });
 
-    let mapType = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
-    if(this.config.mapType === "osm"){
-      mapType = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
-    }else if(this.config.mapType === "mapbox"){
-      mapType = "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}@2x?access_token={accessToken}";
+    let mapType = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+    if(this.config.mapType === 'osm'){
+      mapType = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+    }else if(this.config.mapType === 'mapbox'){
+      mapType = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}@2x?access_token={accessToken}';
     }
     Leaflet.tileLayer(mapType, {
-      id: this.config.mapType === "mapbox" ? "mapbox/streets-v12" : "",
+      id: this.config.mapType === 'mapbox' ? 'mapbox/streets-v12' : '',
       minZoom: this.config.minZoom,
       maxZoom: this.config.maxZoom,
-      tileSize: this.config.mapType === "mapbox" ? 512 : 256,
-      zoomOffset: this.config.mapType === "mapbox" ? -1 : 0,
+      tileSize: this.config.mapType === 'mapbox' ? 512 : 256,
+      zoomOffset: this.config.mapType === 'mapbox' ? -1 : 0,
       accessToken: this.config.accessToken,
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(this.map);
@@ -207,7 +228,7 @@ export class MapPage implements OnDestroy {
       }
 
       this.positionLayerGroup = Leaflet.layerGroup([circle, marker]).addTo(this.map);
-      if (this.config.maxBounds) this.map.setMaxBounds(null);
+      if (this.config.maxBounds) {this.map.setMaxBounds(null);}
       this.map.setView(latLng, zoomLevel);
     } catch (error) {
       console.error('Error getting current position:', error);
@@ -215,7 +236,7 @@ export class MapPage implements OnDestroy {
       if (this.positionLayerGroup) {
         this.positionLayerGroup.remove();
       }
-      if (this.config.maxBounds) this.map.setMaxBounds(null);
+      if (this.config.maxBounds) {this.map.setMaxBounds(null);}
       this.map.setView(latLngOfTheUniversity);
     }
   }
@@ -253,8 +274,8 @@ export class MapPage implements OnDestroy {
     const icon = this.buildIconForCategory(m);
     const marker = Leaflet.marker([m.latitude, m.longitude], { icon })
       .bindPopup(
-        `<h5 class="app-title-5">${m.title_translate}</h5>
-        <div class="app-text-5">${m.description_translate ? m.description_translate : ''}</div>`
+        `<h5 class="app-title-5">${m.titleTranslate}</h5>
+        <div class="app-text-5">${m.descriptionTranslate ? m.descriptionTranslate : ''}</div>`
       );
 
     markersInCategory.push(marker);
@@ -264,10 +285,10 @@ export class MapPage implements OnDestroy {
     if(!m.icon.svg) {
       return this.buildSimpleMarkerIcon();
     }
-    
+
     return Leaflet.divIcon({
       html: m.icon.svg,
-      className: "",
+      className: '',
       iconSize: [m.icon.width, m.icon.height],
       iconAnchor: [m.icon.x, m.icon.y],
     });
@@ -298,15 +319,15 @@ export class MapPage implements OnDestroy {
 
   private translateCategories(categories: Categorie[], currentLanguage: string): Categorie[] {
     return categories.map(categorie => {
-      this.findTranslation(categorie, "label", currentLanguage);
+      this.findTranslation(categorie, 'label', currentLanguage);
       return categorie;
     });
   }
 
   private translateMarkers(markers: Marker[], currentLanguage: string): Marker[] {
     return markers.map(marker => {
-      this.findTranslation(marker, "title", currentLanguage);
-      this.findTranslation(marker, "description", currentLanguage);
+      this.findTranslation(marker, 'title', currentLanguage);
+      this.findTranslation(marker, 'description', currentLanguage);
       return marker;
     });
   }
@@ -317,16 +338,6 @@ export class MapPage implements OnDestroy {
       objectToTranslate[propertyToTranslate].find((t: Label) => t.langcode === this.environment.defaultLanguage) ||
       objectToTranslate[propertyToTranslate][0];
 
-    objectToTranslate[propertyToTranslate+"_translate"] = translation?.value;
-  }
-
-  flyTo(campus: Campus){
-    this.map.setView([campus.initial.lat,campus.initial.lng], this.config.minZoom > 16 ? this.config.minZoom : 16);
-    if(this.config.maxBounds){
-      const southWest = Leaflet.latLng(campus.southwest.lat, campus.southwest.lng);
-      const northEast = Leaflet.latLng(campus.northeast.lat, campus.northeast.lng);
-      const bounds = Leaflet.latLngBounds(southWest, northEast);
-      this.map.setMaxBounds(bounds);
-    }
+    objectToTranslate[propertyToTranslate+'Translate'] = translation?.value;
   }
 }

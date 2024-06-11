@@ -51,8 +51,8 @@ export interface MarkersProps {
 export interface Marker {
     title: Label[];
     description: Label[];
-    title_translate?: string;
-    description_translate?: string;
+    titleTranslate?: string;
+    descriptionTranslate?: string;
     category: string;
     latitude: number;
     longitude: number;
@@ -66,7 +66,7 @@ export interface Categorie {
     id: string;
     sort: number;
     label: Label[];
-    label_translate?: string;
+    labelTranslate?: string;
 }
 
 export interface CampusProps {
