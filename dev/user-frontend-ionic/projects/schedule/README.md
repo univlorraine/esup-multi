@@ -15,7 +15,8 @@ Exemple dans `app.module.ts` :
             ScheduleModule.forRoot({
                 nextEventsWidget: {
                     numberOfEventsLimit: 2,
-                    numberOfDaysLimit: 7
+                    numberOfDaysLimit: 7,
+                    display: 'slider'
                 },
                 previousWeeksInCache: 1,
                 nextWeeksInCache: 2,
@@ -28,6 +29,7 @@ Exemple dans `app.module.ts` :
 ### Configuration du widget "mes prochains cours"
 - `nextEventsWidget.numberOfEventsLimit` : nombre maximum des prochains évènements à afficher.
 - `nextEventsWidget.numberOfDaysLimit` : limite maximale du nombre de jours suivants le jour courant dans lesquels chercher les prochains évènements.
+- `nextEventsWidget.display` : ("list" | "slider") : choix de la vue, en liste ou en ligne
 
 ### Configuration du cache
 - `previousWeeksInCache` : Le nombre de semaines précédentes à sauvegarder en cache.
