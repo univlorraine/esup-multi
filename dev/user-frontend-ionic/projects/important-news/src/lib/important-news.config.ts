@@ -40,7 +40,7 @@
 import { InjectionToken } from '@angular/core';
 
 export interface ImportantNewsModuleConfig {
-  display: "vertically" | "horizontally";
+  display: 'vertically' | 'horizontally';
 }
 
 export const IMPORTANT_NEWS_CONFIG =
