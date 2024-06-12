@@ -1,4 +1,4 @@
-/*!
+/*
  * Copyright ou © ou Copr. Université de Lorraine, (2022)
  *
  * Direction du Numérique de l'Université de Lorraine - SIED
@@ -37,114 +37,11 @@
  * termes.
  */
 
-.importantNews {
-  --border-bottom: 0.3rem;
+import { InjectionToken } from '@angular/core';
+
+export interface ImportantNewsModuleConfig {
+  display: 'vertically' | 'horizontally';
 }
 
-.text-title {
-  margin-top: 2rem;
-  margin-left: 0.625rem;
-  margin-right: 0.7rem;
-}
-
-.text-content {
-  margin-top: 0.875rem;
-  margin-left: 0.625rem;
-  margin-right: 0.7rem;
-  margin-bottom: 2rem;
-}
-
-.link-icon {
-  margin-left: 0.3rem;
-}
-
-.link-button {
-  margin-top: 0.3rem;
-  margin-right: -0.4rem;
-  margin-bottom: 0px;
-}
-
-ion-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.news-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.news-content.without-image {
-  padding-left: 1em;
-
-  @supports (padding-left: env(safe-area-inset-left)) {
-    padding-left: calc(1em + env(safe-area-inset-left));
-  }
-
-  @supports (padding-right: env(safe-area-inset-right)) {
-    padding-right: env(safe-area-inset-right);
-  }
-
-  .text-content {
-    margin-left: 0rem;
-  }
-
-  .text-title {
-    margin-left: 0rem;
-  }
-}
-
-/*.border-bottom {
-  border-bottom: var(--app-border-width-5) solid var(--ion-color-secondary) !important;
-}*/
-
-.border {
-  //border-top: var(--app-border-width-7) solid var(--app-border-color-primary) !important;
-  //border-bottom: var(--app-border-width-7) solid var(--app-border-color-primary) !important;
-}
-
-.light-font-color{
-  color: var(--app-font-color-for-dark-background-from-cms) !important;
-}
-
-.dark-font-color{
-  color: var(--app-font-color-for-light-background-from-cms) !important;
-}
-
-
-.important-news-horizontally-style {
-
-  .img-container {
-    height: 170px;
-  }
-
-  .text-title {
-    margin-top: 1rem;
-    margin-left: 0.7rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .text-content {
-    margin-top: 0;
-    margin-left: 0.7rem;
-    margin-right: 0.7rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .link-button {
-    min-height: auto;
-    margin: 0 0 0.5rem;
-    --padding-end: 0.7rem;
-  }
-
-  .news-content {
-    border-left: var(--app-border-width-5) solid var(--ion-color-secondary) !important;
-  }
-
-  .news-content > ion-label:last-child {
-    margin-bottom: 1rem;
-  }
-
-}
+export const IMPORTANT_NEWS_CONFIG =
+  new InjectionToken<ImportantNewsModuleConfig>('Important news module config');

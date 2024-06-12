@@ -83,7 +83,9 @@ export const environment: any = {
     ClockingModule,
     ContactUsModule,
     ContactsModule.forRoot({ contactTypes: ['STUDENT', 'STAFF', 'STANDIN'] }),
-    ImportantNewsModule,
+    ImportantNewsModule.forRoot({
+      display: 'vertically'
+    }),
     MapModule.forRoot({
       defaultMapLocation: {
         longitude: 2.3488596,
