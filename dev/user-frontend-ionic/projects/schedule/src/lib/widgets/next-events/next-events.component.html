@@ -74,7 +74,7 @@
                 class="app-title-5">{{event.course.label}}</ion-text>
               <ion-row>
                 <ion-row class="ion-align-items-center card-labels" *ngFor="let room of event.rooms">
-                  <ion-icon class="card-labels-icons" name="business-outline" aria-label=""></ion-icon>
+                  <ion-icon [ngClass]="[fontColor(), 'card-labels-icons']" name="business-outline" aria-label=""></ion-icon>
                   <ion-text [ngClass]="fontColor()"
                     class="app-title-6 light">{{room.label}} - {{room.building}}</ion-text>
                 </ion-row>
