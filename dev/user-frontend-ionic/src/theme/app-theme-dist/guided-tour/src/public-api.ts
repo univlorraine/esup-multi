@@ -37,13 +37,5 @@
  * termes.
  */
 
-import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
-import { MapModule } from './map/map.module';
-import { MonitoringModule } from './monitoring/monitoring.module';
-@Module({
-  imports: [ConfigModule.forRoot(), MapModule, MonitoringModule],
-  controllers: [],
-  providers: [],
-})
-export class AppModule {}
+export * from './lib/config/logged-guided-tour.config';
+export * from './lib/config/anonymous-guided-tour.config';

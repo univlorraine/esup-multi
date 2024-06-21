@@ -78,7 +78,7 @@ import { PageLayoutsModule } from './layout/layouts.module';
       loader: {
         provide: TranslateLoader,
         useFactory: translationsLoaderFactory,
-        deps: [HttpClient, ProjectModuleService]
+        deps: [HttpClient, ProjectModuleService, 'environment']
       }
     }),
     ...environment.enabledModules,

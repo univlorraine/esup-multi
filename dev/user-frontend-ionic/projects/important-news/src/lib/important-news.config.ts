@@ -37,13 +37,11 @@
  * termes.
  */
 
-import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
-import { MapModule } from './map/map.module';
-import { MonitoringModule } from './monitoring/monitoring.module';
-@Module({
-  imports: [ConfigModule.forRoot(), MapModule, MonitoringModule],
-  controllers: [],
-  providers: [],
-})
-export class AppModule {}
+import { InjectionToken } from '@angular/core';
+
+export interface ImportantNewsModuleConfig {
+  display: 'vertically' | 'horizontally';
+}
+
+export const IMPORTANT_NEWS_CONFIG =
+  new InjectionToken<ImportantNewsModuleConfig>('Important news module config');

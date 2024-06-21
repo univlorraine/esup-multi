@@ -552,6 +552,46 @@
 
       }
     },
+    "guided-tour": {
+      "projectType": "library",
+      "root": "src/theme/app-theme/guided-tour",
+      "sourceRoot": "src/theme/app-theme/guided-tour/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "src/theme/app-theme/guided-tour/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "src/theme/app-theme/guided-tour/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "src/theme/app-theme/guided-tour/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/theme/app-theme/guided-tour/src/test.ts",
+            "tsConfig": "src/theme/app-theme/guided-tour/tsconfig.spec.json",
+            "karmaConfig": "src/theme/app-theme/guided-tour/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/theme/app-theme/guided-tour/**/*.ts",
+              "src/theme/app-theme/guided-tour/**/*.html"
+            ]
+          }
+        }
+      }
+    },
     "important-news": {
       "projectType": "library",
       "root": "projects/important-news",
