@@ -40,12 +40,12 @@
 import { InjectionToken } from '@angular/core';
 
 interface LatestNewsWidgetConfig {
-    display: "vertically" | "horizontally";
+    display: 'vertically' | 'horizontally';
 }
 
 export interface RssModuleConfig {
     latestNewsWidget: LatestNewsWidgetConfig;
-    display: "vertically" | "horizontally";
+    display: 'vertically' | 'horizontally';
 }
 
 export const RSS_CONFIG =
