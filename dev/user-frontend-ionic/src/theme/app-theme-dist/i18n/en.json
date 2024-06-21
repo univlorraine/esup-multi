@@ -21,5 +21,8 @@
     "WARNING": {
       "TITLE": "Warning"
     }
+  },
+  "GLOBAL" : {
+    "IOS_BACK_BUTTON": "Back"
   }
 }
