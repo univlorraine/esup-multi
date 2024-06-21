@@ -101,7 +101,12 @@ export const environment: any = {
       reservationSsoUrlTemplate: 'https://mon-espace-de-resa.fr/auth?ticket={st}',
     }),
     RestaurantsModule,
-    RssPageModule,
+    RssPageModule.forRoot({
+      latestNewsWidget: {
+        display: 'horizontally'
+      },
+      display: 'vertically'
+    }),
     ScheduleModule.forRoot({
       nextEventsWidget: {
         numberOfEventsLimit: 2,

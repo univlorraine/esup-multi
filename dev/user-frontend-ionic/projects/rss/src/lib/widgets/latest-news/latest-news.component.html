@@ -43,9 +43,11 @@
 
 <ng-container *ngIf="!isLoading">
   <ion-text *ngIf="(latestNews$ | async) === undefined" class="ion-padding app-text-4">{{'RSS.NO_DATA' | translate}}</ion-text>
-  <div *ngIf="(latestNews$ | async) as item" class="latest-news-container ion-padding">
+  <div *ngIf="(latestNews$ | async) as item" class="latest-news-container ion-padding"
+    [ngClass]="{'latest-news-vertically-style': config.latestNewsWidget.display === 'vertically', 
+                'latest-news-horizontally-style': config.latestNewsWidget.display === 'horizontally'}">
     <ion-card class="ion-no-margin safe-area-margin-lr">
-      <app-rss-item-header *ngIf="!isLoading" [item]="item">
+      <app-rss-item-header *ngIf="!isLoading" [item]="item" [display]="config.latestNewsWidget.display">
         <ng-template appRssItemHeaderButton>
           <ion-button
             [queryParams]="{guid: item.guid}" class="app-text-button-2 link-button" fill="clear" routerLink="/rss">

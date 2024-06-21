@@ -38,7 +38,7 @@
  */
 
 import { CommonModule } from '@angular/common';
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { APP_INITIALIZER, ModuleWithProviders, NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { ProjectModuleService, SharedComponentsModule, SharedPipeModule } from '@multi/shared';
@@ -47,6 +47,7 @@ import { RssPage } from './rss.page';
 import { LatestNewsComponent } from './widgets/latest-news/latest-news.component';
 import { RssItemHeaderComponent } from './common/rss-item-header/rss-item-header.component';
 import { RssItemHeaderButtonDirective } from './common/rss-item-header/rss-item-header-button.directive';
+import { RSS_CONFIG, RssModuleConfig } from './rss.config';
 
 const initModule = (projectModuleService: ProjectModuleService) =>
   () => projectModuleService.initProjectModule({
@@ -81,4 +82,13 @@ const initModule = (projectModuleService: ProjectModuleService) =>
 })
 export class RssPageModule {
   static routerLink = '/rss';
+
+  static forRoot(config: RssModuleConfig): ModuleWithProviders<RssPageModule> {
+    return {
+      ngModule: RssPageModule,
+      providers: [
+        { provide: RSS_CONFIG, useValue: config }
+      ]
+    };
+  }
 }
