@@ -37,32 +37,12 @@
  * termes.
  */
 
-import { Inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Campus, Categorie, Marker } from './map.repository';
-import { HttpClient } from '@angular/common/http';
+const express = require('express');
+const router = express.Router();
+const { categories, campuses, pois } = require('./map.mock');
 
-@Injectable({
-  providedIn: 'root'
-})
-export class MapService {
+router.get('/multi-map/pois', (req, res) => res.json(pois));
+router.get('/multi-map/categories', (req, res) => res.json(categories));
+router.get('/multi-map/campuses', (req, res) => res.json(campuses));
 
-
-  constructor(
-    @Inject('environment')
-    private environment: any,
-    private http: HttpClient,
-  ) { }
-
-  getMarkers(): Observable<Marker[]> {
-    return this.http.get<Marker[]>(`${this.environment.apiEndpoint}/map`);
-  }
-
-  getCategories(): Observable<Categorie[]> {
-    return this.http.get<Categorie[]>(`${this.environment.apiEndpoint}/map/categories`);
-  }
-
-  getCampus(): Observable<Campus[]> {
-    return this.http.get<Campus[]>(`${this.environment.apiEndpoint}/map/campuses`);
-  }
-}
+module.exports = router;

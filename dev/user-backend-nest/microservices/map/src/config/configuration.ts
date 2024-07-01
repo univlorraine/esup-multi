@@ -37,32 +37,60 @@
  * termes.
  */
 
-import { Inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Campus, Categorie, Marker } from './map.repository';
-import { HttpClient } from '@angular/common/http';
+import { ProviderOptions, KeepAliveOptions } from './configuration.interface';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class MapService {
-
-
-  constructor(
-    @Inject('environment')
-    private environment: any,
-    private http: HttpClient,
-  ) { }
-
-  getMarkers(): Observable<Marker[]> {
-    return this.http.get<Marker[]>(`${this.environment.apiEndpoint}/map`);
+const applyIfNotBlank = (param: string, applyFn: (value: string) => void) => {
+  if (param && param.trim().length > 0) {
+    applyFn(param);
   }
+};
 
-  getCategories(): Observable<Categorie[]> {
-    return this.http.get<Categorie[]>(`${this.environment.apiEndpoint}/map/categories`);
-  }
+export default (): {
+  providerOptions: ProviderOptions;
+  keepAliveOptions: KeepAliveOptions;
+} => {
+  const keepAliveOptions = {};
 
-  getCampus(): Observable<Campus[]> {
-    return this.http.get<Campus[]>(`${this.environment.apiEndpoint}/map/campuses`);
-  }
-}
+  applyIfNotBlank(
+    process.env.MAP_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVE,
+    (value) => (keepAliveOptions['keepAlive'] = value === 'true'),
+  );
+
+  applyIfNotBlank(
+    process.env.MAP_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVEMSECS,
+    (value) => (keepAliveOptions['keepAliveMsecs'] = parseInt(value)),
+  );
+
+  applyIfNotBlank(
+    process.env.MAP_SERVICE_AGENTKEEPALIVE_OPTION_FREESOCKETTIMEOUT,
+    (value) => (keepAliveOptions['freeSocketTimeout'] = parseInt(value)),
+  );
+
+  applyIfNotBlank(
+    process.env.MAP_SERVICE_AGENTKEEPALIVE_OPTION_TIMEOUT,
+    (value) => (keepAliveOptions['timeout'] = parseInt(value)),
+  );
+
+  applyIfNotBlank(
+    process.env.MAP_SERVICE_AGENTKEEPALIVE_OPTION_MAXSOCKETS,
+    (value) => (keepAliveOptions['maxSockets'] = parseInt(value)),
+  );
+
+  applyIfNotBlank(
+    process.env.MAP_SERVICE_AGENTKEEPALIVE_OPTION_MAXFREESOCKETS,
+    (value) => (keepAliveOptions['maxFreeSockets'] = parseInt(value)),
+  );
+
+  applyIfNotBlank(
+    process.env.MAP_SERVICE_AGENTKEEPALIVE_OPTION_SOCKETACTIVETTL,
+    (value) => (keepAliveOptions['socketActiveTTL'] = parseInt(value)),
+  );
+
+  return {
+    providerOptions: {
+      url: process.env.MAP_SERVICE_PROVIDER_API_URL,
+      bearerToken: process.env.MAP_SERVICE_PROVIDER_API_BEARER_TOKEN,
+    },
+    keepAliveOptions,
+  };
+};
