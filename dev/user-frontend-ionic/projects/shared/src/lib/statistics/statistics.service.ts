@@ -40,11 +40,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Device } from '@capacitor/device';
-import { Platform } from '@ionic/angular';
 import { combineLatest, from, Observable, of } from 'rxjs';
 import { catchError, switchMap, take } from 'rxjs/operators';
 import { getAuthToken } from '../auth/auth.repository';
 import { NetworkService } from '../network/network.service';
+import { Capacitor } from '@capacitor/core';
 
 interface UserActionRequestData {
   authToken: string;
@@ -52,7 +52,7 @@ interface UserActionRequestData {
     duid: string | null;
     action: string;
     functionality: string;
-    platform: string | null;
+    platform: string;
     connectionType: string;
   };
 }
@@ -71,7 +71,6 @@ export class StatisticsService {
     private environment: any,
     private http: HttpClient,
     private networkService: NetworkService,
-    private platform: Platform
   ) {}
 
   public async onFunctionalityOpened(statisticName: string) {
@@ -101,7 +100,7 @@ export class StatisticsService {
             duid: deviceId.identifier,
             action: userActionDetails.action,
             functionality: userActionDetails.functionality,
-            platform: this.platform.platforms().join(','),
+            platform: Capacitor.getPlatform(),
             connectionType: connectionStatus.connectionType
           }
         };

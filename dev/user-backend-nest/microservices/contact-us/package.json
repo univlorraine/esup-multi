@@ -21,7 +21,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
-    "@nestjs-modules/mailer": "^1.10.3",
+    "@nestjs-modules/mailer": "^2.0.2",
     "@nestjs/axios": "^3.0.1",
     "@nestjs/cache-manager": "^2.1.0",
     "@nestjs/common": "^10.2.4",

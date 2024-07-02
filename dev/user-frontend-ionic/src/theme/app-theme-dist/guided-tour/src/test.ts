@@ -37,17 +37,30 @@
  * termes.
  */
 
-import { AppPage } from './app.po';
+// This file is required by karma.conf.js and loads recursively all the .spec and framework files
 
-describe('new App', () => {
-  let page: AppPage;
+import 'zone.js';
+import 'zone.js/testing';
+import { getTestBed } from '@angular/core/testing';
+import {
+  BrowserDynamicTestingModule,
+  platformBrowserDynamicTesting
+} from '@angular/platform-browser-dynamic/testing';
 
-  beforeEach(() => {
-    page = new AppPage();
-  });
+declare const require: {
+  context(path: string, deep?: boolean, filter?: RegExp): {
+    <T>(id: string): T;
+    keys(): string[];
+  };
+};
 
-  it('should be blank', () => {
-    page.navigateTo();
-    expect(page.getParagraphText()).toContain('Start with Ionic UI Components');
-  });
-});
+// First, initialize the Angular testing environment.
+getTestBed().initTestEnvironment(
+  BrowserDynamicTestingModule,
+  platformBrowserDynamicTesting(),
+);
+
+// Then we find all the tests.
+const context = require.context('./', true, /\.spec\.ts$/);
+// And load the modules.
+context.keys().forEach(context);

@@ -112,3 +112,39 @@ ion-img {
 .dark-font-color{
   color: var(--app-font-color-for-light-background-from-cms) !important;
 }
+
+
+.important-news-horizontally-style {
+
+  .img-container {
+    height: 170px;
+  }
+
+  .text-title {
+    margin-top: 1rem;
+    margin-left: 0.7rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .text-content {
+    margin-top: 0;
+    margin-left: 0.7rem;
+    margin-right: 0.7rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .link-button {
+    min-height: auto;
+    margin: 0 0 0.5rem;
+    --padding-end: 0.7rem;
+  }
+
+  .news-content {
+    border-left: var(--app-border-width-5) solid var(--ion-color-secondary) !important;
+  }
+
+  .news-content > ion-label:last-child {
+    margin-bottom: 1rem;
+  }
+
+}

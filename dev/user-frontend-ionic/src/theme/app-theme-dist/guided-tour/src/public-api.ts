@@ -37,14 +37,5 @@
  * termes.
  */
 
-import { browser, by, element } from 'protractor';
-
-export class AppPage {
-  navigateTo() {
-    return browser.get('/');
-  }
-
-  getParagraphText() {
-    return element(by.deepCss('app-root ion-content')).getText();
-  }
-}
+export * from './lib/config/logged-guided-tour.config';
+export * from './lib/config/anonymous-guided-tour.config';
