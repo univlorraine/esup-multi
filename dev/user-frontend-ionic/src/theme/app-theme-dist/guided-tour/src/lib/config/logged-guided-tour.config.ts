@@ -167,7 +167,7 @@ export const loggedSteps= (router: Router, translateService: TranslateService, o
   },
   {
     id: 'logged-step-60',
-    beforeShowPromise: () => router.navigate(['/features/services']),
+    beforeShowPromise: () => router.navigate(['/features/services'], { state: { internal: true }}),
     buttons: [
       {
         classes: 'shepherd-button-secondary',
@@ -293,7 +293,7 @@ export const loggedSteps= (router: Router, translateService: TranslateService, o
   },
   {
     id: 'logged-step-110',
-    beforeShowPromise: () => router.navigate(['/menu']),
+    beforeShowPromise: () => router.navigate(['/menu'], { state: { internal: true }}),
     buttons: [
       {
         classes: 'shepherd-button-secondary',

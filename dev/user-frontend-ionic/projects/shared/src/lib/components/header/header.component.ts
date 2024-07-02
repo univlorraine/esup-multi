@@ -37,28 +37,37 @@
  * termes.
  */
 
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PageLayoutService, PageTitle } from '../../navigation/page-layout.service';
 import { NetworkService } from '../../network/network.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   templateUrl: 'header.component.html',
   styleUrls: ['../../../../../../src/theme/app-theme/styles/shared/header.component.scss']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
 
   @Input() backRouterLink = '';
 
   public currentPageTitle$: Observable<PageTitle>;
   public showCurrentPageHeader$: Observable<boolean>;
   public isOnline$: Observable<boolean>;
+  public hideBackButton: boolean;
 
-  constructor(private pageLayoutService: PageLayoutService,
-    private networkService: NetworkService,) {
+  constructor(
+    private pageLayoutService: PageLayoutService,
+    private networkService: NetworkService,
+    private router: Router
+  ) {
     this.currentPageTitle$ = this.pageLayoutService.currentPageTitle$;
     this.showCurrentPageHeader$ = this.pageLayoutService.showCurrentPageHeader$;
     this.isOnline$ = this.networkService.isOnline$;
+  }
+
+  ngOnInit() {
+    this.hideBackButton = !this.router.getCurrentNavigation()?.extras?.state?.internal;
   }
 }

@@ -66,6 +66,7 @@ export class LoginPage implements OnInit {
   public saveCredentialsOnAuthentication$ = saveCredentialsOnAuthentication$;
   public isLoading = false;
   public translatedPageContent$: Observable<TranslatedLoginPageContent>;
+  public internalNavigation: boolean;
 
 
   constructor(
@@ -110,10 +111,12 @@ export class LoginPage implements OnInit {
       }
       this.loginForm.controls.username.setValue(value.trim().toLowerCase(), { emitEvent: false });
     });
+
+    this.internalNavigation = this.router.getCurrentNavigation()?.extras?.state?.internal;
   }
 
   ionViewWillEnter() {
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/features/widgets';
+    this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/features/widgets';
     this.isLoading = false;
     this.loginForm.reset();
   }
@@ -146,9 +149,9 @@ export class LoginPage implements OnInit {
         }
         this.authService.dispatchLoginAction();
         if(!isLoggedTourViewed()) {
-          this.router.navigate(['/features/widgets']);
+          this.router.navigate(['/features/widgets'], { state: { internal: true }});
         } else {
-          this.router.navigateByUrl(this.returnUrl);
+          this.router.navigateByUrl(this.returnUrl, { state: { internal: this.internalNavigation }});
         }
       });
   }

@@ -101,7 +101,7 @@ export class RestaurantsPage implements OnInit {
   }
 
   navigateToRestaurantMenus(restaurantId: number) {
-    this.router.navigate(['restaurants', restaurantId, 'menu']);
+    this.router.navigate(['restaurants', restaurantId, 'menu'], { state: { internal: true }});
   }
 
   public getCurrentOpening(opening: Record<string, RestaurantOpening>): RestaurantOpening | undefined {

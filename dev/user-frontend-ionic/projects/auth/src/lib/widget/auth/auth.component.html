@@ -64,7 +64,7 @@
     </ion-col>
   </ion-grid>
   <ion-list class="menu-section" lines="none">
-    <ion-item routerLink="/auth" mode="md" detail="true">
+    <ion-item routerLink="/auth" [state]="{ internal: true }" mode="md" detail="true">
       <ion-icon slot="start" class="app-icon-4" name="login" aria-label=""></ion-icon>
       <ion-label class="app-text-3 light">{{'AUTH.MENU' | translate}}</ion-label>
     </ion-item>

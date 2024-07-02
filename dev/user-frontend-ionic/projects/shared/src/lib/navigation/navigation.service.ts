@@ -81,7 +81,7 @@ export class NavigationService {
   navigateBack() {
     this.history.pop(); // pop current url
     const previousUrl = this.history.pop() || '/'; // pop previous url
-    this.router.navigateByUrl(previousUrl, { replaceUrl: true });
+    this.router.navigateByUrl(previousUrl, { replaceUrl: true, state: { internal: true} });
   }
 
   navigateToAuth() {

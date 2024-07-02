@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from "@angular/router";
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { getAuthToken } from './auth.repository';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -49,15 +49,18 @@ import { Injectable } from '@angular/core';
 export class AuthGuard implements CanActivate {
   constructor(private router: Router) {}
 
-  canActivate(route:ActivatedRouteSnapshot, state:RouterStateSnapshot): Observable<boolean> {
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
     return getAuthToken().pipe(
       map(authToken => {
         if (!authToken) {
-          this.router.navigate(['/auth'], { queryParams: { returnUrl: state.url } } );
+          this.router.navigate(['/auth'], {
+            queryParams: { returnUrl: state.url },
+            state: { internal: this.router.getCurrentNavigation()?.extras?.state }
+          });
           return false;
         }
         return true;
       })
-    )
+    );
   }
 }

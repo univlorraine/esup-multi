@@ -59,7 +59,7 @@ export class WidgetInternalFeatureComponent {
 
   public onClick() {
     this.statisticsService.onFunctionalityOpened(this.feature.statisticName);
-    this.router.navigateByUrl(this.feature.routerLink);
+    this.router.navigateByUrl(this.feature.routerLink, { state: { internal: true }});
   }
 
   fontColor(backgroundColor) {

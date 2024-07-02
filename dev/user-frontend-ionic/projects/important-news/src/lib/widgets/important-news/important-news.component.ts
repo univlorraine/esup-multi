@@ -112,7 +112,7 @@ export class ImportantNewsComponent {
     this.statisticsService.onFunctionalityOpened(importantNews.statisticName);
 
     if (importantNews.link.startsWith('/')) {
-      return this.router.navigateByUrl(importantNews.link);
+      return this.router.navigateByUrl(importantNews.link, { state: { internal: true }});
     } else {
       return Browser.open({ url: importantNews.link });
     }

@@ -61,6 +61,6 @@ export class ReservationPage {
 
   navigateToScanPage() {
     this.navController.setDirection('forward', false);
-    this.router.navigate(['/reservation/scan']);
+    this.router.navigate(['/reservation/scan'], { state: { internal: true }});
   }
 }
