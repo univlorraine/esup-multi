@@ -76,8 +76,16 @@ export class CardModalComponent implements OnInit, OnDestroy {
     this.isModalOpen = true;
   }
 
-  closeModal = () => {
+  /**
+   * Close the modal
+   * Will trigger the onWillDismiss event
+   */
+  closeModal() {
+    this.isModalOpen = false;
+  }
+
+  onWillDismiss() {
     this.screenService.restorePreviousBrightness();
     this.isModalOpen = false;
-  };
+  }
 }
