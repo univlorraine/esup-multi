@@ -38,15 +38,16 @@
     "back:schedule": "cd dev/user-backend-nest/microservices/schedule && npm",
     "back:social-network": "cd dev/user-backend-nest/microservices/social-network && npm",
     "back:static-pages": "cd dev/user-backend-nest/microservices/static-pages && npm",
-    "back:statistics": "cd dev/user-backend-nest/microservices/statistics && npm"
+    "back:statistics": "cd dev/user-backend-nest/microservices/statistics && npm",
+    "prepare": "husky"
   },
   "devDependencies": {
-    "@commitlint/cli": "^18.6.0",
-    "@commitlint/config-conventional": "^18.6.0",
+    "@commitlint/cli": "^18.6.1",
+    "@commitlint/config-conventional": "^18.6.3",
     "commitizen": "^4.3.0",
     "concurrently": "^8.2.2",
     "cz-conventional-changelog": "^3.3.0",
-    "husky": "^9.0.10"
+    "husky": "^9.0.11"
   },
   "commitlint": {
     "extends": [
