@@ -143,7 +143,9 @@ export class NotificationsService {
 
   public markUnreadNotificationsAsRead(notificationIds: string[]): Observable<void> {
     Badge.clear();
-    FirebaseMessaging.removeAllDeliveredNotifications();
+    if (this.platform.is('capacitor')) {
+      FirebaseMessaging.removeAllDeliveredNotifications();
+    }
 
     return getAuthToken().pipe(
       // On ne balance la requête au serveur que si la liste des notifications à marquer comme lues n'est pas vide
