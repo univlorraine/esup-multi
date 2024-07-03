@@ -39,7 +39,8 @@
         "no-console": [
           "error",
           { "allow": ["warn", "error"] }
-        ]
+        ],
+        "jsdoc/newline-after-description": "off"
       }
     },
     {

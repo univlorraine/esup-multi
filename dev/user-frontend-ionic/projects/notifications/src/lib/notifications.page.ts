@@ -63,7 +63,7 @@ export class NotificationsPage implements OnDestroy {
 
   @ViewChild('popover') popover;
   @ViewChild('modal') modal: IonModal;
-  @ViewChild(IonContent, { static: false }) private content: IonContent;
+  @ViewChild(IonContent, { static: false }) content: IonContent;
 
   public isOpen = false;
   public channels$: Observable<Channel[]>;
