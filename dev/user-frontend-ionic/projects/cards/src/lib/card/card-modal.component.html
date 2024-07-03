@@ -37,7 +37,7 @@
   ~ termes.
   -->
 
-<ion-modal [isOpen]="isModalOpen">
+<ion-modal [isOpen]="isModalOpen" (willDismiss)="onWillDismiss()">
   <ng-template>
     <ion-header>
       <ion-toolbar class="app-toolbar-as-on-page">
@@ -55,7 +55,7 @@
         </ion-card>
         <ion-row class="ion-justify-content-center">
           <qrcode *ngIf="userAndCardsData.cards.studentCard.qrCode" [qrdata]="userAndCardsData.cards.studentCard.qrCode.value"
-                  [errorCorrectionLevel]="'M'" [width]="400"></qrcode>
+                  [errorCorrectionLevel]="'M'" [width]="300"></qrcode>
         </ion-row>
       </ion-content>
 
@@ -67,7 +67,7 @@
         </ion-card>
         <ion-row class="ion-justify-content-center">
           <qrcode *ngIf="userAndCardsData.cards.euStudentCard.qrCode" [qrdata]="userAndCardsData.cards.euStudentCard.qrCode.value"
-                  [errorCorrectionLevel]="'M'" [width]="400"></qrcode>
+                  [errorCorrectionLevel]="'M'" [width]="300"></qrcode>
         </ion-row>
       </ion-content>
     </ion-content>

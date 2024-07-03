@@ -14,7 +14,6 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
     "module:create": "npx ng g library",
     "module:build": "npx ng build --project=",
     "module:watch": "npx ng build --watch --project=",
@@ -113,7 +112,6 @@
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
     "ng-packagr": "^14.2.0",
-    "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
     "typescript": "~4.7.3"
   },
