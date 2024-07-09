@@ -116,7 +116,7 @@ export class LoginPage implements OnInit {
   }
 
   ionViewWillEnter() {
-    this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/features/widgets';
+    this.returnUrl = this.route.snapshot.queryParams.returnUrl;
     this.isLoading = false;
     this.loginForm.reset();
   }
@@ -148,11 +148,13 @@ export class LoginPage implements OnInit {
           return;
         }
         this.authService.dispatchLoginAction();
-        if(!isLoggedTourViewed()) {
-          this.router.navigate(['/features/widgets'], { state: { internal: true }});
-        } else {
+
+        if (this.returnUrl) {
           this.router.navigateByUrl(this.returnUrl, { state: { internal: this.internalNavigation }});
+          return;
         }
+
+        this.router.navigate(['/features/widgets'], { state: { internal: !isLoggedTourViewed() || this.internalNavigation }});
       });
   }
 
