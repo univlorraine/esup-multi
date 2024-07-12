@@ -48,6 +48,7 @@ import { RssItemHeaderButtonDirective } from './rss-item-header-button.directive
 })
 export class RssItemHeaderComponent {
   @Input() item: FeedItem;
+  @Input() display: string;
   @ContentChild(RssItemHeaderButtonDirective, { read: TemplateRef }) rssItemHeaderAction: TemplateRef<any>;
 
   constructor() {

@@ -165,6 +165,7 @@ npm run module:build-all
 
 ### Liste des modules
 
+- [Module guided-tour](dev/user-frontend-ionic/src/theme/app-theme/guided-tour/README.md)
 - [Module shared](dev/user-frontend-ionic/projects/shared/README.md)
 - [Module auth](dev/user-frontend-ionic/projects/auth/README.md)
 - [Module calendar](dev/user-frontend-ionic/projects/calendar/README.md)

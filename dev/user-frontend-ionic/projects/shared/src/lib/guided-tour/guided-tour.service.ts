@@ -49,8 +49,7 @@ import { filter, switchMap, take } from 'rxjs/operators';
 import { userIsAuthenticated$ } from '../auth/authenticated-user.repository';
 import { MenuItem } from '../navigation/menu.model';
 import { NetworkService } from '../network/network.service';
-import { anonymousSteps } from './config/anonymous-guided-tour.config';
-import { loggedSteps } from './config/logged-guided-tour.config';
+import { anonymousSteps, loggedSteps } from '@multi/guided-tour';
 import { isAnonymousTourViewed, isLoggedTourViewed, setAnonymousTourViewed, setLoggedTourViewed } from './guided-tour.repository';
 
 @Injectable({
@@ -67,7 +66,6 @@ export class GuidedTourService {
     private router: Router,
     private translateService: TranslateService,
     private networkService: NetworkService,
-    private platform: Platform
   ) {
     this.isOnline$ = this.networkService.isOnline$;
 

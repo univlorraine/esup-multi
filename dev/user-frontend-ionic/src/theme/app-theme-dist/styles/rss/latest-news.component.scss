@@ -47,3 +47,13 @@ ion-card {
 .latest-news-container {
   padding-top: 0.5rem;
 }
+
+.latest-news-horizontally-style {
+
+  .link-button {
+    min-height: auto;
+    margin: 0 0 0.5rem;
+    --padding-end: 0.7rem;
+  }
+
+}

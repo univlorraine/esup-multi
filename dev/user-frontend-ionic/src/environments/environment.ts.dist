@@ -83,7 +83,9 @@ export const environment: any = {
     ClockingModule,
     ContactUsModule,
     ContactsModule.forRoot({ contactTypes: ['STUDENT', 'STAFF', 'STANDIN'] }),
-    ImportantNewsModule,
+    ImportantNewsModule.forRoot({
+      display: 'vertically'
+    }),
     MapModule.forRoot({
       defaultMapLocation: {
         longitude: 2.3488596,
@@ -99,7 +101,12 @@ export const environment: any = {
       reservationSsoUrlTemplate: 'https://mon-espace-de-resa.fr/auth?ticket={st}',
     }),
     RestaurantsModule,
-    RssPageModule,
+    RssPageModule.forRoot({
+      latestNewsWidget: {
+        display: 'horizontally'
+      },
+      display: 'vertically'
+    }),
     ScheduleModule.forRoot({
       nextEventsWidget: {
         numberOfEventsLimit: 2,

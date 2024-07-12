@@ -39,6 +39,7 @@
 
 import { Component, Input } from '@angular/core';
 import { NavigationService } from '../../navigation/navigation.service';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-back-button',
@@ -51,6 +52,7 @@ export class BackButtonComponent {
 
   constructor(
     private navigationService: NavigationService,
+    public platform: Platform
   ) {}
 
   goBack() {
