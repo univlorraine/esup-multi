@@ -90,9 +90,8 @@ export class CardsPage {
     this.screenService.restorePreviousBrightness();
   }
 
-  hasKnownError(errors: string[]) {
-    const commonErrors = errors.filter(error => this.isKnownError(error));
-    return commonErrors.length > 0;
+  hasErrors(userCards: any): boolean {
+    return userCards.errors && userCards.errors.length > 0;
   }
 
   isKnownError(error: string) {
@@ -115,8 +114,3 @@ export class CardsPage {
     });
   }
 }
-
-
-
-
-

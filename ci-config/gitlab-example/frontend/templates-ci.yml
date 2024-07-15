@@ -30,7 +30,7 @@
     - npm ci --cache ${CI_PROJECT_DIR}/.npm --prefer-offline
     - mkdir -p ${SECURE_FILES_DOWNLOAD_PATH} && curl --silent "https://gitlab.com/gitlab-org/incubation-engineering/mobile-devops/download-secure-files/-/raw/main/installer" | bash
     - ls -al src/environments/firebase/web
-    #- mkdir -p src/assets/stubs && cp -v ${SECURE_FILES_DOWNLOAD_PATH}/${FIREBASE_FILENAME} "src/assets/stubs/firebase-environment.json"
+    - mkdir -p src/assets/stubs && cp -v ${SECURE_FILES_DOWNLOAD_PATH}/${FIREBASE_FILENAME} "src/assets/stubs/firebase-environment.json"
   script:
     - npm run build -- --configuration=${PWA_ENV_CONFIG_NAME}
   artifacts:

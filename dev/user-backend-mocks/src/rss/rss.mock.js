@@ -77,16 +77,16 @@ module.exports.rssData = `<?xml version="1.0" encoding="utf-8"?>
             <source url="${urlMock}">Flux Université Exemple</source>
         </item>
         <item>
-            <title>ANIMATIONS AUTOUR DE L'EGALITE FEMMES/HOMMES</title>
-            <link>${urlMock}/egalite</link>
+            <title>Découvrez les visages inspirants des lauréats ${new Date().getFullYear()} de l'Institut Universitaire de France</title>
+            <link>${urlMock}/iuf</link>
             <description>
                 &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vel tincidunt lacus,
                 luctus pellentesque est. Donec sed nisl felis. Vivamus dignissim libero nec ante auctor fermentum.
                 Donec a varius quam. Aliquam erat volutpat. Aliquam hendrerit purus massa, a venenatis nisi consequat a.
                 Integer dictum enim sit amet ultricies tincidunt. Vestibulum. &lt;/p&gt;
             </description>
-            <enclosure url="${urlImages}/egalite.png" length="107565" type="image/png" />
-            <guid isPermaLink="false">egalite</guid>
+            <enclosure url="${urlImages}/iuf.png" length="107565" type="image/png" />
+            <guid isPermaLink="false">iuf</guid>
             <pubDate>${new Date(new Date().getTime() - 3 * msInDay).toUTCString()}</pubDate>
             <source url="${urlMock}">Flux Université Exemple</source>
         </item>
@@ -133,16 +133,16 @@ module.exports.rssData = `<?xml version="1.0" encoding="utf-8"?>
             <source url="${urlMock}">Flux Université Exemple</source>
         </item>
         <item>
-            <title>[Save the date] - 8° séminaire de pédagogie universitaire - Comment intéger la RSE dans nos enseignements ?</title>
-            <link>${urlMock}/rse</link>
+            <title>La recette génétique des champignons décomposeurs pour s’adapter au changement climatique</title>
+            <link>${urlMock}/champignons</link>
             <description>
                 &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vel tincidunt lacus,
                 luctus pellentesque est. Donec sed nisl felis. Vivamus dignissim libero nec ante auctor fermentum.
                 Donec a varius quam. Aliquam erat volutpat. Aliquam hendrerit purus massa, a venenatis nisi consequat a.
                 Integer dictum enim sit amet ultricies tincidunt. Vestibulum. &lt;/p&gt;
             </description>
-            <enclosure url="${urlImages}/rse.png" length="373559" type="image/png" />
-            <guid isPermaLink="false">rse</guid>
+            <enclosure url="${urlImages}/champignons.png" length="373559" type="image/png" />
+            <guid isPermaLink="false">champigons</guid>
             <pubDate>${new Date(new Date().getTime() - 8 * msInDay).toUTCString()}</pubDate>
             <source url="${urlMock}">Flux Université Exemple</source>
         </item>

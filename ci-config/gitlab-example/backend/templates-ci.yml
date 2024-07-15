@@ -10,7 +10,7 @@
       MS_IMAGE_LABEL="latest-preprod"
     else
       MS_IMAGE_TAG="${VERSION}-dev"
-      MS_IMAGE_LABEL="latest-develop"
+      MS_IMAGE_LABEL="latest-dev"
     fi
   - echo "Tag complet pour l'image Docker = ${MS_IMAGE_TAG}"
   - echo "MS_IMAGE_TAG=${MS_IMAGE_TAG}" > ${SERVICE_PATH}/ms_image_tag.env
@@ -66,7 +66,7 @@
     - if: '$CI_PIPELINE_SOURCE == "web" && ($SERVICE == null || ($SERVICE != $CI_SERVICE_NAME && $SERVICE != "all" && $SERVICE != "all-ms"))'
       when: never
     # Autrement, la pipeline se déclenche automatiquement si des modifications ont été apportées dans le répertoire du service concerné
-    - if: '$CI_COMMIT_BRANCH == "develop" || $CI_COMMIT_BRANCH == "preprod" || $CI_COMMIT_BRANCH == "prod"'
+    - if: '$CI_COMMIT_BRANCH == "develop" || $CI_COMMIT_BRANCH == "preprod" || $CI_COMMIT_BRANCH == "main"'
       changes:
         - '${BACKEND_PATH}/${SERVICE_FOLDER}/**/*'
 
