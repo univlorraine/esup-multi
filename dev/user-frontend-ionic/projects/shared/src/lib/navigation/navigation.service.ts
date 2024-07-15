@@ -49,16 +49,19 @@ import { ProjectModuleService } from '../project-module/project-module.service';
 })
 export class NavigationService {
   public currentRouterLink$: Observable<string>;
+  public isExternalNavigation$: Observable<boolean>;
   private currentRouterLinkSubject$ = new BehaviorSubject<string>('/');
   private history: string[] = [];
   private lastPausedDate: null | Date = null;
   private pausedMinutesBeforeRefresh = 15;
+  private isExternalNavigation = new BehaviorSubject<boolean>(true);
 
   constructor(
     private router: Router,
     private projectModuleService: ProjectModuleService,
     private platform: Platform,
   ) {
+    this.isExternalNavigation$ = this.isExternalNavigation.asObservable();
 
     // feed current router link
     this.currentRouterLink$ = this.currentRouterLinkSubject$;
@@ -78,10 +81,14 @@ export class NavigationService {
     this.setupInactiveRefresh();
   }
 
+  public setExternalNavigation(value: boolean) {
+    this.isExternalNavigation.next(value);
+  }
+
   navigateBack() {
     this.history.pop(); // pop current url
     const previousUrl = this.history.pop() || '/'; // pop previous url
-    this.router.navigateByUrl(previousUrl, { replaceUrl: true, state: { internal: true} });
+    this.router.navigateByUrl(previousUrl, { replaceUrl: true});
   }
 
   navigateToAuth() {

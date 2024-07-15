@@ -39,7 +39,7 @@
 
 <ion-header *ngIf="showCurrentPageHeader$ | async">
   <ion-toolbar>
-    <ion-buttons slot="start" *ngIf="!hideBackButton">
+    <ion-buttons slot="start" *ngIf="(hideBackButton$ | async) === false">
       <app-back-button [defaultHref]="backRouterLink"></app-back-button>
     </ion-buttons>
     <ion-title class="app-centered-header-title app-title-4" *ngIf="(currentPageTitle$ | async) as title">{{

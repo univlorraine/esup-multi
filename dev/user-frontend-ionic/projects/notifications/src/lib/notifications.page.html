@@ -46,7 +46,7 @@
     </ion-button>
 
     <ion-button [attr.aria-label]="'NOTIFICATIONS.SETTINGS.TITLE' | translate" fill="clear"
-                routerLink="/notifications/settings" [state]="{ internal: true }">
+                routerLink="/notifications/settings">
       <ion-icon aria-label="" name="settings-outline"></ion-icon>
     </ion-button>
   </ion-buttons>
@@ -142,7 +142,7 @@
               <ion-col class="routerlink-col ion-justify-content-end">
                 <ion-button *ngIf="notification.routerLink"
                             [attr.aria-label]="'NOTIFICATIONS.NAVIGATE_APP_PAGE' | translate"
-                            [routerLink]="notification.routerLink" [state]="{ internal: true }"
+                            [routerLink]="notification.routerLink"
                             class="routerlink-button ion-no-padding ion-no-margin" fill="clear" size="large">
                   <ion-icon aria-label="" name="arrow-forward-circle-outline"></ion-icon>
                 </ion-button>

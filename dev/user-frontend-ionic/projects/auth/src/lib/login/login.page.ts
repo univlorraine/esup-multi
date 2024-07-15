@@ -41,7 +41,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IonInput, ToastController } from '@ionic/angular';
-import { AuthenticatedUser, isLoggedTourViewed } from '@multi/shared';
+import { AuthenticatedUser, NavigationService } from '@multi/shared';
 import { Observable } from 'rxjs';
 import { finalize, take, tap } from 'rxjs/operators';
 import { AuthService } from '../common/auth.service';
@@ -66,7 +66,7 @@ export class LoginPage implements OnInit {
   public saveCredentialsOnAuthentication$ = saveCredentialsOnAuthentication$;
   public isLoading = false;
   public translatedPageContent$: Observable<TranslatedLoginPageContent>;
-  public internalNavigation: boolean;
+  public hideBackButton$: Observable<boolean>;
 
 
   constructor(
@@ -78,8 +78,10 @@ export class LoginPage implements OnInit {
     private loginRepository: LoginRepository,
     private route: ActivatedRoute,
     private router: Router,
+    private navigationService: NavigationService
   ) {
     this.translatedPageContent$ = this.loginRepository.translatedPageContent$;
+    this.hideBackButton$ = this.navigationService.isExternalNavigation$;
   }
 
   get username() {
@@ -111,8 +113,6 @@ export class LoginPage implements OnInit {
       }
       this.loginForm.controls.username.setValue(value.trim().toLowerCase(), { emitEvent: false });
     });
-
-    this.internalNavigation = this.router.getCurrentNavigation()?.extras?.state?.internal;
   }
 
   ionViewWillEnter() {
@@ -150,11 +150,11 @@ export class LoginPage implements OnInit {
         this.authService.dispatchLoginAction();
 
         if (this.returnUrl) {
-          this.router.navigateByUrl(this.returnUrl, { state: { internal: this.internalNavigation }});
+          this.router.navigateByUrl(this.returnUrl);
           return;
         }
 
-        this.router.navigate(['/features/widgets'], { state: { internal: !isLoggedTourViewed() || this.internalNavigation }});
+        this.router.navigate(['/features/widgets']);
       });
   }
 

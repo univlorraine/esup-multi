@@ -77,6 +77,6 @@ export class StaticPagesWidgetComponent {
 
   public onClick(page: TranslatedStaticPage): Promise<boolean> {
     this.statisticsService.onFunctionalityOpened(page.statisticName);
-    return this.router.navigateByUrl(`/page/${page.id}`, { state: { internal: true }});
+    return this.router.navigateByUrl(`/page/${page.id}`);
   }
 }

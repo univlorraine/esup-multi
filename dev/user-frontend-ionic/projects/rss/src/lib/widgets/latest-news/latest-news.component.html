@@ -49,8 +49,7 @@
     <ion-card class="ion-no-margin safe-area-margin-lr">
       <app-rss-item-header *ngIf="!isLoading" [item]="item" [display]="config.latestNewsWidget.display">
         <ng-template appRssItemHeaderButton>
-          <ion-button [queryParams]="{guid: item.guid}" class="app-text-button-2 link-button" fill="clear"
-                      routerLink="/rss" [state]="{ internal: true }">
+          <ion-button [queryParams]="{guid: item.guid}" class="app-text-button-2 link-button" fill="clear" routerLink="/rss">
             <ion-text class="app-text-5">{{ "RSS.SEE_MORE" | translate }}</ion-text>
             <ion-icon class="app-icon-6" name="arrow-right" aria-label=""></ion-icon>
           </ion-button>

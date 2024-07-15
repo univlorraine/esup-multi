@@ -69,7 +69,7 @@ export class MenuOpenerService {
     }
 
     private async openRouterLink(link: MenuItemRouterLink) {
-        return this.router.navigateByUrl(link.routerLink, { state: { internal: true }});
+        return this.router.navigateByUrl(link.routerLink);
     }
 
     private async openExternalLink(link: MenuItemExternalLink) {

@@ -37,37 +37,34 @@
  * termes.
  */
 
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PageLayoutService, PageTitle } from '../../navigation/page-layout.service';
 import { NetworkService } from '../../network/network.service';
-import { Router } from '@angular/router';
+import { NavigationService } from '../../navigation/navigation.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: 'header.component.html',
   styleUrls: ['../../../../../../src/theme/app-theme/styles/shared/header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
   @Input() backRouterLink = '';
 
   public currentPageTitle$: Observable<PageTitle>;
   public showCurrentPageHeader$: Observable<boolean>;
   public isOnline$: Observable<boolean>;
-  public hideBackButton: boolean;
+  public hideBackButton$: Observable<boolean>;
 
   constructor(
     private pageLayoutService: PageLayoutService,
     private networkService: NetworkService,
-    private router: Router
+    private navigationService: NavigationService
   ) {
     this.currentPageTitle$ = this.pageLayoutService.currentPageTitle$;
     this.showCurrentPageHeader$ = this.pageLayoutService.showCurrentPageHeader$;
     this.isOnline$ = this.networkService.isOnline$;
-  }
-
-  ngOnInit() {
-    this.hideBackButton = !this.router.getCurrentNavigation()?.extras?.state?.internal;
+    this.hideBackButton$ = this.navigationService.isExternalNavigation$;
   }
 }
