@@ -43,6 +43,7 @@ import { Platform } from '@ionic/angular';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
 import { ProjectModuleService } from '../project-module/project-module.service';
+import { Capacitor } from '@capacitor/core';
 
 @Injectable({
   providedIn: 'root'
@@ -54,7 +55,7 @@ export class NavigationService {
   private history: string[] = [];
   private lastPausedDate: null | Date = null;
   private pausedMinutesBeforeRefresh = 15;
-  private isExternalNavigation = new BehaviorSubject<boolean>(true);
+  private isExternalNavigation = new BehaviorSubject<boolean>(!Capacitor.isNativePlatform());
 
   constructor(
     private router: Router,
