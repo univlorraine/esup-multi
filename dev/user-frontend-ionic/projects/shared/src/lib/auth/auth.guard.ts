@@ -37,34 +37,29 @@
  * termes.
  */
 
-import { Component, Input } from '@angular/core';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { getAuthToken } from './auth.repository';
 import { Observable } from 'rxjs';
-import { PageLayoutService, PageTitle } from '../../navigation/page-layout.service';
-import { NetworkService } from '../../network/network.service';
-import { NavigationService } from '../../navigation/navigation.service';
+import { map } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
 
-@Component({
-  selector: 'app-header',
-  templateUrl: 'header.component.html',
-  styleUrls: ['../../../../../../src/theme/app-theme/styles/shared/header.component.scss']
+@Injectable({
+  providedIn: 'root'
 })
-export class HeaderComponent {
+export class AuthGuard implements CanActivate {
+  constructor(private router: Router) {}
 
-  @Input() backRouterLink = '';
-
-  public currentPageTitle$: Observable<PageTitle>;
-  public showCurrentPageHeader$: Observable<boolean>;
-  public isOnline$: Observable<boolean>;
-  public hideBackButton$: Observable<boolean>;
-
-  constructor(
-    private pageLayoutService: PageLayoutService,
-    private networkService: NetworkService,
-    private navigationService: NavigationService
-  ) {
-    this.currentPageTitle$ = this.pageLayoutService.currentPageTitle$;
-    this.showCurrentPageHeader$ = this.pageLayoutService.showCurrentPageHeader$;
-    this.isOnline$ = this.networkService.isOnline$;
-    this.hideBackButton$ = this.navigationService.isExternalNavigation$;
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+    return getAuthToken().pipe(
+      map(authToken => {
+        if (!authToken) {
+          this.router.navigate(['/auth'], {
+            queryParams: { returnUrl: state.url }
+          });
+          return false;
+        }
+        return true;
+      })
+    );
   }
 }

@@ -72,6 +72,7 @@ const initModule = (projectModuleService: ProjectModuleService) =>
       '/schedule/calendar#day',
       '/schedule/calendar#week',
       '/schedule/calendar#month',
+      '/auth',
     ]
   });
 
