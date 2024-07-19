@@ -41,6 +41,7 @@
  * Public API Surface of shared
  */
 
+export * from './lib/auth/auth.guard';
 export * from './lib/auth/auth.interceptor';
 export * from './lib/auth/auth.repository';
 export * from './lib/auth/authenticated-user.repository';
@@ -82,4 +83,3 @@ export * from './lib/store/local-forage';
 export * from './lib/store/user-store-helper';
 export * from './lib/theme/theme.repository';
 export * from './lib/theme/theme.service';
-

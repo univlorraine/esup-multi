@@ -58,15 +58,13 @@ import { ScheduleModule } from '@multi/schedule';
 import { SocialNetworkModule } from '@multi/social-network';
 import { StaticPagesModule } from '@multi/static-pages';
 import { UnreadMailModule } from '@multi/unread-mail';
-import { MatomoModule } from 'ngx-matomo';
+// import { MatomoModule } from 'ngx-matomo';
 
 
-// Décommenter si utilisation des notifications
-// import firebasePwaEnvironment from './firebase/web/firebase-environment.pwa.json';
+import firebasePwaEnvironment from './firebase/web/firebase-environment.pwa.json';
 
 export const environment: any = {
-  // Décommenter si utilisation des notifications
-  // firebase: firebasePwaEnvironment,
+  firebase: firebasePwaEnvironment,
   production: false,
   apiEndpoint: 'http://localhost:3000',
   languages: ['fr', 'en'],
@@ -119,18 +117,18 @@ export const environment: any = {
     SocialNetworkModule,
     StaticPagesModule,
     UnreadMailModule,
-    MatomoModule.forRoot({
-      scriptUrl: 'https://webstats.mon-univ.fr/matomo.js',
-      trackers: [
-        {
-          trackerUrl: 'https://webstats.mon-univ.fr/matomo.php',
-          siteId: 453
-        }
-      ],
-      routeTracking: {
-        enable: true
-      }
-    }),
+    // MatomoModule.forRoot({
+    //   scriptUrl: 'https://webstats.mon-univ.fr/matomo.js',
+    //   trackers: [
+    //     {
+    //       trackerUrl: 'https://webstats.mon-univ.fr/matomo.php',
+    //       siteId: 453
+    //     }
+    //   ],
+    //   routeTracking: {
+    //     enable: true
+    //   }
+    // }),
   ],
 };
 

@@ -37,9 +37,10 @@
  * termes.
  */
 
-importScripts("https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js");
-importScripts("https://www.gstatic.com/firebasejs/9.22.1/firebase-messaging-compat.js");
+importScripts("https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js");
+importScripts("https://www.gstatic.com/firebasejs/10.12.2/firebase-messaging-compat.js");
 
+// Service worker nécessaire pour la réception des notifications en Web
 fetch('./assets/stubs/firebase-environment.json').then(r => r.json().then(env => {
     firebase.initializeApp(env);
 

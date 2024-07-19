@@ -41,7 +41,7 @@ import { CommonModule } from '@angular/common';
 import { APP_INITIALIZER, ModuleWithProviders, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FirebaseMessaging, Notification as NotificationCapacitor } from '@capacitor-firebase/messaging';
-import { Device } from '@capacitor/device';
+// import { Device } from '@capacitor/device';
 import { IonicModule, Platform, ToastController } from '@ionic/angular';
 import { EffectsNgModule } from '@ngneat/effects-ng';
 import { TranslateModule } from '@ngx-translate/core';
@@ -139,18 +139,18 @@ export class NotificationsModule {
       // Donc création d'un "channel" pour utiliser la fonctionnalité notification Android sans envoyer
       // de notification et donc déclencher une demande d'autorisation (le chanel est créé une seule fois à l'installation de l'application)
 
-      const info = await Device.getInfo();
-      if (info.platform === 'android' && parseInt(info.osVersion, 10) >= 13) {
-        FirebaseMessaging.createChannel({
-          id: 'fcm_default_channel',
-          name: 'multi',
-          description: 'Channel pour demande autorisation Android 13+',
-          importance: 5,
-          visibility: 1,
-          lights: true,
-          vibration: true,
-        });
-      }
+      // const info = await Device.getInfo();
+      // if (info.platform === 'android' && parseInt(info.osVersion, 10) >= 13) {
+      //   FirebaseMessaging.createChannel({
+      //     id: 'fcm_default_channel',
+      //     name: 'multi',
+      //     description: 'Channel pour demande autorisation Android 13+',
+      //     importance: 5,
+      //     visibility: 1,
+      //     lights: true,
+      //     vibration: true,
+      //   });
+      // }
       // _______________________________________
 
       await FirebaseMessaging.addListener('notificationReceived', event => {

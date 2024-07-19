@@ -42,7 +42,7 @@ import { Inject, Injectable } from '@angular/core';
 import { Actions } from '@ngneat/effects-ng';
 import { Observable, of } from 'rxjs';
 import { concatMap, delayWhen } from 'rxjs/operators';
-import { cleanupPrivateData } from '../shared.actions';
+import { authenticate, cleanupPrivateData } from '../shared.actions';
 import { updateAuthToken } from './auth.repository';
 import { AuthenticatedUser, updateUser } from './authenticated-user.repository';
 import { getRefreshAuthToken } from './keep-auth.repository';
@@ -78,6 +78,7 @@ export class KeepAuthService {
 
                 const { authToken, ...authenticatedUser } = reauthResult;
                 updateUser(authenticatedUser);
+                this.actions.dispatch(authenticate());
                 return updateAuthToken(authToken);
             }),
         );

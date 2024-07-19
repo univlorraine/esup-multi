@@ -42,11 +42,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { ScheduleListPage } from './schedule-list/schedule-list.page';
 import { ScheduleCalendarComponent } from './schedule-calendar/schedule-calendar.component';
 import { SchedulePage } from './schedule.page';
+import { AuthGuard } from '@multi/shared';
 
 const routes: Routes = [
   {
     path: 'schedule',
     component: SchedulePage,
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'calendar',
