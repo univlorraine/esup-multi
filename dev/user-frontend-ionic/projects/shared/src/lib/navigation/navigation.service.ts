@@ -38,7 +38,7 @@
  */
 
 import { Injectable } from '@angular/core';
-import { NavigationEnd, Router, RouterEvent } from '@angular/router';
+import { Event, NavigationEnd, Router, RouterEvent } from '@angular/router';
 import { Platform } from '@ionic/angular';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
@@ -63,8 +63,8 @@ export class NavigationService {
     // feed current router link
     this.currentRouterLink$ = this.currentRouterLinkSubject$;
     this.router.events.pipe(
-      filter((event: RouterEvent) => event instanceof NavigationEnd),
-      map((event: RouterEvent): NavigationEnd => event as NavigationEnd),
+      filter((event: Event|RouterEvent) => event instanceof NavigationEnd),
+      map((event): NavigationEnd => event as NavigationEnd),
       map(navigationEnd => navigationEnd.urlAfterRedirects),
     ).subscribe(this.currentRouterLinkSubject$);
 
