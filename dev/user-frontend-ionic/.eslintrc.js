@@ -1,57 +1,61 @@
-{
-  "root": true,
-  "ignorePatterns": ["projects/**/*"],
-  "overrides": [
+module.exports = {
+  root: true,
+  ignorePatterns: ["projects/**/*"],
+  overrides: [
     {
-      "files": ["*.ts"],
-      "parserOptions": {
-        "project": ["tsconfig.json"],
-        "createDefaultProgram": true
+      files: ["*.ts"],
+      parserOptions: {
+        project: [
+          "tsconfig.json",
+          "projects/*/tsconfig.lib.json"
+        ],
+        tsconfigRootDir: __dirname,
+        createDefaultProgram: true
       },
-      "extends": [
+      extends: [
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
         "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
-      "rules": {
+      rules: {
         "@angular-eslint/component-class-suffix": [
           "error",
           {
-            "suffixes": ["Page", "Component"]
+            suffixes: ["Page", "Component"]
           }
         ],
         "@angular-eslint/component-selector": [
           "error",
           {
-            "type": "element",
-            "prefix": "app",
-            "style": "kebab-case"
+            type: "element",
+            prefix: "app",
+            style: "kebab-case"
           }
         ],
         "@angular-eslint/directive-selector": [
           "error",
           {
-            "type": "attribute",
-            "prefix": "app",
-            "style": "camelCase"
+            type: "attribute",
+            prefix: "app",
+            style: "camelCase"
           }
         ],
         "@typescript-eslint/naming-convention": "error",
         "@typescript-eslint/no-explicit-any": "off",
         "no-console": [
           "error",
-          { "allow": ["warn", "error"] }
+          { allow: ["warn", "error"] }
         ]
       }
     },
     {
-      "files": ["*.html"],
-      "extends": [
+      files: ["*.html"],
+      extends: [
         "plugin:@angular-eslint/template/recommended",
         "plugin:@angular-eslint/template/accessibility"
       ],
-      "rules": {}
+      rules: {}
     }
   ]
 }
