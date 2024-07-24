@@ -112,7 +112,7 @@ export class LayoutPage implements AfterViewInit, OnChanges {
     combineLatest([
       this.topMenuItems$.pipe(
         distinctUntilChanged((prevMenuItems, currentMenuItems) => this.menuService
-          .areSpecifiedPropetiesEqualsInMenuItemsArrays(
+          .areSpecifiedPropertiesEqualsInMenuItemsArrays(
             prevMenuItems,
             currentMenuItems,
             ['link.routerLink']
