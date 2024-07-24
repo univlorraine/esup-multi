@@ -48,8 +48,6 @@ import { Observable } from 'rxjs';
 export class GreetingComponent implements OnInit {
   authenticatedUser$: Observable<AuthenticatedUser>;
 
-  constructor() {}
-
   ngOnInit() {
     this.authenticatedUser$ = authenticatedUser$;
   }

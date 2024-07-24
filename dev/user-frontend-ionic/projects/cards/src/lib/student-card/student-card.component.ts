@@ -45,6 +45,4 @@ import { Component, Input } from '@angular/core';
 })
 export class StudentCardComponent{
   @Input() userAndCardsData;
-
-  constructor() {}
 }
