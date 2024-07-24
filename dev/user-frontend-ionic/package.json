@@ -4,7 +4,7 @@
   "author": "UL",
   "homepage": "https://ionicframework.com/",
   "engines": {
-    "node": ">=16"
+    "node": ">=18"
   },
   "license": "CECILL-2.1",
   "scripts": {
