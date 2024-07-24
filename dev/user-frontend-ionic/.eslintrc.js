@@ -4,14 +4,6 @@ module.exports = {
   overrides: [
     {
       files: ["*.ts"],
-      parserOptions: {
-        project: [
-          "tsconfig.json",
-          "projects/*/tsconfig.lib.json"
-        ],
-        tsconfigRootDir: __dirname,
-        createDefaultProgram: true
-      },
       extends: [
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
