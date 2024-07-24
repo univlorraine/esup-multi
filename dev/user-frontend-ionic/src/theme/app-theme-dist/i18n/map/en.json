@@ -1,15 +1,6 @@
 {
     "YOUR_POSITION": "Your location",
     "FILTERS": "Filters",
-    "CATEGORY": {
-        "PRESIDENCES": "Presidency",
-        "COMPOSANTES": "Faculties",
-        "BUS": "Libraries",
-        "RESTOS": "University restaurants",
-        "CITES": "University building",
-        "SANTES": "Health services",
-        "SUAPS": "SUAPS"
-    },
     "FILTER": "Filter markers",
     "LOCATE": "Locate me",
     "REMOVE_FROM_FILTERS": "Remove '{{category}}' from filters"
