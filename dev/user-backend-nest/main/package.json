@@ -4,7 +4,7 @@
   "description": "",
   "author": "",
   "engines": {
-    "node": ">=16"
+    "node": ">=18"
   },
   "private": true,
   "license": "CECILL-2.1",
