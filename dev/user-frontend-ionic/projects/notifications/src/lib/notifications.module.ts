@@ -100,8 +100,6 @@ export class NotificationsModule {
 
   static routerLink = '/notifications';
 
-  constructor() { }
-
   static forRoot(config: NotificationsModuleConfig): ModuleWithProviders<NotificationsModule> {
     return {
       ngModule: NotificationsModule,

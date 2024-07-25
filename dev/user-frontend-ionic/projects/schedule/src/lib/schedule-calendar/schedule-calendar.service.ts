@@ -46,8 +46,6 @@ import { Event } from '../schedule.repository';
 })
 export class ScheduleCalendarService {
 
-  constructor() { }
-
   eventsToCalendarEvents(events: Event[]): EventInput[] {
 
     if (events.length === 0) {

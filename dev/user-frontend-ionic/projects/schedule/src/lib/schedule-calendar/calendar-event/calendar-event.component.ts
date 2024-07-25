@@ -51,8 +51,6 @@ export class CalendarEventComponent {
   @Input() event: Event;
   @Input() viewType: string;
 
-  constructor() {}
-
   getCurrentDateClass(): string {
     const currentDate = new Date();
     const eventDate = new Date(this.event.startDateTime);

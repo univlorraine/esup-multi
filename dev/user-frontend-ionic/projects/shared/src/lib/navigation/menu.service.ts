@@ -117,7 +117,7 @@ export class MenuService {
   }
 
   // Used in distinctUntilChanged() on the menuItemsTabs$ observable to compare specific properties of two arrays of menu items.
-  public areSpecifiedPropetiesEqualsInMenuItemsArrays<T>(
+  public areSpecifiedPropertiesEqualsInMenuItemsArrays(
     firstMenuItems: MenuItem[],
     secondMenuItems: MenuItem[],
     propertiesToCompare: string[]

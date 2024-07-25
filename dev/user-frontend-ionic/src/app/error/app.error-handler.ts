@@ -81,10 +81,11 @@ export class AppErrorHandler implements ErrorHandler {
 
       // 401 errors are handled by auth.interceptor.ts in the shared module. The following code is not
       // executed if auth.interceptor is enabled.
-      case 401:
-        getAuthToken().pipe(take(1)).subscribe(token => this.actions.dispatch(cleanupPrivateData({ authToken: token })));
+      case 401: {
+        getAuthToken().pipe(take(1)).subscribe(token => this.actions.dispatch(cleanupPrivateData({authToken: token})));
         return this.displayError('UNAUTHENTICATED');
-      case 500:
+      }
+      case 500: {
         // expected errors (business error case which should display a specific message)
         const expectedErrorMessage = getExpectedErrorMessage(error);
         if (expectedErrorMessage) {
@@ -92,6 +93,7 @@ export class AppErrorHandler implements ErrorHandler {
         }
         // unexpected errors
         return this.displayGenericError(error);
+      }
       default:
         return this.displayGenericError(error);
     }

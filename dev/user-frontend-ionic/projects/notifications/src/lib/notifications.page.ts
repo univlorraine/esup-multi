@@ -63,7 +63,7 @@ export class NotificationsPage implements OnDestroy {
 
   @ViewChild('popover') popover;
   @ViewChild('modal') modal: IonModal;
-  @ViewChild(IonContent, { static: false }) private content: IonContent;
+  @ViewChild(IonContent, { static: false }) content: IonContent;
 
   public isOpen = false;
   public channels$: Observable<Channel[]>;
@@ -182,7 +182,7 @@ export class NotificationsPage implements OnDestroy {
         this.endOfNotifications = false;
       }
       )).subscribe();
-  };
+  }
 
   async onIonInfinite(ev: Event) {
     const infiniteScrollEvent = ev as InfiniteScrollCustomEvent;
@@ -215,7 +215,7 @@ export class NotificationsPage implements OnDestroy {
     this.notificationsService.deleteNotification(id)
       .pipe(
         take(1),
-      ).subscribe(async (status) => {
+      ).subscribe(async () => {
         this.notificationRepository.deletNotification(id);
         this.toastService.displayToast('NOTIFICATIONS.ALERT.DELETED');
         this.dismissModal();

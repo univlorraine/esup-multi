@@ -37,8 +37,12 @@
   ~ termes.
   -->
 
-<div class="app-square-button-1" (click)="draggableIsOn ? null : open(menuItem)"
-     role="button" [attr.aria-label]="menuItem.title">
+<div class="app-square-button-1"
+     (click)="draggableIsOn ? null : open(menuItem)"
+     (keydown)="handleKeyDown($event, menuItem)"
+     role="button"
+     [attr.aria-label]="menuItem.title"
+     tabindex="0">
   <div class="icon-container">
       <app-custom-icon
       [icon]="menuItem.icon"

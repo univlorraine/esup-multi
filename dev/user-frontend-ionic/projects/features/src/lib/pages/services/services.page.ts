@@ -80,7 +80,7 @@ export class ServicesPage implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    document.addEventListener('visibilitychange', (event) => this.onVisibilityChange(event));
+    document.addEventListener('visibilitychange', () => this.onVisibilityChange());
 
     this.initMenuItems();
     this.initDragula();
@@ -100,7 +100,7 @@ export class ServicesPage implements OnInit, OnDestroy {
     });
   }
 
-  onVisibilityChange(event) {
+  onVisibilityChange() {
     clearTimeout(this.activateDragTimeOut);
   }
 
@@ -192,7 +192,7 @@ export class ServicesPage implements OnInit, OnDestroy {
           concatMap(dragulaAfterDragResponse => featuresUserOrder$.pipe(
             take(1),
             map(featuresUserOrder => [dragulaAfterDragResponse.sourceModel, featuresUserOrder])))
-        ).subscribe(([dragulaDomAfterDrag, featuresUserOrder]) => {
+        ).subscribe(([dragulaDomAfterDrag]) => {
           const userOrderFeature = dragulaDomAfterDrag.map(elem => elem.id);
 
           setFeaturesUserOrder(userOrderFeature);
@@ -204,8 +204,8 @@ export class ServicesPage implements OnInit, OnDestroy {
     this.draggableServices.forEach(item => {
       item.nativeElement.removeEventListener('mousedown', this.onPressBound);
       item.nativeElement.removeEventListener('touchstart', this.onPressBound);
-      item.nativeElement.addEventListener('mousedown', (event) => this.onPress(event));
-      item.nativeElement.addEventListener('touchstart', (event) => this.onPress(event));
+      item.nativeElement.addEventListener('mousedown', () => this.onPress());
+      item.nativeElement.addEventListener('touchstart', () => this.onPress());
     });
 
     document.removeEventListener('mouseup', this.onUpBound);
@@ -214,7 +214,7 @@ export class ServicesPage implements OnInit, OnDestroy {
     document.addEventListener('touchend', this.onUpBound);
   }
 
-  private onPress(event) {
+  private onPress() {
     if (this.dragIsAllowed && !this.draggableIsOn && this.searchQuery$.getValue().length === 0) {
       clearTimeout(this.activateDragTimeOut);
       this.activateDragTimeOut = window.setTimeout(() => {
@@ -223,7 +223,7 @@ export class ServicesPage implements OnInit, OnDestroy {
     }
   }
 
-  private onUp(event) {
+  private onUp() {
     if (!this.draggableIsOn) {
       clearTimeout(this.activateDragTimeOut);
     }

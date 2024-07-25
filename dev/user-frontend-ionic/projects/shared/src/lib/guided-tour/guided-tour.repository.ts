@@ -38,9 +38,6 @@
  */
 
 import { createStore, setProps, withProps } from '@ngneat/elf';
-import { persistState } from '@ngneat/elf-persist-state';
-import { localForageStore } from '../store/local-forage';
-
 
 const STORE_NAME = 'guided-tour';
 
@@ -58,11 +55,6 @@ const store = createStore(
     scheduleTourViewed: false
   })
 );
-
-const persist = persistState(store, {
-  key: STORE_NAME,
-  storage: localForageStore,
-});
 
 export const isAnonymousTourViewed = () => store.getValue()?.anonymousTourViewed;
 export const isLoggedTourViewed = () => store.getValue()?.loggedTourViewed;

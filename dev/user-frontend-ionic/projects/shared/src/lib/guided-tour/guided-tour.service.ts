@@ -41,7 +41,6 @@ import { Inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Capacitor } from '@capacitor/core';
 import { OrientationType, ScreenOrientation } from '@capawesome/capacitor-screen-orientation';
-import { Platform } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { ShepherdService } from 'angular-shepherd';
 import { Observable } from 'rxjs';

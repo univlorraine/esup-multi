@@ -55,7 +55,7 @@ export interface ImportantNews {
   authorization?: Authorization;
   translations?: Translation[];
   statisticName?: string;
-};
+}
 
 interface Translation {
   // eslint-disable-next-line @typescript-eslint/naming-convention

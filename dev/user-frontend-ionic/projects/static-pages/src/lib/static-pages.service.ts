@@ -61,6 +61,6 @@ export class StaticPagesService {
     return this.http.get<StaticPage[]>(url).pipe(
       tap((staticPages) => {
         this.staticPagesRepository.setStaticPages(staticPages);
-      }));;
+      }));
   }
 }

@@ -43,7 +43,7 @@ export enum MenuItemLinkType {
   router,
   external,
   sso
-};
+}
 
 interface MenuItemLinkCommon {
   type: MenuItemLinkType;
