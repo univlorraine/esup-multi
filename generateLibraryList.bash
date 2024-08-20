@@ -190,7 +190,7 @@ licenseMarkdown ./dev/user-backend-mocks
   echo "## [Backend](./dev/user-backend-nest)"
   echo "### [main](./dev/user-backend-nest/main)"
   echo "<span id=\"backend-main\"></span>"
-} >> libraries.md
+} >> $OUTPUT_FILE
 licenseSummary ./dev/user-backend-nest/main
 {
   echo "<details><summary>Détails</summary>"
@@ -208,7 +208,7 @@ for d in ./dev/user-backend-nest/microservices/*; do
     {
       echo "### [$(basename "$d")](./dev/user-backend-nest/microservices/$(basename "$d"))"
       echo "<span id=\"backend-$(basename "$d")\"></span>"
-    } >> libraries.md
+    } >> $OUTPUT_FILE
     licenseSummary "$d"
     {
       echo "<details><summary>Détails</summary>"

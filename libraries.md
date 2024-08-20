@@ -42,8 +42,8 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 
 ## [Frontend](./dev/user-frontend-ionic)
 ```
-├─ MIT: 77
-├─ Apache-2.0: 6
+├─ MIT: 76
+├─ Apache-2.0: 7
 ├─ BSD-2-Clause: 2
 ├─ MIT*: 1
 ├─ Apache-2.0*: 1
@@ -70,10 +70,10 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@angular/platform-browser@14.3.0](https://github.com/angular/angular) - MIT
 - [@angular/router@14.3.0](https://github.com/angular/angular) - MIT
 - [@awesome-cordova-plugins/core@6.7.0](https://github.com/danielsogl/awesome-cordova-plugins) - MIT
-- [@capacitor-community/barcode-scanner@4.0.1](https://github.com/capacitor-community/barcode-scanner) - MIT
 - [@capacitor-community/contacts@5.0.5](https://github.com/capacitor-community/contacts) - MIT
 - [@capacitor-community/screen-brightness@5.0.0](https://github.com/capacitor-community/screen-brightness) - MIT
 - [@capacitor-firebase/messaging@5.4.1](https://github.com/capawesome-team/capacitor-firebase) - Apache-2.0
+- [@capacitor-mlkit/barcode-scanning@5.4.0](https://github.com/capawesome-team/capacitor-mlkit) - Apache-2.0
 - [@capacitor/android@5.3.0](https://github.com/ionic-team/capacitor) - MIT
 - [@capacitor/app@5.0.8](https://github.com/ionic-team/capacitor-plugins) - MIT
 - [@capacitor/assets@3.0.5](https://github.com/ionic-team/capacitor-assets) - MIT
