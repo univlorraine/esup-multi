@@ -1,0 +1,23 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Run full backend" type="CompoundRunConfigurationType">
+    <toRun name="backend/auth" type="js.build_tools.npm" />
+    <toRun name="backend/cards" type="js.build_tools.npm" />
+    <toRun name="backend/chatbot" type="js.build_tools.npm" />
+    <toRun name="backend/clocking" type="js.build_tools.npm" />
+    <toRun name="backend/contact-us" type="js.build_tools.npm" />
+    <toRun name="backend/contacts" type="js.build_tools.npm" />
+    <toRun name="backend/features" type="js.build_tools.npm" />
+    <toRun name="backend/important-news" type="js.build_tools.npm" />
+    <toRun name="backend/mail-calendar" type="js.build_tools.npm" />
+    <toRun name="backend/main" type="js.build_tools.npm" />
+    <toRun name="backend/map" type="js.build_tools.npm" />
+    <toRun name="backend/notifications" type="js.build_tools.npm" />
+    <toRun name="backend/restaurants" type="js.build_tools.npm" />
+    <toRun name="backend/rss" type="js.build_tools.npm" />
+    <toRun name="backend/schedule" type="js.build_tools.npm" />
+    <toRun name="backend/social-network" type="js.build_tools.npm" />
+    <toRun name="backend/static-pages" type="js.build_tools.npm" />
+    <toRun name="backend/statistics" type="js.build_tools.npm" />
+    <method v="2" />
+  </configuration>
+</component>
