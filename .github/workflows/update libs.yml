@@ -44,6 +44,7 @@ jobs:
     - name: Add changes to Git
       if: steps.changes.outputs.packageJson == 'true'
       run: |
+        git config core.fileMode false
         git add -A
 
     - name: Commit changes
