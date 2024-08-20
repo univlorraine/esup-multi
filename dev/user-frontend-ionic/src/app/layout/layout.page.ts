@@ -112,7 +112,7 @@ export class LayoutPage implements AfterViewInit, OnChanges {
     combineLatest([
       this.topMenuItems$.pipe(
         distinctUntilChanged((prevMenuItems, currentMenuItems) => this.menuService
-          .areSpecifiedPropetiesEqualsInMenuItemsArrays(
+          .areSpecifiedPropertiesEqualsInMenuItemsArrays(
             prevMenuItems,
             currentMenuItems,
             ['link.routerLink']
@@ -121,10 +121,10 @@ export class LayoutPage implements AfterViewInit, OnChanges {
       this.layoutChangeSubject$
     ])
     .pipe(
-      filter(([menuItems, layout]) => layout === 'tabs'),
+      filter(([, layout]) => layout === 'tabs'),
       map(([menuItems]) => menuItems),
     )
-    .subscribe(menuItems => { // Triggers when either layout has gone from full to tabs or when the topMenuItems have changed
+    .subscribe(() => { // Triggers when either layout has gone from full to tabs or when the topMenuItems have changed
       this.navigationService.setExternalNavigation(false);
       this.notificationsService.loadNotifications(0, 10).subscribe();
     });

@@ -44,9 +44,5 @@ import { Component, Input } from '@angular/core';
   templateUrl: './svg_cart_europ.html',
 })
 export class EuStudentCardComponent{
-
   @Input() userAndCardsData;
-
-  constructor() {}
-
 }

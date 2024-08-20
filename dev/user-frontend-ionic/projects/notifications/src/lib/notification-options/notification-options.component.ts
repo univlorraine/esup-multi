@@ -121,7 +121,7 @@ export class NotificationOptionsComponent {
       channelCodes: this.unsubscribedChannelsCodes
     }).pipe(
       take(1)
-    ).subscribe(async (status) => {
+    ).subscribe(async () => {
       if (isSubscription) {
         this.notificationRepository.subscribeChannel(channel.code);
         this.toastService.displayToast('NOTIFICATIONS.ALERT.CHANNEL.SUBSCRIBED', channel.label);

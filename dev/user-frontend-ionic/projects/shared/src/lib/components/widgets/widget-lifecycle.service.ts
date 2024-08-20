@@ -58,8 +58,6 @@ export class WidgetLifecycleService {
   private widgetViewWillLeaveSubject: Subject<string[]> = new Subject();
   private widgetViewDidLeaveSubject: Subject<string[]> = new Subject();
 
-  constructor() {}
-
   sendWidgetViewWillEnter(widgets) {
     this.widgetViewWillEnterSubject.next(widgets);
   }

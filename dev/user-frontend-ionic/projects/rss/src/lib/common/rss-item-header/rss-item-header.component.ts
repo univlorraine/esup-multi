@@ -51,9 +51,6 @@ export class RssItemHeaderComponent {
   @Input() display: string;
   @ContentChild(RssItemHeaderButtonDirective, { read: TemplateRef }) rssItemHeaderAction: TemplateRef<any>;
 
-  constructor() {
-  }
-
   public isMediaAnImage(media: any): boolean {
     const imageTypes: Array<string> = [
       'image/gif',

@@ -168,7 +168,7 @@ export class ScheduleCalendarComponent implements OnDestroy {
 
             return successCallback(events);
           },
-          error: (error) => {
+          error: () => {
             if (this.calendarDisplaySomeDateOutOfState) {
               this.loadScheduleOutOfStateError = true;
 
