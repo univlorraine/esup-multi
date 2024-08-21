@@ -40,7 +40,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { combineLatest, Observable } from 'rxjs';
-import { catchError, filter, finalize, take, map, tap } from 'rxjs/operators';
+import { catchError, filter, finalize, take, map } from 'rxjs/operators';
 import { NotificationsRepository, NotificationsService, TranslatedChannel } from '@multi/shared';
 import { ToastService } from '../toast.service';
 

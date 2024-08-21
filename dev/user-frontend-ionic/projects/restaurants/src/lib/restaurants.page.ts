@@ -96,7 +96,7 @@ export class RestaurantsPage implements OnInit {
     setFavoriteRestaurant(restaurantId);
   }
 
-  unsetFavoriteRestaurant(restaurantId: number) {
+  unsetFavoriteRestaurant() {
     setFavoriteRestaurant(null);
   }
 
