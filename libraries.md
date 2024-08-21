@@ -47,7 +47,6 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 ├─ BSD-2-Clause: 2
 ├─ Custom: LICENSE: 1
 ├─ MIT*: 1
-├─ Apache-2.0*: 1
 └─ 0BSD: 1
 ```
 
@@ -70,27 +69,27 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@angular/platform-browser@16.2.12](https://github.com/angular/angular) - MIT
 - [@angular/router@16.2.12](https://github.com/angular/angular) - MIT
 - [@awesome-cordova-plugins/core@6.8.0](https://github.com/danielsogl/awesome-cordova-plugins) - MIT
-- [@capacitor-community/contacts@5.0.5](https://github.com/capacitor-community/contacts) - MIT
-- [@capacitor-community/screen-brightness@5.0.0](https://github.com/capacitor-community/screen-brightness) - MIT
-- [@capacitor-firebase/messaging@5.4.1](https://github.com/capawesome-team/capacitor-firebase) - Apache-2.0
-- [@capacitor-mlkit/barcode-scanning@5.4.0](https://github.com/capawesome-team/capacitor-mlkit) - Apache-2.0
-- [@capacitor/android@5.3.0](https://github.com/ionic-team/capacitor) - MIT
-- [@capacitor/app@5.0.8](https://github.com/ionic-team/capacitor-plugins) - MIT
+- [@capacitor-community/contacts@6.0.6](https://github.com/capacitor-community/contacts) - MIT
+- [@capacitor-community/screen-brightness@6.0.0](https://github.com/capacitor-community/screen-brightness) - MIT
+- [@capacitor-firebase/messaging@6.1.0](https://github.com/capawesome-team/capacitor-firebase) - Apache-2.0
+- [@capacitor-mlkit/barcode-scanning@6.1.0](https://github.com/capawesome-team/capacitor-mlkit) - Apache-2.0
+- [@capacitor/android@6.1.2](https://github.com/ionic-team/capacitor) - MIT
+- [@capacitor/app@6.0.1](https://github.com/ionic-team/capacitor-plugins) - MIT
 - [@capacitor/assets@3.0.5](https://github.com/ionic-team/capacitor-assets) - MIT
-- [@capacitor/browser@5.2.1](https://github.com/ionic-team/capacitor-plugins) - MIT
-- [@capacitor/camera@5.0.10](https://github.com/ionic-team/capacitor-plugins) - MIT
-- [@capacitor/cli@5.7.7](https://github.com/ionic-team/capacitor) - MIT
-- [@capacitor/core@5.7.7](https://github.com/ionic-team/capacitor) - MIT
-- [@capacitor/device@5.0.8](https://github.com/ionic-team/capacitor-plugins) - MIT
-- [@capacitor/geolocation@5.0.8](https://github.com/ionic-team/capacitor-plugins) - MIT
-- [@capacitor/haptics@5.0.8](https://github.com/ionic-team/capacitor-plugins) - MIT
-- [@capacitor/ios@5.7.7](https://github.com/ionic-team/capacitor) - MIT
-- [@capacitor/keyboard@5.0.9](https://github.com/ionic-team/capacitor-plugins) - MIT
-- [@capacitor/network@5.0.8](https://github.com/ionic-team/capacitor-plugins) - MIT
-- [@capacitor/splash-screen@5.0.8](https://github.com/ionic-team/capacitor-plugins) - MIT
-- [@capacitor/status-bar@5.0.8](https://github.com/ionic-team/capacitor-plugins) - MIT
-- [@capawesome/capacitor-badge@5.0.0](https://github.com/capawesome-team/capacitor-plugins) - MIT
-- [@capawesome/capacitor-screen-orientation@5.0.0](https://github.com/capawesome-team/capacitor-plugins) - MIT
+- [@capacitor/browser@6.0.2](https://github.com/ionic-team/capacitor-plugins) - MIT
+- [@capacitor/camera@6.0.2](https://github.com/ionic-team/capacitor-plugins) - MIT
+- [@capacitor/cli@6.1.2](https://github.com/ionic-team/capacitor) - MIT
+- [@capacitor/core@6.1.2](https://github.com/ionic-team/capacitor) - MIT
+- [@capacitor/device@6.0.1](https://github.com/ionic-team/capacitor-plugins) - MIT
+- [@capacitor/geolocation@6.0.1](https://github.com/ionic-team/capacitor-plugins) - MIT
+- [@capacitor/haptics@6.0.1](https://github.com/ionic-team/capacitor-plugins) - MIT
+- [@capacitor/ios@6.1.2](https://github.com/ionic-team/capacitor) - MIT
+- [@capacitor/keyboard@6.0.2](https://github.com/ionic-team/capacitor-plugins) - MIT
+- [@capacitor/network@6.0.2](https://github.com/ionic-team/capacitor-plugins) - MIT
+- [@capacitor/splash-screen@6.0.2](https://github.com/ionic-team/capacitor-plugins) - MIT
+- [@capacitor/status-bar@6.0.1](https://github.com/ionic-team/capacitor-plugins) - MIT
+- [@capawesome/capacitor-badge@6.0.0](https://github.com/capawesome-team/capacitor-plugins) - MIT
+- [@capawesome/capacitor-screen-orientation@6.0.1](https://github.com/capawesome-team/capacitor-plugins) - MIT
 - [@fullcalendar/angular@6.1.15](https://github.com/fullcalendar/fullcalendar-angular) - MIT
 - [@ionic/angular-toolkit@9.0.0](https://github.com/ionic-team/angular-toolkit) - MIT
 - [@ionic/angular@7.8.6](https://github.com/ionic-team/ionic-framework) - MIT
@@ -106,15 +105,14 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@types/jasminewd2@2.0.13](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/leaflet@1.9.12](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/node@12.20.55](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@typescript-eslint/eslint-plugin@7.17.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
-- [@typescript-eslint/parser@7.17.0](https://github.com/typescript-eslint/typescript-eslint) - BSD-2-Clause
+- [@typescript-eslint/eslint-plugin@7.18.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
+- [@typescript-eslint/parser@7.18.0](https://github.com/typescript-eslint/typescript-eslint) - BSD-2-Clause
 - [angular-shepherd@16.0.0](https://github.com/shipshapecode/angular-shepherd) - MIT
 - [angularx-qrcode@16.0.2](https://github.com/cordobo/angularx-qrcode) - MIT
-- [call-number@1.0.1](https://github.com/Rohfosho/CordovaCallNumberPlugin) - Apache-2.0*
-- [capacitor-secure-storage-plugin@0.9.0](https://github.com/martinkasa/capacitor-secure-storage-plugin) - MIT
+- [capacitor-secure-storage-plugin@0.10.0](https://github.com/martinkasa/capacitor-secure-storage-plugin) - MIT
 - [date-fns@2.30.0](https://github.com/date-fns/date-fns) - MIT
 - [eslint@8.57.0](https://github.com/eslint/eslint) - MIT
-- [firebase@10.12.4](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
+- [firebase@10.13.0](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
 - [fullcalendar@6.1.15](https://github.com/fullcalendar/fullcalendar) - MIT
 - [geolib@3.3.4](https://github.com/manuelbieh/geolib) - MIT
 - [ionicons@7.4.0](https://github.com/ionic-team/ionicons) - MIT
