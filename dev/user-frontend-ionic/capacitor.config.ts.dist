@@ -55,9 +55,6 @@ const config: CapacitorConfig = {
     FirebaseMessaging: {
       presentationOptions: ['badge', 'sound', 'alert'],
     },
-  },
-  server: {
-    androidScheme: 'http'
   }
 };
 
