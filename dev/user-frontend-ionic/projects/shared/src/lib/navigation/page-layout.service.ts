@@ -71,7 +71,7 @@ export class PageLayoutService {
       ),
       this.menuService.tabsMenuItems$.pipe(
         distinctUntilChanged((prevMenuItems, currentMenuItems) => this.menuService
-          .areSpecifiedPropetiesEqualsInMenuItemsArrays(
+          .areSpecifiedPropertiesEqualsInMenuItemsArrays(
             prevMenuItems,
             currentMenuItems,
             ['link.routerLink']
@@ -100,7 +100,7 @@ export class PageLayoutService {
       this.navigationService.currentRouterLink$.pipe(distinctUntilChanged()),
       this.menuService.allMenuItems$.pipe(
         distinctUntilChanged((prevMenuItems, currentMenuItems) => this.menuService
-          .areSpecifiedPropetiesEqualsInMenuItemsArrays(
+          .areSpecifiedPropertiesEqualsInMenuItemsArrays(
             prevMenuItems,
             currentMenuItems,
             ['link.type', 'title', 'type']

@@ -54,6 +54,4 @@ export class CustomIconComponent {
   @Input() slot?: string;
 
   public isDarkTheme$ = isDarkTheme$;
-
-  constructor() {}
 }

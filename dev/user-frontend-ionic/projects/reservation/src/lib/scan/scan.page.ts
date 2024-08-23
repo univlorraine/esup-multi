@@ -38,10 +38,10 @@
  */
 
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
+import { BarcodeScanner, BarcodeValueType } from '@capacitor-mlkit/barcode-scanning';
 import { ReservationService } from '../reservation.service';
 import { NavigationService } from '@multi/shared';
+import { PluginListenerHandle } from '@capacitor/core';
 
 @Component({
   selector: 'app-scan',
@@ -50,30 +50,49 @@ import { NavigationService } from '@multi/shared';
 })
 
 export class QRScanPage {
-  hideContent = false;
+  private listener: PluginListenerHandle;
+  private url: string = null;
 
   constructor(
     private navigationService: NavigationService,
     private reservationService: ReservationService,
-    private router: Router,
   ) { }
 
   ionViewWillLeave() {
+    this.listener.remove();
     document.querySelector('body').classList.remove('scanner-active');
     BarcodeScanner.stopScan();
+    if (this.url) {
+      // ouvrir l'URL depuis le listener ne fonctionne pas à chaque fois, donc on l'ouvre quand on quitte la page
+      this.reservationService.openURL(this.url);
+    }
   }
 
   async ionViewWillEnter() {
     document.querySelector('body').classList.add('scanner-active');
-    const permission = await BarcodeScanner.checkPermission({ force: true });
-    if (!permission.granted) {
-      BarcodeScanner.openAppSettings();
+
+    const granted = await this.requestPermissions();
+    if (!granted) {
+      BarcodeScanner.openSettings();
+      this.navigationService.navigateBack();
       return;
     }
-    const result = await BarcodeScanner.startScan();
-    if (result.hasContent) {
-      this.reservationService.openURL(result.content);
-      this.navigationService.navigateBack();
-    }
+
+    this.listener = await BarcodeScanner.addListener(
+      'barcodeScanned',
+      async result => {
+        if (result.barcode.valueType === BarcodeValueType.Url) {
+          this.url = result.barcode.displayValue;
+          this.navigationService.navigateBack();
+        }
+      },
+    );
+
+    await BarcodeScanner.startScan();
+  }
+
+  private async requestPermissions(): Promise<boolean> {
+    const { camera } = await BarcodeScanner.requestPermissions();
+    return camera === 'granted' || camera === 'limited';
   }
 }

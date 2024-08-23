@@ -40,6 +40,7 @@
 import { Component, Input } from '@angular/core';
 import { isDarkTheme$, MenuOpenerService, ServiceMenuItem, updateFeatureIsNewToFalse } from '@multi/shared';
 
+
 @Component({
   selector: 'app-service',
   templateUrl: './service.component.html',
@@ -57,5 +58,14 @@ export class ServiceComponent {
   open(menuItem: ServiceMenuItem) {
     updateFeatureIsNewToFalse(menuItem);
     this.menuOpenerService.open(menuItem);
+  }
+
+  handleKeyDown(event: KeyboardEvent, menuItem: any): void {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault(); // Prevent default behavior of the key press
+      if (!this.draggableIsOn) {
+        this.open(menuItem);
+      }
+    }
   }
 }

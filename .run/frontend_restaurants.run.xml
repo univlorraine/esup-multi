@@ -1,0 +1,13 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="frontend/restaurants" type="js.build_tools.npm" folderName="Frontend">
+    <package-json value="$PROJECT_DIR$/dev/user-frontend-ionic/package.json" />
+    <command value="run" />
+    <scripts>
+      <script value="module:watch" />
+    </scripts>
+    <arguments value="restaurants" />
+    <node-interpreter value="project" />
+    <envs />
+    <method v="2" />
+  </configuration>
+</component>

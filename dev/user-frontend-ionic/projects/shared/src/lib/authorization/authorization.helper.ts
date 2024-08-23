@@ -46,7 +46,7 @@ export interface Authorization {
 
 export interface WithAuthorization {
     authorization?: Authorization;
-};
+}
 
 export class AuthorizationHelper {
 

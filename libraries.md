@@ -42,83 +42,78 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 
 ## [Frontend](./dev/user-frontend-ionic)
 ```
-├─ MIT: 77
-├─ Apache-2.0: 6
+├─ MIT: 73
+├─ Apache-2.0: 7
 ├─ BSD-2-Clause: 2
+├─ Custom: LICENSE: 1
 ├─ MIT*: 1
-├─ Apache-2.0*: 1
-├─ BSD-3-Clause: 1
 └─ 0BSD: 1
 ```
 
 <details><summary>Détails</summary>
 
-- [@angular-devkit/build-angular@14.2.13](https://github.com/angular/angular-cli) - MIT
-- [@angular-eslint/builder@13.0.1](https://github.com/angular-eslint/angular-eslint) - MIT
-- [@angular-eslint/eslint-plugin-template@13.0.1](https://github.com/angular-eslint/angular-eslint) - MIT
-- [@angular-eslint/eslint-plugin@13.0.1](https://github.com/angular-eslint/angular-eslint) - MIT
-- [@angular-eslint/template-parser@13.0.1](https://github.com/angular-eslint/angular-eslint) - MIT
-- [@angular/animations@14.3.0](https://github.com/angular/angular) - MIT
-- [@angular/cli@14.2.13](https://github.com/angular/angular-cli) - MIT
-- [@angular/common@14.3.0](https://github.com/angular/angular) - MIT
-- [@angular/compiler-cli@14.3.0](https://github.com/angular/angular) - MIT
-- [@angular/compiler@14.3.0](https://github.com/angular/angular) - MIT
-- [@angular/core@14.3.0](https://github.com/angular/angular) - MIT
-- [@angular/forms@14.3.0](https://github.com/angular/angular) - MIT
-- [@angular/language-service@14.3.0](https://github.com/angular/angular) - MIT
-- [@angular/platform-browser-dynamic@14.3.0](https://github.com/angular/angular) - MIT
-- [@angular/platform-browser@14.3.0](https://github.com/angular/angular) - MIT
-- [@angular/router@14.3.0](https://github.com/angular/angular) - MIT
-- [@awesome-cordova-plugins/core@6.7.0](https://github.com/danielsogl/awesome-cordova-plugins) - MIT
-- [@capacitor-community/barcode-scanner@4.0.1](https://github.com/capacitor-community/barcode-scanner) - MIT
-- [@capacitor-community/contacts@5.0.5](https://github.com/capacitor-community/contacts) - MIT
-- [@capacitor-community/screen-brightness@5.0.0](https://github.com/capacitor-community/screen-brightness) - MIT
-- [@capacitor-firebase/messaging@5.4.1](https://github.com/capawesome-team/capacitor-firebase) - Apache-2.0
-- [@capacitor/android@5.3.0](https://github.com/ionic-team/capacitor) - MIT
-- [@capacitor/app@5.0.8](https://github.com/ionic-team/capacitor-plugins) - MIT
+- [@angular-devkit/build-angular@16.2.14](https://github.com/angular/angular-cli) - MIT
+- [@angular-eslint/builder@16.3.1](https://github.com/angular-eslint/angular-eslint) - MIT
+- [@angular-eslint/eslint-plugin-template@16.3.1](https://github.com/angular-eslint/angular-eslint) - MIT
+- [@angular-eslint/eslint-plugin@16.3.1](https://github.com/angular-eslint/angular-eslint) - MIT
+- [@angular-eslint/template-parser@16.3.1](https://github.com/angular-eslint/angular-eslint) - MIT
+- [@angular/animations@16.2.12](https://github.com/angular/angular) - MIT
+- [@angular/cli@16.2.14](https://github.com/angular/angular-cli) - MIT
+- [@angular/common@16.2.12](https://github.com/angular/angular) - MIT
+- [@angular/compiler-cli@16.2.12](https://github.com/angular/angular) - MIT
+- [@angular/compiler@16.2.12](https://github.com/angular/angular) - MIT
+- [@angular/core@16.2.12](https://github.com/angular/angular) - MIT
+- [@angular/forms@16.2.12](https://github.com/angular/angular) - MIT
+- [@angular/language-service@16.2.12](https://github.com/angular/angular) - MIT
+- [@angular/platform-browser-dynamic@16.2.12](https://github.com/angular/angular) - MIT
+- [@angular/platform-browser@16.2.12](https://github.com/angular/angular) - MIT
+- [@angular/router@16.2.12](https://github.com/angular/angular) - MIT
+- [@awesome-cordova-plugins/core@6.8.0](https://github.com/danielsogl/awesome-cordova-plugins) - MIT
+- [@capacitor-community/contacts@6.0.6](https://github.com/capacitor-community/contacts) - MIT
+- [@capacitor-community/screen-brightness@6.0.0](https://github.com/capacitor-community/screen-brightness) - MIT
+- [@capacitor-firebase/messaging@6.1.0](https://github.com/capawesome-team/capacitor-firebase) - Apache-2.0
+- [@capacitor-mlkit/barcode-scanning@6.1.0](https://github.com/capawesome-team/capacitor-mlkit) - Apache-2.0
+- [@capacitor/android@6.1.2](https://github.com/ionic-team/capacitor) - MIT
+- [@capacitor/app@6.0.1](https://github.com/ionic-team/capacitor-plugins) - MIT
 - [@capacitor/assets@3.0.5](https://github.com/ionic-team/capacitor-assets) - MIT
-- [@capacitor/browser@5.2.1](https://github.com/ionic-team/capacitor-plugins) - MIT
-- [@capacitor/camera@5.0.10](https://github.com/ionic-team/capacitor-plugins) - MIT
-- [@capacitor/cli@5.7.6](https://github.com/ionic-team/capacitor) - MIT
-- [@capacitor/core@5.7.6](https://github.com/ionic-team/capacitor) - MIT
-- [@capacitor/device@5.0.8](https://github.com/ionic-team/capacitor-plugins) - MIT
-- [@capacitor/geolocation@5.0.8](https://github.com/ionic-team/capacitor-plugins) - MIT
-- [@capacitor/haptics@5.0.8](https://github.com/ionic-team/capacitor-plugins) - MIT
-- [@capacitor/ios@5.7.6](https://github.com/ionic-team/capacitor) - MIT
-- [@capacitor/keyboard@5.0.9](https://github.com/ionic-team/capacitor-plugins) - MIT
-- [@capacitor/network@5.0.8](https://github.com/ionic-team/capacitor-plugins) - MIT
-- [@capacitor/splash-screen@5.0.8](https://github.com/ionic-team/capacitor-plugins) - MIT
-- [@capacitor/status-bar@5.0.8](https://github.com/ionic-team/capacitor-plugins) - MIT
-- [@capawesome/capacitor-badge@5.0.0](https://github.com/capawesome-team/capacitor-plugins) - MIT
-- [@capawesome/capacitor-screen-orientation@5.0.0](https://github.com/capawesome-team/capacitor-plugins) - MIT
-- [@fullcalendar/angular@6.1.14](https://github.com/fullcalendar/fullcalendar-angular) - MIT
+- [@capacitor/browser@6.0.2](https://github.com/ionic-team/capacitor-plugins) - MIT
+- [@capacitor/camera@6.0.2](https://github.com/ionic-team/capacitor-plugins) - MIT
+- [@capacitor/cli@6.1.2](https://github.com/ionic-team/capacitor) - MIT
+- [@capacitor/core@6.1.2](https://github.com/ionic-team/capacitor) - MIT
+- [@capacitor/device@6.0.1](https://github.com/ionic-team/capacitor-plugins) - MIT
+- [@capacitor/geolocation@6.0.1](https://github.com/ionic-team/capacitor-plugins) - MIT
+- [@capacitor/haptics@6.0.1](https://github.com/ionic-team/capacitor-plugins) - MIT
+- [@capacitor/ios@6.1.2](https://github.com/ionic-team/capacitor) - MIT
+- [@capacitor/keyboard@6.0.2](https://github.com/ionic-team/capacitor-plugins) - MIT
+- [@capacitor/network@6.0.2](https://github.com/ionic-team/capacitor-plugins) - MIT
+- [@capacitor/splash-screen@6.0.2](https://github.com/ionic-team/capacitor-plugins) - MIT
+- [@capacitor/status-bar@6.0.1](https://github.com/ionic-team/capacitor-plugins) - MIT
+- [@capawesome/capacitor-badge@6.0.0](https://github.com/capawesome-team/capacitor-plugins) - MIT
+- [@capawesome/capacitor-screen-orientation@6.0.1](https://github.com/capawesome-team/capacitor-plugins) - MIT
+- [@fullcalendar/angular@6.1.15](https://github.com/fullcalendar/fullcalendar-angular) - MIT
 - [@ionic/angular-toolkit@9.0.0](https://github.com/ionic-team/angular-toolkit) - MIT
 - [@ionic/angular@7.8.6](https://github.com/ionic-team/ionic-framework) - MIT
-- [@larscom/ngx-translate-module-loader@3.2.0](https://github.com/larscom/ngx-translate-module-loader) - MIT
+- [@larscom/ngx-translate-module-loader@3.2.1](https://github.com/larscom/ngx-translate-module-loader) - MIT
 - [@ngneat/effects-ng@2.0.0](https://github.com/ngneat/effects) - MIT
 - [@ngneat/elf-entities@4.6.0](https://github.com/ngneat/elf) - MIT
 - [@ngneat/elf-persist-state@1.2.1](https://github.com/ngneat/elf) - MIT
 - [@ngneat/elf@2.5.1](https://github.com/ngneat/elf) - MIT
 - [@ngneat/react-rxjs@1.1.0](https://github.com/ngneat/react-rxjs) - MIT
-- [@ngx-translate/core@14.0.0](https://github.com/ngx-translate/core) - MIT
+- [@ngx-translate/core@15.0.0](undefined) - Custom: LICENSE
 - [@trapezedev/configure@7.0.10](https://github.com/ionic-team/capacitor-configure) - MIT*
 - [@types/jasmine@3.6.11](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/jasminewd2@2.0.13](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/leaflet@1.9.12](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/node@12.20.55](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@typescript-eslint/eslint-plugin@5.3.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
-- [@typescript-eslint/parser@5.3.0](https://github.com/typescript-eslint/typescript-eslint) - BSD-2-Clause
-- [angular-shepherd@14.0.0](https://github.com/shipshapecode/angular-shepherd) - MIT
-- [angularx-qrcode@14.0.0](https://github.com/cordobo/angularx-qrcode) - MIT
-- [call-number@1.0.1](https://github.com/Rohfosho/CordovaCallNumberPlugin) - Apache-2.0*
-- [capacitor-secure-storage-plugin@0.9.0](https://github.com/martinkasa/capacitor-secure-storage-plugin) - MIT
+- [@typescript-eslint/eslint-plugin@7.18.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
+- [@typescript-eslint/parser@7.18.0](https://github.com/typescript-eslint/typescript-eslint) - BSD-2-Clause
+- [angular-shepherd@16.0.0](https://github.com/shipshapecode/angular-shepherd) - MIT
+- [angularx-qrcode@16.0.2](https://github.com/cordobo/angularx-qrcode) - MIT
+- [capacitor-secure-storage-plugin@0.10.0](https://github.com/martinkasa/capacitor-secure-storage-plugin) - MIT
 - [date-fns@2.30.0](https://github.com/date-fns/date-fns) - MIT
-- [eslint-plugin-import@2.22.1](https://github.com/benmosher/eslint-plugin-import) - MIT
-- [eslint-plugin-jsdoc@30.7.6](https://github.com/gajus/eslint-plugin-jsdoc) - BSD-3-Clause
-- [eslint-plugin-prefer-arrow@1.2.2](https://github.com/TristonJ/eslint-plugin-prefer-arrow) - MIT
-- [eslint@7.32.0](https://github.com/eslint/eslint) - MIT
-- [firebase@10.12.2](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
-- [fullcalendar@6.1.14](https://github.com/fullcalendar/fullcalendar) - MIT
+- [eslint@8.57.0](https://github.com/eslint/eslint) - MIT
+- [firebase@10.13.0](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
+- [fullcalendar@6.1.15](https://github.com/fullcalendar/fullcalendar) - MIT
 - [geolib@3.3.4](https://github.com/manuelbieh/geolib) - MIT
 - [ionicons@7.4.0](https://github.com/ionic-team/ionicons) - MIT
 - [jasmine-core@3.8.0](https://github.com/jasmine/jasmine) - MIT
@@ -132,16 +127,16 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [leaflet@1.9.4](https://github.com/Leaflet/Leaflet) - BSD-2-Clause
 - [localforage@1.10.0](https://github.com/localForage/localForage) - Apache-2.0
 - [lodash@4.17.21](https://github.com/lodash/lodash) - MIT
-- [ng-packagr@14.2.2](https://github.com/ng-packagr/ng-packagr) - MIT
-- [ng2-dragula@3.2.0](https://github.com/valor-software/ng2-dragula) - MIT
-- [ngx-matomo@1.1.0](https://github.com/Arnaud73/ngx-matomo) - MIT
+- [ng-packagr@16.2.3](https://github.com/ng-packagr/ng-packagr) - MIT
+- [ng2-dragula@5.1.0](https://github.com/valor-software/ng2-dragula) - MIT
+- [ngx-matomo@2.0.0](https://github.com/Arnaud73/ngx-matomo) - MIT
 - [rxjs@7.8.1](https://github.com/reactivex/rxjs) - Apache-2.0
 - [swiper@9.4.1](https://github.com/nolimits4web/Swiper) - MIT
 - [tinycolor2@1.6.0](https://github.com/bgrins/TinyColor) - MIT
 - [ts-node@8.3.0](https://github.com/TypeStrong/ts-node) - MIT
 - [tslib@2.6.3](https://github.com/Microsoft/tslib) - 0BSD
-- [typescript@4.7.4](https://github.com/Microsoft/TypeScript) - Apache-2.0
-- [zone.js@0.11.8](https://github.com/angular/angular) - MIT
+- [typescript@4.9.5](https://github.com/Microsoft/TypeScript) - Apache-2.0
+- [zone.js@0.13.3](https://github.com/angular/angular) - MIT
 
 </details>
 

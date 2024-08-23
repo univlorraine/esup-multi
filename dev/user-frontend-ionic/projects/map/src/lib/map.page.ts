@@ -178,7 +178,8 @@ export class MapPage implements OnDestroy {
   private async refreshUserPosition() {
     const permissionAlreadyGranted = (await Geolocation.checkPermissions()).location === 'granted';
 
-    await Geolocation.getCurrentPosition().then(position => {
+    try {
+      const position = await Geolocation.getCurrentPosition();
       let zoomLevel = 11;
       if (!permissionAlreadyGranted) { // Permission has just been granted now
         zoomLevel = 16;
@@ -196,15 +197,14 @@ export class MapPage implements OnDestroy {
 
       this.positionLayerGroup = Leaflet.layerGroup([circle, marker]).addTo(this.map);
       this.map.setView(latLng, zoomLevel);
-    },
-      error => {
-        const latLngOfTheUniversity: Leaflet.LatLngTuple = [this.config.defaultMapLocation.latitude,
-        this.config.defaultMapLocation.longitude];
-        if (this.positionLayerGroup) {
-          this.positionLayerGroup.remove();
-        }
-        this.map.setView(latLngOfTheUniversity);
-      });
+    } catch (error) {
+      console.error('Error getting current position:', error);
+      const latLngOfTheUniversity: Leaflet.LatLngTuple = [this.config.defaultMapLocation.latitude, this.config.defaultMapLocation.longitude];
+      if (this.positionLayerGroup) {
+        this.positionLayerGroup.remove();
+      }
+      this.map.setView(latLngOfTheUniversity);
+    }
   }
 
   private async loadMarkersInNetworkAvailable() {
