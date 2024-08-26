@@ -209,7 +209,7 @@ export class NotificationsService {
           return this.http.post(url, data);
         })
       )
-      .subscribe(res => {
+      .subscribe(() => {
         this.deleteFCMToken();
         return;
       });

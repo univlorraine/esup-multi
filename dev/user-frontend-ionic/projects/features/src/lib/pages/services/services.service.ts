@@ -46,8 +46,6 @@ import { TranslatedFeature } from '@multi/shared';
 })
 export class ServicesService {
 
-  constructor() { }
-
   sortFeaturesByUserOrder(features: TranslatedFeature[], userOrder: string[]): TranslatedFeature[] {
 
     return features

@@ -37,8 +37,6 @@
  * termes.
  */
 
-import { TestBed } from '@angular/core/testing';
-
 import { AuthorizationHelper, WithAuthorization } from './authorization.helper';
 
 interface Stuff extends WithAuthorization {
