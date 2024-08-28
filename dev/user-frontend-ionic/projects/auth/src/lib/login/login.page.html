@@ -75,13 +75,15 @@
 
     <ion-item lines="none">
       <ion-checkbox
-        [checked]="(saveCredentialsOnAuthentication$ | async)"
         (ionChange)="onSaveCredentialsOnAuthenticationChange($event)"
+        [checked]="(saveCredentialsOnAuthentication$ | async)"
         class="ion-margin-end"
+        justify="start"
+        labelPlacement="end"
         mode="md"
       >
+        <ion-label class="app-text-3 light ion-text-wrap">{{ 'AUTH.LOGIN.SAVE_CREDENTIALS' | translate }}</ion-label>
       </ion-checkbox>
-      <ion-label class="app-text-3 light ion-text-wrap">{{ 'AUTH.LOGIN.SAVE_CREDENTIALS' | translate }}</ion-label>
     </ion-item>
 
     <ion-row class="ion-margin-top ion-padding-horizontal ion-justify-content-center">
