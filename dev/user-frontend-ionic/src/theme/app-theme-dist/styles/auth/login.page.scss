@@ -41,19 +41,11 @@ ion-item {
   --background: transparent;
 }
 
-.input-label {
-  padding-bottom: 10px;
-  color: var(--app-font-color-primary) !important;
-}
-
-.item-has-value .label-floating.sc-ion-label-md-h {
-  padding-bottom: 10px;
+ion-input {
+  --border-color: var(--ion-color-medium-light-tint);
+  --highlight-color: var(--app-font-color-primary);
 }
 
 ion-title {
   color: var(--app-font-color-topbar) !important;
-}
-
-ion-item {
-  --border-color: var(--ion-color-medium-light-tint);;
 }

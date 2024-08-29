@@ -56,21 +56,20 @@
       <div class="app-text-3" [innerHTML]="page.connexion_text"></div>
     </ion-row>
 
-    <ion-item lines="full">
-      <ion-label position="floating" class="input-label app-text-3 light">{{ 'AUTH.LOGIN.USERNAME' | translate }}</ion-label>
-      <ion-input (keyup.enter)="gotoField(passwordField)" type="text" formControlName="username" class="form-control" id="username" required></ion-input>
-      <ion-note class="app-text-5 danger" slot="error" *ngIf="username && username.errors && (username.dirty && username.touched)">
-        {{ 'AUTH.LOGIN.REQUIRED.USERNAME' | translate }}
-      </ion-note>
+    <ion-item lines="none">
+      <ion-input (keyup.enter)="gotoField(passwordField)" class="form-control app-text-3 light"
+                 formControlName="username" id="username" required type="text"
+                 label="{{ 'AUTH.LOGIN.USERNAME' | translate }}" labelPlacement="floating"
+                 errorText="{{ 'AUTH.LOGIN.REQUIRED.USERNAME' | translate }}">
+      </ion-input>
     </ion-item>
 
-    <ion-item lines="full">
-      <ion-label position="floating" class="input-label app-text-3 light">{{ 'AUTH.LOGIN.PASSWORD' | translate }}</ion-label>
-      <ion-input #passwordField (keyup.enter)="keyboardSubmit()" class="form-control" formControlName="password" id="password"
-                 required type="password"></ion-input>
-      <ion-note class="app-text-5 danger" slot="error" *ngIf="password && password.errors && (password.dirty && password.touched)">
-        {{ 'AUTH.LOGIN.REQUIRED.PASSWORD' | translate }}
-      </ion-note>
+    <ion-item lines="none">
+      <ion-input #passwordField (keyup.enter)="keyboardSubmit()" class="form-control app-text-3 light"
+                 formControlName="password" id="password" required type="password"
+                 label="{{ 'AUTH.LOGIN.PASSWORD' | translate }}" labelPlacement="floating"
+                 errorText="{{ 'AUTH.LOGIN.REQUIRED.PASSWORD' | translate }}">
+      </ion-input>
     </ion-item>
 
     <ion-item lines="none">
