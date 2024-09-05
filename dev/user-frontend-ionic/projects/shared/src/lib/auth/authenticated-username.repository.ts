@@ -54,7 +54,7 @@ const authStore = createStore(
   withProps<AuthProps>({ username: null })
 );
 
-export const persist = persistState(authStore, {
+export const persistAuthenticatedUsername = persistState(authStore, {
   key: STORE_NAME,
   storage: localStorageStrategy,
 });

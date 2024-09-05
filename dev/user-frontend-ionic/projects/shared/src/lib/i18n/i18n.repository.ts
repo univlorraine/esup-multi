@@ -54,7 +54,7 @@ const store = createStore(
   })
 );
 
-export const persist = persistState(store, {
+export const persistI18n = persistState(store, {
   key: STORE_NAME,
   storage: localForageStore,
 });

@@ -58,7 +58,7 @@ const store = createStore(
   })
 );
 
-export const persist = persistState(store, {
+export const persistGuidedTour = persistState(store, {
   key: STORE_NAME,
   storage: localForageStore,
 });
