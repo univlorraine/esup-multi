@@ -61,7 +61,7 @@ const authStore = createStore(
   withProps<AuthProps>({ authenticatedUser: null })
 );
 
-export const persist = persistState(authStore, {
+export const persistAuthenticatedUser = persistState(authStore, {
   key: STORE_NAME,
   storage: localForageStore,
 });
