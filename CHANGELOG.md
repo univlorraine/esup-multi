@@ -47,6 +47,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
   * Image à gauche et bloc de texte à droite
   * Image en haut et bloc de texte en dessous
 * **(schedule)** : Il est désormais possible d'accéder directement à l'emploi du temps en web via une url (https://mon-url-vers-ma-pwa.edu/schedule/calendar)
+* **(menu)** : Amélioration de l'ergonomie du menu utilisateur sur les périphériques avec une petite résolution
 
 #### Autres
 * Mise à jour de la librairie [ionicons](https://ionic.io/ionicons) afin de disposer de la nouvelle icône X en remplacement de l'ancienne icône Twitter
