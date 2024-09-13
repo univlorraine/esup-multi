@@ -26,7 +26,8 @@
 The `*` next to the license name indicates that the license was *guessed* by [license-checker-rseidelsohn](https://www.npmjs.com/package/license-checker-rseidelsohn#how-licenses-are-found).
 ## [Root directory](.)
 ```
-└─ MIT: 6
+├─ MIT: 6
+└─ BSD-3-Clause: 1
 ```
 
 <details><summary>Détails</summary>
@@ -37,6 +38,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [concurrently@8.2.2](https://github.com/open-cli-tools/concurrently) - MIT
 - [cz-conventional-changelog@3.3.0](https://github.com/commitizen/cz-conventional-changelog) - MIT
 - [husky@9.0.11](https://github.com/typicode/husky) - MIT
+- [license-checker-rseidelsohn@4.3.0](https://github.com/RSeidelsohn/license-checker-rseidelsohn) - BSD-3-Clause
 
 </details>
 
@@ -244,7 +246,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@typescript-eslint/eslint-plugin@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
 - [@typescript-eslint/parser@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - BSD-2-Clause
 - [agentkeepalive@4.5.0](https://github.com/node-modules/agentkeepalive) - MIT
-- [axios@1.6.7](https://github.com/axios/axios) - MIT
+- [axios@1.7.4](https://github.com/axios/axios) - MIT
 - [cache-manager@5.2.3](https://github.com/node-cache-manager/node-cache-manager) - MIT
 - [cron@2.4.3](https://github.com/kelektiv/node-cron) - MIT
 - [eslint-config-prettier@8.10.0](https://github.com/prettier/eslint-config-prettier) - MIT
