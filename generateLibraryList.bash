@@ -50,13 +50,13 @@ fi
 
 # Check if license-checker-rseidelsohn is installed
 WAS_INSTALLED=1
-if ! command -v license-checker-rseidelsohn &> /dev/null
+if ! npx license-checker-rseidelsohn &> /dev/null
 then
   WAS_INSTALLED=0
-  echo "Installing license-checker-rseidelsohn..."
+  echo "Installing license-checker-rseidelsohn globally..."
   npm i -g license-checker-rseidelsohn
   echo ""
-  if ! command -v license-checker-rseidelsohn &> /dev/null
+  if ! npx license-checker-rseidelsohn &> /dev/null
   then
     echo "license-checker-rseidelsohn could not be installed"
     exit 1
@@ -107,7 +107,7 @@ function licenseSummary() {
   # generate license summary for the given directory
   {
     echo "\`\`\`"
-    license-checker-rseidelsohn --summary --excludePrivatePackages --direct 0 --start "$1" | sed '/^[[:space:]]*$/d'
+    npx license-checker-rseidelsohn --summary --excludePrivatePackages --direct 0 --start "$1" | sed '/^[[:space:]]*$/d'
     echo "\`\`\`"
     echo ""
   } >> $OUTPUT_FILE
@@ -122,7 +122,7 @@ function licenseMarkdown() {
 
   # generate library list for the given directory
   {
-    license-checker-rseidelsohn --markdown --excludePrivatePackages --direct 0 --start "$1" | sed '/^[[:space:]]*$/d'
+    npx license-checker-rseidelsohn --markdown --excludePrivatePackages --direct 0 --start "$1" | sed '/^[[:space:]]*$/d'
     echo ""
   } >> $OUTPUT_FILE
 
