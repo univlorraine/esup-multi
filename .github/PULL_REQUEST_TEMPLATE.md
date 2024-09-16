@@ -1,6 +1,7 @@
 ## Checklist de PR
 Veuillez vérifier que votre PR respecte bien les indications suivantes :
 
+- [ ] Votre PR pointe vers la branche `develop`
 - [ ] Votre PR suit les différentes étapes du guide de contribution : https://www.esup-portail.org/wiki/x/KQCeUQ
 - [ ] Les modifications ont été testées de votre côté, cela implique également des tests sur des périphériques (iOS + Android) si le client a évolué
 - [ ] La documentation a été mise à jour et prend en compte les changements (fichiers README, Wiki Esup)
