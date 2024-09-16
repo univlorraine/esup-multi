@@ -1116,23 +1116,6 @@
         }, {
             "type": "Feature",
             "properties": {
-                "Nom": "Bibliothèque Universitaire Pharmacie-Odontologie",
-                "Horaires": "Du lundi au Vendredi : 8h00-19h00",
-                "Adresse": "30 rue Lionnois 54000 Nancy",
-                "Telephone": "03.72.74.09.50",
-                "Web": "http://bu.univ-lorraine.fr/",
-                "Lien": "http://bu.univ-lorraine.fr/bibliotheques/bu-sante"
-            },
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
-                    6.194373,
-                    48.684148
-                ]
-            }
-        }, {
-            "type": "Feature",
-            "properties": {
                 "Nom": "Bibliothèque Universitaire Ingénieurs – Brabois",
                 "Horaires": "Du lundi au vendredi : 8h00-21h00",
                 "Adresse": "2 avenue de la Forêt de Haye TSA 50603 54518 Vandœuvre-lès-Nancy Cedex",
