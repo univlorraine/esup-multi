@@ -45,6 +45,7 @@ import { catchError, switchMap, take } from 'rxjs/operators';
 import { getAuthToken } from '../auth/auth.repository';
 import { NetworkService } from '../network/network.service';
 import { Capacitor } from '@capacitor/core';
+import { getStatsUid, updateStatsUid } from './statistics.repository';
 
 interface UserActionRequestData {
   authToken: string;
@@ -108,6 +109,24 @@ export class StatisticsService {
         return this.http.post<void>(url, data);
       }),
       catchError(() => of(null))
+    );
+  }
+
+  // Generate a unique id for stats usage and store it in Local Storage
+  public async checkAndGenerateStatsUid() {
+    if (!getStatsUid()) {
+      updateStatsUid(this.uuid4());
+    }
+  }
+
+  private uuid4() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(
+      /[xy]/g,
+      function (c) {
+        const r = (Math.random() * 16) | 0,
+          v = c === 'x' ? r : (r & 0x3) | 0x8;
+        return v.toString(16);
+      },
     );
   }
 }
