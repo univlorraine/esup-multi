@@ -61,8 +61,6 @@ export const persistStatsUid = persistState(statsUidStore, {
 
 export const statsUid$ = statsUidStore.pipe(select((state) => state.uid));
 
-export const getStatsUid = () => statsUidStore.getValue()?.uid;
-
 export const updateStatsUid = (uid: StatsUidProps['uid']) => {
   statsUidStore.update((state) => ({
     ...state,

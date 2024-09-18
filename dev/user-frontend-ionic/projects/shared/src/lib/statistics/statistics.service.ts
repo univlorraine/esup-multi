@@ -39,13 +39,12 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { Device } from '@capacitor/device';
 import { combineLatest, from, Observable, of } from 'rxjs';
 import { catchError, switchMap, take } from 'rxjs/operators';
 import { getAuthToken } from '../auth/auth.repository';
 import { NetworkService } from '../network/network.service';
 import { Capacitor } from '@capacitor/core';
-import { getStatsUid, updateStatsUid } from './statistics.repository';
+import { statsUid$, updateStatsUid } from './statistics.repository';
 
 interface UserActionRequestData {
   authToken: string;
@@ -92,13 +91,13 @@ export class StatisticsService {
   private postUserActionStatistic(userActionDetails: UserActionDetails): Observable<void> {
     const url = `${this.environment.apiEndpoint}/statistics/user-action`;
 
-    return combineLatest([getAuthToken(), from(Device.getId()), from(this.networkService.getConnectionStatus())]).pipe(
+    return combineLatest([getAuthToken(), statsUid$, from(this.networkService.getConnectionStatus())]).pipe(
       take(1),
-      switchMap(([authToken, deviceId, connectionStatus]) => {
+      switchMap(([authToken, statsUid, connectionStatus]) => {
         const data: UserActionRequestData = {
           authToken,
           data: {
-            duid: deviceId.identifier,
+            duid: statsUid,
             action: userActionDetails.action,
             functionality: userActionDetails.functionality,
             platform: Capacitor.getPlatform(),
@@ -114,9 +113,11 @@ export class StatisticsService {
 
   // Generate a unique id for stats usage and store it in Local Storage
   public async checkAndGenerateStatsUid() {
-    if (!getStatsUid()) {
-      updateStatsUid(this.uuid4());
-    }
+    statsUid$.pipe(take(1)).subscribe((uid) => {
+      if (!uid) {
+        updateStatsUid(this.uuid4());
+      }
+    });
   }
 
   private uuid4() {
