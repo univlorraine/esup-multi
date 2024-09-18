@@ -38,7 +38,7 @@
  */
 
 export interface StatisticsUserActionDto {
-  uid: string | null;
+  uid: string;
   userAgent: string;
   xForwardedFor: string;
   duid: string;
@@ -49,8 +49,8 @@ export interface StatisticsUserActionDto {
 }
 
 export interface StatisticsExternalApiUserActionDto {
-  uid: string | null;
-  duid: string | null;
+  uid: string;
+  duid: string;
   action: string;
   service: string;
   platform: string | null;
