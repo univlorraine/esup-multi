@@ -3,13 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## next-release (YYYy-MM-DD)
+## next-release (YYYY-MM-DD)
+
 ### Client
 #### Bug fixes
 * **(statistics)** : suppression de l'utilisation du DeviceId pour le suivi des statistiques d'usage comme préconisé dans le RGPD. Utilisation d'une UID générée automatiquement par le client à la place.
 
 ### Backend
 #### Bug fixes
+* **(maps)** : suppression du tracking du fichier map-data.json et ajout d'un fichier .dist avec des POI factices
 * **(statistics)** : prise en compte de la nouvelle uid de tracking à la place du Device Id pour la génération des statistiques d'usage
 
 ## 1.1.0 (2024-09-13)
