@@ -1,0 +1,299 @@
+{
+    "presidences_points": {
+        "type": "FeatureCollection",
+        "features": [
+            {
+                "type": "Feature",
+                "properties": {
+                    "Nom": "Présidence - Site Cité",
+                    "Descriptif": "Descriptif de Présidence - Site Cité",
+                    "Adresse": "Rue de la forêt  01000 Paris",
+                    "Telephone": "01 02 03 04 05",
+                    "Horaires": "",
+                    "Lien": "http://example.com",
+                    "Web": "http://example.com"
+                },
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [
+                        2.3467186904826645,
+                        48.854383268734956
+                    ]
+                }
+            },
+            {
+                "type": "Feature",
+                "properties": {
+                    "Nom": "Présidence - Site Orsay",
+                    "Descriptif": "Descriptif de Présidence - Site Orsay",
+                    "Adresse": "Rue de la forêt  01000 Paris",
+                    "Telephone": "01 02 03 04 05",
+                    "Horaires": "",
+                    "Lien": "http://example.com",
+                    "Web": "http://example.com"
+                },
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [
+                        2.3079086410214797,
+                        48.862134002068665
+                    ]
+                }
+            }
+        ]
+    },
+    "composantes_points": {
+        "type": "FeatureCollection",
+        "features": [
+            {
+                "type": "Feature",
+                "properties": {
+                    "Nom": "Sciences Po",
+                    "Descriptif": "Descriptif de Sciences Po",
+                    "Adresse": "Rue de la forêt  01000 Paris",
+                    "Telephone": "01 02 03 04 05",
+                    "Horaires": "",
+                    "Lien": "http://example.com",
+                    "Web": "http://example.com"
+                },
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [
+                        2.3290566836289646,
+                        48.85390543261499
+                    ]
+                }
+            },
+            {
+                "type": "Feature",
+                "properties": {
+                    "Nom": "Faculté de Pharmacie",
+                    "Descriptif": "Descriptif de Faculté de Pharmacie",
+                    "Adresse": "Rue de la forêt  01000 Paris",
+                    "Telephone": "01 02 03 04 05",
+                    "Horaires": "",
+                    "Lien": "http://example.com",
+                    "Web": "http://example.com"
+                },
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [
+                        2.3359908596751855,
+                        48.843015325026435
+                    ]
+                }
+            }
+        ]
+    },
+    "bus_points": {
+        "type": "FeatureCollection",
+        "features": [
+            {
+                "type": "Feature",
+                "properties": {
+                    "Nom": "Bibliothèque Universitaire La Madeleine",
+                    "Horaires": "Du Mercredi au vendredi : 9h00-12h00 - 12h45-16h15\n Vendredi 8h30-13h00",
+                    "Adresse": "Rue de la forêt  01000 Paris",
+                    "Telephone": "01 02 03 04 05",
+                    "Web": "http://example.com"
+                },
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [
+                        2.3241929233072707,
+                        48.86924811236367
+                    ]
+                }
+            },
+            {
+                "type": "Feature",
+                "properties": {
+                    "Nom": "Bibliothèque Universitaire  La Bastille",
+                    "Horaires": "Du Mercredi au vendredi : 9h00-12h00 - 12h45-16h15\n Vendredi 8h30-13h00",
+                    "Adresse": "Rue de la forêt  01000 Paris",
+                    "Telephone": "01 02 03 04 05",
+                    "Web": "http://example.com"
+                },
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [
+                        2.3686278007923676,
+                        48.853545735218816
+                    ]
+                }
+            }
+        ]
+    },
+    "restos_points": {
+        "type": "FeatureCollection",
+        "features": [
+            {
+                "type": "Feature",
+                "properties": {
+                    "Nom": "Restaurant Universitaire Campus 1",
+                    "Descriptif": "",
+                    "Adresse": "Rue de la forêt  01000 Paris",
+                    "Telephone": "01 02 03 04 05",
+                    "Horaires": "Lundi-Vendredi 11h30 – 13h30",
+                    "Lien": "http://example.com",
+                    "Web": "http://example.com"
+                },
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [
+                        2.3517868451422417,
+                        48.84090230441078
+                    ]
+                }
+            },
+            {
+                "type": "Feature",
+                "properties": {
+                    "Nom": "Restaurant Universitaire Campus 2",
+                    "Descriptif": "",
+                    "Adresse": "Rue de la forêt  01000 Paris",
+                    "Telephone": "01 02 03 04 05",
+                    "Horaires": "Lundi-Vendredi 11h30 – 13h30",
+                    "Lien": "http://example.com",
+                    "Web": "http://example.com"
+                },
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [
+                        2.3545433987853324,
+                        48.86240823443377
+                    ]
+                }
+            }
+        ]
+    },
+    "cites_points": {
+        "type": "FeatureCollection",
+        "features": [
+            {
+                "type": "Feature",
+                "properties": {
+                    "Nom": "Cité Universitaire Italie",
+                    "Descriptif": "Descriptif Cité Universitaire Italie",
+                    "Adresse": "Rue de la forêt  01000 Paris",
+                    "Telephone": "01 02 03 04 05",
+                    "Horaires": "",
+                    "Lien": "http://example.com",
+                    "Web": "http://example.com"
+                },
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [
+                        2.357777173284931,
+                        48.83345521599942
+                    ]
+                }
+            },
+            {
+                "type": "Feature",
+                "properties": {
+                    "Nom": "Cité Universitaire Popincourt",
+                    "Descriptif": "Descriptif Cité Universitaire popincourt",
+                    "Adresse": "Rue de la forêt  01000 Paris",
+                    "Telephone": "01 02 03 04 05",
+                    "Horaires": "",
+                    "Lien": "http://example.com",
+                    "Web": "http://example.com"
+                },
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [
+                        2.3767162685816148,
+                        48.85858178132521
+                    ]
+                }
+            }
+        ]
+    },
+    "santes_points": {
+        "type": "FeatureCollection",
+        "features": [
+            {
+                "type": "Feature",
+                "properties": {
+                    "Nom": "Infirmerie Archives",
+                    "Descriptif": "Descriptif Infirmerie Archives",
+                    "Adresse": "Rue de la forêt  01000 Paris",
+                    "Telephone": "01 02 03 04 05",
+                    "Horaires": "",
+                    "Lien": "http://example.com",
+                    "Web": "http://example.com"
+                },
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [
+                        2.3571722485539595,
+                        48.86058629775207
+                    ]
+                }
+            },
+            {
+                "type": "Feature",
+                "properties": {
+                    "Nom": "SUMPPS Tuilerie",
+                    "Descriptif": "Descriptif SUMPPS Tuilerie",
+                    "Adresse": "Rue de la forêt  01000 Paris",
+                    "Telephone": "01 02 03 04 05",
+                    "Horaires": "",
+                    "Lien": "http://example.com",
+                    "Web": "http://example.com"
+                },
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [
+                        2.33076542178264,
+                        48.86436025213916
+                    ]
+                }
+            }
+        ]
+    },
+    "suaps_points": {
+        "type": "FeatureCollection",
+        "features": [
+            {
+                "type": "Feature",
+                "properties": {
+                    "Nom": "Complexe Sportif Jussieu",
+                    "Descriptif": "Descriptif Complexe Sportif Jussieu",
+                    "Adresse": "Rue de la forêt  01000 Paris",
+                    "Telephone": "01 02 03 04 05",
+                    "Horaires": "",
+                    "Lien": "http://example.com",
+                    "Web": "http://example.com"
+                },
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [
+                        2.357407545766903,
+                        48.84936477561433
+                    ]
+                }
+            },
+            {
+                "type": "Feature",
+                "properties": {
+                    "Nom": "Complexe Sportif Vivienne",
+                    "Descriptif": "Descriptif Complexe Sportif Vivienne",
+                    "Adresse": "Rue de la forêt  01000 Paris",
+                    "Telephone": "01 02 03 04 05",
+                    "Horaires": "",
+                    "Lien": "http://example.com",
+                    "Web": "http://example.com"
+                },
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": [
+                        2.340147049272692,
+                        48.86673897319426
+                    ]
+                }
+            }
+        ]
+    }
+}
