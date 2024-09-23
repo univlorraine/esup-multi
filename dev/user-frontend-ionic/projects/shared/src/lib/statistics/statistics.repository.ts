@@ -37,22 +37,35 @@
  * termes.
  */
 
-export interface StatisticsUserActionDto {
+import { createStore, select, withProps } from '@ngneat/elf';
+import {
+  persistState,
+  localStorageStrategy
+} from '@ngneat/elf-persist-state';
+
+const STORE_NAME = 'stats-uid';
+
+interface StatsUidProps {
   uid: string;
-  userAgent: string;
-  xForwardedFor: string;
-  duid: string;
-  action: 'OPEN';
-  functionality: string;
-  platform: string;
-  connectionType: string;
 }
 
-export interface StatisticsExternalApiUserActionDto {
-  uid: string;
-  duid: string;
-  action: string;
-  service: string;
-  platform: string | null;
-  connection: string;
-}
+const statsUidStore = createStore(
+  { name: STORE_NAME },
+  withProps<StatsUidProps>({ uid: null })
+);
+
+export const persistStatsUid = persistState(statsUidStore, {
+  key: STORE_NAME,
+  storage: localStorageStrategy,
+});
+
+export const statsUid$ = statsUidStore.pipe(select((state) => state.uid));
+
+export const updateStatsUid = (uid: StatsUidProps['uid']) => {
+  statsUidStore.update((state) => ({
+    ...state,
+    uid,
+  }));
+};
+
+export const clearStatsUid = () => statsUidStore.reset();

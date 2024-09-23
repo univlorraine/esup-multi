@@ -50,8 +50,8 @@ import { ModalController, Platform, PopoverController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import {
   currentLanguage$, features$, FeaturesService, isDarkTheme$, isFeatureStoreInitialized$, NavigationService,
-  NotificationsService, NetworkService, PageLayout, PageLayoutService, setIsDarkTheme, themeRepoInitialized$,
-  userHadSetThemeInApp, userHadSetThemeInApp$
+  NotificationsService, NetworkService, PageLayout, PageLayoutService, setIsDarkTheme, StatisticsService,
+  themeRepoInitialized$, userHadSetThemeInApp, userHadSetThemeInApp$
 } from '@multi/shared';
 import { initializeApp } from 'firebase/app';
 import { combineLatest, Observable, of, Subscription } from 'rxjs';
@@ -88,6 +88,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private networkService: NetworkService,
     private featuresService: FeaturesService,
     private notificationsService: NotificationsService,
+    private statisticsService: StatisticsService,
     private titleService: Title
   ) {
     currentLanguage$.subscribe((language) => {
@@ -143,6 +144,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
       StatusBar.setStyle({ style: Style.Dark });
     });
+
+    this.statisticsService.checkAndGenerateStatsUid();
   }
 
   ngOnInit() {
