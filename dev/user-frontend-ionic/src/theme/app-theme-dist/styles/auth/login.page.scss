@@ -44,6 +44,7 @@ ion-item {
 ion-input {
   --border-color: var(--ion-color-medium-light-tint);
   --highlight-color: var(--app-font-color-primary);
+  --highlight-color-valid: var(--app-font-color-primary);
 }
 
 ion-title {
