@@ -38,44 +38,34 @@
  */
 
 import { createStore, select, withProps } from '@ngneat/elf';
-import { persistState } from '@ngneat/elf-persist-state';
-import { localForageStore } from '../store/local-forage';
+import {
+  persistState,
+  localStorageStrategy
+} from '@ngneat/elf-persist-state';
 
-const STORE_NAME = 'auth';
+const STORE_NAME = 'stats-uid';
 
-
-export interface AuthProps {
-  authenticatedUser: AuthenticatedUser;
+interface StatsUidProps {
+  uid: string;
 }
 
-export interface AuthenticatedUser {
-  displayName: string;
-  name: string;
-  firstname: string;
-  email: string;
-  roles: string[];
-}
-
-const authStore = createStore(
+const statsUidStore = createStore(
   { name: STORE_NAME },
-  withProps<AuthProps>({ authenticatedUser: null })
+  withProps<StatsUidProps>({ uid: null })
 );
 
-export const persistAuthenticatedUser = persistState(authStore, {
+export const persistStatsUid = persistState(statsUidStore, {
   key: STORE_NAME,
-  storage: localForageStore,
+  storage: localStorageStrategy,
 });
 
-export const authenticatedUser$ = authStore.pipe(select((state) => state.authenticatedUser));
+export const statsUid$ = statsUidStore.pipe(select((state) => state.uid));
 
-export const updateUser = (authenticatedUser: AuthProps['authenticatedUser']) => {
-  authStore.update((state) => ({
+export const updateStatsUid = (uid: StatsUidProps['uid']) => {
+  statsUidStore.update((state) => ({
     ...state,
-    authenticatedUser,
+    uid,
   }));
 };
 
-export const userIsAuthenticated$ = authStore.pipe(select((state) => !!state.authenticatedUser));
-
-export const clearAuthenticatedUser = () => authStore.reset();
-
+export const clearStatsUid = () => statsUidStore.reset();

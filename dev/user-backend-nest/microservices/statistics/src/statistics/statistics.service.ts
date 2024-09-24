@@ -83,7 +83,7 @@ export class StatisticsService {
 
     const requestData: StatisticsExternalApiUserActionDto = {
       uid: statData.uid,
-      duid: statData.platform != 'web' ? statData.duid : null,
+      duid: statData.duid && statData.duid !== '' ? statData.duid : 'unknown',
       action: mappedAction,
       service: statData.functionality,
       platform: statData.platform,

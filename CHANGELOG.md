@@ -3,7 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## 1.1.0 (2024-xx-xx)
+## next-release (YYYY-MM-DD)
+
+### Client
+#### Bug fixes
+* **(statistics)** : suppression de l'utilisation du DeviceId pour le suivi des statistiques d'usage comme préconisé dans le RGPD. Utilisation d'une UID générée automatiquement par le client à la place.
+
+### Backend
+#### Bug fixes
+* **(maps)** : suppression du tracking du fichier map-data.json et ajout d'un fichier .dist avec des POI factices
+* **(statistics)** : prise en compte de la nouvelle uid de tracking à la place du Device Id pour la génération des statistiques d'usage
+
+## 1.1.0 (2024-09-13)
 
 ### Client
 
@@ -47,6 +58,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
   * Image à gauche et bloc de texte à droite
   * Image en haut et bloc de texte en dessous
 * **(schedule)** : Il est désormais possible d'accéder directement à l'emploi du temps en web via une url (https://mon-url-vers-ma-pwa.edu/schedule/calendar)
+* **(menu)** : Amélioration de l'ergonomie du menu utilisateur sur les périphériques avec une petite résolution
 
 #### Autres
 * Mise à jour de la librairie [ionicons](https://ionic.io/ionicons) afin de disposer de la nouvelle icône X en remplacement de l'ancienne icône Twitter

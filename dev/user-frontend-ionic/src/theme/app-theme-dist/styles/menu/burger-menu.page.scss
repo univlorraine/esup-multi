@@ -37,6 +37,13 @@
  * termes.
  */
 
+.menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
 .menu-section {
   padding-top: 0;
   padding-bottom: 0;
@@ -62,4 +69,8 @@
     // apply the same style as ion-icon
     margin-inline-end: 32px;
   }
+}
+
+.menu-footer {
+  margin-top: 1rem;
 }
