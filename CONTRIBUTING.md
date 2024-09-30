@@ -10,7 +10,7 @@ Se faire connaitre en échangeant sur les canaux suivants
 
 ## Un projet GitHub
 
-Le projet est hébergé sur gitHub : https://github.com/univlorraine/Esup-Pod
+Le projet est hébergé sur gitHub : https://github.com/univlorraine/esup-multi
 Les demandes de développement, les signalements de bugs seront donc remontés sous forme d'une [Issue](https://github.com/univlorraine/esup-multi/issues)
 
 Les établissements qui souhaitent contribuer au projet devront forker le dépôt (au sens GitHub).
