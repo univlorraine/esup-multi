@@ -97,6 +97,7 @@ export class FeaturesService {
       isFeatureStoreInitialized$.pipe(filter(initialized => initialized === true))
     ])
       .pipe(
+        filter(([features]) => features.length > 0),
         map(([features, currentLanguage]) => this.translate(features, currentLanguage)),
         share(),
       ).subscribe(this.translatedFeaturesSubject$);
