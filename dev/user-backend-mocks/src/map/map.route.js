@@ -41,8 +41,8 @@ const express = require('express');
 const router = express.Router();
 const { categories, campuses, pois } = require('./map.mock');
 
-router.get('/multi-map/pois', (req, res) => res.json(pois));
-router.get('/multi-map/categories', (req, res) => res.json(categories));
-router.get('/multi-map/campuses', (req, res) => res.json(campuses));
+router.get('/pois', (req, res) => res.json(pois));
+router.get('/categories', (req, res) => res.json(categories));
+router.get('/campuses', (req, res) => res.json(campuses));
 
 module.exports = router;

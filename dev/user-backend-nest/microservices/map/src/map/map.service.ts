@@ -73,7 +73,7 @@ export class MapService {
               (feature) => {
                 Object.entries(feature.properties).forEach(
                   ([property, value]: [string, any]) => {
-                    if (property === 'Nom') {
+                    if (property === 'nom') {
                       return;
                     }
 
@@ -85,7 +85,7 @@ export class MapService {
                       value = `<a href="${value}" target="_blank">${value}</a>`;
                     }
 
-                    if (property === 'Description') {
+                    if (property === 'description') {
                       value.forEach((d) => {
                         if (d.value) d.value += '<br />';
                       });
@@ -95,8 +95,8 @@ export class MapService {
 
                 return {
                   category,
-                  title: feature.properties.Nom,
-                  description: feature.properties.Description,
+                  title: feature.properties.nom,
+                  description: feature.properties.description,
                   latitude: feature.geometry.coordinates[1],
                   longitude: feature.geometry.coordinates[0],
                   icon: feature.properties.icon,
