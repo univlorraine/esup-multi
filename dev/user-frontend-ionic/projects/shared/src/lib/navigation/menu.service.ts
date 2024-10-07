@@ -122,8 +122,17 @@ export class MenuService {
     secondMenuItems: MenuItem[],
     propertiesToCompare: string[]
   ): boolean {
-    return firstMenuItems.length === secondMenuItems.length &&
-    isMatch(firstMenuItems, pick(secondMenuItems, [propertiesToCompare]));
+    if (firstMenuItems.length !== secondMenuItems.length) {
+      return false;
+    }
+    for (let i in firstMenuItems) {
+      const firstMenuItem = firstMenuItems[i];
+      const secondMenuItem = secondMenuItems[i];
+      if(!isMatch(firstMenuItem, pick(secondMenuItem, propertiesToCompare))){
+        return false;
+      }
+    }
+    return true;
   }
 
   private getStaticMenuItemsByType(menuType: StaticMenuType): MenuItem[] {
