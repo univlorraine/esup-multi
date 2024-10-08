@@ -86,7 +86,7 @@
             <ion-card *ngFor="let event of events" class="ion-no-margin">
               <ion-card-content>
                 <ion-row class="event-day-hour">
-                  <ion-text [ngClass]="fontColor()" class="hour app-title-2">{{event.startDateTime | localHour}} - {{event.endDateTime | localHour}}</ion-text>
+                  <ion-text [ngClass]="fontColor()" class="hour app-title-3">{{event.startDateTime | localHour}} - {{event.endDateTime | localHour}}</ion-text>
                   <ng-container *ngIf="(event.startDateTime | completeLocalDate) as completeLocalDate">
                     <ion-row [ngClass]="fontColor()" class="day app-text-4">
                       <ion-text>{{completeLocalDate | slice: 0:completeLocalDate.indexOf(' ')}}</ion-text>
@@ -97,7 +97,7 @@
                 <ion-text [ngClass]="fontColor()" class="app-title-5 event-label">{{event.label}}</ion-text>
                 <ion-row *ngIf="event.location" class="event-additional">
                   <ion-row class="ion-align-items-center card-labels">
-                    <ion-icon class="card-labels-icons" name="business-outline" aria-label=""></ion-icon>
+                    <ion-icon [ngClass]="fontColor()" class="card-labels-icons" name="business-outline" aria-label=""></ion-icon>
                     <ion-text [ngClass]="fontColor()"
                       class="app-title-6 light">{{event.location}}</ion-text>
                   </ion-row>
