@@ -38,7 +38,7 @@
  */
 
 import { DOCUMENT } from '@angular/common';
-import { Component, Inject, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { Component, DestroyRef, inject, Inject, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { FirebaseMessaging } from '@capacitor-firebase/messaging';
 import { App } from '@capacitor/app';
 import { Capacitor, PluginListenerHandle } from '@capacitor/core';
@@ -54,9 +54,10 @@ import {
   themeRepoInitialized$, userHadSetThemeInApp, userHadSetThemeInApp$
 } from '@multi/shared';
 import { initializeApp } from 'firebase/app';
-import { combineLatest, Observable, of, Subject } from 'rxjs';
-import { distinctUntilChanged, filter, map, switchMap, takeUntil } from 'rxjs/operators';
+import { combineLatest, Observable, of } from 'rxjs';
+import { distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
 import { Title } from '@angular/platform-browser';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-root',
@@ -70,7 +71,7 @@ export class AppComponent implements OnInit, OnDestroy {
   public isNothingToShow$: Observable<boolean>;
   private backButtonListener: Promise<PluginListenerHandle>;
   private appResumeListener: Promise<PluginListenerHandle>;
-  private destroy$ = new Subject<void>();
+  private destroyRef = inject(DestroyRef);
   private prefersDark: MediaQueryList;
 
   constructor(
@@ -106,8 +107,6 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
     this.backButtonListener.then((listener) => listener.remove());
     this.appResumeListener.then((listener) => listener.remove());
     this.prefersDark.removeEventListener('change', this.handleColorSchemeChange);
@@ -143,9 +142,9 @@ export class AppComponent implements OnInit, OnDestroy {
     this.prefersDark.addEventListener('change', this.handleColorSchemeChange);
 
     themeRepoInitialized$.pipe(
-      filter(isInitialized => isInitialized),
+      filter((isInitialized: boolean) => isInitialized),
       switchMap(() => combineLatest([isDarkTheme$, userHadSetThemeInApp$])),
-      takeUntil(this.destroy$)
+      takeUntilDestroyed(this.destroyRef)
     ).subscribe(([isDarkTheme, userHadSetThemeInApplication]) => {
       if (!userHadSetThemeInApplication) {
         isDarkTheme = this.prefersDark.matches;
@@ -183,7 +182,7 @@ export class AppComponent implements OnInit, OnDestroy {
     // Observable permettant de mettre à jour le code language dans l'entête html et d'appliquer la langue choisie
     currentLanguage$.pipe(
       distinctUntilChanged(),
-      takeUntil(this.destroy$)
+      takeUntilDestroyed(this.destroyRef)
     ).subscribe(language => {
       // Mise à jour du langage dans l'application et dans l'attribut lang de l'élément HTML
       this.translateService.use(language || this.environment.defaultLanguage);
@@ -194,7 +193,7 @@ export class AppComponent implements OnInit, OnDestroy {
   private initializeEmptyStateDetection(): void {
     const featuresIsEmpty$ : Observable<boolean> = features$.pipe(map(val => val.length === 0));
     this.isNothingToShow$ = isFeatureStoreInitialized$.pipe(
-      filter(isInitialized => isInitialized),
+      filter((isInitialized: boolean) => isInitialized),
       switchMap(() => combineLatest([featuresIsEmpty$, this.networkService.isOnline$])),
       switchMap(([featuresIsEmpty, isOnline]) => {
         if (featuresIsEmpty && isOnline) {
@@ -203,7 +202,7 @@ export class AppComponent implements OnInit, OnDestroy {
         return of(featuresIsEmpty || !isOnline);
       }),
       distinctUntilChanged(),
-      takeUntil(this.destroy$)
+      takeUntilDestroyed(this.destroyRef)
     );
     this.isNothingToShow$.subscribe();
   }
@@ -253,8 +252,8 @@ export class AppComponent implements OnInit, OnDestroy {
       return Badge.set({ count: notificationList.notifications.length });
     };
 
-    this.platform.pause.pipe(takeUntil(this.destroy$)).subscribe(fixBadgeCount);
-    this.platform.resume.pipe(takeUntil(this.destroy$)).subscribe(fixBadgeCount);
+    this.platform.pause.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(fixBadgeCount);
+    this.platform.resume.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(fixBadgeCount);
 
     await fixBadgeCount();
   }

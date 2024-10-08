@@ -37,7 +37,15 @@
  * termes.
  */
 
-import { AfterViewInit, Component, Input, OnChanges, OnDestroy, SimpleChanges } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  DestroyRef,
+  inject,
+  Input,
+  OnChanges,
+  SimpleChanges
+} from '@angular/core';
 import { NavController } from '@ionic/angular';
 import {
   FeaturesService,
@@ -56,7 +64,8 @@ import {
   NavigationService
 } from '@multi/shared';
 import { BehaviorSubject, combineLatestWith, Observable, Subject } from 'rxjs';
-import { distinctUntilChanged, filter, finalize, map, takeUntil } from 'rxjs/operators';
+import { distinctUntilChanged, filter, finalize, map } from 'rxjs/operators';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 interface MenuItemWithOptionalRouterLink extends MenuItem {
   routerLink: string;
@@ -71,7 +80,7 @@ interface MenuItemWithBadge extends MenuItemWithOptionalRouterLink {
   templateUrl: 'layout.page.html',
   styleUrls: ['../../theme/app-theme/styles/app/layout.page.scss']
 })
-export class LayoutPage implements AfterViewInit, OnChanges, OnDestroy {
+export class LayoutPage implements AfterViewInit, OnChanges {
   @Input() currentPageLayout: PageLayout;
 
   public isLoading = false;
@@ -80,7 +89,7 @@ export class LayoutPage implements AfterViewInit, OnChanges, OnDestroy {
   public isOnline$: Observable<boolean>;
   public menuItemHasBadgeState$: BehaviorSubject<boolean[]> = new BehaviorSubject<boolean[]>([]);
   public layoutChangeSubject$: Subject<string> = new Subject<string>();
-  private destroy$ = new Subject<void>();
+  private destroyRef = inject(DestroyRef);
 
   constructor(
     private navController: NavController,
@@ -103,17 +112,12 @@ export class LayoutPage implements AfterViewInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if(changes.currentPageLayout) {
+    if (changes.currentPageLayout) {
       this.layoutChangeSubject$.next(changes.currentPageLayout.currentValue);
     }
     if (this.shouldRefreshTabsViewData(changes)) {
       this.loadFeatures();
     }
-  }
-
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
   }
 
   private initializeObservables(): void {
@@ -151,14 +155,14 @@ export class LayoutPage implements AfterViewInit, OnChanges, OnDestroy {
         prevMenuItems, currentMenuItems, ['link.routerLink']
       )),
       combineLatestWith(this.layoutChangeSubject$.pipe(filter(layout => layout === 'tabs'))),
-      takeUntil(this.destroy$)
+      takeUntilDestroyed(this.destroyRef)
     ).subscribe(() => {
       this.navigationService.setExternalNavigation(false);
       this.notificationsService.loadNotifications(0, 10).subscribe();
     });
-    
+
     this.notificationsRepository.notifications$.pipe(
-      takeUntil(this.destroy$),
+      takeUntilDestroyed(this.destroyRef),
       combineLatestWith(this.menuService.topMenuItems$),
       map(([notifications, menuItems]) => this.mapNotificationsToMenuItems(notifications, menuItems)),
     ).subscribe(values => {
