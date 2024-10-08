@@ -1,4 +1,4 @@
-name: Update library list
+name: Check library list
 permissions:
   contents: write
   pull-requests: write
@@ -49,7 +49,6 @@ jobs:
           git config core.fileMode false
           echo "CHANGES=$(git diff-index --quiet HEAD -- ; echo $?)" >> $GITHUB_OUTPUT
 
-        # Non-forked PRs can push changes directly
       - name: Add changes to Git
         if: steps.diff.outputs.CHANGES == 1 && github.event.pull_request.head.repo.full_name == github.repository
         run: |
@@ -68,18 +67,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-        # Forked PRs can't push changes directly, add a comment in the PR instead with the new content
-      - name: Add comment to PR
-        if: steps.diff.outputs.CHANGES == 1 && github.event.pull_request.head.repo.full_name != github.repository
-        uses: mshick/add-pr-comment@v2
-        with:
-          message: |
-            > [!WARNING]
-            > Des changements ont été détectés dans la liste des bibliothèques du projet.
-            > Veuillez exécuter le script \`generateLibraryList.bash\` manuellement pour intégrer ces changements dans votre branche.
-
-      - name: Exit
+      - name: Fork detected
         if: steps.diff.outputs.CHANGES == 1 && github.event.pull_request.head.repo.full_name != github.repository
         run: |
-          echo "Changes detected in the library list. Please update your branch with the new content."
+          echo "La liste des dépendances doit être mise à jour."
+          echo "A cause d'une limitation de GitHub Actions, il est impossible de mettre à jour la liste des dépendances depuis un fork."
+          echo "Merci d'exécuter le script 'generateLibraryList.bash' de votre côté."
           exit 1
