@@ -1,4 +1,4 @@
-name: Update library list
+name: Check library list
 permissions:
   contents: write
   pull-requests: write
@@ -42,21 +42,35 @@ jobs:
           chmod +x generateLibraryList.bash
           ./generateLibraryList.bash
 
-      - name: Add changes to Git
+      - name: Check for changes
+        id: diff
         if: steps.changes.outputs.packageJson == 'true'
         run: |
           git config core.fileMode false
+          echo "CHANGES=$(git diff-index --quiet HEAD -- ; echo $?)" >> $GITHUB_OUTPUT
+
+      - name: Add changes to Git
+        if: steps.diff.outputs.CHANGES == 1 && github.event.pull_request.head.repo.full_name == github.repository
+        run: |
           git add -A
 
       - name: Commit changes
-        if: steps.changes.outputs.packageJson == 'true'
+        if: steps.diff.outputs.CHANGES == 1 && github.event.pull_request.head.repo.full_name == github.repository
         run: |
           git config --local user.name "GitHub Action"
           git config --local user.email "action@github.com"
           git commit -m "docs: update library list" || echo "No changes to commit"
 
       - name: Push changes
-        if: steps.changes.outputs.packageJson == 'true'
+        if: steps.diff.outputs.CHANGES == 1 && github.event.pull_request.head.repo.full_name == github.repository
         run: git push origin HEAD:${{ github.head_ref }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Fork detected
+        if: steps.diff.outputs.CHANGES == 1 && github.event.pull_request.head.repo.full_name != github.repository
+        run: |
+          echo "La liste des dépendances doit être mise à jour."
+          echo "A cause d'une limitation de GitHub Actions, il est impossible de mettre à jour la liste des dépendances depuis un fork."
+          echo "Merci d'exécuter le script 'generateLibraryList.bash' de votre côté."
+          exit 1
