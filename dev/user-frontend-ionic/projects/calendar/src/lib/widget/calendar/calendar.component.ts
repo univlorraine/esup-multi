@@ -37,12 +37,13 @@
  * termes.
  */
 
-import { AfterViewInit, ChangeDetectorRef, Component, Input } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Inject, Input, TemplateRef, ViewChild } from '@angular/core';
 import { ThemeService } from '@multi/shared';
 import { Observable } from 'rxjs';
 import { finalize, take } from 'rxjs/operators';
 import { MailCalendarEvents } from '../../calendar.repository';
 import { CalendarService } from '../../calendar.service';
+import { CALENDAR_CONFIG, CalendarModuleConfig } from '../../calendar.config';
 
 @Component({
   selector: 'app-calendar-widget',
@@ -52,13 +53,16 @@ import { CalendarService } from '../../calendar.service';
 export class CalendarComponent implements AfterViewInit{
 
   @Input() widgetColor: string;
+  @ViewChild('list') list!: TemplateRef<any>;
+  @ViewChild('slider') slider!: TemplateRef<any>;
 
   public isLoading = false;
   public nextEvents$: Observable<MailCalendarEvents>;
 
   constructor(private calendarService: CalendarService,
     private themeService: ThemeService,
-    private changeDetectorRef: ChangeDetectorRef) {
+    private changeDetectorRef: ChangeDetectorRef,
+    @Inject(CALENDAR_CONFIG) private config: CalendarModuleConfig) {
     this.nextEvents$ = this.calendarService.getNextEvents$();
   }
 
@@ -79,5 +83,9 @@ export class CalendarComponent implements AfterViewInit{
   fontColor() {
     return this.themeService.isBackgroundFromCmsDarkOrIsDarkTheme(this.widgetColor) ?
       'light-font-color' : 'dark-font-color';
+  }
+
+  getTemplateRef(): TemplateRef<any> {
+    return this[this?.config.display];
   }
 }

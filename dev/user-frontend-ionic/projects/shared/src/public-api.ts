@@ -70,6 +70,7 @@ export * from './lib/network/network.service';
 export * from './lib/notifications/notifications.repository';
 export * from './lib/notifications/notifications.service';
 export * from './lib/pipe/complete-local-date-pipe';
+export * from './lib/pipe/local-hour.pipe';
 export * from './lib/pipe/relative-time-pipe';
 export * from './lib/pipe/shared-pipe.module';
 export * from './lib/pipe/truncate-pipe';
