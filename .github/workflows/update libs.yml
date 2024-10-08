@@ -42,21 +42,44 @@ jobs:
           chmod +x generateLibraryList.bash
           ./generateLibraryList.bash
 
-      - name: Add changes to Git
+      - name: Check for changes
+        id: diff
         if: steps.changes.outputs.packageJson == 'true'
         run: |
           git config core.fileMode false
+          echo "CHANGES=$(git diff-index --quiet HEAD -- ; echo $?)" >> $GITHUB_OUTPUT
+
+        # Non-forked PRs can push changes directly
+      - name: Add changes to Git
+        if: steps.diff.outputs.CHANGES == 1 && github.event.pull_request.head.repo.full_name == github.repository
+        run: |
           git add -A
 
       - name: Commit changes
-        if: steps.changes.outputs.packageJson == 'true'
+        if: steps.diff.outputs.CHANGES == 1 && github.event.pull_request.head.repo.full_name == github.repository
         run: |
           git config --local user.name "GitHub Action"
           git config --local user.email "action@github.com"
           git commit -m "docs: update library list" || echo "No changes to commit"
 
       - name: Push changes
-        if: steps.changes.outputs.packageJson == 'true'
+        if: steps.diff.outputs.CHANGES == 1 && github.event.pull_request.head.repo.full_name == github.repository
         run: git push origin HEAD:${{ github.head_ref }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+        # Forked PRs can't push changes directly, add a comment in the PR instead with the new content
+      - name: Add comment to PR
+        if: steps.diff.outputs.CHANGES == 1 && github.event.pull_request.head.repo.full_name != github.repository
+        uses: mshick/add-pr-comment@v2
+        with:
+          message: |
+            > [!WARNING]
+            > Des changements ont été détectés dans la liste des bibliothèques du projet.
+            > Veuillez exécuter le script \`generateLibraryList.bash\` manuellement pour intégrer ces changements dans votre branche.
+
+      - name: Exit
+        if: steps.diff.outputs.CHANGES == 1 && github.event.pull_request.head.repo.full_name != github.repository
+        run: |
+          echo "Changes detected in the library list. Please update your branch with the new content."
+          exit 1
