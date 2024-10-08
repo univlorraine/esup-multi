@@ -47,24 +47,15 @@ ion-icon {
 
 ion-item {
   --background: transparent;
-}
-
-.input-label {
-  padding-bottom: 0.2rem;
-  color: var(--app-font-color-primary) !important;
-}
-
-.item-has-value .label-floating.sc-ion-label-md-h {
-  padding-bottom: 0.2rem;
-}
-
-ion-item {
-  --background: transparent;
   --border-color: var(--ion-color-medium-light-tint);
 }
 
 ion-list {
   background: transparent;
+}
+
+ion-input {
+  --highlight-color: var(--app-font-color-primary);
 }
 
 .contact-form-toolbar {

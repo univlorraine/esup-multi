@@ -16,7 +16,7 @@
   "scripts": {
     "ci": "npm ci && npm run back:main -- ci && concurrently \"npm run back:*(!main) -- ci\" && npm run mocks -- ci && npm run front -- ci",
     "build:back": "npm run back:main -- ci && concurrently \"npm run back:*(!main) -- ci\" && concurrently \"npm run back:* -- run build\"",
-    "build:front": "npm run front -- ci && npm run module:build-all",
+    "build:front": "npm run front -- ci && npm run front -- run module:build-all",
     "build:mocks": "npm run mocks -- ci",
     "start:back": "concurrently \"npm run back:* -- run start\"",
     "start:back:dev": "concurrently \"npm run back:* -- run start:dev\"",

@@ -49,8 +49,7 @@
     <ion-content>
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
         <ion-item>
-          <ion-label class="app-text-4" position="floating">{{ 'SCHEDULE.MANAGEMENT.USERNAME_FORM_LABEL' | translate }}</ion-label>
-          <ion-input formControlName="login"></ion-input>
+          <ion-input formControlName="login" label="{{ 'SCHEDULE.MANAGEMENT.USERNAME_FORM_LABEL' | translate }}" labelPlacement="floating"></ion-input>
         </ion-item>
         <ion-button expand="full" type="submit" [disabled]="!form.valid"><ion-text class="app-text-3 contrast">{{ 'SCHEDULE.MANAGEMENT.VALIDATE_FORM_BUTTON' | translate }}</ion-text></ion-button>
       </form>
