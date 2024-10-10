@@ -64,8 +64,10 @@ export class PreferencesService {
         return getRefreshAuthToken().pipe(
             take(1),
             filter(token => token != null),
-            concatMap(token => this.keepAuthService.removeSavedCredentials(token)),
-            finalize(() => deleteRefreshAuthToken())
+            concatMap(token =>
+              this.keepAuthService.removeSavedCredentials(token).pipe(
+                finalize(() => deleteRefreshAuthToken())
+              )),
         ).subscribe();
     }
 }

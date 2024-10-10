@@ -38,7 +38,7 @@
  */
 
 import { Injectable } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Observable, ReplaySubject, Subject } from 'rxjs';
 import { filter, shareReplay } from 'rxjs/operators';
 
 /**
@@ -54,9 +54,9 @@ import { filter, shareReplay } from 'rxjs/operators';
 })
 export class WidgetLifecycleService {
   private widgetViewWillEnterSubject: Subject<string[]> = new Subject();
-  private widgetViewDidEnterSubject: Subject<string[]> = new Subject();
+  private widgetViewDidEnterSubject: ReplaySubject<string[]> = new ReplaySubject<string[]>(1);
   private widgetViewWillLeaveSubject: Subject<string[]> = new Subject();
-  private widgetViewDidLeaveSubject: Subject<string[]> = new Subject();
+  private widgetViewDidLeaveSubject: ReplaySubject<string[]> = new ReplaySubject<string[]>(1);
 
   sendWidgetViewWillEnter(widgets) {
     this.widgetViewWillEnterSubject.next(widgets);
