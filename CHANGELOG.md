@@ -7,6 +7,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Client
 #### Bug fixes
+* **(guided-tour)** : correction problème de chargement des traductions du tour guidé sur certains périphériques
 * **(statistics)** : suppression de l'utilisation du DeviceId pour le suivi des statistiques d'usage comme préconisé dans le RGPD. Utilisation d'une UID générée automatiquement par le client à la place.
 
 ### Backend
