@@ -42,7 +42,10 @@
   <ion-card-header *ngIf="feature.title" class="ion-no-padding">
     <ion-card-title [ngClass]="fontColor(feature.color)"
      class="feature-title app-title-5">
-      <ion-icon [name]="feature.icon" *ngIf="feature.icon" aria-label=""></ion-icon>
+      <app-custom-icon *ngIf="feature.icon || feature.iconSourceSvgLightTheme || feature.iconSourceSvgDarkTheme"
+                       [icon]="feature.icon"
+                       [iconSourceSvgLightTheme]="feature.iconSourceSvgLightTheme"
+                       [iconSourceSvgDarkTheme]="feature.iconSourceSvgDarkTheme"></app-custom-icon>
       {{feature.title}}
     </ion-card-title>
   </ion-card-header>
