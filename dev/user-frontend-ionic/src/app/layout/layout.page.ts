@@ -37,7 +37,15 @@
  * termes.
  */
 
-import { AfterViewInit, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  DestroyRef,
+  inject,
+  Input,
+  OnChanges,
+  SimpleChanges
+} from '@angular/core';
 import { NavController } from '@ionic/angular';
 import {
   FeaturesService,
@@ -48,17 +56,23 @@ import {
   MenuOpenerService,
   MenuService,
   NetworkService,
+  Notification,
   NotificationsRepository,
   NotificationsService,
   PageLayout,
   StatisticsService,
   NavigationService
 } from '@multi/shared';
-import { combineLatest, Observable, Subject, withLatestFrom } from 'rxjs';
-import { distinctUntilChanged, filter, map } from 'rxjs/operators';
+import { BehaviorSubject, combineLatestWith, Observable, Subject } from 'rxjs';
+import { distinctUntilChanged, filter, finalize, map } from 'rxjs/operators';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 interface MenuItemWithOptionalRouterLink extends MenuItem {
   routerLink: string;
+}
+
+interface MenuItemWithBadge extends MenuItemWithOptionalRouterLink {
+  hasBadge: boolean;
 }
 
 @Component({
@@ -70,12 +84,12 @@ export class LayoutPage implements AfterViewInit, OnChanges {
   @Input() currentPageLayout: PageLayout;
 
   public isLoading = false;
-  public topMenuItems$: Observable<MenuItem[]>;
   public tabsMenuItems$: Observable<MenuItemWithOptionalRouterLink[]>;
+  public topMenuItemsWithBadges$: Observable<MenuItemWithBadge[]>;
   public isOnline$: Observable<boolean>;
-  public menuItemHasBadge$: Observable<boolean[]>;
-  public menuItemHasBadgeSubject$: Subject<boolean[]> = new Subject<boolean[]>();
+  public menuItemHasBadgeState$: BehaviorSubject<boolean[]> = new BehaviorSubject<boolean[]>([]);
   public layoutChangeSubject$: Subject<string> = new Subject<string>();
+  private destroyRef = inject(DestroyRef);
 
   constructor(
     private navController: NavController,
@@ -89,54 +103,8 @@ export class LayoutPage implements AfterViewInit, OnChanges {
     private notificationsService: NotificationsService,
     private navigationService: NavigationService
   ) {
-    this.isOnline$ = this.networkService.isOnline$;
-    this.tabsMenuItems$ = this.menuService.tabsMenuItems$.pipe(
-      map(menuItems => menuItems.map(menuItem => {
-        if (menuItem.link.type !== MenuItemLinkType.router) {
-          return {
-            ...menuItem,
-            routerLink: null
-          };
-        }
-
-        return {
-          ...menuItem,
-          routerLink: (menuItem.link as MenuItemRouterLink).routerLink
-        };
-      }))
-    );
-
-    this.topMenuItems$ = this.menuService.topMenuItems$;
-    this.menuItemHasBadge$ = this.menuItemHasBadgeSubject$;
-
-    combineLatest([
-      this.topMenuItems$.pipe(
-        distinctUntilChanged((prevMenuItems, currentMenuItems) => this.menuService
-          .areSpecifiedPropertiesEqualsInMenuItemsArrays(
-            prevMenuItems,
-            currentMenuItems,
-            ['link.routerLink']
-          ))
-      ),
-      this.layoutChangeSubject$
-    ])
-    .pipe(
-      filter(([, layout]) => layout === 'tabs'),
-      map(([menuItems]) => menuItems),
-    )
-    .subscribe(() => { // Triggers when either layout has gone from full to tabs or when the topMenuItems have changed
-      this.navigationService.setExternalNavigation(false);
-      this.notificationsService.loadNotifications(0, 10).subscribe();
-    });
-
-    this.notificationsRepository.notifications$.pipe(
-        withLatestFrom(this.topMenuItems$),
-        map(([notifications, menuItems]) => menuItems.map(menuItem => menuItem.link.type === MenuItemLinkType.router
-            && (menuItem.link as MenuItemRouterLink).routerLink === '/notifications'
-            && notifications.find(notification => notification.state === 'UNREAD') !== undefined)),
-    ).subscribe(values => {
-      this.menuItemHasBadgeSubject$.next(values);
-    });
+    this.initializeObservables();
+    this.setupSubscriptions();
   }
 
   ngAfterViewInit() {
@@ -144,7 +112,7 @@ export class LayoutPage implements AfterViewInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if(changes.currentPageLayout) {
+    if (changes.currentPageLayout) {
       this.layoutChangeSubject$.next(changes.currentPageLayout.currentValue);
     }
     if (this.shouldRefreshTabsViewData(changes)) {
@@ -152,7 +120,83 @@ export class LayoutPage implements AfterViewInit, OnChanges {
     }
   }
 
-  public async openExternalOrSsoLinkOnly(menuItem: MenuItem) {
+  private initializeObservables(): void {
+    this.isOnline$ = this.networkService.isOnline$;
+    this.tabsMenuItems$ = this.menuService.tabsMenuItems$.pipe(
+      map(this.mapMenuItems)
+    );
+
+    this.topMenuItemsWithBadges$ = this.menuService.topMenuItems$.pipe(
+      combineLatestWith(this.menuItemHasBadgeState$),
+      map(([menuItems, badges]) => menuItems.map((menuItem, index) => ({
+        ...menuItem,
+        routerLink: menuItem.link.type === MenuItemLinkType.router
+          ? (menuItem.link as MenuItemRouterLink).routerLink
+          : undefined,
+        hasBadge: badges[index] ?? false
+      })))
+    );
+
+    // this.topMenuItems$ = this.menuService.topMenuItems$;
+  }
+
+  private mapMenuItems(menuItems: MenuItem[]): MenuItemWithOptionalRouterLink[] {
+    return menuItems.map(menuItem => ({
+      ...menuItem,
+      routerLink: menuItem.link.type === MenuItemLinkType.router
+        ? (menuItem.link as MenuItemRouterLink).routerLink
+        : undefined
+    }));
+  }
+
+  private setupSubscriptions(): void {
+    this.topMenuItemsWithBadges$.pipe(
+      distinctUntilChanged((prevMenuItems, currentMenuItems) => this.menuService.areSpecifiedPropertiesEqualsInMenuItemsArrays(
+        prevMenuItems, currentMenuItems, ['link.routerLink']
+      )),
+      combineLatestWith(this.layoutChangeSubject$.pipe(filter(layout => layout === 'tabs'))),
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe(() => {
+      this.navigationService.setExternalNavigation(false);
+      this.notificationsService.loadNotifications(0, 10).subscribe();
+    });
+
+    this.notificationsRepository.notifications$.pipe(
+      takeUntilDestroyed(this.destroyRef),
+      combineLatestWith(this.menuService.topMenuItems$),
+      map(([notifications, menuItems]) => this.mapNotificationsToMenuItems(notifications, menuItems)),
+    ).subscribe(values => {
+      this.menuItemHasBadgeState$.next(values);
+    });
+  }
+
+  private mapNotificationsToMenuItems(notifications: Notification[], menuItems: MenuItem[]): boolean[] {
+    return menuItems.map(menuItem =>
+      menuItem.link.type === MenuItemLinkType.router &&
+      (menuItem.link as MenuItemRouterLink).routerLink === '/notifications' &&
+      notifications.some(notification => notification.state === 'UNREAD')
+    );
+  }
+
+  private shouldRefreshTabsViewData(changes: SimpleChanges): boolean {
+    const currentPageLayoutChange = changes.currentPageLayout;
+    return currentPageLayoutChange?.currentValue === 'tabs' && !currentPageLayoutChange.firstChange;
+  }
+
+  private async loadFeatures(): Promise<void> {
+    // skip if network is not available
+    if (!(await this.networkService.getConnectionStatus()).connected) {
+      console.warn('No network connection available, features can not be loaded');
+      return;
+    }
+
+    this.isLoading = true;
+    this.featuresService.loadAndStoreFeatures().pipe(
+      finalize(() => this.isLoading = false)
+    ).subscribe();
+  }
+
+  public async openExternalOrSsoLinkOnly(menuItem: MenuItem): Promise<boolean | void> {
     if (menuItem.link.type === MenuItemLinkType.router) {
       this.statisticsService.onFunctionalityOpened(menuItem.statisticName);
       this.navController.setDirection('forward', false);
@@ -163,33 +207,10 @@ export class LayoutPage implements AfterViewInit, OnChanges {
   }
 
   public generateMenuItemIdFromRouterLink(menuItem: MenuItemWithOptionalRouterLink) {
-    if (!menuItem.routerLink) {
-      return;
-    }
-    return menuItem.routerLink.substring(1).replace('/', '-');
+    return menuItem.routerLink?.substring(1).replace('/', '-');
   }
 
   public getMenuId(menuItem: MenuItem) {
     return this.guidedTourService.generateMenuItemIdFromTitle(menuItem);
-  }
-
-  private shouldRefreshTabsViewData(changes: SimpleChanges): boolean {
-    const currentPageLayoutChange = changes.currentPageLayout;
-
-    return (
-      currentPageLayoutChange &&
-      currentPageLayoutChange.currentValue === 'tabs' &&
-      !currentPageLayoutChange.firstChange
-    );
-  }
-
-  private async loadFeatures(): Promise<void> {
-    // skip if network is not available
-    if (!(await this.networkService.getConnectionStatus()).connected) {
-      return;
-    }
-
-    this.isLoading = true;
-    this.featuresService.loadAndStoreFeatures().subscribe(() => this.isLoading = false);
   }
 }

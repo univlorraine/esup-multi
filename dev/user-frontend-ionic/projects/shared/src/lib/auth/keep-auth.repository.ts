@@ -39,7 +39,7 @@
 
 import { SecureStoragePlugin } from 'capacitor-secure-storage-plugin';
 import { from, Observable, of } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError, map, switchMap } from 'rxjs/operators';
 
 const REFRESH_AUTH_TOKEN_KEY = 'refresh-auth-token';
 
@@ -53,14 +53,42 @@ export const updateRefreshAuthToken = (token: string): Observable<boolean> => fr
     );
 
 export const getRefreshAuthToken = (): Observable<string | null> => from(
-    SecureStoragePlugin.get({key: REFRESH_AUTH_TOKEN_KEY}))
-    .pipe(
-        map(result => result.value),
-        catchError(() => of(null)),
-    );
+  SecureStoragePlugin.keys()).pipe(
+    map(result => result.value),
+    switchMap(keys => {
+      // On vérifie l'existence de la clé avant suppression pour éviter de tomber dans le catch de l'erreur du plugin
+      // https://github.com/martinkasa/capacitor-secure-storage-plugin/issues/39
+      if (keys.includes(REFRESH_AUTH_TOKEN_KEY)) {
+        return from(SecureStoragePlugin.get({key: REFRESH_AUTH_TOKEN_KEY}))
+          .pipe(
+            map(result => result.value),
+            catchError(() => {
+              return of(null)
+            }),)
+      } else {
+        return of(null);
+      }
+    }),
+  catchError(() => of(null))
+);
 
 export const deleteRefreshAuthToken = (): Observable<boolean> => from(
-    SecureStoragePlugin.remove({key: REFRESH_AUTH_TOKEN_KEY}))
-    .pipe(
-        map(result => result.value)
-    );
+  SecureStoragePlugin.keys()).pipe(
+  map(result => result.value),
+  switchMap(keys => {
+    // On vérifie l'existence de la clé avant suppression pour éviter de tomber dans le catch de l'erreur du plugin
+    // https://github.com/martinkasa/capacitor-secure-storage-plugin/issues/39
+    if (keys.includes(REFRESH_AUTH_TOKEN_KEY)) {
+      return from(
+        SecureStoragePlugin.remove({key: REFRESH_AUTH_TOKEN_KEY}))
+        .pipe(
+          map(result => result.value),
+          catchError(() => {
+            return of(null)
+          }));
+    } else {
+      return of(null);
+    }
+  }),
+  catchError(() => of(null))
+);

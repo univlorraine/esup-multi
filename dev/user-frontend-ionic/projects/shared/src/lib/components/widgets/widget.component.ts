@@ -40,15 +40,14 @@
 import {
   AfterViewInit,
   ChangeDetectorRef,
-  Component,
-  EventEmitter,
+  Component, DestroyRef,
+  EventEmitter, inject,
   Input,
-  OnDestroy,
   Output,
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ProjectModuleService } from '../../project-module/project-module.service';
 import { WidgetLifecycleService } from './widget-lifecycle.service';
 
@@ -57,15 +56,13 @@ import { WidgetLifecycleService } from './widget-lifecycle.service';
   templateUrl: './widget.component.html',
   styleUrls: ['../../../../../../src/theme/app-theme/styles/shared/widget.component.scss'],
 })
-export class WidgetComponent implements AfterViewInit, OnDestroy {
+export class WidgetComponent implements AfterViewInit {
   @Input() widgetId: string;
   @Input() widgetColor: string;
   @ViewChild('widget', { read: ViewContainerRef }) widgetContainerRef: ViewContainerRef;
   @Output() widgetIsEmpty = new EventEmitter<boolean>();
-  private widgetViewWillEnterSubscription: Subscription;
-  private widgetViewDidEnterSubscription: Subscription;
-  private widgetViewWillLeaveSubscription: Subscription;
-  private widgetViewDidLeaveSubscription: Subscription;
+
+  private destroyRef = inject(DestroyRef);
 
   constructor(
     private projectModuleService: ProjectModuleService,
@@ -82,9 +79,11 @@ export class WidgetComponent implements AfterViewInit, OnDestroy {
 
       widgetInstance.widgetColor = this.widgetColor;
       if (widgetInstance.isEmpty$) {
-        widgetInstance.isEmpty$.subscribe((isEmpty: boolean) => {
-          this.widgetIsEmpty.emit(isEmpty);
-        });
+        widgetInstance.isEmpty$
+          .pipe(takeUntilDestroyed(this.destroyRef))
+          .subscribe((isEmpty: boolean) => {
+            this.widgetIsEmpty.emit(isEmpty);
+          });
       }
 
       this.cdr.detectChanges();
@@ -93,36 +92,25 @@ export class WidgetComponent implements AfterViewInit, OnDestroy {
     }
   }
 
-  ngOnDestroy() {
-    if(this.widgetViewWillEnterSubscription) {
-      this.widgetViewWillEnterSubscription.unsubscribe();
-    }
-    if(this.widgetViewDidEnterSubscription) {
-      this.widgetViewDidEnterSubscription.unsubscribe();
-    }
-    if(this.widgetViewWillLeaveSubscription) {
-      this.widgetViewWillLeaveSubscription.unsubscribe();
-    }
-    if(this.widgetViewDidLeaveSubscription) {
-      this.widgetViewDidLeaveSubscription.unsubscribe();
-    }
-  }
-
   private handleWidgetLifecycle(widgetInstance: any) {
     if (widgetInstance.widgetViewWillEnter && typeof widgetInstance.widgetViewWillEnter === 'function') {
-      this.widgetViewWillEnterSubscription = this.widgetLifecycleService.widgetViewWillEnter(this.widgetId)
+      this.widgetLifecycleService.widgetViewWillEnter(this.widgetId)
+        .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe(() => widgetInstance.widgetViewWillEnter());
     }
     if (widgetInstance.widgetViewDidEnter && typeof widgetInstance.widgetViewDidEnter === 'function') {
-      this.widgetViewDidEnterSubscription = this.widgetLifecycleService.widgetViewDidEnter(this.widgetId)
+      this.widgetLifecycleService.widgetViewDidEnter(this.widgetId)
+        .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe(() => widgetInstance.widgetViewDidEnter());
     }
     if (widgetInstance.widgetViewWillLeave && typeof widgetInstance.widgetViewWillLeave === 'function') {
-      this.widgetViewWillLeaveSubscription = this.widgetLifecycleService.widgetViewWillLeave(this.widgetId)
+      this.widgetLifecycleService.widgetViewWillLeave(this.widgetId)
+        .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe(() => widgetInstance.widgetViewWillLeave());
     }
     if (widgetInstance.widgetViewDidLeave && typeof widgetInstance.widgetViewDidLeave === 'function') {
-      this.widgetViewDidLeaveSubscription = this.widgetLifecycleService.widgetViewDidLeave(this.widgetId)
+      this.widgetLifecycleService.widgetViewDidLeave(this.widgetId)
+        .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe(() => widgetInstance.widgetViewDidLeave());
     }
   }
