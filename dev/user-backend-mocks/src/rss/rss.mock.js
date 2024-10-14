@@ -38,22 +38,22 @@
  */
 
 const msInDay = 86_400_000;
-const urlMock = `http://localhost:${process.env.PORT}/mocking/rss`;
-const urlImages = `http://localhost:${process.env.PORT}/rss`;
+const rssOrigin = 'https://www.esup-portail.org/';
+const urlImages = `${process.env.PUBLIC_URL}/rss`;
 
 module.exports.rssData = `<?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xml:base="${urlMock}" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+<rss version="2.0" xml:base="${rssOrigin}" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
     <channel>
         <title>Flux Université Exemple</title>
         <description>Flux des actualités de l&#039;Université Exemple</description>
-        <link>${urlMock}</link>
-        <atom:link rel="self" href="${urlMock}" />
+        <link>${rssOrigin}</link>
+        <atom:link rel="self" href="${rssOrigin}" />
         <language>fr</language>
         <pubDate>${new Date(new Date().getTime() - msInDay / 8).toUTCString()}</pubDate>
         <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
         <item>
             <title>[JACES ${new Date().getFullYear()}] La culture s&#039;invite dans les BU</title>
-            <link>${urlMock}/jaces</link>
+            <link>${rssOrigin}</link>
             <description>
                 &lt;p&gt;Les bibliothèques universitaires accueillent de nombreux événements culturels à
                 l&#039;occasion des JACES ${new Date().getFullYear()}.&lt;/p&gt;
@@ -61,11 +61,11 @@ module.exports.rssData = `<?xml version="1.0" encoding="utf-8"?>
             <enclosure url="${urlImages}/jaces.png" length="224383" type="image/png" />
             <guid isPermaLink="false">jaces</guid>
             <pubDate>${new Date(new Date().getTime() - msInDay / 8).toUTCString()}</pubDate>
-            <source url="${urlMock}">Flux Université Exemple</source>
+            <source url="${rssOrigin}">Flux Université Exemple</source>
         </item>
         <item>
             <title>Pépites des BU : 3 épisodes hors série sur une correspondance inédite</title>
-            <link>${urlMock}/pepite</link>
+            <link>${rssOrigin}</link>
             <description>
                 &lt;p&gt;Les bibliothèques universitaires conservent des trésors patrimoniaux. À l&#039;occasion
                 des Nocturnes de l&#039;histoire ${new Date().getFullYear()}, découvrez trois épisodes hors
@@ -74,11 +74,11 @@ module.exports.rssData = `<?xml version="1.0" encoding="utf-8"?>
             <enclosure url="${urlImages}/pepites.png" length="360839" type="image/png" />
             <guid isPermaLink="false">pepite</guid>
             <pubDate>${new Date(new Date().getTime() - 2 * msInDay).toUTCString()}</pubDate>
-            <source url="${urlMock}">Flux Université Exemple</source>
+            <source url="${rssOrigin}">Flux Université Exemple</source>
         </item>
         <item>
             <title>Découvrez les visages inspirants des lauréats ${new Date().getFullYear()} de l'Institut Universitaire de France</title>
-            <link>${urlMock}/iuf</link>
+            <link>${rssOrigin}</link>
             <description>
                 &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vel tincidunt lacus,
                 luctus pellentesque est. Donec sed nisl felis. Vivamus dignissim libero nec ante auctor fermentum.
@@ -88,11 +88,11 @@ module.exports.rssData = `<?xml version="1.0" encoding="utf-8"?>
             <enclosure url="${urlImages}/iuf.png" length="107565" type="image/png" />
             <guid isPermaLink="false">iuf</guid>
             <pubDate>${new Date(new Date().getTime() - 3 * msInDay).toUTCString()}</pubDate>
-            <source url="${urlMock}">Flux Université Exemple</source>
+            <source url="${rssOrigin}">Flux Université Exemple</source>
         </item>
         <item>
             <title>Élections du 9 avril : qui est concerné·e ?</title>
-            <link>${urlMock}/elections</link>
+            <link>${rssOrigin}</link>
             <description>
                 &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vel tincidunt lacus,
                 luctus pellentesque est. Donec sed nisl felis. Vivamus dignissim libero nec ante auctor fermentum.
@@ -102,11 +102,11 @@ module.exports.rssData = `<?xml version="1.0" encoding="utf-8"?>
             <enclosure url="${urlImages}/elections.png" length="34741" type="image/png" />
             <guid isPermaLink="false">elections</guid>
             <pubDate>${new Date(new Date().getTime() - 3.2 * msInDay).toUTCString()}</pubDate>
-            <source url="${urlMock}">Flux Université Exemple</source>
+            <source url="${rssOrigin}">Flux Université Exemple</source>
         </item>
         <item>
             <title>Cap sur l’enseignement supérieur : une étape clé dans le processus d’orientation des lycéens !</title>
-            <link>${urlMock}/orientation</link>
+            <link>${rssOrigin}</link>
             <description>
                 &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vel tincidunt lacus,
                 luctus pellentesque est. Donec sed nisl felis. Vivamus dignissim libero nec ante auctor fermentum.
@@ -116,11 +116,11 @@ module.exports.rssData = `<?xml version="1.0" encoding="utf-8"?>
             <enclosure url="${urlImages}/orientation.png" length="40102" type="image/png" />
             <guid isPermaLink="false">orientation</guid>
             <pubDate>${new Date(new Date().getTime() - 4 * msInDay).toUTCString()}</pubDate>
-            <source url="${urlMock}">Flux Université Exemple</source>
+            <source url="${rssOrigin}">Flux Université Exemple</source>
         </item>
         <item>
             <title>69% de publications en accès ouvert : la nouvelle édition du Baromètre de la Science Ouverte témoigne d’une nette progression</title>
-            <link>${urlMock}/science-ouverte</link>
+            <link>${rssOrigin}</link>
             <description>
                 &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vel tincidunt lacus,
                 luctus pellentesque est. Donec sed nisl felis. Vivamus dignissim libero nec ante auctor fermentum.
@@ -130,11 +130,11 @@ module.exports.rssData = `<?xml version="1.0" encoding="utf-8"?>
             <enclosure url="${urlImages}/science-ouverte.png" length="33236" type="image/png" />
             <guid isPermaLink="false">science-ouverte</guid>
             <pubDate>${new Date(new Date().getTime() - 7 * msInDay).toUTCString()}</pubDate>
-            <source url="${urlMock}">Flux Université Exemple</source>
+            <source url="${rssOrigin}">Flux Université Exemple</source>
         </item>
         <item>
             <title>La recette génétique des champignons décomposeurs pour s’adapter au changement climatique</title>
-            <link>${urlMock}/champignons</link>
+            <link>${rssOrigin}</link>
             <description>
                 &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vel tincidunt lacus,
                 luctus pellentesque est. Donec sed nisl felis. Vivamus dignissim libero nec ante auctor fermentum.
@@ -144,11 +144,11 @@ module.exports.rssData = `<?xml version="1.0" encoding="utf-8"?>
             <enclosure url="${urlImages}/champignons.png" length="373559" type="image/png" />
             <guid isPermaLink="false">champigons</guid>
             <pubDate>${new Date(new Date().getTime() - 8 * msInDay).toUTCString()}</pubDate>
-            <source url="${urlMock}">Flux Université Exemple</source>
+            <source url="${rssOrigin}">Flux Université Exemple</source>
         </item>
         <item>
             <title>Spectacle au planétarium pour les étudiants de l’IUT</title>
-            <link>${urlMock}/spectacle</link>
+            <link>${rssOrigin}</link>
             <description>
                 &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vel tincidunt lacus,
                 luctus pellentesque est. Donec sed nisl felis. Vivamus dignissim libero nec ante auctor fermentum.
@@ -158,11 +158,11 @@ module.exports.rssData = `<?xml version="1.0" encoding="utf-8"?>
             <enclosure url="${urlImages}/spectacle.png" length="59985" type="image/png" />
             <guid isPermaLink="false">spectacle</guid>
             <pubDate>${new Date(new Date().getTime() - 12 * msInDay).toUTCString()}</pubDate>
-            <source url="${urlMock}">Flux Université Exemple</source>
+            <source url="${rssOrigin}">Flux Université Exemple</source>
         </item>
         <item>
             <title>Découverte scientifique sur la réparation de l'ADN de certaines bactéries du sol</title>
-            <link>${urlMock}/adn</link>
+            <link>${rssOrigin}</link>
             <description>
                 &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vel tincidunt lacus,
                 luctus pellentesque est. Donec sed nisl felis. Vivamus dignissim libero nec ante auctor fermentum.
@@ -172,7 +172,7 @@ module.exports.rssData = `<?xml version="1.0" encoding="utf-8"?>
             <enclosure url="${urlImages}/adn.png" length="65129" type="image/png" />
             <guid isPermaLink="false">adn</guid>
             <pubDate>${new Date(new Date().getTime() - 15 * msInDay).toUTCString()}</pubDate>
-            <source url="${urlMock}">Flux Université Exemple</source>
+            <source url="${rssOrigin}">Flux Université Exemple</source>
         </item>
     </channel>
 </rss>`;
