@@ -1,6 +1,6 @@
 {
   "name": "multi",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "",
   "private": true,
   "repository": {
@@ -14,13 +14,16 @@
   },
   "homepage": "https://github.com/univlorraine/esup-multi#readme",
   "scripts": {
+    "ci": "npm ci && npm run back:main -- ci && concurrently \"npm run back:*(!main) -- ci\" && npm run mocks -- ci && npm run front -- ci",
     "build:back": "npm run back:main -- ci && concurrently \"npm run back:*(!main) -- ci\" && concurrently \"npm run back:* -- run build\"",
-    "build:front": "cd dev/user-frontend-ionic && npm ci && npm run module:build-all",
-    "build:mocks": "cd dev/user-backend-mocks && npm ci",
+    "build:front": "npm run front -- ci && npm run module:build-all",
+    "build:mocks": "npm run mocks -- ci",
     "start:back": "concurrently \"npm run back:* -- run start\"",
     "start:back:dev": "concurrently \"npm run back:* -- run start:dev\"",
     "start:front": "cd dev/user-frontend-ionic && ionic serve",
-    "start:mocks": "cd dev/user-backend-mocks && npm run start",
+    "start:mocks": "npm run mocks -- start",
+    "front": "cd dev/user-frontend-ionic && npm",
+    "mocks": "cd dev/user-backend-mocks && npm",
     "back:main": "cd dev/user-backend-nest/main && npm",
     "back:auth": "cd dev/user-backend-nest/microservices/auth && npm",
     "back:cards": "cd dev/user-backend-nest/microservices/cards && npm",
@@ -46,7 +49,8 @@
     "commitizen": "^4.3.0",
     "concurrently": "^8.2.2",
     "cz-conventional-changelog": "^3.3.0",
-    "husky": "^9.0.10"
+    "husky": "^9.0.10",
+    "license-checker-rseidelsohn": "^4.3.0"
   },
   "commitlint": {
     "extends": [

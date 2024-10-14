@@ -43,6 +43,10 @@ const config: CapacitorConfig = {
   appId: 'fr.esupportail.mobile.multi',
   appName: 'Esup-Multi',
   webDir: 'www',
+  server: {
+    hostname: 'localhost',
+    androidScheme: 'https'
+  },
   plugins: {
     // eslint-disable-next-line @typescript-eslint/naming-convention
     SplashScreen: {
@@ -55,7 +59,7 @@ const config: CapacitorConfig = {
     FirebaseMessaging: {
       presentationOptions: ['badge', 'sound', 'alert'],
     },
-  },
+  }
 };
 
 export default config;

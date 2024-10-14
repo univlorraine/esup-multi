@@ -46,6 +46,7 @@ import { finalize, map, take } from 'rxjs/operators';
 import { ImportantNews, importantNewsList$, setImportantNews as setImportantNewsList } from '../../important-news.repository';
 import { ImportantNewsService } from '../../important-news.service';
 import { TranslatedImportantNews } from '../../important-news.repository';
+import { IMPORTANT_NEWS_CONFIG, ImportantNewsModuleConfig } from '../../important-news.config';
 
 
 @Component({
@@ -70,7 +71,8 @@ export class ImportantNewsComponent {
     private importantNewsService: ImportantNewsService,
     private router: Router,
     private statisticsService: StatisticsService,
-    private themeService: ThemeService
+    private themeService: ThemeService,
+    @Inject(IMPORTANT_NEWS_CONFIG) public config: ImportantNewsModuleConfig
   ) {
     this.isEmpty$ = this.importantNewsList$.pipe(
       map(importantNewsList => !importantNewsList || importantNewsList.length === 0)

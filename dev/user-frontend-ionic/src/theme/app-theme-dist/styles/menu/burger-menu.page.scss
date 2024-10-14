@@ -37,6 +37,13 @@
  * termes.
  */
 
+.menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
 .menu-section {
   padding-top: 0;
   padding-bottom: 0;
@@ -57,4 +64,8 @@
       color: var(--ion-color-font-primary);
     }
   }
+}
+
+.menu-footer {
+  margin-top: 1rem;
 }

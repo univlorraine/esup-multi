@@ -130,7 +130,7 @@
     box-shadow: var(--app-border-no-box-shadow);
     border: var(--app-border-width-7) solid var(--app-border-color-primary);
   }
-  
+
   ion-card-content {
     padding: 0.7rem 0;
     height: 100%;
@@ -142,7 +142,7 @@
     padding-left: 1rem !important;
     padding-bottom: 0rem !important;
   }
-  
+
   .events-container {
     padding: .5rem 0 0;
     display: grid;
@@ -172,12 +172,12 @@
       border-left-style: solid;
       align-items: center;
       flex-wrap: nowrap;
-    
+
       .hour {
         padding-left: 1rem;
         display: block;
       }
-    
+
       .day {
         padding-left: 1rem;
         display: block;

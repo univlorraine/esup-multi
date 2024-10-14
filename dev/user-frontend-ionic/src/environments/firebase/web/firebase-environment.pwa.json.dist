@@ -1,10 +1,10 @@
-export const firebasePwaEnvironment = {
-  apiKey: "",
-  authDomain: "",
-  projectId: "",
-  storageBucket: "",
-  messagingSenderId: "",
-  appId: "",
-  measurementId: "",
-  vapidKey: ""
-};
+{
+  "apiKey": "",
+  "authDomain": "esup-demo.firebaseapp.com",
+  "projectId": "esup-demo",
+  "storageBucket": "esup-demo.appspot.com",
+  "messagingSenderId": "363651876809",
+  "appId": "1:363651876809:web:e140a09e27fa6e54e80a18",
+  "measurementId": "",
+  "vapidKey": ""
+}

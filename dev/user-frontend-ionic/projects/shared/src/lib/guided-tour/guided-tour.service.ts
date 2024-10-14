@@ -41,16 +41,14 @@ import { Inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Capacitor } from '@capacitor/core';
 import { OrientationType, ScreenOrientation } from '@capawesome/capacitor-screen-orientation';
-import { Platform } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { ShepherdService } from 'angular-shepherd';
-import { Observable } from 'rxjs';
+import { Observable, zip } from 'rxjs';
 import { filter, switchMap, take } from 'rxjs/operators';
 import { userIsAuthenticated$ } from '../auth/authenticated-user.repository';
 import { MenuItem } from '../navigation/menu.model';
 import { NetworkService } from '../network/network.service';
-import { anonymousSteps } from './config/anonymous-guided-tour.config';
-import { loggedSteps } from './config/logged-guided-tour.config';
+import { anonymousSteps, loggedSteps } from '@multi/guided-tour';
 import { isAnonymousTourViewed, isLoggedTourViewed, setAnonymousTourViewed, setLoggedTourViewed } from './guided-tour.repository';
 
 @Injectable({
@@ -67,7 +65,6 @@ export class GuidedTourService {
     private router: Router,
     private translateService: TranslateService,
     private networkService: NetworkService,
-    private platform: Platform
   ) {
     this.isOnline$ = this.networkService.isOnline$;
 
@@ -93,13 +90,14 @@ export class GuidedTourService {
       return;
     }
 
-    this.isOnline$
-      .pipe(
+    zip(
+      this.isOnline$.pipe(
         filter(isOnline => isOnline),
         take(1),
-        switchMap(() => userIsAuthenticated$.pipe(take(1)))
-      )
-      .subscribe(userIsAuthenticated => {
+        switchMap(() => userIsAuthenticated$.pipe(take(1))),
+      ),
+      this.translateService.get('GUIDED_TOUR') // on ne le récupère pas, mais permet d'attendre que la traduction soit chargée, sinon .instant() ne fonctionne pas à chaque fois
+    ).subscribe(([userIsAuthenticated]) => {
         if (
           !isLoggedTourViewed() &&
           !isAnonymousTourViewed() &&

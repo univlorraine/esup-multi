@@ -42,8 +42,10 @@ const router = express.Router();
 const { notificationsData } = require('./notifications.mock');
 
 router.get('/multi-notification-manager/channels/*', (req, res) => res.send());
-router.post('/multi-notification-manager/notifications/read', (req, res) => res.send());
+router.post('/multi-notification-manager/notifications/*', (req, res) => res.send());
 router.delete('/multi-notification-manager/notifications', (req, res) => res.send());
 router.get('/multi-notification-manager/notifications/*', (req, res) => res.json(notificationsData));
+router.post('/multi-notification-manager/register', (req, res) => res.send());
+router.post('/multi-notification-manager/unregister', (req, res) => res.send());
 
 module.exports = router;

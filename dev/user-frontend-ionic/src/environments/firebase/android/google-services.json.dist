@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "363651876809",
+    "project_id": "esup-demo",
+    "storage_bucket": "esup-demo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:363651876809:android:3dab6fa9c5c6e197e80a18",
+        "android_client_info": {
+          "package_name": "fr.esupportail.mobile.multi"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": ""
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

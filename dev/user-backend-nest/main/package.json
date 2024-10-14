@@ -1,10 +1,10 @@
 {
   "name": "main",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "",
   "author": "",
   "engines": {
-    "node": ">=16"
+    "node": ">=18"
   },
   "private": true,
   "license": "CECILL-2.1",

@@ -38,8 +38,10 @@ npm-debug.log*
 /src/environments/firebase/*
 !/src/environments/firebase/android
 /src/environments/firebase/android/*
+!/src/environments/firebase/android/google-services.json.dist
 !/src/environments/firebase/ios
 /src/environments/firebase/ios/*
+!/src/environments/firebase/ios/GoogleService-Info.plist.dist
 !/src/environments/firebase/web
 /src/environments/firebase/web/*
 !/src/environments/firebase/web/firebase-environment.pwa.json.dist

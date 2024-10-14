@@ -41,6 +41,7 @@ import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { ScreenService } from '../screen.service';
 import { App } from '@capacitor/app';
 import { PluginListenerHandle } from '@capacitor/core';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-card-modal',
@@ -56,6 +57,7 @@ export class CardModalComponent implements OnInit, OnDestroy {
 
   constructor(
     private screenService: ScreenService,
+    public platform: Platform
   ) {}
 
   ngOnInit() {
@@ -74,8 +76,16 @@ export class CardModalComponent implements OnInit, OnDestroy {
     this.isModalOpen = true;
   }
 
-  closeModal = () => {
+  /**
+   * Close the modal
+   * Will trigger the onWillDismiss event
+   */
+  closeModal() {
+    this.isModalOpen = false;
+  }
+
+  onWillDismiss() {
     this.screenService.restorePreviousBrightness();
     this.isModalOpen = false;
-  };
+  }
 }

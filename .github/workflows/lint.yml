@@ -1,0 +1,209 @@
+name: Lint
+permissions:
+  contents: read
+  pull-requests: read
+
+on:
+  pull_request:
+    types: [ opened, synchronize ]
+
+jobs:
+  frontend:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+
+      - name: Check if frontend was modified
+        uses: dorny/paths-filter@v3
+        id: changes
+        with:
+          filters: |
+            frontend:
+            - 'dev/user-frontend-ionic/**'
+            - 'dev/user-frontend-ionic/.eslintrc.js'
+
+      - name: Read Node.js version
+        id: node_version
+        if: steps.changes.outputs.frontend == 'true'
+        run: echo NODE_VERSION=$(cat dev/user-frontend-ionic/.nvmrc) >> $GITHUB_OUTPUT
+
+      - name: Set up Node.js
+        if: steps.changes.outputs.frontend == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ steps.node_version.outputs.NODE_VERSION }}
+
+      - name: Prepare environment
+        if: steps.changes.outputs.frontend == 'true'
+        run: |
+          cd dev/user-frontend-ionic
+          cp angular.json.dist angular.json
+          cp -r src/theme/app-theme-dist src/theme/app-theme
+          npm ci
+
+      - name: Lint
+        if: steps.changes.outputs.frontend == 'true'
+        run: |
+          cd dev/user-frontend-ionic
+          npm run lint
+
+
+  backend-main:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+
+      - name: Check if backend was modified
+        uses: dorny/paths-filter@v3
+        id: changes
+        with:
+          filters: |
+            main:
+            - 'dev/user-backend-nest/main/**/*.ts'
+            - 'dev/user-backend-nest/main/.eslintrc.js'
+
+      - name: Read Node.js version
+        id: node_version
+        if: steps.changes.outputs.main == 'true'
+        run: echo NODE_VERSION=$(cat dev/user-backend-nest/.nvmrc) >> $GITHUB_OUTPUT
+
+      - name: Set up Node.js
+        if: steps.changes.outputs.main == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ steps.node_version.outputs.NODE_VERSION }}
+
+      - name: Prepare environment
+        if: steps.changes.outputs.main == 'true'
+        run: |
+          cd dev/user-backend-nest/main
+          npm ci
+
+      - name: Lint
+        if: steps.changes.outputs.main == 'true'
+        run: |
+          cd dev/user-backend-nest/main
+          npm run lint
+
+
+  backend-microservices:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        service:
+          - auth
+          - cards
+          - chatbot
+          - clocking
+          - contact-us
+          - contacts
+          - features
+          - important-news
+          - mail-calendar
+          - map
+          - notifications
+          - restaurants
+          - rss
+          - schedule
+          - social-network
+          - static-pages
+          - statistics
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+
+      - name: Check if backend was modified
+        uses: dorny/paths-filter@v3
+        id: changes
+        with:
+          filters: |
+            auth:
+            - 'dev/user-backend-nest/microservices/auth/**/*.ts'
+            - 'dev/user-backend-nest/microservices/auth/.eslintrc.js'
+            cards:
+            - 'dev/user-backend-nest/microservices/cards/**/*.ts'
+            - 'dev/user-backend-nest/microservices/cards/.eslintrc.js'
+            chatbot:
+            - 'dev/user-backend-nest/microservices/chatbot/**/*.ts'
+            - 'dev/user-backend-nest/microservices/chatbot/.eslintrc.js'
+            clocking:
+            - 'dev/user-backend-nest/microservices/clocking/**/*.ts'
+            - 'dev/user-backend-nest/microservices/clocking/.eslintrc.js'
+            contact-us:
+            - 'dev/user-backend-nest/microservices/contact-us/**/*.ts'
+            - 'dev/user-backend-nest/microservices/contact-us/.eslintrc.js'
+            contacts:
+            - 'dev/user-backend-nest/microservices/contacts/**/*.ts'
+            - 'dev/user-backend-nest/microservices/contacts/.eslintrc.js'
+            features:
+            - 'dev/user-backend-nest/microservices/features/**/*.ts'
+            - 'dev/user-backend-nest/microservices/features/.eslintrc.js'
+            important-news:
+            - 'dev/user-backend-nest/microservices/important-news/**/*.ts'
+            - 'dev/user-backend-nest/microservices/important-news/.eslintrc.js'
+            mail-calendar:
+            - 'dev/user-backend-nest/microservices/mail-calendar/**/*.ts'
+            - 'dev/user-backend-nest/microservices/mail-calendar/.eslintrc.js'
+            map:
+            - 'dev/user-backend-nest/microservices/map/**/*.ts'
+            - 'dev/user-backend-nest/microservices/map/.eslintrc.js'
+            notifications:
+            - 'dev/user-backend-nest/microservices/notifications/**/*.ts'
+            - 'dev/user-backend-nest/microservices/notifications/.eslintrc.js'
+            restaurants:
+            - 'dev/user-backend-nest/microservices/restaurants/**/*.ts'
+            - 'dev/user-backend-nest/microservices/restaurants/.eslintrc.js'
+            rss:
+            - 'dev/user-backend-nest/microservices/rss/**/*.ts'
+            - 'dev/user-backend-nest/microservices/rss/.eslintrc.js'
+            schedule:
+            - 'dev/user-backend-nest/microservices/schedule/**/*.ts'
+            - 'dev/user-backend-nest/microservices/schedule/.eslintrc.js'
+            social-nertwork:
+            - 'dev/user-backend-nest/microservices/social-network/**/*.ts'
+            - 'dev/user-backend-nest/microservices/social-network/.eslintrc.js'
+            static-pages:
+            - 'dev/user-backend-nest/microservices/static-pages/**/*.ts'
+            - 'dev/user-backend-nest/microservices/static-pages/.eslintrc.js'
+            statistics:
+            - 'dev/user-backend-nest/microservices/statistics/**/*.ts'
+            - 'dev/user-backend-nest/microservices/statistics/.eslintrc.js'
+
+      - name: Read Node.js version
+        id: node_version
+        if: steps.changes.outputs[${{ matrix.service }}] == 'true'
+        run: echo NODE_VERSION=$(cat dev/user-backend-nest/.nvmrc) >> $GITHUB_OUTPUT
+
+      - name: Set up Node.js
+        if: steps.changes.outputs[${{ matrix.service }}] == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ steps.node_version.outputs.NODE_VERSION }}
+
+      - name: Prepare environment
+        if: steps.changes.outputs[${{ matrix.service }}] == 'true'
+        run: |
+          cd dev/user-backend-nest/microservices/${{ matrix.service }}
+          npm ci
+
+      - name: Lint ${{ matrix.service }}
+        if: steps.changes.outputs[${{ matrix.service }}] == 'true'
+        run: |
+          cd dev/user-backend-nest/microservices/${{ matrix.service }}
+          npm run lint

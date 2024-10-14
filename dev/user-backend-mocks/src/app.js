@@ -60,6 +60,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static('public'));
 
+app.get('/healthcheck', (req, res) => res.sendStatus(200));
+
 app.use('/mocking/auth', authRouter);
 app.use('/mocking/contacts', contactsRouter);
 app.use('/mocking/notifications', notificationsRouter);

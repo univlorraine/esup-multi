@@ -61,3 +61,19 @@ img {
 .border-bottom {
   border-bottom: var(--app-border-width-5) solid var(--ion-color-secondary) !important;
 }*/
+
+.rss-news-header-horizontally-style {
+
+  .img-container {
+    height: 170px;
+  }
+
+  .title {
+    margin: 1rem 0.7rem 0.5rem 0.7rem;
+  }
+
+  .title-col {
+    border-left: var(--app-border-width-5) solid var(--ion-color-secondary) !important;
+  }
+
+}

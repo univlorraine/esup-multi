@@ -41,7 +41,6 @@ import { createStore, setProps, withProps } from '@ngneat/elf';
 import { persistState } from '@ngneat/elf-persist-state';
 import { localForageStore } from '../store/local-forage';
 
-
 const STORE_NAME = 'guided-tour';
 
 export interface GuidedTourProps {
@@ -59,7 +58,7 @@ const store = createStore(
   })
 );
 
-const persist = persistState(store, {
+export const persistGuidedTour = persistState(store, {
   key: STORE_NAME,
   storage: localForageStore,
 });

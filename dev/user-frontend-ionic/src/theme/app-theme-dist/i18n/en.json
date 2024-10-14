@@ -1,85 +1,28 @@
 {
-    "HOME": {
-        "MENU": "Home"
+  "HOME": {
+    "MENU": "Home"
+  },
+  "ERROR": {
+    "UNKNOWN": "Unexpected error",
+    "UNAUTHENTICATED": {
+      "TITLE": "Restricted access",
+      "MESSAGE": "Please login before accessing this feature"
     },
-    "ERROR": {
-        "UNKNOWN": "Unexpected error",
-        "UNAUTHENTICATED": {
-            "TITLE": "Restricted access",
-            "MESSAGE": "Please login before accessing this feature"
-        },
-        "NO_NETWORK": {
-            "TITLE": "No network",
-            "MESSAGE": "You cannot access this feature without network",
-            "FIRST_LAUNCH": "Please activate your network for your first access to the application.",
-            "TOP_BAR_LABEL": "You are offline, limited functionality."
-        },
-        "SERVICE_UNREACHABLE": {
-            "TITLE": "Service unreachable",
-            "MESSAGE": "The service you're trying to contact is not reachable"
-        },
-        "WARNING": {
-            "TITLE": "Warning"
-        }
+    "NO_NETWORK": {
+      "TITLE": "No network",
+      "MESSAGE": "You cannot access this feature without network",
+      "FIRST_LAUNCH": "Please activate your network for your first access to the application.",
+      "TOP_BAR_LABEL": "You are offline, limited functionality."
     },
-  "GUIDED_TOUR": {
-    "NEXT": "Next",
-    "CLOSE": "Close",
-    "FINISH": "Finish",
-    "ANONYMOUS": {
-      "STEP_10" : {
-        "MESSAGE": "Welcome to the new version of UnivLorraine app."
-      },
-      "STEP_20" : {
-        "MESSAGE": "A new ergonomics allows you to navigate through the services it offers…"
-      },
-      "STEP_30" : {
-        "MESSAGE": "...but before going any further, you are asked to authenticate yourself."
-      }
+    "SERVICE_UNREACHABLE": {
+      "TITLE": "Service unreachable",
+      "MESSAGE": "The service you're trying to contact is not reachable"
     },
-    "LOGGED": {
-      "STEP_10" : {
-        "MESSAGE": "You are now authenticated and you will be able to access personalized information."
-      },
-      "STEP_20" : {
-        "MESSAGE": "This screen offers you direct and quick access to your immediate information: next courses, appointments, number of e-mails to read."
-      },
-      "STEP_30" : {
-        "MESSAGE": "Here you will find your notifications…"
-      },
-      "STEP_40" : {
-        "MESSAGE": "…and here the news of the institution."
-      },
-      "STEP_50" : {
-        "MESSAGE": "This screen offers you all the services available in the application."
-      },
-      "STEP_60" : {
-        "MESSAGE": "You can sort the services as you wish by a long press on the icon."
-      },
-      "STEP_70" : {
-        "MESSAGE": "You can also filter services through a search."
-      },
-      "STEP_80" : {
-        "MESSAGE": "Here you will find a dematerialized version of your student or staff cards"
-      },
-      "STEP_90" : {
-        "MESSAGE": "Our robot Ully will take care of answering your questions about your computer account, your connection or your schedule."
-      },
-      "STEP_100" : {
-        "MESSAGE": "Finally, this menu will allow you to access the application settings…"
-      },
-      "STEP_110" : {
-        "MESSAGE": "…it also offers you additional information."
-      },
-      "STEP_120" : {
-        "MESSAGE": "ou have the option to change the dark/light theme and the language."
-      },
-      "STEP_130" : {
-        "MESSAGE": "You can manage your connection settings."
-      },
-      "STEP_140" : {
-        "MESSAGE": "Finally, these menus will allow you to report a bug or request assistance."
-      }
+    "WARNING": {
+      "TITLE": "Warning"
     }
+  },
+  "GLOBAL" : {
+    "IOS_BACK_BUTTON": "Back"
   }
 }

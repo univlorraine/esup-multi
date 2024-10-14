@@ -38,9 +38,7 @@
  */
 
 import { createStore, select, withProps } from '@ngneat/elf';
-import {
-  persistState
-} from '@ngneat/elf-persist-state';
+import { persistState } from '@ngneat/elf-persist-state';
 import { localForageStore } from '../store/local-forage';
 
 const STORE_NAME = 'auth';
@@ -63,7 +61,7 @@ const authStore = createStore(
   withProps<AuthProps>({ authenticatedUser: null })
 );
 
-const persist = persistState(authStore, {
+export const persistAuthenticatedUser = persistState(authStore, {
   key: STORE_NAME,
   storage: localForageStore,
 });

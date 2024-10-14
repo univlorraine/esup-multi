@@ -65,7 +65,7 @@ Puis rajouter le fichier `.eslintrc.json` suivant à la racine du module :
 #### Traductions
 Pour les traductions nous utilisons [ngx translate](https://github.com/ngx-translate/core).
 
-Si le module contient des éléments qui doivent être traduits il faudra créer un fichier de traduction au sein du module : `projects/[mon module]/assets/i18n/fr.json`.
+Si le module contient des éléments qui doivent être traduits, il faudra créer un fichier de traduction pour ce module dans `src/theme/app-theme/i18n/[mon module]/fr.json`. Pensez à le copier dans le dossier `app-theme-dist` pour partager ces traductions.
 
 Il faut ensuite modifier la section "build" du fichier `angular.json` afin de rajouter le fichier de traduction du module aux assets :
 ```json
@@ -165,6 +165,7 @@ npm run module:build-all
 
 ### Liste des modules
 
+- [Module guided-tour](dev/user-frontend-ionic/src/theme/app-theme/guided-tour/README.md)
 - [Module shared](dev/user-frontend-ionic/projects/shared/README.md)
 - [Module auth](dev/user-frontend-ionic/projects/auth/README.md)
 - [Module calendar](dev/user-frontend-ionic/projects/calendar/README.md)

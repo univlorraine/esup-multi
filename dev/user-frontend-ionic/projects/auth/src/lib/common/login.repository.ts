@@ -75,7 +75,7 @@ const store = createStore(
   withProps<LoginProps>({ pageContent: null })
 );
 
-const persist = persistState(store, {
+export const persist = persistState(store, {
   key: STORE_NAME,
   storage: localForageStore,
 });

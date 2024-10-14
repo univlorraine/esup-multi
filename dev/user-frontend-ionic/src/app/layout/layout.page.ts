@@ -51,7 +51,8 @@ import {
   NotificationsRepository,
   NotificationsService,
   PageLayout,
-  StatisticsService
+  StatisticsService,
+  NavigationService
 } from '@multi/shared';
 import { combineLatest, Observable, Subject, withLatestFrom } from 'rxjs';
 import { distinctUntilChanged, filter, map } from 'rxjs/operators';
@@ -85,7 +86,8 @@ export class LayoutPage implements AfterViewInit, OnChanges {
     public menuOpenerService: MenuOpenerService,
     private networkService: NetworkService,
     private notificationsRepository: NotificationsRepository,
-    private notificationsService: NotificationsService
+    private notificationsService: NotificationsService,
+    private navigationService: NavigationService
   ) {
     this.isOnline$ = this.networkService.isOnline$;
     this.tabsMenuItems$ = this.menuService.tabsMenuItems$.pipe(
@@ -110,7 +112,7 @@ export class LayoutPage implements AfterViewInit, OnChanges {
     combineLatest([
       this.topMenuItems$.pipe(
         distinctUntilChanged((prevMenuItems, currentMenuItems) => this.menuService
-          .areSpecifiedPropetiesEqualsInMenuItemsArrays(
+          .areSpecifiedPropertiesEqualsInMenuItemsArrays(
             prevMenuItems,
             currentMenuItems,
             ['link.routerLink']
@@ -119,10 +121,11 @@ export class LayoutPage implements AfterViewInit, OnChanges {
       this.layoutChangeSubject$
     ])
     .pipe(
-      filter(([menuItems, layout]) => layout === 'tabs'),
+      filter(([, layout]) => layout === 'tabs'),
       map(([menuItems]) => menuItems),
     )
-    .subscribe(menuItems => { // Triggers when either layout has gone from full to tabs or when the topMenuItems have changed
+    .subscribe(() => { // Triggers when either layout has gone from full to tabs or when the topMenuItems have changed
+      this.navigationService.setExternalNavigation(false);
       this.notificationsService.loadNotifications(0, 10).subscribe();
     });
 

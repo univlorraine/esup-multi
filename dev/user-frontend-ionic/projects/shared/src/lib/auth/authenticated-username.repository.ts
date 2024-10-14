@@ -45,18 +45,16 @@ import {
 
 const STORE_NAME = 'auth-username';
 
-
 interface AuthProps {
   username: string;
 }
-
 
 const authStore = createStore(
   { name: STORE_NAME },
   withProps<AuthProps>({ username: null })
 );
 
-const persist = persistState(authStore, {
+export const persistAuthenticatedUsername = persistState(authStore, {
   key: STORE_NAME,
   storage: localStorageStrategy,
 });

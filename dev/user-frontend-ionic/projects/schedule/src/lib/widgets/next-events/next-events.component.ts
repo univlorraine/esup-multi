@@ -99,8 +99,8 @@ export class NextEventsComponent implements OnDestroy, AfterViewInit {
     ).subscribe();
 
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-    prefersDark.removeEventListener('change', (mediaQuery) => this.changeDetectorRef.detectChanges());
-    prefersDark.addEventListener('change', (mediaQuery) => this.changeDetectorRef.detectChanges());
+    prefersDark.removeEventListener('change', () => this.changeDetectorRef.detectChanges());
+    prefersDark.addEventListener('change', () => this.changeDetectorRef.detectChanges());
   }
 
   ngAfterViewInit() {

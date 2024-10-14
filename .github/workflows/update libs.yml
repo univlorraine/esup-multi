@@ -1,0 +1,62 @@
+name: Update library list
+permissions:
+  contents: write
+  pull-requests: write
+
+on:
+  pull_request:
+    types: [ opened, synchronize ]
+
+jobs:
+  update-library-list:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+
+      - name: Check if any package.json was modified
+        uses: dorny/paths-filter@v3
+        id: changes
+        with:
+          filters: |
+            packageJson:
+              - '**/package.json'
+
+      - name: Set up Node.js
+        if: steps.changes.outputs.packageJson == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install libs
+        if: steps.changes.outputs.packageJson == 'true'
+        run: npm run ci
+
+      - name: Run the dependency update script
+        if: steps.changes.outputs.packageJson == 'true'
+        run: |
+          chmod +x generateLibraryList.bash
+          ./generateLibraryList.bash
+
+      - name: Add changes to Git
+        if: steps.changes.outputs.packageJson == 'true'
+        run: |
+          git config core.fileMode false
+          git add -A
+
+      - name: Commit changes
+        if: steps.changes.outputs.packageJson == 'true'
+        run: |
+          git config --local user.name "GitHub Action"
+          git config --local user.email "action@github.com"
+          git commit -m "docs: update library list" || echo "No changes to commit"
+
+      - name: Push changes
+        if: steps.changes.outputs.packageJson == 'true'
+        run: git push origin HEAD:${{ github.head_ref }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,6 +1,8 @@
 .pwa_get_full_image_tag: &pwa_get_full_image_tag
-  - apt-get update && apt-get install -y jq
-  - VERSION=$(jq -r '.version' ${CI_PROJECT_DIR}/${FRONTEND_PATH}/package.json)
+  - PWA_ENV_FILE_PATH="src/environments/$PWA_ENV_FILE_NAME"
+  - echo "Chemin du fichier d'environnement PWA = $PWA_ENV_FILE_PATH"
+  - 'VERSION=$(sed -n "s/.*appVersion: \x27\(.*\)\x27,/\1/p" $PWA_ENV_FILE_PATH)'
+  - echo "Version de la PWA = ${VERSION}"
   - >
     if [ ${CI_COMMIT_BRANCH} == "main" ]; then
       PWA_IMAGE_TAG="${VERSION}"

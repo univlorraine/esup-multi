@@ -58,15 +58,13 @@ import { ScheduleModule } from '@multi/schedule';
 import { SocialNetworkModule } from '@multi/social-network';
 import { StaticPagesModule } from '@multi/static-pages';
 import { UnreadMailModule } from '@multi/unread-mail';
-import { MatomoModule } from 'ngx-matomo';
+// import { MatomoModule } from 'ngx-matomo';
 
 
-// Décommenter si utilisation des notifications
-// import firebasePwaEnvironment from './firebase/web/firebase-environment.pwa.json';
+import firebasePwaEnvironment from './firebase/web/firebase-environment.pwa.json';
 
 export const environment: any = {
-  // Décommenter si utilisation des notifications
-  // firebase: firebasePwaEnvironment,
+  firebase: firebasePwaEnvironment,
   production: false,
   apiEndpoint: 'http://localhost:3000',
   languages: ['fr', 'en'],
@@ -83,7 +81,9 @@ export const environment: any = {
     ClockingModule,
     ContactUsModule,
     ContactsModule.forRoot({ contactTypes: ['STUDENT', 'STAFF', 'STANDIN'] }),
-    ImportantNewsModule,
+    ImportantNewsModule.forRoot({
+      display: 'vertically'
+    }),
     MapModule.forRoot({
       defaultMapLocation: {
         longitude: 2.3488596,
@@ -99,7 +99,12 @@ export const environment: any = {
       reservationSsoUrlTemplate: 'https://mon-espace-de-resa.fr/auth?ticket={st}',
     }),
     RestaurantsModule,
-    RssPageModule,
+    RssPageModule.forRoot({
+      latestNewsWidget: {
+        display: 'horizontally'
+      },
+      display: 'vertically'
+    }),
     ScheduleModule.forRoot({
       nextEventsWidget: {
         numberOfEventsLimit: 2,
@@ -112,18 +117,18 @@ export const environment: any = {
     SocialNetworkModule,
     StaticPagesModule,
     UnreadMailModule,
-    MatomoModule.forRoot({
-      scriptUrl: 'https://webstats.mon-univ.fr/matomo.js',
-      trackers: [
-        {
-          trackerUrl: 'https://webstats.mon-univ.fr/matomo.php',
-          siteId: 453
-        }
-      ],
-      routeTracking: {
-        enable: true
-      }
-    }),
+    // MatomoModule.forRoot({
+    //   scriptUrl: 'https://webstats.mon-univ.fr/matomo.js',
+    //   trackers: [
+    //     {
+    //       trackerUrl: 'https://webstats.mon-univ.fr/matomo.php',
+    //       siteId: 453
+    //     }
+    //   ],
+    //   routeTracking: {
+    //     enable: true
+    //   }
+    // }),
   ],
 };
 

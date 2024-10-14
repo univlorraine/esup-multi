@@ -38,33 +38,37 @@
  */
 
 import { Injectable } from '@angular/core';
-import { NavigationEnd, Router, RouterEvent } from '@angular/router';
+import { Event, NavigationEnd, Router, RouterEvent } from '@angular/router';
 import { Platform } from '@ionic/angular';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
 import { ProjectModuleService } from '../project-module/project-module.service';
+import { Capacitor } from '@capacitor/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NavigationService {
   public currentRouterLink$: Observable<string>;
+  public isExternalNavigation$: Observable<boolean>;
   private currentRouterLinkSubject$ = new BehaviorSubject<string>('/');
   private history: string[] = [];
   private lastPausedDate: null | Date = null;
   private pausedMinutesBeforeRefresh = 15;
+  private isExternalNavigation = new BehaviorSubject<boolean>(!Capacitor.isNativePlatform());
 
   constructor(
     private router: Router,
     private projectModuleService: ProjectModuleService,
     private platform: Platform,
   ) {
+    this.isExternalNavigation$ = this.isExternalNavigation.asObservable();
 
     // feed current router link
     this.currentRouterLink$ = this.currentRouterLinkSubject$;
     this.router.events.pipe(
-      filter((event: RouterEvent) => event instanceof NavigationEnd),
-      map((event: RouterEvent): NavigationEnd => event as NavigationEnd),
+      filter((event: Event|RouterEvent) => event instanceof NavigationEnd),
+      map((event): NavigationEnd => event as NavigationEnd),
       map(navigationEnd => navigationEnd.urlAfterRedirects),
     ).subscribe(this.currentRouterLinkSubject$);
 
@@ -78,10 +82,14 @@ export class NavigationService {
     this.setupInactiveRefresh();
   }
 
+  public setExternalNavigation(value: boolean) {
+    this.isExternalNavigation.next(value);
+  }
+
   navigateBack() {
     this.history.pop(); // pop current url
     const previousUrl = this.history.pop() || '/'; // pop previous url
-    this.router.navigateByUrl(previousUrl, { replaceUrl: true });
+    this.router.navigateByUrl(previousUrl, { replaceUrl: true});
   }
 
   navigateToAuth() {

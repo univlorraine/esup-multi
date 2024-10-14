@@ -40,11 +40,13 @@
 <app-header></app-header>
 <ion-progress-bar *ngIf="isLoading" type="indeterminate"></ion-progress-bar>
 
-<ion-content *ngIf="(rssFeedIsEmpty$ | async) === false">
+<ion-content *ngIf="(rssFeedIsEmpty$ | async) === false"
+  [ngClass]="{'rss-page-vertically-style': config.display === 'vertically', 
+              'rss-page-horizontally-style': config.display === 'horizontally'}">
   <ion-card *ngFor="let item of (rssFeed$ | async); let i = index">
     <div class="border-card safe-area-margin-lr">
 
-      <app-rss-item-header [item]="item">
+      <app-rss-item-header [item]="item" [display]="config.display">
         <ng-template appRssItemHeaderButton>
           <ion-button (click)="openContent(i)" class="app-text-button-2 link-button" fill="clear">
             <ion-text class="app-text-5" *ngIf="!isContentVisible[i]">{{ "RSS.SEE_MORE" | translate }}</ion-text>

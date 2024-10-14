@@ -41,6 +41,7 @@ import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PageLayoutService, PageTitle } from '../../navigation/page-layout.service';
 import { NetworkService } from '../../network/network.service';
+import { NavigationService } from '../../navigation/navigation.service';
 
 @Component({
   selector: 'app-header',
@@ -54,11 +55,16 @@ export class HeaderComponent {
   public currentPageTitle$: Observable<PageTitle>;
   public showCurrentPageHeader$: Observable<boolean>;
   public isOnline$: Observable<boolean>;
+  public hideBackButton$: Observable<boolean>;
 
-  constructor(private pageLayoutService: PageLayoutService,
-    private networkService: NetworkService,) {
+  constructor(
+    private pageLayoutService: PageLayoutService,
+    private networkService: NetworkService,
+    private navigationService: NavigationService
+  ) {
     this.currentPageTitle$ = this.pageLayoutService.currentPageTitle$;
     this.showCurrentPageHeader$ = this.pageLayoutService.showCurrentPageHeader$;
     this.isOnline$ = this.networkService.isOnline$;
+    this.hideBackButton$ = this.navigationService.isExternalNavigation$;
   }
 }
