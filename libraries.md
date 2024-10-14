@@ -93,8 +93,8 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@capawesome/capacitor-badge@6.0.0](https://github.com/capawesome-team/capacitor-plugins) - MIT
 - [@capawesome/capacitor-screen-orientation@6.0.1](https://github.com/capawesome-team/capacitor-plugins) - MIT
 - [@fullcalendar/angular@6.1.15](https://github.com/fullcalendar/fullcalendar-angular) - MIT
-- [@ionic/angular-toolkit@9.0.0](https://github.com/ionic-team/angular-toolkit) - MIT
-- [@ionic/angular@7.8.6](https://github.com/ionic-team/ionic-framework) - MIT
+- [@ionic/angular-toolkit@10.1.1](https://github.com/ionic-team/angular-toolkit) - MIT
+- [@ionic/angular@8.2.7](https://github.com/ionic-team/ionic-framework) - MIT
 - [@larscom/ngx-translate-module-loader@3.2.1](https://github.com/larscom/ngx-translate-module-loader) - MIT
 - [@ngneat/effects-ng@2.0.0](https://github.com/ngneat/effects) - MIT
 - [@ngneat/elf-entities@4.6.0](https://github.com/ngneat/elf) - MIT
