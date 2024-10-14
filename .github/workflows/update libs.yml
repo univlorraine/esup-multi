@@ -47,11 +47,15 @@ jobs:
         if: steps.changes.outputs.packageJson == 'true'
         run: |
           git config core.fileMode false
-          echo "CHANGES=$(git diff-index --quiet HEAD -- ; echo $?)" >> $GITHUB_OUTPUT
+          echo "CHANGES=$(( $(git diff -w --ignore-blank-lines | wc -l) > 0 ? 1 : 0 ))" >> $GITHUB_OUTPUT
           echo "----"
           cat libraries.md
           echo "----"
           git diff
+          echo "----"
+          echo $(git diff-index --quiet HEAD -- ; echo $?)
+          echo "----"
+          echo $(( $(git diff -w --ignore-blank-lines | wc -l) > 0 ? 1 : 0 ))
 
 #      - name: Add changes to Git
 #        if: steps.diff.outputs.CHANGES == 1 && github.event.pull_request.head.repo.full_name == github.repository
@@ -71,10 +75,11 @@ jobs:
 #        env:
 #          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Fork detected
+      - name: Fork  detected
         if: steps.diff.outputs.CHANGES == 1 # && github.event.pull_request.head.repo.full_name != github.repository
         run: |
           echo "La liste des dépendances doit être mise à jour."
           echo "A cause d'une limitation de GitHub Actions, il est impossible de mettre à jour la liste des dépendances depuis un fork."
           echo "Merci d'exécuter le script 'generateLibraryList.bash' de votre côté."
           exit 1
+
