@@ -38,7 +38,7 @@
  */
 
 import { DOCUMENT } from '@angular/common';
-import { Component, Inject, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { Component, DestroyRef, inject, Inject, OnDestroy, OnInit, Optional, Renderer2 } from '@angular/core';
 import { FirebaseMessaging } from '@capacitor-firebase/messaging';
 import { App } from '@capacitor/app';
 import { Capacitor, PluginListenerHandle } from '@capacitor/core';
@@ -46,7 +46,7 @@ import { Device } from '@capacitor/device';
 import { SplashScreen } from '@capacitor/splash-screen';
 import { StatusBar, Style } from '@capacitor/status-bar';
 import { Badge } from '@capawesome/capacitor-badge';
-import { ModalController, Platform, PopoverController } from '@ionic/angular';
+import { IonRouterOutlet, ModalController, Platform, PopoverController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import {
   currentLanguage$, features$, FeaturesService, isDarkTheme$, isFeatureStoreInitialized$, NavigationService,
@@ -73,6 +73,7 @@ export class AppComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
   private backButtonListener: Promise<PluginListenerHandle>;
   private appResumeListener: Promise<PluginListenerHandle>;
+  private destroyRef = inject(DestroyRef);
 
   constructor(
     @Inject('environment')
@@ -89,7 +90,8 @@ export class AppComponent implements OnInit, OnDestroy {
     private featuresService: FeaturesService,
     private notificationsService: NotificationsService,
     private statisticsService: StatisticsService,
-    private titleService: Title
+    private titleService: Title,
+    @Optional() private routerOutlet?: IonRouterOutlet
   ) {
     currentLanguage$.subscribe((language) => {
       document.documentElement.lang = language || environment.defaultLanguage;
@@ -150,20 +152,25 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.titleService.setTitle(this.environment.appTitle);
-    this.backButtonListener = App.addListener('backButton', () => {
-      this.popoverController.getTop().then(popover => {
-        if (popover) {
-          popover.dismiss();
-          return;
-        }
-        this.modalController.getTop().then(modal => {
-          if (modal) {
-            modal.dismiss();
-            return;
-          }
-          this.navigationService.navigateBack();
-        });
-      });
+    // Gestion du bouton back du périphérique mobile
+    this.platform.backButton.subscribeWithPriority(-1, async () => {
+      const popover = await this.popoverController.getTop();
+      if (popover) {
+        await popover.dismiss();
+        return;
+      }
+
+      const modal = await this.modalController.getTop();
+      if (modal) {
+        await modal.dismiss();
+        return;
+      }
+
+      if (!this.navigationService.canGoBack()) {
+        App.minimizeApp();
+        return;
+      }
+      this.navigationService.navigateBack();
     });
 
     // reload notifications when app is resumed (back to foreground)
