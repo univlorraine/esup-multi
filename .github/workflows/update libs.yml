@@ -48,27 +48,31 @@ jobs:
         run: |
           git config core.fileMode false
           echo "CHANGES=$(git diff-index --quiet HEAD -- ; echo $?)" >> $GITHUB_OUTPUT
+          echo "----"
+          cat libraries.md
+          echo "----"
+          git diff
 
-      - name: Add changes to Git
-        if: steps.diff.outputs.CHANGES == 1 && github.event.pull_request.head.repo.full_name == github.repository
-        run: |
-          git add -A
-
-      - name: Commit changes
-        if: steps.diff.outputs.CHANGES == 1 && github.event.pull_request.head.repo.full_name == github.repository
-        run: |
-          git config --local user.name "GitHub Action"
-          git config --local user.email "action@github.com"
-          git commit -m "docs: update library list" || echo "No changes to commit"
-
-      - name: Push changes
-        if: steps.diff.outputs.CHANGES == 1 && github.event.pull_request.head.repo.full_name == github.repository
-        run: git push origin HEAD:${{ github.head_ref }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#      - name: Add changes to Git
+#        if: steps.diff.outputs.CHANGES == 1 && github.event.pull_request.head.repo.full_name == github.repository
+#        run: |
+#          git add -A
+#
+#      - name: Commit changes
+#        if: steps.diff.outputs.CHANGES == 1 && github.event.pull_request.head.repo.full_name == github.repository
+#        run: |
+#          git config --local user.name "GitHub Action"
+#          git config --local user.email "action@github.com"
+#          git commit -m "docs: update library list" || echo "No changes to commit"
+#
+#      - name: Push changes
+#        if: steps.diff.outputs.CHANGES == 1 && github.event.pull_request.head.repo.full_name == github.repository
+#        run: git push origin HEAD:${{ github.head_ref }}
+#        env:
+#          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Fork detected
-        if: steps.diff.outputs.CHANGES == 1 && github.event.pull_request.head.repo.full_name != github.repository
+        if: steps.diff.outputs.CHANGES == 1 # && github.event.pull_request.head.repo.full_name != github.repository
         run: |
           echo "La liste des dépendances doit être mise à jour."
           echo "A cause d'une limitation de GitHub Actions, il est impossible de mettre à jour la liste des dépendances depuis un fork."
