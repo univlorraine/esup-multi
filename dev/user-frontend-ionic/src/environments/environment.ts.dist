@@ -111,7 +111,8 @@ export const environment: any = {
     ScheduleModule.forRoot({
       nextEventsWidget: {
         numberOfEventsLimit: 2,
-        numberOfDaysLimit: 7
+        numberOfDaysLimit: 7,
+        display: 'list'
       },
       previousWeeksInCache: 1,
       nextWeeksInCache: 2,

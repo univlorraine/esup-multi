@@ -60,6 +60,10 @@ ion-card {
   @supports (padding-left: env(safe-area-inset-left)) {
     padding-left: calc(1rem + env(safe-area-inset-left));
   }
+
+  app-custom-icon {
+    vertical-align: text-top;
+  }
 }
 
 .light-font-color{
