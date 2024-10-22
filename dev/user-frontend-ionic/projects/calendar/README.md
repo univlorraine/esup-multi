@@ -1,23 +1,18 @@
 # Calendar
 Module permettant d'afficher un calendrier avec les prochains événements sur la page d'accueil.
 
-## Widget
-- `calendar` : Widget qui affiche les prochains évènements de l'agenda de l'utilisateur.
-
 ## Configuration
-Exemple dans `app.module.ts` :
+Exemple dans `environment.ts` :
 
 ```typescript
-@NgModule({
-  declarations: [AppComponent],
-  imports: [
-    CalendarModule.forRoot({
-      numberOfEventsLimit: 3,
-      display: 'slider'
-    })
-  ]
+CalendarModule.forRoot({
+  numberOfEventsLimit: 3,
+  display: 'slider'
 })
 ```
+
+## Widget
+- `calendar` : Widget qui affiche les prochains évènements de l'agenda de l'utilisateur.
 
 ### Configuration du widget
 - `numberOfEventsLimit` : nombre maximum des prochains évènements à afficher.

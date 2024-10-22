@@ -12,6 +12,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **(widgets)**: les widgets tiennent désormais compte de l'Ionicon ou bien des icônes SVG renseignées du côté du CMS et les affichent à côté du titre de la Widget
 
 #### New features
+* **(calendar)** : Il est désormais possible de choisir entre 2 affichages pour la widget des évènements du calendrier :
+  * Liste verticale (list)
+  * Slider horizontal (slider)
 * **(schedule)** : Il est désormais possible de choisir entre 2 affichages pour la widget des prochains cours à venir :
   * Liste verticale (list)
   * Slider horizontal (slider)

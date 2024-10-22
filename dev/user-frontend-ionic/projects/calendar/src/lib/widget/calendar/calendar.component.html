@@ -65,7 +65,7 @@
         </ion-col>
       </ng-container>
     </ng-container>
-    
+
   </ion-row>
 </ng-template>
 
@@ -76,6 +76,7 @@
     <ion-row *ngIf="isLoading">
       <ion-spinner class="ion-margin safe-area-lr-ionic-margin" name="dots"></ion-spinner>
     </ion-row>
+
     <ng-container *ngIf='!isLoading'>
       <ng-container *ngIf='(nextEvents$ | async) as events'>
         <ion-row *ngIf='events.length === 0; else sliderInnerContainer' class="ion-padding">
@@ -83,23 +84,22 @@
         </ion-row>
         <ng-template #sliderInnerContainer>
           <ion-row class="events-container">
-            <ion-card *ngFor="let event of events" class="ion-no-margin">
+            <ion-card *ngFor="let event of events" class="ion-no-margin slider-theme-color">
               <ion-card-content>
                 <ion-row class="event-day-hour">
-                  <ion-text [ngClass]="fontColor()" class="hour app-title-3">{{event.startDateTime | localHour}} - {{event.endDateTime | localHour}}</ion-text>
+                  <ion-text class="hour app-title-2 slider-font-color">{{event.startDateTime | localHour}} - {{event.endDateTime | localHour}}</ion-text>
                   <ng-container *ngIf="(event.startDateTime | completeLocalDate) as completeLocalDate">
-                    <ion-row [ngClass]="fontColor()" class="day app-text-4">
+                    <ion-row class="day app-text-4 slider-font-color">
                       <ion-text>{{completeLocalDate | slice: 0:completeLocalDate.indexOf(' ')}}</ion-text>
                       <ion-text>{{completeLocalDate | slice: completeLocalDate.indexOf(' ')}}</ion-text>
                     </ion-row>
                   </ng-container>
                 </ion-row>
-                <ion-text [ngClass]="fontColor()" class="app-title-5 event-label">{{event.label}}</ion-text>
+                <ion-text class="app-title-5 event-label slider-font-color">{{event.label}}</ion-text>
                 <ion-row *ngIf="event.location" class="event-additional">
                   <ion-row class="ion-align-items-center card-labels">
-                    <ion-icon [ngClass]="fontColor()" class="card-labels-icons" name="business-outline" aria-label=""></ion-icon>
-                    <ion-text [ngClass]="fontColor()"
-                      class="app-title-6 light">{{event.location}}</ion-text>
+                    <ion-icon class="card-labels-icons slider-font-color" name="business-outline" aria-label=""></ion-icon>
+                    <ion-text class="app-title-6 light slider-font-color">{{event.location}}</ion-text>
                   </ion-row>
                 </ion-row>
               </ion-card-content>
