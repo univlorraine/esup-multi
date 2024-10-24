@@ -42,7 +42,8 @@
   },
   "WIDGET": {
     "NEXT_EVENTS": {
-      "NO_EVENTS": "No courses soon"
+      "NO_EVENTS": "No courses soon",
+      "LIMIT_TEACHERS": "others"
     }
   }
 }
