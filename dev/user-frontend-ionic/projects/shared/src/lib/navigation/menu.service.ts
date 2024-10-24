@@ -38,7 +38,6 @@
  */
 
 import { Injectable } from '@angular/core';
-import { isMatch, pick } from 'lodash';
 import { BehaviorSubject, ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FeatureType } from '../features/features.repository';
@@ -125,14 +124,10 @@ export class MenuService {
     if (firstMenuItems.length !== secondMenuItems.length) {
       return false;
     }
-    for (const i in firstMenuItems) {
-      const firstMenuItem = firstMenuItems[i];
-      const secondMenuItem = secondMenuItems[i];
-      if(!isMatch(firstMenuItem, pick(secondMenuItem, propertiesToCompare))){
-        return false;
-      }
-    }
-    return true;
+
+    return firstMenuItems.every((item, index) =>
+      propertiesToCompare.every(property => item[property] === secondMenuItems[index][property])
+    );
   }
 
   private getStaticMenuItemsByType(menuType: StaticMenuType): MenuItem[] {
