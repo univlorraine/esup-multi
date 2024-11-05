@@ -37,16 +37,16 @@
  * termes.
  */
 
-import { Component, OnDestroy, ViewChild } from '@angular/core';
+import { Component, DestroyRef, inject, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Geolocation } from '@capacitor/geolocation';
 import { TranslateService } from '@ngx-translate/core';
 import { NetworkService, MultiTenantService } from '@multi/shared';
 import * as Leaflet from 'leaflet';
-import { Subject } from 'rxjs';
-import { finalize, take, takeUntil } from 'rxjs/operators';
+import { finalize, take } from 'rxjs/operators';
 import { Marker, markersList$, setMarkers } from './map.repository';
 import { MapService } from './map.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 const CATEGORIES = [
   'presidences_points',
@@ -63,7 +63,7 @@ const CATEGORIES = [
   templateUrl: './map.page.html',
   styleUrls: ['../../../../src/theme/app-theme/styles/map/map.page.scss'],
 })
-export class MapPage implements OnDestroy {
+export class MapPage {
 
   @ViewChild('popover') popover;
 
@@ -76,7 +76,7 @@ export class MapPage implements OnDestroy {
   private markersByCategory: Map<string, Leaflet.Marker[]> = new Map();
   private layerGroupByCategory: Map<string, Leaflet.LayerGroup> = new Map();
   private positionLayerGroup: Leaflet.LayerGroup;
-  private unsubscribe$: Subject<boolean> = new Subject<boolean>();
+  private destroyRef = inject(DestroyRef)
 
   constructor(
     private mapService: MapService,
@@ -88,7 +88,7 @@ export class MapPage implements OnDestroy {
     this.initCategoriesForm();
 
     this.categoriesForm.valueChanges.pipe(
-      takeUntil(this.unsubscribe$)
+      takeUntilDestroyed(this.destroyRef)
     ).subscribe(formValues => {
       this.categoriesSelected = CATEGORIES.filter((value, index) => formValues[index]);
       this.refreshMap();
@@ -113,11 +113,6 @@ export class MapPage implements OnDestroy {
 
   ionViewWillLeave() {
     this.map.remove();
-  }
-
-  ngOnDestroy() {
-    this.unsubscribe$.next(true);
-    this.unsubscribe$.complete();
   }
 
   onLocateUserClick() {

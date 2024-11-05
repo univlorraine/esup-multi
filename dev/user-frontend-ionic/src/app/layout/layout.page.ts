@@ -37,7 +37,16 @@
  * termes.
  */
 
-import {AfterViewInit, Component, OnDestroy, Input, OnChanges, SimpleChanges} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnDestroy,
+  DestroyRef,
+  inject,
+  Input,
+  OnChanges,
+  SimpleChanges
+} from '@angular/core';
 import { NavController } from '@ionic/angular';
 import {
   FeaturesService,
@@ -48,6 +57,7 @@ import {
   MenuOpenerService,
   MenuService,
   NetworkService,
+  Notification,
   NotificationsRepository,
   NotificationsService,
   PageLayout,
@@ -55,12 +65,17 @@ import {
   NavigationService,
   MultiTenantService,
 } from '@multi/shared';
-import {combineLatest, Observable, Subject, Subscription, withLatestFrom} from 'rxjs';
-import { distinctUntilChanged, filter, map } from 'rxjs/operators';
+import { BehaviorSubject, combineLatestWith, Observable, Subscription, Subject } from 'rxjs';
+import { distinctUntilChanged, filter, finalize, map } from 'rxjs/operators';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {environment} from '../../environments/environment';
 
 interface MenuItemWithOptionalRouterLink extends MenuItem {
   routerLink: string;
+}
+
+interface MenuItemWithBadge extends MenuItemWithOptionalRouterLink {
+  hasBadge: boolean;
 }
 
 @Component({
@@ -72,12 +87,12 @@ export class LayoutPage implements AfterViewInit, OnChanges, OnDestroy {
   @Input() currentPageLayout: PageLayout;
 
   public isLoading = false;
-  public topMenuItems$: Observable<MenuItem[]>;
   public tabsMenuItems$: Observable<MenuItemWithOptionalRouterLink[]>;
+  public topMenuItemsWithBadges$: Observable<MenuItemWithBadge[]>;
   public isOnline$: Observable<boolean>;
-  public menuItemHasBadge$: Observable<boolean[]>;
-  public menuItemHasBadgeSubject$: Subject<boolean[]> = new Subject<boolean[]>();
+  public menuItemHasBadgeState$: BehaviorSubject<boolean[]> = new BehaviorSubject<boolean[]>([]);
   public layoutChangeSubject$: Subject<string> = new Subject<string>();
+  private destroyRef = inject(DestroyRef);
   public defaultLogo: string;
   private defaultLogoSubscription: Subscription;
 
@@ -94,66 +109,9 @@ export class LayoutPage implements AfterViewInit, OnChanges, OnDestroy {
     private multiTenantService: MultiTenantService,
     private navigationService: NavigationService
   ) {
-    this.isOnline$ = this.networkService.isOnline$;
-    this.tabsMenuItems$ = this.menuService.tabsMenuItems$.pipe(
-      map(menuItems => menuItems.map(menuItem => {
-        if (menuItem.link.type !== MenuItemLinkType.router) {
-          return {
-            ...menuItem,
-            routerLink: null
-          };
-        }
-
-        return {
-          ...menuItem,
-          routerLink: (menuItem.link as MenuItemRouterLink).routerLink
-        };
-      }))
-    );
-
-    this.topMenuItems$ = this.menuService.topMenuItems$;
-    this.menuItemHasBadge$ = this.menuItemHasBadgeSubject$;
-
-    combineLatest([
-      this.topMenuItems$.pipe(
-        distinctUntilChanged((prevMenuItems, currentMenuItems) => this.menuService
-          .areSpecifiedPropertiesEqualsInMenuItemsArrays(
-            prevMenuItems,
-            currentMenuItems,
-            ['link.routerLink']
-          ))
-      ),
-      this.layoutChangeSubject$
-    ])
-    .pipe(
-      filter(([, layout]) => layout === 'tabs'),
-      map(([menuItems]) => menuItems),
-    )
-    .subscribe(() => { // Triggers when either layout has gone from full to tabs or when the topMenuItems have changed
-      this.navigationService.setExternalNavigation(false);
-      this.notificationsService.loadNotifications(0, 10).subscribe();
-    });
-
-    this.notificationsRepository.notifications$.pipe(
-        withLatestFrom(this.topMenuItems$),
-        map(([notifications, menuItems]) => menuItems.map(menuItem => menuItem.link.type === MenuItemLinkType.router
-            && (menuItem.link as MenuItemRouterLink).routerLink === '/notifications'
-            && notifications.find(notification => notification.state === 'UNREAD') !== undefined)),
-    ).subscribe(values => {
-      this.menuItemHasBadgeSubject$.next(values);
-    });
-
-    this.defaultLogo = environment.defaultLogo;
-
-    this.defaultLogoSubscription = multiTenantService.currentTenantLogo$.subscribe(logo => {
-      if(logo) {
-        this.defaultLogo = logo;
-      }
-    });
-
-    if (this.multiTenantService.isSingleTenant()) {
-      this.multiTenantService.setCurrentTenantById(this.multiTenantService.getSelectedTenantId());
-    }
+    this.initializeObservables();
+    this.setupSubscriptions();
+    this.handleSingleTenant();
   }
 
   ngAfterViewInit() {
@@ -165,7 +123,7 @@ export class LayoutPage implements AfterViewInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if(changes.currentPageLayout) {
+    if (changes.currentPageLayout) {
       this.layoutChangeSubject$.next(changes.currentPageLayout.currentValue);
     }
     if (this.shouldRefreshTabsViewData(changes)) {
@@ -173,7 +131,90 @@ export class LayoutPage implements AfterViewInit, OnChanges, OnDestroy {
     }
   }
 
-  public async openExternalOrSsoLinkOnly(menuItem: MenuItem) {
+  private initializeObservables(): void {
+    this.isOnline$ = this.networkService.isOnline$;
+    this.tabsMenuItems$ = this.menuService.tabsMenuItems$.pipe(
+      map(this.mapMenuItems)
+    );
+
+    this.topMenuItemsWithBadges$ = this.menuService.topMenuItems$.pipe(
+      combineLatestWith(this.menuItemHasBadgeState$),
+      map(([menuItems, badges]) => menuItems.map((menuItem, index) => ({
+        ...menuItem,
+        routerLink: menuItem.link.type === MenuItemLinkType.router
+          ? (menuItem.link as MenuItemRouterLink).routerLink
+          : undefined,
+        hasBadge: badges[index] ?? false
+      })))
+    );
+
+    // this.topMenuItems$ = this.menuService.topMenuItems$;
+  }
+
+  private mapMenuItems(menuItems: MenuItem[]): MenuItemWithOptionalRouterLink[] {
+    return menuItems.map(menuItem => ({
+      ...menuItem,
+      routerLink: menuItem.link.type === MenuItemLinkType.router
+        ? (menuItem.link as MenuItemRouterLink).routerLink
+        : undefined
+    }));
+  }
+
+  private setupSubscriptions(): void {
+    this.topMenuItemsWithBadges$.pipe(
+      distinctUntilChanged((prevMenuItems, currentMenuItems) => this.menuService.areSpecifiedPropertiesEqualsInMenuItemsArrays(
+        prevMenuItems, currentMenuItems, ['link.routerLink']
+      )),
+      combineLatestWith(this.layoutChangeSubject$.pipe(filter(layout => layout === 'tabs'))),
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe(() => {
+      this.navigationService.setExternalNavigation(false);
+      this.notificationsService.loadNotifications(0, 10).subscribe();
+    });
+
+    this.notificationsRepository.notifications$.pipe(
+      takeUntilDestroyed(this.destroyRef),
+      combineLatestWith(this.menuService.topMenuItems$),
+      map(([notifications, menuItems]) => this.mapNotificationsToMenuItems(notifications, menuItems)),
+    ).subscribe(values => {
+      this.menuItemHasBadgeState$.next(values);
+    });
+
+    this.defaultLogo = environment.defaultLogo;
+    this.defaultLogoSubscription = this.multiTenantService.currentTenantLogo$.subscribe(logo => {
+      if(logo) {
+        this.defaultLogo = logo;
+      }
+    });
+  }
+
+  private mapNotificationsToMenuItems(notifications: Notification[], menuItems: MenuItem[]): boolean[] {
+    return menuItems.map(menuItem =>
+      menuItem.link.type === MenuItemLinkType.router &&
+      (menuItem.link as MenuItemRouterLink).routerLink === '/notifications' &&
+      notifications.some(notification => notification.state === 'UNREAD')
+    );
+  }
+
+  private shouldRefreshTabsViewData(changes: SimpleChanges): boolean {
+    const currentPageLayoutChange = changes.currentPageLayout;
+    return currentPageLayoutChange?.currentValue === 'tabs' && !currentPageLayoutChange.firstChange;
+  }
+
+  private async loadFeatures(): Promise<void> {
+    // skip if network is not available
+    if (!(await this.networkService.getConnectionStatus()).connected) {
+      console.warn('No network connection available, features can not be loaded');
+      return;
+    }
+
+    this.isLoading = true;
+    this.featuresService.loadAndStoreFeatures().pipe(
+      finalize(() => this.isLoading = false)
+    ).subscribe();
+  }
+
+  public async openExternalOrSsoLinkOnly(menuItem: MenuItem): Promise<boolean | void> {
     if (menuItem.link.type === MenuItemLinkType.router) {
       this.statisticsService.onFunctionalityOpened(menuItem.statisticName);
       this.navController.setDirection('forward', false);
@@ -184,33 +225,16 @@ export class LayoutPage implements AfterViewInit, OnChanges, OnDestroy {
   }
 
   public generateMenuItemIdFromRouterLink(menuItem: MenuItemWithOptionalRouterLink) {
-    if (!menuItem.routerLink) {
-      return;
-    }
-    return menuItem.routerLink.substring(1).replace('/', '-');
+    return menuItem.routerLink?.substring(1).replace('/', '-');
   }
 
   public getMenuId(menuItem: MenuItem) {
     return this.guidedTourService.generateMenuItemIdFromTitle(menuItem);
   }
 
-  private shouldRefreshTabsViewData(changes: SimpleChanges): boolean {
-    const currentPageLayoutChange = changes.currentPageLayout;
-
-    return (
-      currentPageLayoutChange &&
-      currentPageLayoutChange.currentValue === 'tabs' &&
-      !currentPageLayoutChange.firstChange
-    );
-  }
-
-  private async loadFeatures(): Promise<void> {
-    // skip if network is not available
-    if (!(await this.networkService.getConnectionStatus()).connected) {
-      return;
+  private handleSingleTenant() {
+    if (this.multiTenantService.isSingleTenant()) {
+      this.multiTenantService.setCurrentTenantById(this.multiTenantService.getSelectedTenantId());
     }
-
-    this.isLoading = true;
-    this.featuresService.loadAndStoreFeatures().subscribe(() => this.isLoading = false);
   }
 }
