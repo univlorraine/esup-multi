@@ -236,7 +236,7 @@ Dans les fichiers src/environments/environment.*.ts, on peut ajouter un thème p
   defaultLanguage: 'fr',
   firebase: firebasePwaEnvironment,
   guidedTourEnabled: true,
-  defaultTheme: 'Insa',
+  defaultTheme: 'default',
   tenants: [
   ...
   ]
