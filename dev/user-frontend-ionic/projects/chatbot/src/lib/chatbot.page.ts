@@ -47,6 +47,7 @@ import { ChatbotModuleConfig, CHATBOT_CONFIG } from './chatbot.config';
 import { ChatbotMessage, ChatButton, Message, MessageType, UserMessage } from './chatbot.dto';
 import { ChatbotService } from './chatbot.service';
 import { UserIdGeneratorService } from './user-id-generator.service';
+import { MultiTenantService } from '@multi/shared';
 
 @Component({
   selector: 'app-chatbot',
@@ -69,7 +70,7 @@ export class ChatbotPage implements OnInit {
   private domMessageListObserver: MutationObserver;
 
   constructor(
-    @Inject(CHATBOT_CONFIG) private config: ChatbotModuleConfig,
+    private multiTenantService: MultiTenantService,
     private chatbotService: ChatbotService
   ) { }
 
@@ -164,7 +165,7 @@ export class ChatbotPage implements OnInit {
   }
 
   isChatbotLogo(message: ChatbotMessage) {
-    return message?.card?.file?.type === 'image'
-      && message?.card?.file?.name.match(this.config.chatbotLogoRegex);
+    const chatbotLogoRegex = this.multiTenantService.getModuleConfiguration('chatbot.logoRegex');
+    return message?.card?.file?.type === 'image' && message?.card?.file?.name.match(chatbotLogoRegex);
   }
 }

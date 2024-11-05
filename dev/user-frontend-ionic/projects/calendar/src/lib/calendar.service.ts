@@ -39,7 +39,7 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { getAuthToken, NetworkService } from '@multi/shared';
+import { getAuthToken, NetworkService, MultiTenantService } from '@multi/shared';
 import { isAfter } from 'date-fns';
 import { from, iif, Observable, of } from 'rxjs';
 import { map, switchMap, take, tap } from 'rxjs/operators';
@@ -55,6 +55,7 @@ export class CalendarService {
     @Inject(CALENDAR_CONFIG) private config: CalendarModuleConfig,
     @Inject('environment')
     private environment: any,
+    private multiTenantService: MultiTenantService,
     private http: HttpClient,
     private networkService: NetworkService
   ) { }
@@ -83,7 +84,7 @@ export class CalendarService {
   }
 
   private getMailCalendar(): Observable<MailCalendar> {
-    const url = `${this.environment.apiEndpoint}/mail-calendar`;
+    const url = `${this.multiTenantService.getApiEndpoint()}/mail-calendar`;
     return getAuthToken().pipe(
       take(1),
       switchMap(authToken => this.http.post<MailCalendar>(url, { authToken }))

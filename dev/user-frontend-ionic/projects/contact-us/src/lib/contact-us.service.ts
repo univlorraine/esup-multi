@@ -38,11 +38,11 @@
  */
 
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { App } from '@capacitor/app';
 import { Capacitor } from '@capacitor/core';
 import { Platform } from '@ionic/angular';
-import { getAuthToken, NetworkService } from '@multi/shared';
+import { getAuthToken, NetworkService, MultiTenantService } from '@multi/shared';
 import { combineLatest, from, Observable, of } from 'rxjs';
 import { map, switchMap, take, tap } from 'rxjs/operators';
 import { ContactUsPageContent, ContactUsRepository } from './contact-us.repository';
@@ -65,8 +65,7 @@ export interface ContactMessageQueryDto {
 export class ContactUsService {
 
   constructor(
-    @Inject('environment')
-    private environment: any,
+    private multiTenantService: MultiTenantService,
     private http: HttpClient,
     private contactUsRepository: ContactUsRepository,
     private networkService: NetworkService,
@@ -74,7 +73,7 @@ export class ContactUsService {
   ) {}
 
   public loadAndStoreContactUsPageContent(): Observable<ContactUsPageContent> {
-    const url = `${this.environment.apiEndpoint}/contact-us`;
+    const url = `${this.multiTenantService.getApiEndpoint()}/contact-us`;
 
     return this.http.get<ContactUsPageContent>(url).pipe(
       tap((pageContent) => {
@@ -83,7 +82,7 @@ export class ContactUsService {
   }
 
   public sendContactMessage(query: ContactMessageQueryDto): Observable<void> {
-    const url = `${this.environment.apiEndpoint}/contact-us`;
+    const url = `${this.multiTenantService.getApiEndpoint()}/contact-us`;
 
     const appVersion = !Capacitor.isNativePlatform() ? of(null) : from(App.getInfo()).pipe(map(info => info.version));
     return combineLatest([getAuthToken(), appVersion, from(this.networkService.getConnectionStatus())]).pipe(

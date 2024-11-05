@@ -96,7 +96,7 @@ export class GuidedTourService {
         take(1),
         switchMap(() => userIsAuthenticated$.pipe(take(1))),
       ),
-      this.translateService.get('GUIDED_TOUR') // on ne le récupère pas, mais permet d'attendre que la traduction soit chargée, sinon .instant() ne fonctionne pas à chaque fois
+      this.translateService.get('GUIDED-TOUR') // on ne le récupère pas, mais permet d'attendre que la traduction soit chargée, sinon .instant() ne fonctionne pas à chaque fois
     ).subscribe(([userIsAuthenticated]) => {
         if (
           !isLoggedTourViewed() &&
