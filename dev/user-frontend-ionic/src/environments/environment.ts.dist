@@ -72,6 +72,7 @@ export const environment: any = {
   appTitle: 'Esup-Multi',
   appVersion: '1.0.0',
   useCustomNotifService: false,
+  defaultLogo: 'assets/logos/white-logo.svg',
   tenants: [
     {
       apiEndpoint: 'http://localhost:3000',

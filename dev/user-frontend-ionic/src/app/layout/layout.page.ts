@@ -146,7 +146,9 @@ export class LayoutPage implements AfterViewInit, OnChanges, OnDestroy {
     this.defaultLogo = environment.defaultLogo;
 
     this.defaultLogoSubscription = multiTenantService.currentTenantLogo$.subscribe(logo => {
-      this.defaultLogo = logo;
+      if(logo) {
+        this.defaultLogo = logo;
+      }
     });
 
     if (this.multiTenantService.isSingleTenant()) {

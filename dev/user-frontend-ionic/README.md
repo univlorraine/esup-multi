@@ -264,10 +264,10 @@ Exemple:
 export const environment = {
   production: false,
   ...
-  defaultLogo: 'assets/logo/white-university-logo.svg',
+  defaultLogo: 'assets/logos/white-logo.svg',
   tenants: [
     {
-      id: 'Lyon',
-      logo: 'assets/logos/logosINSA_simplifies_Lyon.
+      id: 'other',
+      logo: 'assets/logos/other.svg'
       ...
 ```
