@@ -226,3 +226,48 @@ Pour cela, ajoutez un nouveau dossier d'icônes dans ```src/theme/app-theme/asse
     "output": "./svg"
   }
 ```
+
+### Personnalisation du thème d'un tenant.
+
+Dans les fichiers src/environments/environment.*.ts, on peut ajouter un thème par défaut dans l'attribut ```defaultTheme```
+```
+  production: false,
+  languages: ['fr', 'en'],
+  defaultLanguage: 'fr',
+  firebase: firebasePwaEnvironment,
+  guidedTourEnabled: true,
+  defaultTheme: 'Insa',
+  tenants: [
+  ...
+  ]
+```
+Ce thème est utilisé par défaut si aucun thème n'est défini dans les prefs utilisateurs.
+
+A la sélection d'un tenant, on sauvegarde l'identifiant du tenant comme étant le thème de l'application et on charge ce thème.
+Au démarrage de l'application, on charge le thème sauvegardé dans les préférences utilisateurs.
+S'il n'y en a pas, on charge le thème defaultTheme. Si ce dernier n'est pas défini, on ne fait rien.
+
+Quand on désélectionne un tenant, on utilise defaultTheme ou rien - si ce dernier n'est pas défini.
+
+Pour appliquer un thème, on ajoute un classe au body du document - à l'instar du thème sombre.
+
+#### Modification du logo par défaut
+
+Le fichier d'environnement, qui contient la description des tenants, a été modifié.
+
+Un paramètre global ```defaultLogo``` a été ajouté. Il s'agit du chemin relatif (par rapport à la racine du projet) du logo à utiliser si on n'a pas de tenant sélectionné ou si le tenant n'a pas son propre logo.
+
+Un tenant peut avoir son propre logo grace à la propriété ```logo```. Il s'agit du chemin relatif (par rapport à la racine du projet) du logo du tenant. Si la propriété n'est pas présente ou si elle est vide (ex: ''), alors le logo par défaut est utilisé.
+
+Exemple:
+```
+export const environment = {
+  production: false,
+  ...
+  defaultLogo: 'assets/logo/white-university-logo.svg',
+  tenants: [
+    {
+      id: 'Lyon',
+      logo: 'assets/logos/logosINSA_simplifies_Lyon.
+      ...
+```

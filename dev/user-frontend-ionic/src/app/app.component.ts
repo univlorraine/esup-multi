@@ -49,9 +49,9 @@ import { Badge } from '@capawesome/capacitor-badge';
 import { ModalController, Platform, PopoverController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import {
-  currentLanguage$, features$, FeaturesService, isDarkTheme$, isFeatureStoreInitialized$, NavigationService,
+  currentLanguage$, features$, FeaturesService, FCMService, isDarkTheme$, isFeatureStoreInitialized$, NavigationService,
   NotificationsService, NetworkService, PageLayout, PageLayoutService, setIsDarkTheme, StatisticsService,
-  themeRepoInitialized$, userHadSetThemeInApp, userHadSetThemeInApp$
+  themeRepoInitialized$, userHadSetThemeInApp, userHadSetThemeInApp$, tenantThemeApplied$, MultiTenantService
 } from '@multi/shared';
 import { initializeApp } from 'firebase/app';
 import { combineLatest, Observable, of, Subscription } from 'rxjs';
@@ -73,6 +73,8 @@ export class AppComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
   private backButtonListener: Promise<PluginListenerHandle>;
   private appResumeListener: Promise<PluginListenerHandle>;
+  private themeToApply: string;
+  private defaultTheme: string;
 
   constructor(
     @Inject('environment')
@@ -81,6 +83,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private translateService: TranslateService,
     private pageLayoutService: PageLayoutService,
     private navigationService: NavigationService,
+    private fcmService: FCMService,
     private modalController: ModalController,
     private popoverController: PopoverController,
     private renderer: Renderer2,
@@ -89,7 +92,8 @@ export class AppComponent implements OnInit, OnDestroy {
     private featuresService: FeaturesService,
     private notificationsService: NotificationsService,
     private statisticsService: StatisticsService,
-    private titleService: Title
+    private titleService: Title,
+    private multiTenantService: MultiTenantService
   ) {
     currentLanguage$.subscribe((language) => {
       document.documentElement.lang = language || environment.defaultLanguage;
@@ -146,9 +150,19 @@ export class AppComponent implements OnInit, OnDestroy {
     });
 
     this.statisticsService.checkAndGenerateStatsUid();
+
+    this.defaultTheme = this.environment.defaultTheme || '';
+    this.themeToApply = this.defaultTheme;
+
+    this.subscriptions.push(this.multiTenantService.tenantChange$.subscribe(() => {
+      this.translateService.setTranslation(
+        this.translateService.currentLang,
+        this.translateService.getTranslation(this.translateService.currentLang)
+      ); // Workaround to force the translateService to register the translations change, not working by simply calling reloadLang()
+    }));
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.titleService.setTitle(this.environment.appTitle);
     this.backButtonListener = App.addListener('backButton', () => {
       this.popoverController.getTop().then(popover => {
@@ -173,7 +187,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
     // apply language saved in persistent state
     this.subscriptions.push(currentLanguage$
-      .subscribe(language => this.translateService.use(language || this.environment.defaultLanguage))
+      .subscribe(language => {
+        const lang = language || this.environment.defaultLanguage;
+        this.translateService.use(lang);
+      })
     );
 
     // apply theme saved in persistent state or if is not in the system setting of the user's device
@@ -183,9 +200,9 @@ export class AppComponent implements OnInit, OnDestroy {
     prefersDark.addEventListener('change', (mediaQuery) => this.toggleOSDarkTheme(mediaQuery.matches));
 
     themeRepoInitialized$.pipe(
-      switchMap(isInitialized => isInitialized ? combineLatest([isDarkTheme$, userHadSetThemeInApp$])
+      switchMap(isInitialized => isInitialized ? combineLatest([isDarkTheme$, userHadSetThemeInApp$, tenantThemeApplied$])
         : of(null)),
-    ).subscribe(([isDarkTheme, userHadSetThemeInApplication]) => {
+    ).subscribe(([isDarkTheme, userHadSetThemeInApplication, tenantThemeApplied]) => {
       if (userHadSetThemeInApplication === false && prefersDark.matches) {
         isDarkTheme = true;
         setIsDarkTheme(true);
@@ -197,10 +214,26 @@ export class AppComponent implements OnInit, OnDestroy {
       }
 
       this.toggleDarkTheme(isDarkTheme);
+
+      // remove the current theme from the body
+      if (this.themeToApply !== '') {
+        this.disableTenantTheme(this.themeToApply);
+      }
+      // assign the current theme
+      this.themeToApply = (tenantThemeApplied !== '') ? tenantThemeApplied : this.defaultTheme;
+      // add the current theme as a class for the body element
+      if (this.themeToApply !== '') {
+        this.enableTenantTheme(this.themeToApply);
+      }
     });
 
     this.initializeFirebase();
     this.handleBadge();
+
+    const currentTenant = this.multiTenantService.getCurrentTenantOrThrowError();
+    if(!this.environment.useCustomNotifService && currentTenant) {
+      await this.fcmService.registerPushNotifications(currentTenant.topic);
+    }
   }
 
   toggleDarkTheme(isDarkTheme: boolean): void {
@@ -265,5 +298,15 @@ export class AppComponent implements OnInit, OnDestroy {
     }));
 
     await fixBadgeCount();
+  }
+
+  private enableTenantTheme(theme: string): void {
+    const body = document.body;
+    this.renderer.addClass(body, theme);
+  }
+
+  private disableTenantTheme(theme: string): void {
+    const body = document.body;
+    this.renderer.removeClass(body, theme);
   }
 }

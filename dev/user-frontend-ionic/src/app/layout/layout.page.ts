@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { AfterViewInit, Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, Input, OnChanges, SimpleChanges} from '@angular/core';
 import { NavController } from '@ionic/angular';
 import {
   FeaturesService,
@@ -52,10 +52,12 @@ import {
   NotificationsService,
   PageLayout,
   StatisticsService,
-  NavigationService
+  NavigationService,
+  MultiTenantService,
 } from '@multi/shared';
-import { combineLatest, Observable, Subject, withLatestFrom } from 'rxjs';
+import {combineLatest, Observable, Subject, Subscription, withLatestFrom} from 'rxjs';
 import { distinctUntilChanged, filter, map } from 'rxjs/operators';
+import {environment} from '../../environments/environment';
 
 interface MenuItemWithOptionalRouterLink extends MenuItem {
   routerLink: string;
@@ -66,7 +68,7 @@ interface MenuItemWithOptionalRouterLink extends MenuItem {
   templateUrl: 'layout.page.html',
   styleUrls: ['../../theme/app-theme/styles/app/layout.page.scss']
 })
-export class LayoutPage implements AfterViewInit, OnChanges {
+export class LayoutPage implements AfterViewInit, OnChanges, OnDestroy {
   @Input() currentPageLayout: PageLayout;
 
   public isLoading = false;
@@ -76,6 +78,8 @@ export class LayoutPage implements AfterViewInit, OnChanges {
   public menuItemHasBadge$: Observable<boolean[]>;
   public menuItemHasBadgeSubject$: Subject<boolean[]> = new Subject<boolean[]>();
   public layoutChangeSubject$: Subject<string> = new Subject<string>();
+  public defaultLogo: string;
+  private defaultLogoSubscription: Subscription;
 
   constructor(
     private navController: NavController,
@@ -87,6 +91,7 @@ export class LayoutPage implements AfterViewInit, OnChanges {
     private networkService: NetworkService,
     private notificationsRepository: NotificationsRepository,
     private notificationsService: NotificationsService,
+    private multiTenantService: MultiTenantService,
     private navigationService: NavigationService
   ) {
     this.isOnline$ = this.networkService.isOnline$;
@@ -137,10 +142,24 @@ export class LayoutPage implements AfterViewInit, OnChanges {
     ).subscribe(values => {
       this.menuItemHasBadgeSubject$.next(values);
     });
+
+    this.defaultLogo = environment.defaultLogo;
+
+    this.defaultLogoSubscription = multiTenantService.currentTenantLogo$.subscribe(logo => {
+      this.defaultLogo = logo;
+    });
+
+    if (this.multiTenantService.isSingleTenant()) {
+      this.multiTenantService.setCurrentTenantById(this.multiTenantService.getSelectedTenantId());
+    }
   }
 
   ngAfterViewInit() {
     this.loadFeatures();
+  }
+
+  ngOnDestroy() {
+    this.defaultLogoSubscription.unsubscribe();
   }
 
   ngOnChanges(changes: SimpleChanges): void {

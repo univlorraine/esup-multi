@@ -37,10 +37,11 @@
  * termes.
  */
 
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Marker } from './map.repository';
 import { HttpClient } from '@angular/common/http';
+import { MultiTenantService } from '@multi/shared';
 
 @Injectable({
   providedIn: 'root'
@@ -49,12 +50,11 @@ export class MapService {
 
 
   constructor(
-    @Inject('environment')
-    private environment: any,
+    private multiTenantService: MultiTenantService,
     private http: HttpClient,
   ) { }
 
   getMarkers(): Observable<Marker[]> {
-    return this.http.get<Marker[]>(`${this.environment.apiEndpoint}/map`);
+    return this.http.get<Marker[]>(`${this.multiTenantService.getApiEndpoint()}/map`);
   }
 }

@@ -38,7 +38,8 @@
  */
 
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { MultiTenantService } from '../multi-tenant/multi-tenant.service';
 import { Observable, throwError } from 'rxjs';
 import { catchError, concatMap, filter, map, switchMap, take } from 'rxjs/operators';
 import { getAuthToken } from '../auth/auth.repository';
@@ -51,8 +52,7 @@ import { SsoExternalLinkQueryDto, SsoServiceTokenQueryDto } from './sso.dto';
 export class SsoService {
 
     constructor(
-        @Inject('environment')
-        private environment: any,
+        private multiTenantService: MultiTenantService,
         private http: HttpClient,
         private keepAuthService: KeepAuthService,
     ) {}
@@ -70,7 +70,7 @@ export class SsoService {
     }
 
     private requestSsoServiceToken(query: SsoServiceTokenQueryDto): Observable<string> {
-        const url = `${this.environment.apiEndpoint}/sso-service-token`;
+        const url = `${this.multiTenantService.getApiEndpoint()}/sso-service-token`;
 
         return this.http.post<string>(url, query, {responseType: 'text' as 'json'}).pipe(
           catchError(err => {
