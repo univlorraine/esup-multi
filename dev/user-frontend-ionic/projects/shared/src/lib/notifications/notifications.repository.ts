@@ -51,11 +51,6 @@ const CHANNELS_STORE= 'channels';
 
 const defaultNotificationColor = 'black';
 const defaultNotificationIcon = 'information-circle';
-
-export interface NotificationsProps {
-  fcmToken: string;
-}
-
 export interface ChannelsProps {
   unsubscribedChannels: string[];
 }
@@ -63,6 +58,7 @@ export interface ChannelsProps {
 export interface Notification {
   id: string;
   author: string;
+  topic: string;
   channel: string;
   channelLabel: string;
   icon: string;
@@ -98,9 +94,6 @@ export interface TranslatedChannel {
 
 const notificationsStore = createStore(
   { name: NOTIFICATIONS_STORE },
-  withProps<NotificationsProps>({
-    fcmToken: null,
-  }),
   withEntities<Notification>(),
 );
 
@@ -115,7 +108,6 @@ const channelsStore = createStore(
 @Injectable({ providedIn: 'root' })
 export class NotificationsRepository {
 
-  public fcmToken$ = notificationsStore.pipe(select((state) => state.fcmToken));
   public channels$ = channelsStore.pipe(selectAllEntities());
   public unsubscribedChannels$ = channelsStore.pipe(select((state) => state.unsubscribedChannels));
 
@@ -159,15 +151,8 @@ export class NotificationsRepository {
 
   constructor(
     @Inject('environment')
-    private environment: any,) {
-  }
-
-  public setFcmToken(fcmToken: string) {
-    notificationsStore.update((state) => ({
-      ...state,
-      fcmToken,
-    }));
-  }
+    private environment: any,
+  ) {}
 
   public setNotifications(notifications: Notification[]) {
     notificationsStore.update(setEntities(notifications));
