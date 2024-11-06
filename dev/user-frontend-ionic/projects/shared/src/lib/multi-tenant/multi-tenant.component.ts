@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Tenant } from './multi-tenant.model';
 import { MultiTenantService } from './multi-tenant.service';
@@ -53,7 +53,7 @@ import { isDarkTheme, isDarkTheme$, setIsDarkTheme, setUserHaveSetThemeInApp } f
   templateUrl: './multi-tenant.component.html',
   styleUrls: ['../../../../../src/theme/app-theme/styles/multi-tenant/multi-tenant.component.scss'],
 })
-export class MultiTenantComponent  implements OnInit {
+export class MultiTenantComponent {
 
   public availableTenants: Tenant[];
   public selectedTenantId: string;
@@ -102,7 +102,4 @@ export class MultiTenantComponent  implements OnInit {
     setUserHaveSetThemeInApp(true);
     setIsDarkTheme(this.darkModeEnabled);
   }
-
-  ngOnInit() {}
-
 }

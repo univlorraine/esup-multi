@@ -46,22 +46,22 @@ interface MultiTenantProps {
   selectedTenantId: string;
 }
 
-const authStore = createStore(
+const selectedTenantStore = createStore(
   {name: STORE_NAME},
   withProps<MultiTenantProps>({selectedTenantId: null})
 );
 
-const persist = persistState(authStore, {
+export const persistSelectedTenant = persistState(selectedTenantStore, {
   key: STORE_NAME,
   storage: localStorageStrategy,
 });
 
-export const selectedTenantId$ = authStore.pipe(select((state: MultiTenantProps) => state.selectedTenantId));
+export const selectedTenantId$ = selectedTenantStore.pipe(select((state: MultiTenantProps) => state.selectedTenantId));
 
-export const getSelectedTenantId = () => authStore.getValue()?.selectedTenantId;
+export const getSelectedTenantId = () => selectedTenantStore.getValue()?.selectedTenantId;
 
 export const updateSelectedTenantId = (selectedTenantId: MultiTenantProps['selectedTenantId']) => {
-  authStore.update((state: MultiTenantProps) => ({
+  selectedTenantStore.update((state: MultiTenantProps) => ({
     ...state,
     selectedTenantId
   }));

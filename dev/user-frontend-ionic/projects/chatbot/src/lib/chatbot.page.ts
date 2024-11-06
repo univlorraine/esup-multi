@@ -37,13 +37,12 @@
  * termes.
  */
 
-import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Capacitor } from '@capacitor/core';
 import { Keyboard } from '@capacitor/keyboard';
 import { IonContent } from '@ionic/angular';
 import { BehaviorSubject } from 'rxjs';
 import { finalize, take } from 'rxjs/operators';
-import { ChatbotModuleConfig, CHATBOT_CONFIG } from './chatbot.config';
 import { ChatbotMessage, ChatButton, Message, MessageType, UserMessage } from './chatbot.dto';
 import { ChatbotService } from './chatbot.service';
 import { UserIdGeneratorService } from './user-id-generator.service';

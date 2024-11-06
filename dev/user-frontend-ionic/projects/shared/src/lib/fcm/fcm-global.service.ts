@@ -40,7 +40,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { FirebaseMessaging, GetTokenOptions } from '@capacitor-firebase/messaging';
 import { Platform } from '@ionic/angular';
-import { NotificationsRepository } from '../notifications/notifications.repository';
 import { FCMRepository } from './fcm.repository';
 
 @Injectable({
