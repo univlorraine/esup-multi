@@ -271,3 +271,148 @@ export const environment = {
       logo: 'assets/logos/other.svg'
       ...
 ```
+
+## Fonctionnalité multi établissement (multi tenant)
+
+Dans les fichiers src/environments/environment.*.ts, on peut définir plusieurs établissement à travers l'attribut `tenants` :
+```
+  tenants: [
+    {
+      id: 'etablissement1',
+      name: 'Etablissement 1',
+      logo: 'assets/logos/logo1.svg',
+      apiEndpoint: 'http://localhost:3000',
+      cmsPublicAssetsEndpoint: 'http://localhost:8055/assets/',
+      topic: 'etablissement1',
+      modulesConfigurations: {
+        chatbot: {
+          logoRegex: /_chacha5/i
+        },
+        map: {
+          defaultLocation: {
+            longitude: 2.3488596,
+            latitude: 48.8533249
+          }
+        },
+        reservation: {
+          ssoServiceName: 'https://mon-espace-de-resa.fr',
+          ssoUrlTemplate: 'https://mon-espace-de-resa.fr/auth?ticket={st}',
+        }
+      },
+    },
+    {
+      id: 'etablissement2',
+      name: 'Etablissement 2',
+      logo: 'assets/logos/logo2.svg',
+      apiEndpoint: 'http://localhost:3000',
+      cmsPublicAssetsEndpoint: 'http://localhost:8055/assets/',
+      topic: 'etablissement2',
+      modulesConfigurations: {
+        chatbot: {
+          logoRegex: /_chacha5/i
+        },
+        map: {
+          defaultLocation: {
+            longitude: 2.3488596,
+            latitude: 48.8533249
+          }
+        },
+        reservation: {
+          ssoServiceName: 'https://mon-espace-de-resa.fr',
+          ssoUrlTemplate: 'https://mon-espace-de-resa.fr/auth?ticket={st}',
+        }
+      },
+    }
+  ],
+```
+
+Ainsi, on peut facilement configurer un `apiEndpoint` ainsi qu'un `cmsPublicAssetsEndpoint` différent pour chacun d'entre eux afin d'utiliser un backend et/ou un cms différent selon l'établissement sélectionné.
+
+D'autres configurations peuvent également varier en fonction de l'établissement :
+- `topic` firebase utilisé
+- `logo`
+- `modulesConfigurations` configurations des différents modules pour lesquelles cela a du sens d'avoir une configuration propre par établissement
+- `enabledModules` pour modifier la liste des modules activés pour un tenant
+
+### Group de tenants
+
+Il est également possible de regrouper plusieurs tenants dans un groupe de tenant, en définissant l'attribut forceSelect à false, l'application chargera la configuration du groupe sans forcer l'utilisateur à sélectionner un tenant :
+
+```
+  tenants: [
+    {
+      id: 'etablissement',
+      name: 'Groupe',
+      isGroup: true,
+      forceSelect: false,
+      logo: 'assets/logos/logo.svg',
+      apiEndpoint: 'http://localhost:3000',
+      cmsPublicAssetsEndpoint: 'http://localhost:8055/assets/',
+      modulesConfigurations: {
+        chatbot: {
+          logoRegex: /_chacha5/i
+        },
+        map: {
+          defaultLocation: {
+            longitude: 2.3488596,
+            latitude: 48.8533249
+          }
+        },
+        reservation: {
+          ssoServiceName: 'https://mon-espace-de-resa.fr',
+          ssoUrlTemplate: 'https://mon-espace-de-resa.fr/auth?ticket={st}',
+        }
+      },
+      tenants: [
+        {
+          id: 'etablissement1',
+          name: 'Etablissement 1',
+          logo: 'assets/logos/logo1.svg',
+          apiEndpoint: 'http://localhost:3000',
+          cmsPublicAssetsEndpoint: 'http://localhost:8055/assets/',
+          topic: 'etablissement1',
+          modulesConfigurations: {
+            chatbot: {
+              logoRegex: /_chacha5/i
+            },
+            map: {
+              defaultLocation: {
+                longitude: 2.3488596,
+                latitude: 48.8533249
+              }
+            },
+            reservation: {
+              ssoServiceName: 'https://mon-espace-de-resa.fr',
+              ssoUrlTemplate: 'https://mon-espace-de-resa.fr/auth?ticket={st}',
+            }
+          },
+        },
+        {
+          id: 'etablissement2',
+          name: 'Etablissement 2',
+          logo: 'assets/logos/logo2.svg',
+          apiEndpoint: 'http://localhost:3000',
+          cmsPublicAssetsEndpoint: 'http://localhost:8055/assets/',
+          topic: 'etablissement2',
+          modulesConfigurations: {
+            chatbot: {
+              logoRegex: /_chacha5/i
+            },
+            map: {
+              defaultLocation: {
+                longitude: 2.3488596,
+                latitude: 48.8533249
+              }
+            },
+            reservation: {
+              ssoServiceName: 'https://mon-espace-de-resa.fr',
+              ssoUrlTemplate: 'https://mon-espace-de-resa.fr/auth?ticket={st}',
+            }
+          },
+        }
+      ]
+    }
+  ],
+```
+
+
