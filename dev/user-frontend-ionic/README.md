@@ -415,4 +415,49 @@ Il est également possible de regrouper plusieurs tenants dans un groupe de tena
   ],
 ```
 
+### Translations par tenant
 
+Il est possible de définir des translations par tenant. Pour cela, il suffit de créer un dossier nommé suivant l'id du tenant 
+à l'endroit où se trouvent les translations que l'on souhaite changer, et y placer les fichiers de translations contenant ces 
+dernières (en.json, fr.json).
+
+Par exemple, pour avoir des translations propres à `etablissement1` pour le module `auth`, on aura les fichiers suivants :
+- `src/theme/app-theme/i18n/module/auth/en.json` : translations en par défaut
+- `src/theme/app-theme/i18n/module/auth/fr.json` : translations fr par défaut
+- `src/theme/app-theme/i18n/module/auth/etablissement1/en.json` : translations en propres à `etablissement1`
+- `src/theme/app-theme/i18n/module/auth/etablissement1/fr.json` : translations fr propres à `etablissement1`
+
+Les translations ajoutées de cette manière seront fusionnées avec les translations par défaut, les clés définies dans les nouveaux
+fichiers écrasant les mêmes clefs des translations par défaut. 
+
+Ainsi, si on a la translation par défaut fr suivante :
+
+```json
+{
+  "MENU": "Menu",
+  "VERSION" : {
+    "VERSION": "Version",
+    "VERSION_NOT_FOUND": "Indisponible"
+  }
+}
+```
+.. et que l'on veut changer la cléf `VERSION_NOT_FOUND` uniquement, on va créer un fichier `etablissement1/fr.json` :
+
+```json
+{
+  "VERSION" : {
+    "VERSION_NOT_FOUND": "Version indisponible"
+  }
+}
+```
+
+La translation finale qui sera chargée ressemblera alors à ça :
+```json
+{
+  "MENU": "Menu",
+  "VERSION" : {
+    "VERSION": "Version",
+    "VERSION_NOT_FOUND": "Version indisponible"
+  }
+}
+```
