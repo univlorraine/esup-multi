@@ -441,7 +441,7 @@ Ainsi, si on a la translation par défaut fr suivante :
   }
 }
 ```
-.. et que l'on veut changer la cléf `VERSION_NOT_FOUND` uniquement, on va créer un fichier `etablissement1/fr.json` :
+.. et que l'on veut changer la clé `VERSION_NOT_FOUND` uniquement, on va créer un fichier `etablissement1/fr.json` :
 
 ```json
 {
