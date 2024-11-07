@@ -89,7 +89,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private featuresService: FeaturesService,
     private notificationsService: NotificationsService,
     private statisticsService: StatisticsService,
-    private titleService: Title,
+    private titleService: Title
   ) {
     this.initializeApp();
   }
