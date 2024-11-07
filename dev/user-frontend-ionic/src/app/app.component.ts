@@ -38,7 +38,7 @@
  */
 
 import { DOCUMENT } from '@angular/common';
-import { Component, DestroyRef, inject, Inject, OnDestroy, OnInit, Optional, Renderer2 } from '@angular/core';
+import { Component, DestroyRef, inject, Inject, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { FirebaseMessaging } from '@capacitor-firebase/messaging';
 import { App } from '@capacitor/app';
 import { Capacitor, PluginListenerHandle } from '@capacitor/core';
@@ -46,7 +46,7 @@ import { Device } from '@capacitor/device';
 import { SplashScreen } from '@capacitor/splash-screen';
 import { StatusBar, Style } from '@capacitor/status-bar';
 import { Badge } from '@capawesome/capacitor-badge';
-import { IonRouterOutlet, ModalController, Platform, PopoverController } from '@ionic/angular';
+import { ModalController, Platform, PopoverController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import {
   currentLanguage$, features$, FeaturesService, isDarkTheme$, isFeatureStoreInitialized$, NavigationService,
@@ -90,7 +90,6 @@ export class AppComponent implements OnInit, OnDestroy {
     private notificationsService: NotificationsService,
     private statisticsService: StatisticsService,
     private titleService: Title,
-    @Optional() private routerOutlet?: IonRouterOutlet
   ) {
     this.initializeApp();
   }
