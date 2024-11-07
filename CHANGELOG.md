@@ -9,10 +9,19 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 #### Bug fixes
 * **(guided-tour)** : correction problème de chargement des traductions du tour guidé sur certains périphériques
 * **(statistics)** : suppression de l'utilisation du DeviceId pour le suivi des statistiques d'usage comme préconisé dans le RGPD. Utilisation d'une UID générée automatiquement par le client à la place.
-* **(widgets)**: les widgets tiennent désormais compte de l'ionicon ou bien des icônes SVG renseignées du côté du CMS et les affichent à côté du titre de la Widget
+* **(widgets)**: les widgets tiennent désormais compte de l'Ionicon ou bien des icônes SVG renseignées du côté du CMS et les affichent à côté du titre de la Widget
+
+#### New features
+* **(calendar)** : Il est désormais possible de choisir entre 2 affichages pour la widget des évènements du calendrier :
+  * Liste verticale (list)
+  * Slider horizontal (slider)
+* **(schedule)** : Il est désormais possible de choisir entre 2 affichages pour la widget des prochains cours à venir :
+  * Liste verticale (list)
+  * Slider horizontal (slider)
 
 ### Backend
 #### Bug fixes
+* **(auth)** : l'authentification transmet désormais l'IP du client au serveur CAS pour éviter le bannissement du microservice auth sur de trop nombreuses tentatives d'authentification en échec
 * **(maps)** : suppression du tracking du fichier map-data.json et ajout d'un fichier .dist avec des POI factices
 * **(statistics)** : prise en compte de la nouvelle uid de tracking à la place du Device Id pour la génération des statistiques d'usage
 

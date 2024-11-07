@@ -116,22 +116,28 @@ export class AppController {
   }
 
   @Post('/auth')
-  authenticate(@Body() body) {
+  authenticate(@Body() body, @Request() request) {
     return this.authClient.send(
       {
         cmd: 'authenticate',
       },
-      body,
+      {
+        ...body,
+        ip: request.ip,
+      },
     );
   }
 
   @Delete('/auth')
-  logout(@Body() body) {
+  logout(@Body() body, @Request() request) {
     return this.authClient.send(
       {
         cmd: 'logout',
       },
-      body,
+      {
+        body,
+        ip: request.ip,
+      },
     );
   }
 
@@ -187,12 +193,15 @@ export class AppController {
   }
 
   @Post('/sso-service-token')
-  requestSsoServiceToken(@Body() body) {
+  requestSsoServiceToken(@Body() body, @Request() request) {
     return this.authClient.send(
       {
         cmd: 'requestSsoServiceToken',
       },
-      body,
+      {
+        ...body,
+        ip: request.ip,
+      },
     );
   }
 

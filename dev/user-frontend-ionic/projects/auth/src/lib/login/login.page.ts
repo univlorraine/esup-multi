@@ -41,7 +41,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IonInput, ToastController } from '@ionic/angular';
-import { AuthenticatedUser, NavigationService } from '@multi/shared';
+import { AuthenticatedUser, FeaturesService, NavigationService } from '@multi/shared';
 import { Observable } from 'rxjs';
 import { finalize, take, tap } from 'rxjs/operators';
 import { AuthService } from '../common/auth.service';
@@ -78,7 +78,8 @@ export class LoginPage implements OnInit {
     private loginRepository: LoginRepository,
     private route: ActivatedRoute,
     private router: Router,
-    private navigationService: NavigationService
+    private navigationService: NavigationService,
+    private featuresService: FeaturesService
   ) {
     this.translatedPageContent$ = this.loginRepository.translatedPageContent$;
     this.hideBackButton$ = this.navigationService.isExternalNavigation$;
@@ -149,12 +150,13 @@ export class LoginPage implements OnInit {
         }
         this.authService.dispatchLoginAction();
 
-        if (this.returnUrl) {
-          this.router.navigateByUrl(this.returnUrl);
-          return;
-        }
-
-        this.router.navigate(['/features/widgets']);
+        this.featuresService.loadAndStoreFeatures().subscribe(() => {
+          if (this.returnUrl) {
+            this.router.navigateByUrl(this.returnUrl);
+          } else {
+            this.router.navigate(['/features/widgets']);
+          }
+        });
       });
   }
 
