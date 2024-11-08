@@ -26,7 +26,7 @@ Puis mettre à jour le "path" du module dans le fichier `tsconfig.json` pour pr�
     },
 ```
 
-A partir de là le module peut être importé dans l'application hôte :
+À partir de là, le module peut être importé dans l'application hôte :
 ```ts
 import { HelloPageModule } from '@multi/hello';
 ```
@@ -38,32 +38,31 @@ Il faut également ajouter le module au script npm `module:build-all` :
 
 #### Lint
 
-Rajouter une section lint au project dans `user-frontend-ionic/angular.json`. A rajouter sous la section "test" du module :
+Rajouter une section lint au project dans `user-frontend-ionic/angular.json`. À rajouter sous la section "test" du module :
 ```json
 "lint": {
-          "builder": "@angular-eslint/builder:lint",
-          "options": {
-            "lintFilePatterns": [
-              "projects/[nom du module]/**/*.ts",
-              "projects/[nom du module]/**/*.html"
-            ]
-          }
-        }
+  "builder": "@angular-eslint/builder:lint",
+  "options": {
+    "lintFilePatterns": [
+      "projects/[nom du module]/**/*.ts",
+      "projects/[nom du module]/**/*.html"
+    ]
+  }
+}
 ```
 
-Puis rajouter le fichier `.eslintrc.json` suivant à la racine du module :
-```json
-{
-  "extends": "../../.eslintrc.json",
-  "ignorePatterns": [
+Puis rajouter le fichier `.eslintrc.js` suivant à la racine du module :
+```javascript
+module.exports = {
+  extends: "../../.eslintrc.js",
+  ignorePatterns: [
     "!**/*"
   ]
 }
-
 ```
 
 #### Traductions
-Pour les traductions nous utilisons [ngx translate](https://github.com/ngx-translate/core).
+Pour les traductions, nous utilisons [ngx translate](https://github.com/ngx-translate/core).
 
 Si le module contient des éléments qui doivent être traduits, il faudra créer un fichier de traduction pour ce module dans `src/theme/app-theme/i18n/[mon module]/fr.json`. Pensez à le copier dans le dossier `app-theme-dist` pour partager ces traductions.
 
@@ -87,7 +86,7 @@ Notez que toutes les clés de traduction du module seront préfixées par ce que
 
 **ATTENTION** un module qui contient des traductions doit être initialisé avant que le module de traduction ne démarre, il faudra donc obligatoirement importer le module dans `app.module.ts` (avant l'import du `TranslateModule`).
 
-#### Firebase (à compléter avec la partie iOS)
+### Firebase (à compléter avec la partie iOS)
 
 Ajouter un dossier `firebase` dans `src/environnements` :
 
@@ -119,9 +118,9 @@ En exécutant la commande npx `cap sync`, les fichiers de configuration Firebase
 
 **Procédure pour ajouter un nouvel environnement de développement avec une configuration Firebase spécifique :**
 
-Firebase permet de créer plusieurs applications par environnement de développement pour un même projet. Il génère des fichier configuration `google-service.json` (Android) et `GoogleServices-info.plis` (iOS) pour chacune d’entre elles.
+Firebase permet de créer plusieurs applications par environnement de développement pour un même projet. Il génère des fichiers configuration `google-service.json` (Android) et `GoogleServices-info.plis` (iOS) pour chacune d’entre elles.
 
-* Créer une nouvelle application dans le projet Firebase et génèrer son fichier de configuration pour chaque plateforme.
+* Créer une nouvelle application dans le projet Firebase et générer son fichier de configuration pour chaque plateforme.
 
 * Suffixer ces fichiers pour l’environnement de développement visé : `google-service-[environnement].json`, `GoogleServices-info-[environnement].plist` .
 
