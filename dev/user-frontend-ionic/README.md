@@ -166,6 +166,7 @@ npm run module:build-all
 
 - [Module guided-tour](dev/user-frontend-ionic/src/theme/app-theme/guided-tour/README.md)
 - [Module shared](dev/user-frontend-ionic/projects/shared/README.md)
+- [Module app-update](dev/user-frontend-ionic/projects/app-update/README.md)
 - [Module auth](dev/user-frontend-ionic/projects/auth/README.md)
 - [Module calendar](dev/user-frontend-ionic/projects/calendar/README.md)
 - [Module cards](dev/user-frontend-ionic/projects/cards/README.md)
