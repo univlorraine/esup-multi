@@ -44,7 +44,7 @@ import {
   WidgetLifecycleService, GuidedTourService, VersionService
 } from '@multi/shared';
 import { Observable } from 'rxjs';
-import { finalize, map } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-menu',
@@ -83,7 +83,7 @@ export class BurgerMenuPage {
     this.dynamicMenuItems$ = this.sharedMenuService.burgerMenuItems$.pipe(
       map(menuItems => menuItems.filter(menuItem => menuItem.type === 'dynamic'))
     );
-    this.appVersion$ = versionService.getCurrentAppVersion();
+    this.appVersion$ = this.versionService.getCurrentAppVersion();
 
     this.isDarkTheme$ = isDarkTheme$;
   }
