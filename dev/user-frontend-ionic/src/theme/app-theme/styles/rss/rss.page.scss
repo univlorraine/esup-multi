@@ -39,7 +39,7 @@
 
 ion-card {
   box-shadow: none;
-  border-radius: 0px !important;
+  border-radius: 0 !important;
   margin: 1.7rem;
   background-color: transparent;
 }
@@ -59,7 +59,7 @@ ion-card {
 .rss-news-content {
   overflow: hidden;
   transition: max-height 0.5s ease-in-out;
-  max-height: 0px !important;
+  max-height: 0 !important;
 }
 
 .rss-news-description {

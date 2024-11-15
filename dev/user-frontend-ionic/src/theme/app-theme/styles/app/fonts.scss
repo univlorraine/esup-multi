@@ -72,13 +72,13 @@
 
 .app-title-1 {
   font-size: var(--app-title-1-size) !important;
-  font-family: var(--app-font-primary-static-bold) !important;
+  font-family: var(--app-font-primary-static-bold), sans-serif !important;
   color: var(--app-font-color-primary) !important;
   text-transform: uppercase;
 }
 
 .app-title-1.light {
-  font-family: var(--app-font-primary-static-light) !important;
+  font-family: var(--app-font-primary-static-light), sans-serif !important;
   text-transform: none;
 }
 
@@ -93,13 +93,13 @@
 // Title-2
 .app-title-2 {
   font-size: var(--app-title-2-size) !important;
-  font-family: var(--app-font-primary-static-bold) !important;
+  font-family: var(--app-font-primary-static-bold), sans-serif !important;
   color: var(--app-font-color-primary) !important;
   text-transform: uppercase;
 }
 
 .app-title-2.light {
-  font-family: var(--app-font-primary-static-light) !important;
+  font-family: var(--app-font-primary-static-light), sans-serif !important;
   text-transform: none;
 }
 
@@ -114,13 +114,13 @@
 // Title-3
 .app-title-3 {
   font-size: var(--app-title-3-size) !important;
-  font-family: var(--app-font-primary-static-bold) !important;
+  font-family: var(--app-font-primary-static-bold), sans-serif !important;
   color: var(--app-font-color-primary) !important;
   text-transform: uppercase;
 }
 
 .app-title-3.light {
-  font-family: var(--app-font-primary-static-light) !important;
+  font-family: var(--app-font-primary-static-light), sans-serif !important;
   text-transform: none;
 }
 
@@ -135,13 +135,13 @@
 // Title-4
 .app-title-4 {
   font-size: var(--app-title-4-size) !important;
-  font-family: var(--app-font-primary-static-bold) !important;
+  font-family: var(--app-font-primary-static-bold), sans-serif !important;
   color: var(--app-font-color-primary) !important;
   text-transform: uppercase;
 }
 
 .app-title-4.light {
-  font-family: var(--app-font-primary-static-light) !important;
+  font-family: var(--app-font-primary-static-light), sans-serif !important;
   text-transform: none;
 }
 
@@ -156,13 +156,13 @@
 // Title-5
 .app-title-5 {
   font-size: var(--app-title-5-size) !important;
-  font-family: var(--app-font-primary-static-bold) !important;
+  font-family: var(--app-font-primary-static-bold), sans-serif !important;
   color: var(--app-font-color-primary) !important;
   text-transform: uppercase;
 }
 
 .app-title-5.light {
-  font-family: var(--app-font-primary-static-light) !important;
+  font-family: var(--app-font-primary-static-light), sans-serif !important;
   text-transform: none;
 }
 
@@ -177,13 +177,13 @@
 // Title-6
 .app-title-6 {
   font-size: var(--app-title-6-size) !important;
-  font-family: var(--app-font-primary-static-bold) !important;
+  font-family: var(--app-font-primary-static-bold), sans-serif !important;
   color: var(--app-font-color-primary) !important;
   text-transform: uppercase;
 }
 
 .app-title-6.light {
-  font-family: var(--app-font-primary-static-light) !important;
+  font-family: var(--app-font-primary-static-light), sans-serif !important;
   text-transform: none;
 }
 
@@ -198,13 +198,13 @@
 // Title-7
 .app-title-7 {
   font-size: var(--app-title-7-size) !important;
-  font-family: var(--app-font-primary-static-bold) !important;
+  font-family: var(--app-font-primary-static-bold), sans-serif !important;
   color: var(--app-font-color-primary) !important;
   text-transform: uppercase;
 }
 
 .app-title-7.light {
-  font-family: var(--app-font-primary-static-light) !important;
+  font-family: var(--app-font-primary-static-light), sans-serif !important;
   text-transform: none;
 }
 
@@ -248,7 +248,7 @@ h5{
 // Text-1
 .app-text-1 {
   font-size: var(--app-text-1-size) !important;
-  font-family: var(--app-font-secondary) !important;
+  font-family: var(--app-font-secondary), sans-serif !important;
   color: var(--app-font-color-primary-medium) !important;
   font-weight: 500 !important;
 }
@@ -268,7 +268,7 @@ h5{
 // Text-2
 .app-text-2 {
   font-size: var(--app-text-2-size) !important;
-  font-family: var(--app-font-secondary) !important;
+  font-family: var(--app-font-secondary), sans-serif !important;
   color: var(--app-font-color-primary-medium) !important;
   font-weight: 500 !important;
 }
@@ -288,7 +288,7 @@ h5{
 // Text-3
 .app-text-3 {
   font-size: var(--app-text-2-size) !important;
-  font-family: var(--app-font-secondary) !important;
+  font-family: var(--app-font-secondary), sans-serif !important;
   color: var(--app-font-color-primary-medium) !important;
   font-weight: 500 !important;
 }
@@ -308,7 +308,7 @@ h5{
 // Text-4
 .app-text-4 {
   font-size: var(--app-text-4-size) !important;
-  font-family: var(--app-font-secondary) !important;
+  font-family: var(--app-font-secondary), sans-serif !important;
   color: var(--app-font-color-secondary) !important;
   font-weight: 500 !important;
 }
@@ -328,7 +328,7 @@ h5{
 // Text-5
 .app-text-5 {
   font-size: var(--app-text-5-size) !important;
-  font-family: var(--app-font-secondary) !important;
+  font-family: var(--app-font-secondary), sans-serif !important;
   color: var(--app-font-color-primary-medium) !important;
   font-weight: 500 !important;
 }
@@ -348,7 +348,7 @@ h5{
 // Text-6
 .app-text-6 {
   font-size: var(--app-text-6-size) !important;
-  font-family: var(--app-font-secondary) !important;
+  font-family: var(--app-font-secondary), sans-serif !important;
   color: var(--app-font-color-primary-medium) !important;
   font-weight: 500 !important;
 }
