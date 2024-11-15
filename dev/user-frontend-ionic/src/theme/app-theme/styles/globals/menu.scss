@@ -1,0 +1,18 @@
+.searchbar-search-icon.sc-ion-searchbar-md, .searchbar-has-focus.sc-ion-searchbar-md-h .searchbar-search-icon.sc-ion-searchbar-md{
+  display: none!important;
+}
+
+.sc-ion-searchbar-md-h{
+  --border-radius: 0.5rem;
+  --box-shadow: none;
+  --background: #FFF;
+}
+
+.searchbar-input.sc-ion-searchbar-md {
+  font-size: 0.875rem;
+  -webkit-padding-start: 1rem;
+  padding-inline-start: 1rem;
+  padding-top: 0;
+  padding-bottom: 0;
+  border: solid 1px var(--ion-color-highlight);
+}
