@@ -38,7 +38,7 @@
  */
 
 import { DOCUMENT } from '@angular/common';
-import { Component, DestroyRef, inject, Inject, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { Component, DestroyRef, inject, Inject, OnDestroy, OnInit, Optional, Renderer2 } from '@angular/core';
 import { FirebaseMessaging } from '@capacitor-firebase/messaging';
 import { App } from '@capacitor/app';
 import { Capacitor, PluginListenerHandle } from '@capacitor/core';
@@ -58,6 +58,7 @@ import { combineLatest, Observable, of } from 'rxjs';
 import { distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
 import { Title } from '@angular/platform-browser';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { AppUpdateService } from '@multi/app-update';
 
 @Component({
   selector: 'app-root',
@@ -89,13 +90,17 @@ export class AppComponent implements OnInit, OnDestroy {
     private featuresService: FeaturesService,
     private notificationsService: NotificationsService,
     private statisticsService: StatisticsService,
-    private titleService: Title
+    private titleService: Title,
+    @Optional() @Inject(AppUpdateService) private appUpdateService: AppUpdateService | null,
   ) {
     this.initializeApp();
   }
 
   ngOnInit() {
     this.titleService.setTitle(this.environment.appTitle);
+    if (Capacitor.isNativePlatform() && this.appUpdateService) {
+      this.appUpdateService.checkForUpdate();
+    }
     this.initializeBackButton();
     this.initializeAppResume();
     this.initializeTheme();
@@ -133,6 +138,9 @@ export class AppComponent implements OnInit, OnDestroy {
   private initializeAppResume(): void {
     // reload notifications when app is resumed (back to foreground)
     this.appResumeListener = App.addListener('resume', () => {
+      if (this.appUpdateService) {
+        this.appUpdateService.checkForUpdate();
+      }
       this.notificationsService.loadNotifications(0, 10).subscribe();
     });
   }

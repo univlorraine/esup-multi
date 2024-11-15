@@ -37,45 +37,35 @@
  * termes.
  */
 
-import { APP_INITIALIZER, NgModule } from '@angular/core';
-import { ProjectModuleService } from '@multi/shared';
-import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
-import { AppUpdateService } from './app-update.service';
-import { TranslateModule } from '@ngx-translate/core';
+import { createStore, select, setProps, withProps } from '@ngneat/elf';
+import { persistState } from '@ngneat/elf-persist-state';
+import { localForageStore } from '@multi/shared';
 
+const STORE_NAME = 'app-update';
 
-const initModule = (projectModuleService: ProjectModuleService) =>
-  () => projectModuleService.initProjectModule({
-    name: 'app-update',
-    translation: true,
-  });
+interface AppUpdateProps {
+  dismissedVersion: string | null;
+}
 
-const checkForUpdateInitializer = (appUpdateService: AppUpdateService) =>
-  async () => {
-    await appUpdateService.checkForUpdate();
-  };
+const store = createStore(
+  { name: STORE_NAME },
+  withProps<AppUpdateProps>({
+    dismissedVersion: null,
+  })
+);
 
-@NgModule({
-  imports: [
-    CommonModule,
-    IonicModule,
-    TranslateModule,
-  ],
-  providers: [
-    AppUpdateService,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initModule,
-      deps:[ProjectModuleService],
-      multi: true
-    },
-    {
-      provide: APP_INITIALIZER,
-      useFactory: checkForUpdateInitializer,
-      deps: [AppUpdateService],
-      multi: true,
-    },
-  ],
-})
-export class AppUpdateModule { }
+export const persist = persistState(store, {
+  key: STORE_NAME,
+  storage: localForageStore,
+});
+
+export const storeInitialized$ = persist.initialized$;
+export const dismissedVersion$ = store.pipe(select((state) => state.dismissedVersion));
+
+export const setDismissedVersion = (version: string) => {
+  store.update(setProps({ dismissedVersion: version }));
+};
+
+export const clearDismissedVersion = () => {
+  store.update(setProps({ dismissedVersion: null }));
+};
