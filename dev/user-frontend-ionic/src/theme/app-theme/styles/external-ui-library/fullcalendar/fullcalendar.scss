@@ -206,8 +206,8 @@
 }
 
 .fc-direction-ltr .fc-timegrid-now-indicator-arrow {
-  border-width: 1px 1px 1px 0px !important;
-  border-radius: 0px 3px 3px 0px !important;
+  border-width: 1px 1px 1px 0 !important;
+  border-radius: 0 3px 3px 0 !important;
   height: 4px;
   width: 25px;
   background-color: var(--ion-color-medium-light);
@@ -231,10 +231,9 @@
   z-index: 4 !important;
   margin-top: -2px !important;
   border-style: solid !important;
-  border-color: var(--ion-color-light) !important;
   border-color: var(— fc-now-indicator-color, var(--ion-color-light)) !important;
-  border-width: 1px 1px 1px 0px !important;
-  border-radius: 0px 3px 3px 0px !important;
+  border-width: 1px 1px 1px 0 !important;
+  border-radius: 0 3px 3px 0 !important;
   height: 2px;
   background-color: var(--ion-color-light);
   opacity: 0.5 !important;
@@ -249,13 +248,13 @@
 }
 
 .fc-view-harness {
-  font-family: var(--app-font-secondary);
+  font-family: var(--app-font-secondary), sans-serif;
 }
 
 .fc .fc-button {
   background-color: rgb(0, 0, 0) !important;
   border: none !important;
-  border-radius: 0em !important;
+  border-radius: 0 !important;
   font-size: 0.8rem !important;
   padding: 0.3em 0.40em !important;
 }
@@ -278,7 +277,7 @@
 }
 
 .fc-toolbar.fc-header-toolbar {
-  margin-bottom: 0rem !important;
+  margin-bottom: 0 !important;
   border-bottom: 1px solid var(--ion-color-medium) !important;
 
   @supports (padding-right: env(safe-area-inset-right)) {
@@ -299,7 +298,7 @@
   margin-left: 1.3rem !important;
   max-width: 100%;
   font-size: var(--app-title-3-size) !important;
-  font-family: var(--app-font-primary-static-bold);
+  font-family: var(--app-font-primary-static-bold), sans-serif;
   //border-bottom-width: var(--app-border-2-width);
   //border-bottom-style: solid;
   //border-bottom-color: var(--ion-color-secondary);

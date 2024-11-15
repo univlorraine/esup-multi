@@ -115,7 +115,7 @@
   ion-label {
     color: var(--app-rectangular-button-1-font-color);
     //margin-top:  var(--app-rectangular-button-1-bottom-border-width);
-    font-family: var(--app-rectangular-button-1-font-family);
+    font-family: var(--app-rectangular-button-1-font-family), sans-serif;
     font-size: var(--app-rectangular-button-1-font-size);
     text-transform: uppercase;
     letter-spacing: 0.052rem;
@@ -172,7 +172,7 @@
 
   ion-label {
     user-select: none;
-    font-family: var(--app-font-primary-static-bold);
+    font-family: var(--app-font-primary-static-bold), sans-serif;
     font-weight: 700;
     color: var(--app-font-color-primary);
     letter-spacing: var(--app-square-button-1-letter-spacing);

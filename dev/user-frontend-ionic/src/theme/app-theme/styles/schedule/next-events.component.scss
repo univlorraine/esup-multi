@@ -41,8 +41,8 @@ ion-card {
   overflow: visible;
   box-shadow: var(--app-border-no-box-shadow);
   border-radius: var(--app-border-no-radius);
-  margin-top: 0px !important;
-  margin-bottom: 0px !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
   background: transparent;
 }
 
@@ -52,13 +52,13 @@ ion-card {
 
 .events-container {
 padding-left: 1rem !important;
-padding-bottom: 0rem !important;
+padding-bottom: 0 !important;
 }
 
 .dashed-line{
   position: absolute;
   top: 0.77rem;
-  left: 0rem;
+  left: 0;
   width: 2rem;
   height: 100%;
 
@@ -74,14 +74,14 @@ padding-bottom: 0rem !important;
   position: relative;
   padding-bottom: 0.5rem !important;
   padding-top: 0.5rem !important;
-  padding-left: 0rem !important;
+  padding-left: 0 !important;
   z-index: 12;
 }
 
 ion-card-header {
-  padding-top: 0px;
+  padding-top: 0;
   padding-left: 1.2rem;
-  padding-bottom: 0px;
+  padding-bottom: 0;
 }
 
 ion-card-content {
