@@ -94,7 +94,8 @@ export const environment: any = {
       minZoom: 1,
       maxZoom: 19,
       maxBounds: false,
-      highAccuracy: false
+      highAccuracy: false,
+      maxDisplayedFloatingButton: 5
     }),
     NotificationsModule.forRoot({
       numberOfNotificationsOnFirstLoad: 20,

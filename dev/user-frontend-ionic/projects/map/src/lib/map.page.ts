@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Component, Inject, OnDestroy, ViewChild } from '@angular/core';
+import {Component, Inject, OnDestroy, signal, ViewChild} from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Geolocation } from '@capacitor/geolocation';
 import { TranslateService } from '@ngx-translate/core';
@@ -81,6 +81,8 @@ export class MapPage implements OnDestroy {
   private layerGroupByCategory: Map<string, Leaflet.LayerGroup> = new Map();
   private positionLayerGroup: Leaflet.LayerGroup;
   private unsubscribe$: Subject<boolean> = new Subject<boolean>();
+  public isCampusSelectionOpen = false;
+  public maxDisplayedFloatingButton : number;
 
   constructor(
     private mapService: MapService,
@@ -90,7 +92,9 @@ export class MapPage implements OnDestroy {
     private networkService: NetworkService,
     @Inject('environment')
     private environment: any,
-  ) { }
+  ) {
+    this.maxDisplayedFloatingButton = config.maxDisplayedFloatingButton;
+  }
 
   get categoriesForm(): FormArray {
     return this.form.get('categoriesForm') as FormArray;
@@ -339,5 +343,14 @@ export class MapPage implements OnDestroy {
       objectToTranslate[propertyToTranslate][0];
 
     objectToTranslate[propertyToTranslate+'Translate'] = translation?.value;
+  }
+
+  public closePopOverAndFlyTo(campus:Campus){
+    this.flyTo(campus);
+    this.isCampusSelectionOpen=false;
+  }
+
+  public presentCampusSelection(){
+    this.isCampusSelectionOpen=true;
   }
 }

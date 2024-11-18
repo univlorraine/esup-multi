@@ -78,19 +78,33 @@
 </ion-list>
 
 <ion-content scroll="false">
-    <div class="map-page">
-      <div id="map"></div>
-    </div>
-
-    <ion-fab *ngIf="campus?.length > 0" slot="fixed" vertical="bottom" horizontal="end">
-      <ion-fab-button color="primary">
-        <ion-icon name="compass-outline"></ion-icon>
-      </ion-fab-button>
-      <ion-fab-list side="top" class="campus">
-        <ion-fab-button *ngFor="let oneCampus of campus"
-        [attr.data-campus-name]="oneCampus.name"
-        [ngStyle]="{'--background': 'center / cover no-repeat url('+oneCampus.photo+')'}"
-        (click)="flyTo(oneCampus)"></ion-fab-button>
-      </ion-fab-list>
-    </ion-fab>
+  <div class="map-page">
+    <div id="map"></div>
+  </div>
+  <ion-fab *ngIf="campus?.length > 0 && campus?.length <= maxDisplayedFloatingButton" slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button color="primary">
+      <ion-icon name="compass-outline"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top" class="campus">
+      <ion-fab-button *ngFor="let oneCampus of campus"
+                      [attr.data-campus-name]="oneCampus.name"
+                      [ngStyle]="{'--background': 'center / cover no-repeat url('+oneCampus.photo+')'}"
+                      (click)="flyTo(oneCampus)"></ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+  <ion-fab *ngIf="campus?.length > maxDisplayedFloatingButton" slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button color="primary" (click)="presentCampusSelection()">
+      <ion-icon name="compass-outline"></ion-icon>
+      <ion-popover  [isOpen]="isCampusSelectionOpen" (didDismiss)="isCampusSelectionOpen = false">
+        <ng-template>
+          <ion-list lines="full">
+            <ion-item *ngFor="let oneCampus of campus">
+              <ion-icon name="compass-outline" class="ion-padding-end" size="large" (click)="closePopOverAndFlyTo(oneCampus)"></ion-icon>
+              <ion-label class="app-text-3 light ion-text-wrap">{{ oneCampus.name }}</ion-label>
+            </ion-item>
+          </ion-list>
+        </ng-template>
+      </ion-popover>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
