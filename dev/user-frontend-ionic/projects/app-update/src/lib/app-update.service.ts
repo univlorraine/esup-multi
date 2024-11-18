@@ -37,14 +37,16 @@
  * termes.
  */
 
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { VersionService } from '@multi/shared';
-import { firstValueFrom } from 'rxjs';
+import { Inject, Injectable, Injector } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { AlertsService, updateAuthToken, updateRefreshAuthToken, updateUser, VersionService } from '@multi/shared';
+import { firstValueFrom, of, throwError, zip } from 'rxjs';
 import { Capacitor } from '@capacitor/core';
-import { AlertController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { storeInitialized$, setDismissedVersion, dismissedVersion$ } from './app-update.repository';
+import { App } from '@capacitor/app';
+import { Platform } from '@ionic/angular';
+import { catchError, delayWhen } from 'rxjs/operators';
 
 interface AppUpdateInfo  {
   storeVersion: string;
@@ -60,12 +62,17 @@ export class AppUpdateService {
   private appUpdateInfo: AppUpdateInfo | null = null;
   private currentVersion: string | null = null;
   private translations: any;
+  private initialized = false;
+  private translateService: TranslateService;
 
   constructor(
+    @Inject('environment')
+    private environment: any,
     private http: HttpClient,
-    private alertController: AlertController,
-    private translateService: TranslateService,
-    private versionService: VersionService
+    private versionService: VersionService,
+    private alertsService: AlertsService,
+    private platform: Platform,
+    private injector: Injector,
   ) {}
 
   private async getCurrentVersion(): Promise<string> {
@@ -73,25 +80,86 @@ export class AppUpdateService {
   }
 
   private async fetchUpdateInfoFromBackend(): Promise<AppUpdateInfo> {
-    return {
-      storeVersion: '2.0.8',
-      minVersionRequired: '1.0.0',
-      playStoreUrl: 'https://play.google.com/store/apps/details?id=fr.univlorraine.mobile.appUnivLorraine',
-      appStoreUrl: 'https://apps.apple.com/fr/app/univlorraine/id834941312',
-    };
+    const url = `${this.environment.apiEndpoint}/app-update-infos`;
+    return await firstValueFrom(this.http.get<AppUpdateInfo>(url));
   }
 
   private isVersionLowerThanStore(version: string, storeVersion: string): boolean {
-    const versionParts = version.split('.').map(Number);
-    const storeVersionParts = storeVersion.split('.').map(Number);
+    const parseVersion = (v: string) => v.split('.').map(v => parseInt(v, 10));
+    const currentParts = parseVersion(version);
+    const storeParts = parseVersion(storeVersion);
 
-    for (let i = 0; i < Math.max(versionParts.length, storeVersionParts.length); i++) {
-      const v = versionParts[i] || 0;
-      const sV = storeVersionParts[i] || 0;
-      if (v < sV) return true;  // La version actuelle est inférieure à la version à comparer
-      if (v > sV) return false; // La version actuelle est supérieure
+    for (let i = 0; i < Math.max(currentParts.length, storeParts.length); i++) {
+      const currentPart = currentParts[i] || 0;
+      const storePart = storeParts[i] || 0;
+
+      if (currentPart < storePart) return true;
+      if (currentPart > storePart) return false;
     }
-    return false; // Les versions sont les mêmes
+
+    return false;
+  }
+
+  private async showMandatoryUpdateAlert() {
+    await this.alertsService.enqueueAlert({
+      header: this.translations['APP-UPDATE.MANDATORY_UPDATE_ALERT.HEADER'],
+      message: this.translations['APP-UPDATE.MANDATORY_UPDATE_ALERT.MESSAGE'],
+      buttons: [
+        {
+          text: this.translations['APP-UPDATE.MANDATORY_UPDATE_ALERT.UPDATE_NOW'],
+          handler: () => {
+            window.location.href = this.getStoreUrl();
+          }
+        }
+      ],
+      backdropDismiss: false,
+      type: 'update',
+      priority: 1 // On s'assure d'afficher le message de maj avant les autres alertes d'erreur
+    });
+  }
+
+  private async showOptionalUpdateAlert() {
+    await this.alertsService.enqueueAlert({
+      header: this.translations['APP-UPDATE.OPTIONAL_UPDATE_ALERT.HEADER'],
+      message: this.translations['APP-UPDATE.OPTIONAL_UPDATE_ALERT.MESSAGE'],
+      buttons: [
+        {
+          text: this.translations['APP-UPDATE.OPTIONAL_UPDATE_ALERT.UPDATE_LATER'],
+          role: 'cancel',
+          handler: () => {
+            this.dismissUpdate();
+          }
+        },
+        {
+          text: this.translations['APP-UPDATE.OPTIONAL_UPDATE_ALERT.UPDATE_NOW'],
+          handler: () => {
+            window.location.href = this.getStoreUrl();
+          }
+        }
+      ],
+      backdropDismiss: false,
+      type: 'update',
+      priority: 1 // On s'assure d'afficher le message de maj avant les autres alertes d'erreur
+    });
+  }
+
+  private dismissUpdate() {
+    setDismissedVersion(this.appUpdateInfo?.storeVersion || '');
+  }
+
+  private getStoreUrl(): string {
+    return Capacitor.getPlatform() === 'android'
+      ? this.appUpdateInfo.playStoreUrl
+      : this.appUpdateInfo.appStoreUrl
+      ;
+  }
+
+  private loadTranslateService() {
+    if (this.translateService) {
+      return;
+    }
+
+    this.translateService = this.injector.get(TranslateService);
   }
 
   // Préchargement des traductions pour les alertes
@@ -110,58 +178,20 @@ export class AppUpdateService {
     );
   }
 
-  private async showMandatoryUpdateAlert() {
-    const alert = await this.alertController.create({
-      header: this.translations['APP-UPDATE.MANDATORY_UPDATE_ALERT.HEADER'],
-      message: this.translations['APP-UPDATE.MANDATORY_UPDATE_ALERT.MESSAGE'],
-      buttons: [
-        {
-          text: this.translations['APP-UPDATE.MANDATORY_UPDATE_ALERT.UPDATE_NOW'],
-          handler: () => {
-            window.location.href = this.getStoreUrl();
-          }
-        }
-      ],
-      backdropDismiss: false,
+  async initialize(): Promise<void> {
+    if (this.initialized || !Capacitor.isNativePlatform()) {
+      return;
+    }
+
+    await this.platform.ready();
+    this.loadTranslateService()
+    await this.checkForUpdate();
+
+    App.addListener('resume', () => {
+      this.checkForUpdate();
     });
 
-    await alert.present();
-  }
-
-  private async showOptionalUpdateAlert() {
-    const alert = await this.alertController.create({
-      header: this.translations['APP-UPDATE.OPTIONAL_UPDATE_ALERT.HEADER'],
-      message: this.translations['APP-UPDATE.OPTIONAL_UPDATE_ALERT.MESSAGE'],
-      buttons: [
-        {
-          text: this.translations['APP-UPDATE.OPTIONAL_UPDATE_ALERT.UPDATE_LATER'],
-          role: 'cancel',
-          handler: () => {
-            this.dismissUpdate();
-          }
-        },
-        {
-          text: this.translations['APP-UPDATE.OPTIONAL_UPDATE_ALERT.UPDATE_NOW'],
-          handler: () => {
-            window.location.href = this.getStoreUrl();
-          }
-        }
-      ],
-      backdropDismiss: true,
-    });
-
-    await alert.present();
-  }
-
-  private dismissUpdate() {
-    setDismissedVersion(this.appUpdateInfo?.storeVersion || '');
-  }
-
-  private getStoreUrl(): string {
-    return Capacitor.getPlatform() === 'android'
-      ? this.appUpdateInfo.playStoreUrl
-      : this.appUpdateInfo.appStoreUrl
-      ;
+    this.initialized = true;
   }
 
   async checkForUpdate(): Promise<void> {

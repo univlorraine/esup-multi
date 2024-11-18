@@ -45,16 +45,15 @@ import { AppUpdateService } from './app-update.service';
 import { TranslateModule } from '@ngx-translate/core';
 
 
-const initModule = (projectModuleService: ProjectModuleService) =>
-  () => projectModuleService.initProjectModule({
-    name: 'app-update',
-    translation: true,
-  });
+const initModule = (projectModuleService: ProjectModuleService, appUpdateService: AppUpdateService) =>
+  () => {
+    projectModuleService.initProjectModule({
+      name: 'app-update',
+      translation: true,
+    });
 
-const checkForUpdateInitializer = (appUpdateService: AppUpdateService) =>
-  async () => {
-    await appUpdateService.checkForUpdate();
-  };
+    appUpdateService.initialize();
+  }
 
 @NgModule({
   imports: [
@@ -63,19 +62,12 @@ const checkForUpdateInitializer = (appUpdateService: AppUpdateService) =>
     TranslateModule,
   ],
   providers: [
-    AppUpdateService,
     {
       provide: APP_INITIALIZER,
       useFactory: initModule,
-      deps:[ProjectModuleService],
+      deps:[ProjectModuleService, AppUpdateService],
       multi: true
-    },
-    {
-      provide: APP_INITIALIZER,
-      useFactory: checkForUpdateInitializer,
-      deps: [AppUpdateService],
-      multi: true,
-    },
+    }
   ],
 })
 export class AppUpdateModule { }
