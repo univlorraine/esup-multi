@@ -41,6 +41,7 @@
  * Public API Surface of shared
  */
 
+export * from './lib/alerts/alerts.service';
 export * from './lib/auth/auth.guard';
 export * from './lib/auth/auth.interceptor';
 export * from './lib/auth/auth.repository';
