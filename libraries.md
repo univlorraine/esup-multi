@@ -44,7 +44,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 
 ## [Frontend](./dev/user-frontend-ionic)
 ```
-├─ MIT: 73
+├─ MIT: 72
 ├─ Apache-2.0: 7
 ├─ BSD-2-Clause: 2
 ├─ Custom: LICENSE: 1
@@ -128,7 +128,6 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [karma@6.3.20](https://github.com/karma-runner/karma) - MIT
 - [leaflet@1.9.4](https://github.com/Leaflet/Leaflet) - BSD-2-Clause
 - [localforage@1.10.0](https://github.com/localForage/localForage) - Apache-2.0
-- [lodash@4.17.21](https://github.com/lodash/lodash) - MIT
 - [ng-packagr@16.2.3](https://github.com/ng-packagr/ng-packagr) - MIT
 - [ng2-dragula@5.1.0](https://github.com/valor-software/ng2-dragula) - MIT
 - [ngx-matomo@2.0.0](https://github.com/Arnaud73/ngx-matomo) - MIT

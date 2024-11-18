@@ -37,26 +37,77 @@
   ~ termes.
   -->
 
-<ion-row *ngIf="isLoading">
-  <ion-spinner class="ion-margin safe-area-lr-ionic-margin" name="dots"></ion-spinner>
-</ion-row>
-<ng-container *ngIf='!isLoading'>
-  <ng-container *ngIf='(nextEvents$ | async) as events'>
-    <ion-row *ngIf='events.length === 0' class="ion-padding">
-      <ion-text [ngClass]="fontColor()" class='app-text-4 safe-area-padding-lr'>{{'CALENDAR.NO_EVENTS' | translate}}</ion-text>
+<ng-container *ngTemplateOutlet="getTemplateRef()"></ng-container>
+
+<ng-template #list>
+  <ion-row class="calendar-list-style">
+
+    <ion-row *ngIf="isLoading">
+      <ion-spinner class="ion-margin safe-area-lr-ionic-margin" name="dots"></ion-spinner>
     </ion-row>
-    <ion-col [ngClass]="fontColor()" *ngFor='let event of events let i = index' class='events-container'>
-      <ion-row class='event'>
-        <ion-col class='event-part event-part-date safe-area-padding-lr'>
-          <ion-text [ngClass]="fontColor()" class='app-text-1'>{{event.startDateTime | localDate}}</ion-text>
-          <ion-text [ngClass]="fontColor()" class='app-text-6'>{{event.startDateTime | localTime}}-{{event.endDateTime | localTime}}</ion-text>
+    <ng-container *ngIf='!isLoading'>
+      <ng-container *ngIf='(nextEvents$ | async) as events'>
+        <ion-row *ngIf='events.length === 0' class="ion-padding">
+          <ion-text [ngClass]="fontColor()" class='app-text-4 safe-area-padding-lr'>{{'CALENDAR.NO_EVENTS' | translate}}</ion-text>
+        </ion-row>
+        <ion-col [ngClass]="fontColor()" *ngFor='let event of events let i = index' class='events-container'>
+          <ion-row class='event'>
+            <ion-col class='event-part event-part-date safe-area-padding-lr'>
+              <ion-text [ngClass]="fontColor()" class='app-text-1'>{{event.startDateTime | localDate}}</ion-text>
+              <ion-text [ngClass]="fontColor()" class='app-text-6'>{{event.startDateTime | localTime}}-{{event.endDateTime | localTime}}</ion-text>
+            </ion-col>
+            <ion-col class='event-part event-part-info safe-area-padding-lr'>
+              <ion-text [ngClass]="fontColor()" class='app-text-4 strong'>{{event.label}}</ion-text>
+              <ion-text [ngClass]="fontColor()" class='app-text-4'>{{event.location}}</ion-text>
+            </ion-col>
+          </ion-row>
+          <hr  *ngIf='i !== events.length - 1'>
         </ion-col>
-        <ion-col class='event-part event-part-info safe-area-padding-lr'>
-          <ion-text [ngClass]="fontColor()" class='app-text-4 strong'>{{event.label}}</ion-text>
-          <ion-text [ngClass]="fontColor()" class='app-text-4'>{{event.location}}</ion-text>
-        </ion-col>
-      </ion-row>
-      <hr  *ngIf='i !== events.length - 1'>
-    </ion-col>
-  </ng-container>
-</ng-container>
+      </ng-container>
+    </ng-container>
+
+  </ion-row>
+</ng-template>
+
+
+<ng-template #slider>
+  <ion-row class="calendar-slider-style">
+
+    <ion-row *ngIf="isLoading">
+      <ion-spinner class="ion-margin safe-area-lr-ionic-margin" name="dots"></ion-spinner>
+    </ion-row>
+
+    <ng-container *ngIf='!isLoading'>
+      <ng-container *ngIf='(nextEvents$ | async) as events'>
+        <ion-row *ngIf='events.length === 0; else sliderInnerContainer' class="ion-padding">
+          <ion-text [ngClass]="fontColor()" class='app-text-4 safe-area-padding-lr'>{{'CALENDAR.NO_EVENTS' | translate}}</ion-text>
+        </ion-row>
+        <ng-template #sliderInnerContainer>
+          <ion-row class="events-container">
+            <ion-card *ngFor="let event of events" class="ion-no-margin slider-theme-color">
+              <ion-card-content>
+                <ion-row class="event-day-hour">
+                  <ion-text class="hour app-title-2 slider-font-color">{{event.startDateTime | localHour}} - {{event.endDateTime | localHour}}</ion-text>
+                  <ng-container *ngIf="(event.startDateTime | completeLocalDate) as completeLocalDate">
+                    <ion-row class="day app-text-4 slider-font-color">
+                      <ion-text>{{completeLocalDate | slice: 0:completeLocalDate.indexOf(' ')}}</ion-text>
+                      <ion-text>{{completeLocalDate | slice: completeLocalDate.indexOf(' ')}}</ion-text>
+                    </ion-row>
+                  </ng-container>
+                </ion-row>
+                <ion-text class="app-title-5 event-label slider-font-color">{{event.label}}</ion-text>
+                <ion-row *ngIf="event.location" class="event-additional">
+                  <ion-row class="ion-align-items-center card-labels">
+                    <ion-icon class="card-labels-icons slider-font-color" name="business-outline" aria-label=""></ion-icon>
+                    <ion-text class="app-title-6 light slider-font-color">{{event.location}}</ion-text>
+                  </ion-row>
+                </ion-row>
+              </ion-card-content>
+            </ion-card>
+          </ion-row>
+        </ng-template>
+      </ng-container>
+    </ng-container>
+
+  </ion-row>
+</ng-template>

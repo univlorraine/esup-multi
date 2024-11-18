@@ -41,6 +41,7 @@ import { InjectionToken } from '@angular/core';
 
 export interface CalendarModuleConfig {
   numberOfEventsLimit: number;
+  display: "list" | "slider";
 }
 
 export const CALENDAR_CONFIG =

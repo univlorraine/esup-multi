@@ -75,7 +75,10 @@ export const environment: any = {
   appVersion: '1.0.0',
   enabledModules: [
     AuthModule,
-    CalendarModule.forRoot({ numberOfEventsLimit: 3 }),
+    CalendarModule.forRoot({
+      numberOfEventsLimit: 3,
+      display: 'list',
+    }),
     CardsPageModule.forRoot({ knownErrors: ['NO_PHOTO', 'NO_ACTIVE_CARD', 'UNPAID_FEES'] }),
     ChatbotModule.forRoot({ chatbotLogoRegex: /_chacha5/i }),
     ClockingModule,
@@ -115,7 +118,8 @@ export const environment: any = {
     ScheduleModule.forRoot({
       nextEventsWidget: {
         numberOfEventsLimit: 2,
-        numberOfDaysLimit: 7
+        numberOfDaysLimit: 7,
+        display: 'list'
       },
       previousWeeksInCache: 1,
       nextWeeksInCache: 2,

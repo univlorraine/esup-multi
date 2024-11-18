@@ -37,19 +37,21 @@
   ~ termes.
   -->
 
-<ion-app *ngIf="(currentPageLayout$ | async) as currentPageLayout">
+<ion-app *ngIf="(currentPageLayout$ | async) as currentPageLayout; else noContent">
   <app-layout [currentPageLayout]='currentPageLayout'></app-layout>
 </ion-app>
 
-<div *ngIf="(isNothingToShow$ | async) === true" class="custom-alert">
-  <div class="flex-container">
-    <ion-card class="center-card">
-      <ion-card-header>
-        <ion-card-title class="text-center app-title-4">{{"ERROR.NO_NETWORK.TITLE" | translate}}</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <ion-text class="app-text-4">{{"ERROR.NO_NETWORK.FIRST_LAUNCH" | translate}}</ion-text>
-      </ion-card-content>
-    </ion-card>
+<ng-template #noContent>
+  <div *ngIf="(isNothingToShow$ | async) === true" class="custom-alert">
+    <div class="flex-container">
+      <ion-card class="center-card">
+        <ion-card-header>
+          <ion-card-title class="text-center app-title-4">{{"ERROR.NO_NETWORK.TITLE" | translate}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-text class="app-text-4">{{"ERROR.NO_NETWORK.FIRST_LAUNCH" | translate}}</ion-text>
+        </ion-card-content>
+      </ion-card>
+    </div>
   </div>
-</div>
+</ng-template>

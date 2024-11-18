@@ -70,7 +70,6 @@
     "ionicons": "^7.4.0",
     "leaflet": "^1.9.2",
     "localforage": "^1.10.0",
-    "lodash": "^4.17.21",
     "ng2-dragula": "^5.1.0",
     "ngx-matomo": "^2.0.0",
     "rxjs": "^7.5.0",

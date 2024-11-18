@@ -38,11 +38,12 @@
  */
 
 import { APP_INITIALIZER, ModuleWithProviders, NgModule } from '@angular/core';
-import { ProjectModuleService } from '@multi/shared';
+import { LocalHourPipe, ProjectModuleService, SharedPipeModule } from '@multi/shared';
 import { CalendarComponent } from './widget/calendar/calendar.component';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
+import { CompleteLocalDatePipe } from '@multi/shared';
 import { LocalDatePipe } from './common/pipe/local-date.pipe';
 import { LocalTimePipe } from './common/pipe/local-time.pipe';
 import { CALENDAR_CONFIG, CalendarModuleConfig } from './calendar.config';
@@ -66,14 +67,18 @@ const initModule = (projectModuleService: ProjectModuleService) =>
   imports: [
     CommonModule,
     IonicModule,
-    TranslateModule
+    TranslateModule,
+    SharedPipeModule
   ],
   providers: [{
     provide: APP_INITIALIZER,
     useFactory: initModule,
     deps:[ProjectModuleService],
     multi: true
-  }],
+  },
+    CompleteLocalDatePipe,
+    LocalHourPipe
+  ],
 })
 export class CalendarModule {
   static forRoot(config: CalendarModuleConfig): ModuleWithProviders<CalendarModule> {
