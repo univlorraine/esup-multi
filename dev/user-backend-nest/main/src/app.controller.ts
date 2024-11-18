@@ -728,15 +728,25 @@ export class AppController {
   @Get('/version')
   mainVersion() {
     return {
-      version: infosJsonData.version,
+      storeVersion: infosJsonData.storeVersion,
     };
   }
+  @Get('/app-update-infos')
+  appUpdateInfos() {
+    return {
+      storeVersion: infosJsonData.storeVersion,
+      minVersionRequired: infosJsonData.minVersionRequired,
+      playStoreUrl: infosJsonData.playStoreUrl,
+      appStoreUrl: infosJsonData.appStoreUrl,
+    };
+  }
+
   @Get('/health')
   mainCheckHealth() {
     return {
       message: 'up',
       name: infosJsonData.name,
-      version: infosJsonData.version,
+      version: infosJsonData.storeVersion,
     };
   }
 
