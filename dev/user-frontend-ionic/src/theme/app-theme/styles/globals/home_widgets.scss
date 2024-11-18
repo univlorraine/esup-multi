@@ -115,9 +115,7 @@ ion-card.ion-no-margin[data-widget-id="schedule:next-events"] {
     white-space: nowrap;
     width: 100%;
     height: 100%;
-    //scrollbar-width: none;
     padding-top: 0;
-    padding-left: 0;
   }
 
   @media only screen and (max-width: 1000px) {
@@ -127,15 +125,18 @@ ion-card.ion-no-margin[data-widget-id="schedule:next-events"] {
   }
 
   ion-grid > div.day-events {
-    //div.day-events et display test de date qui scroll
-    display: inline-block;
+    //div.day-events and display  scrolling dates
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 1rem;
     position: relative;
+    margin-bottom: 0.125rem;
 
     &:not(:first-child) {
-      margin: 2.25rem 0 0 1rem;
+      margin: 2.25rem 0 0.125rem 1rem;
     }
 
-    //fin test
     & > ion-col {
       box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.10);
       border-radius: var(--app-border-radius-5);
@@ -144,7 +145,6 @@ ion-card.ion-no-margin[data-widget-id="schedule:next-events"] {
       position: static;
       height: 9.2rem;
       width: 19rem;
-      margin-right: 1.25rem;
 
       .circle-top-left, .dashed-line {
         display: none;
@@ -158,10 +158,8 @@ ion-card.ion-no-margin[data-widget-id="schedule:next-events"] {
         width: 100%;
 
         ion-text {
-          //test de date qui scroll
           position: sticky;
           left: 0;
-          //fin test
           font-family: QuicksandBold, serif !important;
           font-size: var(--app-text-4-size) !important;
           width: fit-content;
@@ -255,14 +253,17 @@ ion-card.ion-no-margin[data-widget-id="schedule:next-events"] {
     border-left: 4px solid var(--ion-color-highlight);
   }
 
-  //test elastic oveflow scroll
+  //elastic oveflow scroll
   ion-grid.events-container {
     scroll-snap-type: x mandatory;
-    background-color: red;
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    padding-right: calc(100vw - (19rem - 1rem));
+
     div.day-events ion-col {
-      scroll-snap-align: center;
-      background-color: green;
-      margin-left: 5rem;
+      scroll-snap-align: start;
+      scroll-margin: 1rem;
     }
   }
 }
