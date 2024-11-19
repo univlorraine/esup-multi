@@ -1,7 +1,4 @@
 {
   "name": "main",
-  "storeVersion": "3.0.3",
-  "minVersionRequired": "1.0.0",
-  "playStoreUrl": "https://play.google.com/store/apps/details?id=fr.univlorraine.mobile.appUnivLorraine",
-  "appStoreUrl": "https://apps.apple.com/fr/app/univlorraine/id834941312"
+  "version": "1.1.0"
 }

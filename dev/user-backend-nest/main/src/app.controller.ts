@@ -56,6 +56,7 @@ import { ClientProxy } from '@nestjs/microservices';
 import { AuthGuard } from '@nestjs/passport';
 import { concatMap, map } from 'rxjs';
 import * as infosJsonData from './infos.json';
+import * as clientInfosJson from './client-infos.json';
 import { ErrorsInterceptor } from './interceptors/errors.interceptor';
 import { AuthorizationHelper } from './security/authorization.helper';
 
@@ -728,17 +729,12 @@ export class AppController {
   @Get('/version')
   mainVersion() {
     return {
-      storeVersion: infosJsonData.storeVersion,
+      storeVersion: infosJsonData.version,
     };
   }
   @Get('/app-update-infos')
   appUpdateInfos() {
-    return {
-      storeVersion: infosJsonData.storeVersion,
-      minVersionRequired: infosJsonData.minVersionRequired,
-      playStoreUrl: infosJsonData.playStoreUrl,
-      appStoreUrl: infosJsonData.appStoreUrl,
-    };
+    return clientInfosJson;
   }
 
   @Get('/health')
@@ -746,7 +742,7 @@ export class AppController {
     return {
       message: 'up',
       name: infosJsonData.name,
-      version: infosJsonData.storeVersion,
+      version: infosJsonData.version,
     };
   }
 
