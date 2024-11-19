@@ -39,7 +39,7 @@
 
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Marker } from './map.repository';
+import { Campus, Categorie, Marker } from './map.repository';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
@@ -56,5 +56,13 @@ export class MapService {
 
   getMarkers(): Observable<Marker[]> {
     return this.http.get<Marker[]>(`${this.environment.apiEndpoint}/map`);
+  }
+
+  getCategories(): Observable<Categorie[]> {
+    return this.http.get<Categorie[]>(`${this.environment.apiEndpoint}/map/categories`);
+  }
+
+  getCampus(): Observable<Campus[]> {
+    return this.http.get<Campus[]>(`${this.environment.apiEndpoint}/map/campuses`);
   }
 }

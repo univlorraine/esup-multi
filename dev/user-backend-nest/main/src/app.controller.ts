@@ -236,6 +236,26 @@ export class AppController {
     );
   }
 
+  @Get('/map/categories')
+  mapCategories() {
+    return this.mapClient.send(
+      {
+        cmd: 'mapCategories'
+      },
+      {},
+    );
+  }
+
+  @Get('/map/campuses')
+  mapCampus() {
+    return this.mapClient.send(
+      {
+        cmd: 'mapCampuses'
+      },
+      {},
+    );
+  }
+
   @Get('/rss')
   rss() {
     return this.rssClient.send(

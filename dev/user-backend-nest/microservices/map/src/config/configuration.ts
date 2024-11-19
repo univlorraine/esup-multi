@@ -37,22 +37,60 @@
  * termes.
  */
 
-import { InjectionToken } from '@angular/core';
+import { ProviderOptions, KeepAliveOptions } from './configuration.interface';
 
-interface GpsCoordinate {
-    longitude: number;
-    latitude: number;
-}
-export interface MapModuleConfig {
-    defaultMapLocation: GpsCoordinate;
-    mapType: 'mapbox' | 'osm';
-    accessToken: string;
-    minZoom: number;
-    maxZoom: number;
-    maxBounds: boolean;
-    highAccuracy: boolean;
-    maxDisplayedFloatingButton: number;
-}
+const applyIfNotBlank = (param: string, applyFn: (value: string) => void) => {
+  if (param && param.trim().length > 0) {
+    applyFn(param);
+  }
+};
 
-export const MAP_CONFIG =
-  new InjectionToken<MapModuleConfig>('Map module config');
+export default (): {
+  providerOptions: ProviderOptions;
+  keepAliveOptions: KeepAliveOptions;
+} => {
+  const keepAliveOptions = {};
+
+  applyIfNotBlank(
+    process.env.MAP_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVE,
+    (value) => (keepAliveOptions['keepAlive'] = value === 'true'),
+  );
+
+  applyIfNotBlank(
+    process.env.MAP_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVEMSECS,
+    (value) => (keepAliveOptions['keepAliveMsecs'] = parseInt(value)),
+  );
+
+  applyIfNotBlank(
+    process.env.MAP_SERVICE_AGENTKEEPALIVE_OPTION_FREESOCKETTIMEOUT,
+    (value) => (keepAliveOptions['freeSocketTimeout'] = parseInt(value)),
+  );
+
+  applyIfNotBlank(
+    process.env.MAP_SERVICE_AGENTKEEPALIVE_OPTION_TIMEOUT,
+    (value) => (keepAliveOptions['timeout'] = parseInt(value)),
+  );
+
+  applyIfNotBlank(
+    process.env.MAP_SERVICE_AGENTKEEPALIVE_OPTION_MAXSOCKETS,
+    (value) => (keepAliveOptions['maxSockets'] = parseInt(value)),
+  );
+
+  applyIfNotBlank(
+    process.env.MAP_SERVICE_AGENTKEEPALIVE_OPTION_MAXFREESOCKETS,
+    (value) => (keepAliveOptions['maxFreeSockets'] = parseInt(value)),
+  );
+
+  applyIfNotBlank(
+    process.env.MAP_SERVICE_AGENTKEEPALIVE_OPTION_SOCKETACTIVETTL,
+    (value) => (keepAliveOptions['socketActiveTTL'] = parseInt(value)),
+  );
+
+  return {
+    providerOptions: {
+      url: process.env.MAP_SERVICE_PROVIDER_API_URL,
+      bearerToken: process.env.MAP_SERVICE_PROVIDER_API_BEARER_TOKEN,
+    },
+    keepAliveOptions,
+  };
+};

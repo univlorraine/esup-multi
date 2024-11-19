@@ -37,22 +37,17 @@
  * termes.
  */
 
-import { InjectionToken } from '@angular/core';
-
-interface GpsCoordinate {
-    longitude: number;
-    latitude: number;
-}
-export interface MapModuleConfig {
-    defaultMapLocation: GpsCoordinate;
-    mapType: 'mapbox' | 'osm';
-    accessToken: string;
-    minZoom: number;
-    maxZoom: number;
-    maxBounds: boolean;
-    highAccuracy: boolean;
-    maxDisplayedFloatingButton: number;
+export interface ProviderOptions {
+  url: string;
+  bearerToken: string;
 }
 
-export const MAP_CONFIG =
-  new InjectionToken<MapModuleConfig>('Map module config');
+export interface KeepAliveOptions {
+  keepAlive?: boolean;
+  keepAliveMsecs?: number;
+  freeSocketTimeout?: number;
+  timeout?: number;
+  maxSockets?: number;
+  maxFreeSockets?: number;
+  socketActiveTTL?: number;
+}

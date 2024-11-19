@@ -655,7 +655,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 ### [map](./dev/user-backend-nest/microservices/map)
 <span id="backend-map"></span>
 ```
-├─ MIT: 24
+├─ MIT: 26
 ├─ Apache-2.0: 4
 ├─ BSD-2-Clause: 1
 └─ ISC: 1
@@ -663,6 +663,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 
 <details><summary>Détails</summary>
 
+- [@nestjs/axios@3.0.2](https://github.com/nestjs/axios) - MIT
 - [@nestjs/cli@10.1.17](https://github.com/nestjs/nest-cli) - MIT
 - [@nestjs/common@10.2.4](https://github.com/nestjs/nest) - MIT
 - [@nestjs/config@3.2.2](https://github.com/nestjs/config) - MIT
@@ -677,6 +678,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@types/supertest@2.0.12](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@typescript-eslint/eslint-plugin@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
 - [@typescript-eslint/parser@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - BSD-2-Clause
+- [agentkeepalive@4.5.0](https://github.com/node-modules/agentkeepalive) - MIT
 - [eslint-config-prettier@8.10.0](https://github.com/prettier/eslint-config-prettier) - MIT
 - [eslint-plugin-prettier@4.2.1](https://github.com/prettier/eslint-plugin-prettier) - MIT
 - [eslint@8.48.0](https://github.com/eslint/eslint) - MIT
