@@ -37,13 +37,13 @@
  * termes.
  */
 
-import { AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy } from '@angular/core';
-import { CompleteLocalDatePipe, ThemeService } from '@multi/shared';
-import { Observable, Subscription } from 'rxjs';
-import { finalize, map, take } from 'rxjs/operators';
-import { Event } from '../../schedule.repository';
-import { ScheduleService } from '../../schedule.service';
-import { NextEventsService } from './next-events.service';
+import {AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy} from '@angular/core';
+import {CompleteLocalDatePipe, ThemeService} from '@multi/shared';
+import {Observable, Subscription} from 'rxjs';
+import {finalize, map, take} from 'rxjs/operators';
+import {Event} from '../../schedule.repository';
+import {ScheduleService} from '../../schedule.service';
+import {NextEventsService} from './next-events.service';
 
 @Component({
   selector: 'app-schedule-widget-next-events',
@@ -75,7 +75,7 @@ export class NextEventsComponent implements OnDestroy, AfterViewInit {
       const idsToDisplay = {};
       events.forEach(event => {
         const eventDay = this.completeLocalDatePipe.transform(event.startDateTime);
-        if(!idsToDisplay[eventDay]) {
+        if (!idsToDisplay[eventDay]) {
           idsToDisplay[eventDay] = event.id;
         }
       });
@@ -111,5 +111,28 @@ export class NextEventsComponent implements OnDestroy, AfterViewInit {
   ngOnDestroy() {
     this.nextEventsSubscription.unsubscribe();
   }
-}
 
+  getUniqueDates(): Set<string> {
+    const uniqueDates: Set<string> = new Set();
+    this.nextEvents$.subscribe(events => {
+      events.forEach(event => {
+        const eventDay = this.completeLocalDatePipe.transform(event.startDateTime);
+        uniqueDates.add(eventDay);
+      });
+    });
+    return uniqueDates;
+  }
+
+  getEventsForDate(date: string): Event[] {
+    const eventsForDate: Event[] = [];
+    this.nextEvents$.subscribe(events => {
+      events.forEach(event => {
+        const eventDay = this.completeLocalDatePipe.transform(event.startDateTime);
+        if (eventDay === date) {
+          eventsForDate.push(event);
+        }
+      });
+    });
+    return eventsForDate;
+  }
+}
