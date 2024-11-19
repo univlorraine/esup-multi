@@ -729,7 +729,7 @@ export class AppController {
   @Get('/version')
   mainVersion() {
     return {
-      storeVersion: infosJsonData.version,
+      version: infosJsonData.version,
     };
   }
   @Get('/app-update-infos')
