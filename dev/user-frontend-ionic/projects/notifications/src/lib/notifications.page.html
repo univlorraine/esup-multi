@@ -60,8 +60,9 @@
         <form [formGroup]="form" *ngIf="(filterableChannels$ | async) as filterableChannels">
           <ion-item class="channel-list" formArrayName="channelsForm"
             *ngFor="let channel of channelsForm.controls; let i = index">
-            <ion-label class="app-text-3 light ion-text-wrap" for="terms">{{filterableChannels[i].label}}</ion-label>
-            <ion-checkbox mode="md" [formControlName]="i"></ion-checkbox>
+            <ion-checkbox mode="md" [formControlName]="i">
+              <ion-label class="app-text-3 light ion-text-wrap" for="terms">{{filterableChannels[i].label}}</ion-label>
+            </ion-checkbox>
           </ion-item>
         </form>
       </ion-list>
