@@ -51,6 +51,7 @@ export interface MapModuleConfig {
     maxZoom: number;
     maxBounds: boolean;
     highAccuracy: boolean;
+    maxDisplayedFloatingButton: number;
 }
 
 export const MAP_CONFIG =

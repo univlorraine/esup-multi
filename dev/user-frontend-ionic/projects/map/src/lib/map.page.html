@@ -99,8 +99,10 @@
         <ng-template>
           <ion-list lines="full">
             <ion-item *ngFor="let oneCampus of campus">
-              <ion-icon name="compass-outline" class="ion-padding-end" size="large" (click)="closePopOverAndFlyTo(oneCampus)"></ion-icon>
-              <ion-label class="app-text-3 light ion-text-wrap">{{ oneCampus.name }}</ion-label>
+              <ion-fab-button [attr.data-campus-name]="oneCampus.name"
+                              [ngStyle]="{'--background': 'center / cover no-repeat url('+oneCampus.photo+')'}"
+                              (click)="closePopOverAndFlyTo(oneCampus)"></ion-fab-button>
+              <ion-label class="app-text-3 light ion-text-wrap ion-padding-start">{{ oneCampus.name }}</ion-label>
             </ion-item>
           </ion-list>
         </ng-template>
