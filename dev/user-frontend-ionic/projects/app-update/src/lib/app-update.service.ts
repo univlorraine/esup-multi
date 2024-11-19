@@ -38,15 +38,14 @@
  */
 
 import { Inject, Injectable, Injector } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { AlertsService, updateAuthToken, updateRefreshAuthToken, updateUser, VersionService } from '@multi/shared';
-import { firstValueFrom, of, throwError, zip } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { AlertsService, VersionService } from '@multi/shared';
+import { firstValueFrom } from 'rxjs';
 import { Capacitor } from '@capacitor/core';
 import { TranslateService } from '@ngx-translate/core';
 import { storeInitialized$, setDismissedVersion, dismissedVersion$ } from './app-update.repository';
 import { App } from '@capacitor/app';
 import { Platform } from '@ionic/angular';
-import { catchError, delayWhen } from 'rxjs/operators';
 
 interface AppUpdateInfo  {
   storeVersion: string;
