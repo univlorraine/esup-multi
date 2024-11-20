@@ -38,8 +38,8 @@
  */
 
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
-import { AuthenticatedUser, getAuthToken, updateAuthToken, updateRefreshAuthToken, updateUser } from '@multi/shared';
+import { Injectable } from '@angular/core';
+import { AuthenticatedUser, getAuthToken, MultiTenantService, updateAuthToken, updateRefreshAuthToken, updateUser } from '@multi/shared';
 import { EMPTY, Observable, of, throwError, zip } from 'rxjs';
 import { catchError, concatMap, delayWhen, take } from 'rxjs/operators';
 
@@ -55,13 +55,12 @@ export class KeepAuthService {
 
 
   constructor(
-    @Inject('environment')
-    private environment: any,
+    private multiTenantService: MultiTenantService,
     private http: HttpClient) { }
 
   login(username: string, password: string): Observable<AuthenticatedUser | null> {
 
-    const url = `${this.environment.apiEndpoint}/keep-auth/auth`;
+    const url = `${this.multiTenantService.getApiEndpoint()}/keep-auth/auth`;
     const data = {
       username,
       password,
@@ -96,7 +95,7 @@ export class KeepAuthService {
   }
 
   logout(refreshAuthToken: string): Observable<boolean> {
-    const url = `${this.environment.apiEndpoint}/keep-auth/auth`;
+    const url = `${this.multiTenantService.getApiEndpoint()}/keep-auth/auth`;
     const headers = {
       // eslint-disable-next-line @typescript-eslint/naming-convention
       Authorization: `Bearer ${refreshAuthToken}`
@@ -120,7 +119,7 @@ export class KeepAuthService {
   }
 
   removeSavedCredentials(refreshAuthToken: string): Observable<boolean> {
-    const url = `${this.environment.apiEndpoint}/keep-auth/reauth`;
+    const url = `${this.multiTenantService.getApiEndpoint()}/keep-auth/reauth`;
     const headers = {
       // eslint-disable-next-line @typescript-eslint/naming-convention
       Authorization: `Bearer ${refreshAuthToken}`

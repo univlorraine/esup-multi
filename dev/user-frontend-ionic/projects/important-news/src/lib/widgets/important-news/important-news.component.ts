@@ -40,7 +40,7 @@
 import { Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Browser } from '@capacitor/browser';
-import { currentLanguage$, StatisticsService, ThemeService } from '@multi/shared';
+import { currentLanguage$, MultiTenantService, StatisticsService, ThemeService } from '@multi/shared';
 import { combineLatest, Observable } from 'rxjs';
 import { finalize, map, take } from 'rxjs/operators';
 import { ImportantNews, importantNewsList$, setImportantNews as setImportantNewsList } from '../../important-news.repository';
@@ -61,13 +61,12 @@ export class ImportantNewsComponent {
   public importantNewsList$: Observable<ImportantNews[]> = importantNewsList$;
   public isEmpty$: Observable<boolean>;
   public translatedImportantNewsList$: Observable<TranslatedImportantNews[]>;
-  public cmsPublicAssetsEndpoint = this.environment.cmsPublicAssetsEndpoint;
+  public cmsPublicAssetsEndpoint;
   public randomImportantNews$: Observable<TranslatedImportantNews | undefined>;
 
 
   constructor(
-    @Inject('environment')
-    private environment: any,
+    private multiTenantService: MultiTenantService,
     private importantNewsService: ImportantNewsService,
     private router: Router,
     private statisticsService: StatisticsService,
@@ -95,6 +94,7 @@ export class ImportantNewsComponent {
   }
 
   widgetViewDidEnter(): void {
+    this.cmsPublicAssetsEndpoint = this.multiTenantService.getCmsPublicAssetsEndpoint();
     this.isLoading = true;
     this.importantNewsService.loadImportantNewsList().pipe(
       take(1),

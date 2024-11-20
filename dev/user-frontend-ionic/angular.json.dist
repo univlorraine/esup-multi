@@ -41,6 +41,11 @@
                 "output": "assets/icons/leaflet"
               },
               {
+                "glob": "**/*",
+                "input": "projects/shared/src/lib/multi-tenant/assets/i18n",
+                "output": "/assets/i18n/multi-tenant"
+              },
+              {
                 "glob": "**/*.svg",
                 "input": "src/theme/app-theme/assets/icons/flag",
                 "output": "./svg"

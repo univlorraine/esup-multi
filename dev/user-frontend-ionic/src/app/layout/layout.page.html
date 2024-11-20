@@ -40,7 +40,7 @@
 <ion-tabs>
   <ion-header *ngIf="currentPageLayout === 'tabs'">
     <ion-toolbar>
-      <img src="assets/logos/white-logo.svg" class="logo ion-padding-start app-logo-3" alt="logo" aria-label="logo" />
+      <img src="{{defaultLogo}}" class="logo ion-padding-start app-logo-3" alt="logo" aria-label="logo" />
       <ion-buttons slot="end">
         <ion-button *ngFor="let menu of (topMenuItemsWithBadges$ | async)"
                     (click)="menuOpenerService.open(menu)"

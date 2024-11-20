@@ -40,6 +40,7 @@
 import {
   AfterViewInit,
   Component,
+  OnDestroy,
   DestroyRef,
   inject,
   Input,
@@ -61,11 +62,13 @@ import {
   NotificationsService,
   PageLayout,
   StatisticsService,
-  NavigationService
+  NavigationService,
+  MultiTenantService,
 } from '@multi/shared';
-import { BehaviorSubject, combineLatestWith, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, combineLatestWith, Observable, Subscription, Subject } from 'rxjs';
 import { distinctUntilChanged, filter, finalize, map } from 'rxjs/operators';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import {environment} from '../../environments/environment';
 
 interface MenuItemWithOptionalRouterLink extends MenuItem {
   routerLink: string;
@@ -80,7 +83,7 @@ interface MenuItemWithBadge extends MenuItemWithOptionalRouterLink {
   templateUrl: 'layout.page.html',
   styleUrls: ['../../theme/app-theme/styles/app/layout.page.scss']
 })
-export class LayoutPage implements AfterViewInit, OnChanges {
+export class LayoutPage implements AfterViewInit, OnChanges, OnDestroy {
   @Input() currentPageLayout: PageLayout;
 
   public isLoading = false;
@@ -90,6 +93,8 @@ export class LayoutPage implements AfterViewInit, OnChanges {
   public menuItemHasBadgeState$: BehaviorSubject<boolean[]> = new BehaviorSubject<boolean[]>([]);
   public layoutChangeSubject$: Subject<string> = new Subject<string>();
   private destroyRef = inject(DestroyRef);
+  public defaultLogo: string;
+  private defaultLogoSubscription: Subscription;
 
   constructor(
     private navController: NavController,
@@ -101,14 +106,20 @@ export class LayoutPage implements AfterViewInit, OnChanges {
     private networkService: NetworkService,
     private notificationsRepository: NotificationsRepository,
     private notificationsService: NotificationsService,
+    private multiTenantService: MultiTenantService,
     private navigationService: NavigationService
   ) {
     this.initializeObservables();
     this.setupSubscriptions();
+    this.handleSingleTenant();
   }
 
   ngAfterViewInit() {
     this.loadFeatures();
+  }
+
+  ngOnDestroy() {
+    this.defaultLogoSubscription.unsubscribe();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -168,6 +179,13 @@ export class LayoutPage implements AfterViewInit, OnChanges {
     ).subscribe(values => {
       this.menuItemHasBadgeState$.next(values);
     });
+
+    this.defaultLogo = environment.defaultLogo;
+    this.defaultLogoSubscription = this.multiTenantService.currentTenantLogo$.subscribe(logo => {
+      if(logo) {
+        this.defaultLogo = logo;
+      }
+    });
   }
 
   private mapNotificationsToMenuItems(notifications: Notification[], menuItems: MenuItem[]): boolean[] {
@@ -212,5 +230,11 @@ export class LayoutPage implements AfterViewInit, OnChanges {
 
   public getMenuId(menuItem: MenuItem) {
     return this.guidedTourService.generateMenuItemIdFromTitle(menuItem);
+  }
+
+  private handleSingleTenant() {
+    if (this.multiTenantService.isSingleTenant()) {
+      this.multiTenantService.setCurrentTenantById(this.multiTenantService.getSelectedTenantId());
+    }
   }
 }

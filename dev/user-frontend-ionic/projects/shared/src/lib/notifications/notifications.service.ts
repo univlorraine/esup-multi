@@ -38,14 +38,16 @@
  */
 
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
-import { FirebaseMessaging, GetTokenOptions } from '@capacitor-firebase/messaging';
+import { Injectable } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { getAuthToken } from '../auth/auth.repository';
 import { combineLatest, first, firstValueFrom, Observable, of } from 'rxjs';
 import { filter, switchMap, take, tap } from 'rxjs/operators';
 import { Channel, Notification, NotificationsRepository } from './notifications.repository';
 import { Badge } from '@capawesome/capacitor-badge';
+import { MultiTenantService } from '../multi-tenant/multi-tenant.service';
+import { FCMService } from '../fcm/fcm-global.service';
+import { FCMRepository } from '../fcm/fcm.repository';
 import { NetworkService } from '../network/network.service';
 import { Capacitor } from '@capacitor/core';
 
@@ -55,17 +57,18 @@ import { Capacitor } from '@capacitor/core';
 export class NotificationsService {
 
   constructor(
-    @Inject('environment')
-    private environment: any,
+    private multiTenantService: MultiTenantService,
+    private fcmService: FCMService,
     private http: HttpClient,
     public notificationRepository: NotificationsRepository,
+    private fcmRepository: FCMRepository,
     private platform: Platform,
     private networkService: NetworkService
   ) {
   }
 
   public getNotifications(authToken: string, offset: number, length: number): Observable<Notification[]> {
-    const url = `${this.environment.apiEndpoint}/notifications`;
+    const url = `${this.multiTenantService.getApiEndpoint()}/notifications`;
     const data = {
       authToken,
       offset,
@@ -76,7 +79,7 @@ export class NotificationsService {
   }
 
   public loadAndStoreChannels(): Observable<Channel[]> {
-    const url = `${this.environment.apiEndpoint}/notifications/channels`;
+    const url = `${this.multiTenantService.getApiEndpoint()}/notifications/channels`;
 
     return this.http.get<Channel[]>(url).pipe(
       tap((channels) => {
@@ -113,7 +116,7 @@ export class NotificationsService {
     return getAuthToken().pipe(
       filter(authToken => authToken != null),
       switchMap(authToken => {
-        const url = `${this.environment.apiEndpoint}/notifications/unsubscribed-channels`;
+        const url = `${this.multiTenantService.getApiEndpoint()}/notifications/unsubscribed-channels`;
         const data = {
           authToken
         };
@@ -130,7 +133,7 @@ export class NotificationsService {
     return getAuthToken().pipe(
       filter(authToken => authToken != null),
       switchMap(authToken => {
-          const url = `${this.environment.apiEndpoint}/notifications/channels`;
+          const url = `${this.multiTenantService.getApiEndpoint()}/notifications/channels`;
           const data = {
             authToken,
             channelCodes: options.channelCodes,
@@ -143,15 +146,13 @@ export class NotificationsService {
 
   public markUnreadNotificationsAsRead(notificationIds: string[]): Observable<void> {
     Badge.clear();
-    if (this.platform.is('capacitor')) {
-      FirebaseMessaging.removeAllDeliveredNotifications();
-    }
+    this.fcmService.removeAllDeliveredNotifications();
 
     return getAuthToken().pipe(
       // On ne balance la requête au serveur que si la liste des notifications à marquer comme lues n'est pas vide
       filter(authToken => authToken != null && notificationIds.length > 0),
       switchMap(authToken => {
-        const url = `${this.environment.apiEndpoint}/notifications/read`;
+        const url = `${this.multiTenantService.getApiEndpoint()}/notifications/read`;
         const data = {
           authToken,
           notificationIds
@@ -164,14 +165,14 @@ export class NotificationsService {
 
   public async saveFCMToken(): Promise<any> {
     // On requête un token auprès des serveurs Firebase
-    const fcmToken = await this.registerPushNotifications();
+    const fcmToken = await this.fcmService.registerPushNotifications();
 
     // Si on a bien récupéré le token
     if (fcmToken) {
       const authToken$ = getAuthToken().pipe(
         filter(authToken => !!authToken),
         switchMap(authToken => {
-          const url = `${this.environment.apiEndpoint}/notifications/register`;
+          const url = `${this.multiTenantService.getApiEndpoint()}/notifications/register`;
           const data = {
             authToken,
             token: fcmToken,
@@ -193,14 +194,14 @@ export class NotificationsService {
     if (!authToken) {
       return;
     }
-    this.notificationRepository.fcmToken$
+    this.fcmRepository.fcmToken$
       .pipe(
         take(1),
         switchMap((fcmToken) => {
           if (!fcmToken) {
             return of(null);
           }
-          const url = `${this.environment.apiEndpoint}/notifications/unregister`;
+          const url = `${this.multiTenantService.getApiEndpoint()}/notifications/unregister`;
 
           const data = {
             authToken,
@@ -210,56 +211,19 @@ export class NotificationsService {
         })
       )
       .subscribe(() => {
-        this.deleteFCMToken();
+        this.notificationRepository.clearNotifications();
+        this.fcmRepository.deleteFcmToken();
         return;
       });
   }
 
-  public async deleteFCMToken() {
-    this.notificationRepository.clearNotifications();
-  }
-
   private removeNotification(authToken: string, notificationId: string) {
-    const url = `${this.environment.apiEndpoint}/notifications/delete`;
+    const url = `${this.multiTenantService.getApiEndpoint()}/notifications/delete`;
     const data = {
       authToken,
       notificationId
     };
 
     return this.http.delete(url, { body: data });
-  }
-
-  private async registerPushNotifications(): Promise<string | null> {
-    // Vérifie que l'utilisateur a bien autorisé les notifications
-    const notificationPermissions = await FirebaseMessaging.requestPermissions();
-
-    if (notificationPermissions.receive !== 'granted') {
-      return null;
-    }
-
-    // Fonction qui nregistre le token FCM dans le state
-    const handleToken = (tokenResult: { token: string }) => {
-      // NOTE: on web browser when the user resets the notifications authorisation and wants to allow it again,
-      // this will trigger a 404 error from firebase followed by this message in the console:
-      // "FirebaseError: Messaging: A problem  occured while unsubscribing the user from FCM",
-      // it has been reported since 2019 in this thread but hasn't been solved since:
-      // https://github.com/firebase/firebase-js-sdk/issues/2364
-      // It could be fixed by firebase in a future release
-      this.notificationRepository.setFcmToken(tokenResult.token);
-      return tokenResult.token || null;
-    }
-
-    if (!this.platform.is('capacitor')) { // Web
-      const options: GetTokenOptions = {
-        vapidKey: this.environment.firebase.vapidKey,
-        serviceWorkerRegistration: await navigator.serviceWorker.register('firebase-messaging-sw.js'),
-      };
-
-      const tokenResult = await FirebaseMessaging.getToken(options);
-      return handleToken(tokenResult);
-    } else { // Mobile
-      const tokenResult = await FirebaseMessaging.getToken();
-      return handleToken(tokenResult);
-    }
   }
 }

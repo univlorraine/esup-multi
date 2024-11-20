@@ -39,6 +39,7 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
+import { MultiTenantService } from '../multi-tenant/multi-tenant.service';
 import { combineLatest, Observable, ReplaySubject } from 'rxjs';
 import { filter, map, share, switchMap, take, tap } from 'rxjs/operators';
 import { getAuthToken } from '../auth/auth.repository';
@@ -87,6 +88,7 @@ export class FeaturesService {
   constructor(
     @Inject('environment')
     private environment: any,
+    private multiTenantService: MultiTenantService,
     private http: HttpClient,
   ) {
     this.translatedFeatures$ = this.translatedFeaturesSubject$;
@@ -113,7 +115,7 @@ export class FeaturesService {
   }
 
   private getFeatures(authToken: string): Observable<Feature[]> {
-    const url = `${this.environment.apiEndpoint}/features`;
+    const url = `${this.multiTenantService.getApiEndpoint()}/features`;
     const data = {
       authToken,
 
