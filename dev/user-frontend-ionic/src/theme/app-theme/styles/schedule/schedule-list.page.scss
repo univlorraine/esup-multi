@@ -37,23 +37,59 @@
  * termes.
  */
 
-.complete-date{
-    background-color: var(--ion-color-medium-light-tint);
-    padding: 0.6rem;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    color: var(--app-font-color-primary-contrast) !important;
+.complete-date {
+  border-bottom: none;
+  display: grid;
+  justify-content: center;
+  ion-col {
+    color: var(--app-font-color-primary) !important;
+    font-family: QuicksandBold, sans-serif !important;
+    text-transform: none;
+    position: relative;
+    width: fit-content;
+    align-self: center;
+    padding-inline-end: 0;
+  }
 }
 
 p {
-    margin:0;
+  margin: 0;
 }
 
-.current-date{
-  background-color: var(--ion-color-tertiary);
-  color: black !important;
+.current-date {
+  ion-col::before {
+    content: "";
+    display: block;
+    position: absolute;
+    bottom: .6rem;
+    width: 100%;
+    height: .6rem;
+    background-color: var(--ion-color-secondary);
+    z-index: -1;
+  }
 }
 
 .see-more {
-  --border-color: var(--app-font-color-primary-medium);
+  --border-color: var(--ion-color-primary);
 }
+
+//Custom URCA Style
+.ion-page ion-content {
+  ion-item-group{
+    padding-top: 1rem;
+  }
+  ion-item-group > ion-col {
+    padding: 1rem 0;
+    display: block;
+  }
+}
+
+ion-content > ion-row ion-button {
+  &::part(native) {
+    background-color: var(--ion-color-primary);
+    color: var(--ion-color-primary-contrast);
+    text-transform: initial;
+    border-radius: var(--app-border-radius-1);
+  }
+}
+
