@@ -8,8 +8,10 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Client
 #### Bug fixes
 * **(guided-tour)** : correction problème de chargement des traductions du tour guidé sur certains périphériques
+* **(rss)** : correction problème de décalage du bouton 'Lire plus' sur iOS
 * **(statistics)** : suppression de l'utilisation du DeviceId pour le suivi des statistiques d'usage comme préconisé dans le RGPD. Utilisation d'une UID générée automatiquement par le client à la place.
-* **(widgets)**: les widgets tiennent désormais compte de l'Ionicon ou bien des icônes SVG renseignées du côté du CMS et les affichent à côté du titre de la Widget
+* **(widgets)** : les widgets tiennent désormais compte de l'Ionicon ou bien des icônes SVG renseignées du côté du CMS et les affichent à côté du titre de la Widget
+* **(widgets)** : correction du problème de chargement du contenu sur les widgets au premier démarrage de l'application ou après authentification
 
 #### New features
 * **(calendar)** : Il est désormais possible de choisir entre 2 affichages pour la widget des évènements du calendrier :
@@ -24,6 +26,10 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **(auth)** : l'authentification transmet désormais l'IP du client au serveur CAS pour éviter le bannissement du microservice auth sur de trop nombreuses tentatives d'authentification en échec
 * **(maps)** : suppression du tracking du fichier map-data.json et ajout d'un fichier .dist avec des POI factices
 * **(statistics)** : prise en compte de la nouvelle uid de tracking à la place du Device Id pour la génération des statistiques d'usage
+
+### Autres
+* Mise à jour du framework [Ionic](https://ionic.io/docs) : Version 7 → Version 8
+* Ajout d'une variable d'environnement pour les mocks pour indiquer l'url vers les assets statiques
 
 ## 1.1.0 (2024-09-13)
 
