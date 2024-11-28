@@ -1,3 +1,16 @@
 h1, h2, h3, h4, h5, h6 {
   font-family: QuicksandBold, sans-serif;
 }
+
+//Modal for schedule select planning, create a blur effect hover page content around modal
+ion-app:has(ion-modal[ng-reflect-is-open=true]) ion-tabs::before {
+  content: '';
+  background-color: #ffffff52;
+  opacity: 1;
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  z-index: 1;
+  bottom: 0;
+  backdrop-filter: blur(7.5px);
+}

@@ -41,6 +41,8 @@
   border-bottom: none;
   display: grid;
   justify-content: center;
+  padding: 0.5rem 0;
+
   ion-col {
     color: var(--app-font-color-primary) !important;
     font-family: QuicksandBold, sans-serif !important;
@@ -61,7 +63,7 @@ p {
     content: "";
     display: block;
     position: absolute;
-    bottom: .6rem;
+    bottom: .75rem;
     width: 100%;
     height: .6rem;
     background-color: var(--ion-color-secondary);
@@ -74,12 +76,13 @@ p {
 }
 
 //Custom URCA Style
-.ion-page ion-content {
-  ion-item-group{
-    padding-top: 1rem;
+ion-content {
+  ion-item-group {
+    padding-top: 0.5rem;
   }
-  ion-item-group > ion-col {
-    padding: 1rem 0;
+
+  ion-item-group .complete-date > ion-col {
+    padding: .5rem 0;
     display: block;
   }
 }
@@ -92,4 +95,3 @@ ion-content > ion-row ion-button {
     border-radius: var(--app-border-radius-1);
   }
 }
-

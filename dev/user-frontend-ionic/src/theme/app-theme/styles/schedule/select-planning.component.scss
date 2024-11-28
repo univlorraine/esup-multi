@@ -40,3 +40,125 @@
 app-calendar-event {
     width: 100%;
 }
+//Custom URCA style
+//Filtre agendas
+ion-modal {
+  position: absolute;
+  left: 40vw;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.10);
+
+  ion-header[role=banner] {
+    box-shadow: none;
+    margin-bottom: 0;
+
+    ion-toolbar.toolbar-title-default {
+      height: fit-content;
+
+      ion-title {
+        width: fit-content;
+        padding: 0;
+        margin-left: 1rem;
+
+        &::before {
+          content: "";
+          display: block;
+          position: absolute;
+          bottom: .25rem;
+          width: 100%;
+          height: .6rem;
+          background-color: var(--ion-color-secondary);
+          z-index: -1;
+        }
+      }
+
+      ion-buttons {
+        ion-button {
+          ion-text::before {
+            content: "";
+            display: inline-block;
+            width: 1.25rem;
+            height: 1.25rem;
+            background-size: contain;
+            background-repeat: no-repeat;
+            margin-bottom: -3px;
+          }
+        }
+      }
+
+      ion-buttons[slot=secondary] {
+        ion-button {
+          ion-text::before {
+            background-image: url('/assets/icons/features/close.svg');
+          }
+        }
+      }
+
+      ion-buttons[slot=primary] {
+        ion-button {
+          ion-text::before {
+            background-image: url('/assets/icons/features/valider.svg');
+          }
+        }
+
+        ion-button::part(native) {
+          background-color: transparent;
+        }
+      }
+    }
+  }
+
+  ion-content {
+    --background: var(--app-font-color-primary-contrast);
+
+    ion-row.ion-margin {
+      margin-top: 0;
+      margin-bottom: 1.25rem;
+
+      ion-label.app-text-4 {
+        font-family: QuicksandBold, sans-serif !important;
+        font-size: var(--app-text-4-size) !important;
+        color: var(--app-font-color-primary) !important;
+      }
+    }
+
+    form ion-item {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: baseline;
+      --border-style: none;
+      --min-height: 2rem;
+      --background: var(--app-font-color-primary-contrast);
+      margin-bottom: 0.25rem;
+
+      ion-label.app-text-4 {
+        order: 2;
+        margin: 0.25rem 0 0 1rem;
+        color: var(--app-font-color-primary) !important;
+      }
+
+      ion-checkbox {
+        margin: 0;
+
+        &::part(container) {
+          display: none;
+        }
+
+        &:before {
+          background-image: url('/assets/icons/features/unchecked.svg');
+          content: "";
+          display: inline-block;
+          width: 1rem;
+          height: 1rem;
+          background-size: contain;
+          background-repeat: no-repeat;
+          margin-bottom: -3px;
+        }
+
+        &[aria-checked=true]:before {
+          background-image: url('/assets/icons/features/checked.svg');
+        }
+      }
+    }
+  }
+}
