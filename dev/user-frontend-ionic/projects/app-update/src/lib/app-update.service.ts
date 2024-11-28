@@ -197,20 +197,23 @@ export class AppUpdateService {
     this.currentVersion = await this.getCurrentVersion();
     this.appUpdateInfo = await this.fetchUpdateInfoFromBackend();
 
-    if (this.appUpdateInfo) {
-      await this.loadTranslations();
-      const isMandatory: boolean = this.isVersionLowerThanStore(this.currentVersion, this.appUpdateInfo.minVersionRequired);
+    if (!this.appUpdateInfo) return;
 
-      if (isMandatory) {
-        await this.showMandatoryUpdateAlert();
-        return;
-      }
+    await this.loadTranslations();
+    const isMandatory: boolean = this.isVersionLowerThanStore(this.currentVersion, this.appUpdateInfo.minVersionRequired);
 
+    if (isMandatory) {
+      await this.showMandatoryUpdateAlert();
+      return;
+    }
+
+    const isUpdateAvailable = this.isVersionLowerThanStore(this.currentVersion, this.appUpdateInfo.storeVersion);
+
+    if (isUpdateAvailable) {
       await firstValueFrom(storeInitialized$);
       const dismissedVersion = await firstValueFrom(dismissedVersion$);
-      if (dismissedVersion !== this.appUpdateInfo.storeVersion) {
+      if (!dismissedVersion || this.isVersionLowerThanStore(dismissedVersion, this.appUpdateInfo.storeVersion)) {
         await this.showOptionalUpdateAlert();
-        return;
       }
     }
   }
