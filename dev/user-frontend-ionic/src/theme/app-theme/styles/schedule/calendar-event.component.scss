@@ -68,11 +68,34 @@ ion-col {
   width: 100%;
 }
 
-.detail-text{
+.detail-text {
   margin-left: 0.2rem;
   margin-right: 0.4rem;
 }
 
-.current-date{
+.current-date {
   color: var(--app-font-color-primary-medium) !important;
+}
+
+//Custom URCA style
+.content.hydrated {
+  background-color: transparent;
+  padding-bottom: 0;
+  border: none;
+
+  ion-row:not(.eventRows) {
+    display: none
+  }
+
+  .event-color {
+    border-width: 48rem !important;
+    z-index: -1;
+  }
+
+  ion-col:not(.event-color) {
+    margin: 1px 1px 1px .313rem;
+    background-color: #FFF;
+    max-height: -webkit-fill-available;
+    max-width: -webkit-fill-available;
+  }
 }

@@ -51,6 +51,7 @@
     width: fit-content;
     align-self: center;
     padding-inline-end: 0;
+    padding-left: calc(var(--ion-safe-area-right, 0px) + var(--inner-padding-end)) !important;
   }
 }
 

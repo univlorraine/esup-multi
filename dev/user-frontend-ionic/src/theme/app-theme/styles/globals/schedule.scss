@@ -1,0 +1,148 @@
+//Modal for schedule select planning, create a blur effect hover page content around modal
+ion-app:has(ion-modal[ng-reflect-is-open=true]) ion-tabs::before {
+  content: '';
+  background-color: #ffffff52;
+  opacity: 1;
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  z-index: 1;
+  bottom: 0;
+  backdrop-filter: blur(7.5px);
+}
+
+//Schedule Calendar style
+full-calendar {
+  div.fc-toolbar.fc-header-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    border: none !important;
+
+    div.fc-toolbar-chunk:has(.fc-toolbar-title) {
+      width: calc(100% - 7rem);
+      margin: 0 3.5rem;
+      display: grid;
+
+      .fc-toolbar-title {
+        font-size: var(--app-text-3-size) !important;
+        margin: .8rem 0 !important;
+        text-align: center;
+        justify-self: center;
+      }
+    }
+
+    div.fc-toolbar-chunk:last-child {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: column-reverse;
+      align-content: center;
+      margin-top: -2.2rem;
+      justify-content: flex-end;
+
+      .fc-today-button {
+        width: fit-content;
+        align-self: center;
+        margin-top: .5rem;
+        margin-bottom: .5rem;
+        padding: .2rem .5rem !important;
+        border-radius: var(--app-border-radius-5) !important;
+        background-color: var(--app-font-color-secondary) !important;
+      }
+
+      .fc-button-group {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        margin-right: 0 !important;
+        margin-left: 0;
+        z-index: 1;
+
+        .fc-button {
+          flex: none;
+          width: 1.75rem;
+          height: 1.75rem;
+          margin: 0 1rem;
+          background-color: var(--ion-color-primary) !important;
+          border-radius: var(--app-border-radius-4) !important;
+
+          span {
+            width: auto;
+            height: auto;
+            margin-left: -.1rem;
+            margin-top: -.1rem;
+
+            &::before {
+              -webkit-mask-image: url("/assets/icons/navigation/arrow-right.svg");
+              mask-image: url("/assets/icons/navigation/arrow-right.svg");
+              mask-size: contain;
+              mask-repeat: no-repeat;
+              mask-position: center;
+              background-color: var(--app-font-color-primary-contrast);
+              content: "";
+              width: 1.25rem;
+              height: 1.25rem;
+              display: block;
+            }
+          }
+        }
+
+        .fc-prev-button span::before {
+          transform: rotate(180deg);
+        }
+
+      }
+    }
+
+    div.fc-toolbar-chunk:last-child:has(.fc-today-button:disabled) {
+      margin-top: -2.6rem;
+    }
+  }
+
+  //full calendar content
+  .fc-timeGridDay-view {
+    table {
+      &.fc-scrollgrid, thead, th {
+        border: none !important;
+      }
+
+      .fc-day-today, .fc-col-header-cell {
+        background-color: transparent !important;
+      }
+
+      th.fc-col-header-cell.fc-day {
+        width: 100vw;
+        position: fixed;
+        top: .5rem;
+        left: 0;
+
+        a {
+          font-size: var(--app-text-3-size) !important;
+          font-family: QuicksandBold, sans-serif !important;
+        }
+      }
+    }
+
+    .fc-timegrid-event-harness {
+      margin-top: 0;
+    }
+
+    .courseLabel {
+      font-family: QuicksandBold, sans-serif !important;
+    }
+  }
+}
+
+full-calendar:has(.fc-timeGridDay-view) div.fc-toolbar.fc-header-toolbar div.fc-toolbar-chunk {
+  .fc-toolbar-title {
+    margin: 1.625rem 0 .8rem !important;
+  }
+
+  &:last-child:has(.fc-today-button:disabled) {
+    margin-top: -3.5rem;
+  }
+
+  &:last-child {
+    margin-top: -2.6rem;
+  }
+}
