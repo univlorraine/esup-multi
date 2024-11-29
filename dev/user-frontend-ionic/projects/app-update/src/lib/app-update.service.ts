@@ -39,7 +39,7 @@
 
 import { Inject, Injectable, Injector } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AlertsService, VersionService } from '@multi/shared';
+import { AlertsService, GuidedTourService, VersionService } from '@multi/shared';
 import { firstValueFrom } from 'rxjs';
 import { Capacitor } from '@capacitor/core';
 import { TranslateService } from '@ngx-translate/core';
@@ -63,6 +63,7 @@ export class AppUpdateService {
   private translations: any;
   private initialized = false;
   private translateService: TranslateService;
+  private guidedTourService: GuidedTourService;
 
   constructor(
     @Inject('environment')
@@ -100,6 +101,7 @@ export class AppUpdateService {
   }
 
   private async showMandatoryUpdateAlert() {
+    this.guidedTourService.setUpdateAlertStatus(true);
     await this.alertsService.enqueueAlert({
       header: this.translations['APP-UPDATE.MANDATORY_UPDATE_ALERT.HEADER'],
       message: this.translations['APP-UPDATE.MANDATORY_UPDATE_ALERT.MESSAGE'],
@@ -118,6 +120,7 @@ export class AppUpdateService {
   }
 
   private async showOptionalUpdateAlert() {
+    this.guidedTourService.setUpdateAlertStatus(true);
     await this.alertsService.enqueueAlert({
       header: this.translations['APP-UPDATE.OPTIONAL_UPDATE_ALERT.HEADER'],
       message: this.translations['APP-UPDATE.OPTIONAL_UPDATE_ALERT.MESSAGE'],
@@ -144,6 +147,8 @@ export class AppUpdateService {
 
   private dismissUpdate() {
     setDismissedVersion(this.appUpdateInfo?.storeVersion || '');
+    this.guidedTourService.setUpdateAlertStatus(false);
+    this.guidedTourService.startGlobalTour();
   }
 
   private getStoreUrl(): string {
@@ -153,12 +158,23 @@ export class AppUpdateService {
       ;
   }
 
+  // Injection du service de traduction
+  // Hack nécessaire, car si on charge le service dans le constructeur, cela casse les traductions dans tous les modules
   private loadTranslateService() {
     if (this.translateService) {
       return;
     }
 
     this.translateService = this.injector.get(TranslateService);
+  }
+
+  // Injection du service du tour guidé
+  // Hack nécessaire, car si on charge le service dans le constructeur, cela casse les traductions dans tous les modules
+  private loadTourService() {
+    if (this.guidedTourService) {
+      return;
+    }
+    this.guidedTourService = this.injector.get(GuidedTourService);
   }
 
   // Préchargement des traductions pour les alertes
@@ -183,7 +199,8 @@ export class AppUpdateService {
     }
 
     await this.platform.ready();
-    this.loadTranslateService()
+    this.loadTranslateService();
+    this.loadTourService();
     await this.checkForUpdate();
 
     App.addListener('resume', () => {
