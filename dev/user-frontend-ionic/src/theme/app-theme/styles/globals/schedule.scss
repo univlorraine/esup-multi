@@ -43,8 +43,7 @@ full-calendar {
       .fc-today-button {
         width: fit-content;
         align-self: center;
-        margin-top: .5rem;
-        margin-bottom: .5rem;
+        margin: .5rem 0;
         padding: .2rem .5rem !important;
         border-radius: var(--app-border-radius-5) !important;
         background-color: var(--app-font-color-secondary) !important;
@@ -133,16 +132,98 @@ full-calendar {
   }
 }
 
+//Day view specific style
 full-calendar:has(.fc-timeGridDay-view) div.fc-toolbar.fc-header-toolbar div.fc-toolbar-chunk {
   .fc-toolbar-title {
     margin: 1.625rem 0 .8rem !important;
   }
 
   &:last-child:has(.fc-today-button:disabled) {
-    margin-top: -3.5rem;
+    margin-top: -4.2rem;
   }
 
   &:last-child {
-    margin-top: -2.6rem;
+    margin-top: -3rem;
+  }
+}
+
+//Week view specific style
+full-calendar:has(.fc-timeGridWeek-view) {
+  table .fc-day.fc-day-today .week-view-column-header-number {
+    border: solid var(--ion-color-secondary) 2px;
+    border-radius: var(--app-border-radius-5);
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
+
+//Common style for Week and Month views
+full-calendar:has(.fc-timeGridWeek-view), full-calendar:has(.fc-dayGridMonth-view) {
+  table {
+    &.fc-scrollgrid, thead, th {
+      border: none !important;
+    }
+
+    .fc-day {
+      background-color: transparent !important;
+
+      .week-view-column-header-day {
+        font-family: QuicksandBold, sans-serif !important;
+        font-size: var(--app-text-5-size) !important;
+        margin-bottom: 0.5rem;
+      }
+
+      .week-view-column-header-number {
+        font-weight: normal;
+        font-size: var(--app-text-4-size) !important;
+      }
+    }
+  }
+
+  div.fc-toolbar.fc-header-toolbar div.fc-toolbar-chunk:last-child .fc-today-button {
+    margin-top: 0;
+  }
+}
+
+//Month view specific style
+full-calendar:has(.fc-dayGridMonth-view) {
+  .fc-daygrid-day-top{
+    justify-content: center;
+  }
+  .fc-daygrid-day-number{
+    width: 1.75rem;
+    text-align: center;
+    height: 1.75rem;
+    padding-top: 0.2rem;
+    font-size: var(--app-text-4-size);
+  }
+  td.fc-day-today .fc-daygrid-day-number{
+    border: solid var(--ion-color-secondary) 2px;
+    border-radius: var(--app-border-radius-5);
+  }
+  .fc-daygrid-day{
+    border: none !important;
+  }
+}
+
+//Modal with event details
+ion-app:has(app-schedule-list.ion-page-hidden) ion-modal:has(app-event-detail) {
+  --height: calc(40% - (var(--ion-safe-area-top) + 10px));
+
+  &::part(content) {
+    border-radius: var(--app-border-radius-5) var(--app-border-radius-5) 0 0;
+  }
+
+  ion-header {
+    display: none;
+  }
+
+  ion-content {
+    --padding-top: 1rem;
+    background-color: #FFFFFF;
+
+    &::part(background) {
+      background: transparent;
+    }
   }
 }
