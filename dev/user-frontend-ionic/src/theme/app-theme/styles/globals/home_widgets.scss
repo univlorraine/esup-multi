@@ -212,20 +212,29 @@ ion-card.ion-no-margin[data-widget-id="schedule:next-events"] {
               display: none;
             }
 
-            ion-row ion-text {
-              font-size: var(--app-text-4-size) !important;
-              font-family: QuicksandBold, serif !important;
+            ion-row.card-labels {
+              ion-text {
+                font-size: var(--app-text-4-size) !important;
+                font-family: QuicksandBold, serif !important;
 
-              &::before {
+                &::before {
+                  content: "";
+                  display: inline-block;
+                  width: 1rem;
+                  height: 1rem;
+                  background-size: contain;
+                  background-repeat: no-repeat;
+                  margin-bottom: -3px;
+                  padding-right: 0.3rem;
+                }
+              }
+
+              &:first-child ion-text::before {
                 background-image: url('/assets/icons/home/batiment.svg');
-                content: "";
-                display: inline-block;
-                width: 1rem;
-                height: 1rem;
-                background-size: contain;
-                background-repeat: no-repeat;
-                margin-bottom: -3px;
-                padding-right: 0.3rem;
+              }
+
+              &:last-child ion-text::before {
+                background-image: url('/assets/icons/home/enseignant.svg');
               }
             }
           }
@@ -243,6 +252,7 @@ ion-card.ion-no-margin[data-widget-id="schedule:next-events"] {
 
         ion-card-content > ion-row > ion-col > ion-row {
           margin-top: 2rem;
+          flex-direction: column;
         }
       }
     }
