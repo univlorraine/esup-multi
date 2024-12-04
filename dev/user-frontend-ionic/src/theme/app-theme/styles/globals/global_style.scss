@@ -1,3 +1,12 @@
 h1, h2, h3, h4, h5, h6 {
   font-family: QuicksandBold, sans-serif;
 }
+
+
+//Dark mode style
+body.dark {
+  ion-icon.ion-color {
+    --color: var(--ion-color-tertiary-contrast);
+    color: var(--ion-color-tertiary-contrast);
+  }
+}

@@ -63,18 +63,28 @@
 
 ion-header[role="banner"] ion-toolbar {
   height: 4.6rem;
-  --background: #FFF;
+  --background: var(--app-color-background-header-footer);
 }
 
 ion-header[role="banner"] {
   z-index: 0;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.10);
   margin-bottom: 0.12rem;
+
   ion-toolbar.toolbar-title-default {
     display: flex;
     align-items: center;
   }
-  ion-title.app-centered-header-title{
+
+  ion-title.app-centered-header-title {
     text-transform: none;
   }
 }
+
+//Dark mode style
+body.dark {
+  ion-header[role=banner] ion-toolbar .logo {
+    filter: brightness(0) invert(1);
+  }
+}
+

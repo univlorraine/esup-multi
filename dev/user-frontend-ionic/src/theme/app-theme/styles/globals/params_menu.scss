@@ -1,88 +1,102 @@
 //Style for the user name and subtitle
-.multi-auth-widget{
+.multi-auth-widget {
   margin-top: 2.38rem;
-  ion-label{
+
+  ion-label {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    h1{
+
+    h1 {
       position: relative;
       text-transform: none;
-      font-size: var(--app-title-4-size)!important;
-      font-family: QuicksandBold, serif!important;
-      &::before{
+      font-size: var(--app-title-4-size) !important;
+      font-family: QuicksandBold, serif !important;
+
+      &::before {
         content: "";
         display: block;
         position: absolute;
         left: 50%;
         transform: translate(-50%, -2.5rem);
-        background-image: url('/assets/icons/navigation/contacts.svg');
+        background-color: var(--app-font-color-primary);
+        -webkit-mask-image: url("/assets/icons/navigation/contacts.svg");
+        mask-image: url("/assets/icons/navigation/contacts.svg");
+        mask-repeat: no-repeat;
+        mask-position: center;
+        mask-size: contain;
         width: 1.875rem;
         height: 1.875rem;
-        background-size: contain;
-        background-repeat: no-repeat;
       }
-      &::after{
+
+      &::after {
         content: "";
         display: block;
         position: absolute;
         bottom: 0.3rem;
         width: 100%;
         height: 0.6rem;
-        background-color: var(--ion-color-secondary);
+        background-color: var(--app-color-underline-title);
         z-index: -1;
       }
     }
-    h3{
-      font-size: var(--app-text-4-size)!important;
+
+    h3 {
+      font-size: var(--app-text-4-size) !important;
     }
   }
 }
 
 //Style for the menu list
-ion-list.menu-section{
-  border-bottom: none!important;
-  ion-item.item.item-label{
+ion-list.menu-section {
+  border-bottom: none !important;
+
+  ion-item.item.item-label {
     padding-left: 0;
     border-bottom: 1px solid var(--Gris, #DEE2E6);
   }
-  ion-icon{
+
+  ion-icon {
     width: 1.125rem;
     height: 1.125rem;
     margin-inline-end: 0.88rem;
   }
-  ion-label.app-text-3.light{
-    font-size: var(--app-text-4-size)!important;
-    font-family: QuicksandBold, serif!important;
+
+  ion-label.app-text-3.light {
+    font-size: var(--app-text-4-size) !important;
+    font-family: QuicksandBold, serif !important;
   }
-  app-custom-icon{
+
+  app-custom-icon {
     margin-inline-end: 0;
   }
-  ion-item::part(detail-icon){
+
+  ion-item::part(detail-icon) {
     --detail-icon-color: var(--app-font-fix-dark-color) !important;
     --detail-icon-opacity: 1;
   }
 }
 
 //Style for the social networks icons
-app-widget > lib-social-network ion-row.socialNetworks.hydrated{
+app-widget > lib-social-network ion-row.socialNetworks.hydrated {
   background-color: transparent;
   margin-top: 2.5rem;
   padding-left: 1rem;
   padding-right: 1rem;
   padding-top: 1.5rem;
 
-  &::before{
+  &::before {
     content: "Suivez-nous";
     display: block;
     position: absolute;
     left: 50%;
     transform: translate(-50%, -2.25rem);
-    font-size: var(--app-text-3-size)!important;
-    font-family: QuicksandBold, serif!important;
+    font-size: var(--app-text-3-size) !important;
+    font-family: QuicksandBold, serif !important;
   }
-  ion-icon{
+
+  ion-icon {
     color: var(--ion-color-tertiary);
     //background-color: var(--ion-color-tertiary);
     border-radius: 5rem;
@@ -91,43 +105,63 @@ app-widget > lib-social-network ion-row.socialNetworks.hydrated{
 }
 
 //Style for parameters page footer
-div.menu-footer{
+div.menu-footer {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   margin-bottom: 1rem;
-  ion-row:first-child{
+
+  ion-row:first-child {
     margin-right: 1rem;
-    .app-round-button-1{
-      --background: transparent!important;
-      border: solid 2px var(--app-rounded-button-1-icon-color)!important;
+
+    .app-round-button-1 {
+      --background: transparent !important;
+      border: solid 2px var(--app-rounded-button-1-icon-color) !important;
       height: 1.5rem;
       min-height: 1.5rem;
       width: 1.5rem;
-      ion-icon{
+
+      ion-icon {
         height: 1.25rem;
       }
     }
+
     width: 3.438rem;
   }
-  ion-row:nth-child(2){
+
+  ion-row:nth-child(2) {
     ion-button {
       margin: 0 0.25rem;
 
-      &::part(native){
+      &::part(native) {
         padding: 0.125rem;
       }
-      ion-icon{
+
+      ion-icon {
         width: 1.5rem;
         height: 1.5rem;
       }
     }
   }
+
   ion-row:last-child {
     margin-top: 1rem;
     padding-bottom: 0;
     width: 100%;
+  }
+}
+
+//Dark mode style
+body.dark {
+  ion-list.menu-section ion-item::part(detail-icon) {
+    --detail-icon-color: var(--ion-text-color) !important;
+    }
+  app-widget > lib-social-network ion-row.socialNetworks.hydrated ion-icon {
+    color: var(--ion-text-color);
+  }
+  div.menu-footer ion-row:first-child .app-round-button-1 {
+    border: solid 2px var(--ion-text-color) !important;
   }
 }

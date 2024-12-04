@@ -86,7 +86,7 @@ ion-card {
     border-radius: var(--app-border-radius-5) !important;
     border: none !important;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.10);
-    //max-height: 17rem;
+    background-color: var(--app-color-background-header-footer);
     max-width: 46rem;
 
     ion-text {

@@ -94,7 +94,7 @@ ion-col {
 
   ion-col:not(.event-color) {
     margin: 1px 1px 1px .313rem;
-    background-color: #FFF;
+    background-color: var(--app-font-color-primary-contrast);
     max-height: -webkit-fill-available;
     max-width: -webkit-fill-available;
   }

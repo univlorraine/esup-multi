@@ -53,6 +53,7 @@ ion-modal {
 
     ion-toolbar.toolbar-title-default {
       height: fit-content;
+      --background: var(--app-font-color-primary-contrast);
 
       ion-title {
         width: fit-content;
@@ -66,7 +67,7 @@ ion-modal {
           bottom: .25rem;
           width: 100%;
           height: .6rem;
-          background-color: var(--ion-color-secondary);
+          background-color: var(--app-color-underline-title);
           z-index: -1;
         }
       }
@@ -88,7 +89,12 @@ ion-modal {
       ion-buttons[slot=secondary] {
         ion-button {
           ion-text::before {
-            background-image: url('/assets/icons/features/close.svg');
+            -webkit-mask-image: url('/assets/icons/features/close.svg');
+            mask-image: url('/assets/icons/features/close.svg');
+            mask-size: contain;
+            mask-repeat: no-repeat;
+            mask-position: center;
+            background-color: var(--ion-color-primary-contrast);
           }
         }
       }
@@ -96,7 +102,12 @@ ion-modal {
       ion-buttons[slot=primary] {
         ion-button {
           ion-text::before {
-            background-image: url('/assets/icons/features/valider.svg');
+            -webkit-mask-image: url('/assets/icons/features/valider.svg');
+            mask-image: url('/assets/icons/features/valider.svg');
+            mask-size: contain;
+            mask-repeat: no-repeat;
+            mask-position: center;
+            background-color: var(--ion-color-primary-contrast);
           }
         }
 
@@ -145,7 +156,12 @@ ion-modal {
         }
 
         &:before {
-          background-image: url('/assets/icons/features/unchecked.svg');
+          -webkit-mask-image: url('/assets/icons/features/unchecked.svg');
+          mask-image: url('/assets/icons/features/unchecked.svg');
+          mask-size: contain;
+          mask-repeat: no-repeat;
+          mask-position: center;
+          background-color: var(--ion-color-primary-contrast);
           content: "";
           display: inline-block;
           width: 1rem;
@@ -156,7 +172,12 @@ ion-modal {
         }
 
         &[aria-checked=true]:before {
-          background-image: url('/assets/icons/features/checked.svg');
+          -webkit-mask-image: url('/assets/icons/features/checked.svg');
+          mask-image: url('/assets/icons/features/checked.svg');
+          mask-size: contain;
+          mask-repeat: no-repeat;
+          mask-position: center;
+          background-color: var(--ion-color-primary-contrast);
         }
       }
     }

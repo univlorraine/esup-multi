@@ -87,13 +87,16 @@ ion-card-header {
     font-size: var(--app-text-5-size) !important;
 
     &::before {
-      background-image: url('/assets/icons/home/horaires.svg');
+      background-color: var(--app-font-color-primary);
+      -webkit-mask-image: url('/assets/icons/home/horaires.svg');
+      mask-image: url('/assets/icons/home/horaires.svg');
+      mask-repeat: no-repeat;
+      mask-position: left;
+      mask-size: contain;
       content: "";
       display: inline-block;
       width: 1rem;
       height: 1rem;
-      background-size: contain;
-      background-repeat: no-repeat;
       margin-bottom: -3px;
       padding-right: 0.4rem;
     }
@@ -132,24 +135,30 @@ ion-card-content.card-content-md {
       }
 
       ion-icon[name=man-outline]:before {
-        background-image: url('/assets/icons/home/enseignant.svg');
+        background-color: var(--app-font-color-primary);
+        -webkit-mask-image: url('/assets/icons/home/enseignant.svg');
+        mask-image: url('/assets/icons/home/enseignant.svg');
+        mask-repeat: no-repeat;
+        mask-position: center;
+        mask-size: contain;
         content: "";
         display: inline-block;
         width: 1.125rem;
         height: 1.125rem;
-        background-size: contain;
-        background-repeat: no-repeat;
         margin-bottom: 2px;
       }
 
       ion-icon[name=business-outline]:before {
-        background-image: url('/assets/icons/home/batiment.svg');
+        background-color: var(--app-font-color-primary);
+        -webkit-mask-image: url('/assets/icons/home/batiment.svg');
+        mask-image: url('/assets/icons/home/batiment.svg');
+        mask-repeat: no-repeat;
+        mask-position: center;
+        mask-size: contain;
         content: "";
         display: inline-block;
         width: 1rem;
         height: 1rem;
-        background-size: contain;
-        background-repeat: no-repeat;
         margin-bottom: 2px;
       }
     }

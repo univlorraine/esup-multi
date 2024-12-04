@@ -1,8 +1,8 @@
-.searchbar-search-icon.sc-ion-searchbar-md, .searchbar-has-focus.sc-ion-searchbar-md-h .searchbar-search-icon.sc-ion-searchbar-md{
-  display: none!important;
+.searchbar-search-icon.sc-ion-searchbar-md, .searchbar-has-focus.sc-ion-searchbar-md-h .searchbar-search-icon.sc-ion-searchbar-md {
+  display: none !important;
 }
 
-.sc-ion-searchbar-md-h{
+.sc-ion-searchbar-md-h {
   --border-radius: 0.5rem;
   --box-shadow: none;
   --background: #FFF;
@@ -15,4 +15,25 @@
   padding-top: 0;
   padding-bottom: 0;
   border: solid 1px var(--ion-color-highlight);
+
+  &, &::placeholder {
+    color: var(--ion-text-color);
+    opacity: 1; /* Firefox */
+  }
+
+  /* For Internet Explorer */
+  &:-ms-input-placeholder {
+    color: var(--ion-text-color);
+  }
+
+  /* For Edge */
+  &::-ms-input-placeholder {
+    color: var(--ion-text-color);
+  }
+}
+
+body.dark {
+  .searchbar-input.sc-ion-searchbar-md {
+    background-color: transparent;
+  }
 }

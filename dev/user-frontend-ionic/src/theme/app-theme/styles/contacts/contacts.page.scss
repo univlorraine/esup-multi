@@ -86,6 +86,7 @@ ion-searchbar {
     border-bottom: var(--app-border-width-7) solid var(--ion-color-dark) !important;
     border-radius: var(--app-border-no-radius);
     box-shadow: var(--app-border-no-box-shadow);
+    --background: var(--app-color-background-header-footer);
 
     ion-item.contact-header {
       --background: transparent;
@@ -121,6 +122,13 @@ ion-searchbar {
 
       .add-icon{
         color: var(--app-font-color-primary-contrast);
+      }
+      ion-button.ion-activated .add-icon{
+        color: var(--app-font-color-primary);
+      }
+
+      ion-button::part(native):active{
+
       }
     }
   }

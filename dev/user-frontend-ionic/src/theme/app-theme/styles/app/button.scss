@@ -154,7 +154,7 @@
 
   .icon-container {
     padding: 0;
-    background-color: var(--ion-color-tertiary);
+    background-color: var(--app-square-button-1-background-color);
     border-radius: var(--app-square-button-1-border-radius) !important;
     height:100%;
     width: 100%;
@@ -167,6 +167,7 @@
       --ion-color-base: var(--ion-color-tertiary-contrast);
       font-size: var(--app-square-button-1-icon-size) !important;
       opacity: 0.2;
+      fill:var(--ion-color-icon-primary);
     }
   }
 
@@ -188,16 +189,6 @@
   }
 }
 
-/*
-If we want to display one or many buttons to another styler :
- */
-div[aria-label="Carte des campus"] .icon-container {
-  background: var(--ion-color-tertiary);
-  app-custom-icon ion-icon.ion-color-icon-primary-contrast{
-    --ion-color-base: var(--ion-color-tertiary-contrast);
-    opacity: 0.2;
-  }
-}
 
 // // // ---------------------
 // // // Rounded Button
@@ -223,5 +214,15 @@ div[aria-label="Carte des campus"] .icon-container {
   ion-icon {
     font-size: var(--app-rounded-button-1-icon-size);
     color: var(--app-rounded-button-1-icon-color) !important;
+  }
+}
+
+body.dark{
+  .app-square-button-1 .icon-container ion-icon {
+    fill:var(--ion-color-icon-primary-dark);
+    opacity: 1;
+  }
+  .app-round-button-1 ion-icon{
+    color: var(--ion-text-color) !important;
   }
 }

@@ -48,7 +48,7 @@ app-custom-icon {
 //Modify main tab bar to fit with webdesign
 ion-tab-bar[data-menu-id="main-tab-bar"],
 ion-tab-bar[data-menu-id="main-tab-bar"] ion-tab-button {
-  background-color: var(--app-color-background);
+  background-color: var(--app-color-background-header-footer);
 }
 
 ion-tab-bar[data-menu-id="main-tab-bar"]{

@@ -186,7 +186,7 @@
   --ion-color-medium-tint: #686870;
 
   /** light **/
-  --ion-color-light: #e2e7ee;
+  --ion-color-light: #FFFFFF;
   --ion-color-light-rgb: 226, 231, 238;
   --ion-color-light-contrast: #12142B;
   --ion-color-light-contrast-rgb: 0, 0, 0;
@@ -219,6 +219,7 @@
   /** highlight **/
   // Exemple of use : new item in a list (used in Notifications module for new notification)
   --ion-color-highlight: #DEE2E6;
+  --ion-color-highlight-new:#DEE2E6;
   --ion-color-highlight-rgb: 255, 239, 101;
   --ion-color-highlight-contrast: #12142B;
   --ion-color-highlight-contrast-rgb: 0, 0, 0;
@@ -238,7 +239,13 @@
   The classes can be inverted depending on the background color of the component where <app-custom-icon> is injected.
   **/
   --ion-color-icon-primary: #FBFBFC;
+  --ion-color-icon-primary-dark: #2C2C6A;
   --ion-color-icon-primary-contrast: var(--app-font-color-primary);
+
+  /** Custom URCA **/
+  --app-color-background-header-footer: #FFFFFF;
+  --app-color-underline-title: var(--ion-color-secondary);
+  --app-color-primary-shade-fixed: #2C2C6A
 }
 
 .ion-color-quaternary {
@@ -327,7 +334,7 @@ body.dark {
   // // // ---------------------
 
   /** App background **/
-  --app-color-background: #75787c;
+  --app-color-background: var(--ion-color-primary-shade);
 
   /** Pages background  : If the background is different from the app background. **/
   // services.page in Features module
@@ -396,8 +403,8 @@ body.dark {
   --ion-color-danger-tint: #ed576b;
 
   /** dark **/
-  --ion-color-dark: #252525;
-  --ion-color-dark-rgb: 37,37,37;
+  --ion-color-dark: var(--ion-color-primary);
+  --ion-color-dark-rgb: 60,60,120;
   --ion-color-dark-contrast: #FBFBFC;
   --ion-color-dark-contrast-rgb: 251, 251, 252;
   --ion-color-dark-shade: #212121;
@@ -445,11 +452,16 @@ body.dark {
   /** highlight **/
   // Exemple of use : new item in a list (used in Notifications module for new notification)
   --ion-color-highlight: #DEE2E6;
+  --ion-color-highlight-new:#2C2C6A;
   --ion-color-highlight-rgb: 255, 239, 101;
   --ion-color-highlight-contrast: #12142B;
   --ion-color-highlight-contrast-rgb: 0, 0, 0;
   --ion-color-highlight-shade: #afb2b6;
   --ion-color-highlight-tint: #f4f7fa;
+
+  /** Customs URCA **/
+  --app-color-background-header-footer: var(--ion-color-primary);
+  --app-color-underline-title: var(--ion-color-primary);
 }
 
 /*
@@ -536,7 +548,7 @@ body.dark {
   --ion-color-step-900: #e7e7e7;
   --ion-color-step-950: #f3f3f3;
 
-  --ion-item-background: #1e1e1e;
+  --ion-item-background: var(--ion-color-primary-shade);
 
   --ion-tab-bar-background: #1f1f1f;
 

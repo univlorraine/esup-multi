@@ -46,7 +46,7 @@ full-calendar {
         margin: .5rem 0;
         padding: .2rem .5rem !important;
         border-radius: var(--app-border-radius-5) !important;
-        background-color: var(--app-font-color-secondary) !important;
+        background-color: var(--app-color-background-header-footer) !important;
       }
 
       .fc-button-group {
@@ -77,7 +77,7 @@ full-calendar {
               mask-size: contain;
               mask-repeat: no-repeat;
               mask-position: center;
-              background-color: var(--app-font-color-primary-contrast);
+              background-color: #FFFFFF;
               content: "";
               width: 1.25rem;
               height: 1.25rem;
@@ -176,6 +176,7 @@ full-calendar:has(.fc-timeGridWeek-view), full-calendar:has(.fc-dayGridMonth-vie
       .week-view-column-header-number {
         font-weight: normal;
         font-size: var(--app-text-4-size) !important;
+        padding-top: .1rem;
       }
     }
   }
@@ -189,6 +190,8 @@ full-calendar:has(.fc-timeGridWeek-view), full-calendar:has(.fc-dayGridMonth-vie
 full-calendar:has(.fc-dayGridMonth-view) {
   .fc-daygrid-day-top{
     justify-content: center;
+    background-color: var(--app-font-color-primary-contrast) !important;
+    padding: .3rem 0;
   }
   .fc-daygrid-day-number{
     width: 1.75rem;
@@ -220,7 +223,7 @@ ion-app:has(app-schedule-list.ion-page-hidden) ion-modal:has(app-event-detail) {
 
   ion-content {
     --padding-top: 1rem;
-    background-color: #FFFFFF;
+    background-color: var(--app-color-background-header-footer);
 
     &::part(background) {
       background: transparent;

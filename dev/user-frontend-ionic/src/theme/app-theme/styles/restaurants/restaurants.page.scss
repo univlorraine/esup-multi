@@ -79,6 +79,7 @@ ion-item {
   max-width: 46rem;
   width: 100%;
   margin: 1rem;
+  background-color: var(--app-color-background-header-footer);
 
   &::part(native) {
     height: 100%;

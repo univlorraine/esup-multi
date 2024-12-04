@@ -46,6 +46,7 @@ ion-card {
   margin: 0;
   border-radius: var(--app-border-no-radius);
   box-shadow: var(--app-border-no-box-shadow);
+  background-color: var(--app-color-background);
 }
 
 ion-card-content {
@@ -122,6 +123,17 @@ h5 {
 }
 
 // Custom URCA style to fit webdesign
+ion-card.swiper-slide:first-child ion-card-header ion-text::before {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: 0.3rem;
+  width: 100%;
+  height: 0.6rem;
+  background-color: var(--app-color-underline-title);
+  z-index: -1;
+}
+
 ion-card-header {
   ion-text {
     color: var(--app-font-color-primary) !important;
@@ -129,22 +141,12 @@ ion-card-header {
     position: relative;
     width: fit-content;
     align-self: center;
-
-    &::before {
-      content: "";
-      display: block;
-      position: absolute;
-      bottom: 0.3rem;
-      width: 100%;
-      height: 0.6rem;
-      background-color: var(--ion-color-secondary);
-      z-index: -1;
-    }
   }
 }
 
 ion-card-content {
   margin: 0 2rem;
+
   ion-list {
     &:not(:last-child) {
       border-bottom: 1px solid var(--ion-color-highlight);
@@ -185,7 +187,7 @@ ion-card-content {
     mask-size: contain;
     mask-repeat: no-repeat;
     mask-position: center;
-    background-color: var(--app-font-color-primary-contrast);
+    background-color: #FFFFFF;
     content: "";
     width: var(--swiper-navigation-size);
     height: var(--swiper-navigation-size);

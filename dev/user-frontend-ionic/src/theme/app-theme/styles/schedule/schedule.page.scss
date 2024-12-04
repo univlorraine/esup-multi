@@ -54,7 +54,7 @@ ion-tabs {
 ion-tab-bar {
   height: 2.4rem;
   padding-top: 0 !important;
-  --background: #FFF;
+  --background: var(--app-color-background-header-footer);
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.10);
 }
 
@@ -64,7 +64,7 @@ ion-label {
 }
 
 .tab-selected {
-  background-color: var(--ion-color-highlight);
+  background-color: var(--ion-color-highlight-new);
 }
 
 ion-title.schedule-as-user-title {
