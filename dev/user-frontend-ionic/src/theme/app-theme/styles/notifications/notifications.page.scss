@@ -249,7 +249,7 @@ ion-list.notifications-list ion-item-sliding.notification-container {
       height: 1.35rem;
 
       &::before {
-        webkit-mask-image: url('/assets/icons/features/delete.svg');
+        -webkit-mask-image: url('/assets/icons/features/delete.svg');
         mask-image: url('/assets/icons/features/delete.svg');
         mask-size: contain;
         mask-repeat: no-repeat;
