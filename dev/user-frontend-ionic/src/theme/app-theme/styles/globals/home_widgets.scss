@@ -217,6 +217,8 @@ ion-card.ion-no-margin[data-widget-id="schedule:next-events"] {
             }
 
             ion-row.card-labels {
+              margin-left: -4px;
+
               ion-text {
                 font-size: var(--app-text-4-size) !important;
                 font-family: QuicksandBold, serif !important;
@@ -233,23 +235,38 @@ ion-card.ion-no-margin[data-widget-id="schedule:next-events"] {
                 }
               }
 
-              &:first-child ion-text::before {
+              ion-text::before {
                 background-color: var(--app-font-color-primary);
-                -webkit-mask-image: url('/assets/icons/home/batiment.svg');
-                mask-image: url('/assets/icons/home/batiment.svg');
                 mask-repeat: no-repeat;
                 mask-position: center;
                 mask-size: contain;
+                content: "";
+                display: inline-block;
+                width: 1rem;
+                height: 1rem;
               }
 
-              &:last-child ion-text::before {
-                background-color: var(--app-font-color-primary);
+              &:has(ion-icon[name=link-outline]) ion-text::before {
+                -webkit-mask-image: url('/assets/icons/home/lien.svg');
+                mask-image: url('/assets/icons/home/lien.svg');
+                width: 1.25rem;
+                height: 1.25rem;
+                margin-bottom: -5px;
+              }
+
+              &:has(ion-icon[name=business-outline]) ion-text::before {
+                -webkit-mask-image: url('/assets/icons/home/batiment.svg');
+                mask-image: url('/assets/icons/home/batiment.svg');
+                margin-left: 2px;
+              }
+
+              &:has(ion-icon[name=man-outline]) ion-text::before {
                 -webkit-mask-image: url('/assets/icons/home/enseignant.svg');
                 mask-image: url('/assets/icons/home/enseignant.svg');
-                mask-repeat: no-repeat;
-                mask-position: center;
-                mask-size: contain;
+                width: 1.25rem;
+                height: 1.25rem;
               }
+
             }
           }
         }
