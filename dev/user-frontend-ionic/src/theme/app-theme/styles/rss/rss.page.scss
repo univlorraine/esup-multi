@@ -82,13 +82,33 @@ ion-card {
 
 // Custom style for University news page
 .rss-page-vertically-style {
+  &::part(scroll){
+    @media only screen and (min-width: 500px){
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    @media only screen and (min-width: 1000px){
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    @media only screen and (min-width: 1600px){
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    @media only screen and (min-width: 2100px){
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+    }
+  }
   ion-card {
     border-radius: var(--app-border-radius-5) !important;
     border: none !important;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.10);
     background-color: var(--app-color-background-header-footer);
-    max-width: 46rem;
-
+    max-width: 26rem;
+    @media only screen and (min-width: 500px){
+      height: max-content;
+    }
     ion-text {
       margin: 1rem 0.5rem;
       div.app-text-4 {
@@ -107,6 +127,9 @@ ion-card {
         font-family: QuickSandBold, sans-serif;
         --box-shadow: none;
         width: auto;
+        @media only screen and (max-width: 250px){
+          padding-bottom: 1rem;
+        }
       }
     }
     .border-content ion-row:nth-child(2){

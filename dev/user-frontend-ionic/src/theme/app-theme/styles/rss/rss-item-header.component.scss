@@ -38,40 +38,56 @@
  */
 ion-card-header.rss-news-header-vertically-style {
   .title-col {
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: calc(100% - 8.25rem) !important;
     .title {
-      height: 8.125rem;
       display: flex;
       align-items: flex-start;
-      margin: 0 2.75rem 0 1.31rem;
-      padding: 0.75rem 0;
+      margin: .44rem;
+      @media only screen and (max-width: 311px), (min-width: 500px) {
+        height: 100%;
+        margin: 0 1.31rem;
+        padding-bottom: 2.5rem;
+      }
 
       h2 {
         font-size: var(--app-text-4-size) !important;
         font-family: QuicksandBold, serif !important;
-        max-height: 96%;
+        max-height: 5.4rem;
         overflow-y: clip;
+        @media only screen and (max-width: 311px), (min-width: 500px) {
+          max-height: 100%;
+        }
       }
     }
 
     ion-row {
       position: absolute;
-      bottom: 0.62rem;
-      right: 0.62rem;
+      bottom: 0.44rem;
+      right: 0.5rem;
     }
   }
 
   .img-container {
-    max-height: 8.125rem;
     padding: 0.44rem;
-
+    width: 8.25rem !important;
+    max-width: 8.25rem !important;
+    min-width: 8.25rem;
+    height: 8.25rem;
+    @media only screen and (max-width: 311px), (min-width: 500px) {
+      width: 100% !important;
+      min-width: 100%;
+      height: auto;
+    }
     img {
       border-radius: var(--app-border-radius-5);
-      height: 7.25rem;
-      width: 13rem;
+      height: 100%;
+      width: 100%;
       object-fit: cover;
-      @media screen and (max-width: 500px) {
-        height: 7.125rem;
-        width: 7.125rem;
+      aspect-ratio: 1/1;
+      @media only screen and (max-width: 311px), (min-width: 500px) {
+        aspect-ratio: 16 / 9;
       }
     }
   }

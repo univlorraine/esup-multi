@@ -46,6 +46,9 @@ ion-modal {
   position: absolute;
   left: 40vw;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.10);
+  @media only screen and (min-width: 768px) and (min-height: 768px) {
+    left: inherit;
+  }
 
   ion-header[role=banner] {
     box-shadow: none;
@@ -94,7 +97,7 @@ ion-modal {
             mask-size: contain;
             mask-repeat: no-repeat;
             mask-position: center;
-            background-color: var(--ion-color-primary-contrast);
+            background-color: var(--app-font-color-primary);
           }
         }
       }
@@ -107,7 +110,7 @@ ion-modal {
             mask-size: contain;
             mask-repeat: no-repeat;
             mask-position: center;
-            background-color: var(--ion-color-primary-contrast);
+            background-color: var(--app-font-color-primary);
           }
         }
 
@@ -161,7 +164,7 @@ ion-modal {
           mask-size: contain;
           mask-repeat: no-repeat;
           mask-position: center;
-          background-color: var(--ion-color-primary-contrast);
+          background-color: var(--app-font-color-primary);
           content: "";
           display: inline-block;
           width: 1rem;
@@ -177,7 +180,7 @@ ion-modal {
           mask-size: contain;
           mask-repeat: no-repeat;
           mask-position: center;
-          background-color: var(--ion-color-primary-contrast);
+          background-color: var(--app-font-color-primary);
         }
       }
     }

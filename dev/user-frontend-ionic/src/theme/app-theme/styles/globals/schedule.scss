@@ -46,7 +46,7 @@ full-calendar {
         margin: .5rem 0;
         padding: .2rem .5rem !important;
         border-radius: var(--app-border-radius-5) !important;
-        background-color: var(--app-color-background-header-footer) !important;
+        background-color: var(--ion-color-primary) !important;
       }
 
       .fc-button-group {
@@ -188,23 +188,26 @@ full-calendar:has(.fc-timeGridWeek-view), full-calendar:has(.fc-dayGridMonth-vie
 
 //Month view specific style
 full-calendar:has(.fc-dayGridMonth-view) {
-  .fc-daygrid-day-top{
+  .fc-daygrid-day-top {
     justify-content: center;
     background-color: var(--app-font-color-primary-contrast) !important;
     padding: .3rem 0;
   }
-  .fc-daygrid-day-number{
+
+  .fc-daygrid-day-number {
     width: 1.75rem;
     text-align: center;
     height: 1.75rem;
     padding-top: 0.2rem;
     font-size: var(--app-text-4-size);
   }
-  td.fc-day-today .fc-daygrid-day-number{
+
+  td.fc-day-today .fc-daygrid-day-number {
     border: solid var(--ion-color-secondary) 2px;
     border-radius: var(--app-border-radius-5);
   }
-  .fc-daygrid-day{
+
+  .fc-daygrid-day {
     border: none !important;
   }
 }

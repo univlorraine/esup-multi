@@ -43,10 +43,6 @@ ion-content {
 
 .searchbar-row {
   margin: 0 1.25rem;
-  width: 90%;
-  /*position: fixed;
-  z-index: 15;
-  top: -1rem;*/
 }
 
 .sc-ion-searchbar-md-h{
@@ -123,7 +119,8 @@ app-service {
   background-color: var(--ion-color-highlight-new);
   margin: 0;
   top: -0.75rem;
-  left: 25%;
+  left: 50%;
+  transform: translateX(-50%);
   color: var(--app-font-color-primary) !important;
   font-family: QuicksandBold,sans-serif;
   border-radius: var(--app-border-radius-5);
