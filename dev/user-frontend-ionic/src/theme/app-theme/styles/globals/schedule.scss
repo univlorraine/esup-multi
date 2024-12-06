@@ -226,7 +226,7 @@ ion-app:has(app-schedule-list.ion-page-hidden) ion-modal:has(app-event-detail) {
 
   ion-content {
     --padding-top: 1rem;
-    background-color: var(--app-color-background-header-footer);
+    background-color: var(--ion-color-primary-shade);
 
     &::part(background) {
       background: transparent;
