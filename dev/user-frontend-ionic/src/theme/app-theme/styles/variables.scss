@@ -244,6 +244,7 @@
 
   /** Custom URCA **/
   --app-color-background-header-footer: #FFFFFF;
+  --app-color-background-modal-schedule: #FFFFFF;
   --app-color-underline-title: var(--ion-color-secondary);
   --app-color-primary-shade-fixed: #2C2C6A
 }
@@ -461,6 +462,7 @@ body.dark {
 
   /** Customs URCA **/
   --app-color-background-header-footer: var(--ion-color-primary);
+  --app-color-background-modal-schedule: var(--ion-color-primary-shade);
   --app-color-underline-title: var(--ion-color-primary);
 }
 
