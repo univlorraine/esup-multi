@@ -56,6 +56,7 @@ import { ClientProxy } from '@nestjs/microservices';
 import { AuthGuard } from '@nestjs/passport';
 import { concatMap, map } from 'rxjs';
 import * as infosJsonData from './infos.json';
+import * as clientInfosJson from './client-infos.json';
 import { ErrorsInterceptor } from './interceptors/errors.interceptor';
 import { AuthorizationHelper } from './security/authorization.helper';
 
@@ -731,6 +732,11 @@ export class AppController {
       version: infosJsonData.version,
     };
   }
+  @Get('/app-update-infos')
+  appUpdateInfos() {
+    return clientInfosJson;
+  }
+
   @Get('/health')
   mainCheckHealth() {
     return {

@@ -14,18 +14,23 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **(widgets)** : correction du problème de chargement du contenu sur les widgets au premier démarrage de l'application ou après authentification
 
 #### New features
+* **(app-update)** : Nouveau module permettant de vérifier si une mise à jour du client est disponible sur les stores et force éventuellement l'utilisateur à mettre à jour si des évolutions majeures empêchent le fonctionnement des anciennes versions
 * **(calendar)** : Il est désormais possible de choisir entre 2 affichages pour la widget des évènements du calendrier :
   * Liste verticale (list)
   * Slider horizontal (slider)
 * **(schedule)** : Il est désormais possible de choisir entre 2 affichages pour la widget des prochains cours à venir :
   * Liste verticale (list)
   * Slider horizontal (slider)
+* **(shared)** : Création d'un nouveau service **Alert** partagé, permettant de gérer l'affichage des messages d'alerte par le biais d'une file d'attente et par ordre de priorité
 
 ### Backend
 #### Bug fixes
 * **(auth)** : l'authentification transmet désormais l'IP du client au serveur CAS pour éviter le bannissement du microservice auth sur de trop nombreuses tentatives d'authentification en échec
 * **(maps)** : suppression du tracking du fichier map-data.json et ajout d'un fichier .dist avec des POI factices
 * **(statistics)** : prise en compte de la nouvelle uid de tracking à la place du Device Id pour la génération des statistiques d'usage
+
+#### New Features
+* **(main)** : une nouvelle route `/app-update-infos` a été ajoutée permettant de retourner les informations nécessaires au client pour le module de mise à jour `app-update`
 
 ### Autres
 * Mise à jour du framework [Ionic](https://ionic.io/docs) : Version 7 → Version 8
