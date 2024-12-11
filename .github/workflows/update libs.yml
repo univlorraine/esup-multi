@@ -1,4 +1,4 @@
-name: Update library list
+name: Check library list
 permissions:
   contents: write
   pull-requests: write
@@ -8,14 +8,15 @@ on:
     types: [ opened, synchronize ]
 
 jobs:
-  update-library-list:
+  check-library-list:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.head_ref }}
+          ref: ${{ github.event.pull_request.head.ref }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
 
       - name: Check if any package.json was modified
         uses: dorny/paths-filter@v3
@@ -41,21 +42,36 @@ jobs:
           chmod +x generateLibraryList.bash
           ./generateLibraryList.bash
 
-      - name: Add changes to Git
+      - name: Check for changes
+        id: diff
         if: steps.changes.outputs.packageJson == 'true'
         run: |
           git config core.fileMode false
+          git diff -w --ignore-blank-lines
+          echo "CHANGES=$(( $(git diff -w --ignore-blank-lines | wc -l) > 0 ? 1 : 0 ))" >> $GITHUB_OUTPUT
+
+      - name: Add changes to Git
+        if: steps.changes.outputs.packageJson == 'true' && steps.diff.outputs.CHANGES == 1 && github.event.pull_request.head.repo.full_name == github.repository
+        run: |
           git add -A
 
       - name: Commit changes
-        if: steps.changes.outputs.packageJson == 'true'
+        if: steps.changes.outputs.packageJson == 'true' && steps.diff.outputs.CHANGES == 1 && github.event.pull_request.head.repo.full_name == github.repository
         run: |
           git config --local user.name "GitHub Action"
           git config --local user.email "action@github.com"
           git commit -m "docs: update library list" || echo "No changes to commit"
 
       - name: Push changes
-        if: steps.changes.outputs.packageJson == 'true'
+        if: steps.changes.outputs.packageJson == 'true' && steps.diff.outputs.CHANGES == 1 && github.event.pull_request.head.repo.full_name == github.repository
         run: git push origin HEAD:${{ github.head_ref }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Fork  detected
+        if: steps.changes.outputs.packageJson == 'true' && steps.diff.outputs.CHANGES == 1 && github.event.pull_request.head.repo.full_name != github.repository
+        run: |
+          echo "La liste des dépendances doit être mise à jour."
+          echo "A cause d'une limitation de GitHub Actions, il est impossible de mettre à jour la liste des dépendances depuis un fork."
+          echo "Merci d'exécuter le script 'generateLibraryList.bash' de votre côté."
+          exit 1

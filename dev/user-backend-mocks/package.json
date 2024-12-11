@@ -1,6 +1,6 @@
 {
   "name": "user-backend-mocks",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Application de mocking des données utilisateurs a destination de l'application multi-tenant / INSA",
   "engines": {
     "node": ">=18"

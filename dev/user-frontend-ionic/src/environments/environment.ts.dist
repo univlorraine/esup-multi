@@ -41,6 +41,7 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import { AppUpdateModule } from '@multi/app-update';
 import { AuthModule } from '@multi/auth';
 import { CalendarModule } from '@multi/calendar';
 import { CardsPageModule } from '@multi/cards';
@@ -74,8 +75,12 @@ export const environment: any = {
   appTitle: 'Esup-Multi',
   appVersion: '1.0.0',
   enabledModules: [
+    AppUpdateModule,
     AuthModule,
-    CalendarModule.forRoot({ numberOfEventsLimit: 3 }),
+    CalendarModule.forRoot({
+      numberOfEventsLimit: 3,
+      display: 'list',
+    }),
     CardsPageModule.forRoot({ knownErrors: ['NO_PHOTO', 'NO_ACTIVE_CARD', 'UNPAID_FEES'] }),
     ChatbotModule.forRoot({ chatbotLogoRegex: /_chacha5/i }),
     ClockingModule,
@@ -108,7 +113,8 @@ export const environment: any = {
     ScheduleModule.forRoot({
       nextEventsWidget: {
         numberOfEventsLimit: 2,
-        numberOfDaysLimit: 7
+        numberOfDaysLimit: 7,
+        display: 'list'
       },
       previousWeeksInCache: 1,
       nextWeeksInCache: 2,

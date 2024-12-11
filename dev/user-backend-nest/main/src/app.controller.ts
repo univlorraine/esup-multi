@@ -56,6 +56,7 @@ import { ClientProxy } from '@nestjs/microservices';
 import { AuthGuard } from '@nestjs/passport';
 import { concatMap, map } from 'rxjs';
 import * as infosJsonData from './infos.json';
+import * as clientInfosJson from './client-infos.json';
 import { ErrorsInterceptor } from './interceptors/errors.interceptor';
 import { AuthorizationHelper } from './security/authorization.helper';
 
@@ -116,22 +117,28 @@ export class AppController {
   }
 
   @Post('/auth')
-  authenticate(@Body() body) {
+  authenticate(@Body() body, @Request() request) {
     return this.authClient.send(
       {
         cmd: 'authenticate',
       },
-      body,
+      {
+        ...body,
+        ip: request.ip,
+      },
     );
   }
 
   @Delete('/auth')
-  logout(@Body() body) {
+  logout(@Body() body, @Request() request) {
     return this.authClient.send(
       {
         cmd: 'logout',
       },
-      body,
+      {
+        body,
+        ip: request.ip,
+      },
     );
   }
 
@@ -187,12 +194,15 @@ export class AppController {
   }
 
   @Post('/sso-service-token')
-  requestSsoServiceToken(@Body() body) {
+  requestSsoServiceToken(@Body() body, @Request() request) {
     return this.authClient.send(
       {
         cmd: 'requestSsoServiceToken',
       },
-      body,
+      {
+        ...body,
+        ip: request.ip,
+      },
     );
   }
 
@@ -722,6 +732,11 @@ export class AppController {
       version: infosJsonData.version,
     };
   }
+  @Get('/app-update-infos')
+  appUpdateInfos() {
+    return clientInfosJson;
+  }
+
   @Get('/health')
   mainCheckHealth() {
     return {

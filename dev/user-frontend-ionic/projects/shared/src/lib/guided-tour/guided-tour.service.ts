@@ -43,7 +43,7 @@ import { Capacitor } from '@capacitor/core';
 import { OrientationType, ScreenOrientation } from '@capawesome/capacitor-screen-orientation';
 import { TranslateService } from '@ngx-translate/core';
 import { ShepherdService } from 'angular-shepherd';
-import { Observable } from 'rxjs';
+import { Observable, zip } from 'rxjs';
 import { filter, switchMap, take } from 'rxjs/operators';
 import { userIsAuthenticated$ } from '../auth/authenticated-user.repository';
 import { MenuItem } from '../navigation/menu.model';
@@ -57,6 +57,7 @@ import { isAnonymousTourViewed, isLoggedTourViewed, setAnonymousTourViewed, setL
 export class GuidedTourService {
 
   private isOnline$: Observable<boolean>;
+  private updateAlertActive: boolean = false;
 
   constructor(
     @Inject('environment')
@@ -85,18 +86,23 @@ export class GuidedTourService {
     this.shepherdService.confirmCancel = false;
   }
 
+  setUpdateAlertStatus(isActive: boolean) {
+    this.updateAlertActive = isActive;
+  }
+
   startGlobalTour() {
-    if (!this.environment.guidedTourEnabled) {
+    if (!this.environment.guidedTourEnabled || this.updateAlertActive) {
       return;
     }
 
-    this.isOnline$
-      .pipe(
+    zip(
+      this.isOnline$.pipe(
         filter(isOnline => isOnline),
         take(1),
-        switchMap(() => userIsAuthenticated$.pipe(take(1)))
-      )
-      .subscribe(userIsAuthenticated => {
+        switchMap(() => userIsAuthenticated$.pipe(take(1))),
+      ),
+      this.translateService.get('GUIDED_TOUR') // on ne le récupère pas, mais permet d'attendre que la traduction soit chargée, sinon .instant() ne fonctionne pas à chaque fois
+    ).subscribe(([userIsAuthenticated]) => {
         if (
           !isLoggedTourViewed() &&
           !isAnonymousTourViewed() &&

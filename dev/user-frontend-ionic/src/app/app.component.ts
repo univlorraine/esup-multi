@@ -38,7 +38,7 @@
  */
 
 import { DOCUMENT } from '@angular/common';
-import { Component, Inject, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { Component, DestroyRef, inject, Inject, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { FirebaseMessaging } from '@capacitor-firebase/messaging';
 import { App } from '@capacitor/app';
 import { Capacitor, PluginListenerHandle } from '@capacitor/core';
@@ -50,13 +50,14 @@ import { ModalController, Platform, PopoverController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import {
   currentLanguage$, features$, FeaturesService, isDarkTheme$, isFeatureStoreInitialized$, NavigationService,
-  NotificationsService, NetworkService, PageLayout, PageLayoutService, setIsDarkTheme, themeRepoInitialized$,
-  userHadSetThemeInApp, userHadSetThemeInApp$
+  NotificationsService, NetworkService, PageLayout, PageLayoutService, setIsDarkTheme, StatisticsService,
+  themeRepoInitialized$, userHadSetThemeInApp, userHadSetThemeInApp$
 } from '@multi/shared';
 import { initializeApp } from 'firebase/app';
-import { combineLatest, Observable, of, Subscription } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { combineLatest, Observable, of } from 'rxjs';
+import { distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
 import { Title } from '@angular/platform-browser';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-root',
@@ -64,15 +65,14 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['../theme/app-theme/styles/app/app.component.scss'],
 })
 export class AppComponent implements OnInit, OnDestroy {
-
   public languages: Array<string> = [];
   public currentPageLayout$: Observable<PageLayout>;
   public isOnline$: Observable<boolean>;
   public isNothingToShow$: Observable<boolean>;
-  private featuresIsEmpty$: Observable<boolean>;
-  private subscriptions: Subscription[] = [];
   private backButtonListener: Promise<PluginListenerHandle>;
   private appResumeListener: Promise<PluginListenerHandle>;
+  private destroyRef = inject(DestroyRef);
+  private prefersDark: MediaQueryList;
 
   constructor(
     @Inject('environment')
@@ -88,149 +88,152 @@ export class AppComponent implements OnInit, OnDestroy {
     private networkService: NetworkService,
     private featuresService: FeaturesService,
     private notificationsService: NotificationsService,
-    private titleService: Title
+    private statisticsService: StatisticsService,
+    private titleService: Title,
   ) {
-    currentLanguage$.subscribe((language) => {
-      document.documentElement.lang = language || environment.defaultLanguage;
-    });
-
-    this.featuresIsEmpty$ = features$.pipe(
-      map((val) => val.length === 0)
-    );
-
-    this.isNothingToShow$ = isFeatureStoreInitialized$.pipe(
-      switchMap(isInitialized => {
-        if (isInitialized) {
-          return combineLatest([
-            this.featuresIsEmpty$,
-            this.networkService.isOnline$
-          ]);
-        } else {
-          return of([null, null]);
-        }
-      }),
-      switchMap(([featuresIsEmpty, isOnline]) => {
-        const nothingToShowButLoadFeatures = featuresIsEmpty && isOnline;
-        const isNothingToShow = (featuresIsEmpty === true || featuresIsEmpty === null) && (isOnline === false || isOnline === null);
-
-        if (nothingToShowButLoadFeatures) {
-          return this.featuresService.loadAndStoreFeatures().pipe(
-            map(() => true)
-          );
-        } else {
-          return of(isNothingToShow);
-        }
-      }));
-
-    this.isNothingToShow$.subscribe();
-
-    SplashScreen.show({
-      showDuration: 1500,
-      autoHide: true,
-      fadeInDuration: 500
-    });
-
-    // Define available languages in app
-    this.languages = this.environment.languages;
-    this.translateService.addLangs(this.languages);
-
-    this.currentPageLayout$ = this.pageLayoutService.currentPageLayout$;
-
-    this.platform.ready().then(() => {
-      if (!Capacitor.isNativePlatform()) {
-        return;
-      }
-
-      StatusBar.setStyle({ style: Style.Dark });
-    });
+    this.initializeApp();
   }
 
   ngOnInit() {
     this.titleService.setTitle(this.environment.appTitle);
-    this.backButtonListener = App.addListener('backButton', () => {
-      this.popoverController.getTop().then(popover => {
-        if (popover) {
-          popover.dismiss();
-          return;
-        }
-        this.modalController.getTop().then(modal => {
-          if (modal) {
-            modal.dismiss();
-            return;
-          }
-          this.navigationService.navigateBack();
-        });
-      });
-    });
-
-    // reload notifications when app is resumed (back to foreground)
-    this.appResumeListener = App.addListener('resume', () => {
-      this.notificationsService.loadNotifications(0, 10).subscribe();
-    });
-
-    // apply language saved in persistent state
-    this.subscriptions.push(currentLanguage$
-      .subscribe(language => this.translateService.use(language || this.environment.defaultLanguage))
-    );
-
-    // apply theme saved in persistent state or if is not in the system setting of the user's device
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-    prefersDark.removeEventListener('change', (mediaQuery) => this.toggleOSDarkTheme(mediaQuery.matches));
-    // Listen for changes to the prefers-color-scheme media query (from system setting of the user)
-    prefersDark.addEventListener('change', (mediaQuery) => this.toggleOSDarkTheme(mediaQuery.matches));
-
-    themeRepoInitialized$.pipe(
-      switchMap(isInitialized => isInitialized ? combineLatest([isDarkTheme$, userHadSetThemeInApp$])
-        : of(null)),
-    ).subscribe(([isDarkTheme, userHadSetThemeInApplication]) => {
-      if (userHadSetThemeInApplication === false && prefersDark.matches) {
-        isDarkTheme = true;
-        setIsDarkTheme(true);
-      }
-
-      if (userHadSetThemeInApplication === false && !prefersDark.matches) {
-        isDarkTheme = false;
-        setIsDarkTheme(false);
-      }
-
-      this.toggleDarkTheme(isDarkTheme);
-    });
-
-    this.initializeFirebase();
+    this.initializeBackButton();
+    this.initializeAppResume();
+    this.initializeTheme();
     this.handleBadge();
-  }
 
-  toggleDarkTheme(isDarkTheme: boolean): void {
-    const body = document.body;
-    if (isDarkTheme) {
-      this.renderer.addClass(body, 'dark');
-    } else {
-      this.renderer.removeClass(body, 'dark');
+    if (!Capacitor.isNativePlatform()) {
+      this.initializeFirebase();
     }
   }
 
-  toggleOSDarkTheme(shouldAdd) {
+  ngOnDestroy(): void {
+    this.backButtonListener.then((listener) => listener.remove());
+    this.appResumeListener.then((listener) => listener.remove());
+    this.prefersDark.removeEventListener('change', this.handleColorSchemeChange);
+  }
+
+  private initializeBackButton(): void {
+    this.backButtonListener = App.addListener('backButton', this.handleBackButton.bind(this));
+  }
+
+  private async handleBackButton(): Promise<void> {
+    const popover = await this.popoverController.getTop();
+    if (popover) {
+      await popover.dismiss();
+      return;
+    }
+    const modal = await this.modalController.getTop();
+    if (modal) {
+      await modal.dismiss();
+      return;
+    }
+    this.navigationService.navigateBack();
+  }
+
+  private initializeAppResume(): void {
+    // reload notifications when app is resumed (back to foreground)
+    this.appResumeListener = App.addListener('resume', () =>
+      this.notificationsService.loadNotifications(0, 10).subscribe()
+    );
+  }
+
+  private initializeTheme(): void {
+    this.prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+    this.prefersDark.addEventListener('change', this.handleColorSchemeChange);
+
+    themeRepoInitialized$.pipe(
+      filter((isInitialized: boolean) => isInitialized),
+      switchMap(() => combineLatest([isDarkTheme$, userHadSetThemeInApp$])),
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe(([isDarkTheme, userHadSetThemeInApplication]) => {
+      if (!userHadSetThemeInApplication) {
+        isDarkTheme = this.prefersDark.matches;
+        setIsDarkTheme(isDarkTheme);
+      }
+      this.toggleDarkTheme(isDarkTheme);
+    });
+  }
+
+  private handleColorSchemeChange(mediaQuery: MediaQueryListEvent): void {
     if (!userHadSetThemeInApp()) {
+      const shouldAdd = mediaQuery.matches;
       setIsDarkTheme(shouldAdd);
       this.toggleDarkTheme(shouldAdd);
     }
   }
 
-  ngOnDestroy(): void {
-    this.subscriptions.forEach(s => s.unsubscribe());
-    this.backButtonListener.then((listener) => {
-      listener.remove();
+  private toggleDarkTheme(isDarkTheme: boolean): void {
+    this.renderer[isDarkTheme ? 'addClass' : 'removeClass'](document.body, 'dark');
+  }
+
+  private initializeApp(): void {
+    this.initializeLanguage();
+    this.initializeEmptyStateDetection();
+    this.initializePageLayout();
+    this.initializeSplashScreen();
+    this.initializeStatusBar();
+    this.statisticsService.checkAndGenerateStatsUid();
+  }
+
+  private initializeLanguage(): void {
+    // Charge les langues disponibles à partir du paramètre 'language' dans le fichier d'environnement
+    this.languages = this.environment.languages;
+    this.translateService.addLangs(this.languages);
+    // Observable permettant de mettre à jour le code language dans l'entête html et d'appliquer la langue choisie
+    currentLanguage$.pipe(
+      distinctUntilChanged(),
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe(language => {
+      // Mise à jour du langage dans l'application et dans l'attribut lang de l'élément HTML
+      this.translateService.use(language || this.environment.defaultLanguage);
+      this.document.documentElement.lang = language || this.environment.defaultLanguage;
     });
-    this.appResumeListener.then((listener) => {
-      listener.remove();
+  }
+
+  private initializeEmptyStateDetection(): void {
+    const featuresIsEmpty$ : Observable<boolean> = features$.pipe(map(val => val.length === 0));
+    this.isNothingToShow$ = isFeatureStoreInitialized$.pipe(
+      filter((isInitialized: boolean) => isInitialized),
+      switchMap(() => combineLatest([featuresIsEmpty$, this.networkService.isOnline$])),
+      switchMap(([featuresIsEmpty, isOnline]) => {
+        if (featuresIsEmpty && isOnline) {
+          return this.featuresService.loadAndStoreFeatures().pipe(map(() => false));
+        }
+        return of(featuresIsEmpty || !isOnline);
+      }),
+      distinctUntilChanged(),
+      takeUntilDestroyed(this.destroyRef)
+    );
+    this.isNothingToShow$.subscribe();
+  }
+
+  private initializePageLayout(): void {
+    this.currentPageLayout$ = this.pageLayoutService.currentPageLayout$;
+  }
+
+  private initializeSplashScreen(): void {
+    SplashScreen.show({
+      showDuration: 1500,
+      autoHide: true,
+      fadeInDuration: 500
+    });
+  }
+
+  private initializeStatusBar(): void {
+    if (!Capacitor.isNativePlatform()) {
+      return;
+    }
+    this.platform.ready().then(() => {
+      StatusBar.setStyle({ style: Style.Dark });
     });
   }
 
   public async initializeFirebase(): Promise<void> {
-    if (Capacitor.isNativePlatform()) {
-      return;
+    try {
+      initializeApp(this.environment.firebase);
+    } catch (error) {
+      console.error('Error initializing Firebase:', error);
     }
-    initializeApp(this.environment.firebase);
   }
 
   /**
@@ -239,27 +242,18 @@ export class AppComponent implements OnInit, OnDestroy {
    * with the number of notifications in notification center
    */
   private async handleBadge(): Promise<void> {
-    const isIos = (await Device.getInfo()).platform === 'ios';
-    const notSupported = !(await Badge.isSupported());
-    if (notSupported || !isIos) { // The badge is already well handled on android, no need to do it manually
+    const deviceInfo = await Device.getInfo();
+    if (deviceInfo.platform !== 'ios' || !(await Badge.isSupported())) {
       return;
     }
 
-    // Will be called when the user launches the app, then each time the app enters or exits background
     const fixBadgeCount = async () => {
       const notificationList = await FirebaseMessaging.getDeliveredNotifications();
-      return Badge.set({
-        count: notificationList.notifications.length
-      });
+      return Badge.set({ count: notificationList.notifications.length });
     };
 
-    this.subscriptions.push(this.platform.pause.subscribe(async () => {
-      await fixBadgeCount();
-    }));
-
-    this.subscriptions.push(this.platform.resume.subscribe(async () => {
-      await fixBadgeCount();
-    }));
+    this.platform.pause.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(fixBadgeCount);
+    this.platform.resume.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(fixBadgeCount);
 
     await fixBadgeCount();
   }

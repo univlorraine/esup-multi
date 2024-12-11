@@ -37,13 +37,14 @@
  * termes.
  */
 
-import { AfterViewInit, ChangeDetectorRef, Component, Input, OnDestroy } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, Inject, Input, OnDestroy, TemplateRef, ViewChild } from '@angular/core';
 import { CompleteLocalDatePipe, ThemeService } from '@multi/shared';
 import { Observable, Subscription } from 'rxjs';
 import { finalize, map, take } from 'rxjs/operators';
 import { Event } from '../../schedule.repository';
 import { ScheduleService } from '../../schedule.service';
 import { NextEventsService } from './next-events.service';
+import { SCHEDULE_CONFIG, ScheduleModuleConfig } from '../../schedule.config';
 
 @Component({
   selector: 'app-schedule-widget-next-events',
@@ -53,6 +54,8 @@ import { NextEventsService } from './next-events.service';
 export class NextEventsComponent implements OnDestroy, AfterViewInit {
 
   @Input() widgetColor: string;
+  @ViewChild('list') list: TemplateRef<any>;
+  @ViewChild('slider') slider: TemplateRef<any>;
 
   public isLoading = false;
   public nextEvents$: Observable<Event[]>;
@@ -65,7 +68,8 @@ export class NextEventsComponent implements OnDestroy, AfterViewInit {
     private scheduleService: ScheduleService,
     private completeLocalDatePipe: CompleteLocalDatePipe,
     private themeService: ThemeService,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    @Inject(SCHEDULE_CONFIG) private config: ScheduleModuleConfig
   ) {
     this.nextEvents$ = this.nextEventsService.getNextEvents$().pipe();
 
@@ -110,6 +114,10 @@ export class NextEventsComponent implements OnDestroy, AfterViewInit {
 
   ngOnDestroy() {
     this.nextEventsSubscription.unsubscribe();
+  }
+
+  getTemplateRef(): TemplateRef<any> {
+    return this[this?.config.nextEventsWidget.display];
   }
 }
 

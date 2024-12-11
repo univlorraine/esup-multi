@@ -39,12 +39,12 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { Device } from '@capacitor/device';
 import { combineLatest, from, Observable, of } from 'rxjs';
 import { catchError, switchMap, take } from 'rxjs/operators';
 import { getAuthToken } from '../auth/auth.repository';
 import { NetworkService } from '../network/network.service';
 import { Capacitor } from '@capacitor/core';
+import { statsUid$, updateStatsUid } from './statistics.repository';
 
 interface UserActionRequestData {
   authToken: string;
@@ -91,13 +91,13 @@ export class StatisticsService {
   private postUserActionStatistic(userActionDetails: UserActionDetails): Observable<void> {
     const url = `${this.environment.apiEndpoint}/statistics/user-action`;
 
-    return combineLatest([getAuthToken(), from(Device.getId()), from(this.networkService.getConnectionStatus())]).pipe(
+    return combineLatest([getAuthToken(), statsUid$, from(this.networkService.getConnectionStatus())]).pipe(
       take(1),
-      switchMap(([authToken, deviceId, connectionStatus]) => {
+      switchMap(([authToken, statsUid, connectionStatus]) => {
         const data: UserActionRequestData = {
           authToken,
           data: {
-            duid: deviceId.identifier,
+            duid: statsUid,
             action: userActionDetails.action,
             functionality: userActionDetails.functionality,
             platform: Capacitor.getPlatform(),
@@ -108,6 +108,26 @@ export class StatisticsService {
         return this.http.post<void>(url, data);
       }),
       catchError(() => of(null))
+    );
+  }
+
+  // Generate a unique id for stats usage and store it in Local Storage
+  public async checkAndGenerateStatsUid() {
+    statsUid$.pipe(take(1)).subscribe((uid) => {
+      if (!uid) {
+        updateStatsUid(this.uuid4());
+      }
+    });
+  }
+
+  private uuid4() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(
+      /[xy]/g,
+      function (c) {
+        const r = (Math.random() * 16) | 0,
+          v = c === 'x' ? r : (r & 0x3) | 0x8;
+        return v.toString(16);
+      },
     );
   }
 }
