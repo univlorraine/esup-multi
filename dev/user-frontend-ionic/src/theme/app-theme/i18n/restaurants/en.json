@@ -1,0 +1,11 @@
+{
+    "KILOMETERS": "km",
+    "CLOSED": "Closed",
+    "NO_DATA": "No restaurants found",
+    "MENUS":{
+        "NO_DATA": "No menus available",
+        "DEFAULT_TOP_BAR_TITLE": "Menus"
+    },
+    "ADD_TO_FAVORITES": "Add '{{name}}' to favorites",
+    "REMOVE_FROM_FAVORITES": "Remove '{{name}}' from favorites"
+}

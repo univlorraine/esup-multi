@@ -1,0 +1,318 @@
+/*!
+ * Copyright ou © ou Copr. Université de Lorraine, (2022)
+ *
+ * Direction du Numérique de l'Université de Lorraine - SIED
+ *  (dn-mobile-dev@univ-lorraine.fr)
+ * JNESIS (contact@jnesis.com)
+ *
+ * Ce logiciel est un programme informatique servant à rendre accessible
+ * sur mobile divers services universitaires aux étudiants et aux personnels
+ * de l'université.
+ *
+ * Ce logiciel est régi par la licence CeCILL 2.1, soumise au droit français
+ * et respectant les principes de diffusion des logiciels libres. Vous pouvez
+ * utiliser, modifier et/ou redistribuer ce programme sous les conditions
+ * de la licence CeCILL telle que diffusée par le CEA, le CNRS et INRIA
+ * sur le site "http://cecill.info".
+ *
+ * En contrepartie de l'accessibilité au code source et des droits de copie,
+ * de modification et de redistribution accordés par cette licence, il n'est
+ * offert aux utilisateurs qu'une garantie limitée. Pour les mêmes raisons,
+ * seule une responsabilité restreinte pèse sur l'auteur du programme, le
+ * titulaire des droits patrimoniaux et les concédants successifs.
+ *
+ * À cet égard, l'attention de l'utilisateur est attirée sur les risques
+ * associés au chargement, à l'utilisation, à la modification et/ou au
+ * développement et à la reproduction du logiciel par l'utilisateur étant
+ * donné sa spécificité de logiciel libre, qui peut le rendre complexe à
+ * manipuler et qui le réserve donc à des développeurs et des professionnels
+ * avertis possédant des connaissances informatiques approfondies. Les
+ * utilisateurs sont donc invités à charger et à tester l'adéquation du
+ * logiciel à leurs besoins dans des conditions permettant d'assurer la
+ * sécurité de leurs systèmes et/ou de leurs données et, plus généralement,
+ * à l'utiliser et à l'exploiter dans les mêmes conditions de sécurité.
+ *
+ * Le fait que vous puissiez accéder à cet en-tête signifie que vous avez
+ * pris connaissance de la licence CeCILL 2.1, et que vous en avez accepté les
+ * termes.
+ */
+
+ion-icon {
+  color: var(--ion-color-icon-primary-contrast);
+}
+
+.favorite-icon {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  padding: 0.125rem;
+  background-color: var(--ion-color-primary-contrast);
+  border-radius: 50%;
+  color: var(--ion-color-primary);
+}
+
+.pin {
+  padding-top: 8%;
+  color: var(--ion-color-medium-light);
+}
+
+.description {
+  width: 100%;
+  //margin-top: 0.3rem;
+}
+
+ion-item {
+  --background: transparent;
+  --border-color: var(--app-border-color-secondary);
+}
+
+ion-list {
+  background: transparent;
+}
+
+// Custom URCA style
+ion-item {
+  border-radius: var(--app-border-radius-5) !important;
+  border: none !important;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.10);
+  max-height: 17rem;
+  max-width: 46rem;
+  width: 100%;
+  margin: 1rem;
+  background-color: var(--app-color-background-header-footer);
+
+  &::part(native) {
+    height: 100%;
+    border: none;
+    --inner-border-width: 0;
+    padding-left: 0;
+  }
+
+  ion-grid {
+    padding: 0;
+  }
+
+  ion-row ion-col {
+    width: auto !important;
+    max-width: none !important;
+    flex: auto !important;
+
+    &:first-child {
+      max-width: 6.9rem !important;
+      max-height: 17rem;
+      padding: 0.44rem;
+
+      ion-img::part(image) {
+        border-radius: var(--app-border-radius-5);
+        object-fit: cover;
+        height: 7.125rem;
+        width: 100%;
+      }
+    }
+  }
+
+  ion-col:nth-child(2).ion-text-start {
+    height: 8.125rem;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    margin: 0;
+    padding: 0.75rem 0;
+    max-width: calc(100% - 6.9rem) !important;
+
+    h2 {
+      font-size: var(--app-text-4-size) !important;
+      font-family: QuicksandBold, serif !important;
+      text-transform: none;
+    }
+
+    ion-label.description p {
+      font-size: var(--app-text-5-size) !important;
+      color: var(--app-font-color-primary);
+      max-height: 2.9rem;
+      overflow-y: clip;
+      text-transform: initial;
+      line-height: normal;
+    }
+  }
+
+  ion-row {
+    max-height: 17rem;
+    max-width: 46rem;
+
+    &::before {
+      -webkit-mask-image: url("/assets/icons/navigation/arrow-right.svg");
+      mask-image: url("/assets/icons/navigation/arrow-right.svg");
+      mask-size: contain;
+      mask-repeat: no-repeat;
+      mask-position: center;
+      color: var(--ion-color-primary-contrast);
+      background-color: var(--ion-color-primary-contrast);
+      content: "";
+      margin-bottom: -3px;
+      border-radius: var(--app-border-radius-5);
+      font-size: var(--app-text-5-size);
+      padding: .125rem .5rem;
+      position: absolute;
+      bottom: .75rem;
+      right: .75rem;
+      z-index: 1;
+      height: .75rem;
+    }
+
+    &::after {
+      content: "voir le menu";
+      background-color: var(--ion-color-primary);
+      border-radius: var(--app-border-radius-5);
+      font-size: var(--app-text-5-size);
+      color: var(--ion-color-primary-contrast);
+      padding: .125rem 1.5rem .125rem .5rem;
+      position: absolute;
+      bottom: .5rem;
+      right: .5rem;
+    }
+
+    ion-text {
+      display: none;
+    }
+
+    ion-button.ion-activated {
+      --background-focused: transparent;
+      --background-hover: transparent;
+      --background-focused-opacity: 0;
+      --background-hover-opacity: 0;
+    }
+
+    ion-button {
+      min-height: 1.5rem;
+      width: 1.5rem;
+      background-color: var(--ion-color-primary);
+      padding: 0;
+      margin: 0;
+      border-radius: var(--app-border-radius-5);
+      --background-hover: transparent;
+      --background-hover-opacity: 0;
+
+      ion-icon {
+        color: var(--app-font-color-primary-contrast) !important;
+        padding: 0 !important;
+        position: absolute;
+        height: 1.75rem;
+        width: 1.75rem;
+        margin: 0 !important;
+        right: -12px;
+      }
+    }
+  }
+
+  ion-label.opening {
+    position: absolute;
+    bottom: 0;
+    left: 6.9rem;
+    max-width: 6.3rem;
+    height: 3.5rem;
+    align-content: end;
+    padding-bottom: 0.5rem;
+
+    h2 {
+      font-family: QuicksandBold, sans-serif !important;
+      height: 1.75rem;
+      align-content: end;
+    }
+  }
+}
+
+//Responsive for 1000, 500, 350, 250px screens
+ion-list > ion-list {
+  display: grid;
+  justify-items: center;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-column-gap: 1rem;
+  padding: 0 1rem;
+  @media screen and (max-width: 1000px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    ion-item {
+      ion-label.opening {
+        max-width: none;
+        bottom: 1.5rem;
+        left: 7rem;
+      }
+
+      ion-row ion-col {
+        &:first-child {
+          ion-img::part(image) {
+            height: 9rem;
+          }
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 500px) {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    ion-item ion-row ion-col {
+      &:first-child {
+        ion-img::part(image) {
+          height: 7.125rem;
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 350px) {
+    ion-item {
+      ion-row ion-col {
+        &:first-child {
+          ion-img::part(image) {
+            height: 9rem;
+          }
+        }
+
+        &:nth-child(2).ion-text-start {
+          height: 7rem;
+          width: 100% !important;
+          margin-bottom: 3rem;
+
+          ion-label.description p {
+            max-height: 3rem;
+          }
+        }
+      }
+    }
+
+  }
+  @media screen and (max-width: 250px) {
+    ion-item {
+      ion-label.opening {
+        left: .5rem;
+      }
+
+      ion-row ion-col {
+        width: 100% !important;
+        max-width: none !important;
+
+        &:first-child {
+          padding: 0;
+
+          .favorite-icon {
+            top: 0.75rem;
+            right: -0.25rem;
+            z-index: 1;
+          }
+
+          ion-img {
+            display: none;
+          }
+        }
+
+        &:nth-child(2).ion-text-start {
+          padding-left: 0.5rem;
+          height: auto;
+          max-width: none !important;
+
+          ion-label:first-child {
+            margin-right: 1.5rem;
+          }
+        }
+      }
+    }
+  }
+}

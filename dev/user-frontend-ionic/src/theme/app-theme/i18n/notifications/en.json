@@ -1,0 +1,29 @@
+{
+    "MENU": "Notifications",
+    "NO_DATA": "No new notifications",
+    "END_OF_NOTIFICATIONS": "End of notifications",
+    "LOAD_MORE_ERROR": "Error loading notifications",
+    "FILTERS": "Filters",
+    "REMOVE_FROM_FILTERS": "Remove '{{channel}}' from filters",
+    "OPEN_MENU": "Show available actions for this notification",
+    "CLOSE": "Close",
+    "SETTINGS": {
+        "TITLE": "Manage my alerts",
+        "DESCRIPTION": "Activate/Deactivate the broadcast channels for which I want to receive alerts"
+    },
+    "UNSUBSCRIBE_TO_CHANNEL": "Don't alert me to incoming channel messages",
+    "SUBSCRIBE_TO_CHANNEL": "Reactivate alert to incoming channel messages",
+    "DELETE": "Delete",
+    "DELETE_THIS_NOTIFICATION": "Delete this notification",
+    "LOAD_MORE": "Load more",
+    "LEARN_MORE": "Learn more",
+    "NAVIGATE_APP_PAGE": "Navigate to the relevant page",
+    "ALERT": {
+        "DELETED": "Notification deleted",
+        "CHANNEL": {
+            "UNSUBSCRIBED": "You are unsubscribed from '{channel}' channel",
+            "SUBSCRIBED": "You have subscribed to '{channel}' channel"
+        }
+    }
+}
+

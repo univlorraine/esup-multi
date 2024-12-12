@@ -1,0 +1,48 @@
+{
+  "NO_DATA": "No data available",
+  "NO_EVENTS": "No events in your schedule",
+  "NO_EVENTS_THIS_DAY": "No events on this date.",
+  "SEE_GROUPS": "See groups",
+  "HIDE_GROUPS": "Hide groups",
+  "COURSE_URL_TEXT": "Link to the events",
+  "CLOSE": "Close",
+  "HIDE_SIMILAR_COURSES": "Hide similar events",
+  "SHOW_SIMILAR_COURSES": "Show similar events",
+  "REQUEST_ERROR": {
+    "BEFORE": "Please try again later. An error occurred while fetching events before",
+    "AFTER": "Please try again later. An error occurred while fetching events after"
+  },
+  "VIEW_TYPE": {
+    "MONTH": "Month",
+    "WEEK": "Week",
+    "DAY": "Day",
+    "LIST": "List"
+  },
+  "SELECT_PLANNING": {
+    "TITLE": "Filter",
+    "SUBTITLE": "What do you want to show in your calendar?",
+    "CANCEL": "",
+    "VALIDATE": "",
+    "HIDDEN_COURSE": "Hidden events",
+    "NO_PLANNING": "No schedule allocated for this period"
+  },
+  "CALENDAR": {
+    "CLOSE": "Close",
+    "TODAY_ABBREVIATION": "Back to today"
+  },
+  "LIST": {
+    "SEE_MORE": "See more"
+  },
+  "MANAGEMENT": {
+    "TITLE": "View schedule as...",
+    "AS_USER_LABEL": "Schedule for",
+    "USERNAME_FORM_LABEL": "Login or Student code",
+    "VALIDATE_FORM_BUTTON": "Validate",
+    "QUIT": "Quit management mode"
+  },
+  "WIDGET": {
+    "NEXT_EVENTS": {
+      "NO_EVENTS": "No events soon"
+    }
+  }
+}
