@@ -55,8 +55,11 @@ ion-card {
 }
 
 .feature-title {
-  padding: 1rem;
-  padding-bottom: 0.2rem;
+  padding: 1rem 1rem 0.2rem;
+
+  app-custom-icon {
+    vertical-align: text-top;
+  }
 }
 
 .light-font-color{

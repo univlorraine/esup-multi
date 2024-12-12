@@ -57,4 +57,9 @@
       color: var(--ion-color-font-primary);
     }
   }
+
+  app-custom-icon {
+    // apply the same style as ion-icon
+    margin-inline-end: 32px;
+  }
 }

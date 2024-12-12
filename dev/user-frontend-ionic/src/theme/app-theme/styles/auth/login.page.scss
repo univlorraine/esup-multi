@@ -41,6 +41,12 @@ ion-item {
   --background: transparent;
 }
 
+ion-input {
+  --border-color: var(--ion-color-medium-light-tint);
+  --highlight-color: var(--app-font-color-primary);
+  --highlight-color-valid: var(--app-font-color-primary);
+}
+
 .input-label {
   padding-bottom: 10px;
   color: var(--app-font-color-primary) !important;

@@ -47,6 +47,15 @@ ion-icon {
 
 ion-item {
   --background: transparent;
+  --border-color: var(--ion-color-medium-light-tint);
+}
+
+ion-list {
+  background: transparent;
+}
+
+ion-input {
+  --highlight-color: var(--app-font-color-primary);
 }
 
 .input-label {
