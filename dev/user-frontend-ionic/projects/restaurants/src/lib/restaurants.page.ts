@@ -44,7 +44,7 @@ import { NetworkService } from '@multi/shared';
 import { getDistance } from 'geolib';
 import { combineLatest, from, Observable, of } from 'rxjs';
 import { catchError, map, take, tap } from 'rxjs/operators';
-import { favoriteRestaurantId$, RestaurantOpening, restaurants$, setFavoriteRestaurant } from './restaurants.repository';
+import { favoritesRestaurantsIds$, RestaurantOpening, restaurants$, setFavoriteRestaurant, unsetFavoriteRestaurant } from './restaurants.repository';
 import { RestaurantsService } from './restaurants.service';
 
 export interface PositionDto {
@@ -96,8 +96,8 @@ export class RestaurantsPage implements OnInit {
     setFavoriteRestaurant(restaurantId);
   }
 
-  unsetFavoriteRestaurant() {
-    setFavoriteRestaurant(null);
+  unsetFavoriteRestaurant(restaurantId: number) {
+    unsetFavoriteRestaurant(restaurantId);
   }
 
   navigateToRestaurantMenus(restaurantId: number) {
@@ -131,9 +131,9 @@ export class RestaurantsPage implements OnInit {
     this.restaurants$ = combineLatest([
       restaurants$,
       this.getMyCurrentPosition(),
-      favoriteRestaurantId$
+      favoritesRestaurantsIds$
     ]).pipe(
-      map(([restaurants, myPosition, favoriteRestaurantId]) => {
+      map(([restaurants, myPosition, favoritesRestaurantsIds]) => {
         const restaurantsSortedByDistance = restaurants
           // Restaurant from store to RestaurantDto to display
           .map(restaurant => {
@@ -149,7 +149,7 @@ export class RestaurantsPage implements OnInit {
               shortDesc: restaurant.shortDesc,
               opening: restaurant.opening,
               distance,
-              favorite: restaurant.id === favoriteRestaurantId
+              favorite: favoritesRestaurantsIds.includes(restaurant.id)
             };
           })
           // sort by distance
