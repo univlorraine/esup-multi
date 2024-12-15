@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Injectable } from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { distinctUntilChanged, filter, map, shareReplay } from 'rxjs/operators';
 import { MenuItemLinkType, MenuItemRouterLink } from './menu.model';
@@ -58,12 +58,15 @@ export class PageLayoutService {
   public currentPageLayout$: Observable<PageLayout>;
   public currentPageTitle$ = new BehaviorSubject<PageTitle>(null);
   public showCurrentPageHeader$ = new BehaviorSubject<boolean>(true);
+  private readonly forceFullLayoutFeatures: [string];
 
   constructor(
     private navigationService: NavigationService,
     private menuService: MenuService,
+    @Inject('environment')
+    private environment: any
   ) {
-
+    this.forceFullLayoutFeatures = this.environment.forceFullLayoutFeatures ?? [];
     this.currentPageLayout$ = combineLatest([
       this.navigationService.currentRouterLink$.pipe(
         filter(routerLink => routerLink !== '/'),
@@ -84,7 +87,7 @@ export class PageLayoutService {
           .filter(menuItem => menuItem.link.type === MenuItemLinkType.router)
           .map(menuItem => menuItem.link as MenuItemRouterLink)
           .find(link => routerLink.startsWith(link.routerLink))
-          ? 'tabs' as PageLayout
+          ? this.hasForceFullLayout(routerLink)
           : 'full' as PageLayout
       ),
       shareReplay(1)
@@ -118,5 +121,10 @@ export class PageLayoutService {
         translated: menuItem.type === 'dynamic'
       }))
     ).subscribe(this.currentPageTitle$);
+  }
+
+  // This method should return true if the feature is inside environment variable forceFullLayoutFeatures
+  hasForceFullLayout(feature: string): PageLayout {
+    return this.forceFullLayoutFeatures.some(f => feature.includes(f)) ? 'full' as PageLayout : 'tabs' as PageLayout;
   }
 }
