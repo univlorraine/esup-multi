@@ -92,6 +92,10 @@ export class NavigationService {
     this.router.navigateByUrl(previousUrl, { replaceUrl: true});
   }
 
+  public canGoBack() {
+    return this.history.length > 1;
+  }
+
   navigateToAuth() {
     this.router.navigateByUrl('/auth');
   }
