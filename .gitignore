@@ -13,3 +13,5 @@ node_modules/
 /env/*
 !/env/local
 /env/local/docker/directus/mysql-data/
+/env/local/docker/wordpress/mysql-data/
+/env/local/docker/wordpress/wordpress/
