@@ -308,6 +308,22 @@ export class ScheduleStoreManager {
           )
         ));
   }
+
+  getPlanningLabelByEventId(eventId: string): string | null {
+    let schedulePlannings: Planning[] = [];
+
+    this.schedule$.subscribe({
+      next(value) {
+        schedulePlannings = value.plannings;
+      }
+    });
+    console.log(schedulePlannings);
+    const planning = schedulePlannings.find(planning =>
+      planning.events?.some(event => event.id === eventId)
+    );
+    return planning ? planning.label : null;
+  }
+
 }
 
 // Store pour l'EDT de l'utilisateur
