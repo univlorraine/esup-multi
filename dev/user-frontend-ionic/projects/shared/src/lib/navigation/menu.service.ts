@@ -38,7 +38,6 @@
  */
 
 import { Injectable } from '@angular/core';
-import { isMatch, pick } from 'lodash';
 import { BehaviorSubject, ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FeatureType } from '../features/features.repository';
@@ -122,8 +121,13 @@ export class MenuService {
     secondMenuItems: MenuItem[],
     propertiesToCompare: string[]
   ): boolean {
-    return firstMenuItems.length === secondMenuItems.length &&
-    isMatch(firstMenuItems, pick(secondMenuItems, [propertiesToCompare]));
+    if (firstMenuItems.length !== secondMenuItems.length) {
+      return false;
+    }
+
+    return firstMenuItems.every((item, index) =>
+      propertiesToCompare.every(property => item[property] === secondMenuItems[index][property])
+    );
   }
 
   private getStaticMenuItemsByType(menuType: StaticMenuType): MenuItem[] {

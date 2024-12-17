@@ -10,6 +10,9 @@
       "@multi/shared": [
         "dist/shared"
       ],
+      "@multi/app-update": [
+        "dist/app-update"
+      ],
       "@multi/auth": [
         "dist/auth"
       ],

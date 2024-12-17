@@ -49,10 +49,9 @@
         completeLocalDate}}.</ion-note>
     </ion-item>
 
-    <ion-range *ngIf="viewType !== 'day'" [(ngModel)]="zoomLevel" (ionChange)="updateZoomLevel()" min="0" max="2" step="1" pin="true" snaps="true">
+    <ion-range *ngIf="viewType !== 'day'" [(ngModel)]="zoomLevel" (ionChange)="updateZoomLevel()" min="0" max="2" step="1" pin="true" snaps="true" ticks="true">
       <ion-label class="app-text-6" slot="start">0</ion-label>
       <ion-label class="app-text-6" slot="end">x2</ion-label>
-      <ion-label class="app-text-6" slot="tick" value="1">1</ion-label>
     </ion-range>
     <full-calendar #calendar [options]="calendarOptions">
       <ng-template #eventContent let-arg>

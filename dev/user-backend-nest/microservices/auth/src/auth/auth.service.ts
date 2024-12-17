@@ -110,7 +110,7 @@ export class AuthService {
 
   public logout(query: LogoutQueryDto): Observable<boolean> {
     return this.casService
-      .logout(query.authToken)
+      .logout(query)
       .pipe(
         delayWhen(() =>
           from(

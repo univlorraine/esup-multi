@@ -39,11 +39,13 @@
 
 interface AuthTokenDto {
   authToken: string;
+  ip?: string;
 }
 
 export interface AuthenticateQueryDto {
   username: string;
   password: string;
+  ip?: string;
 }
 
 export interface UserProfileDto {
@@ -66,4 +68,5 @@ export interface GetUserResultDto {
 
 export interface SsoServiceTokenQueryDto extends AuthTokenDto {
   service: string;
+  ip?: string;
 }

@@ -28,3 +28,12 @@
 - `STATISTICS_SERVICE_NATS_SERVERS` : Addresses complètes des serveurs NATS pour communiquer avec le microservice `statistics`, séparées par des virgules (ex: nats://localhost:4222).
 
 - `MAIL_CALENDAR_SERVICE_NATS_SERVERS` : Addresses complètes des serveurs NATS pour communiquer avec le microservice `mail-calendar`, séparées par des virgules (ex: nats://localhost:4222).
+
+# Paramétrer la vérification des mises à jour côté client
+Si vous avez activé le module côté client qui permet de vérifier les mises à jour disponibles, il faudra alors renseigner ces informations de mises à jour dans le fichier `src/client-infos.json` 
+(copier au préalable le fichier `src/client-infos.json.dist`)
+
+- **storeVersion**: numéro de version du client actuellement sur les stores
+- **minVersionRequired**: version minimum du client requise
+- **playStoreUrl**: url vers l'application sur le Play Store
+- **appStoreUrl**:  url vers l'application sur l'App Store

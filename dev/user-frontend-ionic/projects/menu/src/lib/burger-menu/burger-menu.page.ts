@@ -38,14 +38,12 @@
  */
 
 import { Component, Inject } from '@angular/core';
-import { App } from '@capacitor/app';
-import { Capacitor } from '@capacitor/core';
 import {
   AuthenticatedUser, authenticatedUser$, isDarkTheme, isDarkTheme$, MenuItem, MenuOpenerService,
   MenuService as SharedMenuService, setIsDarkTheme, setLanguage, setUserHaveSetThemeInApp,
-  WidgetLifecycleService, GuidedTourService
+  WidgetLifecycleService, GuidedTourService, VersionService
 } from '@multi/shared';
-import { from, Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -74,6 +72,7 @@ export class BurgerMenuPage {
     private sharedMenuService: SharedMenuService,
     private widgetLifecycleService: WidgetLifecycleService,
     private guidedTourService: GuidedTourService,
+    private versionService: VersionService,
     public menuOpenerService: MenuOpenerService
   ) {
     this.languages = this.environment.languages;
@@ -84,9 +83,7 @@ export class BurgerMenuPage {
     this.dynamicMenuItems$ = this.sharedMenuService.burgerMenuItems$.pipe(
       map(menuItems => menuItems.filter(menuItem => menuItem.type === 'dynamic'))
     );
-    this.appVersion$ = !Capacitor.isNativePlatform()
-      ? of(this.environment.appVersion || '0.0.0')
-      : from(App.getInfo()).pipe(map(info => info.version));
+    this.appVersion$ = this.versionService.getCurrentAppVersion();
 
     this.isDarkTheme$ = isDarkTheme$;
   }

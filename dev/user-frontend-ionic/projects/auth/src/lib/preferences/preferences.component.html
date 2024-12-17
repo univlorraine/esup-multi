@@ -41,8 +41,7 @@
   <h2 class="safe-area-padding-lr">{{ 'AUTH.PREFERENCES.TITLE' | translate }}</h2>
 </ion-label>
 <ion-item>
-  <ion-label class="ion-text-wrap">
-    {{ 'AUTH.PREFERENCES.SAVE_CREDENTIALS' | translate }}
-  </ion-label>
-  <ion-toggle [checked]="saveCredentialsOnAuthentication$ | async" slot="start" (ionChange)="onSaveCredentialsOnAuthenticationChange($event)"></ion-toggle>
+  <ion-toggle [checked]="saveCredentialsOnAuthentication$ | async" (ionChange)="onSaveCredentialsOnAuthenticationChange($event)" labelPlacement="end" justify="start">
+    <ion-label class="ion-text-wrap">{{ 'AUTH.PREFERENCES.SAVE_CREDENTIALS' | translate }}</ion-label>
+  </ion-toggle>
 </ion-item>

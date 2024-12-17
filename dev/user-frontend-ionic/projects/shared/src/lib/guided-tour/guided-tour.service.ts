@@ -57,6 +57,7 @@ import { isAnonymousTourViewed, isLoggedTourViewed, setAnonymousTourViewed, setL
 export class GuidedTourService {
 
   private isOnline$: Observable<boolean>;
+  private updateAlertActive: boolean = false;
 
   constructor(
     @Inject('environment')
@@ -85,8 +86,12 @@ export class GuidedTourService {
     this.shepherdService.confirmCancel = false;
   }
 
+  setUpdateAlertStatus(isActive: boolean) {
+    this.updateAlertActive = isActive;
+  }
+
   startGlobalTour() {
-    if (!this.environment.guidedTourEnabled) {
+    if (!this.environment.guidedTourEnabled || this.updateAlertActive) {
       return;
     }
 

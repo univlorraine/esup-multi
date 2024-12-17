@@ -41,6 +41,7 @@
  * Public API Surface of shared
  */
 
+export * from './lib/alerts/alerts.service';
 export * from './lib/auth/auth.guard';
 export * from './lib/auth/auth.interceptor';
 export * from './lib/auth/auth.repository';
@@ -70,6 +71,7 @@ export * from './lib/network/network.service';
 export * from './lib/notifications/notifications.repository';
 export * from './lib/notifications/notifications.service';
 export * from './lib/pipe/complete-local-date-pipe';
+export * from './lib/pipe/local-hour.pipe';
 export * from './lib/pipe/relative-time-pipe';
 export * from './lib/pipe/shared-pipe.module';
 export * from './lib/pipe/truncate-pipe';
@@ -83,3 +85,4 @@ export * from './lib/store/local-forage';
 export * from './lib/store/user-store-helper';
 export * from './lib/theme/theme.repository';
 export * from './lib/theme/theme.service';
+export * from './lib/version/version.service';

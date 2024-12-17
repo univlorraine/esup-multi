@@ -44,11 +44,15 @@ import { RpcException } from '@nestjs/microservices';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { CasUrl } from '../config/configuration.interface';
-import { AuthenticateQueryDto, SsoServiceTokenQueryDto } from './auth.dto';
+import {
+  AuthenticateQueryDto,
+  LogoutQueryDto,
+  SsoServiceTokenQueryDto,
+} from './auth.dto';
 
 const CAS_HEADERS = {
-  accept: 'application/json',
-  'content-type': 'application/x-www-form-urlencoded',
+  Accept: 'application/json',
+  'Content-Type': 'application/x-www-form-urlencoded',
 };
 
 @Injectable()
@@ -61,6 +65,13 @@ export class CasService {
     private readonly httpService: HttpService,
   ) {
     this.casUrlConfig = this.configService.get<CasUrl>('casUrl');
+  }
+
+  private formatCasHeaderWithIp(ip: string) {
+    return {
+      ...CAS_HEADERS,
+      'X-Forwarded-For': ip,
+    };
   }
 
   public isTgtValid(tgt: string): Observable<boolean> {
@@ -85,7 +96,7 @@ export class CasService {
     params.append('password', query.password);
     return this.httpService
       .post<string>(this.casUrlConfig.requestTgt, params, {
-        headers: CAS_HEADERS,
+        headers: this.formatCasHeaderWithIp(query.ip),
       })
       .pipe(
         catchError((err) => {
@@ -117,7 +128,9 @@ export class CasService {
     const params = new URLSearchParams();
     params.append('service', query.service);
     return this.httpService
-      .post<string>(url, params, { headers: CAS_HEADERS })
+      .post<string>(url, params, {
+        headers: this.formatCasHeaderWithIp(query.ip),
+      })
       .pipe(
         map((res) => res.data),
         catchError((err) => {
@@ -134,13 +147,15 @@ export class CasService {
       );
   }
 
-  public logout(tgt: string): Observable<boolean> {
-    const url = this.casUrlConfig.logout.replace(/\{tgt\}/g, tgt);
-    return this.httpService.delete<string>(url, { headers: CAS_HEADERS }).pipe(
-      catchError((err) => {
-        throw new RpcException(err);
-      }),
-      map((res) => res.status === 200),
-    );
+  public logout(query: LogoutQueryDto): Observable<boolean> {
+    const url = this.casUrlConfig.logout.replace(/\{tgt\}/g, query.authToken);
+    return this.httpService
+      .delete<string>(url, { headers: this.formatCasHeaderWithIp(query.ip) })
+      .pipe(
+        catchError((err) => {
+          throw new RpcException(err);
+        }),
+        map((res) => res.status === 200),
+      );
   }
 }
