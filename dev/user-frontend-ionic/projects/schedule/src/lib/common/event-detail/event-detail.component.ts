@@ -40,7 +40,7 @@
 import { Component, Input } from '@angular/core';
 import { Browser } from '@capacitor/browser';
 import { take } from 'rxjs/operators';
-import { Course, Event, HiddenCourse } from '../../schedule.repository';
+import {Course, Event, HiddenCourse} from '../../schedule.repository';
 import { ScheduleService } from '../../schedule.service';
 
 @Component({
