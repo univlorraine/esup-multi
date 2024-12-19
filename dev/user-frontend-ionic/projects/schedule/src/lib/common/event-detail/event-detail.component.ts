@@ -40,7 +40,7 @@
 import { Component, Input } from '@angular/core';
 import { Browser } from '@capacitor/browser';
 import { take } from 'rxjs/operators';
-import {Course, Event, HiddenCourse, scheduleStoreManager} from '../../schedule.repository';
+import {Course, Event, HiddenCourse} from '../../schedule.repository';
 import { ScheduleService } from '../../schedule.service';
 
 @Component({
@@ -88,6 +88,4 @@ export class EventDetailComponent {
   public isCourseUrlValid() {
     return this.courseUrlRegex.test(this.event.course.url.trim());
   }
-
-  protected readonly scheduleStoreManager = scheduleStoreManager;
 }
