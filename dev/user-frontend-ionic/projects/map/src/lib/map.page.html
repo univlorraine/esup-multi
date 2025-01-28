@@ -98,10 +98,9 @@
       <ion-popover  [isOpen]="isCampusSelectionOpen" (didDismiss)="isCampusSelectionOpen = false">
         <ng-template>
           <ion-list lines="full">
-            <ion-item *ngFor="let oneCampus of campus">
+            <ion-item button *ngFor="let oneCampus of campus" (click)="closePopOverAndFlyTo(oneCampus)">
               <ion-fab-button [attr.data-campus-name]="oneCampus.name"
-                              [ngStyle]="{'--background': 'center / cover no-repeat url('+oneCampus.photo+')'}"
-                              (click)="closePopOverAndFlyTo(oneCampus)"></ion-fab-button>
+                              [ngStyle]="{'--background': 'center / cover no-repeat url('+oneCampus.photo+')'}"></ion-fab-button>
               <ion-label class="app-text-3 light ion-text-wrap ion-padding-start">{{ oneCampus.name }}</ion-label>
             </ion-item>
           </ion-list>
