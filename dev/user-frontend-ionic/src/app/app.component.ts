@@ -89,7 +89,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private featuresService: FeaturesService,
     private notificationsService: NotificationsService,
     private statisticsService: StatisticsService,
-    private titleService: Title
+    private titleService: Title,
   ) {
     this.initializeApp();
   }
@@ -132,9 +132,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
   private initializeAppResume(): void {
     // reload notifications when app is resumed (back to foreground)
-    this.appResumeListener = App.addListener('resume', () => {
-      this.notificationsService.loadNotifications(0, 10).subscribe();
-    });
+    this.appResumeListener = App.addListener('resume', () =>
+      this.notificationsService.loadNotifications(0, 10).subscribe()
+    );
   }
 
   private initializeTheme(): void {

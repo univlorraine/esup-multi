@@ -59,7 +59,7 @@ const app = express();
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static('public'));
+app.use('/static', express.static('public'));
 
 app.get('/healthcheck', (req, res) => res.sendStatus(200));
 

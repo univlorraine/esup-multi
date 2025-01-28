@@ -56,8 +56,13 @@
         </ion-row>
         <form [formGroup]="form">
           <ion-item formArrayName="categoriesForm" *ngFor="let category of categoriesForm.controls; let i = index">
-            <ion-label class="app-text-3 light ion-text-wrap">{{ categories[i].labelTranslate }}</ion-label>
-            <ion-checkbox mode="md" [formControlName]="i"></ion-checkbox>
+          </ion-item>
+        </form>
+        <form [formGroup]="form">
+          <ion-item formArrayName="categoriesForm" *ngFor="let category of categoriesForm.controls; let i = index">
+            <ion-checkbox mode="md" [formControlName]="i">
+              <ion-label class="app-text-3 light ion-text-wrap">{{ categories[i].labelTranslate }}</ion-label>
+            </ion-checkbox>
           </ion-item>
         </form>
       </ion-list>
