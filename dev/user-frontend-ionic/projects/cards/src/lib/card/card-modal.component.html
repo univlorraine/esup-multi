@@ -42,7 +42,8 @@
     <ion-header>
       <ion-toolbar class="app-toolbar-as-on-page">
         <ion-buttons slot="start">
-          <ion-back-button defaultHref="cards" (click)="closeModal()" [text]="(platform.is('ios') ? 'GLOBAL.IOS_BACK_BUTTON' : '') | translate"></ion-back-button>
+          <ion-back-button defaultHref="cards" (click)="closeModal()"
+            [text]="(platform.is('ios') ? 'GLOBAL.IOS_BACK_BUTTON' : '') | translate"></ion-back-button>
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
@@ -54,8 +55,16 @@
           </ion-card-content>
         </ion-card>
         <ion-row class="ion-justify-content-center">
-          <qrcode *ngIf="userAndCardsData.cards.studentCard.qrCode" [qrdata]="userAndCardsData.cards.studentCard.qrCode.value"
-                  [errorCorrectionLevel]="'M'" [width]="300"></qrcode>
+          <ng-container *ngIf="userAndCardsData.cards.studentCard.qrCode">
+            <div *ngIf="userAndCardsData.cards.studentCard.qrCode.type === 'image' && userAndCardsData.cards.studentCard.qrCode.value"
+              [innerHTML]="userAndCardsData.cards.studentCard.qrCode.value | safeHtml">
+            </div>
+            <qrcode *ngIf="userAndCardsData.cards.studentCard.qrCode.type !== 'image' && userAndCardsData.cards.studentCard.qrCode.value"
+              [qrdata]="userAndCardsData.cards.studentCard.qrCode.value" 
+              [errorCorrectionLevel]="'M'" 
+              [width]="300">
+            </qrcode>
+          </ng-container>
         </ion-row>
       </ion-content>
 
@@ -67,14 +76,14 @@
         </ion-card>
         <ion-row class="ion-justify-content-center">
           <ng-container *ngIf="userAndCardsData.cards.euStudentCard.qrCode">
-            <qrcode *ngIf="userAndCardsData.cards.euStudentCard.qrCode.type === 'url' && userAndCardsData.cards.euStudentCard.qrCode.value"
-                    [qrdata]="userAndCardsData.cards.euStudentCard.qrCode.value"
-                    [errorCorrectionLevel]="'M'"
-                    [width]="300">
-            </qrcode>
             <div *ngIf="userAndCardsData.cards.euStudentCard.qrCode.type === 'image' && userAndCardsData.cards.euStudentCard.qrCode.value"
-                 [innerHTML]="userAndCardsData.cards.euStudentCard.qrCode.value | safeHtml">
+              [innerHTML]="userAndCardsData.cards.euStudentCard.qrCode.value | safeHtml">
             </div>
+            <qrcode *ngIf="userAndCardsData.cards.euStudentCard.qrCode.type !== 'image' && userAndCardsData.cards.euStudentCard.qrCode.value"
+              [qrdata]="userAndCardsData.cards.euStudentCard.qrCode.value" 
+              [errorCorrectionLevel]="'M'" 
+              [width]="300">
+            </qrcode>
           </ng-container>
         </ion-row>
       </ion-content>
