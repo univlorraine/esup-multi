@@ -44,6 +44,7 @@ import { PassportModule } from '@nestjs/passport';
 import { AppController } from './app.controller';
 import configuration from './config/configuration';
 import microserviceAuthConfig from './config/microservice-auth.config';
+import microserviceCardEuConfig from './config/microservice-card-eu.config';
 import microserviceCardsConfig from './config/microservice-cards.config';
 import microserviceChatbotConfig from './config/microservice-chatbot.config';
 import microserviceClockingConfig from './config/microservice-clocking.config';
@@ -95,6 +96,13 @@ import { LogsMiddleware } from './logs.middleware';
         name: 'RSS_SERVICE',
         imports: [ConfigModule.forFeature(microserviceRssConfig)],
         useFactory: (config: ConfigService) => config.get('microservice-rss'),
+        inject: [ConfigService],
+      },
+      {
+        name: 'CARD_EU_SERVICE',
+        imports: [ConfigModule.forFeature(microserviceCardEuConfig)],
+        useFactory: (config: ConfigService) =>
+          config.get('microservice-card-eu'),
         inject: [ConfigService],
       },
       {
