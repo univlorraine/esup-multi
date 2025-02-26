@@ -37,36 +37,14 @@
  * termes.
  */
 
-import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
-import { CompleteLocalDatePipe } from './complete-local-date-pipe';
-import { RelativeTimePipe } from './relative-time-pipe';
-import { TruncatePipe } from './truncate-pipe';
-import { LocalHourPipe } from './local-hour.pipe';
-import { SafeHtmlPipe } from './safe-html-pipe';
+import { Pipe, PipeTransform } from "@angular/core";
+import { DomSanitizer } from "@angular/platform-browser";
 
-@NgModule({
-  declarations: [
-    RelativeTimePipe,
-    TruncatePipe,
-    CompleteLocalDatePipe,
-    LocalHourPipe,
-    SafeHtmlPipe
-  ],
-  exports: [
-    RelativeTimePipe,
-    TruncatePipe,
-    CompleteLocalDatePipe,
-    LocalHourPipe,
-    SafeHtmlPipe
-  ],
-  imports: [
-    CommonModule,
-    IonicModule,
-    TranslateModule,
-  ],
-})
-export class SharedPipeModule {
+@Pipe({ name: "safeHtml" })
+export class SafeHtmlPipe implements PipeTransform {
+  constructor(private sanitizer: DomSanitizer) {}
+
+  transform(value: string) {
+    return this.sanitizer.bypassSecurityTrustHtml(value);
+  }
 }

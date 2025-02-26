@@ -75,6 +75,7 @@ export * from './lib/pipe/local-hour.pipe';
 export * from './lib/pipe/relative-time-pipe';
 export * from './lib/pipe/shared-pipe.module';
 export * from './lib/pipe/truncate-pipe';
+export * from './lib/pipe/safe-html-pipe';
 export * from './lib/project-module/project-module.service';
 export * from './lib/project-module/static-menu.service';
 export * from './lib/project-module/translations/translations-loader.factory';
