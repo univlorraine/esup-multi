@@ -66,8 +66,16 @@
           </ion-card-content>
         </ion-card>
         <ion-row class="ion-justify-content-center">
-          <qrcode *ngIf="userAndCardsData.cards.euStudentCard.qrCode" [qrdata]="userAndCardsData.cards.euStudentCard.qrCode.value"
-                  [errorCorrectionLevel]="'M'" [width]="300"></qrcode>
+          <ng-container *ngIf="userAndCardsData.cards.euStudentCard.qrCode">
+            <qrcode *ngIf="userAndCardsData.cards.euStudentCard.qrCode.type === 'url' && userAndCardsData.cards.euStudentCard.qrCode.value"
+                    [qrdata]="userAndCardsData.cards.euStudentCard.qrCode.value"
+                    [errorCorrectionLevel]="'M'"
+                    [width]="300">
+            </qrcode>
+            <div *ngIf="userAndCardsData.cards.euStudentCard.qrCode.type === 'image' && userAndCardsData.cards.euStudentCard.qrCode.value"
+                 [innerHTML]="userAndCardsData.cards.euStudentCard.qrCode.value | safeHtml">
+            </div>
+          </ng-container>
         </ion-row>
       </ion-content>
     </ion-content>
