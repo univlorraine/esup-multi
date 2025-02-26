@@ -42,45 +42,67 @@ import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { RpcException } from '@nestjs/microservices';
 import { catchError, map, Observable } from 'rxjs';
-import { DirectusApi } from '../../config/configuration.interface';
+import { CmsApi } from '../../config/configuration.interface';
 import {
-  DirectusResponse,
+  CMSGraphQLResponse,
   LoginPageContentResultDto,
 } from './login-page-content.dto';
 
 @Injectable()
 export class LoginPageContentService {
   private readonly logger = new Logger(LoginPageContentService.name);
-  private directusApiConfig: DirectusApi;
+  private cmsApiConfig: CmsApi;
 
   constructor(
     private readonly configService: ConfigService,
     private readonly httpService: HttpService,
   ) {
-    this.directusApiConfig = this.configService.get<DirectusApi>('directusApi');
+    this.cmsApiConfig = this.configService.get<CmsApi>('cmsApi');
   }
 
   public getLoginPageContent(): Observable<LoginPageContentResultDto> {
-    const url = `${this.directusApiConfig.url}/items/login`;
+    const url = `${this.cmsApiConfig.apiUrl}/graphql`;
+
+    // Construction de la requête GraphQL
+    const graphqlQuery = {
+      query: `
+        query {
+          login {
+            translations {
+              languagesCode
+              connectionText
+              notAuthenticatedText
+            }
+          }
+        }
+      `,
+    };
+
     const requestConfig = {
-      params: {
-        fields: 'translations.*',
-      },
       headers: {
-        Accept: 'application/json',
-        Authorization: `Bearer ${this.directusApiConfig.bearerToken}`,
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.cmsApiConfig.bearerToken}`,
       },
     };
 
     return this.httpService
-      .get<DirectusResponse<LoginPageContentResultDto>>(url, requestConfig)
+      .post<CMSGraphQLResponse>(url, graphqlQuery, requestConfig)
       .pipe(
         catchError((err: any) => {
-          const errorMessage = 'Unable to get directus login page content';
+          const errorMessage = 'Unable to get login page content from CMS';
           this.logger.error(errorMessage, err);
           throw new RpcException(errorMessage);
         }),
-        map((res) => res.data.data),
+        map((res) => {
+          // Vérification des erreurs dans la réponse GraphQL
+          if (res.data.errors && res.data.errors.length > 0) {
+            const errorMessage = `GraphQL error: ${res.data.errors[0].message}`;
+            this.logger.error(errorMessage);
+            throw new RpcException(errorMessage);
+          }
+
+          return res.data.data.login;
+        }),
       );
   }
 }
