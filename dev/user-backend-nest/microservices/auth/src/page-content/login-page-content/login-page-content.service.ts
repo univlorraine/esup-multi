@@ -44,8 +44,8 @@ import { RpcException } from '@nestjs/microservices';
 import { catchError, map, Observable } from 'rxjs';
 import { CmsApi } from '../../config/configuration.interface';
 import {
-  CMSGraphQLResponse,
   LoginPageContentResultDto,
+  LoginPageGraphQLResponse,
 } from './login-page-content.dto';
 
 @Injectable()
@@ -86,7 +86,11 @@ export class LoginPageContentService {
     };
 
     return this.httpService
-      .post<CMSGraphQLResponse>(url, graphqlQuery, requestConfig)
+      .post<LoginPageGraphQLResponse<LoginPageContentResultDto>>(
+        url,
+        graphqlQuery,
+        requestConfig,
+      )
       .pipe(
         catchError((err: any) => {
           const errorMessage = 'Unable to get login page content from CMS';
