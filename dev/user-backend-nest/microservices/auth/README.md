@@ -9,7 +9,7 @@ Ce module est en charge d'interagir avec le CAS serveur et autres services tiers
 - `AUTH_SERVICE_CAS_URL_LOGOUT`: L'URL de logout du CAS contenant `{tgt}` qui sera remplacé par la valeur du ticket CAS TGT.
 - `AUTH_SERVICE_PROVIDER_API_URL`: L'URL de l'API permettant d'obtenir le profil d'un utilisateur. `{username}` sera remplacé par la valeur de l'identifiant de l'utilisateur.
 - `AUTH_SERVICE_PROVIDER_API_BEARER_TOKEN`: Le token d'accès à l'API permettant d'obtenir le profil d'un utilisateur.
-- `AUTH_SERVICE_CMS_CONNECTOR_API_URL`: l'URL de l'API du connecteur CMS permettant de récupérer les données provenant du CMS.
+- `AUTH_SERVICE_CMS_CONNECTOR_API_URL`: L'URL de l'API du connecteur CMS permettant de récupérer les données provenant du CMS.
 - `AUTH_SERVICE_CMS_CONNECTOR_API_BEARER_TOKEN`: Le token d'accès à l'API du connecteur CMS.
 - `AUTH_SERVICE_USERNAMES_CLEANUP_SCHEDULE`: La notation cron qui définit la tâche planifiée de nettoyage des nom d'utilisateur sauvegardés devenus obsolètes.
 - `AUTH_SERVICE_USERNAMES_CLEANUP_NOT_USED_SINCE_IN_DAYS`: Le nombre de jours d'inactivité après lesquels un nom d'utilisateur sauvegardé est considérée comme étant obsolète.
