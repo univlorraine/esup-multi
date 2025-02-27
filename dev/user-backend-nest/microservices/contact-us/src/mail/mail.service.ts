@@ -42,22 +42,22 @@ import { MailerService } from '@nestjs-modules/mailer';
 import { Observable, catchError, concatMap, firstValueFrom, map } from 'rxjs';
 import { ConfigService } from '@nestjs/config';
 import { HttpService } from '@nestjs/axios';
-import { DirectusApi } from '../config/configuration.interface';
+import { CmsApi } from '../config/configuration.interface';
 import { ContactUsSettingsDto, SendMailQueryDto } from './mail.dto';
 import { RpcException } from '@nestjs/microservices';
-import { DirectusResponse } from '../common/common.dto';
+import { ContactUsGraphQLResponse } from '../common/common.dto';
 
 @Injectable()
 export class MailService {
   private readonly logger = new Logger(MailService.name);
-  private directusApiConfig: DirectusApi;
+  private cmsApiConfig: CmsApi;
 
   constructor(
     private readonly mailerService: MailerService,
     private readonly configService: ConfigService,
     private readonly httpService: HttpService,
   ) {
-    this.directusApiConfig = this.configService.get<DirectusApi>('directusApi');
+    this.cmsApiConfig = this.configService.get<CmsApi>('cmsApi');
   }
 
   public async sendMail(query: SendMailQueryDto) {
@@ -83,23 +83,49 @@ export class MailService {
   }
 
   public getContactUsSettings(): Observable<ContactUsSettingsDto> {
-    const url = `${this.directusApiConfig.url}/items/contact_us`;
+    const url = `${this.cmsApiConfig.apiUrl}/graphql`;
+
+    const graphqlQuery = {
+      query: `
+        query {
+          contactUs {
+            to
+          }
+        }
+      `,
+    };
+
     const requestConfig = {
       headers: {
-        Accept: 'application/json',
-        Authorization: `Bearer ${this.directusApiConfig.bearerToken}`,
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.cmsApiConfig.bearerToken}`,
       },
     };
 
     return this.httpService
-      .get<DirectusResponse<ContactUsSettingsDto>>(url, requestConfig)
+      .post<ContactUsGraphQLResponse<ContactUsSettingsDto>>(
+        url,
+        graphqlQuery,
+        requestConfig,
+      )
       .pipe(
         catchError((err: any) => {
-          const errorMessage = 'Unable to get directus contact-us';
+          const errorMessage = 'Unable to get contact-us settings from CMS';
           this.logger.error(errorMessage, err);
           throw new RpcException(errorMessage);
         }),
-        map((res) => res.data.data),
+        map((res) => {
+          // Vérification des erreurs dans la réponse GraphQL
+          if (res.data.errors && res.data.errors.length > 0) {
+            const errorMessage = `GraphQL error: ${res.data.errors[0].message}`;
+            this.logger.error(errorMessage);
+            throw new RpcException(errorMessage);
+          }
+
+          console.log(res.data.data.contactUs);
+
+          return res.data.data.contactUs;
+        }),
       );
   }
 }

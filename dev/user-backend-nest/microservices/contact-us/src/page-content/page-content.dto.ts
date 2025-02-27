@@ -38,7 +38,7 @@
  */
 
 interface PageContentTranslation {
-  languages_code: string;
+  languagesCode: string;
   title: string;
   content: string;
 }
