@@ -76,7 +76,6 @@ export class FeaturesService {
             ssoService
             statisticName
             type
-            status
             translations {
               languagesCode
               searchKeywords
