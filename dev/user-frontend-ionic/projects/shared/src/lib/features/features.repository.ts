@@ -55,8 +55,7 @@ export enum FeatureType {
 }
 
 interface Translation {
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  languages_code: string;
+  languagesCode: string;
   title: string;
   shortTitle?: string;
   content?: string;
@@ -75,8 +74,8 @@ interface FeatureCommon {
   authorization?: Authorization;
   menu: FeatureMenuType;
   icon: string;
-  iconSourceSvgLightTheme: string;
-  iconSourceSvgDarkTheme: string;
+  iconSvgLight: string;
+  iconSvgDark: string;
   isNew: boolean;
 }
 

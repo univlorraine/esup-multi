@@ -50,8 +50,8 @@ import { map } from 'rxjs/operators';
 export interface StaticPage {
   id: number;
   icon?: string;
-  iconSourceSvgLightTheme?: string;
-  iconSourceSvgDarkTheme?: string;
+  iconSvgLight?: string;
+  iconSvgDark?: string;
   translations?: Translation[];
   statisticName?: string;
 }
@@ -61,8 +61,8 @@ export interface TranslatedStaticPage {
   title: string;
   content: string;
   icon?: string;
-  iconSourceSvgLightTheme?: string;
-  iconSourceSvgDarkTheme?: string;
+  iconSvgLight?: string;
+  iconSvgDark?: string;
   statisticName?: string;
 }
 
@@ -99,8 +99,8 @@ export class StaticPagesRepository {
         title: translation.title,
         content: translation.content,
         icon: staticPage.icon,
-        iconSourceSvgLightTheme: staticPage.iconSourceSvgLightTheme,
-        iconSourceSvgDarkTheme: staticPage.iconSourceSvgDarkTheme,
+        iconSvgLight: staticPage.iconSvgLight,
+        iconSvgDark: staticPage.iconSvgDark,
         statisticName: staticPage.statisticName
       };
     }))

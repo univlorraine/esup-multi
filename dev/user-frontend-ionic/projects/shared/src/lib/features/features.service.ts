@@ -58,8 +58,8 @@ interface TranslatedFeatureCommon {
   searchKeywords?: string[];
   menu: FeatureMenuType;
   icon: string;
-  iconSourceSvgLightTheme?: string;
-  iconSourceSvgDarkTheme?: string;
+  iconSvgLight?: string;
+  iconSvgDark?: string;
   isNew: boolean;
   statisticName?: string;
 }
@@ -128,8 +128,8 @@ export class FeaturesService {
       // Si, ni la langue courante, ni la langue par défaut n'ont été trouvées, on prend la première traduction disponible
       const translation =
         /* eslint-disable @typescript-eslint/naming-convention */
-        feature.translations.find((t) => t.languages_code === currentLanguage) ||
-        feature.translations.find((t) => t.languages_code === this.environment.defaultLanguage) ||
+        feature.translations.find((t) => t.languagesCode === currentLanguage) ||
+        feature.translations.find((t) => t.languagesCode === this.environment.defaultLanguage) ||
         feature.translations[0];
 
       /* eslint-enable @typescript-eslint/naming-convention */

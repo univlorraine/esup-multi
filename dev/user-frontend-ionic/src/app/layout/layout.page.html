@@ -47,8 +47,8 @@
                     (keydown)="menuOpenerService.open(menu)"
                     [attr.data-menu-id]="getMenuId(menu)">
           <app-custom-icon [icon]="menu.icon"
-                           [iconSourceSvgLightTheme]="menu.iconSourceSvgLightTheme"
-                           [iconSourceSvgDarkTheme]="menu.iconSourceSvgDarkTheme"></app-custom-icon>
+                           [iconSvgLight]="menu.iconSvgLight"
+                           [iconSvgDark]="menu.iconSvgDark"></app-custom-icon>
           <span class="menu-icon-badge" *ngIf="menu.hasBadge"></span>
         </ion-button>
       </ion-buttons>
@@ -72,12 +72,11 @@
       [attr.data-menu-id]="generateMenuItemIdFromRouterLink(menu)"
     >
       <app-custom-icon [icon]="menu.icon"
-                       [iconSourceSvgLightTheme]="menu.iconSourceSvgLightTheme"
-                       [iconSourceSvgDarkTheme]="menu.iconSourceSvgDarkTheme"></app-custom-icon>
+                       [iconSvgLight]="menu.iconSvgLight"
+                       [iconSvgDark]="menu.iconSvgDark"></app-custom-icon>
       <ion-text class="short-title">
         {{(menu.shortTitle || menu.title) | translate}}
       </ion-text>
     </ion-tab-button>
   </ion-tab-bar>
 </ion-tabs>
-
