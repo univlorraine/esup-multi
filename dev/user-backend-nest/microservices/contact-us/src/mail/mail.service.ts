@@ -122,8 +122,6 @@ export class MailService {
             throw new RpcException(errorMessage);
           }
 
-          console.log(res.data.data.contactUs);
-
           return res.data.data.contactUs;
         }),
       );
