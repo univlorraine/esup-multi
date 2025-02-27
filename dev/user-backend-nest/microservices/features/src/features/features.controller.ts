@@ -43,7 +43,7 @@ import { ConfigService } from '@nestjs/config';
 import { MessagePattern } from '@nestjs/microservices';
 import { Cache } from 'cache-manager';
 import { firstValueFrom } from 'rxjs';
-import { Feature } from './features.dto';
+import { AppElement } from './features.dto';
 import { FeaturesService } from './features.service';
 
 @Controller()
@@ -55,16 +55,16 @@ export class FeaturesController {
   ) {}
 
   @MessagePattern({ cmd: 'features' })
-  async getFeatures(userRoles: string[]): Promise<Feature[]> {
+  async getFeatures(userRoles: string[]): Promise<AppElement[]> {
     const cacheKey = `features-${userRoles.join('-')}`;
-    const cachedFeatures = await this.cacheManager.get<Feature[]>(cacheKey);
+    const cachedFeatures = await this.cacheManager.get<AppElement[]>(cacheKey);
 
     if (cachedFeatures !== undefined) {
       return cachedFeatures;
     }
 
     const features = await firstValueFrom(
-      this.featuresService.getFeatures(userRoles),
+      this.featuresService.getFeaturesAndWidgets(userRoles),
     );
 
     const ttl = this.configService.get<number>('cacheTtl') || 300;

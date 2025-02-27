@@ -37,22 +37,17 @@
  * termes.
  */
 
+// Commun
+export type AppElement = Feature | Widget;
+
+export enum AccessType {
+  INTERNAL = 'internal',
+  EXTERNAL = 'external',
+}
+
 export interface Authorization {
   type: 'ALLOW' | 'DISALLOW';
   roles: string[];
-}
-
-export interface FeatureTranslation {
-  languages_code: string;
-  title?: string;
-  shortTitle?: string;
-  content?: string;
-  searchKeywords?: string[];
-}
-
-export enum FeatureType {
-  Internal = 'internal',
-  External = 'external',
 }
 
 export interface SettingsByRole {
@@ -60,50 +55,84 @@ export interface SettingsByRole {
   position: number;
 }
 
-interface FeatureCommon<SBR> {
+export interface BaseElement {
   id: string;
-  type: FeatureType;
-  position: number | null;
-  widget?: string;
-  translations: FeatureTranslation[];
-  authorization: Authorization | null;
-  settings_by_role: SBR[];
-  menu: string | null;
+  type: AccessType;
   icon?: string;
-  iconSourceSvgLightTheme?: string;
-  iconSourceSvgDarkTheme?: string;
-  color?: string;
+  iconSvgLight?: string;
+  iconSvgDark?: string;
+  position: number | null;
   statisticName?: string;
+  authorization: Authorization | null;
+  settingsByRole: SettingsByRole[];
 }
 
-export interface ExternalFeature extends FeatureCommon<SettingsByRole> {
+// Features
+export interface FeatureTranslation {
+  languagesCode: string;
+  title?: string;
+  shortTitle?: string;
+  searchKeywords?: string[];
+}
+
+export interface BaseFeature extends BaseElement {
+  menu: string | null;
+  translations: FeatureTranslation[];
+}
+
+export interface InternalFeature extends BaseFeature {
+  type: AccessType.INTERNAL;
+  routerLink: string;
+}
+
+export interface ExternalFeature extends BaseFeature {
+  type: AccessType.EXTERNAL;
   link?: string;
   ssoService?: string;
-  type: FeatureType.External;
 }
 
-export interface InternalFeature extends FeatureCommon<SettingsByRole> {
+export type Feature = InternalFeature | ExternalFeature;
+
+// Widgets
+export interface WidgetTranslation {
+  languagesCode: string;
+  title?: string;
+  content?: string;
+}
+
+export interface BaseWidget extends BaseElement {
+  widget?: string;
+  color?: string;
+  translations: WidgetTranslation[];
+}
+
+export interface InternalWidget extends BaseWidget {
+  type: AccessType.INTERNAL;
   routerLink: string;
-  type: FeatureType.Internal;
 }
 
-export type Feature = ExternalFeature | InternalFeature;
-
-interface DirectusSettingsByRole {
-  settings_by_role_id: SettingsByRole;
-}
-
-export interface DirectusExternalFeature
-  extends FeatureCommon<DirectusSettingsByRole> {
+export interface ExternalWidget extends BaseWidget {
+  type: AccessType.EXTERNAL;
   link?: string;
   ssoService?: string;
-  type: FeatureType.External;
 }
 
-export interface DirectusInternalFeature
-  extends FeatureCommon<DirectusSettingsByRole> {
-  routerLink: string;
-  type: FeatureType.Internal;
+export type Widget = InternalWidget | ExternalWidget;
+
+// GraphQL
+export interface GraphQLResponse<T> {
+  data: T;
+  errors?: Array<{
+    message: string;
+    locations: Array<{
+      line: number;
+      column: number;
+    }>;
+    path: string[];
+  }>;
 }
 
-export type DirectusFeature = DirectusExternalFeature | DirectusInternalFeature;
+export interface ContentQueryResponse {
+  features: Feature[];
+  widgets: Widget[];
+}
