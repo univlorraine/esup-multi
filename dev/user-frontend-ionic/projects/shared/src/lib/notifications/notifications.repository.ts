@@ -86,8 +86,7 @@ export interface Channel {
 }
 
 interface Translation {
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  languages_code: string;
+  languagesCode: string;
   label: string;
 }
 export interface TranslatedChannel {
@@ -140,8 +139,8 @@ export class NotificationsRepository {
 
   public translatedChannels$ = combineLatest([this.channels$, currentLanguage$]).pipe(
     map(([channels, currentLanguage]) => channels.map(channel => {
-        const translation = channel.translations.find((t) => t.languages_code === currentLanguage) ||
-          channel.translations.find((t) => t.languages_code === this.environment.defaultLanguage) ||
+        const translation = channel.translations.find((t) => t.languagesCode === currentLanguage) ||
+          channel.translations.find((t) => t.languagesCode === this.environment.defaultLanguage) ||
           channel.translations[0];
         return { label: translation.label, code: channel.code, filterable: channel.filterable };
       }))
