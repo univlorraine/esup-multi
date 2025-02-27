@@ -47,18 +47,16 @@ export interface LoginPageContentResultDto {
   translations: LoginPageContentTranslation[];
 }
 
-export interface GraphQLError {
-  message: string;
-  locations: Array<{
-    line: number;
-    column: number;
-  }>;
-  path: string[];
-}
-
 export interface LoginPageGraphQLResponse<T> {
   data: {
     login: T;
   };
-  errors?: GraphQLError[];
+  errors?: Array<{
+    message: string;
+    locations: Array<{
+      line: number;
+      column: number;
+    }>;
+    path: string[];
+  }>;
 }
