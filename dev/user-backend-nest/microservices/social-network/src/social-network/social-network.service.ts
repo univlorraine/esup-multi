@@ -41,39 +41,66 @@ import { Injectable, Logger } from '@nestjs/common';
 import { catchError, map, Observable } from 'rxjs';
 import { ConfigService } from '@nestjs/config';
 import { HttpService } from '@nestjs/axios';
-import { DirectusResponse, SocialNetworkDto } from './social-network.dto';
-import { DirectusApi } from '../config/configuration.interface';
+import { SocialNetworksGraphQLResponse, SocialNetworkDto } from './social-network.dto';
+import { CmsApi } from '../config/configuration.interface';
 import { RpcException } from '@nestjs/microservices';
 
 @Injectable()
 export class SocialNetworkService {
   private readonly logger = new Logger(SocialNetworkService.name);
-  private directusApiConfig: DirectusApi;
+  private cmsApiConfig: CmsApi;
   constructor(
     private readonly configService: ConfigService,
     private readonly httpService: HttpService,
   ) {
-    this.directusApiConfig = this.configService.get<DirectusApi>('directusApi');
+    this.cmsApiConfig = this.configService.get<CmsApi>('cmsApi');
   }
 
   public getSocialNetworks(): Observable<SocialNetworkDto[]> {
-    this.logger.log('get social networks');
-    const url = `${this.directusApiConfig.apiUrl}/items/social_networks`;
+    const url = `${this.cmsApiConfig.apiUrl}/graphql`;
+
+    const graphqlQuery = {
+      query: `
+        query {
+          socialNetworks {
+            id
+            link
+            icon
+            title
+            position
+          }   
+        }
+      `,
+    };
+
+    const requestConfig = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.cmsApiConfig.bearerToken}`,
+      },
+    };
+
     return this.httpService
-      .get<DirectusResponse<SocialNetworkDto[]>>(url, {
-        headers: {
-          Accept: 'application/json',
-          Authorization: `Bearer ${this.directusApiConfig.bearerToken}`,
-        },
-      })
+      .post<SocialNetworksGraphQLResponse<SocialNetworkDto[]>>(
+        url,
+        graphqlQuery,
+        requestConfig,
+      )
       .pipe(
         catchError((err: any) => {
-          const errorMessage = 'Unable to get directus social networks data';
+          const errorMessage = 'Unable to get social networks data from CMS';
           this.logger.error(errorMessage, err);
           throw new RpcException(errorMessage);
         }),
         map((res) => {
-          return res.data.data;
+          // Vérification des erreurs dans la réponse GraphQL
+          if (res.data.errors && res.data.errors.length > 0) {
+            const errorMessage = `GraphQL error: ${res.data.errors[0].message}`;
+            this.logger.error(errorMessage);
+            throw new RpcException(errorMessage);
+          }
+
+          return res.data.data.socialNetworks;
         }),
       );
   }
