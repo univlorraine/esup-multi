@@ -67,8 +67,7 @@ export interface TranslatedStaticPage {
 }
 
 interface Translation {
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  languages_code: string;
+  languagesCode: string;
   title: string;
   content: string;
 }
@@ -91,8 +90,8 @@ export class StaticPagesRepository {
 
   public translatedStaticPages$ = combineLatest([this.staticPages$, currentLanguage$]).pipe(
     map(([staticPages, currentLanguage]) => staticPages.map(staticPage => {
-      const translation = staticPage.translations.find((t) => t.languages_code === currentLanguage) ||
-        staticPage.translations.find((t) => t.languages_code === this.environment.defaultLanguage) ||
+      const translation = staticPage.translations.find((t) => t.languagesCode === currentLanguage) ||
+        staticPage.translations.find((t) => t.languagesCode === this.environment.defaultLanguage) ||
         staticPage.translations[0];
       return {
         id: staticPage.id,

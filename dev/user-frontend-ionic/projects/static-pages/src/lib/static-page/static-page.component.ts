@@ -66,7 +66,7 @@ export class StaticPageComponent implements OnInit {
   ngOnInit() {
    this.loadStaticPagesIfNetworkAvailable();
 
-    const id = parseInt(this.route.snapshot.paramMap.get('id'), 10);
+    const id = this.route.snapshot.paramMap.get('id');
 
     this.page$ = this.staticPagesRepository.getStaticPage(id);
   }
