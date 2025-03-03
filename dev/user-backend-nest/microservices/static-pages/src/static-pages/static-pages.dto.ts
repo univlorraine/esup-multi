@@ -64,5 +64,3 @@ export interface StaticPagesGraphQLResponse<T> {
     path: string[];
   }>;
 }
-
-
