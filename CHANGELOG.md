@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## x.x.x (2025-xx-xx)
+
+### Client
+#### Bug fixes
+* **(restaurants)** : correction des dates tronquées à cause d'un scroll vertical inutile
+* **(schedule)** : correction du bouton 'Voir Plus' de la vue liste de l'emploi du temps qui n'affichait pas lorsque l'étudiant n'a pas de cours pendant plus de 15 jours
+
 ## 1.2.0 (2024-12-11)
 
 ### Client
