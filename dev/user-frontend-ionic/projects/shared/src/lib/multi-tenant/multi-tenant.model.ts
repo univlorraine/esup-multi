@@ -46,7 +46,6 @@ export interface Tenant {
   cmsPublicAssetsEndpoint: string;
   logo: string;
   topic?: string;
-  enabledModules?: [];
   tenants?: Tenant[];
   modulesConfigurations: {
     chatbot?: {

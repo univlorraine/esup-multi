@@ -332,12 +332,11 @@ D'autres configurations peuvent également varier en fonction de l'établissemen
 - `topic` firebase utilisé
 - `logo`
 - `modulesConfigurations` configurations des différents modules pour lesquelles cela a du sens d'avoir une configuration propre par établissement
-- `enabledModules` pour modifier la liste des modules activés pour un tenant
 
 ### Group de tenants
 
-Il est également possible de regrouper plusieurs tenants dans un groupe de tenant, en définissant l'attribut forceSelect à false, l'application chargera la configuration du groupe sans forcer l'utilisateur à sélectionner un tenant :
-
+Il est également possible de regrouper les tenants dans un groupe de tenant, en définissant l'attribut forceSelect à false, l'application chargera la configuration du groupe sans forcer l'utilisateur à sélectionner un tenant.
+Il n'est possible de créer qu'un seul groupe de tenant, celui ci devant alors se situer en première et unique position du tableau de tenant situé à la racine de la configuration:
 ```
   tenants: [
     {
