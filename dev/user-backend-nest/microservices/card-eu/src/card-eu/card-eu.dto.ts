@@ -38,20 +38,19 @@
  */
 
 export interface UserCardEuDto {
-    lastname: string;
-    firstname: string;
-    title: string;
-    subtitle?: string;
-    photo: string;
-    escn: string;
-    qrCode?: {
-      type: string;
-      value: string;
-    };
-    errors: string[];
-  }
-  
-  export interface AuthenticateQueryDto {
-    username: string;
-  }
-  
+  lastname: string;
+  firstname: string;
+  title: string;
+  subtitle?: string;
+  photo: string;
+  euid: string;
+  qrCode?: {
+    type: string;
+    value: string;
+  };
+  errors: string[];
+}
+
+export interface AuthenticateQueryDto {
+  username: string;
+}
