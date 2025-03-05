@@ -334,6 +334,47 @@
         }
       }
     },
+    "card-eu": {
+      "projectType": "library",
+      "root": "projects/card-eu",
+      "sourceRoot": "projects/card-eu/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/card-eu/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/card-eu/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/card-eu/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/card-eu/src/test.ts",
+            "tsConfig": "projects/card-eu/tsconfig.spec.json",
+            "karmaConfig": "projects/card-eu/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/card-eu/**/*.ts",
+              "projects/card-eu/**/*.html"
+            ]
+          }
+        }
+
+      }
+    },
     "cards": {
       "projectType": "library",
       "root": "projects/cards",

@@ -1,0 +1,148 @@
+<!--
+  ~ Copyright ou © ou Copr. Université de Lorraine, (2022)
+  ~
+  ~ Direction du Numérique de l'Université de Lorraine - SIED
+  ~  (dn-mobile-dev@univ-lorraine.fr)
+  ~ JNESIS (contact@jnesis.com)
+  ~
+  ~ Ce logiciel est un programme informatique servant à rendre accessible
+  ~ sur mobile divers services universitaires aux étudiants et aux personnels
+  ~ de l'université.
+  ~
+  ~ Ce logiciel est régi par la licence CeCILL 2.1, soumise au droit français
+  ~ et respectant les principes de diffusion des logiciels libres. Vous pouvez
+  ~ utiliser, modifier et/ou redistribuer ce programme sous les conditions
+  ~ de la licence CeCILL telle que diffusée par le CEA, le CNRS et INRIA
+  ~ sur le site "http://cecill.info".
+  ~
+  ~ En contrepartie de l'accessibilité au code source et des droits de copie,
+  ~ de modification et de redistribution accordés par cette licence, il n'est
+  ~ offert aux utilisateurs qu'une garantie limitée. Pour les mêmes raisons,
+  ~ seule une responsabilité restreinte pèse sur l'auteur du programme, le
+  ~ titulaire des droits patrimoniaux et les concédants successifs.
+  ~
+  ~ À cet égard, l'attention de l'utilisateur est attirée sur les risques
+  ~ associés au chargement, à l'utilisation, à la modification et/ou au
+  ~ développement et à la reproduction du logiciel par l'utilisateur étant
+  ~ donné sa spécificité de logiciel libre, qui peut le rendre complexe à
+  ~ manipuler et qui le réserve donc à des développeurs et des professionnels
+  ~ avertis possédant des connaissances informatiques approfondies. Les
+  ~ utilisateurs sont donc invités à charger et à tester l'adéquation du
+  ~ logiciel à leurs besoins dans des conditions permettant d'assurer la
+  ~ sécurité de leurs systèmes et/ou de leurs données et, plus généralement,
+  ~ à l'utiliser et à l'exploiter dans les mêmes conditions de sécurité.
+  ~
+  ~ Le fait que vous puissiez accéder à cet en-tête signifie que vous avez
+  ~ pris connaissance de la licence CeCILL 2.1, et que vous en avez accepté les
+  ~ termes.
+  -->
+
+<ion-progress-bar *ngIf="isLoading" type="indeterminate"></ion-progress-bar>
+<app-header></app-header>
+<ion-content *ngIf="(userAndCardEuData$ | async) as userCardEu">
+  <!-- <ion-card class="safe-area-lr-ionic-margin"> -->
+  <svg xmlns="http://www.w3.org/2000/svg" height="100%" width="100%" viewBox="0 0 850 540"
+    preserveAspectRatio="xMidYMin meet" class="svg-card-eu">
+    <defs>
+      <linearGradient id="card-gradient" x2="0.35" y2="1">
+        <stop offset="0%" stop-color="var(--color-top)" />
+        <stop offset="30%" stop-color="var(--color-top)" />
+        <stop offset="100%" stop-color="var(--color-bottom)" />
+      </linearGradient>
+    </defs>
+
+    <!-- Carte Européenne au couleur de Esup-->
+    <rect width="850" height="540" class="card-eu" rx="15" fill="url(#card-gradient)" />
+
+
+    <!-- Title -->
+    <text x="250" y="235" font-family="Helvetica" font-size="33" letter-spacing="-0.5" font-weight="600" class="title">
+      {{'CARD-EU.CARD_TITLE' | translate}}
+    </text>
+
+    <!-- Subtitle -->
+    <text x="250" y="287" font-family="Helvetica" font-size="33" letter-spacing="-0.5" font-weight="600"
+      class="subtitle">
+      {{'CARD-EU.CARD_SUBTITLE' | translate}}
+    </text>
+
+    <!-- Student photo -->
+    <image height="285" width="180" x="30" y="35" [attr.href]="userCardEu.photo" />
+
+    <!-- Student number -->
+    <text x="30" y="400" font-family="Helvetica" font-size="33" letter-spacing="-0.5" font-weight="600" class="number">
+      {{userCardEu.euid}}
+    </text>
+
+    <!-- Lastname and Firstname -->
+    <text x="30" y="460" font-family="Helvetica" font-size="33" letter-spacing="-0.5" font-weight="600" class="name">
+      {{userCardEu.lastname}} {{userCardEu.firstname}}
+    </text>
+
+    <!-- Logo ESUP -->
+    <image class="logoEsup" height="100" width="100" x="250" y="65" href="assets/cards/card-eu/university-logo.svg"
+      style="z-index: 10;" />
+
+    <!-- Bande verticale à droite -->
+    <rect class="card-eu-r-a" x="820" y="0" rx="15" width="30" height="540" fill="var(--color-bottom)" />
+    <rect class="card-eu-r-b" x="565" y="0" height="540" width="265" fill="var(--color-bottom)" />
+
+    <!-- QR Code -->
+    <foreignObject x="565" y="200" width="285" height="345" xmlns="http://www.w3.org/1999/xhtml">
+      <xhtml:div xmlns:xhtml="http://www.w3.org/1999/xhtml" style="display: flex; justify-content: center; align-items: center; width: 100%; height: 100%;">
+        <xhtml:div [innerHTML]="userCardEu.qrCode.value | safeHtml" style="transform: scale(1.5);"></xhtml:div>
+      </xhtml:div>
+    </foreignObject>
+  </svg>
+  <!-- </ion-card> -->
+</ion-content>
+
+<!-- <ion-content *ngIf="(userAndCardEuData$ | async) as userCardEu; else noCardEuData">
+  <ng-container *ngIf="hasErrors(userCardEu); else cardEuTemplate">
+    <ion-content class="ion-padding">
+      <ng-container *ngFor="let error of userCardEu.errors">
+        <ion-note *ngIf="isKnownError(error); else unknowError" class="column app-text-2">
+          {{ (userCardEu.affiliation === 'staff' ? 'CARD_EU.ERRORS_STAFF.' : 'CARD_EU.ERRORS_STUDENT.') + error | translate }}
+        </ion-note>
+      </ng-container>
+      <ng-template #unknowError>
+        <ion-content class="ion-padding">
+          <ion-note class="column app-text-2"> {{ 'CARD_EU.ERRORS.UNKNOWN' | translate}}</ion-note>
+        </ion-content>
+      </ng-template>
+    </ion-content>
+  </ng-container>
+
+  <ng-template #cardEuTemplate>
+    <ion-content *ngIf="userCardEu.cardEu && !userCardEu.cardEu.staffCard">
+      <ion-card class="card safe-area-lr-ionic-margin" *ngFor="let cardEu of userCardEu.cards | keyvalue" (click)="openModal(cardEu.key)">
+        <ion-card-header>
+          <ion-card-title class="app-title-5">
+            {{cardEu.value.title}}
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <app-eu-student-card *ngIf="cardEu.key === 'euStudentCard'" [userAndCardEuData]="userCardEu"></app-eu-student-card>
+        </ion-card-content>
+      </ion-card>
+    </ion-content>
+    <app-card-modal [userAndCardEuData]="userCardEu"></app-card-modal>
+
+   <ion-content *ngIf="userCards.cards.staffCard">
+      <ion-card class="safe-area-lr-ionic-margin">
+        <ion-card-content>
+          <app-staff-card [userAndCardsData]="userCards"></app-staff-card>
+        </ion-card-content>
+      </ion-card>
+      <ion-row class="ion-justify-content-center">
+        <qrcode *ngIf="userCards.cards.staffCard.qrCode" [qrdata]="userCards.cards.staffCard.qrCode.value" [errorCorrectionLevel]="'M'" [width]="300"></qrcode>
+      </ion-row>
+    </ion-content>
+  </ng-template>
+</ion-content> 
+
+<ng-template #noCardEuData>
+  <ion-content class="ion-padding">
+    <ion-note> {{ "CARD_EU.ERRORS.NO_DATA" | translate }} </ion-note>
+  </ion-content>
+</ng-template> -->
