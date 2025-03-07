@@ -44,12 +44,11 @@ import { EffectsNgModule } from '@ngneat/effects-ng';
 import { TranslateModule } from '@ngx-translate/core';
 import { ProjectModuleService, SharedComponentsModule, SharedPipeModule } from '@multi/shared';
 import { QRCodeModule } from 'angularx-qrcode';
-import { CardEuModalComponent } from './card-eu/card-eu-modal.component';
 import { CardEuRoutingModule } from './card-eu-routing.module';
 import { CardEuEffects } from './card-eu.effects';
 import { CardEuPage } from './card-eu.page';
-import { EuStudentCardComponent } from './eu-student-card/eu-student-card.component';
 import { CARD_EU_CONFIG, CardEuModuleConfig } from './card-eu.config';
+import { CardEuComponent } from './card-eu/card-eu.component';
 
 const initModule = (projectModuleService: ProjectModuleService) =>
   () => projectModuleService.initProjectModule({
@@ -70,8 +69,7 @@ const initModule = (projectModuleService: ProjectModuleService) =>
   ],
   declarations: [
     CardEuPage,
-    CardEuModalComponent,
-    EuStudentCardComponent
+    CardEuComponent
   ],
   providers: [{
     provide: APP_INITIALIZER,

@@ -38,11 +38,13 @@
  */
 
 import { Component, Input } from '@angular/core';
+import { UserAndCardEuData } from '../card-eu.repository';
 
 @Component({
-  selector: 'app-eu-student-card',
-  templateUrl: './svg_cart_europ.html',
+  selector: 'app-card-eu',
+  templateUrl: './card-eu.component.html',
+  styleUrls: ['../../../../../src/theme/app-theme/styles/cards/card-eu/card-eu.component.scss']
 })
-export class EuStudentCardComponent{
-  @Input() userAndCardEuData;
+export class CardEuComponent {
+  @Input() userCardEu: UserAndCardEuData;
 }
