@@ -38,49 +38,53 @@
  */
 
 import { Injectable } from '@angular/core';
-import { Plugins } from '@capacitor/core';
+import { ScreenBrightness } from '@capacitor-community/screen-brightness';
 import { Platform } from '@ionic/angular';
+import { from } from 'rxjs';
+import { filter, finalize, switchMap, take } from 'rxjs/operators';
+import { brightness$, setBrightness } from './screen.repository';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ScreenService {
-  private previousBrightness: number | null = null;
-  private readonly FULL_BRIGHTNESS = 1.0;
+
+  private fullBrightnessEnabled = false;
 
   constructor(private platform: Platform) {}
 
-  /**
-   * Sets the screen brightness to full
-   */
-  async fullBrightness(): Promise<void> {
-    if (this.platform.is('cordova') || this.platform.is('capacitor')) {
-      try {
-        const { Screen } = Plugins;
-        // Store the current brightness before changing it
-        const { brightness } = await Screen.getBrightness();
-        this.previousBrightness = brightness;
-        
-        // Set to full brightness
-        await Screen.setBrightness({ brightness: this.FULL_BRIGHTNESS });
-      } catch (error) {
-        console.error('Error setting screen brightness:', error);
-      }
+  public async fullBrightness() {
+    // the brightness plugin only works with capacitor
+    if (!this.platform.is('capacitor')) {
+      return;
     }
+
+    // prevent multiple full brightness activation
+    if(this.fullBrightnessEnabled === true) {
+      return;
+    }
+
+    this.fullBrightnessEnabled = true;
+    const { brightness } = await ScreenBrightness.getBrightness();
+    setBrightness(brightness);
+    await ScreenBrightness.setBrightness({brightness: 1.0});
   }
 
-  /**
-   * Restores the screen brightness to its previous value
-   */
-  async restorePreviousBrightness(): Promise<void> {
-    if ((this.platform.is('cordova') || this.platform.is('capacitor')) && this.previousBrightness !== null) {
-      try {
-        const { Screen } = Plugins;
-        await Screen.setBrightness({ brightness: this.previousBrightness });
-        this.previousBrightness = null;
-      } catch (error) {
-        console.error('Error restoring screen brightness:', error);
-      }
+  public async restorePreviousBrightness() {
+    // the brightness plugin only works with capacitor
+    if (!this.platform.is('capacitor')) {
+      return;
     }
+
+    if(this.fullBrightnessEnabled === false) {
+      return;
+    }
+
+    return brightness$.pipe(
+      take(1),
+      filter(brightness => brightness !== null),
+      switchMap(brightness => from(ScreenBrightness.setBrightness({brightness}))),
+      finalize(() => this.fullBrightnessEnabled = false)
+    ).toPromise();
   }
 }
