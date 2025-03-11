@@ -60,6 +60,7 @@ import microserviceContactUsConfig from './config/microservice-contact-us.config
 import microserviceRestaurantsConfig from './config/microservice-restaurants.config';
 import microserviceStatisticsConfig from './config/microservice-statistics.config';
 import microserviceMailCalendarConfig from './config/microservice-mail-calendar.config';
+import microserviceUsefulInformationConfig from './config/microservice-useful-information.config';
 import { AuthJwtStrategy } from './security/auth-jwt.strategy';
 import { TerminusModule } from '@nestjs/terminus';
 import { LoggerModule } from 'nestjs-pino';
@@ -185,6 +186,13 @@ import { LogsMiddleware } from './logs.middleware';
         imports: [ConfigModule.forFeature(microserviceMailCalendarConfig)],
         useFactory: (config: ConfigService) =>
           config.get('microservice-mail-calendar'),
+        inject: [ConfigService],
+      },
+      {
+        name: 'USEFUL_INFORMATION_SERVICE',
+        imports: [ConfigModule.forFeature(microserviceUsefulInformationConfig)],
+        useFactory: (config: ConfigService) =>
+          config.get('microservice-useful-information'),
         inject: [ConfigService],
       },
     ]),
