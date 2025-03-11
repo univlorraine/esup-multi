@@ -75,6 +75,9 @@
       ],
       "@multi/guided-tour": [
         "dist/guided-tour"
+      ],
+      "@multi/useful-info": [
+        "dist/useful-info"
       ]
     },
     "downlevelIteration": true,
