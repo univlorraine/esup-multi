@@ -44,7 +44,7 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const natsServers = (
-    process.env.CARD_EU_SERVICE_NATS_SERVERS || 'nats://localhost:4222'
+    process.env.CARD_SERVICE_NATS_SERVERS || 'nats://localhost:4222'
   )
     .split(',')
     .map((server) => server.trim());
@@ -61,13 +61,13 @@ async function bootstrap() {
     transport: Transport.NATS,
     options: {
       servers: natsServers,
-      queue: 'card-eu',
+      queue: 'card',
     },
   });
   await app.startAllMicroservices();
 
-  const host = process.env.CARD_EU_SERVICE_HOST || '127.0.0.1';
-  const port = parseInt(process.env.CARD_EU_SERVICE_PORT) || 3020;
+  const host = process.env.CARD_SERVICE_HOST || '127.0.0.1';
+  const port = parseInt(process.env.CARD_SERVICE_PORT) || 3021;
   Logger.log(`Listening on host ${host}, port ${port}`);
   await app.listen(port, host);
 }

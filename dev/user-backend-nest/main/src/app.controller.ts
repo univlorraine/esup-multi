@@ -69,6 +69,7 @@ export class AppController {
     @Inject('MAP_SERVICE') private mapClient: ClientProxy,
     @Inject('RSS_SERVICE') private rssClient: ClientProxy,
     @Inject('CARD_EU_SERVICE') private cardEuClient: ClientProxy,
+    @Inject('CARD_SERVICE') private cardClient: ClientProxy,
     @Inject('CARDS_SERVICE') private cardsClient: ClientProxy,
     @Inject('SCHEDULE_SERVICE') private scheduleClient: ClientProxy,
     @Inject('CONTACTS_SERVICE') private contactsClient: ClientProxy,
@@ -262,6 +263,27 @@ export class AppController {
           this.cardEuClient.send(
             {
               cmd: 'card-eu',
+            },
+            user.username,
+          ),
+        ),
+      );
+  }
+
+  @Post('/card')
+  card(@Body() body) {
+    return this.authClient
+      .send(
+        {
+          cmd: 'getUserOrThrowError',
+        },
+        body,
+      )
+      .pipe(
+        concatMap((user) =>
+          this.cardClient.send(
+            {
+              cmd: 'card',
             },
             user.username,
           ),

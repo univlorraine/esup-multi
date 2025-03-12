@@ -37,38 +37,25 @@
  * termes.
  */
 
-import { Logger } from '@nestjs/common';
-import { NestFactory } from '@nestjs/core';
-import { MicroserviceOptions, Transport } from '@nestjs/microservices';
-import { AppModule } from './app.module';
-
-async function bootstrap() {
-  const natsServers = (
-    process.env.CARD_EU_SERVICE_NATS_SERVERS || 'nats://localhost:4222'
-  )
-    .split(',')
-    .map((server) => server.trim());
-  Logger.log(`Using nats servers: ${natsServers}`);
-
-  const app = await NestFactory.create(AppModule, {
-    logger:
-      process.env.EXTENDED_LOGS === 'true'
-        ? ['error', 'warn', 'log', 'debug', 'verbose']
-        : ['error', 'warn', 'log'],
-  });
-
-  app.connectMicroservice<MicroserviceOptions>({
-    transport: Transport.NATS,
-    options: {
-      servers: natsServers,
-      queue: 'card-eu',
-    },
-  });
-  await app.startAllMicroservices();
-
-  const host = process.env.CARD_EU_SERVICE_HOST || '127.0.0.1';
-  const port = parseInt(process.env.CARD_EU_SERVICE_PORT) || 3020;
-  Logger.log(`Listening on host ${host}, port ${port}`);
-  await app.listen(port, host);
+export interface UserCardDto {
+  lastname: string;
+  firstname: string;
+  gender?: string;
+  title: string;
+  subtitle?: string;
+  ine?: string;
+  csn: string;
+  photo: string;
+  affiliation: string;
+  idNumber: string;
+  endDate: number;
+  qrCode?: {
+    type: string;
+    value: string;
+  };
+  errors: string[];
 }
-bootstrap();
+
+export interface AuthenticateQueryDto {
+  username: string;
+}

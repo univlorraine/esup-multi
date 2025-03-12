@@ -37,38 +37,60 @@
  * termes.
  */
 
-import { Logger } from '@nestjs/common';
-import { NestFactory } from '@nestjs/core';
-import { MicroserviceOptions, Transport } from '@nestjs/microservices';
-import { AppModule } from './app.module';
+import { KeepAliveOptions, CardProviderApi } from './configuration.interface';
 
-async function bootstrap() {
-  const natsServers = (
-    process.env.CARD_EU_SERVICE_NATS_SERVERS || 'nats://localhost:4222'
-  )
-    .split(',')
-    .map((server) => server.trim());
-  Logger.log(`Using nats servers: ${natsServers}`);
+const applyIfNotBlank = (param: string, applyFn: (value: string) => void) => {
+  if (param && param.trim().length > 0) {
+    applyFn(param);
+  }
+};
 
-  const app = await NestFactory.create(AppModule, {
-    logger:
-      process.env.EXTENDED_LOGS === 'true'
-        ? ['error', 'warn', 'log', 'debug', 'verbose']
-        : ['error', 'warn', 'log'],
-  });
+export default (): {
+  cardProviderApi: CardProviderApi;
+  keepAliveOptions: KeepAliveOptions;
+} => {
+  const keepAliveOptions = {};
 
-  app.connectMicroservice<MicroserviceOptions>({
-    transport: Transport.NATS,
-    options: {
-      servers: natsServers,
-      queue: 'card-eu',
+  applyIfNotBlank(
+    process.env.CARD_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVE,
+    (value) => (keepAliveOptions['keepAlive'] = value === 'true'),
+  );
+
+  applyIfNotBlank(
+    process.env.CARD_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVEMSECS,
+    (value) => (keepAliveOptions['keepAliveMsecs'] = parseInt(value)),
+  );
+
+  applyIfNotBlank(
+    process.env.CARD_SERVICE_AGENTKEEPALIVE_OPTION_FREESOCKETTIMEOUT,
+    (value) => (keepAliveOptions['freeSocketTimeout'] = parseInt(value)),
+  );
+
+  applyIfNotBlank(
+    process.env.CARD_SERVICE_AGENTKEEPALIVE_OPTION_TIMEOUT,
+    (value) => (keepAliveOptions['timeout'] = parseInt(value)),
+  );
+
+  applyIfNotBlank(
+    process.env.CARD_SERVICE_AGENTKEEPALIVE_OPTION_MAXSOCKETS,
+    (value) => (keepAliveOptions['maxSockets'] = parseInt(value)),
+  );
+
+  applyIfNotBlank(
+    process.env.CARD_SERVICE_AGENTKEEPALIVE_OPTION_MAXFREESOCKETS,
+    (value) => (keepAliveOptions['maxFreeSockets'] = parseInt(value)),
+  );
+
+  applyIfNotBlank(
+    process.env.CARD_SERVICE_AGENTKEEPALIVE_OPTION_SOCKETACTIVETTL,
+    (value) => (keepAliveOptions['socketActiveTTL'] = parseInt(value)),
+  );
+
+  return {
+    cardProviderApi: {
+      apiUrl: process.env.CARD_SERVICE_PROVIDER_API_URL,
+      bearerToken: process.env.CARD_SERVICE_PROVIDER_API_BEARER_TOKEN,
     },
-  });
-  await app.startAllMicroservices();
-
-  const host = process.env.CARD_EU_SERVICE_HOST || '127.0.0.1';
-  const port = parseInt(process.env.CARD_EU_SERVICE_PORT) || 3020;
-  Logger.log(`Listening on host ${host}, port ${port}`);
-  await app.listen(port, host);
-}
-bootstrap();
+    keepAliveOptions,
+  };
+};

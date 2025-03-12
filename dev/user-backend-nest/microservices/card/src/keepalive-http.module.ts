@@ -37,38 +37,29 @@
  * termes.
  */
 
-import { Logger } from '@nestjs/common';
-import { NestFactory } from '@nestjs/core';
-import { MicroserviceOptions, Transport } from '@nestjs/microservices';
-import { AppModule } from './app.module';
+import { Logger, Module } from '@nestjs/common';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { HttpModule } from '@nestjs/axios';
+import * as Agent from 'agentkeepalive';
+import { KeepAliveOptions } from './config/configuration.interface';
 
-async function bootstrap() {
-  const natsServers = (
-    process.env.CARD_EU_SERVICE_NATS_SERVERS || 'nats://localhost:4222'
-  )
-    .split(',')
-    .map((server) => server.trim());
-  Logger.log(`Using nats servers: ${natsServers}`);
-
-  const app = await NestFactory.create(AppModule, {
-    logger:
-      process.env.EXTENDED_LOGS === 'true'
-        ? ['error', 'warn', 'log', 'debug', 'verbose']
-        : ['error', 'warn', 'log'],
-  });
-
-  app.connectMicroservice<MicroserviceOptions>({
-    transport: Transport.NATS,
-    options: {
-      servers: natsServers,
-      queue: 'card-eu',
-    },
-  });
-  await app.startAllMicroservices();
-
-  const host = process.env.CARD_EU_SERVICE_HOST || '127.0.0.1';
-  const port = parseInt(process.env.CARD_EU_SERVICE_PORT) || 3020;
-  Logger.log(`Listening on host ${host}, port ${port}`);
-  await app.listen(port, host);
-}
-bootstrap();
+@Module({
+  imports: [
+    ConfigModule,
+    HttpModule.registerAsync({
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => {
+        const keepAliveOptions =
+          configService.get<KeepAliveOptions>('keepAliveOptions');
+        Logger.log('Using agentkeepalive options', keepAliveOptions);
+        return {
+          httpAgent: new Agent(keepAliveOptions),
+          httpsAgent: new Agent.HttpsAgent(keepAliveOptions),
+        };
+      },
+      inject: [ConfigService],
+    }),
+  ],
+  exports: [HttpModule],
+})
+export class KeepaliveHttpModule {}
