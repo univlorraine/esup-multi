@@ -1,0 +1,12 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="backend/card-eu" type="js.build_tools.npm" folderName="Backend">
+    <package-json value="$PROJECT_DIR$/dev/user-backend-nest/microservices/card-eu/package.json" />
+    <command value="run" />
+    <scripts>
+      <script value="start:dev" />
+    </scripts>
+    <node-interpreter value="project" />
+    <envs />
+    <method v="2" />
+  </configuration>
+</component>
