@@ -66,11 +66,11 @@ export class UsefulInfoService {
       const sectionTranslation = this.findTranslation(usefulInfo, currentLanguage);
       const translatedBlocks: TranslatedUsefulInfo[] = usefulInfo.blocks.map(block => {
         const blockTranslation = this.findTranslation(block, currentLanguage);
-        const { section, translations, blocks, ...usefulInfoBlockProps } = block;
-        return { ...usefulInfoBlockProps, title: blockTranslation.title, description: blockTranslation.description };
+        const { id, status, sort, phone, email, icon } = block;
+        return { id, status, sort, phone, email, icon, title: blockTranslation.title, description: blockTranslation.description };
       });
-      const { phone, email, section, translations, ...usefulInfoProps } = usefulInfo;
-      return { ...usefulInfoProps, title: sectionTranslation.title, blocks: translatedBlocks };
+      const { id, status, sort, icon } = usefulInfo;
+      return { id, status, sort, icon, title: sectionTranslation.title, blocks: translatedBlocks };
     });
   }
 

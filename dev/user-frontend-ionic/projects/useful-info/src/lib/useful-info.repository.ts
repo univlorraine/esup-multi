@@ -56,9 +56,11 @@ export interface UsefulInfo {
 
 export interface InfoTranslation {
     id: number;
+    /* eslint-disable @typescript-eslint/naming-convention */
     useful_information_id?: number;
     useful_information_section_id?: number;
     languages_code: string;
+    /* eslint-enable @typescript-eslint/naming-convention */
     title: string;
     description?: string;
 }
