@@ -1,0 +1,187 @@
+<!--
+  ~ Copyright ou © ou Copr. Université de Lorraine, (2022)
+  ~
+  ~ Direction du Numérique de l'Université de Lorraine - SIED
+  ~  (dn-mobile-dev@univ-lorraine.fr)
+  ~ JNESIS (contact@jnesis.com)
+  ~
+  ~ Ce logiciel est un programme informatique servant à rendre accessible
+  ~ sur mobile divers services universitaires aux étudiants et aux personnels
+  ~ de l'université.
+  ~
+  ~ Ce logiciel est régi par la licence CeCILL 2.1, soumise au droit français
+  ~ et respectant les principes de diffusion des logiciels libres. Vous pouvez
+  ~ utiliser, modifier et/ou redistribuer ce programme sous les conditions
+  ~ de la licence CeCILL telle que diffusée par le CEA, le CNRS et INRIA
+  ~ sur le site "http://cecill.info".
+  ~
+  ~ En contrepartie de l'accessibilité au code source et des droits de copie,
+  ~ de modification et de redistribution accordés par cette licence, il n'est
+  ~ offert aux utilisateurs qu'une garantie limitée. Pour les mêmes raisons,
+  ~ seule une responsabilité restreinte pèse sur l'auteur du programme, le
+  ~ titulaire des droits patrimoniaux et les concédants successifs.
+  ~
+  ~ À cet égard, l'attention de l'utilisateur est attirée sur les risques
+  ~ associés au chargement, à l'utilisation, à la modification et/ou au
+  ~ développement et à la reproduction du logiciel par l'utilisateur étant
+  ~ donné sa spécificité de logiciel libre, qui peut le rendre complexe à
+  ~ manipuler et qui le réserve donc à des développeurs et des professionnels
+  ~ avertis possédant des connaissances informatiques approfondies. Les
+  ~ utilisateurs sont donc invités à charger et à tester l'adéquation du
+  ~ logiciel à leurs besoins dans des conditions permettant d'assurer la
+  ~ sécurité de leurs systèmes et/ou de leurs données et, plus généralement,
+  ~ à l'utiliser et à l'exploiter dans les mêmes conditions de sécurité.
+  ~
+  ~ Le fait que vous puissiez accéder à cet en-tête signifie que vous avez
+  ~ pris connaissance de la licence CeCILL 2.1, et que vous en avez accepté les
+  ~ termes.
+  -->
+<!--
+<svg xmlns="http://www.w3.org/2000/svg" height="100%" width="100%" viewBox="0 0 850 540"
+  preserveAspectRatio="xMidYMin meet" class="svg-card-eu">
+  <defs>
+    <linearGradient id="card-gradient" x2="0.35" y2="1">
+      <stop offset="0%" stop-color="var(&#45;&#45;color-top)" />
+      <stop offset="30%" stop-color="var(&#45;&#45;color-top)" />
+      <stop offset="100%" stop-color="var(&#45;&#45;color-bottom)" />
+    </linearGradient>
+  </defs>
+
+  &lt;!&ndash; Carte Européenne au couleur de Esup&ndash;&gt;
+  <rect width="850" height="540" class="card-eu" rx="15" fill="url(#card-gradient)" />
+
+  &lt;!&ndash; Title &ndash;&gt;
+  <text x="250" y="235" font-family="Helvetica" font-size="33" letter-spacing="-0.5" font-weight="600" class="title">
+    {{'CARD-EU.CARD_TITLE' | translate}}
+  </text>
+
+  &lt;!&ndash; Subtitle &ndash;&gt;
+  <text x="250" y="287" font-family="Helvetica" font-size="33" letter-spacing="-0.5" font-weight="600"
+    class="subtitle">
+    {{'CARD-EU.CARD_SUBTITLE' | translate}}
+  </text>
+
+  &lt;!&ndash; Student photo &ndash;&gt;
+  <image height="285" width="180" x="30" y="35" [attr.href]="userCard.photo" />
+
+  &lt;!&ndash; Student number &ndash;&gt;
+  <text x="30" y="400" font-family="Helvetica" font-size="33" letter-spacing="-0.5" font-weight="600" class="number">
+    {{userCard.euid}}
+  </text>
+
+  &lt;!&ndash; Lastname and Firstname &ndash;&gt;
+  <text x="30" y="460" font-family="Helvetica" font-size="33" letter-spacing="-0.5" font-weight="600" class="name">
+    {{userCard.lastname}} {{userCard.firstname}}
+  </text>
+
+  &lt;!&ndash; Logo ESUP &ndash;&gt;
+  <image class="logoEsup" height="100" width="100" x="250" y="65" href="assets/cards/card-eu/university-logo.svg"
+    style="z-index: 10;" />
+
+  &lt;!&ndash; Bande verticale à droite &ndash;&gt;
+  <rect class="card-eu-r-a" x="820" y="0" rx="15" width="30" height="540" fill="var(&#45;&#45;color-bottom)" />
+  <rect class="card-eu-r-b" x="565" y="0" height="540" width="265" fill="var(&#45;&#45;color-bottom)" />
+
+  &lt;!&ndash; QR Code &ndash;&gt;
+  <foreignObject x="565" y="200" width="285" height="345" xmlns="http://www.w3.org/1999/xhtml">
+    <xhtml:div xmlns:xhtml="http://www.w3.org/1999/xhtml" style="display: flex; justify-content: center; align-items: center; width: 100%; height: 100%;">
+      <xhtml:div [innerHTML]="userCard.qrCode.value | safeHtml" style="transform: scale(1.5);"></xhtml:div>
+    </xhtml:div>
+  </foreignObject>
+</svg>-->
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  height="100%"
+  width="100%"
+  viewBox="0 0 850 540"
+  preserveAspectRatio="xMidYMin meet"
+  class="svg-card"
+>
+
+  <!-- Card white background -->
+  <rect rx="10" ry="10" width="850" height="540" fill="white"/>
+
+  <!-- Student photo -->
+  <image height="320" width="240" x="605" y="5" [attr.href]="userCard.photo"/>
+
+  <!-- Lastname -->
+  <text id="lastname" x="40" y="70" font-family="Helvetica" font-size="33" letter-spacing="-0.5" font-weight="600">
+    {{ userCard.lastname }}
+  </text>
+
+  <!-- Firstname -->
+  <text x="40" y="107" font-family="Helvetica" font-size="33" letter-spacing="-0.5" font-weight="600">
+    {{ userCard.firstname }}
+  </text>
+
+  <!-- Apogee ID -->
+  <text x="590" y="120" font-family="Helvetica" font-size="25" letter-spacing="1" font-weight="200" text-anchor="end">
+    {{ userCard.idNumber }}
+  </text>
+
+  <!-- INE Number -->
+  <text x="590" y="150" font-family="Helvetica" font-size="25" letter-spacing="1" font-weight="200" text-anchor="end">
+    {{ userCard.ine }}
+  </text>
+  <!-- csn -->
+  <text x="590" y="180" font-family="Helvetica" font-size="25" letter-spacing="1" font-weight="200" text-anchor="end">
+    {{ userCard.csn }}
+  </text>
+
+  <!-- Card Title -->
+  <text
+    x="40"
+    y="270"
+    font-family="Times New Roman"
+    font-size="33"
+    letter-spacing="0"
+    font-weight="600"
+    font-style="italic"
+  >
+    {{ userCard.title | uppercase }}
+  </text>
+
+  <!-- Title Complement -->
+  <text
+    x="40"
+    y="312"
+    font-family="Times New Roman"
+    font-size="33"
+    letter-spacing="0"
+    font-weight="600"
+    font-style="italic"
+  ></text>
+
+  <!-- Logo UL -->
+  <image height="60" x="40" y="450" href="assets/cards/university-logo.svg"/>
+
+  <!-- Millesime y -->
+  <text
+    x="650"
+    y="420"
+    font-family="Helvetica"
+    font-size="35"
+    letter-spacing="1"
+    font-weight="600"
+    font-style="italic"
+    fill="gray"
+  >
+    {{ userCard.endDate - 1 }}
+
+  </text>
+
+  <!-- Millesime y + 1 -->
+  <text
+    x="710"
+    y="455"
+    font-family="Helvetica"
+    font-size="35"
+    letter-spacing="1"
+    font-weight="600"
+    font-style="italic"
+    fill="gray"
+  >
+    {{ userCard.endDate }}
+  </text>
+</svg>

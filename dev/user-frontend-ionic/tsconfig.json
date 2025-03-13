@@ -25,6 +25,9 @@
       "@multi/rss": [
         "dist/rss"
       ],
+      "@multi/card": [
+        "dist/card"
+      ],
       "@multi/card-eu": [
         "dist/card-eu"
       ],
