@@ -38,7 +38,7 @@
  */
 
 import { Component, Inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Tenant } from './multi-tenant.model';
 import { MultiTenantService } from './multi-tenant.service';
 import { from, Observable, of } from 'rxjs';
@@ -66,7 +66,8 @@ export class MultiTenantComponent {
     @Inject('environment')
     private environment: any,
     private router: Router,
-    private multiTenantService: MultiTenantService
+    private multiTenantService: MultiTenantService,
+    private activatedRoute: ActivatedRoute
   ) {
     this.availableTenants = this.getAvailableTenants();
     this.selectedTenantId = this.multiTenantService.getSelectedTenantId();
@@ -89,7 +90,13 @@ export class MultiTenantComponent {
 
   onValidate(tenantId: string) {
     this.multiTenantService.setCurrentTenantById(tenantId);
-    this.router.navigate(['/']);
+    const redirectToAuth = this.activatedRoute.snapshot.queryParams['redirectToAuth'];
+
+    if (redirectToAuth === 'true') {
+      this.router.navigate(['/auth']);
+    } else {
+      this.router.navigate(['/']);
+    }
   }
 
   useLanguage(language: string): void {

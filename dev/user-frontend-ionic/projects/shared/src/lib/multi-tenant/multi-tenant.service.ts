@@ -50,7 +50,9 @@ import { updateSelectedTenantId, getSelectedTenantId } from './multi-tenant-sele
 import { getRegistry } from '@ngneat/elf';
 import { setTenantThemeApplied } from '../theme/theme.repository';
 import { FCMService } from '../fcm/fcm-global.service';
-import {BehaviorSubject, Observable, Subject} from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { userIsAuthenticated$ } from '../auth/authenticated-user.repository';
+import { filter } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -72,6 +74,14 @@ export class MultiTenantService {
     this.currentTenant = this.findTenant(getSelectedTenantId());
     this.currentTenantLogo$ = this.currentTenantLogoSubject.asObservable();
     this.tenantChange$ = this.tenantChangeSubject.asObservable();
+
+    userIsAuthenticated$.pipe(
+        filter(isAuthenticated => !isAuthenticated)
+      ).subscribe(() => {
+        if(this.currentTenant && this.canUseGroupMode()) { // Only disconnect from tenant when we can use the group mode
+          this.disconnectFromTenant();
+        }
+      });
   }
 
   public getApiEndpoint(): string {
@@ -150,7 +160,11 @@ export class MultiTenantService {
     }, modulesConfiguration);
   }
 
-  public async disconnectFromTenant() {
+  public async redirectToTenantSelection() {
+    await this.router.navigate(['/multi-tenant/select']);
+  }
+
+  public disconnectFromTenant() {
     getRegistry().forEach(store => store.reset());
     updateSelectedTenantId(undefined);
     const defaultTheme = this.environment.defaultTheme || '';
@@ -158,7 +172,6 @@ export class MultiTenantService {
     this.applyTenantTheme(defaultTheme);
     this.tenantChangeSubject.next(undefined);
     this.currentTenantLogoSubject.next(this.environment.defaultLogo);
-    await this.router.navigate(['/multi-tenant/select']);
   }
 
   public getFlattenTenantObjects(t: Tenant[], level: number): Tenant[] {
@@ -203,5 +216,11 @@ export class MultiTenantService {
     const flattenedTenants = this.getFlattenTenantObjects(undefined, 0);
 
     return flattenedTenants.find((tenant: Tenant) => tenant.id === tenantId);
+  }
+
+  // Tells if we can use the tenant group, i.e. not having a specific tenant selected
+  private canUseGroupMode(): boolean {
+    // There is a group defined and the group does not force tenant selection
+    return this.getAvailableTenants()[0].isGroup === true && this.getAvailableTenants()[0].forceSelect === false
   }
 }
