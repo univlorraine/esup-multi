@@ -37,21 +37,32 @@
  * termes.
  */
 
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { LoginPage } from './login/login.page';
-import { IsTenantSelectedGuard } from '@multi/shared';
+import { CanActivate, Router } from '@angular/router';
+import { Injectable } from '@angular/core';
+import { MultiTenantService } from './multi-tenant.service';
 
-const routes: Routes = [
-  {
-    path: 'auth',
-    component: LoginPage,
-    canActivate: [IsTenantSelectedGuard]
-  }
-];
-
-@NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+@Injectable({
+  providedIn: 'root'
 })
-export class AuthRoutingModule {}
+export class IsTenantSelectedGuard implements CanActivate {
+
+  constructor(
+    private multiTenantService: MultiTenantService,
+    private router: Router
+  ) {}
+
+  canActivate() {
+    const isSingleTenant: boolean = this.multiTenantService.isSingleTenant();
+    const hasCurrentTenant: boolean = this.multiTenantService.hasCurrentTenant();
+    const availableTenants: any[] = this.multiTenantService.getAvailableTenants();
+
+    const groupExists = availableTenants && availableTenants.length === 1 && availableTenants[0].isGroup === true;
+
+    if ((!hasCurrentTenant && (groupExists || !isSingleTenant))) { // The tenant should have been select if group or if not single tenant
+      this.router.navigate(['/multi-tenant/select'], {queryParams: { redirectToAuth: true }});
+      return false;
+    }
+
+    return true;
+  }
+}

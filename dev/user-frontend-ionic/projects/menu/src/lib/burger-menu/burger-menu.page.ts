@@ -149,7 +149,10 @@ export class BurgerMenuPage implements OnDestroy {
         {
           text: 'OK',
           role: 'confirm',
-          handler: () => this.multiTenantService.disconnectFromTenant(),
+          handler: () => {
+            this.multiTenantService.disconnectFromTenant();
+            this.multiTenantService.redirectToTenantSelection();
+          },
         },
       ],
     });
