@@ -31,9 +31,6 @@
       "@multi/card-eu": [
         "dist/card-eu"
       ],
-      "@multi/cards": [
-        "dist/cards"
-      ],
       "@multi/schedule": [
         "dist/schedule"
       ],

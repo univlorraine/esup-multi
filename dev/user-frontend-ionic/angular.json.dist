@@ -415,47 +415,6 @@
         }
       }
     },
-    "cards": {
-      "projectType": "library",
-      "root": "projects/cards",
-      "sourceRoot": "projects/cards/src",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
-          "options": {
-            "project": "projects/cards/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/cards/tsconfig.lib.prod.json"
-            },
-            "development": {
-              "tsConfig": "projects/cards/tsconfig.lib.json"
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/cards/src/test.ts",
-            "tsConfig": "projects/cards/tsconfig.spec.json",
-            "karmaConfig": "projects/cards/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
-          "options": {
-            "lintFilePatterns": [
-              "projects/cards/**/*.ts",
-              "projects/cards/**/*.html"
-            ]
-          }
-        }
-
-      }
-    },
     "chatbot": {
       "projectType": "library",
       "root": "projects/chatbot",

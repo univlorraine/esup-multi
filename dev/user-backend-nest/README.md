@@ -1,7 +1,8 @@
 # Application MULTI - Backend utilisateur
 - [Gateway API](dev/user-backend-nest/main/README.md)
 - [Microservice auth](dev/user-backend-nest/microservices/auth/README.md)
-- [Microservice cards](dev/user-backend-nest/microservices/cards/README.md)
+- [Microservice card](dev/user-backend-nest/microservices/card/README.md)
+- [Microservice card-eu](dev/user-backend-nest/microservices/card-eu/README.md)
 - [Microservice chatbot](dev/user-backend-nest/microservices/chatbot/README.md)
 - [Microservice clocking](dev/user-backend-nest/microservices/clocking/README.md)
 - [Microservice contact-us](dev/user-backend-nest/microservices/contact-us/README.md)
