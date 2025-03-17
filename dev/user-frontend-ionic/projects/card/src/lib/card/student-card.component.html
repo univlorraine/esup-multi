@@ -36,60 +36,7 @@
   ~ pris connaissance de la licence CeCILL 2.1, et que vous en avez accepté les
   ~ termes.
   -->
-<!--
-<svg xmlns="http://www.w3.org/2000/svg" height="100%" width="100%" viewBox="0 0 850 540"
-  preserveAspectRatio="xMidYMin meet" class="svg-card-eu">
-  <defs>
-    <linearGradient id="card-gradient" x2="0.35" y2="1">
-      <stop offset="0%" stop-color="var(&#45;&#45;color-top)" />
-      <stop offset="30%" stop-color="var(&#45;&#45;color-top)" />
-      <stop offset="100%" stop-color="var(&#45;&#45;color-bottom)" />
-    </linearGradient>
-  </defs>
-
-  &lt;!&ndash; Carte Européenne au couleur de Esup&ndash;&gt;
-  <rect width="850" height="540" class="card-eu" rx="15" fill="url(#card-gradient)" />
-
-  &lt;!&ndash; Title &ndash;&gt;
-  <text x="250" y="235" font-family="Helvetica" font-size="33" letter-spacing="-0.5" font-weight="600" class="title">
-    {{'CARD-EU.CARD_TITLE' | translate}}
-  </text>
-
-  &lt;!&ndash; Subtitle &ndash;&gt;
-  <text x="250" y="287" font-family="Helvetica" font-size="33" letter-spacing="-0.5" font-weight="600"
-    class="subtitle">
-    {{'CARD-EU.CARD_SUBTITLE' | translate}}
-  </text>
-
-  &lt;!&ndash; Student photo &ndash;&gt;
-  <image height="285" width="180" x="30" y="35" [attr.href]="userCard.photo" />
-
-  &lt;!&ndash; Student number &ndash;&gt;
-  <text x="30" y="400" font-family="Helvetica" font-size="33" letter-spacing="-0.5" font-weight="600" class="number">
-    {{userCard.euid}}
-  </text>
-
-  &lt;!&ndash; Lastname and Firstname &ndash;&gt;
-  <text x="30" y="460" font-family="Helvetica" font-size="33" letter-spacing="-0.5" font-weight="600" class="name">
-    {{userCard.lastname}} {{userCard.firstname}}
-  </text>
-
-  &lt;!&ndash; Logo ESUP &ndash;&gt;
-  <image class="logoEsup" height="100" width="100" x="250" y="65" href="assets/cards/card-eu/university-logo.svg"
-    style="z-index: 10;" />
-
-  &lt;!&ndash; Bande verticale à droite &ndash;&gt;
-  <rect class="card-eu-r-a" x="820" y="0" rx="15" width="30" height="540" fill="var(&#45;&#45;color-bottom)" />
-  <rect class="card-eu-r-b" x="565" y="0" height="540" width="265" fill="var(&#45;&#45;color-bottom)" />
-
-  &lt;!&ndash; QR Code &ndash;&gt;
-  <foreignObject x="565" y="200" width="285" height="345" xmlns="http://www.w3.org/1999/xhtml">
-    <xhtml:div xmlns:xhtml="http://www.w3.org/1999/xhtml" style="display: flex; justify-content: center; align-items: center; width: 100%; height: 100%;">
-      <xhtml:div [innerHTML]="userCard.qrCode.value | safeHtml" style="transform: scale(1.5);"></xhtml:div>
-    </xhtml:div>
-  </foreignObject>
-</svg>-->
-
+<div class="svg-card-container">
 <svg
   xmlns="http://www.w3.org/2000/svg"
   height="100%"
@@ -98,9 +45,8 @@
   preserveAspectRatio="xMidYMin meet"
   class="svg-card"
 >
-
   <!-- Card white background -->
-  <rect rx="10" ry="10" width="850" height="540" fill="white"/>
+  <rect class="carte" rx="10" ry="10" width="850" height="540" fill="white"/>
 
   <!-- Student photo -->
   <image height="320" width="240" x="605" y="5" [attr.href]="userCard.photo"/>
@@ -168,7 +114,6 @@
     fill="gray"
   >
     {{ userCard.endDate - 1 }}
-
   </text>
 
   <!-- Millesime y + 1 -->
@@ -184,4 +129,6 @@
   >
     {{ userCard.endDate }}
   </text>
+
 </svg>
+</div>

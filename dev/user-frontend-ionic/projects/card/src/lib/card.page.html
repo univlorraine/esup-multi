@@ -40,16 +40,22 @@
 <ion-progress-bar *ngIf="isLoading" type="indeterminate"></ion-progress-bar>
 <app-header></app-header>
 <ion-content *ngIf="(userAndCardData$ | async) as userCard">
-  <ion-card class="safe-area-lr-ionic-margin">
-    <ion-card-content>
-      <app-student-card *ngIf="userCard.affiliation === 'student'" [userCard]="userCard"></app-student-card>
-      <app-staff-card *ngIf="userCard.affiliation !== 'student'" [userCard]="userCard"></app-staff-card>
-    </ion-card-content>
-  </ion-card>
-  <ion-row class="ion-justify-content-center">
+  <ion-card-content>
+    <app-student-card [userCard]="userCard" *ngIf="userCard.affiliation === 'student'"></app-student-card>
+    <app-staff-card [userCard]="userCard" *ngIf="userCard.affiliation!=='student'"></app-staff-card>
+  </ion-card-content>
+
+  <!-- Qrcode -->
+  <ion-row class="ion-justify-content-center qr-code-container">
     <ng-container *ngIf="userCard.qrCode">
-      <div *ngIf="userCard.qrCode.type === 'image' && userCard.qrCode.value" [innerHTML]="userCard.qrCode.value | safeHtml"></div>
-      <qrcode *ngIf="userCard.qrCode.type !== 'image' && userCard.qrCode.value" [qrdata]="userCard.qrCode.value" [errorCorrectionLevel]="'M'" [width]="300"></qrcode>
+      <div *ngIf="userCard.qrCode.type === 'image' && userCard.qrCode.value"
+           [innerHTML]="userCard.qrCode.value | safeHtml">
+      </div>
+      <qrcode *ngIf="userCard.qrCode.type !== 'image' && userCard.qrCode.value"
+              [qrdata]="userCard.qrCode.value"
+              [errorCorrectionLevel]="'M'"
+              [width]="300">
+      </qrcode>
     </ng-container>
   </ion-row>
 </ion-content>
