@@ -105,11 +105,11 @@ export class AppComponent implements OnInit, OnDestroy {
     this.initializeAppResume();
     this.initializeTheme();
     this.handleBadge();
-    await this.handleCustomNotifs();
 
     if (!Capacitor.isNativePlatform()) {
       this.initializeFirebase();
     }
+    await this.handleCustomNotifs();
   }
 
   ngOnDestroy(): void {
