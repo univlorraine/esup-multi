@@ -57,12 +57,11 @@ export class CardEuPage {
   public isLoading = false;
   private userAndCardEuDataSubscription: Subscription;
 
-
   constructor(
     private cardEuService: CardEuService,
     private screenService: ScreenService,
     private networkService: NetworkService,
-    @Inject(CARD_EU_CONFIG) private config: CardEuModuleConfig,
+    @Inject(CARD_EU_CONFIG) public config: CardEuModuleConfig,
   ) {}
 
   ionViewWillEnter() {
@@ -105,5 +104,8 @@ export class CardEuPage {
     ).subscribe(userAndCardEuData => {
       setUserAndCardEuData(userAndCardEuData);
     });
+  }
+  toggleCardView() {
+    this.config.display = this.config.display === 'extended' ? 'light' : 'extended';
   }
 }

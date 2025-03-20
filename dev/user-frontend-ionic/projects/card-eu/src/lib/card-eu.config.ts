@@ -41,6 +41,7 @@ import { InjectionToken } from '@angular/core';
 
 export interface CardEuModuleConfig {
     knownErrors: string[];
+    display: 'light' | 'extended';
 }
 
 export const CARD_EU_CONFIG =

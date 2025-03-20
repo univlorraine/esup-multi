@@ -40,5 +40,6 @@
 <ion-progress-bar *ngIf="isLoading" type="indeterminate"></ion-progress-bar>
 <app-header></app-header>
 <ion-content *ngIf="(userAndCardEuData$ | async) as userCardEu">
-  <app-card-eu [userCardEu]="userCardEu"></app-card-eu>
+  <app-card-eu *ngIf="config.display === 'extended'" [userCardEu]="userCardEu"></app-card-eu>
+  <app-card-eu-light *ngIf="config.display === 'light'" [userCardEuLight]="userCardEu"></app-card-eu-light>
 </ion-content>
