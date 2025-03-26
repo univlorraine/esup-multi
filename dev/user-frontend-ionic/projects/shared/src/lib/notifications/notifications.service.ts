@@ -204,6 +204,11 @@ export class NotificationsService {
   }
 
   public async unregisterFCMToken(authToken: string) {
+    if (!Capacitor.isNativePlatform() && !this.environment.firebase) {
+      // On est en web et il n'y a pas de conf firebase dans le env, on ne fait rien
+      return;
+    }
+
     if (!authToken) {
       return;
     }
@@ -211,8 +216,11 @@ export class NotificationsService {
     this.fcmService.unsubscribeFromTopic();
 
     if (!this.environment.useExternalNotificationSystem) {
+      this.notificationRepository.clearNotifications();
+      this.fcmRepository.deleteFcmToken();
       return;
     }
+
     this.fcmRepository.fcmToken$
       .pipe(
         take(1),
