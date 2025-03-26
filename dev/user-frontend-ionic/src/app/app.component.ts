@@ -106,10 +106,9 @@ export class AppComponent implements OnInit, OnDestroy {
     this.initializeTheme();
     this.handleBadge();
 
-    if (!Capacitor.isNativePlatform()) {
+    if (!Capacitor.isNativePlatform() && this.environment.firebase) {
       this.initializeFirebase();
     }
-    await this.handleCustomNotifs();
   }
 
   ngOnDestroy(): void {
@@ -277,13 +276,6 @@ export class AppComponent implements OnInit, OnDestroy {
     this.platform.resume.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(fixBadgeCount);
 
     await fixBadgeCount();
-  }
-
-  private async handleCustomNotifs() {
-    const currentTenant = this.multiTenantService.getCurrentTenantOrThrowError();
-    if (!this.environment.useCustomNotifService && currentTenant) {
-      await this.fcmService.registerPushNotifications(currentTenant.topic);
-    }
   }
 
   private enableTenantTheme(theme: string): void {

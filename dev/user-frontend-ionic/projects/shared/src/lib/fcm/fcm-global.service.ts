@@ -58,7 +58,7 @@ export class FCMService {
   }
 
   public unsubscribeFromTopic() {
-    if(this.currentTopic){
+    if(this.currentTopic) {
       FirebaseMessaging.unsubscribeFromTopic({ topic: this.currentTopic });
     }
   }
@@ -79,7 +79,7 @@ export class FCMService {
 
     // Fonction qui enregistre le token FCM dans le state
     const handleToken = (tokenResult: { token: string }) => {
-      // NOTE: on web browser when the user resets the notifications authorisation and wants to allow it again,
+      // NOTE: on web browser when the user resets the notifications authorization and wants to allow it again,
       // this will trigger a 404 error from firebase followed by this message in the console:
       // "FirebaseError: Messaging: A problem  occured while unsubscribing the user from FCM",
       // it has been reported since 2019 in this thread but hasn't been solved since:

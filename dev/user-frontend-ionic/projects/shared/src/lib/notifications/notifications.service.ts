@@ -38,7 +38,7 @@
  */
 
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { getAuthToken } from '../auth/auth.repository';
 import { combineLatest, first, firstValueFrom, Observable, of } from 'rxjs';
@@ -57,6 +57,8 @@ import { Capacitor } from '@capacitor/core';
 export class NotificationsService {
 
   constructor(
+    @Inject('environment')
+    private environment: any,
     private multiTenantService: MultiTenantService,
     private fcmService: FCMService,
     private http: HttpClient,
@@ -163,12 +165,23 @@ export class NotificationsService {
     );
   }
 
-  public async saveFCMToken(): Promise<any> {
-    // On requête un token auprès des serveurs Firebase
-    const fcmToken = await this.fcmService.registerPushNotifications();
+  public async registerNotificationsAndSaveFCMToken(): Promise<any> {
+    if (!Capacitor.isNativePlatform() && !this.environment.firebase) {
+      // On est en web et il n'y a pas de conf firebase dans le env, on ne fait rien
+      return;
+    }
 
-    // Si on a bien récupéré le token
-    if (fcmToken) {
+    const currentTenant = this.multiTenantService.getCurrentTenantOrThrowError();
+    if (!currentTenant) { // A priori pas besoin de check le current tenant car ça ne sera appelé qu'une fois connecté
+      return;
+    }
+
+    // On souscrit aux notifs et récupère le token auprès des serveurs Firebase
+    const fcmToken = await this.fcmService.registerPushNotifications(currentTenant.topic); // Topic is not mandatory
+
+    // Si on a bien récupéré le token et qu'il y a quelque chose en place pour gérer les notifs dans le backend (useExternalNotificationSystem)
+    if (fcmToken && this.environment.useExternalNotificationSystem) {
+      // On envoie le token au backend
       const authToken$ = getAuthToken().pipe(
         filter(authToken => !!authToken),
         switchMap(authToken => {
@@ -192,6 +205,12 @@ export class NotificationsService {
 
   public async unregisterFCMToken(authToken: string) {
     if (!authToken) {
+      return;
+    }
+
+    this.fcmService.unsubscribeFromTopic();
+
+    if (!this.environment.useExternalNotificationSystem) {
       return;
     }
     this.fcmRepository.fcmToken$

@@ -60,18 +60,17 @@ import { StaticPagesModule } from '@multi/static-pages';
 import { UnreadMailModule } from '@multi/unread-mail';
 // import { MatomoModule } from 'ngx-matomo';
 
-
 import firebasePwaEnvironment from './firebase/web/firebase-environment.pwa.json';
 
 export const environment: any = {
-  firebase: firebasePwaEnvironment,
+  firebase: firebasePwaEnvironment, // A commenter pour désactiver les notifs web
   production: false,
   languages: ['fr', 'en'],
   defaultLanguage: 'fr',
   guidedTourEnabled: true,
   appTitle: 'Esup-Multi',
   appVersion: '1.0.0',
-  useCustomNotifService: false,
+  useExternalNotificationSystem: false,
   defaultLogo: 'assets/logos/white-logo.svg',
   tenants: [
     {
