@@ -58,6 +58,8 @@ import { combineLatest, Observable, of } from 'rxjs';
 import { distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
 import { Title } from '@angular/platform-browser';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { PushNotifications } from '@capacitor/push-notifications';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -90,6 +92,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private notificationsService: NotificationsService,
     private statisticsService: StatisticsService,
     private titleService: Title,
+    private router: Router,
   ) {
     this.initializeApp();
   }
@@ -173,6 +176,10 @@ export class AppComponent implements OnInit, OnDestroy {
     this.initializeSplashScreen();
     this.initializeStatusBar();
     this.statisticsService.checkAndGenerateStatsUid();
+
+    PushNotifications.addListener('pushNotificationActionPerformed', async () => {
+      this.router.navigateByUrl('/notifications');
+    });
   }
 
   private initializeLanguage(): void {
