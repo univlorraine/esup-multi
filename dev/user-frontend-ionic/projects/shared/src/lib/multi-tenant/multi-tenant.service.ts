@@ -69,7 +69,7 @@ export class MultiTenantService {
     @Inject('environment')
     private environment: any,
     private router: Router,
-    private fcmService: FCMService
+    private fcmService: FCMService,
   ) {
     this.currentTenant = this.findTenant(getSelectedTenantId());
     this.currentTenantLogo$ = this.currentTenantLogoSubject.asObservable();
@@ -118,10 +118,6 @@ export class MultiTenantService {
     if (!foundTenant) {
       this.currentTenantLogoSubject.next(this.environment.defaultLogo);
       throw new NoTenantWithIdError(tenantId);
-    }
-    if(!this.environment.useCustomNotifService) {
-      this.fcmService.unsubscribeFromTopic();
-      this.fcmService.registerPushNotifications(foundTenant.topic);
     }
     updateSelectedTenantId(tenantId);
     this.currentTenant = foundTenant;
@@ -172,6 +168,7 @@ export class MultiTenantService {
     this.applyTenantTheme(defaultTheme);
     this.tenantChangeSubject.next(undefined);
     this.currentTenantLogoSubject.next(this.environment.defaultLogo);
+    this.fcmService.unsubscribeFromTopic();
   }
 
   public getFlattenTenantObjects(t: Tenant[], level: number): Tenant[] {
