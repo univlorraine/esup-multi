@@ -74,8 +74,9 @@
       </ion-row>
       <form [formGroup]="form">
         <ion-item formArrayName="planningList" *ngFor="let planning of planningList.controls; let i = index">
-          <ion-label class="app-text-4 ion-text-wrap" for="terms">{{availablePlanningList[i].label}}</ion-label>
-          <ion-checkbox [formControlName]="i"></ion-checkbox>
+          <ion-checkbox [formControlName]="i">
+            <ion-label class="app-text-4 ion-text-wrap" for="terms">{{availablePlanningList[i].label}}</ion-label>
+          </ion-checkbox>
         </ion-item>
       </form>
     </ion-content>

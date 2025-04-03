@@ -41,6 +41,7 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import { AppUpdateModule } from '@multi/app-update';
 import { AuthModule } from '@multi/auth';
 import { CalendarModule } from '@multi/calendar';
 import { CardsPageModule } from '@multi/cards';
@@ -94,6 +95,7 @@ export const environment: any = {
     }
   ],
   enabledModules: [
+    AppUpdateModule,
     AuthModule,
     CalendarModule.forRoot({
       numberOfEventsLimit: 3,

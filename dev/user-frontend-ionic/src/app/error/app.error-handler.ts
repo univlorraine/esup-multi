@@ -39,22 +39,26 @@
 
 import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorHandler, Injectable, Injector } from '@angular/core';
-import { AlertController } from '@ionic/angular';
 import { Actions } from '@ngneat/effects-ng';
 import { TranslateService } from '@ngx-translate/core';
-import { cleanupPrivateData, getAuthToken, getExpectedErrorMessage, NetworkService } from '@multi/shared';
+import {
+  AlertsService,
+  cleanupPrivateData,
+  getAuthToken,
+  getExpectedErrorMessage,
+  NetworkService
+} from '@multi/shared';
 import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AppErrorHandler implements ErrorHandler {
-
   private translateService: TranslateService;
 
   constructor(
     private actions: Actions,
-    private alertController: AlertController,
+    private alertsService: AlertsService,
     private injector: Injector,
     private networkService: NetworkService,
   ) { }
@@ -72,30 +76,62 @@ export class AppErrorHandler implements ErrorHandler {
 
   private async handleHttpError(error: HttpErrorResponse) {
     if (!(await this.networkService.getConnectionStatus()).connected) {
-      return this.displayError('NO_NETWORK');
+      return this.alertsService.enqueueAlert({
+        header: this.translateService.instant('ERROR.NO_NETWORK.TITLE'),
+        message: this.translateService.instant('ERROR.NO_NETWORK.MESSAGE'),
+        type: 'error',
+        priority: 10
+      });
     }
 
     switch (error.status) {
       case 0:
-        return this.displayError('SERVICE_UNREACHABLE');
+        return this.alertsService.enqueueAlert({
+          header: this.translateService.instant('ERROR.SERVICE_UNREACHABLE.TITLE'),
+          message: this.translateService.instant('ERROR.SERVICE_UNREACHABLE.MESSAGE'),
+          type: 'error',
+          priority: 10
+        });
 
-      // 401 errors are handled by auth.interceptor.ts in the shared module. The following code is not
-      // executed if auth.interceptor is enabled.
       case 401: {
-        getAuthToken().pipe(take(1)).subscribe(token => this.actions.dispatch(cleanupPrivateData({authToken: token})));
-        return this.displayError('UNAUTHENTICATED');
+        getAuthToken()
+          .pipe(take(1))
+          .subscribe((token) =>
+            this.actions.dispatch(cleanupPrivateData({ authToken: token }))
+          );
+        return this.alertsService.enqueueAlert({
+          header: this.translateService.instant('ERROR.UNAUTHENTICATED.TITLE'),
+          message: this.translateService.instant('ERROR.UNAUTHENTICATED.MESSAGE'),
+          type: 'error',
+          priority: 10
+        });
       }
+
       case 500: {
-        // expected errors (business error case which should display a specific message)
         const expectedErrorMessage = getExpectedErrorMessage(error);
         if (expectedErrorMessage) {
-          return this.displayWarning(expectedErrorMessage);
+          return this.alertsService.enqueueAlert({
+            header: this.translateService.instant('ERROR.WARNING.TITLE'),
+            message: expectedErrorMessage,
+            type: 'warning',
+            priority: 20
+          });
         }
-        // unexpected errors
-        return this.displayGenericError(error);
+        return this.alertsService.enqueueAlert({
+          header: this.translateService.instant('ERROR.UNKNOWN'),
+          message: error.message,
+          type: 'generic',
+          priority: 15
+        });
       }
+
       default:
-        return this.displayGenericError(error);
+        return this.alertsService.enqueueAlert({
+          header: this.translateService.instant('ERROR.UNKNOWN'),
+          message: error.message,
+          type: 'generic',
+          priority: 15
+        });
     }
   }
 
@@ -109,43 +145,5 @@ export class AppErrorHandler implements ErrorHandler {
     }
 
     this.translateService = this.injector.get(TranslateService);
-  }
-
-  private async displayWarning(message: string) {
-    const header = this.translateService.instant(`ERROR.WARNING.TITLE`);
-
-    const alert = await this.alertController.create({
-      header,
-      message,
-      buttons: ['OK'],
-    });
-
-    await alert.present();
-  }
-
-  private async displayError(errorType: string) {
-    const header = this.translateService.instant(`ERROR.${errorType}.TITLE`);
-    const message = this.translateService.instant(`ERROR.${errorType}.MESSAGE`);
-
-    const alert = await this.alertController.create({
-      header,
-      message,
-      buttons: ['OK'],
-    });
-
-    await alert.present();
-  }
-
-  private async displayGenericError(error: HttpErrorResponse) {
-    const header = this.translateService.instant('ERROR.UNKNOWN');
-
-    const alert = await this.alertController.create({
-      header,
-      subHeader: error.statusText,
-      message: error.message,
-      buttons: ['OK'],
-    });
-
-    await alert.present();
   }
 }

@@ -119,7 +119,8 @@ ion-input.input {
   border-radius: 0.15rem;
   --ion-item-background: var(--app-color-component-background-primary);
   background-color: var(--app-color-component-background-primary);
-  caret-color: auto;
+  --highlight-color: var(--app-font-color-primary);
+  color: var(--app-font-color-primary) !important;
 }
 
 .icon {

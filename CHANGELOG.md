@@ -3,27 +3,45 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## next-release (YYYY-MM-DD)
+## x.x.x (2025-xx-xx)
+
+### Client
+#### Bug fixes
+* **(restaurants)** : correction des dates tronquées à cause d'un scroll vertical inutile
+* **(schedule)** : correction du bouton 'Voir Plus' de la vue liste de l'emploi du temps qui n'affichait pas lorsque l'étudiant n'a pas de cours pendant plus de 15 jours
+
+## 1.2.0 (2024-12-11)
 
 ### Client
 #### Bug fixes
 * **(guided-tour)** : correction problème de chargement des traductions du tour guidé sur certains périphériques
+* **(rss)** : correction problème de décalage du bouton 'Lire plus' sur iOS
 * **(statistics)** : suppression de l'utilisation du DeviceId pour le suivi des statistiques d'usage comme préconisé dans le RGPD. Utilisation d'une UID générée automatiquement par le client à la place.
-* **(widgets)**: les widgets tiennent désormais compte de l'Ionicon ou bien des icônes SVG renseignées du côté du CMS et les affichent à côté du titre de la Widget
+* **(widgets)** : les widgets tiennent désormais compte de l'Ionicon ou bien des icônes SVG renseignées du côté du CMS et les affichent à côté du titre de la Widget
+* **(widgets)** : correction du problème de chargement du contenu sur les widgets au premier démarrage de l'application ou après authentification
 
 #### New features
+* **(app-update)** : Nouveau module permettant de vérifier si une mise à jour du client est disponible sur les stores et force éventuellement l'utilisateur à mettre à jour si des évolutions majeures empêchent le fonctionnement des anciennes versions
 * **(calendar)** : Il est désormais possible de choisir entre 2 affichages pour la widget des évènements du calendrier :
   * Liste verticale (list)
   * Slider horizontal (slider)
 * **(schedule)** : Il est désormais possible de choisir entre 2 affichages pour la widget des prochains cours à venir :
   * Liste verticale (list)
   * Slider horizontal (slider)
+* **(shared)** : Création d'un nouveau service **Alert** partagé, permettant de gérer l'affichage des messages d'alerte par le biais d'une file d'attente et par ordre de priorité
 
 ### Backend
 #### Bug fixes
 * **(auth)** : l'authentification transmet désormais l'IP du client au serveur CAS pour éviter le bannissement du microservice auth sur de trop nombreuses tentatives d'authentification en échec
 * **(maps)** : suppression du tracking du fichier map-data.json et ajout d'un fichier .dist avec des POI factices
 * **(statistics)** : prise en compte de la nouvelle uid de tracking à la place du Device Id pour la génération des statistiques d'usage
+
+#### New Features
+* **(main)** : une nouvelle route `/app-update-infos` a été ajoutée permettant de retourner les informations nécessaires au client pour le module de mise à jour `app-update`
+
+### Autres
+* Mise à jour du framework [Ionic](https://ionic.io/docs) : Version 7 → Version 8
+* Ajout d'une variable d'environnement pour les mocks pour indiquer l'url vers les assets statiques
 
 ## 1.1.0 (2024-09-13)
 

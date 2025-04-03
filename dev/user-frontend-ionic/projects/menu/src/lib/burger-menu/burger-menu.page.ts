@@ -38,16 +38,14 @@
  */
 
 import { Component, Inject, OnDestroy } from '@angular/core';
-import { App } from '@capacitor/app';
-import { Capacitor } from '@capacitor/core';
 import { AlertController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import {
   AuthenticatedUser, authenticatedUser$, isDarkTheme, isDarkTheme$, MenuItem, MenuOpenerService,
   MenuService as SharedMenuService, setIsDarkTheme, setLanguage, setUserHaveSetThemeInApp,
-  WidgetLifecycleService, GuidedTourService, MultiTenantService, Tenant, tenantThemeApplied$
+  WidgetLifecycleService, GuidedTourService, VersionService, MultiTenantService, Tenant, tenantThemeApplied$
 } from '@multi/shared';
-import { from, Observable, of, Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -79,9 +77,10 @@ export class BurgerMenuPage implements OnDestroy {
     private sharedMenuService: SharedMenuService,
     private widgetLifecycleService: WidgetLifecycleService,
     private guidedTourService: GuidedTourService,
+    private versionService: VersionService,
     private alertController: AlertController,
     private translateService: TranslateService,
-    public menuOpenerService: MenuOpenerService,
+  public menuOpenerService: MenuOpenerService,
     public multiTenantService: MultiTenantService
   ) {
     this.languages = this.environment.languages;
@@ -93,9 +92,7 @@ export class BurgerMenuPage implements OnDestroy {
     this.dynamicMenuItems$ = this.sharedMenuService.burgerMenuItems$.pipe(
       map(menuItems => menuItems.filter(menuItem => menuItem.type === 'dynamic'))
     );
-    this.appVersion$ = !Capacitor.isNativePlatform()
-      ? of(this.environment.appVersion || '0.0.0')
-      : from(App.getInfo()).pipe(map(info => info.version));
+    this.appVersion$ = this.versionService.getCurrentAppVersion();
 
     this.isDarkTheme$ = isDarkTheme$;
     this.isUniversitiesButtonVisible = this.displayUniversitiesButton();

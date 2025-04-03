@@ -54,7 +54,7 @@ import {
   themeRepoInitialized$, userHadSetThemeInApp, userHadSetThemeInApp$, tenantThemeApplied$, MultiTenantService
 } from '@multi/shared';
 import { initializeApp } from 'firebase/app';
-import {combineLatest, Observable, of, Subscription } from 'rxjs';
+import { combineLatest, Observable, of, Subscription } from 'rxjs';
 import { distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
 import { Title } from '@angular/platform-browser';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -137,9 +137,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
   private initializeAppResume(): void {
     // reload notifications when app is resumed (back to foreground)
-    this.appResumeListener = App.addListener('resume', () => {
-      this.notificationsService.loadNotifications(0, 10).subscribe();
-    });
+    this.appResumeListener = App.addListener('resume', () =>
+      this.notificationsService.loadNotifications(0, 10).subscribe()
+    );
   }
 
   private initializeTheme(): void {

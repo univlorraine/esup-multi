@@ -41,6 +41,7 @@
  * Public API Surface of shared
  */
 
+export * from './lib/alerts/alerts.service';
 export * from './lib/auth/auth.guard';
 export * from './lib/auth/auth.interceptor';
 export * from './lib/auth/auth.repository';
@@ -84,6 +85,7 @@ export * from './lib/store/local-forage';
 export * from './lib/store/user-store-helper';
 export * from './lib/theme/theme.repository';
 export * from './lib/theme/theme.service';
+export * from './lib/version/version.service';
 export * from './lib/fcm/fcm-global.service';
 export * from './lib/fcm/fcm.repository';
 export * from './lib/multi-tenant/multi-tenant.module';
