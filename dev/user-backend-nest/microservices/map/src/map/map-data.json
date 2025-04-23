@@ -1,0 +1,3799 @@
+{
+  "presidences_points": {
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Aile A et B",
+          "Descriptif": "IUT Reims-Châlons-Charleville",
+          "Adresse": "Chaussée du port, 51000 Châlons-en-Champagne",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.356833,
+            48.959505
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment C",
+          "Descriptif": "IUT Reims-Châlons-Charleville",
+          "Adresse": "Chaussée du port, 51000 Châlons-en-Champagne",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.356489,
+            48.959188
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment A",
+          "Descriptif": "INSPE",
+          "Adresse": "4 rue du 14 juillet 52000 Chaumont",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            5.145308,
+            48.112496
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment B",
+          "Descriptif": "INSPE",
+          "Adresse": "4 rue du 14 juillet 52000 Chaumont",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            5.144482,
+            48.112517
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment 2",
+          "Descriptif": "Campus Croix-Rouge",
+          "Adresse": "57 rue Pierre Taittinger, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.002352,
+            49.237648
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment 3",
+          "Descriptif": "Campus Croix-Rouge",
+          "Adresse": "57 rue Pierre Taittinger, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.001848,
+            49.237611
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment 4",
+          "Descriptif": "Campus Croix-Rouge",
+          "Adresse": "57 rue Pierre Taittinger, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.001094,
+            49.237044
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment 5",
+          "Descriptif": "Campus Croix-Rouge",
+          "Adresse": "57 rue Pierre Taittinger, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.002679,
+            49.237065
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment 9",
+          "Descriptif": "Campus Croix-Rouge",
+          "Adresse": "57 rue Pierre Taittinger, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.002738,
+            49.235632
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment 12",
+          "Descriptif": "Campus Croix-Rouge",
+          "Adresse": "57 rue Pierre Taittinger, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.003487,
+            49.236075
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment 13",
+          "Descriptif": "Campus Croix-Rouge",
+          "Adresse": "57 rue Pierre Taittinger, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.000115,
+            49.236645
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment 14",
+          "Descriptif": "Campus Croix-Rouge",
+          "Adresse": "57 rue Pierre Taittinger, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.004340,
+            49.233814
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment 16",
+          "Descriptif": "Campus Croix-Rouge",
+          "Adresse": "57 rue Pierre Taittinger, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.001432,
+            49.235788
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment 17",
+          "Descriptif": "Campus Croix-Rouge",
+          "Adresse": "57 rue Pierre Taittinger, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.000381,
+            49.237252
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment 18",
+          "Descriptif": "Campus Croix-Rouge",
+          "Adresse": "57 rue Pierre Taittinger, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.002255,
+            49.235247
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment 19",
+          "Descriptif": "Campus Croix-Rouge",
+          "Adresse": "57 rue Pierre Taittinger, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.002207,
+            49.236030
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment modulaire 1",
+          "Descriptif": "Campus Croix-Rouge",
+          "Adresse": "57 rue Pierre Taittinger, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            3.999445,
+            49.238044
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment modulaire 9",
+          "Descriptif": "Campus Croix-Rouge",
+          "Adresse": "57 rue Pierre Taittinger, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            3.998557,
+            49.238149
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment modulaire 10",
+          "Descriptif": "Campus Croix-Rouge",
+          "Adresse": "57 rue Pierre Taittinger, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            3.998635,
+            49.238011
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment modulaire 11",
+          "Descriptif": "Campus Croix-Rouge",
+          "Adresse": "57 rue Pierre Taittinger, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            3.998621,
+            49.237858
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment modulaire 12",
+          "Descriptif": "Campus Croix-Rouge",
+          "Adresse": "57 rue Pierre Taittinger, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            3.998694,
+            49.237716
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment modulaire 14",
+          "Descriptif": "Campus Croix-Rouge",
+          "Adresse": "57 rue Pierre Taittinger, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            3.998753,
+            49.237422
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Maison des Sciences Humaines",
+          "Descriptif": "Laboratoire de recherche, Campus Croix-Rouge",
+          "Adresse": "57 rue Pierre Taittinger, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            3.998761,
+            49.237566
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment 1",
+          "Descriptif": "Campus Moulin de la Housse",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.062463,
+            49.243427
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment 2-3",
+          "Descriptif": "Laboratoire des langues, Laboratoire de Mathématiques de Reims (LMR), Centre de Calcul Régional (ROMEO), Campus Moulin de la Housse",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.062318,
+            49.243933
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment 4",
+          "Descriptif": "Campus Moulin de la Housse",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.063598,
+            49.243921
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment 5",
+          "Descriptif": "Campus Moulin de la Housse",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.064933,
+            49.243910
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment 5b",
+          "Descriptif": "Campus Moulin de la Housse",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.065735,
+            49.244406
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment 5t",
+          "Descriptif": "Campus Moulin de la Housse",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.066768,
+            49.244372
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment 6",
+          "Descriptif": "Groupe de Recherche en Sciences Pour l’Ingénieur (GRESPI), Groupe de Spectrométrie Moléculaire et Atmosphérique (GSMA), Laboratoire d'Ingénierie et Sciences des Matériaux (LISM), Laboratoire de Recherche en Nanosciences (LRN), Campus Moulin de la Housse",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.066291,
+            49.243306
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment 6b",
+          "Descriptif": "Hall de technologie, Campus Moulin de la Housse",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.067640,
+            49.243217
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment 7",
+          "Descriptif": "Campus Moulin de la Housse",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.066832,
+            49.243637
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment 7b",
+          "Descriptif": "Campus Moulin de la Housse",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.067457,
+            49.243688
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment 8",
+          "Descriptif": "Campus Moulin de la Housse",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.064727,
+            49.242411
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment 8b",
+          "Descriptif": "Campus Moulin de la Housse",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.064598,
+            49.242888
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment 9",
+          "Descriptif": "Campus Moulin de la Housse",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.064196,
+            49.242138
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment 10",
+          "Descriptif": "Campus Moulin de la Housse",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.062900,
+            49.242089
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment 11",
+          "Descriptif": "Campus Moulin de la Housse",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.062796,
+            49.241840
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment 12",
+          "Descriptif": "Centre de Recherche en Sciences et Technologies de l'Information et de la Communication (CRESTIC), Cellflex, Campus Moulin de la Housse",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.063549,
+            49.241490
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment 13",
+          "Descriptif": "Campus Moulin de la Housse",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.064343,
+            49.241665
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment 14",
+          "Descriptif": "Campus Moulin de la Housse",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.061688,
+            49.243646
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment 15",
+          "Descriptif": "Campus Moulin de la Housse",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.069300,
+            49.243931
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment 16",
+          "Descriptif": "Campus Moulin de la Housse",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.069185,
+            49.244257
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment 17",
+          "Descriptif": "Campus Moulin de la Housse",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.062120,
+            49.242581
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment 18",
+          "Descriptif": "Europol’Agro, Résistance Induite et Bioprotection des Plantes (RIBP), Matrice Extracellulaire et Dynamique Cellulaire (MEDyC), Institut de Chimie Moléculaire de Reims (ICMR), Fractionnement des Agro-Ressources et Environnement (FARE), Stress Environnementaux et BIOsurveillance des milieux aquatiques (SEBIO), Campus Moulin de la Housse",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.0661241,
+            49.242262
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment 19",
+          "Descriptif": "Campus Moulin de la Housse",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.069356,
+            49.243005
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment 19a",
+          "Descriptif": "Campus Moulin de la Housse",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.068949,
+            49.242938
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment 19b",
+          "Descriptif": "Campus Moulin de la Housse",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.068957,
+            49.243196
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment 20",
+          "Descriptif": "Campus Moulin de la Housse",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.068426,
+            49.243465
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment 20b",
+          "Descriptif": "Campus Moulin de la Housse",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.069126,
+            49.242425
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment 21",
+          "Descriptif": "Campus Moulin de la Housse",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.070260,
+            49.242035
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment 22",
+          "Descriptif": "Campus Moulin de la Housse",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.061693,
+            49.244141
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment 23",
+          "Descriptif": "Campus Moulin de la Housse",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.059314,
+            49.244147
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment 24",
+          "Descriptif": "Campus Moulin de la Housse",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.064735,
+            49.244693
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment 25",
+          "Descriptif": "Campus Moulin de la Housse",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.068447,
+            49.244078
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment C",
+          "Descriptif": "IUT Reims-Châlons-Charleville",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.061787,
+            49.240767
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment D",
+          "Descriptif": "IUT Reims-Châlons-Charleville",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.061801,
+            49.240478
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment H",
+          "Descriptif": "IUT Reims-Châlons-Charleville",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.063453,
+            49.240550
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment I",
+          "Descriptif": "IUT Reims-Châlons-Charleville",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.062796,
+            49.240401
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment K",
+          "Descriptif": "IUT Reims-Châlons-Charleville",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.064314,
+            49.240418
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment PR1",
+          "Descriptif": "IUT Reims-Châlons-Charleville",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.062790,
+            49.240215
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment PR2",
+          "Descriptif": "IUT Reims-Châlons-Charleville",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.063201,
+            49.240201
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment S",
+          "Descriptif": "IUT Reims-Châlons-Charleville",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.060838,
+            49.240476
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment T",
+          "Descriptif": "IUT Reims-Châlons-Charleville",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.061396,
+            49.240014
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment U",
+          "Descriptif": "IUT Reims-Châlons-Charleville",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.062063,
+            49.239986
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment V",
+          "Descriptif": "IUT Reims-Châlons-Charleville",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.062675,
+            49.239982
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment Z",
+          "Descriptif": "IUT Reims-Châlons-Charleville",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.062401,
+            49.239753
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment A",
+          "Descriptif": "Laboratoire de recherche, Pôle Santé",
+          "Adresse": "51 rue Cognacq Jay 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.016219,
+            49.227449
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment B",
+          "Descriptif": "Pôle Santé",
+          "Adresse": "51 rue Cognacq Jay 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.015447,
+            49.227588
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment C",
+          "Descriptif": "Pôle Santé",
+          "Adresse": "51 rue Cognacq Jay 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.015025,
+            49.228064
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment A",
+          "Descriptif": "ESIReims",
+          "Adresse": "3 esplanade Roland Garros 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.064252,
+            49.237870
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment B",
+          "Descriptif": "ESIReims",
+          "Adresse": "3 esplanade Roland Garros 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.065314,
+            49.237394
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment A",
+          "Descriptif": "IUT de Troyes",
+          "Adresse": "9 rue Quebec, 10430 Rosières-prés-Troyes",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.080064,
+            48.268735
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment C",
+          "Descriptif": "IUT de Troyes",
+          "Adresse": "9 rue Quebec, 10430 Rosières-prés-Troyes",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.080206,
+            48.268176
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment D",
+          "Descriptif": "IUT de Troyes",
+          "Adresse": "9 rue Quebec, 10430 Rosières-prés-Troyes",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.080171,
+            48.267798
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment E",
+          "Descriptif": "IUT de Troyes",
+          "Adresse": "9 rue Quebec, 10430 Rosières-prés-Troyes",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.080541,
+            48.268507
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment F",
+          "Descriptif": "IUT de Troyes",
+          "Adresse": "9 rue Quebec, 10430 Rosières-prés-Troyes",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.079530,
+            48.267950
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment G",
+          "Descriptif": "IUT de Troyes",
+          "Adresse": "9 rue Quebec, 10430 Rosières-prés-Troyes",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.079152,
+            48.267605
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bâtiment H",
+          "Descriptif": "IUT de Troyes",
+          "Adresse": "9 rue Quebec, 10430 Rosières-prés-Troyes",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.079742,
+            48.269080
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Siège université",
+          "Descriptif": "",
+          "Adresse": "2 avenue Robert Schuman, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.007733,
+            49.232925
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Villa Douce",
+          "Descriptif": "Institut Georges Chappaz de la vigne et du vin en Champagne",
+          "Adresse": "9 boulevard de la Paix, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.040818,
+            49.255935
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Aÿ-Champagne - Villa Bissinger",
+          "Descriptif": "Institut Georges Chappaz de la vigne et du vin en Champagne",
+          "Adresse": "15 rue Jeanson, 51160 Aÿ-Champagne",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.002288,
+            49.056775
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Boult-aux-Bois",
+          "Descriptif": "Centre de Recherche et de Formation en Eco-éthologie (CERFE)",
+          "Adresse": "5 Rue de la Héronnière, 08240 Boult-aux-Bois",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.838592,
+            49.430251
+          ]
+        }
+      }
+    ]
+  },
+  "composantes_points": {
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Amphithéâtre A",
+          "Descriptif": "IUT Reims-Châlons-Charleville",
+          "Adresse": "Chaussée du port, 51000 Châlons-en-Champagne",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.356789086942037,
+            48.95963571446272
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Amphithéâtre C",
+          "Descriptif": "IUT Reims-Châlons-Charleville",
+          "Adresse": "Chaussée du port, 51000 Châlons-en-Champagne",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.356276808445407,
+            48.95926039304586
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Auditorium",
+          "Descriptif": "INSPE",
+          "Adresse": "4 rue du 14 juillet 52000 Chaumont",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            5.144605376033461,
+            48.11224488778541
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Amphithéâtres 1 à 6",
+          "Descriptif": "Campus Croix-Rouge",
+          "Adresse": "57 rue Pierre Taittinger, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.002699932209597,
+            49.237085654516825
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Amphithéâtres 7 à 10",
+          "Descriptif": "Campus Croix-Rouge",
+          "Adresse": "57 rue Pierre Taittinger, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.002803493362321,
+            49.235548678618414
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Amphithéâtre",
+          "Descriptif": "Campus Moulin de la Housse",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.063644631921168,
+            49.24369987401504
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Amphithéâtre A1",
+          "Descriptif": "IUT Reims-Châlons-Charleville",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.0615956559891995,
+            49.24090503391299
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Amphithéâtre A2",
+          "Descriptif": "IUT Reims-Châlons-Charleville",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.062026974534194,
+            49.24088475252262
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Amphithéâtre Y3 - RDC",
+          "Descriptif": "IUT Reims-Châlons-Charleville",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.061721119187431,
+            49.23974692199492
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Amphithéâtre Y4 - 1er étage",
+          "Descriptif": "IUT Reims-Châlons-Charleville",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.061689860002066,
+            49.239628880754054
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Amphithéâtre 1",
+          "Descriptif": "INSPE",
+          "Adresse": "11 rue Gabriel Voisin, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.068005412625129,
+            49.232716851809684
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Amphithéâtre 2",
+          "Descriptif": "INSPE",
+          "Adresse": "11 rue Gabriel Voisin, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.0706238519253315,
+            49.231973396525
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Amphithéâtre",
+          "Descriptif": "IUT de Troyes",
+          "Adresse": "9 rue Quebec, 10430 Rosières-prés-Troyes",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.079789048718356,
+            48.268452397807735
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Amphithéâtre",
+          "Descriptif": "INSPE",
+          "Adresse": "6 avenue des lombards, 10000 Troyes",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.067927339134336,
+            48.27696311223381
+          ]
+        }
+      }
+    ]
+  },
+  "bus_points": {
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bibliothèque Universitaire",
+          "Descriptif": "IUT Reims-Châlons-Charleville",
+          "Adresse": "Chaussée du port, 51000 Châlons-en-Champagne",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.356638803324493,
+            48.95913378455301
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bibliothèque Universitaire",
+          "Descriptif": "INSPE",
+          "Adresse": "11 rue des droits de l'enfant, 08000 Charleville-Mézières",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.718406053702101,
+            49.73774724826958
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bibliothèque Universitaire",
+          "Descriptif": "INSPE",
+          "Adresse": "4 rue du 14 juillet 52000 Chaumont",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            5.145483888386285,
+            48.11232099339363
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bibliothèque Universitaire Robert de Sorbon",
+          "Descriptif": "Campus Croix-Rouge",
+          "Adresse": "57 rue Pierre Taittinger, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.001173362742075,
+            49.23566068273586
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bibliothèque Universitaire",
+          "Descriptif": "Campus Moulin de la Housse",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.061771407602756,
+            49.243735270966006
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Centre documentaire",
+          "Descriptif": "IUT Reims-Châlons-Charleville",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.0618913582962515,
+            49.24045076709859
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bibliothèque Universitaire",
+          "Descriptif": "Pôle Santé",
+          "Adresse": "51 rue Cognacq Jay 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.015611000609173,
+            49.227688428164605
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bibliothèque universitaire",
+          "Descriptif": "INSPE",
+          "Adresse": "11 rue Gabriel Voisin, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.0676184149091315,
+            49.232708292955465
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bibliothèque universitaire",
+          "Descriptif": "Campus Comtes de Champagne",
+          "Adresse": "Place du préau 10000 Troyes",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.079498790356266,
+            48.29937999097113
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bibliothèque universitaire",
+          "Descriptif": "IUT de Troyes",
+          "Adresse": "9 rue Quebec, 10430 Rosières-prés-Troyes",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.079570102588806,
+            48.26877830595364
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Bibliothèque universitaire",
+          "Descriptif": "INSPE",
+          "Adresse": "6 avenue des lombards, 10000 Troyes",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.067356882778506,
+            48.277154643736324
+          ]
+        }
+      }
+    ]
+  },
+  "restos_points": {
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Cafétéria",
+          "Descriptif": "IUT Reims-Châlons-Charleville et INSPE",
+          "Adresse": "Chaussée du port, 51000 Châlons-en-Champagne",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.356093,
+            48.959065
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Resto U ENSAM",
+          "Descriptif": "IUT Reims-Châlons-Charleville et INSPE",
+          "Adresse": "2 rue Saint-Dominique, 51000 Châlons-en-Champagne",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.358823,
+            48.956825
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Resto U Moulin Le Blanc",
+          "Descriptif": "EiSINe et INSPE",
+          "Adresse": "3 boulevard Jean Delautre, 08000 Charleville-Mézières",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.717826,
+            49.739666
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "La Maison du Campus",
+          "Descriptif": "EiSINe et INSPE",
+          "Adresse": "38 rue de Montjoly, 08000 Charleville-Mézières",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.712974,
+            49.772723
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Resto U Jean-Charles Prost",
+          "Descriptif": "Campus Croix-Rouge",
+          "Adresse": "57 rue Pierre Taittinger, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.003237,
+            49.235967
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Kfet by INTERCampus",
+          "Descriptif": "Campus Croix-Rouge",
+          "Adresse": "57 rue Pierre Taittinger, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.001392,
+            49.236995
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Resto U Paul Fort",
+          "Descriptif": "Campus Croix-Rouge",
+          "Adresse": "8 boulevard Franchet d'Espèrey, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.015259,
+            49.241564
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Resto U Moulin de la Housse",
+          "Descriptif": "Campus Moulin de la Housse et IUT Reims-Châlons-Charleville",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.060408,
+            49.241842
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Cafet Sciences",
+          "Descriptif": "Campus Moulin de la Housse",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.062605,
+            49.243936
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Cafet Evariste Galois",
+          "Descriptif": "Campus Moulin de la Housse et IUT Reims-Châlons-Charleville",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.059011,
+            49.241579
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Cafet IUT Reims",
+          "Descriptif": "IUT Reims-Châlons-Charleville",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.062179,
+            49.240643
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Resto U Pôle santé",
+          "Descriptif": "Pôle Santé",
+          "Adresse": "51 rue Cognacq Jay 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.062179,
+            49.240643
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Resto U Inspé",
+          "Descriptif": "INSPE et ESIReims",
+          "Adresse": "23 rue Clément Ader, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.068112,
+            49.232327
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Cafétéria Hôtel Dieu",
+          "Descriptif": "Campus Comtes de Champagne",
+          "Adresse": "Place du préau 10000 Troyes",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.079197,
+            48.299343
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Resto U Les Courtines",
+          "Descriptif": "Campus Comtes de Champagne",
+          "Adresse": "6 rue de la petite courtine, 10000 Troyes",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.083607,
+            48.299677
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Cafet IUT Troyes",
+          "Descriptif": "IUT de Troyes",
+          "Adresse": "9 rue Quebec, 10430 Rosières-prés-Troyes",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.079779,
+            48.268050
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Resto U Les Lombards",
+          "Descriptif": "IUT de Troyes",
+          "Adresse": "28 place Léonard de Vinci, 10430 Rosières-Près-Troyes",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.070515,
+            48.267991
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Brasserie UTT",
+          "Descriptif": "IUT de Troyes",
+          "Adresse": "12 rue Marie Curie, 10000 Troyes",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.067358,
+            48.268823
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Cafet le QG",
+          "Descriptif": "IUT de Troyes",
+          "Adresse": "16 place Léonard de Vinci, 10430 Rosières-Près-Troyes",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.070432,
+            48.268553
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Restauration",
+          "Descriptif": "INSPE",
+          "Adresse": "6 avenue des lombards, 10000 Troyes",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.067374,
+            48.277117
+          ]
+        }
+      }
+    ]
+  },
+  "cites_points": {
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Parking",
+          "Descriptif": "IUT Reims-Châlons-Charleville et INSPE",
+          "Adresse": "Chaussée du port, 51000 Châlons-en-Champagne",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.356696,
+            48.959836
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Parking",
+          "Descriptif": "EiSINe",
+          "Adresse": "9a rue Claude Chrétien 8000 Charleville-Mézières",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.721388,
+            49.738089
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Parking",
+          "Descriptif": "INSPE",
+          "Adresse": "11 rue des droits de l'enfant, 08000 Charleville-Mézières",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.719007,
+            49.737375
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Parking",
+          "Descriptif": "IUT Reims-Châlons-Charleville",
+          "Adresse": "4 boulevard Jean Delautre 8000 Charleville-Mézières",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.719878,
+            49.739536
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Parking",
+          "Descriptif": "INSPE",
+          "Adresse": "4 rue du 14 juillet 52000 Chaumont",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            5.145274,
+            48.112125
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Parking A",
+          "Descriptif": "Campus Croix-Rouge",
+          "Adresse": "57 rue Pierre Taittinger, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.004557,
+            49.233247
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Parking B",
+          "Descriptif": "Campus Croix-Rouge",
+          "Adresse": "57 rue Pierre Taittinger, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.003232,
+            49.234310
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Parking C",
+          "Descriptif": "Campus Croix-Rouge",
+          "Adresse": "57 rue Pierre Taittinger, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.001558,
+            49.235286
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Parking D",
+          "Descriptif": "Campus Croix-Rouge",
+          "Adresse": "57 rue Pierre Taittinger, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            3.999627,
+            49.237294
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Parking E",
+          "Descriptif": "Campus Croix-Rouge",
+          "Adresse": "57 rue Pierre Taittinger, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.000724,
+            49.237881
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Parking 1",
+          "Descriptif": "Campus Moulin de la Housse",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.063434,
+            49.244964
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Parking 2",
+          "Descriptif": "Campus Moulin de la Housse",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.064622,
+            49.243873
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Parking 3",
+          "Descriptif": "Campus Moulin de la Housse",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.067291,
+            49.243527
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Parking 4",
+          "Descriptif": "Campus Moulin de la Housse",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.067895,
+            49.244120
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Parking 5",
+          "Descriptif": "Campus Moulin de la Housse",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.068257,
+            49.243122
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Parking 6",
+          "Descriptif": "Campus Moulin de la Housse",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.070005,
+            49.241930
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Parking 7",
+          "Descriptif": "Campus Moulin de la Housse",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.066596,
+            49.242187
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Parking 8",
+          "Descriptif": "Campus Moulin de la Housse",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.065435,
+            49.242679
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Parking 9",
+          "Descriptif": "Campus Moulin de la Housse",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.064094,
+            49.240925
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Parking 10",
+          "Descriptif": "Campus Moulin de la Housse",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.059904,
+            49.243064
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Parking 11",
+          "Descriptif": "Campus Moulin de la Housse",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.058960,
+            49.244056
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Parking 1",
+          "Descriptif": "Parking étudiant, IUT Reims-Châlons-Charleville",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.060972,
+            49.239890
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Parking 2",
+          "Descriptif": "Parking étudiant, IUT Reims-Châlons-Charleville",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.063109,
+            49.239324
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Parking 3",
+          "Descriptif": "Parking étudiant, IUT Reims-Châlons-Charleville",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.063485,
+            49.239746
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Parking 4",
+          "Descriptif": "Parking étudiant, IUT Reims-Châlons-Charleville",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.063938,
+            49.240396
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Parking visiteurs",
+          "Descriptif": "IUT Reims-Châlons-Charleville",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.062034,
+            49.241369
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Parking personnel",
+          "Descriptif": "Parking étudiant, IUT Reims-Châlons-Charleville",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.061036,
+            49.240805
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Parking",
+          "Descriptif": "Pôle Santé",
+          "Adresse": "51 rue Cognacq Jay 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.015272,
+            49.228977
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Parking",
+          "Descriptif": "ESIReims",
+          "Adresse": "3 esplanade Roland Garros 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.064671,
+            49.238061
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Parking centre de formation",
+          "Descriptif": "INSPE",
+          "Adresse": "11 rue Gabriel Voisin, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.068192,
+            49.232003
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Parking siège",
+          "Descriptif": "INSPE",
+          "Adresse": "23 rue Clément Ader, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.069893,
+            49.232103
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Parking",
+          "Descriptif": "Siège Université",
+          "Adresse": "2 avenue Robert Schuman, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.008189,
+            49.232629
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Parking",
+          "Descriptif": "IUT de Troyes",
+          "Adresse": "9 rue Quebec, 10430 Rosières-prés-Troyes",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.079951,
+            48.269210
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Parking",
+          "Descriptif": "INSPE",
+          "Adresse": "6 avenue des lombards, 10000 Troyes",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.068412,
+            48.276164
+          ]
+        }
+      }
+    ]
+  },
+  "santes_points": {
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "FabLab",
+          "Descriptif": "EiSINe",
+          "Adresse": "9A rue Claude Chrétien 8000 Charleville-Mézières",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.720489,
+            49.738383
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Administration",
+          "Descriptif": "INSPE",
+          "Adresse": "11 rue des droits de l'enfant, 08000 Charleville-Mézières",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.718902,
+            49.737803
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Accueil",
+          "Descriptif": "INSPE",
+          "Adresse": "11 rue des droits de l'enfant, 08000 Charleville-Mézières",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.718684,
+            49.737941
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Salle polyvalente DAUMAL",
+          "Descriptif": "INSPE",
+          "Adresse": "11 rue des droits de l'enfant, 08000 Charleville-Mézières",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.718330,
+            49.737988
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Accueil",
+          "Descriptif": "INSPE",
+          "Adresse": "4 rue du 14 juillet 52000 Chaumont",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            5.144957,
+            48.112702
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Foyer étudiant",
+          "Descriptif": "INSPE",
+          "Adresse": "4 rue du 14 juillet 52000 Chaumont",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            5.145496,
+            48.112220
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Médecine préventive universitaire",
+          "Descriptif": "Campus Croix-Rouge",
+          "Adresse": "57 rue Pierre Taittinger, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.002441,
+            49.238014
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Pyxis",
+          "Descriptif": "Campus Croix-Rouge",
+          "Adresse": "57 rue Pierre Taittinger, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.002167,
+            49.235934
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "AGORAé",
+          "Descriptif": "Épicerie sociale étudiante et INTERCampus, Campus Croix-Rouge",
+          "Adresse": "57 rue Pierre Taittinger, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            3.998795,
+            49.237856
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "UFR DSP",
+          "Descriptif": "Droit et Science Politique, Accueil - Scolarité - Administration, Campus Croix-Rouge",
+          "Adresse": "57 rue Pierre Taittinger, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.002805,
+            49.237566
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "UFR SESG",
+          "Descriptif": "Sciences Economiques, Sociales et Gestion, Accueil - Scolarité - Administration, Campus Croix-Rouge",
+          "Adresse": "57 rue Pierre Taittinger, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.002457,
+            49.237510
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "UFR LSH",
+          "Descriptif": "Lettres et Sciences Humaines, Accueil - Scolarité - Administration, Campus Croix-Rouge",
+          "Adresse": "57 rue Pierre Taittinger, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.000139,
+            49.237447
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "UFR STAPS",
+          "Descriptif": "Sciences et Techniques des Activités Physiques et Sportives, Accueil - Scolarité - Administration, Campus Croix-Rouge",
+          "Adresse": "57 rue Pierre Taittinger, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.002567,
+            49.234851
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Associations étudiantes",
+          "Descriptif": "Campus Croix-Rouge",
+          "Adresse": "57 rue Pierre Taittinger, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.001475,
+            49.237042
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Imprimerie centrale",
+          "Descriptif": "Campus Croix-Rouge",
+          "Adresse": "57 rue Pierre Taittinger, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.001201,
+            49.236935
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "UFR SEN",
+          "Descriptif": "Sciences Exactes et Naturelles, Accueil - Scolarité - Administration, Campus Moulin de la Housse",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.062565,
+            49.243299
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Maison des langues",
+          "Descriptif": "Centre International d’Etudes Françaises (CIEF), CEntres de Ressources et Espaces de Langues (CEREL), Campus Moulin de la Housse",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.066977,
+            49.244276
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Médecine préventive universitaire",
+          "Descriptif": "Campus Moulin de la Housse",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.064727,
+            49.242410
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Mission Orientation",
+          "Descriptif": "Service d'Accompagnement des Etudiants, Campus Moulin de la Housse",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.061683,
+            49.243863
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "SUAPS",
+          "Descriptif": "Service Universitaire des Activités Physiques et Sportives, Campus Moulin de la Housse",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.068941,
+            49.242937
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Administration",
+          "Descriptif": "IUT Reims-Châlons-Charleville",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.062294,
+            49.241184
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Infirmerie",
+          "Descriptif": "IUT Reims-Châlons-Charleville",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.062592,
+            49.240217
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Administration et accueil",
+          "Descriptif": "Centre de formation INSPE",
+          "Adresse": "11 rue Gabriel Voisin, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.067640,
+            49.232566
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Scolarité",
+          "Descriptif": "Siège INSPE",
+          "Adresse": "23 rue Clément Ader, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.070121,
+            49.231870
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Accueil",
+          "Descriptif": "Siège INSPE",
+          "Adresse": "23 rue Clément Ader, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.070185,
+            49.231939
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Administration centrale et direction",
+          "Descriptif": "Siège INSPE",
+          "Adresse": "23 rue Clément Ader, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.070394,
+            49.232079
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Administration et accueil",
+          "Descriptif": "Campus Comtes de Champagne",
+          "Adresse": "Place du préau 10000 Troyes",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.079669,
+            48.299281
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Service d'Accompagnement des Etudiants",
+          "Descriptif": "Campus Comtes de Champagne",
+          "Adresse": "Place du préau 10000 Troyes",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.079171,
+            48.299174
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Scolarité",
+          "Descriptif": "Campus Comtes de Champagne",
+          "Adresse": "Place du préau 10000 Troyes",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.079350,
+            48.299204
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Administration et accueil",
+          "Descriptif": "IUT de Troyes",
+          "Adresse": "9 rue Quebec, 10430 Rosières-prés-Troyes",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.079500,
+            48.268776
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Accueil",
+          "Descriptif": "INSPE",
+          "Adresse": "6 avenue des lombards, 10000 Troyes",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.067916,
+            48.277510
+          ]
+        }
+      }
+    ]
+  },
+  "suaps_points": {
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Gymnase",
+          "Descriptif": "INSPE",
+          "Adresse": "11 rue des droits de l'enfant, 08000 Charleville-Mézières",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.717233,
+            49.738018
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Gymnase",
+          "Descriptif": "INSPE",
+          "Adresse": "4 rue du 14 juillet 52000 Chaumont",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            5.145759,
+            48.111590
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Halle des sports",
+          "Descriptif": "Campus Croix-Rouge",
+          "Adresse": "57 rue Pierre Taittinger, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.004189,
+            49.233697
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Complexe sportif",
+          "Descriptif": "Campus Moulin de la Housse",
+          "Adresse": "Chemin des rouliers, 51100 Reims",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.069332,
+            49.243001
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {
+          "Nom": "Gymnase René Lacoste",
+          "Descriptif": "",
+          "Adresse": "2 rue de la petite courtine, 10000 Troyes",
+          "Telephone": "",
+          "Horaires": "",
+          "Lien": "",
+          "Web": ""
+        },
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            4.083400,
+            48.299128
+          ]
+        }
+      }
+    ]
+  }
+}
