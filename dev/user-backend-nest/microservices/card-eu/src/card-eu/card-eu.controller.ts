@@ -40,7 +40,7 @@
 import { Controller } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
 import { Observable } from 'rxjs';
-import { UserCardEuDto } from './card-eu.dto';
+import { UserCardEuDto, UserCardEuLightDto } from './card-eu.dto';
 import { CardEuService } from './card-eu.service';
 
 @Controller()
@@ -50,5 +50,10 @@ export class CardEuController {
   @MessagePattern({ cmd: 'card-eu' })
   getUserCardEu(username: string): Observable<UserCardEuDto> {
     return this.cardEuService.getUserCardEu(username);
+  }
+
+  @MessagePattern({ cmd: 'card-eu-light' })
+  getUserCardEuLight(escn: string): Observable<UserCardEuLightDto> {
+    return this.cardEuService.getUserCardEuLight(escn);
   }
 }

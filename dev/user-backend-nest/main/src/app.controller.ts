@@ -54,7 +54,7 @@ import {
 } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { AuthGuard } from '@nestjs/passport';
-import { concatMap, map } from 'rxjs';
+import {concatMap, map, tap} from 'rxjs';
 import * as infosJsonData from './infos.json';
 import * as clientInfosJson from './client-infos.json';
 import { ErrorsInterceptor } from './interceptors/errors.interceptor';
@@ -265,6 +265,27 @@ export class AppController {
               cmd: 'card-eu',
             },
             user.username,
+          ),
+        ),
+      );
+  }
+
+  @Post('/card-eu-light')
+  cardEuLight(@Body() body) {
+    return this.authClient
+      .send(
+        {
+          cmd: 'getUserOrThrowError',
+        },
+        body,
+      )
+      .pipe(
+        concatMap(() =>
+          this.cardEuClient.send(
+            {
+              cmd: 'card-eu-light',
+            },
+            body.escn,
           ),
         ),
       );
@@ -521,6 +542,7 @@ export class AppController {
         ),
       );
   }
+
   @Post('/notifications/register')
   registerFCMToken(@Request() request, @Body() body) {
     return this.authClient
@@ -776,6 +798,7 @@ export class AppController {
       version: infosJsonData.version,
     };
   }
+
   @Get('/app-update-infos')
   appUpdateInfos() {
     return clientInfosJson;

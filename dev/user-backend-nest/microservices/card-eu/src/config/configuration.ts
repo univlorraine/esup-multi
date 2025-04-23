@@ -47,6 +47,7 @@ const applyIfNotBlank = (param: string, applyFn: (value: string) => void) => {
 
 export default (): {
   cardEuProviderApi: CardEuProviderApi;
+  cardEuLightProviderApi: CardEuProviderApi;
   keepAliveOptions: KeepAliveOptions;
 } => {
   const keepAliveOptions = {};
@@ -90,6 +91,10 @@ export default (): {
     cardEuProviderApi: {
       apiUrl: process.env.CARD_EU_SERVICE_PROVIDER_API_URL,
       bearerToken: process.env.CARD_EU_SERVICE_PROVIDER_API_BEARER_TOKEN,
+    },
+    cardEuLightProviderApi: {
+      apiUrl: process.env.CARD_EU_SERVICE_PROVIDER_API_LIGHT_URL,
+      bearerToken: process.env.CARD_EU_SERVICE_PROVIDER_API_LIGHT_BEARER_TOKEN,
     },
     keepAliveOptions,
   };

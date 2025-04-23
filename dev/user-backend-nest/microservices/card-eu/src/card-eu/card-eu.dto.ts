@@ -40,9 +40,17 @@
 export interface UserCardEuDto {
   lastname: string;
   firstname: string;
-  title: string;
-  subtitle?: string;
-  photo: string;
+  photo?: string;
+  euid: string;
+  qrCode?: {
+    type: string;
+    value: string;
+  };
+  errors: string[];
+}
+
+export interface UserCardEuLightDto {
+  fullname: string;
   euid: string;
   qrCode?: {
     type: string;

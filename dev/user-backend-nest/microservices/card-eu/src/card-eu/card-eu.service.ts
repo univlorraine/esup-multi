@@ -41,15 +41,15 @@ import { HttpService } from '@nestjs/axios';
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { RpcException } from '@nestjs/microservices';
-import { catchError, map, Observable, of } from 'rxjs';
+import { catchError, map, Observable, switchMap } from 'rxjs';
 import { CardEuProviderApi } from '../config/configuration.interface';
-import { UserCardEuDto } from './card-eu.dto';
-import { error } from 'console';
+import { UserCardEuDto, UserCardEuLightDto } from './card-eu.dto';
 
 @Injectable()
 export class CardEuService {
   private readonly logger = new Logger(CardEuService.name);
   private cardEuProviderApiConfig: CardEuProviderApi;
+  private cardEuLightProviderApiConfig: CardEuProviderApi;
 
   constructor(
     private readonly configService: ConfigService,
@@ -57,6 +57,8 @@ export class CardEuService {
   ) {
     this.cardEuProviderApiConfig =
       this.configService.get<CardEuProviderApi>('cardEuProviderApi');
+    this.cardEuLightProviderApiConfig =
+      this.configService.get<CardEuProviderApi>('cardEuLightProviderApi');
   }
 
   public getUserCardEu(username: string): Observable<UserCardEuDto> {
@@ -64,7 +66,6 @@ export class CardEuService {
       /\{username\}/g,
       username,
     );
-
     return this.httpService
       .get<any>(url, {
         headers: {
@@ -82,5 +83,58 @@ export class CardEuService {
           return res.data;
         }),
       );
+  }
+
+  public getUserCardEuLight(escn: string): Observable<UserCardEuLightDto> {
+    const esiPrefix = 'urn:schac:personalUniqueCode:int:esi:';
+    const baseUrl = this.cardEuLightProviderApiConfig.apiUrl.replace(
+      /\{escn\}/g,
+      escn,
+    );
+    const headers = {
+      Accept: 'application/json',
+      Authorization: `Bearer ${this.cardEuLightProviderApiConfig.bearerToken}`,
+    };
+
+    // Récupération des informations de l'utilisateur
+    return this.httpService.get<any>(baseUrl, { headers }).pipe(
+      catchError((err) => {
+        const errorMessage = `Unable to get user eu card info with escn '${escn}'`;
+        this.logger.error(errorMessage, err);
+        throw new RpcException(errorMessage);
+      }),
+
+      map((res) => ({
+        fullname: res.data.person.fullname,
+        euid: res.data.person.identifier.startsWith(esiPrefix)
+          ? res.data.person.identifier.slice(esiPrefix.length)
+          : res.data.person.identifier,
+        errors: [],
+      })),
+      switchMap((cardEU: UserCardEuLightDto) => {
+        const qrHeaders = {
+          Accept: 'image/svg+xml',
+          Authorization: `Bearer ${this.cardEuLightProviderApiConfig.bearerToken}`,
+        };
+
+        // Récupération du QR code
+        return this.httpService
+          .get<any>(`${baseUrl}/qr`, { headers: qrHeaders })
+          .pipe(
+            catchError((err) => {
+              const errorMessage = `Unable to get user eu qrcode with escn '${escn}'`;
+              this.logger.error(errorMessage, err);
+              throw new RpcException(errorMessage);
+            }),
+            map((res) => {
+              cardEU.qrCode = {
+                type: 'image',
+                value: res.data,
+              };
+              return cardEU;
+            }),
+          );
+      }),
+    );
   }
 }
