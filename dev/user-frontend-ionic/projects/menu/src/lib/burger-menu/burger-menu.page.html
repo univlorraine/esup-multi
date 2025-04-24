@@ -42,7 +42,13 @@
     <div>
       <app-widget [widgetId]="widgetIds.auth"></app-widget>
       <ion-list lines="none" class="menu-section">
-        <ion-item button *ngIf="isUniversitiesButtonVisible" (click)="clearSelectedTenant()">
+        <ion-item
+          *ngIf="isUniversitiesButtonVisible"
+          (click)="clearSelectedTenant()"
+          button="true"
+          mode="md"
+          detail="true"
+        >
           <ion-icon class="app-icon-4" name="logout" slot="start"></ion-icon>
           <ion-label class="app-text-3 light">{{"MULTI-TENANT.UNIVERSITY_CHANGE" | translate}}</ion-label>
         </ion-item>
