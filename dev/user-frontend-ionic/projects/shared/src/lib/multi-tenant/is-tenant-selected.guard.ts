@@ -58,8 +58,8 @@ export class IsTenantSelectedGuard implements CanActivate {
 
     const groupExists = availableTenants && availableTenants.length === 1 && availableTenants[0].isGroup === true;
 
-    if ((!hasCurrentTenant && (groupExists || !isSingleTenant))) { // The tenant should have been select if group or if not single tenant
-      this.router.navigate(['/multi-tenant/select'], {queryParams: { redirectToAuth: true }});
+    if ((!hasCurrentTenant && (groupExists || !isSingleTenant))) { // The tenant should have been selected if group or if not single tenant
+      this.multiTenantService.redirectToTenantSelection(true).then();
       return false;
     }
 

@@ -50,8 +50,8 @@ import { updateSelectedTenantId, getSelectedTenantId } from './multi-tenant-sele
 import { getRegistry } from '@ngneat/elf';
 import { setTenantThemeApplied } from '../theme/theme.repository';
 import { FCMService } from '../fcm/fcm-global.service';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
-import { userIsAuthenticated$ } from '../auth/authenticated-user.repository';
+import { BehaviorSubject, Observable, Subject, withLatestFrom } from 'rxjs';
+import { authenticatedUserRepoInitialized$, userIsAuthenticated$ } from '../auth/authenticated-user.repository';
 import { filter } from 'rxjs/operators';
 
 @Injectable({
@@ -71,17 +71,22 @@ export class MultiTenantService {
     private router: Router,
     private fcmService: FCMService,
   ) {
-    this.currentTenant = this.findTenant(getSelectedTenantId());
     this.currentTenantLogo$ = this.currentTenantLogoSubject.asObservable();
     this.tenantChange$ = this.tenantChangeSubject.asObservable();
 
+    const tenantId = getSelectedTenantId();
+    if(tenantId) {
+      this.setCurrentTenantById(tenantId);
+    }
+
     userIsAuthenticated$.pipe(
-        filter(isAuthenticated => !isAuthenticated)
-      ).subscribe(() => {
-        if(this.currentTenant && this.canUseGroupMode()) { // Only disconnect from tenant when we can use the group mode
-          this.disconnectFromTenant();
-        }
-      });
+      withLatestFrom(authenticatedUserRepoInitialized$),
+      filter(([isAuth, isAuthRepoInit]) => !isAuth && isAuthRepoInit)
+    ).subscribe(() => {
+      if(this.currentTenant && this.canUseGroupMode()) { // Only disconnect from tenant when we can use the group mode
+        this.disconnectFromTenant();
+      }
+    });
   }
 
   public getApiEndpoint(): string {
@@ -93,19 +98,34 @@ export class MultiTenantService {
   }
 
   public getCurrentTenantOrThrowError(): Tenant {
-    if (!this.currentTenant) {
-      if (this.isSingleTenant()) {
-        if (this.getAvailableTenants()[0].isGroup === true && this.getAvailableTenants()[0].forceSelect === true) {
-          throw new NoTenantSelectedError();
-        }
-        return this.getAvailableTenants()[0];
+    if(!this.isCurrentTenantStateAllowed()) {
+      throw new NoTenantSelectedError();
+    }
+
+    return this.currentTenant ?? this.getAvailableTenants()[0];
+  }
+
+  public isCurrentTenantStateAllowed(): boolean {
+    if(this.currentTenant) {
+      if(this.currentTenant.isGroup === false) {
+        // There's a tenant and it's not a group, all good
+        return true;
       }
-      throw new NoTenantSelectedError();
+
+      // Group: tenant must be selected if forceSelect is true
+      return !(this.currentTenant.forceSelect === true);
     }
-    if (this.currentTenant.isGroup === true && this.currentTenant.forceSelect === true) {
-      throw new NoTenantSelectedError();
+
+    // No tenant is selected
+    const availableTenants = this.getAvailableTenants();
+
+    if(!this.isSingleTenant()) {
+      // There are multiple tenants, one must be selected
+      return false;
     }
-    return this.currentTenant;
+
+    // There is only one tenant at root level, so unless it is a group and forceSelect is true, the state is allowed
+    return availableTenants[0].isGroup === false || availableTenants[0].forceSelect === false;
   }
 
   public getAvailableTenants(): Tenant[] {
@@ -125,7 +145,9 @@ export class MultiTenantService {
     if(previousTenantId !== tenantId) { // If the tenant changes from previous value
       this.tenantChangeSubject.next(foundTenant);
     }
-    this.currentTenantLogoSubject.next(this.currentTenant.logo);
+    if(this.currentTenant?.logo) {
+      this.currentTenantLogoSubject.next(this.currentTenant.logo);
+    }
   }
 
   public getSelectedTenantId(): string {
@@ -134,7 +156,8 @@ export class MultiTenantService {
   }
 
   public isSingleTenant(): boolean {
-    return this.getTenants().length === 1;
+    const tenants = this.getTenants();
+    return tenants?.length === 1;
   }
 
   public hasCurrentTenant(): boolean {
@@ -156,7 +179,11 @@ export class MultiTenantService {
     }, modulesConfiguration);
   }
 
-  public async redirectToTenantSelection() {
+  public async redirectToTenantSelection(backToAuth: boolean = false) {
+    if(backToAuth) {
+      await this.router.navigate(['/multi-tenant/select'], {queryParams: {redirectToAuth: true}});
+      return;
+    }
     await this.router.navigate(['/multi-tenant/select']);
   }
 

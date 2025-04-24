@@ -233,7 +233,10 @@ export class LayoutPage implements AfterViewInit, OnChanges, OnDestroy {
   }
 
   private handleSingleTenant() {
-    if (this.multiTenantService.isSingleTenant()) {
+    const availableTenants: any[] = this.multiTenantService.getAvailableTenants();
+    const isGroup = availableTenants && availableTenants.length === 1 && availableTenants[0].isGroup === true;
+
+    if (this.multiTenantService.isSingleTenant() && !isGroup) {
       this.multiTenantService.setCurrentTenantById(this.multiTenantService.getSelectedTenantId());
     }
   }
