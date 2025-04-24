@@ -105,7 +105,7 @@ export class CardEuService {
       }),
 
       map((res) => ({
-        fullname: res.data.person.fullname,
+        fullname: res.data.person.fullName,
         euid: res.data.person.identifier.startsWith(esiPrefix)
           ? res.data.person.identifier.slice(esiPrefix.length)
           : res.data.person.identifier,
@@ -119,7 +119,14 @@ export class CardEuService {
 
         // Récupération du QR code
         return this.httpService
-          .get<any>(`${baseUrl}/qr`, { headers: qrHeaders })
+          .get<any>(`${baseUrl}/qr`, {
+            headers: qrHeaders,
+            params: {
+              orientation: 'vertical',
+              colours: 'inverted',
+              size: 'M',
+            },
+          })
           .pipe(
             catchError((err) => {
               const errorMessage = `Unable to get user eu qrcode with escn '${escn}'`;
