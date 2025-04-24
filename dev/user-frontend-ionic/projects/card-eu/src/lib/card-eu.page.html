@@ -39,7 +39,16 @@
 
 <ion-progress-bar *ngIf="isLoading" type="indeterminate"></ion-progress-bar>
 <app-header></app-header>
-<ion-content *ngIf="(userAndCardEuData$ | async) as userCardEu">
+
+<ion-content *ngIf="(userAndCardEuData$ | async) as userCardEu; else noCardsData">
   <app-card-eu *ngIf="config.display === 'extended'" [userCardEu]="userCardEu"></app-card-eu>
   <app-card-eu-light *ngIf="config.display === 'light'" [userCardEuLight]="userCardEu"></app-card-eu-light>
 </ion-content>
+
+<ng-template #noCardsData>
+  <ion-content class="ion-padding">
+    <ion-note>
+      {{ "CARD-EU.ERRORS.NO_DATA" | translate }}
+    </ion-note>
+  </ion-content>
+</ng-template>

@@ -54,12 +54,29 @@ export class CardEuService {
   ) {
   }
 
-  public getUserAndCardEuData(authToken: string): Observable<UserAndCardEuData> {
+  public getUserAndCardEuData(authToken: string, useLight: boolean, escn?: string): Observable<UserAndCardEuData> {
+    if (useLight && !escn) {
+      return;
+    }
+    if (useLight && escn) {
+      return this.getUserAndCardEuLightData(authToken, escn);
+    } else {
+      return this.getUserAndCardEuExtendedData(authToken);
+    }
+  }
+
+  private getUserAndCardEuExtendedData(authToken: string): Observable<UserAndCardEuData> {
     const url = `${this.environment.apiEndpoint}/card-eu`;
-    const data = {
-      authToken
-    };
+    const data = { authToken };
+
+    return this.http.post<UserAndCardEuData>(url, data);
+  }
+
+  private getUserAndCardEuLightData(authToken: string, escn: string): Observable<UserAndCardEuData> {
+    const url = `${this.environment.apiEndpoint}/card-eu-light`;
+    const data = { authToken, escn };
 
     return this.http.post<UserAndCardEuData>(url, data);
   }
 }
+

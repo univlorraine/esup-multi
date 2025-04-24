@@ -40,9 +40,10 @@
 import { BehaviorSubject, Observable } from 'rxjs';
 
 export interface UserAndCardEuData {
-  lastname: string;
-  firstname: string;
-  photo: string;
+  lastname?: string;
+  firstname?: string;
+  fullname?: string;
+  photo?: string;
   euid: string;
   qrCode: {
     type: string;

@@ -38,7 +38,7 @@
  */
 
 import { Component, Inject } from '@angular/core';
-import { AuthenticatedUser, getAuthToken, NetworkService } from '@multi/shared';
+import { AuthenticatedUser, getAuthToken, NetworkService, authenticatedUser$ } from '@multi/shared';
 import { Observable, Subscription } from 'rxjs';
 import { filter, finalize, switchMap, take } from 'rxjs/operators';
 import { CardEuModuleConfig, CARD_EU_CONFIG } from './card-eu.config';
@@ -63,6 +63,10 @@ export class CardEuPage {
     private networkService: NetworkService,
     @Inject(CARD_EU_CONFIG) public config: CardEuModuleConfig,
   ) {}
+
+  ngOnInit() {
+    this.authenticatedUser$ = authenticatedUser$;
+  }
 
   ionViewWillEnter() {
     this.userAndCardEuDataSubscription = userAndCardEuData$.subscribe(userAndCardEuData => {
@@ -90,22 +94,31 @@ export class CardEuPage {
     return this.config.knownErrors.includes(error);
   }
 
-  private async loadUserCardEuData() {
-    if (!(await this.networkService.getConnectionStatus()).connected){
+  async loadUserCardEuData() {
+    if (!(await this.networkService.getConnectionStatus()).connected) {
       return;
     }
 
     this.isLoading = true;
-    getAuthToken().pipe(
+
+    this.authenticatedUser$.pipe(
       take(1),
-      filter(authToken => authToken != null),
-      switchMap(authToken => this.cardEuService.getUserAndCardEuData(authToken)),
-      finalize(() => this.isLoading = false)
+      filter(user => user != null),
+      switchMap((user: AuthenticatedUser) => {
+        return getAuthToken().pipe(
+          take(1),
+          filter(authToken => authToken != null),
+          switchMap(authToken => this.cardEuService.getUserAndCardEuData(
+              authToken,
+              this.config.display === 'light',
+              user.escn
+            )
+          ),
+        );
+      }),
+        finalize(() => this.isLoading = false)
     ).subscribe(userAndCardEuData => {
       setUserAndCardEuData(userAndCardEuData);
     });
-  }
-  toggleCardView() {
-    this.config.display = this.config.display === 'extended' ? 'light' : 'extended';
   }
 }

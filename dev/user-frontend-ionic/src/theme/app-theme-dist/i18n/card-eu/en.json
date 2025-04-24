@@ -2,9 +2,14 @@
     "CARD_TITLE": "Student",
     "CARD_SUBTITLE" : "Identity card",
 
+    "ERRORS": {
+        "NO_DATA": "Data unavailable",
+        "UNKNOWN" : "Unable to display your card"
+    },
+
     "ERRORS_STUDENT": {
         "NO_PHOTO": "Access to your card will be available after providing a photo ID to the school",
-        "NO_ACTIVE_CARD" : "You do not have an active card at the University",
+        "NO_ACTIVE_CARD" : "You do not have an active european card",
         "UNPAID_FEES" : "You do not have a student card because you have not yet paid your registration fees"
     }
 }
