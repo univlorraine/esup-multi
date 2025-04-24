@@ -44,7 +44,6 @@ export interface UserCardDto {
   title: string;
   subtitle?: string;
   ine?: string;
-  csn: string;
   photo: string;
   affiliation: string;
   idNumber: string;
