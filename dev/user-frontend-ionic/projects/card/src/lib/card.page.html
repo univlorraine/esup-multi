@@ -39,7 +39,8 @@
 
 <ion-progress-bar *ngIf="isLoading" type="indeterminate"></ion-progress-bar>
 <app-header></app-header>
-<ion-content *ngIf="(userAndCardData$ | async) as userCard">
+
+<ion-content *ngIf="(userAndCardData$ | async) as userCard; else noCardsData">
   <ion-card-content>
     <app-student-card [userCard]="userCard" *ngIf="userCard.affiliation === 'student'"></app-student-card>
     <app-staff-card [userCard]="userCard" *ngIf="userCard.affiliation!=='student'"></app-staff-card>
@@ -60,3 +61,10 @@
   </ion-row>
 </ion-content>
 
+<ng-template #noCardsData>
+  <ion-content class="ion-padding">
+    <ion-note>
+      {{ "CARD.ERRORS.NO_DATA" | translate }}
+    </ion-note>
+  </ion-content>
+</ng-template>
