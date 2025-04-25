@@ -53,6 +53,7 @@ export interface UserProfileDto {
   name: string;
   firstname: string;
   email: string;
+  escn?: string;
   roles: string[];
 }
 

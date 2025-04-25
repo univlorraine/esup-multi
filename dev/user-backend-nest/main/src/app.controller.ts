@@ -54,7 +54,7 @@ import {
 } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { AuthGuard } from '@nestjs/passport';
-import {concatMap, map, tap} from 'rxjs';
+import { concatMap, map } from 'rxjs';
 import * as infosJsonData from './infos.json';
 import * as clientInfosJson from './client-infos.json';
 import { ErrorsInterceptor } from './interceptors/errors.interceptor';
