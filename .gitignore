@@ -6,10 +6,10 @@
 node_modules/
 *.DS_Store
 
-
 /ci-config/*
 !/ci-config/gitlab-example/
 
 /env/*
 !/env/local
 /env/local/docker/directus/mysql-data/
+/env/local/docker/wordpress/wp-data/
