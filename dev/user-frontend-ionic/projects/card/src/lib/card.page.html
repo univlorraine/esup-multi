@@ -41,10 +41,12 @@
 <app-header></app-header>
 
 <ion-content *ngIf="(userAndCardData$ | async) as userCard; else noCardsData">
-  <ion-card-content>
-    <app-student-card [userCard]="userCard" *ngIf="userCard.affiliation === 'student'"></app-student-card>
-    <app-staff-card [userCard]="userCard" *ngIf="userCard.affiliation!=='student'"></app-staff-card>
-  </ion-card-content>
+  <ion-card>
+    <ion-card-content>
+      <app-student-card [userCard]="userCard" *ngIf="userCard.affiliation === 'student'"></app-student-card>
+      <app-staff-card [userCard]="userCard" *ngIf="userCard.affiliation!=='student'"></app-staff-card>
+    </ion-card-content>
+  </ion-card>
 
   <!-- Qrcode -->
   <ion-row class="ion-justify-content-center qr-code-container">

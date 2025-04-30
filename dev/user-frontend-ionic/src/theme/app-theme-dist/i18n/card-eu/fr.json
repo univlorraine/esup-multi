@@ -4,12 +4,9 @@
 
     "ERRORS":{
         "NO_DATA": "Données indisponibles",
-        "UNKNOWN" : "Impossible d'afficher votre carte"
-    },
-
-    "ERRORS_STUDENT": {
-        "NO_PHOTO": "Access to your card will be available after providing a photo ID to the school",
-        "NO_ACTIVE_CARD" : "You do not have an active card at the University",
-        "UNPAID_FEES" : "You do not have a student card because you have not yet paid your registration fees"
+        "UNKNOWN" : "Impossible d'afficher votre carte",
+        "NO_PHOTO": "L'accès à votre carte sera disponible après avoir fourni une photo d'identité à la scolarité de la formation",
+        "NO_ACTIVE_CARD" : "Vous ne disposez pas de carte active à l'Université",
+        "UNPAID_FEES" : "Vous ne pouvez pas disposer de carte d'étudiant car vous n'avez pas encore réglé vos droits d'inscription"
     }
 }

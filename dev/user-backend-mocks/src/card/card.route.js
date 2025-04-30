@@ -39,15 +39,16 @@
 
 const express = require('express');
 const router = express.Router();
-const { cardsData } = require('./cards.mock.js');
+const { getCardData } = require('./card.mock.js');
 
-router.get('/:username', (req, res) => {
-    const { username } = req.params;
-    let cards = cardsData[username];
-    if (!cards) {
-        cards = cardsData.noActiveCard;
+router.get('/:username', async (req, res) => {
+    const {username} = req.params;
+    let data = await getCardData();
+    let card= data[username];
+    if (!card) {
+        card = data.noActiveCard;
     }
-    return res.json(cards);
+    return res.json(card);
 });
 
 module.exports = router;

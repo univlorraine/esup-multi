@@ -37,50 +37,20 @@
  * termes.
  */
 
-const {v4: uuid} = require('uuid');
+const express = require('express');
+const router = express.Router();
+const { getCardEuData } = require('./card-eu.mock.js');
 
-module.exports.authTokenData = () => `TGT-${uuid()}-${uuid()}-LUKE`;
-module.exports.userProviderData = {
-    "etu": {
-        "displayName": "John DOE",
-        "name": "Doe",
-        "firstname": "John",
-        "email": "john.doe@univ.fr",
-        "escn": "11111111-2222-3333-4444-555555555555",
-        "roles": [
-            "student"
-        ]
-    },
-    "staff": {
-        "displayName": "Alice DUPONT",
-        "name": "Dupont",
-        "firstname": "Alice",
-        "email": "alice.dupont@univ.fr",
-        "roles": [
-            "staff",
-            "schedule-manager"
-        ]
-    },
-    "prof": {
-        "displayName": "Bruce WILLIS",
-        "name": "Willis",
-        "firstname": "Bruce",
-        "email": "bruce.willis@univ.fr",
-        "roles": [
-            "teacher"
-        ]
+router.get('/:username/extended', async (req, res) => {
+    const {username} = req.params;
+    let data = await getCardEuData(true);
+    let cardEu= data[username];
+        if (!cardEu) {
+        cardEu = data.noActiveCard;
     }
-};
+    console.log(cardEu);
+    return res.json(cardEu);
+});
 
-module.exports.errorsData = {
-    unauthorized: (username) => ({
-        "statusCode": 401,
-        "message": `Invalid authentication for '${username}'`
-    }),
-    unknownUser: {
-        "error": {
-            "code": 400,
-            "message": "Utilisateur inconnu"
-        }
-    }
-};
+module.exports = router;
+

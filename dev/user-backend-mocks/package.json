@@ -16,6 +16,21 @@
     "express": "^4.19.2",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
+    "qrcode": "^1.5.4",
     "uuid": "^9.0.1"
+  },
+  "jshintConfig": {
+    "esversion": 8,
+    "node": true,
+    "browser": false,
+    "predef": [
+      "require",
+      "module",
+      "__dirname",
+      "process"
+    ]
+  },
+  "devDependencies": {
+    "qrcode-svg": "^1.1.0"
   }
 }
