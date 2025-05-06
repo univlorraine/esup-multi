@@ -10,6 +10,10 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **(restaurants)** : correction des dates tronquées à cause d'un scroll vertical inutile
 * **(schedule)** : correction du bouton 'Voir Plus' de la vue liste de l'emploi du temps qui n'affichait pas lorsque l'étudiant n'a pas de cours pendant plus de 15 jours
 
+#### Autres
+* Migration de [NodeJS](https://nodejs.org/docs/latest-v20.x/api/index.html) : Version 18 → Version 20
+* Mise à jour du moteur [Capacitor](https://capacitorjs.com/docs) : Version 6 → Version 7
+
 ## 1.2.0 (2024-12-11)
 
 ### Client
