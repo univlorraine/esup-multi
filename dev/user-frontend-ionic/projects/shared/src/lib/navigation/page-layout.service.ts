@@ -87,7 +87,7 @@ export class PageLayoutService {
           .filter(menuItem => menuItem.link.type === MenuItemLinkType.router)
           .map(menuItem => menuItem.link as MenuItemRouterLink)
           .find(link => routerLink.startsWith(link.routerLink))
-          ? this.hasForceFullLayout(routerLink)
+          ? this.determineLayoutByFeature(routerLink)
           : 'full' as PageLayout
       ),
       shareReplay(1)
@@ -123,8 +123,17 @@ export class PageLayoutService {
     ).subscribe(this.currentPageTitle$);
   }
 
-  // This method should return true if the feature is inside environment variable forceFullLayoutFeatures
-  hasForceFullLayout(feature: string): PageLayout {
+  /**
+   * Determines the appropriate page layout based on the given feature.
+   *
+   * This function checks if the provided feature string contains any of the predefined
+   * features that require a full layout. If so, it returns 'full' as the PageLayout;
+   * otherwise, it returns 'tabs'.
+   *
+   * @param {string} feature - The feature string to check against predefined full layout features.
+   * @returns {PageLayout} The determined layout type, either 'full' or 'tabs'.
+   */
+  determineLayoutByFeature(feature: string): PageLayout {
     return this.forceFullLayoutFeatures.some(f => feature.includes(f)) ? 'full' as PageLayout : 'tabs' as PageLayout;
   }
 }
