@@ -17,16 +17,16 @@ npm run module:create [nom du module]
 Puis mettre à jour le "path" du module dans le fichier `tsconfig.json` pour préfixer par `@multi/`.
 ```json
     "paths": {
-      "@multi/hello": [
-        "dist/hello"
-      ],
-      "@multi/shared": [
-        "dist/shared"
-      ]
-    },
+"@multi/hello": [
+"dist/hello"
+],
+"@multi/shared": [
+"dist/shared"
+]
+},
 ```
 
-A partir de là le module peut être importé dans l'application hôte :
+À partir de là, le module peut être importé dans l'application hôte :
 ```ts
 import { HelloPageModule } from '@multi/hello';
 ```
@@ -38,32 +38,31 @@ Il faut également ajouter le module au script npm `module:build-all` :
 
 #### Lint
 
-Rajouter une section lint au project dans `user-frontend-ionic/angular.json`. A rajouter sous la section "test" du module :
+Rajouter une section lint au project dans `user-frontend-ionic/angular.json`. À rajouter sous la section "test" du module :
 ```json
 "lint": {
-          "builder": "@angular-eslint/builder:lint",
-          "options": {
-            "lintFilePatterns": [
-              "projects/[nom du module]/**/*.ts",
-              "projects/[nom du module]/**/*.html"
-            ]
-          }
-        }
+  "builder": "@angular-eslint/builder:lint",
+  "options": {
+    "lintFilePatterns": [
+      "projects/[nom du module]/**/*.ts",
+      "projects/[nom du module]/**/*.html"
+    ]
+  }
+}
 ```
 
-Puis rajouter le fichier `.eslintrc.json` suivant à la racine du module :
-```json
-{
-  "extends": "../../.eslintrc.json",
-  "ignorePatterns": [
+Puis rajouter le fichier `.eslintrc.js` suivant à la racine du module :
+```javascript
+module.exports = {
+  extends: "../../.eslintrc.js",
+  ignorePatterns: [
     "!**/*"
   ]
 }
-
 ```
 
 #### Traductions
-Pour les traductions nous utilisons [ngx translate](https://github.com/ngx-translate/core).
+Pour les traductions, nous utilisons [ngx translate](https://github.com/ngx-translate/core).
 
 Si le module contient des éléments qui doivent être traduits, il faudra créer un fichier de traduction pour ce module dans `src/theme/app-theme/i18n/[mon module]/fr.json`. Pensez à le copier dans le dossier `app-theme-dist` pour partager ces traductions.
 
@@ -87,7 +86,7 @@ Notez que toutes les clés de traduction du module seront préfixées par ce que
 
 **ATTENTION** un module qui contient des traductions doit être initialisé avant que le module de traduction ne démarre, il faudra donc obligatoirement importer le module dans `app.module.ts` (avant l'import du `TranslateModule`).
 
-#### Firebase (à compléter avec la partie iOS)
+### Firebase (à compléter avec la partie iOS)
 
 Ajouter un dossier `firebase` dans `src/environnements` :
 
@@ -107,9 +106,9 @@ Ajouter au dossier web tous les fichiers de configuration Firebase : `firebase-e
 Ajouter au dossier src/assets/stubs/ un fichier qui reprend la configuration à utiliser : `firebase-environment.json`
 
 Pour que le projet puisse quand même build sans avoir les fichiers réels de la pwa sous la main, une config d'exemple peut être déplacée
-depuis les chemins suivants : 
+depuis les chemins suivants :
 
-`/env/production/frontend/firebase/firebase-environment.pwa-prod.json.example` et `/env/development/frontend/firebase/firebase-environment.pwa-development.json.example` 
+`/env/production/frontend/firebase/firebase-environment.pwa-prod.json.example` et `/env/development/frontend/firebase/firebase-environment.pwa-development.json.example`
 
 vers `src/environnements/firebase/pwa/` (ne pas oublier d'enlever les .example des fichiers)
 
@@ -119,9 +118,9 @@ En exécutant la commande npx `cap sync`, les fichiers de configuration Firebase
 
 **Procédure pour ajouter un nouvel environnement de développement avec une configuration Firebase spécifique :**
 
-Firebase permet de créer plusieurs applications par environnement de développement pour un même projet. Il génère des fichier configuration `google-service.json` (Android) et `GoogleServices-info.plis` (iOS) pour chacune d’entre elles.
+Firebase permet de créer plusieurs applications par environnement de développement pour un même projet. Il génère des fichiers configuration `google-service.json` (Android) et `GoogleServices-info.plis` (iOS) pour chacune d’entre elles.
 
-* Créer une nouvelle application dans le projet Firebase et génèrer son fichier de configuration pour chaque plateforme.
+* Créer une nouvelle application dans le projet Firebase et générer son fichier de configuration pour chaque plateforme.
 
 * Suffixer ces fichiers pour l’environnement de développement visé : `google-service-[environnement].json`, `GoogleServices-info-[environnement].plist` .
 
@@ -167,6 +166,7 @@ npm run module:build-all
 
 - [Module guided-tour](dev/user-frontend-ionic/src/theme/app-theme/guided-tour/README.md)
 - [Module shared](dev/user-frontend-ionic/projects/shared/README.md)
+- [Module app-update](dev/user-frontend-ionic/projects/app-update/README.md)
 - [Module auth](dev/user-frontend-ionic/projects/auth/README.md)
 - [Module calendar](dev/user-frontend-ionic/projects/calendar/README.md)
 - [Module cards](dev/user-frontend-ionic/projects/cards/README.md)
@@ -198,7 +198,7 @@ Le thème de l'application est défini dans les fichiers suivants :
 
 - **src/theme/app-theme-variables.scss** : Contient les variables CSS custom pour personnaliser l'application. Modifiez les valeurs des variables dans ce fichier et les changements seront pris en compte automatiquement dans toute l'application.
 
-Ces variables ne sont à utiliser que dans les fichiers suivant pour paramétrer les classes CSS correspondantes : 
+Ces variables ne sont à utiliser que dans les fichiers suivant pour paramétrer les classes CSS correspondantes :
 
 - **src/theme/icons** : Contient les classes CSS utilisées dans toutes les balises ```<ion-icon>```.
 
@@ -226,3 +226,34 @@ Pour cela, ajoutez un nouveau dossier d'icônes dans ```src/theme/app-theme/asse
     "output": "./svg"
   }
 ```
+
+### Forcer l'affichage FULL
+
+Par défaut, les fonctionnalités affectées au MENU TABS sont affichées avec le layout TABS.
+
+Cependant, il est possible de  forcer si on le souhaite l'affichage d'une ou plusieurs fonctionnalités affectées au MENU TABS avec le layout FULL.
+
+Pour cela, il suffit d'ajouter la ou les routes concernées dans la variable `forceFullLayoutFeatures` présente dans le fichier d'environnement.
+L'affichage des routes enfants sera aussi forcé en layout FULL.
+
+Exemple 1 :
+
+* La variable d'environnement contient schedule
+```typescript
+  forceFullLayoutFeatures: ['schedule']
+```
+* La fonctionnalité Schedule est affectée au MENU TABS
+
+Alors le layout FULL est utilisé pour les routes /schedule/list, /schedule/calendar#month, /schedule/calendar#week, /schedule/calendar#day
+
+Exemple 2 :
+
+* La variable d'environnement contient schedule/calendar#month
+```typescript
+  forceFullLayoutFeatures: ['schedule/calendar#month']
+```
+* La fonctionnalité Schedule est affectée au MENU TABS
+
+Alors le layout FULL est utilisé pour la route /schedule/calendar#month
+
+Et le layout TABS est utilisé pour les routes /schedule/list, /schedule/calendar#week, /schedule/calendar#day
