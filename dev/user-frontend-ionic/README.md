@@ -17,13 +17,13 @@ npm run module:create [nom du module]
 Puis mettre à jour le "path" du module dans le fichier `tsconfig.json` pour préfixer par `@multi/`.
 ```json
     "paths": {
-"@multi/hello": [
-"dist/hello"
-],
-"@multi/shared": [
-"dist/shared"
-]
-},
+      "@multi/hello": [
+        "dist/hello"
+      ],
+      "@multi/shared": [
+        "dist/shared"
+      ]
+    },
 ```
 
 À partir de là, le module peut être importé dans l'application hôte :
