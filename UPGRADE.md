@@ -1,5 +1,8 @@
 # Upgrades
 
+## 1.2.0 vers 2.0.0
+→ [Mise à jour de la version 1.2.0 à la version 2.0.0](https://www.esup-portail.org/wiki/x/A4AYWQ)
+
 ## 1.1.0 vers 1.2.0
 → [Mise à jour de la version 1.1.0 à la version 1.2.0](https://www.esup-portail.org/wiki/x/AYA7Vw)
 
