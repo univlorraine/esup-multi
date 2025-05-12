@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Injectable } from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { distinctUntilChanged, filter, map, shareReplay } from 'rxjs/operators';
 import { MenuItemLinkType, MenuItemRouterLink } from './menu.model';
@@ -58,12 +58,15 @@ export class PageLayoutService {
   public currentPageLayout$: Observable<PageLayout>;
   public currentPageTitle$ = new BehaviorSubject<PageTitle>(null);
   public showCurrentPageHeader$ = new BehaviorSubject<boolean>(true);
+  private readonly forceFullLayoutFeatures: [string];
 
   constructor(
     private navigationService: NavigationService,
     private menuService: MenuService,
+    @Inject('environment')
+    private environment: any
   ) {
-
+    this.forceFullLayoutFeatures = this.environment.forceFullLayoutFeatures ?? [];
     this.currentPageLayout$ = combineLatest([
       this.navigationService.currentRouterLink$.pipe(
         filter(routerLink => routerLink !== '/'),
@@ -84,7 +87,7 @@ export class PageLayoutService {
           .filter(menuItem => menuItem.link.type === MenuItemLinkType.router)
           .map(menuItem => menuItem.link as MenuItemRouterLink)
           .find(link => routerLink.startsWith(link.routerLink))
-          ? 'tabs' as PageLayout
+          ? this.determineLayoutByFeature(routerLink)
           : 'full' as PageLayout
       ),
       shareReplay(1)
@@ -118,5 +121,19 @@ export class PageLayoutService {
         translated: menuItem.type === 'dynamic'
       }))
     ).subscribe(this.currentPageTitle$);
+  }
+
+  /**
+   * Determines the appropriate page layout based on the given feature.
+   *
+   * This function checks if the provided feature string contains any of the predefined
+   * features that require a full layout. If so, it returns 'full' as the PageLayout;
+   * otherwise, it returns 'tabs'.
+   *
+   * @param {string} feature - The feature string to check against predefined full layout features.
+   * @returns {PageLayout} The determined layout type, either 'full' or 'tabs'.
+   */
+  determineLayoutByFeature(feature: string): PageLayout {
+    return this.forceFullLayoutFeatures.some(f => feature.includes(f)) ? 'full' as PageLayout : 'tabs' as PageLayout;
   }
 }

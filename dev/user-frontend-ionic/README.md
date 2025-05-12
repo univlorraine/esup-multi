@@ -106,9 +106,9 @@ Ajouter au dossier web tous les fichiers de configuration Firebase : `firebase-e
 Ajouter au dossier src/assets/stubs/ un fichier qui reprend la configuration à utiliser : `firebase-environment.json`
 
 Pour que le projet puisse quand même build sans avoir les fichiers réels de la pwa sous la main, une config d'exemple peut être déplacée
-depuis les chemins suivants : 
+depuis les chemins suivants :
 
-`/env/production/frontend/firebase/firebase-environment.pwa-prod.json.example` et `/env/development/frontend/firebase/firebase-environment.pwa-development.json.example` 
+`/env/production/frontend/firebase/firebase-environment.pwa-prod.json.example` et `/env/development/frontend/firebase/firebase-environment.pwa-development.json.example`
 
 vers `src/environnements/firebase/pwa/` (ne pas oublier d'enlever les .example des fichiers)
 
@@ -198,7 +198,7 @@ Le thème de l'application est défini dans les fichiers suivants :
 
 - **src/theme/app-theme-variables.scss** : Contient les variables CSS custom pour personnaliser l'application. Modifiez les valeurs des variables dans ce fichier et les changements seront pris en compte automatiquement dans toute l'application.
 
-Ces variables ne sont à utiliser que dans les fichiers suivant pour paramétrer les classes CSS correspondantes : 
+Ces variables ne sont à utiliser que dans les fichiers suivant pour paramétrer les classes CSS correspondantes :
 
 - **src/theme/icons** : Contient les classes CSS utilisées dans toutes les balises ```<ion-icon>```.
 
@@ -226,3 +226,34 @@ Pour cela, ajoutez un nouveau dossier d'icônes dans ```src/theme/app-theme/asse
     "output": "./svg"
   }
 ```
+
+### Forcer l'affichage FULL
+
+Par défaut, les fonctionnalités affectées au MENU TABS sont affichées avec le layout TABS.
+
+Cependant, il est possible de  forcer si on le souhaite l'affichage d'une ou plusieurs fonctionnalités affectées au MENU TABS avec le layout FULL.
+
+Pour cela, il suffit d'ajouter la ou les routes concernées dans la variable `forceFullLayoutFeatures` présente dans le fichier d'environnement.
+L'affichage des routes enfants sera aussi forcé en layout FULL.
+
+Exemple 1 :
+
+* La variable d'environnement contient schedule
+```typescript
+  forceFullLayoutFeatures: ['schedule']
+```
+* La fonctionnalité Schedule est affectée au MENU TABS
+
+Alors le layout FULL est utilisé pour les routes /schedule/list, /schedule/calendar#month, /schedule/calendar#week, /schedule/calendar#day
+
+Exemple 2 :
+
+* La variable d'environnement contient schedule/calendar#month
+```typescript
+  forceFullLayoutFeatures: ['schedule/calendar#month']
+```
+* La fonctionnalité Schedule est affectée au MENU TABS
+
+Alors le layout FULL est utilisé pour la route /schedule/calendar#month
+
+Et le layout TABS est utilisé pour les routes /schedule/list, /schedule/calendar#week, /schedule/calendar#day
