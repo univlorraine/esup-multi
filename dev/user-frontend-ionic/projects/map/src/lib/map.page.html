@@ -57,7 +57,7 @@
         <form [formGroup]="form">
           <ion-item formArrayName="categoriesForm" *ngFor="let category of categoriesForm.controls; let i = index">
             <ion-checkbox mode="md" [formControlName]="i">
-              <ion-label class="app-text-3 light ion-text-wrap">{{ getCategoryTranslation(categories[i]) | translate }}</ion-label>
+              <ion-label class="app-text-3 light ion-text-wrap">{{ categories[i].labelTranslate }}</ion-label>
             </ion-checkbox>
           </ion-item>
         </form>
@@ -69,17 +69,44 @@
 
 <ion-list class="chip-list" *ngIf="categoriesSelected?.length > 0">
   <button *ngFor="let category of categoriesSelected; let i = index" (click)="removeSelectedCategory(category, i)"
-          [attr.aria-label]="'MAP.REMOVE_FROM_FILTERS' | translate:{category: getCategoryTranslation(category) | translate}"
+          [attr.aria-label]="'MAP.REMOVE_FROM_FILTERS' | translate:{category: getCategoryTranslation(category)}"
           class="chip-item">
     <ion-chip>
-      {{ getCategoryTranslation(category) | translate }}
+      {{ getCategoryTranslation(category) }}
       <ion-icon name="close-circle-outline" aria-label=""></ion-icon>
     </ion-chip>
   </button>
 </ion-list>
 
 <ion-content scroll="false">
-    <div class="map-page">
-      <div id="map"></div>
-    </div>
+  <div class="map-page">
+    <div id="map"></div>
+  </div>
+  <ion-fab *ngIf="campus?.length > 0 && campus?.length <= maxDisplayedFloatingButton" slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button color="primary">
+      <ion-icon name="compass-outline"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top" class="campus">
+      <ion-fab-button *ngFor="let oneCampus of campus"
+                      [attr.data-campus-name]="oneCampus.name"
+                      [ngStyle]="{'--background': 'center / cover no-repeat url('+oneCampus.photo+')'}"
+                      (click)="flyTo(oneCampus)"></ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+  <ion-fab *ngIf="campus?.length > maxDisplayedFloatingButton" slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button color="primary" (click)="presentCampusSelection()">
+      <ion-icon name="compass-outline"></ion-icon>
+      <ion-popover  [isOpen]="isCampusSelectionOpen" (didDismiss)="isCampusSelectionOpen = false">
+        <ng-template>
+          <ion-list lines="full">
+            <ion-item button *ngFor="let oneCampus of campus" (click)="closePopOverAndFlyTo(oneCampus)">
+              <ion-fab-button [attr.data-campus-name]="oneCampus.name"
+                              [ngStyle]="{'--background': 'center / cover no-repeat url('+oneCampus.photo+')'}"></ion-fab-button>
+              <ion-label class="app-text-3 light ion-text-wrap ion-padding-start">{{ oneCampus.name }}</ion-label>
+            </ion-item>
+          </ion-list>
+        </ng-template>
+      </ion-popover>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

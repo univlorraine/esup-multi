@@ -70,3 +70,18 @@ ion-item {
 .chip-item {
   background-color: transparent;
 }
+
+ion-fab-list.campus {
+  ion-fab-button::before {
+    content: attr(data-campus-name);
+    position: absolute;
+    left: -10px;
+    top: 50%;
+    transform: translate(-100%, -50%);
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 20px;
+    box-shadow: rgb(255, 255, 255) 0px 0px 0px 1px inset;
+    color: black;
+  }
+}

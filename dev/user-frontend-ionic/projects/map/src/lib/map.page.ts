@@ -41,23 +41,26 @@ import { Component, DestroyRef, inject, Inject, ViewChild } from '@angular/core'
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Geolocation } from '@capacitor/geolocation';
 import { TranslateService } from '@ngx-translate/core';
-import { NetworkService } from '@multi/shared';
+import { NetworkService, currentLanguage$ } from '@multi/shared';
 import * as Leaflet from 'leaflet';
-import { finalize, take } from 'rxjs/operators';
+import { finalize, take, map } from 'rxjs/operators';
+import { combineLatest } from 'rxjs';
 import { MapModuleConfig, MAP_CONFIG } from './map.config';
-import { Marker, markersList$, setMarkers } from './map.repository';
+import {
+  Campus,
+  Categorie,
+  Label,
+  Marker,
+  campusList$,
+  categoriesList$,
+  markersList$,
+  setCampus,
+  setCategories,
+  setMarkers
+} from './map.repository';
 import { MapService } from './map.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
-const CATEGORIES = [
-  'presidences_points',
-  'composantes_points',
-  'bus_points',
-  'restos_points',
-  'cites_points',
-  'santes_points',
-  'suaps_points'
-];
 
 @Component({
   selector: 'app-map',
@@ -72,12 +75,15 @@ export class MapPage {
   public isLoading = false;
   public form: FormGroup;
   public categoriesSelected: string[];
-  protected readonly categories = CATEGORIES;
+  public categories: Categorie[];
+  public campus: Campus[];
   private map: Leaflet.Map;
   private markersByCategory: Map<string, Leaflet.Marker[]> = new Map();
   private layerGroupByCategory: Map<string, Leaflet.LayerGroup> = new Map();
   private positionLayerGroup: Leaflet.LayerGroup;
   private destroyRef = inject(DestroyRef)
+  public isCampusSelectionOpen = false;
+  public maxDisplayedFloatingButton : number;
 
   constructor(
     private mapService: MapService,
@@ -85,15 +91,10 @@ export class MapPage {
     private formBuilder: FormBuilder,
     @Inject(MAP_CONFIG) private config: MapModuleConfig,
     private networkService: NetworkService,
+    @Inject('environment')
+    private environment: any,
   ) {
-    this.initCategoriesForm();
-
-    this.categoriesForm.valueChanges.pipe(
-      takeUntilDestroyed(this.destroyRef)
-    ).subscribe(formValues => {
-      this.categoriesSelected = CATEGORIES.filter((value, index) => formValues[index]);
-      this.refreshMap();
-    });
+    this.maxDisplayedFloatingButton = config.maxDisplayedFloatingButton;
   }
 
   get categoriesForm(): FormArray {
@@ -102,11 +103,34 @@ export class MapPage {
 
   async ionViewDidEnter() {
     this.isLoading = true;
-    await this.loadMarkersInNetworkAvailable();
-    await this.leafletMapInit();
-    markersList$
+    await this.loadMapDataInNetworkAvailable();
+
+    combineLatest([categoriesList$, currentLanguage$])
       .pipe(
         take(1),
+        map(([categories, currentLanguage]) => this.translateCategories(categories, currentLanguage))
+      )
+      .subscribe(categories => this.categories = categories);
+
+    this.initCategoriesForm();
+    this.categoriesForm.valueChanges.pipe(
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe(formValues => {
+      this.categoriesSelected = this.categories.filter((value, index) => formValues[index]).map(value => value.id);
+      this.refreshMap();
+    });
+
+    campusList$
+      .pipe(
+        take(1)
+      )
+      .subscribe(campus => this.campus = campus);
+
+    await this.leafletMapInit();
+    combineLatest([markersList$, currentLanguage$])
+      .pipe(
+        take(1),
+        map(([markers, currentLanguage]) => this.translateMarkers(markers, currentLanguage)),
         finalize(() => this.isLoading = false)
       )
       .subscribe(markers => this.initMarkers(markers));
@@ -126,22 +150,7 @@ export class MapPage {
   }
 
   getCategoryTranslation(category: string) {
-    switch (category) {
-      case 'presidences_points':
-        return 'MAP.CATEGORY.PRESIDENCES';
-      case 'composantes_points':
-        return 'MAP.CATEGORY.COMPOSANTES';
-      case 'bus_points':
-        return 'MAP.CATEGORY.BUS';
-      case 'restos_points':
-        return 'MAP.CATEGORY.RESTOS';
-      case 'cites_points':
-        return 'MAP.CATEGORY.CITES';
-      case 'santes_points':
-        return 'MAP.CATEGORY.SANTES';
-      case 'suaps_points':
-        return 'MAP.CATEGORY.SUAPS';
-    }
+    return this.categories.find(cat => cat.id === category).labelTranslate;
   }
 
   removeSelectedCategory(category: string, selectedCatIndex: number) {
@@ -149,15 +158,43 @@ export class MapPage {
     this.refreshMap();
 
     const newValue = [...this.categoriesForm.value];
-    newValue[CATEGORIES.indexOf(category)] = false;
+    newValue[this.categories.findIndex(cat => cat.id === category)] = false;
     this.categoriesForm.setValue(newValue);
   }
 
+  flyTo(campus: Campus){
+    this.map.setView([campus.initial.lat,campus.initial.lng], this.config.minZoom > 16 ? this.config.minZoom : 16);
+    if(this.config.maxBounds){
+      const southWest = Leaflet.latLng(campus.southwest.lat, campus.southwest.lng);
+      const northEast = Leaflet.latLng(campus.northeast.lat, campus.northeast.lng);
+      const bounds = Leaflet.latLngBounds(southWest, northEast);
+      this.map.setMaxBounds(bounds);
+    }
+  }
+
   private async leafletMapInit() {
-    this.map = Leaflet.map('map').setView([0, 0], 9);
-    Leaflet.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    this.map = Leaflet.map('map', {
+      center: [0, 0],
+      zoom: this.config.minZoom > 9 ? this.config.minZoom : 9,
+      maxBoundsViscosity: 0.5
+    });
+
+    let mapType = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+    if(this.config.mapType === 'osm'){
+      mapType = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+    }else if(this.config.mapType === 'mapbox'){
+      mapType = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}@2x?access_token={accessToken}';
+    }
+    Leaflet.tileLayer(mapType, {
+      id: this.config.mapType === 'mapbox' ? 'mapbox/streets-v12' : '',
+      minZoom: this.config.minZoom,
+      maxZoom: this.config.maxZoom,
+      tileSize: this.config.mapType === 'mapbox' ? 512 : 256,
+      zoomOffset: this.config.mapType === 'mapbox' ? -1 : 0,
+      accessToken: this.config.accessToken,
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(this.map);
+
     await this.refreshUserPosition();
   }
 
@@ -174,10 +211,10 @@ export class MapPage {
     const permissionAlreadyGranted = (await Geolocation.checkPermissions()).location === 'granted';
 
     try {
-      const position = await Geolocation.getCurrentPosition();
-      let zoomLevel = 11;
+      const position = await Geolocation.getCurrentPosition({enableHighAccuracy: this.config.highAccuracy});
+      let zoomLevel = this.config.minZoom > 11 ? this.config.minZoom : 11;
       if (!permissionAlreadyGranted) { // Permission has just been granted now
-        zoomLevel = 16;
+        zoomLevel = this.config.minZoom > 16 ? this.config.minZoom : 16;
       }
       const latLng: Leaflet.LatLngTuple = [position.coords.latitude, position.coords.longitude];
       const circle = Leaflet.circle(latLng, position.coords.accuracy);
@@ -191,6 +228,7 @@ export class MapPage {
       }
 
       this.positionLayerGroup = Leaflet.layerGroup([circle, marker]).addTo(this.map);
+      if (this.config.maxBounds) {this.map.setMaxBounds(null);}
       this.map.setView(latLng, zoomLevel);
     } catch (error) {
       console.error('Error getting current position:', error);
@@ -198,11 +236,12 @@ export class MapPage {
       if (this.positionLayerGroup) {
         this.positionLayerGroup.remove();
       }
+      if (this.config.maxBounds) {this.map.setMaxBounds(null);}
       this.map.setView(latLngOfTheUniversity);
     }
   }
 
-  private async loadMarkersInNetworkAvailable() {
+  private async loadMapDataInNetworkAvailable() {
     // skip if network is not available
     if (!(await this.networkService.getConnectionStatus()).connected) {
       return;
@@ -210,6 +249,10 @@ export class MapPage {
 
     const markers = await this.mapService.getMarkers().toPromise();
     setMarkers(markers);
+    const categories = await this.mapService.getCategories().toPromise();
+    setCategories(categories);
+    const campus = await this.mapService.getCampus().toPromise();
+    setCampus(campus);
   }
 
   private initMarkers(markers: Marker[]) {
@@ -228,45 +271,26 @@ export class MapPage {
     }
     const markersInCategory = this.markersByCategory.get(m.category);
 
-    const icon = this.buildIconForCategory(m.category);
+    const icon = this.buildIconForCategory(m);
     const marker = Leaflet.marker([m.latitude, m.longitude], { icon })
       .bindPopup(
-        `<h4 class="app-title-4">${m.title}</h4><br>
-        <div class="app-text-5">${m.description}</div>`
+        `<h5 class="app-title-5">${m.titleTranslate}</h5>
+        <div class="app-text-5">${m.descriptionTranslate ? m.descriptionTranslate : ''}</div>`
       );
 
     markersInCategory.push(marker);
   }
 
-  private getIconFileByCategory(category: string) {
-    switch (category) {
-      case 'presidences_points':
-        return 'presidence.png';
-      case 'composantes_points':
-        return 'composante.png';
-      case 'bus_points':
-        return 'bu.png';
-      case 'restos_points':
-        return 'resto_u.png';
-      case 'cites_points':
-        return 'cite_u.png';
-      case 'santes_points':
-        return 'sante.png';
-      case 'suaps_points':
-        return 'suap.png';
-      default:
-        return 'composante.png'; //default icon for unknown category
+  private buildIconForCategory(m: Marker) {
+    if(!m.icon.svg) {
+      return this.buildSimpleMarkerIcon();
     }
-  }
 
-  private buildIconForCategory(category: string) {
-    const iconFile = this.getIconFileByCategory(category);
-    const iconUrl = `./assets/icons/markers/${iconFile}`;
-
-    return Leaflet.icon({
-      iconUrl,
-      iconSize: [34, 48], // size of the icon
-      iconAnchor: [18, 48], // point of the icon which will correspond to marker's location
+    return Leaflet.divIcon({
+      html: m.icon.svg,
+      className: '',
+      iconSize: [m.icon.width, m.icon.height],
+      iconAnchor: [m.icon.x, m.icon.y],
     });
   }
 
@@ -290,6 +314,39 @@ export class MapPage {
     });
 
     this.categoriesForm.clear();
-    CATEGORIES.forEach(() => this.categoriesForm.push(new FormControl(false)));
+    this.categories.forEach(() => this.categoriesForm.push(new FormControl(false)));
+  }
+
+  private translateCategories(categories: Categorie[], currentLanguage: string): Categorie[] {
+    return categories.map(categorie => {
+      this.findTranslation(categorie, 'label', currentLanguage);
+      return categorie;
+    });
+  }
+
+  private translateMarkers(markers: Marker[], currentLanguage: string): Marker[] {
+    return markers.map(marker => {
+      this.findTranslation(marker, 'title', currentLanguage);
+      this.findTranslation(marker, 'description', currentLanguage);
+      return marker;
+    });
+  }
+
+  private findTranslation(objectToTranslate: Categorie | Marker, propertyToTranslate: string, currentLanguage: string) {
+    const translation =
+      objectToTranslate[propertyToTranslate].find((t: Label) => t.langcode === currentLanguage) ||
+      objectToTranslate[propertyToTranslate].find((t: Label) => t.langcode === this.environment.defaultLanguage) ||
+      objectToTranslate[propertyToTranslate][0];
+
+    objectToTranslate[propertyToTranslate+'Translate'] = translation?.value;
+  }
+
+  public closePopOverAndFlyTo(campus:Campus){
+    this.flyTo(campus);
+    this.isCampusSelectionOpen=false;
+  }
+
+  public presentCampusSelection(){
+    this.isCampusSelectionOpen=true;
   }
 }

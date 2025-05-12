@@ -37,22 +37,12 @@
  * termes.
  */
 
-import { InjectionToken } from '@angular/core';
+const express = require('express');
+const router = express.Router();
+const { categories, campuses, pois } = require('./map.mock');
 
-interface GpsCoordinate {
-    longitude: number;
-    latitude: number;
-}
-export interface MapModuleConfig {
-    defaultMapLocation: GpsCoordinate;
-    mapType: 'mapbox' | 'osm';
-    accessToken: string;
-    minZoom: number;
-    maxZoom: number;
-    maxBounds: boolean;
-    highAccuracy: boolean;
-    maxDisplayedFloatingButton: number;
-}
+router.get('/pois', (req, res) => res.json(pois));
+router.get('/categories', (req, res) => res.json(categories));
+router.get('/campuses', (req, res) => res.json(campuses));
 
-export const MAP_CONFIG =
-  new InjectionToken<MapModuleConfig>('Map module config');
+module.exports = router;

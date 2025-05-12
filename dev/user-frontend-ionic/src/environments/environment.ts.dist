@@ -94,7 +94,14 @@ export const environment: any = {
       defaultMapLocation: {
         longitude: 2.3488596,
         latitude: 48.8533249
-      }
+      },
+      mapType: "osm",
+      accessToken: "",
+      minZoom: 1,
+      maxZoom: 19,
+      maxBounds: false,
+      highAccuracy: false,
+      maxDisplayedFloatingButton: 5
     }),
     NotificationsModule.forRoot({
       numberOfNotificationsOnFirstLoad: 20,
