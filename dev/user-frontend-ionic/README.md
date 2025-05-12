@@ -257,3 +257,237 @@ Exemple 2 :
 Alors le layout FULL est utilisé pour la route /schedule/calendar#month
 
 Et le layout TABS est utilisé pour les routes /schedule/list, /schedule/calendar#week, /schedule/calendar#day
+
+### Personnalisation du thème d'un tenant.
+
+Dans les fichiers src/environments/environment.*.ts, on peut ajouter un thème par défaut dans l'attribut ```defaultTheme```
+```
+  production: false,
+  languages: ['fr', 'en'],
+  defaultLanguage: 'fr',
+  firebase: firebasePwaEnvironment,
+  guidedTourEnabled: true,
+  defaultTheme: 'default',
+  tenants: [
+  ...
+  ]
+```
+Ce thème est utilisé par défaut si aucun thème n'est défini dans les prefs utilisateurs.
+
+A la sélection d'un tenant, on sauvegarde l'identifiant du tenant comme étant le thème de l'application et on charge ce thème.
+Au démarrage de l'application, on charge le thème sauvegardé dans les préférences utilisateurs.
+S'il n'y en a pas, on charge le thème defaultTheme. Si ce dernier n'est pas défini, on ne fait rien.
+
+Quand on désélectionne un tenant, on utilise defaultTheme ou rien - si ce dernier n'est pas défini.
+
+Pour appliquer un thème, on ajoute un classe au body du document - à l'instar du thème sombre.
+
+#### Modification du logo par défaut
+
+Le fichier d'environnement, qui contient la description des tenants, a été modifié.
+
+Un paramètre global ```defaultLogo``` a été ajouté. Il s'agit du chemin relatif (par rapport à la racine du projet) du logo à utiliser si on n'a pas de tenant sélectionné ou si le tenant n'a pas son propre logo.
+
+Un tenant peut avoir son propre logo grace à la propriété ```logo```. Il s'agit du chemin relatif (par rapport à la racine du projet) du logo du tenant. Si la propriété n'est pas présente ou si elle est vide (ex: ''), alors le logo par défaut est utilisé.
+
+Exemple:
+```
+export const environment = {
+  production: false,
+  ...
+  defaultLogo: 'assets/logos/white-logo.svg',
+  tenants: [
+    {
+      id: 'other',
+      logo: 'assets/logos/other.svg'
+      ...
+```
+
+## Fonctionnalité multi établissement (multi tenant)
+
+Dans les fichiers src/environments/environment.*.ts, on peut définir plusieurs établissement à travers l'attribut `tenants` :
+```
+  tenants: [
+    {
+      id: 'etablissement1',
+      name: 'Etablissement 1',
+      logo: 'assets/logos/logo1.svg',
+      apiEndpoint: 'http://localhost:3000',
+      cmsPublicAssetsEndpoint: 'http://localhost:8055/assets/',
+      topic: 'etablissement1',
+      modulesConfigurations: {
+        chatbot: {
+          logoRegex: /_chacha5/i
+        },
+        map: {
+          defaultLocation: {
+            longitude: 2.3488596,
+            latitude: 48.8533249
+          }
+        },
+        reservation: {
+          ssoServiceName: 'https://mon-espace-de-resa.fr',
+          ssoUrlTemplate: 'https://mon-espace-de-resa.fr/auth?ticket={st}',
+        }
+      },
+    },
+    {
+      id: 'etablissement2',
+      name: 'Etablissement 2',
+      logo: 'assets/logos/logo2.svg',
+      apiEndpoint: 'http://localhost:3000',
+      cmsPublicAssetsEndpoint: 'http://localhost:8055/assets/',
+      topic: 'etablissement2',
+      modulesConfigurations: {
+        chatbot: {
+          logoRegex: /_chacha5/i
+        },
+        map: {
+          defaultLocation: {
+            longitude: 2.3488596,
+            latitude: 48.8533249
+          }
+        },
+        reservation: {
+          ssoServiceName: 'https://mon-espace-de-resa.fr',
+          ssoUrlTemplate: 'https://mon-espace-de-resa.fr/auth?ticket={st}',
+        }
+      },
+    }
+  ],
+```
+
+Ainsi, on peut facilement configurer un `apiEndpoint` ainsi qu'un `cmsPublicAssetsEndpoint` différent pour chacun d'entre eux afin d'utiliser un backend et/ou un cms différent selon l'établissement sélectionné.
+
+D'autres configurations peuvent également varier en fonction de l'établissement :
+- `topic` firebase utilisé
+- `logo`
+- `modulesConfigurations` configurations des différents modules pour lesquelles cela a du sens d'avoir une configuration propre par établissement
+
+### Group de tenants
+
+Il est également possible de regrouper les tenants dans un groupe de tenant, en définissant l'attribut forceSelect à false, l'application chargera la configuration du groupe sans forcer l'utilisateur à sélectionner un tenant.
+Il n'est possible de créer qu'un seul groupe de tenant, celui ci devant alors se situer en première et unique position du tableau de tenant situé à la racine de la configuration:
+```
+  tenants: [
+    {
+      id: 'etablissement',
+      name: 'Groupe',
+      isGroup: true,
+      forceSelect: false,
+      logo: 'assets/logos/logo.svg',
+      apiEndpoint: 'http://localhost:3000',
+      cmsPublicAssetsEndpoint: 'http://localhost:8055/assets/',
+      modulesConfigurations: {
+        chatbot: {
+          logoRegex: /_chacha5/i
+        },
+        map: {
+          defaultLocation: {
+            longitude: 2.3488596,
+            latitude: 48.8533249
+          }
+        },
+        reservation: {
+          ssoServiceName: 'https://mon-espace-de-resa.fr',
+          ssoUrlTemplate: 'https://mon-espace-de-resa.fr/auth?ticket={st}',
+        }
+      },
+      tenants: [
+        {
+          id: 'etablissement1',
+          name: 'Etablissement 1',
+          logo: 'assets/logos/logo1.svg',
+          apiEndpoint: 'http://localhost:3000',
+          cmsPublicAssetsEndpoint: 'http://localhost:8055/assets/',
+          topic: 'etablissement1',
+          modulesConfigurations: {
+            chatbot: {
+              logoRegex: /_chacha5/i
+            },
+            map: {
+              defaultLocation: {
+                longitude: 2.3488596,
+                latitude: 48.8533249
+              }
+            },
+            reservation: {
+              ssoServiceName: 'https://mon-espace-de-resa.fr',
+              ssoUrlTemplate: 'https://mon-espace-de-resa.fr/auth?ticket={st}',
+            }
+          },
+        },
+        {
+          id: 'etablissement2',
+          name: 'Etablissement 2',
+          logo: 'assets/logos/logo2.svg',
+          apiEndpoint: 'http://localhost:3000',
+          cmsPublicAssetsEndpoint: 'http://localhost:8055/assets/',
+          topic: 'etablissement2',
+          modulesConfigurations: {
+            chatbot: {
+              logoRegex: /_chacha5/i
+            },
+            map: {
+              defaultLocation: {
+                longitude: 2.3488596,
+                latitude: 48.8533249
+              }
+            },
+            reservation: {
+              ssoServiceName: 'https://mon-espace-de-resa.fr',
+              ssoUrlTemplate: 'https://mon-espace-de-resa.fr/auth?ticket={st}',
+            }
+          },
+        }
+      ]
+    }
+  ],
+```
+
+### Translations par tenant
+
+Il est possible de définir des translations par tenant. Pour cela, il suffit de créer un dossier nommé suivant l'id du tenant 
+à l'endroit où se trouvent les translations que l'on souhaite changer, et y placer les fichiers de translations contenant ces 
+dernières (en.json, fr.json).
+
+Par exemple, pour avoir des translations propres à `etablissement1` pour le module `auth`, on aura les fichiers suivants :
+- `src/theme/app-theme/i18n/module/auth/en.json` : translations en par défaut
+- `src/theme/app-theme/i18n/module/auth/fr.json` : translations fr par défaut
+- `src/theme/app-theme/i18n/module/auth/etablissement1/en.json` : translations en propres à `etablissement1`
+- `src/theme/app-theme/i18n/module/auth/etablissement1/fr.json` : translations fr propres à `etablissement1`
+
+Les translations ajoutées de cette manière seront fusionnées avec les translations par défaut, les clés définies dans les nouveaux
+fichiers écrasant les mêmes clefs des translations par défaut. 
+
+Ainsi, si on a la translation par défaut fr suivante :
+
+```json
+{
+  "MENU": "Menu",
+  "VERSION" : {
+    "VERSION": "Version",
+    "VERSION_NOT_FOUND": "Indisponible"
+  }
+}
+```
+.. et que l'on veut changer la clé `VERSION_NOT_FOUND` uniquement, on va créer un fichier `etablissement1/fr.json` :
+
+```json
+{
+  "VERSION" : {
+    "VERSION_NOT_FOUND": "Version indisponible"
+  }
+}
+```
+
+La translation finale qui sera chargée ressemblera alors à ça :
+```json
+{
+  "MENU": "Menu",
+  "VERSION" : {
+    "VERSION": "Version",
+    "VERSION_NOT_FOUND": "Version indisponible"
+  }
+}
+```

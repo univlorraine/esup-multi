@@ -1,0 +1,10 @@
+{
+  "CHOICE_UNIVERSITY": "Veuillez sélectionner votre université pour vous connecter :",
+  "UNIVERSITY": "Université",
+  "VALIDATE": "Valider",
+  "UNIVERSITY_CHANGE": "Changer d'université",
+  "CHANGE_UNIVERSITY_CONFIRMATION" : {
+    "HEADER": "Confirmation de changement d'université",
+    "MESSAGE": "Êtes-vous sûr de vouloir changer d'université ?"
+  }
+}

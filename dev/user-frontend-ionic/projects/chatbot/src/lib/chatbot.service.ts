@@ -38,7 +38,8 @@
  */
 
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { MultiTenantService } from '@multi/shared';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ChatbotButtonPayloadRequest, ChatbotMessage, ChatbotTextRequest, MessageType } from './chatbot.dto';
@@ -49,8 +50,7 @@ import { ChatbotButtonPayloadRequest, ChatbotMessage, ChatbotTextRequest, Messag
 export class ChatbotService {
 
   constructor(
-    @Inject('environment')
-    private environment: any,
+    private multiTenantService: MultiTenantService,
     private http: HttpClient) { }
 
   textRequest(text: string, userId: string): Observable<ChatbotMessage[]> {
@@ -58,7 +58,7 @@ export class ChatbotService {
       return;
     }
 
-    const url = `${this.environment.apiEndpoint}/chatbot/text-request`;
+    const url = `${this.multiTenantService.getApiEndpoint()}/chatbot/text-request`;
     const request: ChatbotTextRequest = {
       query: text,
       userId
@@ -71,7 +71,7 @@ export class ChatbotService {
   buttonPayloadRequest(buttonPayload: string, userId: string): Observable<ChatbotMessage[]> {
     const request: ChatbotButtonPayloadRequest = { payload: buttonPayload, userId };
 
-    const url = `${this.environment.apiEndpoint}/chatbot/button-payload-request`;
+    const url = `${this.multiTenantService.getApiEndpoint()}/chatbot/button-payload-request`;
 
     return this.http.post<ChatbotMessage[]>(url , request).pipe(
       map(chatbotResponses =>  this.setMessageTypeToBot(chatbotResponses)));

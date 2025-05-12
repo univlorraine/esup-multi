@@ -37,14 +37,13 @@
  * termes.
  */
 
-import { Component, DestroyRef, inject, Inject, ViewChild } from '@angular/core';
+import { Component, DestroyRef, inject, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Geolocation } from '@capacitor/geolocation';
 import { TranslateService } from '@ngx-translate/core';
-import { NetworkService } from '@multi/shared';
+import { NetworkService, MultiTenantService } from '@multi/shared';
 import * as Leaflet from 'leaflet';
 import { finalize, take } from 'rxjs/operators';
-import { MapModuleConfig, MAP_CONFIG } from './map.config';
 import { Marker, markersList$, setMarkers } from './map.repository';
 import { MapService } from './map.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -83,7 +82,7 @@ export class MapPage {
     private mapService: MapService,
     private translateService: TranslateService,
     private formBuilder: FormBuilder,
-    @Inject(MAP_CONFIG) private config: MapModuleConfig,
+    private multiTenantService: MultiTenantService,
     private networkService: NetworkService,
   ) {
     this.initCategoriesForm();
@@ -194,7 +193,12 @@ export class MapPage {
       this.map.setView(latLng, zoomLevel);
     } catch (error) {
       console.error('Error getting current position:', error);
-      const latLngOfTheUniversity: Leaflet.LatLngTuple = [this.config.defaultMapLocation.latitude, this.config.defaultMapLocation.longitude];
+      const {latitude, longitude} = this.multiTenantService.getModuleConfiguration('map.defaultLocation');
+      const latLngOfTheUniversity: Leaflet.LatLngTuple = [
+        latitude,
+        longitude
+      ];
+
       if (this.positionLayerGroup) {
         this.positionLayerGroup.remove();
       }

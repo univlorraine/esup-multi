@@ -38,10 +38,11 @@
  */
 
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Restaurant, setRestaurants } from './restaurants.repository';
 import { tap } from 'rxjs/operators';
+import { MultiTenantService } from '@multi/shared';
 
 
 @Injectable({
@@ -50,13 +51,12 @@ import { tap } from 'rxjs/operators';
 export class RestaurantsService {
 
   constructor(
-    @Inject('environment')
-    private environment: any,
+    private multiTenantService: MultiTenantService,
     private http: HttpClient,
   ) {}
 
   public loadAndStoreRestaurants(): Observable<Restaurant[]> {
-    const url = `${this.environment.apiEndpoint}/restaurants`;
+    const url = `${this.multiTenantService.getApiEndpoint()}/restaurants`;
 
     return this.http.get<Restaurant[]>(url).pipe(
       tap(restaurants => setRestaurants(restaurants)));

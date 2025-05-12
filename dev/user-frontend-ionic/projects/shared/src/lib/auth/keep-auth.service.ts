@@ -38,8 +38,9 @@
  */
 
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Actions } from '@ngneat/effects-ng';
+import { MultiTenantService } from '../multi-tenant/multi-tenant.service';
 import { Observable, of } from 'rxjs';
 import { concatMap, delayWhen } from 'rxjs/operators';
 import { authenticate, cleanupPrivateData } from '../shared.actions';
@@ -57,8 +58,7 @@ interface ReauthResult extends AuthenticatedUser {
 export class KeepAuthService {
 
     constructor(
-        @Inject('environment')
-        private environment: any,
+        private multiTenantService: MultiTenantService,
         private http: HttpClient,
         private actions: Actions,
     ) {}
@@ -85,7 +85,7 @@ export class KeepAuthService {
     }
 
     private reauthenticate(refreshAuthToken: string) {
-        const url = `${this.environment.apiEndpoint}/keep-auth/reauth`;
+      const url = `${this.multiTenantService.getApiEndpoint()}/keep-auth/reauth`;
         const headers = {
             // eslint-disable-next-line @typescript-eslint/naming-convention
             Authorization: `Bearer ${refreshAuthToken}`
