@@ -58,6 +58,7 @@ import { combineLatest, Observable, of, Subscription } from 'rxjs';
 import { distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
 import { Title } from '@angular/platform-browser';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { EdgeToEdge } from '@capawesome/capacitor-android-edge-to-edge-support';
 
 @Component({
   selector: 'app-root',
@@ -244,7 +245,14 @@ export class AppComponent implements OnInit, OnDestroy {
       return;
     }
     this.platform.ready().then(() => {
-      StatusBar.setStyle({ style: Style.Dark });
+      const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--ion-color-primary');
+      const r = parseInt(primaryColor.slice(1, 3), 16);
+      const g = parseInt(primaryColor.slice(3, 5), 16);
+      const b = parseInt(primaryColor.slice(5, 7), 16);
+      const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+      StatusBar.setStyle({ style: luminance > 0.5 ? Style.Light : Style.Dark });
+      StatusBar.setBackgroundColor({ color: primaryColor });
+      EdgeToEdge.setBackgroundColor({ color: primaryColor });
     });
   }
 

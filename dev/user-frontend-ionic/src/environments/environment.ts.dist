@@ -71,6 +71,7 @@ export const environment: any = {
   guidedTourEnabled: true,
   appTitle: 'Esup-Multi',
   appVersion: '1.0.0',
+  forceFullLayoutFeatures: [],
   useExternalNotificationSystem: false,
   defaultLogo: 'assets/logos/white-logo.svg',
   tenants: [
