@@ -47,29 +47,29 @@ services:
         define('WP_DEBUG_DISPLAY', false);
 
       # Sécurité supplémentaire avec un serveur proxy Nginx
-      NGINX_UPLOADS_PROXY: 'http://localhost:8080'
-      WORDPRESS_HTACCESS_OVERRIDE_NONE: no
-      WORDPRESS_ENABLE_HTACCESS_PERSISTENCE: yes
+#      NGINX_UPLOADS_PROXY: 'http://localhost:8080'
+#      WORDPRESS_HTACCESS_OVERRIDE_NONE: no
+#      WORDPRESS_ENABLE_HTACCESS_PERSISTENCE: yes
 
     volumes:
       - ./wp-data/wordpress_data:/bitnami/wordpress
       - ./docker-entrypoint-init.d:/docker-entrypoint-init.d:ro
-      - ./wp-data/uploads:/var/www/html/wp-content/uploads # Ne pas monter directement dans /opt/bitnami/wordpress/wp-content/ car sinon l'init de l'image tombe en erreur
+#      - ./wp-data/uploads:/var/www/html/wp-content/uploads # Ne pas monter directement dans /opt/bitnami/wordpress/wp-content/ car sinon l'init de l'image tombe en erreur
     depends_on:
       - wordpress-db
 
-  nginx:
-    container_name: nginx
-    image: nginx:latest
-    ports:
-      - '8080:80'
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./wp-data/uploads:/var/www/html/wp-content/uploads:ro
-    networks:
-      - wordpress-network
-    depends_on:
-      - wordpress
+#  nginx:
+#    container_name: nginx
+#    image: nginx:latest
+#    ports:
+#      - '8080:80'
+#    volumes:
+#      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+#      - ./wp-data/uploads:/var/www/html/wp-content/uploads:ro
+#    networks:
+#      - wordpress-network
+#    depends_on:
+#      - wordpress
 
 networks:
   wordpress-network:

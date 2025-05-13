@@ -59,7 +59,7 @@ manage_plugins() {
 
   wp plugin install pods --activate  --allow-root
   wp plugin install polylang --activate  --allow-root
-  wp plugin install https://github.com/univlorraine/multi-wordpress-config/archive/refs/heads/stable.zip --activate --allow-root
+  wp plugin install https://github.com/univlorraine/multi-wordpress-config/archive/refs/heads/main.zip --activate --allow-root
   wp plugin install wp-graphql --activate --allow-root
   wp plugin install https://github.com/valu-digital/wp-graphql-polylang/archive/refs/heads/stable.zip --activate --allow-root
   wp plugin install disable-gutenberg --activate --allow-root
