@@ -64,6 +64,7 @@ manage_plugins() {
   wp plugin install https://github.com/valu-digital/wp-graphql-polylang/archive/refs/heads/stable.zip --activate --allow-root
   wp plugin install disable-gutenberg --activate --allow-root
   wp plugin install wordpress-importer --activate --allow-root
+  wp plugin install wpc-admin-columns --activate --allow-root
 
   info "Plugins installés et activés avec succès"
 
