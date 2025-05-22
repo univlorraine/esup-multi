@@ -1,0 +1,18 @@
+export default () => ({
+  cmsName: 'WordPress',
+  apiUrl: process.env.WORDPRESS_API_URL || 'http://localhost:9090',
+  apiUsername: process.env.WORDPRESS_API_USERNAME || '',
+  apiPassword: process.env.WORDPRESS_API_PASSWORD || '',
+  timeout: 5000,
+  // assetsPath: process.env.WORDPRESS_ASSETS_PATH || '/assets',
+  // channelPath: '/channels',
+  // contactUsPath: '/contact-us',
+  // featuresPath: '/features',
+  // importantNewsPath: '/important-news',
+  // languagesPath: '/languages',
+  // loginPath: '/login',
+  // pagePath: '/pages',
+  // socialNetworksPath: '/social-networks',
+  // widgetPath: '/widgets',
+  // options: '?acf_format=standard&_fields=acf,id&per_page=100',
+});
