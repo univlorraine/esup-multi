@@ -5,6 +5,7 @@ import { join } from 'path';
 import { ConfigModule } from '@nestjs/config';
 import { CmsModule } from './cms/cms.module';
 import { AuthModule } from './auth/auth.module';
+import { MonitoringModule } from './monitoring/monitoring.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { AuthModule } from './auth/auth.module';
     }),
     AuthModule,
     CmsModule.register(),
+    MonitoringModule,
   ],
 })
 export class AppModule {}
