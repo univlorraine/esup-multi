@@ -44,11 +44,11 @@ import { TranslateService }  from '@ngx-translate/core';
 export const loggedSteps= (router: Router, translateService: TranslateService, onComplete?: () => void): Step.StepOptions[] => [
   {
     id: 'logged-step-10',
-    text: translateService.instant('GUIDED_TOUR.LOGGED.STEP_10.MESSAGE'),
+    text: translateService.instant('GUIDED-TOUR.LOGGED.STEP_10.MESSAGE'),
     buttons: [
       {
         classes: 'shepherd-button-secondary',
-        text: translateService.instant('GUIDED_TOUR.CLOSE'),
+        text: translateService.instant('GUIDED-TOUR.CLOSE'),
         action() {
           onComplete();
           return this.complete();
@@ -56,7 +56,7 @@ export const loggedSteps= (router: Router, translateService: TranslateService, o
       },
       {
         classes: 'shepherd-button-primary',
-        text: translateService.instant('GUIDED_TOUR.NEXT'),
+        text: translateService.instant('GUIDED-TOUR.NEXT'),
         action() {
           this.next();
         }
@@ -72,7 +72,7 @@ export const loggedSteps= (router: Router, translateService: TranslateService, o
     buttons: [
       {
         classes: 'shepherd-button-secondary',
-        text: translateService.instant('GUIDED_TOUR.CLOSE'),
+        text: translateService.instant('GUIDED-TOUR.CLOSE'),
         action() {
           onComplete();
           return this.complete();
@@ -80,13 +80,13 @@ export const loggedSteps= (router: Router, translateService: TranslateService, o
       },
       {
         classes: 'shepherd-button-primary',
-        text: translateService.instant('GUIDED_TOUR.NEXT'),
+        text: translateService.instant('GUIDED-TOUR.NEXT'),
         action() {
           this.next();
         }
       }
     ],
-    text: `${translateService.instant('GUIDED_TOUR.LOGGED.STEP_20.MESSAGE')}
+    text: `${translateService.instant('GUIDED-TOUR.LOGGED.STEP_20.MESSAGE')}
             <br/> <img class="shepherd-image" src="assets/guided-tour/logged-guided-tour-step-20.png">`,
   },
   {
@@ -98,7 +98,7 @@ export const loggedSteps= (router: Router, translateService: TranslateService, o
     buttons: [
       {
         classes: 'shepherd-button-secondary',
-        text: translateService.instant('GUIDED_TOUR.CLOSE'),
+        text: translateService.instant('GUIDED-TOUR.CLOSE'),
         action() {
           onComplete();
           return this.complete();
@@ -106,13 +106,13 @@ export const loggedSteps= (router: Router, translateService: TranslateService, o
       },
       {
         classes: 'shepherd-button-primary',
-        text: translateService.instant('GUIDED_TOUR.NEXT'),
+        text: translateService.instant('GUIDED-TOUR.NEXT'),
         action() {
           this.next();
         }
       }
     ],
-    text: `${translateService.instant('GUIDED_TOUR.LOGGED.STEP_30.MESSAGE')}
+    text: `${translateService.instant('GUIDED-TOUR.LOGGED.STEP_30.MESSAGE')}
           <br/> <img class="shepherd-image" src="assets/guided-tour/logged-guided-tour-step-30.png">`,
   },
   {
@@ -124,7 +124,7 @@ export const loggedSteps= (router: Router, translateService: TranslateService, o
     buttons: [
       {
         classes: 'shepherd-button-secondary',
-        text: translateService.instant('GUIDED_TOUR.CLOSE'),
+        text: translateService.instant('GUIDED-TOUR.CLOSE'),
         action() {
           onComplete();
           return this.complete();
@@ -132,13 +132,13 @@ export const loggedSteps= (router: Router, translateService: TranslateService, o
       },
       {
         classes: 'shepherd-button-primary',
-        text: translateService.instant('GUIDED_TOUR.NEXT'),
+        text: translateService.instant('GUIDED-TOUR.NEXT'),
         action() {
           this.next();
         }
       }
     ],
-    text: `${translateService.instant('GUIDED_TOUR.LOGGED.STEP_40.MESSAGE')}`,
+    text: `${translateService.instant('GUIDED-TOUR.LOGGED.STEP_40.MESSAGE')}`,
   },
   {
     id: 'logged-step-50',
@@ -149,7 +149,7 @@ export const loggedSteps= (router: Router, translateService: TranslateService, o
     buttons: [
       {
         classes: 'shepherd-button-secondary',
-        text: translateService.instant('GUIDED_TOUR.CLOSE'),
+        text: translateService.instant('GUIDED-TOUR.CLOSE'),
         action() {
           onComplete();
           return this.complete();
@@ -157,13 +157,13 @@ export const loggedSteps= (router: Router, translateService: TranslateService, o
       },
       {
         classes: 'shepherd-button-primary',
-        text: translateService.instant('GUIDED_TOUR.NEXT'),
+        text: translateService.instant('GUIDED-TOUR.NEXT'),
         action() {
           this.next();
         }
       }
     ],
-    text: `${translateService.instant('GUIDED_TOUR.LOGGED.STEP_50.MESSAGE')}`,
+    text: `${translateService.instant('GUIDED-TOUR.LOGGED.STEP_50.MESSAGE')}`,
   },
   {
     id: 'logged-step-60',
@@ -171,7 +171,7 @@ export const loggedSteps= (router: Router, translateService: TranslateService, o
     buttons: [
       {
         classes: 'shepherd-button-secondary',
-        text: translateService.instant('GUIDED_TOUR.CLOSE'),
+        text: translateService.instant('GUIDED-TOUR.CLOSE'),
         action() {
           onComplete();
           return this.complete();
@@ -179,13 +179,13 @@ export const loggedSteps= (router: Router, translateService: TranslateService, o
       },
       {
         classes: 'shepherd-button-primary',
-        text: translateService.instant('GUIDED_TOUR.NEXT'),
+        text: translateService.instant('GUIDED-TOUR.NEXT'),
         action() {
           this.next();
         }
       }
     ],
-    text: `${translateService.instant('GUIDED_TOUR.LOGGED.STEP_60.MESSAGE')}
+    text: `${translateService.instant('GUIDED-TOUR.LOGGED.STEP_60.MESSAGE')}
         <br/> <img class="shepherd-image" src="assets/guided-tour/logged-guided-tour-step-60.png">`,
   },
   {
@@ -197,7 +197,7 @@ export const loggedSteps= (router: Router, translateService: TranslateService, o
     buttons: [
       {
         classes: 'shepherd-button-secondary',
-        text: translateService.instant('GUIDED_TOUR.CLOSE'),
+        text: translateService.instant('GUIDED-TOUR.CLOSE'),
         action() {
           onComplete();
           return this.complete();
@@ -205,13 +205,13 @@ export const loggedSteps= (router: Router, translateService: TranslateService, o
       },
       {
         classes: 'shepherd-button-primary',
-        text: translateService.instant('GUIDED_TOUR.NEXT'),
+        text: translateService.instant('GUIDED-TOUR.NEXT'),
         action() {
           this.next();
         }
       }
     ],
-    text: `${translateService.instant('GUIDED_TOUR.LOGGED.STEP_70.MESSAGE')}`,
+    text: `${translateService.instant('GUIDED-TOUR.LOGGED.STEP_70.MESSAGE')}`,
   },
   {
     id: 'logged-step-80',
@@ -222,7 +222,7 @@ export const loggedSteps= (router: Router, translateService: TranslateService, o
     buttons: [
       {
         classes: 'shepherd-button-secondary',
-        text: translateService.instant('GUIDED_TOUR.CLOSE'),
+        text: translateService.instant('GUIDED-TOUR.CLOSE'),
         action() {
           onComplete();
           return this.complete();
@@ -230,13 +230,13 @@ export const loggedSteps= (router: Router, translateService: TranslateService, o
       },
       {
         classes: 'shepherd-button-primary',
-        text: translateService.instant('GUIDED_TOUR.NEXT'),
+        text: translateService.instant('GUIDED-TOUR.NEXT'),
         action() {
           this.next();
         }
       }
     ],
-    text: `${translateService.instant('GUIDED_TOUR.LOGGED.STEP_80.MESSAGE')}
+    text: `${translateService.instant('GUIDED-TOUR.LOGGED.STEP_80.MESSAGE')}
         <br/> <img class="shepherd-image" src="assets/guided-tour/logged-guided-tour-step-80.png">`,
   },
   {
@@ -248,7 +248,7 @@ export const loggedSteps= (router: Router, translateService: TranslateService, o
     buttons: [
       {
         classes: 'shepherd-button-secondary',
-        text: translateService.instant('GUIDED_TOUR.CLOSE'),
+        text: translateService.instant('GUIDED-TOUR.CLOSE'),
         action() {
           onComplete();
           return this.complete();
@@ -256,13 +256,13 @@ export const loggedSteps= (router: Router, translateService: TranslateService, o
       },
       {
         classes: 'shepherd-button-primary',
-        text: translateService.instant('GUIDED_TOUR.NEXT'),
+        text: translateService.instant('GUIDED-TOUR.NEXT'),
         action() {
           this.next();
         }
       }
     ],
-    text: `${translateService.instant('GUIDED_TOUR.LOGGED.STEP_90.MESSAGE')}
+    text: `${translateService.instant('GUIDED-TOUR.LOGGED.STEP_90.MESSAGE')}
         <br/> <img class="shepherd-image" src="assets/guided-tour/logged-guided-tour-step-90.png">`,
   },
   {
@@ -274,7 +274,7 @@ export const loggedSteps= (router: Router, translateService: TranslateService, o
     buttons: [
       {
         classes: 'shepherd-button-secondary',
-        text: translateService.instant('GUIDED_TOUR.CLOSE'),
+        text: translateService.instant('GUIDED-TOUR.CLOSE'),
         action() {
           onComplete();
           return this.complete();
@@ -282,13 +282,13 @@ export const loggedSteps= (router: Router, translateService: TranslateService, o
       },
       {
         classes: 'shepherd-button-primary',
-        text: translateService.instant('GUIDED_TOUR.NEXT'),
+        text: translateService.instant('GUIDED-TOUR.NEXT'),
         action() {
           this.next();
         }
       }
     ],
-    text: `${translateService.instant('GUIDED_TOUR.LOGGED.STEP_100.MESSAGE')}
+    text: `${translateService.instant('GUIDED-TOUR.LOGGED.STEP_100.MESSAGE')}
         <br/> <img class="shepherd-image" src="assets/guided-tour/logged-guided-tour-step-100.png">`,
   },
   {
@@ -297,7 +297,7 @@ export const loggedSteps= (router: Router, translateService: TranslateService, o
     buttons: [
       {
         classes: 'shepherd-button-secondary',
-        text: translateService.instant('GUIDED_TOUR.CLOSE'),
+        text: translateService.instant('GUIDED-TOUR.CLOSE'),
         action() {
           onComplete();
           return this.complete();
@@ -305,13 +305,13 @@ export const loggedSteps= (router: Router, translateService: TranslateService, o
       },
       {
         classes: 'shepherd-button-primary',
-        text: translateService.instant('GUIDED_TOUR.NEXT'),
+        text: translateService.instant('GUIDED-TOUR.NEXT'),
         action() {
           this.next();
         }
       }
     ],
-    text: `${translateService.instant('GUIDED_TOUR.LOGGED.STEP_110.MESSAGE')}`,
+    text: `${translateService.instant('GUIDED-TOUR.LOGGED.STEP_110.MESSAGE')}`,
   },
   {
     id: 'logged-step-120',
@@ -322,7 +322,7 @@ export const loggedSteps= (router: Router, translateService: TranslateService, o
     buttons: [
       {
         classes: 'shepherd-button-secondary',
-        text: translateService.instant('GUIDED_TOUR.CLOSE'),
+        text: translateService.instant('GUIDED-TOUR.CLOSE'),
         action() {
           onComplete();
           return this.complete();
@@ -330,13 +330,13 @@ export const loggedSteps= (router: Router, translateService: TranslateService, o
       },
       {
         classes: 'shepherd-button-primary',
-        text: translateService.instant('GUIDED_TOUR.NEXT'),
+        text: translateService.instant('GUIDED-TOUR.NEXT'),
         action() {
           this.next();
         }
       }
     ],
-    text: `${translateService.instant('GUIDED_TOUR.LOGGED.STEP_120.MESSAGE')}`,
+    text: `${translateService.instant('GUIDED-TOUR.LOGGED.STEP_120.MESSAGE')}`,
   },
   {
     id: 'logged-step-130',
@@ -347,7 +347,7 @@ export const loggedSteps= (router: Router, translateService: TranslateService, o
     buttons: [
       {
         classes: 'shepherd-button-secondary',
-        text: translateService.instant('GUIDED_TOUR.CLOSE'),
+        text: translateService.instant('GUIDED-TOUR.CLOSE'),
         action() {
           onComplete();
           return this.complete();
@@ -355,13 +355,13 @@ export const loggedSteps= (router: Router, translateService: TranslateService, o
       },
       {
         classes: 'shepherd-button-primary',
-        text: translateService.instant('GUIDED_TOUR.NEXT'),
+        text: translateService.instant('GUIDED-TOUR.NEXT'),
         action() {
           this.next();
         }
       }
     ],
-    text: `${translateService.instant('GUIDED_TOUR.LOGGED.STEP_130.MESSAGE')}`,
+    text: `${translateService.instant('GUIDED-TOUR.LOGGED.STEP_130.MESSAGE')}`,
   },
   {
     id: 'logged-step-140',
@@ -372,13 +372,13 @@ export const loggedSteps= (router: Router, translateService: TranslateService, o
     buttons: [
       {
         classes: 'shepherd-button-primary',
-        text: translateService.instant('GUIDED_TOUR.FINISH'),
+        text: translateService.instant('GUIDED-TOUR.FINISH'),
         action() {
           onComplete();
           return this.complete();
         }
       }
     ],
-    text: `${translateService.instant('GUIDED_TOUR.LOGGED.STEP_140.MESSAGE')}`,
+    text: `${translateService.instant('GUIDED-TOUR.LOGGED.STEP_140.MESSAGE')}`,
   },
 ];

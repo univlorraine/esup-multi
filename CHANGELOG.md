@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## x.x.x (2025-xx-xx)
+
+### Client
+#### Bug fixes
+* **(restaurants)** : correction des dates tronquées à cause d'un scroll vertical inutile
+* **(schedule)** : correction du bouton 'Voir Plus' de la vue liste de l'emploi du temps qui n'affichait pas lorsque l'étudiant n'a pas de cours pendant plus de 15 jours
+
+#### New features
+* **(shared)** : Navigation, possibilité de forcer l'affichage pleine page (*full*) pour les fonctionnalités positionnées dans le menu *tabs*.
+* **(multi-tenant)** : On peut désormais avoir plusieurs établissements (tenants) dans la même application, chacun pouvant définir son logo, ses traductions et son backend
+
+#### Autres
+* Migration de [NodeJS](https://nodejs.org/docs/latest-v20.x/api/index.html) : Version 18 → Version 20
+* Mise à jour du moteur [Capacitor](https://capacitorjs.com/docs) : Version 6 → Version 7
+
 ## 1.2.0 (2024-12-11)
 
 ### Client

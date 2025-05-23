@@ -38,8 +38,8 @@
  */
 
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
-import { getAuthToken, NetworkService } from '@multi/shared';
+import { Injectable } from '@angular/core';
+import { getAuthToken, MultiTenantService, NetworkService } from '@multi/shared';
 import { filter, first, Observable } from 'rxjs';
 import { map, switchMap, take, tap } from 'rxjs/operators';
 import { MailCalendar, setMails } from './unread-mail.repository';
@@ -49,8 +49,7 @@ import { MailCalendar, setMails } from './unread-mail.repository';
 })
 export class UnreadMailService {
   constructor(
-    @Inject('environment')
-    private environment: any,
+    private multiTenantService: MultiTenantService,
     private http: HttpClient,
     private networkService: NetworkService
   ) { }
@@ -64,7 +63,7 @@ export class UnreadMailService {
   }
 
   private getMailCalendar(): Observable<MailCalendar> {
-    const url = `${this.environment.apiEndpoint}/mail-calendar`;
+    const url = `${this.multiTenantService.getApiEndpoint()}/mail-calendar`;
     return getAuthToken().pipe(
       take(1),
       switchMap(authToken => this.http.post<MailCalendar>(url, { authToken }))

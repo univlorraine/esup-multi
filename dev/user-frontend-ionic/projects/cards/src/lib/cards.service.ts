@@ -38,7 +38,8 @@
  */
 
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
+import { MultiTenantService } from '@multi/shared';
 import { Observable } from 'rxjs';
 import { UserAndCardsData } from './cards.repository';
 
@@ -48,14 +49,13 @@ import { UserAndCardsData } from './cards.repository';
 export class CardsService {
 
   constructor(
-    @Inject('environment')
-    private environment: any,
+    private multiTenantService: MultiTenantService,
     private http: HttpClient,
   ) {
   }
 
   public getUserAndCardsData(authToken: string): Observable<UserAndCardsData> {
-    const url = `${this.environment.apiEndpoint}/cards`;
+    const url = `${this.multiTenantService.getApiEndpoint()}/cards`;
     const data = {
       authToken
     };
