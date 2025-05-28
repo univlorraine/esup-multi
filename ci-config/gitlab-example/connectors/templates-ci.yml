@@ -1,0 +1,72 @@
+.connector_get_full_image_tag: &connector_get_full_image_tag
+  - apt-get update && apt-get install -y jq
+  - VERSION=$(jq -r '.version' ${CONNECTOR_PATH}/package.json)
+  - >
+    if [ ${CI_COMMIT_BRANCH} == "main" ]; then
+      IMAGE_TAG="${VERSION}"
+      IMAGE_LABEL="latest-prod"
+    elif [ ${CI_COMMIT_BRANCH} == "preprod" ]; then
+      IMAGE_TAG="${VERSION}-preprod"
+      IMAGE_LABEL="latest-preprod"
+    else
+      IMAGE_TAG="${VERSION}-dev"
+      IMAGE_LABEL="latest-dev"
+    fi
+  - echo "Tag complet pour l'image Docker = ${IMAGE_TAG}"
+  - echo "IMAGE_TAG=${IMAGE_TAG}" > ${CONNECTOR_PATH}/image_tag.env
+  - echo "Label pour l'image Docker = ${IMAGE_LABEL}"
+  - echo "IMAGE_LABEL=${IMAGE_LABEL}" >> ${CONNECTOR_PATH}/image_tag.env
+
+# Template pour le build JS des connecteurs
+.template_build_connector:
+  variables:
+    CONNECTOR_PATH: '${CI_PROJECT_DIR}/${CONNECTORS_PATH}/${CONNECTOR_FOLDER}'
+  image: node:$NODE_VERSION
+  before_script:
+    - cd ${CONNECTOR_PATH}
+    - *connector_get_full_image_tag
+    - npm ci --cache ${CI_PROJECT_DIR}/.npm --prefer-offline
+  script:
+    - npm run lint
+    - npm run build
+    - npm ci --cache ${CI_PROJECT_DIR}/.npm --prefer-offline --omit=dev
+  artifacts:
+    paths:
+      - '${CONNECTOR_PATH}/node_modules'
+      - '${CONNECTOR_PATH}/dist'
+    expire_in: 1 hour
+    reports:
+      dotenv: ${CONNECTOR_PATH}/image_tag.env
+
+# Template pour le build et le déploiement des images Docker des connecteurs
+.template_docker_deploy_connector:
+  variables:
+    DOCKERFILE_PATH: '${CI_PROJECT_DIR}/ci-config/gitlab-example/connectors/Dockerfile'
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  before_script:
+    # On renseigne les informations de connexion au registry Harbor dans un fichier de conf Kaniko
+    - mkdir -p /kaniko/.docker
+    - echo "{\"auths\":{\"${CI_REGISTRY}\":{\"auth\":\"$(printf "%s:%s" "${CI_REGISTRY_USER}" "${CI_REGISTRY_PASSWORD}" | base64 | tr -d '\n')\"}}}" > /kaniko/.docker/config.json
+  script:
+    # On build l'image Docker et on la push sur le repository
+    - /kaniko/executor
+      --context "${CI_PROJECT_DIR}/${CONNECTORS_PATH}/${CONNECTOR_FOLDER}"
+      --build-arg NODE_VERSION=${NODE_VERSION:-20}
+      --dockerfile ${DOCKERFILE_PATH}
+      --destination "${CI_REGISTRY_IMAGE}/${CONNECTOR_IMAGE_NAME}:${IMAGE_TAG}"
+      --destination "${CI_REGISTRY_IMAGE}/${CONNECTOR_IMAGE_NAME}:${IMAGE_LABEL}"
+  when: manual
+
+# Template pour les règles d'exécution des jobs
+.connector_rules_template:
+  rules:
+    # Si la pipeline est lancée manuellement depuis GitLab, on s'assure que le nom du service est renseigné pour lancer le job correspondant
+    - if: '$CI_PIPELINE_SOURCE == "web" && ($SERVICE == null || ($SERVICE != $CI_SERVICE_NAME && $SERVICE != "all" && $SERVICE != "all-ms"))'
+      when: never
+    # Autrement, la pipeline se déclenche automatiquement si des modifications ont été apportées dans le répertoire du service concerné
+    - if: '$CI_COMMIT_BRANCH == "develop" || $CI_COMMIT_BRANCH == "preprod" || $CI_COMMIT_BRANCH == "main"'
+      changes:
+        - '${CONNECTORS_PATH}/${CONNECTOR_FOLDER}/**/*'
+
