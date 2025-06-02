@@ -59,7 +59,7 @@ export class WordpressService {
       throw new CmsConfigError('Missing required WordPress configuration');
     }
 
-    this.apiUrl = `${cmsConfig.apiUrl}/graphql`;
+    this.apiUrl = `${cmsConfig.baseUrl}/graphql`;
     this.apiUsername = cmsConfig.apiUsername;
     this.apiPassword = cmsConfig.apiPassword;
     this.timeout = cmsConfig.timeout || 5000;
