@@ -55,7 +55,9 @@ export class ImportantNewsDirectusService {
           }
         : null,
       color: importantNew.color,
-      image: importantNew.image?.id.toString(),
+      image: importantNew.image
+        ? this.directusService.buildAssetUrl(importantNew.image.id.toString())
+        : null,
       link: importantNew.link,
       position: importantNew.sort,
       statisticName: importantNew.statisticName,
@@ -101,7 +103,7 @@ export class ImportantNewsDirectusService {
         }
       }
     `);
-    return data.important_news.map(this.mapToMultiModel);
+    return data.important_news.map((item) => this.mapToMultiModel(item));
   }
 
   async getImportantNew(id: number): Promise<ImportantNews> {

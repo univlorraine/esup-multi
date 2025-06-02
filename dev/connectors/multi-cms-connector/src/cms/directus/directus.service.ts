@@ -45,9 +45,11 @@ import { CmsConfigError, CmsQueryError } from '../cms.exception';
 @Injectable()
 export class DirectusService {
   private readonly logger = new Logger(DirectusService.name);
+  private readonly baseUrl: string;
   private readonly apiUrl: string;
   private readonly apiToken: string;
   private readonly timeout: number;
+  private readonly assetsPath: string;
 
   constructor(
     private readonly configService: ConfigService,
@@ -58,9 +60,11 @@ export class DirectusService {
       throw new CmsConfigError('Missing required Directus configuration');
     }
 
-    this.apiUrl = `${cmsConfig.apiUrl}/graphql`;
+    this.baseUrl = cmsConfig.baseUrl;
+    this.apiUrl = `${this.baseUrl}/graphql`;
     this.apiToken = cmsConfig.apiToken;
     this.timeout = cmsConfig.timeout || 5000;
+    this.assetsPath = cmsConfig.assetsPath || '/assets';
 
     this.logger.log('Directus service initialized successfully');
   }
@@ -85,5 +89,9 @@ export class DirectusService {
     } catch (error) {
       throw new CmsQueryError('Failed to fetch data from Directus', error);
     }
+  }
+
+  buildAssetUrl(assetId: string): string {
+    return `${this.baseUrl}${this.assetsPath}/${assetId}`;
   }
 }
