@@ -13,6 +13,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 #### New features
 * **(shared)** : Navigation, possibilité de forcer l'affichage pleine page (*full*) pour les fonctionnalités positionnées dans le menu *tabs*.
 * **(multi-tenant)** : On peut désormais avoir plusieurs établissements (tenants) dans la même application, chacun pouvant définir son logo, ses traductions et son backend
+* **(restaurants)** : Favoris multiples
 
 #### Autres
 * Migration de [NodeJS](https://nodejs.org/docs/latest-v20.x/api/index.html) : Version 18 → Version 20
