@@ -42,11 +42,11 @@ import { ContactUsTranslations } from '@common/models/translations.model';
 @ObjectType()
 export class ContactUs {
   @Field({ nullable: true })
-  icon: string;
+  icon: string | null;
 
   @Field()
   to: string;
 
-  @Field(() => [ContactUsTranslations], { nullable: true })
+  @Field(() => [ContactUsTranslations])
   translations: ContactUsTranslations[];
 }

@@ -44,15 +44,15 @@ export class SocialNetworks {
   @Field()
   id: string;
 
-  @Field({ nullable: true })
+  @Field()
   icon: string;
 
-  @Field({ nullable: true })
+  @Field()
   link: string;
 
-  @Field({ nullable: true })
+  @Field()
   title: string;
 
-  @Field({ nullable: true })
+  @Field()
   position: number;
 }

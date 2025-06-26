@@ -46,7 +46,7 @@ export class StaticPages {
   id: string;
 
   @Field({ nullable: true })
-  icon: string;
+  icon: string | null;
 
   @Field({ nullable: true })
   iconSvgDark: string;

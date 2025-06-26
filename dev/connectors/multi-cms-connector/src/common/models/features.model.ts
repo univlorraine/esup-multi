@@ -47,44 +47,44 @@ export class Features {
   id: string;
 
   @Field({ nullable: true })
-  description: string;
+  description: string | null;
 
   @Field({ nullable: true })
-  icon: string;
+  icon: string | null;
 
   @Field({ nullable: true })
-  iconSvgDark: string;
+  iconSvgDark: string | null;
 
   @Field({ nullable: true })
-  iconSvgLight: string;
+  iconSvgLight: string | null;
 
   @Field({ nullable: true })
-  link: string;
+  link: string | null;
 
-  @Field({ nullable: true })
-  menu: string;
+  @Field()
+  menu: 'top' | 'burger' | 'service' | 'tabs';
 
-  @Field({ nullable: true })
+  @Field()
   position: number;
 
   @Field({ nullable: true })
-  routerLink: string;
+  routerLink: string | null;
 
   @Field({ nullable: true })
-  ssoService: string;
+  ssoService: string | null;
 
   @Field({ nullable: true })
-  statisticName: string;
+  statisticName: string | null;
 
   @Field()
   type: 'internal' | 'external';
 
-  @Field(() => [FeaturesTranslations], { nullable: true })
+  @Field(() => [FeaturesTranslations])
   translations: FeaturesTranslations[];
 
   @Field(() => Authorization, { nullable: true })
-  authorization: Authorization;
+  authorization: Authorization | null;
 
-  @Field(() => [SettingsByRole], { nullable: true })
+  @Field(() => [SettingsByRole])
   settingsByRole: SettingsByRole[];
 }

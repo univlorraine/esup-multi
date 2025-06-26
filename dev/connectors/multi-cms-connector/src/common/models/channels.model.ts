@@ -45,21 +45,21 @@ export class Channels {
   @Field()
   id: string;
 
-  @Field({ nullable: true })
+  @Field()
   code: string;
 
   @Field({ nullable: true })
-  color: string;
+  color: string | null;
 
-  @Field({ nullable: true })
+  @Field()
   filterable: boolean;
 
   @Field({ nullable: true })
-  icon: string;
+  icon: string | null;
 
   @Field({ nullable: true })
-  routerLink: string;
+  routerLink: string | null;
 
-  @Field(() => [ChannelsTranslations], { nullable: true })
+  @Field(() => [ChannelsTranslations])
   translations: ChannelsTranslations[];
 }

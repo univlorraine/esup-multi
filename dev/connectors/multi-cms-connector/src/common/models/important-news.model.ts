@@ -46,23 +46,23 @@ export class ImportantNews {
   id: string;
 
   @Field(() => Authorization, { nullable: true })
-  authorization: Authorization;
+  authorization: Authorization | null;
 
   @Field({ nullable: true })
   color: string;
 
   @Field({ nullable: true })
-  image: string;
+  image: string | null;
 
   @Field({ nullable: true })
-  link: string;
+  link: string | null;
 
-  @Field({ nullable: true })
+  @Field()
   position: number;
 
   @Field({ nullable: true })
-  statisticName: string;
+  statisticName: string | null;
 
-  @Field(() => [ImportantNewsTranslations], { nullable: true })
+  @Field(() => [ImportantNewsTranslations])
   translations: ImportantNewsTranslations[];
 }

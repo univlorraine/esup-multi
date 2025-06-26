@@ -42,14 +42,14 @@ import { Field, ObjectType } from '@nestjs/graphql';
 @ObjectType()
 export class Languages {
   @Field({ nullable: true })
-  code: string;
+  code: string | null;
 
   @Field({ nullable: true })
-  direction: string;
+  direction?: string | null;
 
   @Field({ nullable: true })
-  name: string;
+  name: string | null;
 
   @Field({ nullable: true })
-  locale: string;
+  locale: string | null;
 }

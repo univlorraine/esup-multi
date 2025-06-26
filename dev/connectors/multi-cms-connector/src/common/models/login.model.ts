@@ -41,6 +41,6 @@ import { LoginTranslations } from '@common/models/translations.model';
 
 @ObjectType()
 export class Login {
-  @Field(() => [LoginTranslations], { nullable: true })
+  @Field(() => [LoginTranslations])
   translations: LoginTranslations[];
 }

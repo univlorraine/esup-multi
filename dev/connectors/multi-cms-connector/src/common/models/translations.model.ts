@@ -40,72 +40,72 @@ import { Field, ObjectType } from '@nestjs/graphql';
 
 @ObjectType({ isAbstract: true })
 export class BaseTranslations {
-  @Field({ nullable: true })
+  @Field()
   languagesCode: string;
 }
 
 @ObjectType()
 export class ChannelsTranslations extends BaseTranslations {
-  @Field({ nullable: true })
+  @Field()
   label: string;
 }
 
 @ObjectType()
 export class ContactUsTranslations extends BaseTranslations {
-  @Field({ nullable: true })
-  content: string;
-
-  @Field({ nullable: true })
+  @Field()
   title: string;
+
+  @Field()
+  content: string;
 }
 
 @ObjectType()
 export class FeaturesTranslations extends BaseTranslations {
   @Field(() => [String], { nullable: true })
-  searchKeywords: string[];
+  searchKeywords: string[] | null;
 
   @Field({ nullable: true })
-  shortTitle: string;
+  shortTitle: string | null;
 
   @Field({ nullable: true })
-  title: string;
+  title: string | null;
 }
 
 @ObjectType()
 export class ImportantNewsTranslations extends BaseTranslations {
-  @Field({ nullable: true })
+  @Field()
   title: string;
 
-  @Field({ nullable: true })
+  @Field()
   content: string;
 
   @Field({ nullable: true })
-  buttonLabel: string;
+  buttonLabel: string | null;
 }
 
 @ObjectType()
 export class LoginTranslations extends BaseTranslations {
   @Field({ nullable: true })
-  notAuthenticatedText: string;
+  notAuthenticatedText: string | null;
 
   @Field({ nullable: true })
-  connectionText: string;
+  connectionText: string | null;
 }
 
 @ObjectType()
 export class StaticPagesTranslations extends BaseTranslations {
-  @Field({ nullable: true })
+  @Field()
   content: string;
 
-  @Field({ nullable: true })
+  @Field()
   title: string;
 }
 
 @ObjectType()
 export class WidgetsTranslations extends BaseTranslations {
   @Field({ nullable: true })
-  content: string;
+  content: string | null;
 
   @Field({ nullable: true })
-  title: string;
+  title: string | null;
 }
