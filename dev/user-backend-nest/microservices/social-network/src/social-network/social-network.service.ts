@@ -41,7 +41,10 @@ import { Injectable, Logger } from '@nestjs/common';
 import { catchError, map, Observable } from 'rxjs';
 import { ConfigService } from '@nestjs/config';
 import { HttpService } from '@nestjs/axios';
-import { SocialNetworksGraphQLResponse, SocialNetworkDto } from './social-network.dto';
+import {
+  SocialNetworksGraphQLResponse,
+  SocialNetworkDto,
+} from './social-network.dto';
 import { CmsApi } from '../config/configuration.interface';
 import { RpcException } from '@nestjs/microservices';
 

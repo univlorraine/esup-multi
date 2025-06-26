@@ -41,6 +41,8 @@ export interface StaticPageDto {
   id: number;
   status: string;
   icon?: string;
+  iconSvgLight?: string;
+  iconSvgDark?: string;
   translations?: StaticPageTranslation[];
   statisticName?: string;
 }

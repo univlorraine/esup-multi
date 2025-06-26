@@ -44,6 +44,6 @@ interface PageContentTranslation {
 }
 
 export interface PageContentResultDto {
-  icon: string;
+  icon: string | null;
   translations: PageContentTranslation[];
 }

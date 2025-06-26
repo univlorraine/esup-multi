@@ -61,7 +61,7 @@ export interface BaseElement {
   icon?: string;
   iconSvgLight?: string;
   iconSvgDark?: string;
-  position: number | null;
+  position: number;
   statisticName?: string;
   authorization: Authorization | null;
   settingsByRole: SettingsByRole[];
@@ -70,7 +70,7 @@ export interface BaseElement {
 // Features
 export interface FeatureTranslation {
   languagesCode: string;
-  title?: string;
+  title: string;
   shortTitle?: string;
   searchKeywords?: string[];
 }
@@ -101,7 +101,7 @@ export interface WidgetTranslation {
 }
 
 export interface BaseWidget extends BaseElement {
-  widget?: string;
+  widget: string;
   color?: string;
   translations: WidgetTranslation[];
 }
