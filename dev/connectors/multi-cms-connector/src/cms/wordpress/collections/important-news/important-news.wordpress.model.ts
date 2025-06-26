@@ -42,6 +42,18 @@ import { ImageWordpress } from '@wordpress/collections/system/image.wordpress.mo
 import { RolesWordpress } from '@wordpress/collections/roles/roles.wordpress.model';
 
 @ObjectType()
+class ImportantNewsImageConnection {
+  @Field(() => ImageWordpress)
+  node: ImageWordpress;
+}
+
+@ObjectType()
+class ImportantNewsRolesConnection {
+  @Field(() => [RolesWordpress])
+  nodes: RolesWordpress[];
+}
+
+@ObjectType()
 export class ImportantNewsWordpress {
   @Field()
   databaseId: number;
@@ -52,39 +64,30 @@ export class ImportantNewsWordpress {
   @Field()
   importantNewContent: string;
 
-  @Field({ nullable: true })
+  @Field()
   importantNewButtonLabel: string;
 
   @Field(() => ImportantNewsImageConnection, { nullable: true })
-  importantNewImage?: ImportantNewsImageConnection;
+  importantNewImage: ImportantNewsImageConnection | null;
 
   @Field()
   importantNewAccessRestriction: 'ALLOW' | 'DISALLOW' | 'NONE';
 
-  @Field(() => ImportantNewsRolesConnection, { nullable: true })
-  importantNewRoles?: ImportantNewsRolesConnection;
+  @Field(() => ImportantNewsRolesConnection)
+  importantNewRoles: ImportantNewsRolesConnection;
 
-  @Field({ nullable: true })
-  importantNewColor?: string;
+  @Field()
+  importantNewColor: string;
 
-  @Field({ nullable: true })
-  importantNewLinkUrl?: string;
+  @Field()
+  importantNewLinkUrl: string;
 
-  @Field({ nullable: true })
-  importantNewStatisticName?: string;
+  @Field()
+  importantNewPosition: number;
+
+  @Field()
+  importantNewStatisticName: string;
 
   @Field(() => [ImportantNewsTranslationsWordpress])
   translations: ImportantNewsTranslationsWordpress[];
-}
-
-@ObjectType()
-class ImportantNewsImageConnection {
-  @Field(() => ImageWordpress, { nullable: true })
-  node: ImageWordpress;
-}
-
-@ObjectType()
-class ImportantNewsRolesConnection {
-  @Field(() => [RolesWordpress])
-  nodes: RolesWordpress[];
 }

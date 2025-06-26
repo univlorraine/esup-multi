@@ -40,6 +40,12 @@ import { Field, ObjectType } from '@nestjs/graphql';
 import { RolesWordpress } from '@wordpress/collections/roles/roles.wordpress.model';
 
 @ObjectType()
+class PositionByRoleRoleConnection {
+  @Field(() => [RolesWordpress])
+  node: RolesWordpress;
+}
+
+@ObjectType()
 export class PositionsByRoleWordpress {
   @Field()
   databaseId: number;
@@ -49,10 +55,4 @@ export class PositionsByRoleWordpress {
 
   @Field(() => PositionByRoleRoleConnection)
   positionByRoleRole: PositionByRoleRoleConnection;
-}
-
-@ObjectType()
-class PositionByRoleRoleConnection {
-  @Field(() => [RolesWordpress])
-  node: RolesWordpress;
 }

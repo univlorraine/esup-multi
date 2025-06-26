@@ -42,26 +42,36 @@ import { WordpressService } from '@wordpress/wordpress.service';
 import { LoginTranslations } from '@common/models/translations.model';
 import { LoginTranslationsWordpress } from '@wordpress/collections/translations/translations.wordpress.model';
 import { LoginWordpress } from '@wordpress/collections/login/login.wordpress.model';
+import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
+import { LoginSchema } from '@common/validation/schemas/login.schema';
+import { normalizeEmptyStringToNull } from '@common/utils/normalize';
 
+// TODO: Move FRENCH_CODE to .env and rename it to DEFAULT_LANGUAGE_CODE
 const FRENCH_CODE = 'FR';
 @Injectable()
 export class LoginWordpressService {
   constructor(private readonly wordpressService: WordpressService) {}
 
+  @ValidateMapping({ schema: LoginSchema })
   private mapToMultiModel(login: LoginWordpress): Login {
     const frTranslation: LoginTranslations = {
       languagesCode: FRENCH_CODE.toLowerCase(),
-      connectionText: login.loginConnectionText,
-      notAuthenticatedText: login.loginNotAuthenticatedText,
+      connectionText: normalizeEmptyStringToNull(login.loginConnectionText),
+      notAuthenticatedText: normalizeEmptyStringToNull(
+        login.loginNotAuthenticatedText,
+      ),
     };
 
     const translations: LoginTranslations[] = [
       frTranslation,
       ...(login.translations.map((translation: LoginTranslationsWordpress) => ({
-        id: translation.databaseId,
         languagesCode: translation.language.code.toLowerCase(),
-        connectionText: translation.loginConnectionText,
-        notAuthenticatedText: translation.loginNotAuthenticatedText,
+        connectionText: normalizeEmptyStringToNull(
+          translation.loginConnectionText,
+        ),
+        notAuthenticatedText: normalizeEmptyStringToNull(
+          translation.loginNotAuthenticatedText,
+        ),
       })) || []),
     ];
 

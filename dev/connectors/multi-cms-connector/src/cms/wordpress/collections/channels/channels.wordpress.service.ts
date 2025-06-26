@@ -42,12 +42,17 @@ import { Channels } from '@common/models/channels.model';
 import { WordpressService } from '@wordpress/wordpress.service';
 import { ChannelsTranslations } from '@common/models/translations.model';
 import { ChannelsTranslationsWordpress } from '@wordpress/collections/translations/translations.wordpress.model';
+import { normalizeEmptyStringToNull } from '@common/utils/normalize';
+import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
+import { ChannelsSchema } from '@common/validation/schemas/channels.schema';
 
+// TODO: Move FRENCH_CODE to .env and rename it to DEFAULT_LANGUAGE_CODE
 const FRENCH_CODE = 'FR';
 @Injectable()
 export class ChannelsWordpressService {
   constructor(private readonly wordpressService: WordpressService) {}
 
+  @ValidateMapping({ schema: ChannelsSchema })
   private mapToMultiModel(channel: ChannelsWordpress): Channels {
     const frTranslation: ChannelsTranslations = {
       languagesCode: FRENCH_CODE.toLowerCase(),
@@ -58,7 +63,6 @@ export class ChannelsWordpressService {
       frTranslation,
       ...(channel.translations?.map(
         (translation: ChannelsTranslationsWordpress) => ({
-          id: translation.databaseId,
           languagesCode: translation.language.code.toLowerCase(),
           label: translation.channelLabel,
         }),
@@ -68,10 +72,10 @@ export class ChannelsWordpressService {
     return {
       id: channel.databaseId.toString(),
       code: channel.channelCode,
-      color: channel.channelColor,
+      color: normalizeEmptyStringToNull(channel.channelColor),
       filterable: channel.channelFilterable,
-      icon: channel.channelIcon,
-      routerLink: channel.channelRouterLink,
+      icon: normalizeEmptyStringToNull(channel.channelIcon),
+      routerLink: normalizeEmptyStringToNull(channel.channelRouterLink),
       translations,
     };
   }
@@ -79,7 +83,7 @@ export class ChannelsWordpressService {
   async getChannels(): Promise<Channels[]> {
     const data = await this.wordpressService.executeGraphQLQuery(`
       query {
-        channels(where: { language: ${FRENCH_CODE} }) {
+        channels(first: 100, where: { language: ${FRENCH_CODE} }) {
           nodes {
             databaseId
             channelCode

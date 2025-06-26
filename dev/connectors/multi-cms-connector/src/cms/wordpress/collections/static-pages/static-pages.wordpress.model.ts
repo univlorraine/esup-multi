@@ -50,17 +50,17 @@ export class StaticPagesWordpress {
   @Field()
   staticPageContent: string;
 
-  @Field({ nullable: true })
-  staticPageLinkIcon?: string;
+  @Field()
+  staticPageLinkIcon: string;
 
-  @Field({ nullable: true })
-  staticPageIconSvgLight?: string;
+  @Field()
+  staticPageIconSvgLight: string;
 
-  @Field({ nullable: true })
-  staticPageIconSvgDark?: string;
+  @Field()
+  staticPageIconSvgDark: string;
 
-  @Field({ nullable: true })
-  staticPageStatisticName?: string;
+  @Field()
+  staticPageStatisticName: string;
 
   @Field()
   staticPagePosition: number;

@@ -43,28 +43,32 @@ import { WidgetsTranslations } from '@common/models/translations.model';
 import { WidgetsTranslationsWordpress } from '@wordpress/collections/translations/translations.wordpress.model';
 import { WidgetsWordpress } from '@wordpress/collections/widgets/widgets.wordpress.model';
 import { SettingsByRole } from '@common/models/settings-by-role.model';
+import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
+import { normalizeEmptyArrayToNull, normalizeEmptyStringToNull } from '@common/utils/normalize';
+import { WidgetsSchema } from '@common/validation/schemas/widgets.schema';
 
+// TODO: Move FRENCH_CODE to .env and rename it to DEFAULT_LANGUAGE_CODE
 const FRENCH_CODE = 'FR';
 
 @Injectable()
 export class WidgetsWordpressService {
   constructor(private readonly wordpressService: WordpressService) {}
 
+  @ValidateMapping({ schema: WidgetsSchema })
   private mapToMultiModel(widget: WidgetsWordpress): Widgets {
     const frTranslation: WidgetsTranslations = {
       languagesCode: FRENCH_CODE.toLowerCase(),
-      title: widget.widgetTitle,
-      content: widget.widgetContent,
+      title: normalizeEmptyStringToNull(widget.widgetTitle),
+      content: normalizeEmptyStringToNull(widget.widgetContent),
     };
 
     const translations: WidgetsTranslations[] = [
       frTranslation,
       ...(widget.translations?.map(
         (translation: WidgetsTranslationsWordpress) => ({
-          id: translation.databaseId,
           languagesCode: translation.language.code.toLowerCase(),
-          title: translation.widgetTitle,
-          content: translation.widgetContent,
+          title: normalizeEmptyStringToNull(translation.widgetTitle),
+          content: normalizeEmptyStringToNull(translation.widgetContent),
         }),
       ) || []),
     ];
@@ -72,27 +76,27 @@ export class WidgetsWordpressService {
     const roles =
       widget.widgetRoles?.nodes.length > 0
         ? widget.widgetRoles.nodes.map((role) => role.roleCode)
-        : null;
+        : [];
 
     const settingsByRole: SettingsByRole[] =
       widget.widgetPositionsByRole?.nodes.map((positionByRole) => ({
         position: positionByRole.positionByRolePosition,
         role: positionByRole.positionByRoleRole.node.roleCode,
-      })) || [];
+      })) ?? [];
 
     return {
       id: widget.databaseId.toString(),
-      description: widget.widgetDescription,
+      description: normalizeEmptyStringToNull(widget.widgetDescription),
       widget: widget.widgetCode,
-      icon: widget.widgetIcon,
-      iconSvgDark: widget.widgetIconSvgDark,
-      iconSvgLight: widget.widgetIconSvgLight,
+      icon: normalizeEmptyStringToNull(widget.widgetIcon),
+      iconSvgDark: normalizeEmptyStringToNull(widget.widgetIconSvgDark),
+      iconSvgLight: normalizeEmptyStringToNull(widget.widgetIconSvgLight),
       position: widget.widgetPosition,
-      routerLink: widget.widgetRouterLink,
-      link: widget.widgetLinkUrl,
-      ssoService: widget.widgetSsoService,
-      statisticName: widget.widgetStatisticName,
-      color: widget.widgetColor,
+      routerLink: normalizeEmptyStringToNull(widget.widgetRouterLink),
+      link: normalizeEmptyStringToNull(widget.widgetLinkUrl),
+      ssoService: normalizeEmptyStringToNull(widget.widgetSsoService),
+      statisticName: normalizeEmptyStringToNull(widget.widgetStatisticName),
+      color: normalizeEmptyStringToNull(widget.widgetColor),
       type: widget.widgetType,
       authorization:
         widget.widgetAccessRestriction &&
@@ -110,7 +114,7 @@ export class WidgetsWordpressService {
   async getWidgets(): Promise<Widgets[]> {
     const data = await this.wordpressService.executeGraphQLQuery(`
       query {
-        widgets(where: {language: ${FRENCH_CODE}}) {
+        widgets(first: 100, where: {language: ${FRENCH_CODE}}) {
           nodes {
             databaseId
             widgetTitle

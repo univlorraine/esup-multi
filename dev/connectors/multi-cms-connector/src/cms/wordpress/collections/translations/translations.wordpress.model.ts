@@ -65,11 +65,11 @@ export class ContactUsTranslationsWordpress extends BaseTranslationsWordpress {
 
 @ObjectType()
 export class FeaturesTranslationsWordpress extends BaseTranslationsWordpress {
-  @Field({ nullable: true })
-  featureSearchKeywords?: string;
+  @Field()
+  featureSearchKeywords: string;
 
-  @Field({ nullable: true })
-  featureShortTitle?: string;
+  @Field()
+  featureShortTitle: string;
 
   @Field()
   featureTitle: string;
@@ -83,17 +83,17 @@ export class ImportantNewsTranslationsWordpress extends BaseTranslationsWordpres
   @Field()
   importantNewContent: string;
 
-  @Field({ nullable: true })
-  importantNewButtonLabel?: string;
+  @Field()
+  importantNewButtonLabel: string;
 }
 
 @ObjectType()
 export class LoginTranslationsWordpress extends BaseTranslationsWordpress {
-  @Field({ nullable: true })
-  loginConnectionText?: string;
+  @Field()
+  loginConnectionText: string;
 
-  @Field({ nullable: true })
-  loginNotAuthenticatedText?: string;
+  @Field()
+  loginNotAuthenticatedText: string;
 }
 
 @ObjectType()
@@ -107,9 +107,9 @@ export class StaticPagesTranslationsWordpress extends BaseTranslationsWordpress 
 
 @ObjectType()
 export class WidgetsTranslationsWordpress extends BaseTranslationsWordpress {
-  @Field({ nullable: true })
-  widgetContent?: string;
+  @Field()
+  widgetContent: string;
 
-  @Field({ nullable: true })
-  widgetTitle?: string;
+  @Field()
+  widgetTitle: string;
 }

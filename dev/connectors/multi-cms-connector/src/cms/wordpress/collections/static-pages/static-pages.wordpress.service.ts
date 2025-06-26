@@ -42,13 +42,18 @@ import { StaticPages } from '@common/models/static-pages.model';
 import { WordpressService } from '@wordpress/wordpress.service';
 import { StaticPagesTranslations } from '@common/models/translations.model';
 import { StaticPagesTranslationsWordpress } from '@wordpress/collections/translations/translations.wordpress.model';
+import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
+import { StaticPagesSchema } from '@common/validation/schemas/static-pages.schema';
+import { normalizeEmptyStringToNull } from '@common/utils/normalize';
 
+// TODO: Move FRENCH_CODE to .env and rename it to DEFAULT_LANGUAGE_CODE
 const FRENCH_CODE = 'FR';
 
 @Injectable()
 export class StaticPagesWordpressService {
   constructor(private readonly wordpressService: WordpressService) {}
 
+  @ValidateMapping({ schema: StaticPagesSchema })
   private mapToMultiModel(staticPage: StaticPagesWordpress): StaticPages {
     const frTranslation: StaticPagesTranslations = {
       languagesCode: FRENCH_CODE.toLowerCase(),
@@ -60,7 +65,6 @@ export class StaticPagesWordpressService {
       frTranslation,
       ...(staticPage.translations?.map(
         (translation: StaticPagesTranslationsWordpress) => ({
-          id: translation.databaseId,
           languagesCode: translation.language.code.toLowerCase(),
           title: translation.staticPageTitle,
           content: translation.staticPageContent,
@@ -70,11 +74,15 @@ export class StaticPagesWordpressService {
 
     return {
       id: staticPage.databaseId.toString(),
-      icon: staticPage.staticPageLinkIcon,
-      iconSvgDark: staticPage.staticPageIconSvgDark,
-      iconSvgLight: staticPage.staticPageIconSvgLight,
-      position: staticPage.staticPagePosition,
-      statisticName: staticPage.staticPageStatisticName,
+      icon: normalizeEmptyStringToNull(staticPage.staticPageLinkIcon),
+      iconSvgDark: normalizeEmptyStringToNull(staticPage.staticPageIconSvgDark),
+      iconSvgLight: normalizeEmptyStringToNull(
+        staticPage.staticPageIconSvgLight,
+      ),
+      position: staticPage.staticPagePosition || 0,
+      statisticName: normalizeEmptyStringToNull(
+        staticPage.staticPageStatisticName,
+      ),
       translations,
     };
   }
@@ -82,7 +90,7 @@ export class StaticPagesWordpressService {
   async getStaticPages(): Promise<StaticPages[]> {
     const data = await this.wordpressService.executeGraphQLQuery(`
       query {
-        staticPages(where: {language: ${FRENCH_CODE}}) {
+        staticPages(first: 100, where: {language: ${FRENCH_CODE}}) {
           nodes {
             databaseId
             staticPageTitle

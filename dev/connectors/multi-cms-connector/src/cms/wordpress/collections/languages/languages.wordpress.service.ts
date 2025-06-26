@@ -40,20 +40,25 @@ import { Injectable } from '@nestjs/common';
 import { Languages } from '@common/models/languages.model';
 import { WordpressService } from '@wordpress/wordpress.service';
 import { LanguagesWordpress } from '@wordpress/collections/languages/languages.wordpress.model';
+import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
+import { LanguagesSchema } from '@common/validation/schemas/languages.schema';
+import { normalizeEmptyStringToNull } from '@common/utils/normalize';
 
 @Injectable()
 export class LanguagesWordpressService {
   constructor(private readonly wordpressService: WordpressService) {}
 
+  @ValidateMapping({ schema: LanguagesSchema })
   private mapToMultiModel(language: LanguagesWordpress): Languages {
     return {
-      name: language.name,
+      name: normalizeEmptyStringToNull(language.name),
       direction: null,
-      code: language.code,
-      locale: language.locale,
+      code: normalizeEmptyStringToNull(language.code),
+      locale: normalizeEmptyStringToNull(language.locale),
     };
   }
 
+  // TODO: vérifier si la fonction est bien utile au niveau de multi
   async getLanguages(): Promise<Languages[]> {
     const data = await this.wordpressService.executeGraphQLQuery(`
       query {

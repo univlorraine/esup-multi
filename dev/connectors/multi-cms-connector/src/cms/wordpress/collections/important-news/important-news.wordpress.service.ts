@@ -42,30 +42,38 @@ import { ImportantNews } from '@common/models/important-news.model';
 import { WordpressService } from '@wordpress/wordpress.service';
 import { ImportantNewsTranslations } from '@common/models/translations.model';
 import { ImportantNewsTranslationsWordpress } from '@wordpress/collections/translations/translations.wordpress.model';
+import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
+import { ImportantNewsSchema } from '@common/validation/schemas/important-news.schema';
+import { normalizeEmptyStringToNull } from '@common/utils/normalize';
 
+// TODO: Move FRENCH_CODE to .env and rename it to DEFAULT_LANGUAGE_CODE
 const FRENCH_CODE = 'FR';
 
 @Injectable()
 export class ImportantNewsWordpressService {
   constructor(private readonly wordpressService: WordpressService) {}
 
+  @ValidateMapping({ schema: ImportantNewsSchema })
   private mapToMultiModel(importantNew: ImportantNewsWordpress): ImportantNews {
     const frTranslation: ImportantNewsTranslations = {
       languagesCode: FRENCH_CODE.toLowerCase(),
       title: importantNew.importantNewTitle,
       content: importantNew.importantNewContent,
-      buttonLabel: importantNew.importantNewButtonLabel,
+      buttonLabel: normalizeEmptyStringToNull(
+        importantNew.importantNewButtonLabel,
+      ),
     };
 
     const translations: ImportantNewsTranslations[] = [
       frTranslation,
       ...(importantNew.translations?.map(
         (translation: ImportantNewsTranslationsWordpress) => ({
-          id: translation.databaseId,
           languagesCode: translation.language.code.toLowerCase(),
           title: translation.importantNewTitle,
           content: translation.importantNewContent,
-          buttonLabel: translation.importantNewButtonLabel,
+          buttonLabel: normalizeEmptyStringToNull(
+            translation.importantNewButtonLabel,
+          ),
         }),
       ) || []),
     ];
@@ -73,9 +81,8 @@ export class ImportantNewsWordpressService {
     const roles =
       importantNew.importantNewRoles?.nodes.length > 0
         ? importantNew.importantNewRoles.nodes.map((role) => role.roleCode)
-        : null;
+        : [];
 
-    // TODO: vérifier si le sort est bien utile et utilisé côté Directus ou si on peut l'enlever pour les 2 CMS
     return {
       id: importantNew.databaseId.toString(),
       authorization:
@@ -86,11 +93,15 @@ export class ImportantNewsWordpressService {
               roles,
             }
           : null,
-      color: importantNew.importantNewColor,
-      image: importantNew.importantNewImage?.node.mediaItemUrl.toString(),
-      link: importantNew.importantNewLinkUrl,
-      position: null,
-      statisticName: importantNew.importantNewStatisticName,
+      color: normalizeEmptyStringToNull(importantNew.importantNewColor),
+      image: normalizeEmptyStringToNull(
+        importantNew.importantNewImage?.node.mediaItemUrl.toString(),
+      ),
+      link: normalizeEmptyStringToNull(importantNew.importantNewLinkUrl),
+      position: importantNew.importantNewPosition || 0,
+      statisticName: normalizeEmptyStringToNull(
+        importantNew.importantNewStatisticName,
+      ),
       translations,
     };
   }
@@ -98,7 +109,7 @@ export class ImportantNewsWordpressService {
   async getImportantNews(): Promise<ImportantNews[]> {
     const data = await this.wordpressService.executeGraphQLQuery(`
       query {
-        importantNews(where: {language: ${FRENCH_CODE}}) {
+        importantNews(first: 100, where: {language: ${FRENCH_CODE}}) {
           nodes {
             databaseId
             importantNewTitle
@@ -122,6 +133,7 @@ export class ImportantNewsWordpressService {
             }
             importantNewColor
             importantNewLinkUrl
+            importantNewPosition
             importantNewStatisticName
             translations {
               databaseId
@@ -167,6 +179,7 @@ export class ImportantNewsWordpressService {
           }
           importantNewColor
           importantNewLinkUrl
+          importantNewPosition
           importantNewStatisticName
           translations {
             databaseId

@@ -43,42 +43,49 @@ import { FeaturesTranslations } from '@common/models/translations.model';
 import { FeaturesTranslationsWordpress } from '@wordpress/collections/translations/translations.wordpress.model';
 import { FeaturesWordpress } from '@wordpress/collections/features/features.wordpress.model';
 import { SettingsByRole } from '@common/models/settings-by-role.model';
+import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
+import { FeaturesSchema } from '@common/validation/schemas/features.schema';
+import {
+  normalizeEmptyArrayToNull,
+  normalizeEmptyStringToNull,
+} from '@common/utils/normalize';
 
+// TODO: Move FRENCH_CODE to .env and rename it to DEFAULT_LANGUAGE_CODE
 const FRENCH_CODE = 'FR';
 
 @Injectable()
 export class FeaturesWordpressService {
   constructor(private readonly wordpressService: WordpressService) {}
 
+  @ValidateMapping({ schema: FeaturesSchema })
   private mapToMultiModel(feature: FeaturesWordpress): Features {
     const frTranslation: FeaturesTranslations = {
       languagesCode: FRENCH_CODE.toLowerCase(),
       title: feature.featureTitle,
-      shortTitle: feature.featureShortTitle,
+      shortTitle: normalizeEmptyStringToNull(feature.featureShortTitle),
       searchKeywords:
         feature.featureSearchKeywords &&
         feature.featureSearchKeywords.trim() !== ''
           ? feature.featureSearchKeywords
               .split(',')
               .filter((keyword) => keyword.trim() !== '')
-          : [],
+          : null,
     };
 
     const translations: FeaturesTranslations[] = [
       frTranslation,
       ...(feature.translations?.map(
         (translation: FeaturesTranslationsWordpress) => ({
-          id: translation.databaseId,
           languagesCode: translation.language.code.toLowerCase(),
           title: translation.featureTitle,
-          shortTitle: translation.featureShortTitle,
+          shortTitle: normalizeEmptyStringToNull(translation.featureShortTitle),
           searchKeywords:
             translation.featureSearchKeywords &&
             translation.featureSearchKeywords.trim() !== ''
               ? translation.featureSearchKeywords
                   .split(',')
                   .filter((keyword) => keyword.trim() !== '')
-              : [],
+              : null,
         }),
       ) || []),
     ];
@@ -86,26 +93,26 @@ export class FeaturesWordpressService {
     const roles =
       feature.featureRoles?.nodes.length > 0
         ? feature.featureRoles.nodes.map((role) => role.roleCode)
-        : null;
+        : [];
 
     const settingsByRole: SettingsByRole[] =
       feature.featurePositionsByRole?.nodes.map((positionByRole) => ({
         position: positionByRole.positionByRolePosition,
         role: positionByRole.positionByRoleRole.node.roleCode,
-      })) || [];
+      })) ?? [];
 
     return {
       id: feature.databaseId.toString(),
-      description: feature.featureDescription,
-      icon: feature.featureIcon,
-      iconSvgDark: feature.featureIconSvgDark,
-      iconSvgLight: feature.featureIconSvgLight,
+      description: normalizeEmptyStringToNull(feature.featureDescription),
+      icon: normalizeEmptyStringToNull(feature.featureIcon),
+      iconSvgDark: normalizeEmptyStringToNull(feature.featureIconSvgDark),
+      iconSvgLight: normalizeEmptyStringToNull(feature.featureIconSvgLight),
       menu: feature.featureMenu,
       position: feature.featurePosition,
-      routerLink: feature.featureRouterLink,
-      link: feature.featureLinkUrl,
-      ssoService: feature.featureSsoService,
-      statisticName: feature.featureStatisticName,
+      routerLink: normalizeEmptyStringToNull(feature.featureRouterLink),
+      link: normalizeEmptyStringToNull(feature.featureLinkUrl),
+      ssoService: normalizeEmptyStringToNull(feature.featureSsoService),
+      statisticName: normalizeEmptyStringToNull(feature.featureStatisticName),
       type: feature.featureType,
       authorization:
         feature.featureAccessRestriction &&
@@ -123,7 +130,7 @@ export class FeaturesWordpressService {
   async getFeatures(): Promise<Features[]> {
     const data = await this.wordpressService.executeGraphQLQuery(`
       query {
-        features(where: {language: ${FRENCH_CODE}}) {
+        features(first: 100, where: {language: ${FRENCH_CODE}}) {
           nodes {
             databaseId
             featureTitle

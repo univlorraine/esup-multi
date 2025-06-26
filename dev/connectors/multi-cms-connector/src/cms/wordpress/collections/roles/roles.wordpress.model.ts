@@ -46,6 +46,6 @@ export class RolesWordpress {
   @Field()
   roleCode: string;
 
-  @Field({ nullable: true })
-  roleDescription?: string;
+  @Field()
+  roleDescription: string;
 }

@@ -39,6 +39,18 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
+class MediaDetails {
+  @Field()
+  file: string;
+
+  @Field()
+  height: number;
+
+  @Field()
+  width: number;
+}
+
+@ObjectType()
 export class ImageWordpress {
   @Field()
   databaseId: number;
@@ -55,7 +67,7 @@ export class ImageWordpress {
   @Field()
   filesize: number;
 
-  @Field()
+  @Field(() => MediaDetails)
   mediaDetails: MediaDetails;
 
   @Field()
@@ -72,15 +84,4 @@ export class ImageWordpress {
 
   @Field()
   title: string;
-}
-
-class MediaDetails {
-  @Field()
-  file: string;
-
-  @Field()
-  height: number;
-
-  @Field()
-  width: number;
 }

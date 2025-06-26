@@ -44,11 +44,11 @@ export class LoginWordpress {
   @Field()
   databaseId: number;
 
-  @Field({ nullable: true })
-  loginConnectionText?: string;
+  @Field()
+  loginConnectionText: string;
 
-  @Field({ nullable: true })
-  loginNotAuthenticatedText?: string;
+  @Field()
+  loginNotAuthenticatedText: string;
 
   @Field(() => [LoginTranslationsWordpress])
   translations: LoginTranslationsWordpress[];

@@ -42,66 +42,6 @@ import { FeaturesTranslationsWordpress } from '@wordpress/collections/translatio
 import { PositionsByRoleWordpress } from '@wordpress/collections/positions-by-role/positions-by-role.wordpress.model';
 
 @ObjectType()
-export class FeaturesWordpress {
-  @Field()
-  databaseId: number;
-
-  @Field()
-  featureTitle: string;
-
-  @Field({ nullable: true })
-  featureShortTitle?: string;
-
-  @Field({ nullable: true })
-  featureSearchKeywords?: string;
-
-  @Field({ nullable: true })
-  featureDescription?: string;
-
-  @Field({ nullable: true })
-  featureIcon?: string;
-
-  @Field({ nullable: true })
-  featureIconSvgLight?: string;
-
-  @Field({ nullable: true })
-  featureIconSvgDark?: string;
-
-  @Field()
-  featureMenu: string;
-
-  @Field()
-  featureAccessRestriction: 'ALLOW' | 'DISALLOW' | 'NONE';
-
-  @Field(() => FeaturesRolesConnection, { nullable: true })
-  featureRoles?: FeaturesRolesConnection;
-
-  @Field()
-  featurePosition: number;
-
-  @Field(() => FeaturesPositionsByRoleConnection, { nullable: true })
-  featurePositionsByRole?: FeaturesPositionsByRoleConnection;
-
-  @Field()
-  featureType: 'internal' | 'external';
-
-  @Field({ nullable: true })
-  featureRouterLink?: string;
-
-  @Field({ nullable: true })
-  featureLinkUrl?: string;
-
-  @Field({ nullable: true })
-  featureSsoService?: string;
-
-  @Field({ nullable: true })
-  featureStatisticName?: string;
-
-  @Field(() => [FeaturesTranslationsWordpress])
-  translations: FeaturesTranslationsWordpress[];
-}
-
-@ObjectType()
 class FeaturesRolesConnection {
   @Field(() => [RolesWordpress])
   nodes: RolesWordpress[];
@@ -111,4 +51,64 @@ class FeaturesRolesConnection {
 class FeaturesPositionsByRoleConnection {
   @Field(() => [PositionsByRoleWordpress])
   nodes: PositionsByRoleWordpress[];
+}
+
+@ObjectType()
+export class FeaturesWordpress {
+  @Field()
+  databaseId: number;
+
+  @Field()
+  featureTitle: string;
+
+  @Field()
+  featureShortTitle: string;
+
+  @Field()
+  featureSearchKeywords: string;
+
+  @Field()
+  featureDescription: string;
+
+  @Field()
+  featureIcon: string;
+
+  @Field()
+  featureIconSvgLight?: string;
+
+  @Field()
+  featureIconSvgDark: string;
+
+  @Field()
+  featureMenu: 'top' | 'burger' | 'service' | 'tabs';
+
+  @Field()
+  featureAccessRestriction: 'ALLOW' | 'DISALLOW' | 'NONE';
+
+  @Field(() => FeaturesRolesConnection)
+  featureRoles: FeaturesRolesConnection;
+
+  @Field()
+  featurePosition: number;
+
+  @Field(() => FeaturesPositionsByRoleConnection)
+  featurePositionsByRole: FeaturesPositionsByRoleConnection;
+
+  @Field()
+  featureType: 'internal' | 'external';
+
+  @Field()
+  featureRouterLink: string;
+
+  @Field()
+  featureLinkUrl: string;
+
+  @Field()
+  featureSsoService: string;
+
+  @Field()
+  featureStatisticName: string;
+
+  @Field(() => [FeaturesTranslationsWordpress])
+  translations: FeaturesTranslationsWordpress[];
 }

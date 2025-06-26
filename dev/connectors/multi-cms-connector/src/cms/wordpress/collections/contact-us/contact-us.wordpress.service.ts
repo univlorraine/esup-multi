@@ -42,12 +42,17 @@ import { ContactUs } from '@common/models/contact-us.model';
 import { WordpressService } from '@wordpress/wordpress.service';
 import { ContactUsTranslations } from '@common/models/translations.model';
 import { ContactUsTranslationsWordpress } from '@wordpress/collections/translations/translations.wordpress.model';
+import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
+import { ContactUsSchema } from '@common/validation/schemas/contact-us.schema';
+import { normalizeEmptyStringToNull } from '@common/utils/normalize';
 
+// TODO: Move FRENCH_CODE to .env and rename it to DEFAULT_LANGUAGE_CODE
 const FRENCH_CODE = 'FR';
 @Injectable()
 export class ContactUsWordpressService {
   constructor(private readonly wordpressService: WordpressService) {}
 
+  @ValidateMapping({ schema: ContactUsSchema })
   private mapToMultiModel(contactUs: ContactUsWordpress): ContactUs {
     const frTranslation: ContactUsTranslations = {
       languagesCode: FRENCH_CODE.toLowerCase(),
@@ -59,7 +64,6 @@ export class ContactUsWordpressService {
       frTranslation,
       ...(contactUs.translations.map(
         (translation: ContactUsTranslationsWordpress) => ({
-          id: translation.databaseId,
           languagesCode: translation.language.code.toLowerCase(),
           content: translation.contactUsContent,
           title: translation.contactUsTitle,
@@ -68,7 +72,7 @@ export class ContactUsWordpressService {
     ];
 
     return {
-      icon: contactUs.contactUsIcon,
+      icon: normalizeEmptyStringToNull(contactUs.contactUsIcon),
       to: contactUs.contactUsTo,
       translations,
     };

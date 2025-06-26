@@ -40,25 +40,28 @@ import { Injectable } from '@nestjs/common';
 import { SocialNetworks } from '@common/models/social-networks.model';
 import { SocialNetworksWordpress } from './social-networks.wordpress.model';
 import { WordpressService } from '@wordpress/wordpress.service';
+import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
+import { SocialNetworksSchema } from '@common/validation/schemas/social-networks.schema';
 
 @Injectable()
 export class SocialNetworksWordpressService {
   constructor(private readonly wordpressService: WordpressService) {}
 
+  @ValidateMapping({ schema: SocialNetworksSchema })
   private mapToMultiModel(network: SocialNetworksWordpress): SocialNetworks {
     return {
       id: network.databaseId.toString(),
       title: network.socialNetworkName,
       icon: network.socialNetworkIcon,
       link: network.socialNetworkLinkUrl,
-      position: network.socialNetworkPosition,
+      position: network.socialNetworkPosition || 0,
     };
   }
 
   async getSocialNetworks(): Promise<SocialNetworks[]> {
     const data = await this.wordpressService.executeGraphQLQuery(`
       query {
-        socialNetworks {
+        socialNetworks(first: 100) {
           nodes {
             databaseId
             socialNetworkName
