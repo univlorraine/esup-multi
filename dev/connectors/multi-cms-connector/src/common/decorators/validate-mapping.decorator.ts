@@ -59,7 +59,6 @@ export function ValidateMapping(options: ValidationOptions) {
 
         // Valider le résultat avec Zod
         return options.schema.parse(result);
-
       } catch (error) {
         if (error instanceof z.ZodError) {
           // Erreur de validation Zod
