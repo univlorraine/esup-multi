@@ -47,20 +47,20 @@ export class PagesDirectus {
   @Field()
   status: string;
 
-  @Field()
-  icon: string;
+  @Field({ nullable: true })
+  icon?: string | null;
 
-  @Field()
-  iconSourceSvgDarkTheme: string;
+  @Field({ nullable: true })
+  iconSourceSvgDarkTheme?: string | null;
 
-  @Field()
-  iconSourceSvgLightTheme: string;
+  @Field({ nullable: true })
+  iconSourceSvgLightTheme?: string | null;
 
   @Field()
   sort: number;
 
-  @Field()
-  statisticName: string;
+  @Field({ nullable: true })
+  statisticName: string | null;
 
   @Field(() => [PagesTranslationsDirectus])
   translations: PagesTranslationsDirectus[];

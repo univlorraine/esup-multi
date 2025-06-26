@@ -47,17 +47,17 @@ export class ChannelsDirectus {
   @Field()
   code: string;
 
-  @Field()
-  color: string;
+  @Field({ nullable: true })
+  color?: string | null;
 
   @Field()
   filterable: boolean;
 
-  @Field()
-  icon: string;
+  @Field({ nullable: true })
+  icon?: string | null;
 
-  @Field()
-  routerLink: string;
+  @Field({ nullable: true })
+  routerLink?: string | null;
 
   @Field(() => [ChannelsTranslationsDirectus])
   translations: ChannelsTranslationsDirectus[];

@@ -46,23 +46,23 @@ export class ImportantNewsDirectus {
   @Field()
   id: number;
 
-  @Field(() => AuthorizationDirectus)
-  authorization: AuthorizationDirectus;
+  @Field(() => AuthorizationDirectus, { nullable: true })
+  authorization?: AuthorizationDirectus | null;
 
-  @Field()
-  color: string;
+  @Field({ nullable: true })
+  color?: string | null;
 
-  @Field()
-  image: FileDirectus;
+  @Field(() => FileDirectus, { nullable: true })
+  image?: FileDirectus | null;
 
-  @Field()
-  link: string;
+  @Field({ nullable: true })
+  link?: string | null;
 
-  @Field()
-  sort: number;
+  @Field({ nullable: true })
+  sort?: number | null;
 
-  @Field()
-  statisticName: string;
+  @Field({ nullable: true })
+  statisticName?: string | null;
 
   @Field()
   status: string;

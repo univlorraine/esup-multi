@@ -40,21 +40,24 @@ import { Injectable } from '@nestjs/common';
 import { PagesDirectus } from '@directus/collections/pages/pages.directus.model';
 import { StaticPages } from '@common/models/static-pages.model';
 import { DirectusService } from '@directus/directus.service';
+import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
+import { StaticPagesSchema } from '@common/validation/schemas/static-pages.schema';
+import { normalizeEmptyStringToNull } from '@common/utils/normalize';
 
 @Injectable()
 export class PagesDirectusService {
   constructor(private readonly directusService: DirectusService) {}
 
+  @ValidateMapping({ schema: StaticPagesSchema })
   private mapToMultiModel(page: PagesDirectus): StaticPages {
     return {
       id: page.id.toString(),
-      icon: page.icon,
-      iconSvgDark: page.iconSourceSvgDarkTheme,
-      iconSvgLight: page.iconSourceSvgLightTheme,
-      position: page.sort,
-      statisticName: page.statisticName,
+      icon: normalizeEmptyStringToNull(page.icon),
+      iconSvgDark: normalizeEmptyStringToNull(page.iconSourceSvgDarkTheme),
+      iconSvgLight: normalizeEmptyStringToNull(page.iconSourceSvgLightTheme),
+      position: page.sort || 0,
+      statisticName: normalizeEmptyStringToNull(page.statisticName),
       translations: page.translations.map((translation) => ({
-        id: translation.id,
         languagesCode: translation.languages_code.code,
         title: translation.title,
         content: translation.content,

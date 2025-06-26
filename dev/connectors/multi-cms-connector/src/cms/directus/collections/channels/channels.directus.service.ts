@@ -40,19 +40,23 @@ import { Injectable } from '@nestjs/common';
 import { ChannelsDirectus } from '@directus/collections/channels/channels.directus.model';
 import { Channels } from '@common/models/channels.model';
 import { DirectusService } from '@directus/directus.service';
+import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
+import { ChannelsSchema } from '@common/validation/schemas/channels.schema';
+import { normalizeEmptyStringToNull } from '@common/utils/normalize';
 
 @Injectable()
 export class ChannelsDirectusService {
   constructor(private readonly directusService: DirectusService) {}
 
+  @ValidateMapping({ schema: ChannelsSchema })
   private mapToMultiModel(channel: ChannelsDirectus): Channels {
     return {
       id: channel.id.toString(),
       code: channel.code,
-      color: channel.color,
+      color: normalizeEmptyStringToNull(channel.color),
       filterable: channel.filterable,
-      icon: channel.icon,
-      routerLink: channel.routerLink,
+      icon: normalizeEmptyStringToNull(channel.icon),
+      routerLink: normalizeEmptyStringToNull(channel.routerLink),
       translations: channel.translations.map((translation) => ({
         id: translation.id,
         languagesCode: translation.languages_code.code,

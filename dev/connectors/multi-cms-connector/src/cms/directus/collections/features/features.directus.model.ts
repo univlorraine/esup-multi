@@ -46,47 +46,44 @@ export class FeaturesDirectus {
   @Field()
   id: number;
 
-  @Field()
-  description: string;
+  @Field({ nullable: true })
+  description?: string | null;
 
-  @Field()
-  icon: string;
+  @Field({ nullable: true })
+  icon?: string | null;
 
-  @Field()
-  iconSourceSvgDarkTheme: string;
+  @Field({ nullable: true })
+  iconSourceSvgDarkTheme?: string | null;
 
-  @Field()
-  iconSourceSvgLightTheme: string;
+  @Field({ nullable: true })
+  iconSourceSvgLightTheme?: string | null;
 
-  @Field()
-  link: string;
+  @Field({ nullable: true })
+  menu: 'top' | 'burger' | 'service' | 'tabs';
 
-  @Field()
-  menu: string;
-
-  @Field()
-  position: number;
-
-  @Field()
-  routerLink: string;
-
-  @Field()
-  ssoService: string;
-
-  @Field()
-  statisticName: string;
-
-  @Field()
-  status: string;
+  @Field({ nullable: true })
+  position?: number | null;
 
   @Field()
   type: 'internal' | 'external';
 
+  @Field({ nullable: true })
+  routerLink?: string | null;
+
+  @Field({ nullable: true })
+  link?: string | null;
+
+  @Field({ nullable: true })
+  ssoService?: string | null;
+
+  @Field({ nullable: true })
+  statisticName?: string | null;
+
   @Field(() => [FeaturesTranslationsDirectus])
   translations: FeaturesTranslationsDirectus[];
 
-  @Field(() => AuthorizationDirectus)
-  authorization: AuthorizationDirectus;
+  @Field(() => AuthorizationDirectus, { nullable: true })
+  authorization?: AuthorizationDirectus | null;
 
   @Field(() => [SettingsByRoleDirectus])
   settings_by_role: SettingsByRoleDirectus[];

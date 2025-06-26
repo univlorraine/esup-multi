@@ -40,18 +40,21 @@ import { Injectable } from '@nestjs/common';
 import { SocialNetworks } from '@common/models/social-networks.model';
 import { SocialNetworksDirectus } from './social-networks.directus.model';
 import { DirectusService } from '@directus/directus.service';
+import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
+import { SocialNetworksSchema } from '@common/validation/schemas/social-networks.schema';
 
 @Injectable()
 export class SocialNetworksDirectusService {
   constructor(private readonly directusService: DirectusService) {}
 
+  @ValidateMapping({ schema: SocialNetworksSchema })
   private mapToMultiModel(network: SocialNetworksDirectus): SocialNetworks {
     return {
       id: network.id.toString(),
       icon: network.icon,
       title: network.title,
       link: network.link,
-      position: network.sort,
+      position: network.sort || 0,
     };
   }
 

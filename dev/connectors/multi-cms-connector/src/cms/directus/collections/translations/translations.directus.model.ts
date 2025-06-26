@@ -51,7 +51,7 @@ export class BaseTranslationsDirectus {
 @ObjectType()
 export class ChannelsTranslationsDirectus extends BaseTranslationsDirectus {
   @Field()
-  label: string;
+  label?: string | null;
 }
 
 @ObjectType()
@@ -65,20 +65,20 @@ export class ContactUsTranslationsDirectus extends BaseTranslationsDirectus {
 
 @ObjectType()
 export class FeaturesTranslationsDirectus extends BaseTranslationsDirectus {
-  @Field(() => [String])
-  searchKeywords: string[];
+  @Field(() => [String], { nullable: true })
+  searchKeywords: string[] | null;
 
-  @Field()
-  shortTitle: string;
+  @Field({ nullable: true })
+  shortTitle?: string | null;
 
-  @Field()
-  title: string;
+  @Field({ nullable: true })
+  title?: string | null;
 }
 
 @ObjectType()
 export class ImportantNewsTranslationsDirectus extends BaseTranslationsDirectus {
-  @Field()
-  buttonLabel: string;
+  @Field({ nullable: true })
+  buttonLabel?: string | null;
 
   @Field()
   content: string;
@@ -89,11 +89,11 @@ export class ImportantNewsTranslationsDirectus extends BaseTranslationsDirectus 
 
 @ObjectType()
 export class LoginTranslationsDirectus extends BaseTranslationsDirectus {
-  @Field()
-  connexion_text: string;
+  @Field({ nullable: true })
+  connexion_text?: string | null;
 
-  @Field()
-  not_authenticated_text: string;
+  @Field({ nullable: true })
+  not_authenticated_text?: string | null;
 }
 
 @ObjectType()
@@ -107,9 +107,9 @@ export class PagesTranslationsDirectus extends BaseTranslationsDirectus {
 
 @ObjectType()
 export class WidgetsTranslationsDirectus extends BaseTranslationsDirectus {
-  @Field()
-  content: string;
+  @Field({ nullable: true })
+  content?: string | null;
 
-  @Field()
-  title: string;
+  @Field({ nullable: true })
+  title?: string | null;
 }

@@ -46,6 +46,6 @@ export class FolderDirectus {
   @Field()
   name: string;
 
-  @Field()
-  parent: FolderDirectus;
+  @Field(() => FolderDirectus, { nullable: true })
+  parent: FolderDirectus | null;
 }

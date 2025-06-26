@@ -47,8 +47,8 @@ export class ContactUsDirectus {
   @Field()
   to: string;
 
-  @Field()
-  icon: string;
+  @Field({ nullable: true })
+  icon?: string | null;
 
   @Field(() => [ContactUsTranslationsDirectus])
   translations: ContactUsTranslationsDirectus[];

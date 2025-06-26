@@ -43,9 +43,9 @@ export class LanguagesDirectus {
   @Field()
   code: string;
 
-  @Field()
-  direction: string;
+  @Field({ nullable: true })
+  direction?: string | null;
 
-  @Field()
-  name: string;
+  @Field({ nullable: true })
+  name?: string | null;
 }

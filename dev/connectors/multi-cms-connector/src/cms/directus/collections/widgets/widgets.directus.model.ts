@@ -46,41 +46,41 @@ export class WidgetsDirectus {
   @Field()
   id: number;
 
-  @Field()
-  color: string;
+  @Field({ nullable: true })
+  color?: string | null;
 
-  @Field()
-  description: string;
+  @Field({ nullable: true })
+  description?: string | null;
 
-  @Field()
-  icon: string;
+  @Field({ nullable: true })
+  icon?: string | null;
 
-  @Field()
-  iconSourceSvgDarkTheme: string;
+  @Field({ nullable: true })
+  iconSourceSvgDarkTheme?: string | null;
 
-  @Field()
-  iconSourceSvgLightTheme: string;
+  @Field({ nullable: true })
+  iconSourceSvgLightTheme?: string | null;
 
-  @Field()
-  link: string;
+  @Field({ nullable: true })
+  link?: string | null;
 
-  @Field()
-  position: number;
+  @Field({ nullable: true })
+  position?: number | null;
 
-  @Field()
-  routerLink: string;
+  @Field({ nullable: true })
+  routerLink?: string | null;
 
-  @Field()
-  ssoService: string;
+  @Field({ nullable: true })
+  ssoService?: string | null;
 
-  @Field()
-  statisticName: string;
+  @Field({ nullable: true })
+  statisticName?: string | null;
 
   @Field()
   status: string;
 
   @Field()
-  type: string;
+  type: 'internal' | 'external';
 
   @Field()
   widget: string;

@@ -40,11 +40,15 @@ import { Injectable } from '@nestjs/common';
 import { WidgetsDirectus } from '@directus/collections/widgets/widgets.directus.model';
 import { Widgets } from '@common/models/widgets.model';
 import { DirectusService } from '@directus/directus.service';
+import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
+import { normalizeEmptyArrayToNull, normalizeEmptyStringToNull } from '@common/utils/normalize';
+import { WidgetsSchema } from '@common/validation/schemas/widgets.schema';
 
 @Injectable()
 export class WidgetsDirectusService {
   constructor(private readonly directusService: DirectusService) {}
 
+  @ValidateMapping({ schema: WidgetsSchema })
   private mapToMultiModel(widget: WidgetsDirectus): Widgets {
     return {
       id: widget.id.toString(),
@@ -54,28 +58,29 @@ export class WidgetsDirectusService {
             roles: widget.authorization.roles,
           }
         : null,
-      color: widget.color,
-      description: widget.description,
-      icon: widget.icon,
-      iconSvgDark: widget.iconSourceSvgDarkTheme,
-      iconSvgLight: widget.iconSourceSvgLightTheme,
-      link: widget.link,
-      position: widget.position,
-      routerLink: widget.routerLink,
-      ssoService: widget.ssoService,
-      statisticName: widget.statisticName,
+      color: normalizeEmptyStringToNull(widget.color),
+      description: normalizeEmptyStringToNull(widget.description),
+      icon: normalizeEmptyStringToNull(widget.icon),
+      iconSvgDark: normalizeEmptyStringToNull(widget.iconSourceSvgDarkTheme),
+      iconSvgLight: normalizeEmptyStringToNull(widget.iconSourceSvgLightTheme),
+      link: normalizeEmptyStringToNull(widget.link),
+      position: widget.position || 0,
+      routerLink: normalizeEmptyStringToNull(widget.routerLink),
+      ssoService: normalizeEmptyStringToNull(widget.ssoService),
+      statisticName: normalizeEmptyStringToNull(widget.statisticName),
       type: widget.type,
       widget: widget.widget,
-      translations: widget.translations.map((translation) => ({
-        id: translation.id,
-        languagesCode: translation.languages_code.code,
-        content: translation.content,
-        title: translation.title,
-      })),
-      settingsByRole: widget.settings_by_role.map((settings) => ({
-        role: settings.settings_by_role_id.role,
-        position: settings.settings_by_role_id.position,
-      })),
+      translations:
+        widget.translations.map((translation) => ({
+          languagesCode: translation.languages_code.code,
+          content: normalizeEmptyStringToNull(translation.content),
+          title: normalizeEmptyStringToNull(translation.title),
+        })) ?? [],
+      settingsByRole:
+        widget.settings_by_role?.map((settings) => ({
+          role: settings.settings_by_role_id.role,
+          position: settings.settings_by_role_id.position || 0,
+        })) ?? [],
     };
   }
 

@@ -40,20 +40,25 @@ import { Injectable } from '@nestjs/common';
 import { LanguagesDirectus } from './languages.directus.model';
 import { Languages } from '@common/models/languages.model';
 import { DirectusService } from '@directus/directus.service';
+import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
+import { LanguagesSchema } from '@common/validation/schemas/languages.schema';
+import { normalizeEmptyStringToNull } from '@common/utils/normalize';
 
 @Injectable()
 export class LanguagesDirectusService {
   constructor(private readonly directusService: DirectusService) {}
 
+  @ValidateMapping({ schema: LanguagesSchema })
   private mapToMultiModel(language: LanguagesDirectus): Languages {
     return {
-      name: language.name,
-      direction: language.direction,
-      code: language.code,
+      name: normalizeEmptyStringToNull(language.name),
+      direction: normalizeEmptyStringToNull(language.direction),
+      code: normalizeEmptyStringToNull(language.code),
       locale: null,
     };
   }
 
+  // TODO: vérifier si la fonction est bien utile au niveau de multi
   async getLanguages(): Promise<Languages[]> {
     const data = await this.directusService.executeGraphQLQuery(`
       query {
@@ -67,6 +72,7 @@ export class LanguagesDirectusService {
     return data.languages.map(this.mapToMultiModel);
   }
 
+  // TODO: vérifier si la fonction est bien utile au niveau de multi
   async getLanguage(code: string): Promise<Languages> {
     const data = await this.directusService.executeGraphQLQuery(`
       query {

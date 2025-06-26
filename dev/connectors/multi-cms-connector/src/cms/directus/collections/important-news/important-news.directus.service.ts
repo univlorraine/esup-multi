@@ -40,11 +40,15 @@ import { Injectable } from '@nestjs/common';
 import { ImportantNewsDirectus } from '@directus/collections/important-news/important-news.directus.model';
 import { ImportantNews } from '@common/models/important-news.model';
 import { DirectusService } from '@directus/directus.service';
+import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
+import { ImportantNewsSchema } from '@common/validation/schemas/important-news.schema';
+import { normalizeEmptyStringToNull } from '@common/utils/normalize';
 
 @Injectable()
 export class ImportantNewsDirectusService {
   constructor(private readonly directusService: DirectusService) {}
 
+  @ValidateMapping({ schema: ImportantNewsSchema })
   private mapToMultiModel(importantNew: ImportantNewsDirectus): ImportantNews {
     return {
       id: importantNew.id.toString(),
@@ -54,19 +58,18 @@ export class ImportantNewsDirectusService {
             roles: importantNew.authorization.roles,
           }
         : null,
-      color: importantNew.color,
+      color: normalizeEmptyStringToNull(importantNew.color),
       image: importantNew.image
         ? this.directusService.buildAssetUrl(importantNew.image.id.toString())
         : null,
-      link: importantNew.link,
-      position: importantNew.sort,
-      statisticName: importantNew.statisticName,
+      link: normalizeEmptyStringToNull(importantNew.link),
+      position: importantNew.sort || 0,
+      statisticName: normalizeEmptyStringToNull(importantNew.statisticName),
       translations: importantNew.translations.map((translation) => ({
-        id: translation.id,
         languagesCode: translation.languages_code.code,
         title: translation.title,
         content: translation.content,
-        buttonLabel: translation.buttonLabel,
+        buttonLabel: normalizeEmptyStringToNull(translation.buttonLabel),
       })),
     };
   }

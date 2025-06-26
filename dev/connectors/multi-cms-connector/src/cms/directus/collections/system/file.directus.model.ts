@@ -38,6 +38,7 @@
 
 import { Field, ObjectType } from '@nestjs/graphql';
 import { FolderDirectus } from '@directus/collections/system/folder.directus.model';
+import { GraphQLJSONObject } from 'graphql-type-json';
 
 @ObjectType()
 export class FileDirectus {
@@ -71,7 +72,7 @@ export class FileDirectus {
   @Field()
   focal_point_y: number;
 
-  @Field()
+  @Field(() => FolderDirectus)
   folder: FolderDirectus;
 
   @Field()
@@ -80,13 +81,13 @@ export class FileDirectus {
   @Field()
   location: string;
 
-  @Field()
-  metadata: object;
+  @Field(() => GraphQLJSONObject, { nullable: true })
+  metadata: object | null;
 
   @Field()
   storage: string;
 
-  @Field()
+  @Field(() => [String])
   tags: string[];
 
   @Field()

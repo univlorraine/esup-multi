@@ -40,18 +40,23 @@ import { Injectable } from '@nestjs/common';
 import { LoginDirectus } from '@directus/collections/login/login.directus.model';
 import { Login } from '@common/models/login.model';
 import { DirectusService } from '@directus/directus.service';
+import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
+import { LoginSchema } from '@common/validation/schemas/login.schema';
+import { normalizeEmptyStringToNull } from '@common/utils/normalize';
 
 @Injectable()
 export class LoginDirectusService {
   constructor(private readonly directusService: DirectusService) {}
 
+  @ValidateMapping({ schema: LoginSchema })
   private mapToMultiModel(login: LoginDirectus): Login {
     return {
       translations: login.translations.map((translation) => ({
-        id: translation.id,
         languagesCode: translation.languages_code.code,
-        notAuthenticatedText: translation.not_authenticated_text,
-        connectionText: translation.connexion_text,
+        notAuthenticatedText: normalizeEmptyStringToNull(
+          translation.not_authenticated_text,
+        ),
+        connectionText: normalizeEmptyStringToNull(translation.connexion_text),
       })),
     };
   }

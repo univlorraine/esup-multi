@@ -43,7 +43,7 @@ export class AuthorizationDirectus {
   @Field()
   id: number;
 
-  @Field()
+  @Field(() => [String])
   roles: string[];
 
   @Field()

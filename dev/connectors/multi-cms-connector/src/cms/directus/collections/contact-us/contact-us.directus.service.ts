@@ -40,14 +40,18 @@ import { Injectable } from '@nestjs/common';
 import { ContactUsDirectus } from '@directus/collections/contact-us/contact-us.directus.model';
 import { ContactUs } from '@common/models/contact-us.model';
 import { DirectusService } from '@directus/directus.service';
+import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
+import { ContactUsSchema } from '@common/validation/schemas/contact-us.schema';
+import { normalizeEmptyStringToNull } from '@common/utils/normalize';
 
 @Injectable()
 export class ContactUsDirectusService {
   constructor(private readonly directusService: DirectusService) {}
 
+  @ValidateMapping({ schema: ContactUsSchema })
   private mapToMultiModel(contactUs: ContactUsDirectus): ContactUs {
     return {
-      icon: contactUs.icon,
+      icon: normalizeEmptyStringToNull(contactUs.icon),
       to: contactUs.to,
       translations: contactUs.translations.map((translation) => ({
         id: translation.id,

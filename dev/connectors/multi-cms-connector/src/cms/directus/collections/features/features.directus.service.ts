@@ -40,11 +40,18 @@ import { Injectable } from '@nestjs/common';
 import { Features } from '@common/models/features.model';
 import { FeaturesDirectus } from '@directus/collections/features/features.directus.model';
 import { DirectusService } from '@directus/directus.service';
+import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
+import { FeaturesSchema } from '@common/validation/schemas/features.schema';
+import {
+  normalizeEmptyArrayToNull,
+  normalizeEmptyStringToNull,
+} from '@common/utils/normalize';
 
 @Injectable()
 export class FeaturesDirectusService {
   constructor(private readonly directusService: DirectusService) {}
 
+  @ValidateMapping({ schema: FeaturesSchema })
   private mapToMultiModel(feature: FeaturesDirectus): Features {
     return {
       id: feature.id.toString(),
@@ -54,28 +61,28 @@ export class FeaturesDirectusService {
             roles: feature.authorization.roles,
           }
         : null,
-      description: feature.description,
-      icon: feature.icon,
-      iconSvgDark: feature.iconSourceSvgDarkTheme,
-      iconSvgLight: feature.iconSourceSvgLightTheme,
-      link: feature.link,
+      description: normalizeEmptyStringToNull(feature.description),
+      icon: normalizeEmptyStringToNull(feature.icon),
+      iconSvgDark: normalizeEmptyStringToNull(feature.iconSourceSvgDarkTheme),
+      iconSvgLight: normalizeEmptyStringToNull(feature.iconSourceSvgLightTheme),
+      link: normalizeEmptyStringToNull(feature.link),
       menu: feature.menu,
-      position: feature.position,
-      routerLink: feature.routerLink,
-      ssoService: feature.ssoService,
-      statisticName: feature.statisticName,
+      position: feature.position || 0,
+      routerLink: normalizeEmptyStringToNull(feature.routerLink),
+      ssoService: normalizeEmptyStringToNull(feature.ssoService),
+      statisticName: normalizeEmptyStringToNull(feature.statisticName),
       type: feature.type,
       translations: feature.translations.map((translation) => ({
-        id: translation.id,
         languagesCode: translation.languages_code.code,
-        searchKeywords: translation.searchKeywords,
-        shortTitle: translation.shortTitle,
-        title: translation.title,
+        searchKeywords: normalizeEmptyArrayToNull(translation.searchKeywords),
+        shortTitle: normalizeEmptyStringToNull(translation.shortTitle),
+        title: normalizeEmptyStringToNull(translation.title),
       })),
-      settingsByRole: feature.settings_by_role.map((settings) => ({
-        role: settings.settings_by_role_id.role,
-        position: settings.settings_by_role_id.position,
-      })),
+      settingsByRole:
+        feature.settings_by_role?.map((settings) => ({
+          role: settings.settings_by_role_id.role,
+          position: settings.settings_by_role_id.position || 0,
+        })) ?? [],
     };
   }
 
