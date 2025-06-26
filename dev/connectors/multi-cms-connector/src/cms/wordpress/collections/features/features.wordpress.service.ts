@@ -45,10 +45,7 @@ import { FeaturesWordpress } from '@wordpress/collections/features/features.word
 import { SettingsByRole } from '@common/models/settings-by-role.model';
 import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
 import { FeaturesSchema } from '@common/validation/schemas/features.schema';
-import {
-  normalizeEmptyArrayToNull,
-  normalizeEmptyStringToNull,
-} from '@common/utils/normalize';
+import { normalizeEmptyStringToNull } from '@common/utils/normalize';
 
 // TODO: Move FRENCH_CODE to .env and rename it to DEFAULT_LANGUAGE_CODE
 const FRENCH_CODE = 'FR';

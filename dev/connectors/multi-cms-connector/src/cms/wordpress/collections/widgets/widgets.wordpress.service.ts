@@ -44,7 +44,7 @@ import { WidgetsTranslationsWordpress } from '@wordpress/collections/translation
 import { WidgetsWordpress } from '@wordpress/collections/widgets/widgets.wordpress.model';
 import { SettingsByRole } from '@common/models/settings-by-role.model';
 import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
-import { normalizeEmptyArrayToNull, normalizeEmptyStringToNull } from '@common/utils/normalize';
+import { normalizeEmptyStringToNull } from '@common/utils/normalize';
 import { WidgetsSchema } from '@common/validation/schemas/widgets.schema';
 
 // TODO: Move FRENCH_CODE to .env and rename it to DEFAULT_LANGUAGE_CODE

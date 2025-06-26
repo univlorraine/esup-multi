@@ -41,7 +41,7 @@ import { WidgetsDirectus } from '@directus/collections/widgets/widgets.directus.
 import { Widgets } from '@common/models/widgets.model';
 import { DirectusService } from '@directus/directus.service';
 import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
-import { normalizeEmptyArrayToNull, normalizeEmptyStringToNull } from '@common/utils/normalize';
+import { normalizeEmptyStringToNull } from '@common/utils/normalize';
 import { WidgetsSchema } from '@common/validation/schemas/widgets.schema';
 
 @Injectable()
