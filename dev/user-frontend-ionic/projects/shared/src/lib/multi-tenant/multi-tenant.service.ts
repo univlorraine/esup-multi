@@ -93,10 +93,6 @@ export class MultiTenantService {
     return this.getCurrentTenantOrThrowError().apiEndpoint;
   }
 
-  public getCmsPublicAssetsEndpoint(): string {
-    return this.getCurrentTenantOrThrowError().cmsPublicAssetsEndpoint;
-  }
-
   public getCurrentTenantOrThrowError(): Tenant {
     if(!this.isCurrentTenantStateAllowed()) {
       throw new NoTenantSelectedError();

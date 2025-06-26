@@ -313,7 +313,6 @@ Dans les fichiers src/environments/environment.*.ts, on peut définir plusieurs 
       name: 'Etablissement 1',
       logo: 'assets/logos/logo1.svg',
       apiEndpoint: 'http://localhost:3000',
-      cmsPublicAssetsEndpoint: 'http://localhost:8055/assets/',
       topic: 'etablissement1',
       modulesConfigurations: {
         chatbot: {

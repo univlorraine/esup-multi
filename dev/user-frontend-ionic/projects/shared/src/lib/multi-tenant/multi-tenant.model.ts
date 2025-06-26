@@ -43,7 +43,6 @@ export interface Tenant {
   isGroup?: boolean;
   forceSelect?: boolean;
   apiEndpoint: string;
-  cmsPublicAssetsEndpoint: string;
   logo: string;
   topic?: string;
   tenants?: Tenant[];
