@@ -1,4 +1,3 @@
-
 <!--
   ~ Copyright ou © ou Copr. Université de Lorraine, (2022)
   ~
@@ -38,40 +37,88 @@
   ~ termes.
   -->
 
-<ion-content id="scrollContent" *ngIf="(featuresIsEmpty$ | async) === false && (menuItems$ | async)"
-[scrollEvents]="true"
-(ionScrollStart)="handleScrollStart()">
+<ion-content
+  id="scrollContent"
+  *ngIf="(featuresIsEmpty$ | async) === false && (menuItems$ | async) as items"
+  [scrollEvents]="true"
+  (ionScrollStart)="handleScrollStart()"
+>
   <ion-row data-service-id="searchbar" class="searchbar-row">
-    <ion-searchbar show-clear-button="focus" [placeholder]="'FEATURES.SEARCHBAR_MESSAGE' | translate"
-                   [attr.aria-label]="'FEATURES.SEARCHBAR_MESSAGE' | translate" (ionChange)="handleChange($event)"
-                   [disabled]="draggableIsOn" class="safe-area-margin-lr"></ion-searchbar>
+    <ion-searchbar
+      show-clear-button="focus"
+      [placeholder]="'FEATURES.SEARCHBAR_MESSAGE' | translate"
+      [attr.aria-label]="'FEATURES.SEARCHBAR_MESSAGE' | translate"
+      (ionInput)="handleInput($event)"
+      [disabled]="draggableIsOn"
+      class="safe-area-margin-lr"
+    ></ion-searchbar>
   </ion-row>
 
   <ion-fab *ngIf="draggableIsOn" slot="fixed" vertical="bottom" horizontal="end">
-    <ion-fab-button size="small" (click)="deactivateDrag()" [attr.aria-label]="'FEATURES.DRAG_DEACTIVATION' | translate">
+    <ion-fab-button
+      size="small"
+      (click)="deactivateDrag()"
+      [attr.aria-label]="'FEATURES.DRAG_DEACTIVATION' | translate"
+    >
       <ion-icon name="checkmark-circle-outline" aria-label=""></ion-icon>
     </ion-fab-button>
   </ion-fab>
 
-  <div #servicesContainer class="container-draggable-list" dragula="SERVICES" [(dragulaModel)]="menuItems">
-
-    <div #draggableServices class="not-draggable draggable-container" *ngFor="let menuItem of menuItems;">
+  <div
+    #servicesContainer
+    class="container-draggable-list"
+    dragula="SERVICES"
+    [(dragulaModel)]="menuItems"
+  >
+    <div
+      #draggableServices
+      class="not-draggable draggable-container"
+      *ngFor="let menuItem of menuItems"
+    >
       <div class="inner-draggable-container">
-        <ion-button shape="round" size="small" *ngIf="draggableIsOn"
-          class="drag-button ion-no-padding ion-no-margin" dragHandle>
-          <ion-icon class="drag-button-icon" name="move-outline" dragHandle slot="icon-only"
-            size="small" aria-label=""></ion-icon>
+        <ion-button
+          shape="round"
+          size="small"
+          *ngIf="draggableIsOn"
+          class="drag-button ion-no-padding ion-no-margin"
+          dragHandle
+        >
+          <ion-icon
+            class="drag-button-icon"
+            name="move-outline"
+            dragHandle
+            slot="icon-only"
+            size="small"
+            aria-label=""
+          ></ion-icon>
         </ion-button>
 
-        <ion-badge class="new app-title-7" *ngIf="menuItem.isNew">{{ "FEATURES.NEW" | translate }}</ion-badge>
+        <ion-badge class="new app-title-7" *ngIf="menuItem.isNew">{{
+            'FEATURES.NEW' | translate
+          }}
+        </ion-badge>
 
-        <app-service [menuItem]="menuItem" [draggableIsOn]="draggableIsOn"></app-service>
+        <app-service
+          [menuItem]="menuItem"
+          [draggableIsOn]="draggableIsOn"
+        ></app-service>
       </div>
     </div>
+    <ion-grid *ngIf="menuItems.length === 0 && searchBarValue.length >= 3" class="ion-text-center">
+      <ion-row justify-content-center align-items-center>
+        <ion-col size="12">
+          <ion-icon name="search-outline" size="large" color="light"></ion-icon>
+          <div class="ion-padding-top">
+            <ion-text color="light">
+              <p>Aucun résultat trouvé</p>
+            </ion-text>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </div>
-
 </ion-content>
 
 <ion-content class="ion-padding" *ngIf="(featuresIsEmpty$ | async)">
-  <ion-note> {{ "FEATURES.NO_DATA" | translate }} </ion-note>
+  <ion-note> {{ 'FEATURES.NO_DATA' | translate }}</ion-note>
 </ion-content>
