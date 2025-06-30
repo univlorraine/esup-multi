@@ -86,9 +86,59 @@ export class WordpressService {
         ),
       );
 
+      // Check GraphQL response for errors
+      if (response.data.errors && response.data.errors.length > 0) {
+        const graphqlError = response.data.errors[0];
+        throw new CmsQueryError(
+          `GraphQL Error: ${graphqlError.message}`,
+          graphqlError,
+        );
+      }
+
+      // Vérifier si les données sont présentes
+      if (!response.data.data) {
+        const noDataError = new Error('No data field in GraphQL response');
+        (noDataError as any).response = response.data;
+        (noDataError as any).query = query;
+
+        throw new CmsQueryError(
+          'No data returned from GraphQL query',
+          noDataError,
+        );
+      }
+
       this.logger.debug('Query executed successfully');
       return response.data.data;
     } catch (error) {
+      // Gérer les erreurs HTTP (401, 403, etc.)
+      if (error.response) {
+        const statusCode = error.response.status;
+        const statusText = error.response.statusText;
+
+        if (statusCode === 401) {
+          throw new CmsQueryError(
+            'Authentication failed: Invalid credentials (HTTP 401)',
+            error,
+          );
+        } else if (statusCode === 403) {
+          throw new CmsQueryError(
+            'Access forbidden: Insufficient permissions (HTTP 403)',
+            error,
+          );
+        } else {
+          throw new CmsQueryError(
+            `HTTP Error ${statusCode}: ${statusText}`,
+            error,
+          );
+        }
+      }
+
+      // Si c'est déjà une CmsQueryError, la relancer
+      if (error instanceof CmsQueryError) {
+        throw error;
+      }
+
+      // Autres erreurs (réseau, timeout, etc.)
       throw new CmsQueryError('Failed to fetch data from WordPress', error);
     }
   }
