@@ -125,7 +125,7 @@ export class WidgetsWordpressService {
             widgetIconSvgLight
             widgetIconSvgDark
             widgetAccessRestriction
-            widgetRoles {
+            widgetRoles(first: 100) {
               nodes {
                 databaseId
                 roleCode
@@ -133,7 +133,7 @@ export class WidgetsWordpressService {
               }
             }
             widgetPosition
-            widgetPositionsByRole {
+            widgetPositionsByRole(first: 100) {
               nodes {
                 databaseId
                 positionByRolePosition
@@ -182,7 +182,7 @@ export class WidgetsWordpressService {
           widgetIconSvgLight
           widgetIconSvgDark
           widgetAccessRestriction
-          widgetRoles {
+          widgetRoles(first: 100) {
             nodes {
               databaseId
               roleCode
@@ -190,7 +190,7 @@ export class WidgetsWordpressService {
             }
           }
           widgetPosition
-          widgetPositionsByRole {
+          widgetPositionsByRole(first: 100) {
             nodes {
               databaseId
               positionByRolePosition

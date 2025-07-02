@@ -124,7 +124,7 @@ export class ImportantNewsWordpressService {
               }
             }
             importantNewAccessRestriction
-            importantNewRoles {
+            importantNewRoles(first: 100) {
               nodes {
                 databaseId
                 roleCode
@@ -170,7 +170,7 @@ export class ImportantNewsWordpressService {
             }
           }
           importantNewAccessRestriction
-          importantNewRoles {
+          importantNewRoles(first: 100) {
             nodes {
               databaseId
               roleCode

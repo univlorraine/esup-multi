@@ -139,7 +139,7 @@ export class FeaturesWordpressService {
             featureIconSvgDark
             featureMenu
             featureAccessRestriction
-            featureRoles {
+            featureRoles(first: 100) {
               nodes {
                 databaseId
                 roleCode
@@ -147,7 +147,7 @@ export class FeaturesWordpressService {
               }
             }
             featurePosition
-            featurePositionsByRole {
+            featurePositionsByRole(first: 100) {
               nodes {
                 databaseId
                 positionByRolePosition
@@ -197,7 +197,7 @@ export class FeaturesWordpressService {
           featureIconSvgDark
           featureMenu
           featureAccessRestriction
-          featureRoles {
+          featureRoles(first: 100) {
             nodes {
               databaseId
               roleCode
@@ -205,7 +205,7 @@ export class FeaturesWordpressService {
             }
           }
           featurePosition
-          featurePositionsByRole {
+          featurePositionsByRole(first: 100) {
             nodes {
               databaseId
               positionByRolePosition
