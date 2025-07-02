@@ -43,10 +43,7 @@ import { ConfigService } from '@nestjs/config';
 import { RpcException } from '@nestjs/microservices';
 import { catchError, map, Observable } from 'rxjs';
 import { CmsApi } from 'src/config/configuration.interface';
-import {
-  StaticPagesGraphQLResponse,
-  StaticPageDto,
-} from './static-pages.dto';
+import { StaticPagesGraphQLResponse, StaticPageDto } from './static-pages.dto';
 
 @Injectable()
 export class StaticPagesService {
