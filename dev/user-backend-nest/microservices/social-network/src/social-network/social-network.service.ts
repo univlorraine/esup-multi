@@ -103,7 +103,14 @@ export class SocialNetworkService {
             throw new RpcException(errorMessage);
           }
 
-          return res.data.data.socialNetworks;
+          const socialNetworks = res.data.data.socialNetworks;
+
+          // Tri par position
+          return socialNetworks.sort((a, b) => {
+            const positionA = a.position ?? Number.MAX_SAFE_INTEGER;
+            const positionB = b.position ?? Number.MAX_SAFE_INTEGER;
+            return positionA - positionB;
+          });
         }),
       );
   }
