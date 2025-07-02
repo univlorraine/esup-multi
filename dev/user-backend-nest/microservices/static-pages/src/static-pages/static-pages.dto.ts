@@ -45,6 +45,7 @@ export interface StaticPageDto {
   iconSvgDark?: string;
   translations?: StaticPageTranslation[];
   statisticName?: string;
+  position: number;
 }
 
 export interface StaticPageTranslation {

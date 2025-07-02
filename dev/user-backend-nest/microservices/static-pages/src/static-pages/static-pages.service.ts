@@ -110,7 +110,14 @@ export class StaticPagesService {
             throw new RpcException(errorMessage);
           }
 
-          return res.data.data.staticPages;
+          const staticPages = res.data.data.staticPages;
+
+          // Tri par position
+          return staticPages.sort((a, b) => {
+            const positionA = a.position ?? Number.MAX_SAFE_INTEGER;
+            const positionB = b.position ?? Number.MAX_SAFE_INTEGER;
+            return positionA - positionB;
+          });
         }),
       );
   }
