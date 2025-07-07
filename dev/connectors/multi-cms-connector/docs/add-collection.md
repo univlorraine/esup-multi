@@ -8,11 +8,23 @@
 7. Ajouter la collection au module du CMS. Ex: dans le fichier `src/cms/wordpress/wordpress.module.ts` :
 ```typescript
 import { Module } from '@nestjs/common';
-import { ContactsUtilesDirectusModule } from './collections/contacts-utiles/contacts-utiles.directus.module';
-import { SocialNetworksDirectusModule } from './collections/social-networks/social-networks.directus.module';
+import { HttpModule } from '@nestjs/axios';
+import { WordpressService } from '@wordpress/wordpress.service';
+import { MyNewCollectionWordpressModule } from '@wordpress/collections/my-new-collection/my-new-collection.wordpress.module';
+import { SocialNetworksWordpressModule } from '@wordpress/collections/social-networks/social-networks.wordpress.module';
 
 @Module({
-  imports: [ContactsUtilesDirectusModule, SocialNetworksDirectusModule],
-  exports: [ContactsUtilesDirectusModule, SocialNetworksDirectusModule],
+  providers: [WordpressService],
+  imports: [
+    HttpModule,
+    MyNewCollectionWordpressModule,
+    SocialNetworksWordpressModule,
+  ],
+  exports: [
+    WordpressService,
+    MyNewCollectionWordpressModule,
+    SocialNetworksWordpressModule,
+  ],
 })
-export class DirectusModule {}
+export class WordpressModule {}
+```
