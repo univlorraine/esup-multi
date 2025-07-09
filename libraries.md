@@ -46,7 +46,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 
 ## [Frontend](./dev/user-frontend-ionic)
 ```
-├─ MIT: 72
+├─ MIT: 73
 ├─ Apache-2.0: 7
 ├─ BSD-2-Clause: 2
 ├─ Custom: LICENSE: 1
@@ -89,6 +89,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@capacitor/ios@7.2.0](https://github.com/ionic-team/capacitor) - MIT
 - [@capacitor/keyboard@7.0.1](https://github.com/ionic-team/capacitor-plugins) - MIT
 - [@capacitor/network@7.0.1](https://github.com/ionic-team/capacitor-plugins) - MIT
+- [@capacitor/push-notifications@7.0.1](https://github.com/ionic-team/capacitor-plugins) - MIT
 - [@capacitor/splash-screen@7.0.1](https://github.com/ionic-team/capacitor-plugins) - MIT
 - [@capacitor/status-bar@7.0.1](https://github.com/ionic-team/capacitor-plugins) - MIT
 - [@capawesome/capacitor-android-edge-to-edge-support@7.1.0](https://github.com/capawesome-team/capacitor-plugins) - MIT

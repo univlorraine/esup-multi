@@ -191,7 +191,7 @@ export class NotificationsRepository {
     channelsStore.update(state => {
       // On crée un nouveau set contenant les canaux actuels auxquels l'utilisateur est désabonné
       const unsubscribedChannelsSet = new Set(state.unsubscribedChannels);
-      // On ajout le canal demandé à la liste
+      // On ajoute le canal demandé à la liste
       unsubscribedChannelsSet.add(channelCode);
       // On retourne une nouvelle copie de l'ensemble en le convertissant en tableau grâce à l'opérateur
       // de spread qui permet également de retirer les doublons au passage
