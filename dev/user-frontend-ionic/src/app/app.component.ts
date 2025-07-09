@@ -61,7 +61,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { PushNotifications } from '@capacitor/push-notifications';
 import { Router } from '@angular/router';
 import { EdgeToEdge } from '@capawesome/capacitor-android-edge-to-edge-support';
-import { FCMService } from '../../projects/shared/src/lib/fcm/fcm-global.service';
 
 @Component({
   selector: 'app-root',

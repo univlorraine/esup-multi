@@ -39,7 +39,6 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { Platform } from '@ionic/angular';
 import { getAuthToken } from '../auth/auth.repository';
 import { combineLatest, first, firstValueFrom, Observable, of } from 'rxjs';
 import { filter, switchMap, take, tap } from 'rxjs/operators';
