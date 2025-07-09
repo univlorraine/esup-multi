@@ -3,10 +3,11 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## x.x.x (2025-xx-xx)
+## 2.0.0 (2025-xx-xx)
 
 ### Client
 #### Bug fixes
+* **(notifications)** : le tap sur une notification système redirige désormais sur la page des notifications dans l'application
 * **(restaurants)** : correction des dates tronquées à cause d'un scroll vertical inutile
 * **(schedule)** : correction du bouton 'Voir Plus' de la vue liste de l'emploi du temps qui n'affichait pas lorsque l'étudiant n'a pas de cours pendant plus de 15 jours
 
