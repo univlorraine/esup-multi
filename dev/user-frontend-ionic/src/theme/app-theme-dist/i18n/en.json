@@ -22,7 +22,12 @@
       "TITLE": "Warning"
     }
   },
-  "GLOBAL" : {
-    "IOS_BACK_BUTTON": "Back"
+  "GLOBAL": {
+    "BACK_BUTTON":{
+      "LABEL_IOS": "Back",
+      "LABEL_ANDROID": "Back",
+      "ARIA_LABEL_IOS": "Back",
+      "ARIA_LABEL_ANDROID": "Back"
+    }
   }
 }
