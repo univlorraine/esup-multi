@@ -38,24 +38,35 @@
  */
 
 import { HttpClient } from '@angular/common/http';
-import { IModuleTranslationOptions, ModuleTranslateLoader } from '@larscom/ngx-translate-module-loader';
 import { ProjectModuleService } from '../project-module.service';
+import { ModuleTranslationOptions, ModuleTranslateLoader } from './module-translate-loader';
+import { MultiTenantService } from '../../multi-tenant/multi-tenant.service';
 
-export const translationsLoaderFactory = (http: HttpClient, projectModuleService: ProjectModuleService, environment: any) => {
-    const baseTranslateUrl = './i18n';
-    const guidedTourTranslateUrl = { baseTranslateUrl: './i18n/guided-tour'};
+export const translationsLoaderFactory = (
+  http: HttpClient,
+  projectModuleService: ProjectModuleService,
+  multiTenantService: MultiTenantService,
+  environment: any
+) => {
+  const baseTranslateUrl = './i18n';
 
-    const translations = projectModuleService.getTranslatedProjectModules().map(projectModule => ({
-      baseTranslateUrl, moduleName: projectModule
-    }));
+  const translations = projectModuleService.getTranslatedProjectModules().map(projectModule => ({
+    baseTranslateUrl, moduleName: projectModule
+  }));
 
-    const options: IModuleTranslationOptions = {
-      modules: [
-        { baseTranslateUrl },
-        ...translations,
-        ...(environment.guidedTourEnabled ? [guidedTourTranslateUrl] : [])
-      ]
-    };
+  // Conditionally adding guided-tour module translations
+  if(environment.guidedTourEnabled) {
+    translations.push({
+      baseTranslateUrl, moduleName: 'guided-tour'
+    });
+  }
 
-    return new ModuleTranslateLoader(http, options);
+  const options: ModuleTranslationOptions = {
+    modules: [
+      { baseTranslateUrl },
+      ...translations,
+    ]
+  };
+
+  return new ModuleTranslateLoader(http, options, multiTenantService);
 };

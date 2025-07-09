@@ -40,11 +40,11 @@
 import { Injectable } from '@angular/core';
 import { Actions } from '@ngneat/effects-ng';
 import {
-  authenticate, AuthenticatedUser,
-  cleanupPrivateData, getAuthToken, getRefreshAuthToken, updateAuthenticatedUsername
+  authenticate, AuthenticatedUser, userIsAuthenticated$,
+  cleanupPrivateData, getAuthToken, getRefreshAuthToken, updateAuthenticatedUsername, MultiTenantService
 } from '@multi/shared';
-import { Observable } from 'rxjs';
-import { concatMap, take, tap } from 'rxjs/operators';
+import { Observable, withLatestFrom } from 'rxjs';
+import { concatMap, filter, switchMap, take, tap } from 'rxjs/operators';
 import { saveCredentialsOnAuthentication$ } from '../preferences/preferences.repository';
 import { KeepAuthService } from './keep-auth.service';
 import { StandardAuthService } from './standard-auth.service';
@@ -58,7 +58,15 @@ export class AuthService {
     private actions: Actions,
     private standardAuthService: StandardAuthService,
     private keepAuthService: KeepAuthService,
-  ) { }
+    private multiTenantService: MultiTenantService,
+  ) {
+    // Si l'utilisateur passe en mode anonyme et qu'il est toujours connecté, on le déconnecte
+    this.multiTenantService.tenantChange$.pipe(
+      withLatestFrom(userIsAuthenticated$),
+      filter(([tenant, isAuthenticated]) => tenant === undefined && isAuthenticated),
+      switchMap(() => this.logout())
+    ).subscribe();
+  }
 
   login(username: string, password: string): Observable<AuthenticatedUser | null> {
     return saveCredentialsOnAuthentication$.pipe(
