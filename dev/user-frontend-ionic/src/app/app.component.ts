@@ -54,7 +54,7 @@ import {
   themeRepoInitialized$, userHadSetThemeInApp, userHadSetThemeInApp$, tenantThemeApplied$, MultiTenantService
 } from '@multi/shared';
 import { initializeApp } from 'firebase/app';
-import { combineLatest, Observable, of, Subscription } from 'rxjs';
+import { combineLatest, Observable, of } from 'rxjs';
 import { distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
 import { Title } from '@angular/platform-browser';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -71,7 +71,6 @@ export class AppComponent implements OnInit, OnDestroy {
   public languages: Array<string> = [];
   public currentPageLayout$: Observable<PageLayout>;
   public isNothingToShow$: Observable<boolean>;
-  private subscriptions: Subscription[] = [];
   private backButtonListener: Promise<PluginListenerHandle>;
   private appResumeListener: Promise<PluginListenerHandle>;
   private destroyRef = inject(DestroyRef);
@@ -308,11 +307,13 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   private handleTranslationsChangeForTenant() {
-    this.subscriptions.push(this.multiTenantService.tenantChange$.subscribe(() => {
+    this.multiTenantService.tenantChange$.pipe(
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe(() => {
       this.translateService.setTranslation(
         this.translateService.currentLang,
         this.translateService.getTranslation(this.translateService.currentLang)
       ); // Workaround to force the translateService to register the translations change, not working by simply calling reloadLang()
-    }));
+    });
   }
 }
