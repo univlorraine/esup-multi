@@ -110,7 +110,6 @@ export class WordpressService {
       this.logger.debug('Query executed successfully');
       return response.data.data;
     } catch (error) {
-      console.log('error ma poule', error);
       // Gérer les erreurs HTTP (401, 403, etc.)
       if (error.response) {
         const statusCode = error.response.status;

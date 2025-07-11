@@ -40,7 +40,6 @@ import { Query, Resolver } from '@nestjs/graphql';
 import { ContactUsDirectusService } from './contact-us.directus.service';
 import { ContactUs } from '@common/models/contact-us.model';
 
-
 @Resolver(() => ContactUs)
 export class ContactUsDirectusResolver {
   constructor(private readonly contactUsService: ContactUsDirectusService) {}

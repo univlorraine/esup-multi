@@ -40,7 +40,6 @@ import { Query, Resolver } from '@nestjs/graphql';
 import { LoginDirectusService } from './login.directus.service';
 import { Login } from '@common/models/login.model';
 
-
 @Resolver(() => Login)
 export class LoginDirectusResolver {
   constructor(private readonly loginService: LoginDirectusService) {}
