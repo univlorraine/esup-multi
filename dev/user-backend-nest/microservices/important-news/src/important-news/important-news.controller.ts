@@ -41,7 +41,7 @@ import { CacheInterceptor, CacheKey } from '@nestjs/cache-manager';
 import { Controller, UseInterceptors } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
 import { Observable } from 'rxjs';
-import { DirectusImportantNews } from './important-news.dto';
+import { ImportantNewsDto } from './important-news.dto';
 import { ImportantNewsService } from './important-news.service';
 
 @Controller()
@@ -51,7 +51,7 @@ export class ImportantNewsController {
   @MessagePattern({ cmd: 'important-news' })
   @CacheKey('important-news')
   @UseInterceptors(CacheInterceptor)
-  getImportantNews(): Observable<DirectusImportantNews[]> {
+  getImportantNews(): Observable<ImportantNewsDto[]> {
     return this.importantNewsService.getImportantNews();
   }
 }

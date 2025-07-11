@@ -77,7 +77,6 @@ export const environment: any = {
   tenants: [
     {
       apiEndpoint: 'http://localhost:3000',
-      cmsPublicAssetsEndpoint: 'http://localhost:8055/assets/',
       modulesConfigurations: {
         chatbot: {
           logoRegex: /_chacha5/i

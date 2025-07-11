@@ -20,6 +20,33 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * Migration de [NodeJS](https://nodejs.org/docs/latest-v20.x/api/index.html) : Version 18 → Version 20
 * Mise à jour du moteur [Capacitor](https://capacitorjs.com/docs) : Version 6 → Version 7
 
+### Connecteurs
+* Ajout du connecteur **multi-cms-connector** permettant de faire l'intermédiaire entre le client et un CMS au choix (Directus et WordPress pour l'instant).
+Pour plus d'information sur l'installation et la configuration du connecteur CMS : https://www.esup-portail.org/wiki/x/DQD8V
+
+### !! BREAKING CHANGES !!
+La mise en place du connecteur CMS a nécessité la refactorisation des requêtes des microservices vers le CMS. Le passage à cette release 2.0 implique donc la mise en place du connecteur CMS pour que l'application continue de fonctionner correctement.
+
+Les microservices impactés sont :
+* auth
+* contact-us
+* features
+* important-news
+* notifications
+* social-network
+* static-pages
+* widgets
+
+Côté client, certains DTO ont également été revus pour plus de cohérence avec les données renvoyées par le connecteur CMS. Il est donc nécessaire de mettre à jour le client pour que l'application continue de fonctionner correctement.
+
+Les modules concernés sont :
+* auth
+* contact-us
+* features
+* important-news
+* notifications
+* static-pages
+
 ## 1.2.0 (2024-12-11)
 
 ### Client

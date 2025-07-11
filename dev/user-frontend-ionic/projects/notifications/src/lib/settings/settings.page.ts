@@ -65,14 +65,14 @@ export class SettingsPage implements OnInit {
   ) {}
 
   ngOnInit() {
-    // Récupération des canaux qui peuvent être filtrés par l'utilisateur auprès de Directus
+    // Récupération depuis le CMS des canaux qui peuvent être filtrés par l'utilisateur
     const filterableChannels$ = this.notificationRepository.translatedChannels$.pipe(
       filter(filterableChannel => filterableChannel.length > 0),
       map(channels => channels.filter(channel => channel.filterable === true))
     );
 
     // On combine la liste des canaux reçue ci-dessus avec la liste des canaux auxquels l'utilisateur a déjà choisi
-    // de se désabonner, renvoyée par l'API des notifications
+    // de se désabonner, renvoyée par l'API des notifications.
     this.channelsSubscriptions$ = combineLatest([
       filterableChannels$,
       this.notificationRepository.unsubscribedChannels$
