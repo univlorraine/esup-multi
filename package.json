@@ -14,7 +14,7 @@
   },
   "homepage": "https://github.com/univlorraine/esup-multi#readme",
   "scripts": {
-    "ci": "npm ci && npm run back:main -- npm ci && concurrently \"npm run back:*(!main) -- npm ci\" && npm run mocks -- npm ci && npm run front -- npm ci",
+    "ci": "npm ci && npm run back:main -- npm ci && concurrently \"npm run back:*(!main) -- npm ci\" && npm run mocks -- npm ci && npm run front -- npm ci && concurrently \"npm run connector:* -- npm ci\"",
     "build:back": "npm run back:main -- npm ci && concurrently \"npm run back:*(!main) -- npm ci\" && concurrently \"npm run back:* -- npm run build\"",
     "build:front": "npm run front -- npm ci && npm run front -- npm run module:build-all",
     "build:mocks": "npm run mocks -- npm ci",
@@ -41,7 +41,8 @@
     "back:schedule": "cd dev/user-backend-nest/microservices/schedule && ",
     "back:social-network": "cd dev/user-backend-nest/microservices/social-network && ",
     "back:static-pages": "cd dev/user-backend-nest/microservices/static-pages && ",
-    "back:statistics": "cd dev/user-backend-nest/microservices/statistics && "
+    "back:statistics": "cd dev/user-backend-nest/microservices/statistics && ",
+    "connector:multi-cms-connector": "cd dev/connectors/multi-cms-connector && "
   },
   "devDependencies": {
     "@commitlint/cli": "^18.6.0",
