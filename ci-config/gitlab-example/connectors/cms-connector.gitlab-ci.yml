@@ -1,0 +1,30 @@
+# CI du connecteur multi-cms-connector
+
+.cms_connector_variables:
+  variables:
+    # Nom de dossier du connecteur
+    CONNECTOR_FOLDER: "multi-cms-connector"
+    # Nom qui sera donné à l'image Docker du connecteur
+    CONNECTOR_IMAGE_NAME: "connecteur/multi-cms-connector"
+    # Nom du service pour le déclenchement manuel dans GitLab
+    CI_SERVICE_NAME: "multi-cms-connector"
+
+include:
+  - local: '${CI_PROJECT_DIR}/ci-config/gitlab-example/connectors/templates-ci.yml'
+
+build-connector-cms-connector:
+  extends:
+    - .cms_connector_variables
+    - .template_build_connector
+    - .connector_rules_template
+  stage: build-package
+
+deploy-connector-cms-connector:
+  extends:
+    - .cms_connector_variables
+    - .template_docker_deploy_connector
+    - .connector_rules_template
+  stage: build-deploy-docker
+  needs:
+    - job: build-connector-cms-connector
+      artifacts: true

@@ -21,6 +21,8 @@
   * [social-network](#backend-social-network)
   * [static-pages](#backend-static-pages)
   * [statistics](#backend-statistics)
+* [Connectors](#connectors)
+  * [multi-cms-connector](#connector-multi-cms-connector)
 
 # Libraries
 The `*` next to the license name indicates that the license was *guessed* by [license-checker-rseidelsohn](https://www.npmjs.com/package/license-checker-rseidelsohn#how-licenses-are-found).
@@ -44,7 +46,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 
 ## [Frontend](./dev/user-frontend-ionic)
 ```
-├─ MIT: 72
+├─ MIT: 73
 ├─ Apache-2.0: 7
 ├─ BSD-2-Clause: 2
 ├─ Custom: LICENSE: 1
@@ -87,6 +89,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@capacitor/ios@7.2.0](https://github.com/ionic-team/capacitor) - MIT
 - [@capacitor/keyboard@7.0.1](https://github.com/ionic-team/capacitor-plugins) - MIT
 - [@capacitor/network@7.0.1](https://github.com/ionic-team/capacitor-plugins) - MIT
+- [@capacitor/push-notifications@7.0.1](https://github.com/ionic-team/capacitor-plugins) - MIT
 - [@capacitor/splash-screen@7.0.1](https://github.com/ionic-team/capacitor-plugins) - MIT
 - [@capacitor/status-bar@7.0.1](https://github.com/ionic-team/capacitor-plugins) - MIT
 - [@capawesome/capacitor-android-edge-to-edge-support@7.1.0](https://github.com/capawesome-team/capacitor-plugins) - MIT
@@ -106,7 +109,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@types/jasmine@3.6.11](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/jasminewd2@2.0.13](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/leaflet@1.9.17](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/node@20.17.30](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/node@20.19.1](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@typescript-eslint/eslint-plugin@7.18.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
 - [@typescript-eslint/parser@7.18.0](https://github.com/typescript-eslint/typescript-eslint) - BSD-2-Clause
 - [angular-shepherd@16.0.0](https://github.com/shipshapecode/angular-shepherd) - MIT
@@ -184,7 +187,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@nestjs/testing@10.2.4](https://github.com/nestjs/nest) - MIT
 - [@types/express@4.17.17](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/jest@29.5.4](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/node@20.5.7](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/node@20.19.1](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/passport-jwt@3.0.9](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/supertest@2.0.12](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@typescript-eslint/eslint-plugin@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
@@ -240,7 +243,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@types/cron@2.4.0](undefined) - MIT
 - [@types/express@4.17.17](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/jest@29.5.4](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/node@20.5.7](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/node@20.19.1](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/supertest@2.0.12](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@typescript-eslint/eslint-plugin@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
 - [@typescript-eslint/parser@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - BSD-2-Clause
@@ -290,7 +293,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@nestjs/testing@10.2.4](https://github.com/nestjs/nest) - MIT
 - [@types/express@4.17.14](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/jest@28.1.8](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/node@16.18.3](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/node@20.19.1](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/supertest@2.0.12](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@typescript-eslint/eslint-plugin@5.43.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
 - [@typescript-eslint/parser@5.43.0](https://github.com/typescript-eslint/typescript-eslint) - BSD-2-Clause
@@ -336,7 +339,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@nestjs/testing@10.2.4](https://github.com/nestjs/nest) - MIT
 - [@types/express@4.17.17](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/jest@29.2.4](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/node@18.11.18](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/node@20.19.1](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/supertest@2.0.12](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@typescript-eslint/eslint-plugin@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
 - [@typescript-eslint/parser@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - BSD-2-Clause
@@ -383,14 +386,14 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@nestjs/testing@10.2.4](https://github.com/nestjs/nest) - MIT
 - [@types/express@4.17.17](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/jest@28.1.8](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/node@16.18.12](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/node@20.19.1](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/supertest@2.0.12](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@typescript-eslint/eslint-plugin@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
 - [@typescript-eslint/parser@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - BSD-2-Clause
 - [agentkeepalive@4.5.0](https://github.com/node-modules/agentkeepalive) - MIT
 - [cache-manager-redis-yet@4.1.2](https://github.com/node-cache-manager/node-cache-manager-redis-yet) - MIT
 - [cache-manager@5.2.3](https://github.com/node-cache-manager/node-cache-manager) - MIT
-- [date-fns@2.29.3](https://github.com/date-fns/date-fns) - MIT
+- [date-fns@2.30.0](https://github.com/date-fns/date-fns) - MIT
 - [eslint-config-prettier@8.10.0](https://github.com/prettier/eslint-config-prettier) - MIT
 - [eslint-plugin-prettier@4.2.1](https://github.com/prettier/eslint-plugin-prettier) - MIT
 - [eslint@8.48.0](https://github.com/eslint/eslint) - MIT
@@ -435,7 +438,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@nestjs/testing@10.2.4](https://github.com/nestjs/nest) - MIT
 - [@types/express@4.17.17](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/jest@28.1.8](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/node@16.18.23](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/node@20.19.1](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/supertest@2.0.12](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@typescript-eslint/eslint-plugin@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
 - [@typescript-eslint/parser@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - BSD-2-Clause
@@ -483,7 +486,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@nestjs/testing@10.2.4](https://github.com/nestjs/nest) - MIT
 - [@types/express@4.17.17](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/jest@28.1.8](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/node@16.18.12](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/node@20.19.1](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/supertest@2.0.12](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@typescript-eslint/eslint-plugin@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
 - [@typescript-eslint/parser@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - BSD-2-Clause
@@ -530,7 +533,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@nestjs/testing@10.2.4](https://github.com/nestjs/nest) - MIT
 - [@types/express@4.17.14](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/jest@28.1.8](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/node@16.11.65](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/node@20.19.1](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/supertest@2.0.12](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@typescript-eslint/eslint-plugin@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
 - [@typescript-eslint/parser@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - BSD-2-Clause
@@ -578,7 +581,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@nestjs/testing@10.2.4](https://github.com/nestjs/nest) - MIT
 - [@types/express@4.17.17](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/jest@28.1.8](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/node@16.18.12](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/node@20.19.1](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/supertest@2.0.12](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@typescript-eslint/eslint-plugin@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
 - [@typescript-eslint/parser@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - BSD-2-Clause
@@ -626,7 +629,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@nestjs/testing@10.2.4](https://github.com/nestjs/nest) - MIT
 - [@types/express@4.17.17](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/jest@29.5.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/node@18.15.11](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/node@20.19.1](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/supertest@2.0.12](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@typescript-eslint/eslint-plugin@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
 - [@typescript-eslint/parser@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - BSD-2-Clause
@@ -673,7 +676,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@nestjs/testing@10.2.4](https://github.com/nestjs/nest) - MIT
 - [@types/express@4.17.14](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/jest@28.1.8](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/node@16.18.3](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/node@20.19.1](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/supertest@2.0.12](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@typescript-eslint/eslint-plugin@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
 - [@typescript-eslint/parser@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - BSD-2-Clause
@@ -719,7 +722,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@nestjs/testing@10.2.4](https://github.com/nestjs/nest) - MIT
 - [@types/express@4.17.17](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/jest@28.1.8](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/node@16.18.12](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/node@20.19.1](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/supertest@2.0.12](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@typescript-eslint/eslint-plugin@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
 - [@typescript-eslint/parser@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - BSD-2-Clause
@@ -767,7 +770,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@nestjs/testing@10.2.4](https://github.com/nestjs/nest) - MIT
 - [@types/express@4.17.17](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/jest@28.1.8](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/node@16.18.24](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/node@20.19.1](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/supertest@2.0.12](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@typescript-eslint/eslint-plugin@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
 - [@typescript-eslint/parser@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - BSD-2-Clause
@@ -815,7 +818,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@nestjs/testing@10.2.4](https://github.com/nestjs/nest) - MIT
 - [@types/express@4.17.14](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/jest@28.1.8](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/node@16.18.3](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/node@20.19.1](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/supertest@2.0.12](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@typescript-eslint/eslint-plugin@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
 - [@typescript-eslint/parser@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - BSD-2-Clause
@@ -865,7 +868,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@nestjs/testing@10.2.4](https://github.com/nestjs/nest) - MIT
 - [@types/express@4.17.14](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/jest@28.1.8](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/node@16.18.3](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/node@20.19.1](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/supertest@2.0.12](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@typescript-eslint/eslint-plugin@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
 - [@typescript-eslint/parser@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - BSD-2-Clause
@@ -914,7 +917,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@nestjs/testing@10.2.4](https://github.com/nestjs/nest) - MIT
 - [@types/express@4.17.17](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/jest@28.1.8](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/node@16.18.18](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/node@20.19.1](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/supertest@2.0.12](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@typescript-eslint/eslint-plugin@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
 - [@typescript-eslint/parser@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - BSD-2-Clause
@@ -962,7 +965,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@nestjs/testing@10.2.4](https://github.com/nestjs/nest) - MIT
 - [@types/express@4.17.17](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/jest@29.2.4](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/node@18.11.18](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/node@20.19.1](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/supertest@2.0.12](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@typescript-eslint/eslint-plugin@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
 - [@typescript-eslint/parser@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - BSD-2-Clause
@@ -1009,7 +1012,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@nestjs/testing@10.2.4](https://github.com/nestjs/nest) - MIT
 - [@types/express@4.17.17](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/jest@28.1.8](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/node@16.18.24](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/node@20.19.1](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/supertest@2.0.12](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@typescript-eslint/eslint-plugin@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
 - [@typescript-eslint/parser@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - BSD-2-Clause
@@ -1030,6 +1033,68 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [ts-node@10.9.1](https://github.com/TypeStrong/ts-node) - MIT
 - [tsconfig-paths@4.1.0](https://github.com/dividab/tsconfig-paths) - MIT
 - [typescript@4.9.5](https://github.com/Microsoft/TypeScript) - Apache-2.0
+
+</details>
+
+## [Connectors](./dev/connectors)
+### [multi-cms-connector](./dev/connectors/multi-cms-connector)
+<span id="connector-multi-cms-connector"></span>
+```
+├─ MIT: 40
+├─ Apache-2.0: 3
+├─ BSD-3-Clause: 1
+├─ BSD-2-Clause: 1
+└─ Apache-2.0*: 1
+```
+
+<details><summary>Détails</summary>
+
+- [@apollo/client@3.11.8](https://github.com/apollographql/apollo-client) - MIT
+- [@golevelup/nestjs-graphql-request@0.2.2](https://github.com/golevelup/nestjs) - MIT
+- [@hapi/joi@17.1.1](https://github.com/hapijs/joi) - BSD-3-Clause
+- [@nestjs/apollo@12.2.0](https://github.com/nestjs/graphql) - MIT
+- [@nestjs/axios@3.1.2](https://github.com/nestjs/axios) - MIT
+- [@nestjs/cli@10.4.1](https://github.com/nestjs/nest-cli) - MIT
+- [@nestjs/common@10.3.10](https://github.com/nestjs/nest) - MIT
+- [@nestjs/config@3.3.0](https://github.com/nestjs/config) - MIT
+- [@nestjs/core@10.3.10](https://github.com/nestjs/nest) - MIT
+- [@nestjs/graphql@12.2.0](https://github.com/nestjs/graphql) - MIT
+- [@nestjs/jwt@11.0.0](https://github.com/nestjs/jwt) - MIT
+- [@nestjs/passport@11.0.5](https://github.com/nestjs/passport) - MIT
+- [@nestjs/platform-express@10.3.10](https://github.com/nestjs/nest) - MIT
+- [@nestjs/schematics@10.1.2](https://github.com/nestjs/schematics) - MIT
+- [@nestjs/testing@10.3.10](https://github.com/nestjs/nest) - MIT
+- [@types/express@4.17.21](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/hapi__joi@17.1.15](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/jest@29.5.12](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/node@20.14.9](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/passport-jwt@4.0.1](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/supertest@6.0.2](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@typescript-eslint/eslint-plugin@7.15.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
+- [@typescript-eslint/parser@7.15.0](https://github.com/typescript-eslint/typescript-eslint) - BSD-2-Clause
+- [apollo-link-rest@0.9.0](https://github.com/apollographql/apollo-link-rest) - MIT
+- [envalid@8.0.0](https://github.com/af/envalid) - MIT
+- [eslint-config-prettier@9.1.0](https://github.com/prettier/eslint-config-prettier) - MIT
+- [eslint-plugin-prettier@5.1.3](https://github.com/prettier/eslint-plugin-prettier) - MIT
+- [eslint@8.57.0](https://github.com/eslint/eslint) - MIT
+- [filereader@0.10.3](undefined) - Apache-2.0*
+- [graphql-request@7.1.0](https://github.com/jasonkuhrt/graphql-request) - MIT
+- [graphql-type-json@0.3.2](https://github.com/taion/graphql-type-json) - MIT
+- [jest@29.7.0](https://github.com/jestjs/jest) - MIT
+- [passport-jwt@4.0.1](https://github.com/mikenicholson/passport-jwt) - MIT
+- [passport@0.7.0](https://github.com/jaredhanson/passport) - MIT
+- [prettier@3.3.2](https://github.com/prettier/prettier) - MIT
+- [reflect-metadata@0.2.2](https://github.com/rbuckton/reflect-metadata) - Apache-2.0
+- [rxjs@7.8.1](https://github.com/reactivex/rxjs) - Apache-2.0
+- [source-map-support@0.5.21](https://github.com/evanw/node-source-map-support) - MIT
+- [supertest@7.0.0](https://github.com/ladjs/supertest) - MIT
+- [ts-jest@29.1.5](https://github.com/kulshekhar/ts-jest) - MIT
+- [ts-loader@9.5.1](https://github.com/TypeStrong/ts-loader) - MIT
+- [ts-node@10.9.2](https://github.com/TypeStrong/ts-node) - MIT
+- [tsconfig-paths@4.2.0](https://github.com/dividab/tsconfig-paths) - MIT
+- [typescript@5.5.3](https://github.com/Microsoft/TypeScript) - Apache-2.0
+- [xhr2@0.2.1](https://github.com/pwnall/node-xhr2) - MIT
+- [zod@3.25.57](https://github.com/colinhacks/zod) - MIT
 
 </details>
 

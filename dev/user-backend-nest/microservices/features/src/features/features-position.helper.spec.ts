@@ -38,7 +38,7 @@
  */
 
 import { FeaturesPositionHelper } from './features-position.helper';
-import { Feature, FeatureType } from './features.dto';
+import { AccessType, Feature } from './features.dto';
 
 describe('FeaturesPositionHelper', () => {
   it('should not match any role and returns default position which is null', () => {
@@ -49,14 +49,13 @@ describe('FeaturesPositionHelper', () => {
     const feature: Feature = {
       authorization: undefined,
       routerLink: '',
-      type: FeatureType.Internal,
+      type: AccessType.INTERNAL,
       id: '',
       icon: '',
       menu: null,
-      widget: null,
       position: null,
       translations: [],
-      settings_by_role: [
+      settingsByRole: [
         {
           role: 'r3',
           position: 30,
@@ -68,7 +67,7 @@ describe('FeaturesPositionHelper', () => {
       ],
     };
 
-    const position = helper.getFeaturePosition(feature);
+    const position = helper.getElementPosition(feature);
     expect(position).toBeNull();
   });
 
@@ -79,15 +78,14 @@ describe('FeaturesPositionHelper', () => {
     ]);
     const feature: Feature = {
       routerLink: '',
-      type: FeatureType.Internal,
+      type: AccessType.INTERNAL,
       id: '',
       icon: '',
       menu: null,
-      widget: null,
       authorization: null,
       position: 5,
       translations: [],
-      settings_by_role: [
+      settingsByRole: [
         {
           role: 'r3',
           position: 30,
@@ -99,7 +97,7 @@ describe('FeaturesPositionHelper', () => {
       ],
     };
 
-    const position = helper.getFeaturePosition(feature);
+    const position = helper.getElementPosition(feature);
     expect(position).toBe(5);
   });
 
@@ -110,15 +108,14 @@ describe('FeaturesPositionHelper', () => {
     ]);
     const feature: Feature = {
       routerLink: '',
-      type: FeatureType.Internal,
+      type: AccessType.INTERNAL,
       id: '',
       icon: '',
       menu: null,
-      widget: null,
       authorization: null,
       position: 5,
       translations: [],
-      settings_by_role: [
+      settingsByRole: [
         {
           role: 'r3',
           position: 30,
@@ -134,7 +131,7 @@ describe('FeaturesPositionHelper', () => {
       ],
     };
 
-    const position = helper.getFeaturePosition(feature);
+    const position = helper.getElementPosition(feature);
     expect(position).toBe(20);
   });
 
@@ -146,15 +143,14 @@ describe('FeaturesPositionHelper', () => {
     ]);
     const feature: Feature = {
       routerLink: '',
-      type: FeatureType.Internal,
+      type: AccessType.INTERNAL,
       id: '',
       icon: '',
       menu: null,
-      widget: null,
       authorization: null,
       position: 5,
       translations: [],
-      settings_by_role: [
+      settingsByRole: [
         {
           role: 'r2',
           position: 20,
@@ -166,7 +162,7 @@ describe('FeaturesPositionHelper', () => {
       ],
     };
 
-    const position = helper.getFeaturePosition(feature);
+    const position = helper.getElementPosition(feature);
     expect(position).toBe(20);
   });
 
@@ -178,15 +174,14 @@ describe('FeaturesPositionHelper', () => {
     ]);
     const feature: Feature = {
       routerLink: '',
-      type: FeatureType.Internal,
+      type: AccessType.INTERNAL,
       id: '',
       icon: '',
       menu: null,
-      widget: null,
       authorization: null,
       position: 5,
       translations: [],
-      settings_by_role: [
+      settingsByRole: [
         {
           role: 'r1',
           position: 10,
@@ -198,7 +193,7 @@ describe('FeaturesPositionHelper', () => {
       ],
     };
 
-    const position = helper.getFeaturePosition(feature);
+    const position = helper.getElementPosition(feature);
     expect(position).toBe(10);
   });
 });

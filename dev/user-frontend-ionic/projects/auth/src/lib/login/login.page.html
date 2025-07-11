@@ -53,7 +53,7 @@
 <ion-content class="ion-padding" *ngIf="translatedPageContent$ | async as page">
   <form [formGroup]="loginForm" (ngSubmit)="submit()">
     <ion-row class="ion-justify-content-center ion-text-center">
-      <div class="app-text-3" [innerHTML]="page.connexion_text"></div>
+      <div class="app-text-3" [innerHTML]="page.connectionText"></div>
     </ion-row>
 
     <ion-item lines="none">

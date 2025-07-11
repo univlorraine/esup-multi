@@ -39,12 +39,12 @@
 
 import {
   MailConfig,
-  DirectusApi,
+  CmsApi,
   KeepAliveOptions,
 } from './configuration.interface';
 
 interface Configuration {
-  directusApi: DirectusApi;
+  cmsApi: CmsApi;
   mail: MailConfig;
   keepAliveOptions: KeepAliveOptions;
   cacheTtl: number;
@@ -99,9 +99,9 @@ export default (): Configuration => {
     mail: {
       smtp: process.env.CONTACT_US_SERVICE_SMTP,
     },
-    directusApi: {
-      url: process.env.CONTACT_US_SERVICE_DIRECTUS_API_URL,
-      bearerToken: process.env.CONTACT_US_SERVICE_DIRECTUS_API_BEARER_TOKEN,
+    cmsApi: {
+      apiUrl: process.env.CONTACT_US_SERVICE_CMS_CONNECTOR_API_URL,
+      bearerToken: process.env.CONTACT_US_SERVICE_CMS_CONNECTOR_API_BEARER_TOKEN,
     },
     keepAliveOptions,
     cacheTtl: parseInt(process.env.CONTACT_US_SERVICE_CACHE_TTL_MS),

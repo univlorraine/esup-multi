@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { DirectusApi, KeepAliveOptions } from './configuration.interface';
+import { CmsApi, KeepAliveOptions } from './configuration.interface';
 
 const applyIfNotBlank = (param: string, applyFn: (value: string) => void) => {
   if (param && param.trim().length > 0) {
@@ -46,7 +46,7 @@ const applyIfNotBlank = (param: string, applyFn: (value: string) => void) => {
 };
 
 export default (): {
-  directusApi: DirectusApi;
+  cmsApi: CmsApi;
   keepAliveOptions: KeepAliveOptions;
   cacheTtl: number;
   cacheMax: number;
@@ -89,9 +89,9 @@ export default (): {
   );
 
   return {
-    directusApi: {
-      apiUrl: process.env.FEATURES_SERVICE_DIRECTUS_API_URL,
-      bearerToken: process.env.FEATURES_SERVICE_DIRECTUS_API_BEARER_TOKEN,
+    cmsApi: {
+      apiUrl: process.env.FEATURES_SERVICE_CMS_CONNECTOR_API_URL,
+      bearerToken: process.env.FEATURES_SERVICE_CMS_CONNECTOR_API_BEARER_TOKEN,
     },
     keepAliveOptions,
     cacheTtl: parseInt(process.env.FEATURES_SERVICE_CACHE_TTL_MS),
