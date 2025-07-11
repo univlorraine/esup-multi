@@ -41,5 +41,5 @@ export default () => ({
   baseUrl: process.env.WORDPRESS_API_URL || 'http://localhost:9090',
   apiUsername: process.env.WORDPRESS_API_USERNAME || '',
   apiPassword: process.env.WORDPRESS_API_PASSWORD || '',
-  timeout: 5000,
+  timeout: process.env.WORDPRESS_API_TIMEOUT || 5000,
 });
