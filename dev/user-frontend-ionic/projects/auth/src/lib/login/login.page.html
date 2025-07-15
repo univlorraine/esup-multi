@@ -68,8 +68,16 @@
       <ion-input #passwordField (keyup.enter)="keyboardSubmit()" class="form-control app-text-3 light"
                  formControlName="password" id="password" required type="password"
                  label="{{ 'AUTH.LOGIN.PASSWORD' | translate }}" labelPlacement="floating"
-                 errorText="{{ 'AUTH.LOGIN.REQUIRED.PASSWORD' | translate }}">
+                 errorText="{{ 'AUTH.LOGIN.REQUIRED.PASSWORD' | translate }}"
+                 [type]="showPassword ? 'text' : 'password'"
+      >
+        <ion-icon
+          [name]="showPassword ? 'eye-outline' : 'eye-off-outline'"
+          slot="end"
+          (click)="togglePasswordVisibility()">
+        </ion-icon>
       </ion-input>
+
     </ion-item>
 
     <ion-item lines="none">
