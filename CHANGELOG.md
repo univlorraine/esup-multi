@@ -7,6 +7,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Client
 #### Bug fixes
+* **(features)** : Amélioration du comportement du filtre de recherche dans les services
 * **(notifications)** : le tap sur une notification système redirige désormais sur la page des notifications dans l'application
 * **(restaurants)** : correction des dates tronquées à cause d'un scroll vertical inutile
 * **(schedule)** : correction du bouton 'Voir Plus' de la vue liste de l'emploi du temps qui n'affichait pas lorsque l'étudiant n'a pas de cours pendant plus de 15 jours
