@@ -37,8 +37,8 @@
  * termes.
  */
 
-export interface DirectusApi {
-  url: string;
+export interface CmsApi {
+  apiUrl: string;
   bearerToken: string;
 }
 

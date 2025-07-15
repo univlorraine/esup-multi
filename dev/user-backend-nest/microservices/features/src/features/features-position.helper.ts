@@ -37,22 +37,42 @@
  * termes.
  */
 
-import { Feature } from './features.dto';
+import { AppElement } from './features.dto';
 
 export class FeaturesPositionHelper {
   constructor(private userRoles: string[]) {}
 
-  public getFeaturePosition(feature: Feature): number {
-    const settingsByRole = feature.settings_by_role.find((sbr) =>
+  /**
+   * Détermine la position d'un élément (feature ou widget)
+   * @param element L'élément dont on veut connaître la position
+   * @returns La position calculée
+   */
+  public getElementPosition(element: AppElement): number {
+    // La structure étant la même pour les features et les widgets,
+    // on peut réutiliser la même logique
+    const settingsByRole = element.settingsByRole.find((sbr) =>
       this.userRoles.includes(sbr.role),
     );
 
     if (settingsByRole) {
       return settingsByRole.position;
-    } else if (feature.position) {
-      return feature.position;
+    } else if (element.position) {
+      return element.position;
     } else {
       return Number.MAX_SAFE_INTEGER;
     }
+  }
+
+  /**
+   * Trie un tableau d'éléments selon leur position
+   * @param elements Les éléments à trier
+   * @returns Les éléments triés
+   */
+  public sortElements(elements: AppElement[]): AppElement[] {
+    return elements.sort((a, b) => {
+      const positionA = this.getElementPosition(a);
+      const positionB = this.getElementPosition(b);
+      return positionA - positionB;
+    });
   }
 }

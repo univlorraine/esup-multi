@@ -42,8 +42,19 @@ export interface SocialNetworkDto {
   link: string;
   icon: string;
   title: string;
+  position: number;
 }
 
-export interface DirectusResponse<T> {
-  data: T;
+export interface SocialNetworksGraphQLResponse<T> {
+  data: {
+    socialNetworks: T;
+  };
+  errors?: Array<{
+    message: string;
+    locations: Array<{
+      line: number;
+      column: number;
+    }>;
+    path: string[];
+  }>;
 }

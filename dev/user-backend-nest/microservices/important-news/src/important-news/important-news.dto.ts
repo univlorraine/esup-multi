@@ -42,23 +42,34 @@ export interface Authorization {
   roles: string[];
 }
 
-export interface DirectusImportantNews {
+export interface ImportantNewsDto {
   id: string;
   image?: string;
   color?: string;
   link?: string;
+  position?: number;
   authorization?: Authorization;
-  translations?: DirectusImportantNewsTranslation[];
+  translations?: ImportantNewsTranslation[];
   statisticName?: string;
 }
 
-export interface DirectusResponse<T> {
-  data: T;
-}
-
-export interface DirectusImportantNewsTranslation {
-  language_code: string;
+export interface ImportantNewsTranslation {
+  languagesCode: string;
   title: string;
   content: string;
   buttonLabel?: string;
+}
+
+export interface ImportantNewsGraphQLResponse<T> {
+  data: {
+    importantNews: T;
+  };
+  errors?: Array<{
+    message: string;
+    locations: Array<{
+      line: number;
+      column: number;
+    }>;
+    path: string[];
+  }>;
 }

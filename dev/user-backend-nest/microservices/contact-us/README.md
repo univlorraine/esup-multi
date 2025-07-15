@@ -5,8 +5,8 @@ Ce module permet aux utilisateurs de l'application de contacter un administrateu
 - `CONTACT_US_SERVICE_HOST`: L'hôte d'écoute du service
 - `CONTACT_US_SERVICE_PORT`: Port d'écoute du service
 - `CONTACT_US_SERVICE_SMTP`: La chaîne de connexion STMP (ex: `smtps://user@domain.com:pass@smtp.domain.com`)
-- `CONTACT_US_SERVICE_DIRECTUS_API_URL`: L'URL de l'API du CMS Directus
-- `CONTACT_US_SERVICE_DIRECTUS_API_BEARER_TOKEN`: Bearer token permettant l'accès à l'API du CMS Directus
+- `CONTACT_US_SERVICE_CMS_CONNECTOR_API_URL`: L'URL de l'API du connecteur CMS permettant de récupérer les données provenant du CMS.
+- `CONTACT_US_SERVICE_CMS_CONNECTOR_API_BEARER_TOKEN`: Le token d'accès à l'API du connecteur CMS.
 - `CONTACT_US_SERVICE_CACHE_TTL_MS`: Durée de vie du cache en millisecondes (default: 300)
 - `CONTACT_US_SERVICE_CACHE_MAX`: Max des entrées enregistrées en cache (default: 200)
 

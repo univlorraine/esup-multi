@@ -8,8 +8,8 @@ Ce module est en charge de remonter les notifications de l'utilisateur en proven
 - `NOTIFICATIONS_SERVICE_NATS_SERVERS`: Addresses complètes des serveurs NATS séparées par des virgules (ex: nats://localhost:4222)
 - `NOTIFICATIONS_SERVICE_PROVIDER_API_URL`: L'URL de l'API des notifications
 - `NOTIFICATIONS_SERVICE_PROVIDER_API_BEARER_TOKEN`: Le token d'accès à l'API permettant d'obtenir les notifications et les channels.
-- `NOTIFICATIONS_SERVICE_DIRECTUS_API_URL`: L'URL de l'API Directus des channels
-- `NOTIFICATIONS_SERVICE_DIRECTUS_API_BEARER_TOKEN`: Bearer token permettant l'accès à l'API du CMS Directus
+- `NOTIFICATIONS_SERVICE_CMS_CONNECTOR_API_URL`: L'URL de l'API du connecteur CMS permettant de récupérer les données provenant du CMS.
+- `NOTIFICATIONS_SERVICE_CMS_CONNECTOR_API_BEARER_TOKEN`: Le token d'accès à l'API du connecteur CMS.
 - `NOTIFICATIONS_SERVICE_CACHE_TTL_MS`: Durée de vie du cache en millisecondes (default: 300)
 - `NOTIFICATIONS_SERVICE_CACHE_MAX`: Max des entrées enregistrées en cache (default: 200)
 

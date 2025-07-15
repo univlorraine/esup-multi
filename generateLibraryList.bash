@@ -72,6 +72,11 @@ for d in ./dev/user-backend-nest/microservices/*; do
     NB_TASKS=$((NB_TASKS+2)) # + details + summary
   fi
 done
+for d in ./dev/connectors/*; do
+  if [ -d "$d" ]; then
+    NB_TASKS=$((NB_TASKS+2)) # + details + summary
+  fi
+done
 
 
 
@@ -92,6 +97,16 @@ function tableOfContent() {
     if [ -d "$d" ]; then
       {
         echo "  * [$(basename "$d")](#backend-$(basename "$d"))"
+      } >> $OUTPUT_FILE
+    fi
+  done
+  {
+    echo "* [Connectors](#connectors)"
+  } >> $OUTPUT_FILE
+  for d in ./dev/connectors/*; do
+    if [ -d "$d" ]; then
+      {
+        echo "  * [$(basename "$d")](#connector-$(basename "$d"))"
       } >> $OUTPUT_FILE
     fi
   done
@@ -208,6 +223,29 @@ for d in ./dev/user-backend-nest/microservices/*; do
     {
       echo "### [$(basename "$d")](./dev/user-backend-nest/microservices/$(basename "$d"))"
       echo "<span id=\"backend-$(basename "$d")\"></span>"
+    } >> $OUTPUT_FILE
+    licenseSummary "$d"
+    {
+      echo "<details><summary>Détails</summary>"
+      echo ""
+    } >> $OUTPUT_FILE
+    licenseMarkdown "$d"
+    {
+      echo "</details>"
+      echo ""
+    } >> $OUTPUT_FILE
+  fi
+done
+
+# Generate for each connector
+{
+  echo "## [Connectors](./dev/connectors)"
+} >> $OUTPUT_FILE
+for d in ./dev/connectors/*; do
+  if [ -d "$d" ]; then
+    {
+      echo "### [$(basename "$d")](./dev/connectors/$(basename "$d"))"
+      echo "<span id=\"connector-$(basename "$d")\"></span>"
     } >> $OUTPUT_FILE
     licenseSummary "$d"
     {

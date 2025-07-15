@@ -3,20 +3,54 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## x.x.x (2025-xx-xx)
+## 2.0.0 (2025-xx-xx)
 
 ### Client
 #### Bug fixes
+* **(notifications)** : le tap sur une notification système redirige désormais sur la page des notifications dans l'application
 * **(restaurants)** : correction des dates tronquées à cause d'un scroll vertical inutile
 * **(schedule)** : correction du bouton 'Voir Plus' de la vue liste de l'emploi du temps qui n'affichait pas lorsque l'étudiant n'a pas de cours pendant plus de 15 jours
 
 #### New features
-* **(shared)** : Navigation, possibilité de forcer l'affichage pleine page (*full*) pour les fonctionnalités positionnées dans le menu *tabs*.
+* **(login)** : Ajout d'un bouton permettant de voir le mot de passe saisi
 * **(multi-tenant)** : On peut désormais avoir plusieurs établissements (tenants) dans la même application, chacun pouvant définir son logo, ses traductions et son backend
+* **(restaurants)** : Favoris multiples
+* **(schedule)** : Affichage du nom du planning sur l'évènement
+* **(shared)** : Navigation, possibilité de forcer l'affichage pleine page (*full*) pour les fonctionnalités positionnées dans le menu *tabs*.
+
+#### Styles
+* Suppression du libellé du bouton Retour pour gagner en espace dans la barre de menu supérieure
 
 #### Autres
 * Migration de [NodeJS](https://nodejs.org/docs/latest-v20.x/api/index.html) : Version 18 → Version 20
 * Mise à jour du moteur [Capacitor](https://capacitorjs.com/docs) : Version 6 → Version 7
+
+### Connecteurs
+* Ajout du connecteur **multi-cms-connector** permettant de faire l'intermédiaire entre le client et un CMS au choix (Directus et WordPress pour l'instant).
+Pour plus d'information sur l'installation et la configuration du connecteur CMS : https://www.esup-portail.org/wiki/x/DQD8V
+
+### !! BREAKING CHANGES !!
+La mise en place du connecteur CMS a nécessité la refactorisation des requêtes des microservices vers le CMS. Le passage à cette release 2.0 implique donc la mise en place du connecteur CMS pour que l'application continue de fonctionner correctement.
+
+Les microservices impactés sont :
+* auth
+* contact-us
+* features
+* important-news
+* notifications
+* social-network
+* static-pages
+* widgets
+
+Côté client, certains DTO ont également été revus pour plus de cohérence avec les données renvoyées par le connecteur CMS. Il est donc nécessaire de mettre à jour le client pour que l'application continue de fonctionner correctement.
+
+Les modules concernés sont :
+* auth
+* contact-us
+* features
+* important-news
+* notifications
+* static-pages
 
 ## 1.2.0 (2024-12-11)
 

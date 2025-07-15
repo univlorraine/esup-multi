@@ -6,8 +6,8 @@ Ce module est en charge de remonter les nouvelles importantes par rôle d'utilis
 - `IMPORTANT_NEWS_SERVICE_HOST`: L'hôte d'écoute pour le monitoring du service
 - `IMPORTANT_NEWS_SERVICE_PORT`: Port d'écoute pour le monitoring du service
 - `IMPORTANT_NEWS_SERVICE_NATS_SERVERS`: Addresses complètes des serveurs NATS séparées par des virgules (ex: nats://localhost:4222)
-- `IMPORTANT_NEWS_SERVICE_DIRECTUS_API_URL`: L'URL de l'API du CMS Directus
-- `IMPORTANT_NEWS_SERVICE_DIRECTUS_API_BEARER_TOKEN`: Bearer token permettant l'accès à l'API du CMS Directus
+- `IMPORTANT_NEWS_SERVICE_CMS_CONNECTOR_API_URL`: 'URL de l'API du connecteur CMS permettant de récupérer les données provenant du CMS.
+- `IMPORTANT_NEWS_SERVICE_CMS_CONNECTOR_API_BEARER_TOKEN`: Le token d'accès à l'API du connecteur CMS.
 - `IMPORTANT_NEWS_SERVICE_CACHE_TTL_MS`: Durée de vie du cache en millisecondes (default: 300)
 - `IMPORTANT_NEWS_SERVICE_CACHE_MAX`: Max des entrées enregistrées en cache (default: 200)
 

@@ -50,8 +50,8 @@ import { map } from 'rxjs/operators';
 export interface StaticPage {
   id: number;
   icon?: string;
-  iconSourceSvgLightTheme?: string;
-  iconSourceSvgDarkTheme?: string;
+  iconSvgLight?: string;
+  iconSvgDark?: string;
   translations?: Translation[];
   statisticName?: string;
 }
@@ -61,14 +61,13 @@ export interface TranslatedStaticPage {
   title: string;
   content: string;
   icon?: string;
-  iconSourceSvgLightTheme?: string;
-  iconSourceSvgDarkTheme?: string;
+  iconSvgLight?: string;
+  iconSvgDark?: string;
   statisticName?: string;
 }
 
 interface Translation {
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  languages_code: string;
+  languagesCode: string;
   title: string;
   content: string;
 }
@@ -91,16 +90,16 @@ export class StaticPagesRepository {
 
   public translatedStaticPages$ = combineLatest([this.staticPages$, currentLanguage$]).pipe(
     map(([staticPages, currentLanguage]) => staticPages.map(staticPage => {
-      const translation = staticPage.translations.find((t) => t.languages_code === currentLanguage) ||
-        staticPage.translations.find((t) => t.languages_code === this.environment.defaultLanguage) ||
+      const translation = staticPage.translations.find((t) => t.languagesCode === currentLanguage) ||
+        staticPage.translations.find((t) => t.languagesCode === this.environment.defaultLanguage) ||
         staticPage.translations[0];
       return {
         id: staticPage.id,
         title: translation.title,
         content: translation.content,
         icon: staticPage.icon,
-        iconSourceSvgLightTheme: staticPage.iconSourceSvgLightTheme,
-        iconSourceSvgDarkTheme: staticPage.iconSourceSvgDarkTheme,
+        iconSvgLight: staticPage.iconSvgLight,
+        iconSvgDark: staticPage.iconSvgDark,
         statisticName: staticPage.statisticName
       };
     }))
