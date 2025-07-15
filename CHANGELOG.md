@@ -18,6 +18,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **(schedule)** : Affichage du nom du planning sur l'évènement
 * **(shared)** : Navigation, possibilité de forcer l'affichage pleine page (*full*) pour les fonctionnalités positionnées dans le menu *tabs*.
 
+#### Styles
+* Suppression du libellé du bouton Retour pour gagner en espace dans la barre de menu supérieure
+
 #### Autres
 * Migration de [NodeJS](https://nodejs.org/docs/latest-v20.x/api/index.html) : Version 18 → Version 20
 * Mise à jour du moteur [Capacitor](https://capacitorjs.com/docs) : Version 6 → Version 7
