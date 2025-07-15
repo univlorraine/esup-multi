@@ -38,9 +38,15 @@
  */
 
 import { Injectable, Logger } from '@nestjs/common';
-import { catchError, map, Observable, zip } from 'rxjs';
+import { catchError, map, Observable } from 'rxjs';
 import { FeaturesPositionHelper } from './features-position.helper';
-import { Feature, GraphQLResponse, Widget, AppElement, ContentQueryResponse } from './features.dto';
+import {
+  Feature,
+  GraphQLResponse,
+  Widget,
+  AppElement,
+  ContentQueryResponse,
+} from './features.dto';
 import { CmsApi } from '../config/configuration.interface';
 import { ConfigService } from '@nestjs/config';
 import { HttpService } from '@nestjs/axios';
