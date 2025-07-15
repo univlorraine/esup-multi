@@ -37,20 +37,33 @@
  * termes.
  */
 
-export interface DirectusStaticPageResultDto {
+export interface StaticPageDto {
   id: number;
   status: string;
   icon?: string;
-  translations?: DirectusStaticPageTranslation[];
+  iconSvgLight?: string;
+  iconSvgDark?: string;
+  translations?: StaticPageTranslation[];
   statisticName?: string;
+  position: number;
 }
 
-export interface DirectusResponse<T> {
-  data: T;
-}
-
-export interface DirectusStaticPageTranslation {
-  languages_code: string;
+export interface StaticPageTranslation {
+  languagesCode: string;
   title: string;
   content: string;
+}
+
+export interface StaticPagesGraphQLResponse<T> {
+  data: {
+    staticPages: T;
+  };
+  errors?: Array<{
+    message: string;
+    locations: Array<{
+      line: number;
+      column: number;
+    }>;
+    path: string[];
+  }>;
 }

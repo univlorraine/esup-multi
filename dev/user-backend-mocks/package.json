@@ -1,7 +1,7 @@
 {
   "name": "user-backend-mocks",
   "version": "0.0.2",
-  "description": "Application de mocking des données utilisateurs a destination de l'application multi-tenant / INSA",
+  "description": "Application de mocking des données utilisateurs pour l'installation test en quickstart",
   "engines": {
     "node": ">=20"
   },

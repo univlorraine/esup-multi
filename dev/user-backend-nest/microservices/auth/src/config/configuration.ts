@@ -39,7 +39,7 @@
 
 import {
   CasUrl,
-  DirectusApi,
+  CmsApi,
   KeepAliveOptions,
   ScheduledCleanup,
   AuthProviderApi,
@@ -52,7 +52,7 @@ interface Configuration {
   jwtSecret: string;
   usernamesCleanup: ScheduledCleanup;
   credentialsCleanup: ScheduledCleanup;
-  directusApi: DirectusApi;
+  cmsApi: CmsApi;
   keepAliveOptions: KeepAliveOptions;
   cacheTtl: number;
   cacheMax: number;
@@ -130,9 +130,9 @@ export default (): Configuration => {
           process.env.AUTH_SERVICE_CREDENTIALS_CLEANUP_NOT_USED_SINCE_IN_DAYS,
         ) || 365,
     },
-    directusApi: {
-      url: process.env.AUTH_SERVICE_DIRECTUS_API_URL,
-      bearerToken: process.env.AUTH_SERVICE_DIRECTUS_API_BEARER_TOKEN,
+    cmsApi: {
+      apiUrl: process.env.AUTH_SERVICE_CMS_CONNECTOR_API_URL,
+      bearerToken: process.env.AUTH_SERVICE_CMS_CONNECTOR_API_BEARER_TOKEN,
     },
     keepAliveOptions,
     cacheTtl: parseInt(process.env.AUTH_SERVICE_CACHE_TTL_MS),

@@ -42,45 +42,80 @@ import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { RpcException } from '@nestjs/microservices';
 import { catchError, map, Observable } from 'rxjs';
-import { DirectusApi } from 'src/config/configuration.interface';
-import {
-  DirectusResponse,
-  DirectusStaticPageResultDto,
-} from './static-pages.dto';
+import { CmsApi } from 'src/config/configuration.interface';
+import { StaticPagesGraphQLResponse, StaticPageDto } from './static-pages.dto';
 
 @Injectable()
 export class StaticPagesService {
   private readonly logger = new Logger(StaticPagesService.name);
-  private directusApiConfig: DirectusApi;
+  private cmsApiConfig: CmsApi;
 
   constructor(
     private readonly configService: ConfigService,
     private readonly httpService: HttpService,
   ) {
-    this.directusApiConfig = this.configService.get<DirectusApi>('directusApi');
+    this.cmsApiConfig = this.configService.get<CmsApi>('cmsApi');
   }
 
-  getStaticPages(): Observable<DirectusStaticPageResultDto[]> {
-    const url = `${this.directusApiConfig.url}/items/pages`;
+  getStaticPages(): Observable<StaticPageDto[]> {
+    const url = `${this.cmsApiConfig.apiUrl}/graphql`;
+
+    const graphqlQuery = {
+      query: `
+        query {
+          staticPages {
+            id
+            icon
+            iconSvgLight
+            iconSvgDark
+            position
+            statisticName
+            translations {
+                languagesCode
+                content
+                title
+            }
+          }
+        }
+      `,
+    };
+
+    const requestConfig = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.cmsApiConfig.bearerToken}`,
+      },
+    };
 
     return this.httpService
-      .get<DirectusResponse<DirectusStaticPageResultDto[]>>(url, {
-        params: {
-          'filter[status][_eq]': 'published',
-          fields: '*,translations.*',
-        },
-        headers: {
-          Accept: 'application/json',
-          Authorization: `Bearer ${this.directusApiConfig.bearerToken}`,
-        },
-      })
+      .post<StaticPagesGraphQLResponse<StaticPageDto[]>>(
+        url,
+        graphqlQuery,
+        requestConfig,
+      )
       .pipe(
         catchError((err: any) => {
-          const errorMessage = 'Unable to get directus static pages data';
+          const errorMessage = 'Unable to get static pages data from CMS';
           this.logger.error(errorMessage, err);
           throw new RpcException(errorMessage);
         }),
-        map((res) => res.data.data),
+        map((res) => {
+          // Vérification des erreurs dans la réponse GraphQL
+          if (res.data.errors && res.data.errors.length > 0) {
+            const errorMessage = `GraphQL error: ${res.data.errors[0].message}`;
+            this.logger.error(errorMessage);
+            throw new RpcException(errorMessage);
+          }
+
+          const staticPages = res.data.data.staticPages;
+
+          // Tri par position
+          return staticPages.sort((a, b) => {
+            const positionA = a.position ?? Number.MAX_SAFE_INTEGER;
+            const positionB = b.position ?? Number.MAX_SAFE_INTEGER;
+            return positionA - positionB;
+          });
+        }),
       );
   }
 }

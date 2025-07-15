@@ -76,8 +76,8 @@
             slot="start"
             [icon]="menu.icon"
             [color]="(isDarkTheme$ | async) === true ? 'icon-primary': 'icon-primary-contrast'"
-            [iconSourceSvgLightTheme]="menu.iconSourceSvgLightTheme"
-            [iconSourceSvgDarkTheme]="menu.iconSourceSvgDarkTheme"></app-custom-icon>
+            [iconSvgLight]="menu.iconSvgLight"
+            [iconSvgDark]="menu.iconSvgDark"></app-custom-icon>
           <ion-label class="app-text-3 light">{{menu.title}}</ion-label>
         </ion-item>
       </ion-list>

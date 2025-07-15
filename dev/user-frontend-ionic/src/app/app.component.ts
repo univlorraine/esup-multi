@@ -49,15 +49,17 @@ import { Badge } from '@capawesome/capacitor-badge';
 import { ModalController, Platform, PopoverController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import {
-  currentLanguage$, features$, FeaturesService, FCMService, isDarkTheme$, isFeatureStoreInitialized$, NavigationService,
+  currentLanguage$, features$, FeaturesService, isDarkTheme$, isFeatureStoreInitialized$, NavigationService,
   NotificationsService, NetworkService, PageLayout, PageLayoutService, setIsDarkTheme, StatisticsService,
   themeRepoInitialized$, userHadSetThemeInApp, userHadSetThemeInApp$, tenantThemeApplied$, MultiTenantService
 } from '@multi/shared';
 import { initializeApp } from 'firebase/app';
-import { combineLatest, Observable, of, Subscription } from 'rxjs';
+import { combineLatest, Observable, of } from 'rxjs';
 import { distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
 import { Title } from '@angular/platform-browser';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { PushNotifications } from '@capacitor/push-notifications';
+import { Router } from '@angular/router';
 import { EdgeToEdge } from '@capawesome/capacitor-android-edge-to-edge-support';
 
 @Component({
@@ -68,9 +70,7 @@ import { EdgeToEdge } from '@capawesome/capacitor-android-edge-to-edge-support';
 export class AppComponent implements OnInit, OnDestroy {
   public languages: Array<string> = [];
   public currentPageLayout$: Observable<PageLayout>;
-  public isOnline$: Observable<boolean>;
   public isNothingToShow$: Observable<boolean>;
-  private subscriptions: Subscription[] = [];
   private backButtonListener: Promise<PluginListenerHandle>;
   private appResumeListener: Promise<PluginListenerHandle>;
   private destroyRef = inject(DestroyRef);
@@ -85,7 +85,6 @@ export class AppComponent implements OnInit, OnDestroy {
     private translateService: TranslateService,
     private pageLayoutService: PageLayoutService,
     private navigationService: NavigationService,
-    private fcmService: FCMService,
     private modalController: ModalController,
     private popoverController: PopoverController,
     private renderer: Renderer2,
@@ -95,6 +94,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private notificationsService: NotificationsService,
     private statisticsService: StatisticsService,
     private titleService: Title,
+    private router: Router,
     private multiTenantService: MultiTenantService
   ) {
     this.initializeApp();
@@ -194,6 +194,11 @@ export class AppComponent implements OnInit, OnDestroy {
     this.statisticsService.checkAndGenerateStatsUid();
     this.initializeDefaultTheme();
     this.handleTranslationsChangeForTenant();
+
+    PushNotifications.addListener('pushNotificationActionPerformed', async () => {
+      this.router.navigateByUrl('/notifications');
+    });
+
   }
 
   private initializeLanguage(): void {
@@ -302,11 +307,13 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   private handleTranslationsChangeForTenant() {
-    this.subscriptions.push(this.multiTenantService.tenantChange$.subscribe(() => {
+    this.multiTenantService.tenantChange$.pipe(
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe(() => {
       this.translateService.setTranslation(
         this.translateService.currentLang,
         this.translateService.getTranslation(this.translateService.currentLang)
       ); // Workaround to force the translateService to register the translations change, not working by simply calling reloadLang()
-    }));
+    });
   }
 }
