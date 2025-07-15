@@ -15,6 +15,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **(login)** : Ajout d'un bouton permettant de voir le mot de passe saisi
 * **(multi-tenant)** : On peut désormais avoir plusieurs établissements (tenants) dans la même application, chacun pouvant définir son logo, ses traductions et son backend
 * **(restaurants)** : Favoris multiples
+* **(schedule)** : Affichage du nom du planning sur l'évènement
 * **(shared)** : Navigation, possibilité de forcer l'affichage pleine page (*full*) pour les fonctionnalités positionnées dans le menu *tabs*.
 
 #### Autres
