@@ -3,14 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## 2.0.0 (2025-xx-xx)
+## 2.0.0 (2025-07-16)
 
 ### Client
 #### Bug fixes
-* **(features)** : Amélioration du comportement du filtre de recherche dans les services
-* **(notifications)** : le tap sur une notification système redirige désormais sur la page des notifications dans l'application
-* **(restaurants)** : correction des dates tronquées à cause d'un scroll vertical inutile
-* **(schedule)** : correction du bouton 'Voir Plus' de la vue liste de l'emploi du temps qui n'affichait pas lorsque l'étudiant n'a pas de cours pendant plus de 15 jours
+* **(features)** : Amélioration du comportement du champ de recherche dans les services
+* **(notifications)** : Le tap sur une notification système redirige désormais sur la page des notifications dans l'application
+* **(restaurants)** : Correction des dates tronquées à cause d'un scroll vertical inutile
+* **(schedule)** : Correction du bouton 'Voir Plus' de la vue liste de l'emploi du temps qui ne s'affichait pas lorsque l'étudiant n'a pas de cours pendant plus de 15 jours
 
 #### New features
 * **(login)** : Ajout d'un bouton permettant de voir le mot de passe saisi

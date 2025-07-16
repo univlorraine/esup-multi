@@ -93,7 +93,7 @@ export class SelectUserComponent {
       return;
     }
 
-    const login = this.form.value.login;
+    const login = this.form.value.login.toLowerCase();
     this.isSelectUserModalOpen = false;
     impersonatedScheduleStoreManager.resetStore();
     this.scheduleService.setAsUser(login);
