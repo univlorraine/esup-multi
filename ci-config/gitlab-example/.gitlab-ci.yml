@@ -1,6 +1,8 @@
 variables:
   # Chemin vers le backend
   BACKEND_PATH: 'dev/user-backend-nest'
+  # Chemin vers les connecteurs
+  CONNECTORS_PATH: 'dev/connectors'
   # Chemin vers le frontend
   FRONTEND_PATH: 'dev/user-frontend-ionic'
 
@@ -39,6 +41,8 @@ include:
   - local: '${CI_PROJECT_DIR}/ci-config/gitlab-example/backend/social-network.gitlab-ci.yml'
   - local: '${CI_PROJECT_DIR}/ci-config/gitlab-example/backend/static-pages.gitlab-ci.yml'
   - local: '${CI_PROJECT_DIR}/ci-config/gitlab-example/backend/statistics.gitlab-ci.yml'
+  # CI connecteurs
+  - local: '${CI_PROJECT_DIR}/ci-config/gitlab-example/connectors/cms-connector.gitlab-ci.yml'
   # CI frontend
   - local: '${CI_PROJECT_DIR}/ci-config/gitlab-example/frontend/pwa-dev.gitlab-ci.yml'
   - local: '${CI_PROJECT_DIR}/ci-config/gitlab-example/frontend/pwa-preprod.gitlab-ci.yml'

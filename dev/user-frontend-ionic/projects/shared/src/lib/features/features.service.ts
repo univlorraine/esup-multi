@@ -39,6 +39,7 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
+import { MultiTenantService } from '../multi-tenant/multi-tenant.service';
 import { combineLatest, Observable, ReplaySubject } from 'rxjs';
 import { filter, map, share, switchMap, take, tap } from 'rxjs/operators';
 import { getAuthToken } from '../auth/auth.repository';
@@ -58,8 +59,8 @@ interface TranslatedFeatureCommon {
   searchKeywords?: string[];
   menu: FeatureMenuType;
   icon: string;
-  iconSourceSvgLightTheme?: string;
-  iconSourceSvgDarkTheme?: string;
+  iconSvgLight?: string;
+  iconSvgDark?: string;
   isNew: boolean;
   statisticName?: string;
 }
@@ -87,6 +88,7 @@ export class FeaturesService {
   constructor(
     @Inject('environment')
     private environment: any,
+    private multiTenantService: MultiTenantService,
     private http: HttpClient,
   ) {
     this.translatedFeatures$ = this.translatedFeaturesSubject$;
@@ -113,7 +115,7 @@ export class FeaturesService {
   }
 
   private getFeatures(authToken: string): Observable<Feature[]> {
-    const url = `${this.environment.apiEndpoint}/features`;
+    const url = `${this.multiTenantService.getApiEndpoint()}/features`;
     const data = {
       authToken,
 
@@ -128,8 +130,8 @@ export class FeaturesService {
       // Si, ni la langue courante, ni la langue par défaut n'ont été trouvées, on prend la première traduction disponible
       const translation =
         /* eslint-disable @typescript-eslint/naming-convention */
-        feature.translations.find((t) => t.languages_code === currentLanguage) ||
-        feature.translations.find((t) => t.languages_code === this.environment.defaultLanguage) ||
+        feature.translations.find((t) => t.languagesCode === currentLanguage) ||
+        feature.translations.find((t) => t.languagesCode === this.environment.defaultLanguage) ||
         feature.translations[0];
 
       /* eslint-enable @typescript-eslint/naming-convention */

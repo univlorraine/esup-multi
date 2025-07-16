@@ -37,13 +37,15 @@
  * termes.
  */
 
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnDestroy } from '@angular/core';
+import { AlertController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 import {
   AuthenticatedUser, authenticatedUser$, isDarkTheme, isDarkTheme$, MenuItem, MenuOpenerService,
   MenuService as SharedMenuService, setIsDarkTheme, setLanguage, setUserHaveSetThemeInApp,
-  WidgetLifecycleService, GuidedTourService, VersionService
+  WidgetLifecycleService, GuidedTourService, VersionService, MultiTenantService, Tenant, tenantThemeApplied$
 } from '@multi/shared';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -51,7 +53,7 @@ import { map } from 'rxjs/operators';
   templateUrl: './burger-menu.page.html',
   styleUrls: ['../../../../../src/theme/app-theme/styles/menu/burger-menu.page.scss'],
 })
-export class BurgerMenuPage {
+export class BurgerMenuPage implements OnDestroy {
   public widgetIds = {
     auth: 'auth:auth-widget',
     contactUs: 'contact-us:contact-us-menu-item-widget',
@@ -65,6 +67,9 @@ export class BurgerMenuPage {
   authenticatedUser$: Observable<AuthenticatedUser>;
   public darkModeEnabled: boolean;
   isDarkTheme$: Observable<boolean>;
+  tenantThemeApplied$: Observable<string>;
+  isUniversitiesButtonVisible: boolean;
+  private defaultTenantThemeSubscription: Subscription;
 
   constructor(
     @Inject('environment')
@@ -73,10 +78,14 @@ export class BurgerMenuPage {
     private widgetLifecycleService: WidgetLifecycleService,
     private guidedTourService: GuidedTourService,
     private versionService: VersionService,
-    public menuOpenerService: MenuOpenerService
+    private alertController: AlertController,
+    private translateService: TranslateService,
+  public menuOpenerService: MenuOpenerService,
+    public multiTenantService: MultiTenantService
   ) {
     this.languages = this.environment.languages;
     this.authenticatedUser$ = authenticatedUser$;
+    this.tenantThemeApplied$ = tenantThemeApplied$;
     this.staticMenuItems$ = this.sharedMenuService.burgerMenuItems$.pipe(
       map(menuItems => menuItems.filter(menuItem => menuItem.type === 'static'))
     );
@@ -86,6 +95,10 @@ export class BurgerMenuPage {
     this.appVersion$ = this.versionService.getCurrentAppVersion();
 
     this.isDarkTheme$ = isDarkTheme$;
+    this.isUniversitiesButtonVisible = this.displayUniversitiesButton();
+    this.defaultTenantThemeSubscription = this.tenantThemeApplied$.subscribe(() => {
+      this.isUniversitiesButtonVisible = this.displayUniversitiesButton();
+    });
   }
 
   useLanguage(language: string): void {
@@ -117,5 +130,40 @@ export class BurgerMenuPage {
 
   getMenuId(menuItem: MenuItem){
     return this.guidedTourService.generateMenuItemIdFromTitle(menuItem);
+  }
+
+  async clearSelectedTenant() {
+    const header = this.translateService.instant('MULTI-TENANT.CHANGE_UNIVERSITY_CONFIRMATION.HEADER');
+    const message = this.translateService.instant('MULTI-TENANT.CHANGE_UNIVERSITY_CONFIRMATION.MESSAGE');
+    const confirmation = await this.alertController.create({
+      header,
+      message,
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        },
+        {
+          text: 'OK',
+          role: 'confirm',
+          handler: () => {
+            this.multiTenantService.disconnectFromTenant();
+            this.multiTenantService.redirectToTenantSelection();
+          },
+        },
+      ],
+    });
+
+    await confirmation.present();
+  }
+
+  displayUniversitiesButton(): boolean {
+    const isSingleTenant: boolean = this.multiTenantService.getFlattenTenantObjects(undefined, 0).length === 1;
+    const currentTenant: Tenant = this.multiTenantService.getCurrentTenantOrThrowError();
+    return !isSingleTenant || currentTenant.isGroup === true;
+  }
+
+  ngOnDestroy() {
+    this.defaultTenantThemeSubscription.unsubscribe();
   }
 }

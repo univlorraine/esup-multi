@@ -38,15 +38,25 @@
  */
 
 interface LoginPageContentTranslation {
-  languages_code: string;
-  connexion_text: string;
-  not_authenticated_text: string;
+  languagesCode: string;
+  connectionText: string;
+  notAuthenticatedText: string;
 }
 
 export interface LoginPageContentResultDto {
   translations: LoginPageContentTranslation[];
 }
 
-export interface DirectusResponse<T> {
-  data: T;
+export interface LoginPageGraphQLResponse<T> {
+  data: {
+    login: T;
+  };
+  errors?: Array<{
+    message: string;
+    locations: Array<{
+      line: number;
+      column: number;
+    }>;
+    path: string[];
+  }>;
 }

@@ -39,7 +39,7 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { getAuthToken, NetworkService } from '@multi/shared';
+import { getAuthToken, NetworkService, MultiTenantService } from '@multi/shared';
 import { from, iif, Observable, of } from 'rxjs';
 import { map, switchMap, take, tap } from 'rxjs/operators';
 import { Clocking, setClocking } from './clocking.repository';
@@ -52,6 +52,7 @@ export class ClockingService {
   constructor(
     @Inject('environment')
     private environment: any,
+    private multiTenantService: MultiTenantService,
     private http: HttpClient,
     private networkService: NetworkService,
   ) {}
@@ -74,7 +75,7 @@ export class ClockingService {
   }
 
   private getClocking(): Observable<Clocking> {
-    const url = `${this.environment.apiEndpoint}/clocking`;
+    const url = `${this.multiTenantService.getApiEndpoint()}/clocking`;
     return getAuthToken().pipe(
       take(1),
       switchMap(authToken => this.http.post<Clocking>(url, { authToken }))
@@ -89,7 +90,7 @@ export class ClockingService {
   }
 
   private addClocking(): Observable<Clocking> {
-    const url = `${this.environment.apiEndpoint}/clock-in`;
+    const url = `${this.multiTenantService.getApiEndpoint()}/clock-in`;
     return getAuthToken().pipe(
       take(1),
       switchMap(authToken => this.http.post<Clocking>(url, { authToken }))

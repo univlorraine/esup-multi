@@ -41,8 +41,8 @@ export interface MailConfig {
   smtp: string;
 }
 
-export interface DirectusApi {
-  url: string;
+export interface CmsApi {
+  apiUrl: string;
   bearerToken: string;
 }
 

@@ -44,7 +44,6 @@ import { Cron } from '@nestjs/schedule';
 import * as dotenv from 'dotenv';
 import { from, Observable } from 'rxjs';
 import { concatWith, delayWhen, map, tap, toArray } from 'rxjs/operators';
-import { DirectusApi } from '../config/configuration.interface';
 import { LoginPageContentResultDto } from '../page-content/login-page-content/login-page-content.dto';
 import { LoginPageContentService } from '../page-content/login-page-content/login-page-content.service';
 import {
@@ -67,7 +66,6 @@ dotenv.config(); // used to get process.env access prior to AppModule instanciat
 export class AuthService {
   private readonly logger = new Logger(AuthService.name);
   private usernamesCleanupNotUsedSinceInDays: number;
-  private directusApiConfig: DirectusApi;
 
   constructor(
     private readonly casService: CasService,

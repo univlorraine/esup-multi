@@ -61,13 +61,10 @@ export class ImportantNewsComponent {
   public importantNewsList$: Observable<ImportantNews[]> = importantNewsList$;
   public isEmpty$: Observable<boolean>;
   public translatedImportantNewsList$: Observable<TranslatedImportantNews[]>;
-  public cmsPublicAssetsEndpoint = this.environment.cmsPublicAssetsEndpoint;
   public randomImportantNews$: Observable<TranslatedImportantNews | undefined>;
 
 
   constructor(
-    @Inject('environment')
-    private environment: any,
     private importantNewsService: ImportantNewsService,
     private router: Router,
     private statisticsService: StatisticsService,
