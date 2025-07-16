@@ -155,7 +155,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 
 - [debug@2.6.9](https://github.com/visionmedia/debug) - MIT
 - [dotenv@16.4.5](https://github.com/motdotla/dotenv) - BSD-2-Clause
-- [express@4.19.2](https://github.com/expressjs/express) - MIT
+- [express@5.1.0](https://github.com/expressjs/express) - MIT
 - [http-errors@1.6.3](https://github.com/jshttp/http-errors) - MIT
 - [morgan@1.9.1](https://github.com/expressjs/morgan) - MIT
 - [uuid@9.0.1](https://github.com/uuidjs/uuid) - MIT
