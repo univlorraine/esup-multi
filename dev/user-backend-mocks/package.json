@@ -1,6 +1,6 @@
 {
   "name": "user-backend-mocks",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Application de mocking des données utilisateurs pour l'installation test en quickstart",
   "engines": {
     "node": ">=20"
