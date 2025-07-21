@@ -5,6 +5,10 @@
   "author": "",
   "private": true,
   "license": "CECILL-2.1",
+  "engines": {
+    "node": ">=20",
+    "npm": ">=9"
+  },
   "scripts": {
     "prebuild": "rimraf dist && node update-infos.js",
     "build": "nest build",
