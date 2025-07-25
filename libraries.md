@@ -1092,7 +1092,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [tsconfig-paths@4.2.0](https://github.com/dividab/tsconfig-paths) - MIT
 - [typescript@5.8.3](https://github.com/microsoft/TypeScript) - Apache-2.0
 - [xhr2@0.2.1](https://github.com/pwnall/node-xhr2) - MIT
-- [zod@4.0.8](https://github.com/colinhacks/zod) - MIT
+- [zod@3.25.76](https://github.com/colinhacks/zod) - MIT
 
 </details>
 
