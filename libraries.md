@@ -246,7 +246,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@typescript-eslint/eslint-plugin@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
 - [@typescript-eslint/parser@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - BSD-2-Clause
 - [agentkeepalive@4.6.0](https://github.com/node-modules/agentkeepalive) - MIT
-- [axios@1.10.0](https://github.com/axios/axios) - MIT
+- [axios@1.11.0](https://github.com/axios/axios) - MIT
 - [cache-manager@7.0.1](https://github.com/jaredwray/cacheable) - MIT
 - [cron@4.3.2](https://github.com/kelektiv/node-cron) - MIT
 - [eslint-config-prettier@8.10.2](https://github.com/prettier/eslint-config-prettier) - MIT
