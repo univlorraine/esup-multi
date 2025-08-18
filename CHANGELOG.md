@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## next version...
+
+### Client
+#### Autres
+* Mises à jour des dépendances suite aux alertes CVE
+
+### Connecteurs
+#### Autres
+* Mises à jour des dépendances suite aux alertes CVE
+
+### Backend
+#### Autres
+* Mises à jour des dépendances suite aux alertes CVE
+
 ## 2.0.0 (2025-07-16)
 
 ### Client
