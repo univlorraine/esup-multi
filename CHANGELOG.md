@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## next version...
+
+### Client
+#### Bug fixes
+* **(features)** : Normalisation du contenu pour la recherche dans les services
+
 ## 2.0.0 (2025-07-16)
 
 ### Client
