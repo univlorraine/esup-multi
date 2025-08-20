@@ -45,12 +45,17 @@ import { ChannelsTranslationsWordpress } from '@wordpress/collections/translatio
 import { normalizeEmptyStringToNull } from '@common/utils/normalize';
 import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
 import { ChannelsSchema } from '@common/validation/schemas/channels.schema';
+import { CacheService } from '@cache/cache.service';
+import { CacheCollection } from '@cache/cache.config';
 
 // TODO: Move FRENCH_CODE to .env and rename it to DEFAULT_LANGUAGE_CODE
 const FRENCH_CODE = 'FR';
 @Injectable()
 export class ChannelsWordpressService {
-  constructor(private readonly wordpressService: WordpressService) {}
+  constructor(
+    private readonly wordpressService: WordpressService,
+    private readonly cacheService: CacheService,
+  ) {}
 
   @ValidateMapping({ schema: ChannelsSchema })
   private mapToMultiModel(channel: ChannelsWordpress): Channels {
@@ -81,6 +86,13 @@ export class ChannelsWordpressService {
   }
 
   async getChannels(): Promise<Channels[]> {
+    const cached = await this.cacheService.get<Channels[]>(
+      CacheCollection.CHANNELS,
+    );
+    if (cached) {
+      return cached;
+    }
+
     const data = await this.wordpressService.executeGraphQLQuery(`
       query {
         channels(first: 100, where: { language: ${FRENCH_CODE} }) {
@@ -105,10 +117,20 @@ export class ChannelsWordpressService {
         }
       }
     `);
-    return data.channels.nodes.map(this.mapToMultiModel);
+    const result = data.channels.nodes.map(this.mapToMultiModel);
+    await this.cacheService.set(CacheCollection.CHANNELS, result);
+    return result;
   }
 
   async getChannel(id: number): Promise<Channels> {
+    const cached = await this.cacheService.get<Channels>(
+      CacheCollection.CHANNELS,
+      id,
+    );
+    if (cached) {
+      return cached;
+    }
+
     const data = await this.wordpressService.executeGraphQLQuery(`
       query {
         channel(id: ${id}, idType: DATABASE_ID) {
@@ -131,6 +153,8 @@ export class ChannelsWordpressService {
         }
       }
     `);
-    return this.mapToMultiModel(data.channel);
+    const result = this.mapToMultiModel(data.channel);
+    await this.cacheService.set(CacheCollection.CHANNELS, result, id);
+    return result;
   }
 }
