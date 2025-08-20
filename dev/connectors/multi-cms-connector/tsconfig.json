@@ -26,6 +26,9 @@
       ],
       "@wordpress/*": [
         "./cms/wordpress/*"
+      ],
+      "@cache/*": [
+        "./cache/*"
       ]
     }
   },

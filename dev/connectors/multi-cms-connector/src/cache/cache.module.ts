@@ -36,31 +36,20 @@
  * termes.
  */
 
-import { Module } from '@nestjs/common';
-import { GraphQLModule } from '@nestjs/graphql';
-import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { join } from 'path';
-import { ConfigModule } from '@nestjs/config';
-import { CmsModule } from './cms/cms.module';
-import { AuthModule } from './auth/auth.module';
-import { MonitoringModule } from './monitoring/monitoring.module';
-import { CacheModule } from '@cache/cache.module';
+import { Module, Global } from '@nestjs/common';
+import { CacheModule as NestCacheModule } from '@nestjs/cache-manager';
+import { CacheService } from './cache.service';
+import { CacheController } from './cache.controller';
 
+@Global()
 @Module({
   imports: [
-    ConfigModule.forRoot({
+    NestCacheModule.register({
       isGlobal: true,
     }),
-    GraphQLModule.forRoot<ApolloDriverConfig>({
-      driver: ApolloDriver,
-      autoSchemaFile: join(process.cwd(), 'src/schema.gpl'),
-      sortSchema: true,
-      playground: true,
-    }),
-    CacheModule,
-    AuthModule,
-    CmsModule.register(),
-    MonitoringModule,
   ],
+  controllers: [CacheController],
+  providers: [CacheService],
+  exports: [CacheService],
 })
-export class AppModule {}
+export class CacheModule {}

@@ -36,31 +36,41 @@
  * termes.
  */
 
-import { Module } from '@nestjs/common';
-import { GraphQLModule } from '@nestjs/graphql';
-import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { join } from 'path';
-import { ConfigModule } from '@nestjs/config';
-import { CmsModule } from './cms/cms.module';
-import { AuthModule } from './auth/auth.module';
-import { MonitoringModule } from './monitoring/monitoring.module';
-import { CacheModule } from '@cache/cache.module';
+export enum CacheCollection {
+  AUTH = 'auth',
+  CONTACT_US = 'contact-us',
+  FEATURES = 'features',
+  IMPORTANT_NEWS = 'important-news',
+  CHANNELS = 'channels',
+  SOCIAL_NETWORKS = 'social-networks',
+  STATIC_PAGES = 'static-pages',
+  WIDGETS = 'widgets',
+}
 
-@Module({
-  imports: [
-    ConfigModule.forRoot({
-      isGlobal: true,
-    }),
-    GraphQLModule.forRoot<ApolloDriverConfig>({
-      driver: ApolloDriver,
-      autoSchemaFile: join(process.cwd(), 'src/schema.gpl'),
-      sortSchema: true,
-      playground: true,
-    }),
-    CacheModule,
-    AuthModule,
-    CmsModule.register(),
-    MonitoringModule,
-  ],
-})
-export class AppModule {}
+const DEFAULT_TTL = 300000; // 5 minutes
+
+export function getCacheTTL(collection: CacheCollection): number {
+  const envKey = `CACHE_TTL_${collection.toUpperCase().replace('-', '_')}`;
+  const envValue = process.env[envKey];
+
+  if (envValue) {
+    const ttl = parseInt(envValue, 10);
+    if (!isNaN(ttl) && ttl > 0) {
+      return ttl;
+    }
+  }
+
+  // Fallback values if .env is not configured
+  const fallbackConfig: Record<CacheCollection, number> = {
+    [CacheCollection.AUTH]: 86400000, // 1 day
+    [CacheCollection.CONTACT_US]: 86400000, // 1 day
+    [CacheCollection.FEATURES]: 3600000, // 1 hour
+    [CacheCollection.IMPORTANT_NEWS]: 3600000, // 1 hour
+    [CacheCollection.CHANNELS]: 86400000, // 1 day
+    [CacheCollection.SOCIAL_NETWORKS]: 86400000, // 1 day
+    [CacheCollection.STATIC_PAGES]: 86400000, // 1 day
+    [CacheCollection.WIDGETS]: 3600000, // 1 hour
+  };
+
+  return fallbackConfig[collection] || DEFAULT_TTL;
+}
