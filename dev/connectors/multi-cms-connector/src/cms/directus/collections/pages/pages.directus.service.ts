@@ -43,10 +43,15 @@ import { DirectusService } from '@directus/directus.service';
 import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
 import { StaticPagesSchema } from '@common/validation/schemas/static-pages.schema';
 import { normalizeEmptyStringToNull } from '@common/utils/normalize';
+import { CacheService } from '@cache/cache.service';
+import { CacheCollection } from '@cache/cache.config';
 
 @Injectable()
 export class PagesDirectusService {
-  constructor(private readonly directusService: DirectusService) {}
+  constructor(
+    private readonly directusService: DirectusService,
+    private readonly cacheService: CacheService,
+  ) {}
 
   @ValidateMapping({ schema: StaticPagesSchema })
   private mapToMultiModel(page: PagesDirectus): StaticPages {
@@ -66,6 +71,14 @@ export class PagesDirectusService {
   }
 
   async getPages(): Promise<StaticPages[]> {
+    const cachedData = await this.cacheService.get(
+      CacheCollection.STATIC_PAGES,
+    );
+
+    if (cachedData) {
+      return cachedData;
+    }
+
     const data = await this.directusService.executeGraphQLQuery(`
       query {
         pages(filter: { status: { _eq: "published" }}) {
@@ -89,10 +102,21 @@ export class PagesDirectusService {
         }
       }
     `);
-    return data.pages.map(this.mapToMultiModel);
+    const result = data.pages.map(this.mapToMultiModel);
+    await this.cacheService.set(CacheCollection.STATIC_PAGES, result);
+    return result;
   }
 
   async getPage(id: number): Promise<StaticPages> {
+    const cachedData = await this.cacheService.get(
+      CacheCollection.STATIC_PAGES,
+      id,
+    );
+
+    if (cachedData) {
+      return cachedData;
+    }
+
     const data = await this.directusService.executeGraphQLQuery(`
       query {
         pages(filter: {id: { _eq: ${id} }}) {
@@ -116,6 +140,8 @@ export class PagesDirectusService {
         }
       }
     `);
-    return this.mapToMultiModel(data.pages[0]);
+    const result = this.mapToMultiModel(data.pages[0]);
+    await this.cacheService.set(CacheCollection.STATIC_PAGES, result, id);
+    return result;
   }
 }
