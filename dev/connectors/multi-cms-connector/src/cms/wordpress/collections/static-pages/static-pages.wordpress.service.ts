@@ -45,13 +45,18 @@ import { StaticPagesTranslationsWordpress } from '@wordpress/collections/transla
 import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
 import { StaticPagesSchema } from '@common/validation/schemas/static-pages.schema';
 import { normalizeEmptyStringToNull } from '@common/utils/normalize';
+import { CacheService } from '@cache/cache.service';
+import { CacheCollection } from '@cache/cache.config';
 
 // TODO: Move FRENCH_CODE to .env and rename it to DEFAULT_LANGUAGE_CODE
 const FRENCH_CODE = 'FR';
 
 @Injectable()
 export class StaticPagesWordpressService {
-  constructor(private readonly wordpressService: WordpressService) {}
+  constructor(
+    private readonly wordpressService: WordpressService,
+    private readonly cacheService: CacheService,
+  ) {}
 
   @ValidateMapping({ schema: StaticPagesSchema })
   private mapToMultiModel(staticPage: StaticPagesWordpress): StaticPages {
@@ -88,6 +93,13 @@ export class StaticPagesWordpressService {
   }
 
   async getStaticPages(): Promise<StaticPages[]> {
+    const cached = await this.cacheService.get<StaticPages[]>(
+      CacheCollection.STATIC_PAGES,
+    );
+    if (cached) {
+      return cached;
+    }
+
     const data = await this.wordpressService.executeGraphQLQuery(`
       query {
         staticPages(first: 100, where: {language: ${FRENCH_CODE}}) {
@@ -114,10 +126,20 @@ export class StaticPagesWordpressService {
         }
       }
     `);
-    return data.staticPages.nodes.map(this.mapToMultiModel);
+    const result = data.staticPages.nodes.map(this.mapToMultiModel);
+    await this.cacheService.set(CacheCollection.STATIC_PAGES, result);
+    return result;
   }
 
   async getStaticPage(id: number): Promise<StaticPages> {
+    const cached = await this.cacheService.get<StaticPages>(
+      CacheCollection.STATIC_PAGES,
+      id,
+    );
+    if (cached) {
+      return cached;
+    }
+
     const data = await this.wordpressService.executeGraphQLQuery(`
       query {
         staticPage(id: ${id}, idType: DATABASE_ID) {
@@ -142,6 +164,8 @@ export class StaticPagesWordpressService {
         }
       }
     `);
-    return this.mapToMultiModel(data.staticPage);
+    const result = this.mapToMultiModel(data.staticPage);
+    await this.cacheService.set(CacheCollection.STATIC_PAGES, result, id);
+    return result;
   }
 }
