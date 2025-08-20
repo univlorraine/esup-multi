@@ -43,10 +43,15 @@ import { DirectusService } from '@directus/directus.service';
 import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
 import { LoginSchema } from '@common/validation/schemas/login.schema';
 import { normalizeEmptyStringToNull } from '@common/utils/normalize';
+import { CacheService } from '@cache/cache.service';
+import { CacheCollection } from '@cache/cache.config';
 
 @Injectable()
 export class LoginDirectusService {
-  constructor(private readonly directusService: DirectusService) {}
+  constructor(
+    private readonly directusService: DirectusService,
+    private readonly cacheService: CacheService,
+  ) {}
 
   @ValidateMapping({ schema: LoginSchema })
   private mapToMultiModel(login: LoginDirectus): Login {
@@ -62,6 +67,13 @@ export class LoginDirectusService {
   }
 
   async getLogin(): Promise<Login> {
+    const cached = await this.cacheService.get<Login>(
+      CacheCollection.LOGIN,
+    );
+    if (cached) {
+      return cached;
+    }
+
     const data = await this.directusService.executeGraphQLQuery(`
       query {
         login {
@@ -79,6 +91,8 @@ export class LoginDirectusService {
         }
       }
     `);
-    return this.mapToMultiModel(data.login);
+    const result = this.mapToMultiModel(data.login);
+    await this.cacheService.set(CacheCollection.LOGIN, result);
+    return result;
   }
 }
