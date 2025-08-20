@@ -45,12 +45,17 @@ import { ContactUsTranslationsWordpress } from '@wordpress/collections/translati
 import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
 import { ContactUsSchema } from '@common/validation/schemas/contact-us.schema';
 import { normalizeEmptyStringToNull } from '@common/utils/normalize';
+import { CacheService } from '@cache/cache.service';
+import { CacheCollection } from '@cache/cache.config';
 
 // TODO: Move FRENCH_CODE to .env and rename it to DEFAULT_LANGUAGE_CODE
 const FRENCH_CODE = 'FR';
 @Injectable()
 export class ContactUsWordpressService {
-  constructor(private readonly wordpressService: WordpressService) {}
+  constructor(
+    private readonly wordpressService: WordpressService,
+    private readonly cacheService: CacheService,
+  ) {}
 
   @ValidateMapping({ schema: ContactUsSchema })
   private mapToMultiModel(contactUs: ContactUsWordpress): ContactUs {
@@ -79,6 +84,13 @@ export class ContactUsWordpressService {
   }
 
   async getContactUs(): Promise<ContactUs> {
+    const cached = await this.cacheService.get<ContactUs>(
+      CacheCollection.CONTACT_US,
+    );
+    if (cached) {
+      return cached;
+    }
+
     const data = await this.wordpressService.executeGraphQLQuery(`
       query {
         contactUs(where: {language: ${FRENCH_CODE}}) {
@@ -102,6 +114,8 @@ export class ContactUsWordpressService {
         }
       }
     `);
-    return this.mapToMultiModel(data.contactUs.nodes[0]);
+    const result = this.mapToMultiModel(data.contactUs.nodes[0]);
+    await this.cacheService.set(CacheCollection.CONTACT_US, result);
+    return result;
   }
 }
