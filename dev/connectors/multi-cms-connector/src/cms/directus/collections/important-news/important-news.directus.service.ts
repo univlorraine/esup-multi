@@ -43,10 +43,15 @@ import { DirectusService } from '@directus/directus.service';
 import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
 import { ImportantNewsSchema } from '@common/validation/schemas/important-news.schema';
 import { normalizeEmptyStringToNull } from '@common/utils/normalize';
+import { CacheService } from '@cache/cache.service';
+import { CacheCollection } from '@cache/cache.config';
 
 @Injectable()
 export class ImportantNewsDirectusService {
-  constructor(private readonly directusService: DirectusService) {}
+  constructor(
+    private readonly directusService: DirectusService,
+    private readonly cacheService: CacheService,
+  ) {}
 
   @ValidateMapping({ schema: ImportantNewsSchema })
   private mapToMultiModel(importantNew: ImportantNewsDirectus): ImportantNews {
@@ -75,6 +80,14 @@ export class ImportantNewsDirectusService {
   }
 
   async getImportantNews(): Promise<ImportantNews[]> {
+    const cachedData = await this.cacheService.get(
+      CacheCollection.IMPORTANT_NEWS,
+    );
+
+    if (cachedData) {
+      return cachedData;
+    }
+
     const data = await this.directusService.executeGraphQLQuery(`
       query {
         important_news(filter: { status: { _eq: "published" } }) {
@@ -106,10 +119,21 @@ export class ImportantNewsDirectusService {
         }
       }
     `);
-    return data.important_news.map((item) => this.mapToMultiModel(item));
+    const result = data.important_news.map((item) => this.mapToMultiModel(item));
+    await this.cacheService.set(CacheCollection.IMPORTANT_NEWS, result);
+    return result;
   }
 
   async getImportantNew(id: number): Promise<ImportantNews> {
+    const cachedData = await this.cacheService.get(
+      CacheCollection.IMPORTANT_NEWS,
+      id,
+    );
+
+    if (cachedData) {
+      return cachedData;
+    }
+
     const data = await this.directusService.executeGraphQLQuery(`
       query {
         important_news(filter: {id: { _eq: ${id} }}) {
@@ -141,6 +165,8 @@ export class ImportantNewsDirectusService {
         }
       }
     `);
-    return this.mapToMultiModel(data.important_news[0]);
+    const result = this.mapToMultiModel(data.important_news[0]);
+    await this.cacheService.set(CacheCollection.IMPORTANT_NEWS, result, id);
+    return result;
   }
 }
