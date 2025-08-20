@@ -43,10 +43,15 @@ import { DirectusService } from '@directus/directus.service';
 import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
 import { ChannelsSchema } from '@common/validation/schemas/channels.schema';
 import { normalizeEmptyStringToNull } from '@common/utils/normalize';
+import { CacheService } from '@cache/cache.service';
+import { CacheCollection } from '@cache/cache.config';
 
 @Injectable()
 export class ChannelsDirectusService {
-  constructor(private readonly directusService: DirectusService) {}
+  constructor(
+    private readonly directusService: DirectusService,
+    private readonly cacheService: CacheService,
+  ) {}
 
   @ValidateMapping({ schema: ChannelsSchema })
   private mapToMultiModel(channel: ChannelsDirectus): Channels {
@@ -66,6 +71,13 @@ export class ChannelsDirectusService {
   }
 
   async getChannels(): Promise<Channels[]> {
+    const cached = await this.cacheService.get<Channels[]>(
+      CacheCollection.CHANNELS,
+    );
+    if (cached) {
+      return cached;
+    }
+
     const data = await this.directusService.executeGraphQLQuery(`
       query {
         channels {
@@ -87,10 +99,20 @@ export class ChannelsDirectusService {
         }
       }
     `);
-    return data.channels.map(this.mapToMultiModel);
+    const result = data.channels.map(this.mapToMultiModel);
+    await this.cacheService.set(CacheCollection.CHANNELS, result);
+    return result;
   }
 
   async getChannel(id: number): Promise<Channels> {
+    const cached = await this.cacheService.get<Channels>(
+      CacheCollection.CHANNELS,
+      id,
+    );
+    if (cached) {
+      return cached;
+    }
+
     const data = await this.directusService.executeGraphQLQuery(`
       query {
         channels(filter: {id: { _eq: ${id} }}) {
@@ -112,6 +134,8 @@ export class ChannelsDirectusService {
         }
       }
     `);
-    return this.mapToMultiModel(data.channels[0]);
+    const result = this.mapToMultiModel(data.channels[0]);
+    await this.cacheService.set(CacheCollection.CHANNELS, result, id);
+    return result;
   }
 }
