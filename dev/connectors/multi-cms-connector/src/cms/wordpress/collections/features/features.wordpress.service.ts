@@ -46,13 +46,18 @@ import { SettingsByRole } from '@common/models/settings-by-role.model';
 import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
 import { FeaturesSchema } from '@common/validation/schemas/features.schema';
 import { normalizeEmptyStringToNull } from '@common/utils/normalize';
+import { CacheService } from '@cache/cache.service';
+import { CacheCollection } from '@cache/cache.config';
 
 // TODO: Move FRENCH_CODE to .env and rename it to DEFAULT_LANGUAGE_CODE
 const FRENCH_CODE = 'FR';
 
 @Injectable()
 export class FeaturesWordpressService {
-  constructor(private readonly wordpressService: WordpressService) {}
+  constructor(
+    private readonly wordpressService: WordpressService,
+    private readonly cacheService: CacheService,
+  ) {}
 
   @ValidateMapping({ schema: FeaturesSchema })
   private mapToMultiModel(feature: FeaturesWordpress): Features {
@@ -125,6 +130,13 @@ export class FeaturesWordpressService {
   }
 
   async getFeatures(): Promise<Features[]> {
+    const cached = await this.cacheService.get<Features[]>(
+      CacheCollection.FEATURES,
+    );
+    if (cached) {
+      return cached;
+    }
+
     const data = await this.wordpressService.executeGraphQLQuery(`
       query {
         features(first: 100, where: {language: ${FRENCH_CODE}}) {
@@ -180,10 +192,21 @@ export class FeaturesWordpressService {
         }
       }
     `);
-    return data.features.nodes.map(this.mapToMultiModel);
+
+    const result = data.features.nodes.map(this.mapToMultiModel);
+    await this.cacheService.set(CacheCollection.FEATURES, result);
+    return result;
   }
 
   async getFeature(id: number): Promise<Features> {
+    const cached = await this.cacheService.get<Features>(
+      CacheCollection.FEATURES,
+      id,
+    );
+    if (cached) {
+      return cached;
+    }
+
     const data = await this.wordpressService.executeGraphQLQuery(`
       query {
         feature(id: ${id}, idType: DATABASE_ID) {
@@ -236,6 +259,9 @@ export class FeaturesWordpressService {
         }
       }
     `);
-    return this.mapToMultiModel(data.feature);
+
+    const result = this.mapToMultiModel(data.feature);
+    await this.cacheService.set(CacheCollection.FEATURES, result, id);
+    return result;
   }
 }
