@@ -42,10 +42,15 @@ import { SocialNetworksWordpress } from './social-networks.wordpress.model';
 import { WordpressService } from '@wordpress/wordpress.service';
 import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
 import { SocialNetworksSchema } from '@common/validation/schemas/social-networks.schema';
+import { CacheService } from '@cache/cache.service';
+import { CacheCollection } from '@cache/cache.config';
 
 @Injectable()
 export class SocialNetworksWordpressService {
-  constructor(private readonly wordpressService: WordpressService) {}
+  constructor(
+    private readonly wordpressService: WordpressService,
+    private readonly cacheService: CacheService,
+  ) {}
 
   @ValidateMapping({ schema: SocialNetworksSchema })
   private mapToMultiModel(network: SocialNetworksWordpress): SocialNetworks {
@@ -59,6 +64,13 @@ export class SocialNetworksWordpressService {
   }
 
   async getSocialNetworks(): Promise<SocialNetworks[]> {
+    const cached = await this.cacheService.get<SocialNetworks[]>(
+      CacheCollection.SOCIAL_NETWORKS,
+    );
+    if (cached) {
+      return cached;
+    }
+
     const data = await this.wordpressService.executeGraphQLQuery(`
       query {
         socialNetworks(first: 100) {
@@ -72,10 +84,20 @@ export class SocialNetworksWordpressService {
         }
       }
     `);
-    return data.socialNetworks.nodes.map(this.mapToMultiModel);
+    const result = data.socialNetworks.nodes.map(this.mapToMultiModel);
+    await this.cacheService.set(CacheCollection.SOCIAL_NETWORKS, result);
+    return result;
   }
 
   async getSocialNetwork(id: number): Promise<SocialNetworks> {
+    const cached = await this.cacheService.get<SocialNetworks>(
+      CacheCollection.SOCIAL_NETWORKS,
+      id,
+    );
+    if (cached) {
+      return cached;
+    }
+
     const data = await this.wordpressService.executeGraphQLQuery(`
       query {
         socialNetwork(id: ${id}, idType: DATABASE_ID) {
@@ -87,6 +109,8 @@ export class SocialNetworksWordpressService {
         }
       }
     `);
-    return this.mapToMultiModel(data.socialNetwork);
+    const result = this.mapToMultiModel(data.socialNetwork);
+    await this.cacheService.set(CacheCollection.SOCIAL_NETWORKS, result, id);
+    return result;
   }
 }
