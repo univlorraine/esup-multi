@@ -43,10 +43,15 @@ import { DirectusService } from '@directus/directus.service';
 import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
 import { normalizeEmptyStringToNull } from '@common/utils/normalize';
 import { WidgetsSchema } from '@common/validation/schemas/widgets.schema';
+import { CacheService } from '@cache/cache.service';
+import { CacheCollection } from '@cache/cache.config';
 
 @Injectable()
 export class WidgetsDirectusService {
-  constructor(private readonly directusService: DirectusService) {}
+  constructor(
+    private readonly directusService: DirectusService,
+    private readonly cacheService: CacheService,
+  ) {}
 
   @ValidateMapping({ schema: WidgetsSchema })
   private mapToMultiModel(widget: WidgetsDirectus): Widgets {
@@ -85,6 +90,13 @@ export class WidgetsDirectusService {
   }
 
   async getWidgets(): Promise<Widgets[]> {
+    const cached = await this.cacheService.get<Widgets[]>(
+      CacheCollection.WIDGETS,
+    );
+    if (cached) {
+      return cached;
+    }
+
     const data = await this.directusService.executeGraphQLQuery(`
       query {
         widgets(filter: { status: { _eq: "published" }}) {
@@ -129,10 +141,20 @@ export class WidgetsDirectusService {
         }
       }
     `);
-    return data.widgets.map(this.mapToMultiModel);
+    const result = data.widgets.map(this.mapToMultiModel);
+    await this.cacheService.set(CacheCollection.WIDGETS, result);
+    return result;
   }
 
   async getWidget(id: number): Promise<Widgets> {
+    const cached = await this.cacheService.get<Widgets>(
+      CacheCollection.WIDGETS,
+      id,
+    );
+    if (cached) {
+      return cached;
+    }
+
     const data = await this.directusService.executeGraphQLQuery(`
       query {
         widgets(filter: {id: { _eq: ${id} }}) {
@@ -177,6 +199,8 @@ export class WidgetsDirectusService {
         }
       }
     `);
-    return this.mapToMultiModel(data.widgets[0]);
+    const result = this.mapToMultiModel(data.widgets[0]);
+    await this.cacheService.set(CacheCollection.WIDGETS, result, id);
+    return result;
   }
 }
