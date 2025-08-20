@@ -46,10 +46,15 @@ import {
   normalizeEmptyArrayToNull,
   normalizeEmptyStringToNull,
 } from '@common/utils/normalize';
+import { CacheService } from '@cache/cache.service';
+import { CacheCollection } from '@cache/cache.config';
 
 @Injectable()
 export class FeaturesDirectusService {
-  constructor(private readonly directusService: DirectusService) {}
+  constructor(
+    private readonly directusService: DirectusService,
+    private readonly cacheService: CacheService,
+  ) {}
 
   @ValidateMapping({ schema: FeaturesSchema })
   private mapToMultiModel(feature: FeaturesDirectus): Features {
@@ -87,6 +92,13 @@ export class FeaturesDirectusService {
   }
 
   async getFeatures(): Promise<Features[]> {
+    const cached = await this.cacheService.get<Features[]>(
+      CacheCollection.FEATURES,
+    );
+    if (cached) {
+      return cached;
+    }
+
     const data = await this.directusService.executeGraphQLQuery(`
       query {
         features(filter: { status: { _eq: "published" }}) {
@@ -131,10 +143,20 @@ export class FeaturesDirectusService {
         }
       }
     `);
-    return data.features.map(this.mapToMultiModel);
+    const result = data.features.map(this.mapToMultiModel);
+    await this.cacheService.set(CacheCollection.FEATURES, result);
+    return result;
   }
 
   async getFeature(id: number): Promise<Features> {
+    const cached = await this.cacheService.get<Features>(
+      CacheCollection.FEATURES,
+      id,
+    );
+    if (cached) {
+      return cached;
+    }
+
     const data = await this.directusService.executeGraphQLQuery(`
       query {
         features(filter: {id: { _eq: ${id} }}) {
@@ -179,6 +201,8 @@ export class FeaturesDirectusService {
         }
       }
     `);
-    return this.mapToMultiModel(data.features[0]);
+    const result = this.mapToMultiModel(data.features[0]);
+    await this.cacheService.set(CacheCollection.FEATURES, result, id);
+    return result;
   }
 }
