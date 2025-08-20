@@ -46,13 +46,18 @@ import { SettingsByRole } from '@common/models/settings-by-role.model';
 import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
 import { normalizeEmptyStringToNull } from '@common/utils/normalize';
 import { WidgetsSchema } from '@common/validation/schemas/widgets.schema';
+import { CacheService } from '@cache/cache.service';
+import { CacheCollection } from '@cache/cache.config';
 
 // TODO: Move FRENCH_CODE to .env and rename it to DEFAULT_LANGUAGE_CODE
 const FRENCH_CODE = 'FR';
 
 @Injectable()
 export class WidgetsWordpressService {
-  constructor(private readonly wordpressService: WordpressService) {}
+  constructor(
+    private readonly wordpressService: WordpressService,
+    private readonly cacheService: CacheService,
+  ) {}
 
   @ValidateMapping({ schema: WidgetsSchema })
   private mapToMultiModel(widget: WidgetsWordpress): Widgets {
@@ -112,6 +117,13 @@ export class WidgetsWordpressService {
   }
 
   async getWidgets(): Promise<Widgets[]> {
+    const cached = await this.cacheService.get<Widgets[]>(
+      CacheCollection.WIDGETS,
+    );
+    if (cached) {
+      return cached;
+    }
+
     const data = await this.wordpressService.executeGraphQLQuery(`
       query {
         widgets(first: 100, where: {language: ${FRENCH_CODE}}) {
@@ -166,10 +178,21 @@ export class WidgetsWordpressService {
         }
       }
     `);
-    return data.widgets.nodes.map(this.mapToMultiModel);
+
+    const result = data.widgets.nodes.map(this.mapToMultiModel);
+    await this.cacheService.set(CacheCollection.WIDGETS, result);
+    return result;
   }
 
   async getWidget(id: number): Promise<Widgets> {
+    const cached = await this.cacheService.get<Widgets>(
+      CacheCollection.WIDGETS,
+      id,
+    );
+    if (cached) {
+      return cached;
+    }
+
     const data = await this.wordpressService.executeGraphQLQuery(`
       query {
         widget(id: ${id}, idType: DATABASE_ID) {
@@ -222,6 +245,9 @@ export class WidgetsWordpressService {
         }
       }
     `);
-    return this.mapToMultiModel(data.widget);
+
+    const result = this.mapToMultiModel(data.widget);
+    await this.cacheService.set(CacheCollection.WIDGETS, result, id);
+    return result;
   }
 }
