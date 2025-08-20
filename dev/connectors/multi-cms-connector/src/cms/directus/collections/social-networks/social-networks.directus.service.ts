@@ -42,10 +42,15 @@ import { SocialNetworksDirectus } from './social-networks.directus.model';
 import { DirectusService } from '@directus/directus.service';
 import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
 import { SocialNetworksSchema } from '@common/validation/schemas/social-networks.schema';
+import { CacheService } from '@cache/cache.service';
+import { CacheCollection } from '@cache/cache.config';
 
 @Injectable()
 export class SocialNetworksDirectusService {
-  constructor(private readonly directusService: DirectusService) {}
+  constructor(
+    private readonly directusService: DirectusService,
+    private readonly cacheService: CacheService,
+  ) {}
 
   @ValidateMapping({ schema: SocialNetworksSchema })
   private mapToMultiModel(network: SocialNetworksDirectus): SocialNetworks {
@@ -59,6 +64,14 @@ export class SocialNetworksDirectusService {
   }
 
   async getSocialNetworks(): Promise<SocialNetworks[]> {
+    const cachedData = await this.cacheService.get(
+      CacheCollection.SOCIAL_NETWORKS,
+    );
+
+    if (cachedData) {
+      return cachedData;
+    }
+
     const data = await this.directusService.executeGraphQLQuery(`
       query {
         social_networks {
@@ -70,10 +83,21 @@ export class SocialNetworksDirectusService {
         }
       }
     `);
-    return data.social_networks.map(this.mapToMultiModel);
+    const result = data.social_networks.map(this.mapToMultiModel);
+    await this.cacheService.set(CacheCollection.SOCIAL_NETWORKS, result);
+    return result;
   }
 
   async getSocialNetwork(id: number): Promise<SocialNetworks> {
+    const cachedData = await this.cacheService.get(
+      CacheCollection.SOCIAL_NETWORKS,
+      id,
+    );
+
+    if (cachedData) {
+      return cachedData;
+    }
+
     const data = await this.directusService.executeGraphQLQuery(`
       query {
         social_networks(filter: { id: { _eq: ${id} } }) {
@@ -85,6 +109,8 @@ export class SocialNetworksDirectusService {
         }
       }
     `);
-    return this.mapToMultiModel(data.social_networks[0]);
+    const result = this.mapToMultiModel(data.social_networks[0]);
+    await this.cacheService.set(CacheCollection.SOCIAL_NETWORKS, result, id);
+    return result;
   }
 }
