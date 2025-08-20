@@ -43,10 +43,15 @@ import { DirectusService } from '@directus/directus.service';
 import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
 import { ContactUsSchema } from '@common/validation/schemas/contact-us.schema';
 import { normalizeEmptyStringToNull } from '@common/utils/normalize';
+import { CacheService } from '@cache/cache.service';
+import { CacheCollection } from '@cache/cache.config';
 
 @Injectable()
 export class ContactUsDirectusService {
-  constructor(private readonly directusService: DirectusService) {}
+  constructor(
+    private readonly directusService: DirectusService,
+    private readonly cacheService: CacheService,
+  ) {}
 
   @ValidateMapping({ schema: ContactUsSchema })
   private mapToMultiModel(contactUs: ContactUsDirectus): ContactUs {
@@ -63,6 +68,13 @@ export class ContactUsDirectusService {
   }
 
   async getContactUs(): Promise<ContactUs> {
+    const cached = await this.cacheService.get<ContactUs>(
+      CacheCollection.CONTACT_US,
+    );
+    if (cached) {
+      return cached;
+    }
+
     const data = await this.directusService.executeGraphQLQuery(`
       query {
         contact_us {
@@ -82,6 +94,8 @@ export class ContactUsDirectusService {
         }
       }
     `);
-    return this.mapToMultiModel(data.contact_us);
+    const result = this.mapToMultiModel(data.contact_us);
+    await this.cacheService.set(CacheCollection.CONTACT_US, result);
+    return result;
   }
 }
