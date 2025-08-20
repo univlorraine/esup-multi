@@ -45,13 +45,18 @@ import { ImportantNewsTranslationsWordpress } from '@wordpress/collections/trans
 import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
 import { ImportantNewsSchema } from '@common/validation/schemas/important-news.schema';
 import { normalizeEmptyStringToNull } from '@common/utils/normalize';
+import { CacheService } from '@cache/cache.service';
+import { CacheCollection } from '@cache/cache.config';
 
 // TODO: Move FRENCH_CODE to .env and rename it to DEFAULT_LANGUAGE_CODE
 const FRENCH_CODE = 'FR';
 
 @Injectable()
 export class ImportantNewsWordpressService {
-  constructor(private readonly wordpressService: WordpressService) {}
+  constructor(
+    private readonly wordpressService: WordpressService,
+    private readonly cacheService: CacheService,
+  ) {}
 
   @ValidateMapping({ schema: ImportantNewsSchema })
   private mapToMultiModel(importantNew: ImportantNewsWordpress): ImportantNews {
@@ -107,6 +112,13 @@ export class ImportantNewsWordpressService {
   }
 
   async getImportantNews(): Promise<ImportantNews[]> {
+    const cached = await this.cacheService.get<ImportantNews[]>(
+      CacheCollection.IMPORTANT_NEWS,
+    );
+    if (cached) {
+      return cached;
+    }
+
     const data = await this.wordpressService.executeGraphQLQuery(`
       query {
         importantNews(first: 100, where: {language: ${FRENCH_CODE}}) {
@@ -150,10 +162,20 @@ export class ImportantNewsWordpressService {
         }
       }
     `);
-    return data.importantNews.nodes.map(this.mapToMultiModel);
+    const result = data.importantNews.nodes.map(this.mapToMultiModel);
+    await this.cacheService.set(CacheCollection.IMPORTANT_NEWS, result);
+    return result;
   }
 
   async getImportantNew(id: number): Promise<ImportantNews> {
+    const cached = await this.cacheService.get<ImportantNews>(
+      CacheCollection.IMPORTANT_NEWS,
+      id,
+    );
+    if (cached) {
+      return cached;
+    }
+
     const data = await this.wordpressService.executeGraphQLQuery(`
       query {
         importantNew(id: ${id}, idType: DATABASE_ID) {
@@ -195,6 +217,8 @@ export class ImportantNewsWordpressService {
         }
       }
     `);
-    return this.mapToMultiModel(data.importantNew);
+    const result = this.mapToMultiModel(data.importantNew);
+    await this.cacheService.set(CacheCollection.IMPORTANT_NEWS, result, id);
+    return result;
   }
 }
