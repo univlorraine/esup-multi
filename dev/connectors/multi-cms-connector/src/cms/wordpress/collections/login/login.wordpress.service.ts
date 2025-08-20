@@ -45,12 +45,17 @@ import { LoginWordpress } from '@wordpress/collections/login/login.wordpress.mod
 import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
 import { LoginSchema } from '@common/validation/schemas/login.schema';
 import { normalizeEmptyStringToNull } from '@common/utils/normalize';
+import { CacheService } from '@cache/cache.service';
+import { CacheCollection } from '@cache/cache.config';
 
 // TODO: Move FRENCH_CODE to .env and rename it to DEFAULT_LANGUAGE_CODE
 const FRENCH_CODE = 'FR';
 @Injectable()
 export class LoginWordpressService {
-  constructor(private readonly wordpressService: WordpressService) {}
+  constructor(
+    private readonly wordpressService: WordpressService,
+    private readonly cacheService: CacheService,
+  ) {}
 
   @ValidateMapping({ schema: LoginSchema })
   private mapToMultiModel(login: LoginWordpress): Login {
@@ -81,6 +86,13 @@ export class LoginWordpressService {
   }
 
   async getLogin(): Promise<Login> {
+    const cached = await this.cacheService.get<Login>(
+      CacheCollection.LOGIN,
+    );
+    if (cached) {
+      return cached;
+    }
+
     const data = await this.wordpressService.executeGraphQLQuery(`
       query {
         login(where: {language: ${FRENCH_CODE}}) {
@@ -102,6 +114,8 @@ export class LoginWordpressService {
         }
       }
     `);
-    return this.mapToMultiModel(data.login.nodes[0]);
+    const result = this.mapToMultiModel(data.login.nodes[0]);
+    await this.cacheService.set(CacheCollection.LOGIN, result);
+    return result;
   }
 }

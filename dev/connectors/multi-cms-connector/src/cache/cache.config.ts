@@ -37,7 +37,7 @@
  */
 
 export enum CacheCollection {
-  AUTH = 'auth',
+  LOGIN = 'login',
   CONTACT_US = 'contact-us',
   FEATURES = 'features',
   IMPORTANT_NEWS = 'important-news',
@@ -62,7 +62,7 @@ export function getCacheTTL(collection: CacheCollection): number {
 
   // Fallback values if .env is not configured
   const fallbackConfig: Record<CacheCollection, number> = {
-    [CacheCollection.AUTH]: 86400000, // 1 day
+    [CacheCollection.LOGIN]: 86400000, // 1 day
     [CacheCollection.CONTACT_US]: 86400000, // 1 day
     [CacheCollection.FEATURES]: 3600000, // 1 hour
     [CacheCollection.IMPORTANT_NEWS]: 3600000, // 1 hour
