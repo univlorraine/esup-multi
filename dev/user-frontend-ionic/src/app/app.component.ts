@@ -54,7 +54,7 @@ import {
   themeRepoInitialized$, userHadSetThemeInApp, userHadSetThemeInApp$, tenantThemeApplied$, MultiTenantService
 } from '@multi/shared';
 import { initializeApp } from 'firebase/app';
-import { combineLatest, Observable, of } from 'rxjs';
+import { combineLatest, Observable, of, Subscription } from 'rxjs';
 import { distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
 import { Title } from '@angular/platform-browser';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -71,7 +71,7 @@ export class AppComponent implements OnInit, OnDestroy {
   public languages: Array<string> = [];
   public currentPageLayout$: Observable<PageLayout>;
   public isNothingToShow$: Observable<boolean>;
-  private backButtonListener: Promise<PluginListenerHandle>;
+  private backButtonSubscription: Subscription;
   private appResumeListener: Promise<PluginListenerHandle>;
   private destroyRef = inject(DestroyRef);
   private prefersDark: MediaQueryList;
@@ -113,13 +113,18 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.backButtonListener.then((listener) => listener.remove());
+    if (this.backButtonSubscription) {
+      this.backButtonSubscription.unsubscribe();
+    }
     this.appResumeListener.then((listener) => listener.remove());
     this.prefersDark.removeEventListener('change', this.handleColorSchemeChange);
   }
 
   private initializeBackButton(): void {
-    this.backButtonListener = App.addListener('backButton', this.handleBackButton.bind(this));
+    this.platform.ready().then(() => {
+      this.backButtonSubscription = this.platform.backButton
+        .subscribeWithPriority(-1, this.handleBackButton.bind(this));
+    });
   }
 
   private async handleBackButton(): Promise<void> {
@@ -131,6 +136,10 @@ export class AppComponent implements OnInit, OnDestroy {
     const modal = await this.modalController.getTop();
     if (modal) {
       await modal.dismiss();
+      return;
+    }
+    if(!this.navigationService.canGoBack()) {
+      App.minimizeApp();
       return;
     }
     this.navigationService.navigateBack();
