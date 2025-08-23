@@ -38,6 +38,7 @@
  */
 
 import { Injectable } from '@angular/core';
+import { Location } from '@angular/common';
 import { Event, NavigationEnd, Router, RouterEvent } from '@angular/router';
 import { Platform } from '@ionic/angular';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -56,11 +57,13 @@ export class NavigationService {
   private lastPausedDate: null | Date = null;
   private pausedMinutesBeforeRefresh = 15;
   private isExternalNavigation = new BehaviorSubject<boolean>(!Capacitor.isNativePlatform());
+  private hasNavigatedToBlackList: boolean;
 
   constructor(
     private router: Router,
     private projectModuleService: ProjectModuleService,
     private platform: Platform,
+    private location: Location
   ) {
     this.isExternalNavigation$ = this.isExternalNavigation.asObservable();
 
@@ -80,6 +83,23 @@ export class NavigationService {
     ).subscribe();
 
     this.setupInactiveRefresh();
+
+    // Fix hardware back-button on Android.
+    // As soon as a back event happens while the top of the stack
+    // is a black-listed URL, we trigger a back event again until
+    // we reach the initial URL (i.e. the schedule's initial view).
+    this.location.subscribe(popStateEvent => {
+      let url = popStateEvent.url;
+
+      if (this.projectModuleService.getHistoryBlacklist().includes(url)) {
+        this.location.back();
+        this.hasNavigatedToBlackList = true;
+
+      } else if (url == "/schedule/list" && this.hasNavigatedToBlackList) {
+        this.location.back();
+        this.hasNavigatedToBlackList = false;
+      }
+    });
   }
 
   public setExternalNavigation(value: boolean) {
