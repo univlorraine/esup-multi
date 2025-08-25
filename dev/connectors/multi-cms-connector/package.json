@@ -26,6 +26,7 @@
   "dependencies": {
     "@apollo/client": "^3.13.8",
     "@golevelup/nestjs-graphql-request": "^0.2.5",
+    "@keyv/redis": "^5.1.1",
     "@nestjs/apollo": "^13.1.0",
     "@nestjs/axios": "^4.0.1",
     "@nestjs/cache-manager": "^3.0.1",
@@ -43,6 +44,7 @@
     "graphql-request": "^7.2.0",
     "graphql-type-json": "^0.3.2",
     "joi": "^17.13.3",
+    "keyv": "^5.5.0",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",
     "reflect-metadata": "^0.2.0",

@@ -86,9 +86,7 @@ export class LoginWordpressService {
   }
 
   async getLogin(): Promise<Login> {
-    const cached = await this.cacheService.get<Login>(
-      CacheCollection.LOGIN,
-    );
+    const cached = await this.cacheService.get<Login>(CacheCollection.LOGIN);
     if (cached) {
       return cached;
     }
