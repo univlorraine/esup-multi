@@ -71,7 +71,7 @@ export class PagesDirectusService {
   }
 
   async getPages(): Promise<StaticPages[]> {
-    const cachedData = await this.cacheService.get(
+    const cachedData = await this.cacheService.get<StaticPages[]>(
       CacheCollection.STATIC_PAGES,
     );
 
@@ -108,7 +108,7 @@ export class PagesDirectusService {
   }
 
   async getPage(id: number): Promise<StaticPages> {
-    const cachedData = await this.cacheService.get(
+    const cachedData = await this.cacheService.get<StaticPages>(
       CacheCollection.STATIC_PAGES,
       id,
     );

@@ -64,7 +64,7 @@ export class SocialNetworksDirectusService {
   }
 
   async getSocialNetworks(): Promise<SocialNetworks[]> {
-    const cachedData = await this.cacheService.get(
+    const cachedData = await this.cacheService.get<SocialNetworks[]>(
       CacheCollection.SOCIAL_NETWORKS,
     );
 
@@ -89,7 +89,7 @@ export class SocialNetworksDirectusService {
   }
 
   async getSocialNetwork(id: number): Promise<SocialNetworks> {
-    const cachedData = await this.cacheService.get(
+    const cachedData = await this.cacheService.get<SocialNetworks>(
       CacheCollection.SOCIAL_NETWORKS,
       id,
     );

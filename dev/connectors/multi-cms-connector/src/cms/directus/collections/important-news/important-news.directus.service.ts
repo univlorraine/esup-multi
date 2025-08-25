@@ -80,7 +80,7 @@ export class ImportantNewsDirectusService {
   }
 
   async getImportantNews(): Promise<ImportantNews[]> {
-    const cachedData = await this.cacheService.get(
+    const cachedData = await this.cacheService.get<ImportantNews[]>(
       CacheCollection.IMPORTANT_NEWS,
     );
 
@@ -119,13 +119,15 @@ export class ImportantNewsDirectusService {
         }
       }
     `);
-    const result = data.important_news.map((item) => this.mapToMultiModel(item));
+    const result = data.important_news.map((item) =>
+      this.mapToMultiModel(item),
+    );
     await this.cacheService.set(CacheCollection.IMPORTANT_NEWS, result);
     return result;
   }
 
   async getImportantNew(id: number): Promise<ImportantNews> {
-    const cachedData = await this.cacheService.get(
+    const cachedData = await this.cacheService.get<ImportantNews>(
       CacheCollection.IMPORTANT_NEWS,
       id,
     );
