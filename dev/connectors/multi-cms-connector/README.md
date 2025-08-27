@@ -27,6 +27,7 @@ Pour connaitre les requêtes GraphQL disponibles côté backend se référer à 
 * `REDIS_DB`: Numéro de la base de données Redis (optionnel, défaut : 0)
 
 ### Cache
+* `CACHE_ENABLED`: Active ou désactive le cache (true/false, défaut : true)
 * `CACHE_TTL_CHANNELS`: TTL du cache pour la collection Channels (en secondes)
 * `CACHE_TTL_CONTACT_US`: TTL du cache pour la collection Contact-Us (en secondes)
 * `CACHE_TTL_FEATURES`: TTL du cache pour la collection Features (en secondes)
@@ -49,6 +50,14 @@ Le connecteur CMS utilise un système de cache Redis distribué pour optimiser l
 - **Invalidation** : Manuelle via API REST et automatique au démarrage
 
 ### Configuration du Cache
+
+#### Activation/Désactivation
+Le cache peut être entièrement désactivé pour les tests de performance :
+
+```bash
+# Désactiver le cache
+CACHE_ENABLED=false
+```
 
 #### Variables d'environnement TTL
 Les TTL du cache de chaque collection peut être paramétré depuis le fichier .env (cf. Configuration ci-dessus)

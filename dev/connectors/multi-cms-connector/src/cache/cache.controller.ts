@@ -46,7 +46,7 @@ import {
   Param,
 } from '@nestjs/common';
 import { CacheService } from './cache.service';
-import { CacheCollection } from './cache.config';
+import { CacheCollection, isCacheEnabled } from './cache.config';
 
 @Controller('cache')
 export class CacheController {
@@ -60,6 +60,13 @@ export class CacheController {
   @Get('clear-all')
   @HttpCode(HttpStatus.OK)
   async clearAllCache(): Promise<{ success: boolean; message: string }> {
+    if (!isCacheEnabled()) {
+      return {
+        success: false,
+        message: 'Cache is disabled',
+      };
+    }
+
     try {
       this.logger.debug('Clearing all cache');
       await this.cacheService.invalidateAll();
@@ -85,6 +92,13 @@ export class CacheController {
   async clearCollectionCache(
     @Param('collection') collection: string,
   ): Promise<{ success: boolean; message: string }> {
+    if (!isCacheEnabled()) {
+      return {
+        success: false,
+        message: 'Cache is disabled',
+      };
+    }
+
     try {
       this.logger.debug(`Clearing cache for collection: ${collection}`);
 

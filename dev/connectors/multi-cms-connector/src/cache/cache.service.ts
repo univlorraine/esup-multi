@@ -40,7 +40,7 @@ import { Injectable, Logger, Inject, OnModuleInit } from '@nestjs/common';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { EventEmitter2 } from '@nestjs/event-emitter';
 import { Cache } from 'cache-manager';
-import { CacheCollection, getCacheTTL } from './cache.config';
+import { CacheCollection, getCacheTTL, isCacheEnabled } from './cache.config';
 import { ConfigService } from '@nestjs/config';
 
 @Injectable()
@@ -62,6 +62,11 @@ export class CacheService implements OnModuleInit {
   }
 
   private async clearCacheOnStartup() {
+    if (!isCacheEnabled()) {
+      this.logger.log('Cache disabled, skipping startup cache clear');
+      return;
+    }
+
     this.logger.log('Clearing all existing cache...');
 
     try {
@@ -89,6 +94,11 @@ export class CacheService implements OnModuleInit {
     collection: CacheCollection,
     id?: string | number,
   ): Promise<T | null> {
+    if (!isCacheEnabled()) {
+      this.logger.debug('Cache disabled, skipping get');
+      return null;
+    }
+
     const key = this.getCacheKey(collection, id);
     try {
       const cached = await this.cacheManager.get<T>(key);
@@ -119,6 +129,11 @@ export class CacheService implements OnModuleInit {
     data: T,
     id?: string | number,
   ): Promise<void> {
+    if (!isCacheEnabled()) {
+      this.logger.debug('Cache disabled, skipping set');
+      return;
+    }
+
     const key = this.getCacheKey(collection, id);
     try {
       const ttl = getCacheTTL(collection);

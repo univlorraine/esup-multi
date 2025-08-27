@@ -49,6 +49,14 @@ export enum CacheCollection {
 
 const DEFAULT_TTL = 300000; // 5 minutes
 
+export function isCacheEnabled(): boolean {
+  const cacheEnabled = process.env.CACHE_ENABLED;
+  if (cacheEnabled !== undefined) {
+    return cacheEnabled.toLowerCase() === 'true';
+  }
+  return true; // Cache activé par défaut
+}
+
 export function getCacheTTL(collection: CacheCollection): number {
   const envKey = `CACHE_TTL_${collection.toUpperCase().replace('-', '_')}`;
   const envValue = process.env[envKey];
