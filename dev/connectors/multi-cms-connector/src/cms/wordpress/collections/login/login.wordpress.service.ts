@@ -36,12 +36,13 @@
  * termes.
  */
 
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { Login } from '@common/models/login.model';
 import { WordpressService } from '@wordpress/wordpress.service';
 import { LoginTranslations } from '@common/models/translations.model';
 import { LoginTranslationsWordpress } from '@wordpress/collections/translations/translations.wordpress.model';
 import { LoginWordpress } from '@wordpress/collections/login/login.wordpress.model';
+import { OnEvent } from '@nestjs/event-emitter';
 import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
 import { LoginSchema } from '@common/validation/schemas/login.schema';
 import { normalizeEmptyStringToNull } from '@common/utils/normalize';
@@ -52,10 +53,30 @@ import { CacheCollection } from '@cache/cache.config';
 const FRENCH_CODE = 'FR';
 @Injectable()
 export class LoginWordpressService {
+  private readonly logger = new Logger(LoginWordpressService.name);
   constructor(
     private readonly wordpressService: WordpressService,
     private readonly cacheService: CacheService,
   ) {}
+
+  @OnEvent('wordpress.login.cache.cleared')
+  async handleCacheCleared() {
+    this.logger.log('Received cache cleared event - preloading data...');
+    try {
+      await this.preloadData();
+    } catch (error) {
+      this.logger.error(
+        'Failed to preload login after cache clear:',
+        error.message,
+      );
+    }
+  }
+
+  public async preloadData() {
+    this.logger.log('Preloading login...');
+    await this.getLogin();
+    this.logger.log('Login preloaded successfully');
+  }
 
   @ValidateMapping({ schema: LoginSchema })
   private mapToMultiModel(login: LoginWordpress): Login {

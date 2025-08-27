@@ -36,10 +36,11 @@
  * termes.
  */
 
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { WidgetsDirectus } from '@directus/collections/widgets/widgets.directus.model';
 import { Widgets } from '@common/models/widgets.model';
 import { DirectusService } from '@directus/directus.service';
+import { OnEvent } from '@nestjs/event-emitter';
 import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
 import { normalizeEmptyStringToNull } from '@common/utils/normalize';
 import { WidgetsSchema } from '@common/validation/schemas/widgets.schema';
@@ -48,10 +49,30 @@ import { CacheCollection } from '@cache/cache.config';
 
 @Injectable()
 export class WidgetsDirectusService {
+  private readonly logger = new Logger(WidgetsDirectusService.name);
   constructor(
     private readonly directusService: DirectusService,
     private readonly cacheService: CacheService,
   ) {}
+
+  @OnEvent('directus.widgets.cache.cleared')
+  async handleCacheCleared() {
+    this.logger.log('Received cache cleared event - preloading data...');
+    try {
+      await this.preloadData();
+    } catch (error) {
+      this.logger.error(
+        'Failed to preload widgets after cache clear:',
+        error.message,
+      );
+    }
+  }
+
+  public async preloadData() {
+    this.logger.log('Preloading widgets...');
+    await this.getWidgets();
+    this.logger.log('Widgets preloaded successfully');
+  }
 
   @ValidateMapping({ schema: WidgetsSchema })
   private mapToMultiModel(widget: WidgetsDirectus): Widgets {

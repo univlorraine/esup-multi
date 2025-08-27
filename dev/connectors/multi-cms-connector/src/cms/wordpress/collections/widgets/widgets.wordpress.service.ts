@@ -36,13 +36,14 @@
  * termes.
  */
 
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { WordpressService } from '@wordpress/wordpress.service';
 import { Widgets } from '@common/models/widgets.model';
 import { WidgetsTranslations } from '@common/models/translations.model';
 import { WidgetsTranslationsWordpress } from '@wordpress/collections/translations/translations.wordpress.model';
 import { WidgetsWordpress } from '@wordpress/collections/widgets/widgets.wordpress.model';
 import { SettingsByRole } from '@common/models/settings-by-role.model';
+import { OnEvent } from '@nestjs/event-emitter';
 import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
 import { normalizeEmptyStringToNull } from '@common/utils/normalize';
 import { WidgetsSchema } from '@common/validation/schemas/widgets.schema';
@@ -54,10 +55,30 @@ const FRENCH_CODE = 'FR';
 
 @Injectable()
 export class WidgetsWordpressService {
+  private readonly logger = new Logger(WidgetsWordpressService.name);
   constructor(
     private readonly wordpressService: WordpressService,
     private readonly cacheService: CacheService,
   ) {}
+
+  @OnEvent('wordpress.widgets.cache.cleared')
+  async handleCacheCleared() {
+    this.logger.log('Received cache cleared event - preloading data...');
+    try {
+      await this.preloadData();
+    } catch (error) {
+      this.logger.error(
+        'Failed to preload widgets after cache clear:',
+        error.message,
+      );
+    }
+  }
+
+  public async preloadData() {
+    this.logger.log('Preloading widgets...');
+    await this.getWidgets();
+    this.logger.log('Widgets preloaded successfully');
+  }
 
   @ValidateMapping({ schema: WidgetsSchema })
   private mapToMultiModel(widget: WidgetsWordpress): Widgets {

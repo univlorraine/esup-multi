@@ -38,6 +38,7 @@
 
 import { Module, Global } from '@nestjs/common';
 import { CacheModule as NestCacheModule } from '@nestjs/cache-manager';
+import { EventEmitterModule } from '@nestjs/event-emitter';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { Keyv } from 'keyv';
 import KeyvRedis from '@keyv/redis';
@@ -47,6 +48,7 @@ import { CacheController } from './cache.controller';
 @Global()
 @Module({
   imports: [
+    EventEmitterModule.forRoot(),
     NestCacheModule.registerAsync({
       isGlobal: true,
       imports: [ConfigModule],

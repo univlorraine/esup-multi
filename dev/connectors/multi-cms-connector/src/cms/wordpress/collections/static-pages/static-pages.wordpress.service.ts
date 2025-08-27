@@ -36,12 +36,13 @@
  * termes.
  */
 
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { StaticPagesWordpress } from '@wordpress/collections/static-pages/static-pages.wordpress.model';
 import { StaticPages } from '@common/models/static-pages.model';
 import { WordpressService } from '@wordpress/wordpress.service';
 import { StaticPagesTranslations } from '@common/models/translations.model';
 import { StaticPagesTranslationsWordpress } from '@wordpress/collections/translations/translations.wordpress.model';
+import { OnEvent } from '@nestjs/event-emitter';
 import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
 import { StaticPagesSchema } from '@common/validation/schemas/static-pages.schema';
 import { normalizeEmptyStringToNull } from '@common/utils/normalize';
@@ -53,10 +54,30 @@ const FRENCH_CODE = 'FR';
 
 @Injectable()
 export class StaticPagesWordpressService {
+  private readonly logger = new Logger(StaticPagesWordpressService.name);
   constructor(
     private readonly wordpressService: WordpressService,
     private readonly cacheService: CacheService,
   ) {}
+
+  @OnEvent('wordpress.static-pages.cache.cleared')
+  async handleCacheCleared() {
+    this.logger.log('Received cache cleared event - preloading data...');
+    try {
+      await this.preloadData();
+    } catch (error) {
+      this.logger.error(
+        'Failed to preload static-pages after cache clear:',
+        error.message,
+      );
+    }
+  }
+
+  public async preloadData() {
+    this.logger.log('Preloading static-pages...');
+    await this.getStaticPages();
+    this.logger.log('Static-pages preloaded successfully');
+  }
 
   @ValidateMapping({ schema: StaticPagesSchema })
   private mapToMultiModel(staticPage: StaticPagesWordpress): StaticPages {

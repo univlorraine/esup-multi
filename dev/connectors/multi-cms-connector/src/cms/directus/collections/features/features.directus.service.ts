@@ -36,10 +36,11 @@
  * termes.
  */
 
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { Features } from '@common/models/features.model';
 import { FeaturesDirectus } from '@directus/collections/features/features.directus.model';
 import { DirectusService } from '@directus/directus.service';
+import { OnEvent } from '@nestjs/event-emitter';
 import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
 import { FeaturesSchema } from '@common/validation/schemas/features.schema';
 import {
@@ -51,10 +52,30 @@ import { CacheCollection } from '@cache/cache.config';
 
 @Injectable()
 export class FeaturesDirectusService {
+  private readonly logger = new Logger(FeaturesDirectusService.name);
   constructor(
     private readonly directusService: DirectusService,
     private readonly cacheService: CacheService,
   ) {}
+
+  @OnEvent('directus.features.cache.cleared')
+  async handleCacheCleared() {
+    this.logger.log('Received cache cleared event - preloading data...');
+    try {
+      await this.preloadData();
+    } catch (error) {
+      this.logger.error(
+        'Failed to preload features after cache clear:',
+        error.message,
+      );
+    }
+  }
+
+  public async preloadData() {
+    this.logger.log('Preloading features...');
+    await this.getFeatures();
+    this.logger.log('Features preloaded successfully');
+  }
 
   @ValidateMapping({ schema: FeaturesSchema })
   private mapToMultiModel(feature: FeaturesDirectus): Features {

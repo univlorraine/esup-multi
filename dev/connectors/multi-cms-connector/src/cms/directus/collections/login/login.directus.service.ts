@@ -36,10 +36,11 @@
  * termes.
  */
 
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { LoginDirectus } from '@directus/collections/login/login.directus.model';
 import { Login } from '@common/models/login.model';
 import { DirectusService } from '@directus/directus.service';
+import { OnEvent } from '@nestjs/event-emitter';
 import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
 import { LoginSchema } from '@common/validation/schemas/login.schema';
 import { normalizeEmptyStringToNull } from '@common/utils/normalize';
@@ -48,10 +49,30 @@ import { CacheCollection } from '@cache/cache.config';
 
 @Injectable()
 export class LoginDirectusService {
+  private readonly logger = new Logger(LoginDirectusService.name);
   constructor(
     private readonly directusService: DirectusService,
     private readonly cacheService: CacheService,
   ) {}
+
+  @OnEvent('directus.login.cache.cleared')
+  async handleCacheCleared() {
+    this.logger.log('Received cache cleared event - preloading data...');
+    try {
+      await this.preloadData();
+    } catch (error) {
+      this.logger.error(
+        'Failed to preload login after cache clear:',
+        error.message,
+      );
+    }
+  }
+
+  public async preloadData() {
+    this.logger.log('Preloading login...');
+    await this.getLogin();
+    this.logger.log('Login preloaded successfully');
+  }
 
   @ValidateMapping({ schema: LoginSchema })
   private mapToMultiModel(login: LoginDirectus): Login {

@@ -36,7 +36,8 @@
  * termes.
  */
 
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
+import { OnEvent } from '@nestjs/event-emitter';
 import { Features } from '@common/models/features.model';
 import { WordpressService } from '@wordpress/wordpress.service';
 import { FeaturesTranslations } from '@common/models/translations.model';
@@ -54,10 +55,30 @@ const FRENCH_CODE = 'FR';
 
 @Injectable()
 export class FeaturesWordpressService {
+  private readonly logger = new Logger(FeaturesWordpressService.name);
   constructor(
     private readonly wordpressService: WordpressService,
     private readonly cacheService: CacheService,
   ) {}
+
+  @OnEvent('wordpress.features.cache.cleared')
+  async handleCacheCleared() {
+    this.logger.log('Received cache cleared event - preloading data...');
+    try {
+      await this.preloadData();
+    } catch (error) {
+      this.logger.error(
+        'Failed to preload features after cache clear:',
+        error.message,
+      );
+    }
+  }
+
+  public async preloadData() {
+    this.logger.log('Preloading features...');
+    await this.getFeatures();
+    this.logger.log('Features preloaded successfully');
+  }
 
   @ValidateMapping({ schema: FeaturesSchema })
   private mapToMultiModel(feature: FeaturesWordpress): Features {

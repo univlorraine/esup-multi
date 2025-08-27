@@ -36,16 +36,41 @@
  * termes.
  */
 
-import { Injectable, Logger, Inject } from '@nestjs/common';
+import { Injectable, Logger, Inject, OnModuleInit } from '@nestjs/common';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
+import { EventEmitter2 } from '@nestjs/event-emitter';
 import { Cache } from 'cache-manager';
 import { CacheCollection, getCacheTTL } from './cache.config';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
-export class CacheService {
+export class CacheService implements OnModuleInit {
   private readonly logger = new Logger(CacheService.name);
 
-  constructor(@Inject(CACHE_MANAGER) private cacheManager: Cache) {}
+  constructor(
+    @Inject(CACHE_MANAGER) private cacheManager: Cache,
+    private readonly eventEmitter: EventEmitter2,
+    private readonly configService: ConfigService,
+  ) {}
+
+  async onModuleInit() {
+    // On vide le cache au démarrage de l'application après un délai
+    // pour s'assurer que le service est bien initialisé
+    setTimeout(() => {
+      this.clearCacheOnStartup();
+    }, 2000);
+  }
+
+  private async clearCacheOnStartup() {
+    this.logger.log('Clearing all existing cache...');
+
+    try {
+      await this.invalidateAll();
+      this.logger.log('Cache cleared successfully');
+    } catch (error) {
+      this.logger.warn('Failed to clear cache:', error.message);
+    }
+  }
 
   private getCacheKey(
     collection: CacheCollection,
@@ -115,6 +140,16 @@ export class CacheService {
     try {
       const allKey = this.getCacheKey(collection);
       await this.cacheManager.del(allKey);
+
+      // On émet un événement pour déclencher le preload de la collection
+      const defaultCms = this.configService.get<string>('DEFAULT_CMS');
+      if (defaultCms) {
+        const emitKey = `${defaultCms.toLowerCase()}.${collection.toLowerCase()}.cache.cleared`;
+        this.logger.debug(`Emitting ${emitKey} event`);
+        this.eventEmitter.emit(emitKey);
+      }
+
+      this.eventEmitter.emit(`${collection}.cache.cleared`);
 
       this.logger.debug(`Cache invalidated for collection ${collection}`);
     } catch (error) {

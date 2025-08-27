@@ -36,10 +36,11 @@
  * termes.
  */
 
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { SocialNetworks } from '@common/models/social-networks.model';
 import { SocialNetworksDirectus } from './social-networks.directus.model';
 import { DirectusService } from '@directus/directus.service';
+import { OnEvent } from '@nestjs/event-emitter';
 import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
 import { SocialNetworksSchema } from '@common/validation/schemas/social-networks.schema';
 import { CacheService } from '@cache/cache.service';
@@ -47,10 +48,30 @@ import { CacheCollection } from '@cache/cache.config';
 
 @Injectable()
 export class SocialNetworksDirectusService {
+  private readonly logger = new Logger(SocialNetworksDirectusService.name);
   constructor(
     private readonly directusService: DirectusService,
     private readonly cacheService: CacheService,
   ) {}
+
+  @OnEvent('directus.social-networks.cache.cleared')
+  async handleCacheCleared() {
+    this.logger.log('Received cache cleared event - preloading data...');
+    try {
+      await this.preloadData();
+    } catch (error) {
+      this.logger.error(
+        'Failed to preload social-networks after cache clear:',
+        error.message,
+      );
+    }
+  }
+
+  public async preloadData() {
+    this.logger.log('Preloading social-networks...');
+    await this.getSocialNetworks();
+    this.logger.log('Social-networks preloaded successfully');
+  }
 
   @ValidateMapping({ schema: SocialNetworksSchema })
   private mapToMultiModel(network: SocialNetworksDirectus): SocialNetworks {

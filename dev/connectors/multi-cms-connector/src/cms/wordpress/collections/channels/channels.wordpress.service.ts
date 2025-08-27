@@ -36,7 +36,8 @@
  * termes.
  */
 
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
+import { OnEvent } from '@nestjs/event-emitter';
 import { ChannelsWordpress } from '@wordpress/collections/channels/channels.wordpress.model';
 import { Channels } from '@common/models/channels.model';
 import { WordpressService } from '@wordpress/wordpress.service';
@@ -52,10 +53,30 @@ import { CacheCollection } from '@cache/cache.config';
 const FRENCH_CODE = 'FR';
 @Injectable()
 export class ChannelsWordpressService {
+  private readonly logger = new Logger(ChannelsWordpressService.name);
   constructor(
     private readonly wordpressService: WordpressService,
     private readonly cacheService: CacheService,
   ) {}
+
+  @OnEvent('wordpress.channels.cache.cleared')
+  async handleCacheCleared() {
+    this.logger.log('Received cache cleared event - preloading data...');
+    try {
+      await this.preloadData();
+    } catch (error) {
+      this.logger.error(
+        'Failed to preload channels after cache clear:',
+        error.message,
+      );
+    }
+  }
+
+  public async preloadData() {
+    this.logger.log('Preloading channels...');
+    await this.getChannels();
+    this.logger.log('Channels preloaded successfully');
+  }
 
   @ValidateMapping({ schema: ChannelsSchema })
   private mapToMultiModel(channel: ChannelsWordpress): Channels {

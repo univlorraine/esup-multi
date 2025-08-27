@@ -36,10 +36,11 @@
  * termes.
  */
 
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { PagesDirectus } from '@directus/collections/pages/pages.directus.model';
 import { StaticPages } from '@common/models/static-pages.model';
 import { DirectusService } from '@directus/directus.service';
+import { OnEvent } from '@nestjs/event-emitter';
 import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
 import { StaticPagesSchema } from '@common/validation/schemas/static-pages.schema';
 import { normalizeEmptyStringToNull } from '@common/utils/normalize';
@@ -48,10 +49,30 @@ import { CacheCollection } from '@cache/cache.config';
 
 @Injectable()
 export class PagesDirectusService {
+  private readonly logger = new Logger(PagesDirectusService.name);
   constructor(
     private readonly directusService: DirectusService,
     private readonly cacheService: CacheService,
   ) {}
+
+  @OnEvent('directus.static-pages.cache.cleared')
+  async handleCacheCleared() {
+    this.logger.log('Received cache cleared event - preloading data...');
+    try {
+      await this.preloadData();
+    } catch (error) {
+      this.logger.error(
+        'Failed to preload pages after cache clear:',
+        error.message,
+      );
+    }
+  }
+
+  public async preloadData() {
+    this.logger.log('Preloading pages...');
+    await this.getPages();
+    this.logger.log('Pages preloaded successfully');
+  }
 
   @ValidateMapping({ schema: StaticPagesSchema })
   private mapToMultiModel(page: PagesDirectus): StaticPages {
