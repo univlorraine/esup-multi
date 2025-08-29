@@ -6,6 +6,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ## next version...
 
 ### Client
+#### Bug fixes
+* **(schedule)** : Suppression des espaces dans le champ *asUser* des gestionnaires
+
 #### Autres
 * Mises à jour des dépendances suite aux alertes CVE
 
