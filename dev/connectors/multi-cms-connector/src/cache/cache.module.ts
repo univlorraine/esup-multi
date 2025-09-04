@@ -37,49 +37,15 @@
  */
 
 import { Module, Global } from '@nestjs/common';
-import { CacheModule as NestCacheModule } from '@nestjs/cache-manager';
 import { EventEmitterModule } from '@nestjs/event-emitter';
-import { ConfigModule, ConfigService } from '@nestjs/config';
-import { Keyv } from 'keyv';
-import KeyvRedis from '@keyv/redis';
+import { ConfigModule } from '@nestjs/config';
 import { CacheService } from './cache.service';
 import { CacheController } from './cache.controller';
+import { RedisModule } from '@redis/redis.module';
 
 @Global()
 @Module({
-  imports: [
-    EventEmitterModule.forRoot(),
-    NestCacheModule.registerAsync({
-      isGlobal: true,
-      imports: [ConfigModule],
-      useFactory: async (configService: ConfigService) => {
-        const redisHost = configService.get<string>('REDIS_HOST');
-        const redisPort = configService.get<number>('REDIS_PORT', 6379);
-        const redisPassword = configService.get<string>('REDIS_PASSWORD');
-        const redisDb = configService.get<number>('REDIS_DB', 0);
-
-        // Si Redis est configuré, l'utiliser, sinon fallback mémoire
-        if (redisHost) {
-          const redisUrl = redisPassword
-            ? `redis://:${redisPassword}@${redisHost}:${redisPort}/${redisDb}`
-            : `redis://${redisHost}:${redisPort}/${redisDb}`;
-
-          return {
-            stores: [
-              new Keyv({
-                store: new KeyvRedis(redisUrl),
-                namespace: 'multi-cms-connector',
-              }),
-            ],
-          };
-        }
-
-        // Fallback vers le cache mémoire par défaut
-        return {};
-      },
-      inject: [ConfigService],
-    }),
-  ],
+  imports: [EventEmitterModule.forRoot(), ConfigModule, RedisModule],
   controllers: [CacheController],
   providers: [CacheService],
   exports: [CacheService],

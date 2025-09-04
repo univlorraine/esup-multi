@@ -44,10 +44,12 @@ Le connecteur CMS utilise un système de cache Redis distribué pour optimiser l
 ### Architecture du Cache
 
 - **Backend principal** : Redis (avec fallback automatique vers le cache mémoire si Redis n'est pas disponible)
-- **Namespace** : `multi-cms-connector` pour éviter les conflits
-- **Clés** : Format `{collection}:all` ou `{collection}:{id}` 
+- **Namespace** : `multi:{env}:cache:` pour éviter les conflits avec d'autres services
+- **Clés** : Format `multi:{env}:cache:{collection}:all` ou `multi:{env}:cache:{collection}:{id}` 
 - **TTL configurables** : Par collection via variables d'environnement
 - **Invalidation** : Manuelle via API REST et automatique au démarrage
+- **Protection contre Cache Stampede** : Verrous distribués Redis (`multi:{env}:lock:{collection}:{id}`) avec tokens sécurisés
+- **Déduplication des promesses** : Évite les appels multiples en parallèle sur la même instance
 
 ### Configuration du Cache
 
@@ -83,7 +85,7 @@ GET /cache/clear-all
 GET /cache/clear/{collection}
 ```
 
-Collections disponibles : `channels`, `contact-us`, `features`, `important-news`, `login`, `social-networks`, `static-pages`, `widgets`
+Collections disponibles : `channels`, `contact-us`, `features`, `important-news`, `login`, `pages`, `social-networks`, `static-pages`, `widgets`
 
 ### Système d'événements et Preload
 
@@ -91,7 +93,7 @@ Le système utilise des événements NestJS pour déclencher automatiquement le 
 
 #### Architecture événementielle
 
-1. **Au démarrage** : Le `CacheService` vide tout le cache et émet `cache.startup.cleared`
+1. **Au démarrage** : Le `CacheService` vide tout le cache via le pattern `multi:{env}:cache:*`
 2. **Via l'API** : Le `CacheController` invalide une collection et émet `{cms}.{collection}.cache.cleared`
 3. **Services** : Chaque service écoute son événement spécifique et preload automatiquement
 
@@ -134,13 +136,17 @@ export class FeaturesWordpressService {
   }
 
   async getFeatures(): Promise<Features[]> {
-    const cached = await this.cacheService.get<Features[]>(CacheCollection.FEATURES);
-    if (cached) return cached;
-    
-    // Logique de récupération des données...
-    const result = await this.fetchFromCms();
-    await this.cacheService.set(CacheCollection.FEATURES, result);
-    return result;
+    return this.cacheService.getOrFetchWithLock(
+      CacheCollection.FEATURES,
+      () => this.loadFeaturesFromWordpress(),
+    );
+  }
+
+  private async loadFeaturesFromWordpress(): Promise<Features[]> {
+    this.logger.debug('Loading features from WordPress...');
+    // Requête GraphQL vers le CMS...
+    const data = await this.wordpressService.executeGraphQLQuery(/* ... */);
+    return data.features.nodes.map(this.mapToMultiModel);
   }
 }
 ```

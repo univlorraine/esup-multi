@@ -107,13 +107,12 @@ export class ChannelsWordpressService {
   }
 
   async getChannels(): Promise<Channels[]> {
-    const cached = await this.cacheService.get<Channels[]>(
-      CacheCollection.CHANNELS,
+    return this.cacheService.getOrFetchWithLock(CacheCollection.CHANNELS, () =>
+      this.loadChannelsFromWordpress(),
     );
-    if (cached) {
-      return cached;
-    }
-
+  }
+  private async loadChannelsFromWordpress(): Promise<Channels[]> {
+    this.logger.debug('Loading channels from WordPress...');
     const data = await this.wordpressService.executeGraphQLQuery(`
       query {
         channels(first: 100, where: { language: ${FRENCH_CODE} }) {
@@ -138,20 +137,19 @@ export class ChannelsWordpressService {
         }
       }
     `);
-    const result = data.channels.nodes.map(this.mapToMultiModel);
-    await this.cacheService.set(CacheCollection.CHANNELS, result);
-    return result;
+    return data.channels.nodes.map(this.mapToMultiModel);
   }
 
   async getChannel(id: number): Promise<Channels> {
-    const cached = await this.cacheService.get<Channels>(
+    return this.cacheService.getOrFetchWithLock(
       CacheCollection.CHANNELS,
+      () => this.loadChannelFromWordpress(id),
       id,
     );
-    if (cached) {
-      return cached;
-    }
+  }
 
+  private async loadChannelFromWordpress(id: number): Promise<Channels> {
+    this.logger.debug(`Loading channel ${id} from WordPress...`);
     const data = await this.wordpressService.executeGraphQLQuery(`
       query {
         channel(id: ${id}, idType: DATABASE_ID) {
@@ -174,8 +172,6 @@ export class ChannelsWordpressService {
         }
       }
     `);
-    const result = this.mapToMultiModel(data.channel);
-    await this.cacheService.set(CacheCollection.CHANNELS, result, id);
-    return result;
+    return this.mapToMultiModel(data.channel);
   }
 }

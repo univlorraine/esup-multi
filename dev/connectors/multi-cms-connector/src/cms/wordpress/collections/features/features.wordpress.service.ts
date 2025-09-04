@@ -151,13 +151,13 @@ export class FeaturesWordpressService {
   }
 
   async getFeatures(): Promise<Features[]> {
-    const cached = await this.cacheService.get<Features[]>(
-      CacheCollection.FEATURES,
+    return this.cacheService.getOrFetchWithLock(CacheCollection.FEATURES, () =>
+      this.loadFeaturesFromWordpress(),
     );
-    if (cached) {
-      return cached;
-    }
+  }
 
+  private async loadFeaturesFromWordpress(): Promise<Features[]> {
+    this.logger.debug('Loading features from WordPress...');
     const data = await this.wordpressService.executeGraphQLQuery(`
       query {
         features(first: 100, where: {language: ${FRENCH_CODE}}) {
@@ -214,20 +214,19 @@ export class FeaturesWordpressService {
       }
     `);
 
-    const result = data.features.nodes.map(this.mapToMultiModel);
-    await this.cacheService.set(CacheCollection.FEATURES, result);
-    return result;
+    return data.features.nodes.map(this.mapToMultiModel);
   }
 
   async getFeature(id: number): Promise<Features> {
-    const cached = await this.cacheService.get<Features>(
+    return this.cacheService.getOrFetchWithLock(
       CacheCollection.FEATURES,
+      () => this.loadFeatureFromWordpress(id),
       id,
     );
-    if (cached) {
-      return cached;
-    }
+  }
 
+  private async loadFeatureFromWordpress(id: number): Promise<Features> {
+    this.logger.debug(`Loading feature ${id} from WordPress...`);
     const data = await this.wordpressService.executeGraphQLQuery(`
       query {
         feature(id: ${id}, idType: DATABASE_ID) {
@@ -264,6 +263,7 @@ export class FeaturesWordpressService {
           }
           featureType
           featureRouterLink
+          featureLinkUrl
           featureSsoService
           featureStatisticName
           translations {
@@ -281,8 +281,6 @@ export class FeaturesWordpressService {
       }
     `);
 
-    const result = this.mapToMultiModel(data.feature);
-    await this.cacheService.set(CacheCollection.FEATURES, result, id);
-    return result;
+    return this.mapToMultiModel(data.feature);
   }
 }

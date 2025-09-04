@@ -36,21 +36,21 @@
  * termes.
  */
 
-import { Injectable, Logger, Inject, OnModuleInit } from '@nestjs/common';
-import { CACHE_MANAGER } from '@nestjs/cache-manager';
+import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import { EventEmitter2 } from '@nestjs/event-emitter';
-import { Cache } from 'cache-manager';
 import { CacheCollection, getCacheTTL, isCacheEnabled } from './cache.config';
 import { ConfigService } from '@nestjs/config';
+import { RedisService } from '@redis/redis.service';
 
 @Injectable()
 export class CacheService implements OnModuleInit {
   private readonly logger = new Logger(CacheService.name);
+  private memoryCache = new Map<string, { data: any; expiresAt: number }>();
 
   constructor(
-    @Inject(CACHE_MANAGER) private cacheManager: Cache,
     private readonly eventEmitter: EventEmitter2,
     private readonly configService: ConfigService,
+    private readonly redisService: RedisService,
   ) {}
 
   async onModuleInit() {
@@ -61,6 +61,10 @@ export class CacheService implements OnModuleInit {
     }, 2000);
   }
 
+  /**
+   * Vide le cache au démarrage de l'application si le cache est activé.
+   * @private
+   */
   private async clearCacheOnStartup() {
     if (!isCacheEnabled()) {
       this.logger.log('Cache disabled, skipping startup cache clear');
@@ -77,11 +81,34 @@ export class CacheService implements OnModuleInit {
     }
   }
 
+  /**
+   * Génère une clé de cache unique pour une collection et un ID spécifique.
+   * @param collection
+   * @param id
+   * @private
+   */
   private getCacheKey(
     collection: CacheCollection,
     id?: string | number,
   ): string {
-    return id ? `${collection}:${id}` : `${collection}:all`;
+    const env = process.env.NODE_ENV || 'dev';
+    const base = id ? `${collection}:${id}` : `${collection}:all`;
+    return `multi:${env}:cache:${base}`;
+  }
+
+  /**
+   * Génère une clé de lock unique pour une collection et un ID spécifique.
+   * @param collection
+   * @param id
+   * @private
+   */
+  private getLockKey(
+    collection: CacheCollection,
+    id?: string | number,
+  ): string {
+    const env = process.env.NODE_ENV || 'dev';
+    const base = id ? `${collection}:${id}` : `${collection}:all`;
+    return `multi:${env}:lock:${base}`;
   }
 
   /**
@@ -100,21 +127,30 @@ export class CacheService implements OnModuleInit {
     }
 
     const key = this.getCacheKey(collection, id);
-    try {
-      const cached = await this.cacheManager.get<T>(key);
-      if (cached) {
-        this.logger.debug(`Cache hit for ${key}`);
-        return cached;
+
+    // Essai Redis d'abord si disponible
+    if (this.redisService.isAvailable()) {
+      try {
+        const redisValue = await this.redisService.get(key);
+        if (redisValue) {
+          const parsed = JSON.parse(redisValue);
+          this.logger.debug(`Redis cache hit for ${key}`);
+          return parsed;
+        }
+      } catch (error) {
+        this.logger.warn(`Redis cache error for ${key}:`, error.message);
       }
-      this.logger.debug(`Cache miss for ${key}`);
-      return null;
-    } catch (error) {
-      this.logger.error(
-        `Cache get error for ${collection} with key ${key}`,
-        error,
-      );
-      return null;
     }
+
+    // Fallback vers cache mémoire
+    const memoryItem = this.memoryCache.get(key);
+    if (memoryItem && memoryItem.expiresAt > Date.now()) {
+      this.logger.debug(`Memory cache hit for ${key}`);
+      return memoryItem.data;
+    }
+
+    this.logger.debug(`Cache miss for ${key}`);
+    return null;
   }
 
   /**
@@ -135,10 +171,27 @@ export class CacheService implements OnModuleInit {
     }
 
     const key = this.getCacheKey(collection, id);
+    const ttl = getCacheTTL(collection);
+
     try {
-      const ttl = getCacheTTL(collection);
-      await this.cacheManager.set(key, data, ttl);
-      this.logger.debug(`Cache set for ${key} with TTL ${ttl}ms`);
+      // Stockage Redis si disponible
+      if (this.redisService.isAvailable()) {
+        const success = await this.redisService.set(
+          key,
+          JSON.stringify(data),
+          ttl,
+        );
+        if (success) {
+          this.logger.debug(`Redis cache set for ${key} with TTL ${ttl}ms`);
+        }
+      }
+
+      // Stockage mémoire en parallèle (backup)
+      this.memoryCache.set(key, {
+        data,
+        expiresAt: Date.now() + ttl,
+      });
+      this.logger.debug(`Memory cache set for ${key} with TTL ${ttl}ms`);
     } catch (error) {
       this.logger.error(
         `Cache set error for ${collection} with key ${key}`,
@@ -153,8 +206,30 @@ export class CacheService implements OnModuleInit {
    */
   async invalidateCollection(collection: CacheCollection): Promise<void> {
     try {
-      const allKey = this.getCacheKey(collection);
-      await this.cacheManager.del(allKey);
+      const env = process.env.NODE_ENV || 'dev';
+      const pattern = `multi:${env}:cache:${collection}:*`;
+
+      // 1) Redis : suppression de toutes les clés de la collection
+      if (this.redisService.isAvailable()) {
+        const deleted = await this.redisService.delPattern(pattern);
+        this.logger.debug(
+          `Redis: deleted ${deleted} key(s) for pattern "${pattern}"`,
+        );
+      } else {
+        this.logger.debug('Redis unavailable, skipping Redis invalidation');
+      }
+
+      // 2) Mémoire : suppression de toutes les clés correspondantes
+      let memDeleted = 0;
+      for (const key of Array.from(this.memoryCache.keys())) {
+        if (key.startsWith(`multi:${env}:cache:${collection}:`)) {
+          this.memoryCache.delete(key);
+          memDeleted++;
+        }
+      }
+      this.logger.debug(
+        `Memory: deleted ${memDeleted} key(s) for collection "${collection}"`,
+      );
 
       // On émet un événement pour déclencher le preload de la collection
       const defaultCms = this.configService.get<string>('DEFAULT_CMS');
@@ -180,32 +255,126 @@ export class CacheService implements OnModuleInit {
    */
   async invalidateAll(): Promise<void> {
     try {
-      for (const collection of Object.values(CacheCollection)) {
-        await this.invalidateCollection(collection);
+      // Redis : suppression par pattern
+      if (this.redisService.isAvailable()) {
+        const env = process.env.NODE_ENV || 'dev';
+        await this.redisService.delPattern(`multi:${env}:cache:*`);
       }
+
+      // Mémoire : clear complet
+      this.memoryCache.clear();
+
+      // Émission des événements pour chaque collection
+      for (const collection of Object.values(CacheCollection)) {
+        const defaultCms = this.configService.get<string>('DEFAULT_CMS');
+        if (defaultCms) {
+          const emitKey = `${defaultCms.toLowerCase()}.${collection.toLowerCase()}.cache.cleared`;
+          this.logger.debug(`Emitting ${emitKey} event`);
+          this.eventEmitter.emit(emitKey);
+        }
+        this.eventEmitter.emit(`${collection}.cache.cleared`);
+      }
+
       this.logger.debug('All cache invalidated');
     } catch (error) {
       this.logger.error('Cache invalidation error', error);
     }
   }
 
-  /**
-   * Invalide le cache pour une collection et un ID spécifique.
-   * (inutilisé sur le projet pour le moment)
-   * @param collection
-   * @param id
-   */
-  async invalidateKey(
+  private readonly loadingPromises = new Map<string, Promise<any>>();
+
+  async getOrFetchWithLock<T>(
     collection: CacheCollection,
+    fetcher: () => Promise<T>,
     id?: string | number,
-  ): Promise<void> {
+  ): Promise<T> {
+    // 0) Premier check cache
+    const first = await this.get<T>(collection, id);
+    if (first !== null && first !== undefined) return first;
+
+    const cacheKey = this.getCacheKey(collection, id);
+    const lockKey = this.getLockKey(collection, id);
+    const lockTtl = 10000; // 10 secondes
+
+    // 1. Prévention du cache stampede local (même instance)
+    if (this.loadingPromises.has(cacheKey)) {
+      this.logger.debug(`${cacheKey} already loading (in-memory), waiting...`);
+      return await this.loadingPromises.get(cacheKey)!;
+    }
+
+    let lockToken: string | null = null;
+    const start = Date.now();
+    const maxWaitMs = 8000;
+    let delay = 150;
+
+    // 2. Prévention du cache stampede distribué (multi-instance) avec Redis
+    if (this.redisService.isAvailable()) {
+      while (!lockToken && Date.now() - start <= maxWaitMs) {
+        // On re-checke le cache avant d'essayer d'acquérir le lock
+        const second = await this.get<T>(collection, id);
+        if (second !== null && second !== undefined) return second;
+
+        // On attend d'acquérir le lock avant de continuer
+        lockToken = await this.redisService.tryLock(lockKey, lockTtl);
+
+        if (lockToken) {
+          this.logger.debug(`Lock acquired for ${cacheKey}`);
+
+          // Recheck cache APRÈS lock (double-check pour éviter le fetch inutile)
+          const third = await this.get<T>(collection, id);
+          if (third !== null && third !== undefined) {
+            // Rien à faire, on libère le lock proprement et on sert le cache
+            await this.redisService.releaseLock(lockKey, lockToken);
+            this.logger.debug(
+              `Cache already filled for ${cacheKey} after lock — no fetch`,
+            );
+            return third;
+          }
+
+          // On a le lock et le cache est toujours vide → on sort de la boucle pour fetch
+          break;
+        }
+
+        this.logger.debug(
+          `${cacheKey} being loaded by another instance, waiting...`,
+        );
+
+        await new Promise((res) =>
+          setTimeout(res, delay + Math.floor(Math.random() * 50)),
+        );
+        delay = Math.min(Math.floor(delay * 1.8), 750);
+      }
+    } else {
+      this.logger.debug('Redis unavailable, fallback to in-memory');
+    }
+
+    // Lock acquired (or no Redis), can load data
+    const loadingPromise = (async () => {
+      try {
+        // Dernier re-check juste avant fetch (cas limite)
+        const fourth = await this.get<T>(collection, id);
+        if (fourth !== null && fourth !== undefined) return fourth;
+
+        const result = await fetcher();
+        await this.set(collection, result, id);
+        this.logger.debug(`${cacheKey} loaded and cached`);
+        return result;
+      } catch (error) {
+        this.logger.error(`Loading error for ${cacheKey}:`, error);
+        throw error;
+      } finally {
+        if (lockToken) {
+          await this.redisService.releaseLock(lockKey, lockToken);
+          this.logger.debug(`Lock released for ${cacheKey}`);
+        }
+      }
+    })();
+    this.loadingPromises.set(cacheKey, loadingPromise);
+
     try {
-      const key = this.getCacheKey(collection, id);
-      await this.cacheManager.del(key);
-      this.logger.debug(`Cache invalidated for key ${key}`);
-    } catch (error) {
-      const errorKey = this.getCacheKey(collection, id);
-      this.logger.error(`Cache invalidation error for key ${errorKey}`, error);
+      return await loadingPromise;
+    } finally {
+      this.loadingPromises.delete(cacheKey);
     }
   }
 }

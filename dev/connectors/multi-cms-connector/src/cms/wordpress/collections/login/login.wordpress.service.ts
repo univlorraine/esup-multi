@@ -107,11 +107,13 @@ export class LoginWordpressService {
   }
 
   async getLogin(): Promise<Login> {
-    const cached = await this.cacheService.get<Login>(CacheCollection.LOGIN);
-    if (cached) {
-      return cached;
-    }
+    return this.cacheService.getOrFetchWithLock(CacheCollection.LOGIN, () =>
+      this.loadLoginFromWordpress(),
+    );
+  }
 
+  private async loadLoginFromWordpress(): Promise<Login> {
+    this.logger.debug('Loading login from WordPress...');
     const data = await this.wordpressService.executeGraphQLQuery(`
       query {
         login(where: {language: ${FRENCH_CODE}}) {
@@ -133,8 +135,6 @@ export class LoginWordpressService {
         }
       }
     `);
-    const result = this.mapToMultiModel(data.login.nodes[0]);
-    await this.cacheService.set(CacheCollection.LOGIN, result);
-    return result;
+    return this.mapToMultiModel(data.login.nodes[0]);
   }
 }

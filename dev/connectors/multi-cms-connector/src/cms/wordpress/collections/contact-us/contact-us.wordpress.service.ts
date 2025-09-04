@@ -105,13 +105,14 @@ export class ContactUsWordpressService {
   }
 
   async getContactUs(): Promise<ContactUs> {
-    const cached = await this.cacheService.get<ContactUs>(
+    return this.cacheService.getOrFetchWithLock(
       CacheCollection.CONTACT_US,
+      () => this.loadContactUsFromWordpress(),
     );
-    if (cached) {
-      return cached;
-    }
+  }
 
+  private async loadContactUsFromWordpress(): Promise<ContactUs> {
+    this.logger.debug('Loading contact-us from WordPress...');
     const data = await this.wordpressService.executeGraphQLQuery(`
       query {
         contactUs(where: {language: ${FRENCH_CODE}}) {
@@ -135,8 +136,6 @@ export class ContactUsWordpressService {
         }
       }
     `);
-    const result = this.mapToMultiModel(data.contactUs.nodes[0]);
-    await this.cacheService.set(CacheCollection.CONTACT_US, result);
-    return result;
+    return this.mapToMultiModel(data.contactUs.nodes[0]);
   }
 }

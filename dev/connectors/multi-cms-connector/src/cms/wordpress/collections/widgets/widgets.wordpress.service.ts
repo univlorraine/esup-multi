@@ -138,13 +138,13 @@ export class WidgetsWordpressService {
   }
 
   async getWidgets(): Promise<Widgets[]> {
-    const cached = await this.cacheService.get<Widgets[]>(
-      CacheCollection.WIDGETS,
+    return this.cacheService.getOrFetchWithLock(CacheCollection.WIDGETS, () =>
+      this.loadWidgetsFromWordpress(),
     );
-    if (cached) {
-      return cached;
-    }
+  }
 
+  private async loadWidgetsFromWordpress(): Promise<Widgets[]> {
+    this.logger.debug('Loading widgets from WordPress...');
     const data = await this.wordpressService.executeGraphQLQuery(`
       query {
         widgets(first: 100, where: {language: ${FRENCH_CODE}}) {
@@ -199,21 +199,19 @@ export class WidgetsWordpressService {
         }
       }
     `);
-
-    const result = data.widgets.nodes.map(this.mapToMultiModel);
-    await this.cacheService.set(CacheCollection.WIDGETS, result);
-    return result;
+    return data.widgets.nodes.map(this.mapToMultiModel);
   }
 
   async getWidget(id: number): Promise<Widgets> {
-    const cached = await this.cacheService.get<Widgets>(
+    return this.cacheService.getOrFetchWithLock(
       CacheCollection.WIDGETS,
+      () => this.loadWidgetFromWordpress(id),
       id,
     );
-    if (cached) {
-      return cached;
-    }
+  }
 
+  private async loadWidgetFromWordpress(id: number): Promise<Widgets> {
+    this.logger.debug(`Loading widget ${id} from WordPress...`);
     const data = await this.wordpressService.executeGraphQLQuery(`
       query {
         widget(id: ${id}, idType: DATABASE_ID) {
@@ -266,9 +264,6 @@ export class WidgetsWordpressService {
         }
       }
     `);
-
-    const result = this.mapToMultiModel(data.widget);
-    await this.cacheService.set(CacheCollection.WIDGETS, result, id);
-    return result;
+    return this.mapToMultiModel(data.widget);
   }
 }

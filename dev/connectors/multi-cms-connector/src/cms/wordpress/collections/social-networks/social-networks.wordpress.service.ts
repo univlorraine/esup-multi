@@ -85,13 +85,14 @@ export class SocialNetworksWordpressService {
   }
 
   async getSocialNetworks(): Promise<SocialNetworks[]> {
-    const cached = await this.cacheService.get<SocialNetworks[]>(
+    return this.cacheService.getOrFetchWithLock(
       CacheCollection.SOCIAL_NETWORKS,
+      () => this.loadSocialNetworksFromWordpress(),
     );
-    if (cached) {
-      return cached;
-    }
+  }
 
+  private async loadSocialNetworksFromWordpress(): Promise<SocialNetworks[]> {
+    this.logger.debug('Loading social networks from WordPress...');
     const data = await this.wordpressService.executeGraphQLQuery(`
       query {
         socialNetworks(first: 100) {
@@ -105,20 +106,21 @@ export class SocialNetworksWordpressService {
         }
       }
     `);
-    const result = data.socialNetworks.nodes.map(this.mapToMultiModel);
-    await this.cacheService.set(CacheCollection.SOCIAL_NETWORKS, result);
-    return result;
+    return data.socialNetworks.nodes.map(this.mapToMultiModel);
   }
 
   async getSocialNetwork(id: number): Promise<SocialNetworks> {
-    const cached = await this.cacheService.get<SocialNetworks>(
+    return this.cacheService.getOrFetchWithLock(
       CacheCollection.SOCIAL_NETWORKS,
+      () => this.loadSocialNetworkFromWordpress(id),
       id,
     );
-    if (cached) {
-      return cached;
-    }
+  }
 
+  private async loadSocialNetworkFromWordpress(
+    id: number,
+  ): Promise<SocialNetworks> {
+    this.logger.debug(`Loading social network ${id} from WordPress...`);
     const data = await this.wordpressService.executeGraphQLQuery(`
       query {
         socialNetwork(id: ${id}, idType: DATABASE_ID) {
@@ -130,8 +132,6 @@ export class SocialNetworksWordpressService {
         }
       }
     `);
-    const result = this.mapToMultiModel(data.socialNetwork);
-    await this.cacheService.set(CacheCollection.SOCIAL_NETWORKS, result, id);
-    return result;
+    return this.mapToMultiModel(data.socialNetwork);
   }
 }

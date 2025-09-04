@@ -92,14 +92,14 @@ export class PagesDirectusService {
   }
 
   async getPages(): Promise<StaticPages[]> {
-    const cachedData = await this.cacheService.get<StaticPages[]>(
+    return this.cacheService.getOrFetchWithLock(
       CacheCollection.STATIC_PAGES,
+      () => this.loadPagesFromDirectus(),
     );
+  }
 
-    if (cachedData) {
-      return cachedData;
-    }
-
+  private async loadPagesFromDirectus(): Promise<StaticPages[]> {
+    this.logger.debug('Loading pages from Directus...');
     const data = await this.directusService.executeGraphQLQuery(`
       query {
         pages(filter: { status: { _eq: "published" }}) {
@@ -123,21 +123,19 @@ export class PagesDirectusService {
         }
       }
     `);
-    const result = data.pages.map(this.mapToMultiModel);
-    await this.cacheService.set(CacheCollection.STATIC_PAGES, result);
-    return result;
+    return data.pages.map(this.mapToMultiModel);
   }
 
   async getPage(id: number): Promise<StaticPages> {
-    const cachedData = await this.cacheService.get<StaticPages>(
+    return this.cacheService.getOrFetchWithLock(
       CacheCollection.STATIC_PAGES,
+      () => this.loadPageFromDirectus(id),
       id,
     );
+  }
 
-    if (cachedData) {
-      return cachedData;
-    }
-
+  private async loadPageFromDirectus(id: number): Promise<StaticPages> {
+    this.logger.debug(`Loading page ${id} from Directus...`);
     const data = await this.directusService.executeGraphQLQuery(`
       query {
         pages(filter: {id: { _eq: ${id} }}) {
@@ -161,8 +159,6 @@ export class PagesDirectusService {
         }
       }
     `);
-    const result = this.mapToMultiModel(data.pages[0]);
-    await this.cacheService.set(CacheCollection.STATIC_PAGES, result, id);
-    return result;
+    return this.mapToMultiModel(data.pages[0]);
   }
 }

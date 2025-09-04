@@ -111,13 +111,13 @@ export class WidgetsDirectusService {
   }
 
   async getWidgets(): Promise<Widgets[]> {
-    const cached = await this.cacheService.get<Widgets[]>(
-      CacheCollection.WIDGETS,
+    return this.cacheService.getOrFetchWithLock(CacheCollection.WIDGETS, () =>
+      this.loadWidgetsFromDirectus(),
     );
-    if (cached) {
-      return cached;
-    }
+  }
 
+  private async loadWidgetsFromDirectus(): Promise<Widgets[]> {
+    this.logger.debug('Loading widgets from Directus...');
     const data = await this.directusService.executeGraphQLQuery(`
       query {
         widgets(filter: { status: { _eq: "published" }}) {
@@ -162,20 +162,19 @@ export class WidgetsDirectusService {
         }
       }
     `);
-    const result = data.widgets.map(this.mapToMultiModel);
-    await this.cacheService.set(CacheCollection.WIDGETS, result);
-    return result;
+    return data.widgets.map(this.mapToMultiModel);
   }
 
   async getWidget(id: number): Promise<Widgets> {
-    const cached = await this.cacheService.get<Widgets>(
+    return this.cacheService.getOrFetchWithLock(
       CacheCollection.WIDGETS,
+      () => this.loadWidgetFromDirectus(id),
       id,
     );
-    if (cached) {
-      return cached;
-    }
+  }
 
+  private async loadWidgetFromDirectus(id: number): Promise<Widgets> {
+    this.logger.debug(`Loading widget ${id} from Directus...`);
     const data = await this.directusService.executeGraphQLQuery(`
       query {
         widgets(filter: {id: { _eq: ${id} }}) {
@@ -220,8 +219,6 @@ export class WidgetsDirectusService {
         }
       }
     `);
-    const result = this.mapToMultiModel(data.widgets[0]);
-    await this.cacheService.set(CacheCollection.WIDGETS, result, id);
-    return result;
+    return this.mapToMultiModel(data.widgets[0]);
   }
 }

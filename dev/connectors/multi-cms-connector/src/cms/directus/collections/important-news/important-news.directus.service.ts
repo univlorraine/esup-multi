@@ -101,14 +101,14 @@ export class ImportantNewsDirectusService {
   }
 
   async getImportantNews(): Promise<ImportantNews[]> {
-    const cachedData = await this.cacheService.get<ImportantNews[]>(
+    return this.cacheService.getOrFetchWithLock(
       CacheCollection.IMPORTANT_NEWS,
+      () => this.loadImportantNewsFromDirectus(),
     );
+  }
 
-    if (cachedData) {
-      return cachedData;
-    }
-
+  private async loadImportantNewsFromDirectus(): Promise<ImportantNews[]> {
+    this.logger.debug('Loading important news from Directus...');
     const data = await this.directusService.executeGraphQLQuery(`
       query {
         important_news(filter: { status: { _eq: "published" } }) {
@@ -140,23 +140,21 @@ export class ImportantNewsDirectusService {
         }
       }
     `);
-    const result = data.important_news.map((item) =>
-      this.mapToMultiModel(item),
-    );
-    await this.cacheService.set(CacheCollection.IMPORTANT_NEWS, result);
-    return result;
+    return data.important_news.map((item) => this.mapToMultiModel(item));
   }
 
   async getImportantNew(id: number): Promise<ImportantNews> {
-    const cachedData = await this.cacheService.get<ImportantNews>(
+    return this.cacheService.getOrFetchWithLock(
       CacheCollection.IMPORTANT_NEWS,
+      () => this.loadImportantNewFromDirectus(id),
       id,
     );
+  }
 
-    if (cachedData) {
-      return cachedData;
-    }
-
+  private async loadImportantNewFromDirectus(
+    id: number,
+  ): Promise<ImportantNews> {
+    this.logger.debug(`Loading important new ${id} from Directus...`);
     const data = await this.directusService.executeGraphQLQuery(`
       query {
         important_news(filter: {id: { _eq: ${id} }}) {
@@ -188,8 +186,6 @@ export class ImportantNewsDirectusService {
         }
       }
     `);
-    const result = this.mapToMultiModel(data.important_news[0]);
-    await this.cacheService.set(CacheCollection.IMPORTANT_NEWS, result, id);
-    return result;
+    return this.mapToMultiModel(data.important_news[0]);
   }
 }

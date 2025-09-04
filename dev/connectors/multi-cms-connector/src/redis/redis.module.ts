@@ -36,53 +36,14 @@
  * termes.
  */
 
-export enum CacheCollection {
-  LOGIN = 'login',
-  CONTACT_US = 'contact-us',
-  FEATURES = 'features',
-  IMPORTANT_NEWS = 'important-news',
-  CHANNELS = 'channels',
-  SOCIAL_NETWORKS = 'social-networks',
-  STATIC_PAGES = 'static-pages',
-  WIDGETS = 'widgets',
-}
+import { Module, Global } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import { RedisService } from './redis.service';
 
-const DEFAULT_TTL = 300000; // 5 minutes
-
-export function isCacheEnabled(): boolean {
-  const cacheEnabled = process.env.CACHE_ENABLED;
-  if (cacheEnabled !== undefined) {
-    return cacheEnabled.toLowerCase() === 'true';
-  }
-  return true; // Cache activé par défaut
-}
-
-/**
- * Permet d'obtenir le TTL de cache dans le .env pour une collection spécifique.
- * @param collection
- */
-export function getCacheTTL(collection: CacheCollection): number {
-  const envKey = `CACHE_TTL_${collection.toUpperCase().replace('-', '_')}`;
-  const envValue = process.env[envKey];
-
-  if (envValue) {
-    const ttl = parseInt(envValue, 10);
-    if (!isNaN(ttl) && ttl > 0) {
-      return ttl;
-    }
-  }
-
-  // Fallback values if .env is not configured
-  const fallbackConfig: Record<CacheCollection, number> = {
-    [CacheCollection.LOGIN]: 86400000, // 1 day
-    [CacheCollection.CONTACT_US]: 86400000, // 1 day
-    [CacheCollection.FEATURES]: 3600000, // 1 hour
-    [CacheCollection.IMPORTANT_NEWS]: 3600000, // 1 hour
-    [CacheCollection.CHANNELS]: 86400000, // 1 day
-    [CacheCollection.SOCIAL_NETWORKS]: 86400000, // 1 day
-    [CacheCollection.STATIC_PAGES]: 86400000, // 1 day
-    [CacheCollection.WIDGETS]: 3600000, // 1 hour
-  };
-
-  return fallbackConfig[collection] || DEFAULT_TTL;
-}
+@Global()
+@Module({
+  imports: [ConfigModule],
+  providers: [RedisService],
+  exports: [RedisService],
+})
+export class RedisModule {}

@@ -114,13 +114,14 @@ export class StaticPagesWordpressService {
   }
 
   async getStaticPages(): Promise<StaticPages[]> {
-    const cached = await this.cacheService.get<StaticPages[]>(
+    return this.cacheService.getOrFetchWithLock(
       CacheCollection.STATIC_PAGES,
+      () => this.loadStaticPagesFromWordpress(),
     );
-    if (cached) {
-      return cached;
-    }
+  }
 
+  private async loadStaticPagesFromWordpress(): Promise<StaticPages[]> {
+    this.logger.debug('Loading static pages from WordPress...');
     const data = await this.wordpressService.executeGraphQLQuery(`
       query {
         staticPages(first: 100, where: {language: ${FRENCH_CODE}}) {
@@ -147,20 +148,19 @@ export class StaticPagesWordpressService {
         }
       }
     `);
-    const result = data.staticPages.nodes.map(this.mapToMultiModel);
-    await this.cacheService.set(CacheCollection.STATIC_PAGES, result);
-    return result;
+    return data.staticPages.nodes.map(this.mapToMultiModel);
   }
 
   async getStaticPage(id: number): Promise<StaticPages> {
-    const cached = await this.cacheService.get<StaticPages>(
+    return this.cacheService.getOrFetchWithLock(
       CacheCollection.STATIC_PAGES,
+      () => this.loadStaticPageFromWordpress(id),
       id,
     );
-    if (cached) {
-      return cached;
-    }
+  }
 
+  private async loadStaticPageFromWordpress(id: number): Promise<StaticPages> {
+    this.logger.debug(`Loading static page ${id} from WordPress...`);
     const data = await this.wordpressService.executeGraphQLQuery(`
       query {
         staticPage(id: ${id}, idType: DATABASE_ID) {
@@ -185,8 +185,6 @@ export class StaticPagesWordpressService {
         }
       }
     `);
-    const result = this.mapToMultiModel(data.staticPage);
-    await this.cacheService.set(CacheCollection.STATIC_PAGES, result, id);
-    return result;
+    return this.mapToMultiModel(data.staticPage);
   }
 }

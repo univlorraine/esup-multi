@@ -88,11 +88,13 @@ export class LoginDirectusService {
   }
 
   async getLogin(): Promise<Login> {
-    const cached = await this.cacheService.get<Login>(CacheCollection.LOGIN);
-    if (cached) {
-      return cached;
-    }
+    return this.cacheService.getOrFetchWithLock(CacheCollection.LOGIN, () =>
+      this.loadLoginFromDirectus(),
+    );
+  }
 
+  private async loadLoginFromDirectus(): Promise<Login> {
+    this.logger.debug('Loading login from Directus...');
     const data = await this.directusService.executeGraphQLQuery(`
       query {
         login {
@@ -110,8 +112,6 @@ export class LoginDirectusService {
         }
       }
     `);
-    const result = this.mapToMultiModel(data.login);
-    await this.cacheService.set(CacheCollection.LOGIN, result);
-    return result;
+    return this.mapToMultiModel(data.login);
   }
 }

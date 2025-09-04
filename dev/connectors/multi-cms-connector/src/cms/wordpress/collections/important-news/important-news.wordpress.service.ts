@@ -133,13 +133,14 @@ export class ImportantNewsWordpressService {
   }
 
   async getImportantNews(): Promise<ImportantNews[]> {
-    const cached = await this.cacheService.get<ImportantNews[]>(
+    return this.cacheService.getOrFetchWithLock(
       CacheCollection.IMPORTANT_NEWS,
+      () => this.loadImportantNewsFromWordpress(),
     );
-    if (cached) {
-      return cached;
-    }
+  }
 
+  private async loadImportantNewsFromWordpress(): Promise<ImportantNews[]> {
+    this.logger.debug('Loading important news from WordPress...');
     const data = await this.wordpressService.executeGraphQLQuery(`
       query {
         importantNews(first: 100, where: {language: ${FRENCH_CODE}}) {
@@ -183,20 +184,21 @@ export class ImportantNewsWordpressService {
         }
       }
     `);
-    const result = data.importantNews.nodes.map(this.mapToMultiModel);
-    await this.cacheService.set(CacheCollection.IMPORTANT_NEWS, result);
-    return result;
+    return data.importantNews.nodes.map(this.mapToMultiModel);
   }
 
   async getImportantNew(id: number): Promise<ImportantNews> {
-    const cached = await this.cacheService.get<ImportantNews>(
+    return this.cacheService.getOrFetchWithLock(
       CacheCollection.IMPORTANT_NEWS,
+      () => this.loadImportantNewFromWordpress(id),
       id,
     );
-    if (cached) {
-      return cached;
-    }
+  }
 
+  private async loadImportantNewFromWordpress(
+    id: number,
+  ): Promise<ImportantNews> {
+    this.logger.debug(`Loading important new ${id} from WordPress...`);
     const data = await this.wordpressService.executeGraphQLQuery(`
       query {
         importantNew(id: ${id}, idType: DATABASE_ID) {
@@ -238,8 +240,6 @@ export class ImportantNewsWordpressService {
         }
       }
     `);
-    const result = this.mapToMultiModel(data.importantNew);
-    await this.cacheService.set(CacheCollection.IMPORTANT_NEWS, result, id);
-    return result;
+    return this.mapToMultiModel(data.importantNew);
   }
 }

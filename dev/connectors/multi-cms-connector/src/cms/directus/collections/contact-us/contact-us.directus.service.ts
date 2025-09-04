@@ -89,13 +89,14 @@ export class ContactUsDirectusService {
   }
 
   async getContactUs(): Promise<ContactUs> {
-    const cached = await this.cacheService.get<ContactUs>(
+    return this.cacheService.getOrFetchWithLock(
       CacheCollection.CONTACT_US,
+      () => this.loadContactUsFromDirectus(),
     );
-    if (cached) {
-      return cached;
-    }
+  }
 
+  private async loadContactUsFromDirectus(): Promise<ContactUs> {
+    this.logger.debug('Loading contact-us from Directus...');
     const data = await this.directusService.executeGraphQLQuery(`
       query {
         contact_us {
@@ -115,8 +116,6 @@ export class ContactUsDirectusService {
         }
       }
     `);
-    const result = this.mapToMultiModel(data.contact_us);
-    await this.cacheService.set(CacheCollection.CONTACT_US, result);
-    return result;
+    return this.mapToMultiModel(data.contact_us);
   }
 }

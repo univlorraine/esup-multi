@@ -92,13 +92,13 @@ export class ChannelsDirectusService {
   }
 
   async getChannels(): Promise<Channels[]> {
-    const cached = await this.cacheService.get<Channels[]>(
-      CacheCollection.CHANNELS,
+    return this.cacheService.getOrFetchWithLock(CacheCollection.CHANNELS, () =>
+      this.loadChannelsFromDirectus(),
     );
-    if (cached) {
-      return cached;
-    }
+  }
 
+  private async loadChannelsFromDirectus(): Promise<Channels[]> {
+    this.logger.debug('Loading channels from Directus...');
     const data = await this.directusService.executeGraphQLQuery(`
       query {
         channels {
@@ -120,20 +120,19 @@ export class ChannelsDirectusService {
         }
       }
     `);
-    const result = data.channels.map(this.mapToMultiModel);
-    await this.cacheService.set(CacheCollection.CHANNELS, result);
-    return result;
+    return data.channels.map(this.mapToMultiModel);
   }
 
   async getChannel(id: number): Promise<Channels> {
-    const cached = await this.cacheService.get<Channels>(
+    return this.cacheService.getOrFetchWithLock(
       CacheCollection.CHANNELS,
+      () => this.loadChannelFromDirectus(id),
       id,
     );
-    if (cached) {
-      return cached;
-    }
+  }
 
+  private async loadChannelFromDirectus(id: number): Promise<Channels> {
+    this.logger.debug(`Loading channel ${id} from Directus...`);
     const data = await this.directusService.executeGraphQLQuery(`
       query {
         channels(filter: {id: { _eq: ${id} }}) {
@@ -155,8 +154,6 @@ export class ChannelsDirectusService {
         }
       }
     `);
-    const result = this.mapToMultiModel(data.channels[0]);
-    await this.cacheService.set(CacheCollection.CHANNELS, result, id);
-    return result;
+    return this.mapToMultiModel(data.channels[0]);
   }
 }

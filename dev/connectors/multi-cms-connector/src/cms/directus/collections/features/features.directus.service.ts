@@ -113,13 +113,13 @@ export class FeaturesDirectusService {
   }
 
   async getFeatures(): Promise<Features[]> {
-    const cached = await this.cacheService.get<Features[]>(
-      CacheCollection.FEATURES,
+    return this.cacheService.getOrFetchWithLock(CacheCollection.FEATURES, () =>
+      this.loadFeaturesFromDirectus(),
     );
-    if (cached) {
-      return cached;
-    }
+  }
 
+  private async loadFeaturesFromDirectus(): Promise<Features[]> {
+    this.logger.debug('Loading features from Directus...');
     const data = await this.directusService.executeGraphQLQuery(`
       query {
         features(filter: { status: { _eq: "published" }}) {
@@ -164,20 +164,19 @@ export class FeaturesDirectusService {
         }
       }
     `);
-    const result = data.features.map(this.mapToMultiModel);
-    await this.cacheService.set(CacheCollection.FEATURES, result);
-    return result;
+    return data.features.map(this.mapToMultiModel);
   }
 
   async getFeature(id: number): Promise<Features> {
-    const cached = await this.cacheService.get<Features>(
+    return this.cacheService.getOrFetchWithLock(
       CacheCollection.FEATURES,
+      () => this.loadFeatureFromDirectus(id),
       id,
     );
-    if (cached) {
-      return cached;
-    }
+  }
 
+  private async loadFeatureFromDirectus(id: number): Promise<Features> {
+    this.logger.debug(`Loading feature ${id} from Directus...`);
     const data = await this.directusService.executeGraphQLQuery(`
       query {
         features(filter: {id: { _eq: ${id} }}) {
@@ -222,8 +221,6 @@ export class FeaturesDirectusService {
         }
       }
     `);
-    const result = this.mapToMultiModel(data.features[0]);
-    await this.cacheService.set(CacheCollection.FEATURES, result, id);
-    return result;
+    return this.mapToMultiModel(data.features[0]);
   }
 }

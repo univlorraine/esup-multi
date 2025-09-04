@@ -85,14 +85,14 @@ export class SocialNetworksDirectusService {
   }
 
   async getSocialNetworks(): Promise<SocialNetworks[]> {
-    const cachedData = await this.cacheService.get<SocialNetworks[]>(
+    return this.cacheService.getOrFetchWithLock(
       CacheCollection.SOCIAL_NETWORKS,
+      () => this.loadSocialNetworksFromDirectus(),
     );
+  }
 
-    if (cachedData) {
-      return cachedData;
-    }
-
+  private async loadSocialNetworksFromDirectus(): Promise<SocialNetworks[]> {
+    this.logger.debug('Loading social networks from Directus...');
     const data = await this.directusService.executeGraphQLQuery(`
       query {
         social_networks {
@@ -104,21 +104,21 @@ export class SocialNetworksDirectusService {
         }
       }
     `);
-    const result = data.social_networks.map(this.mapToMultiModel);
-    await this.cacheService.set(CacheCollection.SOCIAL_NETWORKS, result);
-    return result;
+    return data.social_networks.map(this.mapToMultiModel);
   }
 
   async getSocialNetwork(id: number): Promise<SocialNetworks> {
-    const cachedData = await this.cacheService.get<SocialNetworks>(
+    return this.cacheService.getOrFetchWithLock(
       CacheCollection.SOCIAL_NETWORKS,
+      () => this.loadSocialNetworkFromDirectus(id),
       id,
     );
+  }
 
-    if (cachedData) {
-      return cachedData;
-    }
-
+  private async loadSocialNetworkFromDirectus(
+    id: number,
+  ): Promise<SocialNetworks> {
+    this.logger.debug(`Loading social network ${id} from Directus...`);
     const data = await this.directusService.executeGraphQLQuery(`
       query {
         social_networks(filter: { id: { _eq: ${id} } }) {
@@ -130,8 +130,6 @@ export class SocialNetworksDirectusService {
         }
       }
     `);
-    const result = this.mapToMultiModel(data.social_networks[0]);
-    await this.cacheService.set(CacheCollection.SOCIAL_NETWORKS, result, id);
-    return result;
+    return this.mapToMultiModel(data.social_networks[0]);
   }
 }
