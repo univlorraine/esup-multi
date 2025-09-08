@@ -43,7 +43,14 @@ import { RpcException } from '@nestjs/microservices';
 import { Cron } from '@nestjs/schedule';
 import * as dotenv from 'dotenv';
 import { from, Observable } from 'rxjs';
-import { concatWith, delayWhen, map, tap, toArray } from 'rxjs/operators';
+import {
+  catchError,
+  concatWith,
+  delayWhen,
+  map,
+  tap,
+  toArray,
+} from 'rxjs/operators';
 import { LoginPageContentResultDto } from '../page-content/login-page-content/login-page-content.dto';
 import { LoginPageContentService } from '../page-content/login-page-content/login-page-content.service';
 import {
@@ -82,12 +89,24 @@ export class AuthService {
   public authenticate(
     query: AuthenticateQueryDto,
   ): Observable<AuthenticatedDto> {
+    this.logger.debug(`Starting authentication for user: ${query.username}`);
     return this.casService.requestTgt(query).pipe(
+      catchError((error) => {
+        this.logger.error(
+          `CAS authentication failed for user ${query.username}:`,
+          error.message || error,
+        );
+        throw error;
+      }),
       concatWith(this.userService.getUserProfile(query.username)),
       toArray(),
       map((res) => {
         const authToken = res[0] as string;
         const userProfile = res[1] as UserProfileDto;
+
+        this.logger.debug(
+          `Authentication successful for user: ${query.username}`,
+        );
 
         return {
           authToken,
@@ -103,6 +122,13 @@ export class AuthService {
           }),
         ),
       ),
+      catchError((error) => {
+        this.logger.error(
+          `Authentication process failed for user ${query.username}:`,
+          error.message || error,
+        );
+        throw error;
+      }),
     );
   }
 
