@@ -239,8 +239,6 @@ export class CacheService implements OnModuleInit {
         this.eventEmitter.emit(emitKey);
       }
 
-      this.eventEmitter.emit(`${collection}.cache.cleared`);
-
       this.logger.debug(`Cache invalidated for collection ${collection}`);
     } catch (error) {
       this.logger.error(
@@ -272,7 +270,6 @@ export class CacheService implements OnModuleInit {
           this.logger.debug(`Emitting ${emitKey} event`);
           this.eventEmitter.emit(emitKey);
         }
-        this.eventEmitter.emit(`${collection}.cache.cleared`);
       }
 
       this.logger.debug('All cache invalidated');
