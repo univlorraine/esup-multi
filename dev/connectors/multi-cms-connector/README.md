@@ -14,6 +14,7 @@ Pour connaitre les requêtes GraphQL disponibles côté backend se référer à 
 ### Directus
 * `DIRECTUS_API_URL`: URL de l'API Directus
 * `DIRECTUS_API_TOKEN`: Token d'accès à l'API Directus
+* `DIRECTUS_ASSETS_PUBLIC_URL`: URL publique pour les assets Directus
 
 ### Wordpress
 * `WORDPRESS_API_URL`: URL de l'API Wordpress
