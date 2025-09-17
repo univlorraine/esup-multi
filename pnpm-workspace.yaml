@@ -1,0 +1,17 @@
+packages:
+  - dev/connectors/*
+  - dev/user-backend-mocks
+  - dev/user-backend-nest/main
+  - dev/user-backend-nest/microservices/*
+  - dev/user-frontend-ionic
+
+onlyBuiltDependencies:
+  - '@apollo/protobufjs'
+  - '@firebase/util'
+  - '@nestjs/core'
+  - '@parcel/watcher'
+  - esbuild
+  - nestjs-pino
+  - nx
+  - protobufjs
+  - sharp
