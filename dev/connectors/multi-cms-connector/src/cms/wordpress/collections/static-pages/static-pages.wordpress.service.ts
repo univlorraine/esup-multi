@@ -36,22 +36,48 @@
  * termes.
  */
 
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { StaticPagesWordpress } from '@wordpress/collections/static-pages/static-pages.wordpress.model';
 import { StaticPages } from '@common/models/static-pages.model';
 import { WordpressService } from '@wordpress/wordpress.service';
 import { StaticPagesTranslations } from '@common/models/translations.model';
 import { StaticPagesTranslationsWordpress } from '@wordpress/collections/translations/translations.wordpress.model';
+import { OnEvent } from '@nestjs/event-emitter';
 import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
 import { StaticPagesSchema } from '@common/validation/schemas/static-pages.schema';
 import { normalizeEmptyStringToNull } from '@common/utils/normalize';
+import { CacheService } from '@cache/cache.service';
+import { CacheCollection } from '@cache/cache.config';
 
 // TODO: Move FRENCH_CODE to .env and rename it to DEFAULT_LANGUAGE_CODE
 const FRENCH_CODE = 'FR';
 
 @Injectable()
 export class StaticPagesWordpressService {
-  constructor(private readonly wordpressService: WordpressService) {}
+  private readonly logger = new Logger(StaticPagesWordpressService.name);
+  constructor(
+    private readonly wordpressService: WordpressService,
+    private readonly cacheService: CacheService,
+  ) {}
+
+  @OnEvent('wordpress.static-pages.cache.cleared')
+  async handleCacheCleared() {
+    this.logger.log('Received cache cleared event - preloading data...');
+    try {
+      await this.preloadData();
+    } catch (error) {
+      this.logger.error(
+        'Failed to preload static-pages after cache clear:',
+        error.message,
+      );
+    }
+  }
+
+  public async preloadData() {
+    this.logger.log('Preloading static-pages...');
+    await this.getStaticPages();
+    this.logger.log('Static-pages preloaded successfully');
+  }
 
   @ValidateMapping({ schema: StaticPagesSchema })
   private mapToMultiModel(staticPage: StaticPagesWordpress): StaticPages {
@@ -88,6 +114,14 @@ export class StaticPagesWordpressService {
   }
 
   async getStaticPages(): Promise<StaticPages[]> {
+    return this.cacheService.getOrFetchWithLock(
+      CacheCollection.STATIC_PAGES,
+      () => this.loadStaticPagesFromWordpress(),
+    );
+  }
+
+  private async loadStaticPagesFromWordpress(): Promise<StaticPages[]> {
+    this.logger.debug('Loading static pages from WordPress...');
     const data = await this.wordpressService.executeGraphQLQuery(`
       query {
         staticPages(first: 100, where: {language: ${FRENCH_CODE}}) {
@@ -118,6 +152,15 @@ export class StaticPagesWordpressService {
   }
 
   async getStaticPage(id: number): Promise<StaticPages> {
+    return this.cacheService.getOrFetchWithLock(
+      CacheCollection.STATIC_PAGES,
+      () => this.loadStaticPageFromWordpress(id),
+      id,
+    );
+  }
+
+  private async loadStaticPageFromWordpress(id: number): Promise<StaticPages> {
+    this.logger.debug(`Loading static page ${id} from WordPress...`);
     const data = await this.wordpressService.executeGraphQLQuery(`
       query {
         staticPage(id: ${id}, idType: DATABASE_ID) {

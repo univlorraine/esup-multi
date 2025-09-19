@@ -26,7 +26,6 @@
   },
   "dependencies": {
     "@nestjs/axios": "^4.0.1",
-    "@nestjs/cache-manager": "^3.0.1",
     "@nestjs/common": "^11.1.5",
     "@nestjs/config": "^4.0.2",
     "@nestjs/core": "^11.1.5",
@@ -37,7 +36,6 @@
     "@nestjs/schedule": "^6.0.0",
     "agentkeepalive": "^4.6.0",
     "axios": "1.11.0",
-    "cache-manager": "^7.0.1",
     "cron": "^4.3.2",
     "mongoose": "^8.16.4",
     "nats": "^2.29.3",

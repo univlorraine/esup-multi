@@ -36,21 +36,47 @@
  * termes.
  */
 
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { ContactUsWordpress } from '@wordpress/collections/contact-us/contact-us.wordpress.model';
 import { ContactUs } from '@common/models/contact-us.model';
 import { WordpressService } from '@wordpress/wordpress.service';
 import { ContactUsTranslations } from '@common/models/translations.model';
 import { ContactUsTranslationsWordpress } from '@wordpress/collections/translations/translations.wordpress.model';
+import { OnEvent } from '@nestjs/event-emitter';
 import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
 import { ContactUsSchema } from '@common/validation/schemas/contact-us.schema';
 import { normalizeEmptyStringToNull } from '@common/utils/normalize';
+import { CacheService } from '@cache/cache.service';
+import { CacheCollection } from '@cache/cache.config';
 
 // TODO: Move FRENCH_CODE to .env and rename it to DEFAULT_LANGUAGE_CODE
 const FRENCH_CODE = 'FR';
 @Injectable()
 export class ContactUsWordpressService {
-  constructor(private readonly wordpressService: WordpressService) {}
+  private readonly logger = new Logger(ContactUsWordpressService.name);
+  constructor(
+    private readonly wordpressService: WordpressService,
+    private readonly cacheService: CacheService,
+  ) {}
+
+  @OnEvent('wordpress.contact-us.cache.cleared')
+  async handleCacheCleared() {
+    this.logger.log('Received cache cleared event - preloading data...');
+    try {
+      await this.preloadData();
+    } catch (error) {
+      this.logger.error(
+        'Failed to preload contact-us after cache clear:',
+        error.message,
+      );
+    }
+  }
+
+  public async preloadData() {
+    this.logger.log('Preloading contact-us...');
+    await this.getContactUs();
+    this.logger.log('Contact-us preloaded successfully');
+  }
 
   @ValidateMapping({ schema: ContactUsSchema })
   private mapToMultiModel(contactUs: ContactUsWordpress): ContactUs {
@@ -79,6 +105,14 @@ export class ContactUsWordpressService {
   }
 
   async getContactUs(): Promise<ContactUs> {
+    return this.cacheService.getOrFetchWithLock(
+      CacheCollection.CONTACT_US,
+      () => this.loadContactUsFromWordpress(),
+    );
+  }
+
+  private async loadContactUsFromWordpress(): Promise<ContactUs> {
+    this.logger.debug('Loading contact-us from WordPress...');
     const data = await this.wordpressService.executeGraphQLQuery(`
       query {
         contactUs(where: {language: ${FRENCH_CODE}}) {
