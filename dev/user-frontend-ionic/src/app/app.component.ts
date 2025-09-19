@@ -38,7 +38,7 @@
  */
 
 import { DOCUMENT } from '@angular/common';
-import { Component, DestroyRef, inject, Inject, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { Component, DestroyRef, inject, Inject, Injector, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { FirebaseMessaging } from '@capacitor-firebase/messaging';
 import { App } from '@capacitor/app';
 import { Capacitor, PluginListenerHandle } from '@capacitor/core';
@@ -51,7 +51,8 @@ import { TranslateService } from '@ngx-translate/core';
 import {
   currentLanguage$, features$, FeaturesService, isDarkTheme$, isFeatureStoreInitialized$, NavigationService,
   NotificationsService, NetworkService, PageLayout, PageLayoutService, setIsDarkTheme, StatisticsService,
-  themeRepoInitialized$, userHadSetThemeInApp, userHadSetThemeInApp$, tenantThemeApplied$, MultiTenantService
+  themeRepoInitialized$, userHadSetThemeInApp, userHadSetThemeInApp$, tenantThemeApplied$, MultiTenantService,
+  ProjectModuleService
 } from '@multi/shared';
 import { initializeApp } from 'firebase/app';
 import { combineLatest, Observable, of } from 'rxjs';
@@ -95,7 +96,9 @@ export class AppComponent implements OnInit, OnDestroy {
     private statisticsService: StatisticsService,
     private titleService: Title,
     private router: Router,
-    private multiTenantService: MultiTenantService
+    private multiTenantService: MultiTenantService,
+    private injector: Injector,
+    private projectModuleService: ProjectModuleService,
   ) {
     this.initializeApp();
   }
@@ -110,12 +113,35 @@ export class AppComponent implements OnInit, OnDestroy {
     if (!Capacitor.isNativePlatform() && this.environment.firebase) {
       this.initializeFirebase();
     }
+
+    await this.initializeAppUpdateIfAvailable();
   }
 
   ngOnDestroy(): void {
     this.backButtonListener.then((listener) => listener.remove());
     this.appResumeListener.then((listener) => listener.remove());
     this.prefersDark.removeEventListener('change', this.handleColorSchemeChange);
+  }
+
+  private async initializeAppUpdateIfAvailable(): Promise<void> {
+    try {
+      // Hack permettant de checker si le module AppUpdateModule est importé ou pas dans le fichier
+      // environment.ts
+      const translatedModules = this.projectModuleService.getTranslatedProjectModules();
+      if (!translatedModules.includes('app-update')) {
+        return;
+      }
+
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      const { AppUpdateService } = await import('@multi/app-update');
+      const appUpdateService = this.injector.get(AppUpdateService, null);
+
+      if (appUpdateService) {
+        await appUpdateService.initialize();
+      }
+    } catch (error) {
+      console.error('AppUpdateService not available:', error);
+    }
   }
 
   private initializeBackButton(): void {
