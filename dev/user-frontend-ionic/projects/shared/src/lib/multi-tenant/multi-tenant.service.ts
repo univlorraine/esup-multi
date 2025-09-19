@@ -50,9 +50,9 @@ import { updateSelectedTenantId, getSelectedTenantId } from './multi-tenant-sele
 import { getRegistry } from '@ngneat/elf';
 import { setTenantThemeApplied } from '../theme/theme.repository';
 import { FCMService } from '../fcm/fcm-global.service';
-import { BehaviorSubject, Observable, Subject, withLatestFrom } from 'rxjs';
+import { BehaviorSubject, firstValueFrom, Observable, Subject, withLatestFrom } from 'rxjs';
 import { authenticatedUserRepoInitialized$, userIsAuthenticated$ } from '../auth/authenticated-user.repository';
-import { filter } from 'rxjs/operators';
+import { filter, take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -60,6 +60,9 @@ import { filter } from 'rxjs/operators';
 export class MultiTenantService {
   public currentTenantLogo$: Observable<string>;
   public tenantChange$: Observable<Tenant>;
+
+  private readySubject = new BehaviorSubject<boolean>(false);
+  public readonly ready$ = this.readySubject.asObservable();
 
   private currentTenant: Tenant;
   private currentTenantLogoSubject = new BehaviorSubject<string>(this.environment.defaultLogo);
@@ -87,6 +90,13 @@ export class MultiTenantService {
         this.disconnectFromTenant();
       }
     });
+
+    this.emitServiceReady();
+  }
+
+  public async waitUntilReady(): Promise<void> {
+    if (this.readySubject.value) return;
+    await firstValueFrom(this.ready$.pipe(filter(Boolean), take(1)));
   }
 
   public getApiEndpoint(): string {
@@ -144,6 +154,8 @@ export class MultiTenantService {
     if(this.currentTenant?.logo) {
       this.currentTenantLogoSubject.next(this.currentTenant.logo);
     }
+
+    this.emitServiceReady();
   }
 
   public getSelectedTenantId(): string {
@@ -192,6 +204,8 @@ export class MultiTenantService {
     this.tenantChangeSubject.next(undefined);
     this.currentTenantLogoSubject.next(this.environment.defaultLogo);
     this.fcmService.unsubscribeFromTopic();
+
+    this.emitServiceReady();
   }
 
   public getFlattenTenantObjects(t: Tenant[], level: number): Tenant[] {
@@ -221,6 +235,21 @@ export class MultiTenantService {
 
   public applyTenantTheme(theme: string): void {
     setTenantThemeApplied(theme);
+  }
+
+  private emitServiceReady(): void {
+    let ready = false;
+    try {
+      if (this.isCurrentTenantStateAllowed()) {
+        const ep = this.getCurrentTenantOrThrowError().apiEndpoint;
+        ready = !!ep;
+      }
+    } catch {
+      ready = false;
+    }
+    if (this.readySubject.value !== ready) {
+      this.readySubject.next(ready);
+    }
   }
 
   private getTenants(): Tenant[] {

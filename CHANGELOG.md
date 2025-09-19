@@ -6,6 +6,10 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ## 2.x.x (Unreleased)
 
 ### Client
+
+#### Bug fixes
+* **(app-update)**: Le client n'était plus capable de récupérer la version min requise suite au passage au multi-tenants
+
 #### Autres
 * Mises à jour des dépendances suite aux alertes CVE
 

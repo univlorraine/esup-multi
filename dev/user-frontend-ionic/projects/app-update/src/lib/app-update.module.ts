@@ -41,18 +41,15 @@ import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { ProjectModuleService } from '@multi/shared';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
-import { AppUpdateService } from './app-update.service';
 import { TranslateModule } from '@ngx-translate/core';
 
 
-const initModule = (projectModuleService: ProjectModuleService, appUpdateService: AppUpdateService) =>
+const initModule = (projectModuleService: ProjectModuleService) =>
   () => {
     projectModuleService.initProjectModule({
       name: 'app-update',
       translation: true,
     });
-
-    appUpdateService.initialize();
   }
 
 @NgModule({
@@ -65,7 +62,7 @@ const initModule = (projectModuleService: ProjectModuleService, appUpdateService
     {
       provide: APP_INITIALIZER,
       useFactory: initModule,
-      deps:[ProjectModuleService, AppUpdateService],
+      deps:[ProjectModuleService],
       multi: true
     }
   ],
