@@ -53,8 +53,6 @@ export default (): {
   notificationsProviderApi: NotificationsProviderApi;
   cmsApi: CmsApi;
   keepAliveOptions: KeepAliveOptions;
-  cacheTtl: number;
-  cacheMax: number;
 } => {
   const keepAliveOptions = {};
 
@@ -104,7 +102,5 @@ export default (): {
         process.env.NOTIFICATIONS_SERVICE_CMS_CONNECTOR_API_BEARER_TOKEN,
     },
     keepAliveOptions,
-    cacheTtl: parseInt(process.env.NOTIFICATIONS_SERVICE_CACHE_TTL_MS),
-    cacheMax: parseInt(process.env.NOTIFICATIONS_SERVICE_CACHE_MAX),
   };
 };

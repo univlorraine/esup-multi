@@ -2,8 +2,7 @@
  * Copyright ou © ou Copr. Université de Lorraine, (2022)
  *
  * Direction du Numérique de l'Université de Lorraine - SIED
- *  (dn-mobile-dev@univ-lorraine.fr)
- * JNESIS (contact@jnesis.com)
+ * (dn-mobile-dev@univ-lorraine.fr)
  *
  * Ce logiciel est un programme informatique servant à rendre accessible
  * sur mobile divers services universitaires aux étudiants et aux personnels
@@ -37,18 +36,14 @@
  * termes.
  */
 
-import { Controller } from '@nestjs/common';
-import { MessagePattern } from '@nestjs/microservices';
-import { from, Observable } from 'rxjs';
-import { PageContentResultDto } from './page-content.dto';
-import { PageContentService } from './page-content.service';
+import { Module, Global } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import { RedisService } from './redis.service';
 
-@Controller()
-export class PageContentController {
-  constructor(private readonly pageContentService: PageContentService) {}
-
-  @MessagePattern({ cmd: 'contactUsPageContent' })
-  getContactUsPageContent(): Observable<PageContentResultDto> {
-    return from(this.pageContentService.getPageContent());
-  }
-}
+@Global()
+@Module({
+  imports: [ConfigModule],
+  providers: [RedisService],
+  exports: [RedisService],
+})
+export class RedisModule {}
