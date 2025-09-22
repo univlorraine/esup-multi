@@ -27,30 +27,37 @@ jobs:
             - 'dev/user-frontend-ionic/**'
             - 'dev/user-frontend-ionic/.eslintrc.js'
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
       - name: Read Node.js version
         id: node_version
-        if: steps.changes.outputs.frontend == 'true'
+        if: ${{ steps.changes.outputs.frontend == 'true' }}
         run: echo NODE_VERSION=$(cat dev/user-frontend-ionic/.nvmrc) >> $GITHUB_OUTPUT
 
       - name: Set up Node.js
-        if: steps.changes.outputs.frontend == 'true'
+        if: ${{ steps.changes.outputs.frontend == 'true' }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ steps.node_version.outputs.NODE_VERSION }}
+          cache: "pnpm"
+          cache-dependency-path: pnpm-lock.yaml
 
       - name: Prepare environment
-        if: steps.changes.outputs.frontend == 'true'
+        if: ${{ steps.changes.outputs.frontend == 'true' }}
         run: |
           cd dev/user-frontend-ionic
           cp angular.json.dist angular.json
           cp -r src/theme/app-theme-dist src/theme/app-theme
-          npm ci
+          pnpm i  --frozen-lockfile  --filter .
 
       - name: Lint
-        if: steps.changes.outputs.frontend == 'true'
+        if: ${{ steps.changes.outputs.frontend == 'true' }}
         run: |
           cd dev/user-frontend-ionic
-          npm run lint
+          pnpm run lint
 
 
   backend-main:
@@ -72,28 +79,35 @@ jobs:
             - 'dev/user-backend-nest/main/**/*.ts'
             - 'dev/user-backend-nest/main/.eslintrc.js'
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
       - name: Read Node.js version
         id: node_version
-        if: steps.changes.outputs.main == 'true'
+        if: ${{ steps.changes.outputs.main == 'true' }}
         run: echo NODE_VERSION=$(cat dev/user-backend-nest/.nvmrc) >> $GITHUB_OUTPUT
 
       - name: Set up Node.js
-        if: steps.changes.outputs.main == 'true'
+        if: ${{ steps.changes.outputs.main == 'true' }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ steps.node_version.outputs.NODE_VERSION }}
+          cache: "pnpm"
+          cache-dependency-path: pnpm-lock.yaml
 
       - name: Prepare environment
-        if: steps.changes.outputs.main == 'true'
+        if: ${{ steps.changes.outputs.main == 'true' }}
         run: |
           cd dev/user-backend-nest/main
-          npm ci
+          pnpm i  --frozen-lockfile  --filter .
 
       - name: Lint
-        if: steps.changes.outputs.main == 'true'
+        if: ${{ steps.changes.outputs.main == 'true' }}
         run: |
           cd dev/user-backend-nest/main
-          npm run lint
+          pnpm run lint
 
 
   backend-microservices:
@@ -185,28 +199,35 @@ jobs:
             - 'dev/user-backend-nest/microservices/statistics/**/*.ts'
             - 'dev/user-backend-nest/microservices/statistics/.eslintrc.js'
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
       - name: Read Node.js version
         id: node_version
-        if: steps.changes.outputs[${{ matrix.service }}] == 'true'
+        if: ${{ steps.changes.outputs[matrix.service] == 'true' }}
         run: echo NODE_VERSION=$(cat dev/user-backend-nest/.nvmrc) >> $GITHUB_OUTPUT
 
       - name: Set up Node.js
-        if: steps.changes.outputs[${{ matrix.service }}] == 'true'
+        if: ${{ steps.changes.outputs[matrix.service] == 'true' }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ steps.node_version.outputs.NODE_VERSION }}
+          cache: "pnpm"
+          cache-dependency-path: pnpm-lock.yaml
 
       - name: Prepare environment
-        if: steps.changes.outputs[${{ matrix.service }}] == 'true'
+        if: ${{ steps.changes.outputs[matrix.service] == 'true' }}
         run: |
           cd dev/user-backend-nest/microservices/${{ matrix.service }}
-          npm ci
+          pnpm i  --frozen-lockfile  --filter .
 
       - name: Lint ${{ matrix.service }}
-        if: steps.changes.outputs[${{ matrix.service }}] == 'true'
+        if: ${{ steps.changes.outputs[matrix.service] == 'true' }}
         run: |
           cd dev/user-backend-nest/microservices/${{ matrix.service }}
-          npm run lint
+          pnpm run lint
 
   connectors:
     runs-on: ubuntu-latest
@@ -233,25 +254,32 @@ jobs:
             - 'dev/connectors/multi-cms-connector/**/*.ts'
             - 'dev/connectors/multi-cms-connector/.eslintrc.js'
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
       - name: Read Node.js version
         id: node_version
-        if: steps.changes.outputs[${{ matrix.service }}] == 'true'
+        if: ${{ steps.changes.outputs[matrix.service] == 'true' }}
         run: echo NODE_VERSION=$(cat dev/connectors/${{ matrix.service }}/.nvmrc) >> $GITHUB_OUTPUT
 
       - name: Set up Node.js
-        if: steps.changes.outputs[${{ matrix.service }}] == 'true'
+        if: ${{ steps.changes.outputs[matrix.service] == 'true' }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ steps.node_version.outputs.NODE_VERSION }}
+          cache: "pnpm"
+          cache-dependency-path: pnpm-lock.yaml
 
       - name: Prepare environment
-        if: steps.changes.outputs[${{ matrix.service }}] == 'true'
+        if: ${{ steps.changes.outputs[matrix.service] == 'true' }}
         run: |
           cd dev/connectors/${{ matrix.service }}
-          npm ci
+          pnpm i  --frozen-lockfile  --filter .
 
       - name: Lint ${{ matrix.service }}
-        if: steps.changes.outputs[${{ matrix.service }}] == 'true'
+        if: ${{ steps.changes.outputs[matrix.service] == 'true' }}
         run: |
           cd dev/connectors/${{ matrix.service }}
-          npm run lint
+          pnpm run lint
