@@ -100,7 +100,7 @@ Pour que le projet puisse quand même build sans avoir les fichiers réels de la
 
 Veillez à ne pas commiter votre configuration Firebase réelle dans le projet.
 
-En exécutant la commande `npx cap sync`, les fichiers de configuration Firebase seront injectés lors du build dans la plateforme visée, grâce à la librairie *trapeze*.
+En exécutant la commande `pnpx cap sync`, les fichiers de configuration Firebase seront injectés lors du build dans la plateforme visée, grâce à la librairie *trapeze*.
 
 **Procédure pour ajouter un nouvel environnement de développement avec une configuration Firebase spécifique :**
 
@@ -122,7 +122,7 @@ platforms:
         dest: app/google-services.json
   ios: (à compléter)
 ```
-Exécuter la commande npx `cap sync`.
+Exécuter la commande pnpx `cap sync`.
 
 ### Dépendances inter-modules
 

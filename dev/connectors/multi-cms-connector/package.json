@@ -7,9 +7,10 @@
   "private": true,
   "engines": {
     "node": ">=20",
-    "npm": ">=9"
+    "pnpm": ">=10"
   },
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",

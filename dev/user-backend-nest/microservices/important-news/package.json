@@ -7,9 +7,10 @@
   "license": "CECILL-2.1",
   "engines": {
     "node": ">=20",
-    "npm": ">=9"
+    "pnpm": ">=10"
   },
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "prebuild": "rimraf dist && node update-infos.js",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",

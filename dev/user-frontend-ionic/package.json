@@ -5,20 +5,21 @@
   "homepage": "https://ionicframework.com/",
   "engines": {
     "node": ">=20",
-    "npm": ">=9"
+    "pnpm": ">=10"
   },
   "license": "CECILL-2.1",
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "ng": "ng",
     "start": "ng serve",
-    "prebuild": "npm run module:build-all",
+    "prebuild": "pnpm run module:build-all",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "module:create": "npx ng g library",
-    "module:build": "npx ng build --project=",
-    "module:watch": "npx ng build --watch --project=",
-    "module:build-all": "npm run module:build guided-tour && npm run module:build shared && npm run module:build app-update && npm run module:build preferences && npm run module:build features && npm run module:build auth && npm run module:build map && npm run module:build rss && npm run module:build cards && npm run module:build schedule && npm run module:build contacts && npm run module:build notifications && npm run module:build important-news && npm run module:build clocking && npm run module:build reservation && npm run module:build menu && npm run module:build chatbot && npm run module:build static-pages && npm run module:build social-network && npm run module:build contact-us && npm run module:build restaurants && npm run module:build unread-mail && npm run module:build calendar",
+    "module:create": "pnpx ng g library",
+    "module:build": "pnpx ng build --project=",
+    "module:watch": "pnpx ng build --watch --project=",
+    "module:build-all": "pnpm run module:build guided-tour && pnpm run module:build shared && pnpm run module:build app-update && pnpm run module:build preferences && pnpm run module:build features && pnpm run module:build auth && pnpm run module:build map && pnpm run module:build rss && pnpm run module:build cards && pnpm run module:build schedule && pnpm run module:build contacts && pnpm run module:build notifications && pnpm run module:build important-news && pnpm run module:build clocking && pnpm run module:build reservation && pnpm run module:build menu && pnpm run module:build chatbot && pnpm run module:build static-pages && pnpm run module:build social-network && pnpm run module:build contact-us && pnpm run module:build restaurants && pnpm run module:build unread-mail && pnpm run module:build calendar",
     "dev:android": "ionic capacitor run android --open -l --external",
     "dev:ios": "ionic capacitor run ios --open -l --external"
   },

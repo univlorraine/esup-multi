@@ -15,17 +15,17 @@
   "homepage": "https://github.com/univlorraine/esup-multi#readme",
   "engines": {
     "node": ">=20",
-    "npm": ">=9"
+    "pnpm": ">=10"
   },
   "scripts": {
-    "ci": "npm ci && npm run back:main -- npm ci && concurrently \"npm run back:*(!main) -- npm ci\" && npm run mocks -- npm ci && npm run front -- npm ci && concurrently \"npm run connector:* -- npm ci\"",
-    "build:back": "npm run back:main -- npm ci && concurrently \"npm run back:*(!main) -- npm ci\" && concurrently \"npm run back:* -- npm run build\"",
-    "build:front": "npm run front -- npm ci && npm run front -- npm run module:build-all",
-    "build:mocks": "npm run mocks -- npm ci",
-    "start:back": "concurrently \"npm run back:* -- npm run start\"",
-    "start:back:dev": "concurrently \"npm run back:* -- npm run start:dev\"",
-    "start:front": "npm run front -- ionic serve",
-    "start:mocks": "npm run mocks -- npm start",
+    "preinstall": "npx only-allow pnpm",
+    "ci": "pnpm i --frozen-lockfile",
+    "build:back": "concurrently \"pnpm run back:* -- pnpm run build\"",
+    "build:front": "pnpm run front -- pnpm run module:build-all",
+    "start:back": "concurrently \"pnpm run back:* -- pnpm run start\"",
+    "start:back:dev": "concurrently \"pnpm run back:* -- pnpm run start:dev\"",
+    "start:front": "pnpm run front -- ionic serve",
+    "start:mocks": "pnpm run mocks -- pnpm start",
     "front": "cd dev/user-frontend-ionic && ",
     "mocks": "cd dev/user-backend-mocks && ",
     "back:main": "cd dev/user-backend-nest/main && ",
