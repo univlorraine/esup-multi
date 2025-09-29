@@ -11,10 +11,18 @@ stages:
   - build-deploy-docker
 
 cache:
-  key: ${CI_COMMIT_REF_SLUG}
+  key:
+    files:
+      - pnpm-lock.yaml
   paths:
-    - '${CI_PROJECT_DIR}/.npm/'
+    - '${CI_PROJECT_DIR}/.pnpm-store'
   policy: pull-push
+
+before_script:
+  - npm install --global corepack@latest
+  - corepack enable
+  - corepack prepare pnpm@latest-10 --activate
+  - pnpm config set store-dir .pnpm-store
 
 workflow:
   # La pipeline ne se déclenchera que si les modifications ont eu lieu sur les branches suivantes
