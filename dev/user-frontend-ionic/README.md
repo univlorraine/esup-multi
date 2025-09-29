@@ -11,7 +11,7 @@ L'application est organisée sous la forme d'un monorepo "léger" :
 ### Ajout d'un nouveau module
 
 ```bash
-npm run module:create [nom du module]
+pnpm run module:create [nom du module]
 ```
 
 Puis mettre à jour le "path" du module dans le fichier `tsconfig.json` pour préfixer par `@multi/`.
@@ -31,9 +31,9 @@ Puis mettre à jour le "path" du module dans le fichier `tsconfig.json` pour pr�
 import { HelloPageModule } from '@multi/hello';
 ```
 
-Il faut également ajouter le module au script npm `module:build-all` :
+Il faut également ajouter le module au script pnpm `module:build-all` :
 ```json
-  "module:build-all": "npm run module:build hello && npm run module:build [nom du module]",
+  "module:build-all": "pnpm run module:build hello && pnpm run module:build [nom du module]",
 ```
 
 #### Lint
@@ -140,12 +140,12 @@ Pour qu'un module dépende du module `shared` il faut le déclarer dans les `pee
 
 Compilation d'un seul module :
 ```bash
-npm run module:build [nom du module]
+pnpm run module:build [nom du module]
 ```
 
 Compilation de tous les modules :
 ```bash
-npm run module:build-all
+pnpm run module:build-all
 ```
 
 ### Liste des modules

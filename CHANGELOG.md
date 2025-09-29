@@ -12,6 +12,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 #### Autres
 * Mises à jour des dépendances suite aux alertes CVE
+* Remplacelement de NPM par PNPM
 
 ### Backend
 #### New features
@@ -25,6 +26,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 #### Autres
 * Mises à jour des dépendances suite aux alertes CVE
+* Remplacelement de NPM par PNPM
 
 ### Connecteurs
 #### New features
@@ -33,6 +35,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 #### Autres
 * Mises à jour des dépendances suite aux alertes CVE
+* Remplacelement de NPM par PNPM
 
 ## 2.0.0 (2025-07-16)
 
