@@ -3,17 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## next version...
+## 2.x.x (Unreleased)
 
 ### Client
-#### Autres
-* Mises à jour des dépendances suite aux alertes CVE
 
-### Connecteurs
+#### Bug fixes
+* **(app-update)**: Le client n'était plus capable de récupérer la version min requise suite au passage au multi-tenants
+
 #### Autres
 * Mises à jour des dépendances suite aux alertes CVE
 
 ### Backend
+#### New features
+* **(auth)** : Suppression du cache dans le microservice, déportation vers le connecteur CMS
+* **(contact-us)** : Suppression du cache dans le microservice, déportation vers le connecteur CMS
+* **(features)** : Suppression du cache dans le microservice, déportation vers le connecteur CMS
+* **(important-news)** : Suppression du cache dans le microservice, déportation vers le connecteur CMS
+* **(notifications)** : Suppression du cache dans le microservice, déportation vers le connecteur CMS
+* **(social-networks)** : Suppression du cache dans le microservice, déportation vers le connecteur CMS
+* **(static-pages)** : Suppression du cache dans le microservice, déportation vers le connecteur CMS
+
+#### Autres
+* Mises à jour des dépendances suite aux alertes CVE
+
+### Connecteurs
+#### New features
+* **(multi-cms-connector)** : Ajout de cache pour palier aux problèmes de performance côté CMS
+* **(multi-cms-connector)** : Ajout de routes permettant de vider le cache via des webhooks côté CMS
+
 #### Autres
 * Mises à jour des dépendances suite aux alertes CVE
 

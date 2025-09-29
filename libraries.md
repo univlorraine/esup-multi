@@ -77,6 +77,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@capacitor-firebase/messaging@7.2.0](https://github.com/capawesome-team/capacitor-firebase) - Apache-2.0
 - [@capacitor-mlkit/barcode-scanning@7.2.1](https://github.com/capawesome-team/capacitor-mlkit) - Apache-2.0
 - [@capacitor/android@7.4.3](https://github.com/ionic-team/capacitor) - MIT
+<<<<<<< HEAD
 - [@capacitor/app@7.1.0](https://github.com/ionic-team/capacitor-plugins) - MIT
 - [@capacitor/assets@3.0.5](https://github.com/ionic-team/capacitor-assets) - MIT
 - [@capacitor/browser@7.0.2](https://github.com/ionic-team/capacitor-plugins) - MIT
@@ -92,6 +93,23 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@capacitor/push-notifications@7.0.3](https://github.com/ionic-team/capacitor-plugins) - MIT
 - [@capacitor/splash-screen@7.0.3](https://github.com/ionic-team/capacitor-plugins) - MIT
 - [@capacitor/status-bar@7.0.3](https://github.com/ionic-team/capacitor-plugins) - MIT
+=======
+- [@capacitor/app@7.0.1](https://github.com/ionic-team/capacitor-plugins) - MIT
+- [@capacitor/assets@3.0.5](https://github.com/ionic-team/capacitor-assets) - MIT
+- [@capacitor/browser@7.0.1](https://github.com/ionic-team/capacitor-plugins) - MIT
+- [@capacitor/camera@7.0.1](https://github.com/ionic-team/capacitor-plugins) - MIT
+- [@capacitor/cli@7.4.3](https://github.com/ionic-team/capacitor) - MIT
+- [@capacitor/core@7.4.3](https://github.com/ionic-team/capacitor) - MIT
+- [@capacitor/device@7.0.1](https://github.com/ionic-team/capacitor-plugins) - MIT
+- [@capacitor/geolocation@7.1.4](https://github.com/ionic-team/capacitor-geolocation) - MIT
+- [@capacitor/haptics@7.0.1](https://github.com/ionic-team/capacitor-plugins) - MIT
+- [@capacitor/ios@7.4.3](https://github.com/ionic-team/capacitor) - MIT
+- [@capacitor/keyboard@7.0.2](https://github.com/ionic-team/capacitor-plugins) - MIT
+- [@capacitor/network@7.0.1](https://github.com/ionic-team/capacitor-plugins) - MIT
+- [@capacitor/push-notifications@7.0.1](https://github.com/ionic-team/capacitor-plugins) - MIT
+- [@capacitor/splash-screen@7.0.1](https://github.com/ionic-team/capacitor-plugins) - MIT
+- [@capacitor/status-bar@7.0.1](https://github.com/ionic-team/capacitor-plugins) - MIT
+>>>>>>> github/develop
 - [@capawesome/capacitor-android-edge-to-edge-support@7.2.3](https://github.com/capawesome-team/capacitor-plugins) - MIT
 - [@capawesome/capacitor-badge@7.0.1](https://github.com/capawesome-team/capacitor-plugins) - MIT
 - [@capawesome/capacitor-screen-orientation@7.0.1](https://github.com/capawesome-team/capacitor-plugins) - MIT
@@ -218,7 +236,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 ### [auth](./dev/user-backend-nest/microservices/auth)
 <span id="backend-auth"></span>
 ```
-├─ MIT: 34
+├─ MIT: 32
 ├─ Apache-2.0: 4
 ├─ BSD-2-Clause: 1
 └─ ISC: 1
@@ -227,9 +245,14 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 <details><summary>Détails</summary>
 
 - [@nestjs/axios@4.0.1](https://github.com/nestjs/axios) - MIT
+<<<<<<< HEAD
 - [@nestjs/cache-manager@3.0.1](https://github.com/nestjs/cache-manager) - MIT
 - [@nestjs/cli@11.0.10](https://github.com/nestjs/nest-cli) - MIT
 - [@nestjs/common@11.1.6](https://github.com/nestjs/nest) - MIT
+=======
+- [@nestjs/cli@11.0.7](https://github.com/nestjs/nest-cli) - MIT
+- [@nestjs/common@11.1.5](https://github.com/nestjs/nest) - MIT
+>>>>>>> github/develop
 - [@nestjs/config@4.0.2](https://github.com/nestjs/config) - MIT
 - [@nestjs/core@11.1.6](https://github.com/nestjs/nest) - MIT
 - [@nestjs/jwt@11.0.0](https://github.com/nestjs/jwt) - MIT
@@ -247,8 +270,12 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@typescript-eslint/parser@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - BSD-2-Clause
 - [agentkeepalive@4.6.0](https://github.com/node-modules/agentkeepalive) - MIT
 - [axios@1.11.0](https://github.com/axios/axios) - MIT
+<<<<<<< HEAD
 - [cache-manager@7.2.0](https://github.com/jaredwray/cacheable) - MIT
 - [cron@4.3.3](https://github.com/kelektiv/node-cron) - MIT
+=======
+- [cron@4.3.2](https://github.com/kelektiv/node-cron) - MIT
+>>>>>>> github/develop
 - [eslint-config-prettier@8.10.2](https://github.com/prettier/eslint-config-prettier) - MIT
 - [eslint-plugin-prettier@4.2.5](https://github.com/prettier/eslint-plugin-prettier) - MIT
 - [eslint@8.57.1](https://github.com/eslint/eslint) - MIT
@@ -414,7 +441,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 ### [contact-us](./dev/user-backend-nest/microservices/contact-us)
 <span id="backend-contact-us"></span>
 ```
-├─ MIT: 29
+├─ MIT: 27
 ├─ Apache-2.0: 4
 ├─ BSD-2-Clause: 1
 ├─ MIT-0: 1
@@ -425,9 +452,14 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 
 - [@nestjs-modules/mailer@2.0.2](https://github.com/nest-modules/mailer) - MIT
 - [@nestjs/axios@4.0.1](https://github.com/nestjs/axios) - MIT
+<<<<<<< HEAD
 - [@nestjs/cache-manager@3.0.1](https://github.com/nestjs/cache-manager) - MIT
 - [@nestjs/cli@11.0.10](https://github.com/nestjs/nest-cli) - MIT
 - [@nestjs/common@11.1.6](https://github.com/nestjs/nest) - MIT
+=======
+- [@nestjs/cli@11.0.7](https://github.com/nestjs/nest-cli) - MIT
+- [@nestjs/common@11.1.5](https://github.com/nestjs/nest) - MIT
+>>>>>>> github/develop
 - [@nestjs/config@4.0.2](https://github.com/nestjs/config) - MIT
 - [@nestjs/core@11.1.6](https://github.com/nestjs/nest) - MIT
 - [@nestjs/microservices@11.1.6](https://github.com/nestjs/nest) - MIT
@@ -441,7 +473,10 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@typescript-eslint/eslint-plugin@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
 - [@typescript-eslint/parser@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - BSD-2-Clause
 - [agentkeepalive@4.6.0](https://github.com/node-modules/agentkeepalive) - MIT
+<<<<<<< HEAD
 - [cache-manager@7.2.0](https://github.com/jaredwray/cacheable) - MIT
+=======
+>>>>>>> github/develop
 - [eslint-config-prettier@8.10.2](https://github.com/prettier/eslint-config-prettier) - MIT
 - [eslint-plugin-prettier@4.2.5](https://github.com/prettier/eslint-plugin-prettier) - MIT
 - [eslint@8.57.1](https://github.com/eslint/eslint) - MIT
@@ -511,7 +546,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 ### [features](./dev/user-backend-nest/microservices/features)
 <span id="backend-features"></span>
 ```
-├─ MIT: 28
+├─ MIT: 26
 ├─ Apache-2.0: 4
 ├─ BSD-2-Clause: 1
 └─ ISC: 1
@@ -520,9 +555,14 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 <details><summary>Détails</summary>
 
 - [@nestjs/axios@4.0.1](https://github.com/nestjs/axios) - MIT
+<<<<<<< HEAD
 - [@nestjs/cache-manager@3.0.1](https://github.com/nestjs/cache-manager) - MIT
 - [@nestjs/cli@11.0.10](https://github.com/nestjs/nest-cli) - MIT
 - [@nestjs/common@11.1.6](https://github.com/nestjs/nest) - MIT
+=======
+- [@nestjs/cli@11.0.7](https://github.com/nestjs/nest-cli) - MIT
+- [@nestjs/common@11.1.5](https://github.com/nestjs/nest) - MIT
+>>>>>>> github/develop
 - [@nestjs/config@4.0.2](https://github.com/nestjs/config) - MIT
 - [@nestjs/core@11.1.6](https://github.com/nestjs/nest) - MIT
 - [@nestjs/microservices@11.1.6](https://github.com/nestjs/nest) - MIT
@@ -536,7 +576,10 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@typescript-eslint/eslint-plugin@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
 - [@typescript-eslint/parser@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - BSD-2-Clause
 - [agentkeepalive@4.6.0](https://github.com/node-modules/agentkeepalive) - MIT
+<<<<<<< HEAD
 - [cache-manager@7.2.0](https://github.com/jaredwray/cacheable) - MIT
+=======
+>>>>>>> github/develop
 - [eslint-config-prettier@8.10.2](https://github.com/prettier/eslint-config-prettier) - MIT
 - [eslint-plugin-prettier@4.2.5](https://github.com/prettier/eslint-plugin-prettier) - MIT
 - [eslint@8.57.1](https://github.com/eslint/eslint) - MIT
@@ -559,7 +602,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 ### [important-news](./dev/user-backend-nest/microservices/important-news)
 <span id="backend-important-news"></span>
 ```
-├─ MIT: 28
+├─ MIT: 26
 ├─ Apache-2.0: 4
 ├─ BSD-2-Clause: 1
 └─ ISC: 1
@@ -568,9 +611,14 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 <details><summary>Détails</summary>
 
 - [@nestjs/axios@4.0.1](https://github.com/nestjs/axios) - MIT
+<<<<<<< HEAD
 - [@nestjs/cache-manager@3.0.1](https://github.com/nestjs/cache-manager) - MIT
 - [@nestjs/cli@11.0.10](https://github.com/nestjs/nest-cli) - MIT
 - [@nestjs/common@11.1.6](https://github.com/nestjs/nest) - MIT
+=======
+- [@nestjs/cli@11.0.7](https://github.com/nestjs/nest-cli) - MIT
+- [@nestjs/common@11.1.5](https://github.com/nestjs/nest) - MIT
+>>>>>>> github/develop
 - [@nestjs/config@4.0.2](https://github.com/nestjs/config) - MIT
 - [@nestjs/core@11.1.6](https://github.com/nestjs/nest) - MIT
 - [@nestjs/microservices@11.1.6](https://github.com/nestjs/nest) - MIT
@@ -584,7 +632,10 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@typescript-eslint/eslint-plugin@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
 - [@typescript-eslint/parser@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - BSD-2-Clause
 - [agentkeepalive@4.6.0](https://github.com/node-modules/agentkeepalive) - MIT
+<<<<<<< HEAD
 - [cache-manager@7.2.0](https://github.com/jaredwray/cacheable) - MIT
+=======
+>>>>>>> github/develop
 - [eslint-config-prettier@8.10.2](https://github.com/prettier/eslint-config-prettier) - MIT
 - [eslint-plugin-prettier@4.2.5](https://github.com/prettier/eslint-plugin-prettier) - MIT
 - [eslint@8.57.1](https://github.com/eslint/eslint) - MIT
@@ -700,7 +751,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 ### [notifications](./dev/user-backend-nest/microservices/notifications)
 <span id="backend-notifications"></span>
 ```
-├─ MIT: 28
+├─ MIT: 26
 ├─ Apache-2.0: 4
 ├─ BSD-2-Clause: 1
 └─ ISC: 1
@@ -709,9 +760,14 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 <details><summary>Détails</summary>
 
 - [@nestjs/axios@4.0.1](https://github.com/nestjs/axios) - MIT
+<<<<<<< HEAD
 - [@nestjs/cache-manager@3.0.1](https://github.com/nestjs/cache-manager) - MIT
 - [@nestjs/cli@11.0.10](https://github.com/nestjs/nest-cli) - MIT
 - [@nestjs/common@11.1.6](https://github.com/nestjs/nest) - MIT
+=======
+- [@nestjs/cli@11.0.7](https://github.com/nestjs/nest-cli) - MIT
+- [@nestjs/common@11.1.5](https://github.com/nestjs/nest) - MIT
+>>>>>>> github/develop
 - [@nestjs/config@4.0.2](https://github.com/nestjs/config) - MIT
 - [@nestjs/core@11.1.6](https://github.com/nestjs/nest) - MIT
 - [@nestjs/microservices@11.1.6](https://github.com/nestjs/nest) - MIT
@@ -725,7 +781,10 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@typescript-eslint/eslint-plugin@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
 - [@typescript-eslint/parser@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - BSD-2-Clause
 - [agentkeepalive@4.6.0](https://github.com/node-modules/agentkeepalive) - MIT
+<<<<<<< HEAD
 - [cache-manager@7.2.0](https://github.com/jaredwray/cacheable) - MIT
+=======
+>>>>>>> github/develop
 - [eslint-config-prettier@8.10.2](https://github.com/prettier/eslint-config-prettier) - MIT
 - [eslint-plugin-prettier@4.2.5](https://github.com/prettier/eslint-plugin-prettier) - MIT
 - [eslint@8.57.1](https://github.com/eslint/eslint) - MIT
@@ -895,7 +954,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 ### [social-network](./dev/user-backend-nest/microservices/social-network)
 <span id="backend-social-network"></span>
 ```
-├─ MIT: 28
+├─ MIT: 26
 ├─ Apache-2.0: 4
 ├─ BSD-2-Clause: 1
 └─ ISC: 1
@@ -904,9 +963,14 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 <details><summary>Détails</summary>
 
 - [@nestjs/axios@4.0.1](https://github.com/nestjs/axios) - MIT
+<<<<<<< HEAD
 - [@nestjs/cache-manager@3.0.1](https://github.com/nestjs/cache-manager) - MIT
 - [@nestjs/cli@11.0.10](https://github.com/nestjs/nest-cli) - MIT
 - [@nestjs/common@11.1.6](https://github.com/nestjs/nest) - MIT
+=======
+- [@nestjs/cli@11.0.7](https://github.com/nestjs/nest-cli) - MIT
+- [@nestjs/common@11.1.5](https://github.com/nestjs/nest) - MIT
+>>>>>>> github/develop
 - [@nestjs/config@4.0.2](https://github.com/nestjs/config) - MIT
 - [@nestjs/core@11.1.6](https://github.com/nestjs/nest) - MIT
 - [@nestjs/microservices@11.1.6](https://github.com/nestjs/nest) - MIT
@@ -920,7 +984,10 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@typescript-eslint/eslint-plugin@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
 - [@typescript-eslint/parser@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - BSD-2-Clause
 - [agentkeepalive@4.6.0](https://github.com/node-modules/agentkeepalive) - MIT
+<<<<<<< HEAD
 - [cache-manager@7.2.0](https://github.com/jaredwray/cacheable) - MIT
+=======
+>>>>>>> github/develop
 - [eslint-config-prettier@8.10.2](https://github.com/prettier/eslint-config-prettier) - MIT
 - [eslint-plugin-prettier@4.2.5](https://github.com/prettier/eslint-plugin-prettier) - MIT
 - [eslint@8.57.1](https://github.com/eslint/eslint) - MIT
@@ -943,7 +1010,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 ### [static-pages](./dev/user-backend-nest/microservices/static-pages)
 <span id="backend-static-pages"></span>
 ```
-├─ MIT: 28
+├─ MIT: 26
 ├─ Apache-2.0: 4
 ├─ BSD-2-Clause: 1
 └─ ISC: 1
@@ -952,9 +1019,14 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 <details><summary>Détails</summary>
 
 - [@nestjs/axios@4.0.1](https://github.com/nestjs/axios) - MIT
+<<<<<<< HEAD
 - [@nestjs/cache-manager@3.0.1](https://github.com/nestjs/cache-manager) - MIT
 - [@nestjs/cli@11.0.10](https://github.com/nestjs/nest-cli) - MIT
 - [@nestjs/common@11.1.6](https://github.com/nestjs/nest) - MIT
+=======
+- [@nestjs/cli@11.0.7](https://github.com/nestjs/nest-cli) - MIT
+- [@nestjs/common@11.1.5](https://github.com/nestjs/nest) - MIT
+>>>>>>> github/develop
 - [@nestjs/config@4.0.2](https://github.com/nestjs/config) - MIT
 - [@nestjs/core@11.1.6](https://github.com/nestjs/nest) - MIT
 - [@nestjs/microservices@11.1.6](https://github.com/nestjs/nest) - MIT
@@ -968,7 +1040,10 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@typescript-eslint/eslint-plugin@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
 - [@typescript-eslint/parser@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - BSD-2-Clause
 - [agentkeepalive@4.6.0](https://github.com/node-modules/agentkeepalive) - MIT
+<<<<<<< HEAD
 - [cache-manager@7.2.0](https://github.com/jaredwray/cacheable) - MIT
+=======
+>>>>>>> github/develop
 - [eslint-config-prettier@8.10.2](https://github.com/prettier/eslint-config-prettier) - MIT
 - [eslint-plugin-prettier@4.2.5](https://github.com/prettier/eslint-plugin-prettier) - MIT
 - [eslint@8.57.1](https://github.com/eslint/eslint) - MIT
@@ -1038,10 +1113,9 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 ### [multi-cms-connector](./dev/connectors/multi-cms-connector)
 <span id="connector-multi-cms-connector"></span>
 ```
-├─ MIT: 40
+├─ MIT: 39
 ├─ Apache-2.0: 3
 ├─ BSD-2-Clause: 1
-├─ Apache-2.0*: 1
 └─ BSD-3-Clause: 1
 ```
 
@@ -1054,7 +1128,12 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@nestjs/cli@11.0.10](https://github.com/nestjs/nest-cli) - MIT
 - [@nestjs/common@11.1.6](https://github.com/nestjs/nest) - MIT
 - [@nestjs/config@4.0.2](https://github.com/nestjs/config) - MIT
+<<<<<<< HEAD
 - [@nestjs/core@11.1.6](https://github.com/nestjs/nest) - MIT
+=======
+- [@nestjs/core@11.1.5](https://github.com/nestjs/nest) - MIT
+- [@nestjs/event-emitter@3.0.1](https://github.com/nestjs/event-emitter) - MIT
+>>>>>>> github/develop
 - [@nestjs/graphql@13.1.0](https://github.com/nestjs/graphql) - MIT
 - [@nestjs/jwt@11.0.0](https://github.com/nestjs/jwt) - MIT
 - [@nestjs/passport@11.0.5](https://github.com/nestjs/passport) - MIT
@@ -1062,19 +1141,22 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@nestjs/schematics@11.0.7](https://github.com/nestjs/schematics) - MIT
 - [@nestjs/testing@11.1.6](https://github.com/nestjs/nest) - MIT
 - [@types/express@5.0.3](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+<<<<<<< HEAD
 - [@types/hapi__joi@17.1.15](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/jest@29.5.4](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/node@20.19.16](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+=======
+- [@types/jest@29.5.14](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/node@20.19.9](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+>>>>>>> github/develop
 - [@types/passport-jwt@4.0.1](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/supertest@6.0.3](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@typescript-eslint/eslint-plugin@7.18.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
 - [@typescript-eslint/parser@7.18.0](https://github.com/typescript-eslint/typescript-eslint) - BSD-2-Clause
-- [apollo-link-rest@0.9.0](https://github.com/apollographql/apollo-link-rest) - MIT
 - [envalid@8.1.0](https://github.com/af/envalid) - MIT
 - [eslint-config-prettier@9.1.2](https://github.com/prettier/eslint-config-prettier) - MIT
 - [eslint-plugin-prettier@5.5.4](https://github.com/prettier/eslint-plugin-prettier) - MIT
 - [eslint@8.57.1](https://github.com/eslint/eslint) - MIT
-- [filereader@0.10.3](undefined) - Apache-2.0*
 - [graphql-request@7.2.0](https://github.com/jasonkuhrt/graphql-request) - MIT
 - [graphql-type-json@0.3.2](https://github.com/taion/graphql-type-json) - MIT
 - [jest@29.7.0](https://github.com/jestjs/jest) - MIT
@@ -1082,6 +1164,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [passport-jwt@4.0.1](https://github.com/mikenicholson/passport-jwt) - MIT
 - [passport@0.7.0](https://github.com/jaredhanson/passport) - MIT
 - [prettier@3.6.2](https://github.com/prettier/prettier) - MIT
+- [redis@5.8.2](https://github.com/redis/node-redis) - MIT
 - [reflect-metadata@0.2.2](https://github.com/rbuckton/reflect-metadata) - Apache-2.0
 - [rxjs@7.8.2](https://github.com/reactivex/rxjs) - Apache-2.0
 - [source-map-support@0.5.21](https://github.com/evanw/node-source-map-support) - MIT
@@ -1090,8 +1173,12 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [ts-loader@9.5.4](https://github.com/TypeStrong/ts-loader) - MIT
 - [ts-node@10.9.2](https://github.com/TypeStrong/ts-node) - MIT
 - [tsconfig-paths@4.2.0](https://github.com/dividab/tsconfig-paths) - MIT
+<<<<<<< HEAD
 - [typescript@5.9.2](https://github.com/microsoft/TypeScript) - Apache-2.0
 - [xhr2@0.2.1](https://github.com/pwnall/node-xhr2) - MIT
+=======
+- [typescript@5.8.3](https://github.com/microsoft/TypeScript) - Apache-2.0
+>>>>>>> github/develop
 - [zod@3.25.76](https://github.com/colinhacks/zod) - MIT
 
 </details>
