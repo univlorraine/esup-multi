@@ -39,7 +39,7 @@
 
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { DeleteResult, Model } from 'mongoose';
 import { SaveUserCredentialsDto } from './user-credentials.dto';
 import {
   UserCredentials,
@@ -59,23 +59,27 @@ export class UserCredentialsRepository {
     const userCredentialsModel = new this.userCredentialsModel(
       savedCredentials,
     );
-    return userCredentialsModel.save();
+    // force the return type to avoid issues with mongoose typings
+    return userCredentialsModel.save() as unknown as Promise<UserCredentialsDocument>;
   }
 
   public async getCredentials(id: string): Promise<UserCredentialsDocument> {
+    // force the return type to avoid issues with mongoose typings
     return this.userCredentialsModel
       .findByIdAndUpdate(id, {
         lastUsedAt: new Date(),
       })
-      .exec();
+      .exec() as unknown as Promise<UserCredentialsDocument>;
   }
 
-  public async removeCredentialsLastUsedBefore(limitDate: Date) {
+  public async removeCredentialsLastUsedBefore(
+    limitDate: Date,
+  ): Promise<DeleteResult> {
     return this.userCredentialsModel
       .deleteMany({
         lastUsedAt: { $lt: limitDate },
       })
-      .exec();
+      .exec() as Promise<DeleteResult>;
   }
 
   public async removeCredentialsById(id: string) {

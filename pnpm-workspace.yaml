@@ -12,6 +12,7 @@ onlyBuiltDependencies:
   - '@parcel/watcher'
   - esbuild
   - nestjs-pino
+  - nice-napi
   - nx
   - protobufjs
   - sharp

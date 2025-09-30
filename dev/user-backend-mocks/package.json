@@ -13,6 +13,7 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "debug": "^4.4.3",
     "dotenv": "^17.2.0",
     "express": "5.1.0",
     "http-errors": "~2.0.0",
