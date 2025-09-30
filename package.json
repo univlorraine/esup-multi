@@ -21,11 +21,11 @@
     "preinstall": "npx only-allow pnpm",
     "ci": "pnpm i --frozen-lockfile",
     "build:back": "pnpm --stream --parallel --filter \"./dev/user-backend-nest/**\" run build",
-    "build:front": "pnpm --filter \"./dev/user-frontend-ionic/\" run module:build-all",
+    "build:front": "pnpm --filter \"./dev/user-frontend-ionic/\" run build",
     "build:connectors": "pnpm --stream --filter \"./dev/connectors/*\" run build",
     "start:back": "pnpm --stream --parallel --filter \"./dev/user-backend-nest/**\" run start",
     "start:back:dev": "pnpm --stream --parallel --filter \"./dev/user-backend-nest/**\" run start:dev",
-    "start:front": "pnpm --filter \"./dev/user-frontend-ionic\" ionic serve",
+    "start:front": "pnpm --filter \"./dev/user-frontend-ionic\" exec ionic serve",
     "start:mocks": "pnpm --filter \"./dev/user-backend-mocks\" run start",
     "start:connectors": "pnpm --stream --parallel --filter \"./dev/connectors/*\" run start"
   },
