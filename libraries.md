@@ -28,7 +28,7 @@
 The `*` next to the license name indicates that the license was *guessed* by [license-checker-rseidelsohn](https://www.npmjs.com/package/license-checker-rseidelsohn#how-licenses-are-found).
 ## [Root directory](.)
 ```
-├─ MIT: 6
+├─ MIT: 5
 └─ BSD-3-Clause: 1
 ```
 
@@ -37,7 +37,6 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@commitlint/cli@18.6.1](https://github.com/conventional-changelog/commitlint) - MIT
 - [@commitlint/config-conventional@18.6.3](https://github.com/conventional-changelog/commitlint) - MIT
 - [commitizen@4.3.1](https://github.com/commitizen/cz-cli) - MIT
-- [concurrently@8.2.2](https://github.com/open-cli-tools/concurrently) - MIT
 - [cz-conventional-changelog@3.3.0](https://github.com/commitizen/cz-conventional-changelog) - MIT
 - [husky@9.1.7](https://github.com/typicode/husky) - MIT
 - [license-checker-rseidelsohn@4.4.2](https://github.com/RSeidelsohn/license-checker-rseidelsohn) - BSD-3-Clause
@@ -46,7 +45,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 
 ## [Frontend](./dev/user-frontend-ionic)
 ```
-├─ MIT: 73
+├─ MIT: 79
 ├─ Apache-2.0: 7
 ├─ BSD-2-Clause: 2
 ├─ Custom: LICENSE: 1
@@ -96,10 +95,14 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@capawesome/capacitor-badge@7.0.1](https://github.com/capawesome-team/capacitor-plugins) - MIT
 - [@capawesome/capacitor-screen-orientation@7.0.1](https://github.com/capawesome-team/capacitor-plugins) - MIT
 - [@fullcalendar/angular@6.1.19](https://github.com/fullcalendar/fullcalendar-angular) - MIT
+- [@fullcalendar/core@6.1.19](https://github.com/fullcalendar/fullcalendar) - MIT
+- [@fullcalendar/daygrid@6.1.19](https://github.com/fullcalendar/fullcalendar) - MIT
+- [@fullcalendar/timegrid@6.1.19](https://github.com/fullcalendar/fullcalendar) - MIT
 - [@ionic/angular-toolkit@10.1.1](https://github.com/ionic-team/angular-toolkit) - MIT
 - [@ionic/angular@8.7.5](https://github.com/ionic-team/ionic-framework) - MIT
 - [@larscom/ngx-translate-module-loader@3.3.1](https://github.com/larscom/ngx-translate-module-loader) - MIT
 - [@ngneat/effects-ng@2.0.0](https://github.com/ngneat/effects) - MIT
+- [@ngneat/effects@2.1.2](https://github.com/ngneat/effects) - MIT
 - [@ngneat/elf-entities@4.6.0](https://github.com/ngneat/elf) - MIT
 - [@ngneat/elf-persist-state@1.2.1](https://github.com/ngneat/elf) - MIT
 - [@ngneat/elf@2.5.1](https://github.com/ngneat/elf) - MIT
@@ -134,7 +137,9 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [ng-packagr@16.2.3](https://github.com/ng-packagr/ng-packagr) - MIT
 - [ng2-dragula@5.1.0](https://github.com/valor-software/ng2-dragula) - MIT
 - [ngx-matomo@2.0.0](https://github.com/Arnaud73/ngx-matomo) - MIT
+- [ramda@0.31.3](https://github.com/ramda/ramda) - MIT
 - [rxjs@7.8.2](https://github.com/reactivex/rxjs) - Apache-2.0
+- [shepherd.js@11.2.0](https://github.com/shipshapecode/shepherd) - MIT
 - [swiper@9.4.1](https://github.com/nolimits4web/Swiper) - MIT
 - [tinycolor2@1.6.0](https://github.com/bgrins/TinyColor) - MIT
 - [ts-node@9.1.1](https://github.com/TypeStrong/ts-node) - MIT
@@ -147,12 +152,13 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 ## [Mocks (backend)](./dev/user-backend-mocks)
 <span id="backend-mocks"></span>
 ```
-├─ MIT: 4
+├─ MIT: 5
 └─ BSD-2-Clause: 1
 ```
 
 <details><summary>Détails</summary>
 
+- [debug@4.4.3](https://github.com/debug-js/debug) - MIT
 - [dotenv@17.2.2](https://github.com/motdotla/dotenv) - BSD-2-Clause
 - [express@5.1.0](https://github.com/expressjs/express) - MIT
 - [http-errors@2.0.0](https://github.com/jshttp/http-errors) - MIT
@@ -220,7 +226,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 ```
 ├─ MIT: 32
 ├─ Apache-2.0: 4
-├─ BSD-2-Clause: 1
+├─ BSD-2-Clause: 2
 └─ ISC: 1
 ```
 
@@ -247,6 +253,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [agentkeepalive@4.6.0](https://github.com/node-modules/agentkeepalive) - MIT
 - [axios@1.11.0](https://github.com/axios/axios) - MIT
 - [cron@4.3.3](https://github.com/kelektiv/node-cron) - MIT
+- [dotenv@16.4.7](https://github.com/motdotla/dotenv) - BSD-2-Clause
 - [eslint-config-prettier@8.10.2](https://github.com/prettier/eslint-config-prettier) - MIT
 - [eslint-plugin-prettier@4.2.5](https://github.com/prettier/eslint-plugin-prettier) - MIT
 - [eslint@8.57.1](https://github.com/eslint/eslint) - MIT
@@ -263,7 +270,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [ts-loader@9.5.4](https://github.com/TypeStrong/ts-loader) - MIT
 - [ts-node@10.9.2](https://github.com/TypeStrong/ts-node) - MIT
 - [tsconfig-paths@4.2.0](https://github.com/dividab/tsconfig-paths) - MIT
-- [typescript@4.9.5](https://github.com/Microsoft/TypeScript) - Apache-2.0
+- [typescript@5.8.3](https://github.com/microsoft/TypeScript) - Apache-2.0
 
 </details>
 
@@ -362,7 +369,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 ### [clocking](./dev/user-backend-nest/microservices/clocking)
 <span id="backend-clocking"></span>
 ```
-├─ MIT: 30
+├─ MIT: 31
 ├─ Apache-2.0: 4
 ├─ BSD-2-Clause: 1
 └─ ISC: 1
@@ -388,6 +395,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@typescript-eslint/eslint-plugin@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
 - [@typescript-eslint/parser@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - BSD-2-Clause
 - [agentkeepalive@4.6.0](https://github.com/node-modules/agentkeepalive) - MIT
+- [axios@1.11.0](https://github.com/axios/axios) - MIT
 - [cache-manager@7.2.2](https://github.com/jaredwray/cacheable) - MIT
 - [date-fns@4.1.0](https://github.com/date-fns/date-fns) - MIT
 - [eslint-config-prettier@8.10.2](https://github.com/prettier/eslint-config-prettier) - MIT
