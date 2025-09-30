@@ -9,6 +9,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 #### Bug fixes
 * **(app-update)**: Le client n'était plus capable de récupérer la version min requise suite au passage au multi-tenants
+* **(login)** : Afficher/masquer le mot de passe, utilisation du composant Ionic prévu à cet effet
 
 #### Autres
 * Mises à jour des dépendances suite aux alertes CVE
