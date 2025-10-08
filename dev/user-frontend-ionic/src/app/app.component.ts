@@ -284,12 +284,15 @@ export class AppComponent implements OnInit, OnDestroy {
       StatusBar.setStyle({ style: luminance > 0.5 ? Style.Light : Style.Dark });
       StatusBar.setBackgroundColor({ color: primaryColor });
 
+      // Gestion du edge to edge sur android
       const info = await Device.getInfo();
-      if (info.platform === 'android' && Number(info.osVersion) >= 15) {
-        await EdgeToEdge.enable();
-        EdgeToEdge.setBackgroundColor({ color: primaryColor });
-      } else {
-        await EdgeToEdge.disable();
+      if (info.platform === 'android') {
+        if (Number(info.osVersion) >= 15) {
+          await EdgeToEdge.enable();
+          await EdgeToEdge.setBackgroundColor({ color: primaryColor });
+        } else {
+          await EdgeToEdge.disable();
+        }
       }
     });
   }
