@@ -61,6 +61,7 @@ import { Title } from '@angular/platform-browser';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { PushNotifications } from '@capacitor/push-notifications';
 import { Router } from '@angular/router';
+import { MatomoTracker } from 'ngx-matomo';
 import { EdgeToEdge } from '@capawesome/capacitor-android-edge-to-edge-support';
 
 @Component({
@@ -99,6 +100,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private multiTenantService: MultiTenantService,
     private injector: Injector,
     private projectModuleService: ProjectModuleService,
+    private matomoTracker: MatomoTracker,
   ) {
     this.initializeApp();
   }
@@ -212,6 +214,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   private initializeApp(): void {
+    this.initializeMatomo();
     this.initializeLanguage();
     this.initializeEmptyStateDetection();
     this.initializePageLayout();
@@ -225,6 +228,13 @@ export class AppComponent implements OnInit, OnDestroy {
       this.router.navigateByUrl('/notifications');
     });
 
+  }
+
+  private initializeMatomo(): void {
+    // Désactiver les cookies pour les apps natives
+    if (this.platform.is('capacitor') || this.platform.is('cordova')) {
+      this.matomoTracker.disableCookies();
+    }
   }
 
   private initializeLanguage(): void {
