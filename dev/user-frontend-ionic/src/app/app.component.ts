@@ -52,7 +52,7 @@ import {
   currentLanguage$, features$, FeaturesService, isDarkTheme$, isFeatureStoreInitialized$, NavigationService,
   NotificationsService, NetworkService, PageLayout, PageLayoutService, setIsDarkTheme, StatisticsService,
   themeRepoInitialized$, userHadSetThemeInApp, userHadSetThemeInApp$, tenantThemeApplied$, MultiTenantService,
-  ProjectModuleService
+  ProjectModuleService, statsUid$
 } from '@multi/shared';
 import { initializeApp } from 'firebase/app';
 import { combineLatest, Observable, of } from 'rxjs';
@@ -231,10 +231,19 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   private initializeMatomo(): void {
-    // Désactiver les cookies pour les apps natives
-    if (this.matomoTracker && (this.platform.is('capacitor') || this.platform.is('cordova'))) {
-      this.matomoTracker.disableCookies();
+    if (!this.matomoTracker) {
+      return;
     }
+
+    // On désactive les cookies, car on va utiliser le stats-uid présent en local storage
+    this.matomoTracker.disableCookies();
+
+    statsUid$.pipe(
+      filter(uid => !!uid),
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe(uid => {
+      this.matomoTracker.setUserId(uid);
+    });
   }
 
   private initializeLanguage(): void {
