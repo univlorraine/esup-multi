@@ -275,7 +275,7 @@ export class AppComponent implements OnInit, OnDestroy {
     if (!Capacitor.isNativePlatform()) {
       return;
     }
-    this.platform.ready().then(() => {
+    this.platform.ready().then(async () => {
       const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--ion-color-primary');
       const r = parseInt(primaryColor.slice(1, 3), 16);
       const g = parseInt(primaryColor.slice(3, 5), 16);
@@ -283,7 +283,14 @@ export class AppComponent implements OnInit, OnDestroy {
       const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
       StatusBar.setStyle({ style: luminance > 0.5 ? Style.Light : Style.Dark });
       StatusBar.setBackgroundColor({ color: primaryColor });
-      EdgeToEdge.setBackgroundColor({ color: primaryColor });
+
+      const info = await Device.getInfo();
+      if (info.platform === 'android' && Number(info.osVersion) >= 15) {
+        await EdgeToEdge.enable();
+        EdgeToEdge.setBackgroundColor({ color: primaryColor });
+      } else {
+        await EdgeToEdge.disable();
+      }
     });
   }
 
