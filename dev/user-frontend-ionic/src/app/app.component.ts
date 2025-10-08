@@ -38,7 +38,7 @@
  */
 
 import { DOCUMENT } from '@angular/common';
-import { Component, DestroyRef, inject, Inject, Injector, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { Component, DestroyRef, inject, Inject, Injector, OnDestroy, OnInit, Optional, Renderer2 } from '@angular/core';
 import { FirebaseMessaging } from '@capacitor-firebase/messaging';
 import { App } from '@capacitor/app';
 import { Capacitor, PluginListenerHandle } from '@capacitor/core';
@@ -100,7 +100,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private multiTenantService: MultiTenantService,
     private injector: Injector,
     private projectModuleService: ProjectModuleService,
-    private matomoTracker: MatomoTracker,
+    @Optional() private matomoTracker: MatomoTracker,
   ) {
     this.initializeApp();
   }
@@ -232,7 +232,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   private initializeMatomo(): void {
     // Désactiver les cookies pour les apps natives
-    if (this.platform.is('capacitor') || this.platform.is('cordova')) {
+    if (this.matomoTracker && (this.platform.is('capacitor') || this.platform.is('cordova'))) {
       this.matomoTracker.disableCookies();
     }
   }
