@@ -8,6 +8,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Client
 
 #### Bug fixes
+* Correction du mode *Edge to Edge* pour Android
 * **(app-update)**: Le client n'était plus capable de récupérer la version min requise suite au passage au multi-tenants
 
 #### Autres
