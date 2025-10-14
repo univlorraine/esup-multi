@@ -36,22 +36,48 @@
  * termes.
  */
 
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { ImportantNewsWordpress } from '@wordpress/collections/important-news/important-news.wordpress.model';
 import { ImportantNews } from '@common/models/important-news.model';
 import { WordpressService } from '@wordpress/wordpress.service';
 import { ImportantNewsTranslations } from '@common/models/translations.model';
 import { ImportantNewsTranslationsWordpress } from '@wordpress/collections/translations/translations.wordpress.model';
+import { OnEvent } from '@nestjs/event-emitter';
 import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
 import { ImportantNewsSchema } from '@common/validation/schemas/important-news.schema';
 import { normalizeEmptyStringToNull } from '@common/utils/normalize';
+import { CacheService } from '@cache/cache.service';
+import { CacheCollection } from '@cache/cache.config';
 
 // TODO: Move FRENCH_CODE to .env and rename it to DEFAULT_LANGUAGE_CODE
 const FRENCH_CODE = 'FR';
 
 @Injectable()
 export class ImportantNewsWordpressService {
-  constructor(private readonly wordpressService: WordpressService) {}
+  private readonly logger = new Logger(ImportantNewsWordpressService.name);
+  constructor(
+    private readonly wordpressService: WordpressService,
+    private readonly cacheService: CacheService,
+  ) {}
+
+  @OnEvent('wordpress.important-news.cache.cleared')
+  async handleCacheCleared() {
+    this.logger.log('Received cache cleared event - preloading data...');
+    try {
+      await this.preloadData();
+    } catch (error) {
+      this.logger.error(
+        'Failed to preload important-news after cache clear:',
+        error.message,
+      );
+    }
+  }
+
+  public async preloadData() {
+    this.logger.log('Preloading important-news...');
+    await this.getImportantNews();
+    this.logger.log('Important-news preloaded successfully');
+  }
 
   @ValidateMapping({ schema: ImportantNewsSchema })
   private mapToMultiModel(importantNew: ImportantNewsWordpress): ImportantNews {
@@ -107,6 +133,14 @@ export class ImportantNewsWordpressService {
   }
 
   async getImportantNews(): Promise<ImportantNews[]> {
+    return this.cacheService.getOrFetchWithLock(
+      CacheCollection.IMPORTANT_NEWS,
+      () => this.loadImportantNewsFromWordpress(),
+    );
+  }
+
+  private async loadImportantNewsFromWordpress(): Promise<ImportantNews[]> {
+    this.logger.debug('Loading important news from WordPress...');
     const data = await this.wordpressService.executeGraphQLQuery(`
       query {
         importantNews(first: 100, where: {language: ${FRENCH_CODE}}) {
@@ -154,6 +188,17 @@ export class ImportantNewsWordpressService {
   }
 
   async getImportantNew(id: number): Promise<ImportantNews> {
+    return this.cacheService.getOrFetchWithLock(
+      CacheCollection.IMPORTANT_NEWS,
+      () => this.loadImportantNewFromWordpress(id),
+      id,
+    );
+  }
+
+  private async loadImportantNewFromWordpress(
+    id: number,
+  ): Promise<ImportantNews> {
+    this.logger.debug(`Loading important new ${id} from WordPress...`);
     const data = await this.wordpressService.executeGraphQLQuery(`
       query {
         importantNew(id: ${id}, idType: DATABASE_ID) {
