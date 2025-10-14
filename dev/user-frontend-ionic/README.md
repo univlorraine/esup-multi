@@ -11,7 +11,7 @@ L'application est organisée sous la forme d'un monorepo "léger" :
 ### Ajout d'un nouveau module
 
 ```bash
-npm run module:create [nom du module]
+pnpm run module:create [nom du module]
 ```
 
 Puis mettre à jour le "path" du module dans le fichier `tsconfig.json` pour préfixer par `@multi/`.
@@ -31,9 +31,16 @@ Puis mettre à jour le "path" du module dans le fichier `tsconfig.json` pour pr�
 import { HelloPageModule } from '@multi/hello';
 ```
 
-Il faut également ajouter le module au script npm `module:build-all` :
+Il faut également ajouter le module au script pnpm `module:build-all`.
+Si votre module n'est pas une dépendance d'un autre module (ex: shared est utilisé par d'autres modules), ajoutez simplement un script `_module:build:[nom du module]` :
 ```json
-  "module:build-all": "npm run module:build hello && npm run module:build [nom du module]",
+  "_module:build:[nom du module]": "pnpm run module:build [nom du module]",
+```
+
+Sinon, il faut s'assurer que le module dépendant est construit avant.
+Il faut donc l'ajouter avant dans la liste `module:build-all` dans l'ordre approprié :
+```json
+  "module:build-all": "pnpm run module:build hello && pnpm run module:build [nom du module]",
 ```
 
 #### Lint
@@ -100,7 +107,7 @@ Pour que le projet puisse quand même build sans avoir les fichiers réels de la
 
 Veillez à ne pas commiter votre configuration Firebase réelle dans le projet.
 
-En exécutant la commande `npx cap sync`, les fichiers de configuration Firebase seront injectés lors du build dans la plateforme visée, grâce à la librairie *trapeze*.
+En exécutant la commande `pnpm cap sync`, les fichiers de configuration Firebase seront injectés lors du build dans la plateforme visée, grâce à la librairie *trapeze*.
 
 **Procédure pour ajouter un nouvel environnement de développement avec une configuration Firebase spécifique :**
 
@@ -122,7 +129,7 @@ platforms:
         dest: app/google-services.json
   ios: (à compléter)
 ```
-Exécuter la commande npx `cap sync`.
+Exécuter la commande pnpm `cap sync`.
 
 ### Dépendances inter-modules
 
@@ -140,12 +147,12 @@ Pour qu'un module dépende du module `shared` il faut le déclarer dans les `pee
 
 Compilation d'un seul module :
 ```bash
-npm run module:build [nom du module]
+pnpm run module:build [nom du module]
 ```
 
 Compilation de tous les modules :
 ```bash
-npm run module:build-all
+pnpm run module:build-all
 ```
 
 ### Liste des modules
@@ -207,7 +214,8 @@ Vous pouvez également ajouter de nouvelles icônes dans l'application.
 Pour cela, ajoutez un nouveau dossier d'icônes dans ```src/theme/app-theme/assets/icons/```, et modifiez le fichier `angular.json` en ajoutant à la propriété `projects.app.architect.build.assets` l'objet suivant :
 
 ```
-  { "glob": "**/*.svg",
+  {
+    "glob": "**/*.svg",
     "input": "src/theme/app-theme/assets/[Nom du dossier]",
     "output": "./svg"
   }

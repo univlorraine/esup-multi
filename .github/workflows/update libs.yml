@@ -26,50 +26,57 @@ jobs:
             packageJson:
               - '**/package.json'
 
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
       - name: Set up Node.js
-        if: steps.changes.outputs.packageJson == 'true'
+        if: ${{ steps.changes.outputs.packageJson == 'true' }}
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: "pnpm"
+          cache-dependency-path: pnpm-lock.yaml
 
       - name: Install libs
-        if: steps.changes.outputs.packageJson == 'true'
-        run: npm run ci
+        if: ${{ steps.changes.outputs.packageJson == 'true' }}
+        run: pnpm run ci
 
       - name: Run the dependency update script
-        if: steps.changes.outputs.packageJson == 'true'
+        if: ${{ steps.changes.outputs.packageJson == 'true' }}
         run: |
           chmod +x generateLibraryList.bash
           ./generateLibraryList.bash
 
       - name: Check for changes
         id: diff
-        if: steps.changes.outputs.packageJson == 'true'
+        if: ${{ steps.changes.outputs.packageJson == 'true' }}
         run: |
           git config core.fileMode false
           git diff -w --ignore-blank-lines
           echo "CHANGES=$(( $(git diff -w --ignore-blank-lines | wc -l) > 0 ? 1 : 0 ))" >> $GITHUB_OUTPUT
 
       - name: Add changes to Git
-        if: steps.changes.outputs.packageJson == 'true' && steps.diff.outputs.CHANGES == 1 && github.event.pull_request.head.repo.full_name == github.repository
+        if: ${{ steps.changes.outputs.packageJson == 'true' && steps.diff.outputs.CHANGES == 1 && github.event.pull_request.head.repo.full_name == github.repository }}
         run: |
           git add -A
 
       - name: Commit changes
-        if: steps.changes.outputs.packageJson == 'true' && steps.diff.outputs.CHANGES == 1 && github.event.pull_request.head.repo.full_name == github.repository
+        if: ${{ steps.changes.outputs.packageJson == 'true' && steps.diff.outputs.CHANGES == 1 && github.event.pull_request.head.repo.full_name == github.repository }}
         run: |
           git config --local user.name "GitHub Action"
           git config --local user.email "action@github.com"
           git commit -m "docs: update library list" || echo "No changes to commit"
 
       - name: Push changes
-        if: steps.changes.outputs.packageJson == 'true' && steps.diff.outputs.CHANGES == 1 && github.event.pull_request.head.repo.full_name == github.repository
+        if: ${{ steps.changes.outputs.packageJson == 'true' && steps.diff.outputs.CHANGES == 1 && github.event.pull_request.head.repo.full_name == github.repository }}
         run: git push origin HEAD:${{ github.head_ref }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Fork  detected
-        if: steps.changes.outputs.packageJson == 'true' && steps.diff.outputs.CHANGES == 1 && github.event.pull_request.head.repo.full_name != github.repository
+        if: ${{ steps.changes.outputs.packageJson == 'true' && steps.diff.outputs.CHANGES == 1 && github.event.pull_request.head.repo.full_name != github.repository }}
         run: |
           echo "La liste des dépendances doit être mise à jour."
           echo "A cause d'une limitation de GitHub Actions, il est impossible de mettre à jour la liste des dépendances depuis un fork."

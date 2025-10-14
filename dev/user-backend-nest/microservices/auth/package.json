@@ -7,9 +7,10 @@
   "license": "CECILL-2.1",
   "engines": {
     "node": ">=20",
-    "npm": ">=9"
+    "pnpm": ">=10"
   },
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "prebuild": "rimraf dist && node update-infos.js",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
@@ -37,7 +38,8 @@
     "agentkeepalive": "^4.6.0",
     "axios": "1.11.0",
     "cron": "^4.3.2",
-    "mongoose": "^8.16.4",
+    "dotenv": "^16.4.7",
+    "mongoose": "^8.18.2",
     "nats": "^2.29.3",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^6.0.1",
@@ -64,7 +66,7 @@
     "ts-loader": "^9.5.2",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "^4.9.5"
+    "typescript": "^5.8.3"
   },
   "jest": {
     "moduleFileExtensions": [

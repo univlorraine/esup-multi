@@ -27,7 +27,7 @@ nest new [nom-du-microservice]
 
 Se placer dans le nouveau dossier qui vient d'être créé `microservices/[nom-du-microservice]/` puis exécuter :
 ```bash
-npm i --save @nestjs/microservices
+pnpm add @nestjs/microservices
 ```
 
 Remplacer le contenu du fichier `microservices/[nom-du-microservice]/src/main.ts` par le code suivant, en replaçant les éléments entre crochet (Attention à ne pas prendre un port par défaut déjà pris par un autre microservice).

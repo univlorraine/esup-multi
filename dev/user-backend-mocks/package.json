@@ -4,14 +4,16 @@
   "description": "Application de mocking des données utilisateurs pour l'installation test en quickstart",
   "engines": {
     "node": ">=20",
-    "npm": ">=9"
+    "pnpm": ">=10"
   },
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "debug": "^4.4.3",
     "dotenv": "^17.2.0",
     "express": "5.1.0",
     "http-errors": "~2.0.0",

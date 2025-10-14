@@ -7,9 +7,10 @@
   "license": "CECILL-2.1",
   "engines": {
     "node": ">=20",
-    "npm": ">=9"
+    "pnpm": ">=10"
   },
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "prebuild": "rimraf dist && node update-infos.js",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
@@ -34,6 +35,7 @@
     "@nestjs/microservices": "^11.1.5",
     "@nestjs/platform-express": "^11.1.5",
     "agentkeepalive": "^4.6.0",
+    "axios": "1.11.0",
     "cache-manager": "^7.0.1",
     "date-fns": "^4.1.0",
     "nats": "^2.29.3",

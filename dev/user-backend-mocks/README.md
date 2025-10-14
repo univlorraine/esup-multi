@@ -14,7 +14,7 @@ nvm use
 ### Installer toutes les dépendances
 Se placer dans le dossier [user-backend-mocks](.) et exécuter :
 ```bash
-npm ci
+pnpm install --frozen-lockfile
 ```
 
 ## Configuration
@@ -24,7 +24,7 @@ Modifier si besoin les variables d'environnement.
 ## Exécution
 Se placer dans le dossier [user-backend-mocks](.) et exécuter :
 ```bash
-npm start
+pnpm start
 ```
 
 ### Comptes utilisateurs

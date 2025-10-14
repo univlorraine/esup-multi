@@ -23,13 +23,17 @@
     CONNECTOR_PATH: '${CI_PROJECT_DIR}/${CONNECTORS_PATH}/${CONNECTOR_FOLDER}'
   image: node:$NODE_VERSION
   before_script:
+    - npm install --global corepack@latest
+    - corepack enable
+    - corepack prepare pnpm@latest-10 --activate
+    - pnpm config set store-dir ${CI_PROJECT_DIR}/.pnpm-store
     - cd ${CONNECTOR_PATH}
     - *connector_get_full_image_tag
-    - npm ci --cache ${CI_PROJECT_DIR}/.npm --prefer-offline
+    - pnpm install --frozen-lockfile
   script:
-    - npm run lint
-    - npm run build
-    - npm ci --cache ${CI_PROJECT_DIR}/.npm --prefer-offline --omit=dev
+    - pnpm run lint
+    - pnpm run build
+    - pnpm install --frozen-lockfile --prod
   artifacts:
     paths:
       - '${CONNECTOR_PATH}/node_modules'

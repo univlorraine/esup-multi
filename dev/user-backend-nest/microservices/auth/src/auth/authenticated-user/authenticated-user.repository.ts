@@ -39,7 +39,7 @@
 
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { DeleteResult, Model } from 'mongoose';
 import { AuthenticatedUserDto } from './authenticated-user.dto';
 import {
   AuthenticatedUser,
@@ -60,12 +60,14 @@ export class AuthenticatedUserRepository {
     const authenticatedUserModel = new this.authenticatedUserModel(
       authenticatedUser,
     );
-    return authenticatedUserModel.save();
+    // force the return type to avoid issues with mongoose typings
+    return authenticatedUserModel.save() as unknown as Promise<AuthenticatedUserDocument>;
   }
 
   public async getAuthenticatedUser(
     authToken: string,
   ): Promise<AuthenticatedUserDocument> {
+    // force the return type to avoid issues with mongoose typings
     return this.authenticatedUserModel
       .findOneAndUpdate(
         {
@@ -75,15 +77,20 @@ export class AuthenticatedUserRepository {
           lastUsedAt: new Date(),
         },
       )
-      .exec();
+      .exec() as unknown as Promise<AuthenticatedUserDocument>;
   }
 
-  public async removeAuthenticatedUserLastUsedBefore(limitDate: Date) {
+  public async removeAuthenticatedUserLastUsedBefore(
+    limitDate: Date,
+  ): Promise<DeleteResult> {
     const outOfDate = await this.authenticatedUserModel.find({
       lastUsedAt: { $lt: limitDate },
     });
     if (outOfDate.length === 0) {
-      return;
+      return Promise.resolve<DeleteResult>({
+        acknowledged: true,
+        deletedCount: 0,
+      });
     }
     this.logger.debug(
       'Following authenticated users data will be removed : ',

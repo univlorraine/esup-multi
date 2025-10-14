@@ -47,21 +47,39 @@ then
   echo "npm could not be found"
   exit 1
 fi
+echo "npm is installed"
+
+# Check if pnpm is installed
+if ! command -v pnpm &> /dev/null
+then
+  echo "Installing pnpm globally..."
+  npm install -g pnpm
+  echo ""
+  if ! command -v pnpm &> /dev/null
+  then
+    echo "pnpm could not be installed"
+    exit 1
+  fi
+else
+  echo "pnpm is installed"
+fi
 
 # Check if license-checker-rseidelsohn is installed
 WAS_INSTALLED=1
-if ! npx license-checker-rseidelsohn &> /dev/null
+if ! pnpx license-checker-rseidelsohn &> /dev/null
 then
   WAS_INSTALLED=0
   echo "Installing license-checker-rseidelsohn globally..."
-  npm i -g license-checker-rseidelsohn
+  pnpm add -g license-checker-rseidelsohn
   echo ""
-  if ! npx license-checker-rseidelsohn &> /dev/null
+  if ! pnpx license-checker-rseidelsohn &> /dev/null
   then
     echo "license-checker-rseidelsohn could not be installed"
     exit 1
   fi
 fi
+
+echo ""
 
 
 # Count number of tasks
@@ -122,7 +140,7 @@ function licenseSummary() {
   # generate license summary for the given directory
   {
     echo "\`\`\`"
-    npx license-checker-rseidelsohn --summary --excludePrivatePackages --direct 0 --start "$1" | sed '/^[[:space:]]*$/d'
+    pnpx license-checker-rseidelsohn --summary --excludePrivatePackages --direct 0 --start "$1" | sed '/^[[:space:]]*$/d'
     echo "\`\`\`"
     echo ""
   } >> $OUTPUT_FILE
@@ -137,7 +155,7 @@ function licenseMarkdown() {
 
   # generate library list for the given directory
   {
-    npx license-checker-rseidelsohn --markdown --excludePrivatePackages --direct 0 --start "$1" | sed '/^[[:space:]]*$/d'
+    pnpx license-checker-rseidelsohn --markdown --excludePrivatePackages --direct 0 --start "$1" | sed '/^[[:space:]]*$/d'
     echo ""
   } >> $OUTPUT_FILE
 
@@ -266,5 +284,5 @@ echo "[DONE]"
 if [ $WAS_INSTALLED -eq 0 ]; then
   echo ""
   echo "Uninstalling license-checker-rseidelsohn..."
-  npm uninstall -g license-checker-rseidelsohn
+  pnpm rm -g license-checker-rseidelsohn
 fi
