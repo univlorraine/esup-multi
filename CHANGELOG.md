@@ -6,10 +6,10 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ## 2.x.x (Unreleased)
 
 ### Client
-
 #### Bug fixes
 * Correction du mode *Edge to Edge* pour Android
 * **(app-update)**: Le client n'était plus capable de récupérer la version min requise suite au passage au multi-tenants
+* * **(schedule)** : Suppression des espaces dans le champ *asUser* des gestionnaires
 
 #### Autres
 * Mises à jour des dépendances suite aux alertes CVE
