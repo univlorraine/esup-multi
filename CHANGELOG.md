@@ -9,7 +9,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 #### Bug fixes
 * Correction du mode *Edge to Edge* pour Android
 * **(app-update)**: Le client n'était plus capable de récupérer la version min requise suite au passage au multi-tenants
-* **(chatbot)** : Balises non affichés dans les messages du chatbot
+* **(chatbot)** : Balises non affichées dans les messages du chatbot
 * **(schedule)** : Suppression des espaces dans le champ *asUser* des gestionnaires
 
 #### Autres
