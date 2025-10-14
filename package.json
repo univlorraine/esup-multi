@@ -13,6 +13,10 @@
     "url": "https://github.com/univlorraine/esup-multi/issues"
   },
   "homepage": "https://github.com/univlorraine/esup-multi#readme",
+  "engines": {
+    "node": ">=20",
+    "npm": ">=9"
+  },
   "scripts": {
     "ci": "npm ci && npm run back:main -- npm ci && concurrently \"npm run back:*(!main) -- npm ci\" && npm run mocks -- npm ci && npm run front -- npm ci && concurrently \"npm run connector:* -- npm ci\"",
     "build:back": "npm run back:main -- npm ci && concurrently \"npm run back:*(!main) -- npm ci\" && concurrently \"npm run back:* -- npm run build\"",

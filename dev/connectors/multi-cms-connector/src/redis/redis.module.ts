@@ -2,8 +2,7 @@
  * Copyright ou © ou Copr. Université de Lorraine, (2022)
  *
  * Direction du Numérique de l'Université de Lorraine - SIED
- *  (dn-mobile-dev@univ-lorraine.fr)
- * JNESIS (contact@jnesis.com)
+ * (dn-mobile-dev@univ-lorraine.fr)
  *
  * Ce logiciel est un programme informatique servant à rendre accessible
  * sur mobile divers services universitaires aux étudiants et aux personnels
@@ -37,34 +36,14 @@
  * termes.
  */
 
-import { APP_INITIALIZER, NgModule } from '@angular/core';
-import { ProjectModuleService } from '@multi/shared';
-import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
+import { Module, Global } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import { RedisService } from './redis.service';
 
-
-const initModule = (projectModuleService: ProjectModuleService) =>
-  () => {
-    projectModuleService.initProjectModule({
-      name: 'app-update',
-      translation: true,
-    });
-  }
-
-@NgModule({
-  imports: [
-    CommonModule,
-    IonicModule,
-    TranslateModule,
-  ],
-  providers: [
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initModule,
-      deps:[ProjectModuleService],
-      multi: true
-    }
-  ],
+@Global()
+@Module({
+  imports: [ConfigModule],
+  providers: [RedisService],
+  exports: [RedisService],
 })
-export class AppUpdateModule { }
+export class RedisModule {}

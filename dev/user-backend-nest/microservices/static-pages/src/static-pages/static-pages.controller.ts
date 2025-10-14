@@ -37,8 +37,7 @@
  * termes.
  */
 
-import { CacheInterceptor, CacheKey } from '@nestjs/cache-manager';
-import { Controller, UseInterceptors } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
 import { Observable } from 'rxjs';
 import { StaticPageDto } from './static-pages.dto';
@@ -49,8 +48,6 @@ export class StaticPagesController {
   constructor(private readonly staticPagesService: StaticPagesService) {}
 
   @MessagePattern({ cmd: 'staticPages' })
-  @CacheKey('staticPages')
-  @UseInterceptors(CacheInterceptor)
   getStaticPages(): Observable<StaticPageDto[]> {
     return this.staticPagesService.getStaticPages();
   }

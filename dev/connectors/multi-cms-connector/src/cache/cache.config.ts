@@ -2,8 +2,7 @@
  * Copyright ou © ou Copr. Université de Lorraine, (2022)
  *
  * Direction du Numérique de l'Université de Lorraine - SIED
- *  (dn-mobile-dev@univ-lorraine.fr)
- * JNESIS (contact@jnesis.com)
+ * (dn-mobile-dev@univ-lorraine.fr)
  *
  * Ce logiciel est un programme informatique servant à rendre accessible
  * sur mobile divers services universitaires aux étudiants et aux personnels
@@ -37,34 +36,53 @@
  * termes.
  */
 
-import { APP_INITIALIZER, NgModule } from '@angular/core';
-import { ProjectModuleService } from '@multi/shared';
-import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
+export enum CacheCollection {
+  LOGIN = 'login',
+  CONTACT_US = 'contact-us',
+  FEATURES = 'features',
+  IMPORTANT_NEWS = 'important-news',
+  CHANNELS = 'channels',
+  SOCIAL_NETWORKS = 'social-networks',
+  STATIC_PAGES = 'static-pages',
+  WIDGETS = 'widgets',
+}
 
+const DEFAULT_TTL = 300000; // 5 minutes
 
-const initModule = (projectModuleService: ProjectModuleService) =>
-  () => {
-    projectModuleService.initProjectModule({
-      name: 'app-update',
-      translation: true,
-    });
+export function isCacheEnabled(): boolean {
+  const cacheEnabled = process.env.CACHE_ENABLED;
+  if (cacheEnabled !== undefined) {
+    return cacheEnabled.toLowerCase() === 'true';
+  }
+  return true; // Cache activé par défaut
+}
+
+/**
+ * Permet d'obtenir le TTL de cache dans le .env pour une collection spécifique.
+ * @param collection
+ */
+export function getCacheTTL(collection: CacheCollection): number {
+  const envKey = `CACHE_TTL_${collection.toUpperCase().replace('-', '_')}`;
+  const envValue = process.env[envKey];
+
+  if (envValue) {
+    const ttl = parseInt(envValue, 10);
+    if (!isNaN(ttl) && ttl > 0) {
+      return ttl;
+    }
   }
 
-@NgModule({
-  imports: [
-    CommonModule,
-    IonicModule,
-    TranslateModule,
-  ],
-  providers: [
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initModule,
-      deps:[ProjectModuleService],
-      multi: true
-    }
-  ],
-})
-export class AppUpdateModule { }
+  // Fallback values if .env is not configured
+  const fallbackConfig: Record<CacheCollection, number> = {
+    [CacheCollection.LOGIN]: 86400000, // 1 day
+    [CacheCollection.CONTACT_US]: 86400000, // 1 day
+    [CacheCollection.FEATURES]: 3600000, // 1 hour
+    [CacheCollection.IMPORTANT_NEWS]: 3600000, // 1 hour
+    [CacheCollection.CHANNELS]: 86400000, // 1 day
+    [CacheCollection.SOCIAL_NETWORKS]: 86400000, // 1 day
+    [CacheCollection.STATIC_PAGES]: 86400000, // 1 day
+    [CacheCollection.WIDGETS]: 3600000, // 1 hour
+  };
+
+  return fallbackConfig[collection] || DEFAULT_TTL;
+}

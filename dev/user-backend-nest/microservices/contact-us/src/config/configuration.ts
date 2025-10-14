@@ -47,8 +47,6 @@ interface Configuration {
   cmsApi: CmsApi;
   mail: MailConfig;
   keepAliveOptions: KeepAliveOptions;
-  cacheTtl: number;
-  cacheMax: number;
 }
 
 const applyIfNotBlank = (param: string, applyFn: (value: string) => void) => {
@@ -101,10 +99,9 @@ export default (): Configuration => {
     },
     cmsApi: {
       apiUrl: process.env.CONTACT_US_SERVICE_CMS_CONNECTOR_API_URL,
-      bearerToken: process.env.CONTACT_US_SERVICE_CMS_CONNECTOR_API_BEARER_TOKEN,
+      bearerToken:
+        process.env.CONTACT_US_SERVICE_CMS_CONNECTOR_API_BEARER_TOKEN,
     },
     keepAliveOptions,
-    cacheTtl: parseInt(process.env.CONTACT_US_SERVICE_CACHE_TTL_MS),
-    cacheMax: parseInt(process.env.CONTACT_US_SERVICE_CACHE_MAX),
   };
 };

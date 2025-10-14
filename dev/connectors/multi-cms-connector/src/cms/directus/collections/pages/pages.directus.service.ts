@@ -36,17 +36,43 @@
  * termes.
  */
 
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { PagesDirectus } from '@directus/collections/pages/pages.directus.model';
 import { StaticPages } from '@common/models/static-pages.model';
 import { DirectusService } from '@directus/directus.service';
+import { OnEvent } from '@nestjs/event-emitter';
 import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
 import { StaticPagesSchema } from '@common/validation/schemas/static-pages.schema';
 import { normalizeEmptyStringToNull } from '@common/utils/normalize';
+import { CacheService } from '@cache/cache.service';
+import { CacheCollection } from '@cache/cache.config';
 
 @Injectable()
 export class PagesDirectusService {
-  constructor(private readonly directusService: DirectusService) {}
+  private readonly logger = new Logger(PagesDirectusService.name);
+  constructor(
+    private readonly directusService: DirectusService,
+    private readonly cacheService: CacheService,
+  ) {}
+
+  @OnEvent('directus.static-pages.cache.cleared')
+  async handleCacheCleared() {
+    this.logger.log('Received cache cleared event - preloading data...');
+    try {
+      await this.preloadData();
+    } catch (error) {
+      this.logger.error(
+        'Failed to preload pages after cache clear:',
+        error.message,
+      );
+    }
+  }
+
+  public async preloadData() {
+    this.logger.log('Preloading pages...');
+    await this.getPages();
+    this.logger.log('Pages preloaded successfully');
+  }
 
   @ValidateMapping({ schema: StaticPagesSchema })
   private mapToMultiModel(page: PagesDirectus): StaticPages {
@@ -66,6 +92,14 @@ export class PagesDirectusService {
   }
 
   async getPages(): Promise<StaticPages[]> {
+    return this.cacheService.getOrFetchWithLock(
+      CacheCollection.STATIC_PAGES,
+      () => this.loadPagesFromDirectus(),
+    );
+  }
+
+  private async loadPagesFromDirectus(): Promise<StaticPages[]> {
+    this.logger.debug('Loading pages from Directus...');
     const data = await this.directusService.executeGraphQLQuery(`
       query {
         pages(filter: { status: { _eq: "published" }}) {
@@ -93,6 +127,15 @@ export class PagesDirectusService {
   }
 
   async getPage(id: number): Promise<StaticPages> {
+    return this.cacheService.getOrFetchWithLock(
+      CacheCollection.STATIC_PAGES,
+      () => this.loadPageFromDirectus(id),
+      id,
+    );
+  }
+
+  private async loadPageFromDirectus(id: number): Promise<StaticPages> {
+    this.logger.debug(`Loading page ${id} from Directus...`);
     const data = await this.directusService.executeGraphQLQuery(`
       query {
         pages(filter: {id: { _eq: ${id} }}) {
