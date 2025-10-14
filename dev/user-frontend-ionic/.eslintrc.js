@@ -4,6 +4,7 @@ module.exports = {
   overrides: [
     {
       files: ["*.ts"],
+      plugins: ["local-rules"],
       extends: [
         "eslint:recommended",
         "plugin:@typescript-eslint/recommended",
@@ -38,8 +39,9 @@ module.exports = {
         "no-console": [
           "error",
           { allow: ["warn", "error"] }
-        ]
-      }
+        ],
+        "local-rules/no-unsafe-browser-open": "error"
+      },
     },
     {
       files: ["*.html"],
