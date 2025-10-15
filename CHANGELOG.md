@@ -17,6 +17,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * Mises à jour des dépendances suite aux alertes CVE
 
 ### Backend
+#### Bug fixes
+* **(contact-us)** : Prévention partielle des usurpations d'adresse email, et avertissement si l'utilisateur n'est pas connecté
+
 #### New features
 * **(auth)** : Suppression du cache dans le microservice, déportation vers le connecteur CMS
 * **(contact-us)** : Suppression du cache dans le microservice, déportation vers le connecteur CMS
