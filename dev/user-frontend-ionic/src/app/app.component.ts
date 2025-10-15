@@ -38,7 +38,7 @@
  */
 
 import { DOCUMENT } from '@angular/common';
-import { Component, DestroyRef, inject, Inject, Injector, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { Component, DestroyRef, inject, Inject, Injector, OnDestroy, OnInit, Optional, Renderer2 } from '@angular/core';
 import { FirebaseMessaging } from '@capacitor-firebase/messaging';
 import { App } from '@capacitor/app';
 import { Capacitor, PluginListenerHandle } from '@capacitor/core';
@@ -52,7 +52,7 @@ import {
   currentLanguage$, features$, FeaturesService, isDarkTheme$, isFeatureStoreInitialized$, NavigationService,
   NotificationsService, NetworkService, PageLayout, PageLayoutService, setIsDarkTheme, StatisticsService,
   themeRepoInitialized$, userHadSetThemeInApp, userHadSetThemeInApp$, tenantThemeApplied$, MultiTenantService,
-  ProjectModuleService
+  ProjectModuleService, statsUid$
 } from '@multi/shared';
 import { initializeApp } from 'firebase/app';
 import { combineLatest, Observable, of } from 'rxjs';
@@ -61,6 +61,7 @@ import { Title } from '@angular/platform-browser';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { PushNotifications } from '@capacitor/push-notifications';
 import { Router } from '@angular/router';
+import { MatomoTracker } from 'ngx-matomo';
 import { EdgeToEdge } from '@capawesome/capacitor-android-edge-to-edge-support';
 
 @Component({
@@ -99,6 +100,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private multiTenantService: MultiTenantService,
     private injector: Injector,
     private projectModuleService: ProjectModuleService,
+    @Optional() private matomoTracker: MatomoTracker,
   ) {
     this.initializeApp();
   }
@@ -212,6 +214,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   private initializeApp(): void {
+    this.initializeMatomo();
     this.initializeLanguage();
     this.initializeEmptyStateDetection();
     this.initializePageLayout();
@@ -225,6 +228,22 @@ export class AppComponent implements OnInit, OnDestroy {
       this.router.navigateByUrl('/notifications');
     });
 
+  }
+
+  private initializeMatomo(): void {
+    if (!this.matomoTracker) {
+      return;
+    }
+
+    // On désactive les cookies, car on va utiliser le stats-uid présent en local storage
+    this.matomoTracker.disableCookies();
+
+    statsUid$.pipe(
+      filter(uid => !!uid),
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe(uid => {
+      this.matomoTracker.setUserId(uid);
+    });
   }
 
   private initializeLanguage(): void {
@@ -275,7 +294,7 @@ export class AppComponent implements OnInit, OnDestroy {
     if (!Capacitor.isNativePlatform()) {
       return;
     }
-    this.platform.ready().then(() => {
+    this.platform.ready().then(async () => {
       const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--ion-color-primary');
       const r = parseInt(primaryColor.slice(1, 3), 16);
       const g = parseInt(primaryColor.slice(3, 5), 16);
@@ -283,7 +302,17 @@ export class AppComponent implements OnInit, OnDestroy {
       const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
       StatusBar.setStyle({ style: luminance > 0.5 ? Style.Light : Style.Dark });
       StatusBar.setBackgroundColor({ color: primaryColor });
-      EdgeToEdge.setBackgroundColor({ color: primaryColor });
+
+      // Gestion du edge to edge sur android
+      const info = await Device.getInfo();
+      if (info.platform === 'android') {
+        if (Number(info.osVersion) >= 15) {
+          await EdgeToEdge.enable();
+          await EdgeToEdge.setBackgroundColor({ color: primaryColor });
+        } else {
+          await EdgeToEdge.disable();
+        }
+      }
     });
   }
 
