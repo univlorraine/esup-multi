@@ -86,6 +86,7 @@ export class ContactUsPage implements OnInit {
       .subscribe(authenticatedUser => {
         this.defaultFrom = authenticatedUser.email;
         this.contactForm.get('from').setValue(this.defaultFrom);
+        this.contactForm.get('from').disable();
       });
   }
 
@@ -110,11 +111,15 @@ export class ContactUsPage implements OnInit {
       text: '',
       ...this.contactForm.value
     };
+    if (this.defaultFrom.length > 0) {
+      query.from = this.defaultFrom; // if user is authenticated, force email
+    }
     this.contactForm.disable();
     this.contactUsService.sendContactMessage(query).pipe(
       take(1),
       finalize(() => {
         this.contactForm.enable();
+        this.contactForm.get('from').disable();
         this.isLoading = false;
       })
     ).subscribe(() => {

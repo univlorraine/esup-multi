@@ -96,6 +96,7 @@ export default (): Configuration => {
   return {
     mail: {
       smtp: process.env.CONTACT_US_SERVICE_SMTP,
+      sender: process.env.CONTACT_US_SERVICE_SENDER,
     },
     cmsApi: {
       apiUrl: process.env.CONTACT_US_SERVICE_CMS_CONNECTOR_API_URL,

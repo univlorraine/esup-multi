@@ -79,11 +79,11 @@ export class ServicesService {
   }
 
   searchQueryFilter(features: TranslatedFeature[], searchQuery: string): TranslatedFeature[] {
-    const query = searchQuery.toLowerCase();
+    const query = searchQuery.normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
     return features.filter(feature => (
-      feature.title.toLowerCase().includes(query) ||
-      feature.content?.toLowerCase().includes(query) ||
-      feature.searchKeywords?.some(keyword => keyword.toLowerCase().includes(query))
+      feature.title.normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase().includes(query) ||
+      feature.content?.normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase().includes(query) ||
+      feature.searchKeywords?.some(keyword => keyword.normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase().includes(query))
     ));
   }
 }

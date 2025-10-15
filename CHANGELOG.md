@@ -6,16 +6,23 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ## 2.x.x (Unreleased)
 
 ### Client
-
 #### Bug fixes
 * Correction du mode *Edge to Edge* pour Android
 * **(app-update)**: Le client n'était plus capable de récupérer la version min requise suite au passage au multi-tenants
+* **(chatbot)** : Balises non affichées dans les messages du chatbot
+* **(features)** : Normalisation du contenu pour la recherche dans les services
+* **(login)** : Afficher/masquer le mot de passe, utilisation du composant Ionic prévu à cet effet
+* **(map)** : Prise en compte de l'état d'activation du service de localisation du système
+* **(schedule)** : Suppression des espaces dans le champ *asUser* des gestionnaires
 * **(shared)** : Navigation, correction faille XSS avec `Browser.open()`
 
 #### Autres
 * Mises à jour des dépendances suite aux alertes CVE
 
 ### Backend
+#### Bug fixes
+* **(contact-us)** : Prévention partielle des usurpations d'adresse email, et avertissement si l'utilisateur n'est pas connecté
+
 #### New features
 * **(auth)** : Suppression du cache dans le microservice, déportation vers le connecteur CMS
 * **(contact-us)** : Suppression du cache dans le microservice, déportation vers le connecteur CMS
