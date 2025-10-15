@@ -48,8 +48,6 @@ const applyIfNotBlank = (param: string, applyFn: (value: string) => void) => {
 export default (): {
   cmsApi: CmsApi;
   keepAliveOptions: KeepAliveOptions;
-  cacheTtl: number;
-  cacheMax: number;
 } => {
   const keepAliveOptions = {};
 
@@ -95,7 +93,5 @@ export default (): {
         process.env.IMPORTANT_NEWS_SERVICE_CMS_CONNECTOR_API_BEARER_TOKEN,
     },
     keepAliveOptions,
-    cacheTtl: parseInt(process.env.IMPORTANT_NEWS_SERVICE_CACHE_TTL_MS),
-    cacheMax: parseInt(process.env.IMPORTANT_NEWS_SERVICE_CACHE_MAX),
   };
 };
