@@ -12,6 +12,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **(chatbot)** : Balises non affichées dans les messages du chatbot
 * **(features)** : Normalisation du contenu pour la recherche dans les services
 * **(login)** : Afficher/masquer le mot de passe, utilisation du composant Ionic prévu à cet effet
+* **(map)** : Prise en compte de l'état d'activation du service de localisation du système
 * **(schedule)** : Suppression des espaces dans le champ *asUser* des gestionnaires
 
 #### Autres
