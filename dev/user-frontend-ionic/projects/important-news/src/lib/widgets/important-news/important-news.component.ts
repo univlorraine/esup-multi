@@ -39,7 +39,6 @@
 
 import { Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { Browser } from '@capacitor/browser';
 import { currentLanguage$, StatisticsService, ThemeService } from '@multi/shared';
 import { combineLatest, Observable } from 'rxjs';
 import { finalize, map, take } from 'rxjs/operators';
@@ -47,6 +46,7 @@ import { ImportantNews, importantNewsList$, setImportantNews as setImportantNews
 import { ImportantNewsService } from '../../important-news.service';
 import { TranslatedImportantNews } from '../../important-news.repository';
 import { IMPORTANT_NEWS_CONFIG, ImportantNewsModuleConfig } from '../../important-news.config';
+import { NavigationService } from '@multi/shared';
 
 
 @Component({
@@ -69,7 +69,8 @@ export class ImportantNewsComponent {
     private router: Router,
     private statisticsService: StatisticsService,
     private themeService: ThemeService,
-    @Inject(IMPORTANT_NEWS_CONFIG) public config: ImportantNewsModuleConfig
+    private navigationService: NavigationService,
+    @Inject(IMPORTANT_NEWS_CONFIG) public config: ImportantNewsModuleConfig,
   ) {
     this.isEmpty$ = this.importantNewsList$.pipe(
       map(importantNewsList => !importantNewsList || importantNewsList.length === 0)
@@ -111,7 +112,7 @@ export class ImportantNewsComponent {
     if (importantNews.link.startsWith('/')) {
       return this.router.navigateByUrl(importantNews.link);
     } else {
-      return Browser.open({ url: importantNews.link });
+      return this.navigationService.openExternalLink(importantNews.link);
     }
   }
 

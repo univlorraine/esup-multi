@@ -14,6 +14,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **(login)** : Afficher/masquer le mot de passe, utilisation du composant Ionic prévu à cet effet
 * **(map)** : Prise en compte de l'état d'activation du service de localisation du système
 * **(schedule)** : Suppression des espaces dans le champ *asUser* des gestionnaires
+* **(shared)** : Navigation, correction faille XSS avec `Browser.open()`
 
 #### Autres
 * Mises à jour des dépendances suite aux alertes CVE

@@ -46,7 +46,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 
 ## [Frontend](./dev/user-frontend-ionic)
 ```
-├─ MIT: 73
+├─ MIT: 74
 ├─ Apache-2.0: 7
 ├─ BSD-2-Clause: 2
 ├─ Custom: LICENSE: 1
@@ -116,6 +116,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [angularx-qrcode@16.0.2](https://github.com/cordobo/angularx-qrcode) - MIT
 - [capacitor-secure-storage-plugin@0.11.0](https://github.com/martinkasa/capacitor-secure-storage-plugin) - MIT
 - [date-fns@2.30.0](https://github.com/date-fns/date-fns) - MIT
+- [eslint-plugin-local-rules@3.0.2](https://github.com/cletusw/eslint-plugin-local-rules) - MIT
 - [eslint@8.57.1](https://github.com/eslint/eslint) - MIT
 - [firebase@11.10.0](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
 - [fullcalendar@6.1.18](https://github.com/fullcalendar/fullcalendar) - MIT
