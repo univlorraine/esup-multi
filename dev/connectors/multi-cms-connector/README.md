@@ -14,9 +14,140 @@ Pour connaitre les requêtes GraphQL disponibles côté backend se référer à 
 ### Directus
 * `DIRECTUS_API_URL`: URL de l'API Directus
 * `DIRECTUS_API_TOKEN`: Token d'accès à l'API Directus
+* `DIRECTUS_ASSETS_PUBLIC_URL`: URL publique pour les assets Directus
 
 ### Wordpress
 * `WORDPRESS_API_URL`: URL de l'API Wordpress
 * `WORDPRESS_API_USERNAME`: Nom d'utilisateur de l'API Wordpress
 * `WORDPRESS_API_PASSWORD`: Mot de passe de l'API Wordpress
 
+### Redis
+* `REDIS_HOST`: Hôte du serveur Redis
+* `REDIS_PORT`: Port du serveur Redis
+* `REDIS_PASSWORD`: Mot de passe du serveur Redis (optionnel)
+* `REDIS_DB`: Numéro de la base de données Redis (optionnel, défaut : 0)
+
+### Cache
+* `CACHE_ENABLED`: Active ou désactive le cache (true/false, défaut : true)
+* `CACHE_TTL_CHANNELS`: TTL du cache pour la collection Channels (en secondes)
+* `CACHE_TTL_CONTACT_US`: TTL du cache pour la collection Contact-Us (en secondes)
+* `CACHE_TTL_FEATURES`: TTL du cache pour la collection Features (en secondes)
+* `CACHE_TTL_IMPORTANT_NEWS`: TTL du cache pour la collection Important-News (en secondes)
+* `CACHE_TTL_LOGIN`: TTL du cache pour la collection Login (en secondes)
+* `CACHE_TTL_SOCIAL_NETWORKS`: TTL du cache pour la collection Social-Networks (en secondes)
+* `CACHE_TTL_STATIC_PAGES`: TTL du cache pour la collection Static-Pages (en secondes)
+* `CACHE_TTL_WIDGETS`: TTL du cache pour la collection Widgets (en secondes)
+
+## Cache
+
+Le connecteur CMS utilise un système de cache Redis distribué pour optimiser les performances et éviter les latences des requêtes vers le CMS.
+
+### Architecture du Cache
+
+- **Backend principal** : Redis (avec fallback automatique vers le cache mémoire si Redis n'est pas disponible)
+- **Namespace** : `multi:{env}:cache:` pour éviter les conflits avec d'autres services
+- **Clés** : Format `multi:{env}:cache:{collection}:all` ou `multi:{env}:cache:{collection}:{id}` 
+- **TTL configurables** : Par collection via variables d'environnement
+- **Invalidation** : Manuelle via API REST et automatique au démarrage
+- **Protection contre Cache Stampede** : Verrous distribués Redis (`multi:{env}:lock:{collection}:{id}`) avec tokens sécurisés
+- **Déduplication des promesses** : Évite les appels multiples en parallèle sur la même instance
+
+### Configuration du Cache
+
+#### Activation/Désactivation
+Le cache peut être entièrement désactivé pour les tests de performance :
+
+```bash
+# Désactiver le cache
+CACHE_ENABLED=false
+```
+
+#### Variables d'environnement TTL
+Les TTL du cache de chaque collection peut être paramétré depuis le fichier .env (cf. Configuration ci-dessus)
+
+#### Valeurs par défaut (fallback)
+Si les variables d'environnement ne sont pas définies, les TTL suivants sont utilisés :
+- **Collections dynamiques** (features, important-news, widgets) : 1 heure
+- **Collections statiques** (login, contact-us, channels, etc.) : 1 jour
+- **TTL par défaut** : 5 minutes
+
+### API Cache
+
+Des routes sont mises à disposition pour vider le cache depuis une application tierce. 
+Cela peut être utile si on souhaite utiliser des TTL plus long, mais pouvoir tout de même invalider le cache lors de la modification d'un élément dans le CMS par exemple.
+
+#### Vider tout le cache
+```bash
+GET /cache/clear-all
+```
+
+#### Vider le cache d'une collection
+```bash
+GET /cache/clear/{collection}
+```
+
+Collections disponibles : `channels`, `contact-us`, `features`, `important-news`, `login`, `pages`, `social-networks`, `static-pages`, `widgets`
+
+### Système d'événements et Preload
+
+Le système utilise des événements NestJS pour déclencher automatiquement le preload des données après vidage du cache.
+
+#### Architecture événementielle
+
+1. **Au démarrage** : Le `CacheService` vide tout le cache via le pattern `multi:{env}:cache:*`
+2. **Via l'API** : Le `CacheController` invalide une collection et émet `{cms}.{collection}.cache.cleared`
+3. **Services** : Chaque service écoute son événement spécifique et preload automatiquement
+
+#### Implémentation dans un service
+
+Chaque service de collection implémente le pattern suivant :
+
+```typescript
+import { Injectable, Logger } from '@nestjs/common';
+import { OnEvent } from '@nestjs/event-emitter';
+import { CacheService } from '@cache/cache.service';
+import { CacheCollection } from '@cache/cache.config';
+
+@Injectable()
+export class FeaturesWordpressService {
+  private readonly logger = new Logger(FeaturesWordpressService.name);
+  
+  constructor(
+    private readonly wordpressService: WordpressService,
+    private readonly cacheService: CacheService,
+  ) {}
+
+  @OnEvent('wordpress.features.cache.cleared')
+  async handleCacheCleared() {
+    this.logger.log('Received cache cleared event - preloading data...');
+    try {
+      await this.preloadData();
+    } catch (error) {
+      this.logger.error(
+        'Failed to preload features after cache clear:',
+        error.message,
+      );
+    }
+  }
+
+  public async preloadData() {
+    this.logger.log('Preloading features...');
+    await this.getFeatures();
+    this.logger.log('Features preloaded successfully');
+  }
+
+  async getFeatures(): Promise<Features[]> {
+    return this.cacheService.getOrFetchWithLock(
+      CacheCollection.FEATURES,
+      () => this.loadFeaturesFromWordpress(),
+    );
+  }
+
+  private async loadFeaturesFromWordpress(): Promise<Features[]> {
+    this.logger.debug('Loading features from WordPress...');
+    // Requête GraphQL vers le CMS...
+    const data = await this.wordpressService.executeGraphQLQuery(/* ... */);
+    return data.features.nodes.map(this.mapToMultiModel);
+  }
+}
+```

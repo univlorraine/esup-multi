@@ -38,7 +38,7 @@
  */
 
 export interface SendMailQueryDto {
-  from: string;
+  replyTo: string;
   subject: string;
   text: string;
   userData: {
