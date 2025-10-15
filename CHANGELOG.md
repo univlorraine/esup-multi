@@ -11,6 +11,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **(app-update)**: Le client n'était plus capable de récupérer la version min requise suite au passage au multi-tenants
 * **(chatbot)** : Balises non affichées dans les messages du chatbot
 * **(features)** : Normalisation du contenu pour la recherche dans les services
+* **(login)** : Afficher/masquer le mot de passe, utilisation du composant Ionic prévu à cet effet
 * **(schedule)** : Suppression des espaces dans le champ *asUser* des gestionnaires
 
 #### Autres

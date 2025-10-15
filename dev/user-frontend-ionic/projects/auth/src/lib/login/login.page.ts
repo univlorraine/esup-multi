@@ -67,8 +67,6 @@ export class LoginPage implements OnInit {
   public isLoading = false;
   public translatedPageContent$: Observable<TranslatedLoginPageContent>;
   public hideBackButton$: Observable<boolean>;
-  private showPasswordTimeout: any;
-
 
   constructor(
     private fb: FormBuilder,
@@ -169,19 +167,6 @@ export class LoginPage implements OnInit {
       color: 'warning'
     });
     toast.present();
-  }
-
-  showPassword = false;
-
-  togglePasswordVisibility() {
-    this.showPassword = !this.showPassword;
-
-    if (this.showPassword) {
-      clearTimeout(this.showPasswordTimeout);
-      this.showPasswordTimeout = setTimeout(() => {
-        this.showPassword = false;
-      }, 5000);
-    }
   }
 
 }
