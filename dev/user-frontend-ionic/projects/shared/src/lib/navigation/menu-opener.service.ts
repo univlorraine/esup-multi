@@ -43,7 +43,7 @@ import { Router } from '@angular/router';
 import { SsoService } from '../sso/sso.service';
 import { StatisticsService } from '../statistics/statistics.service';
 import { from } from 'rxjs';
-import { NavigationService } from '@multi/shared';
+import { NavigationService } from './navigation.service';
 
 @Injectable({
     providedIn: 'root'
