@@ -3,6 +3,48 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.1.0 (2025-10-16)
+
+### Client
+#### Bug fixes
+* Correction du mode *EdgeToEdge* pour Android
+* Désactivation du plugin *EdgeToEdge* pour iOS
+* **(app-update)**: Le client n'était plus capable de récupérer la version min requise suite au passage au multi-tenants
+* **(chatbot)** : Balises non affichées dans les messages du chatbot
+* **(features)** : Normalisation du contenu pour la recherche dans les services
+* **(login)** : Afficher/masquer le mot de passe, utilisation du composant Ionic prévu à cet effet
+* **(map)** : Prise en compte de l'état d'activation du service de localisation du système
+* **(schedule)** : Suppression des espaces dans le champ *asUser* des gestionnaires
+* **(shared)** : Navigation, correction faille XSS avec `Browser.open()`
+* **(statistics)** : Correction erreur Matomo sur création de cookie sur mobile + utilisation de l'UUID générée pour les stats backend comme identifiant Matomo
+
+#### Autres
+* Mises à jour des dépendances suite aux alertes CVE
+
+### Backend
+#### Bug fixes
+* **(contact-us)** : Prévention partielle des usurpations d'adresse email, et avertissement si l'utilisateur n'est pas connecté
+
+#### New features
+* **(auth)** : Suppression du cache dans le microservice, déportation vers le connecteur CMS
+* **(contact-us)** : Suppression du cache dans le microservice, déportation vers le connecteur CMS
+* **(features)** : Suppression du cache dans le microservice, déportation vers le connecteur CMS
+* **(important-news)** : Suppression du cache dans le microservice, déportation vers le connecteur CMS
+* **(notifications)** : Suppression du cache dans le microservice, déportation vers le connecteur CMS
+* **(social-networks)** : Suppression du cache dans le microservice, déportation vers le connecteur CMS
+* **(static-pages)** : Suppression du cache dans le microservice, déportation vers le connecteur CMS
+
+#### Autres
+* Mises à jour des dépendances suite aux alertes CVE
+
+### Connecteurs
+#### New features
+* **(multi-cms-connector)** : Ajout de cache pour palier aux problèmes de performance côté CMS
+* **(multi-cms-connector)** : Ajout de routes permettant de vider le cache via des webhooks côté CMS
+
+#### Autres
+* Mises à jour des dépendances suite aux alertes CVE
+
 ## 2.0.0 (2025-07-16)
 
 ### Client

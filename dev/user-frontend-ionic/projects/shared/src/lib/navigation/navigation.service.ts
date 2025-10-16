@@ -37,13 +37,15 @@
  * termes.
  */
 
-import { Injectable } from '@angular/core';
+import { Injectable, SecurityContext } from '@angular/core';
 import { Event, NavigationEnd, Router, RouterEvent } from '@angular/router';
 import { Platform } from '@ionic/angular';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
 import { ProjectModuleService } from '../project-module/project-module.service';
 import { Capacitor } from '@capacitor/core';
+import { Browser } from '@capacitor/browser';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root'
@@ -61,6 +63,7 @@ export class NavigationService {
     private router: Router,
     private projectModuleService: ProjectModuleService,
     private platform: Platform,
+    private domSanitizer: DomSanitizer,
   ) {
     this.isExternalNavigation$ = this.isExternalNavigation.asObservable();
 
@@ -94,6 +97,16 @@ export class NavigationService {
 
   navigateToAuth() {
     this.router.navigateByUrl('/auth');
+  }
+
+  /**
+   * Open an external link in the system browser.
+   * The link is sanitized to prevent XSS attacks.
+   *
+   * @param link
+   */
+  openExternalLink(link: string) {
+    return Browser.open({ url: this.domSanitizer.sanitize(SecurityContext.URL, link) });
   }
 
   private setupInactiveRefresh() {

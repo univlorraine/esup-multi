@@ -65,7 +65,6 @@ export class ServicesPage implements OnInit, OnDestroy {
   public draggableIsOn = false;
   public menuItems: ServiceMenuItem[] = [];
   public dragIsAllowed = false;
-  public searchBarValue: string = '';
   private subscriptions: Subscription[] = [];
   private activateDragTimeOut: number;
   private dragulaSubscriptions: Subscription[] = [];
@@ -105,19 +104,8 @@ export class ServicesPage implements OnInit, OnDestroy {
     clearTimeout(this.activateDragTimeOut);
   }
 
-  handleInput(event: any): void {
-    const value = (event.detail.value || '').toLowerCase();
-    this.searchBarValue = value;
-
-    this.menuItems$.subscribe(items => {
-      if (value.length < 3) {
-        this.menuItems = items;
-      } else {
-        this.menuItems = items.filter(item =>
-          item.title.toLowerCase().includes(value)
-        );
-      }
-    }).unsubscribe();
+  handleInput(event) {
+    this.searchQuery$.next(event.target.value);
   }
 
   deactivateDrag() {
