@@ -3,11 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## 2.x.x (Unreleased)
+## 2.1.0 (2025-10-16)
 
 ### Client
 #### Bug fixes
-* Correction du mode *Edge to Edge* pour Android
+* Correction du mode *EdgeToEdge* pour Android
+* Désactivation du plugin *EdgeToEdge* pour iOS
 * **(app-update)**: Le client n'était plus capable de récupérer la version min requise suite au passage au multi-tenants
 * **(chatbot)** : Balises non affichées dans les messages du chatbot
 * **(features)** : Normalisation du contenu pour la recherche dans les services
@@ -15,6 +16,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **(map)** : Prise en compte de l'état d'activation du service de localisation du système
 * **(schedule)** : Suppression des espaces dans le champ *asUser* des gestionnaires
 * **(shared)** : Navigation, correction faille XSS avec `Browser.open()`
+* **(statistics)** : Correction erreur Matomo sur création de cookie sur mobile + utilisation de l'UUID générée pour les stats backend comme identifiant Matomo
 
 #### Autres
 * Mises à jour des dépendances suite aux alertes CVE
