@@ -79,10 +79,11 @@ export class QRScanPage {
     }
 
     this.listener = await BarcodeScanner.addListener(
-      'barcodeScanned',
+      'barcodesScanned',
       async result => {
-        if (result.barcode.valueType === BarcodeValueType.Url) {
-          this.url = result.barcode.displayValue;
+        const barcodes = result.barcodes.filter(barcode => barcode.valueType === BarcodeValueType.Url);
+        if (barcodes.length > 0) {
+          this.url = barcodes[0].displayValue;
           this.navigationService.navigateBack();
         }
       },

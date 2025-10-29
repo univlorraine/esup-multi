@@ -3,12 +3,97 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## x.x.x (2025-xx-xx)
+## 2.1.0 (2025-10-16)
 
 ### Client
 #### Bug fixes
-* **(restaurants)** : correction des dates tronquées à cause d'un scroll vertical inutile
-* **(schedule)** : correction du bouton 'Voir Plus' de la vue liste de l'emploi du temps qui n'affichait pas lorsque l'étudiant n'a pas de cours pendant plus de 15 jours
+* Correction du mode *EdgeToEdge* pour Android
+* Désactivation du plugin *EdgeToEdge* pour iOS
+* **(app-update)**: Le client n'était plus capable de récupérer la version min requise suite au passage au multi-tenants
+* **(chatbot)** : Balises non affichées dans les messages du chatbot
+* **(features)** : Normalisation du contenu pour la recherche dans les services
+* **(login)** : Afficher/masquer le mot de passe, utilisation du composant Ionic prévu à cet effet
+* **(map)** : Prise en compte de l'état d'activation du service de localisation du système
+* **(schedule)** : Suppression des espaces dans le champ *asUser* des gestionnaires
+* **(shared)** : Navigation, correction faille XSS avec `Browser.open()`
+* **(statistics)** : Correction erreur Matomo sur création de cookie sur mobile + utilisation de l'UUID générée pour les stats backend comme identifiant Matomo
+
+#### Autres
+* Mises à jour des dépendances suite aux alertes CVE
+
+### Backend
+#### Bug fixes
+* **(contact-us)** : Prévention partielle des usurpations d'adresse email, et avertissement si l'utilisateur n'est pas connecté
+
+#### New features
+* **(auth)** : Suppression du cache dans le microservice, déportation vers le connecteur CMS
+* **(contact-us)** : Suppression du cache dans le microservice, déportation vers le connecteur CMS
+* **(features)** : Suppression du cache dans le microservice, déportation vers le connecteur CMS
+* **(important-news)** : Suppression du cache dans le microservice, déportation vers le connecteur CMS
+* **(notifications)** : Suppression du cache dans le microservice, déportation vers le connecteur CMS
+* **(social-networks)** : Suppression du cache dans le microservice, déportation vers le connecteur CMS
+* **(static-pages)** : Suppression du cache dans le microservice, déportation vers le connecteur CMS
+
+#### Autres
+* Mises à jour des dépendances suite aux alertes CVE
+
+### Connecteurs
+#### New features
+* **(multi-cms-connector)** : Ajout de cache pour palier aux problèmes de performance côté CMS
+* **(multi-cms-connector)** : Ajout de routes permettant de vider le cache via des webhooks côté CMS
+
+#### Autres
+* Mises à jour des dépendances suite aux alertes CVE
+
+## 2.0.0 (2025-07-16)
+
+### Client
+#### Bug fixes
+* **(features)** : Amélioration du comportement du champ de recherche dans les services
+* **(notifications)** : Le tap sur une notification système redirige désormais sur la page des notifications dans l'application
+* **(restaurants)** : Correction des dates tronquées à cause d'un scroll vertical inutile
+* **(schedule)** : Correction du bouton 'Voir Plus' de la vue liste de l'emploi du temps qui ne s'affichait pas lorsque l'étudiant n'a pas de cours pendant plus de 15 jours
+
+#### New features
+* **(login)** : Ajout d'un bouton permettant de voir le mot de passe saisi
+* **(multi-tenant)** : On peut désormais avoir plusieurs établissements (tenants) dans la même application, chacun pouvant définir son logo, ses traductions et son backend
+* **(restaurants)** : Favoris multiples
+* **(schedule)** : Affichage du nom du planning sur l'évènement
+* **(shared)** : Navigation, possibilité de forcer l'affichage pleine page (*full*) pour les fonctionnalités positionnées dans le menu *tabs*.
+
+#### Styles
+* Suppression du libellé du bouton Retour pour gagner en espace dans la barre de menu supérieure
+
+#### Autres
+* Migration de [NodeJS](https://nodejs.org/docs/latest-v20.x/api/index.html) : Version 18 → Version 20
+* Mise à jour du moteur [Capacitor](https://capacitorjs.com/docs) : Version 6 → Version 7
+
+### Connecteurs
+* Ajout du connecteur **multi-cms-connector** permettant de faire l'intermédiaire entre le client et un CMS au choix (Directus et WordPress pour l'instant).
+Pour plus d'information sur l'installation et la configuration du connecteur CMS : https://www.esup-portail.org/wiki/x/DQD8V
+
+### !! BREAKING CHANGES !!
+La mise en place du connecteur CMS a nécessité la refactorisation des requêtes des microservices vers le CMS. Le passage à cette release 2.0 implique donc la mise en place du connecteur CMS pour que l'application continue de fonctionner correctement.
+
+Les microservices impactés sont :
+* auth
+* contact-us
+* features
+* important-news
+* notifications
+* social-network
+* static-pages
+* widgets
+
+Côté client, certains DTO ont également été revus pour plus de cohérence avec les données renvoyées par le connecteur CMS. Il est donc nécessaire de mettre à jour le client pour que l'application continue de fonctionner correctement.
+
+Les modules concernés sont :
+* auth
+* contact-us
+* features
+* important-news
+* notifications
+* static-pages
 
 ## 1.2.0 (2024-12-11)
 

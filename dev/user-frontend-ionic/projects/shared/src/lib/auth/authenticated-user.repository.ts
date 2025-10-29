@@ -67,6 +67,8 @@ export const persistAuthenticatedUser = persistState(authStore, {
   storage: localForageStore,
 });
 
+export const authenticatedUserRepoInitialized$ = persistAuthenticatedUser.initialized$;
+
 export const authenticatedUser$ = authStore.pipe(select((state) => state.authenticatedUser));
 
 export const updateUser = (authenticatedUser: AuthProps['authenticatedUser']) => {

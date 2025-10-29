@@ -46,11 +46,10 @@ import { catchError, filter, finalize, map, mergeMap, startWith, take } from 'rx
 import { NotificationsModuleConfig, NOTIFICATIONS_CONFIG } from './notifications.config';
 import {
   Channel,
-  Notification, NotificationsRepository, TranslatedChannel, NotificationsService
+  Notification, NotificationsRepository, TranslatedChannel, NotificationsService, NavigationService
 } from '@multi/shared';
 
 import { ToastService } from './toast.service';
-import { Browser } from '@capacitor/browser';
 
 const defaultBreakpoint = 0.50;
 
@@ -92,7 +91,7 @@ export class NotificationsPage implements OnDestroy {
     public notificationRepository: NotificationsRepository,
     private toastService: ToastService,
     private networkService: NetworkService,
-
+    private navigationService: NavigationService,
   ) {
     this.translatedChannels$ = this.notificationRepository.translatedChannels$;
     this.channels$ = this.notificationRepository.channels$;
@@ -258,7 +257,7 @@ export class NotificationsPage implements OnDestroy {
     if (!notification.url) {
       return;
     }
-    return Browser.open({ url: notification.url });
+    return this.navigationService.openExternalLink(notification.url);
   }
 
   private async loadDataIfNetworkAvailable() {

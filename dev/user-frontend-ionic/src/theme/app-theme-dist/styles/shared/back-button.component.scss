@@ -37,3 +37,6 @@
  * termes.
  */
 
+ion-back-button::part(text) {
+  display: none;
+}

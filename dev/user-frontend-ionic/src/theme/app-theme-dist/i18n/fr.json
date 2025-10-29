@@ -22,7 +22,12 @@
       "TITLE": "Attention"
     }
   },
-  "GLOBAL" : {
-    "IOS_BACK_BUTTON": "Retour"
+  "GLOBAL": {
+    "BACK_BUTTON":{
+      "LABEL_IOS": "Retour",
+      "LABEL_ANDROID": "Retour",
+      "ARIA_LABEL_IOS": "Retour",
+      "ARIA_LABEL_ANDROID": "Retour"
+    }
   }
 }

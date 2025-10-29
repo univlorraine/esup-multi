@@ -61,8 +61,7 @@ export interface TranslatedContactUsPageContent {
 }
 
 interface Translation {
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  languages_code: string;
+  languagesCode: string;
   title: string;
   content: string;
 }
@@ -88,8 +87,8 @@ export class ContactUsRepository {
   public translatedPageContent$ = combineLatest([this.pageContent$, currentLanguage$]).pipe(
     filter(([pageContent]) => pageContent !== null),
     map(([pageContent, currentLanguage]) => {
-      const translation = pageContent.translations.find((t) => t.languages_code === currentLanguage) ||
-        pageContent.translations.find((t) => t.languages_code === this.environment.defaultLanguage) ||
+      const translation = pageContent.translations.find((t) => t.languagesCode === currentLanguage) ||
+        pageContent.translations.find((t) => t.languagesCode === this.environment.defaultLanguage) ||
         pageContent.translations[0];
 
       return {

@@ -51,11 +51,6 @@ const CHANNELS_STORE= 'channels';
 
 const defaultNotificationColor = 'black';
 const defaultNotificationIcon = 'information-circle';
-
-export interface NotificationsProps {
-  fcmToken: string;
-}
-
 export interface ChannelsProps {
   unsubscribedChannels: string[];
 }
@@ -63,6 +58,7 @@ export interface ChannelsProps {
 export interface Notification {
   id: string;
   author: string;
+  topic: string;
   channel: string;
   channelLabel: string;
   icon: string;
@@ -86,8 +82,7 @@ export interface Channel {
 }
 
 interface Translation {
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  languages_code: string;
+  languagesCode: string;
   label: string;
 }
 export interface TranslatedChannel {
@@ -98,9 +93,6 @@ export interface TranslatedChannel {
 
 const notificationsStore = createStore(
   { name: NOTIFICATIONS_STORE },
-  withProps<NotificationsProps>({
-    fcmToken: null,
-  }),
   withEntities<Notification>(),
 );
 
@@ -115,7 +107,6 @@ const channelsStore = createStore(
 @Injectable({ providedIn: 'root' })
 export class NotificationsRepository {
 
-  public fcmToken$ = notificationsStore.pipe(select((state) => state.fcmToken));
   public channels$ = channelsStore.pipe(selectAllEntities());
   public unsubscribedChannels$ = channelsStore.pipe(select((state) => state.unsubscribedChannels));
 
@@ -140,8 +131,8 @@ export class NotificationsRepository {
 
   public translatedChannels$ = combineLatest([this.channels$, currentLanguage$]).pipe(
     map(([channels, currentLanguage]) => channels.map(channel => {
-        const translation = channel.translations.find((t) => t.languages_code === currentLanguage) ||
-          channel.translations.find((t) => t.languages_code === this.environment.defaultLanguage) ||
+        const translation = channel.translations.find((t) => t.languagesCode === currentLanguage) ||
+          channel.translations.find((t) => t.languagesCode === this.environment.defaultLanguage) ||
           channel.translations[0];
         return { label: translation.label, code: channel.code, filterable: channel.filterable };
       }))
@@ -159,15 +150,8 @@ export class NotificationsRepository {
 
   constructor(
     @Inject('environment')
-    private environment: any,) {
-  }
-
-  public setFcmToken(fcmToken: string) {
-    notificationsStore.update((state) => ({
-      ...state,
-      fcmToken,
-    }));
-  }
+    private environment: any,
+  ) {}
 
   public setNotifications(notifications: Notification[]) {
     notificationsStore.update(setEntities(notifications));
@@ -207,7 +191,7 @@ export class NotificationsRepository {
     channelsStore.update(state => {
       // On crée un nouveau set contenant les canaux actuels auxquels l'utilisateur est désabonné
       const unsubscribedChannelsSet = new Set(state.unsubscribedChannels);
-      // On ajout le canal demandé à la liste
+      // On ajoute le canal demandé à la liste
       unsubscribedChannelsSet.add(channelCode);
       // On retourne une nouvelle copie de l'ensemble en le convertissant en tableau grâce à l'opérateur
       // de spread qui permet également de retirer les doublons au passage

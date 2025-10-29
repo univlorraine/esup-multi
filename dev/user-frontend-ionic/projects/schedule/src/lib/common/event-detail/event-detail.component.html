@@ -55,9 +55,13 @@
           <ion-row class="card-labels course-label">
             <ion-text class="app-text-3">{{event.course.label}}</ion-text>
           </ion-row>
+          <ion-row *ngIf="event.planningLabel" class="card-labels planning-label">
+            <ion-icon class="app-icon-5"  name="calendar-outline" aria-label=""></ion-icon>
+            <ion-text class="app-text-4 light">{{event.planningLabel}}</ion-text>
+          </ion-row>
           <ion-row class="card-labels" *ngFor="let room of event.rooms">
             <ion-icon class="app-icon-5"  name="business-outline" aria-label=""></ion-icon>
-            <ion-text class="app-text-4 light">{{room.label}} - {{room.building}}</ion-text>
+            <ion-text class="app-text-4 light">{{room.label}}<ng-container *ngIf="room.label && room.building"> - </ng-container>{{room.building}}</ion-text>
           </ion-row>
           <ion-row class="card-labels" *ngFor="let teacher of event.teachers">
             <ion-icon class="app-icon-5" name="man-outline" aria-label=""></ion-icon>

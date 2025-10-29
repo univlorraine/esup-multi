@@ -39,7 +39,7 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { getAuthToken, NetworkService } from '@multi/shared';
+import { getAuthToken, NetworkService, MultiTenantService } from '@multi/shared';
 import { from, Observable } from 'rxjs';
 import { filter, switchMap, take } from 'rxjs/operators';
 import { ImportantNews, TranslatedImportantNews } from './important-news.repository';
@@ -52,6 +52,7 @@ export class ImportantNewsService {
   constructor(
     @Inject('environment')
     private environment: any,
+    private multiTenantService: MultiTenantService,
     private http: HttpClient,
     private networkService: NetworkService,
   ) {
@@ -72,11 +73,9 @@ export class ImportantNewsService {
       // Si le contenu traduit n'est pas trouvé dans la langue souhaitée, on prend le contenu dans la langue par défaut
       // Si, ni la langue courante, ni la langue par défaut n'ont été trouvées, on prend la première traduction disponible
       const translation =
-        /* eslint-disable @typescript-eslint/naming-convention */
-        importantNews.translations.find((t) => t.languages_code === currentLanguage) ||
-        importantNews.translations.find((t) => t.languages_code === this.environment.defaultLanguage) ||
+        importantNews.translations.find((t) => t.languagesCode === currentLanguage) ||
+        importantNews.translations.find((t) => t.languagesCode === this.environment.defaultLanguage) ||
         importantNews.translations[0];
-      /* eslint-enable @typescript-eslint/naming-convention */
 
       return {
         ...importantNews,
@@ -88,7 +87,7 @@ export class ImportantNewsService {
   }
 
   private getImportantNews(authToken: string): Observable<ImportantNews[]> {
-    const url = `${this.environment.apiEndpoint}/important-news`;
+    const url = `${this.multiTenantService.getApiEndpoint()}/important-news`;
     const data = {
       authToken
     };

@@ -47,8 +47,8 @@
       <app-custom-icon
       [icon]="menuItem.icon"
       [color]="(isDarkTheme$ | async) === true ? 'icon-primary': 'icon-primary-contrast'"
-      [iconSourceSvgLightTheme]="menuItem.iconSourceSvgLightTheme"
-      [iconSourceSvgDarkTheme]="menuItem.iconSourceSvgDarkTheme"></app-custom-icon>
+      [iconSvgLight]="menuItem.iconSvgLight"
+      [iconSvgDark]="menuItem.iconSvgDark"></app-custom-icon>
   </div>
   <ion-label>{{menuItem.title}}</ion-label>
 </div>

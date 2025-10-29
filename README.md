@@ -34,7 +34,7 @@ Côté front-end :
 Côté back-end :
 - NodeJS avec Express et NestJS
 - Nats
-- Directus
+- CMS : Directus / WordPress
 - MongoDB
 
 Retrouvez toute la documentation sur [notre espace wiki](https://www.esup-portail.org/wiki/x/EYDoTw)

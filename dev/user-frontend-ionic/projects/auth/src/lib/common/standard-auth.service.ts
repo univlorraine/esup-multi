@@ -38,8 +38,8 @@
  */
 
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
-import { AuthenticatedUser, getAuthToken, updateAuthToken, updateUser } from '@multi/shared';
+import { Injectable } from '@angular/core';
+import { AuthenticatedUser, getAuthToken, MultiTenantService, updateAuthToken, updateUser } from '@multi/shared';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, concatMap, delayWhen, take } from 'rxjs/operators';
 
@@ -54,13 +54,12 @@ export class StandardAuthService {
 
 
   constructor(
-    @Inject('environment')
-    private environment: any,
+    private multiTenantService: MultiTenantService,
     private http: HttpClient) { }
 
   login(username: string, password: string): Observable<AuthenticatedUser | null> {
 
-    const url = `${this.environment.apiEndpoint}/auth`;
+    const url = `${this.multiTenantService.getApiEndpoint()}/auth`;
     const data = {
       username,
       password,
@@ -85,7 +84,7 @@ export class StandardAuthService {
   }
 
   logout(): Observable<boolean> {
-    const url = `${this.environment.apiEndpoint}/auth`;
+    const url = `${this.multiTenantService.getApiEndpoint()}/auth`;
 
     return getAuthToken().pipe(
       take(1),

@@ -207,3 +207,51 @@ jobs:
         run: |
           cd dev/user-backend-nest/microservices/${{ matrix.service }}
           npm run lint
+
+  connectors:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        service:
+          - multi-cms-connector
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+
+      - name: Check if connectors were modified
+        uses: dorny/paths-filter@v3
+        id: changes
+        with:
+          filters: |
+            multi-cms-connector:
+            - 'dev/connectors/multi-cms-connector/**/*.ts'
+            - 'dev/connectors/multi-cms-connector/.eslintrc.js'
+
+      - name: Read Node.js version
+        id: node_version
+        if: steps.changes.outputs[${{ matrix.service }}] == 'true'
+        run: echo NODE_VERSION=$(cat dev/connectors/${{ matrix.service }}/.nvmrc) >> $GITHUB_OUTPUT
+
+      - name: Set up Node.js
+        if: steps.changes.outputs[${{ matrix.service }}] == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ steps.node_version.outputs.NODE_VERSION }}
+
+      - name: Prepare environment
+        if: steps.changes.outputs[${{ matrix.service }}] == 'true'
+        run: |
+          cd dev/connectors/${{ matrix.service }}
+          npm ci
+
+      - name: Lint ${{ matrix.service }}
+        if: steps.changes.outputs[${{ matrix.service }}] == 'true'
+        run: |
+          cd dev/connectors/${{ matrix.service }}
+          npm run lint

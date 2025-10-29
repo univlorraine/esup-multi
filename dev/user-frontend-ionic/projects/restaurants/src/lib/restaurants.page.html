@@ -50,8 +50,8 @@
               <div class="border"></div>
 
               <ion-img [src]="restaurant.thumbnailUrl"
-                       (ionError)="restaurant.thumbnailUrl = 'assets/restaurants/fallback.svg'"></ion-img>
-              <ion-icon (click)="unsetFavoriteRestaurant()" *ngIf="restaurant.favorite"
+                       (ionError)="restaurant.thumbnailUrl = 'assets/icons/restaurants/fallback.svg'"></ion-img>
+              <ion-icon (click)="unsetFavoriteRestaurant(restaurant.id)" *ngIf="restaurant.favorite"
                         [attr.aria-label]="'RESTAURANTS.REMOVE_FROM_FAVORITES' | translate: { name: restaurant.title }"
                         class="app-icon-4 favorite-icon" name="heart">
               </ion-icon>
