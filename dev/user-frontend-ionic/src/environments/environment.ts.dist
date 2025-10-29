@@ -102,7 +102,7 @@ export const environment: any = {
       display: 'list',
     }),
     CardEuPageModule.forRoot({
-      knownErrors: ['NO_PHOTO', 'NO_ACTIVE_CARD', 'UNPAID_FEES'],
+      knownErrors: ['NO_PHOTO', 'NO_ACTIVE_CARD', 'UNPAID_FEES', 'ESCN_MISSING'],
       display: 'extended',
     }),
     CardPageModule.forRoot({knownErrors: ['NO_PHOTO', 'NO_ACTIVE_CARD', 'UNPAID_FEES'] }),

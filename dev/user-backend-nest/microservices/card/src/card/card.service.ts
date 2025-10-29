@@ -78,6 +78,7 @@ export class CardService {
           throw new RpcException(errorMessage);
         }),
         map((res) => {
+          console.log(res);
           return res.data;
         }),
       );

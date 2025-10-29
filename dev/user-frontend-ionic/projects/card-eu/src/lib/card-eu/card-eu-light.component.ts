@@ -43,7 +43,7 @@ import { UserAndCardEuData } from '../card-eu.repository';
 @Component({
   selector: 'app-card-eu-light',
   templateUrl: './card-eu-light.component.html',
-  styleUrls: ['../../../../../src/theme/app-theme/styles/cards/card-eu/card-eu-light.component.scss']
+  styleUrls: ['../../../../../src/theme/app-theme/styles/card-eu/card-eu-light.component.scss']
 })
 export class CardEuLightComponent {
   @Input() userCardEuLight: UserAndCardEuData;

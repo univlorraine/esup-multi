@@ -44,12 +44,12 @@ export interface UserAndCardEuData {
   firstname?: string;
   fullname?: string;
   photo?: string;
-  euid: string;
-  qrCode: {
+  euid?: string;
+  qrCode?: {
     type: string;
     value: string;
   };
-  errors: [];
+  errors?: string[];
 }
 
 // BehaviorSubject to store and share the card data

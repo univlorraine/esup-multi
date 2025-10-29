@@ -47,9 +47,9 @@ import { CardEuService } from './card-eu.service';
 import { ScreenService } from './screen.service';
 
 @Component({
-  selector: 'app-cards',
+  selector: 'app-cards-eu',
   templateUrl: './card-eu.page.html',
-  styleUrls: ['../../../../src/theme/app-theme/styles/cards/card-eu/card-eu.page.scss']
+  styleUrls: ['../../../../src/theme/app-theme/styles/card-eu/card-eu.page.scss']
 })
 export class CardEuPage {
   public authenticatedUser$: Observable<AuthenticatedUser>;
@@ -119,6 +119,7 @@ export class CardEuPage {
         finalize(() => this.isLoading = false)
     ).subscribe(userAndCardEuData => {
       setUserAndCardEuData(userAndCardEuData);
-    });
+    })
+    ;
   }
 }

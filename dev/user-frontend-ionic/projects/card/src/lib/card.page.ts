@@ -47,9 +47,9 @@ import { CardService } from './card.service';
 import { ScreenService } from './screen.service';
 
 @Component({
-  selector: 'app-card',
+  selector: 'app-cards',
   templateUrl: './card.page.html',
-  styleUrls: ['../../../../src/theme/app-theme/styles/cards/card/card.page.scss']
+  styleUrls: ['../../../../src/theme/app-theme/styles/card/card.page.scss']
 })
 export class CardPage {
   public authenticatedUser$: Observable<AuthenticatedUser>;

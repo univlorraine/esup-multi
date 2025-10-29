@@ -39,7 +39,7 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { UserAndCardEuData } from './card-eu.repository';
 
 @Injectable({
@@ -56,7 +56,8 @@ export class CardEuService {
 
   public getUserAndCardEuData(authToken: string, useLight: boolean, escn?: string): Observable<UserAndCardEuData> {
     if (useLight && !escn) {
-      return;
+      console.error('ESCN number missing for this user.');
+      return of({ errors: ['ESCN_MISSING'] } as UserAndCardEuData);
     }
     if (useLight && escn) {
       return this.getUserAndCardEuLightData(authToken, escn);
@@ -73,8 +74,11 @@ export class CardEuService {
   }
 
   private getUserAndCardEuLightData(authToken: string, escn: string): Observable<UserAndCardEuData> {
+    console.log('bbic');
     const url = `${this.environment.apiEndpoint}/card-eu-light`;
+    console.log(url);
     const data = { authToken, escn };
+    console.log('data: ', data);
 
     return this.http.post<UserAndCardEuData>(url, data);
   }

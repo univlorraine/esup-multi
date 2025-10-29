@@ -43,7 +43,7 @@ import { UserAndCardData } from '../card.repository';
 @Component({
   selector: 'app-staff-card',
   templateUrl: './staff-card.component.html',
-  styleUrls: ['../../../../../src/theme/app-theme/styles/cards/card/card.component.scss']
+  styleUrls: ['../../../../../src/theme/app-theme/styles/card/card.component.scss']
 })
 export class StaffCardComponent {
   @Input() userCard: UserAndCardData;

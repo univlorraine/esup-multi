@@ -43,7 +43,7 @@ import { UserAndCardEuData } from '../card-eu.repository';
 @Component({
   selector: 'app-card-eu',
   templateUrl: './card-eu.component.html',
-  styleUrls: ['../../../../../src/theme/app-theme/styles/cards/card-eu/card-eu.component.scss']
+  styleUrls: ['../../../../../src/theme/app-theme/styles/card-eu/card-eu.component.scss']
 })
 export class CardEuComponent {
   @Input() userCardEu: UserAndCardEuData;

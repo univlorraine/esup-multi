@@ -13,6 +13,6 @@ CardEuPageModule.forRoot({
 ```
 
 ### Configuration du module
-- `display` : ("extended" | "light") : 
-  - extended : carte européenne complète avec photo + ine (nécessite un connecteur pour fournir les informations nécessaires)
-  - light : affichage avec des données réduites récupérées directement auprès de l'ESC Router.
+- `display` : 
+  - `extended` : carte européenne complète avec photo + ine (nécessite un connecteur pour fournir les informations nécessaires)
+  - `light` : affichage avec des données réduites récupérées directement auprès de l'ESC Router.
