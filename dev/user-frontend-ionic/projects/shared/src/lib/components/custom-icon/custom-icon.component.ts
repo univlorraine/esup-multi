@@ -47,8 +47,8 @@ import { isDarkTheme$ } from '../../theme/theme.repository';
 })
 export class CustomIconComponent {
   @Input() icon?: string;
-  @Input() iconSourceSvgLightTheme?: string;
-  @Input() iconSourceSvgDarkTheme?: string;
+  @Input() iconSvgLight?: string;
+  @Input() iconSvgDark?: string;
   @Input() color?: string;
   @Input() size?: string;
   @Input() slot?: string;

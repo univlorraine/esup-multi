@@ -38,9 +38,8 @@ Les mots de passe sont identiques aux identifiants.
 ## Modifications de l'application multi
 Il est nécessaire de modifier les fichiers d'environnement de l'application multi-tenant pour associer les microservices
 aux web-services de bouchonnage du projet
-```
-Il est convenu que le projet est exécuté en local (localhost), sur le port 3099.
-```
+
+Il est convenu que le projet est exécuté en local (localhost), sur le port **3099**.
 
 Pour la suite, se placer dans le dossier [user-backend-nest](../user-backend-nest).
 

@@ -37,22 +37,22 @@
   ~ termes.
   -->
 
-<ion-icon *ngIf="!iconSourceSvgLightTheme && !iconSourceSvgDarkTheme"
+<ion-icon *ngIf="!iconSvgLight && !iconSvgDark"
           [name]="icon"
           [slot]="slot"
           [size]="size"
           [color]="color"
           aria-label=""
 ></ion-icon>
-<ion-icon *ngIf="iconSourceSvgLightTheme && (isDarkTheme$ | async) === false"
-          [src]="'data:image/svg+xml;utf8, ' + iconSourceSvgLightTheme"
+<ion-icon *ngIf="iconSvgLight && (isDarkTheme$ | async) === false"
+          [src]="'data:image/svg+xml;utf8, ' + iconSvgLight"
           [slot]="slot"
           [size]="size"
           [color]="color"
           aria-label=""
 ></ion-icon>
-<ion-icon *ngIf="iconSourceSvgDarkTheme && (isDarkTheme$ | async) === true"
-          [src]="'data:image/svg+xml;utf8, ' + iconSourceSvgDarkTheme"
+<ion-icon *ngIf="iconSvgDark && (isDarkTheme$ | async) === true"
+          [src]="'data:image/svg+xml;utf8, ' + iconSvgDark"
           [slot]="slot"
           [size]="size"
           [color]="color"

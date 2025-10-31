@@ -46,7 +46,7 @@ import { concatMap, filter, tap } from 'rxjs/operators';
 export class NotificationsEffects {
     sendFCMToken$ = createEffect(actions => actions.pipe(
         ofType(authenticate),
-        tap(() => this.notificationsService.saveFCMToken()),
+        tap(() => this.notificationsService.registerNotificationsAndSaveFCMToken()),
     ));
     cleanupPrivateData$ = createEffect(actions => actions.pipe(
         ofType(cleanupPrivateData),

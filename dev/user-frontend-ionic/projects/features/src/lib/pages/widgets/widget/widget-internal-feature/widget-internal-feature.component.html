@@ -41,10 +41,10 @@
           (click)="onClick()" [ngStyle]="{'background-color': feature.color}">
   <ion-card-header *ngIf="feature.title" class="ion-no-padding">
     <ion-card-title [ngClass]="fontColor(feature.color)" class="feature-title app-title-5">
-      <app-custom-icon *ngIf="feature.icon || feature.iconSourceSvgLightTheme || feature.iconSourceSvgDarkTheme"
+      <app-custom-icon *ngIf="feature.icon || feature.iconSvgLight || feature.iconSvgDark"
                        [icon]="feature.icon"
-                       [iconSourceSvgLightTheme]="feature.iconSourceSvgLightTheme"
-                       [iconSourceSvgDarkTheme]="feature.iconSourceSvgDarkTheme"></app-custom-icon>
+                       [iconSvgLight]="feature.iconSvgLight"
+                       [iconSvgDark]="feature.iconSvgDark"></app-custom-icon>
       {{feature.title}}
     </ion-card-title>
   </ion-card-header>

@@ -39,7 +39,7 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { getAuthToken, NetworkService } from '@multi/shared';
+import { getAuthToken, MultiTenantService, NetworkService } from '@multi/shared';
 import { add, format, startOfWeek, sub } from 'date-fns';
 import { BehaviorSubject, combineLatest, from, Observable, of, Subject } from 'rxjs';
 import { filter, finalize, map, mergeMap, switchMap, take, tap } from 'rxjs/operators';
@@ -68,8 +68,7 @@ export class ScheduleService {
   private isLoadingSubject = new Subject<boolean>();
 
   constructor(
-    @Inject('environment')
-    private environment: any,
+    private multiTenantService: MultiTenantService,
     private http: HttpClient,
     @Inject(SCHEDULE_CONFIG) private config: ScheduleModuleConfig,
     private networkService: NetworkService,
@@ -86,7 +85,7 @@ export class ScheduleService {
 
   public getSchedule(authToken: string, startDate: string, endDate: string): Observable<Schedule> {
 
-    const url = `${this.environment.apiEndpoint}/schedule`;
+    const url = `${this.multiTenantService.getApiEndpoint()}/schedule`;
     const data = {
       authToken,
       startDate,

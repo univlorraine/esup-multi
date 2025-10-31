@@ -47,7 +47,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { FeaturesModule } from '@multi/features';
 import { MenuModule } from '@multi/menu';
 import { PreferencesPageModule } from '@multi/preferences';
-import { AuthInterceptor, ProjectModuleService, translationsLoaderFactory } from '@multi/shared';
+import { AuthInterceptor, MultiTenantModule, ProjectModuleService, MultiTenantService, translationsLoaderFactory } from '@multi/shared';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -74,11 +74,12 @@ import { PageLayoutsModule } from './layout/layouts.module';
     FeaturesModule,
     MenuModule,
     PreferencesPageModule,
+    MultiTenantModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
         useFactory: translationsLoaderFactory,
-        deps: [HttpClient, ProjectModuleService, 'environment']
+        deps: [HttpClient, ProjectModuleService, MultiTenantService, 'environment']
       }
     }),
     ...environment.enabledModules,

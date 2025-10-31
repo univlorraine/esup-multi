@@ -104,7 +104,7 @@ export class ServicesPage implements OnInit, OnDestroy {
     clearTimeout(this.activateDragTimeOut);
   }
 
-  handleChange(event) {
+  handleInput(event) {
     this.searchQuery$.next(event.target.value);
   }
 

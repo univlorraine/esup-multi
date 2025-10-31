@@ -42,43 +42,80 @@ import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { RpcException } from '@nestjs/microservices';
 import { catchError, map, Observable } from 'rxjs';
-import { DirectusApi } from '../config/configuration.interface';
-import { DirectusImportantNews, DirectusResponse } from './important-news.dto';
+import { CmsApi } from '../config/configuration.interface';
+import {
+  ImportantNewsDto,
+  ImportantNewsGraphQLResponse,
+} from './important-news.dto';
 
 @Injectable()
 export class ImportantNewsService {
   private readonly logger = new Logger(ImportantNewsService.name);
-  private directusApiConfig: DirectusApi;
+  private cmsApiConfig: CmsApi;
 
   constructor(
     private readonly configService: ConfigService,
     private readonly httpService: HttpService,
   ) {
-    this.directusApiConfig = this.configService.get<DirectusApi>('directusApi');
+    this.cmsApiConfig = this.configService.get<CmsApi>('cmsApi');
   }
 
-  public getImportantNews(): Observable<DirectusImportantNews[]> {
-    const url = `${this.directusApiConfig.url}/items/important_news`;
+  public getImportantNews(): Observable<ImportantNewsDto[]> {
+    const url = `${this.cmsApiConfig.apiUrl}/graphql`;
+
+    const graphqlQuery = {
+      query: `
+        query {
+          importantNews {
+            id
+            color
+            image
+            link
+            position
+            statisticName
+            authorization {
+                type
+                roles
+            }
+            translations {
+                languagesCode
+                title
+                content
+                buttonLabel
+            }
+          }
+        }
+      `,
+    };
+
+    const requestConfig = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.cmsApiConfig.bearerToken}`,
+      },
+    };
 
     return this.httpService
-      .get<DirectusResponse<DirectusImportantNews[]>>(url, {
-        params: {
-          'filter[status][_eq]': 'published',
-          fields: '*,translations.*,authorization.*',
-        },
-        headers: {
-          Accept: 'application/json',
-          Authorization: `Bearer ${this.directusApiConfig.bearerToken}`,
-        },
-      })
+      .post<ImportantNewsGraphQLResponse<ImportantNewsDto[]>>(
+        url,
+        graphqlQuery,
+        requestConfig,
+      )
       .pipe(
         catchError((err: any) => {
-          const errorMessage = 'Unable to get directus important news data';
+          const errorMessage = 'Unable to get important news data from CMS';
           this.logger.error(errorMessage, err);
           throw new RpcException(errorMessage);
         }),
         map((res) => {
-          return res.data.data;
+          // Vérification des erreurs dans la réponse GraphQL
+          if (res.data.errors && res.data.errors.length > 0) {
+            const errorMessage = `GraphQL error: ${res.data.errors[0].message}`;
+            this.logger.error(errorMessage);
+            throw new RpcException(errorMessage);
+          }
+
+          return res.data.data.importantNews;
         }),
       );
   }

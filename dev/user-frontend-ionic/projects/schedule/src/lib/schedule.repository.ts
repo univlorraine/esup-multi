@@ -37,11 +37,11 @@
  * termes.
  */
 
-import { createStore, select, Store, withProps } from '@ngneat/elf';
-import { persistState } from '@ngneat/elf-persist-state';
-import { localForageStore } from '@multi/shared';
-import { combineLatest, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import {createStore, select, Store, withProps} from '@ngneat/elf';
+import {persistState} from '@ngneat/elf-persist-state';
+import {localForageStore} from '@multi/shared';
+import {combineLatest, Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 const STORE_NAME = 'schedule';
 const STORE_NAME_2 = 'impersonated-schedule';
@@ -54,15 +54,18 @@ export interface ScheduleProps {
   hiddenCourseList: HiddenCourse[];
   allPlanningsData: PlanningData[];
 }
+
 export interface Schedule {
   messages: [Message?];
   plannings?: Planning[];
 }
+
 export interface Message {
   level: string;
   code: string;
   text: string;
 }
+
 export interface Planning {
   id: string;
   label: string;
@@ -76,16 +79,19 @@ export interface Planning {
   ] | [];
   events?: Event[];
 }
+
 export interface PlanningData {
   id: string;
   label: string;
   default: boolean;
   isSelected: boolean;
 }
+
 export interface Event {
   id: string;
   startDateTime: string;
   endDateTime: string;
+  planningLabel: string;
   course: Course;
   rooms: [
     {
@@ -109,6 +115,7 @@ export interface Event {
     }
   ];
 }
+
 export interface Course {
   id: string;
   label: string;
@@ -117,6 +124,7 @@ export interface Course {
   online: boolean;
   url?: string;
 }
+
 export interface HiddenCourse {
   id: string;
   title: string;
@@ -202,15 +210,15 @@ export class ScheduleStoreManager {
           .map(mapPlanningId) :
         activePlanningIdsInSchedule;
 
-      const  updatedAllPlanningsData = state.allPlanningsData.map(planningData => {
-          const isActive = activePlanningIds.includes(planningData.id);
-          const isSelected = planningData.isSelected === null && isActive ? isActive : planningData.isSelected;
+      const updatedAllPlanningsData = state.allPlanningsData.map(planningData => {
+        const isActive = activePlanningIds.includes(planningData.id);
+        const isSelected = planningData.isSelected === null && isActive ? isActive : planningData.isSelected;
 
-          return {
-            ...planningData,
-            isSelected,
-          };
-        });
+        return {
+          ...planningData,
+          isSelected,
+        };
+      });
 
       return {
         ...state,
@@ -219,14 +227,15 @@ export class ScheduleStoreManager {
       };
     });
   }
+
   public setActivePlanningIds(activePlanningIds) {
     this.store.update((state) => {
       const updatedPlanningsData = state.allPlanningsData
         .map((planningData: PlanningData) => ({
-          ...planningData,
-          isSelected: activePlanningIds.includes(planningData.id)
-        })
-      );
+            ...planningData,
+            isSelected: activePlanningIds.includes(planningData.id)
+          })
+        );
 
       return {
         ...state,
@@ -241,6 +250,7 @@ export class ScheduleStoreManager {
       hiddenCourseList,
     }));
   }
+
   public resetStore() {
     this.store.update(() => ({
       schedule: null,
@@ -251,12 +261,12 @@ export class ScheduleStoreManager {
   }
 
   public persistStore(storeName: string) {
-    persistState(this.store, { key: storeName, storage: localForageStore });
+    persistState(this.store, {key: storeName, storage: localForageStore});
   }
 
   private createStore(storeName: string): Store {
     return createStore(
-      { name: storeName },
+      {name: storeName},
       withProps<ScheduleProps>({
         schedule: null,
         hiddenCourseList: [],

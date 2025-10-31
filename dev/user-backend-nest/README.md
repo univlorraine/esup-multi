@@ -1,22 +1,22 @@
 # Application MULTI - Backend utilisateur
-- [Gateway API](dev/user-backend-nest/main/README.md)
-- [Microservice auth](dev/user-backend-nest/microservices/auth/README.md)
-- [Microservice cards](dev/user-backend-nest/microservices/cards/README.md)
-- [Microservice chatbot](dev/user-backend-nest/microservices/chatbot/README.md)
-- [Microservice clocking](dev/user-backend-nest/microservices/clocking/README.md)
-- [Microservice contact-us](dev/user-backend-nest/microservices/contact-us/README.md)
-- [Microservice contacts](dev/user-backend-nest/microservices/contacts/README.md)
-- [Microservice features](dev/user-backend-nest/microservices/features/README.md)
-- [Microservice important-news](dev/user-backend-nest/microservices/important-news/README.md)
-- [Microservice mail-calendar](dev/user-backend-nest/microservices/mail-calendar/README.md)
-- [Microservice map](dev/user-backend-nest/microservices/map/README.md)
-- [Microservice notifications](dev/user-backend-nest/microservices/notifications/README.md)
-- [Microservice restaurants](dev/user-backend-nest/restaurants/README.md)
-- [Microservice rss](dev/user-backend-nest/microservices/rss/README.md)
-- [Microservice schedule](dev/user-backend-nest/microservices/schedule/README.md)
-- [Microservice social-network](dev/user-backend-nest/microservices/social-network/README.md)
-- [Microservice static-pages](dev/user-backend-nest/microservices/static-pages/README.md)
-- [Microservice statistics](dev/user-backend-nest/microservices/statistics/README.md)
+- [Gateway API](./main/README.md)
+- [Microservice auth](./microservices/auth/README.md)
+- [Microservice cards](./microservices/cards/README.md)
+- [Microservice chatbot](./microservices/chatbot/README.md)
+- [Microservice clocking](./microservices/clocking/README.md)
+- [Microservice contact-us](./microservices/contact-us/README.md)
+- [Microservice contacts](./microservices/contacts/README.md)
+- [Microservice features](./microservices/features/README.md)
+- [Microservice important-news](./microservices/important-news/README.md)
+- [Microservice mail-calendar](./microservices/mail-calendar/README.md)
+- [Microservice map](./microservices/map/README.md)
+- [Microservice notifications](./microservices/notifications/README.md)
+- [Microservice restaurants](./microservices/restaurants/README.md)
+- [Microservice rss](./microservices/rss/README.md)
+- [Microservice schedule](./microservices/schedule/README.md)
+- [Microservice social-network](./microservices/social-network/README.md)
+- [Microservice static-pages](./microservices/static-pages/README.md)
+- [Microservice statistics](./microservices/statistics/README.md)
 
 ## Créer un nouveau microservice
 
@@ -25,7 +25,7 @@ Se placer dans le dossier `microservices/` et exécuter :
 nest new [nom-du-microservice]
 ```
 
-Se placer dans le nouveau dossier qui vient d'être créé `microservices/[nom-du-microservice]/` puis exéctuer :
+Se placer dans le nouveau dossier qui vient d'être créé `microservices/[nom-du-microservice]/` puis exécuter :
 ```bash
 npm i --save @nestjs/microservices
 ```
@@ -60,7 +60,7 @@ async function bootstrap() {
 bootstrap();
 ```
 
-Ne pas oublier de créer les différentes variables d'env:
+Ne pas oublier de créer les différentes variables d'env :
 ```
 [NOM-DU-MICROSERVICE]_SERVICE_HOST=[NOM]
 [NOM-DU-MICROSERVICE]_SERVICE_PORT=[PORT]
@@ -68,7 +68,7 @@ EXTENDED_LOGS=true //ou false
 ```
 Ces trois lignes sont à ajouter à la suite du `/main/.env` ainsi que du `/[NOM-DU-MICROSERVICE]/.env`
 
-### Etat de santé des microservices
+### État de santé des microservices
 
 Ajouter le code suivant dans le controller du microservice :
 ```typescript
@@ -105,7 +105,7 @@ fs.writeFileSync('src/infos.json', infoJson);
 
 ```
 
-Mofifier `package.json` pour ajouter un script prebuild :
+Modifier `package.json` pour ajouter un script prebuild :
 `"prebuild": "node update-infos.ts"`
 
 Ajouter également la vérification de l'état de santé au niveau global, dans `global-health.controller.ts`

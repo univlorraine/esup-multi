@@ -39,12 +39,7 @@
 
 import { InjectionToken } from '@angular/core';
 
-interface GpsCoordinate {
-    longitude: number;
-    latitude: number;
-}
 export interface MapModuleConfig {
-    defaultMapLocation: GpsCoordinate;
     mapType: 'mapbox' | 'osm';
     accessToken: string;
     minZoom: number;

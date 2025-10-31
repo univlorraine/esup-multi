@@ -78,23 +78,33 @@ export interface ChannelSubscriberQueryDto {
   channels: string[];
 }
 
-export interface DirectusChannelResultDto {
-  id: number;
+export interface ChannelDto {
+  id: string;
   code: string;
-  translations?: DirectusChannelTranslation[];
+  translations?: ChannelTranslation[];
   icon?: string;
   color?: string;
   routerLink?: string;
   filterable: boolean;
 }
 
-export interface DirectusResponse<T> {
-  data: T;
+export interface ChannelTranslation {
+  languagesCode: string;
+  label: string;
 }
 
-export interface DirectusChannelTranslation {
-  languages_code: string;
-  label: string;
+export interface ChannelGraphQLResponse<T> {
+  data: {
+    channels: T;
+  };
+  errors?: Array<{
+    message: string;
+    locations: Array<{
+      line: number;
+      column: number;
+    }>;
+    path: string[];
+  }>;
 }
 
 export interface RegisterFCMTokenQueryDto {

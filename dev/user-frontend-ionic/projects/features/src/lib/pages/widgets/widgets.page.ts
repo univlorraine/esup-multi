@@ -38,7 +38,7 @@
  */
 
 import { Component } from '@angular/core';
-import { FeaturesService, GuidedTourService, TranslatedFeature, WidgetLifecycleService } from '@multi/shared';
+import { FeaturesService, GuidedTourService, TranslatedFeature, WidgetLifecycleService, MultiTenantService } from '@multi/shared';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, take } from 'rxjs/operators';
 
@@ -54,7 +54,8 @@ export class WidgetsPage {
   constructor(
     private featuresService: FeaturesService,
     private widgetLifecycleService: WidgetLifecycleService,
-    private guidedTourService: GuidedTourService
+    private guidedTourService: GuidedTourService,
+    private multiTenantService: MultiTenantService
   ) {
     this.translatedFeatures$ = this.featuresService.translatedFeatures$.pipe(
       debounceTime(0), // Only get the last value of the replay subject
@@ -80,7 +81,10 @@ export class WidgetsPage {
       this.widgetLifecycleService.sendWidgetViewDidEnter(features.map(feature => feature.widget));
     });
 
-    this.guidedTourService.startGlobalTour();
+    if(this.multiTenantService.isCurrentTenantStateAllowed()) {
+      // If the current tenant state is not allowed, we will get redirected to the tenant selection page, so no need to show the guided tour yet
+      this.guidedTourService.startGlobalTour();
+    }
   }
 
   ionViewWillLeave() {

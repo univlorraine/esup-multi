@@ -1,0 +1,12 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="connectors/multi-cms-connector" type="js.build_tools.npm" folderName="Connectors">
+    <package-json value="$PROJECT_DIR$/dev/connectors/multi-cms-connector/package.json" />
+    <command value="run" />
+    <scripts>
+      <script value="start:dev" />
+    </scripts>
+    <node-interpreter value="project" />
+    <envs />
+    <method v="2" />
+  </configuration>
+</component>

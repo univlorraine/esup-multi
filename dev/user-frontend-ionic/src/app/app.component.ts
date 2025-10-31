@@ -38,7 +38,7 @@
  */
 
 import { DOCUMENT } from '@angular/common';
-import { Component, DestroyRef, inject, Inject, OnDestroy, OnInit, Renderer2 } from '@angular/core';
+import { Component, DestroyRef, inject, Inject, Injector, OnDestroy, OnInit, Optional, Renderer2 } from '@angular/core';
 import { FirebaseMessaging } from '@capacitor-firebase/messaging';
 import { App } from '@capacitor/app';
 import { Capacitor, PluginListenerHandle } from '@capacitor/core';
@@ -51,13 +51,18 @@ import { TranslateService } from '@ngx-translate/core';
 import {
   currentLanguage$, features$, FeaturesService, isDarkTheme$, isFeatureStoreInitialized$, NavigationService,
   NotificationsService, NetworkService, PageLayout, PageLayoutService, setIsDarkTheme, StatisticsService,
-  themeRepoInitialized$, userHadSetThemeInApp, userHadSetThemeInApp$
+  themeRepoInitialized$, userHadSetThemeInApp, userHadSetThemeInApp$, tenantThemeApplied$, MultiTenantService,
+  ProjectModuleService, statsUid$
 } from '@multi/shared';
 import { initializeApp } from 'firebase/app';
 import { combineLatest, Observable, of } from 'rxjs';
 import { distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
 import { Title } from '@angular/platform-browser';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { PushNotifications } from '@capacitor/push-notifications';
+import { Router } from '@angular/router';
+import { MatomoTracker } from 'ngx-matomo';
+import { EdgeToEdge } from '@capawesome/capacitor-android-edge-to-edge-support';
 
 @Component({
   selector: 'app-root',
@@ -67,12 +72,13 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 export class AppComponent implements OnInit, OnDestroy {
   public languages: Array<string> = [];
   public currentPageLayout$: Observable<PageLayout>;
-  public isOnline$: Observable<boolean>;
   public isNothingToShow$: Observable<boolean>;
   private backButtonListener: Promise<PluginListenerHandle>;
   private appResumeListener: Promise<PluginListenerHandle>;
   private destroyRef = inject(DestroyRef);
   private prefersDark: MediaQueryList;
+  private themeToApply: string;
+  private defaultTheme: string;
 
   constructor(
     @Inject('environment')
@@ -90,26 +96,54 @@ export class AppComponent implements OnInit, OnDestroy {
     private notificationsService: NotificationsService,
     private statisticsService: StatisticsService,
     private titleService: Title,
+    private router: Router,
+    private multiTenantService: MultiTenantService,
+    private injector: Injector,
+    private projectModuleService: ProjectModuleService,
+    @Optional() private matomoTracker: MatomoTracker,
   ) {
     this.initializeApp();
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.titleService.setTitle(this.environment.appTitle);
     this.initializeBackButton();
     this.initializeAppResume();
     this.initializeTheme();
     this.handleBadge();
 
-    if (!Capacitor.isNativePlatform()) {
+    if (!Capacitor.isNativePlatform() && this.environment.firebase) {
       this.initializeFirebase();
     }
+
+    await this.initializeAppUpdateIfAvailable();
   }
 
   ngOnDestroy(): void {
     this.backButtonListener.then((listener) => listener.remove());
     this.appResumeListener.then((listener) => listener.remove());
     this.prefersDark.removeEventListener('change', this.handleColorSchemeChange);
+  }
+
+  private async initializeAppUpdateIfAvailable(): Promise<void> {
+    try {
+      // Hack permettant de checker si le module AppUpdateModule est importé ou pas dans le fichier
+      // environment.ts
+      const translatedModules = this.projectModuleService.getTranslatedProjectModules();
+      if (!translatedModules.includes('app-update')) {
+        return;
+      }
+
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      const { AppUpdateService } = await import('@multi/app-update');
+      const appUpdateService = this.injector.get(AppUpdateService, null);
+
+      if (appUpdateService) {
+        await appUpdateService.initialize();
+      }
+    } catch (error) {
+      console.error('AppUpdateService not available:', error);
+    }
   }
 
   private initializeBackButton(): void {
@@ -143,14 +177,27 @@ export class AppComponent implements OnInit, OnDestroy {
 
     themeRepoInitialized$.pipe(
       filter((isInitialized: boolean) => isInitialized),
-      switchMap(() => combineLatest([isDarkTheme$, userHadSetThemeInApp$])),
+      switchMap(() => combineLatest([isDarkTheme$, userHadSetThemeInApp$, tenantThemeApplied$])),
       takeUntilDestroyed(this.destroyRef)
-    ).subscribe(([isDarkTheme, userHadSetThemeInApplication]) => {
+    ).subscribe(([isDarkTheme, userHadSetThemeInApplication, tenantThemeApplied]) => {
       if (!userHadSetThemeInApplication) {
         isDarkTheme = this.prefersDark.matches;
         setIsDarkTheme(isDarkTheme);
       }
       this.toggleDarkTheme(isDarkTheme);
+
+      // Remove the current theme from the body
+      if (this.themeToApply !== '') {
+        this.disableTenantTheme(this.themeToApply);
+      }
+
+      // Assign the current theme
+      this.themeToApply = (tenantThemeApplied !== '') ? tenantThemeApplied : this.defaultTheme;
+
+      // Add the current theme as a class for the body element
+      if (this.themeToApply !== '') {
+        this.enableTenantTheme(this.themeToApply);
+      }
     });
   }
 
@@ -167,12 +214,36 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   private initializeApp(): void {
+    this.initializeMatomo();
     this.initializeLanguage();
     this.initializeEmptyStateDetection();
     this.initializePageLayout();
     this.initializeSplashScreen();
     this.initializeStatusBar();
     this.statisticsService.checkAndGenerateStatsUid();
+    this.initializeDefaultTheme();
+    this.handleTranslationsChangeForTenant();
+
+    PushNotifications.addListener('pushNotificationActionPerformed', async () => {
+      this.router.navigateByUrl('/notifications');
+    });
+
+  }
+
+  private initializeMatomo(): void {
+    if (!this.matomoTracker) {
+      return;
+    }
+
+    // On désactive les cookies, car on va utiliser le stats-uid présent en local storage
+    this.matomoTracker.disableCookies();
+
+    statsUid$.pipe(
+      filter(uid => !!uid),
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe(uid => {
+      this.matomoTracker.setUserId(uid);
+    });
   }
 
   private initializeLanguage(): void {
@@ -223,8 +294,25 @@ export class AppComponent implements OnInit, OnDestroy {
     if (!Capacitor.isNativePlatform()) {
       return;
     }
-    this.platform.ready().then(() => {
-      StatusBar.setStyle({ style: Style.Dark });
+    this.platform.ready().then(async () => {
+      const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--ion-color-primary');
+      const r = parseInt(primaryColor.slice(1, 3), 16);
+      const g = parseInt(primaryColor.slice(3, 5), 16);
+      const b = parseInt(primaryColor.slice(5, 7), 16);
+      const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+      StatusBar.setStyle({ style: luminance > 0.5 ? Style.Light : Style.Dark });
+      StatusBar.setBackgroundColor({ color: primaryColor });
+
+      // Gestion du edge to edge sur android
+      const info = await Device.getInfo();
+      if (info.platform === 'android') {
+        if (Number(info.osVersion) >= 15) {
+          await EdgeToEdge.enable();
+          await EdgeToEdge.setBackgroundColor({ color: primaryColor });
+        } else {
+          await EdgeToEdge.disable();
+        }
+      }
     });
   }
 
@@ -256,5 +344,31 @@ export class AppComponent implements OnInit, OnDestroy {
     this.platform.resume.pipe(takeUntilDestroyed(this.destroyRef)).subscribe(fixBadgeCount);
 
     await fixBadgeCount();
+  }
+
+  private enableTenantTheme(theme: string): void {
+    const body = document.body;
+    this.renderer.addClass(body, theme);
+  }
+
+  private disableTenantTheme(theme: string): void {
+    const body = document.body;
+    this.renderer.removeClass(body, theme);
+  }
+
+  private initializeDefaultTheme() {
+    this.defaultTheme = this.environment.defaultTheme || '';
+    this.themeToApply = this.defaultTheme;
+  }
+
+  private handleTranslationsChangeForTenant() {
+    this.multiTenantService.tenantChange$.pipe(
+      takeUntilDestroyed(this.destroyRef)
+    ).subscribe(() => {
+      this.translateService.setTranslation(
+        this.translateService.currentLang,
+        this.translateService.getTranslation(this.translateService.currentLang)
+      ); // Workaround to force the translateService to register the translations change, not working by simply calling reloadLang()
+    });
   }
 }

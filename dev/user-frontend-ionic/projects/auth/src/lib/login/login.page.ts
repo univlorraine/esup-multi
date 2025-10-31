@@ -68,7 +68,6 @@ export class LoginPage implements OnInit {
   public translatedPageContent$: Observable<TranslatedLoginPageContent>;
   public hideBackButton$: Observable<boolean>;
 
-
   constructor(
     private fb: FormBuilder,
     public authService: AuthService,
@@ -169,4 +168,5 @@ export class LoginPage implements OnInit {
     });
     toast.present();
   }
+
 }

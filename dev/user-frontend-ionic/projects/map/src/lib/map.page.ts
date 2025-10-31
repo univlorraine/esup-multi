@@ -41,7 +41,7 @@ import { Component, DestroyRef, inject, Inject, ViewChild } from '@angular/core'
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Geolocation } from '@capacitor/geolocation';
 import { TranslateService } from '@ngx-translate/core';
-import { NetworkService, currentLanguage$ } from '@multi/shared';
+import { NetworkService, MultiTenantService, currentLanguage$ } from '@multi/shared';
 import * as Leaflet from 'leaflet';
 import { finalize, take, map } from 'rxjs/operators';
 import { combineLatest } from 'rxjs';
@@ -60,7 +60,6 @@ import {
 } from './map.repository';
 import { MapService } from './map.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-
 
 @Component({
   selector: 'app-map',
@@ -89,6 +88,7 @@ export class MapPage {
     private mapService: MapService,
     private translateService: TranslateService,
     private formBuilder: FormBuilder,
+    private multiTenantService: MultiTenantService,
     @Inject(MAP_CONFIG) private config: MapModuleConfig,
     private networkService: NetworkService,
     @Inject('environment')
@@ -113,6 +113,7 @@ export class MapPage {
       .subscribe(categories => this.categories = categories);
 
     this.initCategoriesForm();
+
     this.categoriesForm.valueChanges.pipe(
       takeUntilDestroyed(this.destroyRef)
     ).subscribe(formValues => {
@@ -180,10 +181,10 @@ export class MapPage {
     });
 
     let mapType = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-    if(this.config.mapType === 'osm'){
+    if (this.config.mapType === 'osm') {
       mapType = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
-    }else if(this.config.mapType === 'mapbox'){
-      mapType = 'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}@2x?access_token={accessToken}';
+    } else if(this.config.mapType === 'mapbox') {
+      mapType = `https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}@2x?access_token=${this.config.accessToken}`;
     }
     Leaflet.tileLayer(mapType, {
       id: this.config.mapType === 'mapbox' ? 'mapbox/streets-v12' : '',
@@ -191,7 +192,6 @@ export class MapPage {
       maxZoom: this.config.maxZoom,
       tileSize: this.config.mapType === 'mapbox' ? 512 : 256,
       zoomOffset: this.config.mapType === 'mapbox' ? -1 : 0,
-      accessToken: this.config.accessToken,
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(this.map);
 
@@ -208,9 +208,10 @@ export class MapPage {
   }
 
   private async refreshUserPosition() {
-    const permissionAlreadyGranted = (await Geolocation.checkPermissions()).location === 'granted';
-
     try {
+      // Will throw if system location services are disabled.
+      const permissionAlreadyGranted = (await Geolocation.checkPermissions()).location === 'granted';
+
       const position = await Geolocation.getCurrentPosition({enableHighAccuracy: this.config.highAccuracy});
       let zoomLevel = this.config.minZoom > 11 ? this.config.minZoom : 11;
       if (!permissionAlreadyGranted) { // Permission has just been granted now
@@ -232,7 +233,11 @@ export class MapPage {
       this.map.setView(latLng, zoomLevel);
     } catch (error) {
       console.error('Error getting current position:', error);
-      const latLngOfTheUniversity: Leaflet.LatLngTuple = [this.config.defaultMapLocation.latitude, this.config.defaultMapLocation.longitude];
+      const {latitude, longitude} = this.multiTenantService.getModuleConfiguration('map.defaultLocation');
+      const latLngOfTheUniversity: Leaflet.LatLngTuple = [
+        latitude,
+        longitude
+      ];
       if (this.positionLayerGroup) {
         this.positionLayerGroup.remove();
       }

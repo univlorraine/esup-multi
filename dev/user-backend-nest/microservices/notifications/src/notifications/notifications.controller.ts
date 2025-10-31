@@ -37,13 +37,12 @@
  * termes.
  */
 
-import { CacheInterceptor, CacheKey } from '@nestjs/cache-manager';
-import { Controller, UseInterceptors } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
 import { Observable } from 'rxjs';
 import {
   ChannelSubscriberQueryDto,
-  DirectusChannelResultDto,
+  ChannelDto,
   NotificationDeleteQueryDto,
   NotificationResultDto,
   NotificationsMarkAsReadQueryDto,
@@ -78,9 +77,7 @@ export class NotificationsController {
   }
 
   @MessagePattern({ cmd: 'channels' })
-  @CacheKey('notifications_channels')
-  @UseInterceptors(CacheInterceptor)
-  getChannels(): Observable<DirectusChannelResultDto[]> {
+  getChannels(): Observable<ChannelDto[]> {
     return this.notificationsService.getChannels();
   }
 

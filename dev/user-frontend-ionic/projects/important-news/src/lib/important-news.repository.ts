@@ -48,7 +48,6 @@ const STORE_NAME = 'important-news';
 
 export interface ImportantNews {
   id: string;
-  status: string;
   image?: string;
   color?: string;
   link?: string;
@@ -58,17 +57,14 @@ export interface ImportantNews {
 }
 
 interface Translation {
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  languages_code: string;
+  languagesCode: string;
   title: string;
   content: string;
   buttonLabel: string;
-
 }
 
 export interface TranslatedImportantNews {
   id: string;
-  status: string;
   image?: string;
   title: string;
   link?: string;
