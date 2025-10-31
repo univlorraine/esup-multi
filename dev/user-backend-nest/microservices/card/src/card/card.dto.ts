@@ -40,10 +40,12 @@
 export interface UserCardDto {
   lastname: string;
   firstname: string;
+  birthdate?: string;
   gender?: string;
   title: string;
   subtitle?: string;
   ine?: string;
+  csn?: string;
   photo: string;
   affiliation: string;
   idNumber: string;
@@ -52,7 +54,7 @@ export interface UserCardDto {
     type: string;
     value: string;
   };
-  errors: string[];
+  errors?: string[];
 }
 
 export interface AuthenticateQueryDto {

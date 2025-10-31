@@ -78,9 +78,36 @@ export class CardService {
           throw new RpcException(errorMessage);
         }),
         map((res) => {
-          console.log(res);
-          return res.data;
+          const cardData = res.data;
+          this.validateRequiredFields(cardData, username);
+          return cardData;
         }),
       );
+  }
+
+  private validateRequiredFields(cardData: any, username: string): void {
+    const requiredFields: (keyof UserCardDto)[] = [
+      'lastname',
+      'firstname',
+      'title',
+      'photo',
+      'affiliation',
+      'idNumber',
+      'endDate',
+    ];
+
+    const missingFields = requiredFields.filter(
+      (field) =>
+        cardData[field] === undefined ||
+        cardData[field] === null ||
+        cardData[field] === '',
+    );
+
+    if (missingFields.length > 0) {
+      const fieldsList = missingFields.join(', ');
+      const errorMessage = `Missing required fields for user '${username}': ${fieldsList}`;
+      this.logger.error(errorMessage);
+      throw new RpcException(errorMessage);
+    }
   }
 }

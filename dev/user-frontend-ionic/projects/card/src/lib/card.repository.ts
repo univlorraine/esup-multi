@@ -42,18 +42,21 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export interface UserAndCardData {
   lastname: string;
   firstname: string;
+  birthdate?: string;
+  gender?: string;
   title: string;
-  ine: string;
-  csn: string;
+  subtitle?: string;
+  ine?: string;
+  csn?: string;
   photo: string;
   affiliation: string;
   idNumber: string;
   endDate: number;
-  qrCode: {
+  qrCode?: {
     type: string;
     value: string;
   };
-  errors: [];
+  errors?: [];
 }
 
 // BehaviorSubject to store and share the card data

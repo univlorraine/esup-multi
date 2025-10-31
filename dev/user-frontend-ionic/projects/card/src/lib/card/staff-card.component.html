@@ -46,39 +46,41 @@
     class="svg-card"
   >
     <!-- Card white background -->
-    <rect class="carte" rx="10" ry="10" width="850" height="540" fill="white"/>
+    <rect class="card-background" rx="10" ry="10" width="850" height="540" fill="white"/>
 
-    <!-- Student photo -->
-    <image height="320" width="240" x="605" y="5" [attr.href]="userCard.photo"/>
+    <!-- User photo -->
+    <image class="card-user-photo" height="320" width="240" x="605" y="5" [attr.href]="userCard.photo"/>
 
     <!-- Lastname -->
-    <text id="lastname" x="40" y="70" font-family="Helvetica" font-size="33" letter-spacing="-0.5" font-weight="600">
+    <text class="card-lastname" x="40" y="70" font-family="Helvetica" font-size="33" letter-spacing="-0.5" font-weight="600">
       {{ userCard.lastname }}
     </text>
 
     <!-- Firstname -->
-    <text x="40" y="107" font-family="Helvetica" font-size="33" letter-spacing="-0.5" font-weight="600">
+    <text class="card-firstname" x="40" y="107" font-family="Helvetica" font-size="33" letter-spacing="-0.5" font-weight="600">
       {{ userCard.firstname }}
     </text>
 
-    <!-- Apogee ID -->
-    <text x="590" y="120" font-family="Helvetica" font-size="25" letter-spacing="1" font-weight="200" text-anchor="end">
+    <!-- Birthdate -->
+    <text class="card-birthdate" x="40" y="137" font-family="Helvetica" font-size="25" letter-spacing="1" font-weight="200">
+      {{ userCard.birthdate }}
+    </text>
+
+    <!-- Staff ID -->
+    <text class="card-user-id" x="590" y="160" font-family="Helvetica" font-size="25" letter-spacing="1" font-weight="200" text-anchor="end">
       {{ userCard.idNumber }}
     </text>
 
-    <!-- INE Number -->
-    <text x="590" y="150" font-family="Helvetica" font-size="25" letter-spacing="1" font-weight="200" text-anchor="end">
-      {{ userCard.ine }}
-    </text>
-    <!-- csn -->
-    <text x="590" y="180" font-family="Helvetica" font-size="25" letter-spacing="1" font-weight="200" text-anchor="end">
+    <!-- CSN -->
+    <text x="590" y="190" font-family="Helvetica" font-size="25" letter-spacing="1" font-weight="200" text-anchor="end">
       {{ userCard.csn }}
     </text>
 
     <!-- Card Title -->
     <text
+      class="card-title"
       x="40"
-      y="270"
+      y="300"
       font-family="Times New Roman"
       font-size="33"
       letter-spacing="0"
@@ -90,20 +92,24 @@
 
     <!-- Title Complement -->
     <text
+      class="card-subtitle"
       x="40"
-      y="312"
+      y="342"
       font-family="Times New Roman"
       font-size="33"
       letter-spacing="0"
       font-weight="600"
       font-style="italic"
-    ></text>
+    >
+      {{ userCard.subtitle | uppercase }}
+    </text>
 
-    <!-- Logo UL -->
-    <image height="60" x="40" y="450" href="assets/cards/card/university-logo.svg"/>
+    <!-- Logo Etablissement -->
+    <image class="card-logo" height="150" x="40" y="400" href="assets/cards/card/university-logo.svg"/>
 
     <!-- Millesime y -->
     <text
+      class="card-date-1"
       x="650"
       y="420"
       font-family="Helvetica"
@@ -118,6 +124,7 @@
 
     <!-- Millesime y + 1 -->
     <text
+      class="card-date-2"
       x="710"
       y="455"
       font-family="Helvetica"
