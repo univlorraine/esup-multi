@@ -65,10 +65,6 @@ export class FCMRepository {
     storage: localForageStore,
   });
 
-  constructor(
-    @Inject('environment')
-    private environment: any,
-  ) {}
 
   public setFcmToken(fcmToken: string) {
     fcmStore.update((state) => ({
