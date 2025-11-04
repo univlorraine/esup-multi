@@ -40,27 +40,59 @@
 <ion-progress-bar *ngIf="isLoading" type="indeterminate"></ion-progress-bar>
 <app-header></app-header>
 
-<ion-content *ngIf="(userAndCardData$ | async) as userCard; else noCardsData">
-  <div class="card-wrapper">
-    <app-student-card [userCard]="userCard" *ngIf="userCard.affiliation === 'student'"></app-student-card>
-    <app-staff-card [userCard]="userCard" *ngIf="userCard.affiliation!=='student'"></app-staff-card>
-  </div>
+<ion-content>
+  <ng-container *ngIf="(userAndCardData$ | async) as userCard; else noCardsData">
 
-  <!-- Qrcode -->
-  <ion-row class="ion-justify-content-center qr-code-container">
-    <ng-container *ngIf="userCard.qrCode">
-      <div *ngIf="userCard.qrCode.type === 'image' && userCard.qrCode.value"
-           [innerHTML]="userCard.qrCode.value | safeHtml">
+    <!-- Gestion des erreurs -->
+    <div *ngIf="hasErrors(userCard); else cardTemplate" class="ion-padding">
+      <ng-container *ngFor="let error of userCard.errors">
+        <ion-note *ngIf="isKnownError(error); else unknownError" class="column app-text-2">
+          {{ (userCard.affiliation === 'staff' ? 'CARD.ERRORS_STAFF.' : 'CARD.ERRORS_STUDENT.') + error | translate }}
+        </ion-note>
+      </ng-container>
+    </div>
+
+    <!-- Template pour erreur inconnue -->
+    <ng-template #unknownError>
+      <ion-note class="column app-text-2">
+        {{ 'CARD.ERRORS.UNKNOWN' | translate }}
+      </ion-note>
+    </ng-template>
+
+    <!-- Template de la carte -->
+    <ng-template #cardTemplate>
+      <div class="card-wrapper">
+        <app-student-card
+          *ngIf="userCard.affiliation === 'student'"
+          [userCard]="userCard">
+        </app-student-card>
+
+        <app-staff-card
+          *ngIf="userCard.affiliation !== 'student'"
+          [userCard]="userCard">
+        </app-staff-card>
       </div>
-      <qrcode *ngIf="userCard.qrCode.type !== 'image' && userCard.qrCode.value"
-              [qrdata]="userCard.qrCode.value"
-              [errorCorrectionLevel]="'M'"
-              [width]="300">
-      </qrcode>
-    </ng-container>
-  </ion-row>
+
+      <!-- QR Code -->
+      <ion-row class="ion-justify-content-center qr-code-container" *ngIf="userCard.qrCode">
+        <div
+          *ngIf="userCard.qrCode.type === 'image' && userCard.qrCode.value"
+          [innerHTML]="userCard.qrCode.value | safeHtml">
+        </div>
+
+        <qrcode
+          *ngIf="userCard.qrCode.type !== 'image' && userCard.qrCode.value"
+          [qrdata]="userCard.qrCode.value"
+          [errorCorrectionLevel]="'M'"
+          [width]="300">
+        </qrcode>
+      </ion-row>
+    </ng-template>
+
+  </ng-container>
 </ion-content>
 
+<!-- Template sans données -->
 <ng-template #noCardsData>
   <ion-content class="ion-padding">
     <ion-note>

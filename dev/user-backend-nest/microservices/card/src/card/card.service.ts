@@ -79,7 +79,9 @@ export class CardService {
         }),
         map((res) => {
           const cardData = res.data;
-          this.validateRequiredFields(cardData, username);
+          if (cardData.errors && cardData.errors.length === 0) {
+            this.validateRequiredFields(cardData, username);
+          }
           return cardData;
         }),
       );
