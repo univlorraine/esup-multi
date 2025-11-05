@@ -37,9 +37,48 @@
  * termes.
  */
 
-/* Exemple pour changer la taille du logo en bas à gauche sur la carte */
-//.svg-card .card-logo {
-//  transform: translate(0, 25px); /* Déplace de 0px à droite et 25px vers le bas par rapport à son emplacement d'origine */
-//  width: 100px !important;
-//  height: 100px !important;
-//}
+.svg-card {
+
+  /* Exemple pour changer la taille du logo en bas à gauche sur la carte */
+  //.card-logo {
+  //  transform: translate(0, 25px); /* Déplace de 0px à droite et 25px vers le bas par rapport à son emplacement d'origine */
+  //  width: 100px !important;
+  //  height: 100px !important;
+  //}
+
+  text.card-lastname, text.card-firstname, text.card-birthdate, {
+    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    font-size: 33px !important;
+    fill: #000;
+  }
+
+  text.card-user-id, text.card-user-ine, text.card-user-csn {
+    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-weight: 400;
+    letter-spacing: 1px;
+    font-size: 25px !important;
+    fill: #000;
+    text-anchor: end;
+  }
+
+  text.card-title, text.card-subtitle {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 33px !important;
+    letter-spacing: 0;
+    font-weight: 600;
+    fill: #000;
+    font-style: italic;
+  }
+
+  text.card-date-1, text.card-date-2 {
+    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font-size: 35px !important;
+    letter-spacing: 1px;
+    font-weight: 600;
+    fill: gray;
+    font-style: italic;
+  }
+
+}
