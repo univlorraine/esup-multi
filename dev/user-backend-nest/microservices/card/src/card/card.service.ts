@@ -79,7 +79,7 @@ export class CardService {
         }),
         map((res) => {
           const cardData = res.data;
-          if (cardData.errors && cardData.errors.length === 0) {
+          if (!cardData.errors || cardData.errors.length === 0) {
             this.validateRequiredFields(cardData, username);
           }
           return cardData;
