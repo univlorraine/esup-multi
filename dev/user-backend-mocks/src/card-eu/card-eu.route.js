@@ -43,13 +43,16 @@ const { getCardEuData } = require('./card-eu.mock.js');
 
 router.get('/:username/extended', async (req, res) => {
     const {username} = req.params;
-    let data = await getCardEuData(true);
-    let cardEu= data[username];
-        if (!cardEu) {
-        cardEu = data.noActiveCard;
+    if (!username || username !== "etu") {
+        return res.json({
+            "errors": [
+                'NO_ACTIVE_CARD'
+            ]
+        });
     }
-    console.log(cardEu);
-    return res.json(cardEu);
+
+    let data = await getCardEuData();
+    return res.json(data);
 });
 
 module.exports = router;
