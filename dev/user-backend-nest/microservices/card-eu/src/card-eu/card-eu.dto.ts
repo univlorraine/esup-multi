@@ -40,13 +40,13 @@
 export interface UserCardEuDto {
   lastname: string;
   firstname: string;
-  photo?: string;
+  photo: string;
   euid: string;
   qrCode?: {
     type: string;
     value: string;
   };
-  errors: string[];
+  errors?: string[];
 }
 
 export interface UserCardEuLightDto {
@@ -56,7 +56,7 @@ export interface UserCardEuLightDto {
     type: string;
     value: string;
   };
-  errors: string[];
+  errors?: string[];
 }
 
 export interface AuthenticateQueryDto {

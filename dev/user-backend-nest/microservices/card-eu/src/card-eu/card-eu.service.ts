@@ -80,7 +80,11 @@ export class CardEuService {
           throw new RpcException(errorMessage);
         }),
         map((res) => {
-          return res.data;
+          const cardData = res.data;
+          if (!cardData.errors || cardData.errors.length === 0) {
+            this.validateRequiredFields(cardData, username);
+          }
+          return cardData;
         }),
       );
   }
@@ -143,5 +147,28 @@ export class CardEuService {
           );
       }),
     );
+  }
+
+  private validateRequiredFields(cardData: any, username: string): void {
+    const requiredFields: (keyof UserCardEuDto)[] = [
+      'lastname',
+      'firstname',
+      'photo',
+      'euid',
+    ];
+
+    const missingFields = requiredFields.filter(
+      (field) =>
+        cardData[field] === undefined ||
+        cardData[field] === null ||
+        cardData[field] === '',
+    );
+
+    if (missingFields.length > 0) {
+      const fieldsList = missingFields.join(', ');
+      const errorMessage = `Missing required fields for user '${username}': ${fieldsList}`;
+      this.logger.error(errorMessage);
+      throw new RpcException(errorMessage);
+    }
   }
 }
