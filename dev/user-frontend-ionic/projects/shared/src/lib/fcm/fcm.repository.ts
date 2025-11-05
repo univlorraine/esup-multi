@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { createStore, select, withProps } from '@ngneat/elf';
 import { persistState } from '@ngneat/elf-persist-state';
 import { localForageStore } from '../store/local-forage';
@@ -64,7 +64,6 @@ export class FCMRepository {
     key: FCM_STORE,
     storage: localForageStore,
   });
-
 
   public setFcmToken(fcmToken: string) {
     fcmStore.update((state) => ({
