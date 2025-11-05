@@ -40,29 +40,33 @@
 <ion-progress-bar *ngIf="isLoading" type="indeterminate"></ion-progress-bar>
 <app-header></app-header>
 
-<ng-container *ngIf="(userAndCardEuData$ | async) as userCardEu; else noCardsData">
-  <ion-content class="ion-padding">
-    <ng-container *ngIf="hasErrors(userCardEu); else cardsTemplate">
-      <ng-container *ngFor="let error of userCardEu.errors">
-        <ng-container *ngIf="isKnownError(error); else unknownError">
-          <ion-note class="column app-text-2">
-            {{ 'CARD-EU.ERRORS.' + error | translate }}
-          </ion-note>
-        </ng-container>
-        <ng-template #unknownError>
-          <ion-note class="column app-text-2">
-            {{ 'CARD-EU.ERRORS.UNKNOWN' | translate }}
-          </ion-note>
-        </ng-template>
-      </ng-container>
-    </ng-container>
+<ion-content>
+  <ng-container *ngIf="(userAndCardEuData$ | async) as userCardEu; else noCardsData">
 
+    <!-- Gestion des erreurs -->
+    <div *ngIf="hasErrors(userCardEu); else cardsTemplate" class="ion-padding">
+      <ng-container *ngFor="let error of userCardEu.errors">
+        <ion-note *ngIf="isKnownError(error); else unknownError" class="column app-text-2">
+          {{ 'CARD-EU.ERRORS.' + error | translate }}
+        </ion-note>
+      </ng-container>
+    </div>
+
+    <!-- Template pour erreur inconnue -->
+    <ng-template #unknownError>
+      <ion-note class="column app-text-2">
+        {{ 'CARD-EU.ERRORS.UNKNOWN' | translate }}
+      </ion-note>
+    </ng-template>
+
+    <!-- Template des cartes -->
     <ng-template #cardsTemplate>
       <app-card-eu *ngIf="config.display === 'extended'" [userCardEu]="userCardEu"></app-card-eu>
       <app-card-eu-light *ngIf="config.display === 'light'" [userCardEuLight]="userCardEu"></app-card-eu-light>
     </ng-template>
-  </ion-content>
-</ng-container>
+
+  </ng-container>
+</ion-content>
 
 <ng-template #noCardsData>
   <ion-content class="ion-padding">

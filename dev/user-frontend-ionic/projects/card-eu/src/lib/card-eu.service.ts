@@ -38,9 +38,10 @@
  */
 
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { UserAndCardEuData } from './card-eu.repository';
+import { MultiTenantService } from '@multi/shared';
 
 @Injectable({
   providedIn: 'root'
@@ -48,8 +49,7 @@ import { UserAndCardEuData } from './card-eu.repository';
 export class CardEuService {
 
   constructor(
-    @Inject('environment')
-    private environment: any,
+    private multiTenantService: MultiTenantService,
     private http: HttpClient,
   ) {
   }
@@ -67,18 +67,15 @@ export class CardEuService {
   }
 
   private getUserAndCardEuExtendedData(authToken: string): Observable<UserAndCardEuData> {
-    const url = `${this.environment.apiEndpoint}/card-eu`;
+    const url = `${this.multiTenantService.getApiEndpoint()}/card-eu`;
     const data = { authToken };
 
     return this.http.post<UserAndCardEuData>(url, data);
   }
 
   private getUserAndCardEuLightData(authToken: string, escn: string): Observable<UserAndCardEuData> {
-    console.log('bbic');
-    const url = `${this.environment.apiEndpoint}/card-eu-light`;
-    console.log(url);
+    const url = `${this.multiTenantService.getApiEndpoint()}/card-eu-light`;
     const data = { authToken, escn };
-    console.log('data: ', data);
 
     return this.http.post<UserAndCardEuData>(url, data);
   }

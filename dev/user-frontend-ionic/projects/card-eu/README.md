@@ -7,7 +7,7 @@ Exemple dans `environment.ts` :
 
 ```typescript 
 CardEuPageModule.forRoot({
-  knownErrors: ['NO_PHOTO', 'NO_ACTIVE_CARD', 'UNPAID_FEES'],
+  knownErrors: ['NO_PHOTO', 'NO_ACTIVE_CARD', 'UNPAID_FEES', 'ESCN_MISSING'],
   display: 'light' | 'extended',
 })
 ```

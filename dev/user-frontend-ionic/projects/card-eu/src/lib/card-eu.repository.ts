@@ -42,7 +42,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export interface UserAndCardEuData {
   lastname?: string;
   firstname?: string;
-  fullname?: string;
+  fullname?: string; // retourné par ESC router uniquement dans le mode light
   photo?: string;
   euid?: string;
   qrCode?: {

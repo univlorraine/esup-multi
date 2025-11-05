@@ -36,22 +36,3 @@
  * pris connaissance de la licence CeCILL 2.1, et que vous en avez accepté les
  * termes.
  */
-
-// Styles de base pour ion-content
-ion-content {
-  --padding-top: 24px;
-  --padding-bottom: 24px;
-  --padding-start: 16px;
-  --padding-end: 16px;
-}
-
-// Responsive mode paysage
-@media screen and (orientation: landscape) {
-  ion-content {
-    --padding-top: 0;
-    --padding-bottom: 0;
-    --padding-start: 0;
-    --padding-end: 0;
-  }
-}
-

@@ -37,13 +37,14 @@
  * termes.
  */
 
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { UserAndCardEuData } from '../card-eu.repository';
 
 @Component({
   selector: 'app-card-eu-light',
   templateUrl: './card-eu-light.component.html',
-  styleUrls: ['../../../../../src/theme/app-theme/styles/card-eu/card-eu-light.component.scss']
+  styleUrls: ['../../../../../src/theme/app-theme/styles/card-eu/card-eu-light.component.scss'],
+  encapsulation: ViewEncapsulation.None // Pour pouvoir jouer sur la taille du QR Code avec les CSS
 })
 export class CardEuLightComponent {
   @Input() userCardEuLight: UserAndCardEuData;

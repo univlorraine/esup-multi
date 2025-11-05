@@ -36,30 +36,23 @@
   ~ pris connaissance de la licence CeCILL 2.1, et que vous en avez accepté les
   ~ termes.
   -->
-<div class="app-title-1">{{ 'CARD-EU.CARD_TITLE' | translate }}</div>
-<div class="app-title-1 light">{{ 'CARD-EU.CARD_SUBTITLE' | translate }}</div>
+<ion-row class="ion-justify-content-center ion-text-center">
+  <ion-label>
+    <h2 class="ion-margin app-title-4 title">{{'CARD-EU.CARD_TITLE' | translate }}</h2>
+    <h3 class="ion-margin app-title-5 subtitle">{{ 'CARD-EU.CARD_SUBTITLE' | translate }}</h3>
+  </ion-label>
+</ion-row>
 
-<div class="row-1">
+<ion-card>
+  <ion-card-content class="ion-text-center">
+    <p class="app-text-3">{{ userCardEuLight.fullname }}</p>
+    <p class="app-text-3 strong">{{ userCardEuLight.euid }}</p>
+  </ion-card-content>
+</ion-card>
 
-  <div class="background-card-eu-id">
-    <div id="card-eu-light-id-name" class="app-text-2">
-      {{ userCardEuLight.fullname }}
-    </div>
-    <div id="card-eu-light-id-number" class="app-text-3 strong">
-      {{ userCardEuLight.euid }}
-    </div>
-  </div>
-
-  <ion-card class="card-eu-rect">
-
-    <!-- QR Code -->
-    <div class="qr-code-container">
-      <div [innerHTML]="userCardEuLight.qrCode.value | safeHtml"></div>
-    </div>
-    <!-- Logo -->
-    <div class="logo-container">
-      <img class="logo" src="assets/cards/card-eu/university-logo.svg" alt="Logo université">
-    </div>
-  </ion-card>
-
-</div>
+<ion-card class="card-eu-light">
+  <ion-card-content class="ion-text-center">
+    <div class="eu-qrcode" [innerHTML]="userCardEuLight.qrCode.value | safeHtml"></div>
+    <img class="logo" src="assets/cards/card-eu/university-logo.svg" alt="Logo université">
+  </ion-card-content>
+</ion-card>
