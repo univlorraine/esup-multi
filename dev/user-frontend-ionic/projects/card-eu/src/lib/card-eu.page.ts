@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { AuthenticatedUser, getAuthToken, NetworkService, authenticatedUser$ } from '@multi/shared';
 import { Observable, Subscription } from 'rxjs';
 import { filter, finalize, switchMap, take } from 'rxjs/operators';
@@ -51,7 +51,7 @@ import { ScreenService } from './screen.service';
   templateUrl: './card-eu.page.html',
   styleUrls: ['../../../../src/theme/app-theme/styles/card-eu/card-eu.page.scss']
 })
-export class CardEuPage {
+export class CardEuPage implements OnInit {
   public authenticatedUser$: Observable<AuthenticatedUser>;
   public userAndCardEuData$: Observable<UserAndCardEuData> = userAndCardEuData$;
   public isLoading = false;
