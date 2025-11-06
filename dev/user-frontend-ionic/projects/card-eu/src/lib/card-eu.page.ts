@@ -47,7 +47,7 @@ import { CardEuService } from './card-eu.service';
 import { ScreenService } from './screen.service';
 
 @Component({
-  selector: 'app-cards-eu',
+  selector: 'app-card-eu',
   templateUrl: './card-eu.page.html',
   styleUrls: ['../../../../src/theme/app-theme/styles/card-eu/card-eu.page.scss']
 })

@@ -48,7 +48,7 @@ import { CardEuRoutingModule } from './card-eu-routing.module';
 import { CardEuEffects } from './card-eu.effects';
 import { CardEuPage } from './card-eu.page';
 import { CARD_EU_CONFIG, CardEuModuleConfig } from './card-eu.config';
-import { CardEuComponent } from './card-eu/card-eu.component';
+import { CardEuExtendedComponent } from './card-eu/card-eu-extended.component';
 import { CardEuLightComponent } from './card-eu/card-eu-light.component';
 
 const initModule = (projectModuleService: ProjectModuleService) =>
@@ -70,7 +70,7 @@ const initModule = (projectModuleService: ProjectModuleService) =>
   ],
   declarations: [
     CardEuPage,
-    CardEuComponent,
+    CardEuExtendedComponent,
     CardEuLightComponent
   ],
   providers: [{

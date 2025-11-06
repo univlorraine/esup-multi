@@ -47,7 +47,7 @@ import { CardService } from './card.service';
 import { ScreenService } from './screen.service';
 
 @Component({
-  selector: 'app-cards',
+  selector: 'app-card',
   templateUrl: './card.page.html',
   styleUrls: ['../../../../src/theme/app-theme/styles/card/card.page.scss']
 })

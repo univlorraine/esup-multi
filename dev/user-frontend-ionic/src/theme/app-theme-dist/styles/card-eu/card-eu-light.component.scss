@@ -37,6 +37,13 @@
  * termes.
  */
 
+ion-content {
+  --padding-top: 24px !important;
+  --padding-bottom: 0;
+  --padding-start: 0;
+  --padding-end: 0;
+}
+
 ion-card.card-eu-light {
   --background: #1a3459;
 
@@ -60,13 +67,6 @@ ion-card.card-eu-light {
 }
 
 @media screen and (orientation: landscape) {
-  ion-content {
-    --padding-top: 24px !important;
-    --padding-bottom: 0;
-    --padding-start: 0;
-    --padding-end: 0;
-  }
-
   ion-card.card-eu-light ion-card-content {
     padding-top: 60px;
   }

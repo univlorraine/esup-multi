@@ -44,7 +44,7 @@
   <ng-container *ngIf="(userAndCardEuData$ | async) as userCardEu; else noCardsData">
 
     <!-- Gestion des erreurs -->
-    <div *ngIf="hasErrors(userCardEu); else cardsTemplate" class="ion-padding">
+    <div *ngIf="hasErrors(userCardEu); else cardTemplate" class="ion-padding">
       <ng-container *ngFor="let error of userCardEu.errors">
         <ion-note *ngIf="isKnownError(error); else unknownError" class="column app-text-2">
           {{ 'CARD-EU.ERRORS.' + error | translate }}
@@ -60,8 +60,8 @@
     </ng-template>
 
     <!-- Template des cartes -->
-    <ng-template #cardsTemplate>
-      <app-card-eu *ngIf="config.display === 'extended'" [userCardEu]="userCardEu"></app-card-eu>
+    <ng-template #cardTemplate>
+      <app-card-eu-extended *ngIf="config.display === 'extended'" [userCardEu]="userCardEu"></app-card-eu-extended>
       <app-card-eu-light *ngIf="config.display === 'light'" [userCardEuLight]="userCardEu"></app-card-eu-light>
     </ng-template>
 

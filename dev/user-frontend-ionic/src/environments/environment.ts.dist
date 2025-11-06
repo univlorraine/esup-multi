@@ -44,7 +44,8 @@
 import { AppUpdateModule } from '@multi/app-update';
 import { AuthModule } from '@multi/auth';
 import { CalendarModule } from '@multi/calendar';
-import { CardsPageModule } from '@multi/cards';
+import { CardPageModule } from '@multi/card';
+import { CardEuPageModule } from '@multi/card-eu';
 import { ChatbotModule } from '@multi/chatbot';
 import { ClockingModule } from '@multi/clocking';
 import { ContactUsModule } from '@multi/contact-us';
@@ -72,7 +73,7 @@ export const environment: any = {
   appTitle: 'Esup-Multi',
   appVersion: '1.0.0',
   forceFullLayoutFeatures: [],
-  useExternalNotificationSystem: false,
+  useExternalNotificationSystem: true,
   defaultLogo: 'assets/logos/white-logo.svg',
   tenants: [
     {
@@ -101,12 +102,12 @@ export const environment: any = {
       numberOfEventsLimit: 3,
       display: 'list',
     }),
+    CardPageModule.forRoot({ knownErrors: ['NO_PHOTO', 'NO_ACTIVE_CARD', 'UNPAID_FEES'] }),
     CardEuPageModule.forRoot({
       knownErrors: ['NO_PHOTO', 'NO_ACTIVE_CARD', 'UNPAID_FEES', 'ESCN_MISSING'],
       display: 'extended',
     }),
-    CardPageModule.forRoot({knownErrors: ['NO_PHOTO', 'NO_ACTIVE_CARD', 'UNPAID_FEES'] }),
-    ChatbotModule.forRoot({ chatbotLogoRegex: /_chacha5/i }),
+    ChatbotModule,
     ClockingModule,
     ContactUsModule,
     ContactsModule.forRoot({ contactTypes: ['STUDENT', 'STAFF', 'STANDIN'] }),

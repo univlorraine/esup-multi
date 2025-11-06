@@ -46,7 +46,6 @@ import configuration from './config/configuration';
 import microserviceAuthConfig from './config/microservice-auth.config';
 import microserviceCardConfig from './config/microservice-card.config';
 import microserviceCardEuConfig from './config/microservice-card-eu.config';
-import microserviceCardsConfig from './config/microservice-cards.config';
 import microserviceChatbotConfig from './config/microservice-chatbot.config';
 import microserviceClockingConfig from './config/microservice-clocking.config';
 import microserviceContactsConfig from './config/microservice-contacts.config';
@@ -110,12 +109,6 @@ import { LogsMiddleware } from './logs.middleware';
         imports: [ConfigModule.forFeature(microserviceCardEuConfig)],
         useFactory: (config: ConfigService) =>
           config.get('microservice-card-eu'),
-        inject: [ConfigService],
-      },
-      {
-        name: 'CARDS_SERVICE',
-        imports: [ConfigModule.forFeature(microserviceCardsConfig)],
-        useFactory: (config: ConfigService) => config.get('microservice-cards'),
         inject: [ConfigService],
       },
       {

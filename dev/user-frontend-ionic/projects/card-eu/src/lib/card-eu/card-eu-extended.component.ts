@@ -1,4 +1,4 @@
-/*!
+/*
  * Copyright ou © ou Copr. Université de Lorraine, (2022)
  *
  * Direction du Numérique de l'Université de Lorraine - SIED
@@ -37,86 +37,15 @@
  * termes.
  */
 
-.card-eu-wrapper {
-  margin: 16px;
-  border-radius: 10px;
-  background: linear-gradient(to bottom, #6589bb, #1a3459);
-  overflow: hidden; /* Pour respecter le border-radius */
-  position: relative;
-  box-shadow: rgba(0, 0, 0, 0.16) 0 3px 6px, rgba(0, 0, 0, 0.23) 0 3px 6px;
+import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { UserAndCardEuData } from '../card-eu.repository';
 
-  // Bande de fond verticale à droite
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 34%;
-    height: 100%;
-    background: #1a3459;
-    pointer-events: none;
-  }
-
-  .svg-card-eu {
-    position: relative;
-    z-index: 1;
-
-    text.card-title {
-      font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
-      font-weight: 600;
-      letter-spacing: -0.5px;
-      font-size: 33px !important;
-      fill: #fff;
-    }
-
-    text.card-subtitle {
-      font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
-      font-size: 33px !important;
-      letter-spacing: -0.5px;
-      font-weight: 400;
-      fill: #fff;
-    }
-
-    text.card-user-number {
-      font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
-      font-size: 35px !important;
-      letter-spacing: 10px;
-      font-weight: 200;
-      fill: #fff;
-    }
-
-    text.card-user-fullname {
-      font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
-      font-size: 35px !important;
-      letter-spacing: -0.5px;
-      font-weight: 400;
-      fill: #fff;
-    }
-
-    .eu-qrcode {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px 0;
-
-      > svg {
-        transform: scale(1.5);
-        transform-origin: center;
-      }
-    }
-  }
-}
-
-@media screen and (orientation: landscape) {
-  .eu-qrcode {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px 0;
-
-    > svg {
-      transform: scale(2);
-      transform-origin: center;
-    }
-  }
+@Component({
+  selector: 'app-card-eu-extended',
+  templateUrl: './card-eu-extended.component.html',
+  styleUrls: ['../../../../../src/theme/app-theme/styles/card-eu/card-eu-extended.component.scss'],
+  encapsulation: ViewEncapsulation.None // Pour pouvoir jouer sur la taille du QR Code avec les CSS
+})
+export class CardEuExtendedComponent {
+  @Input() userCardEu: UserAndCardEuData;
 }
