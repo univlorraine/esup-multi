@@ -626,14 +626,18 @@ export class AppController {
       )
       .pipe(
         concatMap((user) => {
+          let text = body.text;
+          if (!user) {
+            text = `Attention, message envoyé par un utilisateur non authentifié.\nL'utilisateur a renseigné l'adresse email suivante : ${body.from}\nCette adresse n'a pas été vérifiée et peut être fausse ou erronée.\n\n${body.text}`;
+          }
           return this.contactUsClient.send(
             {
               cmd: 'contactUs',
             },
             {
-              from: body.from,
+              replyTo: body.from,
               subject: body.subject,
-              text: body.text,
+              text,
               userData: {
                 username: user ? user.username : 'anonymous',
                 userAgent: request.headers['user-agent'],

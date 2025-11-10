@@ -37,10 +37,8 @@
  * termes.
  */
 
-import { Inject, Injectable } from '@angular/core';
-import { Browser } from '@capacitor/browser';
-import { SsoService } from '@multi/shared';
-import { ReservationModuleConfig, RESERVATION_CONFIG } from './reservation.config';
+import { Injectable } from '@angular/core';
+import { MultiTenantService, NavigationService, SsoService } from '@multi/shared';
 
 @Injectable({
   providedIn: 'root'
@@ -48,16 +46,18 @@ import { ReservationModuleConfig, RESERVATION_CONFIG } from './reservation.confi
 export class ReservationService {
 
   constructor(
-    @Inject(RESERVATION_CONFIG) private config: ReservationModuleConfig,
     private ssoService: SsoService,
+    private multiTenantService: MultiTenantService,
+    private navigationService: NavigationService,
   ) {}
 
   public openReservationService() {
+    const {ssoServiceName, ssoUrlTemplate} = this.multiTenantService.getModuleConfiguration('reservation');
     this.ssoService.getSsoExternalLink({
-      service: this.config.reservationSsoServiceName,
-      urlTemplate: this.config.reservationSsoUrlTemplate
+      service: ssoServiceName,
+      urlTemplate: ssoUrlTemplate
     })
-    .subscribe(url => Browser.open({ url }));
+    .subscribe(url => this.navigationService.openExternalLink(url));
   }
 
   public openURL(service: string) {
@@ -65,6 +65,6 @@ export class ReservationService {
       service,
       urlTemplate: `${service}&ticket={st}`
     })
-    .subscribe(url => Browser.open({ url }));
+    .subscribe(url => this.navigationService.openExternalLink(url));
   }
 }

@@ -72,21 +72,28 @@
 
               <ion-card-header>
                 <ion-card-title [ngClass]="fontColor()" class="app-title-5 light">
-                  {{event.startDateTime | localHour}} - {{event.endDateTime | localHour}}
+                  {{ event.startDateTime | localHour }} - {{ event.endDateTime | localHour }}
                 </ion-card-title>
               </ion-card-header>
 
               <ion-card-content>
                 <ion-row>
                   <ion-col>
-                    <ion-text [ngClass]="fontColor()" class="app-title-5">{{event.course.label}}</ion-text>
-
+                    <ion-text [ngClass]="fontColor()" class="app-title-5">{{ event.course.label }}</ion-text>
+                    <ion-row class="ion-align-items-start card-labels planning-label" *ngIf="event.planningLabel">
+                      <ion-col size="auto" class="ion-no-padding">
+                        <ion-icon [ngClass]="fontColor()" class="card-labels-icons" name="calendar-outline" aria-hidden="true"></ion-icon>
+                      </ion-col>
+                      <ion-col class="ion-no-padding">
+                        <ion-text [ngClass]="fontColor()" class="app-title-6 light">{{ event.planningLabel }}</ion-text>
+                      </ion-col>
+                    </ion-row>
                     <ion-row class="ion-align-items-start card-labels" *ngFor="let room of event.rooms">
                       <ion-col size="auto" class="ion-no-padding">
                         <ion-icon [ngClass]="[fontColor(), 'card-labels-icons']" name="business-outline" aria-hidden="true"></ion-icon>
                       </ion-col>
                       <ion-col class="ion-no-padding">
-                        <ion-text [ngClass]="fontColor()" class="app-title-6 light">{{room.label}} - {{room.building}}</ion-text>
+                          <ion-text [ngClass]="fontColor()" class="app-title-6 light">{{room.label}}<ng-container *ngIf="room.label && room.building"> - </ng-container>{{room.building}}</ion-text>
                       </ion-col>
                     </ion-row>
 
@@ -151,6 +158,14 @@
               </ion-row>
               <ion-text class="app-title-5 event-label slider-font-color">{{event.course.label}}</ion-text>
               <ion-row class="event-additional">
+                <ion-row class="ion-align-items-start card-labels planning-label" *ngIf="event.planningLabel">
+                  <ion-col size="auto" class="ion-no-padding">
+                    <ion-icon [ngClass]="fontColor()" class="card-labels-icons" name="calendar-outline" aria-hidden="true"></ion-icon>
+                  </ion-col>
+                  <ion-col class="ion-no-padding">
+                    <ion-text [ngClass]="fontColor()" class="app-title-6 light">{{ event.planningLabel }}</ion-text>
+                  </ion-col>
+                </ion-row>
                 <ion-row class="ion-align-items-center card-labels" *ngFor="let room of event.rooms">
                   <ion-icon class="card-labels-icons slider-font-color" name="business-outline" aria-hidden="true"></ion-icon>
                   <ion-text class="app-title-6 light slider-font-color">{{room.label}}<span *ngIf="room.building"> - {{room.building}}</span></ion-text>

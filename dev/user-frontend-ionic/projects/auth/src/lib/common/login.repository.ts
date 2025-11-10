@@ -44,7 +44,6 @@ import { currentLanguage$, localForageStore } from '@multi/shared';
 import { combineLatest } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 
-
 interface LoginProps {
   pageContent: LoginPageContent | null;
 }
@@ -54,18 +53,14 @@ export interface LoginPageContent {
 }
 
 export interface TranslatedLoginPageContent {
-  /* eslint-disable @typescript-eslint/naming-convention */
-  connexion_text: string;
-  not_authenticated_text: string;
-  /* eslint-enable @typescript-eslint/naming-convention */
+  connectionText: string;
+  notAuthenticatedText: string;
 }
 
 interface Translation {
-  /* eslint-disable @typescript-eslint/naming-convention */
-  languages_code: string;
-  connexion_text: string;
-  not_authenticated_text: string;
-  /* eslint-enable @typescript-eslint/naming-convention */
+  languagesCode: string;
+  connectionText: string;
+  notAuthenticatedText: string;
 }
 
 const STORE_NAME = 'login-page';
@@ -85,22 +80,19 @@ export class LoginRepository {
 
   private pageContent$ = store.pipe(select((state) => state.pageContent));
 
-  //eslint-disable-next-line @typescript-eslint/member-ordering
   public translatedPageContent$ = combineLatest([this.pageContent$, currentLanguage$]).pipe(
     filter(([pageContent]) => pageContent !== null),
     map(([pageContent, currentLanguage]) => {
       const translations = pageContent.translations;
       if (translations && translations.length > 0) {
 
-        const translation = pageContent.translations.find((t) => t.languages_code === currentLanguage) ||
-          pageContent.translations.find((t) => t.languages_code === this.environment.defaultLanguage) ||
+        const translation = pageContent.translations.find((t) => t.languagesCode === currentLanguage) ||
+          pageContent.translations.find((t) => t.languagesCode === this.environment.defaultLanguage) ||
           pageContent.translations[0];
 
         return {
-          /* eslint-disable @typescript-eslint/naming-convention */
-          connexion_text: translation.connexion_text,
-          not_authenticated_text: translation.not_authenticated_text,
-          /* eslint-enable @typescript-eslint/naming-convention */
+          connectionText: translation.connectionText,
+          notAuthenticatedText: translation.notAuthenticatedText,
         };
       } else {
         return null;

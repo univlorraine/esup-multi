@@ -38,8 +38,8 @@
  */
 
 import { ChangeDetectorRef, Component, Input } from '@angular/core';
-import { Browser } from '@capacitor/browser';
 import { SsoService, StatisticsService, ThemeService, TranslatedExternalFeature } from '@multi/shared';
+import { NavigationService } from '@multi/shared';
 
 @Component({
   selector: 'app-widget-external-feature',
@@ -54,7 +54,8 @@ export class WidgetExternalFeatureComponent {
     private ssoService: SsoService,
     private statisticsService: StatisticsService,
     private themeService: ThemeService,
-    private changeDetector: ChangeDetectorRef
+    private changeDetector: ChangeDetectorRef,
+    private navigationService: NavigationService,
   ) { }
 
   public onClick(): Promise<void> {
@@ -65,14 +66,14 @@ export class WidgetExternalFeatureComponent {
     this.statisticsService.onFunctionalityOpened(this.feature.statisticName);
 
     if (!this.feature.ssoService) {
-      return Browser.open({ url: this.feature.link });
+      return this.navigationService.openExternalLink(this.feature.link);
     }
 
     this.ssoService.getSsoExternalLink({
       urlTemplate: this.feature.link,
       service: this.feature.ssoService
     })
-      .subscribe(url => Browser.open({ url }));
+      .subscribe(url => this.navigationService.openExternalLink(url));
   }
 
   fontColor(backgroundColor) {

@@ -38,9 +38,9 @@
  */
 
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Contacts, EmailType, PhoneType } from '@capacitor-community/contacts';
-import { getAuthToken } from '@multi/shared';
+import { getAuthToken, MultiTenantService } from '@multi/shared';
 import { Observable } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
 
@@ -65,8 +65,7 @@ export interface ContactsBody {
 export class ContactsService {
 
   constructor(
-    @Inject('environment')
-    private environment: any,
+    private multiTenantService: MultiTenantService,
     private http: HttpClient,) { }
 
   public getContacts(body: ContactsBody): Observable<Contact[]> {
@@ -108,7 +107,7 @@ export class ContactsService {
 
   private fetchContacts(body: ContactsBody, authToken: string): Observable<Contact[]>  {
     body.authToken = authToken || null;
-    return this.http.post<Contact[]>(`${this.environment.apiEndpoint}/contacts`, body);
+    return this.http.post<Contact[]>(`${this.multiTenantService.getApiEndpoint()}/contacts`, body);
   }
 
 }

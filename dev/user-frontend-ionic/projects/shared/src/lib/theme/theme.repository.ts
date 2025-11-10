@@ -48,13 +48,15 @@ const STORE_NAME = 'theme';
 export interface ThemeProps {
     isDarkTheme: boolean;
     userHadSetThemeInApp: boolean;
+    tenantThemeApplied: string;
 }
 
 const store = createStore(
     { name: STORE_NAME },
     withProps<ThemeProps>({
       isDarkTheme: false,
-      userHadSetThemeInApp: false
+      userHadSetThemeInApp: false,
+      tenantThemeApplied: ''
     })
   );
 
@@ -69,6 +71,7 @@ export const isDarkTheme$ = store.pipe(select((state) => state.isDarkTheme));
 
 export const userHadSetThemeInApp$ = store.pipe(select((state) => state.userHadSetThemeInApp));
 
+export const tenantThemeApplied$ = store.pipe(select((state) => state.tenantThemeApplied));
 
 export const setIsDarkTheme = (isDarkThemeProps: ThemeProps['isDarkTheme']) => {
     store.update(setProps({
@@ -79,6 +82,12 @@ export const setIsDarkTheme = (isDarkThemeProps: ThemeProps['isDarkTheme']) => {
 export const setUserHaveSetThemeInApp = (userHadSetThemeInAppProps: ThemeProps['userHadSetThemeInApp']) => {
   store.update(setProps({
     userHadSetThemeInApp: userHadSetThemeInAppProps
+  }));
+};
+
+export const setTenantThemeApplied = (tenantThemeAppliedProps: ThemeProps['tenantThemeApplied']) => {
+  store.update(setProps({
+    tenantThemeApplied: tenantThemeAppliedProps
   }));
 };
 

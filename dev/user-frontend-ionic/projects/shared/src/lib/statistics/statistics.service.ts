@@ -38,13 +38,14 @@
  */
 
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { combineLatest, from, Observable, of } from 'rxjs';
 import { catchError, switchMap, take } from 'rxjs/operators';
 import { getAuthToken } from '../auth/auth.repository';
 import { NetworkService } from '../network/network.service';
 import { Capacitor } from '@capacitor/core';
 import { statsUid$, updateStatsUid } from './statistics.repository';
+import { MultiTenantService } from '../multi-tenant/multi-tenant.service';
 
 interface UserActionRequestData {
   authToken: string;
@@ -67,8 +68,7 @@ interface UserActionDetails {
 })
 export class StatisticsService {
   constructor(
-    @Inject('environment')
-    private environment: any,
+    private multiTenantService: MultiTenantService,
     private http: HttpClient,
     private networkService: NetworkService,
   ) {}
@@ -89,7 +89,7 @@ export class StatisticsService {
   }
 
   private postUserActionStatistic(userActionDetails: UserActionDetails): Observable<void> {
-    const url = `${this.environment.apiEndpoint}/statistics/user-action`;
+    const url = `${this.multiTenantService.getApiEndpoint()}/statistics/user-action`;
 
     return combineLatest([getAuthToken(), statsUid$, from(this.networkService.getConnectionStatus())]).pipe(
       take(1),

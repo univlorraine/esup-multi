@@ -43,7 +43,7 @@ import { persistState } from '@ngneat/elf-persist-state';
 import { localForageStore } from '@multi/shared';
 
 interface RestaurantsProps {
-  favoriteRestaurantId: number | null;
+  favoritesRestaurantsIds: number[] | null;
 }
 
 export interface Restaurant {
@@ -67,7 +67,7 @@ const store = createStore(
     { name: STORE_NAME },
     withEntities<Restaurant>(),
     withProps<RestaurantsProps>({
-      favoriteRestaurantId: null
+      favoritesRestaurantsIds: []
     })
 );
 
@@ -84,14 +84,33 @@ export const setRestaurants = (restaurants: Restaurant[]) => {
 
 export const clearRestaurant = () => store.reset();
 
+export const getFavoritesRestaurantsIds = () => {
+  let favoritesRestaurantsIdsArray: number[] = [];
+
+  favoritesRestaurantsIds$.subscribe({
+    next(value) {
+      favoritesRestaurantsIdsArray = value;
+    }
+  });
+  return favoritesRestaurantsIdsArray;
+};
+
 export const setFavoriteRestaurant = (restaurantId: number) => {
   store.update(
     setProps({
-      favoriteRestaurantId: restaurantId,
+      favoritesRestaurantsIds: [...getFavoritesRestaurantsIds(),restaurantId],
     })
   );
 };
 
-export const favoriteRestaurantId$ = store.pipe(select((state) => state.favoriteRestaurantId));
+export const unsetFavoriteRestaurant = (restaurantId: number) => {
+  store.update(
+    setProps({
+      favoritesRestaurantsIds: getFavoritesRestaurantsIds().filter(item => item !== restaurantId),
+    })
+  );
+};
+
+export const favoritesRestaurantsIds$ = store.pipe(select((state) => state.favoritesRestaurantsIds));
 
 export const getRestaurantById = (restaurantId: number) => store.pipe(selectEntity(restaurantId));

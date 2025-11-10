@@ -41,6 +41,11 @@ ion-title {
   color: var(--app-font-color-topbar) !important;
 }
 
+ion-content::part(scroll) {
+  display: flex;
+  flex-direction: column;
+}
+
 ion-card{
   padding: 0;
   margin: 0;
@@ -86,12 +91,12 @@ h5 {
   padding-bottom: 0.4rem;
 }
 
-.swiper-slide {
-  min-height: calc(100vh - 44px);
-}
-
 .hide-other-slides {
   display: none;
+}
+
+.swiper-container {
+  flex-grow: 1;
 }
 
 .swiper-container.empty {
@@ -117,5 +122,3 @@ h5 {
     padding-left: env(safe-area-inset-left)
   }
 }
-
-

@@ -43,13 +43,13 @@ import { ConfigService } from '@nestjs/config';
 import { RpcException } from '@nestjs/microservices';
 import { catchError, map, Observable } from 'rxjs';
 import {
-  DirectusApi,
+  CmsApi,
   NotificationsProviderApi,
 } from 'src/config/configuration.interface';
 import {
   ChannelSubscriberQueryDto,
-  DirectusChannelResultDto,
-  DirectusResponse,
+  ChannelDto,
+  ChannelGraphQLResponse,
   NotificationDeleteQueryDto,
   NotificationResultDto,
   NotificationsMarkAsReadQueryDto,
@@ -64,7 +64,7 @@ import {
 export class NotificationsService {
   private readonly logger = new Logger(NotificationsService.name);
   private notificationsProviderApiConfig: NotificationsProviderApi;
-  private directusApiConfig: DirectusApi;
+  private cmsApiConfig: CmsApi;
 
   constructor(
     private readonly configService: ConfigService,
@@ -74,7 +74,7 @@ export class NotificationsService {
       this.configService.get<NotificationsProviderApi>(
         'notificationsProviderApi',
       );
-    this.directusApiConfig = this.configService.get<DirectusApi>('directusApi');
+    this.cmsApiConfig = this.configService.get<CmsApi>('cmsApi');
   }
 
   public getNotifications(
@@ -101,26 +101,57 @@ export class NotificationsService {
       );
   }
 
-  public getChannels(): Observable<DirectusChannelResultDto[]> {
-    const url = `${this.directusApiConfig.url}/items/channels`;
+  public getChannels(): Observable<ChannelDto[]> {
+    const url = `${this.cmsApiConfig.apiUrl}/graphql`;
+
+    const graphqlQuery = {
+      query: `
+        query {
+          channels {
+            id
+            code
+            color
+            filterable
+            icon
+            routerLink
+            translations {
+                languagesCode
+                label
+            }
+          } 
+        }
+      `,
+    };
+
+    const requestConfig = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.cmsApiConfig.bearerToken}`,
+      },
+    };
 
     return this.httpService
-      .get<DirectusResponse<DirectusChannelResultDto[]>>(url, {
-        params: {
-          fields: '*,translations.*',
-        },
-        headers: {
-          Accept: 'application/json',
-          Authorization: `Bearer ${this.directusApiConfig.bearerToken}`,
-        },
-      })
+      .post<ChannelGraphQLResponse<ChannelDto[]>>(
+        url,
+        graphqlQuery,
+        requestConfig,
+      )
       .pipe(
         catchError((err: any) => {
-          const errorMessage = 'Unable to get directus channels data';
+          const errorMessage = 'Unable to get channels data from CMS';
           this.logger.error(errorMessage, err);
           throw new RpcException(errorMessage);
         }),
-        map((res) => res.data.data),
+        map((res) => {
+          // Vérification des erreurs dans la réponse GraphQL
+          if (res.data.errors && res.data.errors.length > 0) {
+            const errorMessage = `GraphQL error: ${res.data.errors[0].message}`;
+            this.logger.error(errorMessage);
+            throw new RpcException(errorMessage);
+          }
+
+          return res.data.data.channels;
+        }),
       );
   }
 

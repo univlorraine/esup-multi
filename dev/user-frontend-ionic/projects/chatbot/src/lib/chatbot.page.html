@@ -53,7 +53,7 @@
       <div class="message-container ion-margin">
         <div [ngClass]="message.messageType === messageType.bot ? message.card && isChatbotLogo(message) ? 'image-bot' : 'message-bot' : 'message-user'">
           <ion-row *ngIf="message.messageType === messageType.bot">
-            <ion-label class="app-text-4 ion-text-wrap app-fixed-light-color link-inherit-color" *ngIf="!message.card" [innerHTML]="message.text" text-wrap></ion-label>
+            <span class="app-text-4 ion-text-wrap app-fixed-light-color link-inherit-color" *ngIf="!message.card" [innerHTML]="message.text"></span>
             <ion-img *ngIf="message.card" [src]="message.card.file.url"></ion-img>
           </ion-row>
           <ion-row *ngIf="message.messageType === messageType.user">

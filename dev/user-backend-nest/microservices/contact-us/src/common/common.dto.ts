@@ -37,6 +37,16 @@
  * termes.
  */
 
-export interface DirectusResponse<T> {
-  data: T;
+export interface ContactUsGraphQLResponse<T> {
+  data: {
+    contactUs: T;
+  };
+  errors?: Array<{
+    message: string;
+    locations: Array<{
+      line: number;
+      column: number;
+    }>;
+    path: string[];
+  }>;
 }

@@ -61,19 +61,39 @@ import { StaticPagesModule } from '@multi/static-pages';
 import { UnreadMailModule } from '@multi/unread-mail';
 // import { MatomoModule } from 'ngx-matomo';
 
-
 import firebasePwaEnvironment from './firebase/web/firebase-environment.pwa.json';
 
 export const environment: any = {
-  firebase: firebasePwaEnvironment,
+  firebase: firebasePwaEnvironment, // A commenter pour désactiver les notifs web
   production: false,
-  apiEndpoint: 'http://localhost:3000',
   languages: ['fr', 'en'],
   defaultLanguage: 'fr',
-  cmsPublicAssetsEndpoint: 'http://localhost:8055/assets/',
   guidedTourEnabled: true,
   appTitle: 'Esup-Multi',
   appVersion: '1.0.0',
+  forceFullLayoutFeatures: [],
+  useExternalNotificationSystem: false,
+  defaultLogo: 'assets/logos/white-logo.svg',
+  tenants: [
+    {
+      apiEndpoint: 'http://localhost:3000',
+      modulesConfigurations: {
+        chatbot: {
+          logoRegex: /_chacha5/i
+        },
+        map: {
+          defaultLocation: {
+            longitude: 2.3488596,
+            latitude: 48.8533249
+          }
+        },
+        reservation: {
+          ssoServiceName: 'https://mon-espace-de-resa.fr',
+          ssoUrlTemplate: 'https://mon-espace-de-resa.fr/auth?ticket={st}',
+        }
+      },
+    }
+  ],
   enabledModules: [
     AppUpdateModule,
     AuthModule,
@@ -82,27 +102,19 @@ export const environment: any = {
       display: 'list',
     }),
     CardsPageModule.forRoot({ knownErrors: ['NO_PHOTO', 'NO_ACTIVE_CARD', 'UNPAID_FEES'] }),
-    ChatbotModule.forRoot({ chatbotLogoRegex: /_chacha5/i }),
+    ChatbotModule,
     ClockingModule,
     ContactUsModule,
     ContactsModule.forRoot({ contactTypes: ['STUDENT', 'STAFF', 'STANDIN'] }),
     ImportantNewsModule.forRoot({
       display: 'vertically'
     }),
-    MapModule.forRoot({
-      defaultMapLocation: {
-        longitude: 2.3488596,
-        latitude: 48.8533249
-      }
-    }),
+    MapModule,
     NotificationsModule.forRoot({
       numberOfNotificationsOnFirstLoad: 20,
       numberOfNotificationsToLoadOnScroll: 10
     }),
-    ReservationModule.forRoot({
-      reservationSsoServiceName: 'https://mon-espace-de-resa.fr',
-      reservationSsoUrlTemplate: 'https://mon-espace-de-resa.fr/auth?ticket={st}',
-    }),
+    ReservationModule,
     RestaurantsModule,
     RssPageModule.forRoot({
       latestNewsWidget: {

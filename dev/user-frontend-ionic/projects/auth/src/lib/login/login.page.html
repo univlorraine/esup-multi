@@ -53,7 +53,7 @@
 <ion-content class="ion-padding" *ngIf="translatedPageContent$ | async as page">
   <form [formGroup]="loginForm" (ngSubmit)="submit()">
     <ion-row class="ion-justify-content-center ion-text-center">
-      <div class="app-text-3" [innerHTML]="page.connexion_text"></div>
+      <div class="app-text-3" [innerHTML]="page.connectionText"></div>
     </ion-row>
 
     <ion-item lines="none">
@@ -69,7 +69,9 @@
                  formControlName="password" id="password" required type="password"
                  label="{{ 'AUTH.LOGIN.PASSWORD' | translate }}" labelPlacement="floating"
                  errorText="{{ 'AUTH.LOGIN.REQUIRED.PASSWORD' | translate }}">
+        <ion-input-password-toggle slot="end"></ion-input-password-toggle>
       </ion-input>
+
     </ion-item>
 
     <ion-item lines="none">

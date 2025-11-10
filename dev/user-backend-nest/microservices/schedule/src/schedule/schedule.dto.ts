@@ -74,6 +74,7 @@ export interface Event {
   id: string;
   startDateTime: string;
   endDateTime: string;
+  planningLabel: string;
   course: {
     id: string;
     label: string;

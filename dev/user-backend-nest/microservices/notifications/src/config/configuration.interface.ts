@@ -42,8 +42,8 @@ export interface NotificationsProviderApi {
   bearerToken: string;
 }
 
-export interface DirectusApi {
-  url: string;
+export interface CmsApi {
+  apiUrl: string;
   bearerToken: string;
 }
 

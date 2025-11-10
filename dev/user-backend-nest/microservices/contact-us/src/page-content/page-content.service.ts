@@ -41,44 +41,70 @@ import { HttpService } from '@nestjs/axios';
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { Observable, catchError, map } from 'rxjs';
-import { DirectusApi } from 'src/config/configuration.interface';
+import { CmsApi } from 'src/config/configuration.interface';
 import { PageContentResultDto } from './page-content.dto';
-import { DirectusResponse } from 'src/common/common.dto';
+import { ContactUsGraphQLResponse } from 'src/common/common.dto';
 import { RpcException } from '@nestjs/microservices';
 
 @Injectable()
 export class PageContentService {
   private readonly logger = new Logger(PageContentService.name);
-  private directusApiConfig: DirectusApi;
+  private cmsApiConfig: CmsApi;
 
   constructor(
     private readonly configService: ConfigService,
     private readonly httpService: HttpService,
   ) {
-    this.directusApiConfig = this.configService.get<DirectusApi>('directusApi');
+    this.cmsApiConfig = this.configService.get<CmsApi>('cmsApi');
   }
 
   public getPageContent(): Observable<PageContentResultDto> {
-    const url = `${this.directusApiConfig.url}/items/contact_us`;
+    const url = `${this.cmsApiConfig.apiUrl}/graphql`;
+
+    const graphqlQuery = {
+      query: `
+        query {
+          contactUs {
+            icon
+            translations {
+              content
+              languagesCode
+              title
+            }
+          }
+        }
+      `,
+    };
+
     const requestConfig = {
-      params: {
-        fields: 'icon,translations.*',
-      },
       headers: {
-        Accept: 'application/json',
-        Authorization: `Bearer ${this.directusApiConfig.bearerToken}`,
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.cmsApiConfig.bearerToken}`,
       },
     };
 
     return this.httpService
-      .get<DirectusResponse<PageContentResultDto>>(url, requestConfig)
+      .post<ContactUsGraphQLResponse<PageContentResultDto>>(
+        url,
+        graphqlQuery,
+        requestConfig,
+      )
       .pipe(
         catchError((err: any) => {
-          const errorMessage = 'Unable to get directus contact-us';
+          const errorMessage = 'Unable to get contact-us content from CMS';
           this.logger.error(errorMessage, err);
           throw new RpcException(errorMessage);
         }),
-        map((res) => res.data.data),
+        map((res) => {
+          // Vérification des erreurs dans la réponse GraphQL
+          if (res.data.errors && res.data.errors.length > 0) {
+            const errorMessage = `GraphQL error: ${res.data.errors[0].message}`;
+            this.logger.error(errorMessage);
+            throw new RpcException(errorMessage);
+          }
+
+          return res.data.data.contactUs;
+        }),
       );
   }
 }

@@ -69,8 +69,8 @@ export type MenuItemLink = MenuItemRouterLink | MenuItemExternalLink | MenuItemS
 
 export interface MenuItem {
   icon: string;
-  iconSourceSvgLightTheme?: string;
-  iconSourceSvgDarkTheme?: string;
+  iconSvgLight?: string;
+  iconSvgDark?: string;
   title: string;
   shortTitle?: string;
   link: MenuItemLink;

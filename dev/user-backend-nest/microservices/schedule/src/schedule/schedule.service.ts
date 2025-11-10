@@ -58,6 +58,15 @@ export class ScheduleService {
       this.configService.get<ScheduleProviderApi>('scheduleProviderApi');
   }
 
+  private addPlanningLabelToEvent(schedule: Schedule): Schedule {
+    schedule.plannings.forEach((planning) => {
+      planning.events.forEach((event) => {
+        event.planningLabel = planning.label;
+      });
+    });
+    return schedule;
+  }
+
   public getSchedule(query: UserScheduleQueryDto): Observable<Schedule> {
     const url = this.scheduleProviderApiConfig.apiUrl
       .replace(
@@ -82,9 +91,7 @@ export class ScheduleService {
           this.logger.error(errorMessage, err);
           throw new RpcException(errorMessage);
         }),
-        map((res) => {
-          return res.data;
-        }),
+        map((res) => this.addPlanningLabelToEvent(res.data)),
       );
   }
 
