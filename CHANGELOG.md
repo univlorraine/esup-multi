@@ -6,7 +6,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ## 2.x.x (yyyy-mm-dd)
 ### Client
 #### New features
-* **(cards)** : Suppression du module cards au profit de 2 modules séparés **card** et **card-eu**
+* **(cards)** : Suppression du module **cards** au profit de 2 modules séparés **card** et **card-eu**
 * **(card)** : Nouveau module de gestion de la carte dématérialisée de l'établissement
 * **(card-eu)** : Nouveau module de gestion de la carte européenne étudiante
 
