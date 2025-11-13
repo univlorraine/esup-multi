@@ -37,11 +37,11 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 
 - [@commitlint/cli@18.6.1](https://github.com/conventional-changelog/commitlint) - MIT
 - [@commitlint/config-conventional@18.6.3](https://github.com/conventional-changelog/commitlint) - MIT
-- [commitizen@4.3.0](https://github.com/commitizen/cz-cli) - MIT
+- [commitizen@4.3.1](https://github.com/commitizen/cz-cli) - MIT
 - [concurrently@8.2.2](https://github.com/open-cli-tools/concurrently) - MIT
 - [cz-conventional-changelog@3.3.0](https://github.com/commitizen/cz-conventional-changelog) - MIT
-- [husky@9.0.11](https://github.com/typicode/husky) - MIT
-- [license-checker-rseidelsohn@4.3.0](https://github.com/RSeidelsohn/license-checker-rseidelsohn) - BSD-3-Clause
+- [husky@9.1.7](https://github.com/typicode/husky) - MIT
+- [license-checker-rseidelsohn@4.4.2](https://github.com/RSeidelsohn/license-checker-rseidelsohn) - BSD-3-Clause
 
 </details>
 
