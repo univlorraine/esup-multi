@@ -104,7 +104,8 @@ jobs:
       matrix:
         service:
           - auth
-          - cards
+          - card
+          - card-eu
           - chatbot
           - clocking
           - contact-us
@@ -136,9 +137,12 @@ jobs:
             auth:
             - 'dev/user-backend-nest/microservices/auth/**/*.ts'
             - 'dev/user-backend-nest/microservices/auth/.eslintrc.js'
-            cards:
-            - 'dev/user-backend-nest/microservices/cards/**/*.ts'
-            - 'dev/user-backend-nest/microservices/cards/.eslintrc.js'
+            card:
+            - 'dev/user-backend-nest/microservices/card/**/*.ts'
+            - 'dev/user-backend-nest/microservices/card/.eslintrc.js'
+            card-eu:
+            - 'dev/user-backend-nest/microservices/card-eu/**/*.ts'
+            - 'dev/user-backend-nest/microservices/card-eu/.eslintrc.js'
             chatbot:
             - 'dev/user-backend-nest/microservices/chatbot/**/*.ts'
             - 'dev/user-backend-nest/microservices/chatbot/.eslintrc.js'
