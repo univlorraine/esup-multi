@@ -57,7 +57,7 @@
         <form [formGroup]="form">
           <ion-item formArrayName="categoriesForm" *ngFor="let category of categoriesForm.controls; let i = index">
             <ion-checkbox mode="md" [formControlName]="i">
-              <ion-label class="app-text-3 light ion-text-wrap">{{ categories[i].labelTranslate }}</ion-label>
+              <ion-label class="app-text-3 light ion-text-wrap">{{ categories[i].label }}</ion-label>
             </ion-checkbox>
           </ion-item>
         </form>
@@ -82,27 +82,27 @@
   <div class="map-page">
     <div id="map"></div>
   </div>
-  <ion-fab *ngIf="campus?.length > 0 && campus?.length <= maxDisplayedFloatingButton" slot="fixed" vertical="bottom" horizontal="end">
+  <ion-fab *ngIf="campuses?.length > 0 && campuses?.length <= maxDisplayedFloatingButton" slot="fixed" vertical="bottom" horizontal="end">
     <ion-fab-button color="primary">
       <ion-icon name="compass-outline"></ion-icon>
     </ion-fab-button>
     <ion-fab-list side="top" class="campus">
-      <ion-fab-button *ngFor="let oneCampus of campus"
-                      [attr.data-campus-name]="oneCampus.name"
-                      [ngStyle]="{'--background': 'center / cover no-repeat url('+oneCampus.photo+')'}"
-                      (click)="flyTo(oneCampus)"></ion-fab-button>
+      <ion-fab-button *ngFor="let campus of campuses"
+                      [attr.data-campus-name]="campus.name"
+                      [ngStyle]="(campus.photo ? {'--background': 'center / cover no-repeat url('+campus.photo+')'} : {})"
+                      (click)="flyTo(campus)"></ion-fab-button>
     </ion-fab-list>
   </ion-fab>
-  <ion-fab *ngIf="campus?.length > maxDisplayedFloatingButton" slot="fixed" vertical="bottom" horizontal="end">
+  <ion-fab *ngIf="campuses?.length > maxDisplayedFloatingButton" slot="fixed" vertical="bottom" horizontal="end">
     <ion-fab-button color="primary" (click)="presentCampusSelection()">
       <ion-icon name="compass-outline"></ion-icon>
       <ion-popover  [isOpen]="isCampusSelectionOpen" (didDismiss)="isCampusSelectionOpen = false">
         <ng-template>
           <ion-list lines="full">
-            <ion-item button *ngFor="let oneCampus of campus" (click)="closePopOverAndFlyTo(oneCampus)">
-              <ion-fab-button [attr.data-campus-name]="oneCampus.name"
-                              [ngStyle]="{'--background': 'center / cover no-repeat url('+oneCampus.photo+')'}"></ion-fab-button>
-              <ion-label class="app-text-3 light ion-text-wrap ion-padding-start">{{ oneCampus.name }}</ion-label>
+            <ion-item *ngFor="let campus of campuses" (click)="closePopOverAndFlyTo(campus)">
+              <ion-fab-button [attr.data-campus-name]="campus.name"
+                              [ngStyle]="(campus.photo ? {'--background': 'center / cover no-repeat url('+campus.photo+')'} : {})"></ion-fab-button>
+              <ion-label class="app-text-3 light ion-text-wrap ion-padding-start">{{ campus.name }}</ion-label>
             </ion-item>
           </ion-list>
         </ng-template>

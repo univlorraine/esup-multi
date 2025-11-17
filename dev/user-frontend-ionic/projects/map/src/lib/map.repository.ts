@@ -38,101 +38,106 @@
  */
 
 import { createStore, select, withProps } from '@ngneat/elf';
-import {
-    persistState
-} from '@ngneat/elf-persist-state';
+import { persistState } from '@ngneat/elf-persist-state';
 import { localForageStore } from '@multi/shared';
 
 const STORE_NAME = 'map_data';
 
-export interface MarkersProps {
-    markers: Marker[];
-}
-export interface Marker {
-    title: Label[];
-    description: Label[];
-    titleTranslate?: string;
-    descriptionTranslate?: string;
-    category: string;
-    latitude: number;
-    longitude: number;
-    icon: Icon;
+export type MapData = MarkersCollectionsProps &
+  CategoriesProps &
+  CampusesProps &
+  IconsProps;
+
+export interface Translatable {
+  translations?: Array<{
+    languagesCode: string;
+  }>;
 }
 
-export interface CategoriesProps {
-    categories: Categorie[];
+export interface MarkersCollectionsProps {
+  markersCollections: Record<string, Marker[]>;
 }
-export interface Categorie {
-    id: string;
-    sort: number;
-    label: Label[];
-    labelTranslate?: string;
+export interface Marker extends Translatable {
+  id: string;
+  name: string;
+  description: string;
+  latitude: number;
+  longitude: number;
+  categoryId: string;
+  campusId: string;
+  iconId: string;
+  translations?: Array<{
+    languagesCode: string;
+    name: string;
+    description: string;
+  }>;
 }
 
-export interface CampusProps {
-    campus: Campus[];
+interface CategoriesProps {
+  categories: Category[];
+}
+export interface Category extends Translatable {
+  id: string;
+  label: string;
+  translations?: Array<{
+    languagesCode: string;
+    label: string;
+  }>;
+}
+
+interface CampusesProps {
+  campuses: Campus[];
 }
 export interface Campus {
-    id: number;
-    sort: number;
-    name: string;
-    initial: GpsCoordinate;
-    southwest: GpsCoordinate;
-    northeast: GpsCoordinate;
-    photo: string;
-}
-
-export interface Label {
-    value: string;
-    langcode: string;
+  id: string;
+  name: string;
+  photo: string | null;
+  initial: GpsCoordinate;
+  southwest: GpsCoordinate;
+  northeast: GpsCoordinate;
 }
 
 export interface GpsCoordinate {
-    lng: number;
-    lat: number;
+  lng: number;
+  lat: number;
 }
 
+interface IconsProps {
+  icons: Icon[];
+}
 export interface Icon {
-    svg: string;
-    width: number;
-    height: number;
-    x: number;
-    y: number;
+  id: string;
+  svg: string;
+  width: number;
+  height: number;
+  x: number;
+  y: number;
 }
 
 const store = createStore(
-    { name: STORE_NAME },
-    withProps<MarkersProps>({ markers: []}),
-    withProps<CategoriesProps>({ categories: []}),
-    withProps<CampusProps>({ campus: []}),
-  );
+  { name: STORE_NAME },
+  withProps<MarkersCollectionsProps>({ markersCollections: {} }),
+  withProps<CategoriesProps>({ categories: [] }),
+  withProps<CampusesProps>({ campuses: [] }),
+  withProps<IconsProps>({ icons: [] }),
+);
 
 export const persist = persistState(store, {
-    key: STORE_NAME,
-    storage: localForageStore,
+  key: STORE_NAME,
+  storage: localForageStore,
 });
 
-export const markersList$ = store.pipe(select((state) => state.markers));
-export const categoriesList$ = store.pipe(select((state) => state.categories));
-export const campusList$ = store.pipe(select((state) => state.campus));
+export const markersCollections$ = store.pipe(select((state) => state.markersCollections));
+export const categories$ = store.pipe(select((state) => state.categories));
+export const campuses$ = store.pipe(select((state) => state.campuses));
+export const icons$ = store.pipe(select((state) => state.icons));
 
-export const setMarkers = (markers: MarkersProps['markers']) => {
-    store.update((state) => ({
-      ...state,
-      markers,
-    }));
-};
-
-export const setCategories = (categories: CategoriesProps['categories']) => {
-    store.update((state) => ({
-      ...state,
-      categories,
-    }));
-};
-
-export const setCampus = (campus: CampusProps['campus']) => {
-    store.update((state) => ({
-      ...state,
-      campus,
-    }));
-};
+export const setData = (data: MapData) => {
+  store.update((state) => ({
+    ...state,
+    markersCollections: data ? data.markersCollections : {},
+    categories: data ? data.categories : [],
+    campuses: data ? data.campuses : [],
+    icons: data ? data.icons : [],
+  }));
+}

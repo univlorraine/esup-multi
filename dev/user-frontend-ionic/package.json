@@ -66,6 +66,7 @@
     "angularx-qrcode": "^16.0.2",
     "capacitor-secure-storage-plugin": "0.11.0",
     "date-fns": "^2.29.3",
+    "dompurify": "^3.3.0",
     "firebase": "^11.6.0",
     "fullcalendar": "^6.1.18",
     "geolib": "^3.3.4",

@@ -39,107 +39,139 @@
 
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { Observable, catchError, map } from 'rxjs';
-import { Marker } from './marker.dto';
-import { Category } from './category.dto';
-import { Campus } from './campus.dto';
-import { ProviderOptions } from '../config/configuration.interface';
+import { catchError, map, Observable } from 'rxjs';
+import { CmsApi } from '../config/configuration.interface';
 import { HttpService } from '@nestjs/axios';
 import { RpcException } from '@nestjs/microservices';
+import {
+  MapDataGraphQLDto,
+  MapDataGraphQLResponse,
+  MapDataJsonDto,
+  Marker,
+} from './map.dto';
 
 @Injectable()
 export class MapService {
   private readonly logger = new Logger(MapService.name);
-  private readonly providerOptions: ProviderOptions;
+  private cmsApiConfig: CmsApi;
 
   constructor(
     private readonly configService: ConfigService,
     private readonly httpService: HttpService,
   ) {
-    this.providerOptions =
-      this.configService.get<ProviderOptions>('providerOptions');
+    this.cmsApiConfig = this.configService.get<CmsApi>('cmsApi');
   }
 
-  getMarkers(): Observable<Marker[]> {
+  public getMapData(): Observable<MapDataJsonDto> {
+    const url = `${this.cmsApiConfig.apiUrl}/graphql`;
+
+    const graphqlQuery = {
+      query: `
+        query {
+          mapData {
+            icons {
+              id
+              svg
+              width
+              height
+              x
+              y
+            }
+            categories {
+              id
+              translations {
+                languagesCode
+                label
+              }
+            }
+            campuses {
+              id
+              name
+              photo
+              initial {
+                lat
+                lng
+              }
+              southwest {
+                lat
+                lng
+              }
+              northeast {
+                lat
+                lng
+              }
+            }
+            featureCollections {
+              categoryId
+              features {
+                id
+                campusId
+                iconId
+                location {
+                  lat
+                  lng
+                }
+                translations {
+                  languagesCode
+                  name
+                  description
+                }
+              }
+            }
+          }
+        }
+      `,
+    };
+
+    const requestConfig = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.cmsApiConfig.bearerToken}`,
+      },
+    };
+
     return this.httpService
-      .get<any>(`${this.providerOptions.url}/pois`, this.httpOptions)
+      .post<MapDataGraphQLResponse>(url, graphqlQuery, requestConfig)
       .pipe(
-        catchError(this.handleError("Unable to get map's POI")),
+        catchError((err: any) => {
+          const errorMessage = 'Unable to get map points data from CMS';
+          this.logger.error(errorMessage, err);
+          throw new RpcException(errorMessage);
+        }),
         map((res) => {
-          const geoJsonData = res.data;
-          const markersList: Marker[] = [];
-          for (const category in geoJsonData) {
-            const markers: Marker[] = geoJsonData[category].features.map(
+          // Vérification des erreurs dans la réponse GraphQL
+          if (res.data.errors && res.data.errors.length > 0) {
+            const errorMessage = `GraphQL error: ${res.data.errors[0].message}`;
+            this.logger.error(errorMessage);
+            throw new RpcException(errorMessage);
+          }
+
+          const graphQLData: MapDataGraphQLDto = res.data.data.mapData;
+          const markersCollections: Record<string, Marker[]> = {};
+          graphQLData.featureCollections.forEach((collection) => {
+            markersCollections[collection.categoryId] = collection.features.map(
               (feature) => {
-                Object.entries(feature.properties).forEach(
-                  ([property, value]: [string, any]) => {
-                    if (property === 'nom') {
-                      return;
-                    }
-
-                    if (
-                      typeof value == 'string' &&
-                      (value.startsWith('https://') ||
-                        value.startsWith('http://'))
-                    ) {
-                      value = `<a href="${value}" target="_blank">${value}</a>`;
-                    }
-
-                    if (property === 'description') {
-                      value.forEach((d) => {
-                        if (d.value) d.value += '<br />';
-                      });
-                    }
-                  },
-                );
-
                 return {
-                  category,
-                  title: feature.properties.nom,
-                  description: feature.properties.description,
-                  latitude: feature.geometry.coordinates[1],
-                  longitude: feature.geometry.coordinates[0],
-                  icon: feature.properties.icon,
+                  id: feature.id,
+                  latitude: feature.location.lat,
+                  longitude: feature.location.lng,
+                  campusId: feature.campusId,
+                  iconId: feature.iconId,
+                  translations: feature.translations,
                 };
               },
             );
+          });
 
-            markersList.push(...markers);
-          }
+          const jsonData: MapDataJsonDto = {
+            icons: graphQLData.icons,
+            categories: graphQLData.categories,
+            campuses: graphQLData.campuses,
+            markersCollections,
+          };
 
-          return markersList;
+          return jsonData;
         }),
       );
-  }
-
-  getCategories(): Observable<Category[]> {
-    return this.httpService
-      .get<any>(`${this.providerOptions.url}/categories`, this.httpOptions)
-      .pipe(
-        catchError(this.handleError('Unable to get map categories')),
-        map((res) => res.data),
-      );
-  }
-
-  getCampuses(): Observable<Campus[]> {
-    return this.httpService
-      .get<any>(`${this.providerOptions.url}/campuses`, this.httpOptions)
-      .pipe(
-        catchError(this.handleError('Unable to get map campuses')),
-        map((res) => res.data),
-      );
-  }
-
-  private handleError(message: string) {
-    return (err: any) => {
-      this.logger.error(message, err);
-      throw new RpcException(message);
-    };
-  }
-
-  private get httpOptions() {
-    return {
-      headers: { Authorization: `Bearer ${this.providerOptions.bearerToken}` },
-    };
   }
 }

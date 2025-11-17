@@ -36,15 +36,74 @@
  * termes.
  */
 
-import { z } from 'zod';
+import { Field, ObjectType } from '@nestjs/graphql';
+import { Campus } from '@common/models/campuses.model';
+import { MapCategory } from '@common/models/map-categories.model';
+import { MapIcon } from '@common/models/map-icons.model';
+import { MapPointTranslations } from '@common/models/translations.model';
 
-export const IdSchema = z.string().min(1, 'ID must be a non-empty string');
-export const AccessTypeSchema = z.enum(['internal', 'external']);
-export const GpsCoordinatesSchema = z.object({
-  lat: z.number().refine((val) => val >= -90 && val <= 90, {
-    message: 'Latitude must be between -90 and 90',
-  }),
-  lng: z.number().refine((val) => val >= -180 && val <= 180, {
-    message: 'Longitude must be between -180 and 180',
-  }),
-});
+@ObjectType()
+class PointGpsCoordinates {
+  @Field()
+  lat: number;
+
+  @Field()
+  lng: number;
+}
+
+@ObjectType()
+class MapPoint {
+  @Field()
+  id: string;
+
+  @Field()
+  campusId: string;
+
+  @Field()
+  iconId: string;
+
+  @Field(() => PointGpsCoordinates)
+  location: PointGpsCoordinates;
+
+  @Field(() => [MapPointTranslations])
+  translations: MapPointTranslations[];
+}
+
+@ObjectType()
+export class MapPointData {
+  @Field(() => MapPoint)
+  feature: MapPoint;
+
+  @Field(() => Campus)
+  campus: Campus;
+
+  @Field(() => MapCategory, { nullable: true })
+  category: MapCategory | null;
+
+  @Field(() => MapIcon)
+  icon: MapIcon;
+}
+
+@ObjectType()
+export class MapFeatureCollection {
+  @Field()
+  categoryId: string;
+
+  @Field(() => [MapPoint])
+  features: MapPoint[];
+}
+
+@ObjectType()
+export class MapData {
+  @Field(() => [Campus])
+  campuses: Campus[];
+
+  @Field(() => [MapCategory])
+  categories: MapCategory[];
+
+  @Field(() => [MapIcon])
+  icons: MapIcon[];
+
+  @Field(() => [MapFeatureCollection])
+  featureCollections: MapFeatureCollection[];
+}

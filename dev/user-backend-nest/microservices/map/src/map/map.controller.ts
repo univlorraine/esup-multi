@@ -41,26 +41,14 @@ import { Controller } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
 import { Observable } from 'rxjs';
 import { MapService } from './map.service';
-import { Marker } from './marker.dto';
-import { Category } from './category.dto';
-import { Campus } from './campus.dto';
+import { MapDataJsonDto } from './map.dto';
 
 @Controller()
 export class MapController {
   constructor(private readonly mapService: MapService) {}
 
   @MessagePattern({ cmd: 'map' })
-  getMarkers(): Observable<Marker[]> {
-    return this.mapService.getMarkers();
-  }
-
-  @MessagePattern({ cmd: 'mapCategories' })
-  getCategories(): Observable<Category[]> {
-    return this.mapService.getCategories();
-  }
-
-  @MessagePattern({ cmd: 'mapCampuses' })
-  getCampus(): Observable<Campus[]> {
-    return this.mapService.getCampuses();
+  getMapData(): Observable<MapDataJsonDto> {
+    return this.mapService.getMapData();
   }
 }

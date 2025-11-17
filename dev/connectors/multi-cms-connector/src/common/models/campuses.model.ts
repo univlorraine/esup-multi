@@ -36,15 +36,34 @@
  * termes.
  */
 
-import { z } from 'zod';
+import { Field, ObjectType } from '@nestjs/graphql';
 
-export const IdSchema = z.string().min(1, 'ID must be a non-empty string');
-export const AccessTypeSchema = z.enum(['internal', 'external']);
-export const GpsCoordinatesSchema = z.object({
-  lat: z.number().refine((val) => val >= -90 && val <= 90, {
-    message: 'Latitude must be between -90 and 90',
-  }),
-  lng: z.number().refine((val) => val >= -180 && val <= 180, {
-    message: 'Longitude must be between -180 and 180',
-  }),
-});
+@ObjectType()
+class CampusGpsCoordinates {
+  @Field()
+  lat: number;
+
+  @Field()
+  lng: number;
+}
+
+@ObjectType()
+export class Campus {
+  @Field()
+  id: string;
+
+  @Field()
+  name: string;
+
+  @Field({ nullable: true })
+  photo: string | null;
+
+  @Field(() => CampusGpsCoordinates)
+  initial: CampusGpsCoordinates;
+
+  @Field(() => CampusGpsCoordinates)
+  southwest: CampusGpsCoordinates;
+
+  @Field(() => CampusGpsCoordinates)
+  northeast: CampusGpsCoordinates;
+}

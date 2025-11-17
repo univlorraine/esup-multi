@@ -36,15 +36,24 @@
  * termes.
  */
 
-import { z } from 'zod';
+import { Args, Query, Resolver } from '@nestjs/graphql';
+import { MapPointsWordpressService } from './map-points.wordpress.service';
+import { MapData, MapPointData } from '@common/models/map-points.model';
 
-export const IdSchema = z.string().min(1, 'ID must be a non-empty string');
-export const AccessTypeSchema = z.enum(['internal', 'external']);
-export const GpsCoordinatesSchema = z.object({
-  lat: z.number().refine((val) => val >= -90 && val <= 90, {
-    message: 'Latitude must be between -90 and 90',
-  }),
-  lng: z.number().refine((val) => val >= -180 && val <= 180, {
-    message: 'Longitude must be between -180 and 180',
-  }),
-});
+@Resolver(() => MapPointData)
+export class MapPointsWordpressResolver {
+  constructor(private readonly mapPointsService: MapPointsWordpressService) {}
+
+  // Définition de la requête GraphQL qui sera exécutée depuis le backend de Multi
+  @Query(() => MapData, { name: 'mapData' })
+  async getMapData(): Promise<MapData> {
+    return this.mapPointsService.getMapData();
+  }
+
+  @Query(() => MapPointData, { name: 'mapPoint' })
+  async getMapPoint(
+    @Args('id', { type: () => String }) id: string,
+  ): Promise<MapPointData> {
+    return this.mapPointsService.getMapPointData(Number(id));
+  }
+}

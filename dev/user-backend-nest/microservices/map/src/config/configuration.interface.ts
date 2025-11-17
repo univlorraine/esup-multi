@@ -37,8 +37,13 @@
  * termes.
  */
 
-export interface ProviderOptions {
-  url: string;
+export interface CmsApi {
+  apiUrl: string;
+  bearerToken: string;
+}
+
+export interface AdditionalProviderApi {
+  apiUrl: string;
   bearerToken: string;
 }
 

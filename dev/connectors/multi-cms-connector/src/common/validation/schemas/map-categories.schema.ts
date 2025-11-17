@@ -36,15 +36,13 @@
  * termes.
  */
 
+import { IdSchema } from '@common/validation/schemas/base-type.schema';
 import { z } from 'zod';
+import { MapCategoryTranslationsSchema } from '@common/validation/schemas/translations.schema';
 
-export const IdSchema = z.string().min(1, 'ID must be a non-empty string');
-export const AccessTypeSchema = z.enum(['internal', 'external']);
-export const GpsCoordinatesSchema = z.object({
-  lat: z.number().refine((val) => val >= -90 && val <= 90, {
-    message: 'Latitude must be between -90 and 90',
-  }),
-  lng: z.number().refine((val) => val >= -180 && val <= 180, {
-    message: 'Longitude must be between -180 and 180',
-  }),
+export const MapCategorySchema = z.object({
+  id: IdSchema,
+  translations: z
+    .array(MapCategoryTranslationsSchema)
+    .min(1, 'At least one translation is required for Map Category'),
 });

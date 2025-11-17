@@ -2,8 +2,7 @@
  * Copyright ou © ou Copr. Université de Lorraine, (2022)
  *
  * Direction du Numérique de l'Université de Lorraine - SIED
- *  (dn-mobile-dev@univ-lorraine.fr)
- * JNESIS (contact@jnesis.com)
+ * (dn-mobile-dev@univ-lorraine.fr)
  *
  * Ce logiciel est un programme informatique servant à rendre accessible
  * sur mobile divers services universitaires aux étudiants et aux personnels
@@ -37,10 +36,14 @@
  * termes.
  */
 
-export interface Marker {
-  title: string;
-  description: string;
-  category: string;
-  latitude: number;
-  longitude: number;
-}
+import { IdSchema } from '@common/validation/schemas/base-type.schema';
+import { z } from 'zod';
+
+export const MapIconSchema = z.object({
+  id: IdSchema,
+  svg: z.string().min(1, 'Map Icon SVG cannot be empty string'),
+  width: z.number().positive('Map Icon width must be a positive number'),
+  height: z.number().positive('Map Icon height must be a positive number'),
+  x: z.number().nonnegative('Map Icon x must be a non-negative number'),
+  y: z.number().nonnegative('Map Icon y must be a non-negative number'),
+});

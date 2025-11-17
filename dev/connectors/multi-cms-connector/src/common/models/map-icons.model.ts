@@ -36,15 +36,25 @@
  * termes.
  */
 
-import { z } from 'zod';
+import { Field, ObjectType } from '@nestjs/graphql';
 
-export const IdSchema = z.string().min(1, 'ID must be a non-empty string');
-export const AccessTypeSchema = z.enum(['internal', 'external']);
-export const GpsCoordinatesSchema = z.object({
-  lat: z.number().refine((val) => val >= -90 && val <= 90, {
-    message: 'Latitude must be between -90 and 90',
-  }),
-  lng: z.number().refine((val) => val >= -180 && val <= 180, {
-    message: 'Longitude must be between -180 and 180',
-  }),
-});
+@ObjectType()
+export class MapIcon {
+  @Field()
+  id: string;
+
+  @Field()
+  svg: string;
+
+  @Field()
+  width: number;
+
+  @Field()
+  height: number;
+
+  @Field()
+  x: number;
+
+  @Field()
+  y: number;
+}

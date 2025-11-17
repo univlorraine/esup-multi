@@ -36,15 +36,41 @@
  * termes.
  */
 
+import {
+  GpsCoordinatesSchema,
+  IdSchema,
+} from '@common/validation/schemas/base-type.schema';
 import { z } from 'zod';
+import { MapPointTranslationsSchema } from '@common/validation/schemas/translations.schema';
+import { CampusSchema } from '@common/validation/schemas/campuses.schema';
+import { MapCategorySchema } from '@common/validation/schemas/map-categories.schema';
+import { MapIconSchema } from '@common/validation/schemas/map-icons.schema';
 
-export const IdSchema = z.string().min(1, 'ID must be a non-empty string');
-export const AccessTypeSchema = z.enum(['internal', 'external']);
-export const GpsCoordinatesSchema = z.object({
-  lat: z.number().refine((val) => val >= -90 && val <= 90, {
-    message: 'Latitude must be between -90 and 90',
-  }),
-  lng: z.number().refine((val) => val >= -180 && val <= 180, {
-    message: 'Longitude must be between -180 and 180',
-  }),
+const FeaturePointSchema = z.object({
+  id: IdSchema,
+  campusId: IdSchema,
+  iconId: IdSchema,
+  location: GpsCoordinatesSchema,
+  translations: z
+    .array(MapPointTranslationsSchema)
+    .min(1, 'At least one translation is required for Map Point'),
+});
+
+export const MapPointSchema = z.object({
+  feature: FeaturePointSchema,
+  campus: CampusSchema,
+  category: MapCategorySchema,
+  icon: MapIconSchema,
+});
+
+const FeatureCollectionSchema = z.object({
+  categoryId: z.string(),
+  features: z.array(FeaturePointSchema),
+});
+
+export const MapDataSchema = z.object({
+  campuses: z.array(CampusSchema),
+  categories: z.array(MapCategorySchema),
+  icons: z.array(MapIconSchema),
+  featureCollections: z.array(FeatureCollectionSchema),
 });

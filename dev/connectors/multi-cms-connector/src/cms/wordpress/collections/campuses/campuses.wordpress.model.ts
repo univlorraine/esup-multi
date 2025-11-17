@@ -36,15 +36,41 @@
  * termes.
  */
 
-import { z } from 'zod';
+import { Field, ObjectType } from '@nestjs/graphql';
+import { ImageWordpress } from '@wordpress/collections/system/image.wordpress.model';
 
-export const IdSchema = z.string().min(1, 'ID must be a non-empty string');
-export const AccessTypeSchema = z.enum(['internal', 'external']);
-export const GpsCoordinatesSchema = z.object({
-  lat: z.number().refine((val) => val >= -90 && val <= 90, {
-    message: 'Latitude must be between -90 and 90',
-  }),
-  lng: z.number().refine((val) => val >= -180 && val <= 180, {
-    message: 'Longitude must be between -180 and 180',
-  }),
-});
+@ObjectType()
+class CampusImageConnection {
+  @Field(() => ImageWordpress)
+  node: ImageWordpress;
+}
+
+@ObjectType()
+export class CampusWordpress {
+  @Field()
+  databaseId: number;
+
+  @Field()
+  campusName: string;
+
+  @Field(() => CampusImageConnection, { nullable: true })
+  campusPhoto: CampusImageConnection | null;
+
+  @Field()
+  campusInitLatitude: number;
+
+  @Field()
+  campusInitLongitude: number;
+
+  @Field()
+  campusSwLatitude: number;
+
+  @Field()
+  campusSwLongitude: number;
+
+  @Field()
+  campusNeLatitude: number;
+
+  @Field()
+  campusNeLongitude: number;
+}

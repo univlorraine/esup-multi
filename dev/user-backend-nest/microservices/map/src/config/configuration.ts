@@ -37,7 +37,11 @@
  * termes.
  */
 
-import { ProviderOptions, KeepAliveOptions } from './configuration.interface';
+import {
+  AdditionalProviderApi,
+  CmsApi,
+  KeepAliveOptions,
+} from './configuration.interface';
 
 const applyIfNotBlank = (param: string, applyFn: (value: string) => void) => {
   if (param && param.trim().length > 0) {
@@ -46,7 +50,8 @@ const applyIfNotBlank = (param: string, applyFn: (value: string) => void) => {
 };
 
 export default (): {
-  providerOptions: ProviderOptions;
+  cmsApi: CmsApi;
+  additionalProvider: AdditionalProviderApi;
   keepAliveOptions: KeepAliveOptions;
 } => {
   const keepAliveOptions = {};
@@ -87,9 +92,13 @@ export default (): {
   );
 
   return {
-    providerOptions: {
-      url: process.env.MAP_SERVICE_PROVIDER_API_URL,
-      bearerToken: process.env.MAP_SERVICE_PROVIDER_API_BEARER_TOKEN,
+    cmsApi: {
+      apiUrl: process.env.MAP_SERVICE_CMS_CONNECTOR_API_URL,
+      bearerToken: process.env.MAP_SERVICE_CMS_CONNECTOR_API_BEARER_TOKEN,
+    },
+    additionalProvider: {
+      apiUrl: process.env.MAP_SERVICE_ADDITIONAL_PROVIDER_API_URL,
+      bearerToken: process.env.MAP_SERVICE_ADDITIONAL_PROVIDER_API_BEARER_TOKEN,
     },
     keepAliveOptions,
   };

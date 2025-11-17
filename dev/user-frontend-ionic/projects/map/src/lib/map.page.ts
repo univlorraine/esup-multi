@@ -41,22 +41,21 @@ import { Component, DestroyRef, inject, Inject, ViewChild } from '@angular/core'
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Geolocation } from '@capacitor/geolocation';
 import { TranslateService } from '@ngx-translate/core';
-import { NetworkService, MultiTenantService, currentLanguage$ } from '@multi/shared';
+import { currentLanguage$, MultiTenantService, NetworkService } from '@multi/shared';
 import * as Leaflet from 'leaflet';
-import { finalize, take, map } from 'rxjs/operators';
+import { finalize, map, take } from 'rxjs/operators';
 import { combineLatest } from 'rxjs';
-import { MapModuleConfig, MAP_CONFIG } from './map.config';
+import { MAP_CONFIG, MapModuleConfig } from './map.config';
 import {
   Campus,
-  Categorie,
-  Label,
+  campuses$,
+  categories$,
+  Category,
+  Icon,
+  icons$,
   Marker,
-  campusList$,
-  categoriesList$,
-  markersList$,
-  setCampus,
-  setCategories,
-  setMarkers
+  markersCollections$,
+  setData, Translatable,
 } from './map.repository';
 import { MapService } from './map.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
@@ -74,10 +73,10 @@ export class MapPage {
   public isLoading = false;
   public form: FormGroup;
   public categoriesSelected: string[];
-  public categories: Categorie[];
-  public campus: Campus[];
+  public categories: Category[];
+  public campuses: Campus[];
+  public icons: Icon[];
   private map: Leaflet.Map;
-  private markersByCategory: Map<string, Leaflet.Marker[]> = new Map();
   private layerGroupByCategory: Map<string, Leaflet.LayerGroup> = new Map();
   private positionLayerGroup: Leaflet.LayerGroup;
   private destroyRef = inject(DestroyRef)
@@ -105,7 +104,7 @@ export class MapPage {
     this.isLoading = true;
     await this.loadMapDataInNetworkAvailable();
 
-    combineLatest([categoriesList$, currentLanguage$])
+    combineLatest([categories$, currentLanguage$])
       .pipe(
         take(1),
         map(([categories, currentLanguage]) => this.translateCategories(categories, currentLanguage))
@@ -121,20 +120,24 @@ export class MapPage {
       this.refreshMap();
     });
 
-    campusList$
+    campuses$
       .pipe(
         take(1)
       )
-      .subscribe(campus => this.campus = campus);
+      .subscribe(campus => this.campuses = campus);
+
+    icons$.pipe(
+      take(1)
+    ).subscribe(icons => this.icons = icons);
 
     await this.leafletMapInit();
-    combineLatest([markersList$, currentLanguage$])
+    combineLatest([markersCollections$, currentLanguage$])
       .pipe(
         take(1),
-        map(([markers, currentLanguage]) => this.translateMarkers(markers, currentLanguage)),
+        map(([markersCollections, currentLanguage]) => this.translateMarkersCollections(markersCollections, currentLanguage)),
         finalize(() => this.isLoading = false)
       )
-      .subscribe(markers => this.initMarkers(markers));
+      .subscribe(markersCollections => this.initMarkers(markersCollections));
   }
 
   ionViewWillLeave() {
@@ -151,7 +154,7 @@ export class MapPage {
   }
 
   getCategoryTranslation(category: string) {
-    return this.categories.find(cat => cat.id === category).labelTranslate;
+    return this.categories.find(cat => cat.id === category).label;
   }
 
   removeSelectedCategory(category: string, selectedCatIndex: number) {
@@ -252,50 +255,39 @@ export class MapPage {
       return;
     }
 
-    const markers = await this.mapService.getMarkers().toPromise();
-    setMarkers(markers);
-    const categories = await this.mapService.getCategories().toPromise();
-    setCategories(categories);
-    const campus = await this.mapService.getCampus().toPromise();
-    setCampus(campus);
+    const data = await this.mapService.getData().toPromise();
+    setData(data);
   }
 
-  private initMarkers(markers: Marker[]) {
-    markers.forEach(m => this.initMarker(m));
-
-    this.markersByCategory.forEach((markersInCategory, category) => {
-      const layerGroup = Leaflet.layerGroup(markersInCategory);
+  private initMarkers(markersCollections: Record<string, Marker[]>) {
+    Object.entries(markersCollections).forEach(([category, markers]) => {
+      const leafletMarkers: Leaflet.Marker[] = markers.map(m => this.initMarker(m));
+      const layerGroup = Leaflet.layerGroup(leafletMarkers);
       this.layerGroupByCategory.set(category, layerGroup);
       layerGroup.addTo(this.map);
     });
   }
 
-  private initMarker(m: Marker) {
-    if (!this.markersByCategory.has(m.category)) {
-      this.markersByCategory.set(m.category, []);
-    }
-    const markersInCategory = this.markersByCategory.get(m.category);
-
-    const icon = this.buildIconForCategory(m);
-    const marker = Leaflet.marker([m.latitude, m.longitude], { icon })
+  private initMarker(marker: Marker) {
+    const icon = this.buildIconForMarker(marker);
+    return Leaflet.marker([marker.latitude, marker.longitude], { icon })
       .bindPopup(
-        `<h5 class="app-title-5">${m.titleTranslate}</h5>
-        <div class="app-text-5">${m.descriptionTranslate ? m.descriptionTranslate : ''}</div>`
+        `<h5 class="app-title-5">${marker.name}</h5>
+        <div class="app-text-5">${marker.description ? marker.description : ''}</div>`
       );
-
-    markersInCategory.push(marker);
   }
 
-  private buildIconForCategory(m: Marker) {
-    if(!m.icon.svg) {
+  private buildIconForMarker(m: Marker) {
+    const icon = this.icons.find(i => i.id === m.iconId);
+    if (icon.svg == null || icon.svg === '') {
       return this.buildSimpleMarkerIcon();
     }
 
     return Leaflet.divIcon({
-      html: m.icon.svg,
+      html: icon.svg,
       className: '',
-      iconSize: [m.icon.width, m.icon.height],
-      iconAnchor: [m.icon.x, m.icon.y],
+      iconSize: [icon.width, icon.height],
+      iconAnchor: [icon.x, icon.y],
     });
   }
 
@@ -322,28 +314,36 @@ export class MapPage {
     this.categories.forEach(() => this.categoriesForm.push(new FormControl(false)));
   }
 
-  private translateCategories(categories: Categorie[], currentLanguage: string): Categorie[] {
-    return categories.map(categorie => {
-      this.findTranslation(categorie, 'label', currentLanguage);
-      return categorie;
-    });
+  private translateCategories(categories: Category[], currentLanguage: string): Category[] {
+    return categories.map(categorie => this.translate(categorie, currentLanguage));
   }
 
-  private translateMarkers(markers: Marker[], currentLanguage: string): Marker[] {
-    return markers.map(marker => {
-      this.findTranslation(marker, 'title', currentLanguage);
-      this.findTranslation(marker, 'description', currentLanguage);
-      return marker;
+  private translateMarkersCollections(markersCollections: Record<string, Marker[]>, currentLanguage: string): Record<string, Marker[]> {
+    const translatedMarkersCollections: Record<string, Marker[]> = {};
+    Object.entries(markersCollections).forEach(([key, markers]) => {
+      translatedMarkersCollections[key] = markers.map(marker => this.translate(marker, currentLanguage));
     });
+    return translatedMarkersCollections;
   }
 
-  private findTranslation(objectToTranslate: Categorie | Marker, propertyToTranslate: string, currentLanguage: string) {
+  private translate<T extends Translatable>(objectToTranslate: T, currentLanguage: string): T {
     const translation =
-      objectToTranslate[propertyToTranslate].find((t: Label) => t.langcode === currentLanguage) ||
-      objectToTranslate[propertyToTranslate].find((t: Label) => t.langcode === this.environment.defaultLanguage) ||
-      objectToTranslate[propertyToTranslate][0];
+      objectToTranslate.translations.find((t) => t.languagesCode === currentLanguage) ||
+      objectToTranslate.translations.find((t) => t.languagesCode === this.environment.defaultLanguage) ||
+      objectToTranslate.translations[0];
 
-    objectToTranslate[propertyToTranslate+'Translate'] = translation?.value;
+    const object = {
+      ...objectToTranslate
+    }
+    if (translation) {
+      Object.keys(translation).forEach((key) => {
+        if (key !== 'languagesCode') {
+          object[key] = translation[key];
+        }
+      });
+    }
+
+    return object;
   }
 
   public closePopOverAndFlyTo(campus:Campus){
