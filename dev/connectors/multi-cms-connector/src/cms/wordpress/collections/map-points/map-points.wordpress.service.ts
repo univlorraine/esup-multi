@@ -102,12 +102,12 @@ export class MapPointsWordpressService {
     const mapCategoryNode = mapPoint.mapPointCategory?.node;
     let category = null;
     if (mapCategoryNode) {
-      const categoryFrTranslation: MapCategoryTranslations = {
-        languagesCode: FRENCH_CODE.toLowerCase(),
+      const categoryDefaultTranslation: MapCategoryTranslations = {
+        languagesCode: mapCategoryNode.language.code.toLowerCase(),
         label: mapCategoryNode.mapCategoryName,
       };
       const categoryTranslations: MapCategoryTranslations[] = [
-        categoryFrTranslation,
+        categoryDefaultTranslation,
         ...(mapCategoryNode.translations?.map(
           (translation: MapCategoryTranslationsWordpress) => ({
             languagesCode: translation.language.code.toLowerCase(),
@@ -117,7 +117,7 @@ export class MapPointsWordpressService {
       ];
 
       category = {
-        id: mapCategoryNode.databaseId.toString(),
+        id: mapCategoryNode.mapCategoryInternalName,
         translations: categoryTranslations,
       };
     }
@@ -232,6 +232,11 @@ export class MapPointsWordpressService {
               node {
                 databaseId
                 mapCategoryInternalName
+                language {
+                  code
+                  locale
+                  name
+                }
                 mapCategoryName
                 translations {
                   databaseId
@@ -294,6 +299,11 @@ export class MapPointsWordpressService {
             node {
               databaseId
               mapCategoryInternalName
+              language {
+                code
+                locale
+                name
+              }
               mapCategoryName
               translations {
                 databaseId

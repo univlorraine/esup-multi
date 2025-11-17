@@ -38,11 +38,15 @@
 
 import { Field, ObjectType } from '@nestjs/graphql';
 import { MapCategoryTranslationsWordpress } from '@wordpress/collections/translations/translations.wordpress.model';
+import { LanguagesWordpress } from '@wordpress/collections/languages/languages.wordpress.model';
 
 @ObjectType()
 export class MapCategoryWordpress {
   @Field()
-  databaseId: number;
+  mapCategoryInternalName: string;
+
+  @Field(() => LanguagesWordpress)
+  language: LanguagesWordpress;
 
   @Field()
   mapCategoryName: string;

@@ -39,14 +39,20 @@
 
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { catchError, map, Observable } from 'rxjs';
-import { CmsApi } from '../config/configuration.interface';
+import { catchError, forkJoin, map, Observable, of } from 'rxjs';
+import {
+  AdditionalProviderApi,
+  CmsApi,
+} from '../config/configuration.interface';
 import { HttpService } from '@nestjs/axios';
 import { RpcException } from '@nestjs/microservices';
 import {
+  CampusDto,
+  MapDataAdditionalProviderDto,
   MapDataGraphQLDto,
   MapDataGraphQLResponse,
   MapDataJsonDto,
+  MapIconDto,
   Marker,
 } from './map.dto';
 
@@ -54,15 +60,93 @@ import {
 export class MapService {
   private readonly logger = new Logger(MapService.name);
   private cmsApiConfig: CmsApi;
+  private additionalProviderApiConfig: AdditionalProviderApi;
 
   constructor(
     private readonly configService: ConfigService,
     private readonly httpService: HttpService,
   ) {
     this.cmsApiConfig = this.configService.get<CmsApi>('cmsApi');
+    this.additionalProviderApiConfig =
+      this.configService.get<AdditionalProviderApi>('additionalProvider');
   }
 
   public getMapData(): Observable<MapDataJsonDto> {
+    return forkJoin({
+      cms: this.fetchFromCms(),
+      additionalProvider: this.fetchFromAdditionalProvider(),
+    }).pipe(
+      map(({ cms, additionalProvider }) => {
+        const icons: MapIconDto[] = [...cms.icons, ...additionalProvider.icons];
+
+        const categories = [...cms.categories];
+        additionalProvider.categories.forEach((category) => {
+          if (
+            !categories.find(
+              (existingCategory) => existingCategory.id === category.id,
+            )
+          ) {
+            categories.push(category);
+          }
+        });
+
+        const campuses = [...cms.campuses];
+        additionalProvider.campuses.forEach((campus) => {
+          if (
+            !campuses.find(
+              (existingCampus) => existingCampus.name === campus.name,
+            )
+          ) {
+            campuses.push({
+              ...campus,
+              id: `${campus.id}_additional`, // Ensure unique ID
+            });
+          }
+        });
+
+        const markersCollections: Record<string, Marker[]> = {
+          ...cms.markersCollections,
+        };
+        Object.keys(additionalProvider.markersCollections).forEach(
+          (categoryId) => {
+            if (!markersCollections[categoryId]) {
+              // categoryId does not exist in cms data, add the whole collection
+              markersCollections[categoryId] =
+                additionalProvider.markersCollections[categoryId].map(
+                  (marker) => ({
+                    ...marker,
+                    campusId:
+                      campuses.find((campus) => marker.campusId === campus.name)
+                        ?.id || '',
+                  }),
+                );
+            } else {
+              // categoryId exists, append markers to existing collection
+              const markers = additionalProvider.markersCollections[
+                categoryId
+              ].map((marker) => ({
+                ...marker,
+                id: `${marker.id}_additional`, // Ensure unique ID
+                campusId:
+                  campuses.find((campus) => marker.campusId === campus.name)
+                    ?.id || '',
+              }));
+              markersCollections[categoryId].push(...markers);
+            }
+          },
+        );
+
+        return {
+          icons,
+          categories,
+          campuses,
+          markersCollections,
+        };
+      }),
+    );
+  }
+
+  private fetchFromCms(): Observable<MapDataJsonDto> {
     const url = `${this.cmsApiConfig.apiUrl}/graphql`;
 
     const graphqlQuery = {
@@ -171,6 +255,88 @@ export class MapService {
           };
 
           return jsonData;
+        }),
+      );
+  }
+
+  private fetchFromAdditionalProvider(): Observable<MapDataJsonDto> {
+    const url = this.additionalProviderApiConfig.apiUrl;
+
+    if (!url) {
+      return of({
+        icons: [],
+        categories: [],
+        campuses: [],
+        markersCollections: {},
+      });
+    }
+
+    const requestConfig = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.additionalProviderApiConfig.bearerToken}`,
+      },
+    };
+
+    return this.httpService
+      .get<MapDataAdditionalProviderDto>(url, requestConfig)
+      .pipe(
+        catchError((err: any) => {
+          const errorMessage =
+            'Unable to get map points data from Additional Provider';
+          this.logger.error(errorMessage, err);
+          throw new RpcException(errorMessage);
+        }),
+        map((res) => {
+          const data = res.data;
+
+          const campuses = data.campuses;
+          const categories = data.categories.map((category) => ({
+            id: category.id,
+            translations: category.label.map((label) => ({
+              languagesCode: label.langcode,
+              label: label.value,
+            })),
+          }));
+
+          const icons = [];
+          const markersCollections: Record<string, Marker[]> = {};
+          Object.keys(data.pois).forEach((categoryId) => {
+            data.pois[categoryId].features.forEach((poi) => {
+              const poiId = crypto.randomUUID();
+
+              const iconId = `icon_${poiId}`;
+              icons.push({
+                ...poi.properties.icon,
+                id: iconId,
+              });
+
+              if (!markersCollections[categoryId]) {
+                markersCollections[categoryId] = [];
+              }
+              markersCollections[categoryId].push({
+                id: poiId,
+                latitude: poi.geometry.coordinates[1],
+                longitude: poi.geometry.coordinates[0],
+                campusId: poi.properties.site,
+                iconId: iconId,
+                translations: poi.properties.name.map((name, index) => ({
+                  languagesCode: name.langcode,
+                  name: name.value,
+                  description: poi.properties.description[index]
+                    ? poi.properties.description[index].value
+                    : '',
+                })),
+              });
+            });
+          });
+
+          return {
+            icons,
+            categories,
+            campuses,
+            markersCollections,
+          };
         }),
       );
   }

@@ -36,12 +36,11 @@
  * termes.
  */
 
-import { IdSchema } from '@common/validation/schemas/base-type.schema';
 import { z } from 'zod';
 import { MapCategoryTranslationsSchema } from '@common/validation/schemas/translations.schema';
 
 export const MapCategorySchema = z.object({
-  id: IdSchema,
+  id: z.string().min(1, 'Map Category ID is required'),
   translations: z
     .array(MapCategoryTranslationsSchema)
     .min(1, 'At least one translation is required for Map Category'),
