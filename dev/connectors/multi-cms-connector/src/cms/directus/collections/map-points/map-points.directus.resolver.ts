@@ -36,47 +36,24 @@
  * termes.
  */
 
-import { Module } from '@nestjs/common';
-import { HttpModule } from '@nestjs/axios';
-import { WordpressService } from '@wordpress/wordpress.service';
-import { ChannelsWordpressModule } from '@wordpress/collections/channels/channels.wordpress.module';
-import { ContactUsWordpressModule } from '@wordpress/collections/contact-us/contact-us.wordpress.module';
-import { ImportantNewsWordpressModule } from '@wordpress/collections/important-news/important-news.wordpress.module';
-import { SocialNetworksWordpressModule } from '@wordpress/collections/social-networks/social-networks.wordpress.module';
-import { FeaturesWordpressModule } from '@wordpress/collections/features/features.wordpress.module';
-import { LanguagesWordpressModule } from '@wordpress/collections/languages/languages.wordpress.module';
-import { LoginWordpressModule } from '@wordpress/collections/login/login.wordpress.module';
-import { StaticPagesWordpressModule } from '@wordpress/collections/static-pages/static-pages.wordpress.module';
-import { WidgetsWordpressModule } from '@wordpress/collections/widgets/widgets.wordpress.module';
-import { MapPointsWordpressModule } from '@wordpress/collections/map-points/map-points.wordpress.module';
+import { Args, Query, Resolver } from '@nestjs/graphql';
+import { MapData, MapPointData } from '@common/models/map-points.model';
+import { MapPointsDirectusService } from '@directus/collections/map-points/map-points.directus.service';
 
-@Module({
-  providers: [WordpressService],
-  imports: [
-    HttpModule,
-    ChannelsWordpressModule,
-    ContactUsWordpressModule,
-    FeaturesWordpressModule,
-    ImportantNewsWordpressModule,
-    LanguagesWordpressModule,
-    LoginWordpressModule,
-    MapPointsWordpressModule,
-    StaticPagesWordpressModule,
-    SocialNetworksWordpressModule,
-    WidgetsWordpressModule,
-  ],
-  exports: [
-    ChannelsWordpressModule,
-    ContactUsWordpressModule,
-    WordpressService,
-    FeaturesWordpressModule,
-    ImportantNewsWordpressModule,
-    LanguagesWordpressModule,
-    LoginWordpressModule,
-    MapPointsWordpressModule,
-    StaticPagesWordpressModule,
-    SocialNetworksWordpressModule,
-    WidgetsWordpressModule,
-  ],
-})
-export class WordpressModule {}
+@Resolver(() => MapPointData)
+export class MapPointsDirectusResolver {
+  constructor(private readonly mapPointsService: MapPointsDirectusService) {}
+
+  // Définition de la requête GraphQL qui sera exécutée depuis le backend de Multi
+  @Query(() => MapData, { name: 'mapData' })
+  async getMapData(): Promise<MapData> {
+    return this.mapPointsService.getMapData();
+  }
+
+  @Query(() => MapPointData, { name: 'mapPoint' })
+  async getMapPoint(
+    @Args('id', { type: () => String }) id: string,
+  ): Promise<MapPointData> {
+    return this.mapPointsService.getMapPointData(Number(id));
+  }
+}
