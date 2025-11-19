@@ -24,10 +24,10 @@
   },
   "GLOBAL": {
     "BACK_BUTTON": {
-      "LABEL_IOS": "Retour",
-      "LABEL_ANDROID": "Retour",
-      "ARIA_LABEL_IOS": "Retour",
-      "ARIA_LABEL_ANDROID": "Retour"
+     	"LABEL_IOS": "Retour",
+     	"LABEL_ANDROID": "Retour",
+     	"ARIA_LABEL_IOS": "Retour",
+     	"ARIA_LABEL_ANDROID": "Retour"
     }
   }
 }

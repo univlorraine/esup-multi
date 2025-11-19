@@ -49,13 +49,13 @@
 }
 
 .filter-list {
-  background-color: var(--app-color-component-background-primary);
+  background-color: var(--app-font-color-primary-contrast);
   padding-top: 1rem;
   padding-right: 0.4rem;
 }
 
 ion-item::part(native) {
-  background: var(--app-color-component-background-primary);
+  background-color: var(--app-font-color-primary-contrast);
 }
 
 ion-item:last-child {
@@ -72,5 +72,10 @@ ion-item {
 }
 
 .chip-item .ion-activatable {
-  background-color: var(--ion-color-primary);
+  background-color: var(--app-font-color-secondary);
+  color: var(--app-color-background);
+
+  ion-icon {
+    color: var(--app-color-background);
+  }
 }

@@ -38,7 +38,14 @@
  */
 
 .logo {
-  margin: 0.8rem 0;
+  margin: 0.8rem auto;
+  flex-grow: 1;
+  max-width: none;
+  display: block;
+}
+
+.logo.ion-padding-start {
+  padding-inline-start: 0 !important;
 }
 
 app-custom-icon {
@@ -55,7 +62,6 @@ ion-tab-bar[data-menu-id="main-tab-bar"]{
   /*border-top-left-radius: var(--app-square-button-1-border-radius);
   border-top-right-radius: var(--app-square-button-1-border-radius);*/
   box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12);
-  padding: 0.3rem 0;
 }
 
 ion-tab-bar[data-menu-id="main-tab-bar"] ion-tab-button {

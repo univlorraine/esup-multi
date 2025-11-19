@@ -37,9 +37,9 @@
  * termes.
  */
 
-ion-icon {
-  color: var(--ion-color-icon-primary-contrast);
-}
+//ion-icon {
+//  color: var(--ion-color-icon-primary-contrast);
+//}
 
 .favorite-icon {
   position: absolute;
@@ -51,10 +51,10 @@ ion-icon {
   color: var(--ion-color-primary);
 }
 
-.pin {
-  padding-top: 8%;
-  color: var(--ion-color-medium-light);
-}
+//.pin {
+//  padding-top: 8%;
+//  //color: var(--ion-color-medium-light);
+//}
 
 .description {
   width: 100%;
@@ -127,12 +127,27 @@ ion-item {
     }
 
     ion-label.description p {
-      font-size: var(--app-text-5-size) !important;
+      font-size: var(--app-text-4-size) !important;
       color: var(--app-font-color-primary);
       max-height: 2.9rem;
       overflow-y: clip;
       text-transform: initial;
       line-height: normal;
+    }
+  }
+
+  ion-col:nth-child(3).ion-text-end {
+    max-width: 7rem !important;
+    position: absolute;
+    display: inline-flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    bottom: 0;
+    left: 6.7rem;
+    padding: 0;
+
+    .pin {
+      width: 1rem;
     }
   }
 
@@ -161,10 +176,9 @@ ion-item {
     }
 
     &::after {
-      content: "voir le menu";
       background-color: var(--ion-color-primary);
       border-radius: var(--app-border-radius-5);
-      font-size: var(--app-text-5-size);
+      font-size: var(--app-text-4-size);
       color: var(--ion-color-primary-contrast);
       padding: .125rem 1.5rem .125rem .5rem;
       position: absolute;
@@ -207,9 +221,9 @@ ion-item {
 
   ion-label.opening {
     position: absolute;
-    bottom: 0;
+    bottom: 1.3rem;
     left: 6.9rem;
-    max-width: 6.3rem;
+    max-width: 10rem;
     height: 3.5rem;
     align-content: end;
     padding-bottom: 0.5rem;
@@ -218,8 +232,16 @@ ion-item {
       font-family: QuicksandBold, sans-serif !important;
       height: 1.75rem;
       align-content: end;
+      font-size: var(--app-text-4-size) !important;
     }
   }
+}
+
+:host-context(html[lang="fr"]) ion-item ion-row:after {
+  content: "voir le menu";
+}
+:host-context(html[lang="en"]) ion-item ion-row:after {
+  content: "see the menu";
 }
 
 //Responsive for 1000, 500, 350, 250px screens
@@ -244,6 +266,15 @@ ion-list > ion-list {
             height: 9rem;
           }
         }
+      }
+    }
+    ion-item:has(ion-col:nth-child(3).ion-text-end) {
+      ion-label.opening {
+        bottom: 2.3rem;
+      }
+
+      ion-col:nth-child(3).ion-text-end {
+        bottom: 1.3rem;
       }
     }
   }

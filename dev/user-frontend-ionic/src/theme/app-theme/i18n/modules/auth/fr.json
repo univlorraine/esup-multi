@@ -12,7 +12,7 @@
             "USERNAME": "Identifiant requis",
             "PASSWORD": "Mot de passe requis"
         },
-        "SAVE_CREDENTIALS": "Enregistrer mes identifiants"
+        "SAVE_CREDENTIALS": "Rester connecté"
     },
     "CONNECTED": {
         "HELLO": "Bonjour",

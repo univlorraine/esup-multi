@@ -132,7 +132,7 @@
   // // Icon size variables (Change value here and use variables only here (Button section) and in theme/icons/icons.scss)
   // // ---------------------
 
-  --icon-1-size: 5.2rem !important;
+  --icon-1-size: 3.8rem !important;
   --icon-2-size: 2.3rem !important;
   --icon-3-size: 1.5rem !important;
   --icon-4-size: 1.25rem !important;
@@ -176,12 +176,12 @@
   --app-rectangular-button-1-outline-width: 0.12rem;
   --app-rectangular-button-1-outline-color: var(--ion-color-primary);
   --app-rectangular-button-1-font-family: var(--app-font-primary-static-regular);
-  --app-rectangular-button-1-font-size: 0.8rem;
+  --app-rectangular-button-1-font-size: 0.875rem;
   --app-rectangular-button-1-font-color: var(--app-font-fix-light-color);
   --app-rectangular-button-1-min-height: 1.75rem;
 
   // Button Square type 1 (icon only with label bellow)
-  --app-square-button-1-background-color: var(--ion-color-tertiary);
+  --app-square-button-1-background-color: var(--ion-color-primary);
   --app-square-button-1-font-family: var(--app-font-primary-static-bold);
   --app-square-button-1-font-size: 1.125rem;
   --app-square-button-1-font-color: var(--app-font-color-primary-contrast);

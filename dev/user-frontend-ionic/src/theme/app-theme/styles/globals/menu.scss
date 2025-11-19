@@ -32,6 +32,63 @@
   }
 }
 
+app-services {
+  ion-button {
+    position: static !important;
+    margin-bottom: -19px !important;
+    margin-left: auto !important;
+    margin-right: -9px !important;
+
+    &:before {
+      content: "";
+      position: absolute;
+      height: 100%;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 1;
+      cursor: pointer;
+      margin-top: 13px;
+    }
+  }
+
+  .inner-draggable-container app-custom-icon{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  // Temporary style for colorizing menu items
+
+  // tertiary: positions 1, 5, 8, 9
+  .container-draggable-list .draggable-container:nth-child(9n+1) .app-square-button-1 .icon-container,
+  .container-draggable-list .draggable-container:nth-child(9n+5) .app-square-button-1 .icon-container,
+  .container-draggable-list .draggable-container:nth-child(9n+8) .app-square-button-1 .icon-container,
+  .container-draggable-list .draggable-container:nth-child(9n+9) .app-square-button-1 .icon-container {
+    background-color: var(--ion-color-tertiary);
+  }
+
+  // quaternary: positions 2, 7
+  .container-draggable-list .draggable-container:nth-child(9n+2) .app-square-button-1 .icon-container,
+  .container-draggable-list .draggable-container:nth-child(9n+7) .app-square-button-1 .icon-container {
+    background-color: var(--ion-color-quaternary);
+  }
+
+  // secondary: position 3
+  .container-draggable-list .draggable-container:nth-child(9n+3) .app-square-button-1 .icon-container {
+    background-color: var(--ion-color-secondary);
+  }
+
+  // primary: positions 4, 6
+  .container-draggable-list .draggable-container:nth-child(9n+4) .app-square-button-1 .icon-container,
+  .container-draggable-list .draggable-container:nth-child(9n+6) .app-square-button-1 .icon-container {
+    background-color: var(--ion-color-primary);
+  }
+}
+
+
 body.dark {
   .searchbar-input.sc-ion-searchbar-md {
     background-color: transparent;

@@ -120,6 +120,9 @@ ion-item {
   ion-toggle[aria-checked=false]::part(handle){
     margin: 0 0.3rem;
   }
+  ion-toggle:not(.toggle-checked)::part(handle){
+    margin-left: 5px;
+  }
   ion-toggle.toggle-checked::part(track){
     background-color: var(--ion-color-tertiary);
   }

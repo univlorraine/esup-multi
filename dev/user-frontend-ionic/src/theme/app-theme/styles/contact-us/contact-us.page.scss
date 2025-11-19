@@ -93,9 +93,16 @@ ion-label{
   padding: 0 0.5rem;
 }
 form > ion-list > ion-item{
-  margin-top: 1.8rem;
+  margin-top: 1rem;
   --full-highlight-height: 0;
 
+}
+ion-toolbar.contact-form-toolbar{
+  padding-top: 1rem!important;
+  ion-buttons ion-button{
+    padding-inline-start: 15px!important;
+    --padding-start: 0px!important;
+  }
 }
 //Fields coloration
 .ion-valid{
@@ -111,8 +118,11 @@ ion-item::part(native){
   --highlight-background: var(--ion-color-danger);
   --highlight-color-invalid: var(--ion-color-danger);
 }
-ion-item.ion-invalid::part(native){
+ion-item.ion-touched.ion-invalid::part(native){
   --border-color: var(--ion-color-danger);
+}
+ion-item::part(native) {
+  --inner-border-width: 0;
 }
 ion-textarea{
   min-height: 10rem;
@@ -123,6 +133,9 @@ form ion-toolbar ion-buttons ion-button{
   background: var(--app-font-color-secondary);
   opacity: 1;
   --padding-start: 1.1em;
+  &.button-disabled{
+    opacity: 0.65 !important;
+  }
   ion-text.app-text-4 {
     color: var(--app-font-color-primary-contrast) !important;
     font-family: QuickSandBold, sans-serif !important;

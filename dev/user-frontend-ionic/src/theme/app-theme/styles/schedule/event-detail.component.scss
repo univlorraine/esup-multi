@@ -84,7 +84,7 @@ ion-card-header {
   position: absolute;
 
   ion-card-title.app-text-2 {
-    font-size: var(--app-text-5-size) !important;
+    font-size: var(--app-text-4-size) !important;
 
     &::before {
       background-color: var(--app-font-color-primary);
@@ -103,7 +103,7 @@ ion-card-header {
   }
 }
 
-ion-card-content.card-content-md {
+ion-card-content.card-content-md, ion-card-content.card-content-ios {
   padding-inline-start: 0.7rem;
   padding-inline-end: 0.7rem;
   padding-bottom: 0;
@@ -116,50 +116,60 @@ ion-card-content.card-content-md {
 
     ion-row.course-label {
       max-width: 100%;
-      height: 1.25rem;
+      height: 1.3rem;
       overflow: hidden;
       text-wrap: wrap;
 
       ion-text {
         font-family: QuicksandBold, sans-serif !important;
-        font-size: var(--app-text-4-size) !important;
+        font-size: var(--app-text-3-size) !important;
       }
     }
 
     ion-row.card-labels:not(.course-label) {
       ion-text {
-        font-size: var(--app-text-5-size) !important;
+        font-size: var(--app-text-4-size) !important;
         color: var(--app-font-color-primary) !important;
         padding-top: .125rem;
         max-width: 89%;
       }
-
-      ion-icon[name=man-outline]:before {
+      ion-icon:before{
         background-color: var(--app-font-color-primary);
-        -webkit-mask-image: url('/assets/icons/home/enseignant.svg');
-        mask-image: url('/assets/icons/home/enseignant.svg');
         mask-repeat: no-repeat;
         mask-position: center;
         mask-size: contain;
         content: "";
         display: inline-block;
-        width: 1.125rem;
-        height: 1.125rem;
         margin-bottom: 2px;
-      }
-
-      ion-icon[name=business-outline]:before {
-        background-color: var(--app-font-color-primary);
-        -webkit-mask-image: url('/assets/icons/home/batiment.svg');
-        mask-image: url('/assets/icons/home/batiment.svg');
-        mask-repeat: no-repeat;
-        mask-position: center;
-        mask-size: contain;
-        content: "";
-        display: inline-block;
         width: 1rem;
         height: 1rem;
-        margin-bottom: 2px;
+      }
+      ion-icon {
+        &[name=man-outline]:before {
+          -webkit-mask-image: url('/assets/icons/home/enseignant.svg');
+          mask-image: url('/assets/icons/home/enseignant.svg');
+          width: 1.125rem;
+          height: 1.125rem;
+        }
+
+        &[name=business-outline]:before {
+          -webkit-mask-image: url('/assets/icons/home/batiment.svg');
+          mask-image: url('/assets/icons/home/batiment.svg');
+        }
+
+        &[name=link-outline]:before {
+          -webkit-mask-image: url('/assets/icons/home/lien.svg');
+          mask-image: url('/assets/icons/home/lien.svg');
+          width: 1.125rem;
+          height: 1.125rem;
+        }
+
+        &[name=calendar-outline]:before {
+          -webkit-mask-image: url('/assets/icons/home/date.svg');
+          mask-image: url('/assets/icons/home/date.svg');
+          margin-bottom: 4px;
+          margin-left: 1px;
+        }
       }
     }
 

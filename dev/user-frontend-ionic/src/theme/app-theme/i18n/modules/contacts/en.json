@@ -2,13 +2,13 @@
     "CONTACT_TYPES": {
         "STUDENT": "Student",
         "STAFF": "Personel",
-        "STANDIN": "Temporary Staff."
+        "STANDIN": "Teacher or stand-in"
     },
     "SEARCH": "Search",
     "CANCEL": "Cancel",
     "RESULTS": "result(s)",
-    "PLACEHOLDER": "Last Name/First Name/Phone",
-    "SEARCHBAR_MESSAGE": "Search someone by name or phone number",
+    "PLACEHOLDER": "Search here",
+    "SEARCHBAR_MESSAGE": "Search someone by name",
     "ALERT": {
         "ERROR":  {
             "HEADER": "Error",

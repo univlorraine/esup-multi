@@ -3,57 +3,51 @@
   "CLOSE": "Fermer",
   "FINISH": "Terminer",
   "ANONYMOUS": {
-    "STEP_10": {
+    "STEP_10" : {
       "MESSAGE": "Bienvenue sur la nouvelle version de votre application mobile."
     },
-    "STEP_20": {
+    "STEP_20" : {
       "MESSAGE": "Une nouvelle ergonomie vous permet de naviguer dans les services qu’elle propose..."
     },
-    "STEP_30": {
+    "STEP_30" : {
       "MESSAGE": "…mais avant d’aller plus loin, vous êtes invité à vous authentifier."
     }
   },
   "LOGGED": {
-    "STEP_10": {
+    "STEP_10" : {
       "MESSAGE": "Vous êtes désormais authentifié et vous allez pouvoir accéder à des informations personnalisées."
     },
-    "STEP_20": {
-      "MESSAGE": "Cet écran vous propose un accès direct et rapide à vos informations immédiates : prochains cours, rendez-vous, nombre d’e-mails à lire."
+    "STEP_20" : {
+      "MESSAGE": "Cet écran vous propose un accès direct et rapide à vos informations immédiates : prochains cours, rendez-vous, événements de l'Université, ..."
     },
-    "STEP_30": {
+    "STEP_30" : {
       "MESSAGE": "Vous retrouverez ici vos notifications…"
     },
-    "STEP_40": {
+    "STEP_40" : {
       "MESSAGE": "… et ici les actualités de l'établissement"
     },
-    "STEP_50": {
+    "STEP_50" : {
       "MESSAGE": "Cet écran vous propose l’ensemble des services disponibles dans l’application."
     },
-    "STEP_60": {
+    "STEP_60" : {
       "MESSAGE": "Vous pouvez trier les services comme vous le souhaitez par un appui long sur l’icône."
     },
-    "STEP_70": {
+    "STEP_70" : {
       "MESSAGE": "Vous pouvez également filtrer les services grâce à une recherche."
     },
-    "STEP_80": {
-      "MESSAGE": "Vous trouverez ici une version dématérialisée de vos cartes d'étudiant ou de personnel."
-    },
-    "STEP_90": {
-      "MESSAGE": "Le chatbot se chargera de répondre à vos questions concernant votre compte informatique, votre connexion ou votre emploi du temps."
-    },
-    "STEP_100": {
+    "STEP_80" : {
       "MESSAGE": "Enfin ce menu vous permettra d’accéder aux paramètres de l’application…"
     },
-    "STEP_110": {
+    "STEP_90" : {
       "MESSAGE": "…il vous propose également des informations complémentaires."
     },
-    "STEP_120": {
+    "STEP_100" : {
       "MESSAGE": "Vous avez la possibilité de changer le thème sombre/clair et la langue."
     },
-    "STEP_130": {
+    "STEP_110" : {
       "MESSAGE": "Vous pouvez gérer vos paramètres de connexion."
     },
-    "STEP_140": {
+    "STEP_120" : {
       "MESSAGE": "Enfin ces menus vous permettront de signaler un dysfonctionnement ou demander de l’aide."
     }
   }

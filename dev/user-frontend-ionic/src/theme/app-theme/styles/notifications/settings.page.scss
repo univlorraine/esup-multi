@@ -121,3 +121,27 @@ ion-toggle::part(track) {
   /* Required for iOS handle to overflow the height of the track */
   overflow: visible;
 }
+
+//Style custom URCA
+ion-toggle::part(track){
+  border-radius: var(--app-square-button-1-border-radius) !important;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.10);
+  border: none !important;
+  height: 1.5rem;
+}
+ion-toggle[aria-checked=false]::part(track){
+  background-color: var(--ion-color-highlight);
+}
+ion-toggle.toggle-checked::part(track){
+  background-color: var(--ion-color-tertiary);
+}
+ion-toggle::part(handle){
+  --handle-border-radius: var(--app-square-button-1-border-radius) !important;
+  background-color: var(--app-font-color-primary-contrast);
+  width: 0.9rem;
+  height: 0.9rem;
+  border: none !important;
+}
+ion-toggle:not(.toggle-checked)::part(handle){
+  margin-left: 5px;
+}

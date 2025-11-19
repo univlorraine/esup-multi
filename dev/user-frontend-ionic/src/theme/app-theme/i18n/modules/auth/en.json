@@ -12,7 +12,7 @@
             "USERNAME": "Username required",
             "PASSWORD": "Password required"
         },
-        "SAVE_CREDENTIALS": "Save credentials"
+        "SAVE_CREDENTIALS": "Stay connected"
     },
     "CONNECTED": {
         "HELLO": "Hello",

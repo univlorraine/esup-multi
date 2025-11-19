@@ -91,6 +91,10 @@ h5 {
   padding-bottom: 0.4rem;
 }
 
+.swiper-slide {
+  min-height: calc(100vh - 44px);
+}
+
 .hide-other-slides {
   display: none;
 }
@@ -116,32 +120,24 @@ h5 {
 }
 
 .swiper-button-next {
+  margin-right: .5rem;
   @supports (padding-right: env(safe-area-inset-right)) {
     padding-right: env(safe-area-inset-right)
   }
 }
 
 .swiper-button-prev {
+  margin-left: .5rem;
   @supports (padding-left: env(safe-area-inset-left)) {
     padding-left: env(safe-area-inset-left)
   }
 }
 
 // Custom URCA style to fit webdesign
-ion-card.swiper-slide:first-child ion-card-header ion-text::before {
-  content: "";
-  display: block;
-  position: absolute;
-  bottom: 0.3rem;
-  width: 100%;
-  height: 0.6rem;
-  background-color: var(--app-color-underline-title);
-  z-index: -1;
-}
-
 ion-card-header {
   ion-text {
     color: var(--app-font-color-primary) !important;
+    font-size: var(--app-title-4-size) !important;
     text-transform: none;
     position: relative;
     width: fit-content;
@@ -153,6 +149,8 @@ ion-card-content {
   margin: 0 2rem;
 
   ion-list {
+    background-color: var(--app-color-background);
+
     &:not(:last-child) {
       border-bottom: 1px solid var(--ion-color-highlight);
     }
@@ -165,21 +163,25 @@ ion-card-content {
     .meal-name ion-text {
       color: var(--app-font-color-primary) !important;
       text-transform: capitalize;
+      font-size: var(--app-title-5-size) !important;
     }
 
-    ion-item ion-label {
-      h5 {
-        text-transform: initial;
-        color: var(--app-font-color-secondary) !important;
-      }
+    ion-item {
+      --background: var(--app-color-background);
 
-      p {
-        color: var(--app-font-color-primary) !important;
-      }
+      ion-label {
+        h5 {
+          text-transform: initial;
+          color: var(--app-font-color-secondary) !important;
+        }
 
-      p, h5 {
-        text-align: left !important;
+        p {
+          color: var(--app-font-color-primary) !important;
+        }
 
+        p, h5 {
+          text-align: left !important;
+        }
       }
     }
   }

@@ -2,13 +2,13 @@
     "CONTACT_TYPES": {
         "STUDENT": "Etudiant",
         "STAFF": "Personnel",
-        "STANDIN": "Personnel Vacataire"
+        "STANDIN": "Enseignant et vacataire"
     },
     "SEARCH": "Rechercher",
     "CANCEL": "Annuler",
     "RESULTS": "résultat(s)",
-    "PLACEHOLDER": "Nom/Prénom/Téléphone",
-    "SEARCHBAR_MESSAGE": "Rechercher quelqu'un par nom, prénom ou numéro de téléphone",
+    "PLACEHOLDER": "Rechercher ici",
+    "SEARCHBAR_MESSAGE": "Rechercher quelqu'un par nom et/ou prénom",
     "ALERT": {
         "ERROR": {
             "HEADER": "Erreur",

@@ -1,6 +1,27 @@
 //Style for the user name and subtitle
+.menu-section{
+  padding: 0;
+}
 .multi-auth-widget {
-  margin-top: 2.38rem;
+  margin-top: 3.38rem;
+  ion-col {
+    width: 100%;
+    display: block;
+    padding: 0;
+    margin: 1.113rem 0;
+
+    &::before {
+      content: "";
+      display: block;
+      position: absolute;
+      top: .7rem;
+      width: 100%;
+      width: -moz-available;
+      height: 0.31rem;
+      background-color: var(--ion-color-quaternary);
+      z-index: -1;
+    }
+  }
 
   ion-label {
     display: flex;
@@ -13,6 +34,8 @@
       text-transform: none;
       font-size: var(--app-title-4-size) !important;
       font-family: QuicksandBold, serif !important;
+      padding: 0 .6rem;
+      background: var(--app-color-background) !important;
 
       &::before {
         content: "";
@@ -28,17 +51,6 @@
         mask-size: contain;
         width: 1.875rem;
         height: 1.875rem;
-      }
-
-      &::after {
-        content: "";
-        display: block;
-        position: absolute;
-        bottom: 0.3rem;
-        width: 100%;
-        height: 0.6rem;
-        background-color: var(--app-color-underline-title);
-        z-index: -1;
       }
     }
 
@@ -76,6 +88,23 @@ ion-list.menu-section {
     --detail-icon-color: var(--app-font-fix-dark-color) !important;
     --detail-icon-opacity: 1;
   }
+  //Change contact-us icon
+  ion-icon[name="mail-outline"]{
+    &::before {
+      background-color: var(--app-font-color-primary);
+      -webkit-mask-image: url('/assets/icons/contacts/email.svg');
+      mask-image: url('/assets/icons/contacts/email.svg');
+      mask-repeat: no-repeat;
+      mask-position: center;
+      mask-size: contain;
+      content: "";
+      display: inline-block;
+      width: 1.125rem;
+      height: 1.125rem;
+      margin-bottom: 3px;
+      padding-right: 0;
+    }
+  }
 }
 
 //Style for the social networks icons
@@ -87,7 +116,6 @@ app-widget > lib-social-network ion-row.socialNetworks.hydrated {
   padding-top: 1.5rem;
 
   &::before {
-    content: "Suivez-nous";
     display: block;
     position: absolute;
     left: 50%;
@@ -102,9 +130,50 @@ app-widget > lib-social-network ion-row.socialNetworks.hydrated {
     border-radius: 5rem;
     padding: 0.3rem;
   }
+  //Add custom icons for Bluesky and Instagram
+  button[aria-label="Bluesky"], button[aria-label="Instagram"] {
+    ion-icon{
+      opacity: 0;
+    }
+    &:after {
+      -webkit-mask-size: contain;
+      mask-size: contain;
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+      mask-position: center;
+      color: var(--ion-color-tertiary);
+      background-color: var(--ion-color-tertiary);
+      content: "";
+      position: absolute;
+      z-index: 1;
+      margin-left: -25px;
+      margin-top: 5px;
+      height: 20px;
+      width: 20px;
+    }
+  }
+  button[aria-label="Bluesky"]{
+    &:after {
+      -webkit-mask-image: url("/assets/icons/social-network/bluesky.svg");
+      mask-image: url("/assets/icons/social-network/bluesky.svg");
+    }
+  }
+  button[aria-label="Instagram"]{
+    &:after {
+      -webkit-mask-image: url("/assets/icons/social-network/instagram.svg");
+      mask-image: url("/assets/icons/social-network/instagram.svg");
+    }
+  }
+}
+html[lang="fr"] app-widget > lib-social-network ion-row.socialNetworks.hydrated:before{
+  content: "Suivez-nous";
+}
+html[lang="en"] app-widget > lib-social-network ion-row.socialNetworks.hydrated:before{
+  content: "Follow us";
 }
 
-//Style for parameters page footer
+  //Style for parameters page footer
 div.menu-footer {
   display: flex;
   flex-direction: row;
@@ -122,6 +191,7 @@ div.menu-footer {
       height: 1.5rem;
       min-height: 1.5rem;
       width: 1.5rem;
+      min-width: 1.5rem;
 
       ion-icon {
         height: 1.25rem;
@@ -153,6 +223,25 @@ div.menu-footer {
   }
 }
 
+//Login page style
+app-login {
+  .error-text {
+    margin-bottom: 10px;
+  }
+  ul{
+    list-style-type: none;
+  }
+}
+
+//Contact-us page style
+app-contact-us{
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  min-height: 100vh;
+}
+
 //Dark mode style
 body.dark {
   ion-list.menu-section ion-item::part(detail-icon) {
@@ -163,5 +252,9 @@ body.dark {
   }
   div.menu-footer ion-row:first-child .app-round-button-1 {
     border: solid 2px var(--ion-text-color) !important;
+  }
+  app-widget > lib-social-network ion-row.socialNetworks.hydrated button[aria-label=Bluesky]:after, app-widget > lib-social-network ion-row.socialNetworks.hydrated button[aria-label=Instagram]:after{
+    color: var(--ion-text-color);
+    background-color: var(--ion-text-color);
   }
 }

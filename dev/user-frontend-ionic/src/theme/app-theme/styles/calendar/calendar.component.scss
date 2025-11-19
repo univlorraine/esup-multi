@@ -111,23 +111,23 @@
   ion-card.slider-theme-color {
     box-shadow: var(--app-border-no-box-shadow);
     //border: var(--app-border-width-7) solid var(--app-border-color-primary);
-    background-color: var(--ion-color-tertiary);
+    background-color: var(--app-color-background-header-footer);
   }
 
   ion-card-content {
-    padding: 0.7rem 0;
+    padding: .7rem 0 2rem 0;
     height: 100%;
     display: flex;
     flex-direction: column;
   }
 
   .events-container {
-    padding: .5rem 0 0;
+    padding: .5rem 0;
     display: grid;
-    gap: 1rem;
+    gap: 1.2rem;
     grid-auto-flow: column;
-    grid-template-columns: 10px;
-    grid-auto-columns: 85%;
+    grid-template-columns: 0;
+    grid-auto-columns: 18rem;
     overflow-x: auto;
     scrollbar-width: none;
     scroll-snap-type: x mandatory;
@@ -146,11 +146,9 @@
     .event-day-hour {
       display: flex;
       flex-direction: row;
-      border-left-width: 4px;
-      border-left-style: solid;
       align-items: center;
+      align-self: center;
       flex-wrap: nowrap;
-      border-color: var(--ion-color-secondary);
 
       .hour {
         padding-left: 1rem;
@@ -158,7 +156,6 @@
       }
 
       .day {
-        padding-left: 1rem;
         display: block;
 
         ion-text {
@@ -178,7 +175,6 @@
 
   .event-label {
     padding: 1rem 1rem 0;
-    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
@@ -197,7 +193,7 @@
   }
 
   .slider-font-color{
-    color: var(--app-font-fix-light-color) !important;
+    color: var(--app-font-color-primary) !important;
   }
 
   .light-font-color{

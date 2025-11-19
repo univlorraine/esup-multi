@@ -216,8 +216,8 @@ export const loggedSteps= (router: Router, translateService: TranslateService, o
   {
     id: 'logged-step-80',
     attachTo: {
-      element: '[data-menu-id="cards"]',
-      on: 'top'
+      element: '[data-menu-id="menu"]',
+      on: 'top-start'
     },
     buttons: [
       {
@@ -241,10 +241,7 @@ export const loggedSteps= (router: Router, translateService: TranslateService, o
   },
   {
     id: 'logged-step-90',
-    attachTo: {
-      element: '[data-menu-id="chatbot"]',
-      on: 'top-start'
-    },
+    beforeShowPromise: () => router.navigate(['/menu']),
     buttons: [
       {
         classes: 'shepherd-button-secondary',
@@ -262,14 +259,13 @@ export const loggedSteps= (router: Router, translateService: TranslateService, o
         }
       }
     ],
-    text: `${translateService.instant('GUIDED-TOUR.LOGGED.STEP_90.MESSAGE')}
-        <br/> <img class="shepherd-image" src="assets/guided-tour/logged-guided-tour-step-90.png">`,
+    text: `${translateService.instant('GUIDED-TOUR.LOGGED.STEP_90.MESSAGE')}`,
   },
   {
     id: 'logged-step-100',
     attachTo: {
-      element: '[data-menu-id="menu"]',
-      on: 'top-start'
+      element: '[data-burger-id="menu-footer"]',
+      on: 'top'
     },
     buttons: [
       {
@@ -288,12 +284,14 @@ export const loggedSteps= (router: Router, translateService: TranslateService, o
         }
       }
     ],
-    text: `${translateService.instant('GUIDED-TOUR.LOGGED.STEP_100.MESSAGE')}
-        <br/> <img class="shepherd-image" src="assets/guided-tour/logged-guided-tour-step-100.png">`,
+    text: `${translateService.instant('GUIDED-TOUR.LOGGED.STEP_100.MESSAGE')}`,
   },
   {
     id: 'logged-step-110',
-    beforeShowPromise: () => router.navigate(['/menu']),
+    attachTo: {
+      element: '[data-burger-id="preferences-menu"]',
+      on: 'top'
+    },
     buttons: [
       {
         classes: 'shepherd-button-secondary',
@@ -316,56 +314,6 @@ export const loggedSteps= (router: Router, translateService: TranslateService, o
   {
     id: 'logged-step-120',
     attachTo: {
-      element: '[data-burger-id="menu-footer"]',
-      on: 'top'
-    },
-    buttons: [
-      {
-        classes: 'shepherd-button-secondary',
-        text: translateService.instant('GUIDED-TOUR.CLOSE'),
-        action() {
-          onComplete();
-          return this.complete();
-        }
-      },
-      {
-        classes: 'shepherd-button-primary',
-        text: translateService.instant('GUIDED-TOUR.NEXT'),
-        action() {
-          this.next();
-        }
-      }
-    ],
-    text: `${translateService.instant('GUIDED-TOUR.LOGGED.STEP_120.MESSAGE')}`,
-  },
-  {
-    id: 'logged-step-130',
-    attachTo: {
-      element: '[data-burger-id="preferences-menu"]',
-      on: 'top'
-    },
-    buttons: [
-      {
-        classes: 'shepherd-button-secondary',
-        text: translateService.instant('GUIDED-TOUR.CLOSE'),
-        action() {
-          onComplete();
-          return this.complete();
-        }
-      },
-      {
-        classes: 'shepherd-button-primary',
-        text: translateService.instant('GUIDED-TOUR.NEXT'),
-        action() {
-          this.next();
-        }
-      }
-    ],
-    text: `${translateService.instant('GUIDED-TOUR.LOGGED.STEP_130.MESSAGE')}`,
-  },
-  {
-    id: 'logged-step-140',
-    attachTo: {
       element: '[data-burger-id="menu-help"]',
       on: 'top'
     },
@@ -379,6 +327,6 @@ export const loggedSteps= (router: Router, translateService: TranslateService, o
         }
       }
     ],
-    text: `${translateService.instant('GUIDED-TOUR.LOGGED.STEP_140.MESSAGE')}`,
+    text: `${translateService.instant('GUIDED-TOUR.LOGGED.STEP_120.MESSAGE')}`,
   },
 ];

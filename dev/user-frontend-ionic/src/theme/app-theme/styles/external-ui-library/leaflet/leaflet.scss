@@ -40,3 +40,18 @@
 .leaflet-popup-content-wrapper, .leaflet-popup-tip {
   background: var(--app-color-component-background-primary);
 }
+
+.leaflet-popup-content {
+  margin-top: 24px;
+  div {
+    font-size: var(--app-text-4-size)!important;
+  }
+}
+.leaflet-container a.leaflet-popup-close-button{
+  width: 30px;
+  height: 30px;
+  margin: 5px;
+  span{
+    font-size: 30px;
+  }
+}

@@ -128,6 +128,7 @@ full-calendar {
 
     .courseLabel {
       font-family: QuicksandBold, sans-serif !important;
+      font-size: var(--app-text-4-size) !important;
     }
   }
 }
@@ -195,9 +196,9 @@ full-calendar:has(.fc-dayGridMonth-view) {
   }
 
   .fc-daygrid-day-number {
-    width: 1.75rem;
+    width: 1.8rem;
     text-align: center;
-    height: 1.75rem;
+    height: 1.8rem;
     padding-top: 0.2rem;
     font-size: var(--app-text-4-size);
   }
@@ -205,16 +206,22 @@ full-calendar:has(.fc-dayGridMonth-view) {
   td.fc-day-today .fc-daygrid-day-number {
     border: solid var(--ion-color-secondary) 2px;
     border-radius: var(--app-border-radius-5);
+    font-size: calc(var(--app-text-4-size) - 2px);
   }
 
   .fc-daygrid-day {
     border: none !important;
   }
+
+  .fc-h-event{
+    border: none !important;
+    background: transparent!important;
+  }
 }
 
 //Modal with event details
 ion-app:has(app-schedule-list.ion-page-hidden) ion-modal:has(app-event-detail) {
-  --height: calc(40% - (var(--ion-safe-area-top) + 10px));
+  --height: calc(43% - (var(--ion-safe-area-top) + 10px));
 
   &::part(content) {
     border-radius: var(--app-border-radius-5) var(--app-border-radius-5) 0 0;

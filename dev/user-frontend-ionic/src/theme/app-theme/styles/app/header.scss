@@ -62,9 +62,21 @@
 }
 
 ion-header[role="banner"] ion-toolbar {
-  height: 4.6rem;
+  //height: 4.6rem;
   --background: var(--app-color-background-header-footer);
 }
+
+.ios ion-header[role="banner"] ion-toolbar {
+  --padding-start: 0px !important;
+  --padding-end: 0px !important;
+  --padding-top: 0px !important;
+  --padding-bottom: 0px !important;
+}
+
+.ios ion-header[role="banner"] ion-toolbar .toolbar-container {
+  padding: 0 !important;
+}
+
 
 ion-header[role="banner"] {
   z-index: 0;

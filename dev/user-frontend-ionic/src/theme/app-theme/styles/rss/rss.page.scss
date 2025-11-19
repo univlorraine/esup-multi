@@ -86,6 +86,7 @@ ion-card {
     @media only screen and (min-width: 500px){
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-auto-rows: max-content;
     }
     @media only screen and (min-width: 1000px){
       display: grid;
@@ -123,7 +124,7 @@ ion-card {
         --background: transparent;
         color: var(--app-font-color-secondary);
         text-transform: none;
-        font-size: var(--app-text-5-size);
+        font-size: var(--app-text-4-size);
         font-family: QuickSandBold, sans-serif;
         --box-shadow: none;
         width: auto;
@@ -137,7 +138,7 @@ ion-card {
       bottom: 0.25rem;
       padding: 0.5rem;
       color: var(--app-font-color-primary);
-      font-size: var(--app-text-5-size);
+      font-size: var(--app-text-4-size);
       transition: visibility 0.5s ease-in-out, opacity 0.5s ease-in-out;
       visibility: visible;
       opacity: 1;

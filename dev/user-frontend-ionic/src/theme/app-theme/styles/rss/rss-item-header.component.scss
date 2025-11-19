@@ -44,11 +44,11 @@ ion-card-header.rss-news-header-vertically-style {
     .title {
       display: flex;
       align-items: flex-start;
-      margin: .44rem;
+      margin: .6rem;
       @media only screen and (max-width: 311px), (min-width: 500px) {
         height: 100%;
         margin: 0 1.31rem;
-        padding-bottom: 2.5rem;
+        padding-bottom: .5rem;
       }
 
       h2 {
@@ -81,7 +81,7 @@ ion-card-header.rss-news-header-vertically-style {
       height: auto;
     }
     img {
-      border-radius: var(--app-border-radius-5);
+      border-radius: 0.938rem;
       height: 100%;
       width: 100%;
       object-fit: cover;
