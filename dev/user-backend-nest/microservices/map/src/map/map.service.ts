@@ -47,7 +47,6 @@ import {
 import { HttpService } from '@nestjs/axios';
 import { RpcException } from '@nestjs/microservices';
 import {
-  CampusDto,
   MapDataAdditionalProviderDto,
   MapDataGraphQLDto,
   MapDataGraphQLResponse,
