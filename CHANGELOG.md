@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.x.x (yyyy-mm-dd)
+### Client
+#### New features
+* **(map)** : Ajout de la notion de *campus* pour naviguer entre plusieurs ensembles de points d'intérêts (POI) sur la carte.
+
+### Backend
+#### New features
+* **(map)** : Les données sont désormais chargées depuis le CMS. Un provider additionnel peut être branché au microservice pour récupérer également les données depuis un second système.
+
 ## 2.1.0 (2025-10-16)
 
 ### Client

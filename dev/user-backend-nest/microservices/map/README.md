@@ -1,7 +1,7 @@
 # Backend utilisateur - Module map
 
 Ce module est en charge de remonter des points d'intérêts géolocalisés en provenance du CMS.
-De manière additionnelle, un second provider peut être fournit (voir https://www.esup-portail.org/wiki/x/BgDhV).
+De manière additionnelle, un second provider peut être fourni (voir https://www.esup-portail.org/wiki/x/BgDhV).
 
 ## Configuration
 - `MAP_SERVICE_HOST`: L'hôte d'écoute pour le monitoring du service

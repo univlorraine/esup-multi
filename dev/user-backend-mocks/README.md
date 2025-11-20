@@ -88,11 +88,9 @@ MAIL_CALENDAR_SERVICE_UL_API_URL=http://localhost:3099/mocking/mail-calendar
 Relancer le service `mail-calendar` pour prendre en compte les nouvelles variables.
 
 ### Microservice map
-
 Remplacer les variables dans le fichier `microservices/map/.env` par les suivantes :
-
 ```
-MAP_SERVICE_PROVIDER_API_URL=http://localhost:3099/mocking/map
+MAP_SERVICE_ADDITIONAL_PROVIDER_API_URL=http://localhost:3099/mocking/map
 ```
 
 ### Microservice notifications
