@@ -70,3 +70,27 @@ ion-item {
 .chip-item {
   background-color: transparent;
 }
+
+
+// Style for clustering markers
+::ng-deep{
+  .marker-cluster-small, .marker-cluster-medium, .marker-cluster-large {
+    background-color: color-mix(in srgb, var(--ion-color-primary) 60%, transparent);
+  }
+  .marker-cluster-small div, .marker-cluster-medium div, .marker-cluster-large div {
+    background-color: color-mix(in srgb, var(--ion-color-primary) 60%, transparent);
+  }
+  .leaflet-oldie .marker-cluster-small, .leaflet-oldie .marker-cluster-medium, .leaflet-oldie .marker-cluster-large {
+    background-color: var(--ion-color-primary);
+  }
+  .leaflet-oldie .marker-cluster-small div, .leaflet-oldie .marker-cluster-medium div, .leaflet-oldie .marker-cluster-large div {
+    background-color: var(--ion-color-primary);
+  }
+  .marker-cluster span {
+    font-family: var(--app-font-primary-static-bold), sans-serif;
+    color: var(--app-font-fix-light-color);
+    font-size: 1rem;
+    font-weight: 600;
+    text-shadow: 0 0 1px var(--app-font-fix-light-color);
+  }
+}
