@@ -46,6 +46,7 @@ import Swiper from 'swiper';
 import { getRestaurantById, Restaurant } from '../restaurants.repository';
 import { getMenusByRestaurantId, Menu } from './menus.repository';
 import { RestaurantMenusService } from './restaurant-menus.service';
+import { IonRouterOutlet } from '@ionic/angular';
 
 @Component({
   selector: 'app-restaurant-menus',
@@ -67,6 +68,7 @@ export class RestaurantMenusPage implements OnInit, AfterViewChecked {
     private activatedRoute: ActivatedRoute,
     private restaurantMenusService: RestaurantMenusService,
     private networkService: NetworkService,
+    private routerOutlet: IonRouterOutlet,
   ) { }
 
   ngOnInit() {
@@ -78,6 +80,11 @@ export class RestaurantMenusPage implements OnInit, AfterViewChecked {
     );
 
     this.loadMenusIfNetworkAvailable();
+    this.routerOutlet.swipeGesture = false;
+  }
+
+  ngOnDestroy(){
+    this.routerOutlet.swipeGesture = true;
   }
 
   async loadMenusIfNetworkAvailable() {
