@@ -71,47 +71,47 @@ export class KnowledgeBaseWordpress {
   databaseId: number;
 
   @Field()
-  informationTitle: string;
+  knowledgeBaseTitle: string;
 
   @Field()
-  informationContent: string;
+  knowledgeBaseContent: string;
 
   @Field()
-  informationSearchKeywords: string;
+  knowledgeBaseSearchKeywords: string;
 
   @Field()
-  informationType: 'content' | 'internal_link' | 'external_link';
+  knowledgeBaseType: 'content' | 'internal_link' | 'external_link';
 
   @Field()
-  informationChildDisplay: 'card' | 'list';
+  knowledgeBaseChildDisplay: 'card' | 'list';
 
   @Field()
-  informationLink: string;
+  knowledgeBaseLink: string;
 
   @Field()
-  informationPosition: number;
+  knowledgeBasePosition: number;
 
   @Field()
-  informationAccessRestriction: 'ALLOW' | 'DISALLOW' | 'NONE';
+  knowledgeBaseAccessRestriction: 'ALLOW' | 'DISALLOW' | 'NONE';
 
   @Field(() => KnowledgeBaseRolesWordpress)
-  informationRoles: KnowledgeBaseRolesWordpress;
+  knowledgeBaseRoles: KnowledgeBaseRolesWordpress;
 
   @Field(() => [KnowledgeBaseTranslationsWordpress])
   translations: KnowledgeBaseTranslationsWordpress[];
 
   @Field(() => KnowledgeBaseParentNodeWordpress, { nullable: true })
-  informationParent: KnowledgeBaseParentNodeWordpress | null;
+  knowledgeBaseParent: KnowledgeBaseParentNodeWordpress | null;
 
   @Field(() => KnowledgeBaseImageNodeWordpress, { nullable: true })
-  informationCoverImage: KnowledgeBaseImageNodeWordpress | null;
+  knowledgeBaseCoverImage: KnowledgeBaseImageNodeWordpress | null;
 
   @Field()
-  informationPhone: string;
+  knowledgeBasePhone: string;
 
   @Field()
-  informationAddress: string;
+  knowledgeBaseAddress: string;
 
   @Field()
-  informationEmail: string;
+  knowledgeBaseEmail: string;
 }

@@ -85,12 +85,12 @@ export class KnowledgeBaseWordpressService {
   ): KnowledgeBase {
     const frTranslation: KnowledgeBaseTranslations = {
       languagesCode: FRENCH_CODE.toLowerCase(),
-      title: knowledgeBase.informationTitle,
-      content: knowledgeBase.informationContent,
+      title: knowledgeBase.knowledgeBaseTitle,
+      content: knowledgeBase.knowledgeBaseContent,
       searchKeywords:
-        knowledgeBase.informationSearchKeywords &&
-        knowledgeBase.informationSearchKeywords?.trim() !== ''
-          ? knowledgeBase.informationSearchKeywords
+        knowledgeBase.knowledgeBaseSearchKeywords &&
+        knowledgeBase.knowledgeBaseSearchKeywords?.trim() !== ''
+          ? knowledgeBase.knowledgeBaseSearchKeywords
               .split(',')
               .filter((keyword) => keyword.trim() !== '')
           : null,
@@ -101,12 +101,12 @@ export class KnowledgeBaseWordpressService {
       ...(knowledgeBase.translations?.map(
         (translation: KnowledgeBaseTranslationsWordpress) => ({
           languagesCode: translation.language.code.toLowerCase(),
-          title: translation.informationTitle,
-          content: translation.informationContent,
+          title: translation.knowledgeBaseTitle,
+          content: translation.knowledgeBaseContent,
           searchKeywords:
-            translation.informationSearchKeywords &&
-            translation.informationSearchKeywords?.trim() !== ''
-              ? translation.informationSearchKeywords
+            translation.knowledgeBaseSearchKeywords &&
+            translation.knowledgeBaseSearchKeywords?.trim() !== ''
+              ? translation.knowledgeBaseSearchKeywords
                   .split(',')
                   .filter((keyword) => keyword.trim() !== '')
               : null,
@@ -115,33 +115,33 @@ export class KnowledgeBaseWordpressService {
     ];
 
     const roles =
-      knowledgeBase.informationRoles?.nodes.length > 0
-        ? knowledgeBase.informationRoles.nodes.map((role) => role.roleCode)
+      knowledgeBase.knowledgeBaseRoles?.nodes.length > 0
+        ? knowledgeBase.knowledgeBaseRoles.nodes.map((role) => role.roleCode)
         : [];
 
     return {
       id: knowledgeBase.databaseId.toString(),
-      type: knowledgeBase.informationType,
-      childDisplay: knowledgeBase.informationChildDisplay || null,
-      link: normalizeEmptyStringToNull(knowledgeBase.informationLink),
-      position: knowledgeBase.informationPosition || 0,
+      type: knowledgeBase.knowledgeBaseType,
+      childDisplay: knowledgeBase.knowledgeBaseChildDisplay || null,
+      link: normalizeEmptyStringToNull(knowledgeBase.knowledgeBaseLink),
+      position: knowledgeBase.knowledgeBasePosition || 0,
       authorization:
-        knowledgeBase.informationAccessRestriction &&
-        knowledgeBase.informationAccessRestriction !== 'NONE'
+        knowledgeBase.knowledgeBaseAccessRestriction &&
+        knowledgeBase.knowledgeBaseAccessRestriction !== 'NONE'
           ? {
-              type: knowledgeBase.informationAccessRestriction,
+              type: knowledgeBase.knowledgeBaseAccessRestriction,
               roles,
             }
           : null,
       translations,
       parentId:
-        knowledgeBase.informationParent?.node?.databaseId?.toString() || null,
+        knowledgeBase.knowledgeBaseParent?.node?.databaseId?.toString() || null,
       coverImage: normalizeEmptyStringToNull(
-        knowledgeBase.informationCoverImage?.node.mediaItemUrl.toString(),
+        knowledgeBase.knowledgeBaseCoverImage?.node.mediaItemUrl.toString(),
       ),
-      phone: normalizeEmptyStringToNull(knowledgeBase.informationPhone),
-      address: normalizeEmptyStringToNull(knowledgeBase.informationAddress),
-      email: normalizeEmptyStringToNull(knowledgeBase.informationEmail),
+      phone: normalizeEmptyStringToNull(knowledgeBase.knowledgeBasePhone),
+      address: normalizeEmptyStringToNull(knowledgeBase.knowledgeBaseAddress),
+      email: normalizeEmptyStringToNull(knowledgeBase.knowledgeBaseEmail),
     };
   }
 
@@ -159,25 +159,25 @@ export class KnowledgeBaseWordpressService {
         knowledgeBases(first: 100, where: {language: ${FRENCH_CODE}}) {
           nodes {
             databaseId
-            informationTitle
-            informationContent
-            informationType
-            informationChildDisplay
-            informationLink
-            informationPosition
-            informationAccessRestriction
-            informationRoles(first: 100) {
+            knowledgeBaseTitle
+            knowledgeBaseContent
+            knowledgeBaseType
+            knowledgeBaseChildDisplay
+            knowledgeBaseLink
+            knowledgeBasePosition
+            knowledgeBaseAccessRestriction
+            knowledgeBaseRoles(first: 100) {
               nodes {
                 databaseId
                 roleCode
                 roleDescription
               }
             }
-            informationSearchKeywords
-            informationPhone
-            informationAddress
-            informationEmail
-            informationCoverImage {
+            knowledgeBaseSearchKeywords
+            knowledgeBasePhone
+            knowledgeBaseAddress
+            knowledgeBaseEmail
+            knowledgeBaseCoverImage {
              node {
                 databaseId
                 sourceUrl
@@ -185,11 +185,11 @@ export class KnowledgeBaseWordpressService {
                 altText
               }
             } 
-            informationParent {
+            knowledgeBaseParent {
               node {
                 databaseId
-                informationAccessRestriction
-                informationRoles(first: 100) {
+                knowledgeBaseAccessRestriction
+                knowledgeBaseRoles(first: 100) {
                   nodes {
                     databaseId
                     roleCode
@@ -205,9 +205,9 @@ export class KnowledgeBaseWordpressService {
                 name
                 locale
               }
-              informationTitle
-              informationContent
-              informationSearchKeywords
+              knowledgeBaseTitle
+              knowledgeBaseContent
+              knowledgeBaseSearchKeywords
             }
           }
         }

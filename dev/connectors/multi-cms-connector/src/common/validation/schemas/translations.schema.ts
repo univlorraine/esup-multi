@@ -99,11 +99,11 @@ export const WidgetsTranslationsSchema = BaseTranslationsSchema.extend({
 });
 
 export const KnowledgeBaseTranslationsSchema = BaseTranslationsSchema.extend({
-  title: z.string().min(1, 'Information title cannot be empty string'),
+  title: z.string().min(1, 'Knowledge-base title cannot be empty string'),
   content: z.string().nullable(),
   searchKeywords: z
     .array(
-      z.string().min(1, 'Information search keywords cannot be empty array'),
+      z.string().min(1, 'Knowledge-base search keywords cannot be empty array'),
     )
     .nullable(),
 });
