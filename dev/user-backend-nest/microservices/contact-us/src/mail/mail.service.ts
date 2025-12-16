@@ -75,6 +75,7 @@ export class MailService {
         return this.mailerService.sendMail({
           ...query,
           to,
+          from: this.configService.get<string>('mail.sender'),
         });
       }),
     );

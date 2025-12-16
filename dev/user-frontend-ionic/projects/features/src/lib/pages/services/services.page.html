@@ -104,7 +104,7 @@
         ></app-service>
       </div>
     </div>
-    <ion-grid *ngIf="menuItems.length === 0 && searchBarValue.length >= 3" class="ion-text-center">
+    <ion-grid *ngIf="menuItems.length === 0 && (searchQuery$ | async).trim().length > 0" class="ion-text-center">
       <ion-row justify-content-center align-items-center>
         <ion-col size="12">
           <ion-icon name="search-outline" size="large" color="light"></ion-icon>

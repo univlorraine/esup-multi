@@ -37,8 +37,7 @@
  * termes.
  */
 
-import { CacheInterceptor, CacheKey } from '@nestjs/cache-manager';
-import { Controller, UseInterceptors } from '@nestjs/common';
+import { Controller } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
 import { Observable } from 'rxjs';
 import { ImportantNewsDto } from './important-news.dto';
@@ -49,8 +48,6 @@ export class ImportantNewsController {
   constructor(private readonly importantNewsService: ImportantNewsService) {}
 
   @MessagePattern({ cmd: 'important-news' })
-  @CacheKey('important-news')
-  @UseInterceptors(CacheInterceptor)
   getImportantNews(): Observable<ImportantNewsDto[]> {
     return this.importantNewsService.getImportantNews();
   }

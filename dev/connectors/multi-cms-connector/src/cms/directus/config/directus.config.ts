@@ -39,7 +39,8 @@
 export default () => ({
   cmsName: 'Directus',
   baseUrl: process.env.DIRECTUS_API_URL || 'http://localhost:8055',
+  assetsPublicUrl:
+    process.env.DIRECTUS_ASSETS_PUBLIC_URL || 'http://localhost:8055/assets',
   apiToken: process.env.DIRECTUS_API_TOKEN || '',
   timeout: process.env.DIRECTUS_API_TIMEOUT || 5000,
-  assetsPath: '/assets',
 });

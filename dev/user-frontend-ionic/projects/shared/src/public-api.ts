@@ -93,3 +93,4 @@ export * from './lib/multi-tenant/multi-tenant.service';
 export * from './lib/multi-tenant/multi-tenant-selected.repository';
 export * from './lib/multi-tenant/multi-tenant.model';
 export * from './lib/multi-tenant/is-tenant-selected.guard';
+export * from './lib/statistics/statistics.repository';

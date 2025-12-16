@@ -17,8 +17,6 @@ Ce module est en charge d'interagir avec le CAS serveur et autres services tiers
 - `AUTH_SERVICE_JWT_SECRET`: Le secret du JWT qui protège les URLs de ré-authentification.
 - `AUTH_SERVICE_CREDENTIALS_CLEANUP_SCHEDULE`: La notation cron qui définit la tâche planifiée de nettoyage des anciennes authentifications sauvegardées devenues obsolètes.
 - `AUTH_SERVICE_CREDENTIALS_CLEANUP_NOT_USED_SINCE_IN_DAYS`: Le nombre de jours d'inactivité après lesquels une authentification sauvegardée est considérée comme étant obsolète.
-- `AUTH_SERVICE_CACHE_TTL_MS`: Durée de vie du cache en millisecondes (default: 300)
-- `AUTH_SERVICE_CACHE_MAX`: Max des entrées enregistrées en cache (default: 200)
 
 ### Agentkeepalive configuration
 Look at [official documentation](https://github.com/node-modules/agentkeepalive#new-agentoptions) for each of the following options :

@@ -170,9 +170,10 @@ export class MapPage {
   }
 
   private async refreshUserPosition() {
-    const permissionAlreadyGranted = (await Geolocation.checkPermissions()).location === 'granted';
-
     try {
+      // Will throw if system location services are disabled.
+      const permissionAlreadyGranted = (await Geolocation.checkPermissions()).location === 'granted';
+
       const position = await Geolocation.getCurrentPosition();
       let zoomLevel = 11;
       if (!permissionAlreadyGranted) { // Permission has just been granted now

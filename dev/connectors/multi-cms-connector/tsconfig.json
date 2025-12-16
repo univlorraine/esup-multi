@@ -26,6 +26,12 @@
       ],
       "@wordpress/*": [
         "./cms/wordpress/*"
+      ],
+      "@cache/*": [
+        "./cache/*"
+      ],
+      "@redis/*": [
+        "./redis/*"
       ]
     }
   },

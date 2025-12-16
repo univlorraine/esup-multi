@@ -39,6 +39,7 @@
 
 export interface MailConfig {
   smtp: string;
+  sender: string;
 }
 
 export interface CmsApi {

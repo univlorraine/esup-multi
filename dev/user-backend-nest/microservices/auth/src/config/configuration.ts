@@ -54,8 +54,6 @@ interface Configuration {
   credentialsCleanup: ScheduledCleanup;
   cmsApi: CmsApi;
   keepAliveOptions: KeepAliveOptions;
-  cacheTtl: number;
-  cacheMax: number;
 }
 
 const applyIfNotBlank = (param: string, applyFn: (value: string) => void) => {
@@ -135,7 +133,5 @@ export default (): Configuration => {
       bearerToken: process.env.AUTH_SERVICE_CMS_CONNECTOR_API_BEARER_TOKEN,
     },
     keepAliveOptions,
-    cacheTtl: parseInt(process.env.AUTH_SERVICE_CACHE_TTL_MS),
-    cacheMax: parseInt(process.env.AUTH_SERVICE_CACHE_MAX),
   };
 };

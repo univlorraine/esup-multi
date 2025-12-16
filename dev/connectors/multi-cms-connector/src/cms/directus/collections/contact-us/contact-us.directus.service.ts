@@ -36,17 +36,43 @@
  * termes.
  */
 
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { ContactUsDirectus } from '@directus/collections/contact-us/contact-us.directus.model';
 import { ContactUs } from '@common/models/contact-us.model';
 import { DirectusService } from '@directus/directus.service';
+import { OnEvent } from '@nestjs/event-emitter';
 import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
 import { ContactUsSchema } from '@common/validation/schemas/contact-us.schema';
 import { normalizeEmptyStringToNull } from '@common/utils/normalize';
+import { CacheService } from '@cache/cache.service';
+import { CacheCollection } from '@cache/cache.config';
 
 @Injectable()
 export class ContactUsDirectusService {
-  constructor(private readonly directusService: DirectusService) {}
+  private readonly logger = new Logger(ContactUsDirectusService.name);
+  constructor(
+    private readonly directusService: DirectusService,
+    private readonly cacheService: CacheService,
+  ) {}
+
+  @OnEvent('directus.contact-us.cache.cleared')
+  async handleCacheCleared() {
+    this.logger.log('Received cache cleared event - preloading data...');
+    try {
+      await this.preloadData();
+    } catch (error) {
+      this.logger.error(
+        'Failed to preload contact-us after cache clear:',
+        error.message,
+      );
+    }
+  }
+
+  public async preloadData() {
+    this.logger.log('Preloading contact-us...');
+    await this.getContactUs();
+    this.logger.log('Contact-us preloaded successfully');
+  }
 
   @ValidateMapping({ schema: ContactUsSchema })
   private mapToMultiModel(contactUs: ContactUsDirectus): ContactUs {
@@ -63,6 +89,14 @@ export class ContactUsDirectusService {
   }
 
   async getContactUs(): Promise<ContactUs> {
+    return this.cacheService.getOrFetchWithLock(
+      CacheCollection.CONTACT_US,
+      () => this.loadContactUsFromDirectus(),
+    );
+  }
+
+  private async loadContactUsFromDirectus(): Promise<ContactUs> {
+    this.logger.debug('Loading contact-us from Directus...');
     const data = await this.directusService.executeGraphQLQuery(`
       query {
         contact_us {

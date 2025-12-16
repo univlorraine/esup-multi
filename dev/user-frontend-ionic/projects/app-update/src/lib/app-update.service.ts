@@ -37,9 +37,9 @@
  * termes.
  */
 
-import { Inject, Injectable, Injector } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AlertsService, GuidedTourService, VersionService } from '@multi/shared';
+import { AlertsService, GuidedTourService, MultiTenantService, VersionService } from '@multi/shared';
 import { firstValueFrom } from 'rxjs';
 import { Capacitor } from '@capacitor/core';
 import { TranslateService } from '@ngx-translate/core';
@@ -62,17 +62,15 @@ export class AppUpdateService {
   private currentVersion: string | null = null;
   private translations: any;
   private initialized = false;
-  private translateService: TranslateService;
-  private guidedTourService: GuidedTourService;
 
   constructor(
-    @Inject('environment')
-    private environment: any,
     private http: HttpClient,
     private versionService: VersionService,
     private alertsService: AlertsService,
     private platform: Platform,
-    private injector: Injector,
+    private multiTenantService: MultiTenantService,
+    private translateService: TranslateService,
+    private guidedTourService: GuidedTourService,
   ) {}
 
   private async getCurrentVersion(): Promise<string> {
@@ -80,7 +78,7 @@ export class AppUpdateService {
   }
 
   private async fetchUpdateInfoFromBackend(): Promise<AppUpdateInfo> {
-    const url = `${this.environment.apiEndpoint}/app-update-infos`;
+    const url = `${this.multiTenantService.getApiEndpoint()}/app-update-infos`;
     return await firstValueFrom(this.http.get<AppUpdateInfo>(url));
   }
 
@@ -158,25 +156,6 @@ export class AppUpdateService {
       ;
   }
 
-  // Injection du service de traduction
-  // Hack nécessaire, car si on charge le service dans le constructeur, cela casse les traductions dans tous les modules
-  private loadTranslateService() {
-    if (this.translateService) {
-      return;
-    }
-
-    this.translateService = this.injector.get(TranslateService);
-  }
-
-  // Injection du service du tour guidé
-  // Hack nécessaire, car si on charge le service dans le constructeur, cela casse les traductions dans tous les modules
-  private loadTourService() {
-    if (this.guidedTourService) {
-      return;
-    }
-    this.guidedTourService = this.injector.get(GuidedTourService);
-  }
-
   // Préchargement des traductions pour les alertes
   // Hack nécessaire pour que les traductions soient chargées avant l'affichage de l'alerte de mise à jour
   private async loadTranslations() {
@@ -199,8 +178,8 @@ export class AppUpdateService {
     }
 
     await this.platform.ready();
-    this.loadTranslateService();
-    this.loadTourService();
+    // On attend que le tenant soit complétement initialisé avant de checker les mises à jour
+    await this.multiTenantService.waitUntilReady();
     await this.checkForUpdate();
 
     App.addListener('resume', () => {

@@ -44,6 +44,7 @@ import { ConfigModule } from '@nestjs/config';
 import { CmsModule } from './cms/cms.module';
 import { AuthModule } from './auth/auth.module';
 import { MonitoringModule } from './monitoring/monitoring.module';
+import { CacheModule } from '@cache/cache.module';
 
 @Module({
   imports: [
@@ -56,6 +57,7 @@ import { MonitoringModule } from './monitoring/monitoring.module';
       sortSchema: true,
       playground: true,
     }),
+    CacheModule,
     AuthModule,
     CmsModule.register(),
     MonitoringModule,

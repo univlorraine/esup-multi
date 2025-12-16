@@ -36,7 +36,8 @@
  * termes.
  */
 
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
+import { OnEvent } from '@nestjs/event-emitter';
 import { Features } from '@common/models/features.model';
 import { WordpressService } from '@wordpress/wordpress.service';
 import { FeaturesTranslations } from '@common/models/translations.model';
@@ -46,13 +47,38 @@ import { SettingsByRole } from '@common/models/settings-by-role.model';
 import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
 import { FeaturesSchema } from '@common/validation/schemas/features.schema';
 import { normalizeEmptyStringToNull } from '@common/utils/normalize';
+import { CacheService } from '@cache/cache.service';
+import { CacheCollection } from '@cache/cache.config';
 
 // TODO: Move FRENCH_CODE to .env and rename it to DEFAULT_LANGUAGE_CODE
 const FRENCH_CODE = 'FR';
 
 @Injectable()
 export class FeaturesWordpressService {
-  constructor(private readonly wordpressService: WordpressService) {}
+  private readonly logger = new Logger(FeaturesWordpressService.name);
+  constructor(
+    private readonly wordpressService: WordpressService,
+    private readonly cacheService: CacheService,
+  ) {}
+
+  @OnEvent('wordpress.features.cache.cleared')
+  async handleCacheCleared() {
+    this.logger.log('Received cache cleared event - preloading data...');
+    try {
+      await this.preloadData();
+    } catch (error) {
+      this.logger.error(
+        'Failed to preload features after cache clear:',
+        error.message,
+      );
+    }
+  }
+
+  public async preloadData() {
+    this.logger.log('Preloading features...');
+    await this.getFeatures();
+    this.logger.log('Features preloaded successfully');
+  }
 
   @ValidateMapping({ schema: FeaturesSchema })
   private mapToMultiModel(feature: FeaturesWordpress): Features {
@@ -125,6 +151,13 @@ export class FeaturesWordpressService {
   }
 
   async getFeatures(): Promise<Features[]> {
+    return this.cacheService.getOrFetchWithLock(CacheCollection.FEATURES, () =>
+      this.loadFeaturesFromWordpress(),
+    );
+  }
+
+  private async loadFeaturesFromWordpress(): Promise<Features[]> {
+    this.logger.debug('Loading features from WordPress...');
     const data = await this.wordpressService.executeGraphQLQuery(`
       query {
         features(first: 100, where: {language: ${FRENCH_CODE}}) {
@@ -180,10 +213,20 @@ export class FeaturesWordpressService {
         }
       }
     `);
+
     return data.features.nodes.map(this.mapToMultiModel);
   }
 
   async getFeature(id: number): Promise<Features> {
+    return this.cacheService.getOrFetchWithLock(
+      CacheCollection.FEATURES,
+      () => this.loadFeatureFromWordpress(id),
+      id,
+    );
+  }
+
+  private async loadFeatureFromWordpress(id: number): Promise<Features> {
+    this.logger.debug(`Loading feature ${id} from WordPress...`);
     const data = await this.wordpressService.executeGraphQLQuery(`
       query {
         feature(id: ${id}, idType: DATABASE_ID) {
@@ -220,6 +263,7 @@ export class FeaturesWordpressService {
           }
           featureType
           featureRouterLink
+          featureLinkUrl
           featureSsoService
           featureStatisticName
           translations {
@@ -236,6 +280,7 @@ export class FeaturesWordpressService {
         }
       }
     `);
+
     return this.mapToMultiModel(data.feature);
   }
 }

@@ -36,17 +36,43 @@
  * termes.
  */
 
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { ChannelsDirectus } from '@directus/collections/channels/channels.directus.model';
 import { Channels } from '@common/models/channels.model';
 import { DirectusService } from '@directus/directus.service';
+import { OnEvent } from '@nestjs/event-emitter';
 import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
 import { ChannelsSchema } from '@common/validation/schemas/channels.schema';
 import { normalizeEmptyStringToNull } from '@common/utils/normalize';
+import { CacheService } from '@cache/cache.service';
+import { CacheCollection } from '@cache/cache.config';
 
 @Injectable()
 export class ChannelsDirectusService {
-  constructor(private readonly directusService: DirectusService) {}
+  private readonly logger = new Logger(ChannelsDirectusService.name);
+  constructor(
+    private readonly directusService: DirectusService,
+    private readonly cacheService: CacheService,
+  ) {}
+
+  @OnEvent('directus.channels.cache.cleared')
+  async handleCacheCleared() {
+    this.logger.log('Received cache cleared event - preloading data...');
+    try {
+      await this.preloadData();
+    } catch (error) {
+      this.logger.error(
+        'Failed to preload channels after cache clear:',
+        error.message,
+      );
+    }
+  }
+
+  public async preloadData() {
+    this.logger.log('Preloading channels...');
+    await this.getChannels();
+    this.logger.log('Channels preloaded successfully');
+  }
 
   @ValidateMapping({ schema: ChannelsSchema })
   private mapToMultiModel(channel: ChannelsDirectus): Channels {
@@ -66,6 +92,13 @@ export class ChannelsDirectusService {
   }
 
   async getChannels(): Promise<Channels[]> {
+    return this.cacheService.getOrFetchWithLock(CacheCollection.CHANNELS, () =>
+      this.loadChannelsFromDirectus(),
+    );
+  }
+
+  private async loadChannelsFromDirectus(): Promise<Channels[]> {
+    this.logger.debug('Loading channels from Directus...');
     const data = await this.directusService.executeGraphQLQuery(`
       query {
         channels {
@@ -91,6 +124,15 @@ export class ChannelsDirectusService {
   }
 
   async getChannel(id: number): Promise<Channels> {
+    return this.cacheService.getOrFetchWithLock(
+      CacheCollection.CHANNELS,
+      () => this.loadChannelFromDirectus(id),
+      id,
+    );
+  }
+
+  private async loadChannelFromDirectus(id: number): Promise<Channels> {
+    this.logger.debug(`Loading channel ${id} from Directus...`);
     const data = await this.directusService.executeGraphQLQuery(`
       query {
         channels(filter: {id: { _eq: ${id} }}) {

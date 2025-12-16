@@ -36,17 +36,43 @@
  * termes.
  */
 
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { WidgetsDirectus } from '@directus/collections/widgets/widgets.directus.model';
 import { Widgets } from '@common/models/widgets.model';
 import { DirectusService } from '@directus/directus.service';
+import { OnEvent } from '@nestjs/event-emitter';
 import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
 import { normalizeEmptyStringToNull } from '@common/utils/normalize';
 import { WidgetsSchema } from '@common/validation/schemas/widgets.schema';
+import { CacheService } from '@cache/cache.service';
+import { CacheCollection } from '@cache/cache.config';
 
 @Injectable()
 export class WidgetsDirectusService {
-  constructor(private readonly directusService: DirectusService) {}
+  private readonly logger = new Logger(WidgetsDirectusService.name);
+  constructor(
+    private readonly directusService: DirectusService,
+    private readonly cacheService: CacheService,
+  ) {}
+
+  @OnEvent('directus.widgets.cache.cleared')
+  async handleCacheCleared() {
+    this.logger.log('Received cache cleared event - preloading data...');
+    try {
+      await this.preloadData();
+    } catch (error) {
+      this.logger.error(
+        'Failed to preload widgets after cache clear:',
+        error.message,
+      );
+    }
+  }
+
+  public async preloadData() {
+    this.logger.log('Preloading widgets...');
+    await this.getWidgets();
+    this.logger.log('Widgets preloaded successfully');
+  }
 
   @ValidateMapping({ schema: WidgetsSchema })
   private mapToMultiModel(widget: WidgetsDirectus): Widgets {
@@ -85,6 +111,13 @@ export class WidgetsDirectusService {
   }
 
   async getWidgets(): Promise<Widgets[]> {
+    return this.cacheService.getOrFetchWithLock(CacheCollection.WIDGETS, () =>
+      this.loadWidgetsFromDirectus(),
+    );
+  }
+
+  private async loadWidgetsFromDirectus(): Promise<Widgets[]> {
+    this.logger.debug('Loading widgets from Directus...');
     const data = await this.directusService.executeGraphQLQuery(`
       query {
         widgets(filter: { status: { _eq: "published" }}) {
@@ -133,6 +166,15 @@ export class WidgetsDirectusService {
   }
 
   async getWidget(id: number): Promise<Widgets> {
+    return this.cacheService.getOrFetchWithLock(
+      CacheCollection.WIDGETS,
+      () => this.loadWidgetFromDirectus(id),
+      id,
+    );
+  }
+
+  private async loadWidgetFromDirectus(id: number): Promise<Widgets> {
+    this.logger.debug(`Loading widget ${id} from Directus...`);
     const data = await this.directusService.executeGraphQLQuery(`
       query {
         widgets(filter: {id: { _eq: ${id} }}) {

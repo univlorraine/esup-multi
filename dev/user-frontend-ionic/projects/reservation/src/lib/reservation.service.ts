@@ -38,8 +38,7 @@
  */
 
 import { Injectable } from '@angular/core';
-import { Browser } from '@capacitor/browser';
-import { MultiTenantService, SsoService } from '@multi/shared';
+import { MultiTenantService, NavigationService, SsoService } from '@multi/shared';
 
 @Injectable({
   providedIn: 'root'
@@ -48,7 +47,8 @@ export class ReservationService {
 
   constructor(
     private ssoService: SsoService,
-    private multiTenantService: MultiTenantService
+    private multiTenantService: MultiTenantService,
+    private navigationService: NavigationService,
   ) {}
 
   public openReservationService() {
@@ -57,7 +57,7 @@ export class ReservationService {
       service: ssoServiceName,
       urlTemplate: ssoUrlTemplate
     })
-    .subscribe(url => Browser.open({ url }));
+    .subscribe(url => this.navigationService.openExternalLink(url));
   }
 
   public openURL(service: string) {
@@ -65,6 +65,6 @@ export class ReservationService {
       service,
       urlTemplate: `${service}&ticket={st}`
     })
-    .subscribe(url => Browser.open({ url }));
+    .subscribe(url => this.navigationService.openExternalLink(url));
   }
 }

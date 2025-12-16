@@ -37,10 +37,11 @@
  * termes.
  */
 
-import {Component, Input} from '@angular/core';
+import {Component, Input, SecurityContext} from '@angular/core';
 import {Display, KnowledgeBaseItem, TranslatedKnowledgeBaseItem, Type} from '../knowledge-base.repository';
 import {Browser} from '@capacitor/browser';
 import {Router} from '@angular/router';
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-knowledge-base-card',
@@ -55,17 +56,18 @@ export class KnowledgeBaseCardComponent {
 
   constructor(
     private router: Router,
+    private sanitizer: DomSanitizer
   ) {
   }
 
   openItemLink(item: KnowledgeBaseItem) {
     switch (item.type) {
       case Type.internalLink:
-        this.router.navigateByUrl(item.link);
+        this.router.navigateByUrl(this.sanitizer.sanitize(SecurityContext.URL, item.link));
         break;
 
       case Type.externalLink:
-        Browser.open({url: item.link});
+        Browser.open({url: this.sanitizer.sanitize(SecurityContext.URL, item.link)});
         break;
 
       case Type.content:
@@ -98,7 +100,7 @@ export class KnowledgeBaseCardComponent {
   }
 
   handleLink(link: string) {
-    Browser.open({url: link});
+    Browser.open({url: this.sanitizer.sanitize(SecurityContext.URL, link)});
   }
 
   // eslint-disable-next-line @typescript-eslint/naming-convention

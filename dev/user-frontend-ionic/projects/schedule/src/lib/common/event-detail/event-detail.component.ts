@@ -38,10 +38,10 @@
  */
 
 import { Component, Input } from '@angular/core';
-import { Browser } from '@capacitor/browser';
 import { take } from 'rxjs/operators';
 import {Course, Event, HiddenCourse} from '../../schedule.repository';
 import { ScheduleService } from '../../schedule.service';
+import { NavigationService } from '@multi/shared';
 
 @Component({
   selector: 'app-event-detail',
@@ -56,7 +56,10 @@ export class EventDetailComponent {
   public isGroupsVisible = false;
   public courseUrlRegex = /^https?:\/\//;
 
-  constructor(private scheduleService: ScheduleService) { }
+  constructor(
+    private scheduleService: ScheduleService,
+    private navigationService: NavigationService,
+  ) { }
 
   hideAllSimilarCourse(course: Course) {
     this.disableHideCourseButton = true;
@@ -78,7 +81,7 @@ export class EventDetailComponent {
   }
 
   openCourseURL(url: string) {
-    Browser.open({url});
+    this.navigationService.openExternalLink(url);
   }
 
   public toggleExpandGroups() {

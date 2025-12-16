@@ -39,8 +39,7 @@
 
 import { Component, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Browser } from '@capacitor/browser';
-import { NetworkService } from '@multi/shared';
+import { NavigationService, NetworkService } from '@multi/shared';
 import { Observable, Subscription } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
 import { FeedItem, rssFeed$, setRssFeed } from './rss.repository';
@@ -64,6 +63,7 @@ export class RssPage {
     private rssService: RssService,
     private networkService: NetworkService,
     private route: ActivatedRoute,
+    private navigationService: NavigationService,
     @Inject(RSS_CONFIG) public config: RssModuleConfig
   ) {
     this.rssFeedIsEmpty$ = this.rssFeed$.pipe(map(rssFeed => rssFeed.length === 0));
@@ -73,7 +73,7 @@ export class RssPage {
     if (!item.link) {
       return;
     }
-    return Browser.open({ url: item.link });
+    return this.navigationService.openExternalLink(item.link);
   }
 
   async ionViewWillEnter() {

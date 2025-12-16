@@ -46,10 +46,10 @@ import { CmsConfigError, CmsQueryError } from '../cms.exception';
 export class DirectusService {
   private readonly logger = new Logger(DirectusService.name);
   private readonly baseUrl: string;
+  private readonly assetsPublicUrl: string;
   private readonly apiUrl: string;
   private readonly apiToken: string;
   private readonly timeout: number;
-  private readonly assetsPath: string;
 
   constructor(
     private readonly configService: ConfigService,
@@ -61,10 +61,10 @@ export class DirectusService {
     }
 
     this.baseUrl = cmsConfig.baseUrl;
+    this.assetsPublicUrl = cmsConfig.assetsPublicUrl.replace(/\/$/, '');
     this.apiUrl = `${this.baseUrl}/graphql`;
     this.apiToken = cmsConfig.apiToken;
     this.timeout = cmsConfig.timeout || 5000;
-    this.assetsPath = cmsConfig.assetsPath || '/assets';
 
     this.logger.log('Directus service initialized successfully');
   }
@@ -92,6 +92,6 @@ export class DirectusService {
   }
 
   buildAssetUrl(assetId: string): string {
-    return `${this.baseUrl}${this.assetsPath}/${assetId}`;
+    return `${this.assetsPublicUrl}/${assetId}`;
   }
 }

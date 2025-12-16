@@ -36,17 +36,43 @@
  * termes.
  */
 
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { ImportantNewsDirectus } from '@directus/collections/important-news/important-news.directus.model';
 import { ImportantNews } from '@common/models/important-news.model';
 import { DirectusService } from '@directus/directus.service';
+import { OnEvent } from '@nestjs/event-emitter';
 import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
 import { ImportantNewsSchema } from '@common/validation/schemas/important-news.schema';
 import { normalizeEmptyStringToNull } from '@common/utils/normalize';
+import { CacheService } from '@cache/cache.service';
+import { CacheCollection } from '@cache/cache.config';
 
 @Injectable()
 export class ImportantNewsDirectusService {
-  constructor(private readonly directusService: DirectusService) {}
+  private readonly logger = new Logger(ImportantNewsDirectusService.name);
+  constructor(
+    private readonly directusService: DirectusService,
+    private readonly cacheService: CacheService,
+  ) {}
+
+  @OnEvent('directus.important-news.cache.cleared')
+  async handleCacheCleared() {
+    this.logger.log('Received cache cleared event - preloading data...');
+    try {
+      await this.preloadData();
+    } catch (error) {
+      this.logger.error(
+        'Failed to preload important-news after cache clear:',
+        error.message,
+      );
+    }
+  }
+
+  public async preloadData() {
+    this.logger.log('Preloading important-news...');
+    await this.getImportantNews();
+    this.logger.log('Important-news preloaded successfully');
+  }
 
   @ValidateMapping({ schema: ImportantNewsSchema })
   private mapToMultiModel(importantNew: ImportantNewsDirectus): ImportantNews {
@@ -75,6 +101,14 @@ export class ImportantNewsDirectusService {
   }
 
   async getImportantNews(): Promise<ImportantNews[]> {
+    return this.cacheService.getOrFetchWithLock(
+      CacheCollection.IMPORTANT_NEWS,
+      () => this.loadImportantNewsFromDirectus(),
+    );
+  }
+
+  private async loadImportantNewsFromDirectus(): Promise<ImportantNews[]> {
+    this.logger.debug('Loading important news from Directus...');
     const data = await this.directusService.executeGraphQLQuery(`
       query {
         important_news(filter: { status: { _eq: "published" } }) {
@@ -110,6 +144,17 @@ export class ImportantNewsDirectusService {
   }
 
   async getImportantNew(id: number): Promise<ImportantNews> {
+    return this.cacheService.getOrFetchWithLock(
+      CacheCollection.IMPORTANT_NEWS,
+      () => this.loadImportantNewFromDirectus(id),
+      id,
+    );
+  }
+
+  private async loadImportantNewFromDirectus(
+    id: number,
+  ): Promise<ImportantNews> {
+    this.logger.debug(`Loading important new ${id} from Directus...`);
     const data = await this.directusService.executeGraphQLQuery(`
       query {
         important_news(filter: {id: { _eq: ${id} }}) {
