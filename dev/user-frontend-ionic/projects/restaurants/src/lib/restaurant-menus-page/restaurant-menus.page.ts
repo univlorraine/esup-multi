@@ -119,16 +119,24 @@ export class RestaurantMenusPage implements OnInit, AfterViewChecked {
   }
 
   initializeSwiper(swiperContainer: HTMLElement) {
+    // Initialiser les classes cachées avant la création du swiper
+    const nextButton = swiperContainer.querySelector('.swiper-button-next');
+    const prevButton = swiperContainer.querySelector('.swiper-button-prev');
+
+    if (nextButton && swiperContainer.querySelectorAll('.swiper-slide').length <= 1) nextButton.classList.add('hidden');
+    if (prevButton) prevButton.classList.add('hidden');
+
     this.swiper = new Swiper(swiperContainer, {
       // Swiper options :
       navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
       },
+      on: {
+        init: () => this.updateNavigationButtons(),
+        slideChange: () => this.updateNavigationButtons()
+      }
     });
-
-    const nextButton = swiperContainer.querySelector('.swiper-button-next');
-    const prevButton = swiperContainer.querySelector('.swiper-button-prev');
 
     nextButton.addEventListener('click', () => {
       this.swiper.slideNext();
@@ -137,5 +145,24 @@ export class RestaurantMenusPage implements OnInit, AfterViewChecked {
     prevButton.addEventListener('click', () => {
       this.swiper.slidePrev();
     });
+  }
+
+  updateNavigationButtons() {
+    if (!this.swiper) return;
+
+    const nextButton = this.swiper.el.querySelector('.swiper-button-next');
+    const prevButton = this.swiper.el.querySelector('.swiper-button-prev');
+
+    if (this.swiper.isBeginning) {
+      prevButton.classList.add('hidden');
+    } else {
+      prevButton.classList.remove('hidden');
+    }
+
+    if (this.swiper.isEnd) {
+      nextButton.classList.add('hidden');
+    } else {
+      nextButton.classList.remove('hidden');
+    }
   }
 }
