@@ -59,6 +59,7 @@ import { ScheduleModule } from '@multi/schedule';
 import { SocialNetworkModule } from '@multi/social-network';
 import { StaticPagesModule } from '@multi/static-pages';
 import { UnreadMailModule } from '@multi/unread-mail';
+import { UsefulInfoModule } from '@multi/useful-info';
 // import { MatomoModule } from 'ngx-matomo';
 
 import firebasePwaEnvironment from './firebase/web/firebase-environment.pwa.json';
@@ -135,6 +136,7 @@ export const environment: any = {
     SocialNetworkModule,
     StaticPagesModule,
     UnreadMailModule,
+    UsefulInfoModule,
     // MatomoModule.forRoot({
     //   scriptUrl: 'https://webstats.mon-univ.fr/matomo.js',
     //   trackers: [

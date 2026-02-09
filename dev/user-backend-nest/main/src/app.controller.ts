@@ -81,6 +81,8 @@ export class AppController {
     @Inject('RESTAURANTS_SERVICE') private restaurantsClient: ClientProxy,
     @Inject('STATISTICS_SERVICE') private statisticsClient: ClientProxy,
     @Inject('MAIL_CALENDAR_SERVICE') private mailCalendarClient: ClientProxy,
+    @Inject('USEFUL_INFORMATION_SERVICE')
+    private usefulInformationClient: ClientProxy,
   ) {}
 
   @Post('/features')
@@ -728,6 +730,16 @@ export class AppController {
           ),
         ),
       );
+  }
+
+  @Get('/useful-information')
+  usefulInformation() {
+    return this.usefulInformationClient.send(
+      {
+        cmd: 'usefulInformation',
+      },
+      {},
+    );
   }
 
   @Get('/version')
