@@ -52,7 +52,13 @@ export class KnowledgeBase {
   childDisplay: 'card' | 'list';
 
   @Field({ nullable: true })
-  link: string;
+  routerLink: string | null;
+
+  @Field({ nullable: true })
+  link: string | null;
+
+  @Field({ nullable: true })
+  ssoService: string | null;
 
   @Field({ nullable: true })
   position: number;

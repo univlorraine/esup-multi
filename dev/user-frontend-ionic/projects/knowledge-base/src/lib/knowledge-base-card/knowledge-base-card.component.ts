@@ -42,6 +42,7 @@ import {Display, KnowledgeBaseItem, TranslatedKnowledgeBaseItem, Type} from '../
 import {Browser} from '@capacitor/browser';
 import {Router} from '@angular/router';
 import {DomSanitizer} from "@angular/platform-browser";
+import {NavigationService, SsoService} from "@multi/shared";
 
 @Component({
   selector: 'app-knowledge-base-card',
@@ -56,24 +57,46 @@ export class KnowledgeBaseCardComponent {
 
   constructor(
     private router: Router,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private ssoService: SsoService,
+    private navigationService: NavigationService
   ) {
   }
 
   openItemLink(item: KnowledgeBaseItem) {
     switch (item.type) {
       case Type.internalLink:
-        this.router.navigateByUrl(this.sanitizer.sanitize(SecurityContext.URL, item.link));
+        this.openInternalLink(item.routerLink);
         break;
 
       case Type.externalLink:
-        Browser.open({url: this.sanitizer.sanitize(SecurityContext.URL, item.link)});
+        this.openExternalLink(item);
         break;
 
       case Type.content:
-        this.router.navigateByUrl(`knowledge-base/${item.id}`);
+        this.openInternalLink(`knowledge-base/${item.id}`);
         break;
     }
+  }
+
+  openInternalLink(link: string) {
+    this.router.navigateByUrl(link);
+  }
+
+  openExternalLink(item: KnowledgeBaseItem) {
+    if (!item.link) {
+      return;
+    }
+
+    if (!item.ssoService) {
+      return this.navigationService.openExternalLink(item.link);
+    }
+
+    this.ssoService.getSsoExternalLink({
+      urlTemplate: item.link,
+      service: item.ssoService
+    })
+      .subscribe(url => this.navigationService.openExternalLink(url));
   }
 
   getButtonIcon(type: Type) {

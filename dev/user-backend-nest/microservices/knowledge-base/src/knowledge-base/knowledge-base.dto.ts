@@ -61,7 +61,9 @@ export interface KnowledgeBaseDto {
   id: number;
   pageType: PageType;
   parentId?: number;
+  routerLink?: string;
   link?: string;
+  ssoService?: string;
   mail?: string;
   phone?: string;
   address?: string;

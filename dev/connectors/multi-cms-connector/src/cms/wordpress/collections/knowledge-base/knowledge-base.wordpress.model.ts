@@ -86,7 +86,13 @@ export class KnowledgeBaseWordpress {
   knowledgeBaseChildDisplay: 'card' | 'list';
 
   @Field()
-  knowledgeBaseLink: string;
+  knowledgeBaseRouterLink: string;
+
+  @Field()
+  knowledgeBaseUrlLink: string;
+
+  @Field()
+  knowledgeBaseSsoService: string;
 
   @Field()
   knowledgeBasePosition: number;

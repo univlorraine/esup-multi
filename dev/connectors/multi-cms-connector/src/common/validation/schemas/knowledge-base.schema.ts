@@ -44,7 +44,18 @@ export const KnowledgeBaseSchema = z.object({
   id: IdSchema,
   type: z.enum(['content', 'internal_link', 'external_link']),
   childDisplay: z.enum(['card', 'list']).nullable(),
-  link: z.string().min(1, 'Knowledge-Base link cannot be empty string').nullable(),
+  routerLink: z
+    .string()
+    .min(1, 'Knowledge-Base router link cannot be empty string')
+    .nullable(),
+  link: z
+    .string()
+    .min(1, 'Knowledge-Base link cannot be empty string')
+    .nullable(),
+  ssoService: z
+    .string()
+    .min(1, 'Knowledge-Base SSO service cannot be empty string')
+    .nullable(),
   position: z.number().int().default(0),
   authorization: AuthorizationSchema.nullable(),
   translations: z
@@ -56,6 +67,9 @@ export const KnowledgeBaseSchema = z.object({
     .min(1, 'Knowledge-Base cover image cannot be empty string')
     .nullable(),
   phone: z.string().min(1, 'Knowledge-Base phone cannot be empty').nullable(),
-  address: z.string().min(1, 'Knowledge-Base address cannot be empty').nullable(),
+  address: z
+    .string()
+    .min(1, 'Knowledge-Base address cannot be empty')
+    .nullable(),
   email: z.string().min(1, 'Knowledge-Base email cannot be empty').nullable(),
 });

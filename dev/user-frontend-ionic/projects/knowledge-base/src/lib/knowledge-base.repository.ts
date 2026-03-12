@@ -66,7 +66,9 @@ export interface KnowledgeBaseItem {
   id: string,
   type: Type,
   parentId?: string,
+  routerLink?: string
   link?: string,
+  ssoService?: string,
   email?: string,
   phone?: string,
   address?: string,
@@ -83,7 +85,9 @@ export interface TranslatedKnowledgeBaseItem {
   parentId?: string,
   content?: string
   title?: string,
+  routerLink?: string
   link?: string,
+  ssoService?: string,
   email?: string,
   phone?: string,
   address?: string,

@@ -36,7 +36,7 @@
  * termes.
  */
 
-import {Injectable, Logger} from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { WordpressService } from '@wordpress/wordpress.service';
 import { KnowledgeBaseTranslations } from '@common/models/translations.model';
 import { KnowledgeBaseTranslationsWordpress } from '@wordpress/collections/translations/translations.wordpress.model';
@@ -45,39 +45,39 @@ import { KnowledgeBaseSchema } from '@common/validation/schemas/knowledge-base.s
 import { normalizeEmptyStringToNull } from '@common/utils/normalize';
 import { KnowledgeBaseWordpress } from '@wordpress/collections/knowledge-base/knowledge-base.wordpress.model';
 import { KnowledgeBase } from '@common/models/knowledge-base.model';
-import {CacheCollection} from "@cache/cache.config";
-import {CacheService} from "@cache/cache.service";
-import {OnEvent} from "@nestjs/event-emitter";
+import { CacheCollection } from '@cache/cache.config';
+import { CacheService } from '@cache/cache.service';
+import { OnEvent } from '@nestjs/event-emitter';
 
 // TODO: Move FRENCH_CODE to .env and rename it to DEFAULT_LANGUAGE_CODE
 const FRENCH_CODE = 'FR';
 
 @Injectable()
 export class KnowledgeBaseWordpressService {
-    private readonly logger = new Logger(KnowledgeBaseWordpressService.name);
+  private readonly logger = new Logger(KnowledgeBaseWordpressService.name);
   constructor(
-      private readonly wordpressService: WordpressService,
-      private readonly cacheService: CacheService
+    private readonly wordpressService: WordpressService,
+    private readonly cacheService: CacheService,
   ) {}
 
-    @OnEvent('wordpress.knowledge-base.cache.cleared')
-    async handleCacheCleared() {
-        this.logger.log('Received cache cleared event - preloading data...');
-        try {
-            await this.preloadData();
-        } catch (error) {
-            this.logger.error(
-                'Failed to preload knowledge-base after cache clear:',
-                error.message,
-            );
-        }
+  @OnEvent('wordpress.knowledge-base.cache.cleared')
+  async handleCacheCleared() {
+    this.logger.log('Received cache cleared event - preloading data...');
+    try {
+      await this.preloadData();
+    } catch (error) {
+      this.logger.error(
+        'Failed to preload knowledge-base after cache clear:',
+        error.message,
+      );
     }
+  }
 
-    public async preloadData() {
-        this.logger.log('Preloading knowledge-base...');
-        await this.getKnowledgeBase();
-        this.logger.log('knowledge-base preloaded successfully');
-    }
+  public async preloadData() {
+    this.logger.log('Preloading knowledge-base...');
+    await this.getKnowledgeBase();
+    this.logger.log('knowledge-base preloaded successfully');
+  }
 
   @ValidateMapping({ schema: KnowledgeBaseSchema })
   private mapToMultiModel(
@@ -123,7 +123,13 @@ export class KnowledgeBaseWordpressService {
       id: knowledgeBase.databaseId.toString(),
       type: knowledgeBase.knowledgeBaseType,
       childDisplay: knowledgeBase.knowledgeBaseChildDisplay || null,
-      link: normalizeEmptyStringToNull(knowledgeBase.knowledgeBaseLink),
+      routerLink: normalizeEmptyStringToNull(
+        knowledgeBase.knowledgeBaseRouterLink,
+      ),
+      link: normalizeEmptyStringToNull(knowledgeBase.knowledgeBaseUrlLink),
+      ssoService: normalizeEmptyStringToNull(
+        knowledgeBase.knowledgeBaseSsoService,
+      ),
       position: knowledgeBase.knowledgeBasePosition || 0,
       authorization:
         knowledgeBase.knowledgeBaseAccessRestriction &&
@@ -145,12 +151,12 @@ export class KnowledgeBaseWordpressService {
     };
   }
 
-    async getKnowledgeBase(): Promise<KnowledgeBase[]> {
-        return this.cacheService.getOrFetchWithLock(
-            CacheCollection.KNOWLEDGE_BASE,
-            () => this.loadKnowledgeBaseFromWordPress(),
-        );
-    }
+  async getKnowledgeBase(): Promise<KnowledgeBase[]> {
+    return this.cacheService.getOrFetchWithLock(
+      CacheCollection.KNOWLEDGE_BASE,
+      () => this.loadKnowledgeBaseFromWordPress(),
+    );
+  }
 
   private async loadKnowledgeBaseFromWordPress(): Promise<KnowledgeBase[]> {
     this.logger.debug('Loading knowledge-base from WordPress...');
@@ -163,7 +169,9 @@ export class KnowledgeBaseWordpressService {
             knowledgeBaseContent
             knowledgeBaseType
             knowledgeBaseChildDisplay
-            knowledgeBaseLink
+            knowledgeBaseRouterLink
+            knowledgeBaseUrlLink
+            knowledgeBaseSsoService
             knowledgeBasePosition
             knowledgeBaseAccessRestriction
             knowledgeBaseRoles(first: 100) {

@@ -69,7 +69,9 @@ export class KnowledgeBaseService {
           knowledgeBase {
             id
             type
+            routerLink
             link
+            ssoService
             childDisplay
             position
             authorization {
