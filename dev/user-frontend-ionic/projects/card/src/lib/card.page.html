@@ -77,7 +77,7 @@
       <ion-row class="ion-justify-content-center qr-code-container" *ngIf="userCard.qrCode">
         <div
           *ngIf="userCard.qrCode.type === 'image' && userCard.qrCode.value"
-          [innerHTML]="userCard.qrCode.value | safeHtml">
+          [innerHTML]="userCard.qrCode.value | sanitizeSvg">
         </div>
 
         <qrcode
