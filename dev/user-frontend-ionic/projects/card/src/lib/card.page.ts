@@ -44,7 +44,7 @@ import { filter, finalize, switchMap, take } from 'rxjs/operators';
 import { CardModuleConfig, CARD_CONFIG } from './card.config';
 import { setUserAndCardData, UserAndCardData, userAndCardData$ } from './card.repository';
 import { CardService } from './card.service';
-import { ScreenService } from './screen.service';
+import { ScreenService } from '@multi/shared';
 
 @Component({
   selector: 'app-card',

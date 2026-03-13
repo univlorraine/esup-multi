@@ -37,54 +37,33 @@
  * termes.
  */
 
-import { Injectable } from '@angular/core';
-import { ScreenBrightness } from '@capacitor-community/screen-brightness';
-import { Platform } from '@ionic/angular';
-import { from } from 'rxjs';
-import { filter, finalize, switchMap, take } from 'rxjs/operators';
-import { brightness$, setBrightness } from './screen.repository';
+import { createStore, select, withProps } from '@ngneat/elf';
+import {
+ persistState
+} from '@ngneat/elf-persist-state';
+import { localForageStore } from '../store/local-forage';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class ScreenService {
+const STORE_NAME = 'screen';
 
-  private fullBrightnessEnabled = false;
-
-  constructor(private platform: Platform) {}
-
-  public async fullBrightness() {
-    // the brightness plugin only works with capacitor
-    if (!this.platform.is('capacitor')) {
-      return;
-    }
-
-    // prevent multiple full brightness activation
-    if(this.fullBrightnessEnabled === true) {
-      return;
-    }
-
-    this.fullBrightnessEnabled = true;
-    const { brightness } = await ScreenBrightness.getBrightness();
-    setBrightness(brightness);
-    await ScreenBrightness.setBrightness({brightness: 1.0});
-  }
-
-  public async restorePreviousBrightness() {
-    // the brightness plugin only works with capacitor
-    if (!this.platform.is('capacitor')) {
-      return;
-    }
-
-    if(this.fullBrightnessEnabled === false) {
-      return;
-    }
-
-    return brightness$.pipe(
-      take(1),
-      filter(brightness => brightness !== null),
-      switchMap(brightness => from(ScreenBrightness.setBrightness({brightness}))),
-      finalize(() => this.fullBrightnessEnabled = false)
-    ).toPromise();
-  }
+export interface Screen {
+  brightness: number;
 }
+
+const store = createStore(
+    { name: STORE_NAME },
+    withProps<Screen>({ brightness: null})
+  );
+
+const persist = persistState(store, {
+    key: STORE_NAME,
+    storage: localForageStore,
+});
+
+export const brightness$ = store.pipe(select((state) => state.brightness));
+
+export const setBrightness = (brightness: Screen['brightness']) => {
+  store.update((state) => ({
+    ...state,
+    brightness,
+  }));
+};
