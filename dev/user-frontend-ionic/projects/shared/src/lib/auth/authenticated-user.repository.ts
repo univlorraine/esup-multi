@@ -54,6 +54,7 @@ export interface AuthenticatedUser {
   firstname: string;
   email: string;
   roles: string[];
+  escn?: string;
 }
 
 const authStore = createStore(

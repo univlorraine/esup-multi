@@ -37,7 +37,7 @@
  * termes.
  */
 
-const { v4: uuid } = require('uuid');
+const {v4: uuid} = require('uuid');
 
 module.exports.authTokenData = () => `TGT-${uuid()}-${uuid()}-LUKE`;
 module.exports.userProviderData = {
@@ -46,6 +46,7 @@ module.exports.userProviderData = {
         "name": "Doe",
         "firstname": "John",
         "email": "john.doe@univ.fr",
+        "escn": "11111111-2222-3333-4444-555555555555",
         "roles": [
             "student"
         ]
@@ -70,6 +71,7 @@ module.exports.userProviderData = {
         ]
     }
 };
+
 module.exports.errorsData = {
     unauthorized: (username) => ({
         "statusCode": 401,
@@ -81,4 +83,4 @@ module.exports.errorsData = {
             "message": "Utilisateur inconnu"
         }
     }
-}
+};

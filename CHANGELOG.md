@@ -3,13 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.x.x (yyyy-mm-dd)
+### Client
+#### New features
+* **(cards)** : Suppression du module **cards** au profit de 2 modules séparés **card** et **card-eu**
+* **(card)** : Nouveau module de gestion de la carte dématérialisée de l'établissement
+* **(card-eu)** : Nouveau module de gestion de la carte européenne étudiante
+
+### Backend
+#### New features
+* **(cards)** : Suppression du microservice cards au profit de 2 microservices séparés **card** et **card-eu**
+* **(card)** : Nouveau microservice de gestion de la carte dématérialisée de l'établissement
+* **(card-eu)** : Nouveau microservice de gestion de la carte européenne étudiante
+
+### Serveur de mocks
+* Ajout de 2 routes `/mocking/card` et `/mocking/card-eu` pour les nouvelles fonctionnalités **card** et **card-eu**
+
 ## 2.1.0 (2025-10-16)
 
 ### Client
 #### Bug fixes
 * Correction du mode *EdgeToEdge* pour Android
 * Désactivation du plugin *EdgeToEdge* pour iOS
-* **(app-update)**: Le client n'était plus capable de récupérer la version min requise suite au passage au multi-tenants
+* **(app-update)** : Le client n'était plus capable de récupérer la version min requise suite au passage au multi-tenants
 * **(chatbot)** : Balises non affichées dans les messages du chatbot
 * **(features)** : Normalisation du contenu pour la recherche dans les services
 * **(login)** : Afficher/masquer le mot de passe, utilisation du composant Ionic prévu à cet effet

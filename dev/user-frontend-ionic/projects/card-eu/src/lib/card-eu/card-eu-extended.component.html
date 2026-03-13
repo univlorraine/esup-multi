@@ -1,0 +1,84 @@
+<!--
+  ~ Copyright ou © ou Copr. Université de Lorraine, (2022)
+  ~
+  ~ Direction du Numérique de l'Université de Lorraine - SIED
+  ~  (dn-mobile-dev@univ-lorraine.fr)
+  ~ JNESIS (contact@jnesis.com)
+  ~
+  ~ Ce logiciel est un programme informatique servant à rendre accessible
+  ~ sur mobile divers services universitaires aux étudiants et aux personnels
+  ~ de l'université.
+  ~
+  ~ Ce logiciel est régi par la licence CeCILL 2.1, soumise au droit français
+  ~ et respectant les principes de diffusion des logiciels libres. Vous pouvez
+  ~ utiliser, modifier et/ou redistribuer ce programme sous les conditions
+  ~ de la licence CeCILL telle que diffusée par le CEA, le CNRS et INRIA
+  ~ sur le site "http://cecill.info".
+  ~
+  ~ En contrepartie de l'accessibilité au code source et des droits de copie,
+  ~ de modification et de redistribution accordés par cette licence, il n'est
+  ~ offert aux utilisateurs qu'une garantie limitée. Pour les mêmes raisons,
+  ~ seule une responsabilité restreinte pèse sur l'auteur du programme, le
+  ~ titulaire des droits patrimoniaux et les concédants successifs.
+  ~
+  ~ À cet égard, l'attention de l'utilisateur est attirée sur les risques
+  ~ associés au chargement, à l'utilisation, à la modification et/ou au
+  ~ développement et à la reproduction du logiciel par l'utilisateur étant
+  ~ donné sa spécificité de logiciel libre, qui peut le rendre complexe à
+  ~ manipuler et qui le réserve donc à des développeurs et des professionnels
+  ~ avertis possédant des connaissances informatiques approfondies. Les
+  ~ utilisateurs sont donc invités à charger et à tester l'adéquation du
+  ~ logiciel à leurs besoins dans des conditions permettant d'assurer la
+  ~ sécurité de leurs systèmes et/ou de leurs données et, plus généralement,
+  ~ à l'utiliser et à l'exploiter dans les mêmes conditions de sécurité.
+  ~
+  ~ Le fait que vous puissiez accéder à cet en-tête signifie que vous avez
+  ~ pris connaissance de la licence CeCILL 2.1, et que vous en avez accepté les
+  ~ termes.
+  -->
+
+<div class="card-eu-wrapper">
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        height="100%"
+        width="100%"
+        viewBox="0 0 850 540"
+        preserveAspectRatio="xMidYMin meet"
+        class="svg-card-eu"
+    >
+        <rect class="card-background" width="850" height="540" rx="15" fill="transparent" />
+
+        <!-- Student photo -->
+        <image height="285" width="180" x="20" y="20" [attr.href]="userCardEu.photo" class="card-user-photo" />
+
+        <!-- Logo établissement -->
+        <image class="card-logo" height="150" width="150" x="230" y="20" href="assets/cards/card-eu/university-logo.svg" />
+
+        <!-- Title -->
+        <text x="230" y="200" class="card-title">
+            {{'CARD-EU.CARD_TITLE' | translate}}
+        </text>
+
+        <!-- Subtitle -->
+        <text x="230" y="250" class="card-subtitle">
+            {{'CARD-EU.CARD_SUBTITLE' | translate}}
+        </text>
+
+        <!-- Student number -->
+        <text x="30" y="380" class="card-user-number">
+            {{userCardEu.euid}}
+        </text>
+
+        <!-- Lastname and Firstname -->
+        <text x="30" y="460" class="card-user-fullname">
+            {{userCardEu.lastname}} {{userCardEu.firstname}}
+        </text>
+
+        <!-- QR Code -->
+        <foreignObject x="565" y="180" width="285" height="345" xmlns="http://www.w3.org/1999/xhtml">
+            <xhtml:div xmlns:xhtml="http://www.w3.org/1999/xhtml">
+                <xhtml:div class="eu-qrcode" [innerHTML]="userCardEu.qrCode.value | safeHtml"></xhtml:div>
+            </xhtml:div>
+        </foreignObject>
+    </svg>
+</div>

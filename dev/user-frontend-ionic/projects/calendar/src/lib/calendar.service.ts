@@ -53,8 +53,6 @@ export class CalendarService {
 
   constructor(
     @Inject(CALENDAR_CONFIG) private config: CalendarModuleConfig,
-    @Inject('environment')
-    private environment: any,
     private multiTenantService: MultiTenantService,
     private http: HttpClient,
     private networkService: NetworkService

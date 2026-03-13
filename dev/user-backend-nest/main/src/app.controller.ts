@@ -68,7 +68,8 @@ export class AppController {
     @Inject('AUTH_SERVICE') private authClient: ClientProxy,
     @Inject('MAP_SERVICE') private mapClient: ClientProxy,
     @Inject('RSS_SERVICE') private rssClient: ClientProxy,
-    @Inject('CARDS_SERVICE') private cardsClient: ClientProxy,
+    @Inject('CARD_EU_SERVICE') private cardEuClient: ClientProxy,
+    @Inject('CARD_SERVICE') private cardClient: ClientProxy,
     @Inject('SCHEDULE_SERVICE') private scheduleClient: ClientProxy,
     @Inject('CONTACTS_SERVICE') private contactsClient: ClientProxy,
     @Inject('IMPORTANT_NEWS_SERVICE') private importantNewsClient: ClientProxy,
@@ -247,8 +248,8 @@ export class AppController {
     );
   }
 
-  @Post('/cards')
-  cards(@Body() body) {
+  @Post('/card-eu')
+  cardEu(@Body() body) {
     return this.authClient
       .send(
         {
@@ -258,9 +259,51 @@ export class AppController {
       )
       .pipe(
         concatMap((user) =>
-          this.cardsClient.send(
+          this.cardEuClient.send(
             {
-              cmd: 'cards',
+              cmd: 'card-eu',
+            },
+            user.username,
+          ),
+        ),
+      );
+  }
+
+  @Post('/card-eu-light')
+  cardEuLight(@Body() body) {
+    return this.authClient
+      .send(
+        {
+          cmd: 'getUserOrThrowError',
+        },
+        body,
+      )
+      .pipe(
+        concatMap(() =>
+          this.cardEuClient.send(
+            {
+              cmd: 'card-eu-light',
+            },
+            body.escn,
+          ),
+        ),
+      );
+  }
+
+  @Post('/card')
+  card(@Body() body) {
+    return this.authClient
+      .send(
+        {
+          cmd: 'getUserOrThrowError',
+        },
+        body,
+      )
+      .pipe(
+        concatMap((user) =>
+          this.cardClient.send(
+            {
+              cmd: 'card',
             },
             user.username,
           ),
@@ -477,6 +520,7 @@ export class AppController {
         ),
       );
   }
+
   @Post('/notifications/register')
   registerFCMToken(@Request() request, @Body() body) {
     return this.authClient
@@ -736,6 +780,7 @@ export class AppController {
       version: infosJsonData.version,
     };
   }
+
   @Get('/app-update-infos')
   appUpdateInfos() {
     return clientInfosJson;
