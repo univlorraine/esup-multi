@@ -44,4 +44,4 @@ export interface CardModuleConfig {
 }
 
 export const CARD_CONFIG =
-  new InjectionToken<CardModuleConfig>('Card eu module config');
+  new InjectionToken<CardModuleConfig>('Card module config');
