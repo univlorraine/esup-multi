@@ -12,6 +12,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Backend
 #### New features
+* **(main)** : Suppression du fichier client-infos.json pour la version minimum requise. Remplacé par des variables d'environnement
 * **(cards)** : Suppression du microservice cards au profit de 2 microservices séparés **card** et **card-eu**
 * **(card)** : Nouveau microservice de gestion de la carte dématérialisée de l'établissement
 * **(card-eu)** : Nouveau microservice de gestion de la carte européenne étudiante
