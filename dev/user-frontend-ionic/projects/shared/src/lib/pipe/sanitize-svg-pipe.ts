@@ -46,6 +46,7 @@ export class SanitizeSvgPipe implements PipeTransform {
   constructor(private sanitizer: DomSanitizer) {}
 
   transform(value: string) {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     const clean = DOMPurify.sanitize(value, { USE_PROFILES: { svg: true } });
     return this.sanitizer.bypassSecurityTrustHtml(clean);
   }
