@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NetworkService } from '@multi/shared';
 import { Observable } from 'rxjs';
@@ -53,7 +53,7 @@ import { IonRouterOutlet } from '@ionic/angular';
   templateUrl: './restaurant-menus.page.html',
   styleUrls: ['../../../../../src/theme/app-theme/styles/restaurants/restaurant-menus.page.scss'],
 })
-export class RestaurantMenusPage implements OnInit, AfterViewChecked {
+export class RestaurantMenusPage implements OnInit, OnDestroy, AfterViewChecked {
   @ViewChild('swiperContainer') swiperContainer: ElementRef;
 
   public restaurantMenusIsEmpty$: Observable<boolean>;

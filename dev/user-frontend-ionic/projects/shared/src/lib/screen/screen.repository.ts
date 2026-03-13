@@ -54,7 +54,7 @@ const store = createStore(
     withProps<Screen>({ brightness: null})
   );
 
-const persist = persistState(store, {
+persistState(store, {
     key: STORE_NAME,
     storage: localForageStore,
 });
