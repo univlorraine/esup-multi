@@ -37,14 +37,33 @@
  * termes.
  */
 
-import { Pipe, PipeTransform } from "@angular/core";
-import { DomSanitizer } from "@angular/platform-browser";
+import { createStore, select, withProps } from '@ngneat/elf';
+import {
+ persistState
+} from '@ngneat/elf-persist-state';
+import { localForageStore } from '../store/local-forage';
 
-@Pipe({ name: "safeHtml" })
-export class SafeHtmlPipe implements PipeTransform {
-  constructor(private sanitizer: DomSanitizer) {}
+const STORE_NAME = 'screen';
 
-  transform(value: string) {
-    return this.sanitizer.bypassSecurityTrustHtml(value);
-  }
+export interface Screen {
+  brightness: number;
 }
+
+const store = createStore(
+    { name: STORE_NAME },
+    withProps<Screen>({ brightness: null})
+  );
+
+persistState(store, {
+    key: STORE_NAME,
+    storage: localForageStore,
+});
+
+export const brightness$ = store.pipe(select((state) => state.brightness));
+
+export const setBrightness = (brightness: Screen['brightness']) => {
+  store.update((state) => ({
+    ...state,
+    brightness,
+  }));
+};

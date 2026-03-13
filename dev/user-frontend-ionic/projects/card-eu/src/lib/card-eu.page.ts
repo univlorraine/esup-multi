@@ -44,7 +44,7 @@ import { filter, finalize, switchMap, take } from 'rxjs/operators';
 import { CardEuModuleConfig, CARD_EU_CONFIG } from './card-eu.config';
 import { setUserAndCardEuData, UserAndCardEuData, userAndCardEuData$ } from './card-eu.repository';
 import { CardEuService } from './card-eu.service';
-import { ScreenService } from './screen.service';
+import { ScreenService } from '@multi/shared';
 
 @Component({
   selector: 'app-card-eu',

@@ -37,54 +37,17 @@
  * termes.
  */
 
-import { Injectable } from '@angular/core';
-import { ScreenBrightness } from '@capacitor-community/screen-brightness';
-import { Platform } from '@ionic/angular';
-import { from } from 'rxjs';
-import { filter, finalize, switchMap, take } from 'rxjs/operators';
-import { brightness$, setBrightness } from './screen.repository';
+import { Pipe, PipeTransform } from "@angular/core";
+import { DomSanitizer } from "@angular/platform-browser";
+import DOMPurify from "dompurify";
 
-@Injectable({
-  providedIn: 'root'
-})
-export class ScreenService {
+@Pipe({ name: "sanitizeSvg" })
+export class SanitizeSvgPipe implements PipeTransform {
+  constructor(private sanitizer: DomSanitizer) {}
 
-  private fullBrightnessEnabled = false;
-
-  constructor(private platform: Platform) {}
-
-  public async fullBrightness() {
-    // the brightness plugin only works with capacitor
-    if (!this.platform.is('capacitor')) {
-      return;
-    }
-
-    // prevent multiple full brightness activation
-    if(this.fullBrightnessEnabled === true) {
-      return;
-    }
-
-    this.fullBrightnessEnabled = true;
-    const { brightness } = await ScreenBrightness.getBrightness();
-    setBrightness(brightness);
-    await ScreenBrightness.setBrightness({brightness: 1.0});
-  }
-
-  public async restorePreviousBrightness() {
-    // the brightness plugin only works with capacitor
-    if (!this.platform.is('capacitor')) {
-      return;
-    }
-
-    if(this.fullBrightnessEnabled === false) {
-      return;
-    }
-
-    return brightness$.pipe(
-      take(1),
-      filter(brightness => brightness !== null),
-      switchMap(brightness => from(ScreenBrightness.setBrightness({brightness}))),
-      finalize(() => this.fullBrightnessEnabled = false)
-    ).toPromise();
+  transform(value: string) {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    const clean = DOMPurify.sanitize(value, { USE_PROFILES: { svg: true } });
+    return this.sanitizer.bypassSecurityTrustHtml(clean);
   }
 }

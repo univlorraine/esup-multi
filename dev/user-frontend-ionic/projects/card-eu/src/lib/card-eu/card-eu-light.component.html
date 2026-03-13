@@ -52,7 +52,7 @@
 
 <ion-card class="card-eu-light">
   <ion-card-content class="ion-text-center">
-    <div class="eu-qrcode" [innerHTML]="userCardEuLight.qrCode.value | safeHtml"></div>
+    <div class="eu-qrcode" [innerHTML]="userCardEuLight.qrCode.value | sanitizeSvg"></div>
     <img class="logo" src="assets/cards/card-eu/university-logo.svg" alt="Logo université">
   </ion-card-content>
 </ion-card>

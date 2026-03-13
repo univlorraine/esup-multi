@@ -45,7 +45,7 @@ import { CompleteLocalDatePipe } from './complete-local-date-pipe';
 import { RelativeTimePipe } from './relative-time-pipe';
 import { TruncatePipe } from './truncate-pipe';
 import { LocalHourPipe } from './local-hour.pipe';
-import { SafeHtmlPipe } from './safe-html-pipe';
+import { SanitizeSvgPipe } from './sanitize-svg-pipe';
 
 @NgModule({
   declarations: [
@@ -53,14 +53,14 @@ import { SafeHtmlPipe } from './safe-html-pipe';
     TruncatePipe,
     CompleteLocalDatePipe,
     LocalHourPipe,
-    SafeHtmlPipe
+    SanitizeSvgPipe
   ],
   exports: [
     RelativeTimePipe,
     TruncatePipe,
     CompleteLocalDatePipe,
     LocalHourPipe,
-    SafeHtmlPipe
+    SanitizeSvgPipe
   ],
   imports: [
     CommonModule,
