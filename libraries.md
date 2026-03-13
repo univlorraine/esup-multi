@@ -47,11 +47,12 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 
 ## [Frontend](./dev/user-frontend-ionic)
 ```
-├─ MIT: 74
+├─ MIT: 75
 ├─ Apache-2.0: 7
 ├─ BSD-2-Clause: 2
 ├─ Custom: LICENSE: 1
 ├─ MIT*: 1
+├─ (MPL-2.0 OR Apache-2.0): 1
 └─ 0BSD: 1
 ```
 
@@ -107,6 +108,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@ngneat/react-rxjs@1.1.0](https://github.com/ngneat/react-rxjs) - MIT
 - [@ngx-translate/core@15.0.0](undefined) - Custom: LICENSE
 - [@trapezedev/configure@7.1.3](https://github.com/ionic-team/capacitor-configure) - MIT*
+- [@types/dompurify@3.0.5](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/jasmine@3.6.11](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/jasminewd2@2.0.13](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/leaflet@1.9.20](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
@@ -117,6 +119,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [angularx-qrcode@16.0.2](https://github.com/cordobo/angularx-qrcode) - MIT
 - [capacitor-secure-storage-plugin@0.11.0](https://github.com/martinkasa/capacitor-secure-storage-plugin) - MIT
 - [date-fns@2.30.0](https://github.com/date-fns/date-fns) - MIT
+- [dompurify@3.3.3](https://github.com/cure53/DOMPurify) - (MPL-2.0 OR Apache-2.0)
 - [eslint-plugin-local-rules@3.0.2](https://github.com/cletusw/eslint-plugin-local-rules) - MIT
 - [eslint@8.57.1](https://github.com/eslint/eslint) - MIT
 - [firebase@11.10.0](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
