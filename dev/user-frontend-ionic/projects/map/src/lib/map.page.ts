@@ -47,6 +47,7 @@ import { finalize, take } from 'rxjs/operators';
 import { Marker, markersList$, setMarkers } from './map.repository';
 import { MapService } from './map.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import 'leaflet.markercluster';
 
 const CATEGORIES = [
   'presidences_points',
@@ -74,9 +75,10 @@ export class MapPage {
   protected readonly categories = CATEGORIES;
   private map: Leaflet.Map;
   private markersByCategory: Map<string, Leaflet.Marker[]> = new Map();
-  private layerGroupByCategory: Map<string, Leaflet.LayerGroup> = new Map();
   private positionLayerGroup: Leaflet.LayerGroup;
   private destroyRef = inject(DestroyRef)
+  private clusterGroup: Leaflet.MarkerClusterGroup;
+
 
   constructor(
     private mapService: MapService,
@@ -103,6 +105,15 @@ export class MapPage {
     this.isLoading = true;
     await this.loadMarkersInNetworkAvailable();
     await this.leafletMapInit();
+    //On initialise le cluster unique
+    this.clusterGroup = Leaflet.markerClusterGroup({
+      disableClusteringAtZoom: 18, // Désactive le cluster à partir du zoom 18
+      showCoverageOnHover: false,  // Désactive la visualisation du polygone montrant la zone du cluster
+      zoomToBoundsOnClick: true,    // Lors du clic, zoom sur le cluster
+      maxClusterRadius: 80,         // Rayon maximum du cluster en pixel
+      removeOutsideVisibleBounds: true, // Retirer les clusters en dehors de la zone visible sur la carte
+    });
+    this.map.addLayer(this.clusterGroup);
     markersList$
       .pipe(
         take(1),
@@ -161,11 +172,19 @@ export class MapPage {
   }
 
   private refreshMapWithSelectedCategories(categories: string[]) {
-    this.layerGroupByCategory.forEach((layerGroup, category) => {
-      layerGroup.removeFrom(this.map);
-      if (categories.length === 0 || categories.indexOf(category) >= 0) {
-        layerGroup.addTo(this.map);
-      }
+    this.clusterGroup.clearLayers();
+    markersList$.pipe(take(1)).subscribe(markers => {
+      markers
+        .filter(m => categories.length === 0 || categories.includes(m.category))
+        .forEach(m => {
+          const icon = this.buildIconForCategory(m.category);
+          const marker = Leaflet.marker([m.latitude, m.longitude], { icon })
+            .bindPopup(`
+            <h4 class="app-title-4">${m.title}</h4><br>
+            <div class="app-text-5">${m.description}</div>
+          `);
+          this.clusterGroup.addLayer(marker);
+        });
     });
   }
 
@@ -219,12 +238,6 @@ export class MapPage {
 
   private initMarkers(markers: Marker[]) {
     markers.forEach(m => this.initMarker(m));
-
-    this.markersByCategory.forEach((markersInCategory, category) => {
-      const layerGroup = Leaflet.layerGroup(markersInCategory);
-      this.layerGroupByCategory.set(category, layerGroup);
-      layerGroup.addTo(this.map);
-    });
   }
 
   private initMarker(m: Marker) {
@@ -239,7 +252,8 @@ export class MapPage {
         `<h4 class="app-title-4">${m.title}</h4><br>
         <div class="app-text-5">${m.description}</div>`
       );
-
+    //Ajoute le marqueur au cluster unique
+    this.clusterGroup.addLayer(marker);
     markersInCategory.push(marker);
   }
 
