@@ -56,14 +56,15 @@ import { ClientProxy } from '@nestjs/microservices';
 import { AuthGuard } from '@nestjs/passport';
 import { concatMap, map } from 'rxjs';
 import * as infosJsonData from './infos.json';
-import * as clientInfosJson from './client-infos.json';
 import { ErrorsInterceptor } from './interceptors/errors.interceptor';
 import { AuthorizationHelper } from './security/authorization.helper';
+import { ConfigService } from '@nestjs/config';
 
 @UseInterceptors(new ErrorsInterceptor())
 @Controller()
 export class AppController {
   constructor(
+    private configService: ConfigService,
     @Inject('FEATURES_SERVICE') private featuresClient: ClientProxy,
     @Inject('AUTH_SERVICE') private authClient: ClientProxy,
     @Inject('MAP_SERVICE') private mapClient: ClientProxy,
@@ -783,7 +784,14 @@ export class AppController {
 
   @Get('/app-update-infos')
   appUpdateInfos() {
-    return clientInfosJson;
+    return {
+      storeVersion: this.configService.get('APP_UPDATE_STORE_VERSION'),
+      minVersionRequired: this.configService.get(
+        'APP_UPDATE_MIN_VERSION_REQUIRED',
+      ),
+      playStoreUrl: this.configService.get('APP_UPDATE_PLAY_STORE_URL'),
+      appStoreUrl: this.configService.get('APP_UPDATE_APP_STORE_URL'),
+    };
   }
 
   @Get('/health')
