@@ -9,8 +9,8 @@ export interface Marker {
   id: string;
   latitude: number;
   longitude: number;
-  campusId: string;
-  iconId: string;
+  campusId: string | null;
+  iconId: string | null;
   translations?: MapPointTranslationsDto[];
 }
 
@@ -66,9 +66,8 @@ export interface MapDataGraphQLDto {
 
 export interface FeatureDto {
   id: string;
-  categoryId: string;
-  campusId: string;
-  iconId: string;
+  campusId: string | null;
+  iconId: string | null;
   location: GpsCoordinate;
   translations?: MapPointTranslationsDto[];
 }

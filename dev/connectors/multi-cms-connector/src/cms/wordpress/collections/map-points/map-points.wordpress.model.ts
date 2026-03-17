@@ -80,10 +80,10 @@ export class MapPointWordpress {
   @Field(() => MapPointMapCategoryConnection, { nullable: true })
   mapPointCategory: MapPointMapCategoryConnection;
 
-  @Field(() => MapPointCampusConnection)
+  @Field(() => MapPointCampusConnection, { nullable: true })
   mapPointCampus: MapPointCampusConnection;
 
-  @Field(() => MapPointMapIconConnection)
+  @Field(() => MapPointMapIconConnection, { nullable: true })
   mapPointIcon: MapPointMapIconConnection;
 
   @Field(() => [MapPointTranslationsWordpress])

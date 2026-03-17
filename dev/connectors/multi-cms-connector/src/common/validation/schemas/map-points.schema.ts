@@ -48,8 +48,8 @@ import { MapIconSchema } from '@common/validation/schemas/map-icons.schema';
 
 const FeaturePointSchema = z.object({
   id: IdSchema,
-  campusId: IdSchema,
-  iconId: IdSchema,
+  campusId: IdSchema.nullable(),
+  iconId: IdSchema.nullable(),
   location: GpsCoordinatesSchema,
   translations: z
     .array(MapPointTranslationsSchema)
@@ -58,9 +58,9 @@ const FeaturePointSchema = z.object({
 
 export const MapPointSchema = z.object({
   feature: FeaturePointSchema,
-  campus: CampusSchema,
+  campus: CampusSchema.nullable(),
   category: MapCategorySchema,
-  icon: MapIconSchema,
+  icon: MapIconSchema.nullable(),
 });
 
 const FeatureCollectionSchema = z.object({

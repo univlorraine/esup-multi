@@ -89,8 +89,8 @@ export class MapPointsDirectusService {
     return {
       feature: {
         id: mapPoint.id.toString(),
-        campusId: mapPoint.campus.id.toString(),
-        iconId: mapPoint.icon.id.toString(),
+        campusId: mapPoint.campus ? mapPoint.campus.id.toString() : null,
+        iconId: mapPoint.icon ? mapPoint.icon.id.toString() : null,
         location: {
           lat: mapPoint.lat,
           lng: mapPoint.lng,
@@ -101,42 +101,48 @@ export class MapPointsDirectusService {
           description: normalizeEmptyStringToNull(translation.description),
         })),
       },
-      campus: {
-        id: mapPoint.campus.id.toString(),
-        name: mapPoint.campus.name,
-        initial: {
-          lat: mapPoint.campus.initial_lat,
-          lng: mapPoint.campus.initial_lng,
-        },
-        southwest: {
-          lat: mapPoint.campus.southwest_lat,
-          lng: mapPoint.campus.southwest_lng,
-        },
-        northeast: {
-          lat: mapPoint.campus.northeast_lat,
-          lng: mapPoint.campus.northeast_lng,
-        },
-        photo: mapPoint.campus.photo
-          ? this.directusService.buildAssetUrl(
-              mapPoint.campus.photo.id.toString(),
-            )
-          : null,
-      },
-      category: {
-        id: mapPoint.category.id.toString(),
-        translations: mapPoint.category.translations.map((translation) => ({
-          languagesCode: translation.languages_code.code,
-          label: normalizeEmptyStringToNull(translation.label),
-        })),
-      },
-      icon: {
-        id: mapPoint.icon.id.toString(),
-        svg: mapPoint.icon.svg,
-        width: mapPoint.icon.width,
-        height: mapPoint.icon.height,
-        x: mapPoint.icon.x,
-        y: mapPoint.icon.y,
-      },
+      campus: mapPoint.campus
+        ? {
+            id: mapPoint.campus.id.toString(),
+            name: mapPoint.campus.name,
+            initial: {
+              lat: mapPoint.campus.initial_lat,
+              lng: mapPoint.campus.initial_lng,
+            },
+            southwest: {
+              lat: mapPoint.campus.southwest_lat,
+              lng: mapPoint.campus.southwest_lng,
+            },
+            northeast: {
+              lat: mapPoint.campus.northeast_lat,
+              lng: mapPoint.campus.northeast_lng,
+            },
+            photo: mapPoint.campus.photo
+              ? this.directusService.buildAssetUrl(
+                  mapPoint.campus.photo.id.toString(),
+                )
+              : null,
+          }
+        : null,
+      category: mapPoint.category
+        ? {
+            id: mapPoint.category.id.toString(),
+            translations: mapPoint.category.translations.map((translation) => ({
+              languagesCode: translation.languages_code.code,
+              label: normalizeEmptyStringToNull(translation.label),
+            })),
+          }
+        : null,
+      icon: mapPoint.icon
+        ? {
+            id: mapPoint.icon.id.toString(),
+            svg: mapPoint.icon.svg,
+            width: mapPoint.icon.width,
+            height: mapPoint.icon.height,
+            x: mapPoint.icon.x,
+            y: mapPoint.icon.y,
+          }
+        : null,
     };
   }
 
@@ -150,9 +156,10 @@ export class MapPointsDirectusService {
     const featureCollections: MapFeatureCollection[] = [];
 
     for (const mapPointData of data) {
-      if (!campuses[mapPointData.campus.id]) {
+      if (mapPointData.campus && !campuses[mapPointData.campus.id]) {
         campuses[mapPointData.campus.id] = mapPointData.campus;
       }
+
       if (mapPointData.category) {
         if (!categories[mapPointData.category.id]) {
           categories[mapPointData.category.id] = mapPointData.category;
@@ -168,7 +175,8 @@ export class MapPointsDirectusService {
           featureCollection.features.push(mapPointData.feature);
         }
       }
-      if (!icons[mapPointData.icon.id]) {
+
+      if (mapPointData.icon && !icons[mapPointData.icon.id]) {
         icons[mapPointData.icon.id] = mapPointData.icon;
       }
     }

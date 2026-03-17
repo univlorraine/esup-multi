@@ -279,7 +279,7 @@ export class MapPage {
 
   private buildIconForMarker(m: Marker) {
     const icon = this.icons.find(i => i.id === m.iconId);
-    if (icon.svg == null || icon.svg === '') {
+    if (!icon?.svg) {
       return this.buildSimpleMarkerIcon();
     }
 

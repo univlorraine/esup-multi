@@ -56,11 +56,11 @@ class MapPoint {
   @Field()
   id: string;
 
-  @Field()
-  campusId: string;
+  @Field({ nullable: true })
+  campusId: string | null;
 
-  @Field()
-  iconId: string;
+  @Field({ nullable: true })
+  iconId: string | null;
 
   @Field(() => PointGpsCoordinates)
   location: PointGpsCoordinates;
@@ -74,14 +74,14 @@ export class MapPointData {
   @Field(() => MapPoint)
   feature: MapPoint;
 
-  @Field(() => Campus)
-  campus: Campus;
+  @Field(() => Campus, { nullable: true })
+  campus: Campus | null;
 
-  @Field(() => MapCategory, { nullable: true })
-  category: MapCategory | null;
+  @Field(() => MapCategory)
+  category: MapCategory;
 
-  @Field(() => MapIcon)
-  icon: MapIcon;
+  @Field(() => MapIcon, { nullable: true })
+  icon: MapIcon | null;
 }
 
 @ObjectType()

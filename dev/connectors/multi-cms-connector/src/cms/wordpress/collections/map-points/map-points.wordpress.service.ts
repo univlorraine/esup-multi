@@ -78,65 +78,79 @@ export class MapPointsWordpressService {
       ) || []),
     ];
 
-    const campusNode = mapPoint.mapPointCampus.node;
-    const campus = {
-      id: campusNode.databaseId.toString(),
-      name: campusNode.campusName,
-      photo: normalizeEmptyStringToNull(
-        campusNode.campusPhoto?.node?.mediaItemUrl.toString(),
-      ),
-      initial: {
-        lat: campusNode.campusInitLatitude,
-        lng: campusNode.campusInitLongitude,
-      },
-      southwest: {
-        lat: campusNode.campusSwLatitude,
-        lng: campusNode.campusSwLongitude,
-      },
-      northeast: {
-        lat: campusNode.campusNeLatitude,
-        lng: campusNode.campusNeLongitude,
-      },
-    };
-
-    const mapCategoryNode = mapPoint.mapPointCategory?.node;
-    let category = null;
-    if (mapCategoryNode) {
-      const categoryDefaultTranslation: MapCategoryTranslations = {
-        languagesCode: mapCategoryNode.language.code.toLowerCase(),
-        label: mapCategoryNode.mapCategoryName,
-      };
-      const categoryTranslations: MapCategoryTranslations[] = [
-        categoryDefaultTranslation,
-        ...(mapCategoryNode.translations?.map(
-          (translation: MapCategoryTranslationsWordpress) => ({
-            languagesCode: translation.language.code.toLowerCase(),
-            label: translation.mapCategoryName,
-          }),
-        ) || []),
-      ];
-
-      category = {
-        id: mapCategoryNode.mapCategoryInternalName,
-        translations: categoryTranslations,
+    const campusNode = mapPoint.mapPointCampus?.node;
+    let campus: Campus | null = null;
+    if (campusNode) {
+      campus = {
+        id: campusNode.databaseId.toString(),
+        name: campusNode.campusName,
+        photo: normalizeEmptyStringToNull(
+          campusNode.campusPhoto?.node?.mediaItemUrl.toString(),
+        ),
+        initial: {
+          lat: campusNode.campusInitLatitude,
+          lng: campusNode.campusInitLongitude,
+        },
+        southwest: {
+          lat: campusNode.campusSwLatitude,
+          lng: campusNode.campusSwLongitude,
+        },
+        northeast: {
+          lat: campusNode.campusNeLatitude,
+          lng: campusNode.campusNeLongitude,
+        },
       };
     }
 
-    const mapIconNode = mapPoint.mapPointIcon.node;
-    const icon = {
-      id: mapIconNode.databaseId.toString(),
-      svg: mapIconNode.mapIconSvg,
-      width: mapIconNode.mapIconWidth,
-      height: mapIconNode.mapIconHeight,
-      x: mapIconNode.mapIconPosX,
-      y: mapIconNode.mapIconPosY,
+    let mapCategoryNode = mapPoint.mapPointCategory?.node;
+    if (!mapCategoryNode) {
+      mapCategoryNode = {
+        mapCategoryInternalName: '__uncategorized__',
+        language: {
+          code: FRENCH_CODE,
+          locale: 'fr_FR',
+          name: 'French',
+        },
+        mapCategoryName: 'Non catégorisé',
+        translations: [],
+      };
+    }
+    const categoryDefaultTranslation: MapCategoryTranslations = {
+      languagesCode: mapCategoryNode.language.code.toLowerCase(),
+      label: mapCategoryNode.mapCategoryName,
     };
+    const categoryTranslations: MapCategoryTranslations[] = [
+      categoryDefaultTranslation,
+      ...(mapCategoryNode.translations?.map(
+        (translation: MapCategoryTranslationsWordpress) => ({
+          languagesCode: translation.language.code.toLowerCase(),
+          label: translation.mapCategoryName,
+        }),
+      ) || []),
+    ];
+    const category = {
+      id: mapCategoryNode.mapCategoryInternalName,
+      translations: categoryTranslations,
+    };
+
+    const mapIconNode = mapPoint.mapPointIcon?.node;
+    let icon: MapIcon | null = null;
+    if (mapIconNode) {
+      icon = {
+        id: mapIconNode.databaseId.toString(),
+        svg: mapIconNode.mapIconSvg,
+        width: mapIconNode.mapIconWidth,
+        height: mapIconNode.mapIconHeight,
+        x: mapIconNode.mapIconPosX,
+        y: mapIconNode.mapIconPosY,
+      };
+    }
 
     return {
       feature: {
         id: mapPoint.databaseId.toString(),
-        campusId: campus.id,
-        iconId: icon.id,
+        campusId: campus ? campus.id : null,
+        iconId: icon ? icon.id : null,
         location: {
           lat: mapPoint.mapPointLatitude,
           lng: mapPoint.mapPointLongitude,
@@ -159,9 +173,10 @@ export class MapPointsWordpressService {
     const featureCollections: MapFeatureCollection[] = [];
 
     for (const mapPointData of data) {
-      if (!campuses[mapPointData.campus.id]) {
+      if (mapPointData.campus && !campuses[mapPointData.campus.id]) {
         campuses[mapPointData.campus.id] = mapPointData.campus;
       }
+
       if (mapPointData.category) {
         if (!categories[mapPointData.category.id]) {
           categories[mapPointData.category.id] = mapPointData.category;
@@ -177,7 +192,8 @@ export class MapPointsWordpressService {
           featureCollection.features.push(mapPointData.feature);
         }
       }
-      if (!icons[mapPointData.icon.id]) {
+
+      if (mapPointData.icon && !icons[mapPointData.icon.id]) {
         icons[mapPointData.icon.id] = mapPointData.icon;
       }
     }
