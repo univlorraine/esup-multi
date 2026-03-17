@@ -5,7 +5,8 @@
 * [Backend](#backend)
   * [main](#backend-main)
   * [auth](#backend-auth)
-  * [cards](#backend-cards)
+  * [card](#backend-card)
+  * [card-eu](#backend-card-eu)
   * [chatbot](#backend-chatbot)
   * [clocking](#backend-clocking)
   * [contact-us](#backend-contact-us)
@@ -46,7 +47,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 
 ## [Frontend](./dev/user-frontend-ionic)
 ```
-├─ MIT: 74
+├─ MIT: 75
 ├─ Apache-2.0: 7
 ├─ BSD-2-Clause: 2
 ├─ Custom: LICENSE: 1
@@ -107,6 +108,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@ngneat/react-rxjs@1.1.0](https://github.com/ngneat/react-rxjs) - MIT
 - [@ngx-translate/core@15.0.0](undefined) - Custom: LICENSE
 - [@trapezedev/configure@7.1.3](https://github.com/ionic-team/capacitor-configure) - MIT*
+- [@types/dompurify@3.0.5](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/jasmine@3.6.11](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/jasminewd2@2.0.13](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/leaflet@1.9.20](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
@@ -117,7 +119,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [angularx-qrcode@16.0.2](https://github.com/cordobo/angularx-qrcode) - MIT
 - [capacitor-secure-storage-plugin@0.11.0](https://github.com/martinkasa/capacitor-secure-storage-plugin) - MIT
 - [date-fns@2.30.0](https://github.com/date-fns/date-fns) - MIT
-- [dompurify@3.3.0](https://github.com/cure53/DOMPurify) - (MPL-2.0 OR Apache-2.0)
+- [dompurify@3.3.3](https://github.com/cure53/DOMPurify) - (MPL-2.0 OR Apache-2.0)
 - [eslint-plugin-local-rules@3.0.2](https://github.com/cletusw/eslint-plugin-local-rules) - MIT
 - [eslint@8.57.1](https://github.com/eslint/eslint) - MIT
 - [firebase@11.10.0](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
@@ -150,7 +152,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 ## [Mocks (backend)](./dev/user-backend-mocks)
 <span id="backend-mocks"></span>
 ```
-├─ MIT: 4
+├─ MIT: 5
 └─ BSD-2-Clause: 1
 ```
 
@@ -160,6 +162,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [express@5.1.0](https://github.com/expressjs/express) - MIT
 - [http-errors@2.0.0](https://github.com/jshttp/http-errors) - MIT
 - [morgan@1.10.1](https://github.com/expressjs/morgan) - MIT
+- [qrcode@1.5.4](https://github.com/soldair/node-qrcode) - MIT
 - [uuid@11.1.0](https://github.com/uuidjs/uuid) - MIT
 
 </details>
@@ -270,8 +273,54 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 
 </details>
 
-### [cards](./dev/user-backend-nest/microservices/cards)
-<span id="backend-cards"></span>
+### [card](./dev/user-backend-nest/microservices/card)
+<span id="backend-card"></span>
+```
+├─ MIT: 26
+├─ Apache-2.0: 4
+├─ BSD-2-Clause: 1
+└─ ISC: 1
+```
+
+<details><summary>Détails</summary>
+
+- [@nestjs/axios@3.1.3](https://github.com/nestjs/axios) - MIT
+- [@nestjs/cli@10.4.9](https://github.com/nestjs/nest-cli) - MIT
+- [@nestjs/common@10.4.15](https://github.com/nestjs/nest) - MIT
+- [@nestjs/config@3.3.0](https://github.com/nestjs/config) - MIT
+- [@nestjs/core@10.4.15](https://github.com/nestjs/nest) - MIT
+- [@nestjs/microservices@10.4.15](https://github.com/nestjs/nest) - MIT
+- [@nestjs/platform-express@10.4.15](https://github.com/nestjs/nest) - MIT
+- [@nestjs/schematics@10.2.3](https://github.com/nestjs/schematics) - MIT
+- [@nestjs/testing@10.4.15](https://github.com/nestjs/nest) - MIT
+- [@types/express@4.17.21](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/jest@28.1.8](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/node@16.18.126](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/supertest@2.0.16](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@typescript-eslint/eslint-plugin@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
+- [@typescript-eslint/parser@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - BSD-2-Clause
+- [agentkeepalive@4.6.0](https://github.com/node-modules/agentkeepalive) - MIT
+- [eslint-config-prettier@8.10.0](https://github.com/prettier/eslint-config-prettier) - MIT
+- [eslint-plugin-prettier@4.2.1](https://github.com/prettier/eslint-plugin-prettier) - MIT
+- [eslint@8.57.1](https://github.com/eslint/eslint) - MIT
+- [jest@29.7.0](https://github.com/jestjs/jest) - MIT
+- [nats@2.29.2](https://github.com/nats-io/nats.node) - Apache-2.0
+- [prettier@2.8.8](https://github.com/prettier/prettier) - MIT
+- [reflect-metadata@0.1.14](https://github.com/rbuckton/reflect-metadata) - Apache-2.0
+- [rimraf@3.0.2](https://github.com/isaacs/rimraf) - ISC
+- [rxjs@7.8.2](https://github.com/reactivex/rxjs) - Apache-2.0
+- [source-map-support@0.5.21](https://github.com/evanw/node-source-map-support) - MIT
+- [supertest@6.3.4](https://github.com/ladjs/supertest) - MIT
+- [ts-jest@29.2.6](https://github.com/kulshekhar/ts-jest) - MIT
+- [ts-loader@9.5.2](https://github.com/TypeStrong/ts-loader) - MIT
+- [ts-node@10.9.2](https://github.com/TypeStrong/ts-node) - MIT
+- [tsconfig-paths@4.2.0](https://github.com/dividab/tsconfig-paths) - MIT
+- [typescript@4.9.5](https://github.com/Microsoft/TypeScript) - Apache-2.0
+
+</details>
+
+### [card-eu](./dev/user-backend-nest/microservices/card-eu)
+<span id="backend-card-eu"></span>
 ```
 ├─ MIT: 26
 ├─ Apache-2.0: 4
@@ -282,23 +331,23 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 <details><summary>Détails</summary>
 
 - [@nestjs/axios@4.0.1](https://github.com/nestjs/axios) - MIT
-- [@nestjs/cli@11.0.7](https://github.com/nestjs/nest-cli) - MIT
-- [@nestjs/common@11.1.5](https://github.com/nestjs/nest) - MIT
+- [@nestjs/cli@11.0.10](https://github.com/nestjs/nest-cli) - MIT
+- [@nestjs/common@11.1.8](https://github.com/nestjs/nest) - MIT
 - [@nestjs/config@4.0.2](https://github.com/nestjs/config) - MIT
-- [@nestjs/core@11.1.5](https://github.com/nestjs/nest) - MIT
-- [@nestjs/microservices@11.1.5](https://github.com/nestjs/nest) - MIT
-- [@nestjs/platform-express@11.1.5](https://github.com/nestjs/nest) - MIT
-- [@nestjs/schematics@11.0.5](https://github.com/nestjs/schematics) - MIT
-- [@nestjs/testing@11.1.5](https://github.com/nestjs/nest) - MIT
-- [@types/express@5.0.3](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@nestjs/core@11.1.8](https://github.com/nestjs/nest) - MIT
+- [@nestjs/microservices@11.1.8](https://github.com/nestjs/nest) - MIT
+- [@nestjs/platform-express@11.1.8](https://github.com/nestjs/nest) - MIT
+- [@nestjs/schematics@11.0.9](https://github.com/nestjs/schematics) - MIT
+- [@nestjs/testing@11.1.8](https://github.com/nestjs/nest) - MIT
+- [@types/express@5.0.5](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/jest@28.1.8](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/node@20.19.9](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/node@20.19.24](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/supertest@2.0.16](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@typescript-eslint/eslint-plugin@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
 - [@typescript-eslint/parser@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - BSD-2-Clause
 - [agentkeepalive@4.6.0](https://github.com/node-modules/agentkeepalive) - MIT
-- [eslint-config-prettier@8.10.2](https://github.com/prettier/eslint-config-prettier) - MIT
-- [eslint-plugin-prettier@4.2.5](https://github.com/prettier/eslint-plugin-prettier) - MIT
+- [eslint-config-prettier@8.10.0](https://github.com/prettier/eslint-config-prettier) - MIT
+- [eslint-plugin-prettier@4.2.1](https://github.com/prettier/eslint-plugin-prettier) - MIT
 - [eslint@8.57.1](https://github.com/eslint/eslint) - MIT
 - [jest@29.7.0](https://github.com/jestjs/jest) - MIT
 - [nats@2.29.3](https://github.com/nats-io/nats.node) - Apache-2.0
@@ -308,7 +357,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [rxjs@7.8.2](https://github.com/reactivex/rxjs) - Apache-2.0
 - [source-map-support@0.5.21](https://github.com/evanw/node-source-map-support) - MIT
 - [supertest@6.3.4](https://github.com/ladjs/supertest) - MIT
-- [ts-jest@29.4.0](https://github.com/kulshekhar/ts-jest) - MIT
+- [ts-jest@29.4.5](https://github.com/kulshekhar/ts-jest) - MIT
 - [ts-loader@9.5.2](https://github.com/TypeStrong/ts-loader) - MIT
 - [ts-node@10.9.2](https://github.com/TypeStrong/ts-node) - MIT
 - [tsconfig-paths@4.2.0](https://github.com/dividab/tsconfig-paths) - MIT

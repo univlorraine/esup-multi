@@ -1,0 +1,115 @@
+/*
+ * Copyright ou © ou Copr. Université de Lorraine, (2022)
+ *
+ * Direction du Numérique de l'Université de Lorraine - SIED
+ *  (dn-mobile-dev@univ-lorraine.fr)
+ * JNESIS (contact@jnesis.com)
+ *
+ * Ce logiciel est un programme informatique servant à rendre accessible
+ * sur mobile divers services universitaires aux étudiants et aux personnels
+ * de l'université.
+ *
+ * Ce logiciel est régi par la licence CeCILL 2.1, soumise au droit français
+ * et respectant les principes de diffusion des logiciels libres. Vous pouvez
+ * utiliser, modifier et/ou redistribuer ce programme sous les conditions
+ * de la licence CeCILL telle que diffusée par le CEA, le CNRS et INRIA
+ * sur le site "http://cecill.info".
+ *
+ * En contrepartie de l'accessibilité au code source et des droits de copie,
+ * de modification et de redistribution accordés par cette licence, il n'est
+ * offert aux utilisateurs qu'une garantie limitée. Pour les mêmes raisons,
+ * seule une responsabilité restreinte pèse sur l'auteur du programme, le
+ * titulaire des droits patrimoniaux et les concédants successifs.
+ *
+ * À cet égard, l'attention de l'utilisateur est attirée sur les risques
+ * associés au chargement, à l'utilisation, à la modification et/ou au
+ * développement et à la reproduction du logiciel par l'utilisateur étant
+ * donné sa spécificité de logiciel libre, qui peut le rendre complexe à
+ * manipuler et qui le réserve donc à des développeurs et des professionnels
+ * avertis possédant des connaissances informatiques approfondies. Les
+ * utilisateurs sont donc invités à charger et à tester l'adéquation du
+ * logiciel à leurs besoins dans des conditions permettant d'assurer la
+ * sécurité de leurs systèmes et/ou de leurs données et, plus généralement,
+ * à l'utiliser et à l'exploiter dans les mêmes conditions de sécurité.
+ *
+ * Le fait que vous puissiez accéder à cet en-tête signifie que vous avez
+ * pris connaissance de la licence CeCILL 2.1, et que vous en avez accepté les
+ * termes.
+ */
+
+import { HttpService } from '@nestjs/axios';
+import { Injectable, Logger } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { RpcException } from '@nestjs/microservices';
+import { catchError, map, Observable } from 'rxjs';
+import { CardProviderApi } from '../config/configuration.interface';
+import { UserCardDto } from './card.dto';
+
+@Injectable()
+export class CardService {
+  private readonly logger = new Logger(CardService.name);
+  private cardProviderApiConfig: CardProviderApi;
+
+  constructor(
+    private readonly configService: ConfigService,
+    private readonly httpService: HttpService,
+  ) {
+    this.cardProviderApiConfig =
+      this.configService.get<CardProviderApi>('cardProviderApi');
+  }
+
+  public getUserCard(username: string): Observable<UserCardDto> {
+    const url = this.cardProviderApiConfig.apiUrl.replace(
+      /\{username\}/g,
+      username,
+    );
+
+    return this.httpService
+      .get<any>(url, {
+        headers: {
+          Accept: 'application/json',
+          Authorization: `Bearer ${this.cardProviderApiConfig.bearerToken}`,
+        },
+      })
+      .pipe(
+        catchError((err) => {
+          const errorMessage = `Unable to get user card info with username '${username}'`;
+          this.logger.error(errorMessage, err);
+          throw new RpcException(errorMessage);
+        }),
+        map((res) => {
+          const cardData = res.data;
+          if (!cardData.errors || cardData.errors.length === 0) {
+            this.validateRequiredFields(cardData, username);
+          }
+          return cardData;
+        }),
+      );
+  }
+
+  private validateRequiredFields(cardData: any, username: string): void {
+    const requiredFields: (keyof UserCardDto)[] = [
+      'lastname',
+      'firstname',
+      'title',
+      'photo',
+      'affiliation',
+      'idNumber',
+      'endDate',
+    ];
+
+    const missingFields = requiredFields.filter(
+      (field) =>
+        cardData[field] === undefined ||
+        cardData[field] === null ||
+        cardData[field] === '',
+    );
+
+    if (missingFields.length > 0) {
+      const fieldsList = missingFields.join(', ');
+      const errorMessage = `Missing required fields for user '${username}': ${fieldsList}`;
+      this.logger.error(errorMessage);
+      throw new RpcException(errorMessage);
+    }
+  }
+}
