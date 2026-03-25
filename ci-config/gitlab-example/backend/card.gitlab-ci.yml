@@ -1,30 +1,30 @@
-# CI du microservice cards
+# CI du microservice card
 
-.cards_service_variables:
+.card_service_variables:
   variables:
     # Chemin vers le répertoire du service depuis le backend
-    SERVICE_FOLDER: "microservices/cards"
+    SERVICE_FOLDER: "microservices/card"
     # Nom qui sera donné à l'image Docker du service
-    SERVICE_IMAGE_NAME: "backend/multi-cards"
+    SERVICE_IMAGE_NAME: "backend/multi-card"
     # Nom du service pour le déclenchement manuel dans GitLab
-    CI_SERVICE_NAME: "cards"
+    CI_SERVICE_NAME: "card"
 
 include:
   - local: '${CI_PROJECT_DIR}/ci-config/gitlab-example/backend/templates-ci.yml'
 
-build-service-cards:
+build-service-card:
   extends:
-    - .cards_service_variables
+    - .card_service_variables
     - .template_build_microservice
     - .microservice_rules_template
   stage: build-package
 
-deploy-service-cards:
+deploy-service-card:
   extends:
-    - .cards_service_variables
+    - .card_service_variables
     - .template_docker_deploy_microservice
     - .microservice_rules_template
   stage: build-deploy-docker
   needs:
-    - job: build-service-cards
+    - job: build-service-card
       artifacts: true
