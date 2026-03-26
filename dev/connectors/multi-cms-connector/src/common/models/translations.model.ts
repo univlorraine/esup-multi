@@ -93,6 +93,21 @@ export class LoginTranslations extends BaseTranslations {
 }
 
 @ObjectType()
+export class MapCategoryTranslations extends BaseTranslations {
+  @Field()
+  label: string;
+}
+
+@ObjectType()
+export class MapPointTranslations extends BaseTranslations {
+  @Field()
+  name: string;
+
+  @Field({ nullable: true })
+  description: string | null;
+}
+
+@ObjectType()
 export class StaticPagesTranslations extends BaseTranslations {
   @Field()
   content: string;

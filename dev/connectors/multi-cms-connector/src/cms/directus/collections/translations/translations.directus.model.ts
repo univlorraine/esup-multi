@@ -97,6 +97,21 @@ export class LoginTranslationsDirectus extends BaseTranslationsDirectus {
 }
 
 @ObjectType()
+export class MapCategoryTranslationsDirectus extends BaseTranslationsDirectus {
+  @Field()
+  label: string;
+}
+
+@ObjectType()
+export class MapPointTranslationsDirectus extends BaseTranslationsDirectus {
+  @Field()
+  name: string;
+
+  @Field({ nullable: true })
+  description?: string | null;
+}
+
+@ObjectType()
 export class PagesTranslationsDirectus extends BaseTranslationsDirectus {
   @Field()
   content: string;

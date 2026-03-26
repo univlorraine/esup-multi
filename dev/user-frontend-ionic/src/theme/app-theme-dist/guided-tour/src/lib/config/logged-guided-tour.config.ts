@@ -216,7 +216,7 @@ export const loggedSteps= (router: Router, translateService: TranslateService, o
   {
     id: 'logged-step-80',
     attachTo: {
-      element: '[data-menu-id="cards"]',
+      element: '[data-menu-id="card"]',
       on: 'top'
     },
     buttons: [

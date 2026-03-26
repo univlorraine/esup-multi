@@ -24,7 +24,8 @@ workflow:
 include:
   # CI backend
   - local: '${CI_PROJECT_DIR}/ci-config/gitlab-example/backend/auth.gitlab-ci.yml'
-  - local: '${CI_PROJECT_DIR}/ci-config/gitlab-example/backend/cards.gitlab-ci.yml'
+  - local: '${CI_PROJECT_DIR}/ci-config/gitlab-example/backend/card.gitlab-ci.yml'
+  - local: '${CI_PROJECT_DIR}/ci-config/gitlab-example/backend/card-eu.gitlab-ci.yml'
   - local: '${CI_PROJECT_DIR}/ci-config/gitlab-example/backend/chatbot.gitlab-ci.yml'
   - local: '${CI_PROJECT_DIR}/ci-config/gitlab-example/backend/clocking.gitlab-ci.yml'
   - local: '${CI_PROJECT_DIR}/ci-config/gitlab-example/backend/contact-us.gitlab-ci.yml'
