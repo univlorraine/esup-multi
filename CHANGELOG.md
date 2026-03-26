@@ -9,6 +9,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **(cards)** : Suppression du module **cards** au profit de 2 modules séparés **card** et **card-eu**
 * **(card)** : Nouveau module de gestion de la carte dématérialisée de l'établissement
 * **(card-eu)** : Nouveau module de gestion de la carte européenne étudiante
+* **(map)** : Ajout de la notion de *campus* pour naviguer entre plusieurs ensembles de points d'intérêts (POI) sur la carte.
 
 ### Backend
 #### New features
@@ -16,10 +17,10 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **(cards)** : Suppression du microservice cards au profit de 2 microservices séparés **card** et **card-eu**
 * **(card)** : Nouveau microservice de gestion de la carte dématérialisée de l'établissement
 * **(card-eu)** : Nouveau microservice de gestion de la carte européenne étudiante
+* **(map)** : Les données sont désormais chargées depuis le CMS. Un provider additionnel peut être branché au microservice pour récupérer également les données depuis un second système.
 
 ### Serveur de mocks
 * Ajout de 2 routes `/mocking/card` et `/mocking/card-eu` pour les nouvelles fonctionnalités **card** et **card-eu**
-
 ## 2.1.0 (2025-10-16)
 
 ### Client

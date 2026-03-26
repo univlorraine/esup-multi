@@ -2,8 +2,7 @@
  * Copyright ou © ou Copr. Université de Lorraine, (2022)
  *
  * Direction du Numérique de l'Université de Lorraine - SIED
- *  (dn-mobile-dev@univ-lorraine.fr)
- * JNESIS (contact@jnesis.com)
+ * (dn-mobile-dev@univ-lorraine.fr)
  *
  * Ce logiciel est un programme informatique servant à rendre accessible
  * sur mobile divers services universitaires aux étudiants et aux personnels
@@ -37,10 +36,74 @@
  * termes.
  */
 
-export interface Marker {
-  title: string;
-  description: string;
-  category: string;
-  latitude: number;
-  longitude: number;
+import { Field, ObjectType } from '@nestjs/graphql';
+import { Campus } from '@common/models/campuses.model';
+import { MapCategory } from '@common/models/map-categories.model';
+import { MapIcon } from '@common/models/map-icons.model';
+import { MapPointTranslations } from '@common/models/translations.model';
+
+@ObjectType()
+class PointGpsCoordinates {
+  @Field()
+  lat: number;
+
+  @Field()
+  lng: number;
+}
+
+@ObjectType()
+class MapPoint {
+  @Field()
+  id: string;
+
+  @Field({ nullable: true })
+  campusId: string | null;
+
+  @Field({ nullable: true })
+  iconId: string | null;
+
+  @Field(() => PointGpsCoordinates)
+  location: PointGpsCoordinates;
+
+  @Field(() => [MapPointTranslations])
+  translations: MapPointTranslations[];
+}
+
+@ObjectType()
+export class MapPointData {
+  @Field(() => MapPoint)
+  feature: MapPoint;
+
+  @Field(() => Campus, { nullable: true })
+  campus: Campus | null;
+
+  @Field(() => MapCategory)
+  category: MapCategory;
+
+  @Field(() => MapIcon, { nullable: true })
+  icon: MapIcon | null;
+}
+
+@ObjectType()
+export class MapFeatureCollection {
+  @Field()
+  categoryId: string;
+
+  @Field(() => [MapPoint])
+  features: MapPoint[];
+}
+
+@ObjectType()
+export class MapData {
+  @Field(() => [Campus])
+  campuses: Campus[];
+
+  @Field(() => [MapCategory])
+  categories: MapCategory[];
+
+  @Field(() => [MapIcon])
+  icons: MapIcon[];
+
+  @Field(() => [MapFeatureCollection])
+  featureCollections: MapFeatureCollection[];
 }

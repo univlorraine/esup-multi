@@ -114,7 +114,15 @@ export const environment: any = {
     ImportantNewsModule.forRoot({
       display: 'vertically'
     }),
-    MapModule,
+    MapModule.forRoot({
+      mapType: "osm",
+      accessToken: "",
+      minZoom: 1,
+      maxZoom: 19,
+      maxBounds: false,
+      highAccuracy: false,
+      maxDisplayedFloatingButton: 5
+    }),
     NotificationsModule.forRoot({
       numberOfNotificationsOnFirstLoad: 20,
       numberOfNotificationsToLoadOnScroll: 10
