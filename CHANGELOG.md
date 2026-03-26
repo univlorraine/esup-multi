@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## 2.x.x (yyyy-mm-dd)
+## 2.2.0 (2026-03-26)
 ### Client
 #### New features
 * **(cards)** : Suppression du module **cards** au profit de 2 modules séparés **card** et **card-eu**
@@ -21,6 +21,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Serveur de mocks
 * Ajout de 2 routes `/mocking/card` et `/mocking/card-eu` pour les nouvelles fonctionnalités **card** et **card-eu**
+
 ## 2.1.0 (2025-10-16)
 
 ### Client
