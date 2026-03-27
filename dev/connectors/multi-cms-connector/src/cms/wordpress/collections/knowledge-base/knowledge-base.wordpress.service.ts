@@ -126,7 +126,7 @@ export class KnowledgeBaseWordpressService {
       routerLink: normalizeEmptyStringToNull(
         knowledgeBase.knowledgeBaseRouterLink,
       ),
-      link: normalizeEmptyStringToNull(knowledgeBase.knowledgeBaseUrlLink),
+      link: normalizeEmptyStringToNull(knowledgeBase.knowledgeBaseLinkUrl),
       ssoService: normalizeEmptyStringToNull(
         knowledgeBase.knowledgeBaseSsoService,
       ),
@@ -162,7 +162,7 @@ export class KnowledgeBaseWordpressService {
     this.logger.debug('Loading knowledge-base from WordPress...');
     const data = await this.wordpressService.executeGraphQLQuery(`
       query {
-        knowledgeBases(first: 100, where: {language: ${FRENCH_CODE}}) {
+        knowledgeBaseResources(first: 100, where: {language: ${FRENCH_CODE}}) {
           nodes {
             databaseId
             knowledgeBaseTitle
@@ -170,7 +170,7 @@ export class KnowledgeBaseWordpressService {
             knowledgeBaseType
             knowledgeBaseChildDisplay
             knowledgeBaseRouterLink
-            knowledgeBaseUrlLink
+            knowledgeBaseLinkUrl
             knowledgeBaseSsoService
             knowledgeBasePosition
             knowledgeBaseAccessRestriction
@@ -221,6 +221,8 @@ export class KnowledgeBaseWordpressService {
         }
       }
     `);
-    return data.knowledgeBases.nodes.map(this.mapToMultiModel.bind(this));
+    return data.knowledgeBaseResources.nodes.map(
+      this.mapToMultiModel.bind(this),
+    );
   }
 }

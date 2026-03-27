@@ -45,7 +45,7 @@ export enum CacheCollection {
   SOCIAL_NETWORKS = 'social-networks',
   STATIC_PAGES = 'static-pages',
   WIDGETS = 'widgets',
-  KNOWLEDGE_BASE = 'knowledge-base'
+  KNOWLEDGE_BASE = 'knowledge-base',
 }
 
 const DEFAULT_TTL = 300000; // 5 minutes

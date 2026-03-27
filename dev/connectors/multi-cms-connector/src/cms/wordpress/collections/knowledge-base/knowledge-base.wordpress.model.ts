@@ -89,7 +89,7 @@ export class KnowledgeBaseWordpress {
   knowledgeBaseRouterLink: string;
 
   @Field()
-  knowledgeBaseUrlLink: string;
+  knowledgeBaseLinkUrl: string;
 
   @Field()
   knowledgeBaseSsoService: string;
