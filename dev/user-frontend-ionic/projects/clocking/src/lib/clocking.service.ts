@@ -38,7 +38,7 @@
  */
 
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { getAuthToken, NetworkService, MultiTenantService } from '@multi/shared';
 import { from, iif, Observable, of } from 'rxjs';
 import { map, switchMap, take, tap } from 'rxjs/operators';
@@ -50,8 +50,6 @@ import { Clocking, setClocking } from './clocking.repository';
 export class ClockingService {
 
   constructor(
-    @Inject('environment')
-    private environment: any,
     private multiTenantService: MultiTenantService,
     private http: HttpClient,
     private networkService: NetworkService,

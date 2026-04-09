@@ -6,6 +6,17 @@
 node_modules/
 *.DS_Store
 
+# AI Code Assistants configurations
+.claude/
+.cursor/
+.cursorrules
+.windsurf/
+.continue/
+.aider*
+.codeium/
+.tabnine/
+.copilot/
+
 /ci-config/*
 !/ci-config/gitlab-example/
 

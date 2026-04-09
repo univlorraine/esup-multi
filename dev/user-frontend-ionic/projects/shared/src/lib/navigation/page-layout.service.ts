@@ -86,7 +86,10 @@ export class PageLayoutService {
         tabsMenuItems
           .filter(menuItem => menuItem.link.type === MenuItemLinkType.router)
           .map(menuItem => menuItem.link as MenuItemRouterLink)
-          .find(link => routerLink.startsWith(link.routerLink))
+          .find(link =>
+            routerLink === link.routerLink ||
+            routerLink.startsWith(link.routerLink + '/')
+          )
           ? this.determineLayoutByFeature(routerLink)
           : 'full' as PageLayout
       ),
@@ -114,7 +117,10 @@ export class PageLayoutService {
       map(([routerLink, menuItems]) =>
         menuItems
           .filter(menuItem => menuItem.link.type === MenuItemLinkType.router)
-          .find(menuItem => routerLink.startsWith((menuItem.link as MenuItemRouterLink).routerLink))),
+          .find(menuItem => {
+            const link = (menuItem.link as MenuItemRouterLink).routerLink;
+            return routerLink === link || routerLink.startsWith(link + '/');
+          })),
       filter(menuItem => menuItem !== undefined),
       map(menuItem => ({
         title: menuItem.title,

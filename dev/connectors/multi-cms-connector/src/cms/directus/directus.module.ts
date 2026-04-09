@@ -48,6 +48,7 @@ import { LoginDirectusModule } from '@directus/collections/login/login.directus.
 import { FeaturesDirectusModule } from '@directus/collections/features/features.directus.module';
 import { WidgetsDirectusModule } from '@directus/collections/widgets/widgets.directus.module';
 import { DirectusService } from '@directus/directus.service';
+import { MapPointsDirectusModule } from '@directus/collections/map-points/map-points.directus.module';
 
 @Module({
   providers: [DirectusService],
@@ -59,6 +60,7 @@ import { DirectusService } from '@directus/directus.service';
     ImportantNewsDirectusModule,
     LanguagesDirectusModule,
     LoginDirectusModule,
+    MapPointsDirectusModule,
     PagesDirectusModule,
     SocialNetworksDirectusModule,
     WidgetsDirectusModule,
@@ -71,6 +73,7 @@ import { DirectusService } from '@directus/directus.service';
     ImportantNewsDirectusModule,
     LanguagesDirectusModule,
     LoginDirectusModule,
+    MapPointsDirectusModule,
     PagesDirectusModule,
     SocialNetworksDirectusModule,
     WidgetsDirectusModule,

@@ -37,24 +37,67 @@
  * termes.
  */
 
-import { Injectable } from '@angular/core';
+import { Injectable, SecurityContext } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Marker } from './map.repository';
+import { MapData, Marker } from './map.repository';
 import { HttpClient } from '@angular/common/http';
 import { MultiTenantService } from '@multi/shared';
+import { map } from 'rxjs/operators';
+import { DomSanitizer } from '@angular/platform-browser';
+import DOMPurify from 'dompurify';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MapService {
 
-
   constructor(
     private multiTenantService: MultiTenantService,
     private http: HttpClient,
+    private domSanitizer: DomSanitizer,
   ) { }
 
-  getMarkers(): Observable<Marker[]> {
-    return this.http.get<Marker[]>(`${this.multiTenantService.getApiEndpoint()}/map`);
+  getData(): Observable<MapData> {
+    return this.http.get<MapData>(`${this.multiTenantService.getApiEndpoint()}/map`).pipe(
+      // Map data is not handled by Angular's built-in sanitization as it is directly displayed by Leaflet, so we manually sanitize it here
+      map((data: MapData): MapData => {
+        data.icons.forEach(icon => {
+          icon.svg = this.sanitizeSvg(icon.svg);
+        });
+        for (const markersCollectionsKey in data.markersCollections) {
+          data.markersCollections[markersCollectionsKey].forEach((marker: Marker) => {
+            marker.translations.forEach(translation => {
+              translation.name = this.sanitizeHtml(translation.name);
+              translation.description = this.sanitizeHtml(translation.description);
+            });
+          });
+        }
+
+        return data;
+      })
+    )
+  }
+
+  private sanitizeSvg(svg: string): string {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    return DOMPurify.sanitize(svg, { USE_PROFILES: { svg: true } });
+  }
+
+  private sanitizeHtml(html: string): string {
+    let sanitized = this.domSanitizer.sanitize(SecurityContext.HTML, html) || '';
+
+    // Open external links in a new tab
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = sanitized || '';
+    const anchorTags = tempDiv.getElementsByTagName('a');
+    for (let i = 0; i < anchorTags.length; i++) {
+      const href = anchorTags[i].getAttribute('href');
+      if (href && href.startsWith('http') || href.startsWith('https')) {
+        anchorTags[i].setAttribute('target', '_blank');
+      }
+    }
+    sanitized = tempDiv.innerHTML;
+
+    return sanitized;
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "multi",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "",
   "private": true,
   "repository": {
@@ -30,7 +30,8 @@
     "mocks": "cd dev/user-backend-mocks && ",
     "back:main": "cd dev/user-backend-nest/main && ",
     "back:auth": "cd dev/user-backend-nest/microservices/auth && ",
-    "back:cards": "cd dev/user-backend-nest/microservices/cards && ",
+    "back:card": "cd dev/user-backend-nest/microservices/card && ",
+    "back:card-eu": "cd dev/user-backend-nest/microservices/card-eu && ",
     "back:chatbot": "cd dev/user-backend-nest/microservices/chatbot && ",
     "back:clocking": "cd dev/user-backend-nest/microservices/clocking && ",
     "back:contact-us": "cd dev/user-backend-nest/microservices/contact-us && ",
