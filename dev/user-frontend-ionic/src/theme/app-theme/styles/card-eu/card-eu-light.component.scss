@@ -37,19 +37,46 @@
  * termes.
  */
 
-ion-card {
-  //border-bottom: var(--app-border-width-5) solid var(--ion-color-secondary);
-  //border-radius: 10px;
+ion-content {
+  --padding-top: 24px !important;
+  --padding-bottom: 0;
+  --padding-start: 0;
+  --padding-end: 0;
 }
 
-ion-card-content {
-  padding: 0;
+ion-card.card-eu-light {
+  --background: #1a3459;
+
+  img.logo {
+    width: 33%;
+    height: auto;
+    max-width: 150px;
+  }
 }
 
-ion-card-content > * {
+.eu-qrcode {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+
+  > svg {
+    transform: scale(1.2);
+    transform-origin: center;
+  }
 }
 
-ion-back-button {
-  color: var(--app-font-color-topbar);
+@media screen and (orientation: landscape) {
+  ion-card.card-eu-light ion-card-content {
+    padding-top: 60px;
+  }
+
+  .eu-qrcode {
+    padding: 60px 0;
+
+    > svg {
+      transform: scale(2);
+      transform-origin: center;
+    }
+  }
 }
