@@ -1,0 +1,157 @@
+/*!
+ * Copyright ou © ou Copr. Université de Lorraine, (2022)
+ *
+ * Direction du Numérique de l'Université de Lorraine - SIED
+ *  (dn-mobile-dev@univ-lorraine.fr)
+ * JNESIS (contact@jnesis.com)
+ *
+ * Ce logiciel est un programme informatique servant à rendre accessible
+ * sur mobile divers services universitaires aux étudiants et aux personnels
+ * de l'université.
+ *
+ * Ce logiciel est régi par la licence CeCILL 2.1, soumise au droit français
+ * et respectant les principes de diffusion des logiciels libres. Vous pouvez
+ * utiliser, modifier et/ou redistribuer ce programme sous les conditions
+ * de la licence CeCILL telle que diffusée par le CEA, le CNRS et INRIA
+ * sur le site "http://cecill.info".
+ *
+ * En contrepartie de l'accessibilité au code source et des droits de copie,
+ * de modification et de redistribution accordés par cette licence, il n'est
+ * offert aux utilisateurs qu'une garantie limitée. Pour les mêmes raisons,
+ * seule une responsabilité restreinte pèse sur l'auteur du programme, le
+ * titulaire des droits patrimoniaux et les concédants successifs.
+ *
+ * À cet égard, l'attention de l'utilisateur est attirée sur les risques
+ * associés au chargement, à l'utilisation, à la modification et/ou au
+ * développement et à la reproduction du logiciel par l'utilisateur étant
+ * donné sa spécificité de logiciel libre, qui peut le rendre complexe à
+ * manipuler et qui le réserve donc à des développeurs et des professionnels
+ * avertis possédant des connaissances informatiques approfondies. Les
+ * utilisateurs sont donc invités à charger et à tester l'adéquation du
+ * logiciel à leurs besoins dans des conditions permettant d'assurer la
+ * sécurité de leurs systèmes et/ou de leurs données et, plus généralement,
+ * à l'utiliser et à l'exploiter dans les mêmes conditions de sécurité.
+ *
+ * Le fait que vous puissiez accéder à cet en-tête signifie que vous avez
+ * pris connaissance de la licence CeCILL 2.1, et que vous en avez accepté les
+ * termes.
+ */
+
+ion-item {
+  --background: transparent;
+}
+
+ion-input {
+  --border-color: var(--ion-color-medium-light-tint);
+  --highlight-color: var(--app-font-color-primary);
+  --highlight-color-valid: var(--app-font-color-primary);
+}
+
+.input-label {
+  padding-bottom: 10px;
+  color: var(--app-font-color-primary) !important;
+}
+
+.item-has-value .label-floating.sc-ion-label-md-h {
+  padding-bottom: 10px;
+}
+
+ion-title {
+  color: var(--app-font-color-topbar) !important;
+}
+
+ion-item {
+  --border-color: var(--ion-color-medium-light-tint);;
+}
+
+//Style custom URCA
+p {
+  font-size: var(--app-text-4-size) !important;
+}
+label{
+  font-size: var(--app-text-4-size) !important;
+  font-family: QuicksandBold, serif !important;
+}
+ion-item:has(ion-input#username,ion-input#password) {
+  --border-width: 2px !important;
+  --border-radius: var(--app-border-radius-2) !important;
+
+  &:not(.ion-touched.ion-invalid) {
+    --border-color: var(--ion-color-tertiary) !important;
+  }
+
+  &.ion-touched.ion-invalid {
+    --border-color: var(--ion-color-danger) !important;
+  }
+}
+
+.error-text {
+  margin-bottom: 10px;
+}
+
+ion-row:has(ion-button[type="submit"]) {
+  justify-content: right !important;
+  --padding-end: 0;
+  padding-inline-end: 0;
+
+  ion-label {
+    padding-right: 10px;
+    &:after {
+      -webkit-mask-image: url("/assets/icons/navigation/arrow-right.svg");
+      mask-image: url("/assets/icons/navigation/arrow-right.svg");
+      -webkit-mask-size: contain;
+      mask-size: contain;
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+      mask-position: center;
+      color: var(--app-font-color-primary-contrast);
+      background-color: var(--app-font-color-primary-contrast);
+      content: "";
+      margin-bottom: -3px;
+      border-radius: var(--app-border-radius-5);
+      font-size: var(--app-text-4-size);
+      padding: .125rem .5rem;
+      position: absolute;
+      right: -10px;
+      bottom: 2px;
+      z-index: 1;
+      height: .75rem;
+    }
+  }
+}
+ion-item{
+  margin-top: 1rem;
+}
+:host(.checkbox-checked) .checkbox-icon, :host(.checkbox-indeterminate) .checkbox-icon {
+  border-color: var(--border-color-checked);
+  background: var(--checkbox-background-checked);
+  border-radius: 4px;
+}
+//Fields coloration
+.ion-valid{
+  --highlight-background: var(--ion-color-tertiary);
+  --highlight-color-valid: var(--ion-color-tertiary);
+}
+.ion-touched.ion-invalid{
+  --highlight-background: var(--ion-color-danger);
+  --highlight-color-invalid: var(--ion-color-danger);
+}
+.input-bottom.sc-ion-input-md, .input-bottom.sc-ion-input-ios, .sc-ion-input-md-h, .sc-ion-input-ios-h{
+  --border-width: 0!important;
+}
+// Send button
+form ion-row ion-button{
+  border-radius: var(--app-border-radius-5);
+  background: var(--app-font-color-secondary);
+  opacity: 1;
+  padding: 0 6px;
+  &.button-disabled{
+    opacity: 0.65 !important;
+  }
+  ion-label {
+    color: var(--app-font-color-primary-contrast) !important;
+    font-family: QuickSandBold, sans-serif !important;
+    text-transform: initial;
+  }
+}

@@ -1,0 +1,40 @@
+h1, h2, h3, h4, h5, h6 {
+  font-family: QuicksandBold, sans-serif;
+}
+
+
+//Dark mode style
+body.dark {
+  ion-icon.ion-color {
+    --color: var(--ion-color-tertiary-contrast);
+    color: var(--ion-color-tertiary-contrast);
+  }
+  a{
+    color: var(--app-font-color-secondary);
+  }
+}
+
+//Map Marker
+.leaflet-container .leaflet-marker-pane img{
+  width: auto!important;
+}
+.leaflet-popup-content{
+  & > br{
+    display: none;
+  }
+  .app-text-5 br:nth-child(n +3){
+    display: none;
+  }
+}
+
+//Remove text on back button for iOS
+ion-back-button::part(text){
+  display: none;
+}
+
+//Remove padding at left for ul in login page
+app-login ion-content form {
+  ul{
+   padding-inline-start: 0;
+  }
+}

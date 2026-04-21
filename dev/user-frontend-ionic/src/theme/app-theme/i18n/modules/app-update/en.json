@@ -1,0 +1,13 @@
+{
+  "MANDATORY_UPDATE_ALERT": {
+    "HEADER": "Update Required",
+    "MESSAGE": "A new version of the application is available and must be installed to continue.",
+    "UPDATE_NOW": "Update Now"
+  },
+  "OPTIONAL_UPDATE_ALERT": {
+    "HEADER": "Update Available",
+    "MESSAGE": "A new version of the application is available. Would you like to update now?",
+    "UPDATE_NOW": "Update Now",
+    "UPDATE_LATER": "Later"
+  }
+}

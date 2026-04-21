@@ -1,0 +1,25 @@
+{
+    "CONTACT_TYPES": {
+        "STUDENT": "Student",
+        "STAFF": "Personel",
+        "STANDIN": "Teacher or stand-in"
+    },
+    "SEARCH": "Search",
+    "CANCEL": "Cancel",
+    "RESULTS": "result(s)",
+    "PLACEHOLDER": "Search here",
+    "SEARCHBAR_MESSAGE": "Search someone by name",
+    "ALERT": {
+        "ERROR":  {
+            "HEADER": "Error",
+            "SUBHEADER": "Unable to add contact",
+            "MESSAGE": "Unable to add contact from web version",
+            "EXIST":"Contact already exist",
+            "BUTTON1": "ok"
+        },
+        "SUCCESS": {
+            "MESSAGE": "Contact created"
+        }
+    },
+    "ADD": "Add {{name}} to contacts"
+}

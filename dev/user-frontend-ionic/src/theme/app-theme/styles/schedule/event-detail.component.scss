@@ -1,0 +1,187 @@
+/*!
+ * Copyright ou © ou Copr. Université de Lorraine, (2022)
+ *
+ * Direction du Numérique de l'Université de Lorraine - SIED
+ *  (dn-mobile-dev@univ-lorraine.fr)
+ * JNESIS (contact@jnesis.com)
+ *
+ * Ce logiciel est un programme informatique servant à rendre accessible
+ * sur mobile divers services universitaires aux étudiants et aux personnels
+ * de l'université.
+ *
+ * Ce logiciel est régi par la licence CeCILL 2.1, soumise au droit français
+ * et respectant les principes de diffusion des logiciels libres. Vous pouvez
+ * utiliser, modifier et/ou redistribuer ce programme sous les conditions
+ * de la licence CeCILL telle que diffusée par le CEA, le CNRS et INRIA
+ * sur le site "http://cecill.info".
+ *
+ * En contrepartie de l'accessibilité au code source et des droits de copie,
+ * de modification et de redistribution accordés par cette licence, il n'est
+ * offert aux utilisateurs qu'une garantie limitée. Pour les mêmes raisons,
+ * seule une responsabilité restreinte pèse sur l'auteur du programme, le
+ * titulaire des droits patrimoniaux et les concédants successifs.
+ *
+ * À cet égard, l'attention de l'utilisateur est attirée sur les risques
+ * associés au chargement, à l'utilisation, à la modification et/ou au
+ * développement et à la reproduction du logiciel par l'utilisateur étant
+ * donné sa spécificité de logiciel libre, qui peut le rendre complexe à
+ * manipuler et qui le réserve donc à des développeurs et des professionnels
+ * avertis possédant des connaissances informatiques approfondies. Les
+ * utilisateurs sont donc invités à charger et à tester l'adéquation du
+ * logiciel à leurs besoins dans des conditions permettant d'assurer la
+ * sécurité de leurs systèmes et/ou de leurs données et, plus généralement,
+ * à l'utiliser et à l'exploiter dans les mêmes conditions de sécurité.
+ *
+ * Le fait que vous puissiez accéder à cet en-tête signifie que vous avez
+ * pris connaissance de la licence CeCILL 2.1, et que vous en avez accepté les
+ * termes.
+ */
+
+ion-card {
+  //border-width: var(--app-border-width-8);
+  //border-color: var(--app-border-color-primary);
+  //border-style: solid;
+  border-radius: var(--app-border-no-radius);
+  box-shadow: var(--app-border-no-box-shadow);
+  background: var(--app-font-color-primary-contrast);
+}
+
+.course-label {
+  margin-bottom: 1rem !important;
+  max-width: 90%;
+}
+
+ion-icon {
+  margin-right: 0.5rem;
+  margin-left: 0.2rem;
+  padding-top: 0.19rem;
+  color: var(--app-font-color-primary);
+}
+
+.card-labels {
+  margin-bottom: 0.3rem;
+}
+
+.course-type {
+  max-width: 10px;
+}
+
+.hide-event-icon {
+  position: absolute;
+  right: 0;
+  top: 0.2rem;
+}
+
+// Custom URCA style
+.hide-event-icon {
+  display: none;
+}
+
+ion-card-header {
+  padding-inline-start: .95rem;
+  padding-top: 0;
+  margin-top: 2.25rem;
+  position: absolute;
+
+  ion-card-title.app-text-2 {
+    font-size: var(--app-text-4-size) !important;
+
+    &::before {
+      background-color: var(--app-font-color-primary);
+      -webkit-mask-image: url('/assets/icons/home/horaires.svg');
+      mask-image: url('/assets/icons/home/horaires.svg');
+      mask-repeat: no-repeat;
+      mask-position: left;
+      mask-size: contain;
+      content: "";
+      display: inline-block;
+      width: 1rem;
+      height: 1rem;
+      margin-bottom: -3px;
+      padding-right: 0.4rem;
+    }
+  }
+}
+
+ion-card-content.card-content-md, ion-card-content.card-content-ios {
+  padding-inline-start: 0.7rem;
+  padding-inline-end: 0.7rem;
+  padding-bottom: 0;
+
+  ion-row ion-col:first-child {
+    padding-inline-start: 0;
+    padding-inline-end: 0;
+    max-width: 100% !important;
+    min-height: 4rem;
+
+    ion-row.course-label {
+      max-width: 100%;
+      height: 1.3rem;
+      overflow: hidden;
+      text-wrap: wrap;
+
+      ion-text {
+        font-family: QuicksandBold, sans-serif !important;
+        font-size: var(--app-text-3-size) !important;
+      }
+    }
+
+    ion-row.card-labels:not(.course-label) {
+      ion-text {
+        font-size: var(--app-text-4-size) !important;
+        color: var(--app-font-color-primary) !important;
+        padding-top: .125rem;
+        max-width: 89%;
+      }
+      ion-icon:before{
+        background-color: var(--app-font-color-primary);
+        mask-repeat: no-repeat;
+        mask-position: center;
+        mask-size: contain;
+        content: "";
+        display: inline-block;
+        margin-bottom: 2px;
+        width: 1rem;
+        height: 1rem;
+      }
+      ion-icon {
+        &[name=man-outline]:before {
+          -webkit-mask-image: url('/assets/icons/home/enseignant.svg');
+          mask-image: url('/assets/icons/home/enseignant.svg');
+          width: 1.125rem;
+          height: 1.125rem;
+        }
+
+        &[name=business-outline]:before {
+          -webkit-mask-image: url('/assets/icons/home/batiment.svg');
+          mask-image: url('/assets/icons/home/batiment.svg');
+        }
+
+        &[name=link-outline]:before {
+          -webkit-mask-image: url('/assets/icons/home/lien.svg');
+          mask-image: url('/assets/icons/home/lien.svg');
+          width: 1.125rem;
+          height: 1.125rem;
+        }
+
+        &[name=calendar-outline]:before {
+          -webkit-mask-image: url('/assets/icons/home/date.svg');
+          mask-image: url('/assets/icons/home/date.svg');
+          margin-bottom: 4px;
+          margin-left: 1px;
+        }
+      }
+    }
+
+    ion-row.card-labels:not(.course-label):nth-child(2) {
+      margin-top: 2rem;
+    }
+  }
+
+  .course-type {
+    position: absolute;
+    height: 100%;
+    left: 0;
+    padding-inline-end: 0;
+  }
+}

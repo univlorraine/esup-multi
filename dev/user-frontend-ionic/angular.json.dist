@@ -335,23 +335,23 @@
         }
       }
     },
-    "cards": {
+    "card-eu": {
       "projectType": "library",
-      "root": "projects/cards",
-      "sourceRoot": "projects/cards/src",
+      "root": "projects/card-eu",
+      "sourceRoot": "projects/card-eu/src",
       "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "project": "projects/cards/ng-package.json"
+            "project": "projects/card-eu/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/cards/tsconfig.lib.prod.json"
+              "tsConfig": "projects/card-eu/tsconfig.lib.prod.json"
             },
             "development": {
-              "tsConfig": "projects/cards/tsconfig.lib.json"
+              "tsConfig": "projects/card-eu/tsconfig.lib.json"
             }
           },
           "defaultConfiguration": "production"
@@ -359,21 +359,61 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/cards/src/test.ts",
-            "tsConfig": "projects/cards/tsconfig.spec.json",
-            "karmaConfig": "projects/cards/karma.conf.js"
+            "main": "projects/card-eu/src/test.ts",
+            "tsConfig": "projects/card-eu/tsconfig.spec.json",
+            "karmaConfig": "projects/card-eu/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
           "options": {
             "lintFilePatterns": [
-              "projects/cards/**/*.ts",
-              "projects/cards/**/*.html"
+              "projects/card-eu/**/*.ts",
+              "projects/card-eu/**/*.html"
             ]
           }
         }
 
+      }
+    },
+    "card": {
+      "projectType": "library",
+      "root": "projects/card",
+      "sourceRoot": "projects/card/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/card/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/card/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/card/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/card/src/test.ts",
+            "tsConfig": "projects/card/tsconfig.spec.json",
+            "karmaConfig": "projects/card/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/card/**/*.ts",
+              "projects/card/**/*.html"
+            ]
+          }
+        }
       }
     },
     "chatbot": {

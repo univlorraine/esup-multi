@@ -1,0 +1,13 @@
+{
+  "MANDATORY_UPDATE_ALERT": {
+    "HEADER": "Mise à jour requise",
+    "MESSAGE": "Une nouvelle version de l’application est disponible et doit être installée pour continuer.",
+    "UPDATE_NOW": "Mettre à jour"
+  },
+  "OPTIONAL_UPDATE_ALERT": {
+    "HEADER": "Mise à jour disponible",
+    "MESSAGE": "Une nouvelle version de l’application est disponible. Souhaitez-vous la mettre à jour maintenant ?",
+    "UPDATE_NOW": "Mettre à jour",
+    "UPDATE_LATER": "Plus tard"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "HOME": {
+    "MENU": "Accueil"
+  },
+  "ERROR": {
+    "UNKNOWN": "Erreur inattendue",
+    "UNAUTHENTICATED": {
+      "TITLE": "Accès protégé",
+      "MESSAGE": "Vous devez être authentifié pour accéder à cette fonctionnalité"
+    },
+    "NO_NETWORK": {
+      "TITLE": "Absence de réseau",
+      "MESSAGE": "Vous ne pouvez pas accéder à cette fonctionnalité sans réseau",
+      "FIRST_LAUNCH": "Veuillez activer votre réseau pour votre premier accès à l'application",
+      "TOP_BAR_LABEL": "Vous êtes hors connexion, fonctionnalités limitées"
+    },
+    "SERVICE_UNREACHABLE": {
+      "TITLE": "Service injoignable",
+      "MESSAGE": "Le service que vous essayez de contacter n'est pas joignable"
+    },
+    "WARNING": {
+      "TITLE": "Attention"
+    }
+  },
+  "GLOBAL": {
+    "BACK_BUTTON": {
+     	"LABEL_IOS": "Retour",
+     	"LABEL_ANDROID": "Retour",
+     	"ARIA_LABEL_IOS": "Retour",
+     	"ARIA_LABEL_ANDROID": "Retour"
+    }
+  }
+}

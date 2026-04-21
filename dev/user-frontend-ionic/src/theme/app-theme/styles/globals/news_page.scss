@@ -1,0 +1,69 @@
+.rss-page-vertically-style ion-card-header.rss-news-header-vertically-style {
+  .title-col {
+    position: static;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    ion-text {
+      display: none;
+    }
+    ion-row {
+      position: static !important;
+      padding-bottom: 9px;
+      margin-right: 8px;
+
+      ion-button.ion-activated {
+        --background-focused: transparent;
+        --background-hover: transparent;
+        --background-focused-opacity: 0;
+        --background-hover-opacity: 0;
+      }
+
+      ion-button {
+        min-height: 1.5rem;
+        width: 1.5rem;
+        background-color: var(--ion-color-primary);
+        padding: 0;
+        margin: 0;
+        border-radius: var(--app-border-radius-5);
+        --background-hover: transparent;
+        --background-hover-opacity: 0;
+        position: static;
+
+        &:before {
+          content: "";
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          z-index: 1;
+        }
+
+        &::part(native) {
+          padding: 0;
+          --padding-start: 0;
+          --padding-end: 0;
+        }
+
+        ion-icon {
+          color: #FFFFFF !important;
+          padding: 0 !important;
+          position: absolute;
+          height: 1.75rem;
+          width: 1.75rem;
+          margin: 0 !important;
+
+          &.content-open {
+            top: -1px;
+          }
+
+          &.content-close {
+            top: -3px;
+          }
+        }
+      }
+    }
+  }
+}

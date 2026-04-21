@@ -1,0 +1,148 @@
+/*!
+ * Copyright ou © ou Copr. Université de Lorraine, (2022)
+ *
+ * Direction du Numérique de l'Université de Lorraine - SIED
+ *  (dn-mobile-dev@univ-lorraine.fr)
+ * JNESIS (contact@jnesis.com)
+ *
+ * Ce logiciel est un programme informatique servant à rendre accessible
+ * sur mobile divers services universitaires aux étudiants et aux personnels
+ * de l'université.
+ *
+ * Ce logiciel est régi par la licence CeCILL 2.1, soumise au droit français
+ * et respectant les principes de diffusion des logiciels libres. Vous pouvez
+ * utiliser, modifier et/ou redistribuer ce programme sous les conditions
+ * de la licence CeCILL telle que diffusée par le CEA, le CNRS et INRIA
+ * sur le site "http://cecill.info".
+ *
+ * En contrepartie de l'accessibilité au code source et des droits de copie,
+ * de modification et de redistribution accordés par cette licence, il n'est
+ * offert aux utilisateurs qu'une garantie limitée. Pour les mêmes raisons,
+ * seule une responsabilité restreinte pèse sur l'auteur du programme, le
+ * titulaire des droits patrimoniaux et les concédants successifs.
+ *
+ * À cet égard, l'attention de l'utilisateur est attirée sur les risques
+ * associés au chargement, à l'utilisation, à la modification et/ou au
+ * développement et à la reproduction du logiciel par l'utilisateur étant
+ * donné sa spécificité de logiciel libre, qui peut le rendre complexe à
+ * manipuler et qui le réserve donc à des développeurs et des professionnels
+ * avertis possédant des connaissances informatiques approfondies. Les
+ * utilisateurs sont donc invités à charger et à tester l'adéquation du
+ * logiciel à leurs besoins dans des conditions permettant d'assurer la
+ * sécurité de leurs systèmes et/ou de leurs données et, plus généralement,
+ * à l'utiliser et à l'exploiter dans les mêmes conditions de sécurité.
+ *
+ * Le fait que vous puissiez accéder à cet en-tête signifie que vous avez
+ * pris connaissance de la licence CeCILL 2.1, et que vous en avez accepté les
+ * termes.
+ */
+
+ion-title {
+  color: var(--app-font-color-topbar) !important;
+}
+
+ion-icon {
+  color: var(--app-font-color-primary);
+}
+
+ion-item {
+  --background: transparent;
+  --border-color: var(--ion-color-medium-light-tint);
+}
+
+ion-list {
+  background: transparent;
+}
+
+ion-input {
+  --highlight-color: var(--app-font-color-primary);
+}
+
+.input-label {
+  padding-bottom: 0.2rem;
+  color: var(--app-font-color-primary) !important;
+}
+
+.item-has-value .label-floating.sc-ion-label-md-h {
+  padding-bottom: 0.2rem;
+}
+
+ion-item {
+  --background: transparent;
+  --border-color: var(--ion-color-medium-light-tint);
+}
+
+ion-list {
+  background: transparent;
+}
+
+.contact-form-toolbar {
+  --background: transparent;
+}
+
+//Style custom URCA
+p {
+  font-size: var(--app-text-4-size) !important;
+}
+ion-label{
+  font-size: var(--app-text-4-size) !important;
+  font-family: QuicksandBold, serif !important;
+  transform: translateY(-0.75rem) !important;
+  position: fixed;
+  background-color: var(--app-color-background);
+  padding: 0 0.5rem;
+}
+form > ion-list > ion-item{
+  margin-top: 1rem;
+  --full-highlight-height: 0;
+
+}
+ion-toolbar.contact-form-toolbar{
+  padding-top: 1rem!important;
+  ion-buttons ion-button{
+    padding-inline-start: 15px!important;
+    --padding-start: 0px!important;
+  }
+}
+//Fields coloration
+.ion-valid{
+  --highlight-background: var(--ion-color-tertiary);
+  --highlight-color-valid: var(--ion-color-tertiary);
+}
+ion-item::part(native){
+  --border-color: var(--ion-color-tertiary);
+  --border-width: 2px;
+  --border-radius: var(--app-border-radius-2);
+}
+.ion-invalid{
+  --highlight-background: var(--ion-color-danger);
+  --highlight-color-invalid: var(--ion-color-danger);
+}
+ion-item.ion-touched.ion-invalid::part(native){
+  --border-color: var(--ion-color-danger);
+}
+ion-item::part(native) {
+  --inner-border-width: 0;
+}
+ion-textarea{
+  min-height: 10rem;
+}
+// Send button
+form ion-toolbar ion-buttons ion-button{
+  border-radius: var(--app-border-radius-5);
+  background: var(--app-font-color-secondary);
+  opacity: 1;
+  --padding-start: 1.1em;
+  &.button-disabled{
+    opacity: 0.65 !important;
+  }
+  ion-text.app-text-4 {
+    color: var(--app-font-color-primary-contrast) !important;
+    font-family: QuickSandBold, sans-serif !important;
+  }
+  ion-icon.app-icon-6{
+    color: var(--app-font-color-primary-contrast) !important;
+    font-size: var(--icon-4-size) !important;
+    margin-left: 0.25rem !important;
+  }
+}

@@ -45,19 +45,22 @@ import { CompleteLocalDatePipe } from './complete-local-date-pipe';
 import { RelativeTimePipe } from './relative-time-pipe';
 import { TruncatePipe } from './truncate-pipe';
 import { LocalHourPipe } from './local-hour.pipe';
+import { SanitizeSvgPipe } from './sanitize-svg-pipe';
 
 @NgModule({
   declarations: [
     RelativeTimePipe,
     TruncatePipe,
     CompleteLocalDatePipe,
-    LocalHourPipe
+    LocalHourPipe,
+    SanitizeSvgPipe
   ],
   exports: [
     RelativeTimePipe,
     TruncatePipe,
     CompleteLocalDatePipe,
-    LocalHourPipe
+    LocalHourPipe,
+    SanitizeSvgPipe
   ],
   imports: [
     CommonModule,

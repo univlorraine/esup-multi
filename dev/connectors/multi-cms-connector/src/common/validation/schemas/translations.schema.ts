@@ -85,6 +85,18 @@ export const LoginTranslationsSchema = BaseTranslationsSchema.extend({
     .nullable(),
 });
 
+export const MapCategoryTranslationsSchema = BaseTranslationsSchema.extend({
+  label: z.string().nonempty().min(1, 'Map Category label is required'),
+});
+
+export const MapPointTranslationsSchema = BaseTranslationsSchema.extend({
+  name: z.string().min(1, 'Map Point name cannot be empty string'),
+  description: z
+    .string()
+    .min(1, 'Map Point description cannot be empty string')
+    .nullable(),
+});
+
 export const StaticPagesTranslationsSchema = BaseTranslationsSchema.extend({
   title: z.string().min(1, 'Static Page title cannot be empty string'),
   content: z.string().min(1, 'Static Page content cannot be empty string'),

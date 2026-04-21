@@ -1,0 +1,33 @@
+{
+  "HOME": {
+    "MENU": "Home"
+  },
+  "ERROR": {
+    "UNKNOWN": "Unexpected error",
+    "UNAUTHENTICATED": {
+      "TITLE": "Restricted access",
+      "MESSAGE": "Please login before accessing this feature"
+    },
+    "NO_NETWORK": {
+      "TITLE": "No network",
+      "MESSAGE": "You cannot access this feature without network",
+      "FIRST_LAUNCH": "Please activate your network for your first access to the application.",
+      "TOP_BAR_LABEL": "You are offline, limited functionality."
+    },
+    "SERVICE_UNREACHABLE": {
+      "TITLE": "Service unreachable",
+      "MESSAGE": "The service you're trying to contact is not reachable"
+    },
+    "WARNING": {
+      "TITLE": "Warning"
+    }
+  },
+  "GLOBAL": {
+    "BACK_BUTTON": {
+      "LABEL_IOS": "Retour",
+      "LABEL_ANDROID": "Retour",
+      "ARIA_LABEL_IOS": "Retour",
+      "ARIA_LABEL_ANDROID": "Retour"
+    }
+  }
+}

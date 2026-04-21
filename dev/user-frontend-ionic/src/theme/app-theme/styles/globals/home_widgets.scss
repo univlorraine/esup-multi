@@ -1,0 +1,584 @@
+//Homepage, styling widgets
+
+//Style for the important news widget
+ion-card.ion-no-margin:has(app-important-news-widget) {
+  position: relative;
+  margin: 0 !important;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.10);
+  border-radius: 0 !important;
+
+  app-important-news-widget > ion-grid > ion-row {
+    background-color: var(--app-color-background-header-footer) !important;
+  }
+
+  .important-news-horizontally-style .importantNews ion-col.news-content {
+    border-left: none !important;
+    padding: 1rem !important;
+
+    ion-label.text-title, ion-label.text-content, h2, h3, ion-button {
+      margin: 0 !important;
+    }
+
+    ion-label.text-content {
+      margin-top: 0.44rem !important;
+    }
+
+    h2 {
+      text-transform: none;
+      font-size: var(--app-title-4-size) !important;
+      font-family: QuicksandBold, serif !important;
+    }
+
+    h3 {
+      font-size: var(--app-text-4-size) !important;
+    }
+
+    ion-text, ion-icon, h3, h2 {
+      color: var(--app-font-color-primary) !important;
+    }
+
+    //Important news button
+    ion-button {
+      border-radius: var(--app-border-radius-5);
+      background: var(--app-font-color-secondary);
+      margin-top: 1rem !important;
+
+      ion-text.app-text-5 {
+        color: var(--app-font-color-primary-contrast) !important;
+        font-family: QuickSandBold, sans-serif !important;
+        font-size: var(--app-text-4-size) !important;
+      }
+
+      ion-icon.app-icon-6 {
+        color: var(--app-font-color-primary-contrast) !important;
+        font-size: var(--icon-4-size) !important;
+        margin-left: 0.25rem !important;
+      }
+    }
+  }
+}
+
+//Style for auth button, display at not logged-in users
+app-auth-not-authentified-widget{
+  ion-button{
+    border-radius: var(--app-border-radius-5)!important;
+    background: var(--app-font-color-secondary);
+    padding: 0 6px;
+    ion-label{
+      color: var(--app-font-color-primary-contrast) !important;
+      font-family: QuickSandBold, sans-serif !important;
+      font-size: var(--app-text-4-size) !important;
+      text-transform: capitalize!important;
+    }
+  }
+}
+
+//Style for the greeting widget, which display Hello name
+app-auth-greeting-widget h1{
+  padding: 0!important;
+  span.greeting-underline {
+    position: relative;
+    text-transform: none;
+    font-size: var(--app-title-3-size);
+    font-family: QuicksandBold, serif !important;
+  }
+}
+
+//Style for the next events from schedule widget
+ion-card.ion-no-margin[data-widget-id="schedule:next-events"] {
+  border-radius: 0 !important;
+  margin: 0 !important;
+  position: relative;
+
+  & > ion-card-content {
+    &::before {
+      position: absolute;
+      content: "";
+      border-top-left-radius: 1.25rem !important;
+      border-bottom-left-radius: 1.25rem !important;
+      border: 1px solid var(--ion-color-tertiary);
+      border-right: none;
+      width: 100%;
+      height: calc(100% - 2px);
+      margin: 0 6rem;
+      padding: 0 0 1.13rem 0;
+    }
+    .next-events-slider-style{
+      margin: 1.13rem 0;
+      .events-container{
+        padding: 1.13rem 0 0;
+      }
+    }
+  }
+
+  ion-card-header{
+    &::before{
+      content: "";
+      display: block;
+      position: absolute;
+      bottom: 1.3rem;
+      width: 100%;
+      width: -moz-available;
+      height: 0.31rem;
+      background-color: var(--ion-color-quaternary);
+      z-index: -1;
+    }
+    ion-card-title.feature-title {
+      text-transform: none;
+      padding: 0 .6rem;
+      margin: 1.25rem 1.25rem 0.8rem;
+      font-size: var(--app-title-4-size) !important;
+      width: fit-content;
+      background: var(--app-color-background) !important;
+    }
+  }
+
+  ion-note{
+    margin-left: 3.188rem;
+  }
+
+  .events-container {
+
+    & > ion-card {
+      padding: 2.5rem .25rem .25rem 0;
+      display: inline-block;
+      position: static;
+      width: 18rem;
+      height: 100%;
+      background-color: transparent;
+
+      ion-card-content {
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.10);
+        border-radius: 0 var(--app-border-radius-5) var(--app-border-radius-5) 0;
+        background-color: var(--app-color-background-header-footer);
+        border-left: 4px solid var(--ion-color-highlight-new);
+        height: 100%;
+
+        ion-row.event-day-hour {
+          ion-text.hour {
+            font-size: var(--app-text-4-size) !important;
+            font-family: QuicksandBold, serif !important;
+            margin-left: .75rem;
+            padding: 0;
+            position: absolute;
+            top: 4.25rem;
+
+            &::before {
+              background-color: var(--app-font-color-primary);
+              -webkit-mask-image: url('/assets/icons/home/horaires.svg');
+              mask-image: url('/assets/icons/home/horaires.svg');
+              mask-repeat: no-repeat;
+              mask-position: center;
+              mask-size: contain;
+              content: "";
+              display: inline-block;
+              width: 1rem;
+              height: 1rem;
+              margin-bottom: -3px;
+              padding-right: 0.6rem;
+            }
+          }
+
+          ion-row.day {
+            position: absolute;
+            top: -36px;
+            left: -4px;
+            width: fit-content;
+            border-radius: 0 var(--app-border-radius-5) 0 0;
+            border-left: 4px solid var(--ion-color-highlight-new);
+            background-color: var(--ion-color-highlight-new);
+            display: flex !important;
+            justify-content: flex-start;
+            padding-right: .87rem;
+
+            ion-text {
+              position: sticky;
+              left: 0;
+              font-family: QuicksandBold, serif !important;
+              font-size: var(--app-text-4-size) !important;
+              width: fit-content;
+              height: 2.25rem;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              color: var(--app-font-color-primary) !important;
+            }
+
+            ion-text:first-child {
+              padding: 0.5rem 0.4rem 0.5rem 1.25rem;
+            }
+
+            ion-text:last-child {
+              padding: 0.5rem 0.5rem 0.5rem 0;
+            }
+          }
+        }
+
+        & > ion-text.event-label {
+          font-size: var(--app-text-3-size) !important;
+          text-transform: initial;
+        }
+
+        ion-row.event-additional {
+          align-items: center;
+          flex-direction: column;
+          align-content: flex-start;
+
+          ion-icon {
+            display: none;
+          }
+
+          ion-row.card-labels {
+            margin-left: -4px;
+            margin-bottom: .2rem;
+            align-self: flex-start;
+
+            ion-text {
+              font-size: var(--app-text-4-size) !important;
+              font-family: QuicksandBold, serif !important;
+              margin-left: 1.75rem;
+              max-width: 14.5rem;
+              overflow: hidden;
+              height: 1.25rem;
+
+              &::before {
+                content: "";
+                display: inline-block;
+                width: 1rem;
+                height: 1rem;
+                background-size: contain;
+                background-repeat: no-repeat;
+                margin-bottom: -3px;
+                padding-right: 0.6rem;
+              }
+            }
+
+            ion-text::before {
+              background-color: var(--app-font-color-primary);
+              mask-repeat: no-repeat;
+              mask-position: center;
+              mask-size: contain;
+              content: "";
+              display: inline-block;
+              width: 1rem;
+              height: 1rem;
+              position: absolute;
+              left: .65rem;
+            }
+
+            &:has(ion-icon[name=calendar-outline]) ion-text::before {
+              -webkit-mask-image: url('/assets/icons/home/date.svg');
+              mask-image: url('/assets/icons/home/date.svg');
+              left: .15rem;
+            }
+
+            &:has(ion-icon[name=link-outline]) ion-text::before {
+              -webkit-mask-image: url('/assets/icons/home/lien.svg');
+              mask-image: url('/assets/icons/home/lien.svg');
+              width: 1.25rem;
+              height: 1.25rem;
+              margin-bottom: -5px;
+            }
+
+            &:has(ion-icon[name=business-outline]) ion-text::before {
+              -webkit-mask-image: url('/assets/icons/home/batiment.svg');
+              mask-image: url('/assets/icons/home/batiment.svg');
+              margin-left: 2px;
+            }
+
+            &:has(ion-icon[name=man-outline]) ion-text::before {
+              -webkit-mask-image: url('/assets/icons/home/enseignant.svg');
+              mask-image: url('/assets/icons/home/enseignant.svg');
+              width: 1.25rem;
+              height: 1.25rem;
+            }
+
+          }
+        }
+      }
+    }
+  }
+}
+
+//Style for the next University events widget
+app-widget-external-feature > ion-card.ion-no-margin:has(app-calendar-widget) {
+  border-radius: 0 !important;
+  margin: 0 !important;
+
+  & > ion-card-content::before {
+    position: absolute;
+    content: "";
+    border-top-right-radius: 1.25rem !important;
+    border-bottom-right-radius: 1.25rem !important;
+    border: 1px solid var(--ion-color-tertiary);
+    border-left: none;
+    width: 100%;
+    height: calc(100% - 2px);
+    left: -6rem;
+    padding: 0 0 1.13rem 0;
+  }
+  .calendar-slider-style{
+    margin: 1.13rem 0;
+    .events-container{
+      padding: 1.13rem 0 4px 0!important;
+    }
+  }
+
+  ion-card-header{
+    &::before{
+      content: "";
+      display: block;
+      position: absolute;
+      bottom: 1.3rem;
+      width: 100%;
+      width: -moz-available;
+      height: 0.31rem;
+      background-color: var(--ion-color-quaternary);
+      z-index: -1;
+    }
+    ion-card-title.feature-title {
+      text-transform: none;
+      padding: 0 .6rem;
+      margin: 2rem 1.25rem 0.8rem;
+      font-size: var(--app-title-4-size) !important;
+      width: fit-content;
+      background: var(--app-color-background) !important;
+    }
+  }
+
+  app-calendar-widget {
+    .calendar-slider-style > ion-row.events-container > ion-card {
+      border-radius: var(--app-border-radius-5);
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.10) !important;
+      width: 18rem;
+      max-height: 18rem;
+      height: 100%;
+      padding: .8rem;
+
+      ion-card-content {
+        &:after {
+          -webkit-mask-image: url("/assets/icons/navigation/arrow-right.svg");
+          mask-image: url("/assets/icons/navigation/arrow-right.svg");
+          -webkit-mask-size: contain;
+          mask-size: contain;
+          -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+          -webkit-mask-position: center;
+          mask-position: center;
+          color: var(--ion-color-primary-contrast);
+          background-color: var(--ion-color-primary-contrast);
+          content: "";
+          position: absolute;
+          z-index: 1;
+          bottom:0;
+          right: 0;
+          height: 1.7rem;
+          width: 1.7rem;
+          margin-bottom: -2px;
+          margin-right: -2px;
+        }
+        &:before {
+          content: "";
+          position: absolute;
+          z-index: 1;
+          bottom:0;
+          right: 0;
+          height: 1.5rem;
+          width: 1.5rem;
+          background-color: var(--ion-color-primary);
+          border-radius: var(--app-border-radius-5);
+        }
+        ion-row.event-day-hour {
+          ion-text.hour {
+            display: none !important;
+          }
+
+          ion-row.day {
+            display: flex !important;
+
+            ion-text {
+              font-size: var(--app-text-4-size) !important;
+              font-family: QuicksandBold, serif !important;
+
+              &:first-child {
+                padding-right: .3rem;
+              }
+            }
+          }
+        }
+
+        ion-text.event-label {
+          text-align: center;
+          font-size: var(--app-text-3-size) !important;
+          font-family: QuicksandBold, serif !important;
+          text-transform: initial;
+          max-height: 7rem;
+        }
+
+        ion-row.event-additional {
+          ion-icon {
+            display: none;
+          }
+
+          ion-text {
+            text-align: justify;
+            word-break: auto-phrase;
+            font-size: var(--app-text-4-size) !important;
+            font-weight: 600;
+          }
+        }
+
+        //ion-button:has(ion-text.addToCalendar) {
+        //  --background: transparent;
+        //  --box-shadow: none;
+        //  width: auto;
+        //
+        //  ion-text.addToCalendar {
+        //    color: var(--app-font-color-secondary) !important;
+        //    text-transform: none;
+        //    font-size: var(--app-text-5-size) !important;
+        //    font-family: QuickSandBold, sans-serif !important;
+        //  }
+        //}
+
+        //padding: 2px !important;
+      }
+      //padding-bottom: 0 !important;
+    }
+  }
+
+  @media only screen and (max-width: 1000px) {
+    app-calendar-widget {
+      scrollbar-width: none;
+    }
+  }
+}
+
+//Style for the University last news widget
+app-widgets.ion-page ion-card:has(app-latest-news-widget) {
+  margin: 0 !important;
+  border-radius: 0 !important;
+
+  & > ion-card-content {
+    margin-bottom: 2.13rem;
+    &::before {
+      position: absolute;
+      content: "";
+      border-top-left-radius: 1.25rem !important;
+      border-bottom-left-radius: 1.25rem !important;
+      border: 1px solid var(--ion-color-tertiary);
+      border-right: none;
+      width: 100%;
+      height: calc(100% - 2px);
+      margin: 0 6rem;
+    }
+    .next-events-slider-style{
+      margin: 1.13rem 0;
+      .events-container{
+        padding: 1.13rem 0 0;
+      }
+    }
+  }
+
+  & > ion-card-header{
+    &::before{
+      content: "";
+      display: block;
+      position: absolute;
+      bottom: 1.3rem;
+      width: 100%;
+      width: -moz-available;
+      height: 0.31rem;
+      background-color: var(--ion-color-quaternary);
+      z-index: -1;
+    }
+    ion-card-title.feature-title {
+      text-transform: none;
+      padding: 0 .6rem;
+      margin: 2rem 1.25rem 0.8rem;
+      font-size: var(--app-title-4-size) !important;
+      width: fit-content;
+      background: var(--app-color-background) !important;
+    }
+  }
+
+  ion-card-content app-widget app-latest-news-widget > ion-text {
+    margin-left: 2.875rem !important;
+    margin-top: 1rem;
+    padding-top: 1.13rem !important;
+    height: 100%;
+    display: block;
+  }
+
+  .latest-news-container {
+    margin-top: 1rem;
+    ion-card {
+      border-radius: var(--app-border-radius-5) !important;
+      border: none !important;
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.10);
+      max-width: 26rem;
+      background-color: var(--app-color-background-header-footer);
+
+      .title-col {
+        width: 100% !important;
+        max-width: 100% !important;
+        flex: calc(100% - 8.25rem) !important;
+        position: static;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        ion-row {
+          position: static!important;
+          padding-bottom: 9px;
+          margin-right: 8px;
+          ion-text {
+            display: none;
+          }
+
+          ion-button.ion-activated {
+            --background-focused: transparent;
+            --background-hover: transparent;
+            --background-focused-opacity: 0;
+            --background-hover-opacity: 0;
+          }
+
+          ion-button {
+            min-height: 1.5rem;
+            max-height: 1.5rem;
+            height: 1.5rem;
+            width: 1.5rem;
+            background-color: var(--ion-color-primary);
+            padding: 0;
+            margin: 0;
+            border-radius: var(--app-border-radius-5);
+            --background-hover: transparent;
+            --background-hover-opacity: 0;
+            position: static;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            &:before {
+              content: "";
+              position: absolute;
+              top: 0;
+              right: 0;
+              bottom: 0;
+              left: 0;
+              z-index: 1;
+            }
+
+            ion-icon {
+              color: #FFFFFF !important;
+              padding: 0 !important;
+              position: relative;
+              height: 1.75rem;
+              min-width: 1.75rem;
+              margin: 0 !important;
+              padding-left: 2px !important;
+            }
+          }
+        }
+      }
+    }
+  }
+}

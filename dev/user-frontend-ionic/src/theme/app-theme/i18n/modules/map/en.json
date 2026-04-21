@@ -1,0 +1,16 @@
+{
+  "YOUR_POSITION": "Your location",
+  "FILTERS": "Filters",
+  "CATEGORY": {
+    "PRESIDENCES": "Buildings",
+    "COMPOSANTES": "Amphitheater",
+    "BUS": "Library",
+    "RESTOS": "Restauration",
+    "CITES": "Parking",
+    "SANTES": "Universitary services",
+    "SUAPS": "Sports"
+  },
+  "FILTER": "Filter markers",
+  "LOCATE": "Locate me",
+  "REMOVE_FROM_FILTERS": "Remove '{{category}}' from filters"
+}

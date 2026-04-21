@@ -1,0 +1,260 @@
+//Style for the user name and subtitle
+.menu-section{
+  padding: 0;
+}
+.multi-auth-widget {
+  margin-top: 3.38rem;
+  ion-col {
+    width: 100%;
+    display: block;
+    padding: 0;
+    margin: 1.113rem 0;
+
+    &::before {
+      content: "";
+      display: block;
+      position: absolute;
+      top: .7rem;
+      width: 100%;
+      width: -moz-available;
+      height: 0.31rem;
+      background-color: var(--ion-color-quaternary);
+      z-index: -1;
+    }
+  }
+
+  ion-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    h1 {
+      position: relative;
+      text-transform: none;
+      font-size: var(--app-title-4-size) !important;
+      font-family: QuicksandBold, serif !important;
+      padding: 0 .6rem;
+      background: var(--app-color-background) !important;
+
+      &::before {
+        content: "";
+        display: block;
+        position: absolute;
+        left: 50%;
+        transform: translate(-50%, -2.5rem);
+        background-color: var(--app-font-color-primary);
+        -webkit-mask-image: url("/assets/icons/navigation/contacts.svg");
+        mask-image: url("/assets/icons/navigation/contacts.svg");
+        mask-repeat: no-repeat;
+        mask-position: center;
+        mask-size: contain;
+        width: 1.875rem;
+        height: 1.875rem;
+      }
+    }
+
+    h3 {
+      font-size: var(--app-text-4-size) !important;
+    }
+  }
+}
+
+//Style for the menu list
+ion-list.menu-section {
+  border-bottom: none !important;
+
+  ion-item.item.item-label {
+    padding-left: 0;
+    border-bottom: 1px solid var(--Gris, #DEE2E6);
+  }
+
+  ion-icon {
+    width: 1.125rem;
+    height: 1.125rem;
+    margin-inline-end: 0.88rem;
+  }
+
+  ion-label.app-text-3.light {
+    font-size: var(--app-text-4-size) !important;
+    font-family: QuicksandBold, serif !important;
+  }
+
+  app-custom-icon {
+    margin-inline-end: 0;
+  }
+
+  ion-item::part(detail-icon) {
+    --detail-icon-color: var(--app-font-fix-dark-color) !important;
+    --detail-icon-opacity: 1;
+  }
+  //Change contact-us icon
+  ion-icon[name="mail-outline"]{
+    &::before {
+      background-color: var(--app-font-color-primary);
+      -webkit-mask-image: url('/assets/icons/contacts/email.svg');
+      mask-image: url('/assets/icons/contacts/email.svg');
+      mask-repeat: no-repeat;
+      mask-position: center;
+      mask-size: contain;
+      content: "";
+      display: inline-block;
+      width: 1.125rem;
+      height: 1.125rem;
+      margin-bottom: 3px;
+      padding-right: 0;
+    }
+  }
+}
+
+//Style for the social networks icons
+app-widget > lib-social-network ion-row.socialNetworks.hydrated {
+  background-color: transparent;
+  margin-top: 2.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 1.5rem;
+
+  &::before {
+    display: block;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -2.25rem);
+    font-size: var(--app-text-3-size) !important;
+    font-family: QuicksandBold, serif !important;
+  }
+
+  ion-icon {
+    color: var(--ion-color-tertiary);
+    //background-color: var(--ion-color-tertiary);
+    border-radius: 5rem;
+    padding: 0.3rem;
+  }
+  //Add custom icons for Bluesky and Instagram
+  button[aria-label="Bluesky"], button[aria-label="Instagram"] {
+    ion-icon{
+      opacity: 0;
+    }
+    &:after {
+      -webkit-mask-size: contain;
+      mask-size: contain;
+      -webkit-mask-repeat: no-repeat;
+      mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+      mask-position: center;
+      color: var(--ion-color-tertiary);
+      background-color: var(--ion-color-tertiary);
+      content: "";
+      position: absolute;
+      z-index: 1;
+      margin-left: -25px;
+      margin-top: 5px;
+      height: 20px;
+      width: 20px;
+    }
+  }
+  button[aria-label="Bluesky"]{
+    &:after {
+      -webkit-mask-image: url("/assets/icons/social-network/bluesky.svg");
+      mask-image: url("/assets/icons/social-network/bluesky.svg");
+    }
+  }
+  button[aria-label="Instagram"]{
+    &:after {
+      -webkit-mask-image: url("/assets/icons/social-network/instagram.svg");
+      mask-image: url("/assets/icons/social-network/instagram.svg");
+    }
+  }
+}
+html[lang="fr"] app-widget > lib-social-network ion-row.socialNetworks.hydrated:before{
+  content: "Suivez-nous";
+}
+html[lang="en"] app-widget > lib-social-network ion-row.socialNetworks.hydrated:before{
+  content: "Follow us";
+}
+
+  //Style for parameters page footer
+div.menu-footer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+
+  ion-row:first-child {
+    margin-right: 1rem;
+
+    .app-round-button-1 {
+      --background: transparent !important;
+      border: solid 2px var(--app-rounded-button-1-icon-color) !important;
+      height: 1.5rem;
+      min-height: 1.5rem;
+      width: 1.5rem;
+      min-width: 1.5rem;
+
+      ion-icon {
+        height: 1.25rem;
+      }
+    }
+
+    width: 3.438rem;
+  }
+
+  ion-row:nth-child(2) {
+    ion-button {
+      margin: 0 0.25rem;
+
+      &::part(native) {
+        padding: 0.125rem;
+      }
+
+      ion-icon {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+    }
+  }
+
+  ion-row:last-child {
+    margin-top: 1rem;
+    padding-bottom: 0;
+    width: 100%;
+  }
+}
+
+//Login page style
+app-login {
+  .error-text {
+    margin-bottom: 10px;
+  }
+  ul{
+    list-style-type: none;
+  }
+}
+
+//Contact-us page style
+app-contact-us{
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto;
+  min-height: 100vh;
+}
+
+//Dark mode style
+body.dark {
+  ion-list.menu-section ion-item::part(detail-icon) {
+    --detail-icon-color: var(--ion-text-color) !important;
+    }
+  app-widget > lib-social-network ion-row.socialNetworks.hydrated ion-icon {
+    color: var(--ion-text-color);
+  }
+  div.menu-footer ion-row:first-child .app-round-button-1 {
+    border: solid 2px var(--ion-text-color) !important;
+  }
+  app-widget > lib-social-network ion-row.socialNetworks.hydrated button[aria-label=Bluesky]:after, app-widget > lib-social-network ion-row.socialNetworks.hydrated button[aria-label=Instagram]:after{
+    color: var(--ion-text-color);
+    background-color: var(--ion-text-color);
+  }
+}

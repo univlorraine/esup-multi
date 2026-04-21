@@ -68,7 +68,7 @@
       <ion-input #passwordField (keyup.enter)="keyboardSubmit()" class="form-control app-text-3 light"
                  formControlName="password" id="password" required type="password"
                  label="{{ 'AUTH.LOGIN.PASSWORD' | translate }}" labelPlacement="floating"
-                 errorText="{{ 'AUTH.LOGIN.REQUIRED.PASSWORD' | translate }}">
+                 errorText="{{ 'AUTH.LOGIN.REQUIRED.PASSWORD' | translate }}" [clearOnEdit]="false">
         <ion-input-password-toggle slot="end"></ion-input-password-toggle>
       </ion-input>
 

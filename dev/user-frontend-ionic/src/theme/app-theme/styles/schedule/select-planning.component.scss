@@ -1,0 +1,185 @@
+/*!
+ * Copyright ou © ou Copr. Université de Lorraine, (2022)
+ *
+ * Direction du Numérique de l'Université de Lorraine - SIED
+ *  (dn-mobile-dev@univ-lorraine.fr)
+ * JNESIS (contact@jnesis.com)
+ *
+ * Ce logiciel est un programme informatique servant à rendre accessible
+ * sur mobile divers services universitaires aux étudiants et aux personnels
+ * de l'université.
+ *
+ * Ce logiciel est régi par la licence CeCILL 2.1, soumise au droit français
+ * et respectant les principes de diffusion des logiciels libres. Vous pouvez
+ * utiliser, modifier et/ou redistribuer ce programme sous les conditions
+ * de la licence CeCILL telle que diffusée par le CEA, le CNRS et INRIA
+ * sur le site "http://cecill.info".
+ *
+ * En contrepartie de l'accessibilité au code source et des droits de copie,
+ * de modification et de redistribution accordés par cette licence, il n'est
+ * offert aux utilisateurs qu'une garantie limitée. Pour les mêmes raisons,
+ * seule une responsabilité restreinte pèse sur l'auteur du programme, le
+ * titulaire des droits patrimoniaux et les concédants successifs.
+ *
+ * À cet égard, l'attention de l'utilisateur est attirée sur les risques
+ * associés au chargement, à l'utilisation, à la modification et/ou au
+ * développement et à la reproduction du logiciel par l'utilisateur étant
+ * donné sa spécificité de logiciel libre, qui peut le rendre complexe à
+ * manipuler et qui le réserve donc à des développeurs et des professionnels
+ * avertis possédant des connaissances informatiques approfondies. Les
+ * utilisateurs sont donc invités à charger et à tester l'adéquation du
+ * logiciel à leurs besoins dans des conditions permettant d'assurer la
+ * sécurité de leurs systèmes et/ou de leurs données et, plus généralement,
+ * à l'utiliser et à l'exploiter dans les mêmes conditions de sécurité.
+ *
+ * Le fait que vous puissiez accéder à cet en-tête signifie que vous avez
+ * pris connaissance de la licence CeCILL 2.1, et que vous en avez accepté les
+ * termes.
+ */
+
+app-calendar-event {
+  width: 100%;
+}
+
+//Custom URCA style
+//Filtre agendas
+ion-modal {
+  position: absolute;
+  left: 40vw;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.10);
+  @media only screen and (min-width: 768px) {
+    left: inherit;
+  }
+
+  ion-header[role=banner] {
+    box-shadow: none;
+    margin-bottom: 0;
+
+    ion-toolbar.toolbar-title-default {
+      height: fit-content;
+      --background: var(--app-font-color-primary-contrast);
+
+      ion-title {
+        width: fit-content;
+        padding: 0;
+        margin-left: 1rem;
+      }
+
+      ion-buttons {
+        ion-button {
+          ion-text::before {
+            content: "";
+            display: inline-block;
+            width: 1.25rem;
+            height: 1.25rem;
+            background-size: contain;
+            background-repeat: no-repeat;
+            margin-bottom: -3px;
+          }
+        }
+      }
+
+      ion-buttons[slot=secondary] {
+        ion-button {
+          ion-text::before {
+            -webkit-mask-image: url('/assets/icons/features/close.svg');
+            mask-image: url('/assets/icons/features/close.svg');
+            mask-size: contain;
+            mask-repeat: no-repeat;
+            mask-position: center;
+            background-color: var(--app-font-color-primary);
+          }
+        }
+      }
+
+      ion-buttons[slot=primary] {
+        ion-button {
+          ion-text::before {
+            -webkit-mask-image: url('/assets/icons/features/valider.svg');
+            mask-image: url('/assets/icons/features/valider.svg');
+            mask-size: contain;
+            mask-repeat: no-repeat;
+            mask-position: center;
+            background-color: var(--app-font-color-primary);
+          }
+        }
+
+        ion-button::part(native) {
+          background-color: transparent;
+        }
+      }
+
+      // Style for iOS, change close button order
+      ion-buttons[slot=secondary] {
+        -ms-flex-order: 5;
+        order: 5;
+      }
+    }
+  }
+
+  ion-content {
+    --background: var(--app-font-color-primary-contrast);
+
+    ion-row.ion-margin {
+      margin-top: 0;
+      margin-bottom: 1.25rem;
+
+      ion-label.app-text-4 {
+        font-family: QuicksandBold, sans-serif !important;
+        font-size: var(--app-text-4-size) !important;
+        color: var(--app-font-color-primary) !important;
+      }
+    }
+
+    form ion-item {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: baseline;
+      --border-style: none;
+      --min-height: 2rem;
+      --background: var(--app-font-color-primary-contrast);
+      margin-bottom: 0.25rem;
+
+      ion-label.app-text-4 {
+        order: 2;
+        margin-left: 1.4rem;
+        color: var(--app-font-color-primary) !important;
+      }
+
+      ion-checkbox {
+        margin: 0;
+
+        &::part(container) {
+          display: none;
+        }
+
+        &:before {
+          -webkit-mask-image: url('/assets/icons/features/unchecked.svg');
+          mask-image: url('/assets/icons/features/unchecked.svg');
+          mask-size: contain;
+          mask-repeat: no-repeat;
+          mask-position: center;
+          background-color: var(--app-font-color-primary);
+          content: "";
+          display: inline-block;
+          position: absolute;
+          width: 1rem;
+          height: 1rem;
+          background-size: contain;
+          background-repeat: no-repeat;
+          top: .75rem;
+        }
+
+        &[aria-checked=true]:before {
+          -webkit-mask-image: url('/assets/icons/features/checked.svg');
+          mask-image: url('/assets/icons/features/checked.svg');
+          mask-size: contain;
+          mask-repeat: no-repeat;
+          mask-position: center;
+          background-color: var(--app-font-color-primary);
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,294 @@
+/*!
+ * Copyright ou © ou Copr. Université de Lorraine, (2022)
+ *
+ * Direction du Numérique de l'Université de Lorraine - SIED
+ *  (dn-mobile-dev@univ-lorraine.fr)
+ * JNESIS (contact@jnesis.com)
+ *
+ * Ce logiciel est un programme informatique servant à rendre accessible
+ * sur mobile divers services universitaires aux étudiants et aux personnels
+ * de l'université.
+ *
+ * Ce logiciel est régi par la licence CeCILL 2.1, soumise au droit français
+ * et respectant les principes de diffusion des logiciels libres. Vous pouvez
+ * utiliser, modifier et/ou redistribuer ce programme sous les conditions
+ * de la licence CeCILL telle que diffusée par le CEA, le CNRS et INRIA
+ * sur le site "http://cecill.info".
+ *
+ * En contrepartie de l'accessibilité au code source et des droits de copie,
+ * de modification et de redistribution accordés par cette licence, il n'est
+ * offert aux utilisateurs qu'une garantie limitée. Pour les mêmes raisons,
+ * seule une responsabilité restreinte pèse sur l'auteur du programme, le
+ * titulaire des droits patrimoniaux et les concédants successifs.
+ *
+ * À cet égard, l'attention de l'utilisateur est attirée sur les risques
+ * associés au chargement, à l'utilisation, à la modification et/ou au
+ * développement et à la reproduction du logiciel par l'utilisateur étant
+ * donné sa spécificité de logiciel libre, qui peut le rendre complexe à
+ * manipuler et qui le réserve donc à des développeurs et des professionnels
+ * avertis possédant des connaissances informatiques approfondies. Les
+ * utilisateurs sont donc invités à charger et à tester l'adéquation du
+ * logiciel à leurs besoins dans des conditions permettant d'assurer la
+ * sécurité de leurs systèmes et/ou de leurs données et, plus généralement,
+ * à l'utiliser et à l'exploiter dans les mêmes conditions de sécurité.
+ *
+ * Le fait que vous puissiez accéder à cet en-tête signifie que vous avez
+ * pris connaissance de la licence CeCILL 2.1, et que vous en avez accepté les
+ * termes.
+ */
+
+.search-and-filters {
+  --ion-item-background: var(--app-color-component-background-secondary);
+  background: var(--app-color-component-background-secondary);
+  border-radius: 0 0 1.25rem 1.25rem;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.10);
+
+  .sc-ion-searchbar-md-h {
+    --border-radius: 0.5rem;
+    --box-shadow: none;
+    --background: #FFF;
+    padding: .5rem 1rem;
+  }
+
+  .searchbar-input.sc-ion-searchbar-md {
+    font-size: 0.875rem;
+    -webkit-padding-start: 1rem;
+    padding-inline-start: 1rem;
+    padding-top: 0;
+    padding-bottom: 0;
+    border: solid 1px var(--ion-color-highlight);
+
+    &, &::placeholder {
+      color: var(--ion-text-color);
+      opacity: 1; /* Firefox */
+    }
+
+    /* For Internet Explorer */
+    &:-ms-input-placeholder {
+      color: var(--ion-text-color);
+    }
+
+    /* For Edge */
+    &::-ms-input-placeholder {
+      color: var(--ion-text-color);
+    }
+  }
+
+  ion-row:has(ion-button) {
+    padding: 0 .5rem .5rem .5rem;
+  }
+
+  ion-radio-group {
+    display: flex;
+    margin: 0 1rem;
+    justify-content: flex-start;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    &::part(native){
+      border-radius: 0.5rem;
+    }
+
+    ion-item:nth-child(3) {
+      order: -1;
+    }
+
+    ion-item {
+      padding-bottom: 0.5rem;
+      margin-right: 0.5rem;
+      --inner-padding-end: 0;
+
+      &::part(native) {
+        padding-left: 0;
+        border-radius: 0;
+      }
+
+      ion-radio {
+        overflow: visible !important;
+        border-radius: 0.5rem;
+        background-color: var(--app-color-background-header-footer);
+        border: solid 2px var(--app-font-color-secondary);
+        padding: 0 .5rem;
+
+        &::part(label) {
+          margin: 0;
+        }
+
+        &::part(container) {
+          display: none;
+        }
+
+        ion-label {
+          color: var(--app-font-color-primary) !important;
+        }
+      }
+
+      ion-radio.radio-checked {
+        background-color: var(--app-font-color-secondary);
+        border-color: var(--app-font-color-secondary);
+
+        ion-label {
+          color: var(--app-color-background) !important;
+        }
+      }
+    }
+  }
+
+  &.search-fixed {
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+  }
+
+  ion-row.searchbar-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 4rem;
+  }
+
+  ion-item {
+    --min-height: 2rem;
+
+    ion-radio {
+      --color: var(--app-font-color-primary) !important;
+      --color-checked: var(--app-font-color-primary) !important;
+    }
+  }
+}
+
+.search-results {
+  display: grid;
+  grid-gap: 1.5rem;
+  grid-template-columns: repeat(5,minmax(0,1fr));
+  margin: 0 1rem 1rem 1rem;
+  padding-top: 3rem;
+  @media screen and (max-width: 1400px) {
+    grid-template-columns: repeat(4,minmax(0,1fr));
+  }
+  @media screen and (min-width: 700px) and (max-width: 999px) {
+    grid-template-columns: repeat(2,minmax(0,1fr));
+  }
+  @media screen and (max-width: 699px) {
+    grid-template-columns: repeat(1,minmax(0,1fr));
+  }
+
+  & > ion-text {
+    position: absolute;
+    margin-top: -3rem;
+  }
+
+  ion-card.contact-card {
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.10);
+    border-radius: var(--app-border-radius-5);
+    background-color: var(--app-color-background-header-footer);
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    ion-item.contact-header {
+      &::part(native){
+        padding-left: 0;
+      }
+      --background: transparent;
+      ion-avatar {
+        display: none;
+      }
+
+      & > ion-label {
+        //Style for contact name with underline
+        margin-top: 1rem;
+        &:before {
+          content: "";
+          display: block;
+          position: absolute;
+          top: 1.4rem;
+          width: 100%;
+          width: -moz-available;
+          height: 0.31rem;
+          background-color: var(--ion-color-quaternary);
+          z-index: -1;
+        }
+
+        p, ion-label {
+          padding-left: calc(var(--padding-start) + var(--ion-safe-area-left, 0px));
+        }
+
+        h3 {
+          position: relative;
+          text-transform: none;
+          font-size: var(--app-text-4-size) !important;
+          font-family: QuicksandBold, serif !important;
+          width: fit-content;
+          background: var(--app-color-background-header-footer);
+          margin: 0 calc(var(--padding-start) + var(--ion-safe-area-left, 0px) - .3rem);
+          padding: 0 .3rem;
+        }
+      }
+    }
+
+    ion-card-content.contact-content {
+      padding: 0 1rem 1rem;
+      border-radius: var(--app-border-no-radius);
+
+      ion-list {
+        background: transparent !important;
+        display: flex;
+        flex-direction: column-reverse;
+
+        ion-item {
+          --background: transparent;
+          align-items: baseline;
+
+          &::part(native) {
+            min-height: 1.6rem;
+          }
+
+          &::before {
+            background-color: var(--app-font-color-primary);
+            mask-repeat: no-repeat;
+            mask-position: center;
+            mask-size: contain;
+            content: "";
+            display: inline-block;
+            width: 1rem;
+            height: 1rem;
+            position: absolute;
+            top: .25rem;
+          }
+
+          ion-icon {
+            display: none;
+          }
+
+          &:has(ion-icon[name=call])::before {
+            -webkit-mask-image: url('/assets/icons/contacts/phone.svg');
+            mask-image: url('/assets/icons/contacts/phone.svg');
+          }
+
+          &:has(ion-icon[name=mail])::before {
+            -webkit-mask-image: url('/assets/icons/contacts/email.svg');
+            mask-image: url('/assets/icons/contacts/email.svg');
+          }
+
+          ion-label {
+            margin: 0 0 0 0.5rem;
+          }
+        }
+      }
+
+      .add-icon{
+        color: var(--app-font-color-primary-contrast);
+      }
+      ion-button.ion-activated .add-icon{
+        color: var(--app-font-color-primary);
+      }
+
+      ion-button::part(native):active{
+
+      }
+    }
+  }
+}
+
