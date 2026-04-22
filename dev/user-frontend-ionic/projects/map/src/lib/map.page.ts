@@ -59,6 +59,7 @@ import {
 } from './map.repository';
 import { MapService } from './map.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import 'leaflet.markercluster';
 
 @Component({
   selector: 'app-map',
@@ -77,11 +78,13 @@ export class MapPage {
   public campuses: Campus[];
   public icons: Icon[];
   private map: Leaflet.Map;
-  private layerGroupByCategory: Map<string, Leaflet.LayerGroup> = new Map();
   private positionLayerGroup: Leaflet.LayerGroup;
   private destroyRef = inject(DestroyRef)
   public isCampusSelectionOpen = false;
   public maxDisplayedFloatingButton : number;
+  private markerClusterGroup: any;
+  private allMarkersByCategory: Map<string, Leaflet.Marker[]> = new Map();
+  private displayedMarkers: Set<Leaflet.Marker> = new Set();
 
   constructor(
     private mapService: MapService,
@@ -198,16 +201,34 @@ export class MapPage {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(this.map);
 
+    this.markerClusterGroup = Leaflet.markerClusterGroup();
+    this.map.addLayer(this.markerClusterGroup);
+
     await this.refreshUserPosition();
   }
 
   private refreshMapWithSelectedCategories(categories: string[]) {
-    this.layerGroupByCategory.forEach((layerGroup, category) => {
-      layerGroup.removeFrom(this.map);
-      if (categories.length === 0 || categories.indexOf(category) >= 0) {
-        layerGroup.addTo(this.map);
+    const nextMarkers = new Set<Leaflet.Marker>();
+
+    this.allMarkersByCategory.forEach((markers, category) => {
+      if (categories.length === 0 || categories.includes(category)) {
+        markers.forEach(marker => nextMarkers.add(marker));
       }
     });
+
+    this.displayedMarkers.forEach(marker => {
+      if (!nextMarkers.has(marker)) {
+        this.markerClusterGroup.removeLayer(marker);
+      }
+    });
+
+    nextMarkers.forEach(marker => {
+      if (!this.displayedMarkers.has(marker)) {
+        this.markerClusterGroup.addLayer(marker);
+      }
+    });
+
+    this.displayedMarkers = nextMarkers;
   }
 
   private async refreshUserPosition() {
@@ -262,9 +283,12 @@ export class MapPage {
   private initMarkers(markersCollections: Record<string, Marker[]>) {
     Object.entries(markersCollections).forEach(([category, markers]) => {
       const leafletMarkers: Leaflet.Marker[] = markers.map(m => this.initMarker(m));
-      const layerGroup = Leaflet.layerGroup(leafletMarkers);
-      this.layerGroupByCategory.set(category, layerGroup);
-      layerGroup.addTo(this.map);
+      this.allMarkersByCategory.set(category, leafletMarkers);
+
+      leafletMarkers.forEach(marker => {
+        this.markerClusterGroup.addLayer(marker);
+        this.displayedMarkers.add(marker); // important
+      });
     });
   }
 
