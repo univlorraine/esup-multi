@@ -201,7 +201,13 @@ export class MapPage {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(this.map);
 
-    this.markerClusterGroup = Leaflet.markerClusterGroup();
+    this.markerClusterGroup = Leaflet.markerClusterGroup({
+      disableClusteringAtZoom: 18, // Désactive le cluster à partir du zoom 18
+      showCoverageOnHover: false,  // Désactive la visualisation du polygone montrant la zone du cluster
+      zoomToBoundsOnClick: true,    // Lors du clic, zoom sur le cluster
+      maxClusterRadius: 80,         // Rayon maximum du cluster en pixel
+      removeOutsideVisibleBounds: true, // Retirer les clusters en dehors de la zone visible sur la carte
+    });
     this.map.addLayer(this.markerClusterGroup);
 
     await this.refreshUserPosition();
