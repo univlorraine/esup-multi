@@ -217,7 +217,7 @@ export class MapPointsWordpressService {
     this.logger.debug('Loading map points from WordPress...');
     const data = await this.wordpressService.executeGraphQLQuery(`
       query {
-        mapPoints(first: 100, where: {language: ${FRENCH_CODE}}) {
+        mapPoints(first: 500, where: {language: ${FRENCH_CODE}}) {
           nodes {
             databaseId
             mapPointName

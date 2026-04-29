@@ -124,7 +124,7 @@ export class StaticPagesWordpressService {
     this.logger.debug('Loading static pages from WordPress...');
     const data = await this.wordpressService.executeGraphQLQuery(`
       query {
-        staticPages(first: 100, where: {language: ${FRENCH_CODE}}) {
+        staticPages(first: 200, where: {language: ${FRENCH_CODE}}) {
           nodes {
             databaseId
             staticPageTitle
