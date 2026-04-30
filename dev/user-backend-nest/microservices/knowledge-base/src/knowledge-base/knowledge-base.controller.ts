@@ -45,9 +45,7 @@ import { KnowledgeBaseService } from './knowledge-base.service';
 
 @Controller()
 export class KnowledgeBaseController {
-  constructor(
-    private readonly knowledgeBaseService: KnowledgeBaseService,
-  ) {}
+  constructor(private readonly knowledgeBaseService: KnowledgeBaseService) {}
 
   @MessagePattern({ cmd: 'knowledgeBase' })
   getKnowledgeBase(): Observable<KnowledgeBaseDto[]> {

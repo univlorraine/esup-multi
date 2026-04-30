@@ -102,9 +102,11 @@ export class KnowledgeBaseService {
     };
 
     return this.httpService
-      .post<
-        KnowledgeBaseGraphQLResponse<KnowledgeBaseDto[]>
-      >(url, graphqlQuery, requestConfig)
+      .post<KnowledgeBaseGraphQLResponse<KnowledgeBaseDto[]>>(
+        url,
+        graphqlQuery,
+        requestConfig,
+      )
       .pipe(
         catchError((err: any) => {
           const errorMessage = 'Unable to get knowledge base data from CMS';
