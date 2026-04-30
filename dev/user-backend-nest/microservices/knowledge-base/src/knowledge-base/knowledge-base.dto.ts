@@ -58,9 +58,9 @@ export enum PageType {
 }
 
 export interface KnowledgeBaseDto {
-  id: number;
-  pageType: PageType;
-  parentId?: number;
+  id: string;
+  type: PageType;
+  parentId?: string | null;
   routerLink?: string;
   link?: string;
   ssoService?: string;
@@ -70,6 +70,7 @@ export interface KnowledgeBaseDto {
   email?: string;
   translations?: KnowledgeBaseTranslation[];
   childDisplay?: ChildDisplay;
+  coverImage?: string;
   position: number;
   authorization?: Authorization;
 }
