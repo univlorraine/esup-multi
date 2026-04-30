@@ -37,12 +37,9 @@
  * termes.
  */
 
-import { CACHE_MANAGER } from '@nestjs/cache-manager';
-import { Controller, Inject } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+import { Controller } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
-import { Cache } from 'cache-manager';
-import { firstValueFrom } from 'rxjs';
+import { Observable } from 'rxjs';
 import { KnowledgeBaseDto } from './knowledge-base.dto';
 import { KnowledgeBaseService } from './knowledge-base.service';
 
@@ -50,27 +47,10 @@ import { KnowledgeBaseService } from './knowledge-base.service';
 export class KnowledgeBaseController {
   constructor(
     private readonly knowledgeBaseService: KnowledgeBaseService,
-    private readonly configService: ConfigService,
-    @Inject(CACHE_MANAGER) private cacheManager: Cache,
   ) {}
 
   @MessagePattern({ cmd: 'knowledgeBase' })
-  async getKnowledgeBase(): Promise<KnowledgeBaseDto[]> {
-    const cacheKey = `knowledge-base`;
-    const cachedKnowledgeBase =
-      await this.cacheManager.get<KnowledgeBaseDto[]>(cacheKey);
-
-    if (cachedKnowledgeBase !== undefined) {
-      return cachedKnowledgeBase;
-    }
-
-    const knowledgeBase = await firstValueFrom(
-      this.knowledgeBaseService.getKnowledgeBase(),
-    );
-
-    const ttl = this.configService.get<number>('cacheTtl') || 300;
-    await this.cacheManager.set(cacheKey, knowledgeBase, ttl);
-
-    return knowledgeBase;
+  getKnowledgeBase(): Observable<KnowledgeBaseDto[]> {
+    return this.knowledgeBaseService.getKnowledgeBase();
   }
 }

@@ -22,19 +22,16 @@
   },
   "dependencies": {
     "@nestjs/axios": "^4.0.1",
-    "@nestjs/cache-manager": "^3.0.1",
-    "@nestjs/common": "^11.0.1",
+    "@nestjs/common": "^11.1.5",
     "@nestjs/config": "^4.0.2",
-    "@nestjs/core": "^11.0.1",
+    "@nestjs/core": "^11.1.5",
     "@nestjs/microservices": "^11.1.5",
-    "@nestjs/platform-express": "^11.0.1",
+    "@nestjs/platform-express": "^11.1.5",
     "agentkeepalive": "^4.6.0",
-    "cache-manager": "^7.0.1",
-    "cache-manager-redis-yet": "^5.1.5",
     "nats": "^2.29.3",
-    "reflect-metadata": "^0.2.2",
+    "reflect-metadata": "^0.1.13",
     "rimraf": "^6.0.1",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",

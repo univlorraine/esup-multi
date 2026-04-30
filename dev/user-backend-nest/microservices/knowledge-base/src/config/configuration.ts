@@ -37,11 +37,7 @@
  * termes.
  */
 
-import {
-  KeepAliveOptions,
-  RedisSocket,
-  CmsApi,
-} from './configuration.interface';
+import { CmsApi, KeepAliveOptions } from './configuration.interface';
 
 const applyIfNotBlank = (param: string, applyFn: (value: string) => void) => {
   if (param && param.trim().length > 0) {
@@ -52,10 +48,6 @@ const applyIfNotBlank = (param: string, applyFn: (value: string) => void) => {
 export default (): {
   cmsApi: CmsApi;
   keepAliveOptions: KeepAliveOptions;
-  redisSocket: RedisSocket;
-  redisPassword: string;
-  cacheTtl: number;
-  cacheMax: number;
 } => {
   const keepAliveOptions = {};
 
@@ -101,12 +93,5 @@ export default (): {
         process.env.KNOWLEDGE_BASE_SERVICE_CMS_CONNECTOR_API_BEARER_TOKEN,
     },
     keepAliveOptions,
-    redisSocket: {
-      host: process.env.KNOWLEDGE_BASE_SERVICE_CACHE_REDIS_HOST,
-      port: parseInt(process.env.KNOWLEDGE_BASE_SERVICE_CACHE_REDIS_PORT),
-    },
-    redisPassword: process.env.KNOWLEDGE_BASE_SERVICE_CACHE_REDIS_PASSWORD,
-    cacheTtl: parseInt(process.env.KNOWLEDGE_BASE_SERVICE_CACHE_TTL_MS),
-    cacheMax: parseInt(process.env.KNOWLEDGE_BASE_SERVICE_CACHE_MAX),
   };
 };

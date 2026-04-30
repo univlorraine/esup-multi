@@ -51,8 +51,3 @@ export interface KeepAliveOptions {
   maxFreeSockets?: number;
   socketActiveTTL?: number;
 }
-
-export interface RedisSocket {
-  host: string;
-  port: number;
-}
