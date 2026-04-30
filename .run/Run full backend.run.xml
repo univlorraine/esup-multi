@@ -1,7 +1,8 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Run full backend" type="CompoundRunConfigurationType">
     <toRun name="backend/auth" type="js.build_tools.npm" />
-    <toRun name="backend/cards" type="js.build_tools.npm" />
+    <toRun name="backend/card" type="js.build_tools.npm" />
+    <toRun name="backend/card-eu" type="js.build_tools.npm" />
     <toRun name="backend/chatbot" type="js.build_tools.npm" />
     <toRun name="backend/clocking" type="js.build_tools.npm" />
     <toRun name="backend/contact-us" type="js.build_tools.npm" />

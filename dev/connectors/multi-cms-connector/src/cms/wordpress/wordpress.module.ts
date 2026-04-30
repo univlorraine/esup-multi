@@ -48,6 +48,7 @@ import { LanguagesWordpressModule } from '@wordpress/collections/languages/langu
 import { LoginWordpressModule } from '@wordpress/collections/login/login.wordpress.module';
 import { StaticPagesWordpressModule } from '@wordpress/collections/static-pages/static-pages.wordpress.module';
 import { WidgetsWordpressModule } from '@wordpress/collections/widgets/widgets.wordpress.module';
+import { MapPointsWordpressModule } from '@wordpress/collections/map-points/map-points.wordpress.module';
 import { KnowledgeBaseWordpressModule } from '@wordpress/collections/knowledge-base/knowledge-base.wordpress.module';
 
 @Module({
@@ -60,6 +61,7 @@ import { KnowledgeBaseWordpressModule } from '@wordpress/collections/knowledge-b
     ImportantNewsWordpressModule,
     LanguagesWordpressModule,
     LoginWordpressModule,
+    MapPointsWordpressModule,
     StaticPagesWordpressModule,
     SocialNetworksWordpressModule,
     WidgetsWordpressModule,
@@ -73,6 +75,7 @@ import { KnowledgeBaseWordpressModule } from '@wordpress/collections/knowledge-b
     ImportantNewsWordpressModule,
     LanguagesWordpressModule,
     LoginWordpressModule,
+    MapPointsWordpressModule,
     StaticPagesWordpressModule,
     SocialNetworksWordpressModule,
     WidgetsWordpressModule,

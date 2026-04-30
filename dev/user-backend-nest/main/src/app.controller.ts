@@ -56,20 +56,22 @@ import { ClientProxy } from '@nestjs/microservices';
 import { AuthGuard } from '@nestjs/passport';
 import { concatMap, map } from 'rxjs';
 import * as infosJsonData from './infos.json';
-import * as clientInfosJson from './client-infos.json';
 import { ErrorsInterceptor } from './interceptors/errors.interceptor';
 import { AuthorizationHelper } from './security/authorization.helper';
+import { ConfigService } from '@nestjs/config';
 import { NodeHelper } from './common/utils/node.helper';
 
 @UseInterceptors(new ErrorsInterceptor())
 @Controller()
 export class AppController {
   constructor(
+    private configService: ConfigService,
     @Inject('FEATURES_SERVICE') private featuresClient: ClientProxy,
     @Inject('AUTH_SERVICE') private authClient: ClientProxy,
     @Inject('MAP_SERVICE') private mapClient: ClientProxy,
     @Inject('RSS_SERVICE') private rssClient: ClientProxy,
-    @Inject('CARDS_SERVICE') private cardsClient: ClientProxy,
+    @Inject('CARD_EU_SERVICE') private cardEuClient: ClientProxy,
+    @Inject('CARD_SERVICE') private cardClient: ClientProxy,
     @Inject('SCHEDULE_SERVICE') private scheduleClient: ClientProxy,
     @Inject('CONTACTS_SERVICE') private contactsClient: ClientProxy,
     @Inject('IMPORTANT_NEWS_SERVICE') private importantNewsClient: ClientProxy,
@@ -249,8 +251,8 @@ export class AppController {
     );
   }
 
-  @Post('/cards')
-  cards(@Body() body) {
+  @Post('/card-eu')
+  cardEu(@Body() body) {
     return this.authClient
       .send(
         {
@@ -260,9 +262,51 @@ export class AppController {
       )
       .pipe(
         concatMap((user) =>
-          this.cardsClient.send(
+          this.cardEuClient.send(
             {
-              cmd: 'cards',
+              cmd: 'card-eu',
+            },
+            user.username,
+          ),
+        ),
+      );
+  }
+
+  @Post('/card-eu-light')
+  cardEuLight(@Body() body) {
+    return this.authClient
+      .send(
+        {
+          cmd: 'getUserOrThrowError',
+        },
+        body,
+      )
+      .pipe(
+        concatMap(() =>
+          this.cardEuClient.send(
+            {
+              cmd: 'card-eu-light',
+            },
+            body.escn,
+          ),
+        ),
+      );
+  }
+
+  @Post('/card')
+  card(@Body() body) {
+    return this.authClient
+      .send(
+        {
+          cmd: 'getUserOrThrowError',
+        },
+        body,
+      )
+      .pipe(
+        concatMap((user) =>
+          this.cardClient.send(
+            {
+              cmd: 'card',
             },
             user.username,
           ),
@@ -773,7 +817,14 @@ export class AppController {
 
   @Get('/app-update-infos')
   appUpdateInfos() {
-    return clientInfosJson;
+    return {
+      storeVersion: this.configService.get('APP_UPDATE_STORE_VERSION'),
+      minVersionRequired: this.configService.get(
+        'APP_UPDATE_MIN_VERSION_REQUIRED',
+      ),
+      playStoreUrl: this.configService.get('APP_UPDATE_PLAY_STORE_URL'),
+      appStoreUrl: this.configService.get('APP_UPDATE_APP_STORE_URL'),
+    };
   }
 
   @Get('/health')

@@ -45,6 +45,7 @@ export enum CacheCollection {
   SOCIAL_NETWORKS = 'social-networks',
   STATIC_PAGES = 'static-pages',
   WIDGETS = 'widgets',
+  MAP_POINTS = 'map-points',
   KNOWLEDGE_BASE = 'knowledge-base',
 }
 
@@ -83,6 +84,7 @@ export function getCacheTTL(collection: CacheCollection): number {
     [CacheCollection.SOCIAL_NETWORKS]: 86400000, // 1 day
     [CacheCollection.STATIC_PAGES]: 86400000, // 1 day
     [CacheCollection.WIDGETS]: 3600000, // 1 hour
+    [CacheCollection.MAP_POINTS]: 86400000, // 1 day
     [CacheCollection.KNOWLEDGE_BASE]: 86400000, // 1 day
   };
 

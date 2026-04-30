@@ -122,3 +122,8 @@ h5 {
     padding-left: env(safe-area-inset-left)
   }
 }
+
+.swiper-button-next.hidden,
+.swiper-button-prev.hidden {
+  display: none;
+}

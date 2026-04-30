@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NetworkService } from '@multi/shared';
 import { Observable } from 'rxjs';
@@ -46,13 +46,14 @@ import Swiper from 'swiper';
 import { getRestaurantById, Restaurant } from '../restaurants.repository';
 import { getMenusByRestaurantId, Menu } from './menus.repository';
 import { RestaurantMenusService } from './restaurant-menus.service';
+import { IonRouterOutlet } from '@ionic/angular';
 
 @Component({
   selector: 'app-restaurant-menus',
   templateUrl: './restaurant-menus.page.html',
   styleUrls: ['../../../../../src/theme/app-theme/styles/restaurants/restaurant-menus.page.scss'],
 })
-export class RestaurantMenusPage implements OnInit, AfterViewChecked {
+export class RestaurantMenusPage implements OnInit, OnDestroy, AfterViewChecked {
   @ViewChild('swiperContainer') swiperContainer: ElementRef;
 
   public restaurantMenusIsEmpty$: Observable<boolean>;
@@ -67,6 +68,7 @@ export class RestaurantMenusPage implements OnInit, AfterViewChecked {
     private activatedRoute: ActivatedRoute,
     private restaurantMenusService: RestaurantMenusService,
     private networkService: NetworkService,
+    private routerOutlet: IonRouterOutlet,
   ) { }
 
   ngOnInit() {
@@ -78,6 +80,11 @@ export class RestaurantMenusPage implements OnInit, AfterViewChecked {
     );
 
     this.loadMenusIfNetworkAvailable();
+    this.routerOutlet.swipeGesture = false;
+  }
+
+  ngOnDestroy(){
+    this.routerOutlet.swipeGesture = true;
   }
 
   async loadMenusIfNetworkAvailable() {
@@ -112,16 +119,24 @@ export class RestaurantMenusPage implements OnInit, AfterViewChecked {
   }
 
   initializeSwiper(swiperContainer: HTMLElement) {
+    // Initialiser les classes cachées avant la création du swiper
+    const nextButton = swiperContainer.querySelector('.swiper-button-next');
+    const prevButton = swiperContainer.querySelector('.swiper-button-prev');
+
+    if (nextButton && swiperContainer.querySelectorAll('.swiper-slide').length <= 1) nextButton.classList.add('hidden');
+    if (prevButton) prevButton.classList.add('hidden');
+
     this.swiper = new Swiper(swiperContainer, {
       // Swiper options :
       navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
       },
+      on: {
+        init: () => this.updateNavigationButtons(),
+        slideChange: () => this.updateNavigationButtons()
+      }
     });
-
-    const nextButton = swiperContainer.querySelector('.swiper-button-next');
-    const prevButton = swiperContainer.querySelector('.swiper-button-prev');
 
     nextButton.addEventListener('click', () => {
       this.swiper.slideNext();
@@ -130,5 +145,24 @@ export class RestaurantMenusPage implements OnInit, AfterViewChecked {
     prevButton.addEventListener('click', () => {
       this.swiper.slidePrev();
     });
+  }
+
+  updateNavigationButtons() {
+    if (!this.swiper) return;
+
+    const nextButton = this.swiper.el.querySelector('.swiper-button-next');
+    const prevButton = this.swiper.el.querySelector('.swiper-button-prev');
+
+    if (this.swiper.isBeginning) {
+      prevButton.classList.add('hidden');
+    } else {
+      prevButton.classList.remove('hidden');
+    }
+
+    if (this.swiper.isEnd) {
+      nextButton.classList.add('hidden');
+    } else {
+      nextButton.classList.remove('hidden');
+    }
   }
 }

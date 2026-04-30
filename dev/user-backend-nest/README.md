@@ -1,7 +1,8 @@
 # Application MULTI - Backend utilisateur
 - [Gateway API](./main/README.md)
 - [Microservice auth](./microservices/auth/README.md)
-- [Microservice cards](./microservices/cards/README.md)
+- [Microservice card](./microservices/card/README.md)
+- [Microservice card-eu](./microservices/card-eu/README.md)
 - [Microservice chatbot](./microservices/chatbot/README.md)
 - [Microservice clocking](./microservices/clocking/README.md)
 - [Microservice contact-us](./microservices/contact-us/README.md)

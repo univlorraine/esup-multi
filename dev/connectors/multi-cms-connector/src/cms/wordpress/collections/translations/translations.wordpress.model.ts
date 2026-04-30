@@ -97,6 +97,21 @@ export class LoginTranslationsWordpress extends BaseTranslationsWordpress {
 }
 
 @ObjectType()
+export class MapCategoryTranslationsWordpress extends BaseTranslationsWordpress {
+  @Field()
+  mapCategoryName: string;
+}
+
+@ObjectType()
+export class MapPointTranslationsWordpress extends BaseTranslationsWordpress {
+  @Field()
+  mapPointName: string;
+
+  @Field()
+  mapPointDescription: string;
+}
+
+@ObjectType()
 export class StaticPagesTranslationsWordpress extends BaseTranslationsWordpress {
   @Field()
   staticPageContent: string;
