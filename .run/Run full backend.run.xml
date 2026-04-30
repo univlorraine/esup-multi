@@ -9,6 +9,7 @@
     <toRun name="backend/contacts" type="js.build_tools.npm" />
     <toRun name="backend/features" type="js.build_tools.npm" />
     <toRun name="backend/important-news" type="js.build_tools.npm" />
+    <toRun name="backend/knowledge-base" type="js.build_tools.npm" />
     <toRun name="backend/mail-calendar" type="js.build_tools.npm" />
     <toRun name="backend/main" type="js.build_tools.npm" />
     <toRun name="backend/map" type="js.build_tools.npm" />
