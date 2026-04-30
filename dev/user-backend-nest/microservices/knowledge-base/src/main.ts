@@ -67,7 +67,7 @@ async function bootstrap() {
   await app.startAllMicroservices();
 
   const host = process.env.KNOWLEDGE_BASE_SERVICE_HOST || '127.0.0.1';
-  const port = parseInt(process.env.KNOWLEDGE_BASE_SERVICE_PORT) || 3020;
+  const port = parseInt(process.env.KNOWLEDGE_BASE_SERVICE_PORT) || 3021;
   Logger.log(`Listening on host ${host}, port ${port}`);
   Logger.log(
     `Cache enabled. TTL: ${
