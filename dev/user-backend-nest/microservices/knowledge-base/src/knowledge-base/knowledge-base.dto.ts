@@ -42,10 +42,6 @@ export interface Authorization {
   roles: string[];
 }
 
-export interface KnowledgeBaseQueryDto {
-  login: string;
-}
-
 export enum ChildDisplay {
   CARD = 'card',
   LIST = 'list',
@@ -64,7 +60,6 @@ export interface KnowledgeBaseDto {
   routerLink?: string;
   link?: string;
   ssoService?: string;
-  mail?: string;
   phone?: string;
   address?: string;
   email?: string;
