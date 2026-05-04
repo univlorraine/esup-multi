@@ -162,7 +162,7 @@ export class KnowledgeBaseWordpressService {
     this.logger.debug('Loading knowledge-base from WordPress...');
     const data = await this.wordpressService.executeGraphQLQuery(`
       query {
-        knowledgeBaseResources(first: 100, where: {language: ${FRENCH_CODE}}) {
+        knowledgeBaseResources(first: 200, where: {language: ${FRENCH_CODE}}) {
           nodes {
             databaseId
             knowledgeBaseTitle
