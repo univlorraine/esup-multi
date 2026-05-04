@@ -41,11 +41,11 @@ import { Injectable, Logger } from '@nestjs/common';
 import { catchError, map, Observable } from 'rxjs';
 import { FeaturesPositionHelper } from './features-position.helper';
 import {
+  AppElement,
+  ContentQueryResponse,
   Feature,
   GraphQLResponse,
   Widget,
-  AppElement,
-  ContentQueryResponse,
 } from './features.dto';
 import { CmsApi } from '../config/configuration.interface';
 import { ConfigService } from '@nestjs/config';
@@ -56,6 +56,7 @@ import { RpcException } from '@nestjs/microservices';
 export class FeaturesService {
   private readonly logger = new Logger(FeaturesService.name);
   private cmsApiConfig: CmsApi;
+
   constructor(
     private readonly configService: ConfigService,
     private readonly httpService: HttpService,

@@ -1,0 +1,99 @@
+<!--
+  ~ Copyright ou © ou Copr. Université de Lorraine, (2022)
+  ~
+  ~ Direction du Numérique de l'Université de Lorraine - SIED
+  ~  (dn-mobile-dev@univ-lorraine.fr)
+  ~ JNESIS (contact@jnesis.com)
+  ~
+  ~ Ce logiciel est un programme informatique servant à rendre accessible
+  ~ sur mobile divers services universitaires aux étudiants et aux personnels
+  ~ de l'université.
+  ~
+  ~ Ce logiciel est régi par la licence CeCILL 2.1, soumise au droit français
+  ~ et respectant les principes de diffusion des logiciels libres. Vous pouvez
+  ~ utiliser, modifier et/ou redistribuer ce programme sous les conditions
+  ~ de la licence CeCILL telle que diffusée par le CEA, le CNRS et INRIA
+  ~ sur le site "http://cecill.info".
+  ~
+  ~ En contrepartie de l'accessibilité au code source et des droits de copie,
+  ~ de modification et de redistribution accordés par cette licence, il n'est
+  ~ offert aux utilisateurs qu'une garantie limitée. Pour les mêmes raisons,
+  ~ seule une responsabilité restreinte pèse sur l'auteur du programme, le
+  ~ titulaire des droits patrimoniaux et les concédants successifs.
+  ~
+  ~ À cet égard, l'attention de l'utilisateur est attirée sur les risques
+  ~ associés au chargement, à l'utilisation, à la modification et/ou au
+  ~ développement et à la reproduction du logiciel par l'utilisateur étant
+  ~ donné sa spécificité de logiciel libre, qui peut le rendre complexe à
+  ~ manipuler et qui le réserve donc à des développeurs et des professionnels
+  ~ avertis possédant des connaissances informatiques approfondies. Les
+  ~ utilisateurs sont donc invités à charger et à tester l'adéquation du
+  ~ logiciel à leurs besoins dans des conditions permettant d'assurer la
+  ~ sécurité de leurs systèmes et/ou de leurs données et, plus généralement,
+  ~ à l'utiliser et à l'exploiter dans les mêmes conditions de sécurité.
+  ~
+  ~ Le fait que vous puissiez accéder à cet en-tête signifie que vous avez
+  ~ pris connaissance de la licence CeCILL 2.1, et que vous en avez accepté les
+  ~ termes.
+  -->
+
+<ion-card>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="auto">
+        <img *ngIf="item.coverImage" class="thumbnail" alt="" [src]="item.coverImage">
+      </ion-col>
+      <ion-col class="title-col">
+        <ion-card-title>
+          {{item.title}}
+        </ion-card-title>
+      </ion-col>
+      <ion-col size="auto" class="button-col">
+        <ion-button *ngIf="displayMode !== Display.card && !item.isLeaf" fill="solid" shape="round" class="app-round-button-1" (click)="openItemLink(item)" >
+          <ion-icon [name]="getButtonIcon(item.type)" slot="icon-only" size="large"></ion-icon>
+        </ion-button>
+        <ion-button *ngIf="displayMode === Display.card" shape="round"  fill="solid" class="app-round-button-1" (click)="toggleDetails()" >
+          <ion-icon [name]="isExpanded ? 'chevron-up-outline' : 'chevron-down-outline'" slot="icon-only" size="large"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ng-container *ngIf="displayMode === Display.card && isExpanded">
+    <div class="separator"></div>
+    <ion-card-content>
+      <ion-item lines="none">
+        <div [innerHTML]="item.content" class="safe-area-padding-lr link-inherit-color"></div>
+      </ion-item>
+
+      <ng-template #clickableItem let-icon="icon" let-value="value" let-click="click">
+        <ion-item
+          *ngIf="value"
+          button
+          detail="false"
+          lines="none"
+          (click)="click(value)"
+        >
+          <ion-icon [name]="icon" slot="start"></ion-icon>
+          <ion-label class="underline-text">{{ value }}</ion-label>
+        </ion-item>
+      </ng-template>
+
+      <ng-container
+        *ngTemplateOutlet="clickableItem; context: { icon: 'mail-outline', value: item.email, click: handleEmail }"
+      ></ng-container>
+      <ng-container
+        *ngTemplateOutlet="clickableItem; context: { icon: 'call-outline', value: item.phone, click: handlePhone }"
+      ></ng-container>
+      <ion-item *ngIf="item.address" lines="none">
+        <ion-icon name="location-outline" slot="start"></ion-icon>
+        <ion-label>{{ item.address }}</ion-label>
+      </ion-item>
+      <ng-container
+        *ngTemplateOutlet="clickableItem; context: { icon: 'globe-outline', value: item.link, click: handleLink }"
+      ></ng-container>
+    </ion-card-content>
+  </ng-container>
+
+</ion-card>
+

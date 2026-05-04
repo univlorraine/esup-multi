@@ -37,6 +37,7 @@ Pour connaitre les requêtes GraphQL disponibles côté backend se référer à 
 * `CACHE_TTL_SOCIAL_NETWORKS`: TTL du cache pour la collection Social-Networks (en secondes)
 * `CACHE_TTL_STATIC_PAGES`: TTL du cache pour la collection Static-Pages (en secondes)
 * `CACHE_TTL_WIDGETS`: TTL du cache pour la collection Widgets (en secondes)
+* `CACHE_TTL_KNOWLEDGE_BASE=86400000` : TTL du cache pour la collection Base de Knowledge-Base (en secondes)
 
 ## Cache
 

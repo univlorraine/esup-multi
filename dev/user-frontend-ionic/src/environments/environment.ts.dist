@@ -51,6 +51,7 @@ import { ClockingModule } from '@multi/clocking';
 import { ContactUsModule } from '@multi/contact-us';
 import { ContactsModule } from '@multi/contacts';
 import { ImportantNewsModule } from '@multi/important-news';
+import { KnowledgeBasePageModule } from '@multi/knowledge-base';
 import { MapModule } from '@multi/map';
 import { NotificationsModule } from '@multi/notifications';
 import { ReservationModule } from '@multi/reservation';
@@ -114,6 +115,7 @@ export const environment: any = {
     ImportantNewsModule.forRoot({
       display: 'vertically'
     }),
+    KnowledgeBasePageModule,
     MapModule.forRoot({
       mapType: "osm",
       accessToken: "",

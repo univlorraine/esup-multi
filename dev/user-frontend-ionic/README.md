@@ -163,6 +163,7 @@ npm run module:build-all
 - [Module contacts](./projects/contacts/README.md)
 - [Module features](./projects/features/README.md)
 - [Module important-news](./projects/important-news/README.md)
+- [Module knowledge-base](./projects/knowledge-base/README.md)
 - [Module map](./projects/map/README.md)
 - [Module menu](./projects/menu/README.md)
 - [Module notifications](./projects/notifications/README.md)

@@ -49,16 +49,6 @@
 		"translations": [
 			{
 				"title": "A propos",
-				"content": null,
-				"languages_code": null
-			},
-			{
-				"title": "About",
-				"content": null,
-				"languages_code": null
-			},
-			{
-				"title": "A propos",
 				"content": "<p>L'application <strong>UnivLorraine</strong> a &eacute;t&eacute; r&eacute;alis&eacute;e gr&acirc;ce &agrave; l'outil <strong>Esup-Multi</strong>, un projet open source soutenu par le <a href=\"https://www.esup-portail.org/\" target=\"_blank\" rel=\"noopener\">consortium Esup-portail</a>.</p>\n<p>Initi&eacute; par l'Universit&eacute; de Lorraine, en collaboration avec d'autres &eacute;tablissements, ce projet vise &agrave; r&eacute;pondre aux besoins sp&eacute;cifiques de la communaut&eacute; universitaire, tout en offrant une solution adaptable et personnalisable pour chaque &eacute;tablissement.</p>\n<p>Multi, financ&eacute; en partie par le<strong> </strong>plan<strong> France Relance</strong>&nbsp;dans le cadre de l'appel &agrave; projets <strong>Services Num&eacute;riques aux &Eacute;tudiants</strong> offre une architecture modulaire permettant une personnalisation approfondie, garantissant ainsi que l'application Esup-Multi puisse s'interconnecter au syst&egrave;me d'information de l'&eacute;tablissement.</p>",
 				"languages_code": "fr"
 			},

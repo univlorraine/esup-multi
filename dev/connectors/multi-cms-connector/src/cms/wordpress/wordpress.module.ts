@@ -49,6 +49,7 @@ import { LoginWordpressModule } from '@wordpress/collections/login/login.wordpre
 import { StaticPagesWordpressModule } from '@wordpress/collections/static-pages/static-pages.wordpress.module';
 import { WidgetsWordpressModule } from '@wordpress/collections/widgets/widgets.wordpress.module';
 import { MapPointsWordpressModule } from '@wordpress/collections/map-points/map-points.wordpress.module';
+import { KnowledgeBaseWordpressModule } from '@wordpress/collections/knowledge-base/knowledge-base.wordpress.module';
 
 @Module({
   providers: [WordpressService],
@@ -64,6 +65,7 @@ import { MapPointsWordpressModule } from '@wordpress/collections/map-points/map-
     StaticPagesWordpressModule,
     SocialNetworksWordpressModule,
     WidgetsWordpressModule,
+    KnowledgeBaseWordpressModule,
   ],
   exports: [
     ChannelsWordpressModule,
@@ -77,6 +79,7 @@ import { MapPointsWordpressModule } from '@wordpress/collections/map-points/map-
     StaticPagesWordpressModule,
     SocialNetworksWordpressModule,
     WidgetsWordpressModule,
+    KnowledgeBaseWordpressModule,
   ],
 })
 export class WordpressModule {}

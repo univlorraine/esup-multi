@@ -16,7 +16,7 @@
 <!-- 7. WordPress will then import each of the posts, pages, comments, categories, etc. -->
 <!--    contained in this file into your site. -->
 
-	<!-- generator="WordPress/6.8.1" created="2025-05-12 14:55" -->
+	<!-- generator="WordPress/6.8.2" created="2025-08-04 09:56" -->
 <rss version="2.0"
 	xmlns:excerpt="http://wordpress.org/export/1.2/excerpt/"
 	xmlns:content="http://purl.org/rss/1.0/modules/content/"
@@ -29,7 +29,7 @@
 	<title>Mon Blog</title>
 	<link>http://localhost:9090</link>
 	<description></description>
-	<pubDate>Mon, 12 May 2025 14:55:26 +0000</pubDate>
+	<pubDate>Mon, 04 Aug 2025 09:56:24 +0000</pubDate>
 	<language>fr-FR</language>
 	<wp:wxr_version>1.2</wp:wxr_version>
 	<wp:base_site_url>http://localhost:9090</wp:base_site_url>
@@ -38,7 +38,7 @@
 		<wp:author><wp:author_id>1</wp:author_id><wp:author_login><![CDATA[admin]]></wp:author_login><wp:author_email><![CDATA[admin@example.com]]></wp:author_email><wp:author_display_name><![CDATA[admin]]></wp:author_display_name><wp:author_first_name><![CDATA[UserName]]></wp:author_first_name><wp:author_last_name><![CDATA[LastName]]></wp:author_last_name></wp:author>
 
 				
-	<generator>https://wordpress.org/?v=6.8.1</generator>
+	<generator>https://wordpress.org/?v=6.8.2</generator>
 
 		<item>
 		<title><![CDATA[ALERT]]></title>
@@ -93,6 +93,26 @@
 		<wp:meta_key><![CDATA[channel_filterable]]></wp:meta_key>
 		<wp:meta_value><![CDATA[0]]></wp:meta_value>
 		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[channel_code]]></wp:meta_key>
+		<wp:meta_value><![CDATA[ALERT]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[channel_router_link]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[channel_color]]></wp:meta_key>
+		<wp:meta_value><![CDATA[#ef154e]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[channel_icon]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[channel_filterable]]></wp:meta_key>
+		<wp:meta_value><![CDATA[0]]></wp:meta_value>
+		</wp:postmeta>
 							</item>
 					<item>
 		<title><![CDATA[ALERT]]></title>
@@ -106,8 +126,8 @@
 		<wp:post_id>164</wp:post_id>
 		<wp:post_date><![CDATA[2025-05-12 14:21:52]]></wp:post_date>
 		<wp:post_date_gmt><![CDATA[2025-05-12 14:21:52]]></wp:post_date_gmt>
-		<wp:post_modified><![CDATA[2025-05-12 14:21:52]]></wp:post_modified>
-		<wp:post_modified_gmt><![CDATA[2025-05-12 14:21:52]]></wp:post_modified_gmt>
+		<wp:post_modified><![CDATA[2025-07-22 13:47:25]]></wp:post_modified>
+		<wp:post_modified_gmt><![CDATA[2025-07-22 13:47:25]]></wp:post_modified_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[brouillon-auto-2]]></wp:post_name>
@@ -120,6 +140,26 @@
 										<category domain="language" nicename="en"><![CDATA[English]]></category>
 		<category domain="post_translations" nicename="pll_682204001e123"><![CDATA[pll_682204001e123]]></category>
 						<wp:postmeta>
+		<wp:meta_key><![CDATA[channel_code]]></wp:meta_key>
+		<wp:meta_value><![CDATA[ALERT]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[channel_router_link]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[channel_color]]></wp:meta_key>
+		<wp:meta_value><![CDATA[#ef154e]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[channel_icon]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[channel_filterable]]></wp:meta_key>
+		<wp:meta_value><![CDATA[0]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
 		<wp:meta_key><![CDATA[channel_code]]></wp:meta_key>
 		<wp:meta_value><![CDATA[ALERT]]></wp:meta_value>
 		</wp:postmeta>
@@ -201,6 +241,26 @@
 		<wp:meta_key><![CDATA[channel_filterable]]></wp:meta_key>
 		<wp:meta_value><![CDATA[1]]></wp:meta_value>
 		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[channel_code]]></wp:meta_key>
+		<wp:meta_value><![CDATA[ETAB]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[channel_router_link]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[channel_color]]></wp:meta_key>
+		<wp:meta_value><![CDATA[#3771c1]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[channel_icon]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[channel_filterable]]></wp:meta_key>
+		<wp:meta_value><![CDATA[1]]></wp:meta_value>
+		</wp:postmeta>
 							</item>
 					<item>
 		<title><![CDATA[ETAB]]></title>
@@ -214,8 +274,8 @@
 		<wp:post_id>166</wp:post_id>
 		<wp:post_date><![CDATA[2025-05-12 14:22:31]]></wp:post_date>
 		<wp:post_date_gmt><![CDATA[2025-05-12 14:22:31]]></wp:post_date_gmt>
-		<wp:post_modified><![CDATA[2025-05-12 14:22:31]]></wp:post_modified>
-		<wp:post_modified_gmt><![CDATA[2025-05-12 14:22:31]]></wp:post_modified_gmt>
+		<wp:post_modified><![CDATA[2025-07-22 13:47:25]]></wp:post_modified>
+		<wp:post_modified_gmt><![CDATA[2025-07-22 13:47:25]]></wp:post_modified_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[brouillon-auto-4]]></wp:post_name>
@@ -228,6 +288,26 @@
 										<category domain="language" nicename="en"><![CDATA[English]]></category>
 		<category domain="post_translations" nicename="pll_68220427e66bd"><![CDATA[pll_68220427e66bd]]></category>
 						<wp:postmeta>
+		<wp:meta_key><![CDATA[channel_code]]></wp:meta_key>
+		<wp:meta_value><![CDATA[ETAB]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[channel_router_link]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[channel_color]]></wp:meta_key>
+		<wp:meta_value><![CDATA[#3771c1]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[channel_icon]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[channel_filterable]]></wp:meta_key>
+		<wp:meta_value><![CDATA[1]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
 		<wp:meta_key><![CDATA[channel_code]]></wp:meta_key>
 		<wp:meta_value><![CDATA[ETAB]]></wp:meta_value>
 		</wp:postmeta>
@@ -309,6 +389,26 @@
 		<wp:meta_key><![CDATA[channel_filterable]]></wp:meta_key>
 		<wp:meta_value><![CDATA[1]]></wp:meta_value>
 		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[channel_code]]></wp:meta_key>
+		<wp:meta_value><![CDATA[EDT]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[channel_router_link]]></wp:meta_key>
+		<wp:meta_value><![CDATA[/schedule]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[channel_color]]></wp:meta_key>
+		<wp:meta_value><![CDATA[#fdd33a]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[channel_icon]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[channel_filterable]]></wp:meta_key>
+		<wp:meta_value><![CDATA[1]]></wp:meta_value>
+		</wp:postmeta>
 							</item>
 					<item>
 		<title><![CDATA[EDT]]></title>
@@ -322,8 +422,8 @@
 		<wp:post_id>168</wp:post_id>
 		<wp:post_date><![CDATA[2025-05-12 14:23:22]]></wp:post_date>
 		<wp:post_date_gmt><![CDATA[2025-05-12 14:23:22]]></wp:post_date_gmt>
-		<wp:post_modified><![CDATA[2025-05-12 14:23:22]]></wp:post_modified>
-		<wp:post_modified_gmt><![CDATA[2025-05-12 14:23:22]]></wp:post_modified_gmt>
+		<wp:post_modified><![CDATA[2025-07-22 13:47:25]]></wp:post_modified>
+		<wp:post_modified_gmt><![CDATA[2025-07-22 13:47:25]]></wp:post_modified_gmt>
 		<wp:comment_status><![CDATA[closed]]></wp:comment_status>
 		<wp:ping_status><![CDATA[closed]]></wp:ping_status>
 		<wp:post_name><![CDATA[brouillon-auto-6]]></wp:post_name>
@@ -336,6 +436,26 @@
 										<category domain="language" nicename="en"><![CDATA[English]]></category>
 		<category domain="post_translations" nicename="pll_6822045a82dfa"><![CDATA[pll_6822045a82dfa]]></category>
 						<wp:postmeta>
+		<wp:meta_key><![CDATA[channel_code]]></wp:meta_key>
+		<wp:meta_value><![CDATA[EDT]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[channel_router_link]]></wp:meta_key>
+		<wp:meta_value><![CDATA[/schedule]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[channel_color]]></wp:meta_key>
+		<wp:meta_value><![CDATA[#fdd33a]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[channel_icon]]></wp:meta_key>
+		<wp:meta_value><![CDATA[]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
+		<wp:meta_key><![CDATA[channel_filterable]]></wp:meta_key>
+		<wp:meta_value><![CDATA[1]]></wp:meta_value>
+		</wp:postmeta>
+							<wp:postmeta>
 		<wp:meta_key><![CDATA[channel_code]]></wp:meta_key>
 		<wp:meta_value><![CDATA[EDT]]></wp:meta_value>
 		</wp:postmeta>

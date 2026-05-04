@@ -38,6 +38,7 @@
     "back:contacts": "cd dev/user-backend-nest/microservices/contacts && ",
     "back:features": "cd dev/user-backend-nest/microservices/features && ",
     "back:important-news": "cd dev/user-backend-nest/microservices/important-news && ",
+    "back:knowledge-base": "cd dev/user-backend-nest/microservices/knowledge-base && ",
     "back:mail-calendar": "cd dev/user-backend-nest/microservices/mail-calendar && ",
     "back:map": "cd dev/user-backend-nest/microservices/map && ",
     "back:notifications": "cd dev/user-backend-nest/microservices/notifications && ",

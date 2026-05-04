@@ -41,7 +41,7 @@
 <ion-progress-bar *ngIf="isLoading" type="indeterminate"></ion-progress-bar>
 
 <ion-content *ngIf="(rssFeedIsEmpty$ | async) === false"
-  [ngClass]="{'rss-page-vertically-style': config.display === 'vertically', 
+  [ngClass]="{'rss-page-vertically-style': config.display === 'vertically',
               'rss-page-horizontally-style': config.display === 'horizontally'}">
   <ion-card *ngFor="let item of (rssFeed$ | async); let i = index">
     <div class="border-card safe-area-margin-lr">
