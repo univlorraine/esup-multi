@@ -44,12 +44,14 @@ import { LoginPageContentResultDto } from 'src/page-content/login-page-content/l
 import {
   AuthenticatedDto,
   AuthenticateQueryDto,
+  ForceLogoutQueryDto,
   GetUserQueryDto,
   GetUserResultDto,
   LogoutQueryDto,
   SsoServiceTokenQueryDto,
 } from './auth.dto';
 import { AuthService } from './auth.service';
+import { map } from 'rxjs/operators';
 
 @Controller()
 export class AuthController {
@@ -83,5 +85,14 @@ export class AuthController {
   @MessagePattern({ cmd: 'loginPageContent' })
   getLoginPageContent(): Observable<LoginPageContentResultDto> {
     return this.authService.getPageContent();
+  }
+
+  @MessagePattern({ cmd: 'forceLogout' })
+  forceLogout(data: ForceLogoutQueryDto): Observable<{ message: string }> {
+    return this.authService.forceLogout(data.username).pipe(
+      map((nb) => ({
+        message: `User ${data.username} has been logged out from all sessions (${nb} sessions terminated)`,
+      })),
+    );
   }
 }

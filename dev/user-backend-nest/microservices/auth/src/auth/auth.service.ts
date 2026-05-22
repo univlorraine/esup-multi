@@ -169,6 +169,16 @@ export class AuthService {
     );
   }
 
+  public forceLogout(username: string): Observable<number> {
+    return from(
+      this.usernameRepository.removeAuthenticatedUserByUsername(username),
+    ).pipe(
+      map((deleteResult) => {
+        return deleteResult.deletedCount || 0;
+      }),
+    );
+  }
+
   @Cron(process.env.AUTH_SERVICE_USERNAMES_CLEANUP_SCHEDULE)
   async cleanupUsernames() {
     const limitDate = new Date();

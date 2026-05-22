@@ -66,6 +66,7 @@ import { TerminusModule } from '@nestjs/terminus';
 import { LoggerModule } from 'nestjs-pino';
 import * as process from 'process';
 import { LogsMiddleware } from './logs.middleware';
+import { AuthBearerStrategy } from './security/auth-bearer.strategy';
 
 @Module({
   imports: [
@@ -216,7 +217,7 @@ import { LogsMiddleware } from './logs.middleware';
       : []),
   ],
   controllers: [AppController],
-  providers: [AuthJwtStrategy],
+  providers: [AuthJwtStrategy, AuthBearerStrategy],
 })
 export class AppModule {
   // Track HTTP requests with short log
