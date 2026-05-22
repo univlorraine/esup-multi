@@ -172,7 +172,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 ### [main](./dev/user-backend-nest/main)
 <span id="backend-main"></span>
 ```
-├─ MIT: 33
+├─ MIT: 35
 ├─ Apache-2.0: 4
 ├─ BSD-2-Clause: 1
 └─ ISC: 1
@@ -194,6 +194,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@types/express@5.0.3](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/jest@29.5.4](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/node@20.19.9](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/passport-http-bearer@1.0.42](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/passport-jwt@4.0.1](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/supertest@2.0.16](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@typescript-eslint/eslint-plugin@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
@@ -204,6 +205,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [jest@29.7.0](https://github.com/jestjs/jest) - MIT
 - [nats@2.29.3](https://github.com/nats-io/nats.node) - Apache-2.0
 - [nestjs-pino@4.4.0](https://github.com/iamolegga/nestjs-pino) - MIT
+- [passport-http-bearer@1.0.1](https://github.com/jaredhanson/passport-http-bearer) - MIT
 - [passport-jwt@4.0.1](https://github.com/mikenicholson/passport-jwt) - MIT
 - [passport@0.7.0](https://github.com/jaredhanson/passport) - MIT
 - [pino-http@10.5.0](https://github.com/pinojs/pino-http) - MIT
