@@ -160,7 +160,7 @@ export class FeaturesWordpressService {
     this.logger.debug('Loading features from WordPress...');
     const data = await this.wordpressService.executeGraphQLQuery(`
       query {
-        features(first: 100, where: {language: ${FRENCH_CODE}}) {
+        features(first: 200, where: {language: ${FRENCH_CODE}}) {
           nodes {
             databaseId
             featureTitle

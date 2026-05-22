@@ -78,6 +78,9 @@
       ],
       "@multi/guided-tour": [
         "dist/guided-tour"
+      ],
+      "@multi/knowledge-base": [
+        "dist/knowledge-base"
       ]
     },
     "downlevelIteration": true,

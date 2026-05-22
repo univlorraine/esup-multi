@@ -13,6 +13,7 @@
   * [contacts](#backend-contacts)
   * [features](#backend-features)
   * [important-news](#backend-important-news)
+  * [knowledge-base](#backend-knowledge-base)
   * [mail-calendar](#backend-mail-calendar)
   * [map](#backend-map)
   * [notifications](#backend-notifications)
@@ -644,6 +645,55 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [ts-loader@9.5.2](https://github.com/TypeStrong/ts-loader) - MIT
 - [ts-node@10.9.2](https://github.com/TypeStrong/ts-node) - MIT
 - [tsconfig-paths@4.2.0](https://github.com/dividab/tsconfig-paths) - MIT
+- [typescript@4.9.5](https://github.com/Microsoft/TypeScript) - Apache-2.0
+
+</details>
+
+### [knowledge-base](./dev/user-backend-nest/microservices/knowledge-base)
+<span id="backend-knowledge-base"></span>
+```
+├─ MIT: 30
+├─ Apache-2.0: 5
+└─ BlueOak-1.0.0: 1
+```
+
+<details><summary>Détails</summary>
+
+- [@eslint/eslintrc@3.3.5](https://github.com/eslint/eslintrc) - MIT
+- [@eslint/js@9.39.4](https://github.com/eslint/eslint) - MIT
+- [@nestjs/axios@4.0.1](https://github.com/nestjs/axios) - MIT
+- [@nestjs/cli@11.0.21](https://github.com/nestjs/nest-cli) - MIT
+- [@nestjs/common@11.1.19](https://github.com/nestjs/nest) - MIT
+- [@nestjs/config@4.0.4](https://github.com/nestjs/config) - MIT
+- [@nestjs/core@11.1.19](https://github.com/nestjs/nest) - MIT
+- [@nestjs/microservices@11.1.19](https://github.com/nestjs/nest) - MIT
+- [@nestjs/platform-express@11.1.19](https://github.com/nestjs/nest) - MIT
+- [@nestjs/schematics@11.0.10](https://github.com/nestjs/schematics) - MIT
+- [@nestjs/testing@11.1.19](https://github.com/nestjs/nest) - MIT
+- [@swc/cli@0.6.0](https://github.com/swc-project/pkgs) - MIT
+- [@swc/core@1.15.32](https://github.com/swc-project/swc) - Apache-2.0
+- [@types/express@5.0.6](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/jest@29.5.14](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/node@22.19.17](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/supertest@6.0.3](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [agentkeepalive@4.6.0](https://github.com/node-modules/agentkeepalive) - MIT
+- [eslint-config-prettier@8.10.2](https://github.com/prettier/eslint-config-prettier) - MIT
+- [eslint-plugin-prettier@4.2.5](https://github.com/prettier/eslint-plugin-prettier) - MIT
+- [eslint@8.57.1](https://github.com/eslint/eslint) - MIT
+- [globals@16.5.0](https://github.com/sindresorhus/globals) - MIT
+- [jest@29.7.0](https://github.com/jestjs/jest) - MIT
+- [nats@2.29.3](https://github.com/nats-io/nats.node) - Apache-2.0
+- [prettier@2.8.8](https://github.com/prettier/prettier) - MIT
+- [reflect-metadata@0.1.14](https://github.com/rbuckton/reflect-metadata) - Apache-2.0
+- [rimraf@6.1.3](https://github.com/isaacs/rimraf) - BlueOak-1.0.0
+- [rxjs@7.8.2](https://github.com/reactivex/rxjs) - Apache-2.0
+- [source-map-support@0.5.21](https://github.com/evanw/node-source-map-support) - MIT
+- [supertest@7.2.2](https://github.com/ladjs/supertest) - MIT
+- [ts-jest@29.4.9](https://github.com/kulshekhar/ts-jest) - MIT
+- [ts-loader@9.5.7](https://github.com/TypeStrong/ts-loader) - MIT
+- [ts-node@10.9.2](https://github.com/TypeStrong/ts-node) - MIT
+- [tsconfig-paths@4.2.0](https://github.com/dividab/tsconfig-paths) - MIT
+- [typescript-eslint@8.59.1](https://github.com/typescript-eslint/typescript-eslint) - MIT
 - [typescript@4.9.5](https://github.com/Microsoft/TypeScript) - Apache-2.0
 
 </details>

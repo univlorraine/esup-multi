@@ -109,3 +109,13 @@ export const WidgetsTranslationsSchema = BaseTranslationsSchema.extend({
     .min(1, 'Widget content cannot be empty string')
     .nullable(),
 });
+
+export const KnowledgeBaseTranslationsSchema = BaseTranslationsSchema.extend({
+  title: z.string().min(1, 'Knowledge-base title cannot be empty string'),
+  content: z.string().nullable(),
+  searchKeywords: z
+    .array(
+      z.string().min(1, 'Knowledge-base search keywords cannot be empty array'),
+    )
+    .nullable(),
+});

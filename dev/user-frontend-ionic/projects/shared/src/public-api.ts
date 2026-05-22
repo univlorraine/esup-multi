@@ -76,6 +76,7 @@ export * from './lib/pipe/relative-time-pipe';
 export * from './lib/pipe/shared-pipe.module';
 export * from './lib/pipe/truncate-pipe';
 export * from './lib/pipe/sanitize-svg-pipe';
+export * from './lib/pipe/sanitize-html-pipe';
 export * from './lib/screen/screen.repository';
 export * from './lib/screen/screen.service';
 export * from './lib/project-module/project-module.service';
