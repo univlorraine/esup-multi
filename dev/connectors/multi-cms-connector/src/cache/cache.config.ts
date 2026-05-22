@@ -46,6 +46,7 @@ export enum CacheCollection {
   STATIC_PAGES = 'static-pages',
   WIDGETS = 'widgets',
   MAP_POINTS = 'map-points',
+  KNOWLEDGE_BASE = 'knowledge-base',
 }
 
 const DEFAULT_TTL = 300000; // 5 minutes
@@ -84,6 +85,7 @@ export function getCacheTTL(collection: CacheCollection): number {
     [CacheCollection.STATIC_PAGES]: 86400000, // 1 day
     [CacheCollection.WIDGETS]: 3600000, // 1 hour
     [CacheCollection.MAP_POINTS]: 86400000, // 1 day
+    [CacheCollection.KNOWLEDGE_BASE]: 86400000, // 1 day
   };
 
   return fallbackConfig[collection] || DEFAULT_TTL;
