@@ -108,11 +108,6 @@ export class AuthenticatedUserRepository {
   public async removeAuthenticatedUserByUsername(
     username: string,
   ): Promise<DeleteResult> {
-    return this.authenticatedUserModel
-      .find({
-        username,
-      })
-      .deleteMany()
-      .exec();
+    return this.authenticatedUserModel.deleteMany({ username }).exec();
   }
 }
