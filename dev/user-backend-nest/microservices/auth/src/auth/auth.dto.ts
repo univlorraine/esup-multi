@@ -71,3 +71,7 @@ export interface SsoServiceTokenQueryDto extends AuthTokenDto {
   service: string;
   ip?: string;
 }
+
+export interface ForceLogoutQueryDto {
+  username: string;
+}

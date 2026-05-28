@@ -6,6 +6,7 @@
 
 - `AUTH_SERVICE_NATS_SERVERS`: Adresses complètes des serveurs NATS pour communiquer avec le microservice `auth`, séparées par des virgules (ex: nats://localhost:4222).
 - `AUTH_SERVICE_JWT_SECRET`: Le secret du JWT qui protège les URLs de ré-authentification.
+- `AUTH_SERVICE_BEARER_TOKEN_FORCE_LOGOUT`: Le jeton protégeant la route de déconnexion forcée d'un utilisateur.
 
 - `CARD_SERVICE_NATS_SERVERS`: Adresses complètes des serveurs NATS pour communiquer avec le microservice `card`, séparées par des virgules (ex: nats://localhost:4222).
 

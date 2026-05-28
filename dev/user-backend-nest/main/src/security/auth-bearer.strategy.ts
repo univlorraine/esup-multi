@@ -37,11 +37,33 @@
  * termes.
  */
 
-import { SecurityConfiguration } from './configuration.interface';
+import { Strategy } from 'passport-http-bearer';
+import { PassportStrategy } from '@nestjs/passport';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 
-export default (): { security: SecurityConfiguration } => ({
-  security: {
-    authJwtSecret: process.env.AUTH_SERVICE_JWT_SECRET,
-    bearerTokenForceLogout: process.env.AUTH_SERVICE_BEARER_TOKEN_FORCE_LOGOUT,
-  },
-});
+@Injectable()
+export class AuthBearerStrategy extends PassportStrategy(
+  Strategy,
+  'auth-bearer',
+) {
+  constructor(private configService: ConfigService) {
+    super();
+  }
+
+  async validate(token: string): Promise<boolean> {
+    const expectedBearerToken = this.configService.get<string>(
+      'security.bearerTokenForceLogout',
+    );
+
+    if (!expectedBearerToken) {
+      throw new UnauthorizedException('Bearer token secret not configured');
+    }
+
+    if (token !== expectedBearerToken) {
+      throw new UnauthorizedException('Invalid bearer token');
+    }
+
+    return true;
+  }
+}

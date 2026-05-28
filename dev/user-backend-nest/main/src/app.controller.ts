@@ -44,6 +44,7 @@ import {
   Get,
   Inject,
   NotFoundException,
+  Param,
   Patch,
   Post,
   Query,
@@ -228,6 +229,17 @@ export class AppController {
         cmd: 'loginPageContent',
       },
       {},
+    );
+  }
+
+  @Get('/auth/force-logout/:username')
+  @UseGuards(AuthGuard('auth-bearer'))
+  forceLogout(@Param('username') username: string) {
+    return this.authClient.send(
+      {
+        cmd: 'forceLogout',
+      },
+      { username },
     );
   }
 

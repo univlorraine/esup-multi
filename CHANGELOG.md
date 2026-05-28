@@ -10,6 +10,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Backend
 #### New features
+* **(auth)** : Ajout d'une route sécurisée permettant de forcer la déconnexion d'un utilisateur
 * **(knowledge-base)** : Nouveau microservice exposant les pages de la base de connaissance issues du CMS.
 
 ### Connecteurs

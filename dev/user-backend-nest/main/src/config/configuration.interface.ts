@@ -39,4 +39,5 @@
 
 export interface SecurityConfiguration {
   authJwtSecret: string;
+  bearerTokenForceLogout: string;
 }
