@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## 2.3.0 (2026-05-xx)
+## 2.3.0 (2026-05-28)
 ### Client
 #### New features
 * **(knowledge-base)** : Nouveau module de base de connaissance permettant de consulter et rechercher des pages de contact/documentation issues du CMS.
@@ -14,6 +14,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **(knowledge-base)** : Nouveau microservice exposant les pages de la base de connaissance issues du CMS.
 
 ### Connecteurs
+#### New features
+* **(multi-cms-connector)** : Ajout du support de la base de connaissance pour Wordpress uniquement (modèles, résolveur GraphQL, schémas de validation, gestion du cache via `CACHE_TTL_KNOWLEDGE_BASE`).
+
 #### Bug fixes
 * **(multi-cms-connector)** : Augmentation du nombre maximum de réponses retournées par les requêtes GraphQL côté Wordpress.
 
