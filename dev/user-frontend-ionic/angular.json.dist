@@ -69,7 +69,8 @@
             "styles": [
               "src/global.scss",
               "node_modules/swiper/swiper-bundle.min.css",
-              "node_modules/shepherd.js/dist/css/shepherd.css"
+              "node_modules/shepherd.js/dist/css/shepherd.css",
+              "node_modules/leaflet.markercluster/dist/MarkerCluster.Default.css"
             ],
             "scripts": [
               "node_modules/swiper/swiper-bundle.min.js"

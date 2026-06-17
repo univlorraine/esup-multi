@@ -18,3 +18,15 @@ Module permettant l'affichage d'une carte avec points d'intérêts et géolocali
 
 - `defaultLocation.latitude` : Latitude de la position par défaut sur la carte.
 - `defaultLocation.longitude` : Longitude de la position par défaut sur la carte.
+
+## Personnalisation du clustering des marqueurs
+
+### Paramétrage du cluster
+Il est possible de paramétrer le fonctionnement du cluster lors de son initialisation avec les options suivantes :
+- `disableClusteringAtZoom` : Désactive le cluster à partir du niveau de zoom défini. Par défaut, il est fixé à 18 ce qui correspond à l'avant dernier niveau de zoom.
+- `showCoverageOnHover` : Active la visualisation du polygone montrant la zone du cluster. Par défaut, il est fixé à `false`.
+- `zoomToBoundsOnClick` : Permet de centrer et zoomer la vue sur le cluster lorsque l'utilisateur clique dessus. Par défaut, il est fixé à `true`.
+- `maxClusterRadius` : Rayon maximal de regroupement des points dans le cluster, en pixel. Par défaut, il est fixé à 80 pixels.
+- `removeOutsideVisibleBounds` : Supprime les clusters et marqueurs de la carte lorsqu'ils ne sont pas visibles. Par défaut, il est fixé à `true`.
+
+Beaucoup d'autres options sont disponibles, vous pouvez les retrouver sur cette page : https://github.com/Leaflet/Leaflet.markercluster
