@@ -50,7 +50,7 @@
       </ion-col>
       <ion-col size="auto" class="button-col">
         <ion-button
-          *ngIf="displayMode !== Display.card && !item.isLeaf"
+          *ngIf="displayMode !== Display.card && canOpenItem(item)"
           fill="solid"
           shape="round"
           class="app-round-button-1"
