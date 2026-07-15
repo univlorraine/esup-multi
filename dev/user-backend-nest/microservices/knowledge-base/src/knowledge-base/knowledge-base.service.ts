@@ -44,6 +44,7 @@ import { RpcException } from '@nestjs/microservices';
 import { HttpService } from '@nestjs/axios';
 import { catchError, map, Observable } from 'rxjs';
 import {
+  KnowledgeBaseChildrenGraphQLResponse,
   KnowledgeBaseDto,
   KnowledgeBaseGraphQLResponse,
 } from './knowledge-base.dto';
@@ -125,6 +126,84 @@ export class KnowledgeBaseService {
 
           // Tri par position
           return knowledgeBase.sort((a, b) => {
+            const positionA = a.position ?? Number.MAX_SAFE_INTEGER;
+            const positionB = b.position ?? Number.MAX_SAFE_INTEGER;
+            return positionA - positionB;
+          });
+        }),
+      );
+  }
+
+  getKnowledgeBaseChildren(parentId: string): Observable<KnowledgeBaseDto[]> {
+    const url = `${this.cmsApiConfig.apiUrl}/graphql`;
+
+    const graphqlQuery = {
+      query: `
+        query KnowledgeBaseChildren($parentId: String!) {
+          knowledgeBaseChildren(parentId: $parentId) {
+            id
+            type
+            routerLink
+            link
+            ssoService
+            childDisplay
+            position
+            authorization {
+                type
+                roles
+            }
+            translations {
+                languagesCode
+                searchKeywords
+                content
+                title
+            },
+            parentId
+            coverImage
+            phone
+            address
+            email
+          }
+        }
+      `,
+      variables: {
+        parentId,
+      },
+    };
+
+    const requestConfig = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${this.cmsApiConfig.bearerToken}`,
+      },
+    };
+
+    return this.httpService
+      .post<KnowledgeBaseChildrenGraphQLResponse<KnowledgeBaseDto[]>>(
+        url,
+        graphqlQuery,
+        requestConfig,
+      )
+      .pipe(
+        catchError((err: any) => {
+          const errorMessage =
+            'Unable to get knowledge base children data from CMS';
+
+          this.logger.error(errorMessage, err);
+          throw new RpcException(errorMessage);
+        }),
+        map((res) => {
+          if (res.data.errors?.length > 0) {
+            const errorMessage = `GraphQL error: ${res.data.errors[0].message}`;
+
+            this.logger.error(errorMessage);
+            throw new RpcException(errorMessage);
+          }
+
+          const knowledgeBaseChildren = res.data.data.knowledgeBaseChildren;
+
+          // Tri par position
+          return knowledgeBaseChildren.sort((a, b) => {
             const positionA = a.position ?? Number.MAX_SAFE_INTEGER;
             const positionB = b.position ?? Number.MAX_SAFE_INTEGER;
             return positionA - positionB;

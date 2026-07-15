@@ -76,19 +76,18 @@ export class KnowledgeBasePage implements OnInit {
       : this.knowledgeBasesRepository.getKnowledgeBase();
     this.knowledgeBaseParentItem$ = this.knowledgeBasesRepository.getKnowledgeBaseItemById(this.parentPageId);
 
-    if (!(await this.networkService.getConnectionStatus()).connected) {
-      return;
-    }
+    this.isLoading = true;
 
-    if (!this.parentPageId) {
-      this.isLoading = true;
-      this.knowledgeBaseService.loadAndStoreKnowledgeBase()
-        .pipe(
-          take(1),
-          finalize(() => this.isLoading = false)
-        )
-        .subscribe();
-    }
+    const refresh$ = this.parentPageId
+      ? this.knowledgeBaseService.loadAndStoreKnowledgeBaseChildren(this.parentPageId)
+      : this.knowledgeBaseService.loadAndStoreKnowledgeBase();
+
+    refresh$
+      .pipe(
+        take(1),
+        finalize(() => this.isLoading = false)
+      )
+      .subscribe();
   }
 
   searchKnowledgeBase(event) {

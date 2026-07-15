@@ -151,11 +151,17 @@ export class KnowledgeBaseWordpressService {
     };
   }
 
-  async getKnowledgeBase(): Promise<KnowledgeBase[]> {
-    return this.cacheService.getOrFetchWithLock(
+  async getKnowledgeBase(parentId?: string): Promise<KnowledgeBase[]> {
+    const knowledgeBase = await this.cacheService.getOrFetchWithLock(
       CacheCollection.KNOWLEDGE_BASE,
       () => this.loadKnowledgeBaseFromWordPress(),
     );
+
+    if (parentId === undefined) {
+      return knowledgeBase;
+    }
+
+    return knowledgeBase.filter((item) => item.parentId === parentId);
   }
 
   private async loadKnowledgeBaseFromWordPress(): Promise<KnowledgeBase[]> {

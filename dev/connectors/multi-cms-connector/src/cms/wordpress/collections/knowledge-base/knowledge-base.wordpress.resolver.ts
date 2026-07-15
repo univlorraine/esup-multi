@@ -36,7 +36,7 @@
  * termes.
  */
 
-import { Query, Resolver } from '@nestjs/graphql';
+import { Args, Query, Resolver } from '@nestjs/graphql';
 import { KnowledgeBaseWordpressService } from './knowledge-base.wordpress.service';
 import { KnowledgeBase } from '@common/models/knowledge-base.model';
 
@@ -50,5 +50,12 @@ export class KnowledgeBaseWordpressResolver {
   @Query(() => [KnowledgeBase], { name: 'knowledgeBase' })
   async getKnowledgeBase(): Promise<KnowledgeBase[]> {
     return this.knowledgeServiceService.getKnowledgeBase();
+  }
+
+  @Query(() => [KnowledgeBase], { name: 'knowledgeBaseChildren' })
+  async getKnowledgeBaseChildren(
+    @Args('parentId') parentId: string,
+  ): Promise<KnowledgeBase[]> {
+    return this.knowledgeServiceService.getKnowledgeBase(parentId);
   }
 }

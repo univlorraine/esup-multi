@@ -820,6 +820,34 @@ export class AppController {
       );
   }
 
+  @Post('/knowledge-base/children')
+  knowledgeBaseChildren(@Body() body) {
+    return this.authClient
+      .send(
+        {
+          cmd: 'getUser',
+        },
+        body,
+      )
+      .pipe(
+        concatMap((user) => {
+          const roles = user ? user.roles : ['anonymous'];
+          return this.knowledgeBaseClient
+            .send(
+              {
+                cmd: 'knowledgeBaseChildren',
+              },
+              body.parentId,
+            )
+            .pipe(
+              map((knowledgeBase: any) =>
+                new AuthorizationHelper(roles).filter(knowledgeBase),
+              ),
+            );
+        }),
+      );
+  }
+
   @Get('/version')
   mainVersion() {
     return {

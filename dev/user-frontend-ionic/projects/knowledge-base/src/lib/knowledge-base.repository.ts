@@ -43,8 +43,10 @@ import {
 } from '@ngneat/elf-persist-state';
 import {currentLanguage$, localForageStore} from '@multi/shared';
 import {
+  deleteEntities,
   selectAllEntities,
   setEntities,
+  upsertEntities,
   withEntities
 } from "@ngneat/elf-entities";
 import {combineLatest, Observable} from "rxjs";
@@ -190,6 +192,25 @@ export class KnowledgeBaseRepository {
         item.searchKeywords?.some(key => key.toLowerCase().includes(text.toLowerCase()))
       ))
     );
+
+  public replaceChildren(parentId: string, children: KnowledgeBaseItem[]): void {
+    const currentItems = Object.values(store.getValue().entities);
+
+    const currentChildrenIds = currentItems
+      .filter(item => item.parentId === parentId)
+      .map(item => item.id);
+
+    store.update(
+      deleteEntities(currentChildrenIds),
+      upsertEntities(children)
+    );
+
+    const updatedItems = Object.values(store.getValue().entities);
+
+    this.updateDisplayFromParent(updatedItems);
+
+    store.update(setEntities(updatedItems));
+  }
 }
 
 
