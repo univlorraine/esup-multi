@@ -71,6 +71,9 @@ export class KnowledgeBasePage implements OnInit {
 
   async ngOnInit() {
     this.parentPageId = this.activatedRoute.snapshot.paramMap.get('id');
+    if (!(await this.networkService.getConnectionStatus()).connected) {
+      return;
+    }
     this.knowledgeBases$ = this.parentPageId
       ? this.knowledgeBasesRepository.getKnowledgeBaseByParentId(this.parentPageId)
       : this.knowledgeBasesRepository.getKnowledgeBase();
