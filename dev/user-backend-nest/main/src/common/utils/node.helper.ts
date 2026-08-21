@@ -44,8 +44,9 @@ export interface NodeInterface {
 
 export class NodeHelper<N extends NodeInterface> {
   private existingIds: Set<string>;
-
-  constructor(private nodes: N[]) {
+  private readonly parentId;
+  constructor(private nodes: N[], parentId:string = null) {
+    this.parentId = parentId;
     this.existingIds = new Set(nodes.map((node) => node.id));
   }
 
@@ -54,7 +55,7 @@ export class NodeHelper<N extends NodeInterface> {
   }
 
   private hasValidParent(currentNode: N, visited = new Set<string>()): boolean {
-    if (currentNode.parentId == null) return true; // racine valide
+    if (currentNode.parentId == this.parentId) return true; // racine valide
     if (!this.existingIds.has(currentNode.parentId)) return false; // parent inexistant
     if (visited.has(currentNode.parentId)) return false; // boucle éventuelle
     visited.add(currentNode.parentId);

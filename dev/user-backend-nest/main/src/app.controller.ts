@@ -843,6 +843,9 @@ export class AppController {
               map((knowledgeBase: any) =>
                 new AuthorizationHelper(roles).filter(knowledgeBase),
               ),
+              map((knowledgeBase: any) =>
+                new NodeHelper(knowledgeBase,body.parentId).removeOrphans(),
+              ),
             );
         }),
       );

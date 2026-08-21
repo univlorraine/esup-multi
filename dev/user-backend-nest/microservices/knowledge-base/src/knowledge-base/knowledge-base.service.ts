@@ -125,11 +125,7 @@ export class KnowledgeBaseService {
           const knowledgeBase = res.data.data.knowledgeBase;
 
           // Tri par position
-          return knowledgeBase.sort((a, b) => {
-            const positionA = a.position ?? Number.MAX_SAFE_INTEGER;
-            const positionB = b.position ?? Number.MAX_SAFE_INTEGER;
-            return positionA - positionB;
-          });
+          return knowledgeBase.sort(KnowledgeBaseService.byPosition);
         }),
       );
   }
@@ -203,12 +199,14 @@ export class KnowledgeBaseService {
           const knowledgeBaseChildren = res.data.data.knowledgeBaseChildren;
 
           // Tri par position
-          return knowledgeBaseChildren.sort((a, b) => {
-            const positionA = a.position ?? Number.MAX_SAFE_INTEGER;
-            const positionB = b.position ?? Number.MAX_SAFE_INTEGER;
-            return positionA - positionB;
-          });
+          return knowledgeBaseChildren.sort(KnowledgeBaseService.byPosition);
         }),
       );
   }
+
+  private static byPosition = (a: KnowledgeBaseDto, b: KnowledgeBaseDto) => {
+        const positionA = a.position ?? Number.MAX_SAFE_INTEGER;
+        const positionB = b.position ?? Number.MAX_SAFE_INTEGER;
+        return positionA - positionB;
+    };
 }
