@@ -3,8 +3,8 @@
   "version": "0.3.0",
   "description": "Application de mocking des données utilisateurs pour l'installation test en quickstart",
   "engines": {
-    "node": ">=20",
-    "npm": ">=9"
+    "node": ">=26",
+    "npm": ">=11.10.0"
   },
   "private": true,
   "license": "UNLICENSED",

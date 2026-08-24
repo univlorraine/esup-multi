@@ -2,10 +2,9 @@
   "name": "multi",
   "version": "2.3.0",
   "author": "UL",
-  "homepage": "https://ionicframework.com/",
   "engines": {
-    "node": ">=20",
-    "npm": ">=9"
+    "node": ">=26",
+    "npm": ">=11.10.0"
   },
   "license": "CECILL-2.1",
   "scripts": {
@@ -98,7 +97,7 @@
     "@types/jasmine": "~3.6.0",
     "@types/jasminewd2": "~2.0.13",
     "@types/leaflet": "^1.9.20",
-    "@types/node": "^20.19.1",
+    "@types/node": "^26.2.0",
     "@typescript-eslint/eslint-plugin": "^7.17.0",
     "@typescript-eslint/parser": "^7.17.0",
     "eslint": "^8.57.0",

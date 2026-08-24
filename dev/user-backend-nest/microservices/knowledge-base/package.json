@@ -5,6 +5,10 @@
   "author": "",
   "private": true,
   "license": "CECILL-2.1",
+  "engines": {
+    "node": ">=26",
+    "npm": ">=11.10.0"
+  },
   "scripts": {
     "prebuild": "rimraf dist && node update-infos.js",
     "build": "nest build",
@@ -43,7 +47,7 @@
     "@swc/core": "^1.10.7",
     "@types/express": "^5.0.0",
     "@types/jest": "^29.5.14",
-    "@types/node": "^22.10.7",
+    "@types/node": "^26.2.0",
     "@types/supertest": "^6.0.2",
     "eslint": "^8.48.0",
     "eslint-config-prettier": "^8.10.0",
@@ -57,7 +61,7 @@
     "ts-loader": "^9.5.2",
     "ts-node": "^10.9.2",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "^4.7.4",
+    "typescript": "^5.9.3",
     "typescript-eslint": "^8.20.0"
   },
   "jest": {
