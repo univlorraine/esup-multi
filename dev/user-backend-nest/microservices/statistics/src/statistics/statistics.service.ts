@@ -68,6 +68,7 @@ export class StatisticsService {
         mappedAction = 'service_access';
         break;
       default:
+        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
         throw new RpcException(`Invalid action: ${statData.action}`);
     }
 
