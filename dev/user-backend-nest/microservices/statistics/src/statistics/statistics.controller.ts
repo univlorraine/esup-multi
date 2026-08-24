@@ -40,8 +40,8 @@
 import { Controller } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
 import { map, Observable } from 'rxjs';
-import type { StatisticsUserActionDto } from './statistics.dto';
-import { StatisticsService } from './statistics.service';
+import type { StatisticsUserActionDto } from './statistics.dto.js';
+import { StatisticsService } from './statistics.service.js';
 
 @Controller()
 export class StatisticsController {

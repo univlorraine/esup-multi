@@ -37,9 +37,7 @@
  * termes.
  */
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const fs = require('fs');
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const packageData = require('./package.json');
 
 const version = packageData.version;

@@ -42,11 +42,11 @@ import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { RpcException } from '@nestjs/microservices';
 import { catchError, map } from 'rxjs';
-import { StatisticsCollectorApi } from '../config/configuration.interfaces';
+import { StatisticsCollectorApi } from '../config/configuration.interfaces.js';
 import {
   StatisticsExternalApiUserActionDto,
   StatisticsUserActionDto,
-} from './statistics.dto';
+} from './statistics.dto.js';
 
 @Injectable()
 export class StatisticsService {
@@ -91,7 +91,7 @@ export class StatisticsService {
       connection: statData.connectionType,
     };
 
-    return this.httpService.post<any>(url, requestData, options).pipe(
+    return this.httpService.post<never>(url, requestData, options).pipe(
       catchError((err) => {
         const errorMessage = `Unable to send statistics for user '${
           requestData.uid ? requestData.uid : 'anonymous'
