@@ -122,7 +122,7 @@ function licenseSummary() {
   # generate license summary for the given directory
   {
     echo "\`\`\`"
-    npx license-checker-rseidelsohn --summary --excludePrivatePackages --direct 0 --start "$1" | sed '/^[[:space:]]*$/d'
+    npx license-checker-rseidelsohn --summary --excludePrivatePackages --depth 0 --start "$1" | sed '/^[[:space:]]*$/d'
     echo "\`\`\`"
     echo ""
   } >> $OUTPUT_FILE
