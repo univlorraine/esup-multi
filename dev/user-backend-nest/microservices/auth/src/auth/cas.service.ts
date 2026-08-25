@@ -41,15 +41,15 @@ import { HttpService } from '@nestjs/axios';
 import { Injectable, Logger, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { RpcException } from '@nestjs/microservices';
+import { AxiosError } from 'axios';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { CasUrl } from '../config/configuration.interface';
+import { CasUrl } from '../config/configuration.interface.js';
 import {
   AuthenticateQueryDto,
   LogoutQueryDto,
   SsoServiceTokenQueryDto,
-} from './auth.dto';
-import { AxiosError } from 'axios';
+} from './auth.dto.js';
 
 const CAS_HEADERS = {
   Accept: 'application/json',
@@ -77,7 +77,7 @@ export class CasService {
 
   public isTgtValid(tgt: string): Observable<boolean> {
     const url = this.casUrlConfig.validateTgt.replace(/\{tgt\}/g, tgt);
-    return this.httpService.get<any>(url).pipe(
+    return this.httpService.get<never>(url).pipe(
       map(() => true),
       catchError((err: AxiosError) => {
         switch (err.response.status) {

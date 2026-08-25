@@ -44,8 +44,8 @@ import { Cron } from '@nestjs/schedule';
 import * as dotenv from 'dotenv';
 import { from, Observable } from 'rxjs';
 import { concatWith, delayWhen, map, tap, toArray } from 'rxjs/operators';
-import { LoginPageContentResultDto } from '../page-content/login-page-content/login-page-content.dto';
-import { LoginPageContentService } from '../page-content/login-page-content/login-page-content.service';
+import { LoginPageContentResultDto } from '../page-content/login-page-content/login-page-content.dto.js';
+import { LoginPageContentService } from '../page-content/login-page-content/login-page-content.service.js';
 import {
   AuthenticatedDto,
   AuthenticateQueryDto,
@@ -55,10 +55,10 @@ import {
   LogoutQueryDto,
   SsoServiceTokenQueryDto,
   UserProfileDto,
-} from './auth.dto';
-import { AuthenticatedUserRepository } from './authenticated-user/authenticated-user.repository';
-import { CasService } from './cas.service';
-import { UserService } from './user.service';
+} from './auth.dto.js';
+import { AuthenticatedUserRepository } from './authenticated-user/authenticated-user.repository.js';
+import { CasService } from './cas.service.js';
+import { UserService } from './user.service.js';
 
 dotenv.config(); // used to get process.env access prior to AppModule instanciation (typically in @Cron decorators)
 

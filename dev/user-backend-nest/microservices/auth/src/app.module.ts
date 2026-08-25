@@ -41,10 +41,10 @@ import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ScheduleModule } from '@nestjs/schedule';
-import { AuthModule } from './auth/auth.module';
-import configuration from './config/configuration';
-import { KeepAuthModule } from './keep-auth/keep-auth.module';
-import { MonitoringModule } from './monitoring/monitoring.module';
+import { AuthModule } from './auth/auth.module.js';
+import configuration from './config/configuration.js';
+import { KeepAuthModule } from './keep-auth/keep-auth.module.js';
+import { MonitoringModule } from './monitoring/monitoring.module.js';
 
 @Module({
   imports: [
