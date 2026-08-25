@@ -40,8 +40,8 @@
 import { Controller } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
 import { Observable } from 'rxjs';
-import type { Contact, ContactQueryDto } from './contacts.dto';
-import { ContactsService } from './contacts.service';
+import type { Contact, ContactQueryDto } from './contacts.dto.js';
+import { ContactsService } from './contacts.service.js';
 
 @Controller()
 export class ContactsController {

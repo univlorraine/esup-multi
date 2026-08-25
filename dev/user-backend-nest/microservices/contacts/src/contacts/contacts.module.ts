@@ -39,9 +39,9 @@
 
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { ContactsController } from './contacts.controller';
-import { ContactsService } from './contacts.service';
-import { KeepaliveHttpModule } from '../keepalive-http.module';
+import { KeepaliveHttpModule } from '../keepalive-http.module.js';
+import { ContactsController } from './contacts.controller.js';
+import { ContactsService } from './contacts.service.js';
 
 @Module({
   imports: [ConfigModule, KeepaliveHttpModule],
