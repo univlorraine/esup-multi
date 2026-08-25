@@ -41,9 +41,9 @@ import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Controller, Inject } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { MessagePattern } from '@nestjs/microservices';
-import { Cache } from 'cache-manager';
+import type { Cache } from 'cache-manager';
 import { firstValueFrom } from 'rxjs';
-import { ClockingQueryDto, ClockingReplyDto } from './clocking.dto';
+import type { ClockingQueryDto, ClockingReplyDto } from './clocking.dto';
 import { ClockingService } from './clocking.service';
 
 @Controller()
@@ -58,9 +58,8 @@ export class ClockingController {
   async getClocking(query: ClockingQueryDto): Promise<ClockingReplyDto> {
     const cacheKey = `clocking-${JSON.stringify(query)}`;
 
-    const cachedClocking = await this.cacheManager.get<ClockingReplyDto>(
-      cacheKey,
-    );
+    const cachedClocking =
+      await this.cacheManager.get<ClockingReplyDto>(cacheKey);
     if (cachedClocking !== undefined) {
       return cachedClocking;
     }

@@ -45,7 +45,7 @@ import { RpcException } from '@nestjs/microservices';
 import { catchError, map, Observable } from 'rxjs';
 import { ClockingProviderApi } from '../config/configuration.interface';
 import { format } from 'date-fns';
-import {
+import type {
   ClockingQueryDto,
   ClockingReplyDto,
   ExternalApiClockingQueryDto,
@@ -91,14 +91,16 @@ export class ClockingService {
       .pipe(
         catchError((err: AxiosError) => {
           const status = err.response.status;
-          const externalApiMessage = err.response.data['message'];
+          const externalApiMessage: unknown = err.response.data['message'];
 
           // Handle expected business errors from external API
           if ((status === 403 || status === 500) && externalApiMessage) {
             this.logger.warn(
-              `User '${query.username}' got business error '${externalApiMessage}'`,
+              `User '${query.username}' got business error '${JSON.stringify(externalApiMessage)}'`,
             );
-            throw new RpcException(`[EXPECTED]${externalApiMessage}`);
+            throw new RpcException(
+              `[EXPECTED]${JSON.stringify(externalApiMessage)}`,
+            );
           }
 
           // Unexpected error
