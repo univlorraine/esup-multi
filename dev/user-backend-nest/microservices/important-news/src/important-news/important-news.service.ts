@@ -47,6 +47,7 @@ import {
   ImportantNewsDto,
   ImportantNewsGraphQLResponse,
 } from './important-news.dto';
+import type { AxiosError } from 'axios';
 
 @Injectable()
 export class ImportantNewsService {
@@ -102,7 +103,7 @@ export class ImportantNewsService {
         requestConfig,
       )
       .pipe(
-        catchError((err: any) => {
+        catchError((err: AxiosError) => {
           const errorMessage = 'Unable to get important news data from CMS';
           this.logger.error(errorMessage, err);
           throw new RpcException(errorMessage);
