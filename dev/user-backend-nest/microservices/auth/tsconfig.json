@@ -21,7 +21,6 @@
     "forceConsistentCasingInFileNames": false,
     "noImplicitAny": false,
     "strictBindCallApply": false,
-
     "noFallthroughCasesInSwitch": false,
     "types": [
       "node",

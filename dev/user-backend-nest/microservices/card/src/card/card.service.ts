@@ -44,6 +44,7 @@ import { RpcException } from '@nestjs/microservices';
 import { catchError, map, Observable } from 'rxjs';
 import { CardProviderApi } from '../config/configuration.interface';
 import { UserCardDto } from './card.dto';
+import type { AxiosError } from 'axios';
 
 @Injectable()
 export class CardService {
@@ -65,21 +66,21 @@ export class CardService {
     );
 
     return this.httpService
-      .get<any>(url, {
+      .get<UserCardDto>(url, {
         headers: {
           Accept: 'application/json',
           Authorization: `Bearer ${this.cardProviderApiConfig.bearerToken}`,
         },
       })
       .pipe(
-        catchError((err) => {
+        catchError((err: AxiosError) => {
           const errorMessage = `Unable to get user card info with username '${username}'`;
           this.logger.error(errorMessage, err);
           throw new RpcException(errorMessage);
         }),
         map((res) => {
           const cardData = res.data;
-          if (!cardData.errors || cardData.errors.length === 0) {
+          if (!cardData.errors || Object.keys(cardData.errors).length === 0) {
             this.validateRequiredFields(cardData, username);
           }
           return cardData;
@@ -87,7 +88,10 @@ export class CardService {
       );
   }
 
-  private validateRequiredFields(cardData: any, username: string): void {
+  private validateRequiredFields(
+    cardData: Partial<UserCardDto> | Record<string, unknown>,
+    username: string,
+  ): void {
     const requiredFields: (keyof UserCardDto)[] = [
       'lastname',
       'firstname',
