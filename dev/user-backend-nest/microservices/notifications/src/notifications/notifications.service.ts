@@ -41,15 +41,16 @@ import { HttpService } from '@nestjs/axios';
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { RpcException } from '@nestjs/microservices';
+import type { AxiosError } from 'axios';
 import { catchError, map, Observable } from 'rxjs';
 import {
   CmsApi,
   NotificationsProviderApi,
-} from '../config/configuration.interface';
+} from '../config/configuration.interface.js';
 import {
-  ChannelSubscriberQueryDto,
   ChannelDto,
   ChannelGraphQLResponse,
+  ChannelSubscriberQueryDto,
   NotificationDeleteQueryDto,
   NotificationResultDto,
   NotificationsMarkAsReadQueryDto,
@@ -58,8 +59,7 @@ import {
   UnregisterFCMTokenQueryDto,
   UnsubscribedChannelsQueryDto,
   UnsubscribedChannelsResultDto,
-} from './notifications.dto';
-import type { AxiosError } from 'axios';
+} from './notifications.dto.js';
 
 @Injectable()
 export class NotificationsService {

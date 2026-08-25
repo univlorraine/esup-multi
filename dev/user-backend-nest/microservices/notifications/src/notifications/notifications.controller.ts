@@ -41,8 +41,8 @@ import { Controller } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
 import { Observable } from 'rxjs';
 import type {
-  ChannelSubscriberQueryDto,
   ChannelDto,
+  ChannelSubscriberQueryDto,
   NotificationDeleteQueryDto,
   NotificationResultDto,
   NotificationsMarkAsReadQueryDto,
@@ -50,8 +50,8 @@ import type {
   RegisterFCMTokenQueryDto,
   UnregisterFCMTokenQueryDto,
   UnsubscribedChannelsQueryDto,
-} from './notifications.dto';
-import { NotificationsService } from './notifications.service';
+} from './notifications.dto.js';
+import { NotificationsService } from './notifications.service.js';
 
 @Controller()
 export class NotificationsController {
