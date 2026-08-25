@@ -53,14 +53,14 @@ import {
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { ClientProxy } from '@nestjs/microservices';
 import { AuthGuard } from '@nestjs/passport';
 import { concatMap, map } from 'rxjs';
-import * as infosJsonData from './infos.json';
-import { ErrorsInterceptor } from './interceptors/errors.interceptor';
-import { AuthorizationHelper } from './security/authorization.helper';
-import { ConfigService } from '@nestjs/config';
-import { NodeHelper } from './common/utils/node.helper';
+import { NodeHelper } from './common/utils/node.helper.js';
+import infosJsonData from './infos.json' with { type: 'json' };
+import { ErrorsInterceptor } from './interceptors/errors.interceptor.js';
+import { AuthorizationHelper } from './security/authorization.helper.js';
 
 @UseInterceptors(new ErrorsInterceptor())
 @Controller()

@@ -37,12 +37,12 @@
  * termes.
  */
 
+import * as os from 'os';
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-import { EmptyResponseInterceptor } from './interceptors/empty-response.interceptor';
 import { NestExpressApplication } from '@nestjs/platform-express';
-import * as os from 'os';
+import { AppModule } from './app.module.js';
+import { EmptyResponseInterceptor } from './interceptors/empty-response.interceptor.js';
 
 async function bootstrap() {
   const logger = new Logger('Bootstrap');
