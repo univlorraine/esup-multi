@@ -37,17 +37,17 @@
  * termes.
  */
 
-import { Injectable, Logger } from '@nestjs/common';
-import { MailCalendarProviderApi } from '../config/configuration.interface';
-import { ConfigService } from '@nestjs/config';
 import { HttpService } from '@nestjs/axios';
+import { Injectable, Logger } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { RpcException } from '@nestjs/microservices';
+import type { AxiosError } from 'axios';
 import { catchError, map, Observable, of } from 'rxjs';
+import { MailCalendarProviderApi } from '../config/configuration.interface.js';
 import {
   MailCalendarQueryDto,
   MailCalendarReplyDto,
-} from './mail-calendar.dto';
-import { RpcException } from '@nestjs/microservices';
-import type { AxiosError } from 'axios';
+} from './mail-calendar.dto.js';
 
 @Injectable()
 export class MailCalendarService {

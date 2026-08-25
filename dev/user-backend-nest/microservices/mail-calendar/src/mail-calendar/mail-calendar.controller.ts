@@ -46,8 +46,8 @@ import { firstValueFrom } from 'rxjs';
 import type {
   MailCalendarQueryDto,
   MailCalendarReplyDto,
-} from './mail-calendar.dto';
-import { MailCalendarService } from './mail-calendar.service';
+} from './mail-calendar.dto.js';
+import { MailCalendarService } from './mail-calendar.service.js';
 
 @Controller()
 export class MailCalendarController {
