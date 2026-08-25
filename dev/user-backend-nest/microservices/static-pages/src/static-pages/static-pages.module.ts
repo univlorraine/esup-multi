@@ -44,10 +44,7 @@ import { StaticPagesService } from './static-pages.service';
 import { KeepaliveHttpModule } from '../keepalive-http.module';
 
 @Module({
-  imports: [
-    ConfigModule,
-    KeepaliveHttpModule,
-  ],
+  imports: [ConfigModule, KeepaliveHttpModule],
   providers: [StaticPagesService],
   controllers: [StaticPagesController],
 })
