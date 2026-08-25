@@ -37,16 +37,16 @@
  * termes.
  */
 
-import { Injectable, Logger } from '@nestjs/common';
 import { MailerService } from '@nestjs-modules/mailer';
-import { Observable, catchError, concatMap, firstValueFrom, map } from 'rxjs';
-import { ConfigService } from '@nestjs/config';
 import { HttpService } from '@nestjs/axios';
-import { CmsApi } from '../config/configuration.interface';
-import { ContactUsSettingsDto, SendMailQueryDto } from './mail.dto';
+import { Injectable, Logger } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { RpcException } from '@nestjs/microservices';
-import { ContactUsGraphQLResponse } from '../common/common.dto';
 import type { AxiosError } from 'axios';
+import { catchError, concatMap, firstValueFrom, map, Observable } from 'rxjs';
+import { ContactUsGraphQLResponse } from '../common/common.dto.js';
+import { CmsApi } from '../config/configuration.interface.js';
+import { ContactUsSettingsDto, SendMailQueryDto } from './mail.dto.js';
 
 @Injectable()
 export class MailService {

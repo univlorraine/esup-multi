@@ -37,12 +37,12 @@
  * termes.
  */
 
-import { Module } from '@nestjs/common';
-import { MailService } from './mail.service';
-import { MailController } from './mail.controller';
-import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MailerModule } from '@nestjs-modules/mailer';
-import { KeepaliveHttpModule } from '../keepalive-http.module';
+import { Module } from '@nestjs/common';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { KeepaliveHttpModule } from '../keepalive-http.module.js';
+import { MailController } from './mail.controller.js';
+import { MailService } from './mail.service.js';
 
 @Module({
   imports: [

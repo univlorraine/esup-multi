@@ -38,10 +38,10 @@
  */
 
 import { Controller } from '@nestjs/common';
-import { MailService } from './mail.service';
 import { MessagePattern } from '@nestjs/microservices';
-import type { SendMailQueryDto } from './mail.dto';
-import { Observable, from } from 'rxjs';
+import { from, Observable } from 'rxjs';
+import type { SendMailQueryDto } from './mail.dto.js';
+import { MailService } from './mail.service.js';
 
 @Controller()
 export class MailController {
