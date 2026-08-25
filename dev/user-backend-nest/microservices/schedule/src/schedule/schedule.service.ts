@@ -41,10 +41,10 @@ import { HttpService } from '@nestjs/axios';
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { RpcException } from '@nestjs/microservices';
-import { catchError, map, Observable } from 'rxjs';
-import { ScheduleProviderApi } from '../config/configuration.interface';
-import { Schedule, UserScheduleQueryDto } from './schedule.dto';
 import { AxiosError } from 'axios';
+import { catchError, map, Observable } from 'rxjs';
+import { ScheduleProviderApi } from '../config/configuration.interface.js';
+import { Schedule, UserScheduleQueryDto } from './schedule.dto.js';
 
 @Injectable()
 export class ScheduleService {
