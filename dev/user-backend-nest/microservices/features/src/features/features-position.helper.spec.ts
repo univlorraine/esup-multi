@@ -37,8 +37,8 @@
  * termes.
  */
 
-import { FeaturesPositionHelper } from './features-position.helper';
-import { AccessType, Feature } from './features.dto';
+import { FeaturesPositionHelper } from './features-position.helper.js';
+import { AccessType, Feature } from './features.dto.js';
 
 describe('FeaturesPositionHelper', () => {
   it('should not match any role and returns default position which is max safe integer', () => {

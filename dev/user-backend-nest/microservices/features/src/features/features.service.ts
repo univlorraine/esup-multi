@@ -37,21 +37,21 @@
  * termes.
  */
 
+import { HttpService } from '@nestjs/axios';
 import { Injectable, Logger } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { RpcException } from '@nestjs/microservices';
+import type { AxiosError } from 'axios';
 import { catchError, map, Observable } from 'rxjs';
-import { FeaturesPositionHelper } from './features-position.helper';
+import { CmsApi } from '../config/configuration.interface.js';
+import { FeaturesPositionHelper } from './features-position.helper.js';
 import type {
   AppElement,
   ContentQueryResponse,
   Feature,
   GraphQLResponse,
   Widget,
-} from './features.dto';
-import { CmsApi } from '../config/configuration.interface';
-import { ConfigService } from '@nestjs/config';
-import { HttpService } from '@nestjs/axios';
-import { RpcException } from '@nestjs/microservices';
-import type { AxiosError } from 'axios';
+} from './features.dto.js';
 
 @Injectable()
 export class FeaturesService {

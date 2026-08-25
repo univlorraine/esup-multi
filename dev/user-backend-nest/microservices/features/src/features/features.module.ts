@@ -40,10 +40,10 @@
 import { HttpModule } from '@nestjs/axios';
 import { Logger, Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { FeaturesController } from './features.controller';
-import { FeaturesService } from './features.service';
-import { KeepAliveOptions } from '../config/configuration.interface';
 import { HttpAgent, HttpsAgent } from 'agentkeepalive';
+import { KeepAliveOptions } from '../config/configuration.interface.js';
+import { FeaturesController } from './features.controller.js';
+import { FeaturesService } from './features.service.js';
 
 @Module({
   imports: [
