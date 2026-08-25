@@ -40,9 +40,8 @@
 import { Controller } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
 import { Observable } from 'rxjs';
-import { LoginPageContentResultDto } from 'src/page-content/login-page-content/login-page-content.dto';
 import { map } from 'rxjs/operators';
-import {
+import type {
   AuthenticatedDto,
   AuthenticateQueryDto,
   ForceLogoutQueryDto,
@@ -52,6 +51,7 @@ import {
   SsoServiceTokenQueryDto,
 } from './auth.dto';
 import { AuthService } from './auth.service';
+import type { LoginPageContentResultDto } from '../page-content/login-page-content/login-page-content.dto';
 
 @Controller()
 export class AuthController {

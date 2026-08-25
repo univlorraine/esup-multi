@@ -53,7 +53,7 @@ import { MonitoringModule } from './monitoring/monitoring.module';
     }),
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
-      useFactory: async (configService: ConfigService) => ({
+      useFactory: (configService: ConfigService) => ({
         uri: configService.get<string>('mongoUrl'),
       }),
       inject: [ConfigService],

@@ -143,7 +143,7 @@ export class AuthService {
         }
 
         this.logger.debug(
-          `Got user ${usernameDocument} from authToken ${query.authToken}`,
+          `Got user ${JSON.stringify(usernameDocument)} from authToken ${query.authToken}`,
         );
         return {
           username: usernameDocument.username,
@@ -186,7 +186,7 @@ export class AuthService {
       limitDate.getDate() - this.usernamesCleanupNotUsedSinceInDays,
     );
     this.logger.log(
-      `Removing usernames not used for ${this.usernamesCleanupNotUsedSinceInDays} days (since ${limitDate})`,
+      `Removing usernames not used for ${this.usernamesCleanupNotUsedSinceInDays} days (since ${limitDate.toISOString()})`,
     );
     await this.usernameRepository.removeAuthenticatedUserLastUsedBefore(
       limitDate,

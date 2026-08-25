@@ -158,13 +158,11 @@ export class KeepAuthService {
   public logoutAndDeleteCredentials(
     query: KeepAuthenticatedLogoutQueryDto,
   ): Observable<boolean> {
-    return this.authService
-      .logout({ authToken: query.authToken })
-      .pipe(
-        tap(() =>
-          this.userCredentialsRepository.removeCredentialsById(query.uuid),
-        ),
-      );
+    return this.authService.logout({ authToken: query.authToken }).pipe(
+      tap(() => {
+        void this.userCredentialsRepository.removeCredentialsById(query.uuid);
+      }),
+    );
   }
 
   public deleteCredentials(
@@ -207,7 +205,7 @@ export class KeepAuthService {
       limitDate.getDate() - this.credentialsCleanupNotUsedSinceInDays,
     );
     this.logger.log(
-      `Removing credentials not used for ${this.credentialsCleanupNotUsedSinceInDays} days (since ${limitDate})`,
+      `Removing credentials not used for ${this.credentialsCleanupNotUsedSinceInDays} days (since ${limitDate.toISOString()})`,
     );
     await this.userCredentialsRepository.removeCredentialsLastUsedBefore(
       limitDate,

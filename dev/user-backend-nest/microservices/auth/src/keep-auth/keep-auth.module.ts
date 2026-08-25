@@ -50,8 +50,8 @@ import {
 import { AesEncryptionService } from './encryption/aes-encryption.service';
 import { UserCredentialsRepository } from './user-credentials/user-credentials.repository';
 import { JwtModule } from '@nestjs/jwt';
-import { CasService } from 'src/auth/cas.service';
 import { KeepaliveHttpModule } from '../keepalive-http.module';
+import { CasService } from '../auth/cas.service';
 
 @Module({
   imports: [
@@ -63,7 +63,7 @@ import { KeepaliveHttpModule } from '../keepalive-http.module';
     ]),
     JwtModule.registerAsync({
       imports: [ConfigModule],
-      useFactory: async (configService: ConfigService) => ({
+      useFactory: (configService: ConfigService) => ({
         secret: configService.get<string>('jwtSecret'),
       }),
       inject: [ConfigService],
