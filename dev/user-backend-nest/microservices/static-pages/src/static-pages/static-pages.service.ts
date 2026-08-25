@@ -42,8 +42,11 @@ import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { RpcException } from '@nestjs/microservices';
 import { catchError, map, Observable } from 'rxjs';
-import { StaticPagesGraphQLResponse, StaticPageDto } from './static-pages.dto';
-import { CmsApi } from '../config/configuration.interface';
+import { CmsApi } from '../config/configuration.interface.js';
+import {
+  StaticPageDto,
+  StaticPagesGraphQLResponse,
+} from './static-pages.dto.js';
 
 @Injectable()
 export class StaticPagesService {
@@ -94,7 +97,7 @@ export class StaticPagesService {
         requestConfig,
       )
       .pipe(
-        catchError((err: any) => {
+        catchError((err) => {
           const errorMessage = 'Unable to get static pages data from CMS';
           this.logger.error(errorMessage, err);
           throw new RpcException(errorMessage);

@@ -39,9 +39,9 @@
 
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { StaticPagesController } from './static-pages.controller';
-import { StaticPagesService } from './static-pages.service';
-import { KeepaliveHttpModule } from '../keepalive-http.module';
+import { KeepaliveHttpModule } from '../keepalive-http.module.js';
+import { StaticPagesController } from './static-pages.controller.js';
+import { StaticPagesService } from './static-pages.service.js';
 
 @Module({
   imports: [ConfigModule, KeepaliveHttpModule],
