@@ -50,7 +50,7 @@ import { KeepaliveHttpModule } from '../keepalive-http.module';
     KeepaliveHttpModule,
     MailerModule.forRootAsync({
       imports: [ConfigModule],
-      useFactory: async (configService: ConfigService) => ({
+      useFactory: (configService: ConfigService) => ({
         transport: configService.get<string>('mail.smtp'),
       }),
       inject: [ConfigService],

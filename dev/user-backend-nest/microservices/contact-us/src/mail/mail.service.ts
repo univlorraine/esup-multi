@@ -46,6 +46,7 @@ import { CmsApi } from '../config/configuration.interface';
 import { ContactUsSettingsDto, SendMailQueryDto } from './mail.dto';
 import { RpcException } from '@nestjs/microservices';
 import { ContactUsGraphQLResponse } from '../common/common.dto';
+import type { AxiosError } from 'axios';
 
 @Injectable()
 export class MailService {
@@ -110,7 +111,7 @@ export class MailService {
         requestConfig,
       )
       .pipe(
-        catchError((err: any) => {
+        catchError((err: AxiosError) => {
           const errorMessage = 'Unable to get contact-us settings from CMS';
           this.logger.error(errorMessage, err);
           throw new RpcException(errorMessage);
