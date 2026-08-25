@@ -45,7 +45,7 @@ import { catchError, map, Observable } from 'rxjs';
 import {
   CmsApi,
   NotificationsProviderApi,
-} from 'src/config/configuration.interface';
+} from '../config/configuration.interface';
 import {
   ChannelSubscriberQueryDto,
   ChannelDto,
@@ -59,6 +59,7 @@ import {
   UnsubscribedChannelsQueryDto,
   UnsubscribedChannelsResultDto,
 } from './notifications.dto';
+import type { AxiosError } from 'axios';
 
 @Injectable()
 export class NotificationsService {
@@ -90,7 +91,7 @@ export class NotificationsService {
         },
       })
       .pipe(
-        catchError((err) => {
+        catchError((err: AxiosError) => {
           const errorMessage = `Unable to get user notifications with username '${query.username}'`;
           this.logger.error(errorMessage, err);
           throw new RpcException(errorMessage);
@@ -137,7 +138,7 @@ export class NotificationsService {
         requestConfig,
       )
       .pipe(
-        catchError((err: any) => {
+        catchError((err: AxiosError) => {
           const errorMessage = 'Unable to get channels data from CMS';
           this.logger.error(errorMessage, err);
           throw new RpcException(errorMessage);
@@ -168,7 +169,7 @@ export class NotificationsService {
         },
       })
       .pipe(
-        catchError((err) => {
+        catchError((err: AxiosError) => {
           const errorMessage = `Unable to get user's unsubscribed channels with username '${query.username}'`;
           this.logger.error(errorMessage, err);
           throw new RpcException(errorMessage);
@@ -191,7 +192,7 @@ export class NotificationsService {
         data: query,
       })
       .pipe(
-        catchError((err) => {
+        catchError((err: AxiosError) => {
           const errorMessage = `Unable to delete user notification with id '${query.notificationId}' and username '${query.username}''`;
           this.logger.error(errorMessage, err);
           throw new RpcException(errorMessage);
@@ -207,20 +208,20 @@ export class NotificationsService {
   ): Observable<void> {
     const url = `${this.notificationsProviderApiConfig.apiUrl}/notifications/read`;
     return this.httpService
-      .post<void>(url, data, {
+      .post<never>(url, data, {
         headers: {
           Accept: 'application/json',
           Authorization: `Bearer ${this.notificationsProviderApiConfig.bearerToken}`,
         },
       })
       .pipe(
-        catchError((err) => {
+        catchError((err: AxiosError) => {
           const errorMessage =
             'An error occurred while marking notifications as read';
           this.logger.error(errorMessage, err);
           throw new RpcException(errorMessage);
         }),
-        map(() => void 0),
+        map(() => {}),
       );
   }
 
@@ -236,8 +237,8 @@ export class NotificationsService {
       },
     };
 
-    return this.httpService.patch<any>(url, body, options).pipe(
-      catchError((err) => {
+    return this.httpService.patch<never>(url, body, options).pipe(
+      catchError((err: AxiosError) => {
         const errorMessage = `Unable to update unsubscribed channels ${JSON.stringify(
           query.channels,
         )} for user with username '${query.username}'`;
@@ -258,8 +259,8 @@ export class NotificationsService {
         Authorization: `Bearer ${this.notificationsProviderApiConfig.bearerToken}`,
       },
     };
-    return this.httpService.post<any>(url, query, options).pipe(
-      catchError((err) => {
+    return this.httpService.post<never>(url, query, options).pipe(
+      catchError((err: AxiosError) => {
         const errorMessage = `Unable to save FCM Token from '${query.username}'`;
         this.logger.error(errorMessage, err);
         throw new RpcException(errorMessage);
@@ -278,8 +279,8 @@ export class NotificationsService {
         Authorization: `Bearer ${this.notificationsProviderApiConfig.bearerToken}`,
       },
     };
-    return this.httpService.post<any>(url, query, options).pipe(
-      catchError((err) => {
+    return this.httpService.post<never>(url, query, options).pipe(
+      catchError((err: AxiosError) => {
         const errorMessage = `Unable to delete FCM Token from '${query.username}'`;
         this.logger.error(errorMessage, err);
         throw new RpcException(errorMessage);

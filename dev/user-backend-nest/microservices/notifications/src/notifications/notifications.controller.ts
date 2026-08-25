@@ -40,7 +40,7 @@
 import { Controller } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
 import { Observable } from 'rxjs';
-import {
+import type {
   ChannelSubscriberQueryDto,
   ChannelDto,
   NotificationDeleteQueryDto,
