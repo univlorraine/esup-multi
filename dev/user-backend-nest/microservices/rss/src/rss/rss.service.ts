@@ -41,7 +41,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { RpcException } from '@nestjs/microservices';
 import { decode } from 'html-entities';
-import * as Parser from 'rss-parser';
+import Parser, { type Item } from 'rss-parser';
 import { catchError, from, map, Observable } from 'rxjs';
 import { FeedItem } from './feed-item.dto';
 import { striptags } from 'striptags';
@@ -62,18 +62,21 @@ export class RssService {
 
   public getRssFeed(): Observable<FeedItem[]> {
     return from(this.rssParser.parseURL(this.rssUrl)).pipe(
-      catchError((err: any) => {
+      catchError((err) => {
         const errorMessage = 'Unable to get Rss Feed';
         this.logger.error(errorMessage, err);
         throw new RpcException(errorMessage);
       }),
-      map((res: any) => {
-        return res.items.map((item) => ({
+      map((res) => {
+        return res.items.map((item: Item) => ({
           ...item,
           title: decode(item.title),
-          content: striptags(item.content, {
+          content: striptags(item.content ?? '', {
             allowedTags: this.allowedHtmlTags,
           }),
+          link: item.link ?? '',
+          pubDate: item.pubDate ?? '',
+          guid: item.guid ?? '',
         }));
       }),
     );

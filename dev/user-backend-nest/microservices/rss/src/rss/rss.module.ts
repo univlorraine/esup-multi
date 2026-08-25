@@ -50,7 +50,7 @@ import { RssService } from './rss.service';
     HttpModule,
     CacheModule.registerAsync({
       imports: [ConfigModule],
-      useFactory: async (configService: ConfigService) => ({
+      useFactory: (configService: ConfigService) => ({
         ttl: configService.get<number>('cacheTtl') || 300,
         max: configService.get<number>('cacheMax') || 200,
       }),
