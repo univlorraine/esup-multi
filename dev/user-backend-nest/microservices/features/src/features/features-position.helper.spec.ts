@@ -41,7 +41,7 @@ import { FeaturesPositionHelper } from './features-position.helper';
 import { AccessType, Feature } from './features.dto';
 
 describe('FeaturesPositionHelper', () => {
-  it('should not match any role and returns default position which is null', () => {
+  it('should not match any role and returns default position which is max safe integer', () => {
     const helper: FeaturesPositionHelper = new FeaturesPositionHelper([
       'r1',
       'r2',
@@ -68,7 +68,7 @@ describe('FeaturesPositionHelper', () => {
     };
 
     const position = helper.getElementPosition(feature);
-    expect(position).toBeNull();
+    expect(position).toBe(Number.MAX_SAFE_INTEGER);
   });
 
   it('should not match any role and returns default position which is 5', () => {
