@@ -48,7 +48,7 @@ async function bootstrap() {
   )
     .split(',')
     .map((server) => server.trim());
-  Logger.log(`Using nats servers: ${natsServers}`);
+  Logger.log(`Using nats servers: ${JSON.stringify(natsServers)}`);
 
   const app = await NestFactory.create(AppModule, {
     logger:
@@ -79,4 +79,4 @@ async function bootstrap() {
   );
   await app.listen(port, host);
 }
-bootstrap();
+void bootstrap();

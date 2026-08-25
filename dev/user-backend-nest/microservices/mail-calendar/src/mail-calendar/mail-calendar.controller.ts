@@ -41,9 +41,9 @@ import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Controller, Inject } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { MessagePattern } from '@nestjs/microservices';
-import { Cache } from 'cache-manager';
+import type { Cache } from 'cache-manager';
 import { firstValueFrom } from 'rxjs';
-import {
+import type {
   MailCalendarQueryDto,
   MailCalendarReplyDto,
 } from './mail-calendar.dto';

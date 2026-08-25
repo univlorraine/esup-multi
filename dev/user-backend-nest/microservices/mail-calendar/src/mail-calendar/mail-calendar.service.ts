@@ -47,6 +47,7 @@ import {
   MailCalendarReplyDto,
 } from './mail-calendar.dto';
 import { RpcException } from '@nestjs/microservices';
+import type { AxiosError } from 'axios';
 
 @Injectable()
 export class MailCalendarService {
@@ -76,7 +77,7 @@ export class MailCalendarService {
         responseType: 'json',
       })
       .pipe(
-        catchError((err: any) => {
+        catchError((err: AxiosError) => {
           if (err.response && err.response.status === 404) {
             const data: MailCalendarReplyDto = {
               error: 'NO_MAIL_ACCOUNT',
