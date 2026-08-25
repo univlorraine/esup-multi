@@ -67,7 +67,7 @@ export class CardEuService {
       username,
     );
     return this.httpService
-      .get<any>(url, {
+      .get<UserCardEuDto>(url, {
         headers: {
           Accept: 'application/json',
           Authorization: `Bearer ${this.cardEuProviderApiConfig.bearerToken}`,
@@ -101,55 +101,62 @@ export class CardEuService {
     };
 
     // Récupération des informations de l'utilisateur
-    return this.httpService.get<any>(baseUrl, { headers }).pipe(
-      catchError((err) => {
-        const errorMessage = `Unable to get user eu card info with escn '${escn}'`;
-        this.logger.error(errorMessage, err);
-        throw new RpcException(errorMessage);
-      }),
+    return this.httpService
+      .get<{
+        person: { fullName: string; identifier: string };
+      }>(baseUrl, { headers })
+      .pipe(
+        catchError((err) => {
+          const errorMessage = `Unable to get user eu card info with escn '${escn}'`;
+          this.logger.error(errorMessage, err);
+          throw new RpcException(errorMessage);
+        }),
 
-      map((res) => ({
-        fullname: res.data.person.fullName,
-        euid: res.data.person.identifier.startsWith(esiPrefix)
-          ? res.data.person.identifier.slice(esiPrefix.length)
-          : res.data.person.identifier,
-        errors: [],
-      })),
-      switchMap((cardEU: UserCardEuLightDto) => {
-        const qrHeaders = {
-          Accept: 'image/svg+xml',
-          Authorization: `Bearer ${this.cardEuLightProviderApiConfig.bearerToken}`,
-        };
+        map((res) => ({
+          fullname: res.data.person.fullName,
+          euid: res.data.person.identifier.startsWith(esiPrefix)
+            ? res.data.person.identifier.slice(esiPrefix.length)
+            : res.data.person.identifier,
+          errors: [],
+        })),
+        switchMap((cardEU: UserCardEuLightDto) => {
+          const qrHeaders = {
+            Accept: 'image/svg+xml',
+            Authorization: `Bearer ${this.cardEuLightProviderApiConfig.bearerToken}`,
+          };
 
-        // Récupération du QR code
-        return this.httpService
-          .get<any>(`${baseUrl}/qr`, {
-            headers: qrHeaders,
-            params: {
-              orientation: 'vertical',
-              colours: 'inverted',
-              size: 'M',
-            },
-          })
-          .pipe(
-            catchError((err) => {
-              const errorMessage = `Unable to get user eu qrcode with escn '${escn}'`;
-              this.logger.error(errorMessage, err);
-              throw new RpcException(errorMessage);
-            }),
-            map((res) => {
-              cardEU.qrCode = {
-                type: 'image',
-                value: res.data,
-              };
-              return cardEU;
-            }),
-          );
-      }),
-    );
+          // Récupération du QR code
+          return this.httpService
+            .get<string>(`${baseUrl}/qr`, {
+              headers: qrHeaders,
+              params: {
+                orientation: 'vertical',
+                colours: 'inverted',
+                size: 'M',
+              },
+            })
+            .pipe(
+              catchError((err) => {
+                const errorMessage = `Unable to get user eu qrcode with escn '${escn}'`;
+                this.logger.error(errorMessage, err);
+                throw new RpcException(errorMessage);
+              }),
+              map((res) => {
+                cardEU.qrCode = {
+                  type: 'image',
+                  value: res.data,
+                };
+                return cardEU;
+              }),
+            );
+        }),
+      );
   }
 
-  private validateRequiredFields(cardData: any, username: string): void {
+  private validateRequiredFields(
+    cardData: Partial<UserCardEuDto> | Record<string, unknown>,
+    username: string,
+  ): void {
     const requiredFields: (keyof UserCardEuDto)[] = [
       'lastname',
       'firstname',
