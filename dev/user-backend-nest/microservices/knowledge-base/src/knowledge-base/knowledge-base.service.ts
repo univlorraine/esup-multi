@@ -37,17 +37,17 @@
  * termes.
  */
 
+import { HttpService } from '@nestjs/axios';
 import { Injectable, Logger } from '@nestjs/common';
-import { CmsApi } from '../config/configuration.interface';
 import { ConfigService } from '@nestjs/config';
 import { RpcException } from '@nestjs/microservices';
-import { HttpService } from '@nestjs/axios';
+import type { AxiosError } from 'axios';
 import { catchError, map, Observable } from 'rxjs';
+import { CmsApi } from '../config/configuration.interface.js';
 import type {
   KnowledgeBaseDto,
   KnowledgeBaseGraphQLResponse,
-} from './knowledge-base.dto';
-import type { AxiosError } from 'axios';
+} from './knowledge-base.dto.js';
 
 @Injectable()
 export class KnowledgeBaseService {
