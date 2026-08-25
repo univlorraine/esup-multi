@@ -43,8 +43,8 @@ import { ConfigService } from '@nestjs/config';
 import { MessagePattern } from '@nestjs/microservices';
 import type { Cache } from 'cache-manager';
 import { firstValueFrom } from 'rxjs';
-import type { ClockingQueryDto, ClockingReplyDto } from './clocking.dto';
-import { ClockingService } from './clocking.service';
+import type { ClockingQueryDto, ClockingReplyDto } from './clocking.dto.js';
+import { ClockingService } from './clocking.service.js';
 
 @Controller()
 export class ClockingController {

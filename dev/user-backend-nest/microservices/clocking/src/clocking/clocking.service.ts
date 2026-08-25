@@ -38,19 +38,19 @@
  */
 
 import { HttpService } from '@nestjs/axios';
-import { AxiosError } from 'axios';
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { RpcException } from '@nestjs/microservices';
-import { catchError, map, Observable } from 'rxjs';
-import { ClockingProviderApi } from '../config/configuration.interface';
+import { AxiosError } from 'axios';
 import { format } from 'date-fns';
+import { catchError, map, Observable } from 'rxjs';
+import { ClockingProviderApi } from '../config/configuration.interface.js';
 import type {
   ClockingQueryDto,
   ClockingReplyDto,
   ExternalApiClockingQueryDto,
   ExternalApiClockingReplyDto,
-} from './clocking.dto';
+} from './clocking.dto.js';
 
 const apiDayFormat = 'yyyy-MM-dd';
 @Injectable()

@@ -37,14 +37,14 @@
  * termes.
  */
 
+import { createKeyv } from '@keyv/redis';
 import { CacheModule } from '@nestjs/cache-manager';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { ClockingService } from './clocking.service';
-import { ClockingController } from './clocking.controller';
-import { KeepaliveHttpModule } from '../keepalive-http.module';
-import { RedisSocket } from '../config/configuration.interface';
-import { createKeyv } from '@keyv/redis';
+import { RedisSocket } from '../config/configuration.interface.js';
+import { KeepaliveHttpModule } from '../keepalive-http.module.js';
+import { ClockingController } from './clocking.controller.js';
+import { ClockingService } from './clocking.service.js';
 
 @Module({
   imports: [
