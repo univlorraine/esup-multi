@@ -41,13 +41,13 @@ import { HttpService } from '@nestjs/axios';
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { RpcException } from '@nestjs/microservices';
+import type { AxiosError } from 'axios';
 import { catchError, map, Observable } from 'rxjs';
-import { CmsApi } from '../config/configuration.interface';
+import { CmsApi } from '../config/configuration.interface.js';
 import {
   ImportantNewsDto,
   ImportantNewsGraphQLResponse,
-} from './important-news.dto';
-import type { AxiosError } from 'axios';
+} from './important-news.dto.js';
 
 @Injectable()
 export class ImportantNewsService {
