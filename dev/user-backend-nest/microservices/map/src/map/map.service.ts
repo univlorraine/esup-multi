@@ -46,7 +46,7 @@ import {
 } from '../config/configuration.interface';
 import { HttpService } from '@nestjs/axios';
 import { RpcException } from '@nestjs/microservices';
-import {
+import type {
   MapDataAdditionalProviderDto,
   MapDataGraphQLDto,
   MapDataGraphQLResponse,
@@ -54,6 +54,7 @@ import {
   MapIconDto,
   Marker,
 } from './map.dto';
+import type { AxiosError } from 'axios';
 
 @Injectable()
 export class MapService {
@@ -216,7 +217,7 @@ export class MapService {
     return this.httpService
       .post<MapDataGraphQLResponse>(url, graphqlQuery, requestConfig)
       .pipe(
-        catchError((err: any) => {
+        catchError((err: AxiosError) => {
           const errorMessage = 'Unable to get map points data from CMS';
           this.logger.error(errorMessage, err);
           throw new RpcException(errorMessage);
@@ -280,7 +281,7 @@ export class MapService {
     return this.httpService
       .get<MapDataAdditionalProviderDto>(url, requestConfig)
       .pipe(
-        catchError((err: any) => {
+        catchError((err: AxiosError) => {
           const errorMessage =
             'Unable to get map points data from Additional Provider';
           this.logger.error(errorMessage, err);
