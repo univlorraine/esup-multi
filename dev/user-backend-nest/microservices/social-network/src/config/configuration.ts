@@ -89,7 +89,8 @@ export default (): {
   return {
     cmsApi: {
       apiUrl: process.env.SOCIAL_NETWORK_SERVICE_CMS_CONNECTOR_API_URL,
-      bearerToken: process.env.SOCIAL_NETWORK_SERVICE_CMS_CONNECTOR_API_BEARER_TOKEN,
+      bearerToken:
+        process.env.SOCIAL_NETWORK_SERVICE_CMS_CONNECTOR_API_BEARER_TOKEN,
     },
     keepAliveOptions,
   };

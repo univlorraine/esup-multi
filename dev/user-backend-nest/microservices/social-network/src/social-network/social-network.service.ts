@@ -47,6 +47,7 @@ import {
 } from './social-network.dto';
 import { CmsApi } from '../config/configuration.interface';
 import { RpcException } from '@nestjs/microservices';
+import type { AxiosError } from 'axios';
 
 @Injectable()
 export class SocialNetworkService {
@@ -90,7 +91,7 @@ export class SocialNetworkService {
         requestConfig,
       )
       .pipe(
-        catchError((err: any) => {
+        catchError((err: AxiosError) => {
           const errorMessage = 'Unable to get social networks data from CMS';
           this.logger.error(errorMessage, err);
           throw new RpcException(errorMessage);
