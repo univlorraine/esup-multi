@@ -47,8 +47,8 @@ import type {
   RestaurantDTO,
   RestaurantMenu,
   RestaurantMenusQueryDto,
-} from './restaurants.dto';
-import { RestaurantsService } from './restaurants.service';
+} from './restaurants.dto.js';
+import { RestaurantsService } from './restaurants.service.js';
 
 @Controller()
 export class RestaurantsController {

@@ -37,11 +37,11 @@
  * termes.
  */
 
+import { HttpModule } from '@nestjs/axios';
 import { Logger, Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { HttpModule } from '@nestjs/axios';
-import { KeepAliveOptions } from './config/configuration.interfaces';
 import { HttpAgent, HttpsAgent } from 'agentkeepalive';
+import { KeepAliveOptions } from './config/configuration.interfaces.js';
 
 @Module({
   imports: [

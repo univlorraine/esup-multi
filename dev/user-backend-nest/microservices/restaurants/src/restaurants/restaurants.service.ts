@@ -41,16 +41,16 @@ import { HttpService } from '@nestjs/axios';
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { RpcException } from '@nestjs/microservices';
+import type { AxiosError } from 'axios';
 import { catchError, map, Observable } from 'rxjs';
-import { RestaurantsProviderApi } from '../config/configuration.interfaces';
+import { RestaurantsProviderApi } from '../config/configuration.interfaces.js';
 import type {
   RestaurantDTO,
   RestaurantExternalApiDTO,
   RestaurantMenu,
   RestaurantMenusQueryDto,
   RestaurantOpening,
-} from './restaurants.dto';
-import type { AxiosError } from 'axios';
+} from './restaurants.dto.js';
 
 @Injectable()
 export class RestaurantsService {
