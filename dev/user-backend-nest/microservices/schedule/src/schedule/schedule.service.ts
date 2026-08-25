@@ -44,6 +44,7 @@ import { RpcException } from '@nestjs/microservices';
 import { catchError, map, Observable } from 'rxjs';
 import { ScheduleProviderApi } from '../config/configuration.interface';
 import { Schedule, UserScheduleQueryDto } from './schedule.dto';
+import { AxiosError } from 'axios';
 
 @Injectable()
 export class ScheduleService {
@@ -86,7 +87,7 @@ export class ScheduleService {
         },
       })
       .pipe(
-        catchError((err: any) => {
+        catchError((err: AxiosError) => {
           const errorMessage = `Unable to get schedule data with username '${query.username}'`;
           this.logger.error(errorMessage, err);
           throw new RpcException(errorMessage);

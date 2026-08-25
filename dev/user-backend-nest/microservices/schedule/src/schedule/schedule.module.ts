@@ -52,7 +52,7 @@ import { createKeyv } from '@keyv/redis';
     KeepaliveHttpModule,
     CacheModule.registerAsync({
       imports: [ConfigModule],
-      useFactory: async (configService: ConfigService) => ({
+      useFactory: (configService: ConfigService) => ({
         stores: [
           createKeyv({
             socket: configService.get<RedisSocket>('redisSocket'),
