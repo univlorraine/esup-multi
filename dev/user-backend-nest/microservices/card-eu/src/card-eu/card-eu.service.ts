@@ -42,8 +42,8 @@ import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { RpcException } from '@nestjs/microservices';
 import { catchError, map, Observable, switchMap } from 'rxjs';
-import { CardEuProviderApi } from '../config/configuration.interface';
-import { UserCardEuDto, UserCardEuLightDto } from './card-eu.dto';
+import { CardEuProviderApi } from '../config/configuration.interface.js';
+import { UserCardEuDto, UserCardEuLightDto } from './card-eu.dto.js';
 
 @Injectable()
 export class CardEuService {
