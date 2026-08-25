@@ -861,6 +861,8 @@ export class AppController {
     if (!str) {
       return;
     }
-    return str.replace(/-([a-zA-Z])/g, (_, letter) => letter.toUpperCase());
+    return str.replace(/-([a-zA-Z])/g, (_, letter: string) =>
+      letter.toUpperCase(),
+    );
   }
 }

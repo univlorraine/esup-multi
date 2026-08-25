@@ -45,7 +45,7 @@ import { ConfigService } from '@nestjs/config';
 @Injectable()
 export class AuthJwtStrategy extends PassportStrategy(Strategy, 'auth-jwt') {
   constructor(private readonly config: ConfigService) {
-    const secretOrKey = config.get('security.authJwtSecret');
+    const secretOrKey = config.get<string>('security.authJwtSecret');
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
@@ -53,7 +53,7 @@ export class AuthJwtStrategy extends PassportStrategy(Strategy, 'auth-jwt') {
     });
   }
 
-  async validate(payload: any) {
+  validate(payload: unknown) {
     return payload;
   }
 }

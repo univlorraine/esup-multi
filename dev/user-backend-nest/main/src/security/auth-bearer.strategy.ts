@@ -51,7 +51,7 @@ export class AuthBearerStrategy extends PassportStrategy(
     super();
   }
 
-  async validate(token: string): Promise<boolean> {
+  validate(token: string): boolean {
     const expectedBearerToken = this.configService.get<string>(
       'security.bearerTokenForceLogout',
     );
