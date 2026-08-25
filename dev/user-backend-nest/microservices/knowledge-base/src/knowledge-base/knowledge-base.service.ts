@@ -43,10 +43,11 @@ import { ConfigService } from '@nestjs/config';
 import { RpcException } from '@nestjs/microservices';
 import { HttpService } from '@nestjs/axios';
 import { catchError, map, Observable } from 'rxjs';
-import {
+import type {
   KnowledgeBaseDto,
   KnowledgeBaseGraphQLResponse,
 } from './knowledge-base.dto';
+import type { AxiosError } from 'axios';
 
 @Injectable()
 export class KnowledgeBaseService {
@@ -108,7 +109,7 @@ export class KnowledgeBaseService {
         requestConfig,
       )
       .pipe(
-        catchError((err: any) => {
+        catchError((err: AxiosError) => {
           const errorMessage = 'Unable to get knowledge base data from CMS';
           this.logger.error(errorMessage, err);
           throw new RpcException(errorMessage);
