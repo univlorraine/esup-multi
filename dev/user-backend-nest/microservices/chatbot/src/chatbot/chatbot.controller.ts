@@ -44,8 +44,8 @@ import type {
   ChatbotButtonPayloadRequestDto,
   ChatbotResponseDto,
   ChatbotTextRequestDto,
-} from './chatbot.dto';
-import { ChatbotService } from './chatbot.service';
+} from './chatbot.dto.js';
+import { ChatbotService } from './chatbot.service.js';
 
 @Controller()
 export class ChatbotController {
