@@ -50,7 +50,7 @@ import { KeepaliveHttpModule } from '../keepalive-http.module';
     KeepaliveHttpModule,
     CacheModule.registerAsync({
       imports: [ConfigModule],
-      useFactory: async (configService: ConfigService) => ({
+      useFactory: (configService: ConfigService) => ({
         max: configService.get<number>('cacheMax') || 200,
       }),
       inject: [ConfigService],

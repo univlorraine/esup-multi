@@ -41,9 +41,9 @@ import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Controller, Inject } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { MessagePattern } from '@nestjs/microservices';
-import { Cache } from 'cache-manager';
+import type { Cache } from 'cache-manager';
 import { firstValueFrom } from 'rxjs';
-import {
+import type {
   RestaurantDTO,
   RestaurantMenu,
   RestaurantMenusQueryDto,
@@ -62,9 +62,8 @@ export class RestaurantsController {
   async getRestaurants(): Promise<RestaurantDTO[]> {
     const cacheKey = `restaurants`;
 
-    const cachedRestaurants = await this.cacheManager.get<RestaurantDTO[]>(
-      cacheKey,
-    );
+    const cachedRestaurants =
+      await this.cacheManager.get<RestaurantDTO[]>(cacheKey);
     if (cachedRestaurants !== undefined) {
       return cachedRestaurants;
     }

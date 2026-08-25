@@ -43,13 +43,14 @@ import { ConfigService } from '@nestjs/config';
 import { RpcException } from '@nestjs/microservices';
 import { catchError, map, Observable } from 'rxjs';
 import { RestaurantsProviderApi } from '../config/configuration.interfaces';
-import {
+import type {
   RestaurantDTO,
   RestaurantExternalApiDTO,
   RestaurantMenu,
   RestaurantMenusQueryDto,
   RestaurantOpening,
 } from './restaurants.dto';
+import type { AxiosError } from 'axios';
 
 @Injectable()
 export class RestaurantsService {
@@ -76,7 +77,7 @@ export class RestaurantsService {
         },
       )
       .pipe(
-        catchError((err) => {
+        catchError((err: AxiosError) => {
           const errorMessage = `Unable to get restaurants`;
           this.logger.error(errorMessage, err);
           throw new RpcException(errorMessage);
@@ -121,7 +122,7 @@ export class RestaurantsService {
         },
       })
       .pipe(
-        catchError((err) => {
+        catchError((err: AxiosError) => {
           const errorMessage = `Unable to get menu`;
           this.logger.error(errorMessage, err);
           throw new RpcException(errorMessage);
