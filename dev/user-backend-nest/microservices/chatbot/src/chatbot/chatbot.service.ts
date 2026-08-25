@@ -49,6 +49,7 @@ import {
   ChatbotResponseDto,
   ChatbotTextRequestDto,
 } from './chatbot.dto';
+import type { AxiosError } from 'axios';
 
 @Injectable()
 export class ChatbotService {
@@ -70,7 +71,7 @@ export class ChatbotService {
     return this.httpService
       .post<ChatbotApiResponse<ChatbotResponseDto[]>>(url, query)
       .pipe(
-        catchError((err: any) => {
+        catchError((err: AxiosError) => {
           const errorMessage = 'Unable to get Tock response from text request';
           this.logger.error(errorMessage, err);
           throw new RpcException(errorMessage);
@@ -87,7 +88,7 @@ export class ChatbotService {
     return this.httpService
       .post<ChatbotApiResponse<ChatbotResponseDto[]>>(url, query)
       .pipe(
-        catchError((err: any) => {
+        catchError((err: AxiosError) => {
           const errorMessage =
             'Unable to get Tock response from button payload request';
           this.logger.error(errorMessage, err);
