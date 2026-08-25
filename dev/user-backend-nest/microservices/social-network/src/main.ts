@@ -37,11 +37,11 @@
  * termes.
  */
 
+import * as os from 'os';
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { Transport, MicroserviceOptions } from '@nestjs/microservices';
-import { AppModule } from './app.module';
-import * as os from 'os';
+import { MicroserviceOptions, Transport } from '@nestjs/microservices';
+import { AppModule } from './app.module.js';
 
 async function bootstrap() {
   process.env.UV_THREADPOOL_SIZE = os.cpus().length.toString();

@@ -38,12 +38,12 @@
  */
 
 import { HttpModule } from '@nestjs/axios';
-import { ConfigModule, ConfigService } from '@nestjs/config';
 import { Logger, Module } from '@nestjs/common';
-import { SocialNetworkController } from './social-network.controller';
-import { SocialNetworkService } from './social-network.service';
-import { KeepAliveOptions } from '../config/configuration.interface';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { HttpAgent, HttpsAgent } from 'agentkeepalive';
+import { KeepAliveOptions } from '../config/configuration.interface.js';
+import { SocialNetworkController } from './social-network.controller.js';
+import { SocialNetworkService } from './social-network.service.js';
 
 @Module({
   imports: [

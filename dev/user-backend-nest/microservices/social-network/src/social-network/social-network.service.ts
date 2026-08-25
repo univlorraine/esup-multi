@@ -37,17 +37,17 @@
  * termes.
  */
 
-import { Injectable, Logger } from '@nestjs/common';
-import { catchError, map, Observable } from 'rxjs';
-import { ConfigService } from '@nestjs/config';
 import { HttpService } from '@nestjs/axios';
-import {
-  SocialNetworksGraphQLResponse,
-  SocialNetworkDto,
-} from './social-network.dto';
-import { CmsApi } from '../config/configuration.interface';
+import { Injectable, Logger } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { RpcException } from '@nestjs/microservices';
 import type { AxiosError } from 'axios';
+import { catchError, map, Observable } from 'rxjs';
+import { CmsApi } from '../config/configuration.interface.js';
+import {
+  SocialNetworkDto,
+  SocialNetworksGraphQLResponse,
+} from './social-network.dto.js';
 
 @Injectable()
 export class SocialNetworkService {
