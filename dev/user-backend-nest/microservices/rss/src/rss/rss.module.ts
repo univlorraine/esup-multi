@@ -41,8 +41,8 @@ import { HttpModule } from '@nestjs/axios';
 import { CacheModule } from '@nestjs/cache-manager';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { RssController } from './rss.controller';
-import { RssService } from './rss.service';
+import { RssController } from './rss.controller.js';
+import { RssService } from './rss.service.js';
 
 @Module({
   imports: [

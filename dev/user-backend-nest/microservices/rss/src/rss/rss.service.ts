@@ -43,8 +43,8 @@ import { RpcException } from '@nestjs/microservices';
 import { decode } from 'html-entities';
 import Parser, { type Item } from 'rss-parser';
 import { catchError, from, map, Observable } from 'rxjs';
-import { FeedItem } from './feed-item.dto';
 import { striptags } from 'striptags';
+import { FeedItem } from './feed-item.dto.js';
 
 @Injectable()
 export class RssService {
