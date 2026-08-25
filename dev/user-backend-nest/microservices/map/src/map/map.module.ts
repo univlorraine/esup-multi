@@ -37,13 +37,13 @@
  * termes.
  */
 
-import { Logger, Module } from '@nestjs/common';
-import { MapController } from './map.controller';
-import { MapService } from './map.service';
 import { HttpModule } from '@nestjs/axios';
+import { Logger, Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { KeepAliveOptions } from '../config/configuration.interface';
 import { HttpAgent, HttpsAgent } from 'agentkeepalive';
+import { KeepAliveOptions } from '../config/configuration.interface.js';
+import { MapController } from './map.controller.js';
+import { MapService } from './map.service.js';
 
 @Module({
   imports: [

@@ -37,15 +37,16 @@
  * termes.
  */
 
+import { HttpService } from '@nestjs/axios';
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { RpcException } from '@nestjs/microservices';
+import type { AxiosError } from 'axios';
 import { catchError, forkJoin, map, Observable, of } from 'rxjs';
 import {
   AdditionalProviderApi,
   CmsApi,
-} from '../config/configuration.interface';
-import { HttpService } from '@nestjs/axios';
-import { RpcException } from '@nestjs/microservices';
+} from '../config/configuration.interface.js';
 import type {
   MapDataAdditionalProviderDto,
   MapDataGraphQLDto,
@@ -53,8 +54,7 @@ import type {
   MapDataJsonDto,
   MapIconDto,
   Marker,
-} from './map.dto';
-import type { AxiosError } from 'axios';
+} from './map.dto.js';
 
 @Injectable()
 export class MapService {
