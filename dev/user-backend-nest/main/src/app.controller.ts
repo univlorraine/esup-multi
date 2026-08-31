@@ -849,7 +849,11 @@ export class AppController {
                 new NodeHelper(knowledgeBase).removeOrphans(),
               ),
               map((knowledgeBase: any[]) =>
-                knowledgeBase.filter((item) => item.parentId === body.parentId),
+                knowledgeBase.filter(
+                  (item) =>
+                    item.parentId === body.parentId ||
+                    item.id === body.parentId,
+                ),
               ),
             );
         }),
