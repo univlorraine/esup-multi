@@ -38,6 +38,7 @@
  */
 
 import {
+  BadRequestException,
   Body,
   Controller,
   Delete,
@@ -825,6 +826,10 @@ export class AppController {
 
   @Post('/knowledge-base/children')
   knowledgeBaseChildren(@Body() body) {
+    if (!body.parentId) {
+      throw new BadRequestException('parentId is required');
+    }
+
     return this.authClient
       .send(
         {
