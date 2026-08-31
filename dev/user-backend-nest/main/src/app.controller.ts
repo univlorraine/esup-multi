@@ -815,6 +815,9 @@ export class AppController {
               map((knowledgeBase: any) =>
                 new NodeHelper(knowledgeBase).removeOrphans(),
               ),
+              map((knowledgeBase: any) =>
+                new NodeHelper(knowledgeBase).withHasChildren(),
+              ),
             );
         }),
       );
@@ -842,12 +845,19 @@ export class AppController {
               roles,
             )
             .pipe(
+              // On filtre les nœuds en fonction des droits d'accès de l'utilisateur
               map((knowledgeBase: any) =>
                 new AuthorizationHelper(roles).filter(knowledgeBase),
               ),
+              // On supprime les nœuds orphelins pour éviter d'afficher des enfants dont le parent n'est pas accessible
               map((knowledgeBase: any) =>
                 new NodeHelper(knowledgeBase).removeOrphans(),
               ),
+              // On ajoute l'information hasChildren pour chaque nœud afin de savoir si un nœud a des enfants accessibles
+              map((knowledgeBase: any) =>
+                new NodeHelper(knowledgeBase).withHasChildren(),
+              ),
+              // On filtre les nœuds pour ne garder que ceux qui sont enfants du parentId demandé ou le parent lui-même
               map((knowledgeBase: any[]) =>
                 knowledgeBase.filter(
                   (item) =>
