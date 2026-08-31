@@ -51,9 +51,4 @@ export class KnowledgeBaseController {
   getKnowledgeBase(): Observable<KnowledgeBaseDto[]> {
     return this.knowledgeBaseService.getKnowledgeBase();
   }
-
-  @MessagePattern({ cmd: 'knowledgeBaseChildren' })
-  getKnowledgeBaseChildren(parentId: string): Observable<KnowledgeBaseDto[]> {
-    return this.knowledgeBaseService.getKnowledgeBaseChildren(parentId);
-  }
 }

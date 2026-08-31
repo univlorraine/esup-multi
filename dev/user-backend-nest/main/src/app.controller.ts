@@ -832,19 +832,24 @@ export class AppController {
       .pipe(
         concatMap((user) => {
           const roles = user ? user.roles : ['anonymous'];
+          // On charge l'arborescence complète pour pouvoir vérifier les droits d'accès sur tous les nœuds
+          // et filtrer les enfants du parentId demandé
           return this.knowledgeBaseClient
             .send(
               {
-                cmd: 'knowledgeBaseChildren',
+                cmd: 'knowledgeBase',
               },
-              body.parentId,
+              roles,
             )
             .pipe(
               map((knowledgeBase: any) =>
                 new AuthorizationHelper(roles).filter(knowledgeBase),
               ),
               map((knowledgeBase: any) =>
-                new NodeHelper(knowledgeBase,body.parentId).removeOrphans(),
+                new NodeHelper(knowledgeBase).removeOrphans(),
+              ),
+              map((knowledgeBase: any[]) =>
+                knowledgeBase.filter((item) => item.parentId === body.parentId),
               ),
             );
         }),
