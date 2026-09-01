@@ -37,11 +37,22 @@
  * termes.
  */
 
-import express from 'express';
-import { scheduleData } from './schedule.mock.js';
+import js from '@eslint/js';
+import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
+import { defineConfig } from 'eslint/config';
+import globals from 'globals';
 
-const router = express.Router();
-
-router.get('/{*any}', (req, res) => res.json(scheduleData()));
-
-export default router;
+export default defineConfig([
+  {
+    files: ['**/*.{js,mjs,cjs}'],
+    plugins: {
+      js,
+    },
+    extends: ['js/recommended', eslintPluginPrettierRecommended],
+    languageOptions: { globals: globals.node },
+    rules: {
+      'no-irregular-whitespace': ['error', { skipTemplates: true }],
+      'prettier/prettier': ['error', { endOfLine: 'auto' }],
+    },
+  },
+]);

@@ -37,11 +37,12 @@
  * termes.
  */
 
-const express = require('express');
+import express from 'express';
+import { menusData, restaurantsData } from './restaurants.mock.js';
+
 const router = express.Router();
-const { menusData, restaurantsData } = require('./restaurants.mock');
 
 router.get('/', (req, res) => res.json(restaurantsData));
 router.get('/:id', (req, res) => res.json(menusData()));
 
-module.exports = router;
+export default router;

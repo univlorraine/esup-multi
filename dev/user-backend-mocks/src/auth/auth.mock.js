@@ -37,50 +37,43 @@
  * termes.
  */
 
-const {v4: uuid} = require('uuid');
+import { v4 as uuid } from 'uuid';
 
-module.exports.authTokenData = () => `TGT-${uuid()}-${uuid()}-LUKE`;
-module.exports.userProviderData = {
-    "etu": {
-        "displayName": "John DOE",
-        "name": "Doe",
-        "firstname": "John",
-        "email": "john.doe@univ.fr",
-        "escn": "11111111-2222-3333-4444-555555555555",
-        "roles": [
-            "student"
-        ]
-    },
-    "staff": {
-        "displayName": "Alice DUPONT",
-        "name": "Dupont",
-        "firstname": "Alice",
-        "email": "alice.dupont@univ.fr",
-        "roles": [
-            "staff",
-            "schedule-manager"
-        ]
-    },
-    "prof": {
-        "displayName": "Bruce WILLIS",
-        "name": "Willis",
-        "firstname": "Bruce",
-        "email": "bruce.willis@univ.fr",
-        "roles": [
-            "teacher"
-        ]
-    }
+export const authTokenData = () => `TGT-${uuid()}-${uuid()}-LUKE`;
+export const userProviderData = {
+  etu: {
+    displayName: 'John DOE',
+    name: 'Doe',
+    firstname: 'John',
+    email: 'john.doe@univ.fr',
+    escn: '11111111-2222-3333-4444-555555555555',
+    roles: ['student'],
+  },
+  staff: {
+    displayName: 'Alice DUPONT',
+    name: 'Dupont',
+    firstname: 'Alice',
+    email: 'alice.dupont@univ.fr',
+    roles: ['staff', 'schedule-manager'],
+  },
+  prof: {
+    displayName: 'Bruce WILLIS',
+    name: 'Willis',
+    firstname: 'Bruce',
+    email: 'bruce.willis@univ.fr',
+    roles: ['teacher'],
+  },
 };
 
-module.exports.errorsData = {
-    unauthorized: (username) => ({
-        "statusCode": 401,
-        "message": `Invalid authentication for '${username}'`
-    }),
-    unknownUser: {
-        "error": {
-            "code": 400,
-            "message": "Utilisateur inconnu"
-        }
-    }
+export const errorsData = {
+  unauthorized: (username) => ({
+    statusCode: 401,
+    message: `Invalid authentication for '${username}'`,
+  }),
+  unknownUser: {
+    error: {
+      code: 400,
+      message: 'Utilisateur inconnu',
+    },
+  },
 };

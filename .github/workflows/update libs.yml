@@ -71,7 +71,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Fork  detected
+      - name: Fork detected
         if: steps.changes.outputs.packageJson == 'true' && steps.diff.outputs.CHANGES == 1 && github.event.pull_request.head.repo.full_name != github.repository
         run: |
           echo "La liste des dépendances doit être mise à jour."
