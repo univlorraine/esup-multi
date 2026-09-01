@@ -153,18 +153,28 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 ## [Mocks (backend)](./dev/user-backend-mocks)
 <span id="backend-mocks"></span>
 ```
-├─ MIT: 5
+├─ MIT: 13
+├─ Apache-2.0: 1
 └─ BSD-2-Clause: 1
 ```
 
 <details><summary>Détails</summary>
 
-- [dotenv@17.2.0](https://github.com/motdotla/dotenv) - BSD-2-Clause
-- [express@5.1.0](https://github.com/expressjs/express) - MIT
-- [http-errors@2.0.0](https://github.com/jshttp/http-errors) - MIT
-- [morgan@1.10.1](https://github.com/expressjs/morgan) - MIT
+- [@eslint/eslintrc@3.3.6](https://github.com/eslint/eslintrc) - MIT
+- [@eslint/js@10.0.1](https://github.com/eslint/eslint) - MIT
+- [@ianvs/prettier-plugin-sort-imports@4.7.1](https://github.com/ianvs/prettier-plugin-sort-imports) - Apache-2.0
+- [debug@4.4.3](https://github.com/debug-js/debug) - MIT
+- [dotenv@17.4.2](https://github.com/motdotla/dotenv) - BSD-2-Clause
+- [eslint-config-prettier@10.1.8](https://github.com/prettier/eslint-config-prettier) - MIT
+- [eslint-plugin-prettier@5.5.6](https://github.com/prettier/eslint-plugin-prettier) - MIT
+- [eslint@10.9.1](https://github.com/eslint/eslint) - MIT
+- [express@5.2.1](https://github.com/expressjs/express) - MIT
+- [globals@17.11.0](https://github.com/sindresorhus/globals) - MIT
+- [http-errors@2.0.1](https://github.com/jshttp/http-errors) - MIT
+- [morgan@1.11.0](https://github.com/expressjs/morgan) - MIT
+- [prettier@3.9.6](https://github.com/prettier/prettier) - MIT
 - [qrcode@1.5.4](https://github.com/soldair/node-qrcode) - MIT
-- [uuid@11.1.0](https://github.com/uuidjs/uuid) - MIT
+- [uuid@14.0.2](https://github.com/uuidjs/uuid) - MIT
 
 </details>
 
