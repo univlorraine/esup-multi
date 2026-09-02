@@ -1099,58 +1099,57 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 <span id="connector-multi-cms-connector"></span>
 ```
 ├─ MIT: 40
-├─ Apache-2.0: 3
-├─ BSD-2-Clause: 1
+├─ Apache-2.0: 4
 └─ BSD-3-Clause: 1
 ```
 
 <details><summary>Détails</summary>
 
-- [@apollo/client@3.14.1](https://github.com/apollographql/apollo-client) - MIT
 - [@as-integrations/express5@1.1.2](https://github.com/apollo-server-integrations/apollo-server-integration-express5) - MIT
-- [@golevelup/nestjs-graphql-request@0.2.5](https://github.com/golevelup/nestjs) - MIT
-- [@nestjs/apollo@13.4.5](https://github.com/nestjs/graphql) - MIT
-- [@nestjs/axios@4.0.1](https://github.com/nestjs/axios) - MIT
-- [@nestjs/cli@11.0.24](https://github.com/nestjs/nest-cli) - MIT
-- [@nestjs/common@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/config@4.0.4](https://github.com/nestjs/config) - MIT
-- [@nestjs/core@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/event-emitter@3.1.0](https://github.com/nestjs/event-emitter) - MIT
-- [@nestjs/graphql@13.4.5](https://github.com/nestjs/graphql) - MIT
-- [@nestjs/jwt@11.0.2](https://github.com/nestjs/jwt) - MIT
-- [@nestjs/passport@11.0.5](https://github.com/nestjs/passport) - MIT
-- [@nestjs/platform-express@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/schematics@11.1.0](https://github.com/nestjs/schematics) - MIT
-- [@nestjs/testing@11.2.1](https://github.com/nestjs/nest) - MIT
+- [@eslint/eslintrc@3.3.6](https://github.com/eslint/eslintrc) - MIT
+- [@eslint/js@10.0.1](https://github.com/eslint/eslint) - MIT
+- [@golevelup/nestjs-graphql-request@5.0.0](https://github.com/golevelup/nestjs) - MIT
+- [@ianvs/prettier-plugin-sort-imports@4.7.1](https://github.com/ianvs/prettier-plugin-sort-imports) - Apache-2.0
+- [@nestjs/apollo@14.0.0](https://github.com/nestjs/graphql) - MIT
+- [@nestjs/axios@12.0.0](https://github.com/nestjs/axios) - MIT
+- [@nestjs/cli@12.0.0](https://github.com/nestjs/nest-cli) - MIT
+- [@nestjs/common@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/config@12.0.0](https://github.com/nestjs/config) - MIT
+- [@nestjs/core@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/event-emitter@12.0.0](https://github.com/nestjs/event-emitter) - MIT
+- [@nestjs/graphql@14.0.0](https://github.com/nestjs/graphql) - MIT
+- [@nestjs/jwt@12.0.1](https://github.com/nestjs/jwt) - MIT
+- [@nestjs/passport@12.0.0](https://github.com/nestjs/passport) - MIT
+- [@nestjs/platform-express@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/schematics@12.0.0](https://github.com/nestjs/schematics) - MIT
+- [@nestjs/testing@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@types/express@5.0.6](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/jest@29.5.14](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/node@26.2.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/jest@30.0.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/node@26.4.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/passport-jwt@4.0.1](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/supertest@6.0.3](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@typescript-eslint/eslint-plugin@7.18.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
-- [@typescript-eslint/parser@7.18.0](https://github.com/typescript-eslint/typescript-eslint) - BSD-2-Clause
 - [envalid@8.2.0](https://github.com/af/envalid) - MIT
-- [eslint-config-prettier@9.1.2](https://github.com/prettier/eslint-config-prettier) - MIT
+- [eslint-config-prettier@10.1.8](https://github.com/prettier/eslint-config-prettier) - MIT
 - [eslint-plugin-prettier@5.5.6](https://github.com/prettier/eslint-plugin-prettier) - MIT
-- [eslint@8.57.1](https://github.com/eslint/eslint) - MIT
+- [eslint@10.9.1](https://github.com/eslint/eslint) - MIT
+- [globals@17.11.0](https://github.com/sindresorhus/globals) - MIT
 - [graphql-request@7.4.0](https://github.com/graffle-js/graffle) - MIT
 - [graphql-type-json@0.3.2](https://github.com/taion/graphql-type-json) - MIT
-- [jest@29.7.0](https://github.com/jestjs/jest) - MIT
-- [joi@17.13.5](https://github.com/hapijs/joi) - BSD-3-Clause
+- [jest@30.5.0](https://github.com/jestjs/jest) - MIT
+- [joi@18.2.5](https://github.com/hapijs/joi) - BSD-3-Clause
 - [passport-jwt@4.0.1](https://github.com/mikenicholson/passport-jwt) - MIT
 - [passport@0.7.0](https://github.com/jaredhanson/passport) - MIT
 - [prettier@3.9.6](https://github.com/prettier/prettier) - MIT
-- [redis@5.12.1](https://github.com/redis/node-redis) - MIT
+- [redis@6.2.1](https://github.com/redis/node-redis) - MIT
 - [reflect-metadata@0.2.2](https://github.com/rbuckton/reflect-metadata) - Apache-2.0
 - [rxjs@7.8.2](https://github.com/reactivex/rxjs) - Apache-2.0
 - [source-map-support@0.5.21](https://github.com/evanw/node-source-map-support) - MIT
-- [supertest@7.2.2](https://github.com/ladjs/supertest) - MIT
 - [ts-jest@29.4.12](https://github.com/kulshekhar/ts-jest) - MIT
 - [ts-loader@9.6.2](https://github.com/TypeStrong/ts-loader) - MIT
 - [ts-node@10.9.2](https://github.com/TypeStrong/ts-node) - MIT
 - [tsconfig-paths@4.2.0](https://github.com/dividab/tsconfig-paths) - MIT
-- [typescript@5.9.3](https://github.com/microsoft/TypeScript) - Apache-2.0
-- [zod@3.25.76](https://github.com/colinhacks/zod) - MIT
+- [typescript-eslint@8.68.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
+- [typescript@6.0.3](https://github.com/microsoft/TypeScript) - Apache-2.0
+- [zod@4.4.3](https://github.com/colinhacks/zod) - MIT
 
 </details>
 
