@@ -37,7 +37,7 @@
  */
 
 import { Field, ObjectType } from '@nestjs/graphql';
-import { LanguagesWordpress } from '@wordpress/collections/languages/languages.wordpress.model';
+import { LanguagesWordpress } from '#wordpress/collections/languages/languages.wordpress.model.js';
 
 @ObjectType({ isAbstract: true })
 export class BaseTranslationsWordpress {

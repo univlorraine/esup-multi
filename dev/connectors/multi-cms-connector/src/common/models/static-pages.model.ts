@@ -37,7 +37,7 @@
  */
 
 import { Field, ObjectType } from '@nestjs/graphql';
-import { StaticPagesTranslations } from '@common/models/translations.model';
+import { StaticPagesTranslations } from '#common/models/translations.model.js';
 
 // Modèle pour les pages statiques attendu par le backend de Multi
 @ObjectType()

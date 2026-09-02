@@ -36,19 +36,19 @@
  * termes.
  */
 
-import { Module } from '@nestjs/common';
 import { HttpModule } from '@nestjs/axios';
-import { ChannelsDirectusModule } from '@directus/collections/channels/channels.directus.module';
-import { LanguagesDirectusModule } from '@directus/collections/languages/languages.directus.module';
-import { SocialNetworksDirectusModule } from '@directus/collections/social-networks/social-networks.directus.module';
-import { PagesDirectusModule } from '@directus/collections/pages/pages.directus.module';
-import { ImportantNewsDirectusModule } from '@directus/collections/important-news/important-news.directus.module';
-import { ContactUsDirectusModule } from '@directus/collections/contact-us/contact-us.directus.module';
-import { LoginDirectusModule } from '@directus/collections/login/login.directus.module';
-import { FeaturesDirectusModule } from '@directus/collections/features/features.directus.module';
-import { WidgetsDirectusModule } from '@directus/collections/widgets/widgets.directus.module';
-import { DirectusService } from '@directus/directus.service';
-import { MapPointsDirectusModule } from '@directus/collections/map-points/map-points.directus.module';
+import { Module } from '@nestjs/common';
+import { ChannelsDirectusModule } from '#directus/collections/channels/channels.directus.module.js';
+import { ContactUsDirectusModule } from '#directus/collections/contact-us/contact-us.directus.module.js';
+import { FeaturesDirectusModule } from '#directus/collections/features/features.directus.module.js';
+import { ImportantNewsDirectusModule } from '#directus/collections/important-news/important-news.directus.module.js';
+import { LanguagesDirectusModule } from '#directus/collections/languages/languages.directus.module.js';
+import { LoginDirectusModule } from '#directus/collections/login/login.directus.module.js';
+import { MapPointsDirectusModule } from '#directus/collections/map-points/map-points.directus.module.js';
+import { PagesDirectusModule } from '#directus/collections/pages/pages.directus.module.js';
+import { SocialNetworksDirectusModule } from '#directus/collections/social-networks/social-networks.directus.module.js';
+import { WidgetsDirectusModule } from '#directus/collections/widgets/widgets.directus.module.js';
+import { DirectusService } from '#directus/directus.service.js';
 
 @Module({
   providers: [DirectusService],

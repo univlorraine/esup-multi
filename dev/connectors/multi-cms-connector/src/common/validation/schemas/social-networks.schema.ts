@@ -36,7 +36,7 @@
  * termes.
  */
 import { z } from 'zod';
-import { IdSchema } from '@common/validation/schemas/base-type.schema';
+import { IdSchema } from '#common/validation/schemas/base-type.schema.js';
 
 export const SocialNetworksSchema = z.object({
   id: IdSchema,

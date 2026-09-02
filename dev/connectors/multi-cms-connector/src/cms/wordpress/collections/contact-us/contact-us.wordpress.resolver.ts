@@ -37,8 +37,8 @@
  */
 
 import { Query, Resolver } from '@nestjs/graphql';
-import { ContactUsWordpressService } from './contact-us.wordpress.service';
-import { ContactUs } from '@common/models/contact-us.model';
+import { ContactUs } from '#common/models/contact-us.model.js';
+import { ContactUsWordpressService } from './contact-us.wordpress.service.js';
 
 @Resolver(() => ContactUs)
 export class ContactUsWordpressResolver {

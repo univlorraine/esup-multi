@@ -37,8 +37,8 @@
  */
 
 import { Args, Query, Resolver } from '@nestjs/graphql';
-import { FeaturesWordpressService } from './features.wordpress.service';
-import { Features } from '@common/models/features.model';
+import { Features } from '#common/models/features.model.js';
+import { FeaturesWordpressService } from './features.wordpress.service.js';
 
 @Resolver(() => Features)
 export class FeaturesWordpressResolver {

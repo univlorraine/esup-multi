@@ -1,40 +1,47 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "resolvePackageJsonExports": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
     "declaration": true,
     "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
-    "target": "ES2021",
+    "target": "esnext",
     "sourceMap": true,
     "outDir": "./dist",
-    "baseUrl": "./src",
+    "rootDir": "./src",
+    "paths": {
+      "#common/*": [
+        "./src/common/*"
+      ],
+      "#directus/*": [
+        "./src/cms/directus/*"
+      ],
+      "#wordpress/*": [
+        "./src/cms/wordpress/*"
+      ],
+      "#cache/*": [
+        "./src/cache/*"
+      ],
+      "#redis/*": [
+        "./src/redis/*"
+      ]
+    },
     "incremental": true,
+    "tsBuildInfoFile": ".tsbuildinfo",
     "skipLibCheck": true,
     "strictNullChecks": false,
+    "forceConsistentCasingInFileNames": false,
     "noImplicitAny": false,
     "strictBindCallApply": false,
-    "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
-    "paths": {
-      "@common/*": [
-        "./common/*"
-      ],
-      "@directus/*": [
-        "./cms/directus/*"
-      ],
-      "@wordpress/*": [
-        "./cms/wordpress/*"
-      ],
-      "@cache/*": [
-        "./cache/*"
-      ],
-      "@redis/*": [
-        "./redis/*"
-      ]
-    }
-  },
-  "include": ["src/**/*"],
-  "exclude": ["old/**/*"]
+    "types": [
+      "node",
+      "jest"
+    ]
+  }
 }

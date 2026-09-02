@@ -37,7 +37,7 @@
  */
 
 import { Field, ObjectType } from '@nestjs/graphql';
-import { FileDirectus } from '@directus/collections/system/file.directus.model';
+import { FileDirectus } from '#directus/collections/system/file.directus.model.js';
 
 @ObjectType()
 export class CampusDirectus {

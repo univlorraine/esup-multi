@@ -37,7 +37,7 @@
  */
 
 import { Field, ObjectType } from '@nestjs/graphql';
-import { ImageWordpress } from '@wordpress/collections/system/image.wordpress.model';
+import { ImageWordpress } from '#wordpress/collections/system/image.wordpress.model.js';
 
 @ObjectType()
 class CampusImageConnection {

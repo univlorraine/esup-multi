@@ -36,8 +36,8 @@
  * termes.
  */
 
-import { IdSchema } from '@common/validation/schemas/base-type.schema';
 import { z } from 'zod';
+import { IdSchema } from '#common/validation/schemas/base-type.schema.js';
 
 export const MapIconSchema = z.object({
   id: IdSchema,

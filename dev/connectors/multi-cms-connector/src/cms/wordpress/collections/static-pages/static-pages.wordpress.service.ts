@@ -37,17 +37,17 @@
  */
 
 import { Injectable, Logger } from '@nestjs/common';
-import { StaticPagesWordpress } from '@wordpress/collections/static-pages/static-pages.wordpress.model';
-import { StaticPages } from '@common/models/static-pages.model';
-import { WordpressService } from '@wordpress/wordpress.service';
-import { StaticPagesTranslations } from '@common/models/translations.model';
-import { StaticPagesTranslationsWordpress } from '@wordpress/collections/translations/translations.wordpress.model';
 import { OnEvent } from '@nestjs/event-emitter';
-import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
-import { StaticPagesSchema } from '@common/validation/schemas/static-pages.schema';
-import { normalizeEmptyStringToNull } from '@common/utils/normalize';
-import { CacheService } from '@cache/cache.service';
-import { CacheCollection } from '@cache/cache.config';
+import { CacheCollection } from '#cache/cache.config.js';
+import { CacheService } from '#cache/cache.service.js';
+import { ValidateMapping } from '#common/decorators/validate-mapping.decorator.js';
+import { StaticPages } from '#common/models/static-pages.model.js';
+import { StaticPagesTranslations } from '#common/models/translations.model.js';
+import { normalizeEmptyStringToNull } from '#common/utils/normalize.js';
+import { StaticPagesSchema } from '#common/validation/schemas/static-pages.schema.js';
+import { StaticPagesWordpress } from '#wordpress/collections/static-pages/static-pages.wordpress.model.js';
+import { StaticPagesTranslationsWordpress } from '#wordpress/collections/translations/translations.wordpress.model.js';
+import { WordpressService } from '#wordpress/wordpress.service.js';
 
 // TODO: Move FRENCH_CODE to .env and rename it to DEFAULT_LANGUAGE_CODE
 const FRENCH_CODE = 'FR';
@@ -68,7 +68,7 @@ export class StaticPagesWordpressService {
     } catch (error) {
       this.logger.error(
         'Failed to preload static-pages after cache clear:',
-        error.message,
+        error instanceof Error ? error.message : JSON.stringify(error),
       );
     }
   }
@@ -148,7 +148,7 @@ export class StaticPagesWordpressService {
         }
       }
     `);
-    return data.staticPages.nodes.map(this.mapToMultiModel);
+    return data.staticPages.nodes.map(this.mapToMultiModel.bind(this));
   }
 
   async getStaticPage(id: number): Promise<StaticPages> {

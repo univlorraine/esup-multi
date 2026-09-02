@@ -37,8 +37,8 @@
  */
 
 import { Args, Query, Resolver } from '@nestjs/graphql';
-import { FeaturesDirectusService } from './features.directus.service';
-import { Features } from '@common/models/features.model';
+import { Features } from '#common/models/features.model.js';
+import { FeaturesDirectusService } from './features.directus.service.js';
 
 @Resolver(() => Features)
 export class FeaturesDirectusResolver {

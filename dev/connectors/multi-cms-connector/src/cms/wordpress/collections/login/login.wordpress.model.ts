@@ -37,7 +37,7 @@
  */
 
 import { Field, ObjectType } from '@nestjs/graphql';
-import { LoginTranslationsWordpress } from '@wordpress/collections/translations/translations.wordpress.model';
+import { LoginTranslationsWordpress } from '#wordpress/collections/translations/translations.wordpress.model.js';
 
 @ObjectType()
 export class LoginWordpress {

@@ -37,8 +37,8 @@
  */
 
 import { Args, Query, Resolver } from '@nestjs/graphql';
-import { WidgetsWordpressService } from './widgets.wordpress.service';
-import { Widgets } from '@common/models/widgets.model';
+import { Widgets } from '#common/models/widgets.model.js';
+import { WidgetsWordpressService } from './widgets.wordpress.service.js';
 
 @Resolver(() => Widgets)
 export class WidgetsWordpressResolver {
