@@ -37,9 +37,9 @@
  */
 
 import { forwardRef, Module } from '@nestjs/common';
-import { DirectusModule } from '@directus/directus.module';
-import { MapPointsDirectusService } from '@directus/collections/map-points/map-points.directus.service';
-import { MapPointsDirectusResolver } from '@directus/collections/map-points/map-points.directus.resolver';
+import { MapPointsDirectusResolver } from '#directus/collections/map-points/map-points.directus.resolver.js';
+import { MapPointsDirectusService } from '#directus/collections/map-points/map-points.directus.service.js';
+import { DirectusModule } from '#directus/directus.module.js';
 
 @Module({
   imports: [forwardRef(() => DirectusModule)],

@@ -40,7 +40,7 @@
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
-import { AppModule } from './app.module';
+import { AppModule } from './app.module.js';
 
 async function bootstrap() {
   const natsServers = (
@@ -48,7 +48,7 @@ async function bootstrap() {
   )
     .split(',')
     .map((server) => server.trim());
-  Logger.log(`Using nats servers: ${natsServers}`);
+  Logger.log(`Using nats servers: ${JSON.stringify(natsServers)}`);
 
   const app = await NestFactory.create(AppModule, {
     logger:
@@ -84,4 +84,4 @@ async function bootstrap() {
   );
   await app.listen(port, host);
 }
-bootstrap();
+void bootstrap();

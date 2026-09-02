@@ -37,15 +37,15 @@
  */
 
 import { Injectable, Logger } from '@nestjs/common';
-import { PagesDirectus } from '@directus/collections/pages/pages.directus.model';
-import { StaticPages } from '@common/models/static-pages.model';
-import { DirectusService } from '@directus/directus.service';
 import { OnEvent } from '@nestjs/event-emitter';
-import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
-import { StaticPagesSchema } from '@common/validation/schemas/static-pages.schema';
-import { normalizeEmptyStringToNull } from '@common/utils/normalize';
-import { CacheService } from '@cache/cache.service';
-import { CacheCollection } from '@cache/cache.config';
+import { CacheCollection } from '#cache/cache.config.js';
+import { CacheService } from '#cache/cache.service.js';
+import { ValidateMapping } from '#common/decorators/validate-mapping.decorator.js';
+import { StaticPages } from '#common/models/static-pages.model.js';
+import { normalizeEmptyStringToNull } from '#common/utils/normalize.js';
+import { StaticPagesSchema } from '#common/validation/schemas/static-pages.schema.js';
+import { PagesDirectus } from '#directus/collections/pages/pages.directus.model.js';
+import { DirectusService } from '#directus/directus.service.js';
 
 @Injectable()
 export class PagesDirectusService {
@@ -63,7 +63,7 @@ export class PagesDirectusService {
     } catch (error) {
       this.logger.error(
         'Failed to preload pages after cache clear:',
-        error.message,
+        error instanceof Error ? error.message : JSON.stringify(error),
       );
     }
   }
@@ -123,7 +123,7 @@ export class PagesDirectusService {
         }
       }
     `);
-    return data.pages.map(this.mapToMultiModel);
+    return data.pages.map(this.mapToMultiModel.bind(this));
   }
 
   async getPage(id: number): Promise<StaticPages> {

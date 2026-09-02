@@ -37,8 +37,8 @@
  */
 
 import { Query, Resolver } from '@nestjs/graphql';
-import { ContactUsDirectusService } from './contact-us.directus.service';
-import { ContactUs } from '@common/models/contact-us.model';
+import { ContactUs } from '#common/models/contact-us.model.js';
+import { ContactUsDirectusService } from './contact-us.directus.service.js';
 
 @Resolver(() => ContactUs)
 export class ContactUsDirectusResolver {

@@ -38,12 +38,12 @@
  */
 
 import {
+  AuthProviderApi,
   CasUrl,
   CmsApi,
   KeepAliveOptions,
   ScheduledCleanup,
-  AuthProviderApi,
-} from './configuration.interface';
+} from './configuration.interface.js';
 
 interface Configuration {
   casUrl: CasUrl;

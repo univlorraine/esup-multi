@@ -37,16 +37,17 @@
  * termes.
  */
 
+import { HttpService } from '@nestjs/axios';
 import { Injectable, Logger } from '@nestjs/common';
-import { CmsApi } from '../config/configuration.interface';
 import { ConfigService } from '@nestjs/config';
 import { RpcException } from '@nestjs/microservices';
-import { HttpService } from '@nestjs/axios';
+import type { AxiosError } from 'axios';
 import { catchError, map, Observable } from 'rxjs';
-import {
+import { CmsApi } from '../config/configuration.interface.js';
+import type {
   KnowledgeBaseDto,
   KnowledgeBaseGraphQLResponse,
-} from './knowledge-base.dto';
+} from './knowledge-base.dto.js';
 
 @Injectable()
 export class KnowledgeBaseService {
@@ -108,7 +109,7 @@ export class KnowledgeBaseService {
         requestConfig,
       )
       .pipe(
-        catchError((err: any) => {
+        catchError((err: AxiosError) => {
           const errorMessage = 'Unable to get knowledge base data from CMS';
           this.logger.error(errorMessage, err);
           throw new RpcException(errorMessage);

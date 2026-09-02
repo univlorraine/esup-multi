@@ -37,7 +37,7 @@
  */
 
 import { Field, ObjectType } from '@nestjs/graphql';
-import { StaticPagesTranslationsWordpress } from '@wordpress/collections/translations/translations.wordpress.model';
+import { StaticPagesTranslationsWordpress } from '#wordpress/collections/translations/translations.wordpress.model.js';
 
 @ObjectType()
 export class StaticPagesWordpress {

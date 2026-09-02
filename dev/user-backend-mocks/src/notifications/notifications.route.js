@@ -37,15 +37,24 @@
  * termes.
  */
 
-const express = require('express');
-const router = express.Router();
-const { notificationsData } = require('./notifications.mock');
+import express from 'express';
+import { notificationsData } from './notifications.mock.js';
 
-router.get('/multi-notification-manager/channels/{*any}', (req, res) => res.send());
-router.post('/multi-notification-manager/notifications/{*any}', (req, res) => res.send());
-router.delete('/multi-notification-manager/notifications', (req, res) => res.send());
-router.get('/multi-notification-manager/notifications/{*any}', (req, res) => res.json(notificationsData));
+const router = express.Router();
+
+router.get('/multi-notification-manager/channels/{*any}', (req, res) =>
+  res.send(),
+);
+router.post('/multi-notification-manager/notifications/{*any}', (req, res) =>
+  res.send(),
+);
+router.delete('/multi-notification-manager/notifications', (req, res) =>
+  res.send(),
+);
+router.get('/multi-notification-manager/notifications/{*any}', (req, res) =>
+  res.json(notificationsData),
+);
 router.post('/multi-notification-manager/register', (req, res) => res.send());
 router.post('/multi-notification-manager/unregister', (req, res) => res.send());
 
-module.exports = router;
+export default router;

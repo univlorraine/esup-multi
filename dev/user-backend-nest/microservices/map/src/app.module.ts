@@ -39,9 +39,10 @@
 
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import configuration from './config/configuration';
-import { MapModule } from './map/map.module';
-import { MonitoringModule } from './monitoring/monitoring.module';
+import configuration from './config/configuration.js';
+import { MapModule } from './map/map.module.js';
+import { MonitoringModule } from './monitoring/monitoring.module.js';
+
 @Module({
   imports: [
     ConfigModule.forRoot({ load: [configuration] }),

@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { CmsApi, KeepAliveOptions } from './configuration.interface';
+import { CmsApi, KeepAliveOptions } from './configuration.interface.js';
 
 const applyIfNotBlank = (param: string, applyFn: (value: string) => void) => {
   if (param && param.trim().length > 0) {
@@ -89,7 +89,8 @@ export default (): {
   return {
     cmsApi: {
       apiUrl: process.env.SOCIAL_NETWORK_SERVICE_CMS_CONNECTOR_API_URL,
-      bearerToken: process.env.SOCIAL_NETWORK_SERVICE_CMS_CONNECTOR_API_BEARER_TOKEN,
+      bearerToken:
+        process.env.SOCIAL_NETWORK_SERVICE_CMS_CONNECTOR_API_BEARER_TOKEN,
     },
     keepAliveOptions,
   };

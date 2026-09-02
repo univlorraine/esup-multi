@@ -37,8 +37,8 @@
  */
 
 import { Args, Query, Resolver } from '@nestjs/graphql';
-import { LanguagesDirectusService } from './languages.directus.service';
-import { Languages } from '@common/models/languages.model';
+import { Languages } from '#common/models/languages.model.js';
+import { LanguagesDirectusService } from './languages.directus.service.js';
 
 @Resolver(() => Languages)
 export class LanguagesDirectusResolver {

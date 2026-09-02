@@ -37,8 +37,8 @@
  */
 
 import { Query, Resolver } from '@nestjs/graphql';
-import { LoginWordpressService } from './login.wordpress.service';
-import { Login } from '@common/models/login.model';
+import { Login } from '#common/models/login.model.js';
+import { LoginWordpressService } from './login.wordpress.service.js';
 
 @Resolver(() => Login)
 export class LoginWordpressResolver {

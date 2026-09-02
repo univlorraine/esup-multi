@@ -38,13 +38,13 @@
  */
 
 import {
-  Injectable,
-  NestInterceptor,
-  ExecutionContext,
-  CallHandler,
-  HttpException,
   BadGatewayException,
+  CallHandler,
+  ExecutionContext,
+  HttpException,
+  Injectable,
   InternalServerErrorException,
+  NestInterceptor,
 } from '@nestjs/common';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';

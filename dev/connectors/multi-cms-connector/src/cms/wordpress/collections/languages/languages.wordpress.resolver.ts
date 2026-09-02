@@ -37,8 +37,8 @@
  */
 
 import { Query, Resolver } from '@nestjs/graphql';
-import { LanguagesWordpressService } from './languages.wordpress.service';
-import { Languages } from '@common/models/languages.model';
+import { Languages } from '#common/models/languages.model.js';
+import { LanguagesWordpressService } from './languages.wordpress.service.js';
 
 @Resolver(() => Languages)
 export class LanguagesWordpressResolver {

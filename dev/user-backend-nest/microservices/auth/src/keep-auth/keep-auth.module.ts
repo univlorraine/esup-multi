@@ -39,19 +39,19 @@
 
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { KeepAuthService } from './keep-auth.service';
-import { KeepAuthController } from './keep-auth.controller';
-import { AuthModule } from '../auth/auth.module';
+import { JwtModule } from '@nestjs/jwt';
 import { MongooseModule } from '@nestjs/mongoose';
+import { AuthModule } from '../auth/auth.module.js';
+import { CasService } from '../auth/cas.service.js';
+import { KeepaliveHttpModule } from '../keepalive-http.module.js';
+import { AesEncryptionService } from './encryption/aes-encryption.service.js';
+import { KeepAuthController } from './keep-auth.controller.js';
+import { KeepAuthService } from './keep-auth.service.js';
+import { UserCredentialsRepository } from './user-credentials/user-credentials.repository.js';
 import {
   UserCredentials,
   UserCredentialsSchema,
-} from './user-credentials/user-credentials.schema';
-import { AesEncryptionService } from './encryption/aes-encryption.service';
-import { UserCredentialsRepository } from './user-credentials/user-credentials.repository';
-import { JwtModule } from '@nestjs/jwt';
-import { CasService } from 'src/auth/cas.service';
-import { KeepaliveHttpModule } from '../keepalive-http.module';
+} from './user-credentials/user-credentials.schema.js';
 
 @Module({
   imports: [
@@ -63,7 +63,7 @@ import { KeepaliveHttpModule } from '../keepalive-http.module';
     ]),
     JwtModule.registerAsync({
       imports: [ConfigModule],
-      useFactory: async (configService: ConfigService) => ({
+      useFactory: (configService: ConfigService) => ({
         secret: configService.get<string>('jwtSecret'),
       }),
       inject: [ConfigService],
