@@ -150,6 +150,10 @@ export class KnowledgeBaseCardComponent {
     Browser.open({url: this.sanitizer.sanitize(SecurityContext.URL, link)});
   };
 
+  canOpenItem(item: TranslatedKnowledgeBaseItem): boolean {
+    return !item.isLeaf || item.type === Type.internalLink || item.type === Type.externalLink;
+  }
+
   // eslint-disable-next-line @typescript-eslint/naming-convention
   protected readonly Display = Display;
 }

@@ -80,15 +80,18 @@ export class KnowledgeBasePage implements OnInit {
       return;
     }
 
-    if (!this.parentPageId) {
-      this.isLoading = true;
-      this.knowledgeBaseService.loadAndStoreKnowledgeBase()
-        .pipe(
-          take(1),
-          finalize(() => this.isLoading = false)
-        )
-        .subscribe();
-    }
+    this.isLoading = true;
+
+    const refresh$ = this.parentPageId
+      ? this.knowledgeBaseService.loadAndStoreKnowledgeBaseChildren(this.parentPageId)
+      : this.knowledgeBaseService.loadAndStoreKnowledgeBase();
+
+    refresh$
+      .pipe(
+        take(1),
+        finalize(() => this.isLoading = false)
+      )
+      .subscribe();
   }
 
   searchKnowledgeBase(event) {

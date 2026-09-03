@@ -38,6 +38,7 @@
  */
 
 import {
+  BadRequestException,
   Body,
   Controller,
   Delete,
@@ -814,6 +815,60 @@ export class AppController {
               ),
               map((knowledgeBase: any) =>
                 new NodeHelper(knowledgeBase).removeOrphans(),
+              ),
+              map((knowledgeBase: any) =>
+                new NodeHelper(knowledgeBase).withHasChildren(),
+              ),
+            );
+        }),
+      );
+  }
+
+  @Post('/knowledge-base/children')
+  knowledgeBaseChildren(@Body() body) {
+    if (!body.parentId) {
+      throw new BadRequestException('parentId is required');
+    }
+
+    return this.authClient
+      .send(
+        {
+          cmd: 'getUser',
+        },
+        body,
+      )
+      .pipe(
+        concatMap((user) => {
+          const roles = user ? user.roles : ['anonymous'];
+          // On charge l'arborescence complète pour pouvoir vérifier les droits d'accès sur tous les nœuds
+          // et filtrer les enfants du parentId demandé
+          return this.knowledgeBaseClient
+            .send(
+              {
+                cmd: 'knowledgeBase',
+              },
+              roles,
+            )
+            .pipe(
+              // On filtre les nœuds en fonction des droits d'accès de l'utilisateur
+              map((knowledgeBase: any) =>
+                new AuthorizationHelper(roles).filter(knowledgeBase),
+              ),
+              // On supprime les nœuds orphelins pour éviter d'afficher des enfants dont le parent n'est pas accessible
+              map((knowledgeBase: any) =>
+                new NodeHelper(knowledgeBase).removeOrphans(),
+              ),
+              // On ajoute l'information hasChildren pour chaque nœud afin de savoir si un nœud a des enfants accessibles
+              map((knowledgeBase: any) =>
+                new NodeHelper(knowledgeBase).withHasChildren(),
+              ),
+              // On filtre les nœuds pour ne garder que ceux qui sont enfants du parentId demandé ou le parent lui-même
+              map((knowledgeBase: any[]) =>
+                knowledgeBase.filter(
+                  (item) =>
+                    item.parentId === body.parentId ||
+                    item.id === body.parentId,
+                ),
               ),
             );
         }),
