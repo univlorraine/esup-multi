@@ -53,6 +53,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ErrorModule } from './error/error.module';
 import { PageLayoutsModule } from './layout/layouts.module';
+import { MatomoModule } from 'ngx-matomo-client';
 
 @NgModule({
   declarations: [AppComponent],
@@ -69,6 +70,7 @@ import { PageLayoutsModule } from './layout/layouts.module';
     HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    MatomoModule.forRoot(environment.matomoConfig || { mode: 'manual', disabled: true }),
     ErrorModule,
     PageLayoutsModule,
     FeaturesModule,

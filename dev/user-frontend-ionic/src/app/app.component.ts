@@ -38,7 +38,7 @@
  */
 
 import { DOCUMENT } from '@angular/common';
-import { Component, DestroyRef, inject, Inject, Injector, OnDestroy, OnInit, Optional, Renderer2 } from '@angular/core';
+import { Component, DestroyRef, inject, Inject, Injector, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { FirebaseMessaging } from '@capacitor-firebase/messaging';
 import { App } from '@capacitor/app';
 import { Capacitor, PluginListenerHandle } from '@capacitor/core';
@@ -61,7 +61,7 @@ import { Title } from '@angular/platform-browser';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { PushNotifications } from '@capacitor/push-notifications';
 import { Router } from '@angular/router';
-import { MatomoTracker } from 'ngx-matomo';
+import { MatomoTracker } from 'ngx-matomo-client';
 import { EdgeToEdge } from '@capawesome/capacitor-android-edge-to-edge-support';
 
 @Component({
@@ -100,7 +100,7 @@ export class AppComponent implements OnInit, OnDestroy {
     private multiTenantService: MultiTenantService,
     private injector: Injector,
     private projectModuleService: ProjectModuleService,
-    @Optional() private matomoTracker: MatomoTracker,
+    private matomoTracker: MatomoTracker,
   ) {
     this.initializeApp();
   }
@@ -231,10 +231,6 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   private initializeMatomo(): void {
-    if (!this.matomoTracker) {
-      return;
-    }
-
     // On désactive les cookies, car on va utiliser le stats-uid présent en local storage
     this.matomoTracker.disableCookies();
 
