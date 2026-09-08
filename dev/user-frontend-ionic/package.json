@@ -62,7 +62,7 @@
     "angular-shepherd": "^17.0.0",
     "angularx-qrcode": "^17.0.1",
     "capacitor-secure-storage-plugin": "0.11.0",
-    "date-fns": "^2.30.0",
+    "date-fns": "^4.4.0",
     "dompurify": "^3.3.3",
     "firebase": "^11.6.0",
     "fullcalendar": "^6.1.18",
