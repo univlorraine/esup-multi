@@ -63,7 +63,7 @@ export class CalendarService {
       switchMap(status => iif(
         () => status.connected,
         this.getAndStoreCalendarEvents(),
-        of(null),
+        of(void 0),
       )),
     );
   }
@@ -92,7 +92,7 @@ export class CalendarService {
   private getAndStoreCalendarEvents(): Observable<void> {
     return this.getMailCalendar().pipe(
       tap(mailCalendar => setEvents(mailCalendar.events)),
-      map(() => null)
+      map(() => void 0)
     );
   }
 }

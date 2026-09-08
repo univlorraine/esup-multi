@@ -52,7 +52,7 @@ export class LocalTimePipe implements PipeTransform {
   }
 
   transform(fullDate: string): string {
-    const lang = this.translateService.currentLang || this.translateService.defaultLang;
+    const lang = this.translateService.getCurrentLang() || this.translateService.getFallbackLang();
     const date = new Date(fullDate);
     return format(date, 'HH:mm', { locale: locale[lang] });
   }

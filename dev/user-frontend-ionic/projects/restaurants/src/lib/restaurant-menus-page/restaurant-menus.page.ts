@@ -42,7 +42,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NetworkService } from '@multi/shared';
 import { Observable } from 'rxjs';
 import { finalize, map, take } from 'rxjs/operators';
-import Swiper from 'swiper';
+import Swiper from 'swiper/bundle';
 import { getRestaurantById, Restaurant } from '../restaurants.repository';
 import { getMenusByRestaurantId, Menu } from './menus.repository';
 import { RestaurantMenusService } from './restaurant-menus.service';
@@ -136,14 +136,6 @@ export class RestaurantMenusPage implements OnInit, OnDestroy, AfterViewChecked 
         init: () => this.updateNavigationButtons(),
         slideChange: () => this.updateNavigationButtons()
       }
-    });
-
-    nextButton.addEventListener('click', () => {
-      this.swiper.slideNext();
-    });
-
-    prevButton.addEventListener('click', () => {
-      this.swiper.slidePrev();
     });
   }
 

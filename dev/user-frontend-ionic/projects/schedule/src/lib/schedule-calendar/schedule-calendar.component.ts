@@ -103,7 +103,7 @@ export class ScheduleCalendarComponent implements OnDestroy {
     views: {
       timeGridWeek: {
         dayHeaderContent: (args) => {
-          const lang = this.translate.currentLang || this.translate.defaultLang;
+          const lang = this.translate.getCurrentLang() || this.translate.getFallbackLang();
           return {
             html: `
             <div class="week-view-column-header-day">${format(args.date, 'EEE', { locale: locale[lang] })}</div>

@@ -52,7 +52,7 @@ export class CompleteLocalDatePipe implements PipeTransform {
     constructor(private translateService: TranslateService) { }
 
     transform(isoDate: string): string {
-        const lang = this.translateService.currentLang || this.translateService.defaultLang;
+        const lang = this.translateService.getCurrentLang() || this.translateService.getFallbackLang();
 
         let transformedDate = format(parseISO(isoDate), 'PPPP',
             { locale: locale[lang] }

@@ -51,7 +51,7 @@ export class LocalHourPipe implements PipeTransform {
     constructor(private translateService: TranslateService) { }
 
     transform(fullDate: string): string {
-      const lang = this.translateService.currentLang || this.translateService.defaultLang;
+      const lang = this.translateService.getCurrentLang() || this.translateService.getFallbackLang();
       return format(new Date(fullDate), 'p', {locale: locale[lang]});
     }
 }

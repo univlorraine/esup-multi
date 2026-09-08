@@ -52,7 +52,7 @@ export class RelativeTimePipe implements PipeTransform {
     constructor(private translateService: TranslateService) {}
 
     transform(inputDate: string): string {
-        const lang = this.translateService.currentLang || this.translateService.defaultLang;
+        const lang = this.translateService.getCurrentLang() || this.translateService.getFallbackLang();
         return formatDistanceToNow(new Date(inputDate), { locale: locale[lang] });
     }
 }

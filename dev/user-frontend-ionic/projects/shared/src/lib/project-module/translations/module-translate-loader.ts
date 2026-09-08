@@ -78,7 +78,7 @@ import { catchError, map } from 'rxjs/operators';
 import { HttpHeaders } from '@capacitor/core';
 import { MultiTenantService } from '../../multi-tenant/multi-tenant.service';
 
-export type Translation = object;
+export type Translation = Record<string, any>;
 
 export interface ModuleTranslationOptions {
   modules: ModuleTranslation[];
