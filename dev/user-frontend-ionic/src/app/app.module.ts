@@ -37,7 +37,12 @@
  * termes.
  */
 
-import { HttpClient, HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {
+  HttpClient,
+  HTTP_INTERCEPTORS,
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -47,7 +52,13 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { FeaturesModule } from '@multi/features';
 import { MenuModule } from '@multi/menu';
 import { PreferencesPageModule } from '@multi/preferences';
-import { AuthInterceptor, MultiTenantModule, ProjectModuleService, MultiTenantService, translationsLoaderFactory } from '@multi/shared';
+import {
+  AuthInterceptor,
+  MultiTenantModule,
+  ProjectModuleService,
+  MultiTenantService,
+  translationsLoaderFactory,
+} from '@multi/shared';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -57,20 +68,25 @@ import { MatomoModule } from 'ngx-matomo-client';
 
 @NgModule({
   declarations: [AppComponent],
+  bootstrap: [AppComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot({
       platform: {
         desktop: (win) => {
-          const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(win.navigator.userAgent);
+          const isMobile =
+            /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+              win.navigator.userAgent
+            );
           return !isMobile;
-        }
+        },
       },
     }),
-    HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    MatomoModule.forRoot(environment.matomoConfig || { mode: 'manual', disabled: true }),
+    MatomoModule.forRoot(
+      environment.matomoConfig || { mode: 'manual', disabled: true }
+    ),
     ErrorModule,
     PageLayoutsModule,
     FeaturesModule,
@@ -81,8 +97,13 @@ import { MatomoModule } from 'ngx-matomo-client';
       loader: {
         provide: TranslateLoader,
         useFactory: translationsLoaderFactory,
-        deps: [HttpClient, ProjectModuleService, MultiTenantService, 'environment']
-      }
+        deps: [
+          HttpClient,
+          ProjectModuleService,
+          MultiTenantService,
+          'environment',
+        ],
+      },
     }),
     ...environment.enabledModules,
   ],
@@ -94,7 +115,7 @@ import { MatomoModule } from 'ngx-matomo-client';
       useClass: AuthInterceptor,
       multi: true,
     },
+    provideHttpClient(withInterceptorsFromDi()),
   ],
-  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
