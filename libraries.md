@@ -901,7 +901,6 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 <details><summary>Détails</summary>
 
 - [@nestjs/axios@4.0.1](https://github.com/nestjs/axios) - MIT
-- [@nestjs/cache-manager@3.0.1](https://github.com/nestjs/cache-manager) - MIT
 - [@nestjs/cli@11.0.7](https://github.com/nestjs/nest-cli) - MIT
 - [@nestjs/common@11.1.5](https://github.com/nestjs/nest) - MIT
 - [@nestjs/config@4.0.2](https://github.com/nestjs/config) - MIT
@@ -916,11 +915,12 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@types/supertest@2.0.16](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@typescript-eslint/eslint-plugin@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
 - [@typescript-eslint/parser@5.62.0](https://github.com/typescript-eslint/typescript-eslint) - BSD-2-Clause
-- [cache-manager@7.0.1](https://github.com/jaredwray/cacheable) - MIT
+- [agentkeepalive@4.6.0](https://github.com/node-modules/agentkeepalive) - MIT
 - [eslint-config-prettier@8.10.2](https://github.com/prettier/eslint-config-prettier) - MIT
 - [eslint-plugin-prettier@4.2.5](https://github.com/prettier/eslint-plugin-prettier) - MIT
 - [eslint@8.57.1](https://github.com/eslint/eslint) - MIT
 - [html-entities@2.6.0](https://github.com/mdevils/html-entities) - MIT
+- [https-proxy-agent@7.0.6](https://github.com/TooTallNate/proxy-agents) - MIT
 - [jest@29.7.0](https://github.com/jestjs/jest) - MIT
 - [nats@2.29.3](https://github.com/nats-io/nats.node) - Apache-2.0
 - [prettier@2.8.8](https://github.com/prettier/prettier) - MIT
