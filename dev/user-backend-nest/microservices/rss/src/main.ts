@@ -69,10 +69,17 @@ async function bootstrap() {
   const host = process.env.RSS_SERVICE_HOST || '127.0.0.1';
   const port = parseInt(process.env.RSS_SERVICE_PORT) || 3006;
   Logger.log(`Listening on host ${host}, port ${port}`);
-  Logger.log(
-    `Cache enabled. TTL: ${process.env.RSS_SERVICE_CACHE_TTL_MS || 300}ms`,
+
+  const proxyVars = Object.keys(process.env).filter((name) =>
+    /_proxy$/i.test(name),
   );
-  Logger.log(`Max cache entries: ${process.env.RSS_SERVICE_CACHE_MAX || 200}`);
+  Logger.log(
+    proxyVars.length
+      ? `Proxy environment: ${proxyVars
+          .map((name) => `${name}=${process.env[name]}`)
+          .join(', ')}`
+      : 'Proxy environment: none (direct connections)',
+  );
   await app.listen(port, host);
 }
 bootstrap();
