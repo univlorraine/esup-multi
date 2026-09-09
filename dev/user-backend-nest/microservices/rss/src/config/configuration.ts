@@ -37,11 +37,106 @@
  * termes.
  */
 
-export default () => ({
-  rssUrl: process.env.RSS_SERVICE_FEED_URL,
-  allowedHtmlTags: process.env.RSS_SERVICE_ALLOWED_HTML_TAGS
-    ? process.env.RSS_SERVICE_ALLOWED_HTML_TAGS.split(',')
-    : [],
-  cacheTtl: parseInt(process.env.RSS_SERVICE_CACHE_TTL_MS),
-  cacheMax: parseInt(process.env.RSS_SERVICE_CACHE_MAX),
-});
+import * as infosJsonData from '../infos.json';
+import { KeepAliveOptions, RssConfiguration } from './configuration.interface';
+
+const DEFAULT_FEED_TIMEOUT_MS = 15000;
+const DEFAULT_RETRY_COUNT = 1;
+const DEFAULT_RETRY_DELAY_MS = 1000;
+const DEFAULT_STALE_MAX_AGE_MS = 24 * 60 * 60 * 1000;
+const DEFAULT_CACHE_TTL_MS = 300;
+
+const applyIfNotBlank = (param: string, applyFn: (value: string) => void) => {
+  if (param && param.trim().length > 0) {
+    applyFn(param);
+  }
+};
+
+const intOrDefault = (param: string, defaultValue: number): number => {
+  const parsed = parseInt(param);
+  return isNaN(parsed) ? defaultValue : parsed;
+};
+
+/**
+ * Proxy sortant à utiliser pour joindre le flux.
+ */
+const resolveProxyUrl = (): string =>
+  process.env.RSS_SERVICE_HTTPS_PROXY ||
+  process.env.HTTPS_PROXY ||
+  process.env.https_proxy ||
+  process.env.HTTP_PROXY ||
+  process.env.http_proxy ||
+  '';
+
+export default (): RssConfiguration => {
+  const keepAliveOptions: KeepAliveOptions = {};
+
+  applyIfNotBlank(
+    process.env.RSS_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVE,
+    (value) => (keepAliveOptions['keepAlive'] = value === 'true'),
+  );
+
+  applyIfNotBlank(
+    process.env.RSS_SERVICE_AGENTKEEPALIVE_OPTION_KEEPALIVEMSECS,
+    (value) => (keepAliveOptions['keepAliveMsecs'] = parseInt(value)),
+  );
+
+  applyIfNotBlank(
+    process.env.RSS_SERVICE_AGENTKEEPALIVE_OPTION_FREESOCKETTIMEOUT,
+    (value) => (keepAliveOptions['freeSocketTimeout'] = parseInt(value)),
+  );
+
+  applyIfNotBlank(
+    process.env.RSS_SERVICE_AGENTKEEPALIVE_OPTION_TIMEOUT,
+    (value) => (keepAliveOptions['timeout'] = parseInt(value)),
+  );
+
+  applyIfNotBlank(
+    process.env.RSS_SERVICE_AGENTKEEPALIVE_OPTION_MAXSOCKETS,
+    (value) => (keepAliveOptions['maxSockets'] = parseInt(value)),
+  );
+
+  applyIfNotBlank(
+    process.env.RSS_SERVICE_AGENTKEEPALIVE_OPTION_MAXFREESOCKETS,
+    (value) => (keepAliveOptions['maxFreeSockets'] = parseInt(value)),
+  );
+
+  applyIfNotBlank(
+    process.env.RSS_SERVICE_AGENTKEEPALIVE_OPTION_SOCKETACTIVETTL,
+    (value) => (keepAliveOptions['socketActiveTTL'] = parseInt(value)),
+  );
+
+  return {
+    feed: {
+      url: process.env.RSS_SERVICE_FEED_URL,
+      timeoutMs: intOrDefault(
+        process.env.RSS_SERVICE_FEED_TIMEOUT_MS,
+        DEFAULT_FEED_TIMEOUT_MS,
+      ),
+      retryCount: intOrDefault(
+        process.env.RSS_SERVICE_FEED_RETRY_COUNT,
+        DEFAULT_RETRY_COUNT,
+      ),
+      retryDelayMs: intOrDefault(
+        process.env.RSS_SERVICE_FEED_RETRY_DELAY_MS,
+        DEFAULT_RETRY_DELAY_MS,
+      ),
+      userAgent:
+        process.env.RSS_SERVICE_FEED_USER_AGENT ||
+        `${infosJsonData.name}/${infosJsonData.version}`,
+      staleMaxAgeMs: intOrDefault(
+        process.env.RSS_SERVICE_FEED_STALE_MAX_AGE_MS,
+        DEFAULT_STALE_MAX_AGE_MS,
+      ),
+    },
+    allowedHtmlTags: process.env.RSS_SERVICE_ALLOWED_HTML_TAGS
+      ? process.env.RSS_SERVICE_ALLOWED_HTML_TAGS.split(',')
+      : [],
+    cacheTtl: intOrDefault(
+      process.env.RSS_SERVICE_CACHE_TTL_MS,
+      DEFAULT_CACHE_TTL_MS,
+    ),
+    keepAliveOptions,
+    proxyUrl: resolveProxyUrl(),
+  };
+};

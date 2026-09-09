@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## Next Version (2026-mm-dd)
+### Backend
+#### Bug Fixes
+* **(rss)** : Correction du problème de mise en cache des données du flux
+
 ## 2.3.0 (2026-05-28)
 ### Client
 #### New features

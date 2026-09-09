@@ -37,15 +37,38 @@
  * termes.
  */
 
-import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
-import { KeepaliveHttpModule } from '../keepalive-http.module';
-import { RssController } from './rss.controller';
-import { RssService } from './rss.service';
+export interface KeepAliveOptions {
+  keepAlive?: boolean;
+  keepAliveMsecs?: number;
+  freeSocketTimeout?: number;
+  timeout?: number;
+  maxSockets?: number;
+  maxFreeSockets?: number;
+  socketActiveTTL?: number;
+}
 
-@Module({
-  imports: [ConfigModule, KeepaliveHttpModule],
-  providers: [RssService],
-  controllers: [RssController],
-})
-export class RssModule {}
+export interface FeedOptions {
+  /** Url du flux RSS à consommer. */
+  url: string;
+  /** Délai maximum d'une requête vers le flux, en millisecondes. */
+  timeoutMs: number;
+  /** Nombre de nouvelles tentatives après un échec (0 = aucune). */
+  retryCount: number;
+  /** Délai avant une nouvelle tentative, en millisecondes. */
+  retryDelayMs: number;
+  /** User-Agent envoyé au serveur du flux. */
+  userAgent: string;
+  /**
+   * Âge maximum du dernier flux valide servi lorsque la récupération échoue,
+   * en millisecondes (0 = désactive ce repli).
+   */
+  staleMaxAgeMs: number;
+}
+
+export interface RssConfiguration {
+  feed: FeedOptions;
+  allowedHtmlTags: string[];
+  cacheTtl: number;
+  keepAliveOptions: KeepAliveOptions;
+  proxyUrl: string;
+}
