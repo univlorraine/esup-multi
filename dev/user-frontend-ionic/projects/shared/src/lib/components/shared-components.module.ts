@@ -40,7 +40,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { BackButtonComponent } from './back-button/back-button.component';
 import { CustomIconComponent } from './custom-icon/custom-icon.component';
 import { HeaderComponent } from './header/header.component';
@@ -49,6 +49,6 @@ import { WidgetComponent } from './widgets/widget.component';
 @NgModule({
   declarations: [BackButtonComponent, CustomIconComponent, HeaderComponent, WidgetComponent],
   exports: [BackButtonComponent, CustomIconComponent, WidgetComponent, HeaderComponent],
-  imports: [CommonModule, IonicModule, TranslateModule],
+  imports: [CommonModule, IonicModule, TranslatePipe],
 })
 export class SharedComponentsModule {}

@@ -43,7 +43,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FullCalendarModule } from '@fullcalendar/angular'; // must go before plugins
 import { IonicModule } from '@ionic/angular';
 import { EffectsNgModule } from '@ngneat/effects-ng';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import {
   CompleteLocalDatePipe,
   LocalHourPipe,
@@ -100,7 +100,7 @@ const initModule = (projectModuleService: ProjectModuleService) => () =>
     CommonModule,
     IonicModule,
     SchedulePageRoutingModule,
-    TranslateModule,
+    TranslatePipe,
     FormsModule,
     ReactiveFormsModule,
     FullCalendarModule,

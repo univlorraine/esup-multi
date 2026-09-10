@@ -40,7 +40,7 @@
 import { CommonModule } from '@angular/common';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { ProjectModuleService } from '@multi/shared';
 import { UnreadMailComponent } from './widget/unread-mail/unread-mail.component';
 
@@ -58,7 +58,7 @@ const initModule = (projectModuleService: ProjectModuleService) => () =>
 
 @NgModule({
   declarations: [UnreadMailComponent],
-  imports: [CommonModule, IonicModule, TranslateModule],
+  imports: [CommonModule, IonicModule, TranslatePipe],
   providers: [
     {
       provide: APP_INITIALIZER,

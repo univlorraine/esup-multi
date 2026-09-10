@@ -41,7 +41,7 @@ import { CommonModule } from '@angular/common';
 import { APP_INITIALIZER, ModuleWithProviders, NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { EffectsNgModule } from '@ngneat/effects-ng';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { QRCodeModule } from 'angularx-qrcode';
 import { ProjectModuleService, SharedComponentsModule, SharedPipeModule } from '@multi/shared';
 import { CardRoutingModule } from './card-routing.module';
@@ -62,7 +62,7 @@ const initModule = (projectModuleService: ProjectModuleService) => () =>
     CommonModule,
     IonicModule,
     CardRoutingModule,
-    TranslateModule,
+    TranslatePipe,
     QRCodeModule,
     SharedPipeModule,
     SharedComponentsModule,

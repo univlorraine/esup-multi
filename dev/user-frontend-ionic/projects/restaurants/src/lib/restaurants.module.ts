@@ -40,7 +40,7 @@
 import { CommonModule } from '@angular/common';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { ProjectModuleService, SharedComponentsModule, SharedPipeModule } from '@multi/shared';
 import { RestaurantMenusPage } from './restaurant-menus-page/restaurant-menus.page';
 import { RestaurantsRoutingModule } from './restaurants-routing.module';
@@ -66,7 +66,7 @@ const initModule = (projectModuleService: ProjectModuleService) => () =>
     CommonModule,
     IonicModule,
     RestaurantsRoutingModule,
-    TranslateModule,
+    TranslatePipe,
     SharedComponentsModule,
     SharedPipeModule,
   ],

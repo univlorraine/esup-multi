@@ -41,7 +41,7 @@ import { CommonModule } from '@angular/common';
 import { APP_INITIALIZER, ErrorHandler, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { ProjectModuleService } from '../project-module/project-module.service';
 import { MultiTenantErrorHandler } from './multi-tenant-error-handler';
 import { MultiTenantRoutingModule } from './multi-tenant-routing.module';
@@ -54,7 +54,7 @@ const initModule = (projectModuleService: ProjectModuleService) => () =>
   });
 @NgModule({
   declarations: [MultiTenantComponent],
-  imports: [CommonModule, FormsModule, IonicModule, MultiTenantRoutingModule, TranslateModule],
+  imports: [CommonModule, FormsModule, IonicModule, MultiTenantRoutingModule, TranslatePipe],
   providers: [
     {
       provide: APP_INITIALIZER,

@@ -42,7 +42,7 @@ import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { EffectsNgModule } from '@ngneat/effects-ng';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { DragulaModule } from 'ng2-dragula';
 import { ProjectModuleService, SharedComponentsModule } from '@multi/shared';
 import { FeaturesRoutingModule } from './features-routing.module';
@@ -82,7 +82,7 @@ const initModule = (projectModuleService: ProjectModuleService) => () =>
     FormsModule,
     IonicModule,
     FeaturesRoutingModule,
-    TranslateModule,
+    TranslatePipe,
     EffectsNgModule.forFeature([FeaturesEffects]),
     SharedComponentsModule,
     DragulaModule.forRoot(),

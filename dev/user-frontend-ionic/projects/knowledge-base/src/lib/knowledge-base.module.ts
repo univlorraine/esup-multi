@@ -40,7 +40,7 @@
 import { CommonModule } from '@angular/common';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { ProjectModuleService, SharedComponentsModule, SharedPipeModule } from '@multi/shared';
 import { KnowledgeBaseCardComponent } from './knowledge-base-card/knowledge-base-card.component';
 import { KnowledgeBasePageRoutingModule } from './knowledge-base-routing.module';
@@ -56,7 +56,7 @@ const initModule = (projectModuleService: ProjectModuleService) => () =>
     CommonModule,
     IonicModule,
     KnowledgeBasePageRoutingModule,
-    TranslateModule,
+    TranslatePipe,
     SharedComponentsModule,
     SharedPipeModule,
   ],

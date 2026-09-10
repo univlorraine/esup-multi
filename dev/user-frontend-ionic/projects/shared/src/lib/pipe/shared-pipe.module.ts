@@ -40,7 +40,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { CompleteLocalDatePipe } from './complete-local-date-pipe';
 import { LocalHourPipe } from './local-hour.pipe';
 import { RelativeTimePipe } from './relative-time-pipe';
@@ -65,6 +65,6 @@ import { TruncatePipe } from './truncate-pipe';
     SanitizeSvgPipe,
     SanitizeHtmlPipe,
   ],
-  imports: [CommonModule, IonicModule, TranslateModule],
+  imports: [CommonModule, IonicModule, TranslatePipe],
 })
 export class SharedPipeModule {}

@@ -41,7 +41,7 @@ import { CommonModule } from '@angular/common';
 import { APP_INITIALIZER, ModuleWithProviders, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { ProjectModuleService } from '@multi/shared';
 import { IMPORTANT_NEWS_CONFIG, ImportantNewsModuleConfig } from './important-news.config';
 import { ImportantNewsComponent } from './widgets/important-news/important-news.component';
@@ -59,7 +59,7 @@ const initModule = (projectModuleService: ProjectModuleService) => () =>
 
 @NgModule({
   declarations: [ImportantNewsComponent],
-  imports: [CommonModule, IonicModule, TranslateModule, RouterModule],
+  imports: [CommonModule, IonicModule, TranslatePipe, RouterModule],
   providers: [
     {
       provide: APP_INITIALIZER,

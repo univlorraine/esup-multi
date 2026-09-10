@@ -40,7 +40,7 @@
 import { CommonModule } from '@angular/common';
 import { APP_INITIALIZER, ModuleWithProviders, NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { ProjectModuleService, SharedComponentsModule, SharedPipeModule } from '@multi/shared';
 import { RssItemHeaderButtonDirective } from './common/rss-item-header/rss-item-header-button.directive';
 import { RssItemHeaderComponent } from './common/rss-item-header/rss-item-header.component';
@@ -65,7 +65,7 @@ const initModule = (projectModuleService: ProjectModuleService) => () =>
     CommonModule,
     IonicModule,
     RssPageRoutingModule,
-    TranslateModule,
+    TranslatePipe,
     SharedComponentsModule,
     SharedPipeModule,
   ],

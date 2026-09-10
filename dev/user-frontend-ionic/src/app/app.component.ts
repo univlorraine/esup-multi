@@ -389,8 +389,12 @@ export class AppComponent implements OnInit, OnDestroy {
     this.multiTenantService.tenantChange$
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(() => {
+        const currentLang = this.translateService.getCurrentLang();
+        if (currentLang === null) {
+          return;
+        }
         this.translateService.getLangs().forEach((lang) => this.translateService.resetLang(lang));
-        this.translateService.reloadLang(this.translateService.getCurrentLang()).subscribe();
+        this.translateService.reloadLang(currentLang).subscribe();
       });
   }
 }

@@ -41,7 +41,7 @@ import { CommonModule } from '@angular/common';
 import { APP_INITIALIZER, ModuleWithProviders, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { ProjectModuleService, SharedComponentsModule } from '@multi/shared';
 import { ChatbotRoutingModule } from './chatbot-routing.module';
 import { CHATBOT_CONFIG, ChatbotModuleConfig } from './chatbot.config';
@@ -59,7 +59,7 @@ const initModule = (projectModuleService: ProjectModuleService) => () =>
     CommonModule,
     IonicModule,
     FormsModule,
-    TranslateModule,
+    TranslatePipe,
     ReactiveFormsModule,
     ChatbotRoutingModule,
     SharedComponentsModule,

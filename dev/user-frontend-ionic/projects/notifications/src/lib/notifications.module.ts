@@ -47,7 +47,7 @@ import {
 // import { Device } from '@capacitor/device';
 import { IonicModule, Platform, ToastController } from '@ionic/angular';
 import { EffectsNgModule } from '@ngneat/effects-ng';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import {
   NotificationsRepository,
   ProjectModuleService,
@@ -82,7 +82,7 @@ const initModule =
     FormsModule,
     IonicModule,
     NotificationsRoutingModule,
-    TranslateModule,
+    TranslatePipe,
     ReactiveFormsModule,
     SharedComponentsModule,
     EffectsNgModule.forFeature([NotificationsEffects]),

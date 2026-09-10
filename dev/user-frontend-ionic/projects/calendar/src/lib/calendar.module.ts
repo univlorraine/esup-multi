@@ -40,7 +40,7 @@
 import { CommonModule } from '@angular/common';
 import { APP_INITIALIZER, ModuleWithProviders, NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import {
   CompleteLocalDatePipe,
   LocalHourPipe,
@@ -66,7 +66,7 @@ const initModule = (projectModuleService: ProjectModuleService) => () =>
 
 @NgModule({
   declarations: [CalendarComponent, LocalDatePipe, LocalTimePipe],
-  imports: [CommonModule, IonicModule, TranslateModule, SharedPipeModule],
+  imports: [CommonModule, IonicModule, TranslatePipe, SharedPipeModule],
   providers: [
     {
       provide: APP_INITIALIZER,
