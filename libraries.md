@@ -106,7 +106,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@ngneat/elf-entities@4.6.0](https://github.com/ngneat/elf) - MIT
 - [@ngneat/elf-persist-state@1.2.1](https://github.com/ngneat/elf) - MIT
 - [@ngneat/elf@2.5.1](https://github.com/ngneat/elf) - MIT
-- [@ngx-translate/core@17.0.0](https://github.com/ngx-translate/core) - MIT
+- [@ngx-translate/core@18.0.0](https://github.com/ngx-translate/core) - MIT
 - [@trapezedev/configure@7.1.10](https://github.com/ionic-team/trapeze) - MIT*
 - [@types/dompurify@3.0.5](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/jasmine@3.6.11](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
