@@ -39,9 +39,16 @@
 
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AuthenticatedUser, getAuthToken, MultiTenantService, updateAuthToken, updateRefreshAuthToken, updateUser } from '@multi/shared';
 import { EMPTY, Observable, of, throwError, zip } from 'rxjs';
 import { catchError, concatMap, delayWhen, take } from 'rxjs/operators';
+import {
+  AuthenticatedUser,
+  getAuthToken,
+  MultiTenantService,
+  updateAuthToken,
+  updateRefreshAuthToken,
+  updateUser,
+} from '@multi/shared';
 
 interface KeepAuthenticatedUser extends AuthenticatedUser {
   refreshAuthToken: string;
@@ -49,17 +56,15 @@ interface KeepAuthenticatedUser extends AuthenticatedUser {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class KeepAuthService {
-
-
   constructor(
     private multiTenantService: MultiTenantService,
-    private http: HttpClient) { }
+    private http: HttpClient,
+  ) {}
 
   login(username: string, password: string): Observable<AuthenticatedUser | null> {
-
     const url = `${this.multiTenantService.getApiEndpoint()}/keep-auth/auth`;
     const data = {
       username,
@@ -67,52 +72,46 @@ export class KeepAuthService {
     };
 
     return this.http.post<KeepAuthenticatedUser>(url, data, {}).pipe(
-      delayWhen(keepAuthenticatedUser => {
+      delayWhen((keepAuthenticatedUser) => {
         if (!keepAuthenticatedUser) {
           return;
         }
 
-        const {
-          refreshAuthToken,
-          authToken,
-          ...authenticatedUser
-        } = keepAuthenticatedUser;
+        const { refreshAuthToken, authToken, ...authenticatedUser } = keepAuthenticatedUser;
         updateUser(authenticatedUser);
-        return zip(
-          updateRefreshAuthToken(refreshAuthToken),updateAuthToken(authToken)
-        );
+        return zip(updateRefreshAuthToken(refreshAuthToken), updateAuthToken(authToken));
       }),
-      catchError(err => {
+      catchError((err) => {
         if (err instanceof HttpErrorResponse) {
-
           if (err.status === 401) {
             return of(null);
           }
 
           return throwError(err);
         }
-      }));
+      }),
+    );
   }
 
   logout(refreshAuthToken: string): Observable<boolean> {
     const url = `${this.multiTenantService.getApiEndpoint()}/keep-auth/auth`;
     const headers = {
       // eslint-disable-next-line @typescript-eslint/naming-convention
-      Authorization: `Bearer ${refreshAuthToken}`
+      Authorization: `Bearer ${refreshAuthToken}`,
     };
 
     return getAuthToken().pipe(
       take(1),
       concatMap((authToken) => {
-        if(!authToken) {
+        if (!authToken) {
           return EMPTY;
         }
 
         return this.http.delete<boolean>(url, {
           headers,
           body: {
-            authToken
-          }
+            authToken,
+          },
         });
       }),
     );
@@ -122,7 +121,7 @@ export class KeepAuthService {
     const url = `${this.multiTenantService.getApiEndpoint()}/keep-auth/reauth`;
     const headers = {
       // eslint-disable-next-line @typescript-eslint/naming-convention
-      Authorization: `Bearer ${refreshAuthToken}`
+      Authorization: `Bearer ${refreshAuthToken}`,
     };
 
     return this.http.delete<boolean>(url, { headers });

@@ -38,8 +38,12 @@
  */
 
 import { Component, Input } from '@angular/core';
-import { isDarkTheme$, MenuOpenerService, ServiceMenuItem, updateFeatureIsNewToFalse } from '@multi/shared';
-
+import {
+  isDarkTheme$,
+  MenuOpenerService,
+  ServiceMenuItem,
+  updateFeatureIsNewToFalse,
+} from '@multi/shared';
 
 @Component({
   selector: 'app-service',
@@ -51,9 +55,7 @@ export class ServiceComponent {
   @Input() draggableIsOn: boolean;
   public isDarkTheme$ = isDarkTheme$;
 
-  constructor(
-    public menuOpenerService: MenuOpenerService
-  ) {}
+  constructor(public menuOpenerService: MenuOpenerService) {}
 
   open(menuItem: ServiceMenuItem) {
     updateFeatureIsNewToFalse(menuItem);

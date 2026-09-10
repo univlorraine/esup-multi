@@ -39,34 +39,32 @@
 
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { MultiTenantService } from '@multi/shared';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { MultiTenantService } from '@multi/shared';
 import { Menu, upsertMenus } from './menus.repository';
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RestaurantMenusService {
-
   constructor(
     private multiTenantService: MultiTenantService,
     private http: HttpClient,
-  ) { }
+  ) {}
 
   public loadAndStoreMenus(restaurantId: number, date?: string): Observable<Menu[]> {
     const url = `${this.multiTenantService.getApiEndpoint()}/restaurant/menus`;
-    const params = new HttpParams()
-      .set('id', restaurantId)
-      .set('date', date || '');
+    const params = new HttpParams().set('id', restaurantId).set('date', date || '');
 
     return this.http.get<Menu[]>(url, { params }).pipe(
-      tap(menus => upsertMenus(
-        // @TODO supprimer le '.map' une fois l'API de l'UL en place
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        menus.map(m => ({...m, restaurant_id : restaurantId})))
-      )
+      tap((menus) =>
+        upsertMenus(
+          // @TODO supprimer le '.map' une fois l'API de l'UL en place
+          // eslint-disable-next-line @typescript-eslint/naming-convention
+          menus.map((m) => ({ ...m, restaurant_id: restaurantId })),
+        ),
+      ),
     );
   }
 }

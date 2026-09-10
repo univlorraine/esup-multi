@@ -43,45 +43,41 @@ import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { ProjectModuleService, SharedComponentsModule } from '@multi/shared';
 import { ReservationRoutingModule } from './reservation-routing.module';
-import { ReservationModuleConfig, RESERVATION_CONFIG } from './reservation.config';
+import { RESERVATION_CONFIG, ReservationModuleConfig } from './reservation.config';
 import { ReservationPage } from './reservation.page';
 import { QRScanPage } from './scan/scan.page';
 
-const initModule = (projectModuleService: ProjectModuleService) =>
-  () => projectModuleService.initProjectModule({
+const initModule = (projectModuleService: ProjectModuleService) => () =>
+  projectModuleService.initProjectModule({
     name: 'reservation',
     translation: true,
   });
 
 @NgModule({
-  declarations: [
-    ReservationPage,
-    QRScanPage,
-  ],
+  declarations: [ReservationPage, QRScanPage],
   imports: [
     CommonModule,
     IonicModule,
     ReservationRoutingModule,
     TranslateModule,
-    SharedComponentsModule
+    SharedComponentsModule,
   ],
-  providers: [{
-    provide: APP_INITIALIZER,
-    useFactory: initModule,
-    deps: [ProjectModuleService],
-    multi: true
-  }]
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initModule,
+      deps: [ProjectModuleService],
+      multi: true,
+    },
+  ],
 })
 export class ReservationModule {
-
   static routerLink = '/reservation';
 
   static forRoot(config: ReservationModuleConfig): ModuleWithProviders<ReservationModule> {
     return {
       ngModule: ReservationModule,
-      providers: [
-        { provide: RESERVATION_CONFIG, useValue: config }
-      ]
+      providers: [{ provide: RESERVATION_CONFIG, useValue: config }],
     };
   }
 }

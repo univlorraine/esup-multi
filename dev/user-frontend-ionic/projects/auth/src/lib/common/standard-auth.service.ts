@@ -39,26 +39,30 @@
 
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AuthenticatedUser, getAuthToken, MultiTenantService, updateAuthToken, updateUser } from '@multi/shared';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, concatMap, delayWhen, take } from 'rxjs/operators';
+import {
+  AuthenticatedUser,
+  getAuthToken,
+  MultiTenantService,
+  updateAuthToken,
+  updateUser,
+} from '@multi/shared';
 
 interface LoginResult extends AuthenticatedUser {
   authToken: string;
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class StandardAuthService {
-
-
   constructor(
     private multiTenantService: MultiTenantService,
-    private http: HttpClient) { }
+    private http: HttpClient,
+  ) {}
 
   login(username: string, password: string): Observable<AuthenticatedUser | null> {
-
     const url = `${this.multiTenantService.getApiEndpoint()}/auth`;
     const data = {
       username,
@@ -66,21 +70,21 @@ export class StandardAuthService {
     };
 
     return this.http.post<LoginResult>(url, data, {}).pipe(
-      delayWhen(loginResult => {
+      delayWhen((loginResult) => {
         const { authToken, ...authenticatedUser } = loginResult;
         updateUser(authenticatedUser);
         return updateAuthToken(authToken);
       }),
-      catchError(err => {
+      catchError((err) => {
         if (err instanceof HttpErrorResponse) {
-
           if (err.status === 401) {
             return of(null);
           }
 
           return throwError(err);
         }
-      }));
+      }),
+    );
   }
 
   logout(): Observable<boolean> {
@@ -88,9 +92,11 @@ export class StandardAuthService {
 
     return getAuthToken().pipe(
       take(1),
-      concatMap(authToken => this.http.delete<boolean>(url, {
-        body: { authToken }
-      }))
+      concatMap((authToken) =>
+        this.http.delete<boolean>(url, {
+          body: { authToken },
+        }),
+      ),
     );
   }
 }

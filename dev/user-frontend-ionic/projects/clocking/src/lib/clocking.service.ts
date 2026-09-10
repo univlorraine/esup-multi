@@ -39,16 +39,15 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { getAuthToken, NetworkService, MultiTenantService } from '@multi/shared';
 import { from, iif, Observable, of } from 'rxjs';
 import { map, switchMap, take, tap } from 'rxjs/operators';
+import { getAuthToken, MultiTenantService, NetworkService } from '@multi/shared';
 import { Clocking, setClocking } from './clocking.repository';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ClockingService {
-
   constructor(
     private multiTenantService: MultiTenantService,
     private http: HttpClient,
@@ -57,18 +56,14 @@ export class ClockingService {
 
   public loadClockingIfNetworkAvailable(): Observable<void> {
     return from(this.networkService.getConnectionStatus()).pipe(
-      switchMap(status => iif(
-        () => status.connected,
-        this.getAndStoreClocking(),
-        of(null),
-      )),
+      switchMap((status) => iif(() => status.connected, this.getAndStoreClocking(), of(null))),
     );
   }
 
   public clockIn(): Observable<void> {
     return this.addClocking().pipe(
-      tap(clocking => setClocking(clocking)),
-      map(() => null)
+      tap((clocking) => setClocking(clocking)),
+      map(() => null),
     );
   }
 
@@ -76,14 +71,14 @@ export class ClockingService {
     const url = `${this.multiTenantService.getApiEndpoint()}/clocking`;
     return getAuthToken().pipe(
       take(1),
-      switchMap(authToken => this.http.post<Clocking>(url, { authToken }))
+      switchMap((authToken) => this.http.post<Clocking>(url, { authToken })),
     );
   }
 
   private getAndStoreClocking(): Observable<void> {
     return this.getClocking().pipe(
-      tap(clocking => setClocking(clocking)),
-      map(() => null)
+      tap((clocking) => setClocking(clocking)),
+      map(() => null),
     );
   }
 
@@ -91,7 +86,7 @@ export class ClockingService {
     const url = `${this.multiTenantService.getApiEndpoint()}/clock-in`;
     return getAuthToken().pipe(
       take(1),
-      switchMap(authToken => this.http.post<Clocking>(url, { authToken }))
+      switchMap((authToken) => this.http.post<Clocking>(url, { authToken })),
     );
   }
 }

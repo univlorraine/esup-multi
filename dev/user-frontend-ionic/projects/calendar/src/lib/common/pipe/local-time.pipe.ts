@@ -47,9 +47,7 @@ import * as locale from 'date-fns/locale';
   pure: false,
 })
 export class LocalTimePipe implements PipeTransform {
-
-  constructor(private translateService: TranslateService) {
-  }
+  constructor(private translateService: TranslateService) {}
 
   transform(fullDate: string): string {
     const lang = this.translateService.getCurrentLang() || this.translateService.getFallbackLang();

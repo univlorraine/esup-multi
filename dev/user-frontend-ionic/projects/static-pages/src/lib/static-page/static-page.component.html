@@ -37,11 +37,11 @@
   ~ termes.
   -->
 
-<ng-container *ngIf="page$ | async as page">
+@if (page$ | async; as page) {
   <ion-header>
     <ion-toolbar>
       <ion-buttons slot="start">
-        <app-back-button></app-back-button>
+        <app-back-button />
       </ion-buttons>
       <ion-title class="app-centered-header-title app-title-4">{{ page.title }}</ion-title>
     </ion-toolbar>
@@ -50,4 +50,4 @@
   <ion-content class="ion-padding">
     <div [innerHTML]="page.content" class="safe-area-padding-lr link-inherit-color"></div>
   </ion-content>
-</ng-container>
+}

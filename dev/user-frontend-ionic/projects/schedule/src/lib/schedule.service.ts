@@ -39,11 +39,11 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { getAuthToken, MultiTenantService, NetworkService } from '@multi/shared';
 import { add, format, startOfWeek, sub } from 'date-fns';
 import { BehaviorSubject, combineLatest, from, Observable, of, Subject } from 'rxjs';
 import { filter, finalize, map, mergeMap, switchMap, take, tap } from 'rxjs/operators';
-import { ScheduleModuleConfig, SCHEDULE_CONFIG } from './schedule.config';
+import { getAuthToken, MultiTenantService, NetworkService } from '@multi/shared';
+import { SCHEDULE_CONFIG, ScheduleModuleConfig } from './schedule.config';
 import {
   Event,
   HiddenCourse,
@@ -51,19 +51,18 @@ import {
   PlanningData,
   Schedule,
   ScheduleStoreManager,
-  scheduleStoreManager
+  scheduleStoreManager,
 } from './schedule.repository';
 
 export const formatDay = (date: Date) => format(date, 'yyyy-MM-dd');
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ScheduleService {
-
   public isLoading$: Observable<boolean>;
-  public hideEventEvt: Subject<void> = new Subject();
-  public asUser: BehaviorSubject<string> = new BehaviorSubject<string | null>(null);
+  public hideEventEvt = new Subject<void>();
+  public asUser = new BehaviorSubject<string | null>(null);
   private storeManager: ScheduleStoreManager = scheduleStoreManager;
   private isLoadingSubject = new Subject<boolean>();
 
@@ -84,47 +83,42 @@ export class ScheduleService {
   }
 
   public getSchedule(authToken: string, startDate: string, endDate: string): Observable<Schedule> {
-
     const url = `${this.multiTenantService.getApiEndpoint()}/schedule`;
     const data = {
       authToken,
       startDate,
       endDate,
-      asUser: this.asUser.value
+      asUser: this.asUser.value,
     };
 
     return this.http.post<Schedule>(url, data);
   }
 
   loadSchedule(startDate: string, endDate: string): Observable<Schedule> {
-
     return from(this.networkService.getConnectionStatus()).pipe(
-      filter(status => status.connected),
+      filter((status) => status.connected),
       tap(() => this.isLoadingSubject.next(true)),
-      mergeMap(() => getAuthToken().pipe(
-        take(1),
-        filter(authToken => authToken != null),
-        switchMap(authToken =>
-          this.getSchedule(
-            authToken,
-            startDate,
-            endDate
-          )
-        )
-      )),
-      finalize(() => this.isLoadingSubject.next(false))
+      mergeMap(() =>
+        getAuthToken().pipe(
+          take(1),
+          filter((authToken) => authToken != null),
+          switchMap((authToken) => this.getSchedule(authToken, startDate, endDate)),
+        ),
+      ),
+      finalize(() => this.isLoadingSubject.next(false)),
     );
   }
 
   loadScheduleToState(): Observable<Schedule> {
-    return this.loadSchedule(formatDay(this.getStateStartDate()), formatDay(this.getStateEndDate())).pipe(
-      tap(schedule => this.storeManager.setSchedule(schedule))
-    );
+    return this.loadSchedule(
+      formatDay(this.getStateStartDate()),
+      formatDay(this.getStateEndDate()),
+    ).pipe(tap((schedule) => this.storeManager.setSchedule(schedule)));
   }
 
   loadScheduleOutOfStateInterval(startDate: string, endDate: string): Observable<Schedule> {
     return this.loadSchedule(startDate, endDate).pipe(
-      tap(schedule => this.storeManager.updateAllPlanningsData(schedule.plannings)),
+      tap((schedule) => this.storeManager.updateAllPlanningsData(schedule.plannings)),
     );
   }
 
@@ -146,13 +140,19 @@ export class ScheduleService {
       return of([]);
     }
     const eventIds = [];
-    return combineLatest([this.storeManager.allPlanningsData$, this.storeManager.hiddenCourseList$]).pipe(
+    return combineLatest([
+      this.storeManager.allPlanningsData$,
+      this.storeManager.hiddenCourseList$,
+    ]).pipe(
       map(([allPlanningsData, hiddenCourseList]: [PlanningData[], HiddenCourse[]]) =>
-        schedule.plannings.filter(planning =>
-          allPlanningsData.some(planningData => planningData.id === planning.id && planningData.isSelected)
-        )
+        schedule.plannings
+          .filter((planning) =>
+            allPlanningsData.some(
+              (planningData) => planningData.id === planning.id && planningData.isSelected,
+            ),
+          )
           .reduce((events, planning) => {
-            planning.events.forEach(event => {
+            planning.events.forEach((event) => {
               if (!eventIds.includes(event.id)) {
                 eventIds.push(event.id);
                 events.push(event);
@@ -160,9 +160,15 @@ export class ScheduleService {
             });
             return events;
           }, [])
-          .sort((a: Event, b: Event) => new Date(a.startDateTime).getTime() - new Date(b.startDateTime).getTime())
-          .filter((event: Event) => !hiddenCourseList.some(hiddenCourse => hiddenCourse.id === event.course.id)
-          )),
+          .sort(
+            (a: Event, b: Event) =>
+              new Date(a.startDateTime).getTime() - new Date(b.startDateTime).getTime(),
+          )
+          .filter(
+            (event: Event) =>
+              !hiddenCourseList.some((hiddenCourse) => hiddenCourse.id === event.course.id),
+          ),
+      ),
     );
   }
 

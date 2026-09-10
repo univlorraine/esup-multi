@@ -41,7 +41,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CardPage } from './card.page';
 
-
 const routes: Routes = [
   {
     path: 'card',
@@ -49,8 +48,8 @@ const routes: Routes = [
       {
         path: '',
         component: CardPage,
-      }
-    ]
+      },
+    ],
   },
 ];
 
@@ -58,4 +57,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class CardRoutingModule { }
+export class CardRoutingModule {}

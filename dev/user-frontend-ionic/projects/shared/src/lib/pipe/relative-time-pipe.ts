@@ -43,16 +43,14 @@ import { formatDistanceToNow } from 'date-fns';
 import * as locale from 'date-fns/locale';
 
 @Pipe({
-    name: 'relativeTime',
-    pure: false
+  name: 'relativeTime',
+  pure: false,
 })
-
 export class RelativeTimePipe implements PipeTransform {
+  constructor(private translateService: TranslateService) {}
 
-    constructor(private translateService: TranslateService) {}
-
-    transform(inputDate: string): string {
-        const lang = this.translateService.getCurrentLang() || this.translateService.getFallbackLang();
-        return formatDistanceToNow(new Date(inputDate), { locale: locale[lang] });
-    }
+  transform(inputDate: string): string {
+    const lang = this.translateService.getCurrentLang() || this.translateService.getFallbackLang();
+    return formatDistanceToNow(new Date(inputDate), { locale: locale[lang] });
+  }
 }

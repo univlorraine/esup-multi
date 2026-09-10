@@ -44,20 +44,17 @@ import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { ProjectModuleService, SharedComponentsModule } from '@multi/shared';
 import { ContactsRoutingModule } from './contacts-routing.module';
-import { ContactsModuleConfig, CONTACTS_CONFIG } from './contacts.config';
+import { CONTACTS_CONFIG, ContactsModuleConfig } from './contacts.config';
 import { ContactsComponent } from './contacts.page';
 
-
-const initModule = (projectModuleService: ProjectModuleService) =>
-  () => projectModuleService.initProjectModule({
+const initModule = (projectModuleService: ProjectModuleService) => () =>
+  projectModuleService.initProjectModule({
     name: 'contacts',
-    translation: true
+    translation: true,
   });
 
 @NgModule({
-  declarations: [
-    ContactsComponent
-  ],
+  declarations: [ContactsComponent],
   imports: [
     CommonModule,
     IonicModule,
@@ -67,12 +64,14 @@ const initModule = (projectModuleService: ProjectModuleService) =>
     ReactiveFormsModule,
     SharedComponentsModule,
   ],
-  providers: [{
-    provide: APP_INITIALIZER,
-    useFactory: initModule,
-    deps:[ProjectModuleService],
-    multi: true
-  }],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initModule,
+      deps: [ProjectModuleService],
+      multi: true,
+    },
+  ],
 })
 export class ContactsModule {
   static routerLink = '/contatcs';
@@ -80,9 +79,7 @@ export class ContactsModule {
   static forRoot(config: ContactsModuleConfig): ModuleWithProviders<ContactsModule> {
     return {
       ngModule: ContactsModule,
-      providers: [
-        { provide: CONTACTS_CONFIG, useValue: config }
-      ]
+      providers: [{ provide: CONTACTS_CONFIG, useValue: config }],
     };
   }
 }

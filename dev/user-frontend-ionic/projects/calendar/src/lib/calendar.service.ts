@@ -39,45 +39,45 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { getAuthToken, NetworkService, MultiTenantService } from '@multi/shared';
 import { isAfter } from 'date-fns';
 import { from, iif, Observable, of } from 'rxjs';
 import { map, switchMap, take, tap } from 'rxjs/operators';
-import { CalendarModuleConfig, CALENDAR_CONFIG } from './calendar.config';
+import { getAuthToken, MultiTenantService, NetworkService } from '@multi/shared';
+import { CALENDAR_CONFIG, CalendarModuleConfig } from './calendar.config';
 import { events$, MailCalendar, setEvents } from './calendar.repository';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CalendarService {
-
   constructor(
     @Inject(CALENDAR_CONFIG) private config: CalendarModuleConfig,
     private multiTenantService: MultiTenantService,
     private http: HttpClient,
-    private networkService: NetworkService
-  ) { }
+    private networkService: NetworkService,
+  ) {}
 
   public loadCalendarIfNetworkAvailable(): Observable<void> {
     return from(this.networkService.getConnectionStatus()).pipe(
-      switchMap(status => iif(
-        () => status.connected,
-        this.getAndStoreCalendarEvents(),
-        of(void 0),
-      )),
+      switchMap((status) =>
+        iif(() => status.connected, this.getAndStoreCalendarEvents(), of(void 0)),
+      ),
     );
   }
 
   public getNextEvents$() {
     return events$.pipe(
-      map(events => {
+      map((events) => {
         const startDate = new Date();
 
         return events
-          .filter(event => isAfter(new Date(event.endDateTime), startDate))
-          .sort((evtA, evtB) => new Date(evtA.startDateTime).getTime() - new Date(evtB.startDateTime).getTime())
+          .filter((event) => isAfter(new Date(event.endDateTime), startDate))
+          .sort(
+            (evtA, evtB) =>
+              new Date(evtA.startDateTime).getTime() - new Date(evtB.startDateTime).getTime(),
+          )
           .slice(0, this.config.numberOfEventsLimit);
-      })
+      }),
     );
   }
 
@@ -85,14 +85,14 @@ export class CalendarService {
     const url = `${this.multiTenantService.getApiEndpoint()}/mail-calendar`;
     return getAuthToken().pipe(
       take(1),
-      switchMap(authToken => this.http.post<MailCalendar>(url, { authToken }))
+      switchMap((authToken) => this.http.post<MailCalendar>(url, { authToken })),
     );
   }
 
   private getAndStoreCalendarEvents(): Observable<void> {
     return this.getMailCalendar().pipe(
-      tap(mailCalendar => setEvents(mailCalendar.events)),
-      map(() => void 0)
+      tap((mailCalendar) => setEvents(mailCalendar.events)),
+      map(() => void 0),
     );
   }
 }

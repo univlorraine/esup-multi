@@ -47,14 +47,12 @@ import { PreferencesService } from './preferences.service';
   styleUrls: ['../../../../../src/theme/app-theme/styles/auth/preferences.component.scss'],
 })
 export class PreferencesComponent {
-
   saveCredentialsOnAuthentication$ = saveCredentialsOnAuthentication$;
 
-  constructor(private preferencesService: PreferencesService) {
-  }
+  constructor(private preferencesService: PreferencesService) {}
 
   onSaveCredentialsOnAuthenticationChange(event) {
-      const saveCredentials = event.detail.checked;
-      this.preferencesService.saveCredentialsOnAuthenticationChange(saveCredentials);
+    const saveCredentials = event.detail.checked;
+    this.preferencesService.saveCredentialsOnAuthenticationChange(saveCredentials);
   }
 }

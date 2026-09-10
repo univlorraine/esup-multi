@@ -42,24 +42,20 @@ import { TranslateService } from '@ngx-translate/core';
 import { format, parseISO } from 'date-fns';
 import * as locale from 'date-fns/locale';
 
-
 @Pipe({
-    name: 'completeLocalDate',
-    pure: false
+  name: 'completeLocalDate',
+  pure: false,
 })
 export class CompleteLocalDatePipe implements PipeTransform {
+  constructor(private translateService: TranslateService) {}
 
-    constructor(private translateService: TranslateService) { }
+  transform(isoDate: string): string {
+    const lang = this.translateService.getCurrentLang() || this.translateService.getFallbackLang();
 
-    transform(isoDate: string): string {
-        const lang = this.translateService.getCurrentLang() || this.translateService.getFallbackLang();
+    let transformedDate = format(parseISO(isoDate), 'PPPP', { locale: locale[lang] });
 
-        let transformedDate = format(parseISO(isoDate), 'PPPP',
-            { locale: locale[lang] }
-        );
+    transformedDate = transformedDate.charAt(0).toUpperCase() + transformedDate.slice(1);
 
-        transformedDate = transformedDate.charAt(0).toUpperCase() + transformedDate.slice(1);
-
-        return transformedDate;
-    }
+    return transformedDate;
+  }
 }

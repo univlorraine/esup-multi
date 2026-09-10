@@ -38,41 +38,34 @@
  */
 
 import { CommonModule } from '@angular/common';
-import {APP_INITIALIZER, ErrorHandler, NgModule} from '@angular/core';
+import { APP_INITIALIZER, ErrorHandler, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
+import { TranslateModule } from '@ngx-translate/core';
+import { ProjectModuleService } from '../project-module/project-module.service';
 import { MultiTenantErrorHandler } from './multi-tenant-error-handler';
 import { MultiTenantRoutingModule } from './multi-tenant-routing.module';
 import { MultiTenantComponent } from './multi-tenant.component';
-import {TranslateModule} from '@ngx-translate/core';
-import {ProjectModuleService} from '../project-module/project-module.service';
 
-const initModule = (projectModuleService: ProjectModuleService) =>
-  () => projectModuleService.initProjectModule({
+const initModule = (projectModuleService: ProjectModuleService) => () =>
+  projectModuleService.initProjectModule({
     name: 'multi-tenant',
-    translation: true
+    translation: true,
   });
 @NgModule({
-  declarations: [
-    MultiTenantComponent
-  ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    MultiTenantRoutingModule,
-    TranslateModule
-  ],
-  providers: [{
+  declarations: [MultiTenantComponent],
+  imports: [CommonModule, FormsModule, IonicModule, MultiTenantRoutingModule, TranslateModule],
+  providers: [
+    {
       provide: APP_INITIALIZER,
       useFactory: initModule,
-      deps:[ProjectModuleService],
-      multi: true
+      deps: [ProjectModuleService],
+      multi: true,
     },
     {
       provide: ErrorHandler,
-      useClass: MultiTenantErrorHandler
-    }
-  ]
+      useClass: MultiTenantErrorHandler,
+    },
+  ],
 })
-export class MultiTenantModule { }
+export class MultiTenantModule {}

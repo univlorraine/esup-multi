@@ -38,22 +38,24 @@
  */
 
 import { Injectable } from '@angular/core';
-import { createEffect, ofType} from '@ngneat/effects';
-import { authenticate, cleanupPrivateData, NotificationsService } from '@multi/shared';
+import { createEffect, ofType } from '@ngneat/effects';
 import { concatMap, filter, tap } from 'rxjs/operators';
+import { authenticate, cleanupPrivateData, NotificationsService } from '@multi/shared';
 
 @Injectable({ providedIn: 'root' })
 export class NotificationsEffects {
-    sendFCMToken$ = createEffect(actions => actions.pipe(
-        ofType(authenticate),
-        tap(() => this.notificationsService.registerNotificationsAndSaveFCMToken()),
-    ));
-    cleanupPrivateData$ = createEffect(actions => actions.pipe(
-        ofType(cleanupPrivateData),
-        filter((payload) => payload.authToken != null),
-        concatMap((payload) => this.notificationsService.unregisterFCMToken(payload.authToken))
-    ));
-    constructor(
-        private notificationsService: NotificationsService,
-    ) {}
+  sendFCMToken$ = createEffect((actions) =>
+    actions.pipe(
+      ofType(authenticate),
+      tap(() => this.notificationsService.registerNotificationsAndSaveFCMToken()),
+    ),
+  );
+  cleanupPrivateData$ = createEffect((actions) =>
+    actions.pipe(
+      ofType(cleanupPrivateData),
+      filter((payload) => payload.authToken != null),
+      concatMap((payload) => this.notificationsService.unregisterFCMToken(payload.authToken)),
+    ),
+  );
+  constructor(private notificationsService: NotificationsService) {}
 }

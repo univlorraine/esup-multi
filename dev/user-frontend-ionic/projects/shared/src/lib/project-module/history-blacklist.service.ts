@@ -40,17 +40,16 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root',
 })
 export class HistoryBlacklistService {
+  private historyBlacklist: string[] = [];
 
-    private historyBlacklist: string[] = [];
+  public addHistoryBlacklist(historyBlacklist: string[]) {
+    this.historyBlacklist.push(...historyBlacklist);
+  }
 
-    public addHistoryBlacklist(historyBlacklist: string[]) {
-        this.historyBlacklist.push(...historyBlacklist);
-    }
-
-    public getHistoryBlacklist() {
-        return this.historyBlacklist;
-    }
+  public getHistoryBlacklist() {
+    return this.historyBlacklist;
+  }
 }

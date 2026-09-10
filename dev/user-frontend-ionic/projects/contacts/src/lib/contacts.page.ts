@@ -42,7 +42,7 @@ import { Capacitor } from '@capacitor/core';
 import { ActionSheetController, AlertController, ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { finalize, take } from 'rxjs/operators';
-import { ContactsModuleConfig, CONTACTS_CONFIG } from './contacts.config';
+import { CONTACTS_CONFIG, ContactsModuleConfig } from './contacts.config';
 import { Contact, ContactsBody, ContactsService } from './contacts.service';
 
 @Component({
@@ -50,9 +50,7 @@ import { Contact, ContactsBody, ContactsService } from './contacts.service';
   templateUrl: './contacts.page.html',
   styleUrls: ['../../../../src/theme/app-theme/styles/contacts/contacts.page.scss'],
 })
-
 export class ContactsComponent {
-
   @ViewChild('searchBlock') viewBlock: ElementRef;
   public contacts: Contact[] = [];
   public loading = false;
@@ -92,18 +90,27 @@ export class ContactsComponent {
       value: this.searchBarText,
     };
 
-    this.contactsService.getContacts(searchBody)
-    .pipe(take(1), finalize(() => this.loading = false))
-    .subscribe(contacts => {
-      this.contacts = contacts.map(contact => ({
-        ...contact,
-        phoneNumbers: contact.phoneNumbers?.filter(phoneNumber => phoneNumber && phoneNumber.trim() !== ''),
-        mobileNumbers: contact.mobileNumbers?.filter(mobileNumber => mobileNumber && mobileNumber.trim() !== ''),
-        mailAddresses: contact.mailAddresses?.filter(mailAddresse => mailAddresse && mailAddresse.trim() !== '')
-      }));
-      this.searchButtonPressed = true;
-    });
-
+    this.contactsService
+      .getContacts(searchBody)
+      .pipe(
+        take(1),
+        finalize(() => (this.loading = false)),
+      )
+      .subscribe((contacts) => {
+        this.contacts = contacts.map((contact) => ({
+          ...contact,
+          phoneNumbers: contact.phoneNumbers?.filter(
+            (phoneNumber) => phoneNumber && phoneNumber.trim() !== '',
+          ),
+          mobileNumbers: contact.mobileNumbers?.filter(
+            (mobileNumber) => mobileNumber && mobileNumber.trim() !== '',
+          ),
+          mailAddresses: contact.mailAddresses?.filter(
+            (mailAddresse) => mailAddresse && mailAddresse.trim() !== '',
+          ),
+        }));
+        this.searchButtonPressed = true;
+      });
   }
 
   async createContact(user: Contact) {
@@ -118,27 +125,27 @@ export class ContactsComponent {
       return;
     }
     if (await this.contactsService.contactAlreadyExists(user)) {
-    const alreadyExist = await this.toastController.create({
-      message: this.translateService.instant('CONTACTS.ALERT.ERROR.EXIST'),
-      duration: 1500,
-      position: 'middle',
-      color: 'warning'
-    });
-    await alreadyExist.present();
-    return;
+      const alreadyExist = await this.toastController.create({
+        message: this.translateService.instant('CONTACTS.ALERT.ERROR.EXIST'),
+        duration: 1500,
+        position: 'middle',
+        color: 'warning',
+      });
+      await alreadyExist.present();
+      return;
     }
     await this.contactsService.createContact(user);
     const toast = await this.toastController.create({
       message: this.translateService.instant('CONTACTS.ALERT.SUCCESS.MESSAGE'),
       duration: 1500,
       position: 'middle',
-      color: 'success'
+      color: 'success',
     });
     await toast.present();
   }
 
   selectedCategory(item) {
-   this.filterChecked = item.detail.value;
+    this.filterChecked = item.detail.value;
   }
 
   handleScroll(event: Event) {

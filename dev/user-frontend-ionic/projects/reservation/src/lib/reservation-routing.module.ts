@@ -39,18 +39,18 @@
 
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { QRScanPage } from './scan/scan.page';
 import { ReservationPage } from './reservation.page';
+import { QRScanPage } from './scan/scan.page';
 
 const routes: Routes = [
   {
     path: 'reservation',
-    component: ReservationPage
+    component: ReservationPage,
   },
   {
     path: 'reservation/scan',
-    component: QRScanPage
-  }
+    component: QRScanPage,
+  },
 ];
 
 @NgModule({

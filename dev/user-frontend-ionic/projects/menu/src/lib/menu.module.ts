@@ -46,17 +46,19 @@ import { ProjectModuleService, SharedComponentsModule } from '@multi/shared';
 import { BurgerMenuPage } from './burger-menu/burger-menu.page';
 import { MenuRoutingModule } from './menu-routing.module';
 
-const initModule = (projectModuleService: ProjectModuleService) =>
-  () => projectModuleService.initProjectModule({
+const initModule = (projectModuleService: ProjectModuleService) => () =>
+  projectModuleService.initProjectModule({
     name: 'menu',
     translation: true,
-    menuItems: [{
-      title: 'MENU.MENU',
-      icon: 'menu',
-      position: 999,
-      routerLink: MenuModule.routerLink,
-      type: 'tabs:end',
-    }]
+    menuItems: [
+      {
+        title: 'MENU.MENU',
+        icon: 'menu',
+        position: 999,
+        routerLink: MenuModule.routerLink,
+        type: 'tabs:end',
+      },
+    ],
   });
 
 @NgModule({
@@ -67,14 +69,16 @@ const initModule = (projectModuleService: ProjectModuleService) =>
     IonicModule,
     MenuRoutingModule,
     TranslateModule,
-    SharedComponentsModule
+    SharedComponentsModule,
   ],
-  providers: [{
-    provide: APP_INITIALIZER,
-    useFactory: initModule,
-    deps:[ProjectModuleService],
-    multi: true
-  }],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initModule,
+      deps: [ProjectModuleService],
+      multi: true,
+    },
+  ],
 })
 export class MenuModule {
   static routerLink = '/menu';

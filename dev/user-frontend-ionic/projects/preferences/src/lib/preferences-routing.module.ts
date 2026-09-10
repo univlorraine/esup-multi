@@ -38,14 +38,14 @@
  */
 
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { PreferencesPage } from './preferences.page';
 
 const routes: Routes = [
   {
     path: 'preferences',
-    component: PreferencesPage
-  }
+    component: PreferencesPage,
+  },
 ];
 
 @NgModule({

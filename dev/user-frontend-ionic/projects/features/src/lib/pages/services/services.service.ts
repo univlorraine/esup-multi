@@ -40,14 +40,11 @@
 import { Injectable } from '@angular/core';
 import { TranslatedFeature } from '@multi/shared';
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ServicesService {
-
   sortFeaturesByUserOrder(features: TranslatedFeature[], userOrder: string[]): TranslatedFeature[] {
-
     return features
       .sort((a, b) => {
         const orderA = userOrder.indexOf(a.id);
@@ -79,11 +76,30 @@ export class ServicesService {
   }
 
   searchQueryFilter(features: TranslatedFeature[], searchQuery: string): TranslatedFeature[] {
-    const query = searchQuery.normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase().trim();
-    return features.filter(feature => (
-      feature.title.normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase().includes(query) ||
-      feature.content?.normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase().includes(query) ||
-      feature.searchKeywords?.some(keyword => keyword.normalize("NFKD").replace(/[\u0300-\u036f]/g, "").toLowerCase().includes(query))
-    ));
+    const query = searchQuery
+      .normalize('NFKD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLowerCase()
+      .trim();
+    return features.filter(
+      (feature) =>
+        feature.title
+          .normalize('NFKD')
+          .replace(/[\u0300-\u036f]/g, '')
+          .toLowerCase()
+          .includes(query) ||
+        feature.content
+          ?.normalize('NFKD')
+          .replace(/[\u0300-\u036f]/g, '')
+          .toLowerCase()
+          .includes(query) ||
+        feature.searchKeywords?.some((keyword) =>
+          keyword
+            .normalize('NFKD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .toLowerCase()
+            .includes(query),
+        ),
+    );
   }
 }

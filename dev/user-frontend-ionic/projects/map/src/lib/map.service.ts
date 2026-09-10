@@ -37,36 +37,35 @@
  * termes.
  */
 
-import { Injectable, SecurityContext } from '@angular/core';
-import { Observable } from 'rxjs';
-import { MapData, Marker } from './map.repository';
 import { HttpClient } from '@angular/common/http';
-import { MultiTenantService } from '@multi/shared';
-import { map } from 'rxjs/operators';
+import { Injectable, SecurityContext } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import DOMPurify from 'dompurify';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { MultiTenantService } from '@multi/shared';
+import { MapData, Marker } from './map.repository';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MapService {
-
   constructor(
     private multiTenantService: MultiTenantService,
     private http: HttpClient,
     private domSanitizer: DomSanitizer,
-  ) { }
+  ) {}
 
   getData(): Observable<MapData> {
     return this.http.get<MapData>(`${this.multiTenantService.getApiEndpoint()}/map`).pipe(
       // Map data is not handled by Angular's built-in sanitization as it is directly displayed by Leaflet, so we manually sanitize it here
       map((data: MapData): MapData => {
-        data.icons.forEach(icon => {
+        data.icons.forEach((icon) => {
           icon.svg = this.sanitizeSvg(icon.svg);
         });
         for (const markersCollectionsKey in data.markersCollections) {
           data.markersCollections[markersCollectionsKey].forEach((marker: Marker) => {
-            marker.translations.forEach(translation => {
+            marker.translations.forEach((translation) => {
               translation.name = this.sanitizeHtml(translation.name);
               translation.description = this.sanitizeHtml(translation.description);
             });
@@ -74,8 +73,8 @@ export class MapService {
         }
 
         return data;
-      })
-    )
+      }),
+    );
   }
 
   private sanitizeSvg(svg: string): string {
@@ -90,10 +89,10 @@ export class MapService {
     const tempDiv = document.createElement('div');
     tempDiv.innerHTML = sanitized || '';
     const anchorTags = tempDiv.getElementsByTagName('a');
-    for (let i = 0; i < anchorTags.length; i++) {
-      const href = anchorTags[i].getAttribute('href');
-      if (href && href.startsWith('http') || href.startsWith('https')) {
-        anchorTags[i].setAttribute('target', '_blank');
+    for (const anchorTag of Array.from(anchorTags)) {
+      const href = anchorTag.getAttribute('href');
+      if (href && (href.startsWith('http') || href.startsWith('https'))) {
+        anchorTag.setAttribute('target', '_blank');
       }
     }
     sanitized = tempDiv.innerHTML;

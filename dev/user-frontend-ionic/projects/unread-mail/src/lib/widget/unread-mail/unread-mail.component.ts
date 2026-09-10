@@ -38,36 +38,39 @@
  */
 
 import { AfterViewInit, ChangeDetectorRef, Component, Input } from '@angular/core';
-import { ThemeService } from '@multi/shared';
 import { Observable } from 'rxjs';
 import { finalize, take } from 'rxjs/operators';
+import { ThemeService } from '@multi/shared';
 import { MailCalendar, mails$ } from '../../unread-mail.repository';
 import { UnreadMailService } from '../../unread-mail.service';
 
 @Component({
   selector: 'app-unread-mail-widget',
   templateUrl: './unread-mail.component.html',
-  styleUrls: ['../../../../../../src/theme/app-theme/styles/unread-mail/unread-mail.component.scss'],
+  styleUrls: [
+    '../../../../../../src/theme/app-theme/styles/unread-mail/unread-mail.component.scss',
+  ],
 })
 export class UnreadMailComponent implements AfterViewInit {
-
   @Input() widgetColor: string;
 
   public isLoading = false;
   public mails$: Observable<MailCalendar> = mails$;
 
-  constructor(private unreadMailService: UnreadMailService,
+  constructor(
+    private unreadMailService: UnreadMailService,
     private themeService: ThemeService,
-    private changeDetectorRef: ChangeDetectorRef) {
-  }
+    private changeDetectorRef: ChangeDetectorRef,
+  ) {}
 
-   widgetViewDidEnter(): void {
+  widgetViewDidEnter(): void {
     this.isLoading = true;
 
-    this.unreadMailService.loadUnreadMailIfNetworkAvailable()
+    this.unreadMailService
+      .loadUnreadMailIfNetworkAvailable()
       .pipe(
         take(1),
-        finalize(() => this.isLoading = false)
+        finalize(() => (this.isLoading = false)),
       )
       .subscribe();
   }
@@ -77,7 +80,8 @@ export class UnreadMailComponent implements AfterViewInit {
   }
 
   fontColor() {
-    return this.themeService.isBackgroundFromCmsDarkOrIsDarkTheme(this.widgetColor) ?
-      'light-font-color' : 'dark-font-color';
+    return this.themeService.isBackgroundFromCmsDarkOrIsDarkTheme(this.widgetColor)
+      ? 'light-font-color'
+      : 'dark-font-color';
   }
 }

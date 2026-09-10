@@ -37,22 +37,19 @@
  * termes.
  */
 
-import { Injectable } from '@angular/core';
-import { Type } from '@angular/core';
+import { Injectable, Type } from '@angular/core';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root',
 })
 export class PreferencesService {
+  private preferencesComponents: Type<any>[] = [];
 
-    private preferencesComponents: Type<any>[] = [];
+  public addPreferencesComponent(preferencesComponent: Type<any>) {
+    this.preferencesComponents.push(preferencesComponent);
+  }
 
-    public addPreferencesComponent(preferencesComponent: Type<any>) {
-        this.preferencesComponents.push(preferencesComponent);
-    }
-
-    public getPreferencesComponents() {
-        return this.preferencesComponents;
-    }
-
+  public getPreferencesComponents() {
+    return this.preferencesComponents;
+  }
 }

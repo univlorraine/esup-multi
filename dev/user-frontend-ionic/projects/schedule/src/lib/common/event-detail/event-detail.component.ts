@@ -39,9 +39,9 @@
 
 import { Component, Input } from '@angular/core';
 import { take } from 'rxjs/operators';
-import {Course, Event, HiddenCourse} from '../../schedule.repository';
-import { ScheduleService } from '../../schedule.service';
 import { NavigationService } from '@multi/shared';
+import { Course, Event, HiddenCourse } from '../../schedule.repository';
+import { ScheduleService } from '../../schedule.service';
 
 @Component({
   selector: 'app-event-detail',
@@ -59,25 +59,28 @@ export class EventDetailComponent {
   constructor(
     private scheduleService: ScheduleService,
     private navigationService: NavigationService,
-  ) { }
+  ) {}
 
   hideAllSimilarCourse(course: Course) {
     this.disableHideCourseButton = true;
 
-    this.scheduleService.getStoreManager().hiddenCourseList$.pipe(
-      take(1)
-    ).subscribe((hiddenCourseList) => {
-      const hiddenCourseObj: HiddenCourse = {
-        id: course.id,
-        title: course.label
-      };
+    this.scheduleService
+      .getStoreManager()
+      .hiddenCourseList$.pipe(take(1))
+      .subscribe((hiddenCourseList) => {
+        const hiddenCourseObj: HiddenCourse = {
+          id: course.id,
+          title: course.label,
+        };
 
-      if (!hiddenCourseList.some(hiddenCourse => hiddenCourse.id === hiddenCourseObj.id)) {
-        this.scheduleService.getStoreManager().setHiddenCourseList([...hiddenCourseList, hiddenCourseObj]);
-      }
+        if (!hiddenCourseList.some((hiddenCourse) => hiddenCourse.id === hiddenCourseObj.id)) {
+          this.scheduleService
+            .getStoreManager()
+            .setHiddenCourseList([...hiddenCourseList, hiddenCourseObj]);
+        }
 
-      this.scheduleService.emitHideCourseEvt();
-    });
+        this.scheduleService.emitHideCourseEvt();
+      });
   }
 
   openCourseURL(url: string) {

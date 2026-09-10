@@ -55,11 +55,7 @@ import { LayoutPage } from './layout.page';
     RouterModule,
     SharedComponentsModule,
   ],
-  declarations: [
-    LayoutPage
-  ],
-  exports: [
-    LayoutPage
-  ],
+  declarations: [LayoutPage],
+  exports: [LayoutPage],
 })
 export class PageLayoutsModule {}

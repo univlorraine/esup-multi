@@ -46,33 +46,30 @@ import { RestaurantMenusPage } from './restaurant-menus-page/restaurant-menus.pa
 import { RestaurantsRoutingModule } from './restaurants-routing.module';
 import { RestaurantsPage } from './restaurants.page';
 
-const initModule = (projectModuleService: ProjectModuleService) =>
-  () => projectModuleService.initProjectModule({
+const initModule = (projectModuleService: ProjectModuleService) => () =>
+  projectModuleService.initProjectModule({
     name: 'restaurants',
     translation: true,
   });
 
 @NgModule({
-  declarations: [
-    RestaurantsPage,
-    RestaurantMenusPage
+  declarations: [RestaurantsPage, RestaurantMenusPage],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initModule,
+      deps: [ProjectModuleService],
+      multi: true,
+    },
   ],
-  providers: [{
-    provide: APP_INITIALIZER,
-    useFactory: initModule,
-    deps: [
-      ProjectModuleService,
-    ],
-    multi: true
-  }],
   imports: [
     CommonModule,
     IonicModule,
     RestaurantsRoutingModule,
     TranslateModule,
     SharedComponentsModule,
-    SharedPipeModule
-  ]
+    SharedPipeModule,
+  ],
 })
 export class RestaurantsModule {
   static routerLink = '/restaurants';

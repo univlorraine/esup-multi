@@ -37,16 +37,23 @@
  * termes.
  */
 
-import { AfterViewChecked, Component, ElementRef, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import {
+  AfterViewChecked,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NetworkService } from '@multi/shared';
+import { IonRouterOutlet } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { finalize, map, take } from 'rxjs/operators';
 import Swiper from 'swiper/bundle';
+import { NetworkService } from '@multi/shared';
 import { getRestaurantById, Restaurant } from '../restaurants.repository';
 import { getMenusByRestaurantId, Menu } from './menus.repository';
 import { RestaurantMenusService } from './restaurant-menus.service';
-import { IonRouterOutlet } from '@ionic/angular';
 
 @Component({
   selector: 'app-restaurant-menus',
@@ -63,27 +70,24 @@ export class RestaurantMenusPage implements OnInit, OnDestroy, AfterViewChecked 
   protected swiper: Swiper;
   private restaurantId: number;
 
-
   constructor(
     private activatedRoute: ActivatedRoute,
     private restaurantMenusService: RestaurantMenusService,
     private networkService: NetworkService,
     private routerOutlet: IonRouterOutlet,
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.restaurantId = Number.parseInt(this.activatedRoute.snapshot.paramMap.get('id'), 10);
     this.restaurant$ = getRestaurantById(this.restaurantId);
     this.menus$ = getMenusByRestaurantId(this.restaurantId);
-    this.restaurantMenusIsEmpty$ = this.menus$.pipe(
-      map(menus => menus?.length === 0)
-    );
+    this.restaurantMenusIsEmpty$ = this.menus$.pipe(map((menus) => menus?.length === 0));
 
     this.loadMenusIfNetworkAvailable();
     this.routerOutlet.swipeGesture = false;
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.routerOutlet.swipeGesture = true;
   }
 
@@ -99,12 +103,15 @@ export class RestaurantMenusPage implements OnInit, OnDestroy, AfterViewChecked 
 
     // @TODO à décommenter une fois l'api de l'ul en place
     // return this.restaurantsService.loadAndStoreRestaurantMenus(restaurantId, currentDate)...
-    this.restaurantMenusService.loadAndStoreMenus(this.restaurantId).pipe(
-      take(1),
-      finalize(() => {
-        this.isLoading = false;
-      })
-    ).subscribe();
+    this.restaurantMenusService
+      .loadAndStoreMenus(this.restaurantId)
+      .pipe(
+        take(1),
+        finalize(() => {
+          this.isLoading = false;
+        }),
+      )
+      .subscribe();
   }
 
   ngAfterViewChecked() {
@@ -123,7 +130,8 @@ export class RestaurantMenusPage implements OnInit, OnDestroy, AfterViewChecked 
     const nextButton = swiperContainer.querySelector('.swiper-button-next');
     const prevButton = swiperContainer.querySelector('.swiper-button-prev');
 
-    if (nextButton && swiperContainer.querySelectorAll('.swiper-slide').length <= 1) nextButton.classList.add('hidden');
+    if (nextButton && swiperContainer.querySelectorAll('.swiper-slide').length <= 1)
+      nextButton.classList.add('hidden');
     if (prevButton) prevButton.classList.add('hidden');
 
     this.swiper = new Swiper(swiperContainer, {
@@ -134,8 +142,8 @@ export class RestaurantMenusPage implements OnInit, OnDestroy, AfterViewChecked 
       },
       on: {
         init: () => this.updateNavigationButtons(),
-        slideChange: () => this.updateNavigationButtons()
-      }
+        slideChange: () => this.updateNavigationButtons(),
+      },
     });
   }
 

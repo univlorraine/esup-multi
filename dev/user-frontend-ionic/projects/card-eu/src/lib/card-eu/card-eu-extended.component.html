@@ -38,47 +38,61 @@
   -->
 
 <div class="card-eu-wrapper">
-    <svg
-        xmlns="http://www.w3.org/2000/svg"
-        height="100%"
-        width="100%"
-        viewBox="0 0 850 540"
-        preserveAspectRatio="xMidYMin meet"
-        class="svg-card-eu"
-    >
-        <rect class="card-background" width="850" height="540" rx="15" fill="transparent" />
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    height="100%"
+    width="100%"
+    viewBox="0 0 850 540"
+    preserveAspectRatio="xMidYMin meet"
+    class="svg-card-eu"
+  >
+    <rect class="card-background" width="850" height="540" rx="15" fill="transparent" />
 
-        <!-- Student photo -->
-        <image height="285" width="180" x="20" y="20" [attr.href]="userCardEu.photo" class="card-user-photo" />
+    <!-- Student photo -->
+    <image
+      height="285"
+      width="180"
+      x="20"
+      y="20"
+      [attr.href]="userCardEu.photo"
+      class="card-user-photo"
+    />
 
-        <!-- Logo établissement -->
-        <image class="card-logo" height="150" width="150" x="230" y="20" href="assets/cards/card-eu/university-logo.svg" />
+    <!-- Logo établissement -->
+    <image
+      class="card-logo"
+      height="150"
+      width="150"
+      x="230"
+      y="20"
+      href="assets/cards/card-eu/university-logo.svg"
+    />
 
-        <!-- Title -->
-        <text x="230" y="200" class="card-title">
-            {{'CARD-EU.CARD_TITLE' | translate}}
-        </text>
+    <!-- Title -->
+    <text x="230" y="200" class="card-title">
+      {{ 'CARD-EU.CARD_TITLE' | translate }}
+    </text>
 
-        <!-- Subtitle -->
-        <text x="230" y="250" class="card-subtitle">
-            {{'CARD-EU.CARD_SUBTITLE' | translate}}
-        </text>
+    <!-- Subtitle -->
+    <text x="230" y="250" class="card-subtitle">
+      {{ 'CARD-EU.CARD_SUBTITLE' | translate }}
+    </text>
 
-        <!-- Student number -->
-        <text x="30" y="380" class="card-user-number">
-            {{userCardEu.euid}}
-        </text>
+    <!-- Student number -->
+    <text x="30" y="380" class="card-user-number">
+      {{ userCardEu.euid }}
+    </text>
 
-        <!-- Lastname and Firstname -->
-        <text x="30" y="460" class="card-user-fullname">
-            {{userCardEu.lastname}} {{userCardEu.firstname}}
-        </text>
+    <!-- Lastname and Firstname -->
+    <text x="30" y="460" class="card-user-fullname">
+      {{ userCardEu.lastname }} {{ userCardEu.firstname }}
+    </text>
 
-        <!-- QR Code -->
-        <foreignObject x="565" y="180" width="285" height="345" xmlns="http://www.w3.org/1999/xhtml">
-            <xhtml:div xmlns:xhtml="http://www.w3.org/1999/xhtml">
-                <xhtml:div class="eu-qrcode" [innerHTML]="userCardEu.qrCode.value | sanitizeSvg"></xhtml:div>
-            </xhtml:div>
-        </foreignObject>
-    </svg>
+    <!-- QR Code -->
+    <foreignObject x="565" y="180" width="285" height="345" xmlns="http://www.w3.org/1999/xhtml">
+      <xhtml:div xmlns:xhtml="http://www.w3.org/1999/xhtml">
+        <xhtml:div class="eu-qrcode" [innerHTML]="userCardEu.qrCode.value | sanitizeSvg" />
+      </xhtml:div>
+    </foreignObject>
+  </svg>
 </div>

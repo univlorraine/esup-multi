@@ -39,16 +39,15 @@
 
 import { Component } from '@angular/core';
 import { BarcodeScanner, BarcodeValueType } from '@capacitor-mlkit/barcode-scanning';
-import { ReservationService } from '../reservation.service';
-import { NavigationService } from '@multi/shared';
 import { PluginListenerHandle } from '@capacitor/core';
+import { NavigationService } from '@multi/shared';
+import { ReservationService } from '../reservation.service';
 
 @Component({
   selector: 'app-scan',
   templateUrl: './scan.page.html',
   styleUrls: ['../../../../../src/theme/app-theme/styles/reservation/scan.page.scss'],
 })
-
 export class QRScanPage {
   private listener: PluginListenerHandle;
   private url: string = null;
@@ -56,7 +55,7 @@ export class QRScanPage {
   constructor(
     private navigationService: NavigationService,
     private reservationService: ReservationService,
-  ) { }
+  ) {}
 
   ionViewWillLeave() {
     this.listener.remove();
@@ -78,16 +77,15 @@ export class QRScanPage {
       return;
     }
 
-    this.listener = await BarcodeScanner.addListener(
-      'barcodesScanned',
-      async result => {
-        const barcodes = result.barcodes.filter(barcode => barcode.valueType === BarcodeValueType.Url);
-        if (barcodes.length > 0) {
-          this.url = barcodes[0].displayValue;
-          this.navigationService.navigateBack();
-        }
-      },
-    );
+    this.listener = await BarcodeScanner.addListener('barcodesScanned', async (result) => {
+      const barcodes = result.barcodes.filter(
+        (barcode) => barcode.valueType === BarcodeValueType.Url,
+      );
+      if (barcodes.length > 0) {
+        this.url = barcodes[0].displayValue;
+        this.navigationService.navigateBack();
+      }
+    });
 
     await BarcodeScanner.startScan();
   }

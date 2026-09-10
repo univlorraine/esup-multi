@@ -48,10 +48,10 @@ import { Injectable } from '@angular/core';
 import { Actions } from '@ngneat/effects-ng';
 import { Observable, Subject, throwError } from 'rxjs';
 import { catchError, concatMap, finalize, take } from 'rxjs/operators';
+import { NavigationService } from '../navigation/navigation.service';
 import { cleanupPrivateData } from '../shared.actions';
 import { getAuthToken } from './auth.repository';
 import { KeepAuthService } from './keep-auth.service';
-import { NavigationService } from '../navigation/navigation.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -61,13 +61,10 @@ export class AuthInterceptor implements HttpInterceptor {
   constructor(
     private keepAuthService: KeepAuthService,
     private actions: Actions,
-    private navigationService: NavigationService
+    private navigationService: NavigationService,
   ) {}
 
-  intercept(
-    request: HttpRequest<any>,
-    next: HttpHandler
-  ): Observable<HttpEvent<any>> {
+  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const isLoginRequest = request.url.includes('/auth');
 
     return next.handle(request).pipe(
@@ -79,9 +76,7 @@ export class AuthInterceptor implements HttpInterceptor {
         if (isLoginRequest) {
           getAuthToken()
             .pipe(take(1))
-            .subscribe((token) =>
-              this.actions.dispatch(cleanupPrivateData({ authToken: token }))
-            );
+            .subscribe((token) => this.actions.dispatch(cleanupPrivateData({ authToken: token })));
           return throwError(err);
         }
 
@@ -117,7 +112,7 @@ export class AuthInterceptor implements HttpInterceptor {
               return next.handle(request);
             }),
             catchError((error) => throwError(error)),
-            finalize(() => (this.isRefreshingToken = false))
+            finalize(() => (this.isRefreshingToken = false)),
           );
         } else {
           return this.refreshTokenTrigger$.pipe(
@@ -136,10 +131,10 @@ export class AuthInterceptor implements HttpInterceptor {
               });
 
               return next.handle(clonedRequest);
-            })
+            }),
           );
         }
-      })
+      }),
     );
   }
 }

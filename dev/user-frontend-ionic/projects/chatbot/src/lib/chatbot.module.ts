@@ -44,19 +44,17 @@ import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { ProjectModuleService, SharedComponentsModule } from '@multi/shared';
 import { ChatbotRoutingModule } from './chatbot-routing.module';
-import { ChatbotPage } from './chatbot.page';
 import { CHATBOT_CONFIG, ChatbotModuleConfig } from './chatbot.config';
+import { ChatbotPage } from './chatbot.page';
 
-const initModule = (projectModuleService: ProjectModuleService) =>
-  () => projectModuleService.initProjectModule({
+const initModule = (projectModuleService: ProjectModuleService) => () =>
+  projectModuleService.initProjectModule({
     name: 'chatbot',
-    translation: true
+    translation: true,
   });
 
 @NgModule({
-  declarations: [
-    ChatbotPage
-  ],
+  declarations: [ChatbotPage],
   imports: [
     CommonModule,
     IonicModule,
@@ -64,14 +62,16 @@ const initModule = (projectModuleService: ProjectModuleService) =>
     TranslateModule,
     ReactiveFormsModule,
     ChatbotRoutingModule,
-    SharedComponentsModule
+    SharedComponentsModule,
   ],
-  providers: [{
-    provide: APP_INITIALIZER,
-    useFactory: initModule,
-    deps:[ProjectModuleService],
-    multi: true
-  }],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initModule,
+      deps: [ProjectModuleService],
+      multi: true,
+    },
+  ],
 })
 export class ChatbotModule {
   static path = '/chatbot';
@@ -79,9 +79,7 @@ export class ChatbotModule {
   static forRoot(config: ChatbotModuleConfig): ModuleWithProviders<ChatbotModule> {
     return {
       ngModule: ChatbotModule,
-      providers: [
-        { provide: CHATBOT_CONFIG, useValue: config }
-      ]
+      providers: [{ provide: CHATBOT_CONFIG, useValue: config }],
     };
   }
 }

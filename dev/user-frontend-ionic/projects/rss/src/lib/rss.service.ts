@@ -39,18 +39,17 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { MultiTenantService } from '@multi/shared';
 import { Observable } from 'rxjs';
+import { MultiTenantService } from '@multi/shared';
 import { FeedItem } from './rss.repository';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RssService {
-
   constructor(
     private multiTenantService: MultiTenantService,
-    private http: HttpClient
+    private http: HttpClient,
   ) {}
 
   public getRssFeed(): Observable<FeedItem[]> {

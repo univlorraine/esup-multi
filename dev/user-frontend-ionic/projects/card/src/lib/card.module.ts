@@ -38,21 +38,21 @@
  */
 
 import { CommonModule } from '@angular/common';
-import {APP_INITIALIZER, ModuleWithProviders, NgModule} from '@angular/core';
+import { APP_INITIALIZER, ModuleWithProviders, NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { EffectsNgModule } from '@ngneat/effects-ng';
 import { TranslateModule } from '@ngx-translate/core';
-import { ProjectModuleService, SharedComponentsModule, SharedPipeModule } from '@multi/shared';
 import { QRCodeModule } from 'angularx-qrcode';
+import { ProjectModuleService, SharedComponentsModule, SharedPipeModule } from '@multi/shared';
 import { CardRoutingModule } from './card-routing.module';
+import { CARD_CONFIG, CardModuleConfig } from './card.config';
 import { CardEffects } from './card.effects';
 import { CardPage } from './card.page';
-import { CARD_CONFIG, CardModuleConfig } from './card.config';
-import { StudentCardComponent } from './card/student-card.component';
 import { StaffCardComponent } from './card/staff-card.component';
+import { StudentCardComponent } from './card/student-card.component';
 
-const initModule = (projectModuleService: ProjectModuleService) =>
-  () => projectModuleService.initProjectModule({
+const initModule = (projectModuleService: ProjectModuleService) => () =>
+  projectModuleService.initProjectModule({
     name: 'card',
     translation: true,
   });
@@ -68,29 +68,23 @@ const initModule = (projectModuleService: ProjectModuleService) =>
     SharedComponentsModule,
     EffectsNgModule.forFeature([CardEffects]),
   ],
-  declarations: [
-    CardPage,
-    StudentCardComponent,
-    StaffCardComponent
+  declarations: [CardPage, StudentCardComponent, StaffCardComponent],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initModule,
+      deps: [ProjectModuleService],
+      multi: true,
+    },
   ],
-  providers: [{
-    provide: APP_INITIALIZER,
-    useFactory: initModule,
-    deps:[ProjectModuleService],
-    multi: true
-  }],
 })
-
 export class CardPageModule {
   static routerLink = '/card';
 
   static forRoot(config: CardModuleConfig): ModuleWithProviders<CardPageModule> {
     return {
       ngModule: CardPageModule,
-      providers: [
-        { provide: CARD_CONFIG, useValue: config }
-      ]
+      providers: [{ provide: CARD_CONFIG, useValue: config }],
     };
   }
 }
-

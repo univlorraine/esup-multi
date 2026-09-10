@@ -44,7 +44,9 @@ import { StatisticsService, ThemeService, TranslatedInternalFeature } from '@mul
 @Component({
   selector: 'app-widget-internal-feature',
   templateUrl: './widget-internal-feature.component.html',
-  styleUrls: ['../../../../../../../../src/theme/app-theme/styles/features/widget-internal-feature.component.scss'],
+  styleUrls: [
+    '../../../../../../../../src/theme/app-theme/styles/features/widget-internal-feature.component.scss',
+  ],
 })
 export class WidgetInternalFeatureComponent {
   @Input() feature: TranslatedInternalFeature;
@@ -54,8 +56,8 @@ export class WidgetInternalFeatureComponent {
     private router: Router,
     private statisticsService: StatisticsService,
     private themeService: ThemeService,
-    private changeDetector: ChangeDetectorRef
-  ) { }
+    private changeDetector: ChangeDetectorRef,
+  ) {}
 
   public onClick() {
     this.statisticsService.onFunctionalityOpened(this.feature.statisticName);
@@ -63,8 +65,9 @@ export class WidgetInternalFeatureComponent {
   }
 
   fontColor(backgroundColor) {
-    return this.themeService.isBackgroundFromCmsDarkOrIsDarkTheme(backgroundColor) ?
-      'light-font-color' : 'dark-font-color';
+    return this.themeService.isBackgroundFromCmsDarkOrIsDarkTheme(backgroundColor)
+      ? 'light-font-color'
+      : 'dark-font-color';
   }
 
   onWidgetIsEmpty(isEmpty: boolean) {
