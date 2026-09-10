@@ -83,6 +83,7 @@
         "dist/knowledge-base"
       ]
     },
+    "esModuleInterop": true,
     "downlevelIteration": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",
