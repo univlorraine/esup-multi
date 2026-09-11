@@ -37,10 +37,10 @@
  * termes.
  */
 
-import { Strategy } from 'passport-http-bearer';
-import { PassportStrategy } from '@nestjs/passport';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { PassportStrategy } from '@nestjs/passport';
+import { Strategy } from 'passport-http-bearer';
 
 @Injectable()
 export class AuthBearerStrategy extends PassportStrategy(
@@ -51,7 +51,7 @@ export class AuthBearerStrategy extends PassportStrategy(
     super();
   }
 
-  async validate(token: string): Promise<boolean> {
+  validate(token: string): boolean {
     const expectedBearerToken = this.configService.get<string>(
       'security.bearerTokenForceLogout',
     );

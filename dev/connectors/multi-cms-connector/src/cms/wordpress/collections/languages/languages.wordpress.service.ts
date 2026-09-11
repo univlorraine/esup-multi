@@ -37,12 +37,12 @@
  */
 
 import { Injectable } from '@nestjs/common';
-import { Languages } from '@common/models/languages.model';
-import { WordpressService } from '@wordpress/wordpress.service';
-import { LanguagesWordpress } from '@wordpress/collections/languages/languages.wordpress.model';
-import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
-import { LanguagesSchema } from '@common/validation/schemas/languages.schema';
-import { normalizeEmptyStringToNull } from '@common/utils/normalize';
+import { ValidateMapping } from '#common/decorators/validate-mapping.decorator.js';
+import { Languages } from '#common/models/languages.model.js';
+import { normalizeEmptyStringToNull } from '#common/utils/normalize.js';
+import { LanguagesSchema } from '#common/validation/schemas/languages.schema.js';
+import { LanguagesWordpress } from '#wordpress/collections/languages/languages.wordpress.model.js';
+import { WordpressService } from '#wordpress/wordpress.service.js';
 
 @Injectable()
 export class LanguagesWordpressService {
@@ -69,7 +69,7 @@ export class LanguagesWordpressService {
         }
       }
     `);
-    return data.languages.map(this.mapToMultiModel);
+    return data.languages.map(this.mapToMultiModel.bind(this));
   }
 
   // Non supporté dans Wordpress

@@ -37,14 +37,14 @@
  */
 
 import { Injectable, Logger } from '@nestjs/common';
-import { SocialNetworks } from '@common/models/social-networks.model';
-import { SocialNetworksDirectus } from './social-networks.directus.model';
-import { DirectusService } from '@directus/directus.service';
 import { OnEvent } from '@nestjs/event-emitter';
-import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
-import { SocialNetworksSchema } from '@common/validation/schemas/social-networks.schema';
-import { CacheService } from '@cache/cache.service';
-import { CacheCollection } from '@cache/cache.config';
+import { CacheCollection } from '#cache/cache.config.js';
+import { CacheService } from '#cache/cache.service.js';
+import { ValidateMapping } from '#common/decorators/validate-mapping.decorator.js';
+import { SocialNetworks } from '#common/models/social-networks.model.js';
+import { SocialNetworksSchema } from '#common/validation/schemas/social-networks.schema.js';
+import { DirectusService } from '#directus/directus.service.js';
+import { SocialNetworksDirectus } from './social-networks.directus.model.js';
 
 @Injectable()
 export class SocialNetworksDirectusService {
@@ -62,7 +62,7 @@ export class SocialNetworksDirectusService {
     } catch (error) {
       this.logger.error(
         'Failed to preload social-networks after cache clear:',
-        error.message,
+        error instanceof Error ? error.message : JSON.stringify(error),
       );
     }
   }
@@ -104,7 +104,7 @@ export class SocialNetworksDirectusService {
         }
       }
     `);
-    return data.social_networks.map(this.mapToMultiModel);
+    return data.social_networks.map(this.mapToMultiModel.bind(this));
   }
 
   async getSocialNetwork(id: number): Promise<SocialNetworks> {

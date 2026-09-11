@@ -37,20 +37,21 @@
  * termes.
  */
 
+import { HttpService } from '@nestjs/axios';
 import { Injectable, Logger } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { RpcException } from '@nestjs/microservices';
+import type { AxiosError } from 'axios';
 import { catchError, map, Observable } from 'rxjs';
-import { FeaturesPositionHelper } from './features-position.helper';
-import {
+import { CmsApi } from '../config/configuration.interface.js';
+import { FeaturesPositionHelper } from './features-position.helper.js';
+import type {
   AppElement,
   ContentQueryResponse,
   Feature,
   GraphQLResponse,
   Widget,
-} from './features.dto';
-import { CmsApi } from '../config/configuration.interface';
-import { ConfigService } from '@nestjs/config';
-import { HttpService } from '@nestjs/axios';
-import { RpcException } from '@nestjs/microservices';
+} from './features.dto.js';
 
 @Injectable()
 export class FeaturesService {
@@ -145,17 +146,23 @@ export class FeaturesService {
         requestConfig,
       )
       .pipe(
-        catchError((err: any) => {
+        catchError((err: AxiosError) => {
           const errorMessage = 'Unable to get features and widgets from CMS';
           this.logger.error(errorMessage, err);
           throw new RpcException(errorMessage);
         }),
         map((response) => {
           const features = (response.data.data.features || []).map(
-            (f) => ({ ...f, id: `feature:${f.id}` } as Feature),
+            (f: Feature) => ({
+              ...f,
+              id: `feature:${f.id}`,
+            }),
           );
           const widgets = (response.data.data.widgets || []).map(
-            (w) => ({ ...w, id: `widget:${w.id}` } as Widget),
+            (w: Widget) => ({
+              ...w,
+              id: `widget:${w.id}`,
+            }),
           );
 
           const allElements: AppElement[] = [...features, ...widgets];

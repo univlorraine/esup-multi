@@ -38,9 +38,9 @@
  */
 
 import { Component } from '@angular/core';
-import { ReservationService } from './reservation.service';
-import { Router} from '@angular/router';
+import { Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
+import { ReservationService } from './reservation.service';
 
 @Component({
   selector: 'app-reservation',
@@ -48,12 +48,11 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['../../../../src/theme/app-theme/styles/reservation/reservation.page.scss'],
 })
 export class ReservationPage {
-
   constructor(
     private navController: NavController,
     private router: Router,
     private reservationService: ReservationService,
-  ) { }
+  ) {}
 
   openReservationService() {
     this.reservationService.openReservationService();

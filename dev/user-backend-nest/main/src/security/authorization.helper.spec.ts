@@ -37,7 +37,10 @@
  * termes.
  */
 
-import { AuthorizationHelper, WithAuthorization } from './authorization.helper';
+import {
+  AuthorizationHelper,
+  WithAuthorization,
+} from './authorization.helper.js';
 
 interface Stuff extends WithAuthorization {
   name: string;

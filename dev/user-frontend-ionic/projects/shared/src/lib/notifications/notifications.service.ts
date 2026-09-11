@@ -39,22 +39,21 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { getAuthToken } from '../auth/auth.repository';
+import { Capacitor } from '@capacitor/core';
+import { Badge } from '@capawesome/capacitor-badge';
 import { combineLatest, first, firstValueFrom, Observable, of } from 'rxjs';
 import { filter, switchMap, take, tap } from 'rxjs/operators';
-import { Channel, Notification, NotificationsRepository } from './notifications.repository';
-import { Badge } from '@capawesome/capacitor-badge';
-import { MultiTenantService } from '../multi-tenant/multi-tenant.service';
+import { getAuthToken } from '../auth/auth.repository';
 import { FCMService } from '../fcm/fcm-global.service';
 import { FCMRepository } from '../fcm/fcm.repository';
+import { MultiTenantService } from '../multi-tenant/multi-tenant.service';
 import { NetworkService } from '../network/network.service';
-import { Capacitor } from '@capacitor/core';
+import { Channel, Notification, NotificationsRepository } from './notifications.repository';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class NotificationsService {
-
   constructor(
     @Inject('environment')
     private environment: any,
@@ -63,16 +62,19 @@ export class NotificationsService {
     private http: HttpClient,
     public notificationRepository: NotificationsRepository,
     private fcmRepository: FCMRepository,
-    private networkService: NetworkService
-  ) {
-  }
+    private networkService: NetworkService,
+  ) {}
 
-  public getNotifications(authToken: string, offset: number, length: number): Observable<Notification[]> {
+  public getNotifications(
+    authToken: string,
+    offset: number,
+    length: number,
+  ): Observable<Notification[]> {
     const url = `${this.multiTenantService.getApiEndpoint()}/notifications`;
     const data = {
       authToken,
       offset,
-      length
+      length,
     };
 
     return this.http.post<Notification[]>(url, data);
@@ -84,14 +86,12 @@ export class NotificationsService {
     return this.http.get<Channel[]>(url).pipe(
       tap((channels) => {
         this.notificationRepository.setChannels(channels);
-      }));
+      }),
+    );
   }
 
   public loadNotifications(offset: number, length: number): Observable<Notification[]> {
-    return combineLatest([
-      getAuthToken(),
-      this.networkService.getConnectionStatus()
-    ]).pipe(
+    return combineLatest([getAuthToken(), this.networkService.getConnectionStatus()]).pipe(
       filter(([authToken, status]) => authToken != null && status.connected),
       switchMap(([authToken]) => this.getNotifications(authToken, offset, length)),
       tap((notifications) => {
@@ -100,48 +100,50 @@ export class NotificationsService {
         } else {
           this.notificationRepository.addNotifications(notifications);
         }
-      })
+      }),
     );
   }
 
   public deleteNotification(id: string) {
     return getAuthToken().pipe(
       take(1),
-      filter(authToken => authToken != null),
-      switchMap(authToken => this.removeNotification(authToken, id)),
+      filter((authToken) => authToken != null),
+      switchMap((authToken) => this.removeNotification(authToken, id)),
     );
   }
 
   public loadAndStoreUnsubscribedChannels(): Observable<string[]> {
     return getAuthToken().pipe(
-      filter(authToken => authToken != null),
-      switchMap(authToken => {
+      filter((authToken) => authToken != null),
+      switchMap((authToken) => {
         const url = `${this.multiTenantService.getApiEndpoint()}/notifications/unsubscribed-channels`;
         const data = {
-          authToken
+          authToken,
         };
 
         return this.http.post<string[]>(url, data);
       }),
       tap((userChannels) => {
-          this.notificationRepository.setUnsubscribedChannels(userChannels);
-        }
-      ));
+        this.notificationRepository.setUnsubscribedChannels(userChannels);
+      }),
+    );
   }
 
-  public subscribeOrUnsubscribeUserToChannels(options: { channelCodes: string[] }): Observable<any> {
+  public subscribeOrUnsubscribeUserToChannels(options: {
+    channelCodes: string[];
+  }): Observable<any> {
     return getAuthToken().pipe(
-      filter(authToken => authToken != null),
-      switchMap(authToken => {
-          const url = `${this.multiTenantService.getApiEndpoint()}/notifications/channels`;
-          const data = {
-            authToken,
-            channelCodes: options.channelCodes,
-          };
+      filter((authToken) => authToken != null),
+      switchMap((authToken) => {
+        const url = `${this.multiTenantService.getApiEndpoint()}/notifications/channels`;
+        const data = {
+          authToken,
+          channelCodes: options.channelCodes,
+        };
 
-          return this.http.patch(url, data);
-        }
-      ));
+        return this.http.patch(url, data);
+      }),
+    );
   }
 
   public markUnreadNotificationsAsRead(notificationIds: string[]): Observable<void> {
@@ -150,16 +152,16 @@ export class NotificationsService {
 
     return getAuthToken().pipe(
       // On ne balance la requête au serveur que si la liste des notifications à marquer comme lues n'est pas vide
-      filter(authToken => authToken != null && notificationIds.length > 0),
-      switchMap(authToken => {
+      filter((authToken) => authToken != null && notificationIds.length > 0),
+      switchMap((authToken) => {
         const url = `${this.multiTenantService.getApiEndpoint()}/notifications/read`;
         const data = {
           authToken,
-          notificationIds
+          notificationIds,
         };
 
         return this.http.post<void>(url, data);
-      })
+      }),
     );
   }
 
@@ -170,7 +172,8 @@ export class NotificationsService {
     }
 
     const currentTenant = this.multiTenantService.getCurrentTenantOrThrowError();
-    if (!currentTenant) { // A priori pas besoin de check le current tenant car ça ne sera appelé qu'une fois connecté
+    if (!currentTenant) {
+      // A priori pas besoin de check le current tenant car ça ne sera appelé qu'une fois connecté
       return;
     }
 
@@ -181,18 +184,22 @@ export class NotificationsService {
     if (fcmToken && this.environment.useExternalNotificationSystem) {
       // On envoie le token au backend
       const authToken$ = getAuthToken().pipe(
-        filter(authToken => !!authToken),
-        switchMap(authToken => {
+        filter((authToken) => !!authToken),
+        switchMap((authToken) => {
           const url = `${this.multiTenantService.getApiEndpoint()}/notifications/register`;
           const data = {
             authToken,
             token: fcmToken,
-            platform: Capacitor.getPlatform() === 'ios' ? 'iOS' :
-              Capacitor.getPlatform() === 'android' ? 'Android' : 'web',
+            platform:
+              Capacitor.getPlatform() === 'ios'
+                ? 'iOS'
+                : Capacitor.getPlatform() === 'android'
+                  ? 'Android'
+                  : 'web',
           };
           return this.http.post(url, data);
         }),
-        first()  // Ensures the observable completes after the first emission
+        first(), // Ensures the observable completes after the first emission
       );
 
       return firstValueFrom(authToken$);
@@ -233,7 +240,7 @@ export class NotificationsService {
             fcmToken,
           };
           return this.http.post(url, data);
-        })
+        }),
       )
       .subscribe(() => {
         this.notificationRepository.clearNotifications();
@@ -246,7 +253,7 @@ export class NotificationsService {
     const url = `${this.multiTenantService.getApiEndpoint()}/notifications/delete`;
     const data = {
       authToken,
-      notificationId
+      notificationId,
     };
 
     return this.http.delete(url, { body: data });

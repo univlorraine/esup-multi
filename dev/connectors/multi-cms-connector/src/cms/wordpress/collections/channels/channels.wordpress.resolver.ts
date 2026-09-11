@@ -37,8 +37,8 @@
  */
 
 import { Args, Query, Resolver } from '@nestjs/graphql';
-import { Channels } from '@common/models/channels.model';
-import { ChannelsWordpressService } from '@wordpress/collections/channels/channels.wordpress.service';
+import { Channels } from '#common/models/channels.model.js';
+import { ChannelsWordpressService } from '#wordpress/collections/channels/channels.wordpress.service.js';
 
 @Resolver(() => Channels)
 export class ChannelsWordpressResolver {

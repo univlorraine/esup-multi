@@ -42,9 +42,9 @@ import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { EffectsNgModule } from '@ngneat/effects-ng';
-import { TranslateModule } from '@ngx-translate/core';
-import { ProjectModuleService, SharedComponentsModule } from '@multi/shared';
+import { TranslatePipe } from '@ngx-translate/core';
 import { DragulaModule } from 'ng2-dragula';
+import { ProjectModuleService, SharedComponentsModule } from '@multi/shared';
 import { FeaturesRoutingModule } from './features-routing.module';
 import { FeaturesEffects } from './features.effects';
 import { ServiceComponent } from './pages/services/service/service.component';
@@ -54,23 +54,26 @@ import { WidgetInternalFeatureComponent } from './pages/widgets/widget/widget-in
 import { WidgetComponent } from './pages/widgets/widget/widget.component';
 import { WidgetsPage } from './pages/widgets/widgets.page';
 
-const initModule = (projectModuleService: ProjectModuleService) =>
-  () => projectModuleService.initProjectModule({
+const initModule = (projectModuleService: ProjectModuleService) => () =>
+  projectModuleService.initProjectModule({
     name: 'features',
     translation: true,
-    menuItems: [{
-      title: 'FEATURES.MENU.WIDGETS',
-      icon: 'home',
-      position: -1000,
-      routerLink: `${FeaturesModule.routerLink}/widgets`,
-      type: 'tabs:start',
-    },{
-      title: 'FEATURES.MENU.SERVICES',
-      icon: 'services',
-      position: -900,
-      routerLink: `${FeaturesModule.routerLink}/services`,
-      type: 'tabs:start',
-    }]
+    menuItems: [
+      {
+        title: 'FEATURES.MENU.WIDGETS',
+        icon: 'home',
+        position: -1000,
+        routerLink: `${FeaturesModule.routerLink}/widgets`,
+        type: 'tabs:start',
+      },
+      {
+        title: 'FEATURES.MENU.SERVICES',
+        icon: 'services',
+        position: -900,
+        routerLink: `${FeaturesModule.routerLink}/services`,
+        type: 'tabs:start',
+      },
+    ],
   });
 
 @NgModule({
@@ -79,10 +82,10 @@ const initModule = (projectModuleService: ProjectModuleService) =>
     FormsModule,
     IonicModule,
     FeaturesRoutingModule,
-    TranslateModule,
+    TranslatePipe,
     EffectsNgModule.forFeature([FeaturesEffects]),
     SharedComponentsModule,
-    DragulaModule.forRoot()
+    DragulaModule.forRoot(),
   ],
   declarations: [
     WidgetComponent,
@@ -92,12 +95,14 @@ const initModule = (projectModuleService: ProjectModuleService) =>
     ServiceComponent,
     ServicesPage,
   ],
-  providers: [{
-    provide: APP_INITIALIZER,
-    useFactory: initModule,
-    deps:[ProjectModuleService],
-    multi: true
-  }],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initModule,
+      deps: [ProjectModuleService],
+      multi: true,
+    },
+  ],
 })
 export class FeaturesModule {
   static routerLink = '/features';

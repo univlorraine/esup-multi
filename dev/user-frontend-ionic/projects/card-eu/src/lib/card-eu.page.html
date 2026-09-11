@@ -37,41 +37,34 @@
   ~ termes.
   -->
 
-<ion-progress-bar *ngIf="isLoading" type="indeterminate"></ion-progress-bar>
-<app-header></app-header>
+@if (isLoading) {
+  <ion-progress-bar type="indeterminate" />
+}
+<app-header />
 
 <ion-content>
-  <ng-container *ngIf="(userAndCardEuData$ | async) as userCardEu; else noCardsData">
-
-    <!-- Gestion des erreurs -->
-    <div *ngIf="hasErrors(userCardEu); else cardTemplate" class="ion-padding">
-      <ng-container *ngFor="let error of userCardEu.errors">
-        <ion-note *ngIf="isKnownError(error); else unknownError" class="column app-text-2">
-          {{ 'CARD-EU.ERRORS.' + error | translate }}
-        </ion-note>
-      </ng-container>
-    </div>
-
-    <!-- Template pour erreur inconnue -->
-    <ng-template #unknownError>
-      <ion-note class="column app-text-2">
-        {{ 'CARD-EU.ERRORS.UNKNOWN' | translate }}
+  @if (userAndCardEuData$ | async; as userCardEu) {
+    @if (hasErrors(userCardEu)) {
+      <div class="ion-padding">
+        @for (error of userCardEu.errors; track error) {
+          <ion-note class="column app-text-2">
+            {{
+              (isKnownError(error) ? 'CARD-EU.ERRORS.' + error : 'CARD-EU.ERRORS.UNKNOWN')
+                | translate
+            }}
+          </ion-note>
+        }
+      </div>
+    } @else if (config.display === 'extended') {
+      <app-card-eu-extended [userCardEu]="userCardEu" />
+    } @else {
+      <app-card-eu-light [userCardEuLight]="userCardEu" />
+    }
+  } @else {
+    <ion-content class="ion-padding">
+      <ion-note>
+        {{ 'CARD-EU.ERRORS.NO_DATA' | translate }}
       </ion-note>
-    </ng-template>
-
-    <!-- Template des cartes -->
-    <ng-template #cardTemplate>
-      <app-card-eu-extended *ngIf="config.display === 'extended'" [userCardEu]="userCardEu"></app-card-eu-extended>
-      <app-card-eu-light *ngIf="config.display === 'light'" [userCardEuLight]="userCardEu"></app-card-eu-light>
-    </ng-template>
-
-  </ng-container>
+    </ion-content>
+  }
 </ion-content>
-
-<ng-template #noCardsData>
-  <ion-content class="ion-padding">
-    <ion-note>
-      {{ "CARD-EU.ERRORS.NO_DATA" | translate }}
-    </ion-note>
-  </ion-content>
-</ng-template>

@@ -41,28 +41,26 @@ import { CommonModule } from '@angular/common';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { ProjectModuleService, SharedComponentsModule } from '@multi/shared';
-import { ContactUsMenuItemComponent } from './widgets/contact-us-menu-item/contact-us-menu-item.component';
 import { ContactUsRoutingModule } from './contact-us-routing.module';
 import { ContactUsPage } from './contact-us.page';
+import { ContactUsMenuItemComponent } from './widgets/contact-us-menu-item/contact-us-menu-item.component';
 
-const initModule = (projectModuleService: ProjectModuleService) =>
-  () => projectModuleService.initProjectModule({
+const initModule = (projectModuleService: ProjectModuleService) => () =>
+  projectModuleService.initProjectModule({
     name: 'contact-us',
     translation: true,
-    widgets: [{
-      id: 'contact-us-menu-item-widget',
-      component: ContactUsMenuItemComponent,
-    }]
+    widgets: [
+      {
+        id: 'contact-us-menu-item-widget',
+        component: ContactUsMenuItemComponent,
+      },
+    ],
   });
 
-
 @NgModule({
-  declarations: [
-    ContactUsMenuItemComponent,
-    ContactUsPage,
-  ],
+  declarations: [ContactUsMenuItemComponent, ContactUsPage],
   imports: [
     CommonModule,
     FormsModule,
@@ -70,13 +68,15 @@ const initModule = (projectModuleService: ProjectModuleService) =>
     ReactiveFormsModule,
     SharedComponentsModule,
     ContactUsRoutingModule,
-    TranslateModule,
+    TranslatePipe,
   ],
-  providers: [{
-    provide: APP_INITIALIZER,
-    useFactory: initModule,
-    deps:[ProjectModuleService],
-    multi: true
-  }],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initModule,
+      deps: [ProjectModuleService],
+      multi: true,
+    },
+  ],
 })
-export class ContactUsModule { }
+export class ContactUsModule {}

@@ -46,6 +46,7 @@ export class AuthService {
   verifyToken(token: string): any {
     try {
       return this.jwtService.verify(token);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       return null;
     }

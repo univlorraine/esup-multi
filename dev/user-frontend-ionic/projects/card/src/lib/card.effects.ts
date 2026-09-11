@@ -38,16 +38,14 @@
  */
 
 import { Injectable } from '@angular/core';
-import { createEffect, ofType} from '@ngneat/effects';
-import { cleanupPrivateData } from '@multi/shared';
+import { createEffect, ofType } from '@ngneat/effects';
 import { tap } from 'rxjs/operators';
+import { cleanupPrivateData } from '@multi/shared';
 import { clearUserAndCardData } from './card.repository';
 
 @Injectable({ providedIn: 'root' })
 export class CardEffects {
-
-  cleanupPrivateData$ = createEffect(actions => actions.pipe(
-    ofType(cleanupPrivateData),
-    tap(clearUserAndCardData),
-  ));
+  cleanupPrivateData$ = createEffect((actions) =>
+    actions.pipe(ofType(cleanupPrivateData), tap(clearUserAndCardData)),
+  );
 }

@@ -37,9 +37,9 @@
  */
 
 import { forwardRef, Module } from '@nestjs/common';
-import { ContactUsWordpressResolver } from './contact-us.wordpress.resolver';
-import { ContactUsWordpressService } from './contact-us.wordpress.service';
-import { WordpressModule } from '@wordpress/wordpress.module';
+import { WordpressModule } from '#wordpress/wordpress.module.js';
+import { ContactUsWordpressResolver } from './contact-us.wordpress.resolver.js';
+import { ContactUsWordpressService } from './contact-us.wordpress.service.js';
 
 @Module({
   imports: [forwardRef(() => WordpressModule)],

@@ -42,7 +42,7 @@ import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { EffectsNgModule } from '@ngneat/effects-ng';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { ProjectModuleService, SharedComponentsModule } from '@multi/shared';
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthEffects } from './auth.effects';
@@ -52,21 +52,25 @@ import { AuthComponent } from './widget/auth/auth.component';
 import { GreetingComponent } from './widget/greeting/greeting.component';
 import { NotAuthentifiedComponent } from './widget/not-authentified/not-authentified.component';
 
-const initModule = (projectModuleService: ProjectModuleService) =>
-  () => projectModuleService.initProjectModule({
+const initModule = (projectModuleService: ProjectModuleService) => () =>
+  projectModuleService.initProjectModule({
     name: 'auth',
     translation: true,
-    widgets: [{
-      id: 'auth-widget',
-      component: AuthComponent
-    }, {
-      id: 'auth-not-authentified-widget',
-      component: NotAuthentifiedComponent
-    }, {
-      id: 'greeting-widget',
-      component: GreetingComponent
-    }],
-    preferencesComponent: PreferencesComponent
+    widgets: [
+      {
+        id: 'auth-widget',
+        component: AuthComponent,
+      },
+      {
+        id: 'auth-not-authentified-widget',
+        component: NotAuthentifiedComponent,
+      },
+      {
+        id: 'greeting-widget',
+        component: GreetingComponent,
+      },
+    ],
+    preferencesComponent: PreferencesComponent,
   });
 @NgModule({
   declarations: [
@@ -74,7 +78,7 @@ const initModule = (projectModuleService: ProjectModuleService) =>
     PreferencesComponent,
     AuthComponent,
     NotAuthentifiedComponent,
-    GreetingComponent
+    GreetingComponent,
   ],
   imports: [
     CommonModule,
@@ -82,16 +86,18 @@ const initModule = (projectModuleService: ProjectModuleService) =>
     IonicModule,
     AuthRoutingModule,
     ReactiveFormsModule,
-    TranslateModule,
+    TranslatePipe,
     SharedComponentsModule,
     EffectsNgModule.forFeature([AuthEffects]),
   ],
-  providers: [{
-    provide: APP_INITIALIZER,
-    useFactory: initModule,
-    deps:[ProjectModuleService],
-    multi: true
-  }],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initModule,
+      deps: [ProjectModuleService],
+      multi: true,
+    },
+  ],
 })
 export class AuthModule {
   static routerLink = '/auth';

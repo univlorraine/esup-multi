@@ -56,12 +56,11 @@ export class AlertsService {
   private alertQueue: AlertData[] = [];
   private isAlertActive = false;
 
-  constructor(private alertController: AlertController) {
-  }
+  constructor(private alertController: AlertController) {}
 
   async enqueueAlert(alertData: AlertData): Promise<void> {
     // Ajoute l'alerte dans la file en respectant la priorité
-    const insertIndex = this.alertQueue.findIndex(alert => alert.priority > alertData.priority);
+    const insertIndex = this.alertQueue.findIndex((alert) => alert.priority > alertData.priority);
     if (insertIndex === -1) {
       this.alertQueue.push(alertData);
     } else {

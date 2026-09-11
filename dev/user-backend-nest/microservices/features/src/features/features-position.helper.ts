@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { AppElement } from './features.dto';
+import { AppElement } from './features.dto.js';
 
 export class FeaturesPositionHelper {
   constructor(private userRoles: string[]) {}

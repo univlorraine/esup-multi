@@ -40,61 +40,55 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actions } from '@ngneat/effects-ng';
-import { MultiTenantService } from '../multi-tenant/multi-tenant.service';
 import { Observable, of } from 'rxjs';
 import { concatMap, delayWhen } from 'rxjs/operators';
+import { MultiTenantService } from '../multi-tenant/multi-tenant.service';
 import { authenticate, cleanupPrivateData } from '../shared.actions';
 import { updateAuthToken } from './auth.repository';
 import { AuthenticatedUser, updateUser } from './authenticated-user.repository';
 import { getRefreshAuthToken } from './keep-auth.repository';
 
 interface ReauthResult extends AuthenticatedUser {
-    authToken: string;
+  authToken: string;
 }
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root',
 })
 export class KeepAuthService {
+  constructor(
+    private multiTenantService: MultiTenantService,
+    private http: HttpClient,
+    private actions: Actions,
+  ) {}
 
-    constructor(
-        private multiTenantService: MultiTenantService,
-        private http: HttpClient,
-        private actions: Actions,
-    ) {}
+  public reauthenticateIfAvailable(): Observable<ReauthResult | null> {
+    return getRefreshAuthToken().pipe(
+      concatMap((refreshAuthToken) =>
+        refreshAuthToken ? this.reauthenticate(refreshAuthToken) : of(null),
+      ),
+      delayWhen((reauthResult) => {
+        if (!reauthResult) {
+          // We activate anonymous mode
+          this.actions.dispatch(cleanupPrivateData({ authToken: null }));
+          return;
+        }
 
-    public reauthenticateIfAvailable(): Observable<ReauthResult | null> {
-        return getRefreshAuthToken().pipe(
-            concatMap(refreshAuthToken => refreshAuthToken ?
-                this.reauthenticate(refreshAuthToken) :
-                of(null)
-            ),
-            delayWhen(reauthResult => {
-                if (!reauthResult) {
-                    // We activate anonymous mode
-                    this.actions.dispatch(cleanupPrivateData({authToken: null}));
-                    return;
-                }
+        const { authToken, ...authenticatedUser } = reauthResult;
+        updateUser(authenticatedUser);
+        this.actions.dispatch(authenticate());
+        return updateAuthToken(authToken);
+      }),
+    );
+  }
 
-                const { authToken, ...authenticatedUser } = reauthResult;
-                updateUser(authenticatedUser);
-                this.actions.dispatch(authenticate());
-                return updateAuthToken(authToken);
-            }),
-        );
-    }
+  private reauthenticate(refreshAuthToken: string) {
+    const url = `${this.multiTenantService.getApiEndpoint()}/keep-auth/reauth`;
+    const headers = {
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      Authorization: `Bearer ${refreshAuthToken}`,
+    };
 
-    private reauthenticate(refreshAuthToken: string) {
-      const url = `${this.multiTenantService.getApiEndpoint()}/keep-auth/reauth`;
-        const headers = {
-            // eslint-disable-next-line @typescript-eslint/naming-convention
-            Authorization: `Bearer ${refreshAuthToken}`
-        };
-
-        return this.http.post<ReauthResult | null>(url,
-            { authToken: refreshAuthToken },
-            { headers }
-        );
-    }
+    return this.http.post<ReauthResult | null>(url, { authToken: refreshAuthToken }, { headers });
+  }
 }
-

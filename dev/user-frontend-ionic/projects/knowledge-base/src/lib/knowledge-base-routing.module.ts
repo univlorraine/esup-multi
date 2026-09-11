@@ -44,11 +44,11 @@ import { KnowledgeBasePage } from './knowledge-base.page';
 const routes: Routes = [
   {
     path: 'knowledge-base',
-    component: KnowledgeBasePage
+    component: KnowledgeBasePage,
   },
   {
     path: 'knowledge-base/:id',
-    component: KnowledgeBasePage
+    component: KnowledgeBasePage,
   },
 ];
 

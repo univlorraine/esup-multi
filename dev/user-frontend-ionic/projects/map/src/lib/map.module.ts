@@ -39,36 +39,38 @@
 
 import { CommonModule } from '@angular/common';
 import { APP_INITIALIZER, ModuleWithProviders, NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { ProjectModuleService, SharedComponentsModule } from '@multi/shared';
 import { MapRoutingModule } from './map-routing.module';
-import { MapModuleConfig, MAP_CONFIG } from './map.config';
+import { MAP_CONFIG, MapModuleConfig } from './map.config';
 import { MapPage } from './map.page';
-import { ReactiveFormsModule } from '@angular/forms';
 
-const initModule = (projectModuleService: ProjectModuleService) =>
-  () => projectModuleService.initProjectModule({
+const initModule = (projectModuleService: ProjectModuleService) => () =>
+  projectModuleService.initProjectModule({
     name: 'map',
-    translation: true
+    translation: true,
   });
 
 @NgModule({
-    imports: [
-        CommonModule,
-        IonicModule,
-        MapRoutingModule,
-        TranslateModule,
-        SharedComponentsModule,
-        ReactiveFormsModule,
-    ],
+  imports: [
+    CommonModule,
+    IonicModule,
+    MapRoutingModule,
+    TranslatePipe,
+    SharedComponentsModule,
+    ReactiveFormsModule,
+  ],
   declarations: [MapPage],
-  providers: [{
-    provide: APP_INITIALIZER,
-    useFactory: initModule,
-    deps:[ProjectModuleService],
-    multi: true
-  }],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initModule,
+      deps: [ProjectModuleService],
+      multi: true,
+    },
+  ],
 })
 export class MapModule {
   static routerLink = '/map';
@@ -76,9 +78,7 @@ export class MapModule {
   static forRoot(config: MapModuleConfig): ModuleWithProviders<MapModule> {
     return {
       ngModule: MapModule,
-      providers: [
-        { provide: MAP_CONFIG, useValue: config }
-      ]
+      providers: [{ provide: MAP_CONFIG, useValue: config }],
     };
   }
 }

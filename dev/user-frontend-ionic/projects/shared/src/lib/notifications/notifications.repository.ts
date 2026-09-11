@@ -39,15 +39,21 @@
 
 import { Inject, Injectable } from '@angular/core';
 import { createStore, select, withProps } from '@ngneat/elf';
-import { addEntities, deleteEntities, selectAllEntities, setEntities, withEntities } from '@ngneat/elf-entities';
+import {
+  addEntities,
+  deleteEntities,
+  selectAllEntities,
+  setEntities,
+  withEntities,
+} from '@ngneat/elf-entities';
 import { persistState } from '@ngneat/elf-persist-state';
-import { currentLanguage$ } from '../i18n/i18n.repository';
-import { localForageStore } from '../store/local-forage';
 import { combineLatest, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { currentLanguage$ } from '../i18n/i18n.repository';
+import { localForageStore } from '../store/local-forage';
 
 const NOTIFICATIONS_STORE = 'notifications';
-const CHANNELS_STORE= 'channels';
+const CHANNELS_STORE = 'channels';
 
 const defaultNotificationColor = 'black';
 const defaultNotificationIcon = 'information-circle';
@@ -91,51 +97,52 @@ export interface TranslatedChannel {
   filterable: boolean;
 }
 
-const notificationsStore = createStore(
-  { name: NOTIFICATIONS_STORE },
-  withEntities<Notification>(),
-);
+const notificationsStore = createStore({ name: NOTIFICATIONS_STORE }, withEntities<Notification>());
 
 const channelsStore = createStore(
   { name: CHANNELS_STORE },
   withProps<ChannelsProps>({
     unsubscribedChannels: [],
   }),
-  withEntities<Channel>()
+  withEntities<Channel>(),
 );
 
 @Injectable({ providedIn: 'root' })
 export class NotificationsRepository {
-
   public channels$ = channelsStore.pipe(selectAllEntities());
   public unsubscribedChannels$ = channelsStore.pipe(select((state) => state.unsubscribedChannels));
 
   public notifications$: Observable<Notification[]> = combineLatest([
     notificationsStore.pipe(selectAllEntities()),
-    this.channels$
+    this.channels$,
   ]).pipe(
     map(([notifications, channels]) => {
-
       if (notifications.length === 0 || channels.length === 0) {
         return []; // Retourner un tableau vide si l'une des valeurs est vide
       }
 
-      return notifications.map(notification => {
-        const matchedChannel = channels?.find(channel => notification.channel === channel.code);
-        notification.color = matchedChannel?.color ? matchedChannel.color : defaultNotificationColor;
+      return notifications.map((notification) => {
+        const matchedChannel = channels?.find((channel) => notification.channel === channel.code);
+        notification.color = matchedChannel?.color
+          ? matchedChannel.color
+          : defaultNotificationColor;
         notification.icon = matchedChannel?.icon ? matchedChannel.icon : defaultNotificationIcon;
         notification.routerLink = matchedChannel?.routerLink ? matchedChannel.routerLink : null;
         return notification;
-      });})
+      });
+    }),
   );
 
   public translatedChannels$ = combineLatest([this.channels$, currentLanguage$]).pipe(
-    map(([channels, currentLanguage]) => channels.map(channel => {
-        const translation = channel.translations.find((t) => t.languagesCode === currentLanguage) ||
+    map(([channels, currentLanguage]) =>
+      channels.map((channel) => {
+        const translation =
+          channel.translations.find((t) => t.languagesCode === currentLanguage) ||
           channel.translations.find((t) => t.languagesCode === this.environment.defaultLanguage) ||
           channel.translations[0];
         return { label: translation.label, code: channel.code, filterable: channel.filterable };
-      }))
+      }),
+    ),
   );
 
   private persistNotificationsStore = persistState(notificationsStore, {
@@ -161,7 +168,7 @@ export class NotificationsRepository {
     notificationsStore.update(addEntities(notifications));
   }
 
-  public deletNotification(id: string){
+  public deletNotification(id: string) {
     notificationsStore.update(deleteEntities(id));
   }
 
@@ -182,13 +189,13 @@ export class NotificationsRepository {
 
   public subscribeChannel(channelCode: string) {
     channelsStore.update((state) => ({
-          ...state,
-          unsubscribedChannels: state.unsubscribedChannels.filter((code) => code !== channelCode)
-        }));
+      ...state,
+      unsubscribedChannels: state.unsubscribedChannels.filter((code) => code !== channelCode),
+    }));
   }
 
   public unsubscribeChannel(channelCode: string) {
-    channelsStore.update(state => {
+    channelsStore.update((state) => {
       // On crée un nouveau set contenant les canaux actuels auxquels l'utilisateur est désabonné
       const unsubscribedChannelsSet = new Set(state.unsubscribedChannels);
       // On ajoute le canal demandé à la liste

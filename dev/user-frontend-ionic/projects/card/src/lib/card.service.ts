@@ -39,25 +39,23 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { MultiTenantService } from '@multi/shared';
 import { Observable } from 'rxjs';
+import { MultiTenantService } from '@multi/shared';
 import { UserAndCardData } from './card.repository';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CardService {
-
   constructor(
     private multiTenantService: MultiTenantService,
     private http: HttpClient,
-  ) {
-  }
+  ) {}
 
   public getUserAndCardData(authToken: string): Observable<UserAndCardData> {
     const url = `${this.multiTenantService.getApiEndpoint()}/card`;
     const data = {
-      authToken
+      authToken,
     };
 
     return this.http.post<UserAndCardData>(url, data);

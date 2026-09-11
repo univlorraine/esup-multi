@@ -38,22 +38,23 @@
  */
 
 import {
-  HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor,
-  HttpRequest
+  HttpErrorResponse,
+  HttpEvent,
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actions } from '@ngneat/effects-ng';
 import { Observable, Subject, throwError } from 'rxjs';
 import { catchError, concatMap, finalize, take } from 'rxjs/operators';
+import { NavigationService } from '../navigation/navigation.service';
 import { cleanupPrivateData } from '../shared.actions';
 import { getAuthToken } from './auth.repository';
 import { KeepAuthService } from './keep-auth.service';
-import { NavigationService } from '../navigation/navigation.service';
-
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-
   public isRefreshingToken = false;
   private refreshTokenTrigger$ = new Subject<string>();
 
@@ -73,7 +74,9 @@ export class AuthInterceptor implements HttpInterceptor {
         }
 
         if (isLoginRequest) {
-          getAuthToken().pipe(take(1)).subscribe(token => this.actions.dispatch(cleanupPrivateData({ authToken: token })));
+          getAuthToken()
+            .pipe(take(1))
+            .subscribe((token) => this.actions.dispatch(cleanupPrivateData({ authToken: token })));
           return throwError(err);
         }
 
@@ -92,7 +95,6 @@ export class AuthInterceptor implements HttpInterceptor {
 
           return this.keepAuthService.reauthenticateIfAvailable().pipe(
             concatMap((authenticatedUser) => {
-
               if (!authenticatedUser) {
                 return throwError(err);
               }
@@ -108,15 +110,13 @@ export class AuthInterceptor implements HttpInterceptor {
 
               this.refreshTokenTrigger$.next(authenticatedUser.authToken);
               return next.handle(request);
-
             }),
             catchError((error) => throwError(error)),
-            finalize(() => this.isRefreshingToken = false));
-
+            finalize(() => (this.isRefreshingToken = false)),
+          );
         } else {
           return this.refreshTokenTrigger$.pipe(
             concatMap((authToken) => {
-
               if (!authToken) {
                 return throwError(err);
               }
@@ -131,10 +131,10 @@ export class AuthInterceptor implements HttpInterceptor {
               });
 
               return next.handle(clonedRequest);
-            })
+            }),
           );
         }
-      })
+      }),
     );
   }
 }

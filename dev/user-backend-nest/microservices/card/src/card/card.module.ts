@@ -39,9 +39,9 @@
 
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { CardController } from './card.controller';
-import { CardService } from './card.service';
-import { KeepaliveHttpModule } from '../keepalive-http.module';
+import { KeepaliveHttpModule } from '../keepalive-http.module.js';
+import { CardController } from './card.controller.js';
+import { CardService } from './card.service.js';
 
 @Module({
   imports: [ConfigModule, KeepaliveHttpModule],

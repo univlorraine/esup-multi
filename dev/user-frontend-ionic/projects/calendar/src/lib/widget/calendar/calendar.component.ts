@@ -37,21 +37,28 @@
  * termes.
  */
 
-import { AfterViewInit, ChangeDetectorRef, Component, Inject, Input, TemplateRef, ViewChild } from '@angular/core';
-import { ThemeService } from '@multi/shared';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  Inject,
+  Input,
+  TemplateRef,
+  ViewChild,
+} from '@angular/core';
 import { Observable } from 'rxjs';
 import { finalize, take } from 'rxjs/operators';
+import { ThemeService } from '@multi/shared';
+import { CALENDAR_CONFIG, CalendarModuleConfig } from '../../calendar.config';
 import { MailCalendarEvents } from '../../calendar.repository';
 import { CalendarService } from '../../calendar.service';
-import { CALENDAR_CONFIG, CalendarModuleConfig } from '../../calendar.config';
 
 @Component({
   selector: 'app-calendar-widget',
   templateUrl: './calendar.component.html',
   styleUrls: ['../../../../../../src/theme/app-theme/styles/calendar/calendar.component.scss'],
 })
-export class CalendarComponent implements AfterViewInit{
-
+export class CalendarComponent implements AfterViewInit {
   @Input() widgetColor: string;
   @ViewChild('list') list!: TemplateRef<any>;
   @ViewChild('slider') slider!: TemplateRef<any>;
@@ -59,19 +66,22 @@ export class CalendarComponent implements AfterViewInit{
   public isLoading = false;
   public nextEvents$: Observable<MailCalendarEvents>;
 
-  constructor(private calendarService: CalendarService,
+  constructor(
+    private calendarService: CalendarService,
     private themeService: ThemeService,
     private changeDetectorRef: ChangeDetectorRef,
-    @Inject(CALENDAR_CONFIG) private config: CalendarModuleConfig) {
+    @Inject(CALENDAR_CONFIG) private config: CalendarModuleConfig,
+  ) {
     this.nextEvents$ = this.calendarService.getNextEvents$();
   }
 
   widgetViewDidEnter(): void {
     this.isLoading = true;
-    this.calendarService.loadCalendarIfNetworkAvailable()
+    this.calendarService
+      .loadCalendarIfNetworkAvailable()
       .pipe(
         take(1),
-        finalize(() => this.isLoading = false)
+        finalize(() => (this.isLoading = false)),
       )
       .subscribe();
   }
@@ -81,8 +91,9 @@ export class CalendarComponent implements AfterViewInit{
   }
 
   fontColor() {
-    return this.themeService.isBackgroundFromCmsDarkOrIsDarkTheme(this.widgetColor) ?
-      'light-font-color' : 'dark-font-color';
+    return this.themeService.isBackgroundFromCmsDarkOrIsDarkTheme(this.widgetColor)
+      ? 'light-font-color'
+      : 'dark-font-color';
   }
 
   getTemplateRef(): TemplateRef<any> {

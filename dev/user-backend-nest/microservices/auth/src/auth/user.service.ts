@@ -43,8 +43,8 @@ import { ConfigService } from '@nestjs/config';
 import { RpcException } from '@nestjs/microservices';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { AuthProviderApi } from '../config/configuration.interface';
-import { UserProfileDto } from './auth.dto';
+import { AuthProviderApi } from '../config/configuration.interface.js';
+import { UserProfileDto } from './auth.dto.js';
 
 @Injectable()
 export class UserService {

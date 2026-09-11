@@ -41,9 +41,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
-import { authenticatedUser$, NetworkService } from '@multi/shared';
 import { Observable } from 'rxjs';
 import { filter, finalize, take } from 'rxjs/operators';
+import { authenticatedUser$, NetworkService } from '@multi/shared';
 import { ContactUsRepository, TranslatedContactUsPageContent } from './contact-us.repository';
 import { ContactMessageQueryDto, ContactUsService } from './contact-us.service';
 
@@ -53,7 +53,6 @@ import { ContactMessageQueryDto, ContactUsService } from './contact-us.service';
   styleUrls: ['../../../../src/theme/app-theme/styles/contact-us/contact-us.page.scss'],
 })
 export class ContactUsPage implements OnInit {
-
   contactForm = new FormGroup({
     from: new FormControl('', [Validators.required, Validators.email]),
     subject: new FormControl('', Validators.required),
@@ -80,28 +79,23 @@ export class ContactUsPage implements OnInit {
 
     authenticatedUser$
       .pipe(
-        filter(au => au !== null),
+        filter((au) => au !== null),
         take(1),
       )
-      .subscribe(authenticatedUser => {
+      .subscribe((authenticatedUser) => {
         this.defaultFrom = authenticatedUser.email;
         this.contactForm.get('from').setValue(this.defaultFrom);
         this.contactForm.get('from').disable();
       });
   }
 
-
   public async loadContentIfNetworkAvailable(): Promise<void> {
     if (!(await this.networkService.getConnectionStatus()).connected) {
       return;
     }
 
-    this.contactUsService.loadAndStoreContactUsPageContent()
-      .pipe(take(1))
-      .subscribe();
+    this.contactUsService.loadAndStoreContactUsPageContent().pipe(take(1)).subscribe();
   }
-
-
 
   onSubmit(): void {
     this.isLoading = true;
@@ -109,25 +103,28 @@ export class ContactUsPage implements OnInit {
       from: '',
       subject: '',
       text: '',
-      ...this.contactForm.value
+      ...this.contactForm.value,
     };
     if (this.defaultFrom.length > 0) {
       query.from = this.defaultFrom; // if user is authenticated, force email
     }
     this.contactForm.disable();
-    this.contactUsService.sendContactMessage(query).pipe(
-      take(1),
-      finalize(() => {
-        this.contactForm.enable();
-        this.contactForm.get('from').disable();
-        this.isLoading = false;
-      })
-    ).subscribe(() => {
-      this.contactForm.reset({
-        from: this.defaultFrom
+    this.contactUsService
+      .sendContactMessage(query)
+      .pipe(
+        take(1),
+        finalize(() => {
+          this.contactForm.enable();
+          this.contactForm.get('from').disable();
+          this.isLoading = false;
+        }),
+      )
+      .subscribe(() => {
+        this.contactForm.reset({
+          from: this.defaultFrom,
+        });
+        this.showSubmitSuccessToast();
       });
-      this.showSubmitSuccessToast();
-    });
   }
 
   private async showSubmitSuccessToast() {
@@ -140,5 +137,4 @@ export class ContactUsPage implements OnInit {
 
     await toast.present();
   }
-
 }

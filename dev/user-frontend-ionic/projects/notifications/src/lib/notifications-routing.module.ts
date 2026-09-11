@@ -45,12 +45,12 @@ import { SettingsPage } from './settings/settings.page';
 const routes: Routes = [
   {
     path: 'notifications',
-    component: NotificationsPage
+    component: NotificationsPage,
   },
   {
     path: 'notifications/settings',
-    component: SettingsPage
-  }
+    component: SettingsPage,
+  },
 ];
 
 @NgModule({

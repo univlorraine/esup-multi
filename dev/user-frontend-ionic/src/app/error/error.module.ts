@@ -44,14 +44,12 @@ import { AppErrorHandler } from './app.error-handler';
 
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule
-  ],
+  imports: [CommonModule],
   providers: [
     { provide: ErrorHandler, useClass: AppErrorHandler },
     {
-      provide: AuthInterceptor
+      provide: AuthInterceptor,
     },
-  ]
+  ],
 })
-export class ErrorModule { }
+export class ErrorModule {}

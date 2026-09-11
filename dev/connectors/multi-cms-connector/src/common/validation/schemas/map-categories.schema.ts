@@ -37,7 +37,7 @@
  */
 
 import { z } from 'zod';
-import { MapCategoryTranslationsSchema } from '@common/validation/schemas/translations.schema';
+import { MapCategoryTranslationsSchema } from '#common/validation/schemas/translations.schema.js';
 
 export const MapCategorySchema = z.object({
   id: z.string().min(1, 'Map Category ID is required'),

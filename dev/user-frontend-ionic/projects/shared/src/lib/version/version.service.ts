@@ -38,25 +38,23 @@
  */
 
 import { Inject, Injectable } from '@angular/core';
+import { App } from '@capacitor/app';
 import { Capacitor } from '@capacitor/core';
 import { from, Observable, of } from 'rxjs';
-import { App } from '@capacitor/app';
 import { map } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class VersionService {
-
   constructor(
     @Inject('environment')
-    private environment: any
+    private environment: any,
   ) {}
 
   public getCurrentAppVersion(): Observable<string> {
     return !Capacitor.isNativePlatform()
       ? of(this.environment.appVersion || '0.0.0')
-      : from(App.getInfo()).pipe(map(info => info.version));
+      : from(App.getInfo()).pipe(map((info) => info.version));
   }
-
 }

@@ -41,14 +41,14 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { ErrorHandler, Injectable, Injector } from '@angular/core';
 import { Actions } from '@ngneat/effects-ng';
 import { TranslateService } from '@ngx-translate/core';
+import { take } from 'rxjs/operators';
 import {
   AlertsService,
   cleanupPrivateData,
   getAuthToken,
   getExpectedErrorMessage,
-  NetworkService
+  NetworkService,
 } from '@multi/shared';
-import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -61,7 +61,7 @@ export class AppErrorHandler implements ErrorHandler {
     private alertsService: AlertsService,
     private injector: Injector,
     private networkService: NetworkService,
-  ) { }
+  ) {}
 
   async handleError(error: Error | HttpErrorResponse) {
     this.loadTranslateService();
@@ -80,7 +80,7 @@ export class AppErrorHandler implements ErrorHandler {
         header: this.translateService.instant('ERROR.NO_NETWORK.TITLE'),
         message: this.translateService.instant('ERROR.NO_NETWORK.MESSAGE'),
         type: 'error',
-        priority: 10
+        priority: 10,
       });
     }
 
@@ -90,20 +90,18 @@ export class AppErrorHandler implements ErrorHandler {
           header: this.translateService.instant('ERROR.SERVICE_UNREACHABLE.TITLE'),
           message: this.translateService.instant('ERROR.SERVICE_UNREACHABLE.MESSAGE'),
           type: 'error',
-          priority: 10
+          priority: 10,
         });
 
       case 401: {
         getAuthToken()
           .pipe(take(1))
-          .subscribe((token) =>
-            this.actions.dispatch(cleanupPrivateData({ authToken: token }))
-          );
+          .subscribe((token) => this.actions.dispatch(cleanupPrivateData({ authToken: token })));
         return this.alertsService.enqueueAlert({
           header: this.translateService.instant('ERROR.UNAUTHENTICATED.TITLE'),
           message: this.translateService.instant('ERROR.UNAUTHENTICATED.MESSAGE'),
           type: 'error',
-          priority: 10
+          priority: 10,
         });
       }
 
@@ -114,14 +112,14 @@ export class AppErrorHandler implements ErrorHandler {
             header: this.translateService.instant('ERROR.WARNING.TITLE'),
             message: expectedErrorMessage,
             type: 'warning',
-            priority: 20
+            priority: 20,
           });
         }
         return this.alertsService.enqueueAlert({
           header: this.translateService.instant('ERROR.UNKNOWN'),
           message: error.message,
           type: 'generic',
-          priority: 15
+          priority: 15,
         });
       }
 
@@ -130,7 +128,7 @@ export class AppErrorHandler implements ErrorHandler {
           header: this.translateService.instant('ERROR.UNKNOWN'),
           message: error.message,
           type: 'generic',
-          priority: 15
+          priority: 15,
         });
     }
   }

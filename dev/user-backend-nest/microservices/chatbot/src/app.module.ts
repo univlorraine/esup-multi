@@ -39,9 +39,9 @@
 
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { ChatbotModule } from './chatbot/chatbot.module';
-import configuration from './config/configuration';
-import { MonitoringModule } from './monitoring/monitoring.module';
+import { ChatbotModule } from './chatbot/chatbot.module.js';
+import configuration from './config/configuration.js';
+import { MonitoringModule } from './monitoring/monitoring.module.js';
 
 @Module({
   imports: [

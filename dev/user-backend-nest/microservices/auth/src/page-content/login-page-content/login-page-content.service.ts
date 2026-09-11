@@ -41,12 +41,13 @@ import { HttpService } from '@nestjs/axios';
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { RpcException } from '@nestjs/microservices';
+import { AxiosError } from 'axios';
 import { catchError, map, Observable } from 'rxjs';
-import { CmsApi } from '../../config/configuration.interface';
+import { CmsApi } from '../../config/configuration.interface.js';
 import {
   LoginPageContentResultDto,
   LoginPageGraphQLResponse,
-} from './login-page-content.dto';
+} from './login-page-content.dto.js';
 
 @Injectable()
 export class LoginPageContentService {
@@ -92,7 +93,7 @@ export class LoginPageContentService {
         requestConfig,
       )
       .pipe(
-        catchError((err: any) => {
+        catchError((err: AxiosError) => {
           const errorMessage = 'Unable to get login page content from CMS';
           this.logger.error(errorMessage, err);
           throw new RpcException(errorMessage);

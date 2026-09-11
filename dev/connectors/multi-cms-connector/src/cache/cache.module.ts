@@ -36,12 +36,12 @@
  * termes.
  */
 
-import { Module, Global } from '@nestjs/common';
-import { EventEmitterModule } from '@nestjs/event-emitter';
+import { Global, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { CacheService } from './cache.service';
-import { CacheController } from './cache.controller';
-import { RedisModule } from '@redis/redis.module';
+import { EventEmitterModule } from '@nestjs/event-emitter';
+import { RedisModule } from '#redis/redis.module.js';
+import { CacheController } from './cache.controller.js';
+import { CacheService } from './cache.service.js';
 
 @Global()
 @Module({

@@ -40,25 +40,24 @@
 import { CommonModule } from '@angular/common';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
 import { IonicModule } from '@ionic/angular';
-
-import { PreferencesPageRoutingModule } from './preferences-routing.module';
-
 import { ProjectModuleService, SharedComponentsModule } from '@multi/shared';
+import { PreferencesPageRoutingModule } from './preferences-routing.module';
 import { PreferencesPage } from './preferences.page';
 
-const initModule = (projectModuleService: ProjectModuleService) =>
-  () => projectModuleService.initProjectModule({
+const initModule = (projectModuleService: ProjectModuleService) => () =>
+  projectModuleService.initProjectModule({
     name: 'preferences',
     translation: true,
-    menuItems: [{
-      title: 'PREFERENCES.MENU',
-      icon: 'settings',
-      position: 999,
-      routerLink: PreferencesPageModule.routerLink,
-      type: 'burger',
-    }]
+    menuItems: [
+      {
+        title: 'PREFERENCES.MENU',
+        icon: 'settings',
+        position: 999,
+        routerLink: PreferencesPageModule.routerLink,
+        type: 'burger',
+      },
+    ],
   });
 
 @NgModule({
@@ -70,12 +69,14 @@ const initModule = (projectModuleService: ProjectModuleService) =>
     PreferencesPageRoutingModule,
   ],
   declarations: [PreferencesPage],
-  providers: [{
-    provide: APP_INITIALIZER,
-    useFactory: initModule,
-    deps: [ProjectModuleService],
-    multi: true
-  }],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initModule,
+      deps: [ProjectModuleService],
+      multi: true,
+    },
+  ],
 })
 export class PreferencesPageModule {
   static routerLink = '/preferences';

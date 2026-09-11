@@ -41,14 +41,15 @@ import { HttpService } from '@nestjs/axios';
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { RpcException } from '@nestjs/microservices';
+import type { AxiosError } from 'axios';
 import { catchError, map, Observable } from 'rxjs';
-import { ChatbotApi } from '../config/configuration.interface';
+import { ChatbotApi } from '../config/configuration.interface.js';
 import {
   ChatbotApiResponse,
   ChatbotButtonPayloadRequestDto,
   ChatbotResponseDto,
   ChatbotTextRequestDto,
-} from './chatbot.dto';
+} from './chatbot.dto.js';
 
 @Injectable()
 export class ChatbotService {
@@ -70,7 +71,7 @@ export class ChatbotService {
     return this.httpService
       .post<ChatbotApiResponse<ChatbotResponseDto[]>>(url, query)
       .pipe(
-        catchError((err: any) => {
+        catchError((err: AxiosError) => {
           const errorMessage = 'Unable to get Tock response from text request';
           this.logger.error(errorMessage, err);
           throw new RpcException(errorMessage);
@@ -87,7 +88,7 @@ export class ChatbotService {
     return this.httpService
       .post<ChatbotApiResponse<ChatbotResponseDto[]>>(url, query)
       .pipe(
-        catchError((err: any) => {
+        catchError((err: AxiosError) => {
           const errorMessage =
             'Unable to get Tock response from button payload request';
           this.logger.error(errorMessage, err);

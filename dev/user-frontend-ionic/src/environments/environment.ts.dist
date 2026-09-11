@@ -61,7 +61,7 @@ import { ScheduleModule } from '@multi/schedule';
 import { SocialNetworkModule } from '@multi/social-network';
 import { StaticPagesModule } from '@multi/static-pages';
 import { UnreadMailModule } from '@multi/unread-mail';
-// import { MatomoModule } from 'ngx-matomo';
+// import { MatomoRouterModule } from 'ngx-matomo-client';
 
 import firebasePwaEnvironment from './firebase/web/firebase-environment.pwa.json';
 
@@ -76,6 +76,16 @@ export const environment: any = {
   forceFullLayoutFeatures: [],
   useExternalNotificationSystem: true,
   defaultLogo: 'assets/logos/white-logo.svg',
+  // Uncomment matomoConfig to enable Matomo
+  // matomoConfig: {
+  //   scriptUrl: 'https://webstats.mon-univ.fr/matomo.js',
+  //   trackers: [
+  //     {
+  //       trackerUrl: 'https://webstats.mon-univ.fr/matomo.php',
+  //       siteId: 453
+  //     }
+  //   ],
+  // },
   tenants: [
     {
       apiEndpoint: 'http://localhost:3000',
@@ -150,18 +160,8 @@ export const environment: any = {
     SocialNetworkModule,
     StaticPagesModule,
     UnreadMailModule,
-    // MatomoModule.forRoot({
-    //   scriptUrl: 'https://webstats.mon-univ.fr/matomo.js',
-    //   trackers: [
-    //     {
-    //       trackerUrl: 'https://webstats.mon-univ.fr/matomo.php',
-    //       siteId: 453
-    //     }
-    //   ],
-    //   routeTracking: {
-    //     enable: true
-    //   }
-    // }),
+    // Uncomment the following line to enable Matomo route tracking (without any effect if matomoConfig is not set)
+    // MatomoRouterModule,
   ],
 };
 

@@ -37,9 +37,9 @@
  */
 
 import { forwardRef, Module } from '@nestjs/common';
-import { ChannelsWordpressResolver } from './channels.wordpress.resolver';
-import { ChannelsWordpressService } from './channels.wordpress.service';
-import { WordpressModule } from '@wordpress/wordpress.module';
+import { WordpressModule } from '#wordpress/wordpress.module.js';
+import { ChannelsWordpressResolver } from './channels.wordpress.resolver.js';
+import { ChannelsWordpressService } from './channels.wordpress.service.js';
 
 @Module({
   imports: [forwardRef(() => WordpressModule)],

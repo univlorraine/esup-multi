@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { SecurityConfiguration } from './configuration.interface';
+import { SecurityConfiguration } from './configuration.interface.js';
 
 export default (): { security: SecurityConfiguration } => ({
   security: {

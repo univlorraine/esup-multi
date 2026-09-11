@@ -39,8 +39,8 @@
 
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { MultiTenantComponent } from './multi-tenant.component';
 import { IsTenantSelectableGuard } from './is-tenant-selectable.guard';
+import { MultiTenantComponent } from './multi-tenant.component';
 
 const routes: Routes = [
   {
@@ -49,9 +49,9 @@ const routes: Routes = [
       {
         path: 'select',
         component: MultiTenantComponent,
-        canActivate: [IsTenantSelectableGuard]
-      }
-    ]
+        canActivate: [IsTenantSelectableGuard],
+      },
+    ],
   },
 ];
 

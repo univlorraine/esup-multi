@@ -43,8 +43,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FullCalendarModule } from '@fullcalendar/angular'; // must go before plugins
 import { IonicModule } from '@ionic/angular';
 import { EffectsNgModule } from '@ngneat/effects-ng';
-import { TranslateModule } from '@ngx-translate/core';
-import { CompleteLocalDatePipe, LocalHourPipe, ProjectModuleService, SharedComponentsModule, SharedPipeModule } from '@multi/shared';
+import { TranslatePipe } from '@ngx-translate/core';
+import {
+  CompleteLocalDatePipe,
+  LocalHourPipe,
+  ProjectModuleService,
+  SharedComponentsModule,
+  SharedPipeModule,
+} from '@multi/shared';
 import { EventDetailComponent } from './common/event-detail/event-detail.component';
 import { ShortenedDatePipe } from './common/pipe/shortened-date.pipe';
 import { HiddenCourseComponent } from './common/select-planning/hidden-course/hidden-course.component';
@@ -54,25 +60,27 @@ import { CalendarEventComponent } from './schedule-calendar/calendar-event/calen
 import { ScheduleCalendarComponent } from './schedule-calendar/schedule-calendar.component';
 import { ScheduleListPage } from './schedule-list/schedule-list.page';
 import { SchedulePageRoutingModule } from './schedule-routing.module';
-import { ScheduleModuleConfig, SCHEDULE_CONFIG } from './schedule.config';
+import { SCHEDULE_CONFIG, ScheduleModuleConfig } from './schedule.config';
 import { ScheduleEffects } from './schedule.effects';
 import { SchedulePage } from './schedule.page';
 import { NextEventsComponent } from './widgets/next-events/next-events.component';
 
-const initModule = (projectModuleService: ProjectModuleService) =>
-  () => projectModuleService.initProjectModule({
+const initModule = (projectModuleService: ProjectModuleService) => () =>
+  projectModuleService.initProjectModule({
     name: 'schedule',
     translation: true,
-    widgets: [{
-      id: 'next-events',
-      component: NextEventsComponent,
-    }],
+    widgets: [
+      {
+        id: 'next-events',
+        component: NextEventsComponent,
+      },
+    ],
     historyBlacklist: [
       '/schedule/calendar#day',
       '/schedule/calendar#week',
       '/schedule/calendar#month',
       '/auth',
-    ]
+    ],
   });
 
 @NgModule({
@@ -86,13 +94,13 @@ const initModule = (projectModuleService: ProjectModuleService) =>
     SelectUserComponent,
     CalendarEventComponent,
     HiddenCourseComponent,
-    NextEventsComponent
+    NextEventsComponent,
   ],
   imports: [
     CommonModule,
     IonicModule,
     SchedulePageRoutingModule,
-    TranslateModule,
+    TranslatePipe,
     FormsModule,
     ReactiveFormsModule,
     FullCalendarModule,
@@ -100,14 +108,15 @@ const initModule = (projectModuleService: ProjectModuleService) =>
     SharedPipeModule,
     EffectsNgModule.forFeature([ScheduleEffects]),
   ],
-  providers: [{
-    provide: APP_INITIALIZER,
-    useFactory: initModule,
-    deps: [ProjectModuleService],
-    multi: true
-  },
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initModule,
+      deps: [ProjectModuleService],
+      multi: true,
+    },
     CompleteLocalDatePipe,
-    LocalHourPipe
+    LocalHourPipe,
   ],
 })
 export class ScheduleModule {
@@ -116,9 +125,7 @@ export class ScheduleModule {
   static forRoot(config: ScheduleModuleConfig): ModuleWithProviders<ScheduleModule> {
     return {
       ngModule: ScheduleModule,
-      providers: [
-        { provide: SCHEDULE_CONFIG, useValue: config }
-      ]
+      providers: [{ provide: SCHEDULE_CONFIG, useValue: config }],
     };
   }
 }

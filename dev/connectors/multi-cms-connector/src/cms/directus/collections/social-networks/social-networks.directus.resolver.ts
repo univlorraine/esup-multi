@@ -37,8 +37,8 @@
  */
 
 import { Args, Query, Resolver } from '@nestjs/graphql';
-import { SocialNetworksDirectusService } from './social-networks.directus.service';
-import { SocialNetworks } from '@common/models/social-networks.model';
+import { SocialNetworks } from '#common/models/social-networks.model.js';
+import { SocialNetworksDirectusService } from './social-networks.directus.service.js';
 
 @Resolver(() => SocialNetworks)
 export class SocialNetworksDirectusResolver {

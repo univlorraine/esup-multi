@@ -38,18 +38,21 @@
  */
 
 import { Controller } from '@nestjs/common';
-import { from, Observable } from 'rxjs';
 import { MessagePattern } from '@nestjs/microservices';
-import { KeepAuthService } from './keep-auth.service';
-import {
+import { from, Observable } from 'rxjs';
+import type {
+  AuthenticatedDto,
+  AuthenticateQueryDto,
+} from '../auth/auth.dto.js';
+import type {
   KeepAuthenticatedDto,
-  ReauthenticateQueryDto,
   KeepAuthenticatedLogoutQueryDto,
   ReauthenticateIfNeededQueryDto,
   ReauthenticateIfNeededResultDto,
+  ReauthenticateQueryDto,
   RemoveSavedCredentialsQueryDto,
-} from './keep-auth.dto';
-import { AuthenticatedDto, AuthenticateQueryDto } from '../auth/auth.dto';
+} from './keep-auth.dto.js';
+import { KeepAuthService } from './keep-auth.service.js';
 
 @Controller()
 export class KeepAuthController {

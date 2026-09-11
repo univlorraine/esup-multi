@@ -37,13 +37,14 @@
  * termes.
  */
 
-const express = require('express');
+import express from 'express';
+import { rssData } from './rss.mock.js';
+
 const router = express.Router();
-const { rssData } = require('./rss.mock.js');
 
 router.get('/', (req, res) => {
-    res.set('Content-Type', 'application/atom+xml');
-    res.send(rssData);
+  res.set('Content-Type', 'application/atom+xml');
+  res.send(rssData);
 });
 
-module.exports = router;
+export default router;

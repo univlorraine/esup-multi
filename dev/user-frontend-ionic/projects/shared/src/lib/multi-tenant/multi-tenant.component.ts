@@ -39,14 +39,19 @@
 
 import { Component, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Tenant } from './multi-tenant.model';
-import { MultiTenantService } from './multi-tenant.service';
-import { from, Observable, of } from 'rxjs';
-import { Capacitor } from '@capacitor/core';
 import { App } from '@capacitor/app';
+import { Capacitor } from '@capacitor/core';
+import { from, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { setLanguage } from '../i18n/i18n.repository';
-import { isDarkTheme, isDarkTheme$, setIsDarkTheme, setUserHaveSetThemeInApp } from '../theme/theme.repository';
+import {
+  isDarkTheme,
+  isDarkTheme$,
+  setIsDarkTheme,
+  setUserHaveSetThemeInApp,
+} from '../theme/theme.repository';
+import { Tenant } from './multi-tenant.model';
+import { MultiTenantService } from './multi-tenant.service';
 
 @Component({
   selector: 'app-multi-tenant',
@@ -54,10 +59,9 @@ import { isDarkTheme, isDarkTheme$, setIsDarkTheme, setUserHaveSetThemeInApp } f
   styleUrls: ['../../../../../src/theme/app-theme/styles/multi-tenant/multi-tenant.component.scss'],
 })
 export class MultiTenantComponent {
-
   public availableTenants: Tenant[];
   public selectedTenantId: string;
-  public languages: Array<string> = [];
+  public languages: string[] = [];
   appVersion$: Observable<string>;
   public darkModeEnabled: boolean;
   isDarkTheme$: Observable<boolean>;
@@ -67,7 +71,7 @@ export class MultiTenantComponent {
     private environment: any,
     private router: Router,
     private multiTenantService: MultiTenantService,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
   ) {
     this.availableTenants = this.getAvailableTenants();
     this.selectedTenantId = this.multiTenantService.getSelectedTenantId();
@@ -75,7 +79,7 @@ export class MultiTenantComponent {
     this.languages = this.environment.languages;
     this.appVersion$ = !Capacitor.isNativePlatform()
       ? of(this.environment.appVersion || '0.0.0')
-      : from(App.getInfo()).pipe(map(info => info.version));
+      : from(App.getInfo()).pipe(map((info) => info.version));
     this.isDarkTheme$ = isDarkTheme$;
   }
 

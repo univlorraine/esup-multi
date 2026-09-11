@@ -40,8 +40,8 @@
 import { Controller } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
 import { Observable } from 'rxjs';
-import { StaticPageDto } from './static-pages.dto';
-import { StaticPagesService } from './static-pages.service';
+import { StaticPageDto } from './static-pages.dto.js';
+import { StaticPagesService } from './static-pages.service.js';
 
 @Controller()
 export class StaticPagesController {

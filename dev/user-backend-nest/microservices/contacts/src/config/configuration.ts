@@ -38,9 +38,9 @@
  */
 
 import {
-  KeepAliveOptions,
   ContactsProviderApi,
-} from './configuration.interfaces';
+  KeepAliveOptions,
+} from './configuration.interfaces.js';
 
 const applyIfNotBlank = (param: string, applyFn: (value: string) => void) => {
   if (param && param.trim().length > 0) {

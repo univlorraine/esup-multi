@@ -39,9 +39,9 @@
 
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { ImportantNewsController } from './important-news.controller';
-import { ImportantNewsService } from './important-news.service';
-import { KeepaliveHttpModule } from '../keepalive-http.module';
+import { KeepaliveHttpModule } from '../keepalive-http.module.js';
+import { ImportantNewsController } from './important-news.controller.js';
+import { ImportantNewsService } from './important-news.service.js';
 
 @Module({
   imports: [ConfigModule, KeepaliveHttpModule],

@@ -42,9 +42,9 @@ import { Injectable } from '@angular/core';
 import { App } from '@capacitor/app';
 import { Capacitor } from '@capacitor/core';
 import { Platform } from '@ionic/angular';
-import { getAuthToken, NetworkService, MultiTenantService } from '@multi/shared';
 import { combineLatest, from, Observable, of } from 'rxjs';
 import { map, switchMap, take, tap } from 'rxjs/operators';
+import { getAuthToken, MultiTenantService, NetworkService } from '@multi/shared';
 import { ContactUsPageContent, ContactUsRepository } from './contact-us.repository';
 
 export interface ContactMessageQueryDto {
@@ -60,10 +60,9 @@ export interface ContactMessageQueryDto {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ContactUsService {
-
   constructor(
     private multiTenantService: MultiTenantService,
     private http: HttpClient,
@@ -78,27 +77,32 @@ export class ContactUsService {
     return this.http.get<ContactUsPageContent>(url).pipe(
       tap((pageContent) => {
         this.contactUsRepository.setPageContent(pageContent);
-      }));
+      }),
+    );
   }
 
   public sendContactMessage(query: ContactMessageQueryDto): Observable<void> {
     const url = `${this.multiTenantService.getApiEndpoint()}/contact-us`;
 
-    const appVersion = !Capacitor.isNativePlatform() ? of(null) : from(App.getInfo()).pipe(map(info => info.version));
-    return combineLatest([getAuthToken(), appVersion, from(this.networkService.getConnectionStatus())]).pipe(
+    const appVersion = !Capacitor.isNativePlatform()
+      ? of(null)
+      : from(App.getInfo()).pipe(map((info) => info.version));
+    return combineLatest([
+      getAuthToken(),
+      appVersion,
+      from(this.networkService.getConnectionStatus()),
+    ]).pipe(
       take(1),
       switchMap(([authToken, version, connectionStatus]) => {
         query.userData = {
           authToken,
           platform: this.platform.platforms().join(','),
           appVersion: version,
-          connectionType: connectionStatus.connectionType
+          connectionType: connectionStatus.connectionType,
         };
 
-        return this.http.post<void>(url, query).pipe(
-          map(() => void 0)
-        );
-      })
+        return this.http.post<void>(url, query).pipe(map(() => void 0));
+      }),
     );
   }
 }

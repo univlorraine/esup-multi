@@ -45,10 +45,9 @@ import { filter, finalize, switchMap, take } from 'rxjs/operators';
 import { brightness$, setBrightness } from './screen.repository';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ScreenService {
-
   private fullBrightnessEnabled = false;
 
   constructor(private platform: Platform) {}
@@ -60,14 +59,14 @@ export class ScreenService {
     }
 
     // prevent multiple full brightness activation
-    if(this.fullBrightnessEnabled === true) {
+    if (this.fullBrightnessEnabled === true) {
       return;
     }
 
     this.fullBrightnessEnabled = true;
     const { brightness } = await ScreenBrightness.getBrightness();
     setBrightness(brightness);
-    await ScreenBrightness.setBrightness({brightness: 1.0});
+    await ScreenBrightness.setBrightness({ brightness: 1.0 });
   }
 
   public async restorePreviousBrightness() {
@@ -76,15 +75,17 @@ export class ScreenService {
       return;
     }
 
-    if(this.fullBrightnessEnabled === false) {
+    if (this.fullBrightnessEnabled === false) {
       return;
     }
 
-    return brightness$.pipe(
-      take(1),
-      filter(brightness => brightness !== null),
-      switchMap(brightness => from(ScreenBrightness.setBrightness({brightness}))),
-      finalize(() => this.fullBrightnessEnabled = false)
-    ).toPromise();
+    return brightness$
+      .pipe(
+        take(1),
+        filter((brightness) => brightness !== null),
+        switchMap((brightness) => from(ScreenBrightness.setBrightness({ brightness }))),
+        finalize(() => (this.fullBrightnessEnabled = false)),
+      )
+      .toPromise();
   }
 }

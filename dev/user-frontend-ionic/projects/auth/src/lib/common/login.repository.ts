@@ -40,9 +40,9 @@
 import { Inject, Injectable } from '@angular/core';
 import { createStore, select, withProps } from '@ngneat/elf';
 import { persistState } from '@ngneat/elf-persist-state';
-import { currentLanguage$, localForageStore } from '@multi/shared';
 import { combineLatest } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
+import { currentLanguage$, localForageStore } from '@multi/shared';
 
 interface LoginProps {
   pageContent: LoginPageContent | null;
@@ -65,10 +65,7 @@ interface Translation {
 
 const STORE_NAME = 'login-page';
 
-const store = createStore(
-  { name: STORE_NAME },
-  withProps<LoginProps>({ pageContent: null })
-);
+const store = createStore({ name: STORE_NAME }, withProps<LoginProps>({ pageContent: null }));
 
 export const persist = persistState(store, {
   key: STORE_NAME,
@@ -77,7 +74,6 @@ export const persist = persistState(store, {
 
 @Injectable({ providedIn: 'root' })
 export class LoginRepository {
-
   private pageContent$ = store.pipe(select((state) => state.pageContent));
 
   public translatedPageContent$ = combineLatest([this.pageContent$, currentLanguage$]).pipe(
@@ -85,9 +81,11 @@ export class LoginRepository {
     map(([pageContent, currentLanguage]) => {
       const translations = pageContent.translations;
       if (translations && translations.length > 0) {
-
-        const translation = pageContent.translations.find((t) => t.languagesCode === currentLanguage) ||
-          pageContent.translations.find((t) => t.languagesCode === this.environment.defaultLanguage) ||
+        const translation =
+          pageContent.translations.find((t) => t.languagesCode === currentLanguage) ||
+          pageContent.translations.find(
+            (t) => t.languagesCode === this.environment.defaultLanguage,
+          ) ||
           pageContent.translations[0];
 
         return {
@@ -97,13 +95,13 @@ export class LoginRepository {
       } else {
         return null;
       }
-    })
+    }),
   );
 
   constructor(
     @Inject('environment')
-    private environment: any,) {
-  }
+    private environment: any,
+  ) {}
 
   public setPageContent = (pageContent: LoginPageContent) => {
     store.update((state) => ({
@@ -111,5 +109,4 @@ export class LoginRepository {
       pageContent,
     }));
   };
-
 }

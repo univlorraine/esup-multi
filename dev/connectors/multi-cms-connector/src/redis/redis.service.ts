@@ -39,8 +39,8 @@
 import {
   Injectable,
   Logger,
-  OnModuleInit,
   OnModuleDestroy,
+  OnModuleInit,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { createClient, RedisClientType } from 'redis';
@@ -105,7 +105,10 @@ export class RedisService implements OnModuleInit, OnModuleDestroy {
 
       await this.client.connect();
     } catch (error) {
-      this.logger.error('Failed to connect to Redis:', error.message);
+      this.logger.error(
+        'Failed to connect to Redis:',
+        error instanceof Error ? error.message : JSON.stringify(error),
+      );
       this.client = null;
       this.isConnected = false;
     }
@@ -120,7 +123,10 @@ export class RedisService implements OnModuleInit, OnModuleDestroy {
         await this.client.quit();
         this.logger.log('Disconnected from Redis');
       } catch (error) {
-        this.logger.warn('Error during Redis disconnect:', error.message);
+        this.logger.warn(
+          'Error during Redis disconnect:',
+          error instanceof Error ? error.message : JSON.stringify(error),
+        );
       }
       this.client = null;
       this.isConnected = false;
@@ -145,14 +151,17 @@ export class RedisService implements OnModuleInit, OnModuleDestroy {
     try {
       if (ttl) {
         // Si un TTL est fourni, on indique un temps d'expiration en millisecondes à notre commande Redis (PX)
-        await this.client!.set(key, value, { PX: ttl });
+        await this.client.set(key, value, { PX: ttl });
       } else {
         // Sinon, on stocke la valeur sans expiration
-        await this.client!.set(key, value);
+        await this.client.set(key, value);
       }
       return true;
     } catch (error) {
-      this.logger.error(`Failed to set Redis key ${key}:`, error.message);
+      this.logger.error(
+        `Failed to set Redis key ${key}:`,
+        error instanceof Error ? error.message : JSON.stringify(error),
+      );
       return false;
     }
   }
@@ -166,10 +175,13 @@ export class RedisService implements OnModuleInit, OnModuleDestroy {
     }
 
     try {
-      const result = await this.client!.get(key);
+      const result = await this.client.get(key);
       return typeof result === 'string' ? result : null;
     } catch (error) {
-      this.logger.error(`Failed to get Redis key ${key}:`, error.message);
+      this.logger.error(
+        `Failed to get Redis key ${key}:`,
+        error instanceof Error ? error.message : JSON.stringify(error),
+      );
       return null;
     }
   }
@@ -183,10 +195,13 @@ export class RedisService implements OnModuleInit, OnModuleDestroy {
     }
 
     try {
-      await this.client!.del(key);
+      await this.client.del(key);
       return true;
     } catch (error) {
-      this.logger.error(`Failed to delete Redis key ${key}:`, error.message);
+      this.logger.error(
+        `Failed to delete Redis key ${key}:`,
+        error instanceof Error ? error.message : JSON.stringify(error),
+      );
       return false;
     }
   }
@@ -202,13 +217,16 @@ export class RedisService implements OnModuleInit, OnModuleDestroy {
     const lockToken = Math.random().toString(36).slice(2);
 
     try {
-      const result = await this.client!.set(key, lockToken, {
+      const result = await this.client.set(key, lockToken, {
         PX: ttl,
         NX: true,
       });
       return result === 'OK' ? lockToken : null;
     } catch (error) {
-      this.logger.error(`Failed to acquire lock ${key}:`, error.message);
+      this.logger.error(
+        `Failed to acquire lock ${key}:`,
+        error instanceof Error ? error.message : JSON.stringify(error),
+      );
       return null;
     }
   }
@@ -230,9 +248,12 @@ export class RedisService implements OnModuleInit, OnModuleDestroy {
     `;
 
     try {
-      await this.client!.eval(script, { keys: [key], arguments: [lockToken] });
+      await this.client.eval(script, { keys: [key], arguments: [lockToken] });
     } catch (error) {
-      this.logger.error(`Failed to release lock ${key}:`, error.message);
+      this.logger.error(
+        `Failed to release lock ${key}:`,
+        error instanceof Error ? error.message : JSON.stringify(error),
+      );
     }
   }
 
@@ -248,17 +269,20 @@ export class RedisService implements OnModuleInit, OnModuleDestroy {
       let cursor = '0';
       let total = 0;
       do {
-        const res = await this.client!.scan(cursor, {
+        const res = await this.client.scan(cursor, {
           MATCH: pattern,
           COUNT: 500,
         });
         cursor = res.cursor;
         const keys = res.keys;
-        if (keys.length) total += await this.client!.del(keys);
+        if (keys.length) total += await this.client.del(keys);
       } while (cursor !== '0');
       return total;
     } catch (e) {
-      this.logger.error(`Failed to delete pattern ${pattern}:`, e.message);
+      this.logger.error(
+        `Failed to delete pattern ${pattern}:`,
+        e instanceof Error ? e.message : JSON.stringify(e),
+      );
       return 0;
     }
   }

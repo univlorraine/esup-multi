@@ -37,17 +37,22 @@
  * termes.
  */
 
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AlertsService, GuidedTourService, MultiTenantService, VersionService } from '@multi/shared';
-import { firstValueFrom } from 'rxjs';
-import { Capacitor } from '@capacitor/core';
-import { TranslateService } from '@ngx-translate/core';
-import { storeInitialized$, setDismissedVersion, dismissedVersion$ } from './app-update.repository';
+import { Injectable } from '@angular/core';
 import { App } from '@capacitor/app';
+import { Capacitor } from '@capacitor/core';
 import { Platform } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
+import { firstValueFrom } from 'rxjs';
+import {
+  AlertsService,
+  GuidedTourService,
+  MultiTenantService,
+  VersionService,
+} from '@multi/shared';
+import { dismissedVersion$, setDismissedVersion, storeInitialized$ } from './app-update.repository';
 
-interface AppUpdateInfo  {
+interface AppUpdateInfo {
   storeVersion: string;
   minVersionRequired: string;
   playStoreUrl: string;
@@ -55,7 +60,7 @@ interface AppUpdateInfo  {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AppUpdateService {
   private appUpdateInfo: AppUpdateInfo | null = null;
@@ -83,7 +88,7 @@ export class AppUpdateService {
   }
 
   private isVersionLowerThanStore(version: string, storeVersion: string): boolean {
-    const parseVersion = (v: string) => v.split('.').map(v => parseInt(v, 10));
+    const parseVersion = (v: string) => v.split('.').map((v) => parseInt(v, 10));
     const currentParts = parseVersion(version);
     const storeParts = parseVersion(storeVersion);
 
@@ -108,12 +113,12 @@ export class AppUpdateService {
           text: this.translations['APP-UPDATE.MANDATORY_UPDATE_ALERT.UPDATE_NOW'],
           handler: () => {
             window.location.href = this.getStoreUrl();
-          }
-        }
+          },
+        },
       ],
       backdropDismiss: false,
       type: 'update',
-      priority: 1 // On s'assure d'afficher le message de maj avant les autres alertes d'erreur
+      priority: 1, // On s'assure d'afficher le message de maj avant les autres alertes d'erreur
     });
   }
 
@@ -128,18 +133,18 @@ export class AppUpdateService {
           role: 'cancel',
           handler: () => {
             this.dismissUpdate();
-          }
+          },
         },
         {
           text: this.translations['APP-UPDATE.OPTIONAL_UPDATE_ALERT.UPDATE_NOW'],
           handler: () => {
             window.location.href = this.getStoreUrl();
-          }
-        }
+          },
+        },
       ],
       backdropDismiss: false,
       type: 'update',
-      priority: 1 // On s'assure d'afficher le message de maj avant les autres alertes d'erreur
+      priority: 1, // On s'assure d'afficher le message de maj avant les autres alertes d'erreur
     });
   }
 
@@ -152,8 +157,7 @@ export class AppUpdateService {
   private getStoreUrl(): string {
     return Capacitor.getPlatform() === 'android'
       ? this.appUpdateInfo.playStoreUrl
-      : this.appUpdateInfo.appStoreUrl
-      ;
+      : this.appUpdateInfo.appStoreUrl;
   }
 
   // Préchargement des traductions pour les alertes
@@ -167,8 +171,8 @@ export class AppUpdateService {
         'APP-UPDATE.OPTIONAL_UPDATE_ALERT.HEADER',
         'APP-UPDATE.OPTIONAL_UPDATE_ALERT.MESSAGE',
         'APP-UPDATE.OPTIONAL_UPDATE_ALERT.UPDATE_NOW',
-        'APP-UPDATE.OPTIONAL_UPDATE_ALERT.UPDATE_LATER'
-      ])
+        'APP-UPDATE.OPTIONAL_UPDATE_ALERT.UPDATE_LATER',
+      ]),
     );
   }
 
@@ -196,19 +200,28 @@ export class AppUpdateService {
     if (!this.appUpdateInfo) return;
 
     await this.loadTranslations();
-    const isMandatory: boolean = this.isVersionLowerThanStore(this.currentVersion, this.appUpdateInfo.minVersionRequired);
+    const isMandatory: boolean = this.isVersionLowerThanStore(
+      this.currentVersion,
+      this.appUpdateInfo.minVersionRequired,
+    );
 
     if (isMandatory) {
       await this.showMandatoryUpdateAlert();
       return;
     }
 
-    const isUpdateAvailable = this.isVersionLowerThanStore(this.currentVersion, this.appUpdateInfo.storeVersion);
+    const isUpdateAvailable = this.isVersionLowerThanStore(
+      this.currentVersion,
+      this.appUpdateInfo.storeVersion,
+    );
 
     if (isUpdateAvailable) {
       await firstValueFrom(storeInitialized$);
       const dismissedVersion = await firstValueFrom(dismissedVersion$);
-      if (!dismissedVersion || this.isVersionLowerThanStore(dismissedVersion, this.appUpdateInfo.storeVersion)) {
+      if (
+        !dismissedVersion ||
+        this.isVersionLowerThanStore(dismissedVersion, this.appUpdateInfo.storeVersion)
+      ) {
         await this.showOptionalUpdateAlert();
       }
     }

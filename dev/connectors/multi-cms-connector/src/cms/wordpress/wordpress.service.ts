@@ -36,11 +36,11 @@
  * termes.
  */
 
+import { HttpService } from '@nestjs/axios';
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { HttpService } from '@nestjs/axios';
 import { firstValueFrom } from 'rxjs';
-import { CmsConfigError, CmsQueryError } from '../cms.exception';
+import { CmsConfigError, CmsQueryError } from '../cms.exception.js';
 
 @Injectable()
 export class WordpressService {
@@ -111,9 +111,9 @@ export class WordpressService {
       return response.data.data;
     } catch (error) {
       // Gérer les erreurs HTTP (401, 403, etc.)
-      if (error.response) {
-        const statusCode = error.response.status;
-        const statusText = error.response.statusText;
+      if (error instanceof Error && 'response' in error) {
+        const statusCode = error.response?.['status'];
+        const statusText = error.response?.['statusText'];
 
         if (statusCode === 401) {
           throw new CmsQueryError(
@@ -139,7 +139,10 @@ export class WordpressService {
       }
 
       // Autres erreurs (réseau, timeout, etc.)
-      throw new CmsQueryError('Failed to fetch data from WordPress', error);
+      throw new CmsQueryError(
+        'Failed to fetch data from WordPress',
+        error as Error,
+      );
     }
   }
 }

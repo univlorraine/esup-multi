@@ -37,34 +37,28 @@
  * termes.
  */
 
-import { APP_INITIALIZER, NgModule } from '@angular/core';
-import { ProjectModuleService } from '@multi/shared';
 import { CommonModule } from '@angular/common';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
+import { ProjectModuleService } from '@multi/shared';
 
-
-const initModule = (projectModuleService: ProjectModuleService) =>
-  () => {
-    projectModuleService.initProjectModule({
-      name: 'app-update',
-      translation: true,
-    });
-  }
+const initModule = (projectModuleService: ProjectModuleService) => () => {
+  projectModuleService.initProjectModule({
+    name: 'app-update',
+    translation: true,
+  });
+};
 
 @NgModule({
-  imports: [
-    CommonModule,
-    IonicModule,
-    TranslateModule,
-  ],
+  imports: [CommonModule, IonicModule, TranslatePipe],
   providers: [
     {
       provide: APP_INITIALIZER,
       useFactory: initModule,
-      deps:[ProjectModuleService],
-      multi: true
-    }
+      deps: [ProjectModuleService],
+      multi: true,
+    },
   ],
 })
-export class AppUpdateModule { }
+export class AppUpdateModule {}

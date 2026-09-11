@@ -69,7 +69,9 @@ export function ValidateMapping(options: ValidationOptions) {
           logger.error(
             `Validation failed in ${target.constructor.name}.${propertyName}: ${errorMessage}`,
           );
-          throw new Error(`Validation failed: ${errorMessage}`);
+          throw new Error(`Validation failed: ${errorMessage}`, {
+            cause: error,
+          });
         }
 
         // Autre erreur

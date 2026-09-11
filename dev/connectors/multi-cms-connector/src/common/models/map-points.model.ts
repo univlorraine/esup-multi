@@ -37,10 +37,10 @@
  */
 
 import { Field, ObjectType } from '@nestjs/graphql';
-import { Campus } from '@common/models/campuses.model';
-import { MapCategory } from '@common/models/map-categories.model';
-import { MapIcon } from '@common/models/map-icons.model';
-import { MapPointTranslations } from '@common/models/translations.model';
+import { Campus } from '#common/models/campuses.model.js';
+import { MapCategory } from '#common/models/map-categories.model.js';
+import { MapIcon } from '#common/models/map-icons.model.js';
+import { MapPointTranslations } from '#common/models/translations.model.js';
 
 @ObjectType()
 class PointGpsCoordinates {

@@ -39,22 +39,24 @@
 
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NetworkService, StatisticsService } from '@multi/shared';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
+import { NetworkService, StatisticsService } from '@multi/shared';
 import { StaticPagesRepository, TranslatedStaticPage } from '../../static-pages.repository';
 import { StaticPagesService } from '../../static-pages.service';
 
 @Component({
   selector: 'app-static-pages-widget',
   templateUrl: './static-pages-widget.component.html',
-  styleUrls: ['../../../../../../src/theme/app-theme/styles/static-pages/static-pages-widget.component.scss'],
+  styleUrls: [
+    '../../../../../../src/theme/app-theme/styles/static-pages/static-pages-widget.component.scss',
+  ],
 })
 export class StaticPagesWidgetComponent {
-
   public translatedStaticPages$: Observable<TranslatedStaticPage[]>;
 
-  constructor(private route: ActivatedRoute,
+  constructor(
+    private route: ActivatedRoute,
     private staticPagesService: StaticPagesService,
     private staticPagesRepository: StaticPagesRepository,
     private router: Router,
@@ -69,10 +71,7 @@ export class StaticPagesWidgetComponent {
       return;
     }
 
-    this.staticPagesService.loadAndStoreStaticPages()
-      .pipe(
-        take(1)
-      ).subscribe();
+    this.staticPagesService.loadAndStoreStaticPages().pipe(take(1)).subscribe();
   }
 
   public onClick(page: TranslatedStaticPage): Promise<boolean> {

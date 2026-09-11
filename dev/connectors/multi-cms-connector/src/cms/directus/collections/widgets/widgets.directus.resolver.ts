@@ -37,8 +37,8 @@
  */
 
 import { Args, Query, Resolver } from '@nestjs/graphql';
-import { WidgetsDirectusService } from './widgets.directus.service';
-import { Widgets } from '@common/models/widgets.model';
+import { Widgets } from '#common/models/widgets.model.js';
+import { WidgetsDirectusService } from './widgets.directus.service.js';
 
 @Resolver(() => Widgets)
 export class WidgetsDirectusResolver {

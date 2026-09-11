@@ -37,8 +37,8 @@
  */
 
 import { Field, ObjectType } from '@nestjs/graphql';
-import { FolderDirectus } from '@directus/collections/system/folder.directus.model';
 import { GraphQLJSONObject } from 'graphql-type-json';
+import { FolderDirectus } from '#directus/collections/system/folder.directus.model.js';
 
 @ObjectType()
 export class FileDirectus {

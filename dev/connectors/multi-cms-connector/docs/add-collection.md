@@ -9,9 +9,9 @@
 ```typescript
 import { Module } from '@nestjs/common';
 import { HttpModule } from '@nestjs/axios';
-import { WordpressService } from '@wordpress/wordpress.service';
-import { MyNewCollectionWordpressModule } from '@wordpress/collections/my-new-collection/my-new-collection.wordpress.module';
-import { SocialNetworksWordpressModule } from '@wordpress/collections/social-networks/social-networks.wordpress.module';
+import { WordpressService } from '#wordpress/wordpress.service.js';
+import { MyNewCollectionWordpressModule } from '#wordpress/collections/my-new-collection/my-new-collection.wordpress.module.js';
+import { SocialNetworksWordpressModule } from '#wordpress/collections/social-networks/social-networks.wordpress.module.js';
 
 @Module({
   providers: [WordpressService],
