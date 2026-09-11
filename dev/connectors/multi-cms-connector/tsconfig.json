@@ -41,7 +41,7 @@
     "noFallthroughCasesInSwitch": false,
     "types": [
       "node",
-      "jest"
+      "vitest/globals"
     ]
   }
 }
