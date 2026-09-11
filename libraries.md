@@ -184,7 +184,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 ### [main](./dev/user-backend-nest/main)
 <span id="backend-main"></span>
 ```
-├─ MIT: 36
+├─ MIT: 35
 └─ Apache-2.0: 5
 ```
 
@@ -193,29 +193,28 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@eslint/eslintrc@3.3.6](https://github.com/eslint/eslintrc) - MIT
 - [@eslint/js@10.0.1](https://github.com/eslint/eslint) - MIT
 - [@ianvs/prettier-plugin-sort-imports@4.7.1](https://github.com/ianvs/prettier-plugin-sort-imports) - Apache-2.0
-- [@nestjs/cli@11.0.24](https://github.com/nestjs/nest-cli) - MIT
-- [@nestjs/common@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/config@4.0.4](https://github.com/nestjs/config) - MIT
-- [@nestjs/core@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/jwt@11.0.2](https://github.com/nestjs/jwt) - MIT
-- [@nestjs/microservices@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/passport@11.0.5](https://github.com/nestjs/passport) - MIT
-- [@nestjs/platform-express@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/schematics@11.1.0](https://github.com/nestjs/schematics) - MIT
-- [@nestjs/terminus@11.1.1](https://github.com/nestjs/terminus) - MIT
-- [@nestjs/testing@11.2.1](https://github.com/nestjs/nest) - MIT
+- [@nats-io/transport-node@3.4.0](https://github.com/nats-io/nats.js) - Apache-2.0
+- [@nestjs/cli@12.0.0](https://github.com/nestjs/nest-cli) - MIT
+- [@nestjs/common@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/config@12.0.0](https://github.com/nestjs/config) - MIT
+- [@nestjs/core@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/jwt@12.0.1](https://github.com/nestjs/jwt) - MIT
+- [@nestjs/microservices@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/passport@12.0.0](https://github.com/nestjs/passport) - MIT
+- [@nestjs/platform-express@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/schematics@12.0.0](https://github.com/nestjs/schematics) - MIT
+- [@nestjs/terminus@12.0.0](https://github.com/nestjs/terminus) - MIT
+- [@nestjs/testing@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@types/express@5.0.6](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/jest@30.0.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/node@26.2.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/passport-http-bearer@1.0.42](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/passport-jwt@4.0.1](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@vitest/coverage-v8@5.0.0](https://github.com/vitest-dev/vitest) - MIT
 - [eslint-config-prettier@10.1.8](https://github.com/prettier/eslint-config-prettier) - MIT
 - [eslint-plugin-prettier@5.5.6](https://github.com/prettier/eslint-plugin-prettier) - MIT
 - [eslint@10.8.1](https://github.com/eslint/eslint) - MIT
 - [globals@17.11.0](https://github.com/sindresorhus/globals) - MIT
-- [jest@30.4.2](https://github.com/jestjs/jest) - MIT
-- [nats@2.29.3](https://github.com/nats-io/nats.node) - Apache-2.0
-- [nestjs-pino@4.6.1](https://github.com/iamolegga/nestjs-pino) - MIT
+- [nestjs-pino@5.1.0](https://github.com/iamolegga/nestjs-pino) - MIT
 - [passport-http-bearer@1.0.1](https://github.com/jaredhanson/passport-http-bearer) - MIT
 - [passport-jwt@4.0.1](https://github.com/mikenicholson/passport-jwt) - MIT
 - [passport@0.7.0](https://github.com/jaredhanson/passport) - MIT
@@ -225,198 +224,17 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [reflect-metadata@0.2.2](https://github.com/rbuckton/reflect-metadata) - Apache-2.0
 - [rxjs@7.8.2](https://github.com/reactivex/rxjs) - Apache-2.0
 - [source-map-support@0.5.21](https://github.com/evanw/node-source-map-support) - MIT
-- [ts-jest@29.4.12](https://github.com/kulshekhar/ts-jest) - MIT
 - [ts-loader@9.6.2](https://github.com/TypeStrong/ts-loader) - MIT
 - [ts-node@10.9.2](https://github.com/TypeStrong/ts-node) - MIT
 - [tsconfig-paths@4.2.0](https://github.com/dividab/tsconfig-paths) - MIT
 - [typescript-eslint@8.67.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
 - [typescript@6.0.3](https://github.com/microsoft/TypeScript) - Apache-2.0
+- [vitest@5.0.0](https://github.com/vitest-dev/vitest) - MIT
 
 </details>
 
 ### [auth](./dev/user-backend-nest/microservices/auth)
 <span id="backend-auth"></span>
-```
-├─ MIT: 32
-└─ Apache-2.0: 5
-```
-
-<details><summary>Détails</summary>
-
-- [@eslint/eslintrc@3.3.6](https://github.com/eslint/eslintrc) - MIT
-- [@eslint/js@10.0.1](https://github.com/eslint/eslint) - MIT
-- [@ianvs/prettier-plugin-sort-imports@4.7.1](https://github.com/ianvs/prettier-plugin-sort-imports) - Apache-2.0
-- [@nestjs/axios@4.0.1](https://github.com/nestjs/axios) - MIT
-- [@nestjs/cli@11.0.24](https://github.com/nestjs/nest-cli) - MIT
-- [@nestjs/common@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/config@4.0.4](https://github.com/nestjs/config) - MIT
-- [@nestjs/core@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/jwt@11.0.2](https://github.com/nestjs/jwt) - MIT
-- [@nestjs/microservices@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/mongoose@11.0.4](https://github.com/nestjs/mongoose) - MIT
-- [@nestjs/platform-express@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/schedule@6.1.3](https://github.com/nestjs/schedule) - MIT
-- [@nestjs/schematics@11.1.0](https://github.com/nestjs/schematics) - MIT
-- [@nestjs/testing@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@types/express@5.0.6](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/jest@30.0.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/node@26.2.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [agentkeepalive@4.6.0](https://github.com/node-modules/agentkeepalive) - MIT
-- [cron@4.4.0](https://github.com/kelektiv/node-cron) - MIT
-- [eslint-config-prettier@10.1.8](https://github.com/prettier/eslint-config-prettier) - MIT
-- [eslint-plugin-prettier@5.5.6](https://github.com/prettier/eslint-plugin-prettier) - MIT
-- [eslint@10.8.1](https://github.com/eslint/eslint) - MIT
-- [globals@17.11.0](https://github.com/sindresorhus/globals) - MIT
-- [jest@30.4.2](https://github.com/jestjs/jest) - MIT
-- [mongoose@8.24.3](https://github.com/Automattic/mongoose) - MIT
-- [nats@2.29.3](https://github.com/nats-io/nats.node) - Apache-2.0
-- [prettier@3.9.6](https://github.com/prettier/prettier) - MIT
-- [reflect-metadata@0.2.2](https://github.com/rbuckton/reflect-metadata) - Apache-2.0
-- [rxjs@7.8.2](https://github.com/reactivex/rxjs) - Apache-2.0
-- [source-map-support@0.5.21](https://github.com/evanw/node-source-map-support) - MIT
-- [ts-jest@29.4.12](https://github.com/kulshekhar/ts-jest) - MIT
-- [ts-loader@9.6.2](https://github.com/TypeStrong/ts-loader) - MIT
-- [ts-node@10.9.2](https://github.com/TypeStrong/ts-node) - MIT
-- [tsconfig-paths@4.2.0](https://github.com/dividab/tsconfig-paths) - MIT
-- [typescript-eslint@8.67.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
-- [typescript@6.0.3](https://github.com/microsoft/TypeScript) - Apache-2.0
-
-</details>
-
-### [card](./dev/user-backend-nest/microservices/card)
-<span id="backend-card"></span>
-```
-├─ MIT: 27
-└─ Apache-2.0: 5
-```
-
-<details><summary>Détails</summary>
-
-- [@eslint/eslintrc@3.3.6](https://github.com/eslint/eslintrc) - MIT
-- [@eslint/js@10.0.1](https://github.com/eslint/eslint) - MIT
-- [@ianvs/prettier-plugin-sort-imports@4.7.1](https://github.com/ianvs/prettier-plugin-sort-imports) - Apache-2.0
-- [@nestjs/axios@4.0.1](https://github.com/nestjs/axios) - MIT
-- [@nestjs/cli@11.0.24](https://github.com/nestjs/nest-cli) - MIT
-- [@nestjs/common@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/config@4.0.4](https://github.com/nestjs/config) - MIT
-- [@nestjs/core@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/microservices@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/platform-express@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/schematics@11.1.0](https://github.com/nestjs/schematics) - MIT
-- [@nestjs/testing@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@types/express@5.0.6](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/jest@30.0.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/node@26.2.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [agentkeepalive@4.6.0](https://github.com/node-modules/agentkeepalive) - MIT
-- [eslint-config-prettier@10.1.8](https://github.com/prettier/eslint-config-prettier) - MIT
-- [eslint-plugin-prettier@5.5.6](https://github.com/prettier/eslint-plugin-prettier) - MIT
-- [eslint@10.8.1](https://github.com/eslint/eslint) - MIT
-- [globals@17.11.0](https://github.com/sindresorhus/globals) - MIT
-- [jest@30.4.2](https://github.com/jestjs/jest) - MIT
-- [nats@2.29.3](https://github.com/nats-io/nats.node) - Apache-2.0
-- [prettier@3.9.6](https://github.com/prettier/prettier) - MIT
-- [reflect-metadata@0.2.2](https://github.com/rbuckton/reflect-metadata) - Apache-2.0
-- [rxjs@7.8.2](https://github.com/reactivex/rxjs) - Apache-2.0
-- [source-map-support@0.5.21](https://github.com/evanw/node-source-map-support) - MIT
-- [ts-jest@29.4.12](https://github.com/kulshekhar/ts-jest) - MIT
-- [ts-loader@9.6.2](https://github.com/TypeStrong/ts-loader) - MIT
-- [ts-node@10.9.2](https://github.com/TypeStrong/ts-node) - MIT
-- [tsconfig-paths@4.2.0](https://github.com/dividab/tsconfig-paths) - MIT
-- [typescript-eslint@8.67.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
-- [typescript@6.0.3](https://github.com/microsoft/TypeScript) - Apache-2.0
-
-</details>
-
-### [card-eu](./dev/user-backend-nest/microservices/card-eu)
-<span id="backend-card-eu"></span>
-```
-├─ MIT: 27
-└─ Apache-2.0: 5
-```
-
-<details><summary>Détails</summary>
-
-- [@eslint/eslintrc@3.3.6](https://github.com/eslint/eslintrc) - MIT
-- [@eslint/js@10.0.1](https://github.com/eslint/eslint) - MIT
-- [@ianvs/prettier-plugin-sort-imports@4.7.1](https://github.com/ianvs/prettier-plugin-sort-imports) - Apache-2.0
-- [@nestjs/axios@4.0.1](https://github.com/nestjs/axios) - MIT
-- [@nestjs/cli@11.0.24](https://github.com/nestjs/nest-cli) - MIT
-- [@nestjs/common@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/config@4.0.4](https://github.com/nestjs/config) - MIT
-- [@nestjs/core@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/microservices@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/platform-express@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/schematics@11.1.0](https://github.com/nestjs/schematics) - MIT
-- [@nestjs/testing@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@types/express@5.0.6](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/jest@30.0.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/node@26.2.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [agentkeepalive@4.6.0](https://github.com/node-modules/agentkeepalive) - MIT
-- [eslint-config-prettier@10.1.8](https://github.com/prettier/eslint-config-prettier) - MIT
-- [eslint-plugin-prettier@5.5.6](https://github.com/prettier/eslint-plugin-prettier) - MIT
-- [eslint@10.8.1](https://github.com/eslint/eslint) - MIT
-- [globals@17.11.0](https://github.com/sindresorhus/globals) - MIT
-- [jest@30.4.2](https://github.com/jestjs/jest) - MIT
-- [nats@2.29.3](https://github.com/nats-io/nats.node) - Apache-2.0
-- [prettier@3.9.6](https://github.com/prettier/prettier) - MIT
-- [reflect-metadata@0.2.2](https://github.com/rbuckton/reflect-metadata) - Apache-2.0
-- [rxjs@7.8.2](https://github.com/reactivex/rxjs) - Apache-2.0
-- [source-map-support@0.5.21](https://github.com/evanw/node-source-map-support) - MIT
-- [ts-jest@29.4.12](https://github.com/kulshekhar/ts-jest) - MIT
-- [ts-loader@9.6.2](https://github.com/TypeStrong/ts-loader) - MIT
-- [ts-node@10.9.2](https://github.com/TypeStrong/ts-node) - MIT
-- [tsconfig-paths@4.2.0](https://github.com/dividab/tsconfig-paths) - MIT
-- [typescript-eslint@8.67.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
-- [typescript@6.0.3](https://github.com/microsoft/TypeScript) - Apache-2.0
-
-</details>
-
-### [chatbot](./dev/user-backend-nest/microservices/chatbot)
-<span id="backend-chatbot"></span>
-```
-├─ MIT: 27
-└─ Apache-2.0: 5
-```
-
-<details><summary>Détails</summary>
-
-- [@eslint/eslintrc@3.3.6](https://github.com/eslint/eslintrc) - MIT
-- [@eslint/js@10.0.1](https://github.com/eslint/eslint) - MIT
-- [@ianvs/prettier-plugin-sort-imports@4.7.1](https://github.com/ianvs/prettier-plugin-sort-imports) - Apache-2.0
-- [@nestjs/axios@4.0.1](https://github.com/nestjs/axios) - MIT
-- [@nestjs/cli@11.0.24](https://github.com/nestjs/nest-cli) - MIT
-- [@nestjs/common@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/config@4.0.4](https://github.com/nestjs/config) - MIT
-- [@nestjs/core@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/microservices@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/platform-express@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/schematics@11.1.0](https://github.com/nestjs/schematics) - MIT
-- [@nestjs/testing@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@types/express@5.0.6](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/jest@30.0.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/node@26.2.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [agentkeepalive@4.6.0](https://github.com/node-modules/agentkeepalive) - MIT
-- [eslint-config-prettier@10.1.8](https://github.com/prettier/eslint-config-prettier) - MIT
-- [eslint-plugin-prettier@5.5.6](https://github.com/prettier/eslint-plugin-prettier) - MIT
-- [eslint@10.8.1](https://github.com/eslint/eslint) - MIT
-- [globals@17.11.0](https://github.com/sindresorhus/globals) - MIT
-- [jest@30.4.2](https://github.com/jestjs/jest) - MIT
-- [nats@2.29.3](https://github.com/nats-io/nats.node) - Apache-2.0
-- [prettier@3.9.6](https://github.com/prettier/prettier) - MIT
-- [reflect-metadata@0.2.2](https://github.com/rbuckton/reflect-metadata) - Apache-2.0
-- [rxjs@7.8.2](https://github.com/reactivex/rxjs) - Apache-2.0
-- [source-map-support@0.5.21](https://github.com/evanw/node-source-map-support) - MIT
-- [ts-jest@29.4.12](https://github.com/kulshekhar/ts-jest) - MIT
-- [ts-loader@9.6.2](https://github.com/TypeStrong/ts-loader) - MIT
-- [ts-node@10.9.2](https://github.com/TypeStrong/ts-node) - MIT
-- [tsconfig-paths@4.2.0](https://github.com/dividab/tsconfig-paths) - MIT
-- [typescript-eslint@8.67.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
-- [typescript@6.0.3](https://github.com/microsoft/TypeScript) - Apache-2.0
-
-</details>
-
-### [clocking](./dev/user-backend-nest/microservices/clocking)
-<span id="backend-clocking"></span>
 ```
 ├─ MIT: 31
 └─ Apache-2.0: 5
@@ -427,93 +245,46 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@eslint/eslintrc@3.3.6](https://github.com/eslint/eslintrc) - MIT
 - [@eslint/js@10.0.1](https://github.com/eslint/eslint) - MIT
 - [@ianvs/prettier-plugin-sort-imports@4.7.1](https://github.com/ianvs/prettier-plugin-sort-imports) - Apache-2.0
-- [@keyv/redis@5.1.6](https://github.com/jaredwray/keyv) - MIT
-- [@nestjs/axios@4.0.1](https://github.com/nestjs/axios) - MIT
-- [@nestjs/cache-manager@3.1.3](https://github.com/nestjs/cache-manager) - MIT
-- [@nestjs/cli@11.0.24](https://github.com/nestjs/nest-cli) - MIT
-- [@nestjs/common@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/config@4.0.4](https://github.com/nestjs/config) - MIT
-- [@nestjs/core@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/microservices@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/platform-express@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/schematics@11.1.0](https://github.com/nestjs/schematics) - MIT
-- [@nestjs/testing@11.2.1](https://github.com/nestjs/nest) - MIT
+- [@nats-io/transport-node@3.4.0](https://github.com/nats-io/nats.js) - Apache-2.0
+- [@nestjs/axios@12.0.0](https://github.com/nestjs/axios) - MIT
+- [@nestjs/cli@12.0.0](https://github.com/nestjs/nest-cli) - MIT
+- [@nestjs/common@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/config@12.0.0](https://github.com/nestjs/config) - MIT
+- [@nestjs/core@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/jwt@12.0.1](https://github.com/nestjs/jwt) - MIT
+- [@nestjs/microservices@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/mongoose@12.0.0](https://github.com/nestjs/mongoose) - MIT
+- [@nestjs/platform-express@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/schedule@12.0.1](https://github.com/nestjs/schedule) - MIT
+- [@nestjs/schematics@12.0.0](https://github.com/nestjs/schematics) - MIT
+- [@nestjs/testing@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@types/express@5.0.6](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/jest@30.0.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/node@26.2.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@vitest/coverage-v8@5.0.0](https://github.com/vitest-dev/vitest) - MIT
 - [agentkeepalive@4.6.0](https://github.com/node-modules/agentkeepalive) - MIT
-- [cache-manager@7.2.9](https://github.com/jaredwray/cacheable) - MIT
-- [date-fns@4.4.0](https://github.com/date-fns/date-fns) - MIT
+- [cron@4.4.0](https://github.com/kelektiv/node-cron) - MIT
 - [eslint-config-prettier@10.1.8](https://github.com/prettier/eslint-config-prettier) - MIT
 - [eslint-plugin-prettier@5.5.6](https://github.com/prettier/eslint-plugin-prettier) - MIT
 - [eslint@10.8.1](https://github.com/eslint/eslint) - MIT
 - [globals@17.11.0](https://github.com/sindresorhus/globals) - MIT
-- [jest@30.4.2](https://github.com/jestjs/jest) - MIT
-- [nats@2.29.3](https://github.com/nats-io/nats.node) - Apache-2.0
+- [mongoose@8.24.3](https://github.com/Automattic/mongoose) - MIT
 - [prettier@3.9.6](https://github.com/prettier/prettier) - MIT
 - [reflect-metadata@0.2.2](https://github.com/rbuckton/reflect-metadata) - Apache-2.0
 - [rxjs@7.8.2](https://github.com/reactivex/rxjs) - Apache-2.0
 - [source-map-support@0.5.21](https://github.com/evanw/node-source-map-support) - MIT
-- [ts-jest@29.4.12](https://github.com/kulshekhar/ts-jest) - MIT
 - [ts-loader@9.6.2](https://github.com/TypeStrong/ts-loader) - MIT
 - [ts-node@10.9.2](https://github.com/TypeStrong/ts-node) - MIT
 - [tsconfig-paths@4.2.0](https://github.com/dividab/tsconfig-paths) - MIT
 - [typescript-eslint@8.67.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
 - [typescript@6.0.3](https://github.com/microsoft/TypeScript) - Apache-2.0
+- [vitest@5.0.0](https://github.com/vitest-dev/vitest) - MIT
 
 </details>
 
-### [contact-us](./dev/user-backend-nest/microservices/contact-us)
-<span id="backend-contact-us"></span>
+### [card](./dev/user-backend-nest/microservices/card)
+<span id="backend-card"></span>
 ```
-├─ MIT: 28
-├─ Apache-2.0: 5
-└─ MIT-0: 1
-```
-
-<details><summary>Détails</summary>
-
-- [@eslint/eslintrc@3.3.6](https://github.com/eslint/eslintrc) - MIT
-- [@eslint/js@10.0.1](https://github.com/eslint/eslint) - MIT
-- [@ianvs/prettier-plugin-sort-imports@4.7.1](https://github.com/ianvs/prettier-plugin-sort-imports) - Apache-2.0
-- [@nestjs-modules/mailer@2.3.7](https://github.com/nest-modules/mailer) - MIT
-- [@nestjs/axios@4.0.1](https://github.com/nestjs/axios) - MIT
-- [@nestjs/cli@11.0.24](https://github.com/nestjs/nest-cli) - MIT
-- [@nestjs/common@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/config@4.0.4](https://github.com/nestjs/config) - MIT
-- [@nestjs/core@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/microservices@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/platform-express@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/schematics@11.1.0](https://github.com/nestjs/schematics) - MIT
-- [@nestjs/testing@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@types/express@5.0.6](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/jest@30.0.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/node@26.2.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [agentkeepalive@4.6.0](https://github.com/node-modules/agentkeepalive) - MIT
-- [eslint-config-prettier@10.1.8](https://github.com/prettier/eslint-config-prettier) - MIT
-- [eslint-plugin-prettier@5.5.6](https://github.com/prettier/eslint-plugin-prettier) - MIT
-- [eslint@10.8.1](https://github.com/eslint/eslint) - MIT
-- [globals@17.11.0](https://github.com/sindresorhus/globals) - MIT
-- [jest@30.4.2](https://github.com/jestjs/jest) - MIT
-- [nats@2.29.3](https://github.com/nats-io/nats.node) - Apache-2.0
-- [nodemailer@9.0.5](https://github.com/nodemailer/nodemailer) - MIT-0
-- [prettier@3.9.6](https://github.com/prettier/prettier) - MIT
-- [reflect-metadata@0.2.2](https://github.com/rbuckton/reflect-metadata) - Apache-2.0
-- [rxjs@7.8.2](https://github.com/reactivex/rxjs) - Apache-2.0
-- [source-map-support@0.5.21](https://github.com/evanw/node-source-map-support) - MIT
-- [ts-jest@29.4.12](https://github.com/kulshekhar/ts-jest) - MIT
-- [ts-loader@9.6.2](https://github.com/TypeStrong/ts-loader) - MIT
-- [ts-node@10.9.2](https://github.com/TypeStrong/ts-node) - MIT
-- [tsconfig-paths@4.2.0](https://github.com/dividab/tsconfig-paths) - MIT
-- [typescript-eslint@8.67.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
-- [typescript@6.0.3](https://github.com/microsoft/TypeScript) - Apache-2.0
-
-</details>
-
-### [contacts](./dev/user-backend-nest/microservices/contacts)
-<span id="backend-contacts"></span>
-```
-├─ MIT: 27
+├─ MIT: 26
 └─ Apache-2.0: 5
 ```
 
@@ -522,42 +293,41 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@eslint/eslintrc@3.3.6](https://github.com/eslint/eslintrc) - MIT
 - [@eslint/js@10.0.1](https://github.com/eslint/eslint) - MIT
 - [@ianvs/prettier-plugin-sort-imports@4.7.1](https://github.com/ianvs/prettier-plugin-sort-imports) - Apache-2.0
-- [@nestjs/axios@4.0.1](https://github.com/nestjs/axios) - MIT
-- [@nestjs/cli@11.0.24](https://github.com/nestjs/nest-cli) - MIT
-- [@nestjs/common@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/config@4.0.4](https://github.com/nestjs/config) - MIT
-- [@nestjs/core@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/microservices@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/platform-express@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/schematics@11.1.0](https://github.com/nestjs/schematics) - MIT
-- [@nestjs/testing@11.2.1](https://github.com/nestjs/nest) - MIT
+- [@nats-io/transport-node@3.4.0](https://github.com/nats-io/nats.js) - Apache-2.0
+- [@nestjs/axios@12.0.0](https://github.com/nestjs/axios) - MIT
+- [@nestjs/cli@12.0.0](https://github.com/nestjs/nest-cli) - MIT
+- [@nestjs/common@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/config@12.0.0](https://github.com/nestjs/config) - MIT
+- [@nestjs/core@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/microservices@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/platform-express@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/schematics@12.0.0](https://github.com/nestjs/schematics) - MIT
+- [@nestjs/testing@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@types/express@5.0.6](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/jest@30.0.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/node@26.2.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@vitest/coverage-v8@5.0.0](https://github.com/vitest-dev/vitest) - MIT
 - [agentkeepalive@4.6.0](https://github.com/node-modules/agentkeepalive) - MIT
 - [eslint-config-prettier@10.1.8](https://github.com/prettier/eslint-config-prettier) - MIT
 - [eslint-plugin-prettier@5.5.6](https://github.com/prettier/eslint-plugin-prettier) - MIT
 - [eslint@10.8.1](https://github.com/eslint/eslint) - MIT
 - [globals@17.11.0](https://github.com/sindresorhus/globals) - MIT
-- [jest@30.4.2](https://github.com/jestjs/jest) - MIT
-- [nats@2.29.3](https://github.com/nats-io/nats.node) - Apache-2.0
 - [prettier@3.9.6](https://github.com/prettier/prettier) - MIT
 - [reflect-metadata@0.2.2](https://github.com/rbuckton/reflect-metadata) - Apache-2.0
 - [rxjs@7.8.2](https://github.com/reactivex/rxjs) - Apache-2.0
 - [source-map-support@0.5.21](https://github.com/evanw/node-source-map-support) - MIT
-- [ts-jest@29.4.12](https://github.com/kulshekhar/ts-jest) - MIT
 - [ts-loader@9.6.2](https://github.com/TypeStrong/ts-loader) - MIT
 - [ts-node@10.9.2](https://github.com/TypeStrong/ts-node) - MIT
 - [tsconfig-paths@4.2.0](https://github.com/dividab/tsconfig-paths) - MIT
 - [typescript-eslint@8.67.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
 - [typescript@6.0.3](https://github.com/microsoft/TypeScript) - Apache-2.0
+- [vitest@5.0.0](https://github.com/vitest-dev/vitest) - MIT
 
 </details>
 
-### [features](./dev/user-backend-nest/microservices/features)
-<span id="backend-features"></span>
+### [card-eu](./dev/user-backend-nest/microservices/card-eu)
+<span id="backend-card-eu"></span>
 ```
-├─ MIT: 27
+├─ MIT: 26
 └─ Apache-2.0: 5
 ```
 
@@ -566,42 +336,41 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@eslint/eslintrc@3.3.6](https://github.com/eslint/eslintrc) - MIT
 - [@eslint/js@10.0.1](https://github.com/eslint/eslint) - MIT
 - [@ianvs/prettier-plugin-sort-imports@4.7.1](https://github.com/ianvs/prettier-plugin-sort-imports) - Apache-2.0
-- [@nestjs/axios@4.0.1](https://github.com/nestjs/axios) - MIT
-- [@nestjs/cli@11.0.24](https://github.com/nestjs/nest-cli) - MIT
-- [@nestjs/common@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/config@4.0.4](https://github.com/nestjs/config) - MIT
-- [@nestjs/core@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/microservices@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/platform-express@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/schematics@11.1.0](https://github.com/nestjs/schematics) - MIT
-- [@nestjs/testing@11.2.1](https://github.com/nestjs/nest) - MIT
+- [@nats-io/transport-node@3.4.0](https://github.com/nats-io/nats.js) - Apache-2.0
+- [@nestjs/axios@12.0.0](https://github.com/nestjs/axios) - MIT
+- [@nestjs/cli@12.0.0](https://github.com/nestjs/nest-cli) - MIT
+- [@nestjs/common@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/config@12.0.0](https://github.com/nestjs/config) - MIT
+- [@nestjs/core@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/microservices@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/platform-express@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/schematics@12.0.0](https://github.com/nestjs/schematics) - MIT
+- [@nestjs/testing@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@types/express@5.0.6](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/jest@30.0.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/node@26.2.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@vitest/coverage-v8@5.0.0](https://github.com/vitest-dev/vitest) - MIT
 - [agentkeepalive@4.6.0](https://github.com/node-modules/agentkeepalive) - MIT
 - [eslint-config-prettier@10.1.8](https://github.com/prettier/eslint-config-prettier) - MIT
 - [eslint-plugin-prettier@5.5.6](https://github.com/prettier/eslint-plugin-prettier) - MIT
 - [eslint@10.8.1](https://github.com/eslint/eslint) - MIT
 - [globals@17.11.0](https://github.com/sindresorhus/globals) - MIT
-- [jest@30.4.2](https://github.com/jestjs/jest) - MIT
-- [nats@2.29.3](https://github.com/nats-io/nats.node) - Apache-2.0
 - [prettier@3.9.6](https://github.com/prettier/prettier) - MIT
 - [reflect-metadata@0.2.2](https://github.com/rbuckton/reflect-metadata) - Apache-2.0
 - [rxjs@7.8.2](https://github.com/reactivex/rxjs) - Apache-2.0
 - [source-map-support@0.5.21](https://github.com/evanw/node-source-map-support) - MIT
-- [ts-jest@29.4.12](https://github.com/kulshekhar/ts-jest) - MIT
 - [ts-loader@9.6.2](https://github.com/TypeStrong/ts-loader) - MIT
 - [ts-node@10.9.2](https://github.com/TypeStrong/ts-node) - MIT
 - [tsconfig-paths@4.2.0](https://github.com/dividab/tsconfig-paths) - MIT
 - [typescript-eslint@8.67.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
 - [typescript@6.0.3](https://github.com/microsoft/TypeScript) - Apache-2.0
+- [vitest@5.0.0](https://github.com/vitest-dev/vitest) - MIT
 
 </details>
 
-### [important-news](./dev/user-backend-nest/microservices/important-news)
-<span id="backend-important-news"></span>
+### [chatbot](./dev/user-backend-nest/microservices/chatbot)
+<span id="backend-chatbot"></span>
 ```
-├─ MIT: 27
+├─ MIT: 26
 └─ Apache-2.0: 5
 ```
 
@@ -610,86 +379,39 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@eslint/eslintrc@3.3.6](https://github.com/eslint/eslintrc) - MIT
 - [@eslint/js@10.0.1](https://github.com/eslint/eslint) - MIT
 - [@ianvs/prettier-plugin-sort-imports@4.7.1](https://github.com/ianvs/prettier-plugin-sort-imports) - Apache-2.0
-- [@nestjs/axios@4.0.1](https://github.com/nestjs/axios) - MIT
-- [@nestjs/cli@11.0.24](https://github.com/nestjs/nest-cli) - MIT
-- [@nestjs/common@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/config@4.0.4](https://github.com/nestjs/config) - MIT
-- [@nestjs/core@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/microservices@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/platform-express@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/schematics@11.1.0](https://github.com/nestjs/schematics) - MIT
-- [@nestjs/testing@11.2.1](https://github.com/nestjs/nest) - MIT
+- [@nats-io/transport-node@3.4.0](https://github.com/nats-io/nats.js) - Apache-2.0
+- [@nestjs/axios@12.0.0](https://github.com/nestjs/axios) - MIT
+- [@nestjs/cli@12.0.0](https://github.com/nestjs/nest-cli) - MIT
+- [@nestjs/common@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/config@12.0.0](https://github.com/nestjs/config) - MIT
+- [@nestjs/core@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/microservices@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/platform-express@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/schematics@12.0.0](https://github.com/nestjs/schematics) - MIT
+- [@nestjs/testing@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@types/express@5.0.6](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/jest@30.0.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/node@26.2.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@vitest/coverage-v8@5.0.0](https://github.com/vitest-dev/vitest) - MIT
 - [agentkeepalive@4.6.0](https://github.com/node-modules/agentkeepalive) - MIT
 - [eslint-config-prettier@10.1.8](https://github.com/prettier/eslint-config-prettier) - MIT
 - [eslint-plugin-prettier@5.5.6](https://github.com/prettier/eslint-plugin-prettier) - MIT
 - [eslint@10.8.1](https://github.com/eslint/eslint) - MIT
 - [globals@17.11.0](https://github.com/sindresorhus/globals) - MIT
-- [jest@30.4.2](https://github.com/jestjs/jest) - MIT
-- [nats@2.29.3](https://github.com/nats-io/nats.node) - Apache-2.0
 - [prettier@3.9.6](https://github.com/prettier/prettier) - MIT
 - [reflect-metadata@0.2.2](https://github.com/rbuckton/reflect-metadata) - Apache-2.0
 - [rxjs@7.8.2](https://github.com/reactivex/rxjs) - Apache-2.0
 - [source-map-support@0.5.21](https://github.com/evanw/node-source-map-support) - MIT
-- [ts-jest@29.4.12](https://github.com/kulshekhar/ts-jest) - MIT
 - [ts-loader@9.6.2](https://github.com/TypeStrong/ts-loader) - MIT
 - [ts-node@10.9.2](https://github.com/TypeStrong/ts-node) - MIT
 - [tsconfig-paths@4.2.0](https://github.com/dividab/tsconfig-paths) - MIT
 - [typescript-eslint@8.67.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
 - [typescript@6.0.3](https://github.com/microsoft/TypeScript) - Apache-2.0
+- [vitest@5.0.0](https://github.com/vitest-dev/vitest) - MIT
 
 </details>
 
-### [knowledge-base](./dev/user-backend-nest/microservices/knowledge-base)
-<span id="backend-knowledge-base"></span>
-```
-├─ MIT: 28
-└─ Apache-2.0: 6
-```
-
-<details><summary>Détails</summary>
-
-- [@eslint/eslintrc@3.3.6](https://github.com/eslint/eslintrc) - MIT
-- [@eslint/js@10.0.1](https://github.com/eslint/eslint) - MIT
-- [@ianvs/prettier-plugin-sort-imports@4.7.1](https://github.com/ianvs/prettier-plugin-sort-imports) - Apache-2.0
-- [@nestjs/axios@4.0.1](https://github.com/nestjs/axios) - MIT
-- [@nestjs/cli@11.0.24](https://github.com/nestjs/nest-cli) - MIT
-- [@nestjs/common@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/config@4.0.4](https://github.com/nestjs/config) - MIT
-- [@nestjs/core@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/microservices@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/platform-express@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/schematics@11.1.0](https://github.com/nestjs/schematics) - MIT
-- [@nestjs/testing@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@swc/cli@0.8.1](https://github.com/swc-project/pkgs) - MIT
-- [@swc/core@1.16.1](https://github.com/swc-project/swc) - Apache-2.0
-- [@types/express@5.0.6](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/jest@30.0.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/node@26.2.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [agentkeepalive@4.6.0](https://github.com/node-modules/agentkeepalive) - MIT
-- [eslint-config-prettier@10.1.8](https://github.com/prettier/eslint-config-prettier) - MIT
-- [eslint-plugin-prettier@5.5.6](https://github.com/prettier/eslint-plugin-prettier) - MIT
-- [eslint@10.8.1](https://github.com/eslint/eslint) - MIT
-- [globals@17.11.0](https://github.com/sindresorhus/globals) - MIT
-- [jest@30.4.2](https://github.com/jestjs/jest) - MIT
-- [nats@2.29.3](https://github.com/nats-io/nats.node) - Apache-2.0
-- [prettier@3.9.6](https://github.com/prettier/prettier) - MIT
-- [reflect-metadata@0.2.2](https://github.com/rbuckton/reflect-metadata) - Apache-2.0
-- [rxjs@7.8.2](https://github.com/reactivex/rxjs) - Apache-2.0
-- [source-map-support@0.5.21](https://github.com/evanw/node-source-map-support) - MIT
-- [ts-jest@29.4.12](https://github.com/kulshekhar/ts-jest) - MIT
-- [ts-loader@9.6.2](https://github.com/TypeStrong/ts-loader) - MIT
-- [ts-node@10.9.2](https://github.com/TypeStrong/ts-node) - MIT
-- [tsconfig-paths@4.2.0](https://github.com/dividab/tsconfig-paths) - MIT
-- [typescript-eslint@8.67.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
-- [typescript@6.0.3](https://github.com/microsoft/TypeScript) - Apache-2.0
-
-</details>
-
-### [mail-calendar](./dev/user-backend-nest/microservices/mail-calendar)
-<span id="backend-mail-calendar"></span>
+### [clocking](./dev/user-backend-nest/microservices/clocking)
+<span id="backend-clocking"></span>
 ```
 ├─ MIT: 30
 └─ Apache-2.0: 5
@@ -701,44 +423,90 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@eslint/js@10.0.1](https://github.com/eslint/eslint) - MIT
 - [@ianvs/prettier-plugin-sort-imports@4.7.1](https://github.com/ianvs/prettier-plugin-sort-imports) - Apache-2.0
 - [@keyv/redis@5.1.6](https://github.com/jaredwray/keyv) - MIT
-- [@nestjs/axios@4.0.1](https://github.com/nestjs/axios) - MIT
-- [@nestjs/cache-manager@3.1.3](https://github.com/nestjs/cache-manager) - MIT
-- [@nestjs/cli@11.0.24](https://github.com/nestjs/nest-cli) - MIT
-- [@nestjs/common@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/config@4.0.4](https://github.com/nestjs/config) - MIT
-- [@nestjs/core@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/microservices@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/platform-express@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/schematics@11.1.0](https://github.com/nestjs/schematics) - MIT
-- [@nestjs/testing@11.2.1](https://github.com/nestjs/nest) - MIT
+- [@nats-io/transport-node@3.4.0](https://github.com/nats-io/nats.js) - Apache-2.0
+- [@nestjs/axios@12.0.0](https://github.com/nestjs/axios) - MIT
+- [@nestjs/cache-manager@12.0.0](https://github.com/nestjs/cache-manager) - MIT
+- [@nestjs/cli@12.0.0](https://github.com/nestjs/nest-cli) - MIT
+- [@nestjs/common@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/config@12.0.0](https://github.com/nestjs/config) - MIT
+- [@nestjs/core@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/microservices@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/platform-express@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/schematics@12.0.0](https://github.com/nestjs/schematics) - MIT
+- [@nestjs/testing@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@types/express@5.0.6](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/jest@30.0.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/node@26.2.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@vitest/coverage-v8@5.0.0](https://github.com/vitest-dev/vitest) - MIT
 - [agentkeepalive@4.6.0](https://github.com/node-modules/agentkeepalive) - MIT
 - [cache-manager@7.2.9](https://github.com/jaredwray/cacheable) - MIT
+- [date-fns@4.4.0](https://github.com/date-fns/date-fns) - MIT
 - [eslint-config-prettier@10.1.8](https://github.com/prettier/eslint-config-prettier) - MIT
 - [eslint-plugin-prettier@5.5.6](https://github.com/prettier/eslint-plugin-prettier) - MIT
 - [eslint@10.8.1](https://github.com/eslint/eslint) - MIT
 - [globals@17.11.0](https://github.com/sindresorhus/globals) - MIT
-- [jest@30.4.2](https://github.com/jestjs/jest) - MIT
-- [nats@2.29.3](https://github.com/nats-io/nats.node) - Apache-2.0
 - [prettier@3.9.6](https://github.com/prettier/prettier) - MIT
 - [reflect-metadata@0.2.2](https://github.com/rbuckton/reflect-metadata) - Apache-2.0
 - [rxjs@7.8.2](https://github.com/reactivex/rxjs) - Apache-2.0
 - [source-map-support@0.5.21](https://github.com/evanw/node-source-map-support) - MIT
-- [ts-jest@29.4.12](https://github.com/kulshekhar/ts-jest) - MIT
 - [ts-loader@9.6.2](https://github.com/TypeStrong/ts-loader) - MIT
 - [ts-node@10.9.2](https://github.com/TypeStrong/ts-node) - MIT
 - [tsconfig-paths@4.2.0](https://github.com/dividab/tsconfig-paths) - MIT
 - [typescript-eslint@8.67.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
 - [typescript@6.0.3](https://github.com/microsoft/TypeScript) - Apache-2.0
+- [vitest@5.0.0](https://github.com/vitest-dev/vitest) - MIT
 
 </details>
 
-### [map](./dev/user-backend-nest/microservices/map)
-<span id="backend-map"></span>
+### [contact-us](./dev/user-backend-nest/microservices/contact-us)
+<span id="backend-contact-us"></span>
 ```
 ├─ MIT: 27
+├─ Apache-2.0: 5
+└─ MIT-0: 1
+```
+
+<details><summary>Détails</summary>
+
+- [@eslint/eslintrc@3.3.6](https://github.com/eslint/eslintrc) - MIT
+- [@eslint/js@10.0.1](https://github.com/eslint/eslint) - MIT
+- [@ianvs/prettier-plugin-sort-imports@4.7.1](https://github.com/ianvs/prettier-plugin-sort-imports) - Apache-2.0
+- [@nats-io/transport-node@3.4.0](https://github.com/nats-io/nats.js) - Apache-2.0
+- [@nestjs-modules/mailer@2.3.7](https://github.com/nest-modules/mailer) - MIT
+- [@nestjs/axios@12.0.0](https://github.com/nestjs/axios) - MIT
+- [@nestjs/cli@12.0.0](https://github.com/nestjs/nest-cli) - MIT
+- [@nestjs/common@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/config@12.0.0](https://github.com/nestjs/config) - MIT
+- [@nestjs/core@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/microservices@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/platform-express@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/schematics@12.0.0](https://github.com/nestjs/schematics) - MIT
+- [@nestjs/testing@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@types/express@5.0.6](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/node@26.2.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@vitest/coverage-v8@5.0.0](https://github.com/vitest-dev/vitest) - MIT
+- [agentkeepalive@4.6.0](https://github.com/node-modules/agentkeepalive) - MIT
+- [eslint-config-prettier@10.1.8](https://github.com/prettier/eslint-config-prettier) - MIT
+- [eslint-plugin-prettier@5.5.6](https://github.com/prettier/eslint-plugin-prettier) - MIT
+- [eslint@10.8.1](https://github.com/eslint/eslint) - MIT
+- [globals@17.11.0](https://github.com/sindresorhus/globals) - MIT
+- [nodemailer@9.1.1](https://github.com/nodemailer/nodemailer) - MIT-0
+- [prettier@3.9.6](https://github.com/prettier/prettier) - MIT
+- [reflect-metadata@0.2.2](https://github.com/rbuckton/reflect-metadata) - Apache-2.0
+- [rxjs@7.8.2](https://github.com/reactivex/rxjs) - Apache-2.0
+- [source-map-support@0.5.21](https://github.com/evanw/node-source-map-support) - MIT
+- [ts-loader@9.6.2](https://github.com/TypeStrong/ts-loader) - MIT
+- [ts-node@10.9.2](https://github.com/TypeStrong/ts-node) - MIT
+- [tsconfig-paths@4.2.0](https://github.com/dividab/tsconfig-paths) - MIT
+- [typescript-eslint@8.67.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
+- [typescript@6.0.3](https://github.com/microsoft/TypeScript) - Apache-2.0
+- [vitest@5.0.0](https://github.com/vitest-dev/vitest) - MIT
+
+</details>
+
+### [contacts](./dev/user-backend-nest/microservices/contacts)
+<span id="backend-contacts"></span>
+```
+├─ MIT: 26
 └─ Apache-2.0: 5
 ```
 
@@ -747,42 +515,41 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@eslint/eslintrc@3.3.6](https://github.com/eslint/eslintrc) - MIT
 - [@eslint/js@10.0.1](https://github.com/eslint/eslint) - MIT
 - [@ianvs/prettier-plugin-sort-imports@4.7.1](https://github.com/ianvs/prettier-plugin-sort-imports) - Apache-2.0
-- [@nestjs/axios@4.0.1](https://github.com/nestjs/axios) - MIT
-- [@nestjs/cli@11.0.24](https://github.com/nestjs/nest-cli) - MIT
-- [@nestjs/common@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/config@4.0.4](https://github.com/nestjs/config) - MIT
-- [@nestjs/core@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/microservices@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/platform-express@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/schematics@11.1.0](https://github.com/nestjs/schematics) - MIT
-- [@nestjs/testing@11.2.1](https://github.com/nestjs/nest) - MIT
+- [@nats-io/transport-node@3.4.0](https://github.com/nats-io/nats.js) - Apache-2.0
+- [@nestjs/axios@12.0.0](https://github.com/nestjs/axios) - MIT
+- [@nestjs/cli@12.0.0](https://github.com/nestjs/nest-cli) - MIT
+- [@nestjs/common@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/config@12.0.0](https://github.com/nestjs/config) - MIT
+- [@nestjs/core@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/microservices@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/platform-express@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/schematics@12.0.0](https://github.com/nestjs/schematics) - MIT
+- [@nestjs/testing@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@types/express@5.0.6](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/jest@30.0.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/node@26.2.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@vitest/coverage-v8@5.0.0](https://github.com/vitest-dev/vitest) - MIT
 - [agentkeepalive@4.6.0](https://github.com/node-modules/agentkeepalive) - MIT
 - [eslint-config-prettier@10.1.8](https://github.com/prettier/eslint-config-prettier) - MIT
 - [eslint-plugin-prettier@5.5.6](https://github.com/prettier/eslint-plugin-prettier) - MIT
 - [eslint@10.8.1](https://github.com/eslint/eslint) - MIT
 - [globals@17.11.0](https://github.com/sindresorhus/globals) - MIT
-- [jest@30.4.2](https://github.com/jestjs/jest) - MIT
-- [nats@2.29.3](https://github.com/nats-io/nats.node) - Apache-2.0
 - [prettier@3.9.6](https://github.com/prettier/prettier) - MIT
 - [reflect-metadata@0.2.2](https://github.com/rbuckton/reflect-metadata) - Apache-2.0
 - [rxjs@7.8.2](https://github.com/reactivex/rxjs) - Apache-2.0
 - [source-map-support@0.5.21](https://github.com/evanw/node-source-map-support) - MIT
-- [ts-jest@29.4.12](https://github.com/kulshekhar/ts-jest) - MIT
 - [ts-loader@9.6.2](https://github.com/TypeStrong/ts-loader) - MIT
 - [ts-node@10.9.2](https://github.com/TypeStrong/ts-node) - MIT
 - [tsconfig-paths@4.2.0](https://github.com/dividab/tsconfig-paths) - MIT
 - [typescript-eslint@8.67.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
 - [typescript@6.0.3](https://github.com/microsoft/TypeScript) - Apache-2.0
+- [vitest@5.0.0](https://github.com/vitest-dev/vitest) - MIT
 
 </details>
 
-### [notifications](./dev/user-backend-nest/microservices/notifications)
-<span id="backend-notifications"></span>
+### [features](./dev/user-backend-nest/microservices/features)
+<span id="backend-features"></span>
 ```
-├─ MIT: 27
+├─ MIT: 26
 └─ Apache-2.0: 5
 ```
 
@@ -791,40 +558,127 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@eslint/eslintrc@3.3.6](https://github.com/eslint/eslintrc) - MIT
 - [@eslint/js@10.0.1](https://github.com/eslint/eslint) - MIT
 - [@ianvs/prettier-plugin-sort-imports@4.7.1](https://github.com/ianvs/prettier-plugin-sort-imports) - Apache-2.0
-- [@nestjs/axios@4.0.1](https://github.com/nestjs/axios) - MIT
-- [@nestjs/cli@11.0.24](https://github.com/nestjs/nest-cli) - MIT
-- [@nestjs/common@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/config@4.0.4](https://github.com/nestjs/config) - MIT
-- [@nestjs/core@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/microservices@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/platform-express@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/schematics@11.1.0](https://github.com/nestjs/schematics) - MIT
-- [@nestjs/testing@11.2.1](https://github.com/nestjs/nest) - MIT
+- [@nats-io/transport-node@3.4.0](https://github.com/nats-io/nats.js) - Apache-2.0
+- [@nestjs/axios@12.0.0](https://github.com/nestjs/axios) - MIT
+- [@nestjs/cli@12.0.0](https://github.com/nestjs/nest-cli) - MIT
+- [@nestjs/common@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/config@12.0.0](https://github.com/nestjs/config) - MIT
+- [@nestjs/core@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/microservices@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/platform-express@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/schematics@12.0.0](https://github.com/nestjs/schematics) - MIT
+- [@nestjs/testing@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@types/express@5.0.6](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/jest@30.0.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/node@26.2.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@vitest/coverage-v8@5.0.0](https://github.com/vitest-dev/vitest) - MIT
 - [agentkeepalive@4.6.0](https://github.com/node-modules/agentkeepalive) - MIT
 - [eslint-config-prettier@10.1.8](https://github.com/prettier/eslint-config-prettier) - MIT
 - [eslint-plugin-prettier@5.5.6](https://github.com/prettier/eslint-plugin-prettier) - MIT
 - [eslint@10.8.1](https://github.com/eslint/eslint) - MIT
 - [globals@17.11.0](https://github.com/sindresorhus/globals) - MIT
-- [jest@30.4.2](https://github.com/jestjs/jest) - MIT
-- [nats@2.29.3](https://github.com/nats-io/nats.node) - Apache-2.0
 - [prettier@3.9.6](https://github.com/prettier/prettier) - MIT
 - [reflect-metadata@0.2.2](https://github.com/rbuckton/reflect-metadata) - Apache-2.0
 - [rxjs@7.8.2](https://github.com/reactivex/rxjs) - Apache-2.0
 - [source-map-support@0.5.21](https://github.com/evanw/node-source-map-support) - MIT
-- [ts-jest@29.4.12](https://github.com/kulshekhar/ts-jest) - MIT
 - [ts-loader@9.6.2](https://github.com/TypeStrong/ts-loader) - MIT
 - [ts-node@10.9.2](https://github.com/TypeStrong/ts-node) - MIT
 - [tsconfig-paths@4.2.0](https://github.com/dividab/tsconfig-paths) - MIT
 - [typescript-eslint@8.67.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
 - [typescript@6.0.3](https://github.com/microsoft/TypeScript) - Apache-2.0
+- [vitest@5.0.0](https://github.com/vitest-dev/vitest) - MIT
 
 </details>
 
-### [restaurants](./dev/user-backend-nest/microservices/restaurants)
-<span id="backend-restaurants"></span>
+### [important-news](./dev/user-backend-nest/microservices/important-news)
+<span id="backend-important-news"></span>
+```
+├─ MIT: 26
+└─ Apache-2.0: 5
+```
+
+<details><summary>Détails</summary>
+
+- [@eslint/eslintrc@3.3.6](https://github.com/eslint/eslintrc) - MIT
+- [@eslint/js@10.0.1](https://github.com/eslint/eslint) - MIT
+- [@ianvs/prettier-plugin-sort-imports@4.7.1](https://github.com/ianvs/prettier-plugin-sort-imports) - Apache-2.0
+- [@nats-io/transport-node@3.4.0](https://github.com/nats-io/nats.js) - Apache-2.0
+- [@nestjs/axios@12.0.0](https://github.com/nestjs/axios) - MIT
+- [@nestjs/cli@12.0.0](https://github.com/nestjs/nest-cli) - MIT
+- [@nestjs/common@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/config@12.0.0](https://github.com/nestjs/config) - MIT
+- [@nestjs/core@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/microservices@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/platform-express@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/schematics@12.0.0](https://github.com/nestjs/schematics) - MIT
+- [@nestjs/testing@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@types/express@5.0.6](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/node@26.2.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@vitest/coverage-v8@5.0.0](https://github.com/vitest-dev/vitest) - MIT
+- [agentkeepalive@4.6.0](https://github.com/node-modules/agentkeepalive) - MIT
+- [eslint-config-prettier@10.1.8](https://github.com/prettier/eslint-config-prettier) - MIT
+- [eslint-plugin-prettier@5.5.6](https://github.com/prettier/eslint-plugin-prettier) - MIT
+- [eslint@10.8.1](https://github.com/eslint/eslint) - MIT
+- [globals@17.11.0](https://github.com/sindresorhus/globals) - MIT
+- [prettier@3.9.6](https://github.com/prettier/prettier) - MIT
+- [reflect-metadata@0.2.2](https://github.com/rbuckton/reflect-metadata) - Apache-2.0
+- [rxjs@7.8.2](https://github.com/reactivex/rxjs) - Apache-2.0
+- [source-map-support@0.5.21](https://github.com/evanw/node-source-map-support) - MIT
+- [ts-loader@9.6.2](https://github.com/TypeStrong/ts-loader) - MIT
+- [ts-node@10.9.2](https://github.com/TypeStrong/ts-node) - MIT
+- [tsconfig-paths@4.2.0](https://github.com/dividab/tsconfig-paths) - MIT
+- [typescript-eslint@8.67.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
+- [typescript@6.0.3](https://github.com/microsoft/TypeScript) - Apache-2.0
+- [vitest@5.0.0](https://github.com/vitest-dev/vitest) - MIT
+
+</details>
+
+### [knowledge-base](./dev/user-backend-nest/microservices/knowledge-base)
+<span id="backend-knowledge-base"></span>
+```
+├─ MIT: 27
+└─ Apache-2.0: 6
+```
+
+<details><summary>Détails</summary>
+
+- [@eslint/eslintrc@3.3.6](https://github.com/eslint/eslintrc) - MIT
+- [@eslint/js@10.0.1](https://github.com/eslint/eslint) - MIT
+- [@ianvs/prettier-plugin-sort-imports@4.7.1](https://github.com/ianvs/prettier-plugin-sort-imports) - Apache-2.0
+- [@nats-io/transport-node@3.4.0](https://github.com/nats-io/nats.js) - Apache-2.0
+- [@nestjs/axios@12.0.0](https://github.com/nestjs/axios) - MIT
+- [@nestjs/cli@12.0.0](https://github.com/nestjs/nest-cli) - MIT
+- [@nestjs/common@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/config@12.0.0](https://github.com/nestjs/config) - MIT
+- [@nestjs/core@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/microservices@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/platform-express@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/schematics@12.0.0](https://github.com/nestjs/schematics) - MIT
+- [@nestjs/testing@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@swc/cli@0.8.1](https://github.com/swc-project/pkgs) - MIT
+- [@swc/core@1.16.1](https://github.com/swc-project/swc) - Apache-2.0
+- [@types/express@5.0.6](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/node@26.2.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@vitest/coverage-v8@5.0.0](https://github.com/vitest-dev/vitest) - MIT
+- [agentkeepalive@4.6.0](https://github.com/node-modules/agentkeepalive) - MIT
+- [eslint-config-prettier@10.1.8](https://github.com/prettier/eslint-config-prettier) - MIT
+- [eslint-plugin-prettier@5.5.6](https://github.com/prettier/eslint-plugin-prettier) - MIT
+- [eslint@10.8.1](https://github.com/eslint/eslint) - MIT
+- [globals@17.11.0](https://github.com/sindresorhus/globals) - MIT
+- [prettier@3.9.6](https://github.com/prettier/prettier) - MIT
+- [reflect-metadata@0.2.2](https://github.com/rbuckton/reflect-metadata) - Apache-2.0
+- [rxjs@7.8.2](https://github.com/reactivex/rxjs) - Apache-2.0
+- [source-map-support@0.5.21](https://github.com/evanw/node-source-map-support) - MIT
+- [ts-loader@9.6.2](https://github.com/TypeStrong/ts-loader) - MIT
+- [ts-node@10.9.2](https://github.com/TypeStrong/ts-node) - MIT
+- [tsconfig-paths@4.2.0](https://github.com/dividab/tsconfig-paths) - MIT
+- [typescript-eslint@8.67.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
+- [typescript@6.0.3](https://github.com/microsoft/TypeScript) - Apache-2.0
+- [vitest@5.0.0](https://github.com/vitest-dev/vitest) - MIT
+
+</details>
+
+### [mail-calendar](./dev/user-backend-nest/microservices/mail-calendar)
+<span id="backend-mail-calendar"></span>
 ```
 ├─ MIT: 29
 └─ Apache-2.0: 5
@@ -835,44 +689,44 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@eslint/eslintrc@3.3.6](https://github.com/eslint/eslintrc) - MIT
 - [@eslint/js@10.0.1](https://github.com/eslint/eslint) - MIT
 - [@ianvs/prettier-plugin-sort-imports@4.7.1](https://github.com/ianvs/prettier-plugin-sort-imports) - Apache-2.0
-- [@nestjs/axios@4.0.1](https://github.com/nestjs/axios) - MIT
-- [@nestjs/cache-manager@3.1.3](https://github.com/nestjs/cache-manager) - MIT
-- [@nestjs/cli@11.0.24](https://github.com/nestjs/nest-cli) - MIT
-- [@nestjs/common@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/config@4.0.4](https://github.com/nestjs/config) - MIT
-- [@nestjs/core@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/microservices@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/platform-express@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/schematics@11.1.0](https://github.com/nestjs/schematics) - MIT
-- [@nestjs/testing@11.2.1](https://github.com/nestjs/nest) - MIT
+- [@keyv/redis@5.1.6](https://github.com/jaredwray/keyv) - MIT
+- [@nats-io/transport-node@3.4.0](https://github.com/nats-io/nats.js) - Apache-2.0
+- [@nestjs/axios@12.0.0](https://github.com/nestjs/axios) - MIT
+- [@nestjs/cache-manager@12.0.0](https://github.com/nestjs/cache-manager) - MIT
+- [@nestjs/cli@12.0.0](https://github.com/nestjs/nest-cli) - MIT
+- [@nestjs/common@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/config@12.0.0](https://github.com/nestjs/config) - MIT
+- [@nestjs/core@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/microservices@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/platform-express@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/schematics@12.0.0](https://github.com/nestjs/schematics) - MIT
+- [@nestjs/testing@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@types/express@5.0.6](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/jest@30.0.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/node@26.2.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@vitest/coverage-v8@5.0.0](https://github.com/vitest-dev/vitest) - MIT
 - [agentkeepalive@4.6.0](https://github.com/node-modules/agentkeepalive) - MIT
 - [cache-manager@7.2.9](https://github.com/jaredwray/cacheable) - MIT
 - [eslint-config-prettier@10.1.8](https://github.com/prettier/eslint-config-prettier) - MIT
 - [eslint-plugin-prettier@5.5.6](https://github.com/prettier/eslint-plugin-prettier) - MIT
 - [eslint@10.8.1](https://github.com/eslint/eslint) - MIT
 - [globals@17.11.0](https://github.com/sindresorhus/globals) - MIT
-- [jest@30.4.2](https://github.com/jestjs/jest) - MIT
-- [nats@2.29.3](https://github.com/nats-io/nats.node) - Apache-2.0
 - [prettier@3.9.6](https://github.com/prettier/prettier) - MIT
 - [reflect-metadata@0.2.2](https://github.com/rbuckton/reflect-metadata) - Apache-2.0
 - [rxjs@7.8.2](https://github.com/reactivex/rxjs) - Apache-2.0
 - [source-map-support@0.5.21](https://github.com/evanw/node-source-map-support) - MIT
-- [ts-jest@29.4.12](https://github.com/kulshekhar/ts-jest) - MIT
 - [ts-loader@9.6.2](https://github.com/TypeStrong/ts-loader) - MIT
 - [ts-node@10.9.2](https://github.com/TypeStrong/ts-node) - MIT
 - [tsconfig-paths@4.2.0](https://github.com/dividab/tsconfig-paths) - MIT
 - [typescript-eslint@8.67.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
 - [typescript@6.0.3](https://github.com/microsoft/TypeScript) - Apache-2.0
+- [vitest@5.0.0](https://github.com/vitest-dev/vitest) - MIT
 
 </details>
 
-### [rss](./dev/user-backend-nest/microservices/rss)
-<span id="backend-rss"></span>
+### [map](./dev/user-backend-nest/microservices/map)
+<span id="backend-map"></span>
 ```
-├─ MIT: 31
+├─ MIT: 26
 └─ Apache-2.0: 5
 ```
 
@@ -881,46 +735,176 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@eslint/eslintrc@3.3.6](https://github.com/eslint/eslintrc) - MIT
 - [@eslint/js@10.0.1](https://github.com/eslint/eslint) - MIT
 - [@ianvs/prettier-plugin-sort-imports@4.7.1](https://github.com/ianvs/prettier-plugin-sort-imports) - Apache-2.0
-- [@nestjs/axios@4.0.1](https://github.com/nestjs/axios) - MIT
-- [@nestjs/cache-manager@3.1.3](https://github.com/nestjs/cache-manager) - MIT
-- [@nestjs/cli@11.0.24](https://github.com/nestjs/nest-cli) - MIT
-- [@nestjs/common@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/config@4.0.4](https://github.com/nestjs/config) - MIT
-- [@nestjs/core@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/microservices@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/platform-express@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/schematics@11.1.0](https://github.com/nestjs/schematics) - MIT
-- [@nestjs/testing@11.2.1](https://github.com/nestjs/nest) - MIT
+- [@nats-io/transport-node@3.4.0](https://github.com/nats-io/nats.js) - Apache-2.0
+- [@nestjs/axios@12.0.0](https://github.com/nestjs/axios) - MIT
+- [@nestjs/cli@12.0.0](https://github.com/nestjs/nest-cli) - MIT
+- [@nestjs/common@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/config@12.0.0](https://github.com/nestjs/config) - MIT
+- [@nestjs/core@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/microservices@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/platform-express@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/schematics@12.0.0](https://github.com/nestjs/schematics) - MIT
+- [@nestjs/testing@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@types/express@5.0.6](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/jest@30.0.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/node@26.2.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@vitest/coverage-v8@5.0.0](https://github.com/vitest-dev/vitest) - MIT
+- [agentkeepalive@4.6.0](https://github.com/node-modules/agentkeepalive) - MIT
+- [eslint-config-prettier@10.1.8](https://github.com/prettier/eslint-config-prettier) - MIT
+- [eslint-plugin-prettier@5.5.6](https://github.com/prettier/eslint-plugin-prettier) - MIT
+- [eslint@10.8.1](https://github.com/eslint/eslint) - MIT
+- [globals@17.11.0](https://github.com/sindresorhus/globals) - MIT
+- [prettier@3.9.6](https://github.com/prettier/prettier) - MIT
+- [reflect-metadata@0.2.2](https://github.com/rbuckton/reflect-metadata) - Apache-2.0
+- [rxjs@7.8.2](https://github.com/reactivex/rxjs) - Apache-2.0
+- [source-map-support@0.5.21](https://github.com/evanw/node-source-map-support) - MIT
+- [ts-loader@9.6.2](https://github.com/TypeStrong/ts-loader) - MIT
+- [ts-node@10.9.2](https://github.com/TypeStrong/ts-node) - MIT
+- [tsconfig-paths@4.2.0](https://github.com/dividab/tsconfig-paths) - MIT
+- [typescript-eslint@8.67.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
+- [typescript@6.0.3](https://github.com/microsoft/TypeScript) - Apache-2.0
+- [vitest@5.0.0](https://github.com/vitest-dev/vitest) - MIT
+
+</details>
+
+### [notifications](./dev/user-backend-nest/microservices/notifications)
+<span id="backend-notifications"></span>
+```
+├─ MIT: 26
+└─ Apache-2.0: 5
+```
+
+<details><summary>Détails</summary>
+
+- [@eslint/eslintrc@3.3.6](https://github.com/eslint/eslintrc) - MIT
+- [@eslint/js@10.0.1](https://github.com/eslint/eslint) - MIT
+- [@ianvs/prettier-plugin-sort-imports@4.7.1](https://github.com/ianvs/prettier-plugin-sort-imports) - Apache-2.0
+- [@nats-io/transport-node@3.4.0](https://github.com/nats-io/nats.js) - Apache-2.0
+- [@nestjs/axios@12.0.0](https://github.com/nestjs/axios) - MIT
+- [@nestjs/cli@12.0.0](https://github.com/nestjs/nest-cli) - MIT
+- [@nestjs/common@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/config@12.0.0](https://github.com/nestjs/config) - MIT
+- [@nestjs/core@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/microservices@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/platform-express@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/schematics@12.0.0](https://github.com/nestjs/schematics) - MIT
+- [@nestjs/testing@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@types/express@5.0.6](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/node@26.2.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@vitest/coverage-v8@5.0.0](https://github.com/vitest-dev/vitest) - MIT
+- [agentkeepalive@4.6.0](https://github.com/node-modules/agentkeepalive) - MIT
+- [eslint-config-prettier@10.1.8](https://github.com/prettier/eslint-config-prettier) - MIT
+- [eslint-plugin-prettier@5.5.6](https://github.com/prettier/eslint-plugin-prettier) - MIT
+- [eslint@10.8.1](https://github.com/eslint/eslint) - MIT
+- [globals@17.11.0](https://github.com/sindresorhus/globals) - MIT
+- [prettier@3.9.6](https://github.com/prettier/prettier) - MIT
+- [reflect-metadata@0.2.2](https://github.com/rbuckton/reflect-metadata) - Apache-2.0
+- [rxjs@7.8.2](https://github.com/reactivex/rxjs) - Apache-2.0
+- [source-map-support@0.5.21](https://github.com/evanw/node-source-map-support) - MIT
+- [ts-loader@9.6.2](https://github.com/TypeStrong/ts-loader) - MIT
+- [ts-node@10.9.2](https://github.com/TypeStrong/ts-node) - MIT
+- [tsconfig-paths@4.2.0](https://github.com/dividab/tsconfig-paths) - MIT
+- [typescript-eslint@8.67.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
+- [typescript@6.0.3](https://github.com/microsoft/TypeScript) - Apache-2.0
+- [vitest@5.0.0](https://github.com/vitest-dev/vitest) - MIT
+
+</details>
+
+### [restaurants](./dev/user-backend-nest/microservices/restaurants)
+<span id="backend-restaurants"></span>
+```
+├─ MIT: 28
+└─ Apache-2.0: 5
+```
+
+<details><summary>Détails</summary>
+
+- [@eslint/eslintrc@3.3.6](https://github.com/eslint/eslintrc) - MIT
+- [@eslint/js@10.0.1](https://github.com/eslint/eslint) - MIT
+- [@ianvs/prettier-plugin-sort-imports@4.7.1](https://github.com/ianvs/prettier-plugin-sort-imports) - Apache-2.0
+- [@nats-io/transport-node@3.4.0](https://github.com/nats-io/nats.js) - Apache-2.0
+- [@nestjs/axios@12.0.0](https://github.com/nestjs/axios) - MIT
+- [@nestjs/cache-manager@12.0.0](https://github.com/nestjs/cache-manager) - MIT
+- [@nestjs/cli@12.0.0](https://github.com/nestjs/nest-cli) - MIT
+- [@nestjs/common@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/config@12.0.0](https://github.com/nestjs/config) - MIT
+- [@nestjs/core@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/microservices@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/platform-express@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/schematics@12.0.0](https://github.com/nestjs/schematics) - MIT
+- [@nestjs/testing@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@types/express@5.0.6](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/node@26.2.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@vitest/coverage-v8@5.0.0](https://github.com/vitest-dev/vitest) - MIT
+- [agentkeepalive@4.6.0](https://github.com/node-modules/agentkeepalive) - MIT
+- [cache-manager@7.2.9](https://github.com/jaredwray/cacheable) - MIT
+- [eslint-config-prettier@10.1.8](https://github.com/prettier/eslint-config-prettier) - MIT
+- [eslint-plugin-prettier@5.5.6](https://github.com/prettier/eslint-plugin-prettier) - MIT
+- [eslint@10.8.1](https://github.com/eslint/eslint) - MIT
+- [globals@17.11.0](https://github.com/sindresorhus/globals) - MIT
+- [prettier@3.9.6](https://github.com/prettier/prettier) - MIT
+- [reflect-metadata@0.2.2](https://github.com/rbuckton/reflect-metadata) - Apache-2.0
+- [rxjs@7.8.2](https://github.com/reactivex/rxjs) - Apache-2.0
+- [source-map-support@0.5.21](https://github.com/evanw/node-source-map-support) - MIT
+- [ts-loader@9.6.2](https://github.com/TypeStrong/ts-loader) - MIT
+- [ts-node@10.9.2](https://github.com/TypeStrong/ts-node) - MIT
+- [tsconfig-paths@4.2.0](https://github.com/dividab/tsconfig-paths) - MIT
+- [typescript-eslint@8.67.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
+- [typescript@6.0.3](https://github.com/microsoft/TypeScript) - Apache-2.0
+- [vitest@5.0.0](https://github.com/vitest-dev/vitest) - MIT
+
+</details>
+
+### [rss](./dev/user-backend-nest/microservices/rss)
+<span id="backend-rss"></span>
+```
+├─ MIT: 30
+└─ Apache-2.0: 5
+```
+
+<details><summary>Détails</summary>
+
+- [@eslint/eslintrc@3.3.7](https://github.com/eslint/eslintrc) - MIT
+- [@eslint/js@10.0.1](https://github.com/eslint/eslint) - MIT
+- [@ianvs/prettier-plugin-sort-imports@4.7.1](https://github.com/ianvs/prettier-plugin-sort-imports) - Apache-2.0
+- [@nats-io/transport-node@3.4.0](https://github.com/nats-io/nats.js) - Apache-2.0
+- [@nestjs/axios@12.0.0](https://github.com/nestjs/axios) - MIT
+- [@nestjs/cache-manager@12.0.0](https://github.com/nestjs/cache-manager) - MIT
+- [@nestjs/cli@12.0.0](https://github.com/nestjs/nest-cli) - MIT
+- [@nestjs/common@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/config@12.0.0](https://github.com/nestjs/config) - MIT
+- [@nestjs/core@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/microservices@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/platform-express@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/schematics@12.0.0](https://github.com/nestjs/schematics) - MIT
+- [@nestjs/testing@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@types/express@5.0.6](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@types/node@26.2.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@vitest/coverage-v8@5.0.0](https://github.com/vitest-dev/vitest) - MIT
 - [cache-manager@7.2.9](https://github.com/jaredwray/cacheable) - MIT
 - [eslint-config-prettier@10.1.8](https://github.com/prettier/eslint-config-prettier) - MIT
 - [eslint-plugin-prettier@5.5.6](https://github.com/prettier/eslint-plugin-prettier) - MIT
 - [eslint@10.8.1](https://github.com/eslint/eslint) - MIT
 - [globals@17.11.0](https://github.com/sindresorhus/globals) - MIT
 - [html-entities@2.6.0](https://github.com/mdevils/html-entities) - MIT
-- [jest@30.4.2](https://github.com/jestjs/jest) - MIT
-- [nats@2.29.3](https://github.com/nats-io/nats.node) - Apache-2.0
 - [prettier@3.9.6](https://github.com/prettier/prettier) - MIT
 - [reflect-metadata@0.2.2](https://github.com/rbuckton/reflect-metadata) - Apache-2.0
 - [rss-parser@3.13.0](https://github.com/bobby-brennan/rss-parser) - MIT
 - [rxjs@7.8.2](https://github.com/reactivex/rxjs) - Apache-2.0
 - [source-map-support@0.5.21](https://github.com/evanw/node-source-map-support) - MIT
 - [striptags@4.0.0-alpha.4](https://github.com/ericnorris/striptags) - MIT
-- [ts-jest@29.4.12](https://github.com/kulshekhar/ts-jest) - MIT
 - [ts-loader@9.6.2](https://github.com/TypeStrong/ts-loader) - MIT
 - [ts-node@10.9.2](https://github.com/TypeStrong/ts-node) - MIT
 - [tsconfig-paths@4.2.0](https://github.com/dividab/tsconfig-paths) - MIT
 - [typescript-eslint@8.67.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
 - [typescript@6.0.3](https://github.com/microsoft/TypeScript) - Apache-2.0
+- [vitest@5.0.0](https://github.com/vitest-dev/vitest) - MIT
 
 </details>
 
 ### [schedule](./dev/user-backend-nest/microservices/schedule)
 <span id="backend-schedule"></span>
 ```
-├─ MIT: 30
+├─ MIT: 29
 └─ Apache-2.0: 5
 ```
 
@@ -930,44 +914,43 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@eslint/js@10.0.1](https://github.com/eslint/eslint) - MIT
 - [@ianvs/prettier-plugin-sort-imports@4.7.1](https://github.com/ianvs/prettier-plugin-sort-imports) - Apache-2.0
 - [@keyv/redis@5.1.6](https://github.com/jaredwray/keyv) - MIT
-- [@nestjs/axios@4.0.1](https://github.com/nestjs/axios) - MIT
-- [@nestjs/cache-manager@3.1.3](https://github.com/nestjs/cache-manager) - MIT
-- [@nestjs/cli@11.0.24](https://github.com/nestjs/nest-cli) - MIT
-- [@nestjs/common@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/config@4.0.4](https://github.com/nestjs/config) - MIT
-- [@nestjs/core@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/microservices@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/platform-express@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/schematics@11.1.0](https://github.com/nestjs/schematics) - MIT
-- [@nestjs/testing@11.2.1](https://github.com/nestjs/nest) - MIT
+- [@nats-io/transport-node@3.4.0](https://github.com/nats-io/nats.js) - Apache-2.0
+- [@nestjs/axios@12.0.0](https://github.com/nestjs/axios) - MIT
+- [@nestjs/cache-manager@12.0.0](https://github.com/nestjs/cache-manager) - MIT
+- [@nestjs/cli@12.0.0](https://github.com/nestjs/nest-cli) - MIT
+- [@nestjs/common@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/config@12.0.0](https://github.com/nestjs/config) - MIT
+- [@nestjs/core@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/microservices@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/platform-express@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/schematics@12.0.0](https://github.com/nestjs/schematics) - MIT
+- [@nestjs/testing@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@types/express@5.0.6](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/jest@30.0.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/node@26.2.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@vitest/coverage-v8@5.0.0](https://github.com/vitest-dev/vitest) - MIT
 - [agentkeepalive@4.6.0](https://github.com/node-modules/agentkeepalive) - MIT
 - [cache-manager@7.2.9](https://github.com/jaredwray/cacheable) - MIT
 - [eslint-config-prettier@10.1.8](https://github.com/prettier/eslint-config-prettier) - MIT
 - [eslint-plugin-prettier@5.5.6](https://github.com/prettier/eslint-plugin-prettier) - MIT
 - [eslint@10.8.1](https://github.com/eslint/eslint) - MIT
 - [globals@17.11.0](https://github.com/sindresorhus/globals) - MIT
-- [jest@30.4.2](https://github.com/jestjs/jest) - MIT
-- [nats@2.29.3](https://github.com/nats-io/nats.node) - Apache-2.0
 - [prettier@3.9.6](https://github.com/prettier/prettier) - MIT
 - [reflect-metadata@0.2.2](https://github.com/rbuckton/reflect-metadata) - Apache-2.0
 - [rxjs@7.8.2](https://github.com/reactivex/rxjs) - Apache-2.0
 - [source-map-support@0.5.21](https://github.com/evanw/node-source-map-support) - MIT
-- [ts-jest@29.4.12](https://github.com/kulshekhar/ts-jest) - MIT
 - [ts-loader@9.6.2](https://github.com/TypeStrong/ts-loader) - MIT
 - [ts-node@10.9.2](https://github.com/TypeStrong/ts-node) - MIT
 - [tsconfig-paths@4.2.0](https://github.com/dividab/tsconfig-paths) - MIT
 - [typescript-eslint@8.67.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
 - [typescript@6.0.3](https://github.com/microsoft/TypeScript) - Apache-2.0
+- [vitest@5.0.0](https://github.com/vitest-dev/vitest) - MIT
 
 </details>
 
 ### [social-network](./dev/user-backend-nest/microservices/social-network)
 <span id="backend-social-network"></span>
 ```
-├─ MIT: 27
+├─ MIT: 26
 └─ Apache-2.0: 5
 ```
 
@@ -976,42 +959,41 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@eslint/eslintrc@3.3.6](https://github.com/eslint/eslintrc) - MIT
 - [@eslint/js@10.0.1](https://github.com/eslint/eslint) - MIT
 - [@ianvs/prettier-plugin-sort-imports@4.7.1](https://github.com/ianvs/prettier-plugin-sort-imports) - Apache-2.0
-- [@nestjs/axios@4.0.1](https://github.com/nestjs/axios) - MIT
-- [@nestjs/cli@11.0.24](https://github.com/nestjs/nest-cli) - MIT
-- [@nestjs/common@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/config@4.0.4](https://github.com/nestjs/config) - MIT
-- [@nestjs/core@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/microservices@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/platform-express@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/schematics@11.1.0](https://github.com/nestjs/schematics) - MIT
-- [@nestjs/testing@11.2.1](https://github.com/nestjs/nest) - MIT
+- [@nats-io/transport-node@3.4.0](https://github.com/nats-io/nats.js) - Apache-2.0
+- [@nestjs/axios@12.0.0](https://github.com/nestjs/axios) - MIT
+- [@nestjs/cli@12.0.0](https://github.com/nestjs/nest-cli) - MIT
+- [@nestjs/common@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/config@12.0.0](https://github.com/nestjs/config) - MIT
+- [@nestjs/core@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/microservices@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/platform-express@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/schematics@12.0.0](https://github.com/nestjs/schematics) - MIT
+- [@nestjs/testing@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@types/express@5.0.6](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/jest@30.0.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/node@26.2.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@vitest/coverage-v8@5.0.0](https://github.com/vitest-dev/vitest) - MIT
 - [agentkeepalive@4.6.0](https://github.com/node-modules/agentkeepalive) - MIT
 - [eslint-config-prettier@10.1.8](https://github.com/prettier/eslint-config-prettier) - MIT
 - [eslint-plugin-prettier@5.5.6](https://github.com/prettier/eslint-plugin-prettier) - MIT
 - [eslint@10.8.1](https://github.com/eslint/eslint) - MIT
 - [globals@17.11.0](https://github.com/sindresorhus/globals) - MIT
-- [jest@30.4.2](https://github.com/jestjs/jest) - MIT
-- [nats@2.29.3](https://github.com/nats-io/nats.node) - Apache-2.0
 - [prettier@3.9.6](https://github.com/prettier/prettier) - MIT
 - [reflect-metadata@0.2.2](https://github.com/rbuckton/reflect-metadata) - Apache-2.0
 - [rxjs@7.8.2](https://github.com/reactivex/rxjs) - Apache-2.0
 - [source-map-support@0.5.21](https://github.com/evanw/node-source-map-support) - MIT
-- [ts-jest@29.4.12](https://github.com/kulshekhar/ts-jest) - MIT
 - [ts-loader@9.6.2](https://github.com/TypeStrong/ts-loader) - MIT
 - [ts-node@10.9.2](https://github.com/TypeStrong/ts-node) - MIT
 - [tsconfig-paths@4.2.0](https://github.com/dividab/tsconfig-paths) - MIT
 - [typescript-eslint@8.67.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
 - [typescript@6.0.3](https://github.com/microsoft/TypeScript) - Apache-2.0
+- [vitest@5.0.0](https://github.com/vitest-dev/vitest) - MIT
 
 </details>
 
 ### [static-pages](./dev/user-backend-nest/microservices/static-pages)
 <span id="backend-static-pages"></span>
 ```
-├─ MIT: 27
+├─ MIT: 26
 └─ Apache-2.0: 5
 ```
 
@@ -1020,42 +1002,41 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@eslint/eslintrc@3.3.6](https://github.com/eslint/eslintrc) - MIT
 - [@eslint/js@10.0.1](https://github.com/eslint/eslint) - MIT
 - [@ianvs/prettier-plugin-sort-imports@4.7.1](https://github.com/ianvs/prettier-plugin-sort-imports) - Apache-2.0
-- [@nestjs/axios@4.0.1](https://github.com/nestjs/axios) - MIT
-- [@nestjs/cli@11.0.24](https://github.com/nestjs/nest-cli) - MIT
-- [@nestjs/common@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/config@4.0.4](https://github.com/nestjs/config) - MIT
-- [@nestjs/core@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/microservices@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/platform-express@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/schematics@11.1.0](https://github.com/nestjs/schematics) - MIT
-- [@nestjs/testing@11.2.1](https://github.com/nestjs/nest) - MIT
+- [@nats-io/transport-node@3.4.0](https://github.com/nats-io/nats.js) - Apache-2.0
+- [@nestjs/axios@12.0.0](https://github.com/nestjs/axios) - MIT
+- [@nestjs/cli@12.0.0](https://github.com/nestjs/nest-cli) - MIT
+- [@nestjs/common@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/config@12.0.0](https://github.com/nestjs/config) - MIT
+- [@nestjs/core@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/microservices@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/platform-express@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/schematics@12.0.0](https://github.com/nestjs/schematics) - MIT
+- [@nestjs/testing@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@types/express@5.0.6](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/jest@30.0.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/node@26.2.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@vitest/coverage-v8@5.0.0](https://github.com/vitest-dev/vitest) - MIT
 - [agentkeepalive@4.6.0](https://github.com/node-modules/agentkeepalive) - MIT
 - [eslint-config-prettier@10.1.8](https://github.com/prettier/eslint-config-prettier) - MIT
 - [eslint-plugin-prettier@5.5.6](https://github.com/prettier/eslint-plugin-prettier) - MIT
 - [eslint@10.8.1](https://github.com/eslint/eslint) - MIT
 - [globals@17.11.0](https://github.com/sindresorhus/globals) - MIT
-- [jest@30.4.2](https://github.com/jestjs/jest) - MIT
-- [nats@2.29.3](https://github.com/nats-io/nats.node) - Apache-2.0
 - [prettier@3.9.6](https://github.com/prettier/prettier) - MIT
 - [reflect-metadata@0.2.2](https://github.com/rbuckton/reflect-metadata) - Apache-2.0
 - [rxjs@7.8.2](https://github.com/reactivex/rxjs) - Apache-2.0
 - [source-map-support@0.5.21](https://github.com/evanw/node-source-map-support) - MIT
-- [ts-jest@29.4.12](https://github.com/kulshekhar/ts-jest) - MIT
 - [ts-loader@9.6.2](https://github.com/TypeStrong/ts-loader) - MIT
 - [ts-node@10.9.2](https://github.com/TypeStrong/ts-node) - MIT
 - [tsconfig-paths@4.2.0](https://github.com/dividab/tsconfig-paths) - MIT
 - [typescript-eslint@8.67.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
 - [typescript@6.0.3](https://github.com/microsoft/TypeScript) - Apache-2.0
+- [vitest@5.0.0](https://github.com/vitest-dev/vitest) - MIT
 
 </details>
 
 ### [statistics](./dev/user-backend-nest/microservices/statistics)
 <span id="backend-statistics"></span>
 ```
-├─ MIT: 27
+├─ MIT: 26
 └─ Apache-2.0: 5
 ```
 
@@ -1064,35 +1045,34 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@eslint/eslintrc@3.3.6](https://github.com/eslint/eslintrc) - MIT
 - [@eslint/js@10.0.1](https://github.com/eslint/eslint) - MIT
 - [@ianvs/prettier-plugin-sort-imports@4.7.1](https://github.com/ianvs/prettier-plugin-sort-imports) - Apache-2.0
-- [@nestjs/axios@4.0.1](https://github.com/nestjs/axios) - MIT
-- [@nestjs/cli@11.0.24](https://github.com/nestjs/nest-cli) - MIT
-- [@nestjs/common@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/config@4.0.4](https://github.com/nestjs/config) - MIT
-- [@nestjs/core@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/microservices@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/platform-express@11.2.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/schematics@11.1.0](https://github.com/nestjs/schematics) - MIT
-- [@nestjs/testing@11.2.1](https://github.com/nestjs/nest) - MIT
+- [@nats-io/transport-node@3.4.0](https://github.com/nats-io/nats.js) - Apache-2.0
+- [@nestjs/axios@12.0.0](https://github.com/nestjs/axios) - MIT
+- [@nestjs/cli@12.0.0](https://github.com/nestjs/nest-cli) - MIT
+- [@nestjs/common@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/config@12.0.0](https://github.com/nestjs/config) - MIT
+- [@nestjs/core@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/microservices@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/platform-express@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/schematics@12.0.0](https://github.com/nestjs/schematics) - MIT
+- [@nestjs/testing@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@types/express@5.0.6](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/jest@30.0.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/node@26.2.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@vitest/coverage-v8@5.0.0](https://github.com/vitest-dev/vitest) - MIT
 - [agentkeepalive@4.6.0](https://github.com/node-modules/agentkeepalive) - MIT
 - [eslint-config-prettier@10.1.8](https://github.com/prettier/eslint-config-prettier) - MIT
 - [eslint-plugin-prettier@5.5.6](https://github.com/prettier/eslint-plugin-prettier) - MIT
 - [eslint@10.8.1](https://github.com/eslint/eslint) - MIT
 - [globals@17.11.0](https://github.com/sindresorhus/globals) - MIT
-- [jest@30.4.2](https://github.com/jestjs/jest) - MIT
-- [nats@2.29.3](https://github.com/nats-io/nats.node) - Apache-2.0
 - [prettier@3.9.6](https://github.com/prettier/prettier) - MIT
 - [reflect-metadata@0.2.2](https://github.com/rbuckton/reflect-metadata) - Apache-2.0
 - [rxjs@7.8.2](https://github.com/reactivex/rxjs) - Apache-2.0
 - [source-map-support@0.5.21](https://github.com/evanw/node-source-map-support) - MIT
-- [ts-jest@29.4.12](https://github.com/kulshekhar/ts-jest) - MIT
 - [ts-loader@9.6.2](https://github.com/TypeStrong/ts-loader) - MIT
 - [ts-node@10.9.2](https://github.com/TypeStrong/ts-node) - MIT
 - [tsconfig-paths@4.2.0](https://github.com/dividab/tsconfig-paths) - MIT
 - [typescript-eslint@8.67.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
 - [typescript@6.0.3](https://github.com/microsoft/TypeScript) - Apache-2.0
+- [vitest@5.0.0](https://github.com/vitest-dev/vitest) - MIT
 
 </details>
 
@@ -1100,7 +1080,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 ### [multi-cms-connector](./dev/connectors/multi-cms-connector)
 <span id="connector-multi-cms-connector"></span>
 ```
-├─ MIT: 40
+├─ MIT: 39
 ├─ Apache-2.0: 4
 └─ BSD-3-Clause: 1
 ```
@@ -1126,9 +1106,9 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@nestjs/schematics@12.0.0](https://github.com/nestjs/schematics) - MIT
 - [@nestjs/testing@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@types/express@5.0.6](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [@types/jest@30.0.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/node@26.4.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/passport-jwt@4.0.1](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
+- [@vitest/coverage-v8@5.0.0](https://github.com/vitest-dev/vitest) - MIT
 - [envalid@8.2.0](https://github.com/af/envalid) - MIT
 - [eslint-config-prettier@10.1.8](https://github.com/prettier/eslint-config-prettier) - MIT
 - [eslint-plugin-prettier@5.5.6](https://github.com/prettier/eslint-plugin-prettier) - MIT
@@ -1136,7 +1116,6 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [globals@17.11.0](https://github.com/sindresorhus/globals) - MIT
 - [graphql-request@7.4.0](https://github.com/graffle-js/graffle) - MIT
 - [graphql-type-json@0.3.2](https://github.com/taion/graphql-type-json) - MIT
-- [jest@30.5.0](https://github.com/jestjs/jest) - MIT
 - [joi@18.2.5](https://github.com/hapijs/joi) - BSD-3-Clause
 - [passport-jwt@4.0.1](https://github.com/mikenicholson/passport-jwt) - MIT
 - [passport@0.7.0](https://github.com/jaredhanson/passport) - MIT
@@ -1145,12 +1124,12 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [reflect-metadata@0.2.2](https://github.com/rbuckton/reflect-metadata) - Apache-2.0
 - [rxjs@7.8.2](https://github.com/reactivex/rxjs) - Apache-2.0
 - [source-map-support@0.5.21](https://github.com/evanw/node-source-map-support) - MIT
-- [ts-jest@29.4.12](https://github.com/kulshekhar/ts-jest) - MIT
 - [ts-loader@9.6.2](https://github.com/TypeStrong/ts-loader) - MIT
 - [ts-node@10.9.2](https://github.com/TypeStrong/ts-node) - MIT
 - [tsconfig-paths@4.2.0](https://github.com/dividab/tsconfig-paths) - MIT
 - [typescript-eslint@8.68.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
 - [typescript@6.0.3](https://github.com/microsoft/TypeScript) - Apache-2.0
+- [vitest@5.0.0](https://github.com/vitest-dev/vitest) - MIT
 - [zod@4.4.3](https://github.com/colinhacks/zod) - MIT
 
 </details>
