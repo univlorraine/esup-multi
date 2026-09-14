@@ -45,7 +45,6 @@ import { ProjectModuleService, SharedComponentsModule } from '@multi/shared';
 import { ReservationRoutingModule } from './reservation-routing.module';
 import { RESERVATION_CONFIG, ReservationModuleConfig } from './reservation.config';
 import { ReservationPage } from './reservation.page';
-import { QRScanPage } from './scan/scan.page';
 
 const initModule = (projectModuleService: ProjectModuleService) => () =>
   projectModuleService.initProjectModule({
@@ -54,7 +53,7 @@ const initModule = (projectModuleService: ProjectModuleService) => () =>
   });
 
 @NgModule({
-  declarations: [ReservationPage, QRScanPage],
+  declarations: [ReservationPage],
   imports: [
     CommonModule,
     IonicModule,

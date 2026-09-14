@@ -39,6 +39,10 @@
 
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import {
+  CapacitorBarcodeScanner,
+  CapacitorBarcodeScannerTypeHint,
+} from '@capacitor/barcode-scanner';
 import { NavController } from '@ionic/angular';
 import { ReservationService } from './reservation.service';
 
@@ -58,8 +62,16 @@ export class ReservationPage {
     this.reservationService.openReservationService();
   }
 
-  navigateToScanPage() {
-    this.navController.setDirection('forward', false);
-    this.router.navigate(['/reservation/scan']);
+  async startScan() {
+    const options = {
+      hint: CapacitorBarcodeScannerTypeHint.QR_CODE,
+    };
+
+    try {
+      const result = (await CapacitorBarcodeScanner.scanBarcode(options)).ScanResult;
+      this.reservationService.openURL(result);
+    } catch (error) {
+      console.error('Error starting scan:', error);
+    }
   }
 }

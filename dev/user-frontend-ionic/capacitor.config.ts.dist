@@ -42,7 +42,7 @@ import { CapacitorConfig } from '@capacitor/cli';
 const config: CapacitorConfig = {
   appId: 'fr.esupportail.mobile.multi',
   appName: 'Esup-Multi',
-  webDir: 'www',
+  webDir: 'www/browser',
   server: {
     hostname: 'localhost',
     androidScheme: 'https'

@@ -40,16 +40,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ReservationPage } from './reservation.page';
-import { QRScanPage } from './scan/scan.page';
 
 const routes: Routes = [
   {
     path: 'reservation',
     component: ReservationPage,
-  },
-  {
-    path: 'reservation/scan',
-    component: QRScanPage,
   },
 ];
 

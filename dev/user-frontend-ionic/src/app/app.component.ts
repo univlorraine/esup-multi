@@ -53,12 +53,10 @@ import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { FirebaseMessaging } from '@capacitor-firebase/messaging';
 import { App } from '@capacitor/app';
-import { Capacitor, PluginListenerHandle } from '@capacitor/core';
+import { Capacitor, PluginListenerHandle, SystemBars, SystemBarsStyle } from '@capacitor/core';
 import { Device } from '@capacitor/device';
 import { PushNotifications } from '@capacitor/push-notifications';
 import { SplashScreen } from '@capacitor/splash-screen';
-import { StatusBar, Style } from '@capacitor/status-bar';
-import { EdgeToEdge } from '@capawesome/capacitor-android-edge-to-edge-support';
 import { Badge } from '@capawesome/capacitor-badge';
 import { ModalController, Platform, PopoverController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
@@ -318,25 +316,16 @@ export class AppComponent implements OnInit, OnDestroy {
     }
     this.platform.ready().then(async () => {
       const primaryColor = getComputedStyle(document.documentElement).getPropertyValue(
-        '--ion-color-primary',
+        '--ion-toolbar-background',
       );
       const r = parseInt(primaryColor.slice(1, 3), 16);
       const g = parseInt(primaryColor.slice(3, 5), 16);
       const b = parseInt(primaryColor.slice(5, 7), 16);
       const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-      StatusBar.setStyle({ style: luminance > 0.5 ? Style.Light : Style.Dark });
-      StatusBar.setBackgroundColor({ color: primaryColor });
 
-      // Gestion du edge to edge sur android
-      const info = await Device.getInfo();
-      if (info.platform === 'android') {
-        if (Number(info.osVersion) >= 15) {
-          await EdgeToEdge.enable();
-          await EdgeToEdge.setBackgroundColor({ color: primaryColor });
-        } else {
-          await EdgeToEdge.disable();
-        }
-      }
+      await SystemBars.setStyle({
+        style: luminance > 0.5 ? SystemBarsStyle.Light : SystemBarsStyle.Dark,
+      });
     });
   }
 
