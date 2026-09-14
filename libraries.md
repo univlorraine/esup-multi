@@ -48,8 +48,8 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 
 ## [Frontend](./dev/user-frontend-ionic)
 ```
-├─ MIT: 79
-├─ Apache-2.0: 8
+├─ MIT: 78
+├─ Apache-2.0: 7
 ├─ MIT*: 1
 ├─ (MPL-2.0 OR Apache-2.0): 1
 ├─ BSD-2-Clause: 1
@@ -74,29 +74,27 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@angular/platform-browser-dynamic@18.2.14](https://github.com/angular/angular) - MIT
 - [@angular/platform-browser@18.2.14](https://github.com/angular/angular) - MIT
 - [@angular/router@18.2.14](https://github.com/angular/angular) - MIT
-- [@capacitor-community/contacts@7.0.0](https://github.com/capacitor-community/contacts) - MIT
-- [@capacitor-community/screen-brightness@7.0.0](https://github.com/capacitor-community/screen-brightness) - MIT
+- [@capacitor-community/contacts@8.0.0](https://github.com/capacitor-community/contacts) - MIT
+- [@capacitor-community/screen-brightness@8.0.0](https://github.com/capacitor-community/screen-brightness) - MIT
 - [@capacitor-firebase/messaging@7.2.0](https://github.com/capawesome-team/capacitor-firebase) - Apache-2.0
-- [@capacitor-mlkit/barcode-scanning@7.2.1](https://github.com/capawesome-team/capacitor-mlkit) - Apache-2.0
-- [@capacitor/android@7.4.3](https://github.com/ionic-team/capacitor) - MIT
-- [@capacitor/app@7.1.2](https://github.com/ionic-team/capacitor-plugins) - MIT
+- [@capacitor/android@8.5.1](https://github.com/ionic-team/capacitor) - MIT
+- [@capacitor/app@8.1.1](https://github.com/ionic-team/capacitor-plugins) - MIT
 - [@capacitor/assets@3.0.5](https://github.com/ionic-team/capacitor-assets) - MIT
-- [@capacitor/browser@7.0.5](https://github.com/ionic-team/capacitor-plugins) - MIT
-- [@capacitor/camera@7.0.5](https://github.com/ionic-team/capacitor-plugins) - MIT
-- [@capacitor/cli@7.6.9](https://github.com/ionic-team/capacitor) - MIT
-- [@capacitor/core@7.6.9](https://github.com/ionic-team/capacitor) - MIT
-- [@capacitor/device@7.0.5](https://github.com/ionic-team/capacitor-plugins) - MIT
-- [@capacitor/geolocation@7.1.8](https://github.com/ionic-team/capacitor-geolocation) - MIT
-- [@capacitor/haptics@7.0.5](https://github.com/ionic-team/capacitor-plugins) - MIT
-- [@capacitor/ios@7.6.9](https://github.com/ionic-team/capacitor) - MIT
-- [@capacitor/keyboard@7.0.6](https://github.com/ionic-team/capacitor-plugins) - MIT
-- [@capacitor/network@7.0.4](https://github.com/ionic-team/capacitor-plugins) - MIT
-- [@capacitor/push-notifications@7.0.7](https://github.com/ionic-team/capacitor-plugins) - MIT
-- [@capacitor/splash-screen@7.0.5](https://github.com/ionic-team/capacitor-plugins) - MIT
-- [@capacitor/status-bar@7.0.6](https://github.com/ionic-team/capacitor-plugins) - MIT
-- [@capawesome/capacitor-android-edge-to-edge-support@7.2.3](https://github.com/capawesome-team/capacitor-plugins) - MIT
-- [@capawesome/capacitor-badge@7.0.1](https://github.com/capawesome-team/capacitor-plugins) - MIT
-- [@capawesome/capacitor-screen-orientation@7.0.1](https://github.com/capawesome-team/capacitor-plugins) - MIT
+- [@capacitor/barcode-scanner@3.1.2](https://github.com/ionic-team/capacitor-barcode-scanner) - MIT
+- [@capacitor/browser@8.0.4](https://github.com/ionic-team/capacitor-plugins) - MIT
+- [@capacitor/camera@8.2.4](https://github.com/ionic-team/capacitor-camera) - MIT
+- [@capacitor/cli@8.5.1](https://github.com/ionic-team/capacitor) - MIT
+- [@capacitor/core@8.5.1](https://github.com/ionic-team/capacitor) - MIT
+- [@capacitor/device@8.0.3](https://github.com/ionic-team/capacitor-plugins) - MIT
+- [@capacitor/geolocation@8.2.2](https://github.com/ionic-team/capacitor-geolocation) - MIT
+- [@capacitor/haptics@8.0.2](https://github.com/ionic-team/capacitor-haptics) - MIT
+- [@capacitor/ios@8.5.1](https://github.com/ionic-team/capacitor) - MIT
+- [@capacitor/keyboard@8.0.5](https://github.com/ionic-team/capacitor-keyboard) - MIT
+- [@capacitor/network@8.0.1](https://github.com/ionic-team/capacitor-plugins) - MIT
+- [@capacitor/push-notifications@8.1.2](https://github.com/ionic-team/capacitor-plugins) - MIT
+- [@capacitor/splash-screen@8.0.2](https://github.com/ionic-team/capacitor-plugins) - MIT
+- [@capawesome/capacitor-badge@8.0.3](https://github.com/capawesome-team/capacitor-plugins) - MIT
+- [@capawesome/capacitor-screen-orientation@8.0.3](https://github.com/capawesome-team/capacitor-plugins) - MIT
 - [@eslint/js@9.39.5](https://github.com/eslint/eslint) - MIT
 - [@fullcalendar/angular@6.1.21](https://github.com/fullcalendar/fullcalendar-angular) - MIT
 - [@ianvs/prettier-plugin-sort-imports@4.7.1](https://github.com/ianvs/prettier-plugin-sort-imports) - Apache-2.0
@@ -116,7 +114,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [angular-eslint@18.4.3](https://github.com/angular-eslint/angular-eslint) - MIT
 - [angular-shepherd@18.0.2](https://github.com/shipshapecode/angular-shepherd) - MIT
 - [angularx-qrcode@18.0.2](https://github.com/cordobo/angularx-qrcode) - MIT
-- [capacitor-secure-storage-plugin@0.11.0](https://github.com/martinkasa/capacitor-secure-storage-plugin) - MIT
+- [capacitor-secure-storage-plugin@0.13.0](https://github.com/martinkasa/capacitor-secure-storage-plugin) - MIT
 - [date-fns@4.4.0](https://github.com/date-fns/date-fns) - MIT
 - [dompurify@3.4.14](https://github.com/cure53/DOMPurify) - (MPL-2.0 OR Apache-2.0)
 - [eslint-config-prettier@10.1.8](https://github.com/prettier/eslint-config-prettier) - MIT
