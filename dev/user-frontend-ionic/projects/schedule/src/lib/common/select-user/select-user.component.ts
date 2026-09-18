@@ -39,10 +39,10 @@
 
 import { Component, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthenticatedUser, authenticatedUser$, AuthorizationHelper } from '@multi/shared';
 import { Observable } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
-import { ScheduleModuleConfig, SCHEDULE_CONFIG } from '../../schedule.config';
+import { AuthenticatedUser, authenticatedUser$, AuthorizationHelper } from '@multi/shared';
+import { SCHEDULE_CONFIG, ScheduleModuleConfig } from '../../schedule.config';
 import { impersonatedScheduleStoreManager } from '../../schedule.repository';
 import { ScheduleService } from '../../schedule.service';
 
@@ -52,26 +52,30 @@ import { ScheduleService } from '../../schedule.service';
   styleUrls: ['../../../../../../src/theme/app-theme/styles/schedule/select-user.component.scss'],
 })
 export class SelectUserComponent {
-
   public form: FormGroup;
   public isSelectUserModalOpen = false;
   public isAuthorizedUser$: Observable<boolean>;
 
-  constructor(@Inject(SCHEDULE_CONFIG) private config: ScheduleModuleConfig, private scheduleService: ScheduleService) {
+  constructor(
+    @Inject(SCHEDULE_CONFIG) private config: ScheduleModuleConfig,
+    private scheduleService: ScheduleService,
+  ) {
     this.isAuthorizedUser$ = authenticatedUser$.pipe(
       filter((authenticatedUser: AuthenticatedUser) => !!authenticatedUser),
       take(1),
       map((authenticatedUser: AuthenticatedUser) => {
         const authorizationHelper = new AuthorizationHelper(authenticatedUser.roles);
-        return authorizationHelper.filter([
-          {
-            authorization: {
-              roles: this.config.managerRoles || [],
-              type: 'ALLOW'
-            }
-          }
-        ]).length > 0;
-      })
+        return (
+          authorizationHelper.filter([
+            {
+              authorization: {
+                roles: this.config.managerRoles || [],
+                type: 'ALLOW',
+              },
+            },
+          ]).length > 0
+        );
+      }),
     );
 
     this.form = new FormGroup({
@@ -88,7 +92,7 @@ export class SelectUserComponent {
     this.isSelectUserModalOpen = false;
   }
 
-   onSubmit() {
+  onSubmit() {
     if (!this.form.valid) {
       return;
     }

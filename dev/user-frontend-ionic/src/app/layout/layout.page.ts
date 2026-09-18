@@ -40,14 +40,17 @@
 import {
   AfterViewInit,
   Component,
-  OnDestroy,
   DestroyRef,
   inject,
   Input,
   OnChanges,
-  SimpleChanges
+  OnDestroy,
+  SimpleChanges,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavController } from '@ionic/angular';
+import { BehaviorSubject, combineLatestWith, Observable, Subject, Subscription } from 'rxjs';
+import { distinctUntilChanged, filter, finalize, map } from 'rxjs/operators';
 import {
   FeaturesService,
   GuidedTourService,
@@ -56,19 +59,16 @@ import {
   MenuItemRouterLink,
   MenuOpenerService,
   MenuService,
+  MultiTenantService,
+  NavigationService,
   NetworkService,
   Notification,
   NotificationsRepository,
   NotificationsService,
   PageLayout,
   StatisticsService,
-  NavigationService,
-  MultiTenantService,
 } from '@multi/shared';
-import { BehaviorSubject, combineLatestWith, Observable, Subscription, Subject } from 'rxjs';
-import { distinctUntilChanged, filter, finalize, map } from 'rxjs/operators';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import {environment} from '../../environments/environment';
+import { environment } from '../../environments/environment';
 
 interface MenuItemWithOptionalRouterLink extends MenuItem {
   routerLink: string;
@@ -81,7 +81,7 @@ interface MenuItemWithBadge extends MenuItemWithOptionalRouterLink {
 @Component({
   selector: 'app-layout',
   templateUrl: 'layout.page.html',
-  styleUrls: ['../../theme/app-theme/styles/app/layout.page.scss']
+  styleUrls: ['../../theme/app-theme/styles/app/layout.page.scss'],
 })
 export class LayoutPage implements AfterViewInit, OnChanges, OnDestroy {
   @Input() currentPageLayout: PageLayout;
@@ -107,7 +107,7 @@ export class LayoutPage implements AfterViewInit, OnChanges, OnDestroy {
     private notificationsRepository: NotificationsRepository,
     private notificationsService: NotificationsService,
     private multiTenantService: MultiTenantService,
-    private navigationService: NavigationService
+    private navigationService: NavigationService,
   ) {
     this.initializeObservables();
     this.setupSubscriptions();
@@ -133,66 +133,82 @@ export class LayoutPage implements AfterViewInit, OnChanges, OnDestroy {
 
   private initializeObservables(): void {
     this.isOnline$ = this.networkService.isOnline$;
-    this.tabsMenuItems$ = this.menuService.tabsMenuItems$.pipe(
-      map(this.mapMenuItems)
-    );
+    this.tabsMenuItems$ = this.menuService.tabsMenuItems$.pipe(map(this.mapMenuItems));
 
     this.topMenuItemsWithBadges$ = this.menuService.topMenuItems$.pipe(
       combineLatestWith(this.menuItemHasBadgeState$),
-      map(([menuItems, badges]) => menuItems.map((menuItem, index) => ({
-        ...menuItem,
-        routerLink: menuItem.link.type === MenuItemLinkType.router
-          ? (menuItem.link as MenuItemRouterLink).routerLink
-          : undefined,
-        hasBadge: badges[index] ?? false
-      })))
+      map(([menuItems, badges]) =>
+        menuItems.map((menuItem, index) => ({
+          ...menuItem,
+          routerLink:
+            menuItem.link.type === MenuItemLinkType.router
+              ? (menuItem.link as MenuItemRouterLink).routerLink
+              : undefined,
+          hasBadge: badges[index] ?? false,
+        })),
+      ),
     );
 
     // this.topMenuItems$ = this.menuService.topMenuItems$;
   }
 
   private mapMenuItems(menuItems: MenuItem[]): MenuItemWithOptionalRouterLink[] {
-    return menuItems.map(menuItem => ({
+    return menuItems.map((menuItem) => ({
       ...menuItem,
-      routerLink: menuItem.link.type === MenuItemLinkType.router
-        ? (menuItem.link as MenuItemRouterLink).routerLink
-        : undefined
+      routerLink:
+        menuItem.link.type === MenuItemLinkType.router
+          ? (menuItem.link as MenuItemRouterLink).routerLink
+          : undefined,
     }));
   }
 
   private setupSubscriptions(): void {
-    this.topMenuItemsWithBadges$.pipe(
-      distinctUntilChanged((prevMenuItems, currentMenuItems) => this.menuService.areSpecifiedPropertiesEqualsInMenuItemsArrays(
-        prevMenuItems, currentMenuItems, ['link.routerLink']
-      )),
-      combineLatestWith(this.layoutChangeSubject$.pipe(filter(layout => layout === 'tabs'))),
-      takeUntilDestroyed(this.destroyRef)
-    ).subscribe(() => {
-      this.navigationService.setExternalNavigation(false);
-      this.notificationsService.loadNotifications(0, 10).subscribe();
-    });
+    this.topMenuItemsWithBadges$
+      .pipe(
+        distinctUntilChanged((prevMenuItems, currentMenuItems) =>
+          this.menuService.areSpecifiedPropertiesEqualsInMenuItemsArrays(
+            prevMenuItems,
+            currentMenuItems,
+            ['link.routerLink'],
+          ),
+        ),
+        combineLatestWith(this.layoutChangeSubject$.pipe(filter((layout) => layout === 'tabs'))),
+        takeUntilDestroyed(this.destroyRef),
+      )
+      .subscribe(() => {
+        this.navigationService.setExternalNavigation(false);
+        this.notificationsService.loadNotifications(0, 10).subscribe();
+      });
 
-    this.notificationsRepository.notifications$.pipe(
-      takeUntilDestroyed(this.destroyRef),
-      combineLatestWith(this.menuService.topMenuItems$),
-      map(([notifications, menuItems]) => this.mapNotificationsToMenuItems(notifications, menuItems)),
-    ).subscribe(values => {
-      this.menuItemHasBadgeState$.next(values);
-    });
+    this.notificationsRepository.notifications$
+      .pipe(
+        takeUntilDestroyed(this.destroyRef),
+        combineLatestWith(this.menuService.topMenuItems$),
+        map(([notifications, menuItems]) =>
+          this.mapNotificationsToMenuItems(notifications, menuItems),
+        ),
+      )
+      .subscribe((values) => {
+        this.menuItemHasBadgeState$.next(values);
+      });
 
     this.defaultLogo = environment.defaultLogo;
-    this.defaultLogoSubscription = this.multiTenantService.currentTenantLogo$.subscribe(logo => {
-      if(logo) {
+    this.defaultLogoSubscription = this.multiTenantService.currentTenantLogo$.subscribe((logo) => {
+      if (logo) {
         this.defaultLogo = logo;
       }
     });
   }
 
-  private mapNotificationsToMenuItems(notifications: Notification[], menuItems: MenuItem[]): boolean[] {
-    return menuItems.map(menuItem =>
-      menuItem.link.type === MenuItemLinkType.router &&
-      (menuItem.link as MenuItemRouterLink).routerLink === '/notifications' &&
-      notifications.some(notification => notification.state === 'UNREAD')
+  private mapNotificationsToMenuItems(
+    notifications: Notification[],
+    menuItems: MenuItem[],
+  ): boolean[] {
+    return menuItems.map(
+      (menuItem) =>
+        menuItem.link.type === MenuItemLinkType.router &&
+        (menuItem.link as MenuItemRouterLink).routerLink === '/notifications' &&
+        notifications.some((notification) => notification.state === 'UNREAD'),
     );
   }
 
@@ -209,9 +225,10 @@ export class LayoutPage implements AfterViewInit, OnChanges, OnDestroy {
     }
 
     this.isLoading = true;
-    this.featuresService.loadAndStoreFeatures().pipe(
-      finalize(() => this.isLoading = false)
-    ).subscribe();
+    this.featuresService
+      .loadAndStoreFeatures()
+      .pipe(finalize(() => (this.isLoading = false)))
+      .subscribe();
   }
 
   public async openExternalOrSsoLinkOnly(menuItem: MenuItem): Promise<boolean | void> {
@@ -234,7 +251,8 @@ export class LayoutPage implements AfterViewInit, OnChanges, OnDestroy {
 
   private handleSingleTenant() {
     const availableTenants: any[] = this.multiTenantService.getAvailableTenants();
-    const isGroup = availableTenants && availableTenants.length === 1 && availableTenants[0].isGroup === true;
+    const isGroup =
+      availableTenants && availableTenants.length === 1 && availableTenants[0].isGroup === true;
 
     if (this.multiTenantService.isSingleTenant() && !isGroup) {
       this.multiTenantService.setCurrentTenantById(this.multiTenantService.getSelectedTenantId());

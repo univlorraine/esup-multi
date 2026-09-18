@@ -37,56 +37,52 @@
  * termes.
  */
 
-import { APP_INITIALIZER, ModuleWithProviders, NgModule } from '@angular/core';
-import { LocalHourPipe, ProjectModuleService, SharedPipeModule } from '@multi/shared';
-import { CalendarComponent } from './widget/calendar/calendar.component';
 import { CommonModule } from '@angular/common';
+import { APP_INITIALIZER, ModuleWithProviders, NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
-import { CompleteLocalDatePipe } from '@multi/shared';
+import { TranslatePipe } from '@ngx-translate/core';
+import {
+  CompleteLocalDatePipe,
+  LocalHourPipe,
+  ProjectModuleService,
+  SharedPipeModule,
+} from '@multi/shared';
+import { CALENDAR_CONFIG, CalendarModuleConfig } from './calendar.config';
 import { LocalDatePipe } from './common/pipe/local-date.pipe';
 import { LocalTimePipe } from './common/pipe/local-time.pipe';
-import { CALENDAR_CONFIG, CalendarModuleConfig } from './calendar.config';
+import { CalendarComponent } from './widget/calendar/calendar.component';
 
-const initModule = (projectModuleService: ProjectModuleService) =>
-  () => projectModuleService.initProjectModule({
+const initModule = (projectModuleService: ProjectModuleService) => () =>
+  projectModuleService.initProjectModule({
     name: 'calendar',
     translation: true,
-    widgets: [{
-      id: 'calendar',
-      component: CalendarComponent,
-    }]
+    widgets: [
+      {
+        id: 'calendar',
+        component: CalendarComponent,
+      },
+    ],
   });
 
 @NgModule({
-  declarations: [
-    CalendarComponent,
-    LocalDatePipe,
-    LocalTimePipe
-  ],
-  imports: [
-    CommonModule,
-    IonicModule,
-    TranslateModule,
-    SharedPipeModule
-  ],
-  providers: [{
-    provide: APP_INITIALIZER,
-    useFactory: initModule,
-    deps:[ProjectModuleService],
-    multi: true
-  },
+  declarations: [CalendarComponent, LocalDatePipe, LocalTimePipe],
+  imports: [CommonModule, IonicModule, TranslatePipe, SharedPipeModule],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initModule,
+      deps: [ProjectModuleService],
+      multi: true,
+    },
     CompleteLocalDatePipe,
-    LocalHourPipe
+    LocalHourPipe,
   ],
 })
 export class CalendarModule {
   static forRoot(config: CalendarModuleConfig): ModuleWithProviders<CalendarModule> {
     return {
       ngModule: CalendarModule,
-      providers: [
-        { provide: CALENDAR_CONFIG, useValue: config }
-      ]
+      providers: [{ provide: CALENDAR_CONFIG, useValue: config }],
     };
   }
 }

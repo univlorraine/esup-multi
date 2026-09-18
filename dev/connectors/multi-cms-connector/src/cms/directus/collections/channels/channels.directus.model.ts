@@ -37,7 +37,7 @@
  */
 
 import { Field, ObjectType } from '@nestjs/graphql';
-import { ChannelsTranslationsDirectus } from '@directus/collections/translations/translations.directus.model';
+import { ChannelsTranslationsDirectus } from '#directus/collections/translations/translations.directus.model.js';
 
 @ObjectType()
 export class ChannelsDirectus {

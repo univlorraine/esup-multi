@@ -37,7 +37,7 @@
  * termes.
  */
 
-import {Inject, Injectable} from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { distinctUntilChanged, filter, map, shareReplay } from 'rxjs/operators';
 import { MenuItemLinkType, MenuItemRouterLink } from './menu.model';
@@ -51,10 +51,9 @@ export interface PageTitle {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class PageLayoutService {
-
   public currentPageLayout$: Observable<PageLayout>;
   public currentPageTitle$ = new BehaviorSubject<PageTitle>(null);
   public showCurrentPageHeader$ = new BehaviorSubject<boolean>(true);
@@ -64,69 +63,74 @@ export class PageLayoutService {
     private navigationService: NavigationService,
     private menuService: MenuService,
     @Inject('environment')
-    private environment: any
+    private environment: any,
   ) {
     this.forceFullLayoutFeatures = this.environment.forceFullLayoutFeatures ?? [];
     this.currentPageLayout$ = combineLatest([
       this.navigationService.currentRouterLink$.pipe(
-        filter(routerLink => routerLink !== '/'),
+        filter((routerLink) => routerLink !== '/'),
         distinctUntilChanged(),
       ),
       this.menuService.tabsMenuItems$.pipe(
-        distinctUntilChanged((prevMenuItems, currentMenuItems) => this.menuService
-          .areSpecifiedPropertiesEqualsInMenuItemsArrays(
+        distinctUntilChanged((prevMenuItems, currentMenuItems) =>
+          this.menuService.areSpecifiedPropertiesEqualsInMenuItemsArrays(
             prevMenuItems,
             currentMenuItems,
-            ['link.routerLink']
-          )
+            ['link.routerLink'],
+          ),
         ),
       ),
     ]).pipe(
       map(([routerLink, tabsMenuItems]) =>
         tabsMenuItems
-          .filter(menuItem => menuItem.link.type === MenuItemLinkType.router)
-          .map(menuItem => menuItem.link as MenuItemRouterLink)
-          .find(link =>
-            routerLink === link.routerLink ||
-            routerLink.startsWith(link.routerLink + '/')
+          .filter((menuItem) => menuItem.link.type === MenuItemLinkType.router)
+          .map((menuItem) => menuItem.link as MenuItemRouterLink)
+          .find(
+            (link) =>
+              routerLink === link.routerLink || routerLink.startsWith(link.routerLink + '/'),
           )
           ? this.determineLayoutByFeature(routerLink)
-          : 'full' as PageLayout
+          : ('full' as PageLayout),
       ),
-      shareReplay(1)
+      shareReplay(1),
     );
 
-    this.currentPageLayout$.pipe(
-      distinctUntilChanged(),
-      map(layout => layout === 'full')
-    ).subscribe(this.showCurrentPageHeader$);
+    this.currentPageLayout$
+      .pipe(
+        distinctUntilChanged(),
+        map((layout) => layout === 'full'),
+      )
+      .subscribe(this.showCurrentPageHeader$);
 
     // set current page title if current path matches any menu item
     combineLatest([
       this.navigationService.currentRouterLink$.pipe(distinctUntilChanged()),
       this.menuService.allMenuItems$.pipe(
-        distinctUntilChanged((prevMenuItems, currentMenuItems) => this.menuService
-          .areSpecifiedPropertiesEqualsInMenuItemsArrays(
+        distinctUntilChanged((prevMenuItems, currentMenuItems) =>
+          this.menuService.areSpecifiedPropertiesEqualsInMenuItemsArrays(
             prevMenuItems,
             currentMenuItems,
-            ['link.type', 'title', 'type']
-          )
-        )
+            ['link.type', 'title', 'type'],
+          ),
+        ),
       ),
-    ]).pipe(
-      map(([routerLink, menuItems]) =>
-        menuItems
-          .filter(menuItem => menuItem.link.type === MenuItemLinkType.router)
-          .find(menuItem => {
-            const link = (menuItem.link as MenuItemRouterLink).routerLink;
-            return routerLink === link || routerLink.startsWith(link + '/');
-          })),
-      filter(menuItem => menuItem !== undefined),
-      map(menuItem => ({
-        title: menuItem.title,
-        translated: menuItem.type === 'dynamic'
-      }))
-    ).subscribe(this.currentPageTitle$);
+    ])
+      .pipe(
+        map(([routerLink, menuItems]) =>
+          menuItems
+            .filter((menuItem) => menuItem.link.type === MenuItemLinkType.router)
+            .find((menuItem) => {
+              const link = (menuItem.link as MenuItemRouterLink).routerLink;
+              return routerLink === link || routerLink.startsWith(link + '/');
+            }),
+        ),
+        filter((menuItem) => menuItem !== undefined),
+        map((menuItem) => ({
+          title: menuItem.title,
+          translated: menuItem.type === 'dynamic',
+        })),
+      )
+      .subscribe(this.currentPageTitle$);
   }
 
   /**
@@ -140,6 +144,8 @@ export class PageLayoutService {
    * @returns {PageLayout} The determined layout type, either 'full' or 'tabs'.
    */
   determineLayoutByFeature(feature: string): PageLayout {
-    return this.forceFullLayoutFeatures.some(f => feature.includes(f)) ? 'full' as PageLayout : 'tabs' as PageLayout;
+    return this.forceFullLayoutFeatures.some((f) => feature.includes(f))
+      ? ('full' as PageLayout)
+      : ('tabs' as PageLayout);
   }
 }

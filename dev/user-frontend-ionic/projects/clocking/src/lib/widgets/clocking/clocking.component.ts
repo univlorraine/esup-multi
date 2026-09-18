@@ -38,9 +38,9 @@
  */
 
 import { AfterViewInit, ChangeDetectorRef, Component, Input } from '@angular/core';
-import { getExpectedErrorMessage, ThemeService } from '@multi/shared';
 import { Observable } from 'rxjs';
 import { catchError, finalize, take } from 'rxjs/operators';
+import { getExpectedErrorMessage, ThemeService } from '@multi/shared';
 import { Clocking, clocking$ } from '../../clocking.repository';
 import { ClockingService } from '../../clocking.service';
 
@@ -50,7 +50,6 @@ import { ClockingService } from '../../clocking.service';
   styleUrls: ['../../../../../../src/theme/app-theme/styles/clocking/clocking.component.scss'],
 })
 export class ClockingComponent implements AfterViewInit {
-
   @Input() widgetColor: string;
 
   public isLoading = false;
@@ -58,19 +57,22 @@ export class ClockingComponent implements AfterViewInit {
   public clockInLoading = false;
   public errorMessage: string | null = null;
 
-  constructor(private clockingService: ClockingService,
+  constructor(
+    private clockingService: ClockingService,
     private themeService: ThemeService,
-    private changeDetectorRef: ChangeDetectorRef) { }
+    private changeDetectorRef: ChangeDetectorRef,
+  ) {}
 
   widgetViewDidEnter(): void {
     this.isLoading = true;
-    this.clockingService.loadClockingIfNetworkAvailable()
+    this.clockingService
+      .loadClockingIfNetworkAvailable()
       .pipe(
         take(1),
-        catchError(err => this.catchExpectedError(err)),
-        finalize(() => this.isLoading = false)
+        catchError((err) => this.catchExpectedError(err)),
+        finalize(() => (this.isLoading = false)),
       )
-      .subscribe(() => this.errorMessage = null);
+      .subscribe(() => (this.errorMessage = null));
   }
 
   ngAfterViewInit() {
@@ -81,17 +83,20 @@ export class ClockingComponent implements AfterViewInit {
     event.stopPropagation(); // prevent from triggering card click
 
     this.clockInLoading = true;
-    this.clockingService.clockIn().pipe(
-      take(1),
-      catchError(err => this.catchExpectedError(err)),
-      finalize(() => this.clockInLoading = false)
-    )
-    .subscribe(() => this.errorMessage = null);
+    this.clockingService
+      .clockIn()
+      .pipe(
+        take(1),
+        catchError((err) => this.catchExpectedError(err)),
+        finalize(() => (this.clockInLoading = false)),
+      )
+      .subscribe(() => (this.errorMessage = null));
   }
 
   fontColor() {
-    return this.themeService.isBackgroundFromCmsDarkOrIsDarkTheme(this.widgetColor) ?
-      'light-font-color' : 'dark-font-color';
+    return this.themeService.isBackgroundFromCmsDarkOrIsDarkTheme(this.widgetColor)
+      ? 'light-font-color'
+      : 'dark-font-color';
   }
 
   private catchExpectedError(err) {

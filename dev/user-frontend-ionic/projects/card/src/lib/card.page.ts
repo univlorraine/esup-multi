@@ -38,25 +38,23 @@
  */
 
 import { Component, Inject } from '@angular/core';
-import { AuthenticatedUser, getAuthToken, NetworkService } from '@multi/shared';
 import { Observable, Subscription } from 'rxjs';
 import { filter, finalize, switchMap, take } from 'rxjs/operators';
-import { CardModuleConfig, CARD_CONFIG } from './card.config';
+import { AuthenticatedUser, getAuthToken, NetworkService, ScreenService } from '@multi/shared';
+import { CARD_CONFIG, CardModuleConfig } from './card.config';
 import { setUserAndCardData, UserAndCardData, userAndCardData$ } from './card.repository';
 import { CardService } from './card.service';
-import { ScreenService } from '@multi/shared';
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.page.html',
-  styleUrls: ['../../../../src/theme/app-theme/styles/card/card.page.scss']
+  styleUrls: ['../../../../src/theme/app-theme/styles/card/card.page.scss'],
 })
 export class CardPage {
   public authenticatedUser$: Observable<AuthenticatedUser>;
   public userAndCardData$: Observable<UserAndCardData> = userAndCardData$;
   public isLoading = false;
   private userAndCardDataSubscription: Subscription;
-
 
   constructor(
     private cardService: CardService,
@@ -66,11 +64,8 @@ export class CardPage {
   ) {}
 
   ionViewWillEnter() {
-    this.userAndCardDataSubscription = userAndCardData$.subscribe(userAndCardData => {
-      if (
-        userAndCardData  &&
-        (!userAndCardData.errors || userAndCardData.errors.length === 0)
-      ) {
+    this.userAndCardDataSubscription = userAndCardData$.subscribe((userAndCardData) => {
+      if (userAndCardData && (!userAndCardData.errors || userAndCardData.errors.length === 0)) {
         this.screenService.fullBrightness();
       }
     });
@@ -92,18 +87,20 @@ export class CardPage {
   }
 
   private async loadUserCardData() {
-    if (!(await this.networkService.getConnectionStatus()).connected){
+    if (!(await this.networkService.getConnectionStatus()).connected) {
       return;
     }
 
     this.isLoading = true;
-    getAuthToken().pipe(
-      take(1),
-      filter(authToken => authToken != null),
-      switchMap(authToken => this.cardService.getUserAndCardData(authToken)),
-      finalize(() => this.isLoading = false)
-    ).subscribe(userAndCardData => {
-      setUserAndCardData(userAndCardData);
-    });
+    getAuthToken()
+      .pipe(
+        take(1),
+        filter((authToken) => authToken != null),
+        switchMap((authToken) => this.cardService.getUserAndCardData(authToken)),
+        finalize(() => (this.isLoading = false)),
+      )
+      .subscribe((userAndCardData) => {
+        setUserAndCardData(userAndCardData);
+      });
   }
 }

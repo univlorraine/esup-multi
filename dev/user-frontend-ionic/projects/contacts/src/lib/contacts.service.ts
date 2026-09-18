@@ -40,9 +40,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Contacts, EmailType, PhoneType } from '@capacitor-community/contacts';
-import { getAuthToken, MultiTenantService } from '@multi/shared';
 import { Observable } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
+import { getAuthToken, MultiTenantService } from '@multi/shared';
 
 export interface Contact {
   name: string;
@@ -60,54 +60,55 @@ export interface ContactsBody {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ContactsService {
-
   constructor(
     private multiTenantService: MultiTenantService,
-    private http: HttpClient,) { }
+    private http: HttpClient,
+  ) {}
 
   public getContacts(body: ContactsBody): Observable<Contact[]> {
     return getAuthToken().pipe(
       take(1),
-      switchMap(authToken => this.fetchContacts(body, authToken)),
+      switchMap((authToken) => this.fetchContacts(body, authToken)),
     );
   }
   public async contactAlreadyExists(user: Contact): Promise<boolean> {
-    const { contacts: allContacts } = await Contacts.getContacts({projection: {emails: true}});
-    return allContacts.find((contact) => contact.emails?.find((email) =>
-      user.mailAddresses.includes(email.address))) !== undefined;
+    const { contacts: allContacts } = await Contacts.getContacts({ projection: { emails: true } });
+    return (
+      allContacts.find((contact) =>
+        contact.emails?.find((email) => user.mailAddresses.includes(email.address)),
+      ) !== undefined
+    );
   }
 
   public async createContact(user: Contact) {
     const phones = [];
     const emails = [];
-      user.phoneNumbers.map(phone => (
-        phones.push({
-          type: PhoneType.Work,
-          // eslint-disable-next-line id-blacklist
-          number: phone,
-        })
-      ));
-      user.mailAddresses.map(email => (
-        emails.push({
-          type: EmailType.Work,
-          address: email,
-        })
-      ));
-      await Contacts.createContact({
-        contact: {
-          name: { given: user.firstname, family: user.name },
-          phones,
-          emails,
-        },
-      });
+    user.phoneNumbers.map((phone) =>
+      phones.push({
+        type: PhoneType.Work,
+        number: phone,
+      }),
+    );
+    user.mailAddresses.map((email) =>
+      emails.push({
+        type: EmailType.Work,
+        address: email,
+      }),
+    );
+    await Contacts.createContact({
+      contact: {
+        name: { given: user.firstname, family: user.name },
+        phones,
+        emails,
+      },
+    });
   }
 
-  private fetchContacts(body: ContactsBody, authToken: string): Observable<Contact[]>  {
+  private fetchContacts(body: ContactsBody, authToken: string): Observable<Contact[]> {
     body.authToken = authToken || null;
     return this.http.post<Contact[]>(`${this.multiTenantService.getApiEndpoint()}/contacts`, body);
   }
-
 }

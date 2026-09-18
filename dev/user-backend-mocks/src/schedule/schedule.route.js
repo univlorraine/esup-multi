@@ -37,10 +37,11 @@
  * termes.
  */
 
-const express = require('express');
+import express from 'express';
+import { scheduleData } from './schedule.mock.js';
+
 const router = express.Router();
-const { scheduleData } = require('./schedule.mock');
 
-router.get('/{*any}', (req, res) => res.json(scheduleData));
+router.get('/{*any}', (req, res) => res.json(scheduleData()));
 
-module.exports = router;
+export default router;

@@ -40,13 +40,13 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { CompleteLocalDatePipe } from './complete-local-date-pipe';
-import { RelativeTimePipe } from './relative-time-pipe';
-import { TruncatePipe } from './truncate-pipe';
 import { LocalHourPipe } from './local-hour.pipe';
-import { SanitizeSvgPipe } from './sanitize-svg-pipe';
+import { RelativeTimePipe } from './relative-time-pipe';
 import { SanitizeHtmlPipe } from './sanitize-html-pipe';
+import { SanitizeSvgPipe } from './sanitize-svg-pipe';
+import { TruncatePipe } from './truncate-pipe';
 
 @NgModule({
   declarations: [
@@ -55,7 +55,7 @@ import { SanitizeHtmlPipe } from './sanitize-html-pipe';
     CompleteLocalDatePipe,
     LocalHourPipe,
     SanitizeSvgPipe,
-    SanitizeHtmlPipe
+    SanitizeHtmlPipe,
   ],
   exports: [
     RelativeTimePipe,
@@ -63,13 +63,8 @@ import { SanitizeHtmlPipe } from './sanitize-html-pipe';
     CompleteLocalDatePipe,
     LocalHourPipe,
     SanitizeSvgPipe,
-    SanitizeHtmlPipe
+    SanitizeHtmlPipe,
   ],
-  imports: [
-    CommonModule,
-    IonicModule,
-    TranslateModule,
-  ],
+  imports: [CommonModule, IonicModule, TranslatePipe],
 })
-export class SharedPipeModule {
-}
+export class SharedPipeModule {}

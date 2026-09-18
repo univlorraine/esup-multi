@@ -41,35 +41,33 @@ import { CommonModule } from '@angular/common';
 import { APP_INITIALIZER, ModuleWithProviders, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { ProjectModuleService } from '@multi/shared';
-import { ImportantNewsComponent } from './widgets/important-news/important-news.component';
 import { IMPORTANT_NEWS_CONFIG, ImportantNewsModuleConfig } from './important-news.config';
+import { ImportantNewsComponent } from './widgets/important-news/important-news.component';
 
-const initModule = (projectModuleService: ProjectModuleService) =>
-  () => projectModuleService.initProjectModule({
+const initModule = (projectModuleService: ProjectModuleService) => () =>
+  projectModuleService.initProjectModule({
     name: 'important-news',
-    widgets: [{
-      id: 'important-news',
-      component: ImportantNewsComponent,
-    }
-  ]
+    widgets: [
+      {
+        id: 'important-news',
+        component: ImportantNewsComponent,
+      },
+    ],
   });
 
 @NgModule({
   declarations: [ImportantNewsComponent],
-  imports: [
-    CommonModule,
-    IonicModule,
-    TranslateModule,
-    RouterModule
+  imports: [CommonModule, IonicModule, TranslatePipe, RouterModule],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initModule,
+      deps: [ProjectModuleService],
+      multi: true,
+    },
   ],
-  providers: [{
-    provide: APP_INITIALIZER,
-    useFactory: initModule,
-    deps: [ProjectModuleService],
-    multi: true
-  }],
 })
 export class ImportantNewsModule {
   static routerLink = '/important-news';
@@ -77,9 +75,7 @@ export class ImportantNewsModule {
   static forRoot(config: ImportantNewsModuleConfig): ModuleWithProviders<ImportantNewsModule> {
     return {
       ngModule: ImportantNewsModule,
-      providers: [
-        { provide: IMPORTANT_NEWS_CONFIG, useValue: config }
-      ]
+      providers: [{ provide: IMPORTANT_NEWS_CONFIG, useValue: config }],
     };
   }
- }
+}

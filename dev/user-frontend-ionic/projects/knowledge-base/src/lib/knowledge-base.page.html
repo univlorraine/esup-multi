@@ -36,18 +36,21 @@
   ~ pris connaissance de la licence CeCILL 2.1, et que vous en avez accepté les
   ~ termes.
   -->
-<app-header></app-header>
+<app-header />
 <ion-content>
-  <ion-progress-bar *ngIf="isLoading" type="indeterminate"></ion-progress-bar>
+  @if (isLoading) {
+    <ion-progress-bar type="indeterminate" />
+  }
 
-  <ng-container *ngIf="(knowledgeBaseParentItem$ | async) as parentItem; else noParent">
+  @if (knowledgeBaseParentItem$ | async; as parentItem) {
     <div class="parent-content">
       <h1>{{ parentItem.title }}</h1>
-      <div [innerHTML]="parentItem.content | sanitizeHtml" class="safe-area-padding-lr link-inherit-color"></div>
+      <div
+        [innerHTML]="parentItem.content | sanitizeHtml"
+        class="safe-area-padding-lr link-inherit-color"
+      ></div>
     </div>
-  </ng-container>
-
-  <ng-template #noParent>
+  } @else {
     <ion-row class="searchbar-row">
       <ion-searchbar
         debounce="300"
@@ -56,26 +59,21 @@
         [attr.aria-label]="'KNOWLEDGE-BASE.SEARCH_PAGE' | translate"
         (ionInput)="searchKnowledgeBase($event)"
         class="safe-area-margin-lr"
-      ></ion-searchbar>
+      />
     </ion-row>
-  </ng-template>
+  }
 
-  <ng-container *ngIf="(knowledgeBases$ | async) as knowledgeBases">
-    <ion-list *ngIf="knowledgeBases.length > 0; else noData">
-      <app-knowledge-base-card
-        *ngFor="let item of knowledgeBases"
-        [item]="item"
-        [displayMode]="item.display">
-      </app-knowledge-base-card>
-    </ion-list>
-  </ng-container>
-
-  <ng-template #noData>
-    <ng-container *ngIf="(knowledgeBases$ | async)?.length === 0 && !isLoading">
+  @if (knowledgeBases$ | async; as knowledgeBases) {
+    @if (knowledgeBases.length > 0) {
+      <ion-list>
+        @for (item of knowledgeBases; track item.id) {
+          <app-knowledge-base-card [item]="item" [displayMode]="item.display" />
+        }
+      </ion-list>
+    } @else if ((knowledgeBases$ | async)?.length === 0 && !isLoading) {
       <ion-row class="ion-margin ion-justify-content-center">
-        <ion-text>{{ "KNOWLEDGE-BASE.NO_DATA" | translate }}</ion-text>
+        <ion-text>{{ 'KNOWLEDGE-BASE.NO_DATA' | translate }}</ion-text>
       </ion-row>
-    </ng-container>
-  </ng-template>
-
+    }
+  }
 </ion-content>

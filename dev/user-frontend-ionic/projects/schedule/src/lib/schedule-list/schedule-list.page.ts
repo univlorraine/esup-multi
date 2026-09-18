@@ -39,15 +39,15 @@
 
 import { Component, ViewChild } from '@angular/core';
 import { IonContent } from '@ionic/angular';
-import { AuthenticatedUser } from '@multi/shared';
 import { add, isAfter, startOfWeek } from 'date-fns';
 import { combineLatest, Observable, of, Subscription } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
+import { AuthenticatedUser } from '@multi/shared';
 import {
   impersonatedScheduleStoreManager,
   Schedule,
   scheduleStoreManager,
-  ScheduleStoreManager
+  ScheduleStoreManager,
 } from '../schedule.repository';
 import { formatDay, ScheduleService } from '../schedule.service';
 import { EventsByDay, ScheduleListService } from './schedule-list.service';
@@ -58,7 +58,6 @@ import { EventsByDay, ScheduleListService } from './schedule-list.service';
   styleUrls: ['../../../../../src/theme/app-theme/styles/schedule/schedule-list.page.scss'],
 })
 export class ScheduleListPage {
-
   @ViewChild('scrollContent') content: IonContent;
 
   public authenticatedUser$: Observable<AuthenticatedUser>;
@@ -73,7 +72,7 @@ export class ScheduleListPage {
   constructor(
     private scheduleListService: ScheduleListService,
     private scheduleService: ScheduleService,
-  ) { }
+  ) {}
 
   async ionViewWillEnter() {
     const now = new Date();
@@ -82,37 +81,46 @@ export class ScheduleListPage {
     this.viewEndDate = this.scheduleService.getStateEndDate();
 
     this.subscriptions.push(
-      this.scheduleService.asUser.pipe(
-        tap(() => this.storeManager = this.scheduleService.getStoreManager()),
-        switchMap(() => this.storeManager.eventsFromActivePlannings$),
-        map(eventList => eventList.length > 0)
-      ).subscribe(result => {
-        this.areEventsFromActivePlannings$ = of(result);
-        this.eventsByDays$ = this.scheduleListService.loadEventsByDays(this.viewStartDate, this.viewEndDate);
-      }),
+      this.scheduleService.asUser
+        .pipe(
+          tap(() => (this.storeManager = this.scheduleService.getStoreManager())),
+          switchMap(() => this.storeManager.eventsFromActivePlannings$),
+          map((eventList) => eventList.length > 0),
+        )
+        .subscribe((result) => {
+          this.areEventsFromActivePlannings$ = of(result);
+          this.eventsByDays$ = this.scheduleListService.loadEventsByDays(
+            this.viewStartDate,
+            this.viewEndDate,
+          );
+        }),
 
       combineLatest([
         scheduleStoreManager.schedule$,
         impersonatedScheduleStoreManager.schedule$,
-        this.scheduleService.asUser
+        this.scheduleService.asUser,
       ]).subscribe(() => {
         setTimeout(() => {
           this.scrollToCurrentDate();
         }, 300);
-      })
+      }),
     );
 
-    this.subscriptions.push(this.scheduleListService.showEventEvt.subscribe(() => {
-      this.keepScrollPosition();
-    }));
+    this.subscriptions.push(
+      this.scheduleListService.showEventEvt.subscribe(() => {
+        this.keepScrollPosition();
+      }),
+    );
 
-    this.subscriptions.push(this.scheduleService.hideEventEvt.subscribe(() => {
-      this.keepScrollPosition();
-    }));
+    this.subscriptions.push(
+      this.scheduleService.hideEventEvt.subscribe(() => {
+        this.keepScrollPosition();
+      }),
+    );
   }
 
   ionViewWillLeave() {
-    this.subscriptions?.forEach(subscription => subscription.unsubscribe());
+    this.subscriptions?.forEach((subscription) => subscription.unsubscribe());
   }
 
   scrollToCurrentDate() {
@@ -145,13 +153,20 @@ export class ScheduleListPage {
     if (isAfter(endDateToLoad, this.scheduleService.getStateEndDate())) {
       const nextDateAfterStateEndDate = add(this.scheduleService.getStateEndDate(), { days: 1 });
       outOfStateSchedule = await this.scheduleService
-        .loadScheduleOutOfStateInterval(formatDay(nextDateAfterStateEndDate), formatDay(endDateToLoad)).toPromise();
+        .loadScheduleOutOfStateInterval(
+          formatDay(nextDateAfterStateEndDate),
+          formatDay(endDateToLoad),
+        )
+        .toPromise();
     }
 
-    this.eventsByDays$ = this.scheduleListService.loadEventsByDays(this.viewStartDate, endDateToLoad, outOfStateSchedule);
+    this.eventsByDays$ = this.scheduleListService.loadEventsByDays(
+      this.viewStartDate,
+      endDateToLoad,
+      outOfStateSchedule,
+    );
 
     await this.keepScrollPosition(scrollPosition);
     this.viewEndDate = endDateToLoad;
-
   }
 }

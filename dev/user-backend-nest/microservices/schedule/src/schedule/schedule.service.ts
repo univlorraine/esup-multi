@@ -41,9 +41,10 @@ import { HttpService } from '@nestjs/axios';
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { RpcException } from '@nestjs/microservices';
+import { AxiosError } from 'axios';
 import { catchError, map, Observable } from 'rxjs';
-import { ScheduleProviderApi } from '../config/configuration.interface';
-import { Schedule, UserScheduleQueryDto } from './schedule.dto';
+import { ScheduleProviderApi } from '../config/configuration.interface.js';
+import { Schedule, UserScheduleQueryDto } from './schedule.dto.js';
 
 @Injectable()
 export class ScheduleService {
@@ -86,7 +87,7 @@ export class ScheduleService {
         },
       })
       .pipe(
-        catchError((err: any) => {
+        catchError((err: AxiosError) => {
           const errorMessage = `Unable to get schedule data with username '${query.username}'`;
           this.logger.error(errorMessage, err);
           throw new RpcException(errorMessage);

@@ -38,17 +38,18 @@
  */
 
 import { Component } from '@angular/core';
-import { Browser } from '@capacitor/browser';
-import { NetworkService } from '@multi/shared';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
+import { NavigationService, NetworkService } from '@multi/shared';
 import { SocialNetwork, socialNetworks$ } from '../../social-network.repository';
 import { SocialNetworkService } from '../../social-network.service';
 
 @Component({
-  selector: 'lib-social-network',
+  selector: 'app-social-network',
   templateUrl: './social-network.component.html',
-  styleUrls: ['../../../../../../src/theme/app-theme/styles/social-network/social-network.component.scss'],
+  styleUrls: [
+    '../../../../../../src/theme/app-theme/styles/social-network/social-network.component.scss',
+  ],
 })
 export class SocialNetworkComponent {
   public socialNetworks$: Observable<SocialNetwork[]> = socialNetworks$;
@@ -56,17 +57,17 @@ export class SocialNetworkComponent {
   constructor(
     private socialNetworkService: SocialNetworkService,
     private networkService: NetworkService,
-  ) { }
+    private navigationService: NavigationService,
+  ) {}
 
   async widgetViewDidEnter(): Promise<void> {
     if (!(await this.networkService.getConnectionStatus()).connected) {
       return;
     }
-    this.socialNetworkService.loadAndStoreSocialNetworks()
-      .pipe(take(1)).subscribe();
+    this.socialNetworkService.loadAndStoreSocialNetworks().pipe(take(1)).subscribe();
   }
 
   async openExternalLink(link: string) {
-    await Browser.open({ url: link });
+    await this.navigationService.openExternalLink(link);
   }
 }

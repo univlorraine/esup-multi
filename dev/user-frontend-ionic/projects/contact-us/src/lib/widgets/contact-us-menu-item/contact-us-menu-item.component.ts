@@ -38,19 +38,20 @@
  */
 
 import { Component } from '@angular/core';
-import { NetworkService } from '@multi/shared';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
+import { NetworkService } from '@multi/shared';
 import { ContactUsRepository, TranslatedContactUsPageContent } from '../../contact-us.repository';
 import { ContactUsService } from '../../contact-us.service';
 
 @Component({
   selector: 'app-contact-us-menu-item-widget',
   templateUrl: './contact-us-menu-item.component.html',
-  styleUrls: ['../../../../../../src/theme/app-theme/styles/contact-us/contact-us-menu-item.component.scss'],
+  styleUrls: [
+    '../../../../../../src/theme/app-theme/styles/contact-us/contact-us-menu-item.component.scss',
+  ],
 })
 export class ContactUsMenuItemComponent {
-
   public translatedPageContent$: Observable<TranslatedContactUsPageContent>;
 
   constructor(
@@ -59,15 +60,13 @@ export class ContactUsMenuItemComponent {
     private networkService: NetworkService,
   ) {
     this.translatedPageContent$ = this.contactUsRepository.translatedPageContent$;
-   }
+  }
 
   async widgetViewDidEnter(): Promise<void> {
     if (!(await this.networkService.getConnectionStatus()).connected) {
       return;
     }
 
-    this.contactUsService.loadAndStoreContactUsPageContent()
-      .pipe(take(1))
-      .subscribe();
+    this.contactUsService.loadAndStoreContactUsPageContent().pipe(take(1)).subscribe();
   }
 }

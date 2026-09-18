@@ -39,15 +39,15 @@
 
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginPage } from './login/login.page';
 import { IsTenantSelectedGuard } from '@multi/shared';
+import { LoginPage } from './login/login.page';
 
 const routes: Routes = [
   {
     path: 'auth',
     component: LoginPage,
-    canActivate: [IsTenantSelectedGuard]
-  }
+    canActivate: [IsTenantSelectedGuard],
+  },
 ];
 
 @NgModule({

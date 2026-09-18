@@ -37,8 +37,8 @@
  * termes.
  */
 
-import {createStore, select, withProps} from '@ngneat/elf';
-import {localStorageStrategy, persistState} from '@ngneat/elf-persist-state';
+import { createStore, select, withProps } from '@ngneat/elf';
+import { localStorageStrategy, persistState } from '@ngneat/elf-persist-state';
 
 const STORE_NAME = 'multi-tenant-selected';
 
@@ -47,8 +47,8 @@ interface MultiTenantProps {
 }
 
 const selectedTenantStore = createStore(
-  {name: STORE_NAME},
-  withProps<MultiTenantProps>({selectedTenantId: null})
+  { name: STORE_NAME },
+  withProps<MultiTenantProps>({ selectedTenantId: null }),
 );
 
 export const persistSelectedTenant = persistState(selectedTenantStore, {
@@ -56,13 +56,15 @@ export const persistSelectedTenant = persistState(selectedTenantStore, {
   storage: localStorageStrategy,
 });
 
-export const selectedTenantId$ = selectedTenantStore.pipe(select((state: MultiTenantProps) => state.selectedTenantId));
+export const selectedTenantId$ = selectedTenantStore.pipe(
+  select((state: MultiTenantProps) => state.selectedTenantId),
+);
 
 export const getSelectedTenantId = () => selectedTenantStore.getValue()?.selectedTenantId;
 
 export const updateSelectedTenantId = (selectedTenantId: MultiTenantProps['selectedTenantId']) => {
   selectedTenantStore.update((state: MultiTenantProps) => ({
     ...state,
-    selectedTenantId
+    selectedTenantId,
   }));
 };

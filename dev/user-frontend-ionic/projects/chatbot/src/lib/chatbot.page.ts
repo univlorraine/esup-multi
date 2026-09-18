@@ -43,10 +43,10 @@ import { Keyboard } from '@capacitor/keyboard';
 import { IonContent } from '@ionic/angular';
 import { BehaviorSubject } from 'rxjs';
 import { finalize, take } from 'rxjs/operators';
+import { MultiTenantService } from '@multi/shared';
 import { ChatbotMessage, ChatButton, Message, MessageType, UserMessage } from './chatbot.dto';
 import { ChatbotService } from './chatbot.service';
 import { UserIdGeneratorService } from './user-id-generator.service';
-import { MultiTenantService } from '@multi/shared';
 
 @Component({
   selector: 'app-chatbot',
@@ -54,7 +54,6 @@ import { MultiTenantService } from '@multi/shared';
   styleUrls: ['../../../../src/theme/app-theme/styles/chatbot/chatbot.page.scss'],
 })
 export class ChatbotPage implements OnInit {
-
   private static readonly userChatId: string = UserIdGeneratorService.initRandomUserId();
 
   @ViewChild('scrollContent') scrollContent: IonContent;
@@ -70,16 +69,19 @@ export class ChatbotPage implements OnInit {
 
   constructor(
     private multiTenantService: MultiTenantService,
-    private chatbotService: ChatbotService
-  ) { }
+    private chatbotService: ChatbotService,
+  ) {}
 
   ngOnInit() {
-    this.chatbotService.textRequest('Hello', ChatbotPage.userChatId)
-      .pipe(take(1), finalize(() => this.isLoading = false))
+    this.chatbotService
+      .textRequest('Hello', ChatbotPage.userChatId)
+      .pipe(
+        take(1),
+        finalize(() => (this.isLoading = false)),
+      )
       .subscribe((chatBotResponse) => {
-          this.addMessageToChat(chatBotResponse);
-        }
-      );
+        this.addMessageToChat(chatBotResponse);
+      });
   }
 
   ionViewDidEnter() {
@@ -88,7 +90,10 @@ export class ChatbotPage implements OnInit {
         this.scrollContent.scrollToBottom(500);
       });
     });
-    this.domMessageListObserver.observe(this.domMessageList.nativeElement, { childList: true, subtree: true });
+    this.domMessageListObserver.observe(this.domMessageList.nativeElement, {
+      childList: true,
+      subtree: true,
+    });
 
     if (Capacitor.isNativePlatform()) {
       Keyboard.addListener('keyboardWillShow', () => {
@@ -105,7 +110,7 @@ export class ChatbotPage implements OnInit {
   }
 
   textRequest(text: string): void {
-    if(!text) {
+    if (!text) {
       return;
     }
 
@@ -113,11 +118,13 @@ export class ChatbotPage implements OnInit {
     this.addMessageToChat(newUserMessage);
 
     this.isFetchingAnswer = true;
-    this.chatbotService.textRequest(text, ChatbotPage.userChatId)
+    this.chatbotService
+      .textRequest(text, ChatbotPage.userChatId)
       .pipe(
         take(1),
-        finalize(() => this.isFetchingAnswer = false)
-      ).subscribe((chatbotResponses: ChatbotMessage[]) => {
+        finalize(() => (this.isFetchingAnswer = false)),
+      )
+      .subscribe((chatbotResponses: ChatbotMessage[]) => {
         this.addMessageToChat(chatbotResponses);
         this.userInput = '';
       });
@@ -128,11 +135,13 @@ export class ChatbotPage implements OnInit {
     this.addMessageToChat(newMessage);
 
     this.isFetchingAnswer = true;
-    this.chatbotService.buttonPayloadRequest(buttonPayload, ChatbotPage.userChatId)
+    this.chatbotService
+      .buttonPayloadRequest(buttonPayload, ChatbotPage.userChatId)
       .pipe(
         take(1),
-        finalize(() => this.isFetchingAnswer = false)
-      ).subscribe((chatbotResponses: ChatbotMessage[]) => {
+        finalize(() => (this.isFetchingAnswer = false)),
+      )
+      .subscribe((chatbotResponses: ChatbotMessage[]) => {
         this.addMessageToChat(chatbotResponses);
         this.userInput = '';
       });
@@ -165,6 +174,8 @@ export class ChatbotPage implements OnInit {
 
   isChatbotLogo(message: ChatbotMessage) {
     const chatbotLogoRegex = this.multiTenantService.getModuleConfiguration('chatbot.logoRegex');
-    return message?.card?.file?.type === 'image' && message?.card?.file?.name.match(chatbotLogoRegex);
+    return (
+      message?.card?.file?.type === 'image' && message?.card?.file?.name.match(chatbotLogoRegex)
+    );
   }
 }

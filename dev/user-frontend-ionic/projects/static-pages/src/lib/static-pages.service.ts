@@ -39,21 +39,20 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { MultiTenantService } from '@multi/shared';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { MultiTenantService } from '@multi/shared';
 import { StaticPage, StaticPagesRepository } from './static-pages.repository';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class StaticPagesService {
-
   constructor(
     private multiTenantService: MultiTenantService,
     private http: HttpClient,
-    private staticPagesRepository: StaticPagesRepository
-  ) { }
+    private staticPagesRepository: StaticPagesRepository,
+  ) {}
 
   public loadAndStoreStaticPages(): Observable<StaticPage[]> {
     const url = `${this.multiTenantService.getApiEndpoint()}/static-pages`;
@@ -61,6 +60,7 @@ export class StaticPagesService {
     return this.http.get<StaticPage[]>(url).pipe(
       tap((staticPages) => {
         this.staticPagesRepository.setStaticPages(staticPages);
-      }));
+      }),
+    );
   }
 }

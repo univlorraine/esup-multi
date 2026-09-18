@@ -39,19 +39,24 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { MultiTenantService } from '@multi/shared';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { ChatbotButtonPayloadRequest, ChatbotMessage, ChatbotTextRequest, MessageType } from './chatbot.dto';
+import { MultiTenantService } from '@multi/shared';
+import {
+  ChatbotButtonPayloadRequest,
+  ChatbotMessage,
+  ChatbotTextRequest,
+  MessageType,
+} from './chatbot.dto';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ChatbotService {
-
   constructor(
     private multiTenantService: MultiTenantService,
-    private http: HttpClient) { }
+    private http: HttpClient,
+  ) {}
 
   textRequest(text: string, userId: string): Observable<ChatbotMessage[]> {
     if (!text) {
@@ -61,11 +66,12 @@ export class ChatbotService {
     const url = `${this.multiTenantService.getApiEndpoint()}/chatbot/text-request`;
     const request: ChatbotTextRequest = {
       query: text,
-      userId
+      userId,
     };
 
-    return this.http.post<ChatbotMessage[]>(url, request).pipe(
-      map(chatbotResponses =>  this.setMessageTypeToBot(chatbotResponses)));
+    return this.http
+      .post<ChatbotMessage[]>(url, request)
+      .pipe(map((chatbotResponses) => this.setMessageTypeToBot(chatbotResponses)));
   }
 
   buttonPayloadRequest(buttonPayload: string, userId: string): Observable<ChatbotMessage[]> {
@@ -73,13 +79,15 @@ export class ChatbotService {
 
     const url = `${this.multiTenantService.getApiEndpoint()}/chatbot/button-payload-request`;
 
-    return this.http.post<ChatbotMessage[]>(url , request).pipe(
-      map(chatbotResponses =>  this.setMessageTypeToBot(chatbotResponses)));
+    return this.http
+      .post<ChatbotMessage[]>(url, request)
+      .pipe(map((chatbotResponses) => this.setMessageTypeToBot(chatbotResponses)));
   }
 
-  private setMessageTypeToBot(chatbotResponses: ChatbotMessage[]): ChatbotMessage[]{
-   return chatbotResponses.map((chatbotResponse: ChatbotMessage) => ({
+  private setMessageTypeToBot(chatbotResponses: ChatbotMessage[]): ChatbotMessage[] {
+    return chatbotResponses.map((chatbotResponse: ChatbotMessage) => ({
       ...chatbotResponse,
-      messageType: MessageType.bot} ) );
+      messageType: MessageType.bot,
+    }));
   }
 }

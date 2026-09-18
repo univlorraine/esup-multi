@@ -44,7 +44,7 @@ import { UserAndCardEuData } from '../card-eu.repository';
   selector: 'app-card-eu-extended',
   templateUrl: './card-eu-extended.component.html',
   styleUrls: ['../../../../../src/theme/app-theme/styles/card-eu/card-eu-extended.component.scss'],
-  encapsulation: ViewEncapsulation.None // Pour pouvoir jouer sur la taille du QR Code avec les CSS
+  encapsulation: ViewEncapsulation.None, // Pour pouvoir jouer sur la taille du QR Code avec les CSS
 })
 export class CardEuExtendedComponent {
   @Input() userCardEu: UserAndCardEuData;

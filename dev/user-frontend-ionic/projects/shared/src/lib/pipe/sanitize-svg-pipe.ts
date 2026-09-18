@@ -37,11 +37,11 @@
  * termes.
  */
 
-import { Pipe, PipeTransform } from "@angular/core";
-import { DomSanitizer } from "@angular/platform-browser";
-import DOMPurify from "dompurify";
+import { Pipe, PipeTransform } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
+import DOMPurify from 'dompurify';
 
-@Pipe({ name: "sanitizeSvg" })
+@Pipe({ name: 'sanitizeSvg' })
 export class SanitizeSvgPipe implements PipeTransform {
   constructor(private sanitizer: DomSanitizer) {}
 

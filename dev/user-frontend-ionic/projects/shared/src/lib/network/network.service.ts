@@ -42,7 +42,7 @@ import { ConnectionStatus, Network } from '@capacitor/network';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class NetworkService {
   public isOnline$: Observable<boolean>;
@@ -78,5 +78,4 @@ export class NetworkService {
       });
     });
   }
-
 }

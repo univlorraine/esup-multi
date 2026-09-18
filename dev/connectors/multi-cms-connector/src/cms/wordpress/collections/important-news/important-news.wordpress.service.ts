@@ -37,17 +37,17 @@
  */
 
 import { Injectable, Logger } from '@nestjs/common';
-import { ImportantNewsWordpress } from '@wordpress/collections/important-news/important-news.wordpress.model';
-import { ImportantNews } from '@common/models/important-news.model';
-import { WordpressService } from '@wordpress/wordpress.service';
-import { ImportantNewsTranslations } from '@common/models/translations.model';
-import { ImportantNewsTranslationsWordpress } from '@wordpress/collections/translations/translations.wordpress.model';
 import { OnEvent } from '@nestjs/event-emitter';
-import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
-import { ImportantNewsSchema } from '@common/validation/schemas/important-news.schema';
-import { normalizeEmptyStringToNull } from '@common/utils/normalize';
-import { CacheService } from '@cache/cache.service';
-import { CacheCollection } from '@cache/cache.config';
+import { CacheCollection } from '#cache/cache.config.js';
+import { CacheService } from '#cache/cache.service.js';
+import { ValidateMapping } from '#common/decorators/validate-mapping.decorator.js';
+import { ImportantNews } from '#common/models/important-news.model.js';
+import { ImportantNewsTranslations } from '#common/models/translations.model.js';
+import { normalizeEmptyStringToNull } from '#common/utils/normalize.js';
+import { ImportantNewsSchema } from '#common/validation/schemas/important-news.schema.js';
+import { ImportantNewsWordpress } from '#wordpress/collections/important-news/important-news.wordpress.model.js';
+import { ImportantNewsTranslationsWordpress } from '#wordpress/collections/translations/translations.wordpress.model.js';
+import { WordpressService } from '#wordpress/wordpress.service.js';
 
 // TODO: Move FRENCH_CODE to .env and rename it to DEFAULT_LANGUAGE_CODE
 const FRENCH_CODE = 'FR';
@@ -68,7 +68,7 @@ export class ImportantNewsWordpressService {
     } catch (error) {
       this.logger.error(
         'Failed to preload important-news after cache clear:',
-        error.message,
+        error instanceof Error ? error.message : JSON.stringify(error),
       );
     }
   }
@@ -184,7 +184,7 @@ export class ImportantNewsWordpressService {
         }
       }
     `);
-    return data.importantNews.nodes.map(this.mapToMultiModel);
+    return data.importantNews.nodes.map(this.mapToMultiModel.bind(this));
   }
 
   async getImportantNew(id: number): Promise<ImportantNews> {

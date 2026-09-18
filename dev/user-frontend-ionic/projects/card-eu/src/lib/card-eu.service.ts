@@ -40,21 +40,23 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { UserAndCardEuData } from './card-eu.repository';
 import { MultiTenantService } from '@multi/shared';
+import { UserAndCardEuData } from './card-eu.repository';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CardEuService {
-
   constructor(
     private multiTenantService: MultiTenantService,
     private http: HttpClient,
-  ) {
-  }
+  ) {}
 
-  public getUserAndCardEuData(authToken: string, useLight: boolean, escn?: string): Observable<UserAndCardEuData> {
+  public getUserAndCardEuData(
+    authToken: string,
+    useLight: boolean,
+    escn?: string,
+  ): Observable<UserAndCardEuData> {
     if (useLight && !escn) {
       console.error('ESCN number missing for this user.');
       return of({ errors: ['ESCN_MISSING'] } as UserAndCardEuData);
@@ -73,11 +75,13 @@ export class CardEuService {
     return this.http.post<UserAndCardEuData>(url, data);
   }
 
-  private getUserAndCardEuLightData(authToken: string, escn: string): Observable<UserAndCardEuData> {
+  private getUserAndCardEuLightData(
+    authToken: string,
+    escn: string,
+  ): Observable<UserAndCardEuData> {
     const url = `${this.multiTenantService.getApiEndpoint()}/card-eu-light`;
     const data = { authToken, escn };
 
     return this.http.post<UserAndCardEuData>(url, data);
   }
 }
-

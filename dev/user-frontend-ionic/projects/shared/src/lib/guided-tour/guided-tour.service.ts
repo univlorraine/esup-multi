@@ -45,19 +45,23 @@ import { TranslateService } from '@ngx-translate/core';
 import { ShepherdService } from 'angular-shepherd';
 import { Observable, zip } from 'rxjs';
 import { filter, switchMap, take } from 'rxjs/operators';
+import { anonymousSteps, loggedSteps } from '@multi/guided-tour';
 import { userIsAuthenticated$ } from '../auth/authenticated-user.repository';
 import { MenuItem } from '../navigation/menu.model';
 import { NetworkService } from '../network/network.service';
-import { anonymousSteps, loggedSteps } from '@multi/guided-tour';
-import { isAnonymousTourViewed, isLoggedTourViewed, setAnonymousTourViewed, setLoggedTourViewed } from './guided-tour.repository';
+import {
+  isAnonymousTourViewed,
+  isLoggedTourViewed,
+  setAnonymousTourViewed,
+  setLoggedTourViewed,
+} from './guided-tour.repository';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class GuidedTourService {
-
   private isOnline$: Observable<boolean>;
-  private updateAlertActive: boolean = false;
+  private updateAlertActive = false;
 
   constructor(
     @Inject('environment')
@@ -97,31 +101,30 @@ export class GuidedTourService {
 
     zip(
       this.isOnline$.pipe(
-        filter(isOnline => isOnline),
+        filter((isOnline) => isOnline),
         take(1),
         switchMap(() => userIsAuthenticated$.pipe(take(1))),
       ),
-      this.translateService.get('GUIDED-TOUR') // on ne le récupère pas, mais permet d'attendre que la traduction soit chargée, sinon .instant() ne fonctionne pas à chaque fois
+      this.translateService.get('GUIDED-TOUR'), // on ne le récupère pas, mais permet d'attendre que la traduction soit chargée, sinon .instant() ne fonctionne pas à chaque fois
     ).subscribe(([userIsAuthenticated]) => {
-        if (
-          !isLoggedTourViewed() &&
-          !isAnonymousTourViewed() &&
-          !userIsAuthenticated
-        ) {
-          this.startAnonymousTour();
-        } else if (!isLoggedTourViewed() && userIsAuthenticated) {
-          this.startLoggedTour();
-        }
-      });
+      if (!isLoggedTourViewed() && !isAnonymousTourViewed() && !userIsAuthenticated) {
+        this.startAnonymousTour();
+      } else if (!isLoggedTourViewed() && userIsAuthenticated) {
+        this.startLoggedTour();
+      }
+    });
   }
 
   async startAnonymousTour() {
-
-    if (Capacitor.isNativePlatform()) { await ScreenOrientation.lock({ type: OrientationType.PORTRAIT }); }
+    if (Capacitor.isNativePlatform()) {
+      await ScreenOrientation.lock({ type: OrientationType.PORTRAIT });
+    }
 
     const onCompleteFn = () => {
       setAnonymousTourViewed();
-      if (Capacitor.isNativePlatform()) { ScreenOrientation.unlock(); }
+      if (Capacitor.isNativePlatform()) {
+        ScreenOrientation.unlock();
+      }
     };
     const stepsConfig = anonymousSteps(this.router, this.translateService, onCompleteFn);
     this.shepherdService.addSteps(stepsConfig);
@@ -129,12 +132,15 @@ export class GuidedTourService {
   }
 
   async startLoggedTour() {
-
-    if (Capacitor.isNativePlatform()) { await ScreenOrientation.lock({ type: OrientationType.PORTRAIT }); }
+    if (Capacitor.isNativePlatform()) {
+      await ScreenOrientation.lock({ type: OrientationType.PORTRAIT });
+    }
 
     const onCompleteFn = () => {
       setLoggedTourViewed();
-      if (Capacitor.isNativePlatform()) { ScreenOrientation.unlock(); }
+      if (Capacitor.isNativePlatform()) {
+        ScreenOrientation.unlock();
+      }
     };
     const stepsConfig = loggedSteps(this.router, this.translateService, onCompleteFn);
     this.shepherdService.addSteps(stepsConfig);

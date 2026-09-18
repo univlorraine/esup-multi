@@ -37,37 +37,37 @@
  * termes.
  */
 
+import * as process from 'process';
 import { MiddlewareConsumer, Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ClientsModule } from '@nestjs/microservices';
 import { PassportModule } from '@nestjs/passport';
-import { AppController } from './app.controller';
-import configuration from './config/configuration';
-import microserviceAuthConfig from './config/microservice-auth.config';
-import microserviceCardConfig from './config/microservice-card.config';
-import microserviceCardEuConfig from './config/microservice-card-eu.config';
-import microserviceChatbotConfig from './config/microservice-chatbot.config';
-import microserviceClockingConfig from './config/microservice-clocking.config';
-import microserviceContactsConfig from './config/microservice-contacts.config';
-import microserviceImportantNewsConfig from './config/microservice-important-news.config';
-import microserviceMapConfig from './config/microservice-map.config';
-import microserviceNotificationsConfig from './config/microservice-notifications.config';
-import microserviceRssConfig from './config/microservice-rss.config';
-import microserviceScheduleConfig from './config/microservice-schedule.config';
-import microserviceSocialNetworkConfig from './config/microservice-social-network';
-import microserviceStaticPagesConfig from './config/microservice-static-pages.config';
-import microserviceFeaturesConfig from './config/microservice-features.config';
-import microserviceContactUsConfig from './config/microservice-contact-us.config';
-import microserviceRestaurantsConfig from './config/microservice-restaurants.config';
-import microserviceStatisticsConfig from './config/microservice-statistics.config';
-import microserviceMailCalendarConfig from './config/microservice-mail-calendar.config';
-import microserviceKnowledgeBaseConfig from './config/microservice-knowledge-base.config';
-import { AuthJwtStrategy } from './security/auth-jwt.strategy';
 import { TerminusModule } from '@nestjs/terminus';
 import { LoggerModule } from 'nestjs-pino';
-import * as process from 'process';
-import { LogsMiddleware } from './logs.middleware';
-import { AuthBearerStrategy } from './security/auth-bearer.strategy';
+import { AppController } from './app.controller.js';
+import configuration from './config/configuration.js';
+import microserviceAuthConfig from './config/microservice-auth.config.js';
+import microserviceCardEuConfig from './config/microservice-card-eu.config.js';
+import microserviceCardConfig from './config/microservice-card.config.js';
+import microserviceChatbotConfig from './config/microservice-chatbot.config.js';
+import microserviceClockingConfig from './config/microservice-clocking.config.js';
+import microserviceContactUsConfig from './config/microservice-contact-us.config.js';
+import microserviceContactsConfig from './config/microservice-contacts.config.js';
+import microserviceFeaturesConfig from './config/microservice-features.config.js';
+import microserviceImportantNewsConfig from './config/microservice-important-news.config.js';
+import microserviceKnowledgeBaseConfig from './config/microservice-knowledge-base.config.js';
+import microserviceMailCalendarConfig from './config/microservice-mail-calendar.config.js';
+import microserviceMapConfig from './config/microservice-map.config.js';
+import microserviceNotificationsConfig from './config/microservice-notifications.config.js';
+import microserviceRestaurantsConfig from './config/microservice-restaurants.config.js';
+import microserviceRssConfig from './config/microservice-rss.config.js';
+import microserviceScheduleConfig from './config/microservice-schedule.config.js';
+import microserviceSocialNetworkConfig from './config/microservice-social-network.js';
+import microserviceStaticPagesConfig from './config/microservice-static-pages.config.js';
+import microserviceStatisticsConfig from './config/microservice-statistics.config.js';
+import { LogsMiddleware } from './logs.middleware.js';
+import { AuthBearerStrategy } from './security/auth-bearer.strategy.js';
+import { AuthJwtStrategy } from './security/auth-jwt.strategy.js';
 
 @Module({
   imports: [

@@ -38,9 +38,7 @@
  */
 
 import { createStore, select, withProps } from '@ngneat/elf';
-import {
- persistState
-} from '@ngneat/elf-persist-state';
+import { persistState } from '@ngneat/elf-persist-state';
 import { localForageStore } from '../store/local-forage';
 
 const STORE_NAME = 'screen';
@@ -49,14 +47,11 @@ export interface Screen {
   brightness: number;
 }
 
-const store = createStore(
-    { name: STORE_NAME },
-    withProps<Screen>({ brightness: null})
-  );
+const store = createStore({ name: STORE_NAME }, withProps<Screen>({ brightness: null }));
 
 persistState(store, {
-    key: STORE_NAME,
-    storage: localForageStore,
+  key: STORE_NAME,
+  storage: localForageStore,
 });
 
 export const brightness$ = store.pipe(select((state) => state.brightness));

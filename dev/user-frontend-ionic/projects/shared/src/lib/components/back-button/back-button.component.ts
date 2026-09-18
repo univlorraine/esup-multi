@@ -38,26 +38,25 @@
  */
 
 import { Component, Input } from '@angular/core';
-import { NavigationService } from '../../navigation/navigation.service';
 import { Platform } from '@ionic/angular';
+import { NavigationService } from '../../navigation/navigation.service';
 
 @Component({
   selector: 'app-back-button',
   templateUrl: 'back-button.component.html',
-  styleUrls: ['../../../../../../src/theme/app-theme/styles/shared/back-button.component.scss']
+  styleUrls: ['../../../../../../src/theme/app-theme/styles/shared/back-button.component.scss'],
 })
 export class BackButtonComponent {
-
   @Input() defaultHref = '';
 
   constructor(
     private navigationService: NavigationService,
-    public platform: Platform
+    public platform: Platform,
   ) {}
 
   goBack() {
     // use defaultHref if not empty
-    if(this.defaultHref !== '') {
+    if (this.defaultHref !== '') {
       return;
     }
 

@@ -25,7 +25,8 @@ jobs:
           filters: |
             frontend:
             - 'dev/user-frontend-ionic/**'
-            - 'dev/user-frontend-ionic/.eslintrc.js'
+            - 'dev/user-frontend-ionic/.eslintrc.*'
+            - 'dev/user-frontend-ionic/eslint.config.*'
 
       - name: Read Node.js version
         id: node_version
@@ -70,7 +71,8 @@ jobs:
           filters: |
             main:
             - 'dev/user-backend-nest/main/**/*.ts'
-            - 'dev/user-backend-nest/main/.eslintrc.js'
+            - 'dev/user-backend-nest/main/.eslintrc.*'
+            - 'dev/user-backend-nest/main/eslint.config.*'
 
       - name: Read Node.js version
         id: node_version
@@ -112,6 +114,7 @@ jobs:
           - contacts
           - features
           - important-news
+          - knowledge-base
           - mail-calendar
           - map
           - notifications
@@ -136,58 +139,80 @@ jobs:
           filters: |
             auth:
             - 'dev/user-backend-nest/microservices/auth/**/*.ts'
-            - 'dev/user-backend-nest/microservices/auth/.eslintrc.js'
+            - 'dev/user-backend-nest/microservices/auth/.eslintrc.*'
+            - 'dev/user-backend-nest/microservices/auth/eslint.config.*'
             card:
             - 'dev/user-backend-nest/microservices/card/**/*.ts'
-            - 'dev/user-backend-nest/microservices/card/.eslintrc.js'
+            - 'dev/user-backend-nest/microservices/card/.eslintrc.*'
+            - 'dev/user-backend-nest/microservices/card/eslint.config.*'
             card-eu:
             - 'dev/user-backend-nest/microservices/card-eu/**/*.ts'
-            - 'dev/user-backend-nest/microservices/card-eu/.eslintrc.js'
+            - 'dev/user-backend-nest/microservices/card-eu/.eslintrc.*'
+            - 'dev/user-backend-nest/microservices/card-eu/eslint.config.*'
             chatbot:
             - 'dev/user-backend-nest/microservices/chatbot/**/*.ts'
-            - 'dev/user-backend-nest/microservices/chatbot/.eslintrc.js'
+            - 'dev/user-backend-nest/microservices/chatbot/.eslintrc.*'
+            - 'dev/user-backend-nest/microservices/chatbot/eslint.config.*'
             clocking:
             - 'dev/user-backend-nest/microservices/clocking/**/*.ts'
-            - 'dev/user-backend-nest/microservices/clocking/.eslintrc.js'
+            - 'dev/user-backend-nest/microservices/clocking/.eslintrc.*'
+            - 'dev/user-backend-nest/microservices/clocking/eslint.config.*'
             contact-us:
             - 'dev/user-backend-nest/microservices/contact-us/**/*.ts'
-            - 'dev/user-backend-nest/microservices/contact-us/.eslintrc.js'
+            - 'dev/user-backend-nest/microservices/contact-us/.eslintrc.*'
+            - 'dev/user-backend-nest/microservices/contact-us/eslint.config.*'
             contacts:
             - 'dev/user-backend-nest/microservices/contacts/**/*.ts'
-            - 'dev/user-backend-nest/microservices/contacts/.eslintrc.js'
+            - 'dev/user-backend-nest/microservices/contacts/.eslintrc.*'
+            - 'dev/user-backend-nest/microservices/contacts/eslint.config.*'
             features:
             - 'dev/user-backend-nest/microservices/features/**/*.ts'
-            - 'dev/user-backend-nest/microservices/features/.eslintrc.js'
+            - 'dev/user-backend-nest/microservices/features/.eslintrc.*'
+            - 'dev/user-backend-nest/microservices/features/eslint.config.*'
             important-news:
             - 'dev/user-backend-nest/microservices/important-news/**/*.ts'
-            - 'dev/user-backend-nest/microservices/important-news/.eslintrc.js'
+            - 'dev/user-backend-nest/microservices/important-news/.eslintrc.*'
+            - 'dev/user-backend-nest/microservices/important-news/eslint.config.*'
+            knowledge-base:
+            - 'dev/user-backend-nest/microservices/knowledge-base/**/*.ts'
+            - 'dev/user-backend-nest/microservices/knowledge-base/.eslintrc.*'
+            - 'dev/user-backend-nest/microservices/knowledge-base/eslint.config.*'
             mail-calendar:
             - 'dev/user-backend-nest/microservices/mail-calendar/**/*.ts'
-            - 'dev/user-backend-nest/microservices/mail-calendar/.eslintrc.js'
+            - 'dev/user-backend-nest/microservices/mail-calendar/.eslintrc.*'
+            - 'dev/user-backend-nest/microservices/mail-calendar/eslint.config.*'
             map:
             - 'dev/user-backend-nest/microservices/map/**/*.ts'
-            - 'dev/user-backend-nest/microservices/map/.eslintrc.js'
+            - 'dev/user-backend-nest/microservices/map/.eslintrc.*'
+            - 'dev/user-backend-nest/microservices/map/eslint.config.*'
             notifications:
             - 'dev/user-backend-nest/microservices/notifications/**/*.ts'
-            - 'dev/user-backend-nest/microservices/notifications/.eslintrc.js'
+            - 'dev/user-backend-nest/microservices/notifications/.eslintrc.*'
+            - 'dev/user-backend-nest/microservices/notifications/eslint.config.*'
             restaurants:
             - 'dev/user-backend-nest/microservices/restaurants/**/*.ts'
-            - 'dev/user-backend-nest/microservices/restaurants/.eslintrc.js'
+            - 'dev/user-backend-nest/microservices/restaurants/.eslintrc.*'
+            - 'dev/user-backend-nest/microservices/restaurants/eslint.config.*'
             rss:
             - 'dev/user-backend-nest/microservices/rss/**/*.ts'
-            - 'dev/user-backend-nest/microservices/rss/.eslintrc.js'
+            - 'dev/user-backend-nest/microservices/rss/.eslintrc.*'
+            - 'dev/user-backend-nest/microservices/rss/eslint.config.*'
             schedule:
             - 'dev/user-backend-nest/microservices/schedule/**/*.ts'
-            - 'dev/user-backend-nest/microservices/schedule/.eslintrc.js'
-            social-nertwork:
+            - 'dev/user-backend-nest/microservices/schedule/.eslintrc.*'
+            - 'dev/user-backend-nest/microservices/schedule/eslint.config.*'
+            social-network:
             - 'dev/user-backend-nest/microservices/social-network/**/*.ts'
-            - 'dev/user-backend-nest/microservices/social-network/.eslintrc.js'
+            - 'dev/user-backend-nest/microservices/social-network/.eslintrc.*'
+            - 'dev/user-backend-nest/microservices/social-network/eslint.config.*'
             static-pages:
             - 'dev/user-backend-nest/microservices/static-pages/**/*.ts'
-            - 'dev/user-backend-nest/microservices/static-pages/.eslintrc.js'
+            - 'dev/user-backend-nest/microservices/static-pages/.eslintrc.*'
+            - 'dev/user-backend-nest/microservices/static-pages/eslint.config.*'
             statistics:
             - 'dev/user-backend-nest/microservices/statistics/**/*.ts'
-            - 'dev/user-backend-nest/microservices/statistics/.eslintrc.js'
+            - 'dev/user-backend-nest/microservices/statistics/.eslintrc.*'
+            - 'dev/user-backend-nest/microservices/statistics/eslint.config.*'
 
       - name: Read Node.js version
         id: node_version
@@ -235,7 +260,8 @@ jobs:
           filters: |
             multi-cms-connector:
             - 'dev/connectors/multi-cms-connector/**/*.ts'
-            - 'dev/connectors/multi-cms-connector/.eslintrc.js'
+            - 'dev/connectors/multi-cms-connector/.eslintrc.*'
+            - 'dev/connectors/multi-cms-connector/eslint.config.*'
 
       - name: Read Node.js version
         id: node_version

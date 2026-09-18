@@ -37,11 +37,10 @@
  */
 
 import { z } from 'zod';
-
-import { IdSchema, AccessTypeSchema } from './base-type.schema';
-import { FeaturesTranslationsSchema } from '@common/validation/schemas/translations.schema';
-import { AuthorizationSchema } from '@common/validation/schemas/authorization.schema';
-import { SettingsByRoleSchema } from '@common/validation/schemas/settingsByRole.schema';
+import { AuthorizationSchema } from '#common/validation/schemas/authorization.schema.js';
+import { SettingsByRoleSchema } from '#common/validation/schemas/settingsByRole.schema.js';
+import { FeaturesTranslationsSchema } from '#common/validation/schemas/translations.schema.js';
+import { AccessTypeSchema, IdSchema } from './base-type.schema.js';
 
 export const FeaturesSchema = z
   .object({
@@ -60,11 +59,7 @@ export const FeaturesSchema = z
       .min(1, 'Feature icon svg light cannot be empty string')
       .nullable(),
     link: z.string().min(1, 'Feature link cannot be empty string').nullable(),
-    menu: z.enum(['tabs', 'service', 'burger', 'top'], {
-      errorMap: () => ({
-        message: 'Menu must be one of tabs, service, burger, or top',
-      }),
-    }),
+    menu: z.enum(['tabs', 'service', 'burger', 'top']),
     position: z.number().int().default(0),
     routerLink: z
       .string()

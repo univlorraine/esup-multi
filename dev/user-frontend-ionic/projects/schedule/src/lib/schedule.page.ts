@@ -54,7 +54,6 @@ const DEFAULT_VIEW_TYPE: ViewType = 'month';
   styleUrls: ['../../../../src/theme/app-theme/styles/schedule/schedule.page.scss'],
 })
 export class SchedulePage implements OnDestroy {
-
   @ViewChild(ScheduleCalendarComponent) calendarRef: ScheduleCalendarComponent;
   viewType: ViewType = DEFAULT_VIEW_TYPE;
   public isLoading$ = this.scheduleService.isLoading$;
@@ -62,7 +61,8 @@ export class SchedulePage implements OnDestroy {
 
   constructor(
     private scheduleService: ScheduleService,
-    private router: Router) { }
+    private router: Router,
+  ) {}
 
   onViewTypeChange(evt) {
     this.viewType = evt.detail.value;
@@ -71,7 +71,7 @@ export class SchedulePage implements OnDestroy {
   ionViewDidEnter() {
     this.calendarRef?.initCalendar();
     this.scheduleService.loadScheduleToState().pipe(take(1)).subscribe();
-    this.scheduleService.asUser.subscribe((asUser) => this.asUser = asUser);
+    this.scheduleService.asUser.subscribe((asUser) => (this.asUser = asUser));
   }
 
   ngOnDestroy() {

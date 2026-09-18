@@ -37,8 +37,8 @@
  */
 
 import { Args, Query, Resolver } from '@nestjs/graphql';
-import { ImportantNewsDirectusService } from './important-news.directus.service';
-import { ImportantNews } from '@common/models/important-news.model';
+import { ImportantNews } from '#common/models/important-news.model.js';
+import { ImportantNewsDirectusService } from './important-news.directus.service.js';
 
 @Resolver(() => ImportantNews)
 export class ImportantNewsDirectusResolver {

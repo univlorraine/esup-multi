@@ -38,13 +38,20 @@
  */
 
 import { ChangeDetectorRef, Component, Input } from '@angular/core';
-import { SsoService, StatisticsService, ThemeService, TranslatedExternalFeature } from '@multi/shared';
-import { NavigationService } from '@multi/shared';
+import {
+  NavigationService,
+  SsoService,
+  StatisticsService,
+  ThemeService,
+  TranslatedExternalFeature,
+} from '@multi/shared';
 
 @Component({
   selector: 'app-widget-external-feature',
   templateUrl: './widget-external-feature.component.html',
-  styleUrls: ['../../../../../../../../src/theme/app-theme/styles/features/widget-external-feature.component.scss'],
+  styleUrls: [
+    '../../../../../../../../src/theme/app-theme/styles/features/widget-external-feature.component.scss',
+  ],
 })
 export class WidgetExternalFeatureComponent {
   @Input() feature: TranslatedExternalFeature;
@@ -56,7 +63,7 @@ export class WidgetExternalFeatureComponent {
     private themeService: ThemeService,
     private changeDetector: ChangeDetectorRef,
     private navigationService: NavigationService,
-  ) { }
+  ) {}
 
   public onClick(): Promise<void> {
     if (!this.feature.link) {
@@ -69,16 +76,18 @@ export class WidgetExternalFeatureComponent {
       return this.navigationService.openExternalLink(this.feature.link);
     }
 
-    this.ssoService.getSsoExternalLink({
-      urlTemplate: this.feature.link,
-      service: this.feature.ssoService
-    })
-      .subscribe(url => this.navigationService.openExternalLink(url));
+    this.ssoService
+      .getSsoExternalLink({
+        urlTemplate: this.feature.link,
+        service: this.feature.ssoService,
+      })
+      .subscribe((url) => this.navigationService.openExternalLink(url));
   }
 
   fontColor(backgroundColor) {
-    return this.themeService.isBackgroundFromCmsDarkOrIsDarkTheme(backgroundColor) ?
-      'light-font-color' : 'dark-font-color';
+    return this.themeService.isBackgroundFromCmsDarkOrIsDarkTheme(backgroundColor)
+      ? 'light-font-color'
+      : 'dark-font-color';
   }
 
   onWidgetIsEmpty(isEmpty: boolean) {

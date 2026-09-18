@@ -49,17 +49,18 @@ import { RssItemHeaderButtonDirective } from './rss-item-header-button.directive
 export class RssItemHeaderComponent {
   @Input() item: FeedItem;
   @Input() display: string;
-  @ContentChild(RssItemHeaderButtonDirective, { read: TemplateRef }) rssItemHeaderAction: TemplateRef<any>;
+  @ContentChild(RssItemHeaderButtonDirective, { read: TemplateRef })
+  rssItemHeaderAction: TemplateRef<any>;
 
   public isMediaAnImage(media: any): boolean {
-    const imageTypes: Array<string> = [
+    const imageTypes: string[] = [
       'image/gif',
       'image/x-icon',
       'image/jpeg',
       'image/png',
       'image/svg+xml',
       'image/tiff',
-      'image/webp'
+      'image/webp',
     ];
 
     return media.type ? imageTypes.includes(media.type) : false;

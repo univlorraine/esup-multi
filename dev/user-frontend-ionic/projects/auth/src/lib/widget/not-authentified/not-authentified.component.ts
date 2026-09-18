@@ -38,11 +38,12 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { AuthenticatedUser, authenticatedUser$ } from '@multi/shared';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
+import { AuthenticatedUser, authenticatedUser$ } from '@multi/shared';
 import { LoginRepository, TranslatedLoginPageContent } from '../../common/login.repository';
 import { LoginService } from '../../common/login.service';
+
 @Component({
   selector: 'app-auth-not-authentified-widget',
   templateUrl: './not-authentified.component.html',
@@ -62,8 +63,6 @@ export class NotAuthentifiedComponent implements OnInit {
 
   ngOnInit() {
     this.authenticatedUser$ = authenticatedUser$;
-    this.loginService.loadAndStoreLoginPageContent()
-      .pipe(take(1))
-      .subscribe();
+    this.loginService.loadAndStoreLoginPageContent().pipe(take(1)).subscribe();
   }
 }

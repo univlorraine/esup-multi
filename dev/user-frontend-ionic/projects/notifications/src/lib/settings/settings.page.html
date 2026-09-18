@@ -40,25 +40,37 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <app-back-button></app-back-button>
+      <app-back-button />
     </ion-buttons>
 
-    <ion-title class="app-centered-header-title app-title-4">{{ "NOTIFICATIONS.SETTINGS.TITLE" | translate }}</ion-title>
+    <ion-title class="app-centered-header-title app-title-4">{{
+      'NOTIFICATIONS.SETTINGS.TITLE' | translate
+    }}</ion-title>
   </ion-toolbar>
 </ion-header>
 <ng-container>
   <ion-content class="ion-padding">
     <ion-row class="label">
-      <ion-label class="app-text-3 safe-area-padding-lr">{{ "NOTIFICATIONS.SETTINGS.DESCRIPTION" | translate }}</ion-label>
+      <ion-label class="app-text-3 safe-area-padding-lr">{{
+        'NOTIFICATIONS.SETTINGS.DESCRIPTION' | translate
+      }}</ion-label>
     </ion-row>
-    <form [formGroup]="channelForm" *ngIf="(channelsSubscriptions$| async) as channelsSubscriptions">
-      <ion-list>
-        <ion-item *ngFor="let channelSubscription of channelsSubscriptions">
-          <ion-toggle [formControlName]="channelSubscription.code" class="app-text-3 light" justify="space-between">
-            {{ channelSubscription.label }}
-          </ion-toggle>
-        </ion-item>
-      </ion-list>
-    </form>
+    @if (channelsSubscriptions$ | async; as channelsSubscriptions) {
+      <form [formGroup]="channelForm">
+        <ion-list>
+          @for (channelSubscription of channelsSubscriptions; track channelSubscription.code) {
+            <ion-item>
+              <ion-toggle
+                [formControlName]="channelSubscription.code"
+                class="app-text-3 light"
+                justify="space-between"
+              >
+                {{ channelSubscription.label }}
+              </ion-toggle>
+            </ion-item>
+          }
+        </ion-list>
+      </form>
+    }
   </ion-content>
 </ng-container>

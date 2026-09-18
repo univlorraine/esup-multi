@@ -45,35 +45,29 @@ import { StaticPageComponent } from './static-page/static-page.component';
 import { StaticPagesRoutingModule } from './static-pages-routing.module';
 import { StaticPagesWidgetComponent } from './widgets/static-pages-widget/static-pages-widget.component';
 
-
-const initModule = (projectModuleService: ProjectModuleService) =>
-  () => projectModuleService.initProjectModule({
+const initModule = (projectModuleService: ProjectModuleService) => () =>
+  projectModuleService.initProjectModule({
     name: 'static-pages',
-    widgets: [{
-      id: 'static-pages-widget',
-      component: StaticPagesWidgetComponent,
-    }]
+    widgets: [
+      {
+        id: 'static-pages-widget',
+        component: StaticPagesWidgetComponent,
+      },
+    ],
   });
 
 @NgModule({
-  declarations: [
-    StaticPageComponent,
-    StaticPagesWidgetComponent
+  declarations: [StaticPageComponent, StaticPagesWidgetComponent],
+  providers: [
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initModule,
+      deps: [ProjectModuleService],
+      multi: true,
+    },
   ],
-  providers: [{
-    provide: APP_INITIALIZER,
-    useFactory: initModule,
-    deps: [ProjectModuleService],
-    multi: true
-  }],
-  imports: [
-    CommonModule,
-    IonicModule,
-    StaticPagesRoutingModule,
-    SharedComponentsModule,
-  ]
+  imports: [CommonModule, IonicModule, StaticPagesRoutingModule, SharedComponentsModule],
 })
 export class StaticPagesModule {
   static routerLink = '/page';
 }
-

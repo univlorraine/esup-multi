@@ -83,6 +83,7 @@
         "dist/knowledge-base"
       ]
     },
+    "esModuleInterop": true,
     "downlevelIteration": true,
     "experimentalDecorators": true,
     "moduleResolution": "node",
@@ -95,6 +96,7 @@
     ],
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true,
     "useDefineForClassFields": false
   },
   "angularCompilerOptions": {

@@ -38,9 +38,7 @@
  */
 
 import { createStore, select, withProps } from '@ngneat/elf';
-import {
-  persistState
-} from '@ngneat/elf-persist-state';
+import { persistState } from '@ngneat/elf-persist-state';
 import { localForageStore } from '@multi/shared';
 
 const STORE_NAME = 'clocking';
@@ -54,15 +52,11 @@ export interface Clocking {
   day: string;
 }
 
-
-const store = createStore(
-    { name: STORE_NAME },
-    withProps<ClockingProps>({ clocking: null})
-  );
+const store = createStore({ name: STORE_NAME }, withProps<ClockingProps>({ clocking: null }));
 
 export const persist = persistState(store, {
-    key: STORE_NAME,
-    storage: localForageStore,
+  key: STORE_NAME,
+  storage: localForageStore,
 });
 
 export const clocking$ = store.pipe(select((state) => state.clocking));

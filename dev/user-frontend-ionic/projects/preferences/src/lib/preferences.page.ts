@@ -46,14 +46,11 @@ import { ProjectModuleService } from '@multi/shared';
   styleUrls: ['../../../../src/theme/app-theme/styles/preferences/preferences.page.scss'],
 })
 export class PreferencesPage implements OnInit {
-
-  @ViewChildren('preferences', {read: ViewContainerRef}) preferences: QueryList<ViewContainerRef>;
+  @ViewChildren('preferences', { read: ViewContainerRef }) preferences: QueryList<ViewContainerRef>;
 
   public preferencesComponents: Type<any>[] = [];
 
-  constructor(
-    private projectModuleService: ProjectModuleService
-  ) { }
+  constructor(private projectModuleService: ProjectModuleService) {}
 
   ngOnInit(): void {
     this.preferencesComponents = this.projectModuleService.getPreferencesComponents();
@@ -66,5 +63,4 @@ export class PreferencesPage implements OnInit {
       viewContainerRef.createComponent(componentToCreate);
     });
   }
-
 }

@@ -37,14 +37,23 @@
  * termes.
  */
 
-import { AfterViewInit, ChangeDetectorRef, Component, Inject, Input, OnDestroy, TemplateRef, ViewChild } from '@angular/core';
-import { CompleteLocalDatePipe, ThemeService } from '@multi/shared';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  Inject,
+  Input,
+  OnDestroy,
+  TemplateRef,
+  ViewChild,
+} from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { finalize, map, take } from 'rxjs/operators';
+import { CompleteLocalDatePipe, ThemeService } from '@multi/shared';
+import { SCHEDULE_CONFIG, ScheduleModuleConfig } from '../../schedule.config';
 import { Event } from '../../schedule.repository';
 import { ScheduleService } from '../../schedule.service';
 import { NextEventsService } from './next-events.service';
-import { SCHEDULE_CONFIG, ScheduleModuleConfig } from '../../schedule.config';
 
 @Component({
   selector: 'app-schedule-widget-next-events',
@@ -52,7 +61,6 @@ import { SCHEDULE_CONFIG, ScheduleModuleConfig } from '../../schedule.config';
   styleUrls: ['../../../../../../src/theme/app-theme/styles/schedule/next-events.component.scss'],
 })
 export class NextEventsComponent implements OnDestroy, AfterViewInit {
-
   @Input() widgetColor: string;
   @ViewChild('list') list: TemplateRef<any>;
   @ViewChild('slider') slider: TemplateRef<any>;
@@ -69,34 +77,35 @@ export class NextEventsComponent implements OnDestroy, AfterViewInit {
     private completeLocalDatePipe: CompleteLocalDatePipe,
     private themeService: ThemeService,
     private changeDetectorRef: ChangeDetectorRef,
-    @Inject(SCHEDULE_CONFIG) private config: ScheduleModuleConfig
+    @Inject(SCHEDULE_CONFIG) private config: ScheduleModuleConfig,
   ) {
     this.nextEvents$ = this.nextEventsService.getNextEvents$().pipe();
 
     // If two events occurs the same day, we only want to display the date once
     // below we update an array to know for which event we want to show the date
-    this.nextEventsSubscription = this.nextEvents$.subscribe(events => {
+    this.nextEventsSubscription = this.nextEvents$.subscribe((events) => {
       const idsToDisplay = {};
-      events.forEach(event => {
+      events.forEach((event) => {
         const eventDay = this.completeLocalDatePipe.transform(event.startDateTime);
-        if(!idsToDisplay[eventDay]) {
+        if (!idsToDisplay[eventDay]) {
           idsToDisplay[eventDay] = event.id;
         }
       });
       this.displayDateForIds = Object.values(idsToDisplay);
     });
 
-    this.noNextEvents$ = this.nextEvents$.pipe(
-      map(events => !events || events.length === 0)
-    );
+    this.noNextEvents$ = this.nextEvents$.pipe(map((events) => !events || events.length === 0));
   }
 
   widgetViewDidEnter(): void {
     this.isLoading = true;
-    this.scheduleService.loadScheduleToState().pipe(
-      take(1),
-      finalize(() => this.isLoading = false)
-    ).subscribe();
+    this.scheduleService
+      .loadScheduleToState()
+      .pipe(
+        take(1),
+        finalize(() => (this.isLoading = false)),
+      )
+      .subscribe();
 
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
     prefersDark.removeEventListener('change', () => this.changeDetectorRef.detectChanges());
@@ -108,8 +117,9 @@ export class NextEventsComponent implements OnDestroy, AfterViewInit {
   }
 
   fontColor() {
-    return this.themeService.isBackgroundFromCmsDarkOrIsDarkTheme(this.widgetColor) ?
-      'light-font-color' : 'dark-font-color';
+    return this.themeService.isBackgroundFromCmsDarkOrIsDarkTheme(this.widgetColor)
+      ? 'light-font-color'
+      : 'dark-font-color';
   }
 
   ngOnDestroy() {
@@ -120,4 +130,3 @@ export class NextEventsComponent implements OnDestroy, AfterViewInit {
     return this[this?.config.nextEventsWidget.display];
   }
 }
-

@@ -45,75 +45,74 @@ import { TranslationsService } from './translations/translations.service';
 import { Widget, WidgetsService } from './widgets.service';
 
 export interface InitProjectModuleOptions {
-    name: string;
-    preferencesComponent?: Type<any>;
-    translation?: boolean;
-    menuItems?: StaticMenuItem[];
-    widgets?: Widget[];
-    historyBlacklist?: string[];
+  name: string;
+  preferencesComponent?: Type<any>;
+  translation?: boolean;
+  menuItems?: StaticMenuItem[];
+  widgets?: Widget[];
+  historyBlacklist?: string[];
 }
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProjectModuleService {
+  constructor(
+    private preferencesService: PreferencesService,
+    private translationsService: TranslationsService,
+    private staticMenuService: StaticMenuService,
+    private widgetsService: WidgetsService,
+    private historyBlacklistService: HistoryBlacklistService,
+  ) {}
 
-    constructor(
-        private preferencesService: PreferencesService,
-        private translationsService: TranslationsService,
-        private staticMenuService: StaticMenuService,
-        private widgetsService: WidgetsService,
-        private historyBlacklistService: HistoryBlacklistService,
-    ) {}
-
-    initProjectModule(options: InitProjectModuleOptions) {
-        if (options.preferencesComponent) {
-            this.preferencesService.addPreferencesComponent(options.preferencesComponent);
-        }
-
-        if (options.translation === true) {
-            this.translationsService.addTranslation(options.name);
-        }
-
-        if (options.menuItems) {
-            this.staticMenuService.addMenuItems(options.menuItems);
-        }
-
-        if (options.widgets) {
-            // prefix widgets ids with module name
-            const widgets = options.widgets.map(widget => ({
-                id: `${options.name}:${widget.id}`,
-                component: widget.component
-            }));
-            this.widgetsService.addWidgets(widgets);
-        }
-
-        if (options.historyBlacklist) {
-            this.historyBlacklistService.addHistoryBlacklist(options.historyBlacklist);
-        }
+  initProjectModule(options: InitProjectModuleOptions) {
+    if (options.preferencesComponent) {
+      this.preferencesService.addPreferencesComponent(options.preferencesComponent);
     }
 
-    getTranslatedProjectModules(): string[] {
-        return this.translationsService.getTranslations();
+    if (options.translation === true) {
+      this.translationsService.addTranslation(options.name);
     }
 
-    getStaticMenuItemsByType(menuType: StaticMenuType): StaticMenuItem[] {
-        return this.staticMenuService.getMenuItemsByType(menuType);
+    if (options.menuItems) {
+      this.staticMenuService.addMenuItems(options.menuItems);
     }
 
-    getStaticMenuItems(): StaticMenuItem[] {
-        return this.staticMenuService.getMenuItems();
+    if (options.widgets) {
+      // prefix widgets ids with module name
+      const widgets = options.widgets.map((widget) => ({
+        id: `${options.name}:${widget.id}`,
+        component: widget.component,
+      }));
+      this.widgetsService.addWidgets(widgets);
     }
 
-    getPreferencesComponents(): Type<any>[] {
-        return this.preferencesService.getPreferencesComponents();
+    if (options.historyBlacklist) {
+      this.historyBlacklistService.addHistoryBlacklist(options.historyBlacklist);
     }
+  }
 
-    getWidgetComponent(widgetId: string): Type<any> {
-        return this.widgetsService.getWidget(widgetId)?.component;
-    }
+  getTranslatedProjectModules(): string[] {
+    return this.translationsService.getTranslations();
+  }
 
-    getHistoryBlacklist(): string[] {
-        return this.historyBlacklistService.getHistoryBlacklist();
-    }
+  getStaticMenuItemsByType(menuType: StaticMenuType): StaticMenuItem[] {
+    return this.staticMenuService.getMenuItemsByType(menuType);
+  }
+
+  getStaticMenuItems(): StaticMenuItem[] {
+    return this.staticMenuService.getMenuItems();
+  }
+
+  getPreferencesComponents(): Type<any>[] {
+    return this.preferencesService.getPreferencesComponents();
+  }
+
+  getWidgetComponent(widgetId: string): Type<any> {
+    return this.widgetsService.getWidget(widgetId)?.component;
+  }
+
+  getHistoryBlacklist(): string[] {
+    return this.historyBlacklistService.getHistoryBlacklist();
+  }
 }

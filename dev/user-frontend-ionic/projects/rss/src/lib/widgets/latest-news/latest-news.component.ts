@@ -38,12 +38,12 @@
  */
 
 import { Component, Inject } from '@angular/core';
-import { NetworkService } from '@multi/shared';
 import { filter, first, Observable, switchMap } from 'rxjs';
 import { finalize, map, take } from 'rxjs/operators';
+import { NetworkService } from '@multi/shared';
+import { RSS_CONFIG, RssModuleConfig } from '../../rss.config';
 import { FeedItem, rssFeed$, setRssFeed } from '../../rss.repository';
 import { RssService } from '../../rss.service';
-import { RSS_CONFIG, RssModuleConfig } from '../../rss.config';
 
 @Component({
   selector: 'app-latest-news-widget',
@@ -57,11 +57,9 @@ export class LatestNewsComponent {
   constructor(
     private rssService: RssService,
     private networkService: NetworkService,
-    @Inject(RSS_CONFIG) public config: RssModuleConfig
+    @Inject(RSS_CONFIG) public config: RssModuleConfig,
   ) {
-    this.latestNews$ = rssFeed$.pipe(
-      map(rssFeed => rssFeed[0])
-    );
+    this.latestNews$ = rssFeed$.pipe(map((rssFeed) => rssFeed[0]));
   }
 
   widgetViewDidEnter(): void {
@@ -69,16 +67,18 @@ export class LatestNewsComponent {
   }
 
   private loadRssFeedIfNetworkAvailable() {
-    this.networkService.isOnline$.pipe(
-      first(),
-      filter(isOnline => isOnline),
-      switchMap(() => {
-        this.isLoading = true;
-        return this.rssService.getRssFeed().pipe(
-          take(1),
-          finalize(() => this.isLoading = false)
-        );
-      })
-    ).subscribe(setRssFeed);
+    this.networkService.isOnline$
+      .pipe(
+        first(),
+        filter((isOnline) => isOnline),
+        switchMap(() => {
+          this.isLoading = true;
+          return this.rssService.getRssFeed().pipe(
+            take(1),
+            finalize(() => (this.isLoading = false)),
+          );
+        }),
+      )
+      .subscribe(setRssFeed);
   }
 }

@@ -40,13 +40,26 @@
 import { Component, Inject, OnDestroy } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
-import {
-  AuthenticatedUser, authenticatedUser$, isDarkTheme, isDarkTheme$, MenuItem, MenuOpenerService,
-  MenuService as SharedMenuService, setIsDarkTheme, setLanguage, setUserHaveSetThemeInApp,
-  WidgetLifecycleService, GuidedTourService, VersionService, MultiTenantService, Tenant, tenantThemeApplied$
-} from '@multi/shared';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
+import {
+  AuthenticatedUser,
+  authenticatedUser$,
+  GuidedTourService,
+  isDarkTheme,
+  isDarkTheme$,
+  MenuItem,
+  MenuOpenerService,
+  MultiTenantService,
+  setIsDarkTheme,
+  setLanguage,
+  setUserHaveSetThemeInApp,
+  MenuService as SharedMenuService,
+  Tenant,
+  tenantThemeApplied$,
+  VersionService,
+  WidgetLifecycleService,
+} from '@multi/shared';
 
 @Component({
   selector: 'app-menu',
@@ -58,11 +71,11 @@ export class BurgerMenuPage implements OnDestroy {
     auth: 'auth:auth-widget',
     contactUs: 'contact-us:contact-us-menu-item-widget',
     staticPages: 'static-pages:static-pages-widget',
-    socialNetwork: 'social-network:social-network-widget'
+    socialNetwork: 'social-network:social-network-widget',
   };
   public dynamicMenuItems$: Observable<MenuItem[]>;
   public staticMenuItems$: Observable<MenuItem[]>;
-  public languages: Array<string> = [];
+  public languages: string[] = [];
   appVersion$: Observable<string>;
   authenticatedUser$: Observable<AuthenticatedUser>;
   public darkModeEnabled: boolean;
@@ -80,17 +93,17 @@ export class BurgerMenuPage implements OnDestroy {
     private versionService: VersionService,
     private alertController: AlertController,
     private translateService: TranslateService,
-  public menuOpenerService: MenuOpenerService,
-    public multiTenantService: MultiTenantService
+    public menuOpenerService: MenuOpenerService,
+    public multiTenantService: MultiTenantService,
   ) {
     this.languages = this.environment.languages;
     this.authenticatedUser$ = authenticatedUser$;
     this.tenantThemeApplied$ = tenantThemeApplied$;
     this.staticMenuItems$ = this.sharedMenuService.burgerMenuItems$.pipe(
-      map(menuItems => menuItems.filter(menuItem => menuItem.type === 'static'))
+      map((menuItems) => menuItems.filter((menuItem) => menuItem.type === 'static')),
     );
     this.dynamicMenuItems$ = this.sharedMenuService.burgerMenuItems$.pipe(
-      map(menuItems => menuItems.filter(menuItem => menuItem.type === 'dynamic'))
+      map((menuItems) => menuItems.filter((menuItem) => menuItem.type === 'dynamic')),
     );
     this.appVersion$ = this.versionService.getCurrentAppVersion();
 
@@ -128,13 +141,17 @@ export class BurgerMenuPage implements OnDestroy {
     this.widgetLifecycleService.sendWidgetViewDidLeave(Object.values(this.widgetIds));
   }
 
-  getMenuId(menuItem: MenuItem){
+  getMenuId(menuItem: MenuItem) {
     return this.guidedTourService.generateMenuItemIdFromTitle(menuItem);
   }
 
   async clearSelectedTenant() {
-    const header = this.translateService.instant('MULTI-TENANT.CHANGE_UNIVERSITY_CONFIRMATION.HEADER');
-    const message = this.translateService.instant('MULTI-TENANT.CHANGE_UNIVERSITY_CONFIRMATION.MESSAGE');
+    const header = this.translateService.instant(
+      'MULTI-TENANT.CHANGE_UNIVERSITY_CONFIRMATION.HEADER',
+    );
+    const message = this.translateService.instant(
+      'MULTI-TENANT.CHANGE_UNIVERSITY_CONFIRMATION.MESSAGE',
+    );
     const confirmation = await this.alertController.create({
       header,
       message,
@@ -158,7 +175,8 @@ export class BurgerMenuPage implements OnDestroy {
   }
 
   displayUniversitiesButton(): boolean {
-    const isSingleTenant: boolean = this.multiTenantService.getFlattenTenantObjects(undefined, 0).length === 1;
+    const isSingleTenant: boolean =
+      this.multiTenantService.getFlattenTenantObjects(undefined, 0).length === 1;
     const currentTenant: Tenant = this.multiTenantService.getCurrentTenantOrThrowError();
     return !isSingleTenant || currentTenant.isGroup === true;
   }

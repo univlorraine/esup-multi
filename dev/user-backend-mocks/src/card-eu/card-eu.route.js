@@ -37,23 +37,21 @@
  * termes.
  */
 
-const express = require('express');
+import express from 'express';
+import getCardEuData from './card-eu.mock.js';
+
 const router = express.Router();
-const { getCardEuData } = require('./card-eu.mock.js');
 
 router.get('/:username/extended', async (req, res) => {
-    const {username} = req.params;
-    if (!username || username !== "etu") {
-        return res.json({
-            "errors": [
-                'NO_ACTIVE_CARD'
-            ]
-        });
-    }
+  const { username } = req.params;
+  if (!username || username !== 'etu') {
+    return res.json({
+      errors: ['NO_ACTIVE_CARD'],
+    });
+  }
 
-    let data = await getCardEuData();
-    return res.json(data);
+  let data = await getCardEuData();
+  return res.json(data);
 });
 
-module.exports = router;
-
+export default router;

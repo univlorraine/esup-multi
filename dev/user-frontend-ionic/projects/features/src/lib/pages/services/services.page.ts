@@ -37,15 +37,29 @@
  * termes.
  */
 
-import { Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
-import { IonContent } from '@ionic/angular';
 import {
-  FeaturesService, featuresUserOrder$, MenuService, ServiceMenuItem, setFeaturesUserOrder,
-  TranslatedFeature, updateFeaturesListIsNewToFalse, userIsAuthenticated$
-} from '@multi/shared';
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  QueryList,
+  ViewChild,
+  ViewChildren,
+} from '@angular/core';
+import { IonContent } from '@ionic/angular';
 import { DragulaService } from 'ng2-dragula';
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { concatMap, map, switchMap, take, tap } from 'rxjs/operators';
+import {
+  FeaturesService,
+  featuresUserOrder$,
+  MenuService,
+  ServiceMenuItem,
+  setFeaturesUserOrder,
+  TranslatedFeature,
+  updateFeaturesListIsNewToFalse,
+  userIsAuthenticated$,
+} from '@multi/shared';
 import { ServicesService } from './services.service';
 
 @Component({
@@ -54,14 +68,13 @@ import { ServicesService } from './services.service';
   styleUrls: ['../../../../../../src/theme/app-theme/styles/features/services.page.scss'],
 })
 export class ServicesPage implements OnInit, OnDestroy {
-
   @ViewChild('servicesContainer', { read: ElementRef }) servicesContainer: ElementRef;
   @ViewChildren('draggableServices') draggableServices: QueryList<ElementRef>;
   @ViewChild(IonContent, { static: false }) ionContent: IonContent;
 
   public featuresIsEmpty$: Observable<boolean>;
   public menuItems$: Observable<ServiceMenuItem[]>;
-  public searchQuery$: BehaviorSubject<string> = new BehaviorSubject('');
+  public searchQuery$ = new BehaviorSubject<string>('');
   public draggableIsOn = false;
   public menuItems: ServiceMenuItem[] = [];
   public dragIsAllowed = false;
@@ -76,8 +89,8 @@ export class ServicesPage implements OnInit, OnDestroy {
     private featuresService: FeaturesService,
     private menuService: MenuService,
     private dragulaService: DragulaService,
-    private servicesService: ServicesService
-  ) { }
+    private servicesService: ServicesService,
+  ) {}
 
   ngOnInit() {
     document.addEventListener('visibilitychange', () => this.onVisibilityChange());
@@ -85,17 +98,19 @@ export class ServicesPage implements OnInit, OnDestroy {
     this.initMenuItems();
     this.initDragula();
 
-    this.subscriptions.push(userIsAuthenticated$.subscribe(userIsAuthenticated => {
-      this.dragIsAllowed = userIsAuthenticated;
-    }));
+    this.subscriptions.push(
+      userIsAuthenticated$.subscribe((userIsAuthenticated) => {
+        this.dragIsAllowed = userIsAuthenticated;
+      }),
+    );
   }
 
   ngOnDestroy() {
     document.removeEventListener('visibilitychange', this.onVisibilityChangeBound);
-    this.subscriptions.forEach(subscription => {
+    this.subscriptions.forEach((subscription) => {
       subscription.unsubscribe();
     });
-    this.dragulaSubscriptions.forEach(subscription => {
+    this.dragulaSubscriptions.forEach((subscription) => {
       subscription.unsubscribe();
     });
   }
@@ -131,21 +146,23 @@ export class ServicesPage implements OnInit, OnDestroy {
 
   private initMenuItems() {
     const translatedServices$ = this.featuresService.translatedFeatures$.pipe(
-      map(features => features.filter(feature => !feature.widget && feature.menu === 'service'))
+      map((features) =>
+        features.filter((feature) => !feature.widget && feature.menu === 'service'),
+      ),
     );
-    this.featuresIsEmpty$ = translatedServices$.pipe(map(features => features.length === 0));
+    this.featuresIsEmpty$ = translatedServices$.pipe(map((features) => features.length === 0));
 
-    this.menuItems$ = combineLatest([translatedServices$, this.searchQuery$])
-      .pipe(
-        // Filter feature by searchQuery
-        map(([features, searchQuery]) => ({
-          features: this.servicesService.searchQueryFilter(features, searchQuery),
-          searchQuery,
-        })),
-        // Sort feature with featureUserOrder
-        switchMap(({ features }) => featuresUserOrder$.pipe(
+    this.menuItems$ = combineLatest([translatedServices$, this.searchQuery$]).pipe(
+      // Filter feature by searchQuery
+      map(([features, searchQuery]) => ({
+        features: this.servicesService.searchQueryFilter(features, searchQuery),
+        searchQuery,
+      })),
+      // Sort feature with featureUserOrder
+      switchMap(({ features }) =>
+        featuresUserOrder$.pipe(
           take(1),
-          map(userOrder => {
+          map((userOrder) => {
             //  Sort feature with IsNews first
             if (!userOrder || userOrder.length === 0) {
               const sortedFeatures = this.servicesService.sortFeaturesWithIsNewsFirst(features);
@@ -153,28 +170,35 @@ export class ServicesPage implements OnInit, OnDestroy {
             }
             // Else : sort feature with isNew First and by user order
             else {
-              const sortedFeatures = this.servicesService.sortFeaturesByUserOrder(features, userOrder);
+              const sortedFeatures = this.servicesService.sortFeaturesByUserOrder(
+                features,
+                userOrder,
+              );
               return sortedFeatures;
             }
-          }))),
-        // convert sortedTranslatedFeatures into MenuItems
-        map((sortedTranslatedFeatures: TranslatedFeature[]) =>
-          sortedTranslatedFeatures.map(translatedFeature => this.menuService.convertTranslatedFeature(translatedFeature))
+          }),
         ),
-        // update the list of menu items and place listeners on them
-        tap(menuItems => {
-          this.menuItems = menuItems;
-          setTimeout(() => {
-            if (this.draggableServices) {
-              this.initDraggableItemsListener();
-            }
-          }, 0);
-        })
-      );
+      ),
+      // convert sortedTranslatedFeatures into MenuItems
+      map((sortedTranslatedFeatures: TranslatedFeature[]) =>
+        sortedTranslatedFeatures.map((translatedFeature) =>
+          this.menuService.convertTranslatedFeature(translatedFeature),
+        ),
+      ),
+      // update the list of menu items and place listeners on them
+      tap((menuItems) => {
+        this.menuItems = menuItems;
+        setTimeout(() => {
+          if (this.draggableServices) {
+            this.initDraggableItemsListener();
+          }
+        }, 0);
+      }),
+    );
   }
 
   private initDragula() {
-    this.dragulaSubscriptions.forEach(subscription => {
+    this.dragulaSubscriptions.forEach((subscription) => {
       subscription.unsubscribe();
     });
 
@@ -183,25 +207,30 @@ export class ServicesPage implements OnInit, OnDestroy {
       moves: (el, container, handle) =>
         // Allow drag and drop on tags with dragHandle attribute (ion-button only)
         // && if not contain "not-draggable" (when drag and drop is disabled)
-        handle.hasAttribute('dragHandle') && !el.classList.contains('not-draggable')
+        handle.hasAttribute('dragHandle') && !el.classList.contains('not-draggable'),
     });
 
     this.dragulaSubscriptions.push(
-      this.dragulaService.dropModel('SERVICES')
+      this.dragulaService
+        .dropModel('SERVICES')
         .pipe(
-          concatMap(dragulaAfterDragResponse => featuresUserOrder$.pipe(
-            take(1),
-            map(featuresUserOrder => [dragulaAfterDragResponse.sourceModel, featuresUserOrder])))
-        ).subscribe(([dragulaDomAfterDrag]) => {
-          const userOrderFeature = dragulaDomAfterDrag.map(elem => elem.id);
+          concatMap((dragulaAfterDragResponse) =>
+            featuresUserOrder$.pipe(
+              take(1),
+              map((featuresUserOrder) => [dragulaAfterDragResponse.sourceModel, featuresUserOrder]),
+            ),
+          ),
+        )
+        .subscribe(([dragulaDomAfterDrag]) => {
+          const userOrderFeature = dragulaDomAfterDrag.map((elem) => elem.id);
 
           setFeaturesUserOrder(userOrderFeature);
-        }));
+        }),
+    );
   }
 
-
   private initDraggableItemsListener() {
-    this.draggableServices.forEach(item => {
+    this.draggableServices.forEach((item) => {
       item.nativeElement.removeEventListener('mousedown', this.onPressBound);
       item.nativeElement.removeEventListener('touchstart', this.onPressBound);
       item.nativeElement.addEventListener('mousedown', () => this.onPress());
@@ -236,10 +265,8 @@ export class ServicesPage implements OnInit, OnDestroy {
       const dragButtons = document.querySelectorAll('.drag-button');
 
       dragButtons.forEach((dragButton) => {
-
         dragButton.addEventListener('mousedown', () => this.activateIonContentScroll());
         dragButton.addEventListener('touchstart', () => this.activateIonContentScroll());
-
 
         dragButton.addEventListener('mouseup', () => this.desactivateIonContentScroll());
         dragButton.addEventListener('touchend', () => this.desactivateIonContentScroll());

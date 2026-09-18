@@ -39,13 +39,13 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Capacitor } from '@capacitor/core';
 import { combineLatest, from, Observable, of } from 'rxjs';
 import { catchError, switchMap, take } from 'rxjs/operators';
 import { getAuthToken } from '../auth/auth.repository';
-import { NetworkService } from '../network/network.service';
-import { Capacitor } from '@capacitor/core';
-import { statsUid$, updateStatsUid } from './statistics.repository';
 import { MultiTenantService } from '../multi-tenant/multi-tenant.service';
+import { NetworkService } from '../network/network.service';
+import { statsUid$, updateStatsUid } from './statistics.repository';
 
 interface UserActionRequestData {
   authToken: string;
@@ -64,7 +64,7 @@ interface UserActionDetails {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class StatisticsService {
   constructor(
@@ -74,7 +74,7 @@ export class StatisticsService {
   ) {}
 
   public async onFunctionalityOpened(statisticName: string) {
-    if(!statisticName) {
+    if (!statisticName) {
       return;
     }
 
@@ -84,14 +84,18 @@ export class StatisticsService {
 
     this.postUserActionStatistic({
       action: 'OPEN',
-      functionality: statisticName
+      functionality: statisticName,
     }).subscribe();
   }
 
   private postUserActionStatistic(userActionDetails: UserActionDetails): Observable<void> {
     const url = `${this.multiTenantService.getApiEndpoint()}/statistics/user-action`;
 
-    return combineLatest([getAuthToken(), statsUid$, from(this.networkService.getConnectionStatus())]).pipe(
+    return combineLatest([
+      getAuthToken(),
+      statsUid$,
+      from(this.networkService.getConnectionStatus()),
+    ]).pipe(
       take(1),
       switchMap(([authToken, statsUid, connectionStatus]) => {
         const data: UserActionRequestData = {
@@ -101,13 +105,13 @@ export class StatisticsService {
             action: userActionDetails.action,
             functionality: userActionDetails.functionality,
             platform: Capacitor.getPlatform(),
-            connectionType: connectionStatus.connectionType
-          }
+            connectionType: connectionStatus.connectionType,
+          },
         };
 
         return this.http.post<void>(url, data);
       }),
-      catchError(() => of(null))
+      catchError(() => of(null)),
     );
   }
 
@@ -121,13 +125,10 @@ export class StatisticsService {
   }
 
   private uuid4() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(
-      /[xy]/g,
-      function (c) {
-        const r = (Math.random() * 16) | 0,
-          v = c === 'x' ? r : (r & 0x3) | 0x8;
-        return v.toString(16);
-      },
-    );
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+      const r = (Math.random() * 16) | 0,
+        v = c === 'x' ? r : (r & 0x3) | 0x8;
+      return v.toString(16);
+    });
   }
 }

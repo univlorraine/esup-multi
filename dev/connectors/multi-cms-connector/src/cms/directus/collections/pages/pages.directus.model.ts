@@ -37,7 +37,7 @@
  */
 
 import { Field, ObjectType } from '@nestjs/graphql';
-import { PagesTranslationsDirectus } from '@directus/collections/translations/translations.directus.model';
+import { PagesTranslationsDirectus } from '#directus/collections/translations/translations.directus.model.js';
 
 @ObjectType()
 export class PagesDirectus {

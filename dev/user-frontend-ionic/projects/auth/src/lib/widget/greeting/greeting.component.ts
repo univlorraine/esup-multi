@@ -38,8 +38,9 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { AuthenticatedUser, authenticatedUser$ } from '@multi/shared';
 import { Observable } from 'rxjs';
+import { AuthenticatedUser, authenticatedUser$ } from '@multi/shared';
+
 @Component({
   selector: 'app-auth-greeting-widget',
   templateUrl: './greeting.component.html',

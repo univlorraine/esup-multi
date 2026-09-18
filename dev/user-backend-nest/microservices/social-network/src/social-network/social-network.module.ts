@@ -38,25 +38,25 @@
  */
 
 import { HttpModule } from '@nestjs/axios';
-import { ConfigModule, ConfigService } from '@nestjs/config';
 import { Logger, Module } from '@nestjs/common';
-import { SocialNetworkController } from './social-network.controller';
-import { SocialNetworkService } from './social-network.service';
-import * as Agent from 'agentkeepalive';
-import { KeepAliveOptions } from '../config/configuration.interface';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { HttpAgent, HttpsAgent } from 'agentkeepalive';
+import { KeepAliveOptions } from '../config/configuration.interface.js';
+import { SocialNetworkController } from './social-network.controller.js';
+import { SocialNetworkService } from './social-network.service.js';
 
 @Module({
   imports: [
     ConfigModule,
     HttpModule.registerAsync({
       imports: [ConfigModule],
-      useFactory: async (configService: ConfigService) => {
+      useFactory: (configService: ConfigService) => {
         const keepAliveOptions =
           configService.get<KeepAliveOptions>('keepAliveOptions');
         Logger.log('Using agentkeepalive options', keepAliveOptions);
         return {
-          httpAgent: new Agent(keepAliveOptions),
-          httpsAgent: new Agent.HttpsAgent(keepAliveOptions),
+          httpAgent: new HttpAgent(keepAliveOptions),
+          httpsAgent: new HttpsAgent(keepAliveOptions),
         };
       },
       inject: [ConfigService],

@@ -39,9 +39,9 @@
 
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NetworkService } from '@multi/shared';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
+import { NetworkService } from '@multi/shared';
 import { StaticPagesRepository, TranslatedStaticPage } from '../static-pages.repository';
 import { StaticPagesService } from '../static-pages.service';
 
@@ -51,11 +51,11 @@ import { StaticPagesService } from '../static-pages.service';
   styleUrls: ['../../../../../src/theme/app-theme/styles/static-pages/static-page.component.scss'],
 })
 export class StaticPageComponent implements OnInit {
-
   public translatedStaticPages$: Observable<TranslatedStaticPage[]>;
   public page$: Observable<TranslatedStaticPage>;
 
-  constructor(private route: ActivatedRoute,
+  constructor(
+    private route: ActivatedRoute,
     private staticPagesService: StaticPagesService,
     private staticPagesRepository: StaticPagesRepository,
     private networkService: NetworkService,
@@ -64,21 +64,18 @@ export class StaticPageComponent implements OnInit {
   }
 
   ngOnInit() {
-   this.loadStaticPagesIfNetworkAvailable();
+    this.loadStaticPagesIfNetworkAvailable();
 
     const id = this.route.snapshot.paramMap.get('id');
 
     this.page$ = this.staticPagesRepository.getStaticPage(id);
   }
 
-  public async loadStaticPagesIfNetworkAvailable(){
+  public async loadStaticPagesIfNetworkAvailable() {
     if (!(await this.networkService.getConnectionStatus()).connected) {
       return;
     }
 
-    this.staticPagesService.loadAndStoreStaticPages()
-    .pipe(
-      take(1)
-    ).subscribe();
+    this.staticPagesService.loadAndStoreStaticPages().pipe(take(1)).subscribe();
   }
 }

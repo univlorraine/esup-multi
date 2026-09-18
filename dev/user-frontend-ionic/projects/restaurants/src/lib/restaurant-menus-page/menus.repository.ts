@@ -38,10 +38,14 @@
  */
 
 import { createStore } from '@ngneat/elf';
-import { selectManyByPredicate, setEntities, upsertEntities, withEntities } from '@ngneat/elf-entities';
+import {
+  selectManyByPredicate,
+  setEntities,
+  upsertEntities,
+  withEntities,
+} from '@ngneat/elf-entities';
 import { persistState } from '@ngneat/elf-persist-state';
 import { localForageStore } from '@multi/shared';
-
 
 export interface Menu {
   id: number;
@@ -63,10 +67,7 @@ export interface FoodCategory {
 
 const STORE_NAME = 'menus';
 
-const store = createStore(
-  { name: STORE_NAME },
-  withEntities<Menu>(),
-);
+const store = createStore({ name: STORE_NAME }, withEntities<Menu>());
 
 export const persist = persistState(store, {
   key: STORE_NAME,
@@ -84,12 +85,15 @@ export const upsertMenus = (menus: Menu[]) => {
 export const cleanMenus = () => {
   const now = new Date();
   const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  store.update(setEntities(Object.values(store.state.entities)
-    .filter((menu) => {
-      const date = new Date(menu.date);
-      const dateWithoutTime = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-      return today <= dateWithoutTime;
-    })
-    .sort((a, b) => new Date(a.date) > new Date(b.date) ? 1 : -1)
-  ));
+  store.update(
+    setEntities(
+      Object.values(store.state.entities)
+        .filter((menu) => {
+          const date = new Date(menu.date);
+          const dateWithoutTime = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+          return today <= dateWithoutTime;
+        })
+        .sort((a, b) => (new Date(a.date) > new Date(b.date) ? 1 : -1)),
+    ),
+  );
 };

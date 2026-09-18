@@ -1,0 +1,221 @@
+name: Tests
+permissions:
+  contents: read
+  pull-requests: read
+
+on:
+  pull_request:
+    types: [ opened, synchronize ]
+
+jobs:
+  # TODO: Add frontend tests when they are ready
+
+  backend-main:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+
+      - name: Check if backend was modified
+        uses: dorny/paths-filter@v3
+        id: changes
+        with:
+          filters: |
+            main:
+            - 'dev/user-backend-nest/main/**/*.ts'
+            - 'dev/user-backend-nest/main/(vitest|jest)*'
+
+      - name: Read Node.js version
+        id: node_version
+        if: steps.changes.outputs.main == 'true'
+        run: echo NODE_VERSION=$(cat dev/user-backend-nest/.nvmrc) >> $GITHUB_OUTPUT
+
+      - name: Set up Node.js
+        if: steps.changes.outputs.main == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ steps.node_version.outputs.NODE_VERSION }}
+
+      - name: Prepare environment
+        if: steps.changes.outputs.main == 'true'
+        run: |
+          cd dev/user-backend-nest/main
+          npm ci
+
+      - name: Test
+        if: steps.changes.outputs.main == 'true'
+        run: |
+          cd dev/user-backend-nest/main
+          npm run test -- --passWithNoTests
+
+
+  backend-microservices:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        service:
+          - auth
+          - card
+          - card-eu
+          - chatbot
+          - clocking
+          - contact-us
+          - contacts
+          - features
+          - important-news
+          - knowledge-base
+          - mail-calendar
+          - map
+          - notifications
+          - restaurants
+          - rss
+          - schedule
+          - social-network
+          - static-pages
+          - statistics
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+
+      - name: Check if backend was modified
+        uses: dorny/paths-filter@v3
+        id: changes
+        with:
+          filters: |
+            auth:
+            - 'dev/user-backend-nest/microservices/auth/**/*.ts'
+            - 'dev/user-backend-nest/microservices/auth/(vitest|jest)*'
+            card:
+            - 'dev/user-backend-nest/microservices/card/**/*.ts'
+            - 'dev/user-backend-nest/microservices/card/(vitest|jest)*'
+            card-eu:
+            - 'dev/user-backend-nest/microservices/card-eu/**/*.ts'
+            - 'dev/user-backend-nest/microservices/card-eu/(vitest|jest)*'
+            chatbot:
+            - 'dev/user-backend-nest/microservices/chatbot/**/*.ts'
+            - 'dev/user-backend-nest/microservices/chatbot/(vitest|jest)*'
+            clocking:
+            - 'dev/user-backend-nest/microservices/clocking/**/*.ts'
+            - 'dev/user-backend-nest/microservices/clocking/(vitest|jest)*'
+            contact-us:
+            - 'dev/user-backend-nest/microservices/contact-us/**/*.ts'
+            - 'dev/user-backend-nest/microservices/contact-us/(vitest|jest)*'
+            contacts:
+            - 'dev/user-backend-nest/microservices/contacts/**/*.ts'
+            - 'dev/user-backend-nest/microservices/contacts/(vitest|jest)*'
+            features:
+            - 'dev/user-backend-nest/microservices/features/**/*.ts'
+            - 'dev/user-backend-nest/microservices/features/(vitest|jest)*'
+            important-news:
+            - 'dev/user-backend-nest/microservices/important-news/**/*.ts'
+            - 'dev/user-backend-nest/microservices/important-news/(vitest|jest)*'
+            knowledge-base:
+            - 'dev/user-backend-nest/microservices/knowledge-base/**/*.ts'
+            - 'dev/user-backend-nest/microservices/knowledge-base/(vitest|jest)*'
+            mail-calendar:
+            - 'dev/user-backend-nest/microservices/mail-calendar/**/*.ts'
+            - 'dev/user-backend-nest/microservices/mail-calendar/(vitest|jest)*'
+            map:
+            - 'dev/user-backend-nest/microservices/map/**/*.ts'
+            - 'dev/user-backend-nest/microservices/map/(vitest|jest)*'
+            notifications:
+            - 'dev/user-backend-nest/microservices/notifications/**/*.ts'
+            - 'dev/user-backend-nest/microservices/notifications/(vitest|jest)*'
+            restaurants:
+            - 'dev/user-backend-nest/microservices/restaurants/**/*.ts'
+            - 'dev/user-backend-nest/microservices/restaurants/(vitest|jest)*'
+            rss:
+            - 'dev/user-backend-nest/microservices/rss/**/*.ts'
+            - 'dev/user-backend-nest/microservices/rss/(vitest|jest)*'
+            schedule:
+            - 'dev/user-backend-nest/microservices/schedule/**/*.ts'
+            - 'dev/user-backend-nest/microservices/schedule/(vitest|jest)*'
+            social-network:
+            - 'dev/user-backend-nest/microservices/social-network/**/*.ts'
+            - 'dev/user-backend-nest/microservices/social-network/(vitest|jest)*'
+            static-pages:
+            - 'dev/user-backend-nest/microservices/static-pages/**/*.ts'
+            - 'dev/user-backend-nest/microservices/static-pages/(vitest|jest)*'
+            statistics:
+            - 'dev/user-backend-nest/microservices/statistics/**/*.ts'
+            - 'dev/user-backend-nest/microservices/statistics/(vitest|jest)*'
+
+      - name: Read Node.js version
+        id: node_version
+        if: steps.changes.outputs[${{ matrix.service }}] == 'true'
+        run: echo NODE_VERSION=$(cat dev/user-backend-nest/.nvmrc) >> $GITHUB_OUTPUT
+
+      - name: Set up Node.js
+        if: steps.changes.outputs[${{ matrix.service }}] == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ steps.node_version.outputs.NODE_VERSION }}
+
+      - name: Prepare environment
+        if: steps.changes.outputs[${{ matrix.service }}] == 'true'
+        run: |
+          cd dev/user-backend-nest/microservices/${{ matrix.service }}
+          npm ci
+
+      - name: Test ${{ matrix.service }}
+        if: steps.changes.outputs[${{ matrix.service }}] == 'true'
+        run: |
+          cd dev/user-backend-nest/microservices/${{ matrix.service }}
+          npm run test -- --passWithNoTests
+
+  connectors:
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        service:
+          - multi-cms-connector
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+
+      - name: Check if connectors were modified
+        uses: dorny/paths-filter@v3
+        id: changes
+        with:
+          filters: |
+            multi-cms-connector:
+            - 'dev/connectors/multi-cms-connector/**/*.ts'
+            - 'dev/connectors/multi-cms-connector/(vitest|jest)*'
+      - name: Read Node.js version
+        id: node_version
+        if: steps.changes.outputs[${{ matrix.service }}] == 'true'
+        run: echo NODE_VERSION=$(cat dev/connectors/${{ matrix.service }}/.nvmrc) >> $GITHUB_OUTPUT
+
+      - name: Set up Node.js
+        if: steps.changes.outputs[${{ matrix.service }}] == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ steps.node_version.outputs.NODE_VERSION }}
+
+      - name: Prepare environment
+        if: steps.changes.outputs[${{ matrix.service }}] == 'true'
+        run: |
+          cd dev/connectors/${{ matrix.service }}
+          npm ci
+
+      - name: Test ${{ matrix.service }}
+        if: steps.changes.outputs[${{ matrix.service }}] == 'true'
+        run: |
+          cd dev/connectors/${{ matrix.service }}
+          npm run test -- --passWithNoTests

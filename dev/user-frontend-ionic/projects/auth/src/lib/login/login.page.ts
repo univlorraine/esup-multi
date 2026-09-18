@@ -41,14 +41,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IonInput, ToastController } from '@ionic/angular';
-import { AuthenticatedUser, FeaturesService, NavigationService } from '@multi/shared';
 import { Observable } from 'rxjs';
 import { finalize, take, tap } from 'rxjs/operators';
+import { AuthenticatedUser, FeaturesService, NavigationService } from '@multi/shared';
 import { AuthService } from '../common/auth.service';
-import { saveCredentialsOnAuthentication$ } from '../preferences/preferences.repository';
-import { PreferencesService } from '../preferences/preferences.service';
 import { LoginRepository, TranslatedLoginPageContent } from '../common/login.repository';
 import { LoginService } from '../common/login.service';
+import { saveCredentialsOnAuthentication$ } from '../preferences/preferences.repository';
+import { PreferencesService } from '../preferences/preferences.service';
 
 interface AuthenticatedUserToken extends AuthenticatedUser {
   authToken: string;
@@ -60,7 +60,6 @@ interface AuthenticatedUserToken extends AuthenticatedUser {
   styleUrls: ['../../../../../src/theme/app-theme/styles/auth/login.page.scss'],
 })
 export class LoginPage implements OnInit {
-
   loginForm: FormGroup;
   returnUrl: string;
   public saveCredentialsOnAuthentication$ = saveCredentialsOnAuthentication$;
@@ -78,7 +77,7 @@ export class LoginPage implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private navigationService: NavigationService,
-    private featuresService: FeaturesService
+    private featuresService: FeaturesService,
   ) {
     this.translatedPageContent$ = this.loginRepository.translatedPageContent$;
     this.hideBackButton$ = this.navigationService.isExternalNavigation$;
@@ -97,18 +96,16 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
-    this.loginService.loadAndStoreLoginPageContent()
-      .pipe(take(1))
-      .subscribe();
+    this.loginService.loadAndStoreLoginPageContent().pipe(take(1)).subscribe();
 
     this.loginForm = this.fb.group({
       username: ['', [Validators.required]],
-      password: ['', [Validators.required]]
+      password: ['', [Validators.required]],
     });
 
     // We update the username value with its lowercase version
-    this.loginForm.controls.username.valueChanges.subscribe(value => {
-      if(!value) {
+    this.loginForm.controls.username.valueChanges.subscribe((value) => {
+      if (!value) {
         return;
       }
       this.loginForm.controls.username.setValue(value.trim().toLowerCase(), { emitEvent: false });
@@ -139,10 +136,11 @@ export class LoginPage implements OnInit {
   submit() {
     this.isLoading = true;
     this.authService
-      .login(this.username?.value, this.password?.value).pipe(
-      tap(val => !val && this.showToastConnectionFail()),
-      finalize(() => this.isLoading = false)
-    )
+      .login(this.username?.value, this.password?.value)
+      .pipe(
+        tap((val) => !val && this.showToastConnectionFail()),
+        finalize(() => (this.isLoading = false)),
+      )
       .subscribe((token: AuthenticatedUserToken) => {
         if (!token) {
           return;
@@ -164,9 +162,8 @@ export class LoginPage implements OnInit {
       message: 'Identifiants incorrects',
       duration: 1500,
       position: 'middle',
-      color: 'warning'
+      color: 'warning',
     });
     toast.present();
   }
-
 }

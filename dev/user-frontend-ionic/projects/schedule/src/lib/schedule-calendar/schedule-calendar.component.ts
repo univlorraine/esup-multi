@@ -47,31 +47,32 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import { GestureController, IonModal, Platform } from '@ionic/angular';
 import { distinctUntilArrayItemChanged } from '@ngneat/elf';
 import { TranslateService } from '@ngx-translate/core';
-import { currentLanguage$ } from '@multi/shared';
 import { format, isAfter, isBefore, sub } from 'date-fns';
 import * as locale from 'date-fns/locale';
 import { EventInput } from 'fullcalendar';
 import { Observable, Subscription } from 'rxjs';
 import { filter, map, mergeMap, take, tap } from 'rxjs/operators';
+import { currentLanguage$ } from '@multi/shared';
 import {
   Event,
   impersonatedScheduleStoreManager,
   Schedule,
   scheduleStoreManager,
-  ScheduleStoreManager
+  ScheduleStoreManager,
 } from '../schedule.repository';
 import { formatDay, ScheduleService } from '../schedule.service';
 import { ScheduleCalendarService } from './schedule-calendar.service';
 
-const defaultBreakpoint = 0.60;
+const defaultBreakpoint = 0.6;
 
 @Component({
   selector: 'app-schedule-calendar',
   templateUrl: './schedule-calendar.component.html',
-  styleUrls: ['../../../../../src/theme/app-theme/styles/schedule/schedule-calendar.component.scss'],
+  styleUrls: [
+    '../../../../../src/theme/app-theme/styles/schedule/schedule-calendar.component.scss',
+  ],
 })
 export class ScheduleCalendarComponent implements OnDestroy {
-
   @ViewChild('calendar') calendarComponent: FullCalendarComponent;
   @ViewChild('modal') modal: IonModal;
 
@@ -103,22 +104,21 @@ export class ScheduleCalendarComponent implements OnDestroy {
     views: {
       timeGridWeek: {
         dayHeaderContent: (args) => {
-          const lang = this.translate.currentLang || this.translate.defaultLang;
+          const lang = this.translate.getCurrentLang() || this.translate.getFallbackLang();
           return {
             html: `
             <div class="week-view-column-header-day">${format(args.date, 'EEE', { locale: locale[lang] })}</div>
             <div class="week-view-column-header-number">${format(args.date, 'd', { locale: locale[lang] })}</div>
-            `
+            `,
           };
         },
-      }
+      },
     },
-    eventClick: info => {
+    eventClick: (info) => {
       this.selectedEvent = info.event.extendedProps.event;
       this.isEventDetailOpen = true;
     },
     events: (fetchInfo, successCallback) => {
-
       if (this.viewType === 'week') {
         this.resetZoomLevel();
       }
@@ -126,37 +126,40 @@ export class ScheduleCalendarComponent implements OnDestroy {
       this.loadScheduleOutOfStateError = false;
       fetchInfo.end = sub(fetchInfo.end, { days: 1 });
 
-      this.calendarDisplaySomeDateOutOfState = isBefore(fetchInfo.start, this.scheduleService.getStateStartDate())
-        || isAfter(fetchInfo.end, this.scheduleService.getStateEndDate());
+      this.calendarDisplaySomeDateOutOfState =
+        isBefore(fetchInfo.start, this.scheduleService.getStateStartDate()) ||
+        isAfter(fetchInfo.end, this.scheduleService.getStateEndDate());
 
       if (!this.calendarDisplaySomeDateOutOfState) {
-        this.storeManager.displayedEvents$.pipe(
-          take(1),
-          map((events: Event[]) => this.scheduleCalendarService.eventsToCalendarEvents(events))
-        ).subscribe((events: EventInput[]) => {
+        this.storeManager.displayedEvents$
+          .pipe(
+            take(1),
+            map((events: Event[]) => this.scheduleCalendarService.eventsToCalendarEvents(events)),
+          )
+          .subscribe((events: EventInput[]) => {
+            if (this.viewType === 'week') {
+              setTimeout(() => {
+                successCallback(events);
 
-          if (this.viewType === 'week') {
-
-            setTimeout(() => {
-              successCallback(events);
-
-              this.zoomLevel = this.previousZoomLevel;
-              this.updateZoomLevel();
-
-            }, 300);
-          }
-          if (this.viewType !== 'week') {
-            return successCallback(events);
-          }
-        });
+                this.zoomLevel = this.previousZoomLevel;
+                this.updateZoomLevel();
+              }, 300);
+            }
+            if (this.viewType !== 'week') {
+              return successCallback(events);
+            }
+          });
         return;
       }
 
-      this.scheduleService.loadScheduleOutOfStateInterval(formatDay(fetchInfo.start), formatDay(fetchInfo.end))
+      this.scheduleService
+        .loadScheduleOutOfStateInterval(formatDay(fetchInfo.start), formatDay(fetchInfo.end))
         .pipe(
-          mergeMap((outOfStateSchedule: Schedule) => this.scheduleService.outOfStateScheduleToDisplayedEvents(outOfStateSchedule)),
+          mergeMap((outOfStateSchedule: Schedule) =>
+            this.scheduleService.outOfStateScheduleToDisplayedEvents(outOfStateSchedule),
+          ),
           take(1),
-          map((events: Event[]) => this.scheduleCalendarService.eventsToCalendarEvents(events))
+          map((events: Event[]) => this.scheduleCalendarService.eventsToCalendarEvents(events)),
         )
         .subscribe({
           next: (events: EventInput[]) => {
@@ -180,21 +183,24 @@ export class ScheduleCalendarComponent implements OnDestroy {
                 this.dateError = formatDay(this.scheduleService.getStateEndDate());
               }
             }
-            this.storeManager.displayedEvents$.pipe(
-              take(1),
-              map((events: Event[]) => this.scheduleCalendarService.eventsToCalendarEvents(events))
-            ).subscribe((events: EventInput[]) => {
-
-              if (this.viewType === 'week') {
-                setTimeout(() => {
-                  this.setPreviousZoomLevel();
-                }, 500);
-              }
-              return successCallback(events);
-            });
-          }
+            this.storeManager.displayedEvents$
+              .pipe(
+                take(1),
+                map((events: Event[]) =>
+                  this.scheduleCalendarService.eventsToCalendarEvents(events),
+                ),
+              )
+              .subscribe((events: EventInput[]) => {
+                if (this.viewType === 'week') {
+                  setTimeout(() => {
+                    this.setPreviousZoomLevel();
+                  }, 500);
+                }
+                return successCallback(events);
+              });
+          },
         });
-    }
+    },
   };
   private subscriptions: Subscription[] = [];
 
@@ -206,11 +212,9 @@ export class ScheduleCalendarComponent implements OnDestroy {
     private scheduleService: ScheduleService,
     public platform: Platform,
     private translate: TranslateService,
-    private gestureCtrl: GestureController) {
-    this.viewType$ = this.route.fragment
-      .pipe(
-        filter(f => f !== null)
-      );
+    private gestureCtrl: GestureController,
+  ) {
+    this.viewType$ = this.route.fragment.pipe(filter((f) => f !== null));
   }
 
   async ionViewDidEnter() {
@@ -224,37 +228,36 @@ export class ScheduleCalendarComponent implements OnDestroy {
       this.subscribeToDisplayedEvents(impersonatedScheduleStoreManager),
       this.subscribeToAsUser(),
       this.subscribeToHideEvent(),
-      this.subscribeToResizeScreen()
+      this.subscribeToResizeScreen(),
     );
   }
 
   ionViewDidLeave() {
-    this.subscriptions.forEach(subscription => subscription.unsubscribe());
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 
   ngOnDestroy() {
     // We're also removing the subscriptions onDestroy, because it can happen that the destroy gets called but not the
     // ionViewDidLeave, for example when pressing the back button of the topBar
-    this.subscriptions.forEach(subscription => subscription.unsubscribe());
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 
   initCalendar() {
     this.subscriptions.push(
-      currentLanguage$.subscribe(lang => {
-
+      currentLanguage$.subscribe((lang) => {
         if (!lang) {
           this.getCalendar().setOption('locale', this.environment.defaultLanguage);
         } else {
           this.getCalendar().setOption('locale', lang);
         }
 
-        this.getCalendar().setOption('buttonText', { today: this.translate.instant('SCHEDULE.CALENDAR.TODAY_ABBREVIATION') });
+        this.getCalendar().setOption('buttonText', {
+          today: this.translate.instant('SCHEDULE.CALENDAR.TODAY_ABBREVIATION'),
+        });
 
         // fix a display bug from @fullcalendar/angular in Ionic
-        setTimeout(
-          () => window.dispatchEvent(new Event('resize'))
-        );
-      })
+        setTimeout(() => window.dispatchEvent(new Event('resize')));
+      }),
     );
   }
 
@@ -316,7 +319,7 @@ export class ScheduleCalendarComponent implements OnDestroy {
     const isLandscape = this.platform.isLandscape();
     const isDesktop = this.platform.is('desktop');
 
-    const breakpoint = (isDesktop || !isLandscape) ? defaultBreakpoint : 1;
+    const breakpoint = isDesktop || !isLandscape ? defaultBreakpoint : 1;
 
     requestAnimationFrame(() => {
       this.modal.initialBreakpoint = breakpoint;
@@ -339,37 +342,43 @@ export class ScheduleCalendarComponent implements OnDestroy {
   }
 
   private subscribeToViewType(): Subscription {
-    return this.viewType$.subscribe(viewType => {
+    return this.viewType$.subscribe((viewType) => {
       this.viewType = viewType;
       this.changeViewType(viewType);
     });
   }
 
   private subscribeToDisplayedEvents(storeManager: ScheduleStoreManager): Subscription {
-    return storeManager.displayedEvents$.pipe(
-      distinctUntilArrayItemChanged(),
-      tap(() => this.getCalendar()?.refetchEvents())
-    ).subscribe();
+    return storeManager.displayedEvents$
+      .pipe(
+        distinctUntilArrayItemChanged(),
+        tap(() => this.getCalendar()?.refetchEvents()),
+      )
+      .subscribe();
   }
 
   private subscribeToSelectedPlannings(storeManager: ScheduleStoreManager): Subscription {
-    return storeManager.allPlanningsData$.pipe(
-      distinctUntilArrayItemChanged(),
-      tap(() => this.getCalendar()?.refetchEvents())
-    ).subscribe();
+    return storeManager.allPlanningsData$
+      .pipe(
+        distinctUntilArrayItemChanged(),
+        tap(() => this.getCalendar()?.refetchEvents()),
+      )
+      .subscribe();
   }
 
   private subscribeToHiddenCourseList(storeManager: ScheduleStoreManager): Subscription {
-    return storeManager.hiddenCourseList$.pipe(
-      distinctUntilArrayItemChanged(),
-      tap(() => this.getCalendar()?.refetchEvents())
-    ).subscribe();
+    return storeManager.hiddenCourseList$
+      .pipe(
+        distinctUntilArrayItemChanged(),
+        tap(() => this.getCalendar()?.refetchEvents()),
+      )
+      .subscribe();
   }
 
   private subscribeToAsUser(): Subscription {
-    return this.scheduleService.asUser.pipe(
-      tap(() => this.storeManager = this.scheduleService.getStoreManager())
-    ).subscribe(() => this.getCalendar()?.refetchEvents());
+    return this.scheduleService.asUser
+      .pipe(tap(() => (this.storeManager = this.scheduleService.getStoreManager())))
+      .subscribe(() => this.getCalendar()?.refetchEvents());
   }
 
   private subscribeToHideEvent(): Subscription {
@@ -380,7 +389,6 @@ export class ScheduleCalendarComponent implements OnDestroy {
     return this.platform.resize.subscribe(() => {
       this.resetZoomLevel();
       this.updateBreakpoints();
-    }
-    );
+    });
   }
 }

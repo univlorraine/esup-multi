@@ -40,33 +40,34 @@
 import { Inject, Injectable } from '@angular/core';
 import { addDays, isAfter, isBefore, startOfDay } from 'date-fns';
 import { map } from 'rxjs/operators';
-import { ScheduleModuleConfig, SCHEDULE_CONFIG } from '../../schedule.config';
+import { SCHEDULE_CONFIG, ScheduleModuleConfig } from '../../schedule.config';
 import { scheduleStoreManager } from '../../schedule.repository';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class NextEventsService {
-
-  constructor(
-    @Inject(SCHEDULE_CONFIG) private config: ScheduleModuleConfig
-  ) {}
+  constructor(@Inject(SCHEDULE_CONFIG) private config: ScheduleModuleConfig) {}
 
   public getNextEvents$() {
     return scheduleStoreManager.displayedEvents$.pipe(
-      map(events => {
+      map((events) => {
         const startDate = new Date();
-        const endDate = startOfDay(addDays(startDate, this.config.nextEventsWidget.numberOfDaysLimit + 1));
+        const endDate = startOfDay(
+          addDays(startDate, this.config.nextEventsWidget.numberOfDaysLimit + 1),
+        );
 
         return events
-          .filter(event => {
+          .filter((event) => {
             const eventDate = new Date(event.endDateTime);
-            return isAfter(eventDate, startDate) &&
-              isBefore(eventDate, endDate);
+            return isAfter(eventDate, startDate) && isBefore(eventDate, endDate);
           })
-          .sort((evtA, evtB) => new Date(evtA.startDateTime).getTime() - new Date(evtB.startDateTime).getTime())
+          .sort(
+            (evtA, evtB) =>
+              new Date(evtA.startDateTime).getTime() - new Date(evtB.startDateTime).getTime(),
+          )
           .slice(0, this.config.nextEventsWidget.numberOfEventsLimit);
-      })
+      }),
     );
   }
 }

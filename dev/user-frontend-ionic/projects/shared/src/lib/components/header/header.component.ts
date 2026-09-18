@@ -39,17 +39,16 @@
 
 import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
+import { NavigationService } from '../../navigation/navigation.service';
 import { PageLayoutService, PageTitle } from '../../navigation/page-layout.service';
 import { NetworkService } from '../../network/network.service';
-import { NavigationService } from '../../navigation/navigation.service';
 
 @Component({
   selector: 'app-header',
   templateUrl: 'header.component.html',
-  styleUrls: ['../../../../../../src/theme/app-theme/styles/shared/header.component.scss']
+  styleUrls: ['../../../../../../src/theme/app-theme/styles/shared/header.component.scss'],
 })
 export class HeaderComponent {
-
   @Input() backRouterLink = '';
 
   public currentPageTitle$: Observable<PageTitle>;
@@ -60,7 +59,7 @@ export class HeaderComponent {
   constructor(
     private pageLayoutService: PageLayoutService,
     private networkService: NetworkService,
-    private navigationService: NavigationService
+    private navigationService: NavigationService,
   ) {
     this.currentPageTitle$ = this.pageLayoutService.currentPageTitle$;
     this.showCurrentPageHeader$ = this.pageLayoutService.showCurrentPageHeader$;

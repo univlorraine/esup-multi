@@ -39,17 +39,15 @@
 
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { getAuthToken, NetworkService, MultiTenantService } from '@multi/shared';
-import {from, Observable} from 'rxjs';
-import {filter, switchMap, take, tap} from "rxjs/operators";
-import {KnowledgeBaseRepository} from "./knowledge-base.repository";
-import {KnowledgeBaseItem} from "./knowledge-base.repository";
+import { from, Observable } from 'rxjs';
+import { filter, switchMap, take, tap } from 'rxjs/operators';
+import { getAuthToken, MultiTenantService, NetworkService } from '@multi/shared';
+import { KnowledgeBaseItem, KnowledgeBaseRepository } from './knowledge-base.repository';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class KnowledgeBaseService {
-
   constructor(
     private multiTenantService: MultiTenantService,
     private knowledgeBaseRepository: KnowledgeBaseRepository,
@@ -59,33 +57,36 @@ export class KnowledgeBaseService {
 
   public loadAndStoreKnowledgeBase(): Observable<KnowledgeBaseItem[]> {
     return from(this.networkService.getConnectionStatus()).pipe(
-      filter(status => status.connected),
+      filter((status) => status.connected),
       switchMap(() => getAuthToken()),
       take(1),
-      switchMap(authToken => this.getKnowledgeBase(authToken)),
-      tap(knowledgeBases => this.knowledgeBaseRepository.setKnowledgeBases(knowledgeBases)),
+      switchMap((authToken) => this.getKnowledgeBase(authToken)),
+      tap((knowledgeBases) => this.knowledgeBaseRepository.setKnowledgeBases(knowledgeBases)),
     );
   }
 
   public loadAndStoreKnowledgeBaseChildren(parentId: string): Observable<KnowledgeBaseItem[]> {
     return from(this.networkService.getConnectionStatus()).pipe(
-      filter(status => status.connected),
+      filter((status) => status.connected),
       switchMap(() => getAuthToken()),
       take(1),
-      switchMap(authToken => this.getKnowledgeBaseChildren(authToken, parentId)),
-      tap(children => this.knowledgeBaseRepository.replaceChildren(parentId, children)),
+      switchMap((authToken) => this.getKnowledgeBaseChildren(authToken, parentId)),
+      tap((children) => this.knowledgeBaseRepository.replaceChildren(parentId, children)),
     );
   }
 
   private getKnowledgeBase(authToken: string): Observable<KnowledgeBaseItem[]> {
     const url = `${this.multiTenantService.getApiEndpoint()}/knowledge-base`;
     const data = {
-      authToken
+      authToken,
     };
     return this.http.post<KnowledgeBaseItem[]>(url, data);
   }
 
-  private getKnowledgeBaseChildren(authToken: string, parentId: string): Observable<KnowledgeBaseItem[]> {
+  private getKnowledgeBaseChildren(
+    authToken: string,
+    parentId: string,
+  ): Observable<KnowledgeBaseItem[]> {
     const url = `${this.multiTenantService.getApiEndpoint()}/knowledge-base/children`;
     const data = {
       authToken,

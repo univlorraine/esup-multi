@@ -37,15 +37,15 @@
  */
 
 import { Injectable, Logger } from '@nestjs/common';
-import { ImportantNewsDirectus } from '@directus/collections/important-news/important-news.directus.model';
-import { ImportantNews } from '@common/models/important-news.model';
-import { DirectusService } from '@directus/directus.service';
 import { OnEvent } from '@nestjs/event-emitter';
-import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
-import { ImportantNewsSchema } from '@common/validation/schemas/important-news.schema';
-import { normalizeEmptyStringToNull } from '@common/utils/normalize';
-import { CacheService } from '@cache/cache.service';
-import { CacheCollection } from '@cache/cache.config';
+import { CacheCollection } from '#cache/cache.config.js';
+import { CacheService } from '#cache/cache.service.js';
+import { ValidateMapping } from '#common/decorators/validate-mapping.decorator.js';
+import { ImportantNews } from '#common/models/important-news.model.js';
+import { normalizeEmptyStringToNull } from '#common/utils/normalize.js';
+import { ImportantNewsSchema } from '#common/validation/schemas/important-news.schema.js';
+import { ImportantNewsDirectus } from '#directus/collections/important-news/important-news.directus.model.js';
+import { DirectusService } from '#directus/directus.service.js';
 
 @Injectable()
 export class ImportantNewsDirectusService {
@@ -63,7 +63,7 @@ export class ImportantNewsDirectusService {
     } catch (error) {
       this.logger.error(
         'Failed to preload important-news after cache clear:',
-        error.message,
+        error instanceof Error ? error.message : JSON.stringify(error),
       );
     }
   }

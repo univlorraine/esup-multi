@@ -46,20 +46,29 @@ import { ScheduleService } from '../../../schedule.service';
 @Component({
   selector: 'app-hidden-course',
   templateUrl: './hidden-course.component.html',
-  styleUrls: ['../../../../../../../src/theme/app-theme/styles/schedule/hidden-course.component.scss'],
+  styleUrls: [
+    '../../../../../../../src/theme/app-theme/styles/schedule/hidden-course.component.scss',
+  ],
 })
 export class HiddenCourseComponent {
-
   @Input() hiddenCourse: HiddenCourse;
 
-  constructor(private scheduleListService: ScheduleListService, private scheduleService: ScheduleService) { }
+  constructor(
+    private scheduleListService: ScheduleListService,
+    private scheduleService: ScheduleService,
+  ) {}
 
   showAllSimilarCourse(courseToShow: HiddenCourse) {
-    this.scheduleService.getStoreManager().hiddenCourseList$.pipe(take(1)).subscribe(hiddenCourseList => {
-      const filteredHiddenCourseList = hiddenCourseList.filter(hiddenCourse => hiddenCourse.id !== courseToShow.id);
-      this.scheduleService.getStoreManager().setHiddenCourseList(filteredHiddenCourseList);
+    this.scheduleService
+      .getStoreManager()
+      .hiddenCourseList$.pipe(take(1))
+      .subscribe((hiddenCourseList) => {
+        const filteredHiddenCourseList = hiddenCourseList.filter(
+          (hiddenCourse) => hiddenCourse.id !== courseToShow.id,
+        );
+        this.scheduleService.getStoreManager().setHiddenCourseList(filteredHiddenCourseList);
 
-      this.scheduleListService.emitShowCourseEvt();
-    });
+        this.scheduleListService.emitShowCourseEvt();
+      });
   }
 }

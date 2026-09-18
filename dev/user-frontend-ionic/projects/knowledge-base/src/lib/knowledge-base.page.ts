@@ -38,17 +38,17 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { finalize, take } from 'rxjs/operators';
-import { KnowledgeBaseService } from './knowledge-base.service';
-import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
+import { finalize, take } from 'rxjs/operators';
 import { NetworkService } from '@multi/shared';
 import {
+  Display,
   KnowledgeBaseRepository,
   TranslatedKnowledgeBaseItem,
-  Display,
-  Type
+  Type,
 } from './knowledge-base.repository';
+import { KnowledgeBaseService } from './knowledge-base.service';
 
 @Component({
   selector: 'app-knowledge-base',
@@ -56,7 +56,6 @@ import {
   styleUrls: ['../../../../src/theme/app-theme/styles/knowledge-base/knowledge-base.page.scss'],
 })
 export class KnowledgeBasePage implements OnInit {
-
   public isLoading = false;
   public parentPageId: string;
   public knowledgeBases$: Observable<TranslatedKnowledgeBaseItem[]>;
@@ -66,7 +65,7 @@ export class KnowledgeBasePage implements OnInit {
     private activatedRoute: ActivatedRoute,
     private knowledgeBaseService: KnowledgeBaseService,
     private knowledgeBasesRepository: KnowledgeBaseRepository,
-    private networkService: NetworkService
+    private networkService: NetworkService,
   ) {}
 
   async ngOnInit() {
@@ -74,7 +73,9 @@ export class KnowledgeBasePage implements OnInit {
     this.knowledgeBases$ = this.parentPageId
       ? this.knowledgeBasesRepository.getKnowledgeBaseByParentId(this.parentPageId)
       : this.knowledgeBasesRepository.getKnowledgeBase();
-    this.knowledgeBaseParentItem$ = this.knowledgeBasesRepository.getKnowledgeBaseItemById(this.parentPageId);
+    this.knowledgeBaseParentItem$ = this.knowledgeBasesRepository.getKnowledgeBaseItemById(
+      this.parentPageId,
+    );
 
     if (!(await this.networkService.getConnectionStatus()).connected) {
       return;
@@ -89,19 +90,18 @@ export class KnowledgeBasePage implements OnInit {
     refresh$
       .pipe(
         take(1),
-        finalize(() => this.isLoading = false)
+        finalize(() => (this.isLoading = false)),
       )
       .subscribe();
   }
 
   searchKnowledgeBase(event) {
     const query = event.target.value.toLowerCase();
-    if(!query) {
+    if (!query) {
       this.knowledgeBases$ = this.knowledgeBasesRepository.getKnowledgeBase();
       return;
     }
-    this.knowledgeBases$=this.knowledgeBasesRepository.searchKnowledgeBase(query);
-
+    this.knowledgeBases$ = this.knowledgeBasesRepository.searchKnowledgeBase(query);
   }
 
   // eslint-disable-next-line @typescript-eslint/naming-convention

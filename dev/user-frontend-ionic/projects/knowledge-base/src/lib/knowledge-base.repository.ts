@@ -37,21 +37,19 @@
  * termes.
  */
 
-import {createStore} from '@ngneat/elf';
-import {
-  persistState
-} from '@ngneat/elf-persist-state';
-import {currentLanguage$, localForageStore} from '@multi/shared';
+import { Inject, Injectable } from '@angular/core';
+import { createStore } from '@ngneat/elf';
 import {
   deleteEntities,
   selectAllEntities,
   setEntities,
   upsertEntities,
-  withEntities
-} from "@ngneat/elf-entities";
-import {combineLatest, Observable} from "rxjs";
-import {map} from "rxjs/operators";
-import {Inject, Injectable} from "@angular/core";
+  withEntities,
+} from '@ngneat/elf-entities';
+import { persistState } from '@ngneat/elf-persist-state';
+import { combineLatest, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { currentLanguage$, localForageStore } from '@multi/shared';
 
 export enum Display {
   card = 'card',
@@ -65,41 +63,41 @@ export enum Type {
 }
 
 export interface KnowledgeBaseItem {
-  id: string,
-  type: Type,
-  parentId?: string,
-  routerLink?: string
-  link?: string,
-  ssoService?: string,
-  email?: string,
-  phone?: string,
-  address?: string,
-  childDisplay?: Display,
-  display?:Display,
-  translations?: Translation[],
+  id: string;
+  type: Type;
+  parentId?: string;
+  routerLink?: string;
+  link?: string;
+  ssoService?: string;
+  email?: string;
+  phone?: string;
+  address?: string;
+  childDisplay?: Display;
+  display?: Display;
+  translations?: Translation[];
   coverImage?: string;
-  hasChildren?: boolean,
-  isLeaf?: boolean
+  hasChildren?: boolean;
+  isLeaf?: boolean;
 }
 
 export interface TranslatedKnowledgeBaseItem {
-  id: string,
-  type: Type,
-  parentId?: string,
-  content?: string
-  title?: string,
-  routerLink?: string
-  link?: string,
-  ssoService?: string,
-  email?: string,
-  phone?: string,
-  address?: string,
-  childDisplay?: Display,
-  display?:Display,
+  id: string;
+  type: Type;
+  parentId?: string;
+  content?: string;
+  title?: string;
+  routerLink?: string;
+  link?: string;
+  ssoService?: string;
+  email?: string;
+  phone?: string;
+  address?: string;
+  childDisplay?: Display;
+  display?: Display;
   coverImage?: string;
   searchKeywords?: string[];
-  hasChildren?: boolean,
-  isLeaf?: boolean
+  hasChildren?: boolean;
+  isLeaf?: boolean;
 }
 
 interface Translation {
@@ -111,39 +109,40 @@ interface Translation {
 
 const STORE_NAME = 'knowledgeBase';
 
-const store = createStore(
-  {name: STORE_NAME},
-  withEntities<KnowledgeBaseItem>(),
-);
+const store = createStore({ name: STORE_NAME }, withEntities<KnowledgeBaseItem>());
 
 export const persist = persistState(store, {
   key: STORE_NAME,
   storage: localForageStore,
 });
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class KnowledgeBaseRepository {
-
   constructor(
     @Inject('environment')
-    private environment: any,) {
-  }
+    private environment: any,
+  ) {}
 
   private translatedKnowledgeBases$: Observable<TranslatedKnowledgeBaseItem[]> = combineLatest([
     store.pipe(selectAllEntities()),
-    currentLanguage$]
-  ).pipe(
-    map(([knowledgeBases, currentLanguage]) => knowledgeBases.map(knowledgeBase => {
-      const translation = knowledgeBase.translations.find((t) => t.languagesCode === currentLanguage) ||
-        knowledgeBase.translations.find((t) => t.languagesCode === this.environment.defaultLanguage) ||
-        knowledgeBase.translations[0];
-      return {
-        ...knowledgeBase,
-        title: translation.title,
-        content: translation.content,
-        searchKeywords: translation.searchKeywords,
-      };
-    }))
+    currentLanguage$,
+  ]).pipe(
+    map(([knowledgeBases, currentLanguage]) =>
+      knowledgeBases.map((knowledgeBase) => {
+        const translation =
+          knowledgeBase.translations.find((t) => t.languagesCode === currentLanguage) ||
+          knowledgeBase.translations.find(
+            (t) => t.languagesCode === this.environment.defaultLanguage,
+          ) ||
+          knowledgeBase.translations[0];
+        return {
+          ...knowledgeBase,
+          title: translation.title,
+          content: translation.content,
+          searchKeywords: translation.searchKeywords,
+        };
+      }),
+    ),
   );
 
   public setKnowledgeBases = (knowledgeBaseItems: KnowledgeBaseItem[]) => {
@@ -152,63 +151,63 @@ export class KnowledgeBaseRepository {
   };
 
   private updateDisplayFromParent(knowledgeBaseItems: KnowledgeBaseItem[]) {
-    knowledgeBaseItems.forEach(item => {
-      item.display = (item.type===Type.content && !item.hasChildren) ? Display.card : undefined;
+    knowledgeBaseItems.forEach((item) => {
+      item.display = item.type === Type.content && !item.hasChildren ? Display.card : undefined;
 
-      if (!item.parentId || item.display)
-        return
+      if (!item.parentId || item.display) return;
 
       const parent = knowledgeBaseItems.find((parent) => parent.id === item.parentId);
       item.display = parent?.childDisplay;
-    })
+    });
   }
 
-  public getKnowledgeBase = ():Observable<TranslatedKnowledgeBaseItem[]> =>
-    this.translatedKnowledgeBases$.pipe(
-      map(items => items.filter(item => !item.parentId))
-    );
+  public getKnowledgeBase = (): Observable<TranslatedKnowledgeBaseItem[]> =>
+    this.translatedKnowledgeBases$.pipe(map((items) => items.filter((item) => !item.parentId)));
 
-  public getKnowledgeBaseByParentId = (parentId: string): Observable<TranslatedKnowledgeBaseItem[]> =>
+  public getKnowledgeBaseByParentId = (
+    parentId: string,
+  ): Observable<TranslatedKnowledgeBaseItem[]> =>
     this.translatedKnowledgeBases$.pipe(
-      map(allItems => {
-        const children = allItems.filter(item => item.parentId === parentId);
-        return children.map(child => ({
+      map((allItems) => {
+        const children = allItems.filter((item) => item.parentId === parentId);
+        return children.map((child) => ({
           ...child,
-          isLeaf: !child.hasChildren
+          isLeaf: !child.hasChildren,
         }));
-      })
+      }),
     );
 
   public getKnowledgeBaseItemById = (id: string): Observable<TranslatedKnowledgeBaseItem> =>
-    this.translatedKnowledgeBases$.pipe(
-      map(items => items.find(item => item.id === id))
-    );
+    this.translatedKnowledgeBases$.pipe(map((items) => items.find((item) => item.id === id)));
 
   public searchKnowledgeBase = (text: string): Observable<TranslatedKnowledgeBaseItem[]> =>
     this.translatedKnowledgeBases$.pipe(
-      map(items => items.filter( item =>
-        item.title.toLowerCase().includes(text) ||
-        item.content?.toLowerCase().includes(text) ||
-        item.searchKeywords?.some(key => key.toLowerCase().includes(text.toLowerCase()))
-      ))
+      map((items) =>
+        items.filter(
+          (item) =>
+            item.title.toLowerCase().includes(text) ||
+            item.content?.toLowerCase().includes(text) ||
+            item.searchKeywords?.some((key) => key.toLowerCase().includes(text.toLowerCase())),
+        ),
+      ),
     );
 
   public replaceChildren(parentId: string, children: KnowledgeBaseItem[]): void {
     const currentItems = Object.values(store.getValue().entities);
-    const newChildrenIds = new Set(children.map(child => child.id));
+    const newChildrenIds = new Set(children.map((child) => child.id));
 
     const currentChildrenIds = currentItems
-      .filter(item => item.parentId === parentId)
-      .map(item => item.id);
+      .filter((item) => item.parentId === parentId)
+      .map((item) => item.id);
 
     const idsToDelete = new Set(currentChildrenIds);
-    const removedIds = currentChildrenIds.filter(id => !newChildrenIds.has(id));
+    const removedIds = currentChildrenIds.filter((id) => !newChildrenIds.has(id));
 
     while (removedIds.length > 0) {
       const removedId = removedIds.shift();
       currentItems
-        .filter(item => item.parentId === removedId)
-        .forEach(descendant => {
+        .filter((item) => item.parentId === removedId)
+        .forEach((descendant) => {
           if (idsToDelete.has(descendant.id)) {
             return;
           }
@@ -217,10 +216,7 @@ export class KnowledgeBaseRepository {
         });
     }
 
-    store.update(
-      deleteEntities([...idsToDelete]),
-      upsertEntities(children)
-    );
+    store.update(deleteEntities([...idsToDelete]), upsertEntities(children));
 
     const updatedItems = Object.values(store.getValue().entities);
 
@@ -229,5 +225,3 @@ export class KnowledgeBaseRepository {
     store.update(setEntities(updatedItems));
   }
 }
-
-

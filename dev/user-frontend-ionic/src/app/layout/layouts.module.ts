@@ -42,7 +42,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslatePipe } from '@ngx-translate/core';
 import { SharedComponentsModule } from 'projects/shared/src/public-api';
 import { LayoutPage } from './layout.page';
 
@@ -51,15 +51,11 @@ import { LayoutPage } from './layout.page';
     IonicModule,
     CommonModule,
     FormsModule,
-    TranslateModule,
+    TranslatePipe,
     RouterModule,
     SharedComponentsModule,
   ],
-  declarations: [
-    LayoutPage
-  ],
-  exports: [
-    LayoutPage
-  ],
+  declarations: [LayoutPage],
+  exports: [LayoutPage],
 })
 export class PageLayoutsModule {}

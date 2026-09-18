@@ -38,17 +38,17 @@
  */
 
 import { Injectable, SecurityContext } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Event, NavigationEnd, Router, RouterEvent } from '@angular/router';
+import { Browser } from '@capacitor/browser';
+import { Capacitor } from '@capacitor/core';
 import { Platform } from '@ionic/angular';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
 import { ProjectModuleService } from '../project-module/project-module.service';
-import { Capacitor } from '@capacitor/core';
-import { Browser } from '@capacitor/browser';
-import { DomSanitizer } from '@angular/platform-browser';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class NavigationService {
   public currentRouterLink$: Observable<string>;
@@ -69,18 +69,22 @@ export class NavigationService {
 
     // feed current router link
     this.currentRouterLink$ = this.currentRouterLinkSubject$;
-    this.router.events.pipe(
-      filter((event: Event|RouterEvent) => event instanceof NavigationEnd),
-      map((event): NavigationEnd => event as NavigationEnd),
-      map(navigationEnd => navigationEnd.urlAfterRedirects),
-    ).subscribe(this.currentRouterLinkSubject$);
+    this.router.events
+      .pipe(
+        filter((event: Event | RouterEvent) => event instanceof NavigationEnd),
+        map((event): NavigationEnd => event as NavigationEnd),
+        map((navigationEnd) => navigationEnd.urlAfterRedirects),
+      )
+      .subscribe(this.currentRouterLinkSubject$);
 
     // feed history
-    this.currentRouterLink$.pipe(
-      filter(url => !this.projectModuleService.getHistoryBlacklist().includes(url)),
-      filter(url => url !== this.history.slice(-1)[0]),// prevent direct duplicate
-      tap(url => this.history.push(url)),
-    ).subscribe();
+    this.currentRouterLink$
+      .pipe(
+        filter((url) => !this.projectModuleService.getHistoryBlacklist().includes(url)),
+        filter((url) => url !== this.history.slice(-1)[0]), // prevent direct duplicate
+        tap((url) => this.history.push(url)),
+      )
+      .subscribe();
 
     this.setupInactiveRefresh();
   }
@@ -92,7 +96,7 @@ export class NavigationService {
   navigateBack() {
     this.history.pop(); // pop current url
     const previousUrl = this.history.pop() || '/'; // pop previous url
-    this.router.navigateByUrl(previousUrl, { replaceUrl: true});
+    this.router.navigateByUrl(previousUrl, { replaceUrl: true });
   }
 
   navigateToAuth() {
