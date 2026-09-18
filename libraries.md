@@ -892,7 +892,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 ### [rss](./dev/user-backend-nest/microservices/rss)
 <span id="backend-rss"></span>
 ```
-├─ MIT: 30
+├─ MIT: 29
 ├─ Apache-2.0: 4
 ├─ BSD-2-Clause: 1
 └─ ISC: 1
