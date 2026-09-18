@@ -45,10 +45,7 @@ const config: CapacitorConfig = {
   webDir: 'www/browser',
   server: {
     hostname: 'localhost',
-    androidScheme: 'https'
-  },
-  android: {
-    adjustMarginsForEdgeToEdge: 'force'
+    androidScheme: 'https',
   },
   plugins: {
     // eslint-disable-next-line @typescript-eslint/naming-convention
