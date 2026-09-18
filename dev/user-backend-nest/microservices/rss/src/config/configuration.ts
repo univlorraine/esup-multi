@@ -37,7 +37,6 @@
  * termes.
  */
 
-import * as infosJsonData from '../infos.json';
 import { KeepAliveOptions, RssConfiguration } from './configuration.interface';
 
 const DEFAULT_FEED_TIMEOUT_MS = 15000;
@@ -56,17 +55,6 @@ const intOrDefault = (param: string, defaultValue: number): number => {
   const parsed = parseInt(param);
   return isNaN(parsed) ? defaultValue : parsed;
 };
-
-/**
- * Proxy sortant à utiliser pour joindre le flux.
- */
-const resolveProxyUrl = (): string =>
-  process.env.RSS_SERVICE_HTTPS_PROXY ||
-  process.env.HTTPS_PROXY ||
-  process.env.https_proxy ||
-  process.env.HTTP_PROXY ||
-  process.env.http_proxy ||
-  '';
 
 export default (): RssConfiguration => {
   const keepAliveOptions: KeepAliveOptions = {};
@@ -121,9 +109,6 @@ export default (): RssConfiguration => {
         process.env.RSS_SERVICE_FEED_RETRY_DELAY_MS,
         DEFAULT_RETRY_DELAY_MS,
       ),
-      userAgent:
-        process.env.RSS_SERVICE_FEED_USER_AGENT ||
-        `${infosJsonData.name}/${infosJsonData.version}`,
       staleMaxAgeMs: intOrDefault(
         process.env.RSS_SERVICE_FEED_STALE_MAX_AGE_MS,
         DEFAULT_STALE_MAX_AGE_MS,
@@ -137,6 +122,5 @@ export default (): RssConfiguration => {
       DEFAULT_CACHE_TTL_MS,
     ),
     keepAliveOptions,
-    proxyUrl: resolveProxyUrl(),
   };
 };

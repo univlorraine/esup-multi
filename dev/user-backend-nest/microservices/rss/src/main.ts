@@ -69,17 +69,6 @@ async function bootstrap() {
   const host = process.env.RSS_SERVICE_HOST || '127.0.0.1';
   const port = parseInt(process.env.RSS_SERVICE_PORT) || 3006;
   Logger.log(`Listening on host ${host}, port ${port}`);
-
-  const proxyVars = Object.keys(process.env).filter((name) =>
-    /_proxy$/i.test(name),
-  );
-  Logger.log(
-    proxyVars.length
-      ? `Proxy environment: ${proxyVars
-          .map((name) => `${name}=${process.env[name]}`)
-          .join(', ')}`
-      : 'Proxy environment: none (direct connections)',
-  );
   await app.listen(port, host);
 }
 bootstrap();

@@ -41,7 +41,6 @@ import { HttpModule } from '@nestjs/axios';
 import { Logger, Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { HttpAgent, HttpsAgent } from 'agentkeepalive';
-import { HttpsProxyAgent } from 'https-proxy-agent';
 import {
   FeedOptions,
   KeepAliveOptions,
@@ -56,7 +55,6 @@ import {
         const logger = new Logger(KeepaliveHttpModule.name);
         const keepAliveOptions =
           configService.get<KeepAliveOptions>('keepAliveOptions');
-        const proxyUrl = configService.get<string>('proxyUrl');
         const feed = configService.get<FeedOptions>('feed');
 
         // L'agent ne doit pas fermer la socket avant l'expiration de la
@@ -79,25 +77,9 @@ import {
           );
         }
 
-        if (!proxyUrl) {
-          logger.log('No outgoing proxy configured, using direct connections');
-          return {
-            httpAgent: new HttpAgent(agentOptions),
-            httpsAgent: new HttpsAgent(agentOptions),
-          };
-        }
-
-        logger.log(`Using outgoing proxy: ${proxyUrl}`);
-        if (feed?.url?.startsWith('http://')) {
-          logger.warn(
-            'Feed url is plain http: the proxy only applies to https requests',
-          );
-        }
-
         return {
           httpAgent: new HttpAgent(agentOptions),
-          httpsAgent: new HttpsProxyAgent(proxyUrl, agentOptions),
-          proxy: false as const,
+          httpsAgent: new HttpsAgent(agentOptions),
         };
       },
       inject: [ConfigService],

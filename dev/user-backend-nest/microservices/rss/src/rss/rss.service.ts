@@ -91,7 +91,7 @@ export class RssService {
     }
     this.logger.log(
       `Feed url: ${this.feed.url}, timeout: ${this.feed.timeoutMs}ms, ` +
-        `retries: ${this.feed.retryCount}, user-agent: ${this.feed.userAgent}`,
+        `retries: ${this.feed.retryCount}`,
     );
     this.logger.log(
       `Cache ttl: ${
@@ -167,7 +167,6 @@ export class RssService {
         // Sans cela axios tente un JSON.parse sur le xml reçu.
         transformResponse: [(data) => data],
         headers: {
-          'User-Agent': this.feed.userAgent,
           Accept:
             'application/rss+xml, application/xml;q=0.9, text/xml;q=0.8, */*;q=0.5',
         },

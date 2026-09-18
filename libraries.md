@@ -920,7 +920,6 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [eslint-plugin-prettier@4.2.5](https://github.com/prettier/eslint-plugin-prettier) - MIT
 - [eslint@8.57.1](https://github.com/eslint/eslint) - MIT
 - [html-entities@2.6.0](https://github.com/mdevils/html-entities) - MIT
-- [https-proxy-agent@7.0.6](https://github.com/TooTallNate/proxy-agents) - MIT
 - [jest@29.7.0](https://github.com/jestjs/jest) - MIT
 - [nats@2.29.3](https://github.com/nats-io/nats.node) - Apache-2.0
 - [prettier@2.8.8](https://github.com/prettier/prettier) - MIT

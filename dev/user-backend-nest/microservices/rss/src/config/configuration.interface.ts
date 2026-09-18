@@ -56,8 +56,6 @@ export interface FeedOptions {
   retryCount: number;
   /** Délai avant une nouvelle tentative, en millisecondes. */
   retryDelayMs: number;
-  /** User-Agent envoyé au serveur du flux. */
-  userAgent: string;
   /**
    * Âge maximum du dernier flux valide servi lorsque la récupération échoue,
    * en millisecondes (0 = désactive ce repli).
@@ -70,5 +68,4 @@ export interface RssConfiguration {
   allowedHtmlTags: string[];
   cacheTtl: number;
   keepAliveOptions: KeepAliveOptions;
-  proxyUrl: string;
 }
