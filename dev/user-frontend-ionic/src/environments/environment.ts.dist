@@ -41,6 +41,7 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+// import { MatomoRouterModule } from 'ngx-matomo-client';
 import { AppUpdateModule } from '@multi/app-update';
 import { AuthModule } from '@multi/auth';
 import { CalendarModule } from '@multi/calendar';
@@ -61,8 +62,6 @@ import { ScheduleModule } from '@multi/schedule';
 import { SocialNetworkModule } from '@multi/social-network';
 import { StaticPagesModule } from '@multi/static-pages';
 import { UnreadMailModule } from '@multi/unread-mail';
-// import { MatomoRouterModule } from 'ngx-matomo-client';
-
 import firebasePwaEnvironment from './firebase/web/firebase-environment.pwa.json';
 
 export const environment: any = {
