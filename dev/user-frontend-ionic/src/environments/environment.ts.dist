@@ -90,20 +90,20 @@ export const environment: any = {
       apiEndpoint: 'http://localhost:3000',
       modulesConfigurations: {
         chatbot: {
-          logoRegex: /_chacha5/i
+          logoRegex: /_chacha5/i,
         },
         map: {
           defaultLocation: {
             longitude: 2.3488596,
-            latitude: 48.8533249
-          }
+            latitude: 48.8533249,
+          },
         },
         reservation: {
           ssoServiceName: 'https://mon-espace-de-resa.fr',
           ssoUrlTemplate: 'https://mon-espace-de-resa.fr/auth?ticket={st}',
-        }
+        },
       },
-    }
+    },
   ],
   enabledModules: [
     AppUpdateModule,
@@ -122,39 +122,39 @@ export const environment: any = {
     ContactUsModule,
     ContactsModule.forRoot({ contactTypes: ['STUDENT', 'STAFF', 'STANDIN'] }),
     ImportantNewsModule.forRoot({
-      display: 'vertically'
+      display: 'vertically',
     }),
     KnowledgeBasePageModule,
     MapModule.forRoot({
-      mapType: "osm",
-      accessToken: "",
+      mapType: 'osm',
+      accessToken: '',
       minZoom: 1,
       maxZoom: 19,
       maxBounds: false,
       highAccuracy: false,
-      maxDisplayedFloatingButton: 5
+      maxDisplayedFloatingButton: 5,
     }),
     NotificationsModule.forRoot({
       numberOfNotificationsOnFirstLoad: 20,
-      numberOfNotificationsToLoadOnScroll: 10
+      numberOfNotificationsToLoadOnScroll: 10,
     }),
     ReservationModule,
     RestaurantsModule,
     RssPageModule.forRoot({
       latestNewsWidget: {
-        display: 'horizontally'
+        display: 'horizontally',
       },
-      display: 'vertically'
+      display: 'vertically',
     }),
     ScheduleModule.forRoot({
       nextEventsWidget: {
         numberOfEventsLimit: 2,
         numberOfDaysLimit: 7,
-        display: 'list'
+        display: 'list',
       },
       previousWeeksInCache: 1,
       nextWeeksInCache: 2,
-      managerRoles: ['schedule-manager', 'multi-admin']
+      managerRoles: ['schedule-manager', 'multi-admin'],
     }),
     SocialNetworkModule,
     StaticPagesModule,
