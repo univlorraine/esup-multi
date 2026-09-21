@@ -57,6 +57,7 @@ import { MultiTenantService } from './multi-tenant.service';
   selector: 'app-multi-tenant',
   templateUrl: './multi-tenant.component.html',
   styleUrls: ['../../../../../src/theme/app-theme/styles/multi-tenant/multi-tenant.component.scss'],
+  standalone: false,
 })
 export class MultiTenantComponent {
   public availableTenants: Tenant[];

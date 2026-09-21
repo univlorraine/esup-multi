@@ -47,6 +47,7 @@ import { StatisticsService, ThemeService, TranslatedInternalFeature } from '@mul
   styleUrls: [
     '../../../../../../../../src/theme/app-theme/styles/features/widget-internal-feature.component.scss',
   ],
+  standalone: false,
 })
 export class WidgetInternalFeatureComponent {
   @Input() feature: TranslatedInternalFeature;

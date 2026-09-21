@@ -61,6 +61,7 @@ const defaultBreakpoint = 0.5;
   selector: 'app-notifications',
   templateUrl: './notifications.page.html',
   styleUrls: ['../../../../src/theme/app-theme/styles/notifications/notifications.page.scss'],
+  standalone: false,
 })
 export class NotificationsPage implements OnDestroy {
   @ViewChild('popover') popover;

@@ -49,6 +49,7 @@ import {
   selector: 'app-service',
   templateUrl: './service.component.html',
   styleUrls: ['../../../../../../../src/theme/app-theme/styles/features/service.component.scss'],
+  standalone: false,
 })
 export class ServiceComponent {
   @Input() menuItem: ServiceMenuItem;

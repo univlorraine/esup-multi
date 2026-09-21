@@ -51,6 +51,7 @@ import { StaticPagesService } from '../../static-pages.service';
   styleUrls: [
     '../../../../../../src/theme/app-theme/styles/static-pages/static-pages-widget.component.scss',
   ],
+  standalone: false,
 })
 export class StaticPagesWidgetComponent {
   public translatedStaticPages$: Observable<TranslatedStaticPage[]>;

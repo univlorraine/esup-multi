@@ -59,6 +59,7 @@ import { NextEventsService } from './next-events.service';
   selector: 'app-schedule-widget-next-events',
   templateUrl: './next-events.component.html',
   styleUrls: ['../../../../../../src/theme/app-theme/styles/schedule/next-events.component.scss'],
+  standalone: false,
 })
 export class NextEventsComponent implements OnDestroy, AfterViewInit {
   @Input() widgetColor: string;

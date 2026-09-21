@@ -58,6 +58,7 @@ interface AuthenticatedUserToken extends AuthenticatedUser {
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['../../../../../src/theme/app-theme/styles/auth/login.page.scss'],
+  standalone: false,
 })
 export class LoginPage implements OnInit {
   loginForm: FormGroup;

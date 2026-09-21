@@ -50,6 +50,7 @@ import { RssService } from './rss.service';
   selector: 'app-rss',
   templateUrl: './rss.page.html',
   styleUrls: ['../../../../src/theme/app-theme/styles/rss/rss.page.scss'],
+  standalone: false,
 })
 export class RssPage {
   public rssFeed$: Observable<FeedItem[]> = rssFeed$;

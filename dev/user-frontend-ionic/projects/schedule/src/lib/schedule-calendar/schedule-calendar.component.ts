@@ -71,6 +71,7 @@ const defaultBreakpoint = 0.6;
   styleUrls: [
     '../../../../../src/theme/app-theme/styles/schedule/schedule-calendar.component.scss',
   ],
+  standalone: false,
 })
 export class ScheduleCalendarComponent implements OnDestroy {
   @ViewChild('calendar') calendarComponent: FullCalendarComponent;

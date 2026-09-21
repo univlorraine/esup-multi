@@ -40,7 +40,10 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import DOMPurify from 'dompurify';
 
-@Pipe({ name: 'sanitizeHtml' })
+@Pipe({
+  name: 'sanitizeHtml',
+  standalone: false,
+})
 export class SanitizeHtmlPipe implements PipeTransform {
   transform(value: string | null | undefined): string {
     if (!value) {

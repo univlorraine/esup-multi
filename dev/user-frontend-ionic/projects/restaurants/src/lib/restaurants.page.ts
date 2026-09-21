@@ -70,6 +70,7 @@ export interface RestaurantDto {
   selector: 'app-restaurants',
   templateUrl: './restaurants.page.html',
   styleUrls: ['../../../../src/theme/app-theme/styles/restaurants/restaurants.page.scss'],
+  standalone: false,
 })
 export class RestaurantsPage implements OnInit {
   public restaurants$: Observable<RestaurantDto[]>;

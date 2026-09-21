@@ -90,6 +90,7 @@ import {
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['../theme/app-theme/styles/app/app.component.scss'],
+  standalone: false,
 })
 export class AppComponent implements OnInit, OnDestroy {
   public languages: string[] = [];

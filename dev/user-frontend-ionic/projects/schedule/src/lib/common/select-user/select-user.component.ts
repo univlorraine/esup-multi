@@ -50,6 +50,7 @@ import { ScheduleService } from '../../schedule.service';
   selector: 'app-select-user',
   templateUrl: './select-user.component.html',
   styleUrls: ['../../../../../../src/theme/app-theme/styles/schedule/select-user.component.scss'],
+  standalone: false,
 })
 export class SelectUserComponent {
   public form: FormGroup;

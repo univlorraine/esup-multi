@@ -47,6 +47,7 @@ import { Event } from '../../schedule.repository';
   styleUrls: [
     '../../../../../../src/theme/app-theme/styles/schedule/calendar-event.component.scss',
   ],
+  standalone: false,
 })
 export class CalendarEventComponent {
   @Input() event: Event;

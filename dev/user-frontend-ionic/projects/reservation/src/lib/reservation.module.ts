@@ -38,7 +38,7 @@
  */
 
 import { CommonModule } from '@angular/common';
-import { APP_INITIALIZER, ModuleWithProviders, NgModule } from '@angular/core';
+import { inject, ModuleWithProviders, NgModule, provideAppInitializer } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ProjectModuleService, SharedComponentsModule } from '@multi/shared';
@@ -62,12 +62,10 @@ const initModule = (projectModuleService: ProjectModuleService) => () =>
     SharedComponentsModule,
   ],
   providers: [
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initModule,
-      deps: [ProjectModuleService],
-      multi: true,
-    },
+    provideAppInitializer(() => {
+      const initializerFn = initModule(inject(ProjectModuleService));
+      return initializerFn();
+    }),
   ],
 })
 export class ReservationModule {

@@ -39,7 +39,10 @@
 
 import { Directive, TemplateRef } from '@angular/core';
 
-@Directive({ selector: '[appRssItemHeaderButton]' })
+@Directive({
+  selector: '[appRssItemHeaderButton]',
+  standalone: false,
+})
 export class RssItemHeaderButtonDirective {
   constructor(public template: TemplateRef<any>) {}
 }

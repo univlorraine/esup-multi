@@ -61,6 +61,7 @@ interface NotificationOptions {
   styleUrls: [
     '../../../../../src/theme/app-theme/styles/notifications/notification-options.component.scss',
   ],
+  standalone: false,
 })
 export class NotificationOptionsComponent {
   @Input() notification: Notification;

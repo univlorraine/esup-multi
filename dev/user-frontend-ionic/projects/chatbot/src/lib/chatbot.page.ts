@@ -52,6 +52,7 @@ import { UserIdGeneratorService } from './user-id-generator.service';
   selector: 'app-chatbot',
   templateUrl: './chatbot.page.html',
   styleUrls: ['../../../../src/theme/app-theme/styles/chatbot/chatbot.page.scss'],
+  standalone: false,
 })
 export class ChatbotPage implements OnInit {
   private static readonly userChatId: string = UserIdGeneratorService.initRandomUserId();

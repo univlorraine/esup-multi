@@ -54,6 +54,7 @@ import { KnowledgeBaseService } from './knowledge-base.service';
   selector: 'app-knowledge-base',
   templateUrl: './knowledge-base.page.html',
   styleUrls: ['../../../../src/theme/app-theme/styles/knowledge-base/knowledge-base.page.scss'],
+  standalone: false,
 })
 export class KnowledgeBasePage implements OnInit {
   public isLoading = false;

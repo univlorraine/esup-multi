@@ -52,6 +52,7 @@ import {
   styleUrls: [
     '../../../../../../../../src/theme/app-theme/styles/features/widget-external-feature.component.scss',
   ],
+  standalone: false,
 })
 export class WidgetExternalFeatureComponent {
   @Input() feature: TranslatedExternalFeature;

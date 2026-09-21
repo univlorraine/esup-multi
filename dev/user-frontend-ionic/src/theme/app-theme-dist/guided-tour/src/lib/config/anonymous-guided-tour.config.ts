@@ -39,13 +39,13 @@
 
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import Step from 'shepherd.js/src/types/step';
+import { StepOptions } from 'shepherd.js';
 
 export const anonymousSteps = (
   router: Router,
   translateService: TranslateService,
   onComplete?: () => void,
-): Step.StepOptions[] => [
+): StepOptions[] => [
   {
     id: 'anonymous-step-10',
     text: translateService.instant('GUIDED-TOUR.ANONYMOUS.STEP_10.MESSAGE'),

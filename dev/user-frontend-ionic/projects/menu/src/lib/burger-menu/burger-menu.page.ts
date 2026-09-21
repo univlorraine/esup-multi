@@ -65,6 +65,7 @@ import {
   selector: 'app-menu',
   templateUrl: './burger-menu.page.html',
   styleUrls: ['../../../../../src/theme/app-theme/styles/menu/burger-menu.page.scss'],
+  standalone: false,
 })
 export class BurgerMenuPage implements OnDestroy {
   public widgetIds = {

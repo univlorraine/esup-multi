@@ -50,6 +50,7 @@ import { ContactUsService } from '../../contact-us.service';
   styleUrls: [
     '../../../../../../src/theme/app-theme/styles/contact-us/contact-us-menu-item.component.scss',
   ],
+  standalone: false,
 })
 export class ContactUsMenuItemComponent {
   public translatedPageContent$: Observable<TranslatedContactUsPageContent>;

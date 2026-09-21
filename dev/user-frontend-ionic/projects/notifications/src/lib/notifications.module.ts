@@ -38,7 +38,7 @@
  */
 
 import { CommonModule } from '@angular/common';
-import { APP_INITIALIZER, ModuleWithProviders, NgModule } from '@angular/core';
+import { inject, ModuleWithProviders, NgModule, provideAppInitializer } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   FirebaseMessaging,
@@ -90,12 +90,15 @@ const initModule =
   ],
   declarations: [NotificationsPage, SettingsPage, NotificationOptionsComponent],
   providers: [
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initModule,
-      deps: [ProjectModuleService, NotificationsRepository, ToastController, Platform],
-      multi: true,
-    },
+    provideAppInitializer(() => {
+      const initializerFn = initModule(
+        inject(ProjectModuleService),
+        inject(NotificationsRepository),
+        inject(ToastController),
+        inject(Platform),
+      );
+      return initializerFn();
+    }),
   ],
 })
 export class NotificationsModule {

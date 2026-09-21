@@ -45,6 +45,7 @@ import * as locale from 'date-fns/locale';
 @Pipe({
   name: 'localTime',
   pure: false,
+  standalone: false,
 })
 export class LocalTimePipe implements PipeTransform {
   constructor(private translateService: TranslateService) {}

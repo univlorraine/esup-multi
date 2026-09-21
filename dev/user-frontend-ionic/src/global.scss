@@ -48,6 +48,8 @@
  * https://ionicframework.com/docs/layout/global-stylesheets
  */
 
+@use "sass:meta";
+
 /* Core CSS required for Ionic components to work properly */
 @import "@ionic/angular/css/core.css";
 
@@ -68,7 +70,7 @@
 @import "leaflet/dist/leaflet.css";
 
 /* Theme */
-@import "./theme/theme.scss";
+@include meta.load-css("./theme/theme.scss");
 
 body.scanner-active {
   --background: transparent !important;

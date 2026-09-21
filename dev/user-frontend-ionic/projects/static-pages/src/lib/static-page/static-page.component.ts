@@ -49,6 +49,7 @@ import { StaticPagesService } from '../static-pages.service';
   selector: 'app-static-page',
   templateUrl: './static-page.component.html',
   styleUrls: ['../../../../../src/theme/app-theme/styles/static-pages/static-page.component.scss'],
+  standalone: false,
 })
 export class StaticPageComponent implements OnInit {
   public translatedStaticPages$: Observable<TranslatedStaticPage[]>;

@@ -59,6 +59,7 @@ import { RestaurantMenusService } from './restaurant-menus.service';
   selector: 'app-restaurant-menus',
   templateUrl: './restaurant-menus.page.html',
   styleUrls: ['../../../../../src/theme/app-theme/styles/restaurants/restaurant-menus.page.scss'],
+  standalone: false,
 })
 export class RestaurantMenusPage implements OnInit, OnDestroy, AfterViewChecked {
   @ViewChild('swiperContainer') swiperContainer: ElementRef;

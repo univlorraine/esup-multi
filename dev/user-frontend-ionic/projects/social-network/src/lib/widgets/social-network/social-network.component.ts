@@ -50,6 +50,7 @@ import { SocialNetworkService } from '../../social-network.service';
   styleUrls: [
     '../../../../../../src/theme/app-theme/styles/social-network/social-network.component.scss',
   ],
+  standalone: false,
 })
 export class SocialNetworkComponent {
   public socialNetworks$: Observable<SocialNetwork[]> = socialNetworks$;

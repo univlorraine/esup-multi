@@ -45,6 +45,7 @@ import { AuthenticatedUser, authenticatedUser$ } from '@multi/shared';
   selector: 'app-auth-greeting-widget',
   templateUrl: './greeting.component.html',
   styleUrls: ['../../../../../../src/theme/app-theme/styles/auth/greeting.component.scss'],
+  standalone: false,
 })
 export class GreetingComponent implements OnInit {
   authenticatedUser$: Observable<AuthenticatedUser>;

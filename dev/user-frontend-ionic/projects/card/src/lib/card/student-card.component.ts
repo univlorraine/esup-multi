@@ -44,6 +44,7 @@ import { UserAndCardData } from '../card.repository';
   selector: 'app-student-card',
   templateUrl: './student-card.component.html',
   styleUrls: ['../../../../../src/theme/app-theme/styles/card/card.component.scss'],
+  standalone: false,
 })
 export class StudentCardComponent {
   @Input() userCard: UserAndCardData;

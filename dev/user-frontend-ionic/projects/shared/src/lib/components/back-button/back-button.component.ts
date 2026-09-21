@@ -45,6 +45,7 @@ import { NavigationService } from '../../navigation/navigation.service';
   selector: 'app-back-button',
   templateUrl: 'back-button.component.html',
   styleUrls: ['../../../../../../src/theme/app-theme/styles/shared/back-button.component.scss'],
+  standalone: false,
 })
 export class BackButtonComponent {
   @Input() defaultHref = '';

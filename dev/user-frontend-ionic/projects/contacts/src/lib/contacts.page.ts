@@ -49,6 +49,7 @@ import { Contact, ContactsBody, ContactsService } from './contacts.service';
   selector: 'app-contacts',
   templateUrl: './contacts.page.html',
   styleUrls: ['../../../../src/theme/app-theme/styles/contacts/contacts.page.scss'],
+  standalone: false,
 })
 export class ContactsComponent {
   @ViewChild('searchBlock') viewBlock: ElementRef;

@@ -49,6 +49,7 @@ import { RssService } from '../../rss.service';
   selector: 'app-latest-news-widget',
   templateUrl: './latest-news.component.html',
   styleUrls: ['../../../../../../src/theme/app-theme/styles/rss/latest-news.component.scss'],
+  standalone: false,
 })
 export class LatestNewsComponent {
   public isLoading = false;

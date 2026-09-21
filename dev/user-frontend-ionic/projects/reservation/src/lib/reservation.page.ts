@@ -50,6 +50,7 @@ import { ReservationService } from './reservation.service';
   selector: 'app-reservation',
   templateUrl: './reservation.page.html',
   styleUrls: ['../../../../src/theme/app-theme/styles/reservation/reservation.page.scss'],
+  standalone: false,
 })
 export class ReservationPage {
   constructor(

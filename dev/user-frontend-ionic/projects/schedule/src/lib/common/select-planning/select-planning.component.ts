@@ -73,6 +73,7 @@ const atLeastOneCheckedValidator =
   styleUrls: [
     '../../../../../../src/theme/app-theme/styles/schedule/select-planning.component.scss',
   ],
+  standalone: false,
 })
 export class SelectPlanningComponent {
   form: FormGroup;

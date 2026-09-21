@@ -49,6 +49,7 @@ import { ScheduleService } from '../../../schedule.service';
   styleUrls: [
     '../../../../../../../src/theme/app-theme/styles/schedule/hidden-course.component.scss',
   ],
+  standalone: false,
 })
 export class HiddenCourseComponent {
   @Input() hiddenCourse: HiddenCourse;

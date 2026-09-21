@@ -44,7 +44,8 @@ import { UserAndCardEuData } from '../card-eu.repository';
   selector: 'app-card-eu-light',
   templateUrl: './card-eu-light.component.html',
   styleUrls: ['../../../../../src/theme/app-theme/styles/card-eu/card-eu-light.component.scss'],
-  encapsulation: ViewEncapsulation.None, // Pour pouvoir jouer sur la taille du QR Code avec les CSS
+  encapsulation: ViewEncapsulation.None,
+  standalone: false,
 })
 export class CardEuLightComponent {
   @Input() userCardEuLight: UserAndCardEuData;

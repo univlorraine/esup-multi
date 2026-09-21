@@ -38,7 +38,7 @@
  */
 
 import { CommonModule } from '@angular/common';
-import { APP_INITIALIZER, ModuleWithProviders, NgModule } from '@angular/core';
+import { inject, ModuleWithProviders, NgModule, provideAppInitializer } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FullCalendarModule } from '@fullcalendar/angular'; // must go before plugins
 import { IonicModule } from '@ionic/angular';
@@ -109,12 +109,10 @@ const initModule = (projectModuleService: ProjectModuleService) => () =>
     EffectsNgModule.forFeature([ScheduleEffects]),
   ],
   providers: [
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initModule,
-      deps: [ProjectModuleService],
-      multi: true,
-    },
+    provideAppInitializer(() => {
+      const initializerFn = initModule(inject(ProjectModuleService));
+      return initializerFn();
+    }),
     CompleteLocalDatePipe,
     LocalHourPipe,
   ],

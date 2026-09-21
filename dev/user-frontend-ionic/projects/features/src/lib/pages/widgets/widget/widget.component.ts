@@ -44,6 +44,7 @@ import { FeatureType, TranslatedFeature } from '@multi/shared';
   selector: 'app-feature-widget',
   templateUrl: './widget.component.html',
   styleUrls: ['../../../../../../../src/theme/app-theme/styles/features/widget.component.scss'],
+  standalone: false,
 })
 export class WidgetComponent {
   @Input() feature: TranslatedFeature;

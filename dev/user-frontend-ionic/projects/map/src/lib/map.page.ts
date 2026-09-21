@@ -65,6 +65,7 @@ import { MapService } from './map.service';
   selector: 'app-map',
   templateUrl: './map.page.html',
   styleUrls: ['../../../../src/theme/app-theme/styles/map/map.page.scss'],
+  standalone: false,
 })
 export class MapPage {
   @ViewChild('popover') popover;

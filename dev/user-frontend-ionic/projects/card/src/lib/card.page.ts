@@ -49,6 +49,7 @@ import { CardService } from './card.service';
   selector: 'app-card',
   templateUrl: './card.page.html',
   styleUrls: ['../../../../src/theme/app-theme/styles/card/card.page.scss'],
+  standalone: false,
 })
 export class CardPage {
   public authenticatedUser$: Observable<AuthenticatedUser>;

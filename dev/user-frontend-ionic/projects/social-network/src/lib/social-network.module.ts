@@ -38,7 +38,7 @@
  */
 
 import { CommonModule } from '@angular/common';
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { inject, NgModule, provideAppInitializer } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { ProjectModuleService, SharedComponentsModule } from '@multi/shared';
 import { SocialNetworkComponent } from './widgets/social-network/social-network.component';
@@ -57,12 +57,10 @@ const initModule = (projectModuleService: ProjectModuleService) => () =>
 @NgModule({
   declarations: [SocialNetworkComponent],
   providers: [
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initModule,
-      deps: [ProjectModuleService],
-      multi: true,
-    },
+    provideAppInitializer(() => {
+      const initializerFn = initModule(inject(ProjectModuleService));
+      return initializerFn();
+    }),
   ],
   imports: [CommonModule, IonicModule, SharedComponentsModule],
 })

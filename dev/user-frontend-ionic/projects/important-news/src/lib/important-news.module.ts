@@ -38,7 +38,7 @@
  */
 
 import { CommonModule } from '@angular/common';
-import { APP_INITIALIZER, ModuleWithProviders, NgModule } from '@angular/core';
+import { inject, ModuleWithProviders, NgModule, provideAppInitializer } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -61,12 +61,10 @@ const initModule = (projectModuleService: ProjectModuleService) => () =>
   declarations: [ImportantNewsComponent],
   imports: [CommonModule, IonicModule, TranslatePipe, RouterModule],
   providers: [
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initModule,
-      deps: [ProjectModuleService],
-      multi: true,
-    },
+    provideAppInitializer(() => {
+      const initializerFn = initModule(inject(ProjectModuleService));
+      return initializerFn();
+    }),
   ],
 })
 export class ImportantNewsModule {

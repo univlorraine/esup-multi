@@ -52,6 +52,7 @@ const DEFAULT_VIEW_TYPE: ViewType = 'month';
   selector: 'app-schedule',
   templateUrl: './schedule.page.html',
   styleUrls: ['../../../../src/theme/app-theme/styles/schedule/schedule.page.scss'],
+  standalone: false,
 })
 export class SchedulePage implements OnDestroy {
   @ViewChild(ScheduleCalendarComponent) calendarRef: ScheduleCalendarComponent;

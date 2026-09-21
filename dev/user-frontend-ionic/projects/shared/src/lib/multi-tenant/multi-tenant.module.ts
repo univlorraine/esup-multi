@@ -38,7 +38,7 @@
  */
 
 import { CommonModule } from '@angular/common';
-import { APP_INITIALIZER, ErrorHandler, NgModule } from '@angular/core';
+import { ErrorHandler, inject, NgModule, provideAppInitializer } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -56,12 +56,10 @@ const initModule = (projectModuleService: ProjectModuleService) => () =>
   declarations: [MultiTenantComponent],
   imports: [CommonModule, FormsModule, IonicModule, MultiTenantRoutingModule, TranslatePipe],
   providers: [
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initModule,
-      deps: [ProjectModuleService],
-      multi: true,
-    },
+    provideAppInitializer(() => {
+      const initializerFn = initModule(inject(ProjectModuleService));
+      return initializerFn();
+    }),
     {
       provide: ErrorHandler,
       useClass: MultiTenantErrorHandler,

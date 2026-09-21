@@ -82,6 +82,7 @@ interface MenuItemWithBadge extends MenuItemWithOptionalRouterLink {
   selector: 'app-layout',
   templateUrl: 'layout.page.html',
   styleUrls: ['../../theme/app-theme/styles/app/layout.page.scss'],
+  standalone: false,
 })
 export class LayoutPage implements AfterViewInit, OnChanges, OnDestroy {
   @Input() currentPageLayout: PageLayout;

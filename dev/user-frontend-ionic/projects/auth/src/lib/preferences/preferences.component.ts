@@ -45,6 +45,7 @@ import { PreferencesService } from './preferences.service';
   selector: 'app-auth-preferences',
   templateUrl: './preferences.component.html',
   styleUrls: ['../../../../../src/theme/app-theme/styles/auth/preferences.component.scss'],
+  standalone: false,
 })
 export class PreferencesComponent {
   saveCredentialsOnAuthentication$ = saveCredentialsOnAuthentication$;

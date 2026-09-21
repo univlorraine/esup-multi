@@ -52,6 +52,7 @@ interface ChannelSubscription extends TranslatedChannel {
   selector: 'app-settings',
   templateUrl: './settings.page.html',
   styleUrls: ['../../../../../src/theme/app-theme/styles/notifications/settings.page.scss'],
+  standalone: false,
 })
 export class SettingsPage implements OnInit {
   channelsSubscriptions$: Observable<ChannelSubscription[]>;

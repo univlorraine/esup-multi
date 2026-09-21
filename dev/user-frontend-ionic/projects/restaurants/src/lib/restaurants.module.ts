@@ -38,7 +38,7 @@
  */
 
 import { CommonModule } from '@angular/common';
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { inject, NgModule, provideAppInitializer } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ProjectModuleService, SharedComponentsModule, SharedPipeModule } from '@multi/shared';
@@ -55,12 +55,10 @@ const initModule = (projectModuleService: ProjectModuleService) => () =>
 @NgModule({
   declarations: [RestaurantsPage, RestaurantMenusPage],
   providers: [
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initModule,
-      deps: [ProjectModuleService],
-      multi: true,
-    },
+    provideAppInitializer(() => {
+      const initializerFn = initModule(inject(ProjectModuleService));
+      return initializerFn();
+    }),
   ],
   imports: [
     CommonModule,

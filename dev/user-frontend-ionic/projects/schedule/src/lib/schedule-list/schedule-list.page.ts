@@ -56,6 +56,7 @@ import { EventsByDay, ScheduleListService } from './schedule-list.service';
   selector: 'app-schedule-list',
   templateUrl: './schedule-list.page.html',
   styleUrls: ['../../../../../src/theme/app-theme/styles/schedule/schedule-list.page.scss'],
+  standalone: false,
 })
 export class ScheduleListPage {
   @ViewChild('scrollContent') content: IonContent;

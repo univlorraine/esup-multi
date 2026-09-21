@@ -51,6 +51,7 @@ import { ContactMessageQueryDto, ContactUsService } from './contact-us.service';
   selector: 'app-contact-us',
   templateUrl: './contact-us.page.html',
   styleUrls: ['../../../../src/theme/app-theme/styles/contact-us/contact-us.page.scss'],
+  standalone: false,
 })
 export class ContactUsPage implements OnInit {
   contactForm = new FormGroup({

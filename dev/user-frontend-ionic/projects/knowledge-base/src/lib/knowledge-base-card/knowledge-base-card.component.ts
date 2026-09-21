@@ -55,6 +55,7 @@ import {
   styleUrls: [
     '../../../../../src/theme/app-theme/styles/knowledge-base/knowledge-base-card.component.scss',
   ],
+  standalone: false,
 })
 export class KnowledgeBaseCardComponent {
   @Input() item: TranslatedKnowledgeBaseItem;

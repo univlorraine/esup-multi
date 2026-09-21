@@ -38,11 +38,11 @@
  */
 
 import { CommonModule } from '@angular/common';
-import { APP_INITIALIZER, ModuleWithProviders, NgModule } from '@angular/core';
+import { inject, ModuleWithProviders, NgModule, provideAppInitializer } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { EffectsNgModule } from '@ngneat/effects-ng';
 import { TranslatePipe } from '@ngx-translate/core';
-import { QRCodeModule } from 'angularx-qrcode';
+import { QRCodeComponent } from 'angularx-qrcode';
 import { ProjectModuleService, SharedComponentsModule, SharedPipeModule } from '@multi/shared';
 import { CardRoutingModule } from './card-routing.module';
 import { CARD_CONFIG, CardModuleConfig } from './card.config';
@@ -63,19 +63,17 @@ const initModule = (projectModuleService: ProjectModuleService) => () =>
     IonicModule,
     CardRoutingModule,
     TranslatePipe,
-    QRCodeModule,
+    QRCodeComponent,
     SharedPipeModule,
     SharedComponentsModule,
     EffectsNgModule.forFeature([CardEffects]),
   ],
   declarations: [CardPage, StudentCardComponent, StaffCardComponent],
   providers: [
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initModule,
-      deps: [ProjectModuleService],
-      multi: true,
-    },
+    provideAppInitializer(() => {
+      const initializerFn = initModule(inject(ProjectModuleService));
+      return initializerFn();
+    }),
   ],
 })
 export class CardPageModule {

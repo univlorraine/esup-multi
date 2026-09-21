@@ -44,6 +44,7 @@ import { ProjectModuleService } from '@multi/shared';
   selector: 'app-preferences',
   templateUrl: './preferences.page.html',
   styleUrls: ['../../../../src/theme/app-theme/styles/preferences/preferences.page.scss'],
+  standalone: false,
 })
 export class PreferencesPage implements OnInit {
   @ViewChildren('preferences', { read: ViewContainerRef }) preferences: QueryList<ViewContainerRef>;

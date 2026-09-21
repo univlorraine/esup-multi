@@ -55,6 +55,7 @@ import { CardEuService } from './card-eu.service';
   selector: 'app-card-eu',
   templateUrl: './card-eu.page.html',
   styleUrls: ['../../../../src/theme/app-theme/styles/card-eu/card-eu.page.scss'],
+  standalone: false,
 })
 export class CardEuPage implements OnInit {
   public authenticatedUser$: Observable<AuthenticatedUser>;

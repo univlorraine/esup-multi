@@ -48,6 +48,7 @@ import { ClockingService } from '../../clocking.service';
   selector: 'app-clocking-widget',
   templateUrl: './clocking.component.html',
   styleUrls: ['../../../../../../src/theme/app-theme/styles/clocking/clocking.component.scss'],
+  standalone: false,
 })
 export class ClockingComponent implements AfterViewInit {
   @Input() widgetColor: string;

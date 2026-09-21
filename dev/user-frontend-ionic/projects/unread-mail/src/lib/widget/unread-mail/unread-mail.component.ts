@@ -50,6 +50,7 @@ import { UnreadMailService } from '../../unread-mail.service';
   styleUrls: [
     '../../../../../../src/theme/app-theme/styles/unread-mail/unread-mail.component.scss',
   ],
+  standalone: false,
 })
 export class UnreadMailComponent implements AfterViewInit {
   @Input() widgetColor: string;

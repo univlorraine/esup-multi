@@ -57,6 +57,7 @@ import { CalendarService } from '../../calendar.service';
   selector: 'app-calendar-widget',
   templateUrl: './calendar.component.html',
   styleUrls: ['../../../../../../src/theme/app-theme/styles/calendar/calendar.component.scss'],
+  standalone: false,
 })
 export class CalendarComponent implements AfterViewInit {
   @Input() widgetColor: string;

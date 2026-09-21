@@ -47,6 +47,7 @@ import { NetworkService } from '../../network/network.service';
   selector: 'app-header',
   templateUrl: 'header.component.html',
   styleUrls: ['../../../../../../src/theme/app-theme/styles/shared/header.component.scss'],
+  standalone: false,
 })
 export class HeaderComponent {
   @Input() backRouterLink = '';

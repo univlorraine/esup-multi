@@ -38,7 +38,7 @@
  */
 
 import { CommonModule } from '@angular/common';
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { inject, NgModule, provideAppInitializer } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { EffectsNgModule } from '@ngneat/effects-ng';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -67,12 +67,10 @@ const initModule = (projectModuleService: ProjectModuleService) => () =>
     EffectsNgModule.forFeature([ClockingEffects]),
   ],
   providers: [
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initModule,
-      deps: [ProjectModuleService],
-      multi: true,
-    },
+    provideAppInitializer(() => {
+      const initializerFn = initModule(inject(ProjectModuleService));
+      return initializerFn();
+    }),
   ],
 })
 export class ClockingModule {}

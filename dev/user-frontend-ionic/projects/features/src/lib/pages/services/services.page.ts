@@ -66,6 +66,7 @@ import { ServicesService } from './services.service';
   selector: 'app-services',
   templateUrl: './services.page.html',
   styleUrls: ['../../../../../../src/theme/app-theme/styles/features/services.page.scss'],
+  standalone: false,
 })
 export class ServicesPage implements OnInit, OnDestroy {
   @ViewChild('servicesContainer', { read: ElementRef }) servicesContainer: ElementRef;

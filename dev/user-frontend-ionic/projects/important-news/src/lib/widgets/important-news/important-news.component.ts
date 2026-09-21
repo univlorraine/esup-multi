@@ -62,6 +62,7 @@ import { ImportantNewsService } from '../../important-news.service';
   styleUrls: [
     '../../../../../../src/theme/app-theme/styles/important-news/important-news.component.scss',
   ],
+  standalone: false,
 })
 export class ImportantNewsComponent {
   public isLoading = false;
