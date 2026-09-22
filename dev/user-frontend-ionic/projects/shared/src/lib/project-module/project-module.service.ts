@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Injectable, Type } from '@angular/core';
+import { inject, Injectable, Type } from '@angular/core';
 import { HistoryBlacklistService } from './history-blacklist.service';
 import { PreferencesService } from './preferences.service';
 import { StaticMenuItem, StaticMenuService, StaticMenuType } from './static-menu.service';
@@ -57,13 +57,11 @@ export interface InitProjectModuleOptions {
   providedIn: 'root',
 })
 export class ProjectModuleService {
-  constructor(
-    private preferencesService: PreferencesService,
-    private translationsService: TranslationsService,
-    private staticMenuService: StaticMenuService,
-    private widgetsService: WidgetsService,
-    private historyBlacklistService: HistoryBlacklistService,
-  ) {}
+  private preferencesService = inject(PreferencesService);
+  private translationsService = inject(TranslationsService);
+  private staticMenuService = inject(StaticMenuService);
+  private widgetsService = inject(WidgetsService);
+  private historyBlacklistService = inject(HistoryBlacklistService);
 
   initProjectModule(options: InitProjectModuleOptions) {
     if (options.preferencesComponent) {

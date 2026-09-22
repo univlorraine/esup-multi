@@ -38,7 +38,7 @@
  */
 
 import { HttpErrorResponse } from '@angular/common/http';
-import { ErrorHandler, Injectable, Injector } from '@angular/core';
+import { ErrorHandler, inject, Injectable, Injector } from '@angular/core';
 import { Actions } from '@ngneat/effects-ng';
 import { TranslateService } from '@ngx-translate/core';
 import { take } from 'rxjs/operators';
@@ -54,14 +54,12 @@ import {
   providedIn: 'root',
 })
 export class AppErrorHandler implements ErrorHandler {
-  private translateService: TranslateService;
+  private actions = inject(Actions);
+  private alertsService = inject(AlertsService);
+  private injector = inject(Injector);
+  private networkService = inject(NetworkService);
 
-  constructor(
-    private actions: Actions,
-    private alertsService: AlertsService,
-    private injector: Injector,
-    private networkService: NetworkService,
-  ) {}
+  private translateService: TranslateService;
 
   async handleError(error: Error | HttpErrorResponse) {
     this.loadTranslateService();

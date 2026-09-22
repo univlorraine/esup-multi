@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { StatisticsService, ThemeService, TranslatedInternalFeature } from '@multi/shared';
 
@@ -50,15 +50,13 @@ import { StatisticsService, ThemeService, TranslatedInternalFeature } from '@mul
   standalone: false,
 })
 export class WidgetInternalFeatureComponent {
+  private router = inject(Router);
+  private statisticsService = inject(StatisticsService);
+  private themeService = inject(ThemeService);
+  private changeDetector = inject(ChangeDetectorRef);
+
   @Input() feature: TranslatedInternalFeature;
   isEmpty = false;
-
-  constructor(
-    private router: Router,
-    private statisticsService: StatisticsService,
-    private themeService: ThemeService,
-    private changeDetector: ChangeDetectorRef,
-  ) {}
 
   public onClick() {
     this.statisticsService.onFunctionalityOpened(this.feature.statisticName);

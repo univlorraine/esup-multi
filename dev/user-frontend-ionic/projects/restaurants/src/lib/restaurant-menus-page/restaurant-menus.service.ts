@@ -38,7 +38,7 @@
  */
 
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { MultiTenantService } from '@multi/shared';
@@ -48,10 +48,8 @@ import { Menu, upsertMenus } from './menus.repository';
   providedIn: 'root',
 })
 export class RestaurantMenusService {
-  constructor(
-    private multiTenantService: MultiTenantService,
-    private http: HttpClient,
-  ) {}
+  private multiTenantService = inject(MultiTenantService);
+  private http = inject(HttpClient);
 
   public loadAndStoreMenus(restaurantId: number, date?: string): Observable<Menu[]> {
     const url = `${this.multiTenantService.getApiEndpoint()}/restaurant/menus`;

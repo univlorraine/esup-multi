@@ -60,18 +60,16 @@ import { WidgetLifecycleService } from './widget-lifecycle.service';
   standalone: false,
 })
 export class WidgetComponent implements AfterViewInit {
+  private projectModuleService = inject(ProjectModuleService);
+  private cdr = inject(ChangeDetectorRef);
+  private widgetLifecycleService = inject(WidgetLifecycleService);
+
   @Input() widgetId: string;
   @Input() widgetColor: string;
   @ViewChild('widget', { read: ViewContainerRef }) widgetContainerRef: ViewContainerRef;
   @Output() widgetIsEmpty = new EventEmitter<boolean>();
 
   private destroyRef = inject(DestroyRef);
-
-  constructor(
-    private projectModuleService: ProjectModuleService,
-    private cdr: ChangeDetectorRef,
-    private widgetLifecycleService: WidgetLifecycleService,
-  ) {}
 
   async ngAfterViewInit() {
     this.widgetContainerRef.clear();

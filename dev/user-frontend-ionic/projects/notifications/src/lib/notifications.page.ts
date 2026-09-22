@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Component, Inject, OnDestroy, ViewChild } from '@angular/core';
+import { Component, inject, OnDestroy, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { InfiniteScrollCustomEvent, IonContent, IonModal, Platform } from '@ionic/angular';
 import { combineLatest, Observable, Subscription } from 'rxjs';
@@ -64,6 +64,16 @@ const defaultBreakpoint = 0.5;
   standalone: false,
 })
 export class NotificationsPage implements OnDestroy {
+  private notificationsService = inject(NotificationsService);
+  private config = inject<NotificationsModuleConfig>(NOTIFICATIONS_CONFIG);
+  private formBuilder = inject(FormBuilder);
+  pageLayoutService = inject(PageLayoutService);
+  platform = inject(Platform);
+  notificationRepository = inject(NotificationsRepository);
+  private toastService = inject(ToastService);
+  private networkService = inject(NetworkService);
+  private navigationService = inject(NavigationService);
+
   @ViewChild('popover') popover;
   @ViewChild('modal') modal: IonModal;
   @ViewChild(IonContent, { static: false }) content: IonContent;
@@ -86,17 +96,7 @@ export class NotificationsPage implements OnDestroy {
   private enabledChannels$: Observable<TranslatedChannel[]>;
   private subscriptions: Subscription[] = [];
 
-  constructor(
-    private notificationsService: NotificationsService,
-    @Inject(NOTIFICATIONS_CONFIG) private config: NotificationsModuleConfig,
-    private formBuilder: FormBuilder,
-    public pageLayoutService: PageLayoutService,
-    public platform: Platform,
-    public notificationRepository: NotificationsRepository,
-    private toastService: ToastService,
-    private networkService: NetworkService,
-    private navigationService: NavigationService,
-  ) {
+  constructor() {
     this.translatedChannels$ = this.notificationRepository.translatedChannels$;
     this.channels$ = this.notificationRepository.channels$;
 

@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Component, Inject, OnDestroy, ViewChild } from '@angular/core';
+import { Component, inject, OnDestroy, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FullCalendarComponent } from '@fullcalendar/angular';
 import { Calendar, CalendarOptions } from '@fullcalendar/core';
@@ -74,6 +74,14 @@ const defaultBreakpoint = 0.6;
   standalone: false,
 })
 export class ScheduleCalendarComponent implements OnDestroy {
+  private environment = inject<any>('environment' as any);
+  private route = inject(ActivatedRoute);
+  private scheduleCalendarService = inject(ScheduleCalendarService);
+  private scheduleService = inject(ScheduleService);
+  platform = inject(Platform);
+  private translate = inject(TranslateService);
+  private gestureCtrl = inject(GestureController);
+
   @ViewChild('calendar') calendarComponent: FullCalendarComponent;
   @ViewChild('modal') modal: IonModal;
 
@@ -205,16 +213,7 @@ export class ScheduleCalendarComponent implements OnDestroy {
   };
   private subscriptions: Subscription[] = [];
 
-  constructor(
-    @Inject('environment')
-    private environment: any,
-    private route: ActivatedRoute,
-    private scheduleCalendarService: ScheduleCalendarService,
-    private scheduleService: ScheduleService,
-    public platform: Platform,
-    private translate: TranslateService,
-    private gestureCtrl: GestureController,
-  ) {
+  constructor() {
     this.viewType$ = this.route.fragment.pipe(filter((f) => f !== null));
   }
 

@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Component, Inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
@@ -53,6 +53,12 @@ import { RssService } from './rss.service';
   standalone: false,
 })
 export class RssPage {
+  private rssService = inject(RssService);
+  private networkService = inject(NetworkService);
+  private route = inject(ActivatedRoute);
+  private navigationService = inject(NavigationService);
+  config = inject<RssModuleConfig>(RSS_CONFIG);
+
   public rssFeed$: Observable<FeedItem[]> = rssFeed$;
   public rssFeedIsEmpty$: Observable<boolean>;
   public isLoading = false;
@@ -60,13 +66,7 @@ export class RssPage {
   public openItemGuid: string;
   private subscriptions: Subscription[] = [];
 
-  constructor(
-    private rssService: RssService,
-    private networkService: NetworkService,
-    private route: ActivatedRoute,
-    private navigationService: NavigationService,
-    @Inject(RSS_CONFIG) public config: RssModuleConfig,
-  ) {
+  constructor() {
     this.rssFeedIsEmpty$ = this.rssFeed$.pipe(map((rssFeed) => rssFeed.length === 0));
   }
 

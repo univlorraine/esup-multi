@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
@@ -54,6 +54,12 @@ import { ContactMessageQueryDto, ContactUsService } from './contact-us.service';
   standalone: false,
 })
 export class ContactUsPage implements OnInit {
+  private contactUsService = inject(ContactUsService);
+  private contactUsRepository = inject(ContactUsRepository);
+  private toastController = inject(ToastController);
+  private translateService = inject(TranslateService);
+  private networkService = inject(NetworkService);
+
   contactForm = new FormGroup({
     from: new FormControl('', [Validators.required, Validators.email]),
     subject: new FormControl('', Validators.required),
@@ -65,13 +71,7 @@ export class ContactUsPage implements OnInit {
 
   private defaultFrom = '';
 
-  constructor(
-    private contactUsService: ContactUsService,
-    private contactUsRepository: ContactUsRepository,
-    private toastController: ToastController,
-    private translateService: TranslateService,
-    private networkService: NetworkService,
-  ) {
+  constructor() {
     this.translatedPageContent$ = this.contactUsRepository.translatedPageContent$;
   }
 

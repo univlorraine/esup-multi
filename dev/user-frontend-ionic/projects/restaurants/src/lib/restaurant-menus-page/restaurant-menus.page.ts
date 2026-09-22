@@ -41,6 +41,7 @@ import {
   AfterViewChecked,
   Component,
   ElementRef,
+  inject,
   OnDestroy,
   OnInit,
   ViewChild,
@@ -62,6 +63,11 @@ import { RestaurantMenusService } from './restaurant-menus.service';
   standalone: false,
 })
 export class RestaurantMenusPage implements OnInit, OnDestroy, AfterViewChecked {
+  private activatedRoute = inject(ActivatedRoute);
+  private restaurantMenusService = inject(RestaurantMenusService);
+  private networkService = inject(NetworkService);
+  private routerOutlet = inject(IonRouterOutlet);
+
   @ViewChild('swiperContainer') swiperContainer: ElementRef;
 
   public restaurantMenusIsEmpty$: Observable<boolean>;
@@ -70,13 +76,6 @@ export class RestaurantMenusPage implements OnInit, OnDestroy, AfterViewChecked 
   public isLoading = false;
   protected swiper: Swiper;
   private restaurantId: number;
-
-  constructor(
-    private activatedRoute: ActivatedRoute,
-    private restaurantMenusService: RestaurantMenusService,
-    private networkService: NetworkService,
-    private routerOutlet: IonRouterOutlet,
-  ) {}
 
   ngOnInit() {
     this.restaurantId = Number.parseInt(this.activatedRoute.snapshot.paramMap.get('id'), 10);

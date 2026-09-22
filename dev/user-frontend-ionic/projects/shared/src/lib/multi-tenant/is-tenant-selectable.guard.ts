@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { MultiTenantService } from './multi-tenant.service';
 
@@ -45,10 +45,8 @@ import { MultiTenantService } from './multi-tenant.service';
   providedIn: 'root',
 })
 export class IsTenantSelectableGuard implements CanActivate {
-  constructor(
-    private multiTenantService: MultiTenantService,
-    private router: Router,
-  ) {}
+  private multiTenantService = inject(MultiTenantService);
+  private router = inject(Router);
 
   canActivate() {
     const isSingleTenant: boolean = this.multiTenantService.isSingleTenant();

@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Actions } from '@ngneat/effects-ng';
 import { Observable, withLatestFrom } from 'rxjs';
 import { concatMap, filter, switchMap, take, tap } from 'rxjs/operators';
@@ -59,12 +59,12 @@ import { StandardAuthService } from './standard-auth.service';
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(
-    private actions: Actions,
-    private standardAuthService: StandardAuthService,
-    private keepAuthService: KeepAuthService,
-    private multiTenantService: MultiTenantService,
-  ) {
+  private actions = inject(Actions);
+  private standardAuthService = inject(StandardAuthService);
+  private keepAuthService = inject(KeepAuthService);
+  private multiTenantService = inject(MultiTenantService);
+
+  constructor() {
     // Si l'utilisateur passe en mode anonyme et qu'il est toujours connecté, on le déconnecte
     this.multiTenantService.tenantChange$
       .pipe(

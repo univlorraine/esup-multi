@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { add, eachDayOfInterval, Interval, isAfter } from 'date-fns';
 import { Observable, Subject } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
@@ -53,9 +53,9 @@ export interface EventsByDay {
   providedIn: 'root',
 })
 export class ScheduleListService {
-  public showEventEvt = new Subject<void>();
+  private scheduleService = inject(ScheduleService);
 
-  constructor(private scheduleService: ScheduleService) {}
+  public showEventEvt = new Subject<void>();
 
   eventsToEventsByDay(events: Event[], dateInterval: Interval): EventsByDay[] {
     const days = eachDayOfInterval(dateInterval);

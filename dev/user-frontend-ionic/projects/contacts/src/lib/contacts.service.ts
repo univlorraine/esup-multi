@@ -38,7 +38,7 @@
  */
 
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Contacts, EmailType, PhoneType } from '@capacitor-community/contacts';
 import { Observable } from 'rxjs';
 import { switchMap, take } from 'rxjs/operators';
@@ -63,10 +63,8 @@ export interface ContactsBody {
   providedIn: 'root',
 })
 export class ContactsService {
-  constructor(
-    private multiTenantService: MultiTenantService,
-    private http: HttpClient,
-  ) {}
+  private multiTenantService = inject(MultiTenantService);
+  private http = inject(HttpClient);
 
   public getContacts(body: ContactsBody): Observable<Contact[]> {
     return getAuthToken().pipe(

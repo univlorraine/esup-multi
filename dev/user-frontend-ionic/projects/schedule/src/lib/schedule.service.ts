@@ -38,7 +38,7 @@
  */
 
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { add, format, startOfWeek, sub } from 'date-fns';
 import { BehaviorSubject, combineLatest, from, Observable, of, Subject } from 'rxjs';
 import { filter, finalize, map, mergeMap, switchMap, take, tap } from 'rxjs/operators';
@@ -60,18 +60,18 @@ export const formatDay = (date: Date) => format(date, 'yyyy-MM-dd');
   providedIn: 'root',
 })
 export class ScheduleService {
+  private multiTenantService = inject(MultiTenantService);
+  private http = inject(HttpClient);
+  private config = inject<ScheduleModuleConfig>(SCHEDULE_CONFIG);
+  private networkService = inject(NetworkService);
+
   public isLoading$: Observable<boolean>;
   public hideEventEvt = new Subject<void>();
   public asUser = new BehaviorSubject<string | null>(null);
   private storeManager: ScheduleStoreManager = scheduleStoreManager;
   private isLoadingSubject = new Subject<boolean>();
 
-  constructor(
-    private multiTenantService: MultiTenantService,
-    private http: HttpClient,
-    @Inject(SCHEDULE_CONFIG) private config: ScheduleModuleConfig,
-    private networkService: NetworkService,
-  ) {
+  constructor() {
     this.isLoading$ = this.isLoadingSubject.asObservable();
     this.asUser.subscribe(() => {
       this.storeManager = this.getStoreManager();

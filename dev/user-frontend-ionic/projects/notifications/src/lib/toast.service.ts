@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -45,10 +45,8 @@ import { TranslateService } from '@ngx-translate/core';
   providedIn: 'root',
 })
 export class ToastService {
-  constructor(
-    private toastController: ToastController,
-    private translateService: TranslateService,
-  ) {}
+  private toastController = inject(ToastController);
+  private translateService = inject(TranslateService);
 
   async displayToast(messageToTranslate: string, channel?: string) {
     const message = this.translateService

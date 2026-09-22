@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IonInput, ToastController } from '@ionic/angular';
@@ -61,6 +61,17 @@ interface AuthenticatedUserToken extends AuthenticatedUser {
   standalone: false,
 })
 export class LoginPage implements OnInit {
+  private fb = inject(FormBuilder);
+  authService = inject(AuthService);
+  private toastController = inject(ToastController);
+  private preferencesService = inject(PreferencesService);
+  private loginService = inject(LoginService);
+  private loginRepository = inject(LoginRepository);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private navigationService = inject(NavigationService);
+  private featuresService = inject(FeaturesService);
+
   loginForm: FormGroup;
   returnUrl: string;
   public saveCredentialsOnAuthentication$ = saveCredentialsOnAuthentication$;
@@ -68,18 +79,7 @@ export class LoginPage implements OnInit {
   public translatedPageContent$: Observable<TranslatedLoginPageContent>;
   public hideBackButton$: Observable<boolean>;
 
-  constructor(
-    private fb: FormBuilder,
-    public authService: AuthService,
-    private toastController: ToastController,
-    private preferencesService: PreferencesService,
-    private loginService: LoginService,
-    private loginRepository: LoginRepository,
-    private route: ActivatedRoute,
-    private router: Router,
-    private navigationService: NavigationService,
-    private featuresService: FeaturesService,
-  ) {
+  constructor() {
     this.translatedPageContent$ = this.loginRepository.translatedPageContent$;
     this.hideBackButton$ = this.navigationService.isExternalNavigation$;
   }

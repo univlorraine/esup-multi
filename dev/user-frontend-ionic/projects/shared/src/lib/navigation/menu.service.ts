@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, ReplaySubject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FeatureType } from '../features/features.repository';
@@ -55,6 +55,9 @@ import { MenuItem, MenuItemLink, MenuItemLinkType, ServiceMenuItem } from './men
   providedIn: 'root',
 })
 export class MenuService {
+  private projectModuleService = inject(ProjectModuleService);
+  private featuresService = inject(FeaturesService);
+
   public tabsMenuItems$ = new ReplaySubject<MenuItem[]>();
   public topMenuItems$ = new BehaviorSubject<MenuItem[]>([]);
   public burgerMenuItems$ = new BehaviorSubject<MenuItem[]>([]);
@@ -64,10 +67,7 @@ export class MenuService {
   private tabsStaticMenuItemsEnd: MenuItem[];
   private burgerStaticMenuItems: MenuItem[];
 
-  constructor(
-    private projectModuleService: ProjectModuleService,
-    private featuresService: FeaturesService,
-  ) {
+  constructor() {
     this.allStaticMenuItems = this.getStaticMenuItems();
     this.tabsStaticMenuItemsStart = this.getStaticMenuItemsByType('tabs:start');
     this.tabsStaticMenuItemsEnd = this.getStaticMenuItemsByType('tabs:end');

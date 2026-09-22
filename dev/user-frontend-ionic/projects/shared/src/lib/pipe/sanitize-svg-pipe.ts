@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Pipe, PipeTransform } from '@angular/core';
+import { inject, Pipe, PipeTransform } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import DOMPurify from 'dompurify';
 
@@ -46,7 +46,7 @@ import DOMPurify from 'dompurify';
   standalone: false,
 })
 export class SanitizeSvgPipe implements PipeTransform {
-  constructor(private sanitizer: DomSanitizer) {}
+  private sanitizer = inject(DomSanitizer);
 
   transform(value: string) {
     // eslint-disable-next-line @typescript-eslint/naming-convention

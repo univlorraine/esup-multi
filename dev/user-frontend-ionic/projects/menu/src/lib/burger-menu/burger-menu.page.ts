@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Component, Inject, OnDestroy } from '@angular/core';
+import { Component, inject, OnDestroy } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable, Subscription } from 'rxjs';
@@ -68,6 +68,16 @@ import {
   standalone: false,
 })
 export class BurgerMenuPage implements OnDestroy {
+  private environment = inject<any>('environment' as any);
+  private sharedMenuService = inject(SharedMenuService);
+  private widgetLifecycleService = inject(WidgetLifecycleService);
+  private guidedTourService = inject(GuidedTourService);
+  private versionService = inject(VersionService);
+  private alertController = inject(AlertController);
+  private translateService = inject(TranslateService);
+  menuOpenerService = inject(MenuOpenerService);
+  multiTenantService = inject(MultiTenantService);
+
   public widgetIds = {
     auth: 'auth:auth-widget',
     contactUs: 'contact-us:contact-us-menu-item-widget',
@@ -85,18 +95,7 @@ export class BurgerMenuPage implements OnDestroy {
   isUniversitiesButtonVisible: boolean;
   private defaultTenantThemeSubscription: Subscription;
 
-  constructor(
-    @Inject('environment')
-    private environment: any,
-    private sharedMenuService: SharedMenuService,
-    private widgetLifecycleService: WidgetLifecycleService,
-    private guidedTourService: GuidedTourService,
-    private versionService: VersionService,
-    private alertController: AlertController,
-    private translateService: TranslateService,
-    public menuOpenerService: MenuOpenerService,
-    public multiTenantService: MultiTenantService,
-  ) {
+  constructor() {
     this.languages = this.environment.languages;
     this.authenticatedUser$ = authenticatedUser$;
     this.tenantThemeApplied$ = tenantThemeApplied$;

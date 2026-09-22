@@ -40,6 +40,7 @@
 import {
   Component,
   ElementRef,
+  inject,
   OnDestroy,
   OnInit,
   QueryList,
@@ -69,6 +70,11 @@ import { ServicesService } from './services.service';
   standalone: false,
 })
 export class ServicesPage implements OnInit, OnDestroy {
+  private featuresService = inject(FeaturesService);
+  private menuService = inject(MenuService);
+  private dragulaService = inject(DragulaService);
+  private servicesService = inject(ServicesService);
+
   @ViewChild('servicesContainer', { read: ElementRef }) servicesContainer: ElementRef;
   @ViewChildren('draggableServices') draggableServices: QueryList<ElementRef>;
   @ViewChild(IonContent, { static: false }) ionContent: IonContent;
@@ -85,13 +91,6 @@ export class ServicesPage implements OnInit, OnDestroy {
   private onPressBound = this.onPress.bind(this);
   private onUpBound = this.onUp.bind(this);
   private onVisibilityChangeBound = this.onVisibilityChange.bind(this);
-
-  constructor(
-    private featuresService: FeaturesService,
-    private menuService: MenuService,
-    private dragulaService: DragulaService,
-    private servicesService: ServicesService,
-  ) {}
 
   ngOnInit() {
     document.addEventListener('visibilitychange', () => this.onVisibilityChange());

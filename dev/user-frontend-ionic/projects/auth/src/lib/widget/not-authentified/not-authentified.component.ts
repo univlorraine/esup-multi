@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { AuthenticatedUser, authenticatedUser$ } from '@multi/shared';
@@ -51,14 +51,14 @@ import { LoginService } from '../../common/login.service';
   standalone: false,
 })
 export class NotAuthentifiedComponent implements OnInit {
+  private loginService = inject(LoginService);
+  private loginRepository = inject(LoginRepository);
+
   authenticatedUser$: Observable<AuthenticatedUser>;
 
   public translatedPageContent$: Observable<TranslatedLoginPageContent>;
 
-  constructor(
-    private loginService: LoginService,
-    private loginRepository: LoginRepository,
-  ) {
+  constructor() {
     this.translatedPageContent$ = this.loginRepository.translatedPageContent$;
   }
 

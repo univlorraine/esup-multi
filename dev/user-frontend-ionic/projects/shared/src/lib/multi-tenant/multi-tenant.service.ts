@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Inject, Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { getRegistry } from '@ngneat/elf';
 import { BehaviorSubject, firstValueFrom, Observable, Subject, withLatestFrom } from 'rxjs';
@@ -61,6 +61,10 @@ import { Tenant } from './multi-tenant.model';
   providedIn: 'root',
 })
 export class MultiTenantService {
+  private environment = inject<any>('environment' as any);
+  private router = inject(Router);
+  private fcmService = inject(FCMService);
+
   public currentTenantLogo$: Observable<string>;
   public tenantChange$: Observable<Tenant>;
 
@@ -71,12 +75,7 @@ export class MultiTenantService {
   private currentTenantLogoSubject = new BehaviorSubject<string>(this.environment.defaultLogo);
   private tenantChangeSubject = new Subject<Tenant>();
 
-  constructor(
-    @Inject('environment')
-    private environment: any,
-    private router: Router,
-    private fcmService: FCMService,
-  ) {
+  constructor() {
     this.currentTenantLogo$ = this.currentTenantLogoSubject.asObservable();
     this.tenantChange$ = this.tenantChangeSubject.asObservable();
 

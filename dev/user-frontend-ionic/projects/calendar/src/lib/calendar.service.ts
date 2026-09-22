@@ -38,7 +38,7 @@
  */
 
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { isAfter } from 'date-fns';
 import { from, iif, Observable, of } from 'rxjs';
 import { map, switchMap, take, tap } from 'rxjs/operators';
@@ -50,12 +50,10 @@ import { events$, MailCalendar, setEvents } from './calendar.repository';
   providedIn: 'root',
 })
 export class CalendarService {
-  constructor(
-    @Inject(CALENDAR_CONFIG) private config: CalendarModuleConfig,
-    private multiTenantService: MultiTenantService,
-    private http: HttpClient,
-    private networkService: NetworkService,
-  ) {}
+  private config = inject<CalendarModuleConfig>(CALENDAR_CONFIG);
+  private multiTenantService = inject(MultiTenantService);
+  private http = inject(HttpClient);
+  private networkService = inject(NetworkService);
 
   public loadCalendarIfNetworkAvailable(): Observable<void> {
     return from(this.networkService.getConnectionStatus()).pipe(

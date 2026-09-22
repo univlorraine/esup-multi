@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Injectable, SecurityContext } from '@angular/core';
+import { inject, Injectable, SecurityContext } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Event, NavigationEnd, Router, RouterEvent } from '@angular/router';
 import { Browser } from '@capacitor/browser';
@@ -51,6 +51,11 @@ import { ProjectModuleService } from '../project-module/project-module.service';
   providedIn: 'root',
 })
 export class NavigationService {
+  private router = inject(Router);
+  private projectModuleService = inject(ProjectModuleService);
+  private platform = inject(Platform);
+  private domSanitizer = inject(DomSanitizer);
+
   public currentRouterLink$: Observable<string>;
   public isExternalNavigation$: Observable<boolean>;
   private currentRouterLinkSubject$ = new BehaviorSubject<string>('/');
@@ -59,12 +64,7 @@ export class NavigationService {
   private pausedMinutesBeforeRefresh = 15;
   private isExternalNavigation = new BehaviorSubject<boolean>(!Capacitor.isNativePlatform());
 
-  constructor(
-    private router: Router,
-    private projectModuleService: ProjectModuleService,
-    private platform: Platform,
-    private domSanitizer: DomSanitizer,
-  ) {
+  constructor() {
     this.isExternalNavigation$ = this.isExternalNavigation.asObservable();
 
     // feed current router link

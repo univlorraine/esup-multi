@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { NetworkService } from '@multi/shared';
@@ -53,13 +53,13 @@ import { ContactUsService } from '../../contact-us.service';
   standalone: false,
 })
 export class ContactUsMenuItemComponent {
+  private contactUsService = inject(ContactUsService);
+  private contactUsRepository = inject(ContactUsRepository);
+  private networkService = inject(NetworkService);
+
   public translatedPageContent$: Observable<TranslatedContactUsPageContent>;
 
-  constructor(
-    private contactUsService: ContactUsService,
-    private contactUsRepository: ContactUsRepository,
-    private networkService: NetworkService,
-  ) {
+  constructor() {
     this.translatedPageContent$ = this.contactUsRepository.translatedPageContent$;
   }
 

@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { concatMap, filter, finalize, take } from 'rxjs/operators';
 import { deleteRefreshAuthToken, getRefreshAuthToken } from '@multi/shared';
 import { KeepAuthService } from '../common/keep-auth.service';
@@ -47,7 +47,7 @@ import { setSaveCredentialsOnAuthentication } from './preferences.repository';
   providedIn: 'root',
 })
 export class PreferencesService {
-  constructor(private keepAuthService: KeepAuthService) {}
+  private keepAuthService = inject(KeepAuthService);
 
   public saveCredentialsOnAuthenticationChange(saveCredentials: boolean) {
     setSaveCredentialsOnAuthentication(saveCredentials);

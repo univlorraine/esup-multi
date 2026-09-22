@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, Input } from '@angular/core';
 import {
   NavigationService,
   SsoService,
@@ -55,16 +55,14 @@ import {
   standalone: false,
 })
 export class WidgetExternalFeatureComponent {
+  private ssoService = inject(SsoService);
+  private statisticsService = inject(StatisticsService);
+  private themeService = inject(ThemeService);
+  private changeDetector = inject(ChangeDetectorRef);
+  private navigationService = inject(NavigationService);
+
   @Input() feature: TranslatedExternalFeature;
   isEmpty = false;
-
-  constructor(
-    private ssoService: SsoService,
-    private statisticsService: StatisticsService,
-    private themeService: ThemeService,
-    private changeDetector: ChangeDetectorRef,
-    private navigationService: NavigationService,
-  ) {}
 
   public onClick(): Promise<void> {
     if (!this.feature.link) {

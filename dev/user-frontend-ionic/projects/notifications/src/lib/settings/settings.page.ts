@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { combineLatest, Observable } from 'rxjs';
 import { catchError, filter, finalize, map, take } from 'rxjs/operators';
@@ -55,15 +55,13 @@ interface ChannelSubscription extends TranslatedChannel {
   standalone: false,
 })
 export class SettingsPage implements OnInit {
+  private notificationsService = inject(NotificationsService);
+  notificationRepository = inject(NotificationsRepository);
+  private toastService = inject(ToastService);
+
   channelsSubscriptions$: Observable<ChannelSubscription[]>;
   channelForm: FormGroup;
   channelControls: string[] = [];
-
-  constructor(
-    private notificationsService: NotificationsService,
-    public notificationRepository: NotificationsRepository,
-    private toastService: ToastService,
-  ) {}
 
   ngOnInit() {
     // Récupération depuis le CMS des canaux qui peuvent être filtrés par l'utilisateur

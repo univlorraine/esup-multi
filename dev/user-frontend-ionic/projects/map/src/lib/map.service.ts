@@ -38,7 +38,7 @@
  */
 
 import { HttpClient } from '@angular/common/http';
-import { Injectable, SecurityContext } from '@angular/core';
+import { inject, Injectable, SecurityContext } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import DOMPurify from 'dompurify';
 import { Observable } from 'rxjs';
@@ -50,11 +50,9 @@ import { MapData, Marker } from './map.repository';
   providedIn: 'root',
 })
 export class MapService {
-  constructor(
-    private multiTenantService: MultiTenantService,
-    private http: HttpClient,
-    private domSanitizer: DomSanitizer,
-  ) {}
+  private multiTenantService = inject(MultiTenantService);
+  private http = inject(HttpClient);
+  private domSanitizer = inject(DomSanitizer);
 
   getData(): Observable<MapData> {
     return this.http.get<MapData>(`${this.multiTenantService.getApiEndpoint()}/map`).pipe(

@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { NavigationService, NetworkService } from '@multi/shared';
@@ -53,13 +53,11 @@ import { SocialNetworkService } from '../../social-network.service';
   standalone: false,
 })
 export class SocialNetworkComponent {
-  public socialNetworks$: Observable<SocialNetwork[]> = socialNetworks$;
+  private socialNetworkService = inject(SocialNetworkService);
+  private networkService = inject(NetworkService);
+  private navigationService = inject(NavigationService);
 
-  constructor(
-    private socialNetworkService: SocialNetworkService,
-    private networkService: NetworkService,
-    private navigationService: NavigationService,
-  ) {}
+  public socialNetworks$: Observable<SocialNetwork[]> = socialNetworks$;
 
   async widgetViewDidEnter(): Promise<void> {
     if (!(await this.networkService.getConnectionStatus()).connected) {

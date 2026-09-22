@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 
 export interface AlertData {
@@ -53,10 +53,10 @@ export interface AlertData {
   providedIn: 'root',
 })
 export class AlertsService {
+  private alertController = inject(AlertController);
+
   private alertQueue: AlertData[] = [];
   private isAlertActive = false;
-
-  constructor(private alertController: AlertController) {}
 
   async enqueueAlert(alertData: AlertData): Promise<void> {
     // Ajoute l'alerte dans la file en respectant la priorité

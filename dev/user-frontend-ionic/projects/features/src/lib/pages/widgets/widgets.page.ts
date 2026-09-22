@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, take } from 'rxjs/operators';
 import {
@@ -55,15 +55,15 @@ import {
   standalone: false,
 })
 export class WidgetsPage {
+  private featuresService = inject(FeaturesService);
+  private widgetLifecycleService = inject(WidgetLifecycleService);
+  private guidedTourService = inject(GuidedTourService);
+  private multiTenantService = inject(MultiTenantService);
+
   public featuresIsEmpty$: Observable<boolean>;
   public translatedFeatures$: Observable<TranslatedFeature[]>;
 
-  constructor(
-    private featuresService: FeaturesService,
-    private widgetLifecycleService: WidgetLifecycleService,
-    private guidedTourService: GuidedTourService,
-    private multiTenantService: MultiTenantService,
-  ) {
+  constructor() {
     this.translatedFeatures$ = this.featuresService.translatedFeatures$.pipe(
       debounceTime(0), // Only get the last value of the replay subject
       filter((features) => features && features.length > 0),

@@ -38,7 +38,7 @@
  */
 
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { MultiTenantService } from '@multi/shared';
 import { UserAndCardData } from './card.repository';
@@ -47,10 +47,8 @@ import { UserAndCardData } from './card.repository';
   providedIn: 'root',
 })
 export class CardService {
-  constructor(
-    private multiTenantService: MultiTenantService,
-    private http: HttpClient,
-  ) {}
+  private multiTenantService = inject(MultiTenantService);
+  private http = inject(HttpClient);
 
   public getUserAndCardData(authToken: string): Observable<UserAndCardData> {
     const url = `${this.multiTenantService.getApiEndpoint()}/card`;

@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Component, Input, SecurityContext } from '@angular/core';
+import { Component, inject, Input, SecurityContext } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Browser } from '@capacitor/browser';
@@ -58,16 +58,14 @@ import {
   standalone: false,
 })
 export class KnowledgeBaseCardComponent {
+  private router = inject(Router);
+  private sanitizer = inject(DomSanitizer);
+  private ssoService = inject(SsoService);
+  private navigationService = inject(NavigationService);
+
   @Input() item: TranslatedKnowledgeBaseItem;
   @Input() displayMode: Display;
   public isExpanded = false;
-
-  constructor(
-    private router: Router,
-    private sanitizer: DomSanitizer,
-    private ssoService: SsoService,
-    private navigationService: NavigationService,
-  ) {}
 
   openItemLink(item: KnowledgeBaseItem) {
     switch (item.type) {

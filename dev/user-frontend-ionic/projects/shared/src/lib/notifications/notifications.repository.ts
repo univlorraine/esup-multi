@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Inject, Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { createStore, select, withProps } from '@ngneat/elf';
 import {
   addEntities,
@@ -109,6 +109,8 @@ const channelsStore = createStore(
 
 @Injectable({ providedIn: 'root' })
 export class NotificationsRepository {
+  private environment = inject<any>('environment' as any);
+
   public channels$ = channelsStore.pipe(selectAllEntities());
   public unsubscribedChannels$ = channelsStore.pipe(select((state) => state.unsubscribedChannels));
 
@@ -154,11 +156,6 @@ export class NotificationsRepository {
     key: CHANNELS_STORE,
     storage: localForageStore,
   });
-
-  constructor(
-    @Inject('environment')
-    private environment: any,
-  ) {}
 
   public setNotifications(notifications: Notification[]) {
     notificationsStore.update(setEntities(notifications));

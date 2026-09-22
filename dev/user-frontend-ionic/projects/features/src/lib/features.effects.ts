@@ -37,13 +37,16 @@
  * termes.
  */
 
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { createEffect, ofType } from '@ngneat/effects';
 import { tap } from 'rxjs/operators';
 import { cleanupPrivateData, clearFeatures, FeaturesService, NetworkService } from '@multi/shared';
 
 @Injectable({ providedIn: 'root' })
 export class FeaturesEffects {
+  private featuresService = inject(FeaturesService);
+  private networkService = inject(NetworkService);
+
   cleanupPrivateData$ = createEffect((actions) =>
     actions.pipe(
       ofType(cleanupPrivateData),
@@ -58,9 +61,4 @@ export class FeaturesEffects {
       }),
     ),
   );
-
-  constructor(
-    private featuresService: FeaturesService,
-    private networkService: NetworkService,
-  ) {}
 }

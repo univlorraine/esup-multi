@@ -38,7 +38,7 @@
  */
 
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { App } from '@capacitor/app';
 import { Capacitor } from '@capacitor/core';
 import { Platform } from '@ionic/angular';
@@ -63,20 +63,18 @@ interface AppUpdateInfo {
   providedIn: 'root',
 })
 export class AppUpdateService {
+  private http = inject(HttpClient);
+  private versionService = inject(VersionService);
+  private alertsService = inject(AlertsService);
+  private platform = inject(Platform);
+  private multiTenantService = inject(MultiTenantService);
+  private translateService = inject(TranslateService);
+  private guidedTourService = inject(GuidedTourService);
+
   private appUpdateInfo: AppUpdateInfo | null = null;
   private currentVersion: string | null = null;
   private translations: any;
   private initialized = false;
-
-  constructor(
-    private http: HttpClient,
-    private versionService: VersionService,
-    private alertsService: AlertsService,
-    private platform: Platform,
-    private multiTenantService: MultiTenantService,
-    private translateService: TranslateService,
-    private guidedTourService: GuidedTourService,
-  ) {}
 
   private async getCurrentVersion(): Promise<string> {
     return await firstValueFrom(this.versionService.getCurrentAppVersion());

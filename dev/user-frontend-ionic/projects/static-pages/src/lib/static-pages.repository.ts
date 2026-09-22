@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Inject, Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { createStore } from '@ngneat/elf';
 import { selectAllEntities, setEntities, withEntities } from '@ngneat/elf-entities';
 import { persistState } from '@ngneat/elf-persist-state';
@@ -81,6 +81,8 @@ export const persistStaticPages = persistState(store, {
 
 @Injectable({ providedIn: 'root' })
 export class StaticPagesRepository {
+  private environment = inject<any>('environment' as any);
+
   public staticPages$ = store.pipe(selectAllEntities());
 
   public translatedStaticPages$ = combineLatest([this.staticPages$, currentLanguage$]).pipe(
@@ -104,11 +106,6 @@ export class StaticPagesRepository {
       }),
     ),
   );
-
-  constructor(
-    @Inject('environment')
-    private environment: any,
-  ) {}
 
   public setStaticPages = (staticPages: StaticPage[]) => {
     store.update(setEntities(staticPages));

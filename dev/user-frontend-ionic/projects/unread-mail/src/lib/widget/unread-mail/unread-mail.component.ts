@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { AfterViewInit, ChangeDetectorRef, Component, Input } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, inject, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { finalize, take } from 'rxjs/operators';
 import { ThemeService } from '@multi/shared';
@@ -53,16 +53,14 @@ import { UnreadMailService } from '../../unread-mail.service';
   standalone: false,
 })
 export class UnreadMailComponent implements AfterViewInit {
+  private unreadMailService = inject(UnreadMailService);
+  private themeService = inject(ThemeService);
+  private changeDetectorRef = inject(ChangeDetectorRef);
+
   @Input() widgetColor: string;
 
   public isLoading = false;
   public mails$: Observable<MailCalendar> = mails$;
-
-  constructor(
-    private unreadMailService: UnreadMailService,
-    private themeService: ThemeService,
-    private changeDetectorRef: ChangeDetectorRef,
-  ) {}
 
   widgetViewDidEnter(): void {
     this.isLoading = true;

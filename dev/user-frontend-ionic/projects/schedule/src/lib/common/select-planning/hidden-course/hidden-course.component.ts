@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { take } from 'rxjs/operators';
 import { ScheduleListService } from '../../../schedule-list/schedule-list.service';
 import { HiddenCourse } from '../../../schedule.repository';
@@ -52,12 +52,10 @@ import { ScheduleService } from '../../../schedule.service';
   standalone: false,
 })
 export class HiddenCourseComponent {
-  @Input() hiddenCourse: HiddenCourse;
+  private scheduleListService = inject(ScheduleListService);
+  private scheduleService = inject(ScheduleService);
 
-  constructor(
-    private scheduleListService: ScheduleListService,
-    private scheduleService: ScheduleService,
-  ) {}
+  @Input() hiddenCourse: HiddenCourse;
 
   showAllSimilarCourse(courseToShow: HiddenCourse) {
     this.scheduleService

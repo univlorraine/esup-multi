@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { AfterViewInit, ChangeDetectorRef, Component, Input } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, inject, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError, finalize, take } from 'rxjs/operators';
 import { getExpectedErrorMessage, ThemeService } from '@multi/shared';
@@ -51,18 +51,16 @@ import { ClockingService } from '../../clocking.service';
   standalone: false,
 })
 export class ClockingComponent implements AfterViewInit {
+  private clockingService = inject(ClockingService);
+  private themeService = inject(ThemeService);
+  private changeDetectorRef = inject(ChangeDetectorRef);
+
   @Input() widgetColor: string;
 
   public isLoading = false;
   public clocking$: Observable<Clocking> = clocking$;
   public clockInLoading = false;
   public errorMessage: string | null = null;
-
-  constructor(
-    private clockingService: ClockingService,
-    private themeService: ThemeService,
-    private changeDetectorRef: ChangeDetectorRef,
-  ) {}
 
   widgetViewDidEnter(): void {
     this.isLoading = true;

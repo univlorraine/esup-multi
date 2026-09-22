@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Component, Inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { filter, first, Observable, switchMap } from 'rxjs';
 import { finalize, map, take } from 'rxjs/operators';
 import { NetworkService } from '@multi/shared';
@@ -52,14 +52,14 @@ import { RssService } from '../../rss.service';
   standalone: false,
 })
 export class LatestNewsComponent {
+  private rssService = inject(RssService);
+  private networkService = inject(NetworkService);
+  config = inject<RssModuleConfig>(RSS_CONFIG);
+
   public isLoading = false;
   public latestNews$: Observable<FeedItem>;
 
-  constructor(
-    private rssService: RssService,
-    private networkService: NetworkService,
-    @Inject(RSS_CONFIG) public config: RssModuleConfig,
-  ) {
+  constructor() {
     this.latestNews$ = rssFeed$.pipe(map((rssFeed) => rssFeed[0]));
   }
 

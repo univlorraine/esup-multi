@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -54,16 +54,16 @@ import { StaticPagesService } from '../../static-pages.service';
   standalone: false,
 })
 export class StaticPagesWidgetComponent {
+  private route = inject(ActivatedRoute);
+  private staticPagesService = inject(StaticPagesService);
+  private staticPagesRepository = inject(StaticPagesRepository);
+  private router = inject(Router);
+  private statisticsService = inject(StatisticsService);
+  private networkService = inject(NetworkService);
+
   public translatedStaticPages$: Observable<TranslatedStaticPage[]>;
 
-  constructor(
-    private route: ActivatedRoute,
-    private staticPagesService: StaticPagesService,
-    private staticPagesRepository: StaticPagesRepository,
-    private router: Router,
-    private statisticsService: StatisticsService,
-    private networkService: NetworkService,
-  ) {
+  constructor() {
     this.translatedStaticPages$ = this.staticPagesRepository.translatedStaticPages$;
   }
 

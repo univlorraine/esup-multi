@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { finalize, take } from 'rxjs/operators';
@@ -57,17 +57,15 @@ import { KnowledgeBaseService } from './knowledge-base.service';
   standalone: false,
 })
 export class KnowledgeBasePage implements OnInit {
+  private activatedRoute = inject(ActivatedRoute);
+  private knowledgeBaseService = inject(KnowledgeBaseService);
+  private knowledgeBasesRepository = inject(KnowledgeBaseRepository);
+  private networkService = inject(NetworkService);
+
   public isLoading = false;
   public parentPageId: string;
   public knowledgeBases$: Observable<TranslatedKnowledgeBaseItem[]>;
   public knowledgeBaseParentItem$: Observable<TranslatedKnowledgeBaseItem>;
-
-  constructor(
-    private activatedRoute: ActivatedRoute,
-    private knowledgeBaseService: KnowledgeBaseService,
-    private knowledgeBasesRepository: KnowledgeBaseRepository,
-    private networkService: NetworkService,
-  ) {}
 
   async ngOnInit() {
     this.parentPageId = this.activatedRoute.snapshot.paramMap.get('id');

@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { NavigationService } from '../../navigation/navigation.service';
 import { PageLayoutService, PageTitle } from '../../navigation/page-layout.service';
@@ -50,6 +50,10 @@ import { NetworkService } from '../../network/network.service';
   standalone: false,
 })
 export class HeaderComponent {
+  private pageLayoutService = inject(PageLayoutService);
+  private networkService = inject(NetworkService);
+  private navigationService = inject(NavigationService);
+
   @Input() backRouterLink = '';
 
   public currentPageTitle$: Observable<PageTitle>;
@@ -57,11 +61,7 @@ export class HeaderComponent {
   public isOnline$: Observable<boolean>;
   public hideBackButton$: Observable<boolean>;
 
-  constructor(
-    private pageLayoutService: PageLayoutService,
-    private networkService: NetworkService,
-    private navigationService: NavigationService,
-  ) {
+  constructor() {
     this.currentPageTitle$ = this.pageLayoutService.currentPageTitle$;
     this.showCurrentPageHeader$ = this.pageLayoutService.showCurrentPageHeader$;
     this.isOnline$ = this.networkService.isOnline$;

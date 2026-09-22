@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Component, DestroyRef, inject, Inject, ViewChild } from '@angular/core';
+import { Component, DestroyRef, inject, ViewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Geolocation } from '@capacitor/geolocation';
@@ -68,6 +68,14 @@ import { MapService } from './map.service';
   standalone: false,
 })
 export class MapPage {
+  private mapService = inject(MapService);
+  private translateService = inject(TranslateService);
+  private formBuilder = inject(FormBuilder);
+  private multiTenantService = inject(MultiTenantService);
+  private config = inject<MapModuleConfig>(MAP_CONFIG);
+  private networkService = inject(NetworkService);
+  private environment = inject<any>('environment' as any);
+
   @ViewChild('popover') popover;
 
   public isOpen = false;
@@ -84,16 +92,9 @@ export class MapPage {
   public isCampusSelectionOpen = false;
   public maxDisplayedFloatingButton: number;
 
-  constructor(
-    private mapService: MapService,
-    private translateService: TranslateService,
-    private formBuilder: FormBuilder,
-    private multiTenantService: MultiTenantService,
-    @Inject(MAP_CONFIG) private config: MapModuleConfig,
-    private networkService: NetworkService,
-    @Inject('environment')
-    private environment: any,
-  ) {
+  constructor() {
+    const config = this.config;
+
     this.maxDisplayedFloatingButton = config.maxDisplayedFloatingButton;
   }
 

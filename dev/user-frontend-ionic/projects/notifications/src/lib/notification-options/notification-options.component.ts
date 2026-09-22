@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { combineLatest, Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
@@ -64,6 +64,11 @@ interface NotificationOptions {
   standalone: false,
 })
 export class NotificationOptionsComponent {
+  platform = inject(Platform);
+  private notificationsService = inject(NotificationsService);
+  notificationRepository = inject(NotificationsRepository);
+  private toastService = inject(ToastService);
+
   @Input() notification: Notification;
   @Output() closeModal: EventEmitter<void> = new EventEmitter<void>();
 
@@ -71,12 +76,7 @@ export class NotificationOptionsComponent {
   public notificationOptions$: Observable<NotificationOptions>;
   unsubscribedChannelsCodes: string[] = [];
 
-  constructor(
-    public platform: Platform,
-    private notificationsService: NotificationsService,
-    public notificationRepository: NotificationsRepository,
-    private toastService: ToastService,
-  ) {
+  constructor() {
     this.notificationOptions$ = combineLatest([
       this.notificationRepository.translatedChannels$,
       this.notificationRepository.unsubscribedChannels$,

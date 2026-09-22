@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Component, Inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { combineLatest, Observable } from 'rxjs';
 import { finalize, map, take } from 'rxjs/operators';
@@ -65,20 +65,20 @@ import { ImportantNewsService } from '../../important-news.service';
   standalone: false,
 })
 export class ImportantNewsComponent {
+  private importantNewsService = inject(ImportantNewsService);
+  private router = inject(Router);
+  private statisticsService = inject(StatisticsService);
+  private themeService = inject(ThemeService);
+  private navigationService = inject(NavigationService);
+  config = inject<ImportantNewsModuleConfig>(IMPORTANT_NEWS_CONFIG);
+
   public isLoading = false;
   public importantNewsList$: Observable<ImportantNews[]> = importantNewsList$;
   public isEmpty$: Observable<boolean>;
   public translatedImportantNewsList$: Observable<TranslatedImportantNews[]>;
   public randomImportantNews$: Observable<TranslatedImportantNews | undefined>;
 
-  constructor(
-    private importantNewsService: ImportantNewsService,
-    private router: Router,
-    private statisticsService: StatisticsService,
-    private themeService: ThemeService,
-    private navigationService: NavigationService,
-    @Inject(IMPORTANT_NEWS_CONFIG) public config: ImportantNewsModuleConfig,
-  ) {
+  constructor() {
     this.isEmpty$ = this.importantNewsList$.pipe(
       map((importantNewsList) => !importantNewsList || importantNewsList.length === 0),
     );

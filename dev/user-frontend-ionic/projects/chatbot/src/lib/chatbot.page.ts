@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { Capacitor } from '@capacitor/core';
 import { Keyboard } from '@capacitor/keyboard';
 import { IonContent } from '@ionic/angular';
@@ -55,6 +55,9 @@ import { UserIdGeneratorService } from './user-id-generator.service';
   standalone: false,
 })
 export class ChatbotPage implements OnInit {
+  private multiTenantService = inject(MultiTenantService);
+  private chatbotService = inject(ChatbotService);
+
   private static readonly userChatId: string = UserIdGeneratorService.initRandomUserId();
 
   @ViewChild('scrollContent') scrollContent: IonContent;
@@ -67,11 +70,6 @@ export class ChatbotPage implements OnInit {
   public isFetchingAnswer = false;
   private messages: Message[] = [];
   private domMessageListObserver: MutationObserver;
-
-  constructor(
-    private multiTenantService: MultiTenantService,
-    private chatbotService: ChatbotService,
-  ) {}
 
   ngOnInit() {
     this.chatbotService

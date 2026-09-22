@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Component, ViewChild } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 import { IonContent } from '@ionic/angular';
 import { add, isAfter, startOfWeek } from 'date-fns';
 import { combineLatest, Observable, of, Subscription } from 'rxjs';
@@ -59,6 +59,9 @@ import { EventsByDay, ScheduleListService } from './schedule-list.service';
   standalone: false,
 })
 export class ScheduleListPage {
+  private scheduleListService = inject(ScheduleListService);
+  private scheduleService = inject(ScheduleService);
+
   @ViewChild('scrollContent') content: IonContent;
 
   public authenticatedUser$: Observable<AuthenticatedUser>;
@@ -69,11 +72,6 @@ export class ScheduleListPage {
   public viewEndDate: Date;
   public storeManager: ScheduleStoreManager = scheduleStoreManager;
   private subscriptions: Subscription[] = [];
-
-  constructor(
-    private scheduleListService: ScheduleListService,
-    private scheduleService: ScheduleService,
-  ) {}
 
   async ionViewWillEnter() {
     const now = new Date();

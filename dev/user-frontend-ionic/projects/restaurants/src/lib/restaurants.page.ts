@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Geolocation, Position } from '@capacitor/geolocation';
 import { getDistance } from 'geolib';
@@ -73,15 +73,13 @@ export interface RestaurantDto {
   standalone: false,
 })
 export class RestaurantsPage implements OnInit {
+  private restaurantsService = inject(RestaurantsService);
+  private router = inject(Router);
+  private networkService = inject(NetworkService);
+
   public restaurants$: Observable<RestaurantDto[]>;
   public isLoading = false;
   public restaurantsIsEmpty$: Observable<boolean>;
-
-  constructor(
-    private restaurantsService: RestaurantsService,
-    private router: Router,
-    private networkService: NetworkService,
-  ) {}
   async ngOnInit() {
     if (!(await this.networkService.getConnectionStatus()).connected) {
       return;

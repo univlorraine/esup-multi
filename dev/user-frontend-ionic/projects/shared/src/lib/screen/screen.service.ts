@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { ScreenBrightness } from '@capacitor-community/screen-brightness';
 import { Platform } from '@ionic/angular';
 import { from } from 'rxjs';
@@ -48,9 +48,9 @@ import { brightness$, setBrightness } from './screen.repository';
   providedIn: 'root',
 })
 export class ScreenService {
-  private fullBrightnessEnabled = false;
+  private platform = inject(Platform);
 
-  constructor(private platform: Platform) {}
+  private fullBrightnessEnabled = false;
 
   public async fullBrightness() {
     // the brightness plugin only works with capacitor

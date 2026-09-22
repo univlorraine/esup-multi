@@ -38,7 +38,7 @@
  */
 
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { App } from '@capacitor/app';
 import { Capacitor } from '@capacitor/core';
 import { Platform } from '@ionic/angular';
@@ -63,13 +63,11 @@ export interface ContactMessageQueryDto {
   providedIn: 'root',
 })
 export class ContactUsService {
-  constructor(
-    private multiTenantService: MultiTenantService,
-    private http: HttpClient,
-    private contactUsRepository: ContactUsRepository,
-    private networkService: NetworkService,
-    private platform: Platform,
-  ) {}
+  private multiTenantService = inject(MultiTenantService);
+  private http = inject(HttpClient);
+  private contactUsRepository = inject(ContactUsRepository);
+  private networkService = inject(NetworkService);
+  private platform = inject(Platform);
 
   public loadAndStoreContactUsPageContent(): Observable<ContactUsPageContent> {
     const url = `${this.multiTenantService.getApiEndpoint()}/contact-us`;

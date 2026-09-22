@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { finalize, take } from 'rxjs/operators';
 import { AuthenticatedUser, authenticatedUser$ } from '@multi/shared';
@@ -50,10 +50,10 @@ import { AuthService } from '../../common/auth.service';
   standalone: false,
 })
 export class AuthComponent implements OnInit {
+  private authService = inject(AuthService);
+
   isLoading = false;
   authenticatedUser$: Observable<AuthenticatedUser>;
-
-  constructor(private authService: AuthService) {}
 
   ngOnInit() {
     this.authenticatedUser$ = authenticatedUser$;

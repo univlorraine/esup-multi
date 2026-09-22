@@ -38,7 +38,7 @@
  */
 
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { MultiTenantService } from '@multi/shared';
@@ -53,10 +53,8 @@ import {
   providedIn: 'root',
 })
 export class ChatbotService {
-  constructor(
-    private multiTenantService: MultiTenantService,
-    private http: HttpClient,
-  ) {}
+  private multiTenantService = inject(MultiTenantService);
+  private http = inject(HttpClient);
 
   textRequest(text: string, userId: string): Observable<ChatbotMessage[]> {
     if (!text) {

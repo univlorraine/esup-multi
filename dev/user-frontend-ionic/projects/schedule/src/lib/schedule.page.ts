@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Component, OnDestroy, ViewChild } from '@angular/core';
+import { Component, inject, OnDestroy, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { take } from 'rxjs/operators';
 import { ScheduleCalendarComponent } from './schedule-calendar/schedule-calendar.component';
@@ -55,15 +55,13 @@ const DEFAULT_VIEW_TYPE: ViewType = 'month';
   standalone: false,
 })
 export class SchedulePage implements OnDestroy {
+  private scheduleService = inject(ScheduleService);
+  private router = inject(Router);
+
   @ViewChild(ScheduleCalendarComponent) calendarRef: ScheduleCalendarComponent;
   viewType: ViewType = DEFAULT_VIEW_TYPE;
   public isLoading$ = this.scheduleService.isLoading$;
   public asUser: string;
-
-  constructor(
-    private scheduleService: ScheduleService,
-    private router: Router,
-  ) {}
 
   onViewTypeChange(evt) {
     this.viewType = evt.detail.value;

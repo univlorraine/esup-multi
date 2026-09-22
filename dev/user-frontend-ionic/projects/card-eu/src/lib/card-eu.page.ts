@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { filter, finalize, switchMap, take } from 'rxjs/operators';
 import {
@@ -58,17 +58,15 @@ import { CardEuService } from './card-eu.service';
   standalone: false,
 })
 export class CardEuPage implements OnInit {
+  private cardEuService = inject(CardEuService);
+  private screenService = inject(ScreenService);
+  private networkService = inject(NetworkService);
+  config = inject<CardEuModuleConfig>(CARD_EU_CONFIG);
+
   public authenticatedUser$: Observable<AuthenticatedUser>;
   public userAndCardEuData$: Observable<UserAndCardEuData> = userAndCardEuData$;
   public isLoading = false;
   private userAndCardEuDataSubscription: Subscription;
-
-  constructor(
-    private cardEuService: CardEuService,
-    private screenService: ScreenService,
-    private networkService: NetworkService,
-    @Inject(CARD_EU_CONFIG) public config: CardEuModuleConfig,
-  ) {}
 
   ngOnInit() {
     this.authenticatedUser$ = authenticatedUser$;

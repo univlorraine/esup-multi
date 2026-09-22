@@ -43,7 +43,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { TranslatePipe } from '@ngx-translate/core';
-import { SharedComponentsModule } from 'projects/shared/src/public-api';
+import { SharedComponentsModule } from '@multi/shared';
 import { LayoutPage } from './layout.page';
 
 @NgModule({

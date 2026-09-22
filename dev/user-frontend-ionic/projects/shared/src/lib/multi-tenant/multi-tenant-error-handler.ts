@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { ErrorHandler, Injectable, NgZone } from '@angular/core';
+import { ErrorHandler, inject, Injectable, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { NoTenantSelectedError } from './multi-tenant.error';
 
@@ -45,10 +45,8 @@ import { NoTenantSelectedError } from './multi-tenant.error';
   providedIn: 'root',
 })
 export class MultiTenantErrorHandler implements ErrorHandler {
-  constructor(
-    private router: Router,
-    private zone: NgZone,
-  ) {}
+  private router = inject(Router);
+  private zone = inject(NgZone);
 
   handleError(error: any): void {
     if (error instanceof NoTenantSelectedError) {

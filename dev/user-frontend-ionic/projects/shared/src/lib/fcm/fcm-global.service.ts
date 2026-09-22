@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Inject, Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { FirebaseMessaging, GetTokenOptions } from '@capacitor-firebase/messaging';
 import { Platform } from '@ionic/angular';
 import { FCMRepository } from './fcm.repository';
@@ -46,14 +46,11 @@ import { FCMRepository } from './fcm.repository';
   providedIn: 'root',
 })
 export class FCMService {
-  private currentTopic: string;
+  private environment = inject<any>('environment' as any);
+  fcmRepository = inject(FCMRepository);
+  private platform = inject(Platform);
 
-  constructor(
-    @Inject('environment')
-    private environment: any,
-    public fcmRepository: FCMRepository,
-    private platform: Platform,
-  ) {}
+  private currentTopic: string;
 
   public unsubscribeFromTopic() {
     if (this.currentTopic) {

@@ -41,7 +41,7 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
-  Inject,
+  inject,
   Input,
   OnDestroy,
   TemplateRef,
@@ -62,6 +62,13 @@ import { NextEventsService } from './next-events.service';
   standalone: false,
 })
 export class NextEventsComponent implements OnDestroy, AfterViewInit {
+  private nextEventsService = inject(NextEventsService);
+  private scheduleService = inject(ScheduleService);
+  private completeLocalDatePipe = inject(CompleteLocalDatePipe);
+  private themeService = inject(ThemeService);
+  private changeDetectorRef = inject(ChangeDetectorRef);
+  private config = inject<ScheduleModuleConfig>(SCHEDULE_CONFIG);
+
   @Input() widgetColor: string;
   @ViewChild('list') list: TemplateRef<any>;
   @ViewChild('slider') slider: TemplateRef<any>;
@@ -72,14 +79,7 @@ export class NextEventsComponent implements OnDestroy, AfterViewInit {
   public displayDateForIds: string[];
   private nextEventsSubscription: Subscription;
 
-  constructor(
-    private nextEventsService: NextEventsService,
-    private scheduleService: ScheduleService,
-    private completeLocalDatePipe: CompleteLocalDatePipe,
-    private themeService: ThemeService,
-    private changeDetectorRef: ChangeDetectorRef,
-    @Inject(SCHEDULE_CONFIG) private config: ScheduleModuleConfig,
-  ) {
+  constructor() {
     this.nextEvents$ = this.nextEventsService.getNextEvents$().pipe();
 
     // If two events occurs the same day, we only want to display the date once

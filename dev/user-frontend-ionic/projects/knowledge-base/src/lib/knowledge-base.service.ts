@@ -38,7 +38,7 @@
  */
 
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { from, Observable } from 'rxjs';
 import { filter, switchMap, take, tap } from 'rxjs/operators';
 import { getAuthToken, MultiTenantService, NetworkService } from '@multi/shared';
@@ -48,12 +48,10 @@ import { KnowledgeBaseItem, KnowledgeBaseRepository } from './knowledge-base.rep
   providedIn: 'root',
 })
 export class KnowledgeBaseService {
-  constructor(
-    private multiTenantService: MultiTenantService,
-    private knowledgeBaseRepository: KnowledgeBaseRepository,
-    private http: HttpClient,
-    private networkService: NetworkService,
-  ) {}
+  private multiTenantService = inject(MultiTenantService);
+  private knowledgeBaseRepository = inject(KnowledgeBaseRepository);
+  private http = inject(HttpClient);
+  private networkService = inject(NetworkService);
 
   public loadAndStoreKnowledgeBase(): Observable<KnowledgeBaseItem[]> {
     return from(this.networkService.getConnectionStatus()).pipe(

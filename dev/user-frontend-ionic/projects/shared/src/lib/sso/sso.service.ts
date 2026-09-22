@@ -38,7 +38,7 @@
  */
 
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, concatMap, filter, map, switchMap, take } from 'rxjs/operators';
 import { getAuthToken } from '../auth/auth.repository';
@@ -50,11 +50,9 @@ import { SsoExternalLinkQueryDto, SsoServiceTokenQueryDto } from './sso.dto';
   providedIn: 'root',
 })
 export class SsoService {
-  constructor(
-    private multiTenantService: MultiTenantService,
-    private http: HttpClient,
-    private keepAuthService: KeepAuthService,
-  ) {}
+  private multiTenantService = inject(MultiTenantService);
+  private http = inject(HttpClient);
+  private keepAuthService = inject(KeepAuthService);
 
   public getSsoExternalLink(query: SsoExternalLinkQueryDto): Observable<string> {
     return getAuthToken().pipe(

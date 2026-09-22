@@ -38,7 +38,7 @@
  */
 
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { filter, first, Observable } from 'rxjs';
 import { map, switchMap, take, tap } from 'rxjs/operators';
 import { getAuthToken, MultiTenantService, NetworkService } from '@multi/shared';
@@ -48,11 +48,9 @@ import { MailCalendar, setMails } from './unread-mail.repository';
   providedIn: 'root',
 })
 export class UnreadMailService {
-  constructor(
-    private multiTenantService: MultiTenantService,
-    private http: HttpClient,
-    private networkService: NetworkService,
-  ) {}
+  private multiTenantService = inject(MultiTenantService);
+  private http = inject(HttpClient);
+  private networkService = inject(NetworkService);
 
   public loadUnreadMailIfNetworkAvailable(): Observable<void> {
     return this.networkService.isOnline$.pipe(

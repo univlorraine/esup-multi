@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { from } from 'rxjs';
 import { SsoService } from '../sso/sso.service';
@@ -55,12 +55,10 @@ import { NavigationService } from './navigation.service';
   providedIn: 'root',
 })
 export class MenuOpenerService {
-  constructor(
-    private router: Router,
-    private ssoService: SsoService,
-    private statisticsService: StatisticsService,
-    private navigationService: NavigationService,
-  ) {}
+  private router = inject(Router);
+  private ssoService = inject(SsoService);
+  private statisticsService = inject(StatisticsService);
+  private navigationService = inject(NavigationService);
 
   public async open(menuItem: MenuItem) {
     this.statisticsService.onFunctionalityOpened(menuItem.statisticName);

@@ -85,6 +85,18 @@ interface MenuItemWithBadge extends MenuItemWithOptionalRouterLink {
   standalone: false,
 })
 export class LayoutPage implements AfterViewInit, OnChanges, OnDestroy {
+  private navController = inject(NavController);
+  private menuService = inject(MenuService);
+  private featuresService = inject(FeaturesService);
+  private statisticsService = inject(StatisticsService);
+  private guidedTourService = inject(GuidedTourService);
+  menuOpenerService = inject(MenuOpenerService);
+  private networkService = inject(NetworkService);
+  private notificationsRepository = inject(NotificationsRepository);
+  private notificationsService = inject(NotificationsService);
+  private multiTenantService = inject(MultiTenantService);
+  private navigationService = inject(NavigationService);
+
   @Input() currentPageLayout: PageLayout;
 
   public isLoading = false;
@@ -97,19 +109,7 @@ export class LayoutPage implements AfterViewInit, OnChanges, OnDestroy {
   public defaultLogo: string;
   private defaultLogoSubscription: Subscription;
 
-  constructor(
-    private navController: NavController,
-    private menuService: MenuService,
-    private featuresService: FeaturesService,
-    private statisticsService: StatisticsService,
-    private guidedTourService: GuidedTourService,
-    public menuOpenerService: MenuOpenerService,
-    private networkService: NetworkService,
-    private notificationsRepository: NotificationsRepository,
-    private notificationsService: NotificationsService,
-    private multiTenantService: MultiTenantService,
-    private navigationService: NavigationService,
-  ) {
+  constructor() {
     this.initializeObservables();
     this.setupSubscriptions();
     this.handleSingleTenant();

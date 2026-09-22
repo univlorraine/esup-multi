@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
@@ -76,6 +76,9 @@ const atLeastOneCheckedValidator =
   standalone: false,
 })
 export class SelectPlanningComponent {
+  private formBuilder = inject(FormBuilder);
+  private scheduleService = inject(ScheduleService);
+
   form: FormGroup;
   public isSelectPlanningModalOpen = false;
   public isHiddenCourseModalOpen = false;
@@ -84,10 +87,7 @@ export class SelectPlanningComponent {
   public lastSelectedPlanningIndex: number | null = null;
   public hiddenCourseList$: Observable<HiddenCourse[]> = scheduleStoreManager.hiddenCourseList$;
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private scheduleService: ScheduleService,
-  ) {
+  constructor() {
     this.scheduleService.asUser.subscribe(
       () => (this.hiddenCourseList$ = this.scheduleService.getStoreManager().hiddenCourseList$),
     );

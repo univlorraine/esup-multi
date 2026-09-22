@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { NavigationService } from '../../navigation/navigation.service';
 
@@ -48,12 +48,10 @@ import { NavigationService } from '../../navigation/navigation.service';
   standalone: false,
 })
 export class BackButtonComponent {
-  @Input() defaultHref = '';
+  private navigationService = inject(NavigationService);
+  platform = inject(Platform);
 
-  constructor(
-    private navigationService: NavigationService,
-    public platform: Platform,
-  ) {}
+  @Input() defaultHref = '';
 
   goBack() {
     // use defaultHref if not empty

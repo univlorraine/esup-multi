@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Component, Inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Observable, Subscription } from 'rxjs';
 import { filter, finalize, switchMap, take } from 'rxjs/operators';
 import { AuthenticatedUser, getAuthToken, NetworkService, ScreenService } from '@multi/shared';
@@ -52,17 +52,15 @@ import { CardService } from './card.service';
   standalone: false,
 })
 export class CardPage {
+  private cardService = inject(CardService);
+  private screenService = inject(ScreenService);
+  private networkService = inject(NetworkService);
+  private config = inject<CardModuleConfig>(CARD_CONFIG);
+
   public authenticatedUser$: Observable<AuthenticatedUser>;
   public userAndCardData$: Observable<UserAndCardData> = userAndCardData$;
   public isLoading = false;
   private userAndCardDataSubscription: Subscription;
-
-  constructor(
-    private cardService: CardService,
-    private screenService: ScreenService,
-    private networkService: NetworkService,
-    @Inject(CARD_CONFIG) private config: CardModuleConfig,
-  ) {}
 
   ionViewWillEnter() {
     this.userAndCardDataSubscription = userAndCardData$.subscribe((userAndCardData) => {

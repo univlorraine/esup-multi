@@ -38,7 +38,7 @@
  */
 
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { MultiTenantService } from '@multi/shared';
@@ -48,11 +48,9 @@ import { LoginPageContent, LoginRepository } from './login.repository';
   providedIn: 'root',
 })
 export class LoginService {
-  constructor(
-    private multiTenantService: MultiTenantService,
-    private http: HttpClient,
-    private loginRepository: LoginRepository,
-  ) {}
+  private multiTenantService = inject(MultiTenantService);
+  private http = inject(HttpClient);
+  private loginRepository = inject(LoginRepository);
 
   public loadAndStoreLoginPageContent(): Observable<LoginPageContent> {
     const url = `${this.multiTenantService.getApiEndpoint()}/auth/login-page-content`;

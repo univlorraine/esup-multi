@@ -37,7 +37,15 @@
  * termes.
  */
 
-import { Component, OnInit, QueryList, Type, ViewChildren, ViewContainerRef } from '@angular/core';
+import {
+  Component,
+  inject,
+  OnInit,
+  QueryList,
+  Type,
+  ViewChildren,
+  ViewContainerRef,
+} from '@angular/core';
 import { ProjectModuleService } from '@multi/shared';
 
 @Component({
@@ -47,11 +55,11 @@ import { ProjectModuleService } from '@multi/shared';
   standalone: false,
 })
 export class PreferencesPage implements OnInit {
+  private projectModuleService = inject(ProjectModuleService);
+
   @ViewChildren('preferences', { read: ViewContainerRef }) preferences: QueryList<ViewContainerRef>;
 
   public preferencesComponents: Type<any>[] = [];
-
-  constructor(private projectModuleService: ProjectModuleService) {}
 
   ngOnInit(): void {
     this.preferencesComponents = this.projectModuleService.getPreferencesComponents();

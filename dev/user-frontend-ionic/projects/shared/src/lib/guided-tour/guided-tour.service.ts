@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Inject, Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Capacitor } from '@capacitor/core';
 import { OrientationType, ScreenOrientation } from '@capawesome/capacitor-screen-orientation';
@@ -60,17 +60,16 @@ import {
   providedIn: 'root',
 })
 export class GuidedTourService {
+  private environment = inject<any>('environment' as any);
+  private shepherdService = inject(ShepherdService);
+  private router = inject(Router);
+  private translateService = inject(TranslateService);
+  private networkService = inject(NetworkService);
+
   private isOnline$: Observable<boolean>;
   private updateAlertActive = false;
 
-  constructor(
-    @Inject('environment')
-    private environment: any,
-    private shepherdService: ShepherdService,
-    private router: Router,
-    private translateService: TranslateService,
-    private networkService: NetworkService,
-  ) {
+  constructor() {
     this.isOnline$ = this.networkService.isOnline$;
 
     this.shepherdService.defaultStepOptions = {

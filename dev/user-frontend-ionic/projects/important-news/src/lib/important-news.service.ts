@@ -38,7 +38,7 @@
  */
 
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { from, Observable } from 'rxjs';
 import { filter, switchMap, take } from 'rxjs/operators';
 import { getAuthToken, MultiTenantService, NetworkService } from '@multi/shared';
@@ -48,13 +48,10 @@ import { ImportantNews, TranslatedImportantNews } from './important-news.reposit
   providedIn: 'root',
 })
 export class ImportantNewsService {
-  constructor(
-    @Inject('environment')
-    private environment: any,
-    private multiTenantService: MultiTenantService,
-    private http: HttpClient,
-    private networkService: NetworkService,
-  ) {}
+  private environment = inject<any>('environment' as any);
+  private multiTenantService = inject(MultiTenantService);
+  private http = inject(HttpClient);
+  private networkService = inject(NetworkService);
 
   public loadImportantNewsList(): Observable<ImportantNews[]> {
     return from(this.networkService.getConnectionStatus()).pipe(

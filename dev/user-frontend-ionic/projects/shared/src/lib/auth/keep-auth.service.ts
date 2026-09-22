@@ -38,7 +38,7 @@
  */
 
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Actions } from '@ngneat/effects-ng';
 import { Observable, of } from 'rxjs';
 import { concatMap, delayWhen } from 'rxjs/operators';
@@ -56,11 +56,9 @@ interface ReauthResult extends AuthenticatedUser {
   providedIn: 'root',
 })
 export class KeepAuthService {
-  constructor(
-    private multiTenantService: MultiTenantService,
-    private http: HttpClient,
-    private actions: Actions,
-  ) {}
+  private multiTenantService = inject(MultiTenantService);
+  private http = inject(HttpClient);
+  private actions = inject(Actions);
 
   public reauthenticateIfAvailable(): Observable<ReauthResult | null> {
     return getRefreshAuthToken().pipe(

@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Inject, Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { createStore, select, withProps } from '@ngneat/elf';
 import { persistState } from '@ngneat/elf-persist-state';
 import { combineLatest } from 'rxjs';
@@ -76,6 +76,8 @@ export const persist = persistState(store, {
 
 @Injectable({ providedIn: 'root' })
 export class ContactUsRepository {
+  private environment = inject<any>('environment' as any);
+
   private pageContent$ = store.pipe(select((state) => state.pageContent));
 
   public translatedPageContent$ = combineLatest([this.pageContent$, currentLanguage$]).pipe(
@@ -95,11 +97,6 @@ export class ContactUsRepository {
       };
     }),
   );
-
-  constructor(
-    @Inject('environment')
-    private environment: any,
-  ) {}
 
   public setPageContent = (pageContent: ContactUsPageContent) => {
     store.update((state) => ({

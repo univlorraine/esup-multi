@@ -38,7 +38,7 @@
  */
 
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { MultiTenantService } from '@multi/shared';
 import { FeedItem } from './rss.repository';
@@ -47,10 +47,8 @@ import { FeedItem } from './rss.repository';
   providedIn: 'root',
 })
 export class RssService {
-  constructor(
-    private multiTenantService: MultiTenantService,
-    private http: HttpClient,
-  ) {}
+  private multiTenantService = inject(MultiTenantService);
+  private http = inject(HttpClient);
 
   public getRssFeed(): Observable<FeedItem[]> {
     return this.http.get<FeedItem[]>(`${this.multiTenantService.getApiEndpoint()}/rss`);

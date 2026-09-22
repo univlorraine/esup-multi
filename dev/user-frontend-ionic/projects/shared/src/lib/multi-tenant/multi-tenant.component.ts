@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Component, Inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { App } from '@capacitor/app';
 import { Capacitor } from '@capacitor/core';
@@ -60,6 +60,11 @@ import { MultiTenantService } from './multi-tenant.service';
   standalone: false,
 })
 export class MultiTenantComponent {
+  private environment = inject<any>('environment' as any);
+  private router = inject(Router);
+  private multiTenantService = inject(MultiTenantService);
+  private activatedRoute = inject(ActivatedRoute);
+
   public availableTenants: Tenant[];
   public selectedTenantId: string;
   public languages: string[] = [];
@@ -67,13 +72,7 @@ export class MultiTenantComponent {
   public darkModeEnabled: boolean;
   isDarkTheme$: Observable<boolean>;
 
-  constructor(
-    @Inject('environment')
-    private environment: any,
-    private router: Router,
-    private multiTenantService: MultiTenantService,
-    private activatedRoute: ActivatedRoute,
-  ) {
+  constructor() {
     this.availableTenants = this.getAvailableTenants();
     this.selectedTenantId = this.multiTenantService.getSelectedTenantId();
 

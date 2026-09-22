@@ -37,13 +37,15 @@
  * termes.
  */
 
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { createEffect, ofType } from '@ngneat/effects';
 import { concatMap, filter, tap } from 'rxjs/operators';
 import { authenticate, cleanupPrivateData, NotificationsService } from '@multi/shared';
 
 @Injectable({ providedIn: 'root' })
 export class NotificationsEffects {
+  private notificationsService = inject(NotificationsService);
+
   sendFCMToken$ = createEffect((actions) =>
     actions.pipe(
       ofType(authenticate),
@@ -57,5 +59,4 @@ export class NotificationsEffects {
       concatMap((payload) => this.notificationsService.unregisterFCMToken(payload.authToken)),
     ),
   );
-  constructor(private notificationsService: NotificationsService) {}
 }

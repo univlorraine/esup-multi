@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import {
   isDarkTheme$,
   MenuOpenerService,
@@ -52,11 +52,11 @@ import {
   standalone: false,
 })
 export class ServiceComponent {
+  menuOpenerService = inject(MenuOpenerService);
+
   @Input() menuItem: ServiceMenuItem;
   @Input() draggableIsOn: boolean;
   public isDarkTheme$ = isDarkTheme$;
-
-  constructor(public menuOpenerService: MenuOpenerService) {}
 
   open(menuItem: ServiceMenuItem) {
     updateFeatureIsNewToFalse(menuItem);

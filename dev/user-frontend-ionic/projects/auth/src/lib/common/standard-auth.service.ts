@@ -38,7 +38,7 @@
  */
 
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, concatMap, delayWhen, take } from 'rxjs/operators';
 import {
@@ -57,10 +57,8 @@ interface LoginResult extends AuthenticatedUser {
   providedIn: 'root',
 })
 export class StandardAuthService {
-  constructor(
-    private multiTenantService: MultiTenantService,
-    private http: HttpClient,
-  ) {}
+  private multiTenantService = inject(MultiTenantService);
+  private http = inject(HttpClient);
 
   login(username: string, password: string): Observable<AuthenticatedUser | null> {
     const url = `${this.multiTenantService.getApiEndpoint()}/auth`;

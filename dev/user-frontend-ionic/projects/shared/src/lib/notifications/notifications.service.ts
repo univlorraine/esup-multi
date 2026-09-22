@@ -38,7 +38,7 @@
  */
 
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Capacitor } from '@capacitor/core';
 import { Badge } from '@capawesome/capacitor-badge';
 import { combineLatest, first, firstValueFrom, Observable, of } from 'rxjs';
@@ -54,16 +54,13 @@ import { Channel, Notification, NotificationsRepository } from './notifications.
   providedIn: 'root',
 })
 export class NotificationsService {
-  constructor(
-    @Inject('environment')
-    private environment: any,
-    private multiTenantService: MultiTenantService,
-    private fcmService: FCMService,
-    private http: HttpClient,
-    public notificationRepository: NotificationsRepository,
-    private fcmRepository: FCMRepository,
-    private networkService: NetworkService,
-  ) {}
+  private environment = inject<any>('environment' as any);
+  private multiTenantService = inject(MultiTenantService);
+  private fcmService = inject(FCMService);
+  private http = inject(HttpClient);
+  notificationRepository = inject(NotificationsRepository);
+  private fcmRepository = inject(FCMRepository);
+  private networkService = inject(NetworkService);
 
   public getNotifications(
     authToken: string,

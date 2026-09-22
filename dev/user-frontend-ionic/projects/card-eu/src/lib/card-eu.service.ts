@@ -38,7 +38,7 @@
  */
 
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { MultiTenantService } from '@multi/shared';
 import { UserAndCardEuData } from './card-eu.repository';
@@ -47,10 +47,8 @@ import { UserAndCardEuData } from './card-eu.repository';
   providedIn: 'root',
 })
 export class CardEuService {
-  constructor(
-    private multiTenantService: MultiTenantService,
-    private http: HttpClient,
-  ) {}
+  private multiTenantService = inject(MultiTenantService);
+  private http = inject(HttpClient);
 
   public getUserAndCardEuData(
     authToken: string,

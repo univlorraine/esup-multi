@@ -38,7 +38,7 @@
  */
 
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { from, iif, Observable, of } from 'rxjs';
 import { map, switchMap, take, tap } from 'rxjs/operators';
 import { getAuthToken, MultiTenantService, NetworkService } from '@multi/shared';
@@ -48,11 +48,9 @@ import { Clocking, setClocking } from './clocking.repository';
   providedIn: 'root',
 })
 export class ClockingService {
-  constructor(
-    private multiTenantService: MultiTenantService,
-    private http: HttpClient,
-    private networkService: NetworkService,
-  ) {}
+  private multiTenantService = inject(MultiTenantService);
+  private http = inject(HttpClient);
+  private networkService = inject(NetworkService);
 
   public loadClockingIfNetworkAvailable(): Observable<void> {
     return from(this.networkService.getConnectionStatus()).pipe(

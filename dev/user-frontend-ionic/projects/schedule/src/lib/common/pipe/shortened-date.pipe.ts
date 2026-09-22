@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Pipe, PipeTransform } from '@angular/core';
+import { inject, Pipe, PipeTransform } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { format } from 'date-fns';
 import * as locale from 'date-fns/locale';
@@ -48,7 +48,7 @@ import * as locale from 'date-fns/locale';
   standalone: false,
 })
 export class ShortenedDatePipe implements PipeTransform {
-  constructor(private translateService: TranslateService) {}
+  private translateService = inject(TranslateService);
 
   transform(fullDate: string): string {
     const lang = this.translateService.getCurrentLang() || this.translateService.getFallbackLang();

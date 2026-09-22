@@ -38,7 +38,7 @@
  */
 
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { combineLatest, Observable, ReplaySubject } from 'rxjs';
 import { filter, map, share, switchMap, take, tap } from 'rxjs/operators';
 import { getAuthToken } from '../auth/auth.repository';
@@ -88,15 +88,14 @@ export type TranslatedFeature = TranslatedExternalFeature | TranslatedInternalFe
   providedIn: 'root',
 })
 export class FeaturesService {
+  private environment = inject<any>('environment' as any);
+  private multiTenantService = inject(MultiTenantService);
+  private http = inject(HttpClient);
+
   public translatedFeatures$: Observable<TranslatedFeature[]>;
   private translatedFeaturesSubject$ = new ReplaySubject<TranslatedFeature[]>();
 
-  constructor(
-    @Inject('environment')
-    private environment: any,
-    private multiTenantService: MultiTenantService,
-    private http: HttpClient,
-  ) {
+  constructor() {
     this.translatedFeatures$ = this.translatedFeaturesSubject$;
 
     combineLatest([

@@ -37,12 +37,12 @@
  * termes.
  */
 
-import { DOCUMENT } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import {
   Component,
   DestroyRef,
+  DOCUMENT,
   inject,
-  Inject,
   Injector,
   OnDestroy,
   OnInit,
@@ -58,8 +58,8 @@ import { Device } from '@capacitor/device';
 import { PushNotifications } from '@capacitor/push-notifications';
 import { SplashScreen } from '@capacitor/splash-screen';
 import { Badge } from '@capawesome/capacitor-badge';
-import { ModalController, Platform, PopoverController } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
+import { IonicModule, ModalController, Platform, PopoverController } from '@ionic/angular';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { initializeApp } from 'firebase/app';
 import { MatomoTracker } from 'ngx-matomo-client';
 import { combineLatest, Observable, of } from 'rxjs';
@@ -85,14 +85,36 @@ import {
   userHadSetThemeInApp,
   userHadSetThemeInApp$,
 } from '@multi/shared';
+import { PageLayoutsModule } from './layout/layouts.module';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['../theme/app-theme/styles/app/app.component.scss'],
-  standalone: false,
+  standalone: true,
+  imports: [CommonModule, IonicModule, TranslatePipe, PageLayoutsModule],
 })
 export class AppComponent implements OnInit, OnDestroy {
+  private environment = inject<any>('environment' as any);
+  private platform = inject(Platform);
+  private translateService = inject(TranslateService);
+  private pageLayoutService = inject(PageLayoutService);
+  private navigationService = inject(NavigationService);
+  private modalController = inject(ModalController);
+  private popoverController = inject(PopoverController);
+  private renderer = inject(Renderer2);
+  private document = inject<Document>(DOCUMENT);
+  private networkService = inject(NetworkService);
+  private featuresService = inject(FeaturesService);
+  private notificationsService = inject(NotificationsService);
+  private statisticsService = inject(StatisticsService);
+  private titleService = inject(Title);
+  private router = inject(Router);
+  private multiTenantService = inject(MultiTenantService);
+  private injector = inject(Injector);
+  private projectModuleService = inject(ProjectModuleService);
+  private matomoTracker = inject(MatomoTracker);
+
   public languages: string[] = [];
   public currentPageLayout$: Observable<PageLayout>;
   public isNothingToShow$: Observable<boolean>;
@@ -103,28 +125,7 @@ export class AppComponent implements OnInit, OnDestroy {
   private themeToApply: string;
   private defaultTheme: string;
 
-  constructor(
-    @Inject('environment')
-    private environment: any,
-    private platform: Platform,
-    private translateService: TranslateService,
-    private pageLayoutService: PageLayoutService,
-    private navigationService: NavigationService,
-    private modalController: ModalController,
-    private popoverController: PopoverController,
-    private renderer: Renderer2,
-    @Inject(DOCUMENT) private document: Document,
-    private networkService: NetworkService,
-    private featuresService: FeaturesService,
-    private notificationsService: NotificationsService,
-    private statisticsService: StatisticsService,
-    private titleService: Title,
-    private router: Router,
-    private multiTenantService: MultiTenantService,
-    private injector: Injector,
-    private projectModuleService: ProjectModuleService,
-    private matomoTracker: MatomoTracker,
-  ) {
+  constructor() {
     this.initializeApp();
   }
 

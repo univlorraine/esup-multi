@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Inject, Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { distinctUntilChanged, filter, map, shareReplay } from 'rxjs/operators';
 import { MenuItemLinkType, MenuItemRouterLink } from './menu.model';
@@ -54,17 +54,16 @@ export interface PageTitle {
   providedIn: 'root',
 })
 export class PageLayoutService {
+  private navigationService = inject(NavigationService);
+  private menuService = inject(MenuService);
+  private environment = inject<any>('environment' as any);
+
   public currentPageLayout$: Observable<PageLayout>;
   public currentPageTitle$ = new BehaviorSubject<PageTitle>(null);
   public showCurrentPageHeader$ = new BehaviorSubject<boolean>(true);
   private readonly forceFullLayoutFeatures: [string];
 
-  constructor(
-    private navigationService: NavigationService,
-    private menuService: MenuService,
-    @Inject('environment')
-    private environment: any,
-  ) {
+  constructor() {
     this.forceFullLayoutFeatures = this.environment.forceFullLayoutFeatures ?? [];
     this.currentPageLayout$ = combineLatest([
       this.navigationService.currentRouterLink$.pipe(

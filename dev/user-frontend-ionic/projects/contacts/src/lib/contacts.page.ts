@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Component, ElementRef, Inject, Injector, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, Injector, ViewChild } from '@angular/core';
 import { Capacitor } from '@capacitor/core';
 import { ActionSheetController, AlertController, ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
@@ -52,6 +52,13 @@ import { Contact, ContactsBody, ContactsService } from './contacts.service';
   standalone: false,
 })
 export class ContactsComponent {
+  private contactsService = inject(ContactsService);
+  actionSheetController = inject(ActionSheetController);
+  private alertController = inject(AlertController);
+  private config = inject<ContactsModuleConfig>(CONTACTS_CONFIG);
+  private injector = inject(Injector);
+  private toastController = inject(ToastController);
+
   @ViewChild('searchBlock') viewBlock: ElementRef;
   public contacts: Contact[] = [];
   public loading = false;
@@ -64,14 +71,7 @@ export class ContactsComponent {
   private translateService: TranslateService;
   private deltaSearchDisplay = 10; // number of pixels to scroll down/up before display the search block
 
-  constructor(
-    private contactsService: ContactsService,
-    public actionSheetController: ActionSheetController,
-    private alertController: AlertController,
-    @Inject(CONTACTS_CONFIG) private config: ContactsModuleConfig,
-    private injector: Injector,
-    private toastController: ToastController,
-  ) {
+  constructor() {
     this.filtersList = this.config.contactTypes;
     this.filterChecked = this.config.contactTypes[0];
     this.translateService = this.injector.get(TranslateService);

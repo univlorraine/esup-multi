@@ -38,7 +38,7 @@
  */
 
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Capacitor } from '@capacitor/core';
 import { combineLatest, from, Observable, of } from 'rxjs';
 import { catchError, switchMap, take } from 'rxjs/operators';
@@ -67,11 +67,9 @@ interface UserActionDetails {
   providedIn: 'root',
 })
 export class StatisticsService {
-  constructor(
-    private multiTenantService: MultiTenantService,
-    private http: HttpClient,
-    private networkService: NetworkService,
-  ) {}
+  private multiTenantService = inject(MultiTenantService);
+  private http = inject(HttpClient);
+  private networkService = inject(NetworkService);
 
   public async onFunctionalityOpened(statisticName: string) {
     if (!statisticName) {

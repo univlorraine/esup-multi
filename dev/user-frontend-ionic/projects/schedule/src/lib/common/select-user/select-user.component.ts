@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Component, Inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
@@ -53,14 +53,14 @@ import { ScheduleService } from '../../schedule.service';
   standalone: false,
 })
 export class SelectUserComponent {
+  private config = inject<ScheduleModuleConfig>(SCHEDULE_CONFIG);
+  private scheduleService = inject(ScheduleService);
+
   public form: FormGroup;
   public isSelectUserModalOpen = false;
   public isAuthorizedUser$: Observable<boolean>;
 
-  constructor(
-    @Inject(SCHEDULE_CONFIG) private config: ScheduleModuleConfig,
-    private scheduleService: ScheduleService,
-  ) {
+  constructor() {
     this.isAuthorizedUser$ = authenticatedUser$.pipe(
       filter((authenticatedUser: AuthenticatedUser) => !!authenticatedUser),
       take(1),

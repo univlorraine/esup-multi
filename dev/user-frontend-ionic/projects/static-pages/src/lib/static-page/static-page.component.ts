@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -52,15 +52,15 @@ import { StaticPagesService } from '../static-pages.service';
   standalone: false,
 })
 export class StaticPageComponent implements OnInit {
+  private route = inject(ActivatedRoute);
+  private staticPagesService = inject(StaticPagesService);
+  private staticPagesRepository = inject(StaticPagesRepository);
+  private networkService = inject(NetworkService);
+
   public translatedStaticPages$: Observable<TranslatedStaticPage[]>;
   public page$: Observable<TranslatedStaticPage>;
 
-  constructor(
-    private route: ActivatedRoute,
-    private staticPagesService: StaticPagesService,
-    private staticPagesRepository: StaticPagesRepository,
-    private networkService: NetworkService,
-  ) {
+  constructor() {
     this.translatedStaticPages$ = this.staticPagesRepository.translatedStaticPages$;
   }
 

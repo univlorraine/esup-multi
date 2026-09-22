@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Inject, Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { App } from '@capacitor/app';
 import { Capacitor } from '@capacitor/core';
 import { from, Observable, of } from 'rxjs';
@@ -47,10 +47,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class VersionService {
-  constructor(
-    @Inject('environment')
-    private environment: any,
-  ) {}
+  private environment = inject<any>('environment' as any);
 
   public getCurrentAppVersion(): Observable<string> {
     return !Capacitor.isNativePlatform()

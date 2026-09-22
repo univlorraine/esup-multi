@@ -48,7 +48,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
-import { provideTranslateService, TranslateLoader, TranslatePipe } from '@ngx-translate/core';
+import { provideTranslateService, TranslateLoader } from '@ngx-translate/core';
 import { MatomoModule } from 'ngx-matomo-client';
 import { FeaturesModule } from '@multi/features';
 import { MenuModule } from '@multi/menu';
@@ -62,13 +62,10 @@ import {
 } from '@multi/shared';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { ErrorModule } from './error/error.module';
 import { PageLayoutsModule } from './layout/layouts.module';
 
 @NgModule({
-  declarations: [AppComponent],
-  bootstrap: [AppComponent],
   imports: [
     BrowserModule,
     IonicModule.forRoot({
@@ -90,7 +87,6 @@ import { PageLayoutsModule } from './layout/layouts.module';
     MenuModule,
     PreferencesPageModule,
     MultiTenantModule,
-    TranslatePipe,
     ...environment.enabledModules,
   ],
   providers: [

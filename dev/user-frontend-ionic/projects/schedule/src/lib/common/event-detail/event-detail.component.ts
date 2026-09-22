@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { take } from 'rxjs/operators';
 import { NavigationService } from '@multi/shared';
 import { Course, Event, HiddenCourse } from '../../schedule.repository';
@@ -50,17 +50,15 @@ import { ScheduleService } from '../../schedule.service';
   standalone: false,
 })
 export class EventDetailComponent {
+  private scheduleService = inject(ScheduleService);
+  private navigationService = inject(NavigationService);
+
   @Input() event: Event;
   @Input() displayShortenedDate = false;
   @Input() showHideButton = true;
   public disableHideCourseButton = false;
   public isGroupsVisible = false;
   public courseUrlRegex = /^https?:\/\//;
-
-  constructor(
-    private scheduleService: ScheduleService,
-    private navigationService: NavigationService,
-  ) {}
 
   hideAllSimilarCourse(course: Course) {
     this.disableHideCourseButton = true;

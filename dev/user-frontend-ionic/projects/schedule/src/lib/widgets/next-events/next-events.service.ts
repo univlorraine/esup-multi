@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Inject, Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { addDays, isAfter, isBefore, startOfDay } from 'date-fns';
 import { map } from 'rxjs/operators';
 import { SCHEDULE_CONFIG, ScheduleModuleConfig } from '../../schedule.config';
@@ -47,7 +47,7 @@ import { scheduleStoreManager } from '../../schedule.repository';
   providedIn: 'root',
 })
 export class NextEventsService {
-  constructor(@Inject(SCHEDULE_CONFIG) private config: ScheduleModuleConfig) {}
+  private config = inject<ScheduleModuleConfig>(SCHEDULE_CONFIG);
 
   public getNextEvents$() {
     return scheduleStoreManager.displayedEvents$.pipe(

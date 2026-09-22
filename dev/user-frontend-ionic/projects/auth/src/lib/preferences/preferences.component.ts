@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { saveCredentialsOnAuthentication$ } from './preferences.repository';
 import { PreferencesService } from './preferences.service';
 
@@ -48,9 +48,9 @@ import { PreferencesService } from './preferences.service';
   standalone: false,
 })
 export class PreferencesComponent {
-  saveCredentialsOnAuthentication$ = saveCredentialsOnAuthentication$;
+  private preferencesService = inject(PreferencesService);
 
-  constructor(private preferencesService: PreferencesService) {}
+  saveCredentialsOnAuthentication$ = saveCredentialsOnAuthentication$;
 
   onSaveCredentialsOnAuthenticationChange(event) {
     const saveCredentials = event.detail.checked;

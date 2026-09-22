@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Inject, Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { createStore } from '@ngneat/elf';
 import {
   deleteEntities,
@@ -118,10 +118,7 @@ export const persist = persistState(store, {
 
 @Injectable({ providedIn: 'root' })
 export class KnowledgeBaseRepository {
-  constructor(
-    @Inject('environment')
-    private environment: any,
-  ) {}
+  private environment = inject<any>('environment' as any);
 
   private translatedKnowledgeBases$: Observable<TranslatedKnowledgeBaseItem[]> = combineLatest([
     store.pipe(selectAllEntities()),

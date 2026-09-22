@@ -38,7 +38,7 @@
  */
 
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { MultiTenantService } from '@multi/shared';
@@ -48,10 +48,9 @@ import { setSocialNetworks, SocialNetwork } from './social-network.repository';
   providedIn: 'root',
 })
 export class SocialNetworkService {
-  constructor(
-    private multiTenantService: MultiTenantService,
-    private http: HttpClient,
-  ) {}
+  private multiTenantService = inject(MultiTenantService);
+  private http = inject(HttpClient);
+
   public loadAndStoreSocialNetworks(): Observable<SocialNetwork[]> {
     const url = `${this.multiTenantService.getApiEndpoint()}/social-network`;
 

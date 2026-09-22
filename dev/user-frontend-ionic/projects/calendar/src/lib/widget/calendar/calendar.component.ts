@@ -41,7 +41,7 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
-  Inject,
+  inject,
   Input,
   TemplateRef,
   ViewChild,
@@ -60,6 +60,11 @@ import { CalendarService } from '../../calendar.service';
   standalone: false,
 })
 export class CalendarComponent implements AfterViewInit {
+  private calendarService = inject(CalendarService);
+  private themeService = inject(ThemeService);
+  private changeDetectorRef = inject(ChangeDetectorRef);
+  private config = inject<CalendarModuleConfig>(CALENDAR_CONFIG);
+
   @Input() widgetColor: string;
   @ViewChild('list') list!: TemplateRef<any>;
   @ViewChild('slider') slider!: TemplateRef<any>;
@@ -67,12 +72,7 @@ export class CalendarComponent implements AfterViewInit {
   public isLoading = false;
   public nextEvents$: Observable<MailCalendarEvents>;
 
-  constructor(
-    private calendarService: CalendarService,
-    private themeService: ThemeService,
-    private changeDetectorRef: ChangeDetectorRef,
-    @Inject(CALENDAR_CONFIG) private config: CalendarModuleConfig,
-  ) {
+  constructor() {
     this.nextEvents$ = this.calendarService.getNextEvents$();
   }
 

@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   CapacitorBarcodeScanner,
@@ -53,11 +53,9 @@ import { ReservationService } from './reservation.service';
   standalone: false,
 })
 export class ReservationPage {
-  constructor(
-    private navController: NavController,
-    private router: Router,
-    private reservationService: ReservationService,
-  ) {}
+  private navController = inject(NavController);
+  private router = inject(Router);
+  private reservationService = inject(ReservationService);
 
   openReservationService() {
     this.reservationService.openReservationService();
