@@ -37,6 +37,7 @@
  * termes.
  */
 
+import { AsyncPipe } from '@angular/common';
 import {
   Component,
   ElementRef,
@@ -47,8 +48,9 @@ import {
   ViewChild,
   ViewChildren,
 } from '@angular/core';
-import { IonContent } from '@ionic/angular';
-import { DragulaService } from 'ng2-dragula';
+import { IonContent, IonicModule } from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
+import { DragulaModule, DragulaService } from 'ng2-dragula';
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
 import { concatMap, map, switchMap, take, tap } from 'rxjs/operators';
 import {
@@ -61,13 +63,14 @@ import {
   updateFeaturesListIsNewToFalse,
   userIsAuthenticated$,
 } from '@multi/shared';
+import { ServiceComponent } from './service/service.component';
 import { ServicesService } from './services.service';
 
 @Component({
   selector: 'app-services',
   templateUrl: './services.page.html',
   styleUrls: ['../../../../../../src/theme/app-theme/styles/features/services.page.scss'],
-  standalone: false,
+  imports: [IonicModule, DragulaModule, ServiceComponent, AsyncPipe, TranslatePipe],
 })
 export class ServicesPage implements OnInit, OnDestroy {
   private featuresService = inject(FeaturesService);

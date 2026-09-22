@@ -37,19 +37,12 @@
  * termes.
  */
 
-import { CommonModule } from '@angular/common';
 import { inject, ModuleWithProviders, NgModule, provideAppInitializer } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
 import { EffectsNgModule } from '@ngneat/effects-ng';
-import { TranslatePipe } from '@ngx-translate/core';
-import { QRCodeComponent } from 'angularx-qrcode';
-import { ProjectModuleService, SharedComponentsModule, SharedPipeModule } from '@multi/shared';
+import { ProjectModuleService } from '@multi/shared';
 import { CardEuRoutingModule } from './card-eu-routing.module';
 import { CARD_EU_CONFIG, CardEuModuleConfig } from './card-eu.config';
 import { CardEuEffects } from './card-eu.effects';
-import { CardEuPage } from './card-eu.page';
-import { CardEuExtendedComponent } from './card-eu/card-eu-extended.component';
-import { CardEuLightComponent } from './card-eu/card-eu-light.component';
 
 const initModule = (projectModuleService: ProjectModuleService) => () =>
   projectModuleService.initProjectModule({
@@ -58,17 +51,7 @@ const initModule = (projectModuleService: ProjectModuleService) => () =>
   });
 
 @NgModule({
-  imports: [
-    CommonModule,
-    IonicModule,
-    CardEuRoutingModule,
-    TranslatePipe,
-    QRCodeComponent,
-    SharedPipeModule,
-    SharedComponentsModule,
-    EffectsNgModule.forFeature([CardEuEffects]),
-  ],
-  declarations: [CardEuPage, CardEuExtendedComponent, CardEuLightComponent],
+  imports: [CardEuRoutingModule, EffectsNgModule.forFeature([CardEuEffects])],
   providers: [
     provideAppInitializer(() => {
       const initializerFn = initModule(inject(ProjectModuleService));

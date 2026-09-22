@@ -37,6 +37,7 @@
  * termes.
  */
 
+import { AsyncPipe, NgClass, NgStyle, NgTemplateOutlet, SlicePipe } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectorRef,
@@ -47,9 +48,11 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
 import { Observable, Subscription } from 'rxjs';
 import { finalize, map, take } from 'rxjs/operators';
-import { CompleteLocalDatePipe, ThemeService } from '@multi/shared';
+import { CompleteLocalDatePipe, LocalHourPipe, ThemeService, TruncatePipe } from '@multi/shared';
 import { SCHEDULE_CONFIG, ScheduleModuleConfig } from '../../schedule.config';
 import { Event } from '../../schedule.repository';
 import { ScheduleService } from '../../schedule.service';
@@ -59,7 +62,18 @@ import { NextEventsService } from './next-events.service';
   selector: 'app-schedule-widget-next-events',
   templateUrl: './next-events.component.html',
   styleUrls: ['../../../../../../src/theme/app-theme/styles/schedule/next-events.component.scss'],
-  standalone: false,
+  imports: [
+    NgTemplateOutlet,
+    IonicModule,
+    NgClass,
+    NgStyle,
+    AsyncPipe,
+    SlicePipe,
+    TranslatePipe,
+    CompleteLocalDatePipe,
+    TruncatePipe,
+    LocalHourPipe,
+  ],
 })
 export class NextEventsComponent implements OnDestroy, AfterViewInit {
   private nextEventsService = inject(NextEventsService);

@@ -37,15 +37,10 @@
  * termes.
  */
 
-import { CommonModule } from '@angular/common';
 import { ErrorHandler, inject, NgModule, provideAppInitializer } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
-import { TranslatePipe } from '@ngx-translate/core';
 import { ProjectModuleService } from '../project-module/project-module.service';
 import { MultiTenantErrorHandler } from './multi-tenant-error-handler';
 import { MultiTenantRoutingModule } from './multi-tenant-routing.module';
-import { MultiTenantComponent } from './multi-tenant.component';
 
 const initModule = (projectModuleService: ProjectModuleService) => () =>
   projectModuleService.initProjectModule({
@@ -53,8 +48,7 @@ const initModule = (projectModuleService: ProjectModuleService) => () =>
     translation: true,
   });
 @NgModule({
-  declarations: [MultiTenantComponent],
-  imports: [CommonModule, FormsModule, IonicModule, MultiTenantRoutingModule, TranslatePipe],
+  imports: [MultiTenantRoutingModule],
   providers: [
     provideAppInitializer(() => {
       const initializerFn = initModule(inject(ProjectModuleService));

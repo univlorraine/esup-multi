@@ -37,11 +37,8 @@
  * termes.
  */
 
-import { CommonModule } from '@angular/common';
 import { inject, NgModule, provideAppInitializer } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
 import { EffectsNgModule } from '@ngneat/effects-ng';
-import { TranslatePipe } from '@ngx-translate/core';
 import { ProjectModuleService } from '@multi/shared';
 import { ClockingEffects } from './clocking.effects';
 import { ClockingComponent } from './widgets/clocking/clocking.component';
@@ -59,13 +56,7 @@ const initModule = (projectModuleService: ProjectModuleService) => () =>
   });
 
 @NgModule({
-  declarations: [ClockingComponent],
-  imports: [
-    CommonModule,
-    IonicModule,
-    TranslatePipe,
-    EffectsNgModule.forFeature([ClockingEffects]),
-  ],
+  imports: [EffectsNgModule.forFeature([ClockingEffects])],
   providers: [
     provideAppInitializer(() => {
       const initializerFn = initModule(inject(ProjectModuleService));

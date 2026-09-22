@@ -37,10 +37,7 @@
  * termes.
  */
 
-import { CommonModule } from '@angular/common';
 import { inject, NgModule, provideAppInitializer } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
-import { TranslatePipe } from '@ngx-translate/core';
 import { ProjectModuleService } from '@multi/shared';
 import { UnreadMailComponent } from './widget/unread-mail/unread-mail.component';
 
@@ -57,8 +54,6 @@ const initModule = (projectModuleService: ProjectModuleService) => () =>
   });
 
 @NgModule({
-  declarations: [UnreadMailComponent],
-  imports: [CommonModule, IonicModule, TranslatePipe],
   providers: [
     provideAppInitializer(() => {
       const initializerFn = initModule(inject(ProjectModuleService));

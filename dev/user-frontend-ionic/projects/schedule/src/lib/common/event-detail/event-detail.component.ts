@@ -37,17 +37,21 @@
  * termes.
  */
 
+import { NgStyle } from '@angular/common';
 import { Component, inject, Input } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
 import { take } from 'rxjs/operators';
-import { NavigationService } from '@multi/shared';
+import { LocalHourPipe, NavigationService } from '@multi/shared';
 import { Course, Event, HiddenCourse } from '../../schedule.repository';
 import { ScheduleService } from '../../schedule.service';
+import { ShortenedDatePipe } from '../pipe/shortened-date.pipe';
 
 @Component({
   selector: 'app-event-detail',
   templateUrl: './event-detail.component.html',
   styleUrls: ['../../../../../../src/theme/app-theme/styles/schedule/event-detail.component.scss'],
-  standalone: false,
+  imports: [IonicModule, NgStyle, TranslatePipe, ShortenedDatePipe, LocalHourPipe],
 })
 export class EventDetailComponent {
   private scheduleService = inject(ScheduleService);

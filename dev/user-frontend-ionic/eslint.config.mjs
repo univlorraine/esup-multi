@@ -40,7 +40,7 @@ export default tseslint.config(
     },
     rules: {
       '@typescript-eslint/no-explicit-any': 'off',
-      '@angular-eslint/prefer-standalone': 'off',
+      '@angular-eslint/prefer-standalone': 'error',
       '@angular-eslint/component-class-suffix': [
         'error',
         {

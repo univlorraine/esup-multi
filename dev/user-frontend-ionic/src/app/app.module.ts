@@ -63,7 +63,6 @@ import {
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { ErrorModule } from './error/error.module';
-import { PageLayoutsModule } from './layout/layouts.module';
 
 @NgModule({
   imports: [
@@ -82,7 +81,6 @@ import { PageLayoutsModule } from './layout/layouts.module';
     ReactiveFormsModule,
     MatomoModule.forRoot(environment.matomoConfig || { mode: 'manual', disabled: true }),
     ErrorModule,
-    PageLayoutsModule,
     FeaturesModule,
     MenuModule,
     PreferencesPageModule,

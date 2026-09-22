@@ -37,6 +37,7 @@
  * termes.
  */
 
+import { AsyncPipe, NgClass } from '@angular/common';
 import {
   AfterViewChecked,
   Component,
@@ -47,11 +48,12 @@ import {
   ViewChild,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IonRouterOutlet } from '@ionic/angular';
+import { IonicModule, IonRouterOutlet } from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { finalize, map, take } from 'rxjs/operators';
 import Swiper from 'swiper/bundle';
-import { NetworkService } from '@multi/shared';
+import { BackButtonComponent, CompleteLocalDatePipe, NetworkService } from '@multi/shared';
 import { getRestaurantById, Restaurant } from '../restaurants.repository';
 import { getMenusByRestaurantId, Menu } from './menus.repository';
 import { RestaurantMenusService } from './restaurant-menus.service';
@@ -60,7 +62,14 @@ import { RestaurantMenusService } from './restaurant-menus.service';
   selector: 'app-restaurant-menus',
   templateUrl: './restaurant-menus.page.html',
   styleUrls: ['../../../../../src/theme/app-theme/styles/restaurants/restaurant-menus.page.scss'],
-  standalone: false,
+  imports: [
+    IonicModule,
+    NgClass,
+    AsyncPipe,
+    TranslatePipe,
+    BackButtonComponent,
+    CompleteLocalDatePipe,
+  ],
 })
 export class RestaurantMenusPage implements OnInit, OnDestroy, AfterViewChecked {
   private activatedRoute = inject(ActivatedRoute);

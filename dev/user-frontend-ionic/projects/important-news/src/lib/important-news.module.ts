@@ -37,11 +37,7 @@
  * termes.
  */
 
-import { CommonModule } from '@angular/common';
 import { inject, ModuleWithProviders, NgModule, provideAppInitializer } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
-import { TranslatePipe } from '@ngx-translate/core';
 import { ProjectModuleService } from '@multi/shared';
 import { IMPORTANT_NEWS_CONFIG, ImportantNewsModuleConfig } from './important-news.config';
 import { ImportantNewsComponent } from './widgets/important-news/important-news.component';
@@ -58,8 +54,6 @@ const initModule = (projectModuleService: ProjectModuleService) => () =>
   });
 
 @NgModule({
-  declarations: [ImportantNewsComponent],
-  imports: [CommonModule, IonicModule, TranslatePipe, RouterModule],
   providers: [
     provideAppInitializer(() => {
       const initializerFn = initModule(inject(ProjectModuleService));

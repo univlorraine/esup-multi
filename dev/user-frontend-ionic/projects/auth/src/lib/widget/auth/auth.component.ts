@@ -37,7 +37,11 @@
  * termes.
  */
 
+import { AsyncPipe } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { finalize, take } from 'rxjs/operators';
 import { AuthenticatedUser, authenticatedUser$ } from '@multi/shared';
@@ -47,7 +51,7 @@ import { AuthService } from '../../common/auth.service';
   selector: 'app-auth-widget',
   templateUrl: './auth.component.html',
   styleUrls: ['../../../../../../src/theme/app-theme/styles/auth/auth.component.scss'],
-  standalone: false,
+  imports: [IonicModule, RouterLink, AsyncPipe, TranslatePipe],
 })
 export class AuthComponent implements OnInit {
   private authService = inject(AuthService);

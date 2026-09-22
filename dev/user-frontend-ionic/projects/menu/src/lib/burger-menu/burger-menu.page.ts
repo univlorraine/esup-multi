@@ -37,14 +37,16 @@
  * termes.
  */
 
+import { AsyncPipe } from '@angular/common';
 import { Component, inject, OnDestroy } from '@angular/core';
-import { AlertController } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
+import { AlertController, IonicModule } from '@ionic/angular';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
   AuthenticatedUser,
   authenticatedUser$,
+  CustomIconComponent,
   GuidedTourService,
   isDarkTheme,
   isDarkTheme$,
@@ -58,6 +60,7 @@ import {
   Tenant,
   tenantThemeApplied$,
   VersionService,
+  WidgetComponent,
   WidgetLifecycleService,
 } from '@multi/shared';
 
@@ -65,7 +68,7 @@ import {
   selector: 'app-menu',
   templateUrl: './burger-menu.page.html',
   styleUrls: ['../../../../../src/theme/app-theme/styles/menu/burger-menu.page.scss'],
-  standalone: false,
+  imports: [IonicModule, AsyncPipe, TranslatePipe, WidgetComponent, CustomIconComponent],
 })
 export class BurgerMenuPage implements OnDestroy {
   private environment = inject<any>('environment' as any);

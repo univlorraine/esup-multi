@@ -37,6 +37,7 @@
  * termes.
  */
 
+import { UpperCasePipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { UserAndCardData } from '../card.repository';
 
@@ -44,7 +45,7 @@ import { UserAndCardData } from '../card.repository';
   selector: 'app-staff-card',
   templateUrl: './staff-card.component.html',
   styleUrls: ['../../../../../src/theme/app-theme/styles/card/card.component.scss'],
-  standalone: false,
+  imports: [UpperCasePipe],
 })
 export class StaffCardComponent {
   @Input() userCard: UserAndCardData;

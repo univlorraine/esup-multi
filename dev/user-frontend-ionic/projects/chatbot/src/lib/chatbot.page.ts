@@ -37,13 +37,16 @@
  * termes.
  */
 
+import { AsyncPipe, NgClass } from '@angular/common';
 import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { Capacitor } from '@capacitor/core';
 import { Keyboard } from '@capacitor/keyboard';
-import { IonContent } from '@ionic/angular';
+import { IonContent, IonicModule } from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
 import { BehaviorSubject } from 'rxjs';
 import { finalize, take } from 'rxjs/operators';
-import { MultiTenantService } from '@multi/shared';
+import { HeaderComponent, MultiTenantService } from '@multi/shared';
 import { ChatbotMessage, ChatButton, Message, MessageType, UserMessage } from './chatbot.dto';
 import { ChatbotService } from './chatbot.service';
 import { UserIdGeneratorService } from './user-id-generator.service';
@@ -52,7 +55,7 @@ import { UserIdGeneratorService } from './user-id-generator.service';
   selector: 'app-chatbot',
   templateUrl: './chatbot.page.html',
   styleUrls: ['../../../../src/theme/app-theme/styles/chatbot/chatbot.page.scss'],
-  standalone: false,
+  imports: [IonicModule, NgClass, FormsModule, AsyncPipe, TranslatePipe, HeaderComponent],
 })
 export class ChatbotPage implements OnInit {
   private multiTenantService = inject(MultiTenantService);

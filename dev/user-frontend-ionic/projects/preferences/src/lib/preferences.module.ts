@@ -37,13 +37,9 @@
  * termes.
  */
 
-import { CommonModule } from '@angular/common';
 import { inject, NgModule, provideAppInitializer } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
-import { ProjectModuleService, SharedComponentsModule } from '@multi/shared';
+import { ProjectModuleService } from '@multi/shared';
 import { PreferencesPageRoutingModule } from './preferences-routing.module';
-import { PreferencesPage } from './preferences.page';
 
 const initModule = (projectModuleService: ProjectModuleService) => () =>
   projectModuleService.initProjectModule({
@@ -61,14 +57,7 @@ const initModule = (projectModuleService: ProjectModuleService) => () =>
   });
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    SharedComponentsModule,
-    PreferencesPageRoutingModule,
-  ],
-  declarations: [PreferencesPage],
+  imports: [PreferencesPageRoutingModule],
   providers: [
     provideAppInitializer(() => {
       const initializerFn = initModule(inject(ProjectModuleService));

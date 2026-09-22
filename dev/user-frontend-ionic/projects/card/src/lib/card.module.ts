@@ -37,19 +37,12 @@
  * termes.
  */
 
-import { CommonModule } from '@angular/common';
 import { inject, ModuleWithProviders, NgModule, provideAppInitializer } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
 import { EffectsNgModule } from '@ngneat/effects-ng';
-import { TranslatePipe } from '@ngx-translate/core';
-import { QRCodeComponent } from 'angularx-qrcode';
-import { ProjectModuleService, SharedComponentsModule, SharedPipeModule } from '@multi/shared';
+import { ProjectModuleService } from '@multi/shared';
 import { CardRoutingModule } from './card-routing.module';
 import { CARD_CONFIG, CardModuleConfig } from './card.config';
 import { CardEffects } from './card.effects';
-import { CardPage } from './card.page';
-import { StaffCardComponent } from './card/staff-card.component';
-import { StudentCardComponent } from './card/student-card.component';
 
 const initModule = (projectModuleService: ProjectModuleService) => () =>
   projectModuleService.initProjectModule({
@@ -58,17 +51,7 @@ const initModule = (projectModuleService: ProjectModuleService) => () =>
   });
 
 @NgModule({
-  imports: [
-    CommonModule,
-    IonicModule,
-    CardRoutingModule,
-    TranslatePipe,
-    QRCodeComponent,
-    SharedPipeModule,
-    SharedComponentsModule,
-    EffectsNgModule.forFeature([CardEffects]),
-  ],
-  declarations: [CardPage, StudentCardComponent, StaffCardComponent],
+  imports: [CardRoutingModule, EffectsNgModule.forFeature([CardEffects])],
   providers: [
     provideAppInitializer(() => {
       const initializerFn = initModule(inject(ProjectModuleService));

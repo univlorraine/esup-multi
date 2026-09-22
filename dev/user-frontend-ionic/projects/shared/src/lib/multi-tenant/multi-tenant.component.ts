@@ -37,10 +37,13 @@
  * termes.
  */
 
+import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { App } from '@capacitor/app';
 import { Capacitor } from '@capacitor/core';
+import { IonicModule } from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
 import { from, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { setLanguage } from '../i18n/i18n.repository';
@@ -57,7 +60,7 @@ import { MultiTenantService } from './multi-tenant.service';
   selector: 'app-multi-tenant',
   templateUrl: './multi-tenant.component.html',
   styleUrls: ['../../../../../src/theme/app-theme/styles/multi-tenant/multi-tenant.component.scss'],
-  standalone: false,
+  imports: [IonicModule, AsyncPipe, TranslatePipe],
 })
 export class MultiTenantComponent {
   private environment = inject<any>('environment' as any);

@@ -37,14 +37,10 @@
  * termes.
  */
 
-import { CommonModule } from '@angular/common';
 import { inject, ModuleWithProviders, NgModule, provideAppInitializer } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
-import { TranslatePipe } from '@ngx-translate/core';
-import { ProjectModuleService, SharedComponentsModule } from '@multi/shared';
+import { ProjectModuleService } from '@multi/shared';
 import { ReservationRoutingModule } from './reservation-routing.module';
 import { RESERVATION_CONFIG, ReservationModuleConfig } from './reservation.config';
-import { ReservationPage } from './reservation.page';
 
 const initModule = (projectModuleService: ProjectModuleService) => () =>
   projectModuleService.initProjectModule({
@@ -53,14 +49,7 @@ const initModule = (projectModuleService: ProjectModuleService) => () =>
   });
 
 @NgModule({
-  declarations: [ReservationPage],
-  imports: [
-    CommonModule,
-    IonicModule,
-    ReservationRoutingModule,
-    TranslatePipe,
-    SharedComponentsModule,
-  ],
+  imports: [ReservationRoutingModule],
   providers: [
     provideAppInitializer(() => {
       const initializerFn = initModule(inject(ProjectModuleService));

@@ -45,7 +45,6 @@ import * as locale from 'date-fns/locale';
 @Pipe({
   name: 'completeLocalDate',
   pure: false,
-  standalone: false,
 })
 export class CompleteLocalDatePipe implements PipeTransform {
   private translateService = inject(TranslateService);

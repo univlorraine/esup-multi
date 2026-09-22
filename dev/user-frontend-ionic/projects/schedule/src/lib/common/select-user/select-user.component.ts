@@ -37,8 +37,17 @@
  * termes.
  */
 
+import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { IonicModule } from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
 import { AuthenticatedUser, authenticatedUser$, AuthorizationHelper } from '@multi/shared';
@@ -50,7 +59,7 @@ import { ScheduleService } from '../../schedule.service';
   selector: 'app-select-user',
   templateUrl: './select-user.component.html',
   styleUrls: ['../../../../../../src/theme/app-theme/styles/schedule/select-user.component.scss'],
-  standalone: false,
+  imports: [IonicModule, FormsModule, ReactiveFormsModule, AsyncPipe, TranslatePipe],
 })
 export class SelectUserComponent {
   private config = inject<ScheduleModuleConfig>(SCHEDULE_CONFIG);

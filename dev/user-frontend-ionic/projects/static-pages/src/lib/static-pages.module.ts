@@ -37,11 +37,8 @@
  * termes.
  */
 
-import { CommonModule } from '@angular/common';
 import { inject, NgModule, provideAppInitializer } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
-import { ProjectModuleService, SharedComponentsModule } from '@multi/shared';
-import { StaticPageComponent } from './static-page/static-page.component';
+import { ProjectModuleService } from '@multi/shared';
 import { StaticPagesRoutingModule } from './static-pages-routing.module';
 import { StaticPagesWidgetComponent } from './widgets/static-pages-widget/static-pages-widget.component';
 
@@ -57,14 +54,13 @@ const initModule = (projectModuleService: ProjectModuleService) => () =>
   });
 
 @NgModule({
-  declarations: [StaticPageComponent, StaticPagesWidgetComponent],
   providers: [
     provideAppInitializer(() => {
       const initializerFn = initModule(inject(ProjectModuleService));
       return initializerFn();
     }),
   ],
-  imports: [CommonModule, IonicModule, StaticPagesRoutingModule, SharedComponentsModule],
+  imports: [StaticPagesRoutingModule],
 })
 export class StaticPagesModule {
   static routerLink = '/page';

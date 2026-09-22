@@ -37,19 +37,41 @@
  * termes.
  */
 
+import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
+import { QRCodeComponent } from 'angularx-qrcode';
 import { Observable, Subscription } from 'rxjs';
 import { filter, finalize, switchMap, take } from 'rxjs/operators';
-import { AuthenticatedUser, getAuthToken, NetworkService, ScreenService } from '@multi/shared';
+import {
+  AuthenticatedUser,
+  getAuthToken,
+  HeaderComponent,
+  NetworkService,
+  SanitizeSvgPipe,
+  ScreenService,
+} from '@multi/shared';
 import { CARD_CONFIG, CardModuleConfig } from './card.config';
 import { setUserAndCardData, UserAndCardData, userAndCardData$ } from './card.repository';
 import { CardService } from './card.service';
+import { StaffCardComponent } from './card/staff-card.component';
+import { StudentCardComponent } from './card/student-card.component';
 
 @Component({
   selector: 'app-card',
   templateUrl: './card.page.html',
   styleUrls: ['../../../../src/theme/app-theme/styles/card/card.page.scss'],
-  standalone: false,
+  imports: [
+    IonicModule,
+    StudentCardComponent,
+    StaffCardComponent,
+    QRCodeComponent,
+    AsyncPipe,
+    TranslatePipe,
+    HeaderComponent,
+    SanitizeSvgPipe,
+  ],
 })
 export class CardPage {
   private cardService = inject(CardService);

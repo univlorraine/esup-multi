@@ -37,7 +37,11 @@
  * termes.
  */
 
+import { AsyncPipe } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { AuthenticatedUser, authenticatedUser$ } from '@multi/shared';
@@ -48,7 +52,7 @@ import { LoginService } from '../../common/login.service';
   selector: 'app-auth-not-authentified-widget',
   templateUrl: './not-authentified.component.html',
   styleUrls: ['../../../../../../src/theme/app-theme/styles/auth/not-authentified.component.scss'],
-  standalone: false,
+  imports: [IonicModule, RouterLink, AsyncPipe, TranslatePipe],
 })
 export class NotAuthentifiedComponent implements OnInit {
   private loginService = inject(LoginService);

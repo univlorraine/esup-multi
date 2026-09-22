@@ -37,13 +37,17 @@
  * termes.
  */
 
+import { NgClass, NgStyle } from '@angular/common';
 import { ChangeDetectorRef, Component, inject, Input } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
 import {
+  CustomIconComponent,
   NavigationService,
   SsoService,
   StatisticsService,
   ThemeService,
   TranslatedExternalFeature,
+  WidgetComponent,
 } from '@multi/shared';
 
 @Component({
@@ -52,7 +56,7 @@ import {
   styleUrls: [
     '../../../../../../../../src/theme/app-theme/styles/features/widget-external-feature.component.scss',
   ],
-  standalone: false,
+  imports: [IonicModule, NgClass, NgStyle, WidgetComponent, CustomIconComponent],
 })
 export class WidgetExternalFeatureComponent {
   private ssoService = inject(SsoService);

@@ -37,11 +37,13 @@
  * termes.
  */
 
+import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { NetworkService, StatisticsService } from '@multi/shared';
+import { CustomIconComponent, NetworkService, StatisticsService } from '@multi/shared';
 import { StaticPagesRepository, TranslatedStaticPage } from '../../static-pages.repository';
 import { StaticPagesService } from '../../static-pages.service';
 
@@ -51,7 +53,7 @@ import { StaticPagesService } from '../../static-pages.service';
   styleUrls: [
     '../../../../../../src/theme/app-theme/styles/static-pages/static-pages-widget.component.scss',
   ],
-  standalone: false,
+  imports: [IonicModule, AsyncPipe, CustomIconComponent],
 })
 export class StaticPagesWidgetComponent {
   private route = inject(ActivatedRoute);

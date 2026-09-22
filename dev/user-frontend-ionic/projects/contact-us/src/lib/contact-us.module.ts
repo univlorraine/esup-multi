@@ -37,14 +37,9 @@
  * termes.
  */
 
-import { CommonModule } from '@angular/common';
 import { inject, NgModule, provideAppInitializer } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
-import { TranslatePipe } from '@ngx-translate/core';
-import { ProjectModuleService, SharedComponentsModule } from '@multi/shared';
+import { ProjectModuleService } from '@multi/shared';
 import { ContactUsRoutingModule } from './contact-us-routing.module';
-import { ContactUsPage } from './contact-us.page';
 import { ContactUsMenuItemComponent } from './widgets/contact-us-menu-item/contact-us-menu-item.component';
 
 const initModule = (projectModuleService: ProjectModuleService) => () =>
@@ -60,16 +55,7 @@ const initModule = (projectModuleService: ProjectModuleService) => () =>
   });
 
 @NgModule({
-  declarations: [ContactUsMenuItemComponent, ContactUsPage],
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    ReactiveFormsModule,
-    SharedComponentsModule,
-    ContactUsRoutingModule,
-    TranslatePipe,
-  ],
+  imports: [ContactUsRoutingModule],
   providers: [
     provideAppInitializer(() => {
       const initializerFn = initModule(inject(ProjectModuleService));

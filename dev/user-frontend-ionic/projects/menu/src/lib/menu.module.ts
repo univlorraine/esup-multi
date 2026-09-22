@@ -37,13 +37,8 @@
  * termes.
  */
 
-import { CommonModule } from '@angular/common';
 import { inject, NgModule, provideAppInitializer } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
-import { TranslatePipe } from '@ngx-translate/core';
-import { ProjectModuleService, SharedComponentsModule } from '@multi/shared';
-import { BurgerMenuPage } from './burger-menu/burger-menu.page';
+import { ProjectModuleService } from '@multi/shared';
 import { MenuRoutingModule } from './menu-routing.module';
 
 const initModule = (projectModuleService: ProjectModuleService) => () =>
@@ -62,15 +57,7 @@ const initModule = (projectModuleService: ProjectModuleService) => () =>
   });
 
 @NgModule({
-  declarations: [BurgerMenuPage],
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    MenuRoutingModule,
-    TranslatePipe,
-    SharedComponentsModule,
-  ],
+  imports: [MenuRoutingModule],
   providers: [
     provideAppInitializer(() => {
       const initializerFn = initModule(inject(ProjectModuleService));

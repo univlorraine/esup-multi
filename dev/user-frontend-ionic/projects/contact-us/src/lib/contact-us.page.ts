@@ -37,13 +37,20 @@
  * termes.
  */
 
+import { AsyncPipe } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ToastController } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { IonicModule, ToastController } from '@ionic/angular';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { filter, finalize, take } from 'rxjs/operators';
-import { authenticatedUser$, NetworkService } from '@multi/shared';
+import { authenticatedUser$, BackButtonComponent, NetworkService } from '@multi/shared';
 import { ContactUsRepository, TranslatedContactUsPageContent } from './contact-us.repository';
 import { ContactMessageQueryDto, ContactUsService } from './contact-us.service';
 
@@ -51,7 +58,14 @@ import { ContactMessageQueryDto, ContactUsService } from './contact-us.service';
   selector: 'app-contact-us',
   templateUrl: './contact-us.page.html',
   styleUrls: ['../../../../src/theme/app-theme/styles/contact-us/contact-us.page.scss'],
-  standalone: false,
+  imports: [
+    IonicModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AsyncPipe,
+    TranslatePipe,
+    BackButtonComponent,
+  ],
 })
 export class ContactUsPage implements OnInit {
   private contactUsService = inject(ContactUsService);

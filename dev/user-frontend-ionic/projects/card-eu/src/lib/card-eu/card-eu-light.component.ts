@@ -38,6 +38,9 @@
  */
 
 import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
+import { SanitizeSvgPipe } from '@multi/shared';
 import { UserAndCardEuData } from '../card-eu.repository';
 
 @Component({
@@ -45,7 +48,7 @@ import { UserAndCardEuData } from '../card-eu.repository';
   templateUrl: './card-eu-light.component.html',
   styleUrls: ['../../../../../src/theme/app-theme/styles/card-eu/card-eu-light.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  standalone: false,
+  imports: [IonicModule, TranslatePipe, SanitizeSvgPipe],
 })
 export class CardEuLightComponent {
   @Input() userCardEuLight: UserAndCardEuData;

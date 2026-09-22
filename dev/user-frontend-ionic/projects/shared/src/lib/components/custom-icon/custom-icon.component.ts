@@ -37,14 +37,16 @@
  * termes.
  */
 
+import { AsyncPipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
 import { isDarkTheme$ } from '../../theme/theme.repository';
 
 @Component({
   selector: 'app-custom-icon',
   templateUrl: 'custom-icon.component.html',
   styleUrls: ['../../../../../../src/theme/app-theme/styles/shared/custom-icon.component.scss'],
-  standalone: false,
+  imports: [IonicModule, AsyncPipe],
 })
 export class CustomIconComponent {
   @Input() icon?: string;

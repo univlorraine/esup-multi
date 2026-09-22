@@ -37,10 +37,7 @@
  * termes.
  */
 
-import { CommonModule } from '@angular/common';
 import { inject, NgModule, provideAppInitializer } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
-import { TranslatePipe } from '@ngx-translate/core';
 import { ProjectModuleService } from '@multi/shared';
 
 const initModule = (projectModuleService: ProjectModuleService) => () => {
@@ -51,7 +48,6 @@ const initModule = (projectModuleService: ProjectModuleService) => () => {
 };
 
 @NgModule({
-  imports: [CommonModule, IonicModule, TranslatePipe],
   providers: [
     provideAppInitializer(() => {
       const initializerFn = initModule(inject(ProjectModuleService));

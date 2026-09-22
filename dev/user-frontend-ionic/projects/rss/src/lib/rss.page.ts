@@ -37,11 +37,21 @@
  * termes.
  */
 
+import { AsyncPipe, NgClass } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
 import { Observable, Subscription } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
-import { NavigationService, NetworkService } from '@multi/shared';
+import {
+  HeaderComponent,
+  NavigationService,
+  NetworkService,
+  RelativeTimePipe,
+} from '@multi/shared';
+import { RssItemHeaderButtonDirective } from './common/rss-item-header/rss-item-header-button.directive';
+import { RssItemHeaderComponent } from './common/rss-item-header/rss-item-header.component';
 import { RSS_CONFIG, RssModuleConfig } from './rss.config';
 import { FeedItem, rssFeed$, setRssFeed } from './rss.repository';
 import { RssService } from './rss.service';
@@ -50,7 +60,16 @@ import { RssService } from './rss.service';
   selector: 'app-rss',
   templateUrl: './rss.page.html',
   styleUrls: ['../../../../src/theme/app-theme/styles/rss/rss.page.scss'],
-  standalone: false,
+  imports: [
+    IonicModule,
+    NgClass,
+    RssItemHeaderComponent,
+    RssItemHeaderButtonDirective,
+    AsyncPipe,
+    TranslatePipe,
+    HeaderComponent,
+    RelativeTimePipe,
+  ],
 })
 export class RssPage {
   private rssService = inject(RssService);

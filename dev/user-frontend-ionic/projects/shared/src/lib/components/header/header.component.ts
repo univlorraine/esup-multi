@@ -37,17 +37,21 @@
  * termes.
  */
 
+import { AsyncPipe } from '@angular/common';
 import { Component, inject, Input } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { NavigationService } from '../../navigation/navigation.service';
 import { PageLayoutService, PageTitle } from '../../navigation/page-layout.service';
 import { NetworkService } from '../../network/network.service';
+import { BackButtonComponent } from '../back-button/back-button.component';
 
 @Component({
   selector: 'app-header',
   templateUrl: 'header.component.html',
   styleUrls: ['../../../../../../src/theme/app-theme/styles/shared/header.component.scss'],
-  standalone: false,
+  imports: [IonicModule, BackButtonComponent, AsyncPipe, TranslatePipe],
 })
 export class HeaderComponent {
   private pageLayoutService = inject(PageLayoutService);

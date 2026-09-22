@@ -85,14 +85,13 @@ import {
   userHadSetThemeInApp,
   userHadSetThemeInApp$,
 } from '@multi/shared';
-import { PageLayoutsModule } from './layout/layouts.module';
+import { LayoutPage } from './layout/layout.page';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['../theme/app-theme/styles/app/app.component.scss'],
-  standalone: true,
-  imports: [CommonModule, IonicModule, TranslatePipe, PageLayoutsModule],
+  imports: [CommonModule, IonicModule, TranslatePipe, LayoutPage],
 })
 export class AppComponent implements OnInit, OnDestroy {
   private environment = inject<any>('environment' as any);

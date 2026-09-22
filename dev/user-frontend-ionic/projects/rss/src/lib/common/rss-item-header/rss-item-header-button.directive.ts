@@ -39,10 +39,7 @@
 
 import { Directive, inject, TemplateRef } from '@angular/core';
 
-@Directive({
-  selector: '[appRssItemHeaderButton]',
-  standalone: false,
-})
+@Directive({ selector: '[appRssItemHeaderButton]' })
 export class RssItemHeaderButtonDirective {
   template = inject<TemplateRef<any>>(TemplateRef);
 }

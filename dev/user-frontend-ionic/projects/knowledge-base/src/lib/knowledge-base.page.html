@@ -53,7 +53,7 @@
   } @else {
     <ion-row class="searchbar-row">
       <ion-searchbar
-        debounce="300"
+        [debounce]="300"
         show-clear-button="focus"
         [placeholder]="'KNOWLEDGE-BASE.SEARCH_PAGE' | translate"
         [attr.aria-label]="'KNOWLEDGE-BASE.SEARCH_PAGE' | translate"

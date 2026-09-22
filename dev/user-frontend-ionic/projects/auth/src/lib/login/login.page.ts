@@ -37,13 +37,26 @@
  * termes.
  */
 
+import { AsyncPipe } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IonInput, ToastController } from '@ionic/angular';
+import { IonicModule, IonInput, ToastController } from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { finalize, take, tap } from 'rxjs/operators';
-import { AuthenticatedUser, FeaturesService, NavigationService } from '@multi/shared';
+import {
+  AuthenticatedUser,
+  BackButtonComponent,
+  FeaturesService,
+  NavigationService,
+} from '@multi/shared';
 import { AuthService } from '../common/auth.service';
 import { LoginRepository, TranslatedLoginPageContent } from '../common/login.repository';
 import { LoginService } from '../common/login.service';
@@ -58,7 +71,14 @@ interface AuthenticatedUserToken extends AuthenticatedUser {
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['../../../../../src/theme/app-theme/styles/auth/login.page.scss'],
-  standalone: false,
+  imports: [
+    IonicModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AsyncPipe,
+    TranslatePipe,
+    BackButtonComponent,
+  ],
 })
 export class LoginPage implements OnInit {
   private fb = inject(FormBuilder);

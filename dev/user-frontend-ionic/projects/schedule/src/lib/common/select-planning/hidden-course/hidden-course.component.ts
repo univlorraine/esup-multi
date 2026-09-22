@@ -38,6 +38,8 @@
  */
 
 import { Component, inject, Input } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
 import { take } from 'rxjs/operators';
 import { ScheduleListService } from '../../../schedule-list/schedule-list.service';
 import { HiddenCourse } from '../../../schedule.repository';
@@ -49,7 +51,7 @@ import { ScheduleService } from '../../../schedule.service';
   styleUrls: [
     '../../../../../../../src/theme/app-theme/styles/schedule/hidden-course.component.scss',
   ],
-  standalone: false,
+  imports: [IonicModule, TranslatePipe],
 })
 export class HiddenCourseComponent {
   private scheduleListService = inject(ScheduleListService);

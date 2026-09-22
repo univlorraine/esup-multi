@@ -37,11 +37,18 @@
  * termes.
  */
 
+import { NgClass, NgStyle } from '@angular/common';
 import { Component, ElementRef, inject, Injector, ViewChild } from '@angular/core';
 import { Capacitor } from '@capacitor/core';
-import { ActionSheetController, AlertController, ToastController } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
+import {
+  ActionSheetController,
+  AlertController,
+  IonicModule,
+  ToastController,
+} from '@ionic/angular';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { finalize, take } from 'rxjs/operators';
+import { HeaderComponent } from '@multi/shared';
 import { CONTACTS_CONFIG, ContactsModuleConfig } from './contacts.config';
 import { Contact, ContactsBody, ContactsService } from './contacts.service';
 
@@ -49,7 +56,7 @@ import { Contact, ContactsBody, ContactsService } from './contacts.service';
   selector: 'app-contacts',
   templateUrl: './contacts.page.html',
   styleUrls: ['../../../../src/theme/app-theme/styles/contacts/contacts.page.scss'],
-  standalone: false,
+  imports: [IonicModule, NgClass, NgStyle, TranslatePipe, HeaderComponent],
 })
 export class ContactsComponent {
   private contactsService = inject(ContactsService);

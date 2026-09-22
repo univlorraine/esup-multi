@@ -37,10 +37,16 @@
  * termes.
  */
 
+import { AsyncPipe, NgClass } from '@angular/common';
 import { Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
 import { filter, first, Observable, switchMap } from 'rxjs';
 import { finalize, map, take } from 'rxjs/operators';
 import { NetworkService } from '@multi/shared';
+import { RssItemHeaderButtonDirective } from '../../common/rss-item-header/rss-item-header-button.directive';
+import { RssItemHeaderComponent } from '../../common/rss-item-header/rss-item-header.component';
 import { RSS_CONFIG, RssModuleConfig } from '../../rss.config';
 import { FeedItem, rssFeed$, setRssFeed } from '../../rss.repository';
 import { RssService } from '../../rss.service';
@@ -49,7 +55,15 @@ import { RssService } from '../../rss.service';
   selector: 'app-latest-news-widget',
   templateUrl: './latest-news.component.html',
   styleUrls: ['../../../../../../src/theme/app-theme/styles/rss/latest-news.component.scss'],
-  standalone: false,
+  imports: [
+    IonicModule,
+    NgClass,
+    RssItemHeaderComponent,
+    RssItemHeaderButtonDirective,
+    RouterLink,
+    AsyncPipe,
+    TranslatePipe,
+  ],
 })
 export class LatestNewsComponent {
   private rssService = inject(RssService);

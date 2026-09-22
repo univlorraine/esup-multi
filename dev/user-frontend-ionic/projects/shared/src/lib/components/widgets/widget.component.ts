@@ -57,7 +57,6 @@ import { WidgetLifecycleService } from './widget-lifecycle.service';
   selector: 'app-widget',
   templateUrl: './widget.component.html',
   styleUrls: ['../../../../../../src/theme/app-theme/styles/shared/widget.component.scss'],
-  standalone: false,
 })
 export class WidgetComponent implements AfterViewInit {
   private projectModuleService = inject(ProjectModuleService);

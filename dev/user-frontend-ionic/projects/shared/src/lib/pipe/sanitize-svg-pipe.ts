@@ -41,10 +41,7 @@ import { inject, Pipe, PipeTransform } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import DOMPurify from 'dompurify';
 
-@Pipe({
-  name: 'sanitizeSvg',
-  standalone: false,
-})
+@Pipe({ name: 'sanitizeSvg' })
 export class SanitizeSvgPipe implements PipeTransform {
   private sanitizer = inject(DomSanitizer);
 

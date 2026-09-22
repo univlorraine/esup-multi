@@ -37,7 +37,9 @@
  * termes.
  */
 
+import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { NavigationService, NetworkService } from '@multi/shared';
@@ -50,7 +52,7 @@ import { SocialNetworkService } from '../../social-network.service';
   styleUrls: [
     '../../../../../../src/theme/app-theme/styles/social-network/social-network.component.scss',
   ],
-  standalone: false,
+  imports: [IonicModule, AsyncPipe],
 })
 export class SocialNetworkComponent {
   private socialNetworkService = inject(SocialNetworkService);

@@ -37,19 +37,9 @@
  * termes.
  */
 
-import { CommonModule } from '@angular/common';
 import { inject, ModuleWithProviders, NgModule, provideAppInitializer } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
-import { TranslatePipe } from '@ngx-translate/core';
-import {
-  CompleteLocalDatePipe,
-  LocalHourPipe,
-  ProjectModuleService,
-  SharedPipeModule,
-} from '@multi/shared';
+import { CompleteLocalDatePipe, LocalHourPipe, ProjectModuleService } from '@multi/shared';
 import { CALENDAR_CONFIG, CalendarModuleConfig } from './calendar.config';
-import { LocalDatePipe } from './common/pipe/local-date.pipe';
-import { LocalTimePipe } from './common/pipe/local-time.pipe';
 import { CalendarComponent } from './widget/calendar/calendar.component';
 
 const initModule = (projectModuleService: ProjectModuleService) => () =>
@@ -65,8 +55,6 @@ const initModule = (projectModuleService: ProjectModuleService) => () =>
   });
 
 @NgModule({
-  declarations: [CalendarComponent, LocalDatePipe, LocalTimePipe],
-  imports: [CommonModule, IonicModule, TranslatePipe, SharedPipeModule],
   providers: [
     provideAppInitializer(() => {
       const initializerFn = initModule(inject(ProjectModuleService));

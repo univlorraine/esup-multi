@@ -37,15 +37,10 @@
  * termes.
  */
 
-import { CommonModule } from '@angular/common';
 import { inject, ModuleWithProviders, NgModule, provideAppInitializer } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
-import { TranslatePipe } from '@ngx-translate/core';
-import { ProjectModuleService, SharedComponentsModule } from '@multi/shared';
+import { ProjectModuleService } from '@multi/shared';
 import { MapRoutingModule } from './map-routing.module';
 import { MAP_CONFIG, MapModuleConfig } from './map.config';
-import { MapPage } from './map.page';
 
 const initModule = (projectModuleService: ProjectModuleService) => () =>
   projectModuleService.initProjectModule({
@@ -54,15 +49,7 @@ const initModule = (projectModuleService: ProjectModuleService) => () =>
   });
 
 @NgModule({
-  imports: [
-    CommonModule,
-    IonicModule,
-    MapRoutingModule,
-    TranslatePipe,
-    SharedComponentsModule,
-    ReactiveFormsModule,
-  ],
-  declarations: [MapPage],
+  imports: [MapRoutingModule],
   providers: [
     provideAppInitializer(() => {
       const initializerFn = initModule(inject(ProjectModuleService));

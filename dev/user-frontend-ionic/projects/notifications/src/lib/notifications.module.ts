@@ -37,29 +37,18 @@
  * termes.
  */
 
-import { CommonModule } from '@angular/common';
 import { inject, ModuleWithProviders, NgModule, provideAppInitializer } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   FirebaseMessaging,
   Notification as NotificationCapacitor,
 } from '@capacitor-firebase/messaging';
 // import { Device } from '@capacitor/device';
-import { IonicModule, Platform, ToastController } from '@ionic/angular';
+import { Platform, ToastController } from '@ionic/angular';
 import { EffectsNgModule } from '@ngneat/effects-ng';
-import { TranslatePipe } from '@ngx-translate/core';
-import {
-  NotificationsRepository,
-  ProjectModuleService,
-  SharedComponentsModule,
-  SharedPipeModule,
-} from '@multi/shared';
-import { NotificationOptionsComponent } from './notification-options/notification-options.component';
+import { NotificationsRepository, ProjectModuleService } from '@multi/shared';
 import { NotificationsRoutingModule } from './notifications-routing.module';
 import { NOTIFICATIONS_CONFIG, NotificationsModuleConfig } from './notifications.config';
 import { NotificationsEffects } from './notifications.effects';
-import { NotificationsPage } from './notifications.page';
-import { SettingsPage } from './settings/settings.page';
 
 const initModule =
   (
@@ -77,18 +66,7 @@ const initModule =
   };
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    NotificationsRoutingModule,
-    TranslatePipe,
-    ReactiveFormsModule,
-    SharedComponentsModule,
-    EffectsNgModule.forFeature([NotificationsEffects]),
-    SharedPipeModule,
-  ],
-  declarations: [NotificationsPage, SettingsPage, NotificationOptionsComponent],
+  imports: [NotificationsRoutingModule, EffectsNgModule.forFeature([NotificationsEffects])],
   providers: [
     provideAppInitializer(() => {
       const initializerFn = initModule(

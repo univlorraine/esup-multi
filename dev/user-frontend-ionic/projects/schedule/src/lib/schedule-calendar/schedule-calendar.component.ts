@@ -38,21 +38,23 @@
  */
 
 import { Component, inject, OnDestroy, ViewChild } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { FullCalendarComponent } from '@fullcalendar/angular';
+import { FullCalendarComponent, FullCalendarModule } from '@fullcalendar/angular';
 import { Calendar, CalendarOptions } from '@fullcalendar/core';
 import allLocales from '@fullcalendar/core/locales-all';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
-import { GestureController, IonModal, Platform } from '@ionic/angular';
+import { GestureController, IonicModule, IonModal, Platform } from '@ionic/angular';
 import { distinctUntilArrayItemChanged } from '@ngneat/elf';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { format, isAfter, isBefore, sub } from 'date-fns';
 import * as locale from 'date-fns/locale';
 import { EventInput } from 'fullcalendar';
 import { Observable, Subscription } from 'rxjs';
 import { filter, map, mergeMap, take, tap } from 'rxjs/operators';
-import { currentLanguage$ } from '@multi/shared';
+import { CompleteLocalDatePipe, currentLanguage$ } from '@multi/shared';
+import { EventDetailComponent } from '../common/event-detail/event-detail.component';
 import {
   Event,
   impersonatedScheduleStoreManager,
@@ -61,6 +63,7 @@ import {
   ScheduleStoreManager,
 } from '../schedule.repository';
 import { formatDay, ScheduleService } from '../schedule.service';
+import { CalendarEventComponent } from './calendar-event/calendar-event.component';
 import { ScheduleCalendarService } from './schedule-calendar.service';
 
 const defaultBreakpoint = 0.6;
@@ -71,7 +74,15 @@ const defaultBreakpoint = 0.6;
   styleUrls: [
     '../../../../../src/theme/app-theme/styles/schedule/schedule-calendar.component.scss',
   ],
-  standalone: false,
+  imports: [
+    IonicModule,
+    FormsModule,
+    FullCalendarModule,
+    CalendarEventComponent,
+    EventDetailComponent,
+    TranslatePipe,
+    CompleteLocalDatePipe,
+  ],
 })
 export class ScheduleCalendarComponent implements OnDestroy {
   private environment = inject<any>('environment' as any);

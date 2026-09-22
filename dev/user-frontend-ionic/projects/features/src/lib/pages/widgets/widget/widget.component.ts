@@ -39,12 +39,14 @@
 
 import { Component, Input } from '@angular/core';
 import { FeatureType, TranslatedFeature } from '@multi/shared';
+import { WidgetExternalFeatureComponent } from './widget-external-feature/widget-external-feature.component';
+import { WidgetInternalFeatureComponent } from './widget-internal-feature/widget-internal-feature.component';
 
 @Component({
   selector: 'app-feature-widget',
   templateUrl: './widget.component.html',
   styleUrls: ['../../../../../../../src/theme/app-theme/styles/features/widget.component.scss'],
-  standalone: false,
+  imports: [WidgetExternalFeatureComponent, WidgetInternalFeatureComponent],
 })
 export class WidgetComponent {
   @Input() feature: TranslatedFeature;

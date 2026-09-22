@@ -37,13 +37,16 @@
  * termes.
  */
 
+import { AsyncPipe, DecimalPipe } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Geolocation, Position } from '@capacitor/geolocation';
+import { IonicModule } from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
 import { getDistance } from 'geolib';
 import { combineLatest, from, Observable, of } from 'rxjs';
 import { catchError, map, take, tap } from 'rxjs/operators';
-import { NetworkService } from '@multi/shared';
+import { HeaderComponent, NetworkService } from '@multi/shared';
 import {
   favoritesRestaurantsIds$,
   RestaurantOpening,
@@ -70,7 +73,7 @@ export interface RestaurantDto {
   selector: 'app-restaurants',
   templateUrl: './restaurants.page.html',
   styleUrls: ['../../../../src/theme/app-theme/styles/restaurants/restaurants.page.scss'],
-  standalone: false,
+  imports: [IonicModule, AsyncPipe, DecimalPipe, TranslatePipe, HeaderComponent],
 })
 export class RestaurantsPage implements OnInit {
   private restaurantsService = inject(RestaurantsService);

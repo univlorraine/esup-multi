@@ -37,6 +37,7 @@
  * termes.
  */
 
+import { AsyncPipe } from '@angular/common';
 import {
   AfterViewInit,
   Component,
@@ -48,10 +49,13 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { NavController } from '@ionic/angular';
+import { RouterLink, RouterLinkActive } from '@angular/router';
+import { IonicModule, NavController } from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
 import { BehaviorSubject, combineLatestWith, Observable, Subject, Subscription } from 'rxjs';
 import { distinctUntilChanged, filter, finalize, map } from 'rxjs/operators';
 import {
+  CustomIconComponent,
   FeaturesService,
   GuidedTourService,
   MenuItem,
@@ -82,7 +86,14 @@ interface MenuItemWithBadge extends MenuItemWithOptionalRouterLink {
   selector: 'app-layout',
   templateUrl: 'layout.page.html',
   styleUrls: ['../../theme/app-theme/styles/app/layout.page.scss'],
-  standalone: false,
+  imports: [
+    IonicModule,
+    RouterLinkActive,
+    RouterLink,
+    AsyncPipe,
+    TranslatePipe,
+    CustomIconComponent,
+  ],
 })
 export class LayoutPage implements AfterViewInit, OnChanges, OnDestroy {
   private navController = inject(NavController);

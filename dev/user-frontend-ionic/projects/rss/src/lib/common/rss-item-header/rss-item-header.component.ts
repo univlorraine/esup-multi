@@ -37,7 +37,9 @@
  * termes.
  */
 
+import { NgClass, NgTemplateOutlet } from '@angular/common';
 import { Component, ContentChild, Input, TemplateRef } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
 import { FeedItem } from '../../rss.repository';
 import { RssItemHeaderButtonDirective } from './rss-item-header-button.directive';
 
@@ -45,7 +47,7 @@ import { RssItemHeaderButtonDirective } from './rss-item-header-button.directive
   selector: 'app-rss-item-header',
   templateUrl: './rss-item-header.component.html',
   styleUrls: ['../../../../../../src/theme/app-theme/styles/rss/rss-item-header.component.scss'],
-  standalone: false,
+  imports: [IonicModule, NgClass, NgTemplateOutlet],
 })
 export class RssItemHeaderComponent {
   @Input() item: FeedItem;

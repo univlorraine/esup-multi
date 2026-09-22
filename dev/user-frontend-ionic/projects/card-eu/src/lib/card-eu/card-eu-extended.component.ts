@@ -38,6 +38,8 @@
  */
 
 import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
+import { SanitizeSvgPipe } from '@multi/shared';
 import { UserAndCardEuData } from '../card-eu.repository';
 
 @Component({
@@ -45,7 +47,7 @@ import { UserAndCardEuData } from '../card-eu.repository';
   templateUrl: './card-eu-extended.component.html',
   styleUrls: ['../../../../../src/theme/app-theme/styles/card-eu/card-eu-extended.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  standalone: false,
+  imports: [TranslatePipe, SanitizeSvgPipe],
 })
 export class CardEuExtendedComponent {
   @Input() userCardEu: UserAndCardEuData;

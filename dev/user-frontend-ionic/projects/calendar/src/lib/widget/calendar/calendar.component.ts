@@ -37,6 +37,7 @@
  * termes.
  */
 
+import { AsyncPipe, NgClass, NgTemplateOutlet, SlicePipe } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectorRef,
@@ -46,18 +47,33 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { finalize, take } from 'rxjs/operators';
-import { ThemeService } from '@multi/shared';
+import { CompleteLocalDatePipe, LocalHourPipe, ThemeService } from '@multi/shared';
 import { CALENDAR_CONFIG, CalendarModuleConfig } from '../../calendar.config';
 import { MailCalendarEvents } from '../../calendar.repository';
 import { CalendarService } from '../../calendar.service';
+import { LocalDatePipe } from '../../common/pipe/local-date.pipe';
+import { LocalTimePipe } from '../../common/pipe/local-time.pipe';
 
 @Component({
   selector: 'app-calendar-widget',
   templateUrl: './calendar.component.html',
   styleUrls: ['../../../../../../src/theme/app-theme/styles/calendar/calendar.component.scss'],
-  standalone: false,
+  imports: [
+    NgTemplateOutlet,
+    IonicModule,
+    NgClass,
+    AsyncPipe,
+    SlicePipe,
+    TranslatePipe,
+    LocalDatePipe,
+    LocalTimePipe,
+    LocalHourPipe,
+    CompleteLocalDatePipe,
+  ],
 })
 export class CalendarComponent implements AfterViewInit {
   private calendarService = inject(CalendarService);

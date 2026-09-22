@@ -37,8 +37,10 @@
  * termes.
  */
 
+import { AsyncPipe, NgClass, NgStyle } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
 import { combineLatest, Observable } from 'rxjs';
 import { finalize, map, take } from 'rxjs/operators';
 import {
@@ -62,7 +64,7 @@ import { ImportantNewsService } from '../../important-news.service';
   styleUrls: [
     '../../../../../../src/theme/app-theme/styles/important-news/important-news.component.scss',
   ],
-  standalone: false,
+  imports: [IonicModule, NgClass, NgStyle, AsyncPipe],
 })
 export class ImportantNewsComponent {
   private importantNewsService = inject(ImportantNewsService);

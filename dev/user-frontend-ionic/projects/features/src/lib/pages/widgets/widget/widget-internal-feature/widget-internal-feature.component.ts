@@ -37,9 +37,17 @@
  * termes.
  */
 
+import { NgClass, NgStyle } from '@angular/common';
 import { ChangeDetectorRef, Component, inject, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { StatisticsService, ThemeService, TranslatedInternalFeature } from '@multi/shared';
+import { IonicModule } from '@ionic/angular';
+import {
+  CustomIconComponent,
+  StatisticsService,
+  ThemeService,
+  TranslatedInternalFeature,
+  WidgetComponent,
+} from '@multi/shared';
 
 @Component({
   selector: 'app-widget-internal-feature',
@@ -47,7 +55,7 @@ import { StatisticsService, ThemeService, TranslatedInternalFeature } from '@mul
   styleUrls: [
     '../../../../../../../../src/theme/app-theme/styles/features/widget-internal-feature.component.scss',
   ],
-  standalone: false,
+  imports: [IonicModule, NgClass, NgStyle, WidgetComponent, CustomIconComponent],
 })
 export class WidgetInternalFeatureComponent {
   private router = inject(Router);

@@ -37,7 +37,10 @@
  * termes.
  */
 
+import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { NetworkService } from '@multi/shared';
@@ -50,7 +53,7 @@ import { ContactUsService } from '../../contact-us.service';
   styleUrls: [
     '../../../../../../src/theme/app-theme/styles/contact-us/contact-us-menu-item.component.scss',
   ],
-  standalone: false,
+  imports: [IonicModule, RouterLink, AsyncPipe],
 })
 export class ContactUsMenuItemComponent {
   private contactUsService = inject(ContactUsService);

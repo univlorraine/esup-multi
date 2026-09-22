@@ -37,8 +37,10 @@
  * termes.
  */
 
+import { AsyncPipe } from '@angular/common';
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
-import { Platform } from '@ionic/angular';
+import { IonicModule, Platform } from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
 import { combineLatest, Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import {
@@ -61,7 +63,7 @@ interface NotificationOptions {
   styleUrls: [
     '../../../../../src/theme/app-theme/styles/notifications/notification-options.component.scss',
   ],
-  standalone: false,
+  imports: [IonicModule, AsyncPipe, TranslatePipe],
 })
 export class NotificationOptionsComponent {
   platform = inject(Platform);

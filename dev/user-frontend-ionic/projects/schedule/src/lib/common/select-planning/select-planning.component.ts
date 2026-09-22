@@ -37,20 +37,26 @@
  * termes.
  */
 
+import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import {
   FormArray,
   FormBuilder,
   FormControl,
   FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
   ValidationErrors,
   ValidatorFn,
 } from '@angular/forms';
+import { IonicModule } from '@ionic/angular';
 import { distinctUntilArrayItemChanged } from '@ngneat/elf';
+import { TranslatePipe } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { HiddenCourse, PlanningData, scheduleStoreManager } from '../../schedule.repository';
 import { ScheduleService } from '../../schedule.service';
+import { HiddenCourseComponent } from './hidden-course/hidden-course.component';
 
 interface AvailablePlanningFormInput extends AvailablePlanning {
   checked: boolean;
@@ -73,7 +79,14 @@ const atLeastOneCheckedValidator =
   styleUrls: [
     '../../../../../../src/theme/app-theme/styles/schedule/select-planning.component.scss',
   ],
-  standalone: false,
+  imports: [
+    IonicModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HiddenCourseComponent,
+    AsyncPipe,
+    TranslatePipe,
+  ],
 })
 export class SelectPlanningComponent {
   private formBuilder = inject(FormBuilder);

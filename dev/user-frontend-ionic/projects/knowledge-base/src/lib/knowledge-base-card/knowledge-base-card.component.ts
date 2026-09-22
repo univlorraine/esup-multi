@@ -37,11 +37,14 @@
  * termes.
  */
 
+import { NgTemplateOutlet } from '@angular/common';
 import { Component, inject, Input, SecurityContext } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Browser } from '@capacitor/browser';
-import { NavigationService, SsoService } from '@multi/shared';
+import { IonicModule } from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
+import { NavigationService, SanitizeHtmlPipe, SsoService } from '@multi/shared';
 import {
   Display,
   KnowledgeBaseItem,
@@ -55,7 +58,7 @@ import {
   styleUrls: [
     '../../../../../src/theme/app-theme/styles/knowledge-base/knowledge-base-card.component.scss',
   ],
-  standalone: false,
+  imports: [IonicModule, NgTemplateOutlet, TranslatePipe, SanitizeHtmlPipe],
 })
 export class KnowledgeBaseCardComponent {
   private router = inject(Router);

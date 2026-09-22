@@ -37,15 +37,28 @@
  * termes.
  */
 
+import { NgStyle } from '@angular/common';
 import { Component, DestroyRef, inject, ViewChild } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { Geolocation } from '@capacitor/geolocation';
-import { TranslateService } from '@ngx-translate/core';
+import { IonicModule } from '@ionic/angular';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import * as Leaflet from 'leaflet';
 import { combineLatest } from 'rxjs';
 import { finalize, map, take } from 'rxjs/operators';
-import { currentLanguage$, MultiTenantService, NetworkService } from '@multi/shared';
+import {
+  currentLanguage$,
+  HeaderComponent,
+  MultiTenantService,
+  NetworkService,
+} from '@multi/shared';
 import { MAP_CONFIG, MapModuleConfig } from './map.config';
 import {
   Campus,
@@ -65,7 +78,7 @@ import { MapService } from './map.service';
   selector: 'app-map',
   templateUrl: './map.page.html',
   styleUrls: ['../../../../src/theme/app-theme/styles/map/map.page.scss'],
-  standalone: false,
+  imports: [IonicModule, ReactiveFormsModule, NgStyle, TranslatePipe, HeaderComponent],
 })
 export class MapPage {
   private mapService = inject(MapService);

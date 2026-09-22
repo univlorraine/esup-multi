@@ -37,22 +37,11 @@
  * termes.
  */
 
-import { CommonModule } from '@angular/common';
 import { inject, NgModule, provideAppInitializer } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
 import { EffectsNgModule } from '@ngneat/effects-ng';
-import { TranslatePipe } from '@ngx-translate/core';
-import { DragulaModule } from 'ng2-dragula';
-import { ProjectModuleService, SharedComponentsModule } from '@multi/shared';
+import { ProjectModuleService } from '@multi/shared';
 import { FeaturesRoutingModule } from './features-routing.module';
 import { FeaturesEffects } from './features.effects';
-import { ServiceComponent } from './pages/services/service/service.component';
-import { ServicesPage } from './pages/services/services.page';
-import { WidgetExternalFeatureComponent } from './pages/widgets/widget/widget-external-feature/widget-external-feature.component';
-import { WidgetInternalFeatureComponent } from './pages/widgets/widget/widget-internal-feature/widget-internal-feature.component';
-import { WidgetComponent } from './pages/widgets/widget/widget.component';
-import { WidgetsPage } from './pages/widgets/widgets.page';
 
 const initModule = (projectModuleService: ProjectModuleService) => () =>
   projectModuleService.initProjectModule({
@@ -77,24 +66,7 @@ const initModule = (projectModuleService: ProjectModuleService) => () =>
   });
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    FeaturesRoutingModule,
-    TranslatePipe,
-    EffectsNgModule.forFeature([FeaturesEffects]),
-    SharedComponentsModule,
-    DragulaModule.forRoot(),
-  ],
-  declarations: [
-    WidgetComponent,
-    WidgetInternalFeatureComponent,
-    WidgetExternalFeatureComponent,
-    WidgetsPage,
-    ServiceComponent,
-    ServicesPage,
-  ],
+  imports: [FeaturesRoutingModule, EffectsNgModule.forFeature([FeaturesEffects])],
   providers: [
     provideAppInitializer(() => {
       const initializerFn = initModule(inject(ProjectModuleService));

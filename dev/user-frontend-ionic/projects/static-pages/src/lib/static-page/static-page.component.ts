@@ -37,11 +37,13 @@
  * termes.
  */
 
+import { AsyncPipe } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
-import { NetworkService } from '@multi/shared';
+import { BackButtonComponent, NetworkService } from '@multi/shared';
 import { StaticPagesRepository, TranslatedStaticPage } from '../static-pages.repository';
 import { StaticPagesService } from '../static-pages.service';
 
@@ -49,7 +51,7 @@ import { StaticPagesService } from '../static-pages.service';
   selector: 'app-static-page',
   templateUrl: './static-page.component.html',
   styleUrls: ['../../../../../src/theme/app-theme/styles/static-pages/static-page.component.scss'],
-  standalone: false,
+  imports: [IonicModule, AsyncPipe, BackButtonComponent],
 })
 export class StaticPageComponent implements OnInit {
   private route = inject(ActivatedRoute);

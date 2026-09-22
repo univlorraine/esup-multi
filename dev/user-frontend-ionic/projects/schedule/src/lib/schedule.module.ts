@@ -37,32 +37,13 @@
  * termes.
  */
 
-import { CommonModule } from '@angular/common';
 import { inject, ModuleWithProviders, NgModule, provideAppInitializer } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FullCalendarModule } from '@fullcalendar/angular'; // must go before plugins
-import { IonicModule } from '@ionic/angular';
+// must go before plugins
 import { EffectsNgModule } from '@ngneat/effects-ng';
-import { TranslatePipe } from '@ngx-translate/core';
-import {
-  CompleteLocalDatePipe,
-  LocalHourPipe,
-  ProjectModuleService,
-  SharedComponentsModule,
-  SharedPipeModule,
-} from '@multi/shared';
-import { EventDetailComponent } from './common/event-detail/event-detail.component';
-import { ShortenedDatePipe } from './common/pipe/shortened-date.pipe';
-import { HiddenCourseComponent } from './common/select-planning/hidden-course/hidden-course.component';
-import { SelectPlanningComponent } from './common/select-planning/select-planning.component';
-import { SelectUserComponent } from './common/select-user/select-user.component';
-import { CalendarEventComponent } from './schedule-calendar/calendar-event/calendar-event.component';
-import { ScheduleCalendarComponent } from './schedule-calendar/schedule-calendar.component';
-import { ScheduleListPage } from './schedule-list/schedule-list.page';
+import { CompleteLocalDatePipe, LocalHourPipe, ProjectModuleService } from '@multi/shared';
 import { SchedulePageRoutingModule } from './schedule-routing.module';
 import { SCHEDULE_CONFIG, ScheduleModuleConfig } from './schedule.config';
 import { ScheduleEffects } from './schedule.effects';
-import { SchedulePage } from './schedule.page';
 import { NextEventsComponent } from './widgets/next-events/next-events.component';
 
 const initModule = (projectModuleService: ProjectModuleService) => () =>
@@ -84,30 +65,7 @@ const initModule = (projectModuleService: ProjectModuleService) => () =>
   });
 
 @NgModule({
-  declarations: [
-    SchedulePage,
-    ScheduleListPage,
-    ScheduleCalendarComponent,
-    ShortenedDatePipe,
-    EventDetailComponent,
-    SelectPlanningComponent,
-    SelectUserComponent,
-    CalendarEventComponent,
-    HiddenCourseComponent,
-    NextEventsComponent,
-  ],
-  imports: [
-    CommonModule,
-    IonicModule,
-    SchedulePageRoutingModule,
-    TranslatePipe,
-    FormsModule,
-    ReactiveFormsModule,
-    FullCalendarModule,
-    SharedComponentsModule,
-    SharedPipeModule,
-    EffectsNgModule.forFeature([ScheduleEffects]),
-  ],
+  imports: [SchedulePageRoutingModule, EffectsNgModule.forFeature([ScheduleEffects])],
   providers: [
     provideAppInitializer(() => {
       const initializerFn = initModule(inject(ProjectModuleService));

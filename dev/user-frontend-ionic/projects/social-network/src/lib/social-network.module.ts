@@ -37,10 +37,8 @@
  * termes.
  */
 
-import { CommonModule } from '@angular/common';
 import { inject, NgModule, provideAppInitializer } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
-import { ProjectModuleService, SharedComponentsModule } from '@multi/shared';
+import { ProjectModuleService } from '@multi/shared';
 import { SocialNetworkComponent } from './widgets/social-network/social-network.component';
 
 const initModule = (projectModuleService: ProjectModuleService) => () =>
@@ -55,13 +53,11 @@ const initModule = (projectModuleService: ProjectModuleService) => () =>
   });
 
 @NgModule({
-  declarations: [SocialNetworkComponent],
   providers: [
     provideAppInitializer(() => {
       const initializerFn = initModule(inject(ProjectModuleService));
       return initializerFn();
     }),
   ],
-  imports: [CommonModule, IonicModule, SharedComponentsModule],
 })
 export class SocialNetworkModule {}

@@ -37,16 +37,11 @@
  * termes.
  */
 
-import { CommonModule } from '@angular/common';
 import { inject, NgModule, provideAppInitializer } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
 import { EffectsNgModule } from '@ngneat/effects-ng';
-import { TranslatePipe } from '@ngx-translate/core';
-import { ProjectModuleService, SharedComponentsModule } from '@multi/shared';
+import { ProjectModuleService } from '@multi/shared';
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthEffects } from './auth.effects';
-import { LoginPage } from './login/login.page';
 import { PreferencesComponent } from './preferences/preferences.component';
 import { AuthComponent } from './widget/auth/auth.component';
 import { GreetingComponent } from './widget/greeting/greeting.component';
@@ -73,23 +68,7 @@ const initModule = (projectModuleService: ProjectModuleService) => () =>
     preferencesComponent: PreferencesComponent,
   });
 @NgModule({
-  declarations: [
-    LoginPage,
-    PreferencesComponent,
-    AuthComponent,
-    NotAuthentifiedComponent,
-    GreetingComponent,
-  ],
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    AuthRoutingModule,
-    ReactiveFormsModule,
-    TranslatePipe,
-    SharedComponentsModule,
-    EffectsNgModule.forFeature([AuthEffects]),
-  ],
+  imports: [AuthRoutingModule, EffectsNgModule.forFeature([AuthEffects])],
   providers: [
     provideAppInitializer(() => {
       const initializerFn = initModule(inject(ProjectModuleService));

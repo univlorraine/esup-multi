@@ -37,7 +37,9 @@
  * termes.
  */
 
+import { NgClass } from '@angular/common';
 import { Component, Input } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
 import { isSameDay } from 'date-fns';
 import { Event } from '../../schedule.repository';
 
@@ -47,7 +49,7 @@ import { Event } from '../../schedule.repository';
   styleUrls: [
     '../../../../../../src/theme/app-theme/styles/schedule/calendar-event.component.scss',
   ],
-  standalone: false,
+  imports: [IonicModule, NgClass],
 })
 export class CalendarEventComponent {
   @Input() event: Event;

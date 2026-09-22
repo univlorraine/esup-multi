@@ -37,16 +37,10 @@
  * termes.
  */
 
-import { CommonModule } from '@angular/common';
 import { inject, ModuleWithProviders, NgModule, provideAppInitializer } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
-import { TranslatePipe } from '@ngx-translate/core';
-import { ProjectModuleService, SharedComponentsModule, SharedPipeModule } from '@multi/shared';
-import { RssItemHeaderButtonDirective } from './common/rss-item-header/rss-item-header-button.directive';
-import { RssItemHeaderComponent } from './common/rss-item-header/rss-item-header.component';
+import { ProjectModuleService } from '@multi/shared';
 import { RssPageRoutingModule } from './rss-routing.module';
 import { RSS_CONFIG, RssModuleConfig } from './rss.config';
-import { RssPage } from './rss.page';
 import { LatestNewsComponent } from './widgets/latest-news/latest-news.component';
 
 const initModule = (projectModuleService: ProjectModuleService) => () =>
@@ -61,20 +55,7 @@ const initModule = (projectModuleService: ProjectModuleService) => () =>
     ],
   });
 @NgModule({
-  imports: [
-    CommonModule,
-    IonicModule,
-    RssPageRoutingModule,
-    TranslatePipe,
-    SharedComponentsModule,
-    SharedPipeModule,
-  ],
-  declarations: [
-    RssPage,
-    LatestNewsComponent,
-    RssItemHeaderComponent,
-    RssItemHeaderButtonDirective,
-  ],
+  imports: [RssPageRoutingModule],
   providers: [
     provideAppInitializer(() => {
       const initializerFn = initModule(inject(ProjectModuleService));

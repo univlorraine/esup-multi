@@ -37,9 +37,15 @@
  * termes.
  */
 
+import { AsyncPipe } from '@angular/common';
 import { Component, inject, OnDestroy, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
 import { take } from 'rxjs/operators';
+import { HeaderComponent } from '@multi/shared';
+import { SelectPlanningComponent } from './common/select-planning/select-planning.component';
+import { SelectUserComponent } from './common/select-user/select-user.component';
 import { ScheduleCalendarComponent } from './schedule-calendar/schedule-calendar.component';
 import { impersonatedScheduleStoreManager } from './schedule.repository';
 import { ScheduleService } from './schedule.service';
@@ -52,7 +58,14 @@ const DEFAULT_VIEW_TYPE: ViewType = 'month';
   selector: 'app-schedule',
   templateUrl: './schedule.page.html',
   styleUrls: ['../../../../src/theme/app-theme/styles/schedule/schedule.page.scss'],
-  standalone: false,
+  imports: [
+    SelectUserComponent,
+    SelectPlanningComponent,
+    IonicModule,
+    AsyncPipe,
+    TranslatePipe,
+    HeaderComponent,
+  ],
 })
 export class SchedulePage implements OnDestroy {
   private scheduleService = inject(ScheduleService);

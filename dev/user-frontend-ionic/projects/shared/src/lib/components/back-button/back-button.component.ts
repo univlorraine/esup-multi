@@ -38,14 +38,15 @@
  */
 
 import { Component, inject, Input } from '@angular/core';
-import { Platform } from '@ionic/angular';
+import { IonicModule, Platform } from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
 import { NavigationService } from '../../navigation/navigation.service';
 
 @Component({
   selector: 'app-back-button',
   templateUrl: 'back-button.component.html',
   styleUrls: ['../../../../../../src/theme/app-theme/styles/shared/back-button.component.scss'],
-  standalone: false,
+  imports: [IonicModule, TranslatePipe],
 })
 export class BackButtonComponent {
   private navigationService = inject(NavigationService);

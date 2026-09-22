@@ -37,12 +37,15 @@
  * termes.
  */
 
+import { AsyncPipe } from '@angular/common';
 import { Component, inject, ViewChild } from '@angular/core';
-import { IonContent } from '@ionic/angular';
+import { IonContent, IonicModule } from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
 import { add, isAfter, startOfWeek } from 'date-fns';
 import { combineLatest, Observable, of, Subscription } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
-import { AuthenticatedUser } from '@multi/shared';
+import { AuthenticatedUser, CompleteLocalDatePipe } from '@multi/shared';
+import { EventDetailComponent } from '../common/event-detail/event-detail.component';
 import {
   impersonatedScheduleStoreManager,
   Schedule,
@@ -56,7 +59,7 @@ import { EventsByDay, ScheduleListService } from './schedule-list.service';
   selector: 'app-schedule-list',
   templateUrl: './schedule-list.page.html',
   styleUrls: ['../../../../../src/theme/app-theme/styles/schedule/schedule-list.page.scss'],
-  standalone: false,
+  imports: [IonicModule, EventDetailComponent, AsyncPipe, TranslatePipe, CompleteLocalDatePipe],
 })
 export class ScheduleListPage {
   private scheduleListService = inject(ScheduleListService);

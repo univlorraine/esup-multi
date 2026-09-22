@@ -37,15 +37,10 @@
  * termes.
  */
 
-import { CommonModule } from '@angular/common';
 import { inject, ModuleWithProviders, NgModule, provideAppInitializer } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
-import { TranslatePipe } from '@ngx-translate/core';
-import { ProjectModuleService, SharedComponentsModule } from '@multi/shared';
+import { ProjectModuleService } from '@multi/shared';
 import { ChatbotRoutingModule } from './chatbot-routing.module';
 import { CHATBOT_CONFIG, ChatbotModuleConfig } from './chatbot.config';
-import { ChatbotPage } from './chatbot.page';
 
 const initModule = (projectModuleService: ProjectModuleService) => () =>
   projectModuleService.initProjectModule({
@@ -54,16 +49,7 @@ const initModule = (projectModuleService: ProjectModuleService) => () =>
   });
 
 @NgModule({
-  declarations: [ChatbotPage],
-  imports: [
-    CommonModule,
-    IonicModule,
-    FormsModule,
-    TranslatePipe,
-    ReactiveFormsModule,
-    ChatbotRoutingModule,
-    SharedComponentsModule,
-  ],
+  imports: [ChatbotRoutingModule],
   providers: [
     provideAppInitializer(() => {
       const initializerFn = initModule(inject(ProjectModuleService));

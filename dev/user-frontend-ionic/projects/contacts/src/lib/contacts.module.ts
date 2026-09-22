@@ -37,15 +37,10 @@
  * termes.
  */
 
-import { CommonModule } from '@angular/common';
 import { inject, ModuleWithProviders, NgModule, provideAppInitializer } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
-import { TranslatePipe } from '@ngx-translate/core';
-import { ProjectModuleService, SharedComponentsModule } from '@multi/shared';
+import { ProjectModuleService } from '@multi/shared';
 import { ContactsRoutingModule } from './contacts-routing.module';
 import { CONTACTS_CONFIG, ContactsModuleConfig } from './contacts.config';
-import { ContactsComponent } from './contacts.page';
 
 const initModule = (projectModuleService: ProjectModuleService) => () =>
   projectModuleService.initProjectModule({
@@ -54,16 +49,7 @@ const initModule = (projectModuleService: ProjectModuleService) => () =>
   });
 
 @NgModule({
-  declarations: [ContactsComponent],
-  imports: [
-    CommonModule,
-    IonicModule,
-    ContactsRoutingModule,
-    TranslatePipe,
-    FormsModule,
-    ReactiveFormsModule,
-    SharedComponentsModule,
-  ],
+  imports: [ContactsRoutingModule],
   providers: [
     provideAppInitializer(() => {
       const initializerFn = initModule(inject(ProjectModuleService));

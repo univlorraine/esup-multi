@@ -37,11 +37,15 @@
  * termes.
  */
 
+import { AsyncPipe } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { finalize, take } from 'rxjs/operators';
-import { NetworkService } from '@multi/shared';
+import { HeaderComponent, NetworkService, SanitizeHtmlPipe } from '@multi/shared';
+import { KnowledgeBaseCardComponent } from './knowledge-base-card/knowledge-base-card.component';
 import {
   Display,
   KnowledgeBaseRepository,
@@ -54,7 +58,14 @@ import { KnowledgeBaseService } from './knowledge-base.service';
   selector: 'app-knowledge-base',
   templateUrl: './knowledge-base.page.html',
   styleUrls: ['../../../../src/theme/app-theme/styles/knowledge-base/knowledge-base.page.scss'],
-  standalone: false,
+  imports: [
+    IonicModule,
+    KnowledgeBaseCardComponent,
+    AsyncPipe,
+    TranslatePipe,
+    HeaderComponent,
+    SanitizeHtmlPipe,
+  ],
 })
 export class KnowledgeBasePage implements OnInit {
   private activatedRoute = inject(ActivatedRoute);

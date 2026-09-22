@@ -43,14 +43,16 @@ import {
   CapacitorBarcodeScanner,
   CapacitorBarcodeScannerTypeHint,
 } from '@capacitor/barcode-scanner';
-import { NavController } from '@ionic/angular';
+import { IonicModule, NavController } from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
+import { HeaderComponent } from '@multi/shared';
 import { ReservationService } from './reservation.service';
 
 @Component({
   selector: 'app-reservation',
   templateUrl: './reservation.page.html',
   styleUrls: ['../../../../src/theme/app-theme/styles/reservation/reservation.page.scss'],
-  standalone: false,
+  imports: [IonicModule, TranslatePipe, HeaderComponent],
 })
 export class ReservationPage {
   private navController = inject(NavController);

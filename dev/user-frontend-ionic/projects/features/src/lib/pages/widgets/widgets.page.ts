@@ -37,7 +37,10 @@
  * termes.
  */
 
+import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, take } from 'rxjs/operators';
 import {
@@ -47,12 +50,13 @@ import {
   TranslatedFeature,
   WidgetLifecycleService,
 } from '@multi/shared';
+import { WidgetComponent } from './widget/widget.component';
 
 @Component({
   selector: 'app-widgets',
   templateUrl: './widgets.page.html',
   styleUrls: ['../../../../../../src/theme/app-theme/styles/features/widgets.page.scss'],
-  standalone: false,
+  imports: [IonicModule, WidgetComponent, AsyncPipe, TranslatePipe],
 })
 export class WidgetsPage {
   private featuresService = inject(FeaturesService);

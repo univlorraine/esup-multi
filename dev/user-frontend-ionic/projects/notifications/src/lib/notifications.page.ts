@@ -37,21 +37,40 @@
  * termes.
  */
 
+import { AsyncPipe, NgClass, NgStyle } from '@angular/common';
 import { Component, inject, OnDestroy, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { InfiniteScrollCustomEvent, IonContent, IonModal, Platform } from '@ionic/angular';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import { RouterLink } from '@angular/router';
+import {
+  InfiniteScrollCustomEvent,
+  IonContent,
+  IonicModule,
+  IonModal,
+  Platform,
+} from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
 import { combineLatest, Observable, Subscription } from 'rxjs';
 import { catchError, filter, finalize, map, mergeMap, startWith, take } from 'rxjs/operators';
 import {
   Channel,
+  HeaderComponent,
   NavigationService,
   NetworkService,
   Notification,
   NotificationsRepository,
   NotificationsService,
   PageLayoutService,
+  RelativeTimePipe,
   TranslatedChannel,
 } from '@multi/shared';
+import { NotificationOptionsComponent } from './notification-options/notification-options.component';
 import { NOTIFICATIONS_CONFIG, NotificationsModuleConfig } from './notifications.config';
 import { ToastService } from './toast.service';
 
@@ -61,7 +80,19 @@ const defaultBreakpoint = 0.5;
   selector: 'app-notifications',
   templateUrl: './notifications.page.html',
   styleUrls: ['../../../../src/theme/app-theme/styles/notifications/notifications.page.scss'],
-  standalone: false,
+  imports: [
+    IonicModule,
+    RouterLink,
+    FormsModule,
+    ReactiveFormsModule,
+    NgStyle,
+    NgClass,
+    NotificationOptionsComponent,
+    AsyncPipe,
+    TranslatePipe,
+    HeaderComponent,
+    RelativeTimePipe,
+  ],
 })
 export class NotificationsPage implements OnDestroy {
   private notificationsService = inject(NotificationsService);

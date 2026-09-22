@@ -37,11 +37,19 @@
  * termes.
  */
 
+import { AsyncPipe } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { IonicModule } from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
 import { combineLatest, Observable } from 'rxjs';
 import { catchError, filter, finalize, map, take } from 'rxjs/operators';
-import { NotificationsRepository, NotificationsService, TranslatedChannel } from '@multi/shared';
+import {
+  BackButtonComponent,
+  NotificationsRepository,
+  NotificationsService,
+  TranslatedChannel,
+} from '@multi/shared';
 import { ToastService } from '../toast.service';
 
 interface ChannelSubscription extends TranslatedChannel {
@@ -52,7 +60,14 @@ interface ChannelSubscription extends TranslatedChannel {
   selector: 'app-settings',
   templateUrl: './settings.page.html',
   styleUrls: ['../../../../../src/theme/app-theme/styles/notifications/settings.page.scss'],
-  standalone: false,
+  imports: [
+    IonicModule,
+    FormsModule,
+    ReactiveFormsModule,
+    AsyncPipe,
+    TranslatePipe,
+    BackButtonComponent,
+  ],
 })
 export class SettingsPage implements OnInit {
   private notificationsService = inject(NotificationsService);
