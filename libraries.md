@@ -48,7 +48,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 
 ## [Frontend](./dev/user-frontend-ionic)
 ```
-├─ MIT: 78
+├─ MIT: 77
 ├─ Apache-2.0: 7
 ├─ MIT*: 1
 ├─ (MPL-2.0 OR Apache-2.0): 1
@@ -58,22 +58,21 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 
 <details><summary>Détails</summary>
 
-- [@angular-devkit/build-angular@18.2.21](https://github.com/angular/angular-cli) - MIT
-- [@angular-eslint/builder@18.4.3](https://github.com/angular-eslint/angular-eslint) - MIT
-- [@angular-eslint/eslint-plugin-template@18.4.3](https://github.com/angular-eslint/angular-eslint) - MIT
-- [@angular-eslint/eslint-plugin@18.4.3](https://github.com/angular-eslint/angular-eslint) - MIT
-- [@angular-eslint/template-parser@18.4.3](https://github.com/angular-eslint/angular-eslint) - MIT
-- [@angular/animations@18.2.14](https://github.com/angular/angular) - MIT
-- [@angular/cli@18.2.21](https://github.com/angular/angular-cli) - MIT
-- [@angular/common@18.2.14](https://github.com/angular/angular) - MIT
-- [@angular/compiler-cli@18.2.14](https://github.com/angular/angular) - MIT
-- [@angular/compiler@18.2.14](https://github.com/angular/angular) - MIT
-- [@angular/core@18.2.14](https://github.com/angular/angular) - MIT
-- [@angular/forms@18.2.14](https://github.com/angular/angular) - MIT
-- [@angular/language-service@18.2.14](https://github.com/angular/angular) - MIT
-- [@angular/platform-browser-dynamic@18.2.14](https://github.com/angular/angular) - MIT
-- [@angular/platform-browser@18.2.14](https://github.com/angular/angular) - MIT
-- [@angular/router@18.2.14](https://github.com/angular/angular) - MIT
+- [@angular-devkit/build-angular@20.3.37](https://github.com/angular/angular-cli) - MIT
+- [@angular-eslint/builder@20.7.0](https://github.com/angular-eslint/angular-eslint) - MIT
+- [@angular-eslint/eslint-plugin-template@20.7.0](https://github.com/angular-eslint/angular-eslint) - MIT
+- [@angular-eslint/eslint-plugin@20.7.0](https://github.com/angular-eslint/angular-eslint) - MIT
+- [@angular-eslint/template-parser@20.7.0](https://github.com/angular-eslint/angular-eslint) - MIT
+- [@angular/animations@20.3.31](https://github.com/angular/angular) - MIT
+- [@angular/cli@20.3.37](https://github.com/angular/angular-cli) - MIT
+- [@angular/common@20.3.31](https://github.com/angular/angular) - MIT
+- [@angular/compiler-cli@20.3.31](https://github.com/angular/angular) - MIT
+- [@angular/compiler@20.3.31](https://github.com/angular/angular) - MIT
+- [@angular/core@20.3.31](https://github.com/angular/angular) - MIT
+- [@angular/forms@20.3.31](https://github.com/angular/angular) - MIT
+- [@angular/language-service@20.3.31](https://github.com/angular/angular) - MIT
+- [@angular/platform-browser@20.3.31](https://github.com/angular/angular) - MIT
+- [@angular/router@20.3.31](https://github.com/angular/angular) - MIT
 - [@capacitor-community/contacts@8.0.0](https://github.com/capacitor-community/contacts) - MIT
 - [@capacitor-community/screen-brightness@8.0.0](https://github.com/capacitor-community/screen-brightness) - MIT
 - [@capacitor-firebase/messaging@8.5.1](https://github.com/capawesome-team/capacitor-firebase) - Apache-2.0
@@ -83,7 +82,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@capacitor/barcode-scanner@3.1.2](https://github.com/ionic-team/capacitor-barcode-scanner) - MIT
 - [@capacitor/browser@8.0.4](https://github.com/ionic-team/capacitor-plugins) - MIT
 - [@capacitor/camera@8.2.4](https://github.com/ionic-team/capacitor-camera) - MIT
-- [@capacitor/cli@8.5.1](https://github.com/ionic-team/capacitor) - MIT
+- [@capacitor/cli@8.5.2](https://github.com/ionic-team/capacitor) - MIT
 - [@capacitor/core@8.5.1](https://github.com/ionic-team/capacitor) - MIT
 - [@capacitor/device@8.0.3](https://github.com/ionic-team/capacitor-plugins) - MIT
 - [@capacitor/geolocation@8.2.2](https://github.com/ionic-team/capacitor-geolocation) - MIT
@@ -111,9 +110,9 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@types/jasminewd2@2.0.13](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/leaflet@1.9.22](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/node@26.4.1](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
-- [angular-eslint@18.4.3](https://github.com/angular-eslint/angular-eslint) - MIT
-- [angular-shepherd@18.0.2](https://github.com/shipshapecode/angular-shepherd) - MIT
-- [angularx-qrcode@18.0.2](https://github.com/cordobo/angularx-qrcode) - MIT
+- [angular-eslint@20.7.0](https://github.com/angular-eslint/angular-eslint) - MIT
+- [angular-shepherd@20.0.0](https://github.com/shipshapecode/angular-shepherd) - MIT
+- [angularx-qrcode@20.0.0](https://github.com/cordobo/angularx-qrcode) - MIT
 - [capacitor-secure-storage-plugin@0.13.0](https://github.com/martinkasa/capacitor-secure-storage-plugin) - MIT
 - [date-fns@4.4.0](https://github.com/date-fns/date-fns) - MIT
 - [dompurify@3.4.14](https://github.com/cure53/DOMPurify) - (MPL-2.0 OR Apache-2.0)
@@ -135,9 +134,9 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [karma@6.4.4](https://github.com/karma-runner/karma) - MIT
 - [leaflet@1.9.4](https://github.com/Leaflet/Leaflet) - BSD-2-Clause
 - [localforage@1.10.0](https://github.com/localForage/localForage) - Apache-2.0
-- [ng-packagr@18.2.1](https://github.com/ng-packagr/ng-packagr) - MIT
+- [ng-packagr@20.3.2](https://github.com/ng-packagr/ng-packagr) - MIT
 - [ng2-dragula@7.0.0](https://github.com/valor-software/ng2-dragula) - MIT
-- [ngx-matomo-client@6.4.1](https://github.com/EmmanuelRoux/ngx-matomo-client) - MIT
+- [ngx-matomo-client@8.0.0](https://github.com/EmmanuelRoux/ngx-matomo-client) - MIT
 - [prettier@3.9.6](https://github.com/prettier/prettier) - MIT
 - [ramda@0.32.0](https://github.com/ramda/ramda) - MIT
 - [rxjs@7.8.2](https://github.com/reactivex/rxjs) - Apache-2.0
@@ -145,8 +144,8 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [tinycolor2@1.6.0](https://github.com/bgrins/TinyColor) - MIT
 - [tslib@2.8.1](https://github.com/Microsoft/tslib) - 0BSD
 - [typescript-eslint@8.69.0](https://github.com/typescript-eslint/typescript-eslint) - MIT
-- [typescript@5.4.5](https://github.com/Microsoft/TypeScript) - Apache-2.0
-- [zone.js@0.14.10](https://github.com/angular/angular) - MIT
+- [typescript@5.8.3](https://github.com/microsoft/TypeScript) - Apache-2.0
+- [zone.js@0.15.1](https://github.com/angular/angular) - MIT
 
 </details>
 
