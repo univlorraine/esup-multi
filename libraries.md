@@ -76,7 +76,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@angular/router@18.2.14](https://github.com/angular/angular) - MIT
 - [@capacitor-community/contacts@8.0.0](https://github.com/capacitor-community/contacts) - MIT
 - [@capacitor-community/screen-brightness@8.0.0](https://github.com/capacitor-community/screen-brightness) - MIT
-- [@capacitor-firebase/messaging@7.2.0](https://github.com/capawesome-team/capacitor-firebase) - Apache-2.0
+- [@capacitor-firebase/messaging@8.5.1](https://github.com/capawesome-team/capacitor-firebase) - Apache-2.0
 - [@capacitor/android@8.5.1](https://github.com/ionic-team/capacitor) - MIT
 - [@capacitor/app@8.1.1](https://github.com/ionic-team/capacitor-plugins) - MIT
 - [@capacitor/assets@3.0.5](https://github.com/ionic-team/capacitor-assets) - MIT
@@ -121,7 +121,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [eslint-plugin-local-rules@3.0.2](https://github.com/cletusw/eslint-plugin-local-rules) - MIT
 - [eslint-plugin-prettier@5.5.6](https://github.com/prettier/eslint-plugin-prettier) - MIT
 - [eslint@9.39.5](https://github.com/eslint/eslint) - MIT
-- [firebase@11.10.0](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
+- [firebase@12.19.0](https://github.com/firebase/firebase-js-sdk) - Apache-2.0
 - [fullcalendar@6.1.21](https://github.com/fullcalendar/fullcalendar) - MIT
 - [geolib@3.3.14](https://github.com/manuelbieh/geolib) - MIT
 - [ionicons@8.1.0](https://github.com/ionic-team/ionicons) - MIT
