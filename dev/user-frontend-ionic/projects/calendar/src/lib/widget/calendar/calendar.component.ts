@@ -47,7 +47,15 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import {
+  IonCard,
+  IonCardContent,
+  IonCol,
+  IonIcon,
+  IonRow,
+  IonSpinner,
+  IonText,
+} from '@ionic/angular';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { finalize, take } from 'rxjs/operators';
@@ -64,7 +72,6 @@ import { LocalTimePipe } from '../../common/pipe/local-time.pipe';
   styleUrls: ['../../../../../../src/theme/app-theme/styles/calendar/calendar.component.scss'],
   imports: [
     NgTemplateOutlet,
-    IonicModule,
     NgClass,
     AsyncPipe,
     SlicePipe,
@@ -73,6 +80,13 @@ import { LocalTimePipe } from '../../common/pipe/local-time.pipe';
     LocalTimePipe,
     LocalHourPipe,
     CompleteLocalDatePipe,
+    IonCard,
+    IonCardContent,
+    IonCol,
+    IonIcon,
+    IonRow,
+    IonSpinner,
+    IonText,
   ],
 })
 export class CalendarComponent implements AfterViewInit {

@@ -45,7 +45,21 @@ import { Calendar, CalendarOptions } from '@fullcalendar/core';
 import allLocales from '@fullcalendar/core/locales-all';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
-import { GestureController, IonicModule, IonModal, Platform } from '@ionic/angular';
+import {
+  GestureController,
+  IonButton,
+  IonButtons,
+  IonContent,
+  IonHeader,
+  IonItem,
+  IonLabel,
+  IonModal,
+  IonNote,
+  IonRange,
+  IonText,
+  IonToolbar,
+  Platform,
+} from '@ionic/angular';
 import { distinctUntilArrayItemChanged } from '@ngneat/elf';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { format, isAfter, isBefore, sub } from 'date-fns';
@@ -75,13 +89,23 @@ const defaultBreakpoint = 0.6;
     '../../../../../src/theme/app-theme/styles/schedule/schedule-calendar.component.scss',
   ],
   imports: [
-    IonicModule,
     FormsModule,
     FullCalendarModule,
     CalendarEventComponent,
     EventDetailComponent,
     TranslatePipe,
     CompleteLocalDatePipe,
+    IonButton,
+    IonButtons,
+    IonContent,
+    IonHeader,
+    IonItem,
+    IonLabel,
+    IonModal,
+    IonNote,
+    IonRange,
+    IonText,
+    IonToolbar,
   ],
 })
 export class ScheduleCalendarComponent implements OnDestroy {

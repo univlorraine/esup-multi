@@ -48,7 +48,23 @@ import {
   ViewChild,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IonicModule, IonRouterOutlet } from '@ionic/angular';
+import {
+  IonButtons,
+  IonCard,
+  IonCardContent,
+  IonCardHeader,
+  IonContent,
+  IonHeader,
+  IonItem,
+  IonLabel,
+  IonList,
+  IonProgressBar,
+  IonRouterOutlet,
+  IonRow,
+  IonText,
+  IonTitle,
+  IonToolbar,
+} from '@ionic/angular';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { finalize, map, take } from 'rxjs/operators';
@@ -63,12 +79,25 @@ import { RestaurantMenusService } from './restaurant-menus.service';
   templateUrl: './restaurant-menus.page.html',
   styleUrls: ['../../../../../src/theme/app-theme/styles/restaurants/restaurant-menus.page.scss'],
   imports: [
-    IonicModule,
     NgClass,
     AsyncPipe,
     TranslatePipe,
     BackButtonComponent,
     CompleteLocalDatePipe,
+    IonButtons,
+    IonCard,
+    IonCardContent,
+    IonCardHeader,
+    IonContent,
+    IonHeader,
+    IonItem,
+    IonLabel,
+    IonList,
+    IonProgressBar,
+    IonRow,
+    IonText,
+    IonTitle,
+    IonToolbar,
   ],
 })
 export class RestaurantMenusPage implements OnInit, OnDestroy, AfterViewChecked {

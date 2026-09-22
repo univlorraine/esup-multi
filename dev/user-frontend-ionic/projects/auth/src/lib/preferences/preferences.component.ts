@@ -39,7 +39,7 @@
 
 import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { IonItem, IonLabel, IonToggle } from '@ionic/angular';
 import { TranslatePipe } from '@ngx-translate/core';
 import { saveCredentialsOnAuthentication$ } from './preferences.repository';
 import { PreferencesService } from './preferences.service';
@@ -48,7 +48,7 @@ import { PreferencesService } from './preferences.service';
   selector: 'app-auth-preferences',
   templateUrl: './preferences.component.html',
   styleUrls: ['../../../../../src/theme/app-theme/styles/auth/preferences.component.scss'],
-  imports: [IonicModule, AsyncPipe, TranslatePipe],
+  imports: [AsyncPipe, TranslatePipe, IonItem, IonLabel, IonToggle],
 })
 export class PreferencesComponent {
   private preferencesService = inject(PreferencesService);

@@ -39,7 +39,7 @@
 
 import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { IonContent, IonNote, IonProgressBar, IonRow } from '@ionic/angular';
 import { TranslatePipe } from '@ngx-translate/core';
 import { QRCodeComponent } from 'angularx-qrcode';
 import { Observable, Subscription } from 'rxjs';
@@ -63,7 +63,6 @@ import { StudentCardComponent } from './card/student-card.component';
   templateUrl: './card.page.html',
   styleUrls: ['../../../../src/theme/app-theme/styles/card/card.page.scss'],
   imports: [
-    IonicModule,
     StudentCardComponent,
     StaffCardComponent,
     QRCodeComponent,
@@ -71,6 +70,10 @@ import { StudentCardComponent } from './card/student-card.component';
     TranslatePipe,
     HeaderComponent,
     SanitizeSvgPipe,
+    IonContent,
+    IonNote,
+    IonProgressBar,
+    IonRow,
   ],
 })
 export class CardPage {

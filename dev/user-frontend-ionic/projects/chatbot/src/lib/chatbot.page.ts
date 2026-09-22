@@ -42,7 +42,22 @@ import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core'
 import { FormsModule } from '@angular/forms';
 import { Capacitor } from '@capacitor/core';
 import { Keyboard } from '@capacitor/keyboard';
-import { IonContent, IonicModule } from '@ionic/angular';
+import {
+  IonButton,
+  IonButtons,
+  IonCol,
+  IonContent,
+  IonFooter,
+  IonIcon,
+  IonInput,
+  IonItem,
+  IonItemGroup,
+  IonLabel,
+  IonList,
+  IonProgressBar,
+  IonRow,
+  IonSpinner,
+} from '@ionic/angular';
 import { TranslatePipe } from '@ngx-translate/core';
 import { BehaviorSubject } from 'rxjs';
 import { finalize, take } from 'rxjs/operators';
@@ -55,7 +70,27 @@ import { UserIdGeneratorService } from './user-id-generator.service';
   selector: 'app-chatbot',
   templateUrl: './chatbot.page.html',
   styleUrls: ['../../../../src/theme/app-theme/styles/chatbot/chatbot.page.scss'],
-  imports: [IonicModule, NgClass, FormsModule, AsyncPipe, TranslatePipe, HeaderComponent],
+  imports: [
+    NgClass,
+    FormsModule,
+    AsyncPipe,
+    TranslatePipe,
+    HeaderComponent,
+    IonButton,
+    IonButtons,
+    IonCol,
+    IonContent,
+    IonFooter,
+    IonIcon,
+    IonInput,
+    IonItem,
+    IonItemGroup,
+    IonLabel,
+    IonList,
+    IonProgressBar,
+    IonRow,
+    IonSpinner,
+  ],
 })
 export class ChatbotPage implements OnInit {
   private multiTenantService = inject(MultiTenantService);

@@ -48,7 +48,19 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import {
+  IonCard,
+  IonCardContent,
+  IonCardHeader,
+  IonCardTitle,
+  IonCol,
+  IonGrid,
+  IonIcon,
+  IonNote,
+  IonRow,
+  IonSpinner,
+  IonText,
+} from '@ionic/angular';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Observable, Subscription } from 'rxjs';
 import { finalize, map, take } from 'rxjs/operators';
@@ -64,7 +76,6 @@ import { NextEventsService } from './next-events.service';
   styleUrls: ['../../../../../../src/theme/app-theme/styles/schedule/next-events.component.scss'],
   imports: [
     NgTemplateOutlet,
-    IonicModule,
     NgClass,
     NgStyle,
     AsyncPipe,
@@ -73,6 +84,17 @@ import { NextEventsService } from './next-events.service';
     CompleteLocalDatePipe,
     TruncatePipe,
     LocalHourPipe,
+    IonCard,
+    IonCardContent,
+    IonCardHeader,
+    IonCardTitle,
+    IonCol,
+    IonGrid,
+    IonIcon,
+    IonNote,
+    IonRow,
+    IonSpinner,
+    IonText,
   ],
 })
 export class NextEventsComponent implements OnDestroy, AfterViewInit {

@@ -58,7 +58,17 @@ import { Device } from '@capacitor/device';
 import { PushNotifications } from '@capacitor/push-notifications';
 import { SplashScreen } from '@capacitor/splash-screen';
 import { Badge } from '@capawesome/capacitor-badge';
-import { IonicModule, ModalController, Platform, PopoverController } from '@ionic/angular';
+import {
+  IonApp,
+  IonCard,
+  IonCardContent,
+  IonCardHeader,
+  IonCardTitle,
+  IonText,
+  ModalController,
+  Platform,
+  PopoverController,
+} from '@ionic/angular';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { initializeApp } from 'firebase/app';
 import { MatomoTracker } from 'ngx-matomo-client';
@@ -91,7 +101,17 @@ import { LayoutPage } from './layout/layout.page';
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['../theme/app-theme/styles/app/app.component.scss'],
-  imports: [CommonModule, IonicModule, TranslatePipe, LayoutPage],
+  imports: [
+    CommonModule,
+    TranslatePipe,
+    LayoutPage,
+    IonApp,
+    IonCard,
+    IonCardContent,
+    IonCardHeader,
+    IonCardTitle,
+    IonText,
+  ],
 })
 export class AppComponent implements OnInit, OnDestroy {
   private environment = inject<any>('environment' as any);

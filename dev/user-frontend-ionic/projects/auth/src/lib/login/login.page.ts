@@ -47,7 +47,22 @@ import {
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IonicModule, IonInput, ToastController } from '@ionic/angular';
+import {
+  IonButton,
+  IonButtons,
+  IonCheckbox,
+  IonContent,
+  IonHeader,
+  IonInput,
+  IonInputPasswordToggle,
+  IonItem,
+  IonLabel,
+  IonProgressBar,
+  IonRow,
+  IonTitle,
+  IonToolbar,
+  ToastController,
+} from '@ionic/angular';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { finalize, take, tap } from 'rxjs/operators';
@@ -72,12 +87,24 @@ interface AuthenticatedUserToken extends AuthenticatedUser {
   templateUrl: './login.page.html',
   styleUrls: ['../../../../../src/theme/app-theme/styles/auth/login.page.scss'],
   imports: [
-    IonicModule,
     FormsModule,
     ReactiveFormsModule,
     AsyncPipe,
     TranslatePipe,
     BackButtonComponent,
+    IonButton,
+    IonButtons,
+    IonCheckbox,
+    IonContent,
+    IonHeader,
+    IonInput,
+    IonInputPasswordToggle,
+    IonItem,
+    IonLabel,
+    IonProgressBar,
+    IonRow,
+    IonTitle,
+    IonToolbar,
   ],
 })
 export class LoginPage implements OnInit {

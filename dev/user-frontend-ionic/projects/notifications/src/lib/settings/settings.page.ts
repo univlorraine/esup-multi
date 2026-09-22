@@ -40,7 +40,18 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import {
+  IonButtons,
+  IonContent,
+  IonHeader,
+  IonItem,
+  IonLabel,
+  IonList,
+  IonRow,
+  IonTitle,
+  IonToggle,
+  IonToolbar,
+} from '@ionic/angular';
 import { TranslatePipe } from '@ngx-translate/core';
 import { combineLatest, Observable } from 'rxjs';
 import { catchError, filter, finalize, map, take } from 'rxjs/operators';
@@ -61,12 +72,21 @@ interface ChannelSubscription extends TranslatedChannel {
   templateUrl: './settings.page.html',
   styleUrls: ['../../../../../src/theme/app-theme/styles/notifications/settings.page.scss'],
   imports: [
-    IonicModule,
     FormsModule,
     ReactiveFormsModule,
     AsyncPipe,
     TranslatePipe,
     BackButtonComponent,
+    IonButtons,
+    IonContent,
+    IonHeader,
+    IonItem,
+    IonLabel,
+    IonList,
+    IonRow,
+    IonTitle,
+    IonToggle,
+    IonToolbar,
   ],
 })
 export class SettingsPage implements OnInit {

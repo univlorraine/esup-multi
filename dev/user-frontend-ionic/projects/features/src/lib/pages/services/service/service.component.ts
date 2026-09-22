@@ -39,7 +39,7 @@
 
 import { AsyncPipe } from '@angular/common';
 import { Component, inject, Input } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { IonLabel } from '@ionic/angular';
 import {
   CustomIconComponent,
   isDarkTheme$,
@@ -52,7 +52,7 @@ import {
   selector: 'app-service',
   templateUrl: './service.component.html',
   styleUrls: ['../../../../../../../src/theme/app-theme/styles/features/service.component.scss'],
-  imports: [IonicModule, AsyncPipe, CustomIconComponent],
+  imports: [AsyncPipe, CustomIconComponent, IonLabel],
 })
 export class ServiceComponent {
   menuOpenerService = inject(MenuOpenerService);

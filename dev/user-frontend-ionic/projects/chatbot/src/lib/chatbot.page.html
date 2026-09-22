@@ -68,7 +68,7 @@
             @if (message.messageType === messageType.bot) {
               <ion-row>
                 @if (message.card) {
-                  <ion-img [src]="message.card.file.url" />
+                  <img [src]="message.card.file.url" loading="lazy" decoding="async" alt="" />
                 } @else {
                   <span
                     class="app-text-4 ion-text-wrap app-fixed-light-color link-inherit-color"

@@ -39,7 +39,14 @@
 
 import { NgClass, NgStyle } from '@angular/common';
 import { ChangeDetectorRef, Component, inject, Input } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import {
+  IonCard,
+  IonCardContent,
+  IonCardHeader,
+  IonCardTitle,
+  IonCol,
+  IonLabel,
+} from '@ionic/angular';
 import {
   CustomIconComponent,
   NavigationService,
@@ -56,7 +63,18 @@ import {
   styleUrls: [
     '../../../../../../../../src/theme/app-theme/styles/features/widget-external-feature.component.scss',
   ],
-  imports: [IonicModule, NgClass, NgStyle, WidgetComponent, CustomIconComponent],
+  imports: [
+    NgClass,
+    NgStyle,
+    WidgetComponent,
+    CustomIconComponent,
+    IonCard,
+    IonCardContent,
+    IonCardHeader,
+    IonCardTitle,
+    IonCol,
+    IonLabel,
+  ],
 })
 export class WidgetExternalFeatureComponent {
   private ssoService = inject(SsoService);

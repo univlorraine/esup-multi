@@ -40,7 +40,7 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
+import { IonButton, IonCol, IonLabel, IonRouterLink, IonRow } from '@ionic/angular';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -52,7 +52,16 @@ import { LoginService } from '../../common/login.service';
   selector: 'app-auth-not-authentified-widget',
   templateUrl: './not-authentified.component.html',
   styleUrls: ['../../../../../../src/theme/app-theme/styles/auth/not-authentified.component.scss'],
-  imports: [IonicModule, RouterLink, AsyncPipe, TranslatePipe],
+  imports: [
+    RouterLink,
+    AsyncPipe,
+    TranslatePipe,
+    IonButton,
+    IonCol,
+    IonLabel,
+    IonRouterLink,
+    IonRow,
+  ],
 })
 export class NotAuthentifiedComponent implements OnInit {
   private loginService = inject(LoginService);

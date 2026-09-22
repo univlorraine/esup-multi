@@ -39,7 +39,17 @@
 
 import { NgStyle } from '@angular/common';
 import { Component, inject, Input } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import {
+  IonButton,
+  IonCard,
+  IonCardContent,
+  IonCardHeader,
+  IonCardTitle,
+  IonCol,
+  IonIcon,
+  IonRow,
+  IonText,
+} from '@ionic/angular';
 import { TranslatePipe } from '@ngx-translate/core';
 import { take } from 'rxjs/operators';
 import { LocalHourPipe, NavigationService } from '@multi/shared';
@@ -51,7 +61,21 @@ import { ShortenedDatePipe } from '../pipe/shortened-date.pipe';
   selector: 'app-event-detail',
   templateUrl: './event-detail.component.html',
   styleUrls: ['../../../../../../src/theme/app-theme/styles/schedule/event-detail.component.scss'],
-  imports: [IonicModule, NgStyle, TranslatePipe, ShortenedDatePipe, LocalHourPipe],
+  imports: [
+    NgStyle,
+    TranslatePipe,
+    ShortenedDatePipe,
+    LocalHourPipe,
+    IonButton,
+    IonCard,
+    IonCardContent,
+    IonCardHeader,
+    IonCardTitle,
+    IonCol,
+    IonIcon,
+    IonRow,
+    IonText,
+  ],
 })
 export class EventDetailComponent {
   private scheduleService = inject(ScheduleService);

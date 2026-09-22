@@ -39,7 +39,16 @@
 
 import { AsyncPipe, NgClass } from '@angular/common';
 import { AfterViewInit, ChangeDetectorRef, Component, inject, Input } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import {
+  IonButton,
+  IonChip,
+  IonCol,
+  IonGrid,
+  IonLabel,
+  IonNote,
+  IonRow,
+  IonSpinner,
+} from '@ionic/angular';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { catchError, finalize, take } from 'rxjs/operators';
@@ -51,7 +60,19 @@ import { ClockingService } from '../../clocking.service';
   selector: 'app-clocking-widget',
   templateUrl: './clocking.component.html',
   styleUrls: ['../../../../../../src/theme/app-theme/styles/clocking/clocking.component.scss'],
-  imports: [IonicModule, NgClass, AsyncPipe, TranslatePipe],
+  imports: [
+    NgClass,
+    AsyncPipe,
+    TranslatePipe,
+    IonButton,
+    IonChip,
+    IonCol,
+    IonGrid,
+    IonLabel,
+    IonNote,
+    IonRow,
+    IonSpinner,
+  ],
 })
 export class ClockingComponent implements AfterViewInit {
   private clockingService = inject(ClockingService);

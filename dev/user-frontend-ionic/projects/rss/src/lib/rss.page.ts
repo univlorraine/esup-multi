@@ -40,7 +40,17 @@
 import { AsyncPipe, NgClass } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
+import {
+  IonButton,
+  IonCard,
+  IonContent,
+  IonIcon,
+  IonLabel,
+  IonNote,
+  IonProgressBar,
+  IonRow,
+  IonText,
+} from '@ionic/angular';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Observable, Subscription } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
@@ -61,7 +71,6 @@ import { RssService } from './rss.service';
   templateUrl: './rss.page.html',
   styleUrls: ['../../../../src/theme/app-theme/styles/rss/rss.page.scss'],
   imports: [
-    IonicModule,
     NgClass,
     RssItemHeaderComponent,
     RssItemHeaderButtonDirective,
@@ -69,6 +78,15 @@ import { RssService } from './rss.service';
     TranslatePipe,
     HeaderComponent,
     RelativeTimePipe,
+    IonButton,
+    IonCard,
+    IonContent,
+    IonIcon,
+    IonLabel,
+    IonNote,
+    IonProgressBar,
+    IonRow,
+    IonText,
   ],
 })
 export class RssPage {

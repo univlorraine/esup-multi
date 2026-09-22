@@ -40,7 +40,16 @@
 import { AsyncPipe, NgClass, NgStyle } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
+import {
+  IonButton,
+  IonCol,
+  IonGrid,
+  IonIcon,
+  IonLabel,
+  IonRow,
+  IonSpinner,
+  IonText,
+} from '@ionic/angular';
 import { combineLatest, Observable } from 'rxjs';
 import { finalize, map, take } from 'rxjs/operators';
 import {
@@ -64,7 +73,19 @@ import { ImportantNewsService } from '../../important-news.service';
   styleUrls: [
     '../../../../../../src/theme/app-theme/styles/important-news/important-news.component.scss',
   ],
-  imports: [IonicModule, NgClass, NgStyle, AsyncPipe],
+  imports: [
+    NgClass,
+    NgStyle,
+    AsyncPipe,
+    IonButton,
+    IonCol,
+    IonGrid,
+    IonIcon,
+    IonLabel,
+    IonRow,
+    IonSpinner,
+    IonText,
+  ],
 })
 export class ImportantNewsComponent {
   private importantNewsService = inject(ImportantNewsService);

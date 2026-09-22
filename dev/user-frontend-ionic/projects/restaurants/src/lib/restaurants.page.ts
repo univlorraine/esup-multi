@@ -41,7 +41,18 @@ import { AsyncPipe, DecimalPipe } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Geolocation, Position } from '@capacitor/geolocation';
-import { IonicModule } from '@ionic/angular';
+import {
+  IonCol,
+  IonContent,
+  IonGrid,
+  IonIcon,
+  IonItem,
+  IonLabel,
+  IonList,
+  IonProgressBar,
+  IonRow,
+  IonText,
+} from '@ionic/angular';
 import { TranslatePipe } from '@ngx-translate/core';
 import { getDistance } from 'geolib';
 import { combineLatest, from, Observable, of } from 'rxjs';
@@ -73,7 +84,22 @@ export interface RestaurantDto {
   selector: 'app-restaurants',
   templateUrl: './restaurants.page.html',
   styleUrls: ['../../../../src/theme/app-theme/styles/restaurants/restaurants.page.scss'],
-  imports: [IonicModule, AsyncPipe, DecimalPipe, TranslatePipe, HeaderComponent],
+  imports: [
+    AsyncPipe,
+    DecimalPipe,
+    TranslatePipe,
+    HeaderComponent,
+    IonCol,
+    IonContent,
+    IonGrid,
+    IonIcon,
+    IonItem,
+    IonLabel,
+    IonList,
+    IonProgressBar,
+    IonRow,
+    IonText,
+  ],
 })
 export class RestaurantsPage implements OnInit {
   private restaurantsService = inject(RestaurantsService);

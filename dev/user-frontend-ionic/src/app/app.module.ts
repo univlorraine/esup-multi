@@ -47,7 +47,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular';
 import { provideTranslateService, TranslateLoader } from '@ngx-translate/core';
 import { MatomoModule } from 'ngx-matomo-client';
 import { FeaturesModule } from '@multi/features';
@@ -67,16 +67,6 @@ import { ErrorModule } from './error/error.module';
 @NgModule({
   imports: [
     BrowserModule,
-    IonicModule.forRoot({
-      platform: {
-        desktop: (win) => {
-          const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-            win.navigator.userAgent,
-          );
-          return !isMobile;
-        },
-      },
-    }),
     AppRoutingModule,
     ReactiveFormsModule,
     MatomoModule.forRoot(environment.matomoConfig || { mode: 'manual', disabled: true }),
@@ -88,6 +78,16 @@ import { ErrorModule } from './error/error.module';
     ...environment.enabledModules,
   ],
   providers: [
+    provideIonicAngular({
+      platform: {
+        desktop: (win) => {
+          const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+            win.navigator.userAgent,
+          );
+          return !isMobile;
+        },
+      },
+    }),
     provideTranslateService({
       loader: {
         provide: TranslateLoader,

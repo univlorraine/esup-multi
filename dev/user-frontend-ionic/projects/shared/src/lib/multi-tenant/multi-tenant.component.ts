@@ -42,7 +42,17 @@ import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { App } from '@capacitor/app';
 import { Capacitor } from '@capacitor/core';
-import { IonicModule } from '@ionic/angular';
+import {
+  IonButton,
+  IonContent,
+  IonFooter,
+  IonHeader,
+  IonIcon,
+  IonLabel,
+  IonRow,
+  IonTitle,
+  IonToolbar,
+} from '@ionic/angular';
 import { TranslatePipe } from '@ngx-translate/core';
 import { from, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -60,7 +70,19 @@ import { MultiTenantService } from './multi-tenant.service';
   selector: 'app-multi-tenant',
   templateUrl: './multi-tenant.component.html',
   styleUrls: ['../../../../../src/theme/app-theme/styles/multi-tenant/multi-tenant.component.scss'],
-  imports: [IonicModule, AsyncPipe, TranslatePipe],
+  imports: [
+    AsyncPipe,
+    TranslatePipe,
+    IonButton,
+    IonContent,
+    IonFooter,
+    IonHeader,
+    IonIcon,
+    IonLabel,
+    IonRow,
+    IonTitle,
+    IonToolbar,
+  ],
 })
 export class MultiTenantComponent {
   private environment = inject<any>('environment' as any);

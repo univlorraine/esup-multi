@@ -38,7 +38,16 @@
  */
 
 import { Component, inject, Input } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import {
+  IonButton,
+  IonCard,
+  IonCardContent,
+  IonCol,
+  IonGrid,
+  IonIcon,
+  IonRow,
+  IonText,
+} from '@ionic/angular';
 import { TranslatePipe } from '@ngx-translate/core';
 import { take } from 'rxjs/operators';
 import { ScheduleListService } from '../../../schedule-list/schedule-list.service';
@@ -51,7 +60,17 @@ import { ScheduleService } from '../../../schedule.service';
   styleUrls: [
     '../../../../../../../src/theme/app-theme/styles/schedule/hidden-course.component.scss',
   ],
-  imports: [IonicModule, TranslatePipe],
+  imports: [
+    TranslatePipe,
+    IonButton,
+    IonCard,
+    IonCardContent,
+    IonCol,
+    IonGrid,
+    IonIcon,
+    IonRow,
+    IonText,
+  ],
 })
 export class HiddenCourseComponent {
   private scheduleListService = inject(ScheduleListService);

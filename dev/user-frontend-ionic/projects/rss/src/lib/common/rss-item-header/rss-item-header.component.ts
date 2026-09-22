@@ -39,7 +39,7 @@
 
 import { NgClass, NgTemplateOutlet } from '@angular/common';
 import { Component, ContentChild, Input, TemplateRef } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { IonCardHeader, IonCol, IonGrid, IonLabel, IonRow } from '@ionic/angular';
 import { FeedItem } from '../../rss.repository';
 import { RssItemHeaderButtonDirective } from './rss-item-header-button.directive';
 
@@ -47,7 +47,7 @@ import { RssItemHeaderButtonDirective } from './rss-item-header-button.directive
   selector: 'app-rss-item-header',
   templateUrl: './rss-item-header.component.html',
   styleUrls: ['../../../../../../src/theme/app-theme/styles/rss/rss-item-header.component.scss'],
-  imports: [IonicModule, NgClass, NgTemplateOutlet],
+  imports: [NgClass, NgTemplateOutlet, IonCardHeader, IonCol, IonGrid, IonLabel, IonRow],
 })
 export class RssItemHeaderComponent {
   @Input() item: FeedItem;

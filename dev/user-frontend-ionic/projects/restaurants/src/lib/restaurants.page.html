@@ -53,9 +53,12 @@
                 <ion-col size="3">
                   <div class="border"></div>
 
-                  <ion-img
+                  <img
                     [src]="restaurant.thumbnailUrl"
-                    (ionError)="restaurant.thumbnailUrl = 'assets/icons/restaurants/fallback.svg'"
+                    (error)="restaurant.thumbnailUrl = 'assets/icons/restaurants/fallback.svg'"
+                    loading="lazy"
+                    decoding="async"
+                    alt=""
                   />
                   @if (restaurant.favorite) {
                     <ion-icon

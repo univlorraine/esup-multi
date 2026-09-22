@@ -39,7 +39,15 @@
 
 import { AsyncPipe } from '@angular/common';
 import { Component, inject, Input } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import {
+  IonButtons,
+  IonCol,
+  IonHeader,
+  IonRow,
+  IonText,
+  IonTitle,
+  IonToolbar,
+} from '@ionic/angular';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { NavigationService } from '../../navigation/navigation.service';
@@ -51,7 +59,18 @@ import { BackButtonComponent } from '../back-button/back-button.component';
   selector: 'app-header',
   templateUrl: 'header.component.html',
   styleUrls: ['../../../../../../src/theme/app-theme/styles/shared/header.component.scss'],
-  imports: [IonicModule, BackButtonComponent, AsyncPipe, TranslatePipe],
+  imports: [
+    BackButtonComponent,
+    AsyncPipe,
+    TranslatePipe,
+    IonButtons,
+    IonCol,
+    IonHeader,
+    IonRow,
+    IonText,
+    IonTitle,
+    IonToolbar,
+  ],
 })
 export class HeaderComponent {
   private pageLayoutService = inject(PageLayoutService);

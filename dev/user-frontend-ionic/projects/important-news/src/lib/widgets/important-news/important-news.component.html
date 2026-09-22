@@ -55,7 +55,7 @@
           <ion-row class="importantNews">
             @if (randomImportantNews.image) {
               <ion-col [size]="config.display === 'vertically' ? '6' : '12'" class="img-container">
-                <ion-img [src]="randomImportantNews.image" />
+                <img [src]="randomImportantNews.image" loading="lazy" decoding="async" alt="" />
               </ion-col>
             }
             <ion-col

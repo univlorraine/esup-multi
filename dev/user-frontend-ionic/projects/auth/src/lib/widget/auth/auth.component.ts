@@ -40,7 +40,15 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
+import {
+  IonCol,
+  IonGrid,
+  IonIcon,
+  IonItem,
+  IonLabel,
+  IonList,
+  IonRouterLink,
+} from '@ionic/angular';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { finalize, take } from 'rxjs/operators';
@@ -51,7 +59,18 @@ import { AuthService } from '../../common/auth.service';
   selector: 'app-auth-widget',
   templateUrl: './auth.component.html',
   styleUrls: ['../../../../../../src/theme/app-theme/styles/auth/auth.component.scss'],
-  imports: [IonicModule, RouterLink, AsyncPipe, TranslatePipe],
+  imports: [
+    RouterLink,
+    AsyncPipe,
+    TranslatePipe,
+    IonCol,
+    IonGrid,
+    IonIcon,
+    IonItem,
+    IonLabel,
+    IonList,
+    IonRouterLink,
+  ],
 })
 export class AuthComponent implements OnInit {
   private authService = inject(AuthService);

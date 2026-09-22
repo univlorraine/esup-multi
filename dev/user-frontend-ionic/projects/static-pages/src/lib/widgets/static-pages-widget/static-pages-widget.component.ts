@@ -40,7 +40,7 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
+import { IonItem, IonLabel } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { CustomIconComponent, NetworkService, StatisticsService } from '@multi/shared';
@@ -53,7 +53,7 @@ import { StaticPagesService } from '../../static-pages.service';
   styleUrls: [
     '../../../../../../src/theme/app-theme/styles/static-pages/static-pages-widget.component.scss',
   ],
-  imports: [IonicModule, AsyncPipe, CustomIconComponent],
+  imports: [AsyncPipe, CustomIconComponent, IonItem, IonLabel],
 })
 export class StaticPagesWidgetComponent {
   private route = inject(ActivatedRoute);

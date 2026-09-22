@@ -39,7 +39,16 @@
 
 import { AsyncPipe } from '@angular/common';
 import { Component, inject, ViewChild } from '@angular/core';
-import { IonContent, IonicModule } from '@ionic/angular';
+import {
+  IonButton,
+  IonCol,
+  IonContent,
+  IonIcon,
+  IonItemDivider,
+  IonItemGroup,
+  IonNote,
+  IonRow,
+} from '@ionic/angular';
 import { TranslatePipe } from '@ngx-translate/core';
 import { add, isAfter, startOfWeek } from 'date-fns';
 import { combineLatest, Observable, of, Subscription } from 'rxjs';
@@ -59,7 +68,20 @@ import { EventsByDay, ScheduleListService } from './schedule-list.service';
   selector: 'app-schedule-list',
   templateUrl: './schedule-list.page.html',
   styleUrls: ['../../../../../src/theme/app-theme/styles/schedule/schedule-list.page.scss'],
-  imports: [IonicModule, EventDetailComponent, AsyncPipe, TranslatePipe, CompleteLocalDatePipe],
+  imports: [
+    EventDetailComponent,
+    AsyncPipe,
+    TranslatePipe,
+    CompleteLocalDatePipe,
+    IonButton,
+    IonCol,
+    IonContent,
+    IonIcon,
+    IonItemDivider,
+    IonItemGroup,
+    IonNote,
+    IonRow,
+  ],
 })
 export class ScheduleListPage {
   private scheduleListService = inject(ScheduleListService);

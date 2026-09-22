@@ -40,7 +40,19 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, inject, OnDestroy, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
+import {
+  IonButton,
+  IonButtons,
+  IonContent,
+  IonIcon,
+  IonLabel,
+  IonProgressBar,
+  IonTabBar,
+  IonTabButton,
+  IonTabs,
+  IonTitle,
+  IonToolbar,
+} from '@ionic/angular';
 import { TranslatePipe } from '@ngx-translate/core';
 import { take } from 'rxjs/operators';
 import { HeaderComponent } from '@multi/shared';
@@ -61,10 +73,20 @@ const DEFAULT_VIEW_TYPE: ViewType = 'month';
   imports: [
     SelectUserComponent,
     SelectPlanningComponent,
-    IonicModule,
     AsyncPipe,
     TranslatePipe,
     HeaderComponent,
+    IonButton,
+    IonButtons,
+    IonContent,
+    IonIcon,
+    IonLabel,
+    IonProgressBar,
+    IonTabBar,
+    IonTabButton,
+    IonTabs,
+    IonTitle,
+    IonToolbar,
   ],
 })
 export class SchedulePage implements OnDestroy {

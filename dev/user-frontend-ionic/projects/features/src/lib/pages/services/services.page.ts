@@ -48,7 +48,20 @@ import {
   ViewChild,
   ViewChildren,
 } from '@angular/core';
-import { IonContent, IonicModule } from '@ionic/angular';
+import {
+  IonBadge,
+  IonButton,
+  IonCol,
+  IonContent,
+  IonFab,
+  IonFabButton,
+  IonGrid,
+  IonIcon,
+  IonNote,
+  IonRow,
+  IonSearchbar,
+  IonText,
+} from '@ionic/angular';
 import { TranslatePipe } from '@ngx-translate/core';
 import { DragulaModule, DragulaService } from 'ng2-dragula';
 import { BehaviorSubject, combineLatest, Observable, Subscription } from 'rxjs';
@@ -70,7 +83,24 @@ import { ServicesService } from './services.service';
   selector: 'app-services',
   templateUrl: './services.page.html',
   styleUrls: ['../../../../../../src/theme/app-theme/styles/features/services.page.scss'],
-  imports: [IonicModule, DragulaModule, ServiceComponent, AsyncPipe, TranslatePipe],
+  imports: [
+    DragulaModule,
+    ServiceComponent,
+    AsyncPipe,
+    TranslatePipe,
+    IonBadge,
+    IonButton,
+    IonCol,
+    IonContent,
+    IonFab,
+    IonFabButton,
+    IonGrid,
+    IonIcon,
+    IonNote,
+    IonRow,
+    IonSearchbar,
+    IonText,
+  ],
 })
 export class ServicesPage implements OnInit, OnDestroy {
   private featuresService = inject(FeaturesService);

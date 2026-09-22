@@ -48,7 +48,24 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { Geolocation } from '@capacitor/geolocation';
-import { IonicModule } from '@ionic/angular';
+import {
+  IonButton,
+  IonButtons,
+  IonCheckbox,
+  IonChip,
+  IonContent,
+  IonFab,
+  IonFabButton,
+  IonFabList,
+  IonIcon,
+  IonItem,
+  IonLabel,
+  IonList,
+  IonPopover,
+  IonProgressBar,
+  IonRow,
+  IonText,
+} from '@ionic/angular';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import * as Leaflet from 'leaflet';
 import { combineLatest } from 'rxjs';
@@ -78,7 +95,28 @@ import { MapService } from './map.service';
   selector: 'app-map',
   templateUrl: './map.page.html',
   styleUrls: ['../../../../src/theme/app-theme/styles/map/map.page.scss'],
-  imports: [IonicModule, ReactiveFormsModule, NgStyle, TranslatePipe, HeaderComponent],
+  imports: [
+    ReactiveFormsModule,
+    NgStyle,
+    TranslatePipe,
+    HeaderComponent,
+    IonButton,
+    IonButtons,
+    IonCheckbox,
+    IonChip,
+    IonContent,
+    IonFab,
+    IonFabButton,
+    IonFabList,
+    IonIcon,
+    IonItem,
+    IonLabel,
+    IonList,
+    IonPopover,
+    IonProgressBar,
+    IonRow,
+    IonText,
+  ],
 })
 export class MapPage {
   private mapService = inject(MapService);

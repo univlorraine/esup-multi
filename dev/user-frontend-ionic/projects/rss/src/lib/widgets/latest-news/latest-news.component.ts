@@ -40,7 +40,15 @@
 import { AsyncPipe, NgClass } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
+import {
+  IonButton,
+  IonCard,
+  IonIcon,
+  IonRouterLink,
+  IonRow,
+  IonSpinner,
+  IonText,
+} from '@ionic/angular';
 import { TranslatePipe } from '@ngx-translate/core';
 import { filter, first, Observable, switchMap } from 'rxjs';
 import { finalize, map, take } from 'rxjs/operators';
@@ -56,13 +64,19 @@ import { RssService } from '../../rss.service';
   templateUrl: './latest-news.component.html',
   styleUrls: ['../../../../../../src/theme/app-theme/styles/rss/latest-news.component.scss'],
   imports: [
-    IonicModule,
     NgClass,
     RssItemHeaderComponent,
     RssItemHeaderButtonDirective,
     RouterLink,
     AsyncPipe,
     TranslatePipe,
+    IonButton,
+    IonCard,
+    IonIcon,
+    IonRouterLink,
+    IonRow,
+    IonSpinner,
+    IonText,
   ],
 })
 export class LatestNewsComponent {

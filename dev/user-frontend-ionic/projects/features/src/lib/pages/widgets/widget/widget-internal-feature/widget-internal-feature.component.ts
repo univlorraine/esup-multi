@@ -40,7 +40,14 @@
 import { NgClass, NgStyle } from '@angular/common';
 import { ChangeDetectorRef, Component, inject, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
+import {
+  IonCard,
+  IonCardContent,
+  IonCardHeader,
+  IonCardTitle,
+  IonCol,
+  IonLabel,
+} from '@ionic/angular';
 import {
   CustomIconComponent,
   StatisticsService,
@@ -55,7 +62,18 @@ import {
   styleUrls: [
     '../../../../../../../../src/theme/app-theme/styles/features/widget-internal-feature.component.scss',
   ],
-  imports: [IonicModule, NgClass, NgStyle, WidgetComponent, CustomIconComponent],
+  imports: [
+    NgClass,
+    NgStyle,
+    WidgetComponent,
+    CustomIconComponent,
+    IonCard,
+    IonCardContent,
+    IonCardHeader,
+    IonCardTitle,
+    IonCol,
+    IonLabel,
+  ],
 })
 export class WidgetInternalFeatureComponent {
   private router = inject(Router);

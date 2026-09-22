@@ -42,7 +42,18 @@ import { Component, inject, Input, SecurityContext } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { Browser } from '@capacitor/browser';
-import { IonicModule } from '@ionic/angular';
+import {
+  IonButton,
+  IonCard,
+  IonCardContent,
+  IonCardTitle,
+  IonCol,
+  IonGrid,
+  IonIcon,
+  IonItem,
+  IonLabel,
+  IonRow,
+} from '@ionic/angular';
 import { TranslatePipe } from '@ngx-translate/core';
 import { NavigationService, SanitizeHtmlPipe, SsoService } from '@multi/shared';
 import {
@@ -58,7 +69,21 @@ import {
   styleUrls: [
     '../../../../../src/theme/app-theme/styles/knowledge-base/knowledge-base-card.component.scss',
   ],
-  imports: [IonicModule, NgTemplateOutlet, TranslatePipe, SanitizeHtmlPipe],
+  imports: [
+    NgTemplateOutlet,
+    TranslatePipe,
+    SanitizeHtmlPipe,
+    IonButton,
+    IonCard,
+    IonCardContent,
+    IonCardTitle,
+    IonCol,
+    IonGrid,
+    IonIcon,
+    IonItem,
+    IonLabel,
+    IonRow,
+  ],
 })
 export class KnowledgeBaseCardComponent {
   private router = inject(Router);

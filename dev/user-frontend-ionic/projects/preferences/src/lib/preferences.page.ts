@@ -46,14 +46,14 @@ import {
   ViewChildren,
   ViewContainerRef,
 } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { IonContent } from '@ionic/angular';
 import { HeaderComponent, ProjectModuleService } from '@multi/shared';
 
 @Component({
   selector: 'app-preferences',
   templateUrl: './preferences.page.html',
   styleUrls: ['../../../../src/theme/app-theme/styles/preferences/preferences.page.scss'],
-  imports: [IonicModule, HeaderComponent],
+  imports: [HeaderComponent, IonContent],
 })
 export class PreferencesPage implements OnInit {
   private projectModuleService = inject(ProjectModuleService);

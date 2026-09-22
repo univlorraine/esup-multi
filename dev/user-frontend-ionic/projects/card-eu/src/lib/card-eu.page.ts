@@ -39,7 +39,7 @@
 
 import { AsyncPipe } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { IonContent, IonNote, IonProgressBar } from '@ionic/angular';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Observable, Subscription } from 'rxjs';
 import { filter, finalize, switchMap, take } from 'rxjs/operators';
@@ -62,12 +62,14 @@ import { CardEuLightComponent } from './card-eu/card-eu-light.component';
   templateUrl: './card-eu.page.html',
   styleUrls: ['../../../../src/theme/app-theme/styles/card-eu/card-eu.page.scss'],
   imports: [
-    IonicModule,
     CardEuExtendedComponent,
     CardEuLightComponent,
     AsyncPipe,
     TranslatePipe,
     HeaderComponent,
+    IonContent,
+    IonNote,
+    IonProgressBar,
   ],
 })
 export class CardEuPage implements OnInit {

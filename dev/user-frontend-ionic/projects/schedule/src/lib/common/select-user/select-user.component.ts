@@ -46,7 +46,16 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import {
+  IonButton,
+  IonButtons,
+  IonContent,
+  IonIcon,
+  IonInput,
+  IonItem,
+  IonModal,
+  IonText,
+} from '@ionic/angular';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { filter, map, take } from 'rxjs/operators';
@@ -59,7 +68,20 @@ import { ScheduleService } from '../../schedule.service';
   selector: 'app-select-user',
   templateUrl: './select-user.component.html',
   styleUrls: ['../../../../../../src/theme/app-theme/styles/schedule/select-user.component.scss'],
-  imports: [IonicModule, FormsModule, ReactiveFormsModule, AsyncPipe, TranslatePipe],
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    AsyncPipe,
+    TranslatePipe,
+    IonButton,
+    IonButtons,
+    IonContent,
+    IonIcon,
+    IonInput,
+    IonItem,
+    IonModal,
+    IonText,
+  ],
 })
 export class SelectUserComponent {
   private config = inject<ScheduleModuleConfig>(SCHEDULE_CONFIG);

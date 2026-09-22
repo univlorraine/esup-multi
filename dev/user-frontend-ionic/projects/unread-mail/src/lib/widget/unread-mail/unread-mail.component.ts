@@ -39,7 +39,7 @@
 
 import { AsyncPipe, NgClass } from '@angular/common';
 import { AfterViewInit, ChangeDetectorRef, Component, inject, Input } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { IonIcon, IonRow, IonSpinner, IonText } from '@ionic/angular';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { finalize, take } from 'rxjs/operators';
@@ -53,7 +53,7 @@ import { UnreadMailService } from '../../unread-mail.service';
   styleUrls: [
     '../../../../../../src/theme/app-theme/styles/unread-mail/unread-mail.component.scss',
   ],
-  imports: [IonicModule, NgClass, AsyncPipe, TranslatePipe],
+  imports: [NgClass, AsyncPipe, TranslatePipe, IonIcon, IonRow, IonSpinner, IonText],
 })
 export class UnreadMailComponent implements AfterViewInit {
   private unreadMailService = inject(UnreadMailService);

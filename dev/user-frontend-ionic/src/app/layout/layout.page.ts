@@ -50,7 +50,21 @@ import {
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { IonicModule, NavController } from '@ionic/angular';
+import {
+  IonButton,
+  IonButtons,
+  IonCol,
+  IonHeader,
+  IonProgressBar,
+  IonRouterLink,
+  IonRow,
+  IonTabBar,
+  IonTabButton,
+  IonTabs,
+  IonText,
+  IonToolbar,
+  NavController,
+} from '@ionic/angular';
 import { TranslatePipe } from '@ngx-translate/core';
 import { BehaviorSubject, combineLatestWith, Observable, Subject, Subscription } from 'rxjs';
 import { distinctUntilChanged, filter, finalize, map } from 'rxjs/operators';
@@ -87,12 +101,23 @@ interface MenuItemWithBadge extends MenuItemWithOptionalRouterLink {
   templateUrl: 'layout.page.html',
   styleUrls: ['../../theme/app-theme/styles/app/layout.page.scss'],
   imports: [
-    IonicModule,
     RouterLinkActive,
     RouterLink,
     AsyncPipe,
     TranslatePipe,
     CustomIconComponent,
+    IonButton,
+    IonButtons,
+    IonCol,
+    IonHeader,
+    IonProgressBar,
+    IonRouterLink,
+    IonRow,
+    IonTabBar,
+    IonTabButton,
+    IonTabs,
+    IonText,
+    IonToolbar,
   ],
 })
 export class LayoutPage implements AfterViewInit, OnChanges, OnDestroy {

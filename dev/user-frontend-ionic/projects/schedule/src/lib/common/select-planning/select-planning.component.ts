@@ -49,7 +49,23 @@ import {
   ValidationErrors,
   ValidatorFn,
 } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import {
+  IonButton,
+  IonButtons,
+  IonCheckbox,
+  IonCol,
+  IonContent,
+  IonHeader,
+  IonIcon,
+  IonItem,
+  IonLabel,
+  IonModal,
+  IonProgressBar,
+  IonRow,
+  IonText,
+  IonTitle,
+  IonToolbar,
+} from '@ionic/angular';
 import { distinctUntilArrayItemChanged } from '@ngneat/elf';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
@@ -80,12 +96,26 @@ const atLeastOneCheckedValidator =
     '../../../../../../src/theme/app-theme/styles/schedule/select-planning.component.scss',
   ],
   imports: [
-    IonicModule,
     FormsModule,
     ReactiveFormsModule,
     HiddenCourseComponent,
     AsyncPipe,
     TranslatePipe,
+    IonButton,
+    IonButtons,
+    IonCheckbox,
+    IonCol,
+    IonContent,
+    IonHeader,
+    IonIcon,
+    IonItem,
+    IonLabel,
+    IonModal,
+    IonProgressBar,
+    IonRow,
+    IonText,
+    IonTitle,
+    IonToolbar,
   ],
 })
 export class SelectPlanningComponent {

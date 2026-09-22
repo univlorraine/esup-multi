@@ -39,7 +39,7 @@
 
 import { AsyncPipe } from '@angular/common';
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
-import { IonicModule, Platform } from '@ionic/angular';
+import { IonGrid, IonIcon, IonItem, IonLabel, IonRow, IonText, Platform } from '@ionic/angular';
 import { TranslatePipe } from '@ngx-translate/core';
 import { combineLatest, Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
@@ -63,7 +63,7 @@ interface NotificationOptions {
   styleUrls: [
     '../../../../../src/theme/app-theme/styles/notifications/notification-options.component.scss',
   ],
-  imports: [IonicModule, AsyncPipe, TranslatePipe],
+  imports: [AsyncPipe, TranslatePipe, IonGrid, IonIcon, IonItem, IonLabel, IonRow, IonText],
 })
 export class NotificationOptionsComponent {
   platform = inject(Platform);

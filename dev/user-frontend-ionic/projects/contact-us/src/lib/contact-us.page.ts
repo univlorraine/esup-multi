@@ -46,7 +46,22 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { IonicModule, ToastController } from '@ionic/angular';
+import {
+  IonButton,
+  IonButtons,
+  IonContent,
+  IonHeader,
+  IonIcon,
+  IonInput,
+  IonItem,
+  IonList,
+  IonProgressBar,
+  IonText,
+  IonTextarea,
+  IonTitle,
+  IonToolbar,
+  ToastController,
+} from '@ionic/angular';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { filter, finalize, take } from 'rxjs/operators';
@@ -59,12 +74,24 @@ import { ContactMessageQueryDto, ContactUsService } from './contact-us.service';
   templateUrl: './contact-us.page.html',
   styleUrls: ['../../../../src/theme/app-theme/styles/contact-us/contact-us.page.scss'],
   imports: [
-    IonicModule,
     FormsModule,
     ReactiveFormsModule,
     AsyncPipe,
     TranslatePipe,
     BackButtonComponent,
+    IonButton,
+    IonButtons,
+    IonContent,
+    IonHeader,
+    IonIcon,
+    IonInput,
+    IonItem,
+    IonList,
+    IonProgressBar,
+    IonText,
+    IonTextarea,
+    IonTitle,
+    IonToolbar,
   ],
 })
 export class ContactUsPage implements OnInit {
