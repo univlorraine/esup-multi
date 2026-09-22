@@ -48,7 +48,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 
 ## [Frontend](./dev/user-frontend-ionic)
 ```
-├─ MIT: 77
+├─ MIT: 78
 ├─ Apache-2.0: 7
 ├─ MIT*: 1
 ├─ (MPL-2.0 OR Apache-2.0): 1
@@ -97,8 +97,9 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@eslint/js@9.39.5](https://github.com/eslint/eslint) - MIT
 - [@fullcalendar/angular@6.1.21](https://github.com/fullcalendar/fullcalendar-angular) - MIT
 - [@ianvs/prettier-plugin-sort-imports@4.7.1](https://github.com/ianvs/prettier-plugin-sort-imports) - Apache-2.0
-- [@ionic/angular-toolkit@10.1.1](https://github.com/ionic-team/angular-toolkit) - MIT
-- [@ionic/angular@8.8.19](https://github.com/ionic-team/ionic-framework) - MIT
+- [@ionic/angular-toolkit@12.3.0](https://github.com/ionic-team/angular-toolkit) - MIT
+- [@ionic/angular@9.0.4](https://github.com/ionic-team/ionic-framework) - MIT
+- [@ionic/core@9.0.4](https://github.com/ionic-team/ionic-framework) - MIT
 - [@ngneat/effects-ng@2.0.0](https://github.com/ngneat/effects) - MIT
 - [@ngneat/elf-entities@4.6.0](https://github.com/ngneat/elf) - MIT
 - [@ngneat/elf-persist-state@1.2.1](https://github.com/ngneat/elf) - MIT
