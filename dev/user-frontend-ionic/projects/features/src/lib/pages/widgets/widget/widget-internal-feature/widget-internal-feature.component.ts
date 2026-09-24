@@ -37,25 +37,52 @@
  * termes.
  */
 
-import { ChangeDetectorRef, Component, Input } from '@angular/core';
+import { NgClass, NgStyle } from '@angular/common';
+import { ChangeDetectorRef, Component, inject, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { StatisticsService, ThemeService, TranslatedInternalFeature } from '@multi/shared';
+import {
+  IonCard,
+  IonCardContent,
+  IonCardHeader,
+  IonCardTitle,
+  IonCol,
+  IonLabel,
+} from '@ionic/angular';
+import {
+  CustomIconComponent,
+  StatisticsService,
+  ThemeService,
+  TranslatedInternalFeature,
+  WidgetComponent,
+} from '@multi/shared';
 
 @Component({
   selector: 'app-widget-internal-feature',
   templateUrl: './widget-internal-feature.component.html',
-  styleUrls: ['../../../../../../../../src/theme/app-theme/styles/features/widget-internal-feature.component.scss'],
+  styleUrls: [
+    '../../../../../../../../src/theme/app-theme/styles/features/widget-internal-feature.component.scss',
+  ],
+  imports: [
+    NgClass,
+    NgStyle,
+    WidgetComponent,
+    CustomIconComponent,
+    IonCard,
+    IonCardContent,
+    IonCardHeader,
+    IonCardTitle,
+    IonCol,
+    IonLabel,
+  ],
 })
 export class WidgetInternalFeatureComponent {
+  private router = inject(Router);
+  private statisticsService = inject(StatisticsService);
+  private themeService = inject(ThemeService);
+  private changeDetector = inject(ChangeDetectorRef);
+
   @Input() feature: TranslatedInternalFeature;
   isEmpty = false;
-
-  constructor(
-    private router: Router,
-    private statisticsService: StatisticsService,
-    private themeService: ThemeService,
-    private changeDetector: ChangeDetectorRef
-  ) { }
 
   public onClick() {
     this.statisticsService.onFunctionalityOpened(this.feature.statisticName);
@@ -63,8 +90,9 @@ export class WidgetInternalFeatureComponent {
   }
 
   fontColor(backgroundColor) {
-    return this.themeService.isBackgroundFromCmsDarkOrIsDarkTheme(backgroundColor) ?
-      'light-font-color' : 'dark-font-color';
+    return this.themeService.isBackgroundFromCmsDarkOrIsDarkTheme(backgroundColor)
+      ? 'light-font-color'
+      : 'dark-font-color';
   }
 
   onWidgetIsEmpty(isEmpty: boolean) {

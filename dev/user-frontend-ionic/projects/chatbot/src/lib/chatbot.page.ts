@@ -37,23 +37,64 @@
  * termes.
  */
 
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AsyncPipe, NgClass } from '@angular/common';
+import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { Capacitor } from '@capacitor/core';
 import { Keyboard } from '@capacitor/keyboard';
-import { IonContent } from '@ionic/angular';
+import {
+  IonButton,
+  IonButtons,
+  IonCol,
+  IonContent,
+  IonFooter,
+  IonIcon,
+  IonInput,
+  IonItem,
+  IonItemGroup,
+  IonLabel,
+  IonList,
+  IonProgressBar,
+  IonRow,
+  IonSpinner,
+} from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
 import { BehaviorSubject } from 'rxjs';
 import { finalize, take } from 'rxjs/operators';
+import { HeaderComponent, MultiTenantService } from '@multi/shared';
 import { ChatbotMessage, ChatButton, Message, MessageType, UserMessage } from './chatbot.dto';
 import { ChatbotService } from './chatbot.service';
 import { UserIdGeneratorService } from './user-id-generator.service';
-import { MultiTenantService } from '@multi/shared';
 
 @Component({
   selector: 'app-chatbot',
   templateUrl: './chatbot.page.html',
   styleUrls: ['../../../../src/theme/app-theme/styles/chatbot/chatbot.page.scss'],
+  imports: [
+    NgClass,
+    FormsModule,
+    AsyncPipe,
+    TranslatePipe,
+    HeaderComponent,
+    IonButton,
+    IonButtons,
+    IonCol,
+    IonContent,
+    IonFooter,
+    IonIcon,
+    IonInput,
+    IonItem,
+    IonItemGroup,
+    IonLabel,
+    IonList,
+    IonProgressBar,
+    IonRow,
+    IonSpinner,
+  ],
 })
 export class ChatbotPage implements OnInit {
+  private multiTenantService = inject(MultiTenantService);
+  private chatbotService = inject(ChatbotService);
 
   private static readonly userChatId: string = UserIdGeneratorService.initRandomUserId();
 
@@ -68,18 +109,16 @@ export class ChatbotPage implements OnInit {
   private messages: Message[] = [];
   private domMessageListObserver: MutationObserver;
 
-  constructor(
-    private multiTenantService: MultiTenantService,
-    private chatbotService: ChatbotService
-  ) { }
-
   ngOnInit() {
-    this.chatbotService.textRequest('Hello', ChatbotPage.userChatId)
-      .pipe(take(1), finalize(() => this.isLoading = false))
+    this.chatbotService
+      .textRequest('Hello', ChatbotPage.userChatId)
+      .pipe(
+        take(1),
+        finalize(() => (this.isLoading = false)),
+      )
       .subscribe((chatBotResponse) => {
-          this.addMessageToChat(chatBotResponse);
-        }
-      );
+        this.addMessageToChat(chatBotResponse);
+      });
   }
 
   ionViewDidEnter() {
@@ -88,7 +127,10 @@ export class ChatbotPage implements OnInit {
         this.scrollContent.scrollToBottom(500);
       });
     });
-    this.domMessageListObserver.observe(this.domMessageList.nativeElement, { childList: true, subtree: true });
+    this.domMessageListObserver.observe(this.domMessageList.nativeElement, {
+      childList: true,
+      subtree: true,
+    });
 
     if (Capacitor.isNativePlatform()) {
       Keyboard.addListener('keyboardWillShow', () => {
@@ -105,7 +147,7 @@ export class ChatbotPage implements OnInit {
   }
 
   textRequest(text: string): void {
-    if(!text) {
+    if (!text) {
       return;
     }
 
@@ -113,11 +155,13 @@ export class ChatbotPage implements OnInit {
     this.addMessageToChat(newUserMessage);
 
     this.isFetchingAnswer = true;
-    this.chatbotService.textRequest(text, ChatbotPage.userChatId)
+    this.chatbotService
+      .textRequest(text, ChatbotPage.userChatId)
       .pipe(
         take(1),
-        finalize(() => this.isFetchingAnswer = false)
-      ).subscribe((chatbotResponses: ChatbotMessage[]) => {
+        finalize(() => (this.isFetchingAnswer = false)),
+      )
+      .subscribe((chatbotResponses: ChatbotMessage[]) => {
         this.addMessageToChat(chatbotResponses);
         this.userInput = '';
       });
@@ -128,11 +172,13 @@ export class ChatbotPage implements OnInit {
     this.addMessageToChat(newMessage);
 
     this.isFetchingAnswer = true;
-    this.chatbotService.buttonPayloadRequest(buttonPayload, ChatbotPage.userChatId)
+    this.chatbotService
+      .buttonPayloadRequest(buttonPayload, ChatbotPage.userChatId)
       .pipe(
         take(1),
-        finalize(() => this.isFetchingAnswer = false)
-      ).subscribe((chatbotResponses: ChatbotMessage[]) => {
+        finalize(() => (this.isFetchingAnswer = false)),
+      )
+      .subscribe((chatbotResponses: ChatbotMessage[]) => {
         this.addMessageToChat(chatbotResponses);
         this.userInput = '';
       });
@@ -165,6 +211,8 @@ export class ChatbotPage implements OnInit {
 
   isChatbotLogo(message: ChatbotMessage) {
     const chatbotLogoRegex = this.multiTenantService.getModuleConfiguration('chatbot.logoRegex');
-    return message?.card?.file?.type === 'image' && message?.card?.file?.name.match(chatbotLogoRegex);
+    return (
+      message?.card?.file?.type === 'image' && message?.card?.file?.name.match(chatbotLogoRegex)
+    );
   }
 }

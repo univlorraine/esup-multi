@@ -44,8 +44,8 @@ import { RssPage } from './rss.page';
 const routes: Routes = [
   {
     path: 'rss',
-    component: RssPage
-  }
+    component: RssPage,
+  },
 ];
 
 @NgModule({

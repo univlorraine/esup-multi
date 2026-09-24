@@ -37,28 +37,27 @@
  * termes.
  */
 
+import { inject, Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
-import { Injectable } from '@angular/core';
 import { MultiTenantService } from './multi-tenant.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class IsTenantSelectedGuard implements CanActivate {
-
-  constructor(
-    private multiTenantService: MultiTenantService,
-    private router: Router
-  ) {}
+  private multiTenantService = inject(MultiTenantService);
+  private router = inject(Router);
 
   canActivate() {
     const isSingleTenant: boolean = this.multiTenantService.isSingleTenant();
     const hasCurrentTenant: boolean = this.multiTenantService.hasCurrentTenant();
     const availableTenants: any[] = this.multiTenantService.getAvailableTenants();
 
-    const groupExists = availableTenants && availableTenants.length === 1 && availableTenants[0].isGroup === true;
+    const groupExists =
+      availableTenants && availableTenants.length === 1 && availableTenants[0].isGroup === true;
 
-    if ((!hasCurrentTenant && (groupExists || !isSingleTenant))) { // The tenant should have been selected if group or if not single tenant
+    if (!hasCurrentTenant && (groupExists || !isSingleTenant)) {
+      // The tenant should have been selected if group or if not single tenant
       this.multiTenantService.redirectToTenantSelection(true).then();
       return false;
     }

@@ -37,45 +37,74 @@
  * termes.
  */
 
-import { Component, Inject } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Tenant } from './multi-tenant.model';
-import { MultiTenantService } from './multi-tenant.service';
-import { from, Observable, of } from 'rxjs';
-import { Capacitor } from '@capacitor/core';
 import { App } from '@capacitor/app';
+import { Capacitor } from '@capacitor/core';
+import {
+  IonButton,
+  IonContent,
+  IonFooter,
+  IonHeader,
+  IonIcon,
+  IonLabel,
+  IonRow,
+  IonTitle,
+  IonToolbar,
+} from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
+import { from, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { setLanguage } from '../i18n/i18n.repository';
-import { isDarkTheme, isDarkTheme$, setIsDarkTheme, setUserHaveSetThemeInApp } from '../theme/theme.repository';
+import {
+  isDarkTheme,
+  isDarkTheme$,
+  setIsDarkTheme,
+  setUserHaveSetThemeInApp,
+} from '../theme/theme.repository';
+import { Tenant } from './multi-tenant.model';
+import { MultiTenantService } from './multi-tenant.service';
 
 @Component({
   selector: 'app-multi-tenant',
   templateUrl: './multi-tenant.component.html',
   styleUrls: ['../../../../../src/theme/app-theme/styles/multi-tenant/multi-tenant.component.scss'],
+  imports: [
+    AsyncPipe,
+    TranslatePipe,
+    IonButton,
+    IonContent,
+    IonFooter,
+    IonHeader,
+    IonIcon,
+    IonLabel,
+    IonRow,
+    IonTitle,
+    IonToolbar,
+  ],
 })
 export class MultiTenantComponent {
+  private environment = inject<any>('environment' as any);
+  private router = inject(Router);
+  private multiTenantService = inject(MultiTenantService);
+  private activatedRoute = inject(ActivatedRoute);
 
   public availableTenants: Tenant[];
   public selectedTenantId: string;
-  public languages: Array<string> = [];
+  public languages: string[] = [];
   appVersion$: Observable<string>;
   public darkModeEnabled: boolean;
   isDarkTheme$: Observable<boolean>;
 
-  constructor(
-    @Inject('environment')
-    private environment: any,
-    private router: Router,
-    private multiTenantService: MultiTenantService,
-    private activatedRoute: ActivatedRoute
-  ) {
+  constructor() {
     this.availableTenants = this.getAvailableTenants();
     this.selectedTenantId = this.multiTenantService.getSelectedTenantId();
 
     this.languages = this.environment.languages;
     this.appVersion$ = !Capacitor.isNativePlatform()
       ? of(this.environment.appVersion || '0.0.0')
-      : from(App.getInfo()).pipe(map(info => info.version));
+      : from(App.getInfo()).pipe(map((info) => info.version));
     this.isDarkTheme$ = isDarkTheme$;
   }
 

@@ -36,7 +36,7 @@
  * termes.
  */
 import { z } from 'zod';
-import { ContactUsTranslationsSchema } from '@common/validation/schemas/translations.schema';
+import { ContactUsTranslationsSchema } from '#common/validation/schemas/translations.schema.js';
 
 export const ContactUsSchema = z.object({
   icon: z.string().min(1, 'Contact Us icon cannot be empty string').nullable(),

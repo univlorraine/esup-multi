@@ -37,31 +37,58 @@
  * termes.
  */
 
-import { Component, Inject } from '@angular/core';
-import { NetworkService } from '@multi/shared';
+import { AsyncPipe, NgClass } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import {
+  IonButton,
+  IonCard,
+  IonIcon,
+  IonRouterLink,
+  IonRow,
+  IonSpinner,
+  IonText,
+} from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
 import { filter, first, Observable, switchMap } from 'rxjs';
 import { finalize, map, take } from 'rxjs/operators';
+import { NetworkService } from '@multi/shared';
+import { RssItemHeaderButtonDirective } from '../../common/rss-item-header/rss-item-header-button.directive';
+import { RssItemHeaderComponent } from '../../common/rss-item-header/rss-item-header.component';
+import { RSS_CONFIG, RssModuleConfig } from '../../rss.config';
 import { FeedItem, rssFeed$, setRssFeed } from '../../rss.repository';
 import { RssService } from '../../rss.service';
-import { RSS_CONFIG, RssModuleConfig } from '../../rss.config';
 
 @Component({
   selector: 'app-latest-news-widget',
   templateUrl: './latest-news.component.html',
   styleUrls: ['../../../../../../src/theme/app-theme/styles/rss/latest-news.component.scss'],
+  imports: [
+    NgClass,
+    RssItemHeaderComponent,
+    RssItemHeaderButtonDirective,
+    RouterLink,
+    AsyncPipe,
+    TranslatePipe,
+    IonButton,
+    IonCard,
+    IonIcon,
+    IonRouterLink,
+    IonRow,
+    IonSpinner,
+    IonText,
+  ],
 })
 export class LatestNewsComponent {
+  private rssService = inject(RssService);
+  private networkService = inject(NetworkService);
+  config = inject<RssModuleConfig>(RSS_CONFIG);
+
   public isLoading = false;
   public latestNews$: Observable<FeedItem>;
 
-  constructor(
-    private rssService: RssService,
-    private networkService: NetworkService,
-    @Inject(RSS_CONFIG) public config: RssModuleConfig
-  ) {
-    this.latestNews$ = rssFeed$.pipe(
-      map(rssFeed => rssFeed[0])
-    );
+  constructor() {
+    this.latestNews$ = rssFeed$.pipe(map((rssFeed) => rssFeed[0]));
   }
 
   widgetViewDidEnter(): void {
@@ -69,16 +96,18 @@ export class LatestNewsComponent {
   }
 
   private loadRssFeedIfNetworkAvailable() {
-    this.networkService.isOnline$.pipe(
-      first(),
-      filter(isOnline => isOnline),
-      switchMap(() => {
-        this.isLoading = true;
-        return this.rssService.getRssFeed().pipe(
-          take(1),
-          finalize(() => this.isLoading = false)
-        );
-      })
-    ).subscribe(setRssFeed);
+    this.networkService.isOnline$
+      .pipe(
+        first(),
+        filter((isOnline) => isOnline),
+        switchMap(() => {
+          this.isLoading = true;
+          return this.rssService.getRssFeed().pipe(
+            take(1),
+            finalize(() => (this.isLoading = false)),
+          );
+        }),
+      )
+      .subscribe(setRssFeed);
   }
 }

@@ -37,18 +37,20 @@
  * termes.
  */
 
-import { Injectable, NgZone } from '@angular/core';
+import { inject, Injectable, NgZone } from '@angular/core';
 import { ConnectionStatus, Network } from '@capacitor/network';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class NetworkService {
+  private zone = inject(NgZone);
+
   public isOnline$: Observable<boolean>;
   private isOnlineStatusSubject = new BehaviorSubject<boolean>(false);
 
-  constructor(private zone: NgZone) {
+  constructor() {
     this.isOnline$ = this.isOnlineStatusSubject.asObservable();
     this.initIsOnline();
     this.initNetworkStatusListener();
@@ -78,5 +80,4 @@ export class NetworkService {
       });
     });
   }
-
 }

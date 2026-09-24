@@ -37,10 +37,14 @@
  */
 
 import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
-import { EventEmitter2 } from '@nestjs/event-emitter';
-import { CacheCollection, getCacheTTL, isCacheEnabled } from './cache.config';
 import { ConfigService } from '@nestjs/config';
-import { RedisService } from '@redis/redis.service';
+import { EventEmitter2 } from '@nestjs/event-emitter';
+import { RedisService } from '#redis/redis.service.js';
+import {
+  CacheCollection,
+  getCacheTTL,
+  isCacheEnabled,
+} from './cache.config.js';
 
 @Injectable()
 export class CacheService implements OnModuleInit {
@@ -53,11 +57,11 @@ export class CacheService implements OnModuleInit {
     private readonly redisService: RedisService,
   ) {}
 
-  async onModuleInit() {
+  onModuleInit() {
     // On vide le cache au démarrage de l'application après un délai
     // pour s'assurer que le service est bien initialisé
     setTimeout(() => {
-      this.clearCacheOnStartup();
+      void this.clearCacheOnStartup();
     }, 2000);
   }
 
@@ -77,7 +81,10 @@ export class CacheService implements OnModuleInit {
       await this.invalidateAll();
       this.logger.log('Cache cleared successfully');
     } catch (error) {
-      this.logger.warn('Failed to clear cache:', error.message);
+      this.logger.warn(
+        'Failed to clear cache:',
+        error instanceof Error ? error.message : JSON.stringify(error),
+      );
     }
   }
 
@@ -138,7 +145,10 @@ export class CacheService implements OnModuleInit {
           return parsed;
         }
       } catch (error) {
-        this.logger.warn(`Redis cache error for ${key}:`, error.message);
+        this.logger.warn(
+          `Redis cache error for ${key}:`,
+          error instanceof Error ? error.message : JSON.stringify(error),
+        );
       }
     }
 
@@ -296,7 +306,7 @@ export class CacheService implements OnModuleInit {
     // 1. Prévention du cache stampede local (même instance)
     if (this.loadingPromises.has(cacheKey)) {
       this.logger.debug(`${cacheKey} already loading (in-memory), waiting...`);
-      return await this.loadingPromises.get(cacheKey)!;
+      return await this.loadingPromises.get(cacheKey);
     }
 
     let lockToken: string | null = null;

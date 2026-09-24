@@ -52,12 +52,11 @@ const fcmStore = createStore(
   { name: FCM_STORE },
   withProps<FCMProps>({
     fcmToken: null,
-  })
+  }),
 );
 
 @Injectable({ providedIn: 'root' })
 export class FCMRepository {
-
   public fcmToken$ = fcmStore.pipe(select((state) => state.fcmToken));
 
   private persistFCMStore = persistState(fcmStore, {

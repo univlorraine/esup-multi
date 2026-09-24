@@ -53,7 +53,7 @@ export * from './lib/authorization/authorization.helper';
 export * from './lib/components/back-button/back-button.component';
 export * from './lib/components/custom-icon/custom-icon.component';
 export * from './lib/components/header/header.component';
-export * from './lib/components/shared-components.module';
+
 export * from './lib/components/widgets/widget-lifecycle.service';
 export * from './lib/components/widgets/widget.component';
 export * from './lib/errors';
@@ -73,7 +73,7 @@ export * from './lib/notifications/notifications.service';
 export * from './lib/pipe/complete-local-date-pipe';
 export * from './lib/pipe/local-hour.pipe';
 export * from './lib/pipe/relative-time-pipe';
-export * from './lib/pipe/shared-pipe.module';
+
 export * from './lib/pipe/truncate-pipe';
 export * from './lib/pipe/sanitize-svg-pipe';
 export * from './lib/pipe/sanitize-html-pipe';

@@ -39,10 +39,10 @@
 
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ScheduleListPage } from './schedule-list/schedule-list.page';
-import { ScheduleCalendarComponent } from './schedule-calendar/schedule-calendar.component';
-import { SchedulePage } from './schedule.page';
 import { AuthGuard } from '@multi/shared';
+import { ScheduleCalendarComponent } from './schedule-calendar/schedule-calendar.component';
+import { ScheduleListPage } from './schedule-list/schedule-list.page';
+import { SchedulePage } from './schedule.page';
 
 const routes: Routes = [
   {
@@ -56,14 +56,14 @@ const routes: Routes = [
       },
       {
         path: 'list',
-        component: ScheduleListPage
+        component: ScheduleListPage,
       },
       {
         path: '',
         redirectTo: 'list',
-        pathMatch: 'full'
-      }
-    ]
+        pathMatch: 'full',
+      },
+    ],
   },
 ];
 
@@ -71,4 +71,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class SchedulePageRoutingModule { }
+export class SchedulePageRoutingModule {}

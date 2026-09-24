@@ -37,60 +37,35 @@
  * termes.
  */
 
-import { CommonModule } from '@angular/common';
-import {APP_INITIALIZER, ModuleWithProviders, NgModule} from '@angular/core';
-import { IonicModule } from '@ionic/angular';
+import { inject, ModuleWithProviders, NgModule, provideAppInitializer } from '@angular/core';
 import { EffectsNgModule } from '@ngneat/effects-ng';
-import { TranslateModule } from '@ngx-translate/core';
-import { ProjectModuleService, SharedComponentsModule, SharedPipeModule } from '@multi/shared';
-import { QRCodeModule } from 'angularx-qrcode';
+import { ProjectModuleService } from '@multi/shared';
 import { CardEuRoutingModule } from './card-eu-routing.module';
-import { CardEuEffects } from './card-eu.effects';
-import { CardEuPage } from './card-eu.page';
 import { CARD_EU_CONFIG, CardEuModuleConfig } from './card-eu.config';
-import { CardEuExtendedComponent } from './card-eu/card-eu-extended.component';
-import { CardEuLightComponent } from './card-eu/card-eu-light.component';
+import { CardEuEffects } from './card-eu.effects';
 
-const initModule = (projectModuleService: ProjectModuleService) =>
-  () => projectModuleService.initProjectModule({
+const initModule = (projectModuleService: ProjectModuleService) => () =>
+  projectModuleService.initProjectModule({
     name: 'card-eu',
     translation: true,
   });
 
 @NgModule({
-  imports: [
-    CommonModule,
-    IonicModule,
-    CardEuRoutingModule,
-    TranslateModule,
-    QRCodeModule,
-    SharedPipeModule,
-    SharedComponentsModule,
-    EffectsNgModule.forFeature([CardEuEffects]),
+  imports: [CardEuRoutingModule, EffectsNgModule.forFeature([CardEuEffects])],
+  providers: [
+    provideAppInitializer(() => {
+      const initializerFn = initModule(inject(ProjectModuleService));
+      return initializerFn();
+    }),
   ],
-  declarations: [
-    CardEuPage,
-    CardEuExtendedComponent,
-    CardEuLightComponent
-  ],
-  providers: [{
-    provide: APP_INITIALIZER,
-    useFactory: initModule,
-    deps:[ProjectModuleService],
-    multi: true
-  }],
 })
-
 export class CardEuPageModule {
   static routerLink = '/card-eu';
 
   static forRoot(config: CardEuModuleConfig): ModuleWithProviders<CardEuPageModule> {
     return {
       ngModule: CardEuPageModule,
-      providers: [
-        { provide: CARD_EU_CONFIG, useValue: config }
-      ]
+      providers: [{ provide: CARD_EU_CONFIG, useValue: config }],
     };
   }
 }
-

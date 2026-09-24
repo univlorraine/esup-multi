@@ -51,7 +51,7 @@ Rajouter une section lint au project dans `user-frontend-ionic/angular.json`. À
 }
 ```
 
-Puis rajouter le fichier `.eslintrc.js` suivant à la racine du module :
+Puis rajouter le fichier `.eslintrc.cjs` suivant à la racine du module :
 ```javascript
 module.exports = {
   extends: "../../.eslintrc.js",

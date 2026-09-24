@@ -37,42 +37,24 @@
  * termes.
  */
 
-import { CommonModule } from '@angular/common';
-import { APP_INITIALIZER, NgModule } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
-import { ProjectModuleService, SharedComponentsModule, SharedPipeModule } from '@multi/shared';
-import { RestaurantMenusPage } from './restaurant-menus-page/restaurant-menus.page';
+import { inject, NgModule, provideAppInitializer } from '@angular/core';
+import { ProjectModuleService } from '@multi/shared';
 import { RestaurantsRoutingModule } from './restaurants-routing.module';
-import { RestaurantsPage } from './restaurants.page';
 
-const initModule = (projectModuleService: ProjectModuleService) =>
-  () => projectModuleService.initProjectModule({
+const initModule = (projectModuleService: ProjectModuleService) => () =>
+  projectModuleService.initProjectModule({
     name: 'restaurants',
     translation: true,
   });
 
 @NgModule({
-  declarations: [
-    RestaurantsPage,
-    RestaurantMenusPage
+  providers: [
+    provideAppInitializer(() => {
+      const initializerFn = initModule(inject(ProjectModuleService));
+      return initializerFn();
+    }),
   ],
-  providers: [{
-    provide: APP_INITIALIZER,
-    useFactory: initModule,
-    deps: [
-      ProjectModuleService,
-    ],
-    multi: true
-  }],
-  imports: [
-    CommonModule,
-    IonicModule,
-    RestaurantsRoutingModule,
-    TranslateModule,
-    SharedComponentsModule,
-    SharedPipeModule
-  ]
+  imports: [RestaurantsRoutingModule],
 })
 export class RestaurantsModule {
   static routerLink = '/restaurants';

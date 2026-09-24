@@ -37,27 +37,26 @@
  * termes.
  */
 
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
+import { IonBackButton, Platform } from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
 import { NavigationService } from '../../navigation/navigation.service';
-import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-back-button',
   templateUrl: 'back-button.component.html',
-  styleUrls: ['../../../../../../src/theme/app-theme/styles/shared/back-button.component.scss']
+  styleUrls: ['../../../../../../src/theme/app-theme/styles/shared/back-button.component.scss'],
+  imports: [TranslatePipe, IonBackButton],
 })
 export class BackButtonComponent {
+  private navigationService = inject(NavigationService);
+  platform = inject(Platform);
 
   @Input() defaultHref = '';
 
-  constructor(
-    private navigationService: NavigationService,
-    public platform: Platform
-  ) {}
-
   goBack() {
     // use defaultHref if not empty
-    if(this.defaultHref !== '') {
+    if (this.defaultHref !== '') {
       return;
     }
 

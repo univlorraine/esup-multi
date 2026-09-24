@@ -39,58 +39,84 @@
 
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start" *ngIf="(hideBackButton$ | async) === false">
-      <app-back-button></app-back-button>
-    </ion-buttons>
+    @if ((hideBackButton$ | async) === false) {
+      <ion-buttons slot="start">
+        <app-back-button />
+      </ion-buttons>
+    }
     <ion-title class="app-centered-header-title app-title-4">
-      {{ "AUTH.MENU" | translate }}
+      {{ 'AUTH.MENU' | translate }}
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-progress-bar *ngIf="isLoading" type="indeterminate"></ion-progress-bar>
+@if (isLoading) {
+  <ion-progress-bar type="indeterminate" />
+}
 
-<ion-content class="ion-padding" *ngIf="translatedPageContent$ | async as page">
-  <form [formGroup]="loginForm" (ngSubmit)="submit()">
-    <ion-row class="ion-justify-content-center ion-text-center">
-      <div class="app-text-3" [innerHTML]="page.connectionText"></div>
-    </ion-row>
+@if (translatedPageContent$ | async; as page) {
+  <ion-content class="ion-padding">
+    <form [formGroup]="loginForm" (ngSubmit)="submit()">
+      <ion-row class="ion-justify-content-center ion-text-center">
+        <div class="app-text-3" [innerHTML]="page.connectionText"></div>
+      </ion-row>
 
-    <ion-item lines="none">
-      <ion-input (keyup.enter)="gotoField(passwordField)" class="form-control app-text-3 light"
-                 formControlName="username" id="username" required type="text"
-                 label="{{ 'AUTH.LOGIN.USERNAME' | translate }}" labelPlacement="floating"
-                 errorText="{{ 'AUTH.LOGIN.REQUIRED.USERNAME' | translate }}">
-      </ion-input>
-    </ion-item>
+      <ion-item lines="none">
+        <ion-input
+          (keyup.enter)="gotoField(passwordField)"
+          class="form-control app-text-3 light"
+          formControlName="username"
+          id="username"
+          [required]="true"
+          type="text"
+          label="{{ 'AUTH.LOGIN.USERNAME' | translate }}"
+          labelPlacement="floating"
+          errorText="{{ 'AUTH.LOGIN.REQUIRED.USERNAME' | translate }}"
+        />
+      </ion-item>
 
-    <ion-item lines="none">
-      <ion-input #passwordField (keyup.enter)="keyboardSubmit()" class="form-control app-text-3 light"
-                 formControlName="password" id="password" required type="password"
-                 label="{{ 'AUTH.LOGIN.PASSWORD' | translate }}" labelPlacement="floating"
-                 errorText="{{ 'AUTH.LOGIN.REQUIRED.PASSWORD' | translate }}" [clearOnEdit]="false">
-        <ion-input-password-toggle slot="end"></ion-input-password-toggle>
-      </ion-input>
+      <ion-item lines="none">
+        <ion-input
+          #passwordField
+          (keyup.enter)="keyboardSubmit()"
+          class="form-control app-text-3 light"
+          formControlName="password"
+          id="password"
+          [required]="true"
+          type="password"
+          label="{{ 'AUTH.LOGIN.PASSWORD' | translate }}"
+          labelPlacement="floating"
+          errorText="{{ 'AUTH.LOGIN.REQUIRED.PASSWORD' | translate }}"
+          [clearOnEdit]="false"
+        >
+          <ion-input-password-toggle slot="end" />
+        </ion-input>
+      </ion-item>
 
-    </ion-item>
+      <ion-item lines="none">
+        <ion-checkbox
+          (ionChange)="onSaveCredentialsOnAuthenticationChange($event)"
+          [checked]="saveCredentialsOnAuthentication$ | async"
+          class="ion-margin-end"
+          justify="start"
+          labelPlacement="end"
+          mode="md"
+        >
+          <ion-label class="app-text-3 light ion-text-wrap"
+            >{{ 'AUTH.LOGIN.SAVE_CREDENTIALS' | translate }}
+          </ion-label>
+        </ion-checkbox>
+      </ion-item>
 
-    <ion-item lines="none">
-      <ion-checkbox
-        (ionChange)="onSaveCredentialsOnAuthenticationChange($event)"
-        [checked]="(saveCredentialsOnAuthentication$ | async)"
-        class="ion-margin-end"
-        justify="start"
-        labelPlacement="end"
-        mode="md"
-      >
-        <ion-label class="app-text-3 light ion-text-wrap">{{ 'AUTH.LOGIN.SAVE_CREDENTIALS' | translate }}</ion-label>
-      </ion-checkbox>
-    </ion-item>
-
-    <ion-row class="ion-margin-top ion-padding-horizontal ion-justify-content-center">
-      <ion-button class="app-rectangle-button-1" type="submit" lines="none" [disabled]="!loginForm.valid || isLoading">
-        <ion-label>{{ 'AUTH.LOGIN.SUBMIT' | translate }}</ion-label>
-      </ion-button>
-    </ion-row>
-  </form>
-</ion-content>
+      <ion-row class="ion-margin-top ion-padding-horizontal ion-justify-content-center">
+        <ion-button
+          class="app-rectangle-button-1"
+          type="submit"
+          [disabled]="!loginForm.valid || isLoading"
+        >
+          <ion-label>{{ 'AUTH.LOGIN.SUBMIT' | translate }}</ion-label>
+        </ion-button>
+      </ion-row>
+    </form>
+  </ion-content>
+}

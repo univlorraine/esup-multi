@@ -40,11 +40,11 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { SaveUserCredentialsDto } from './user-credentials.dto';
+import { SaveUserCredentialsDto } from './user-credentials.dto.js';
 import {
   UserCredentials,
   UserCredentialsDocument,
-} from './user-credentials.schema';
+} from './user-credentials.schema.js';
 
 @Injectable()
 export class UserCredentialsRepository {

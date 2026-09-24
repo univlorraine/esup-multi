@@ -37,34 +37,27 @@
  * termes.
  */
 
-import { CommonModule } from '@angular/common';
-import { APP_INITIALIZER, NgModule } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
-import { ProjectModuleService, SharedComponentsModule } from '@multi/shared';
-import {SocialNetworkComponent} from './widgets/social-network/social-network.component'
+import { inject, NgModule, provideAppInitializer } from '@angular/core';
+import { ProjectModuleService } from '@multi/shared';
+import { SocialNetworkComponent } from './widgets/social-network/social-network.component';
 
-
-const initModule = (projectModuleService: ProjectModuleService) =>
-  () => projectModuleService.initProjectModule({
+const initModule = (projectModuleService: ProjectModuleService) => () =>
+  projectModuleService.initProjectModule({
     name: 'social-network',
-    widgets: [{
-      id: 'social-network-widget',
-      component: SocialNetworkComponent,
-    }]
+    widgets: [
+      {
+        id: 'social-network-widget',
+        component: SocialNetworkComponent,
+      },
+    ],
   });
 
 @NgModule({
-  declarations: [SocialNetworkComponent],
-  providers: [{
-    provide: APP_INITIALIZER,
-    useFactory: initModule,
-    deps: [ProjectModuleService],
-    multi: true
-  }],
-  imports: [
-    CommonModule,
-    IonicModule,
-    SharedComponentsModule
-  ]
+  providers: [
+    provideAppInitializer(() => {
+      const initializerFn = initModule(inject(ProjectModuleService));
+      return initializerFn();
+    }),
+  ],
 })
-export class SocialNetworkModule { }
+export class SocialNetworkModule {}

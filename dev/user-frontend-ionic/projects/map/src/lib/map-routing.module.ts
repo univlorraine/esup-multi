@@ -44,8 +44,8 @@ import { MapPage } from './map.page';
 const routes: Routes = [
   {
     path: 'map',
-    component: MapPage
-  }
+    component: MapPage,
+  },
 ];
 
 @NgModule({

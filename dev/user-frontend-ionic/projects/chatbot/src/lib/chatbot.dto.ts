@@ -40,8 +40,8 @@
 export type Message = ChatbotMessage | UserMessage;
 
 export enum MessageType {
-   bot,
-   user
+  bot,
+  user,
 }
 
 interface MessageTypeCommon {
@@ -65,7 +65,7 @@ export interface ChatbotButtonPayloadRequest {
   userId: string;
 }
 
-export interface UserMessage extends MessageTypeCommon{
+export interface UserMessage extends MessageTypeCommon {
   text: string;
   messageType: MessageType.user;
 }

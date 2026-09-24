@@ -36,7 +36,7 @@
  * termes.
  */
 import { z } from 'zod';
-import { LoginTranslationsSchema } from '@common/validation/schemas/translations.schema';
+import { LoginTranslationsSchema } from '#common/validation/schemas/translations.schema.js';
 
 export const LoginSchema = z.object({
   translations: z

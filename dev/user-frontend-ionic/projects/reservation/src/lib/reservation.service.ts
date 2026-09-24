@@ -37,34 +37,34 @@
  * termes.
  */
 
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { MultiTenantService, NavigationService, SsoService } from '@multi/shared';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ReservationService {
-
-  constructor(
-    private ssoService: SsoService,
-    private multiTenantService: MultiTenantService,
-    private navigationService: NavigationService,
-  ) {}
+  private ssoService = inject(SsoService);
+  private multiTenantService = inject(MultiTenantService);
+  private navigationService = inject(NavigationService);
 
   public openReservationService() {
-    const {ssoServiceName, ssoUrlTemplate} = this.multiTenantService.getModuleConfiguration('reservation');
-    this.ssoService.getSsoExternalLink({
-      service: ssoServiceName,
-      urlTemplate: ssoUrlTemplate
-    })
-    .subscribe(url => this.navigationService.openExternalLink(url));
+    const { ssoServiceName, ssoUrlTemplate } =
+      this.multiTenantService.getModuleConfiguration('reservation');
+    this.ssoService
+      .getSsoExternalLink({
+        service: ssoServiceName,
+        urlTemplate: ssoUrlTemplate,
+      })
+      .subscribe((url) => this.navigationService.openExternalLink(url));
   }
 
   public openURL(service: string) {
-    this.ssoService.getSsoExternalLink({
-      service,
-      urlTemplate: `${service}&ticket={st}`
-    })
-    .subscribe(url => this.navigationService.openExternalLink(url));
+    this.ssoService
+      .getSsoExternalLink({
+        service,
+        urlTemplate: `${service}&ticket={st}`,
+      })
+      .subscribe((url) => this.navigationService.openExternalLink(url));
   }
 }

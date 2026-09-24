@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { Pipe, PipeTransform } from '@angular/core';
+import { inject, Pipe, PipeTransform } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { format } from 'date-fns';
 import * as locale from 'date-fns/locale';
@@ -47,12 +47,10 @@ import * as locale from 'date-fns/locale';
   pure: false,
 })
 export class LocalDatePipe implements PipeTransform {
-
-  constructor(private translateService: TranslateService) {
-  }
+  private translateService = inject(TranslateService);
 
   transform(fullDate: string): string {
-    const lang = this.translateService.currentLang || this.translateService.defaultLang;
+    const lang = this.translateService.getCurrentLang() || this.translateService.getFallbackLang();
     const date = new Date(fullDate);
     return format(date, 'dd/MM', { locale: locale[lang] });
   }

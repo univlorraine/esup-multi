@@ -38,32 +38,51 @@
   -->
 
 <app-header>
-  <app-select-user slot="end"></app-select-user>
-  <app-select-planning slot="end"></app-select-planning>
+  <app-select-user slot="end" />
+  <app-select-planning slot="end" />
 </app-header>
-<ion-progress-bar *ngIf="isLoading$ | async" type="indeterminate"></ion-progress-bar>
+@if (isLoading$ | async) {
+  <ion-progress-bar type="indeterminate" />
+}
 
-<ion-toolbar *ngIf="!!asUser">
-  <ion-title class="ion-text-center schedule-as-user-title">{{ 'SCHEDULE.MANAGEMENT.AS_USER_LABEL' | translate }} : {{ asUser }}</ion-title>
-  <ion-buttons slot="end">
-    <ion-button (click)="clearAsUserLogin()" fill="clear" [attr.aria-label]="'SCHEDULE.MANAGEMENT.QUIT' | translate">
-      <ion-icon name="close" aria-label=""></ion-icon>
-    </ion-button>
-  </ion-buttons>
-</ion-toolbar>
+@if (!!asUser) {
+  <ion-toolbar>
+    <ion-title class="ion-text-center schedule-as-user-title"
+      >{{ 'SCHEDULE.MANAGEMENT.AS_USER_LABEL' | translate }} : {{ asUser }}
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button
+        (click)="clearAsUserLogin()"
+        fill="clear"
+        [attr.aria-label]="'SCHEDULE.MANAGEMENT.QUIT' | translate"
+      >
+        <ion-icon name="close" aria-label="" />
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+}
 
 <ion-content>
   <ion-tabs>
     <ion-tab-bar slot="top">
-      <ion-tab-button [class.tab-selected]="isTabActive('schedule/calendar#month')" tab="calendar#month">
+      <ion-tab-button
+        [class.tab-selected]="isTabActive('schedule/calendar#month')"
+        tab="calendar#month"
+      >
         <ion-label class="app-text-4">{{ 'SCHEDULE.VIEW_TYPE.MONTH' | translate }}</ion-label>
       </ion-tab-button>
 
-      <ion-tab-button [class.tab-selected]="isTabActive('schedule/calendar#week')" tab="calendar#week">
+      <ion-tab-button
+        [class.tab-selected]="isTabActive('schedule/calendar#week')"
+        tab="calendar#week"
+      >
         <ion-label class="app-text-4">{{ 'SCHEDULE.VIEW_TYPE.WEEK' | translate }}</ion-label>
       </ion-tab-button>
 
-      <ion-tab-button [class.tab-selected]="isTabActive('schedule/calendar#day')" tab="calendar#day">
+      <ion-tab-button
+        [class.tab-selected]="isTabActive('schedule/calendar#day')"
+        tab="calendar#day"
+      >
         <ion-label class="app-text-4">{{ 'SCHEDULE.VIEW_TYPE.DAY' | translate }}</ion-label>
       </ion-tab-button>
 
@@ -73,4 +92,3 @@
     </ion-tab-bar>
   </ion-tabs>
 </ion-content>
-

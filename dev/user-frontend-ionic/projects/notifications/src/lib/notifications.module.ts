@@ -37,27 +37,26 @@
  * termes.
  */
 
-import { CommonModule } from '@angular/common';
-import { APP_INITIALIZER, ModuleWithProviders, NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { FirebaseMessaging, Notification as NotificationCapacitor } from '@capacitor-firebase/messaging';
+import { inject, ModuleWithProviders, NgModule, provideAppInitializer } from '@angular/core';
+import {
+  FirebaseMessaging,
+  Notification as NotificationCapacitor,
+} from '@capacitor-firebase/messaging';
 // import { Device } from '@capacitor/device';
-import { IonicModule, Platform, ToastController } from '@ionic/angular';
+import { Platform, ToastController } from '@ionic/angular';
 import { EffectsNgModule } from '@ngneat/effects-ng';
-import { TranslateModule } from '@ngx-translate/core';
-import { NotificationsRepository, ProjectModuleService, SharedComponentsModule, SharedPipeModule } from '@multi/shared';
-import { NotificationOptionsComponent } from './notification-options/notification-options.component';
+import { NotificationsRepository, ProjectModuleService } from '@multi/shared';
 import { NotificationsRoutingModule } from './notifications-routing.module';
-import { NotificationsModuleConfig, NOTIFICATIONS_CONFIG } from './notifications.config';
+import { NOTIFICATIONS_CONFIG, NotificationsModuleConfig } from './notifications.config';
 import { NotificationsEffects } from './notifications.effects';
-import { NotificationsPage } from './notifications.page';
-import { SettingsPage } from './settings/settings.page';
 
-
-const initModule = (projectModuleService: ProjectModuleService,
-  notificationsRepository: NotificationsRepository,
-  toastController: ToastController,
-  platform: Platform) =>
+const initModule =
+  (
+    projectModuleService: ProjectModuleService,
+    notificationsRepository: NotificationsRepository,
+    toastController: ToastController,
+    platform: Platform,
+  ) =>
   () => {
     projectModuleService.initProjectModule({
       name: 'notifications',
@@ -67,70 +66,53 @@ const initModule = (projectModuleService: ProjectModuleService,
   };
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    NotificationsRoutingModule,
-    TranslateModule,
-    ReactiveFormsModule,
-    SharedComponentsModule,
-    EffectsNgModule.forFeature([NotificationsEffects]),
-    SharedPipeModule
+  imports: [NotificationsRoutingModule, EffectsNgModule.forFeature([NotificationsEffects])],
+  providers: [
+    provideAppInitializer(() => {
+      const initializerFn = initModule(
+        inject(ProjectModuleService),
+        inject(NotificationsRepository),
+        inject(ToastController),
+        inject(Platform),
+      );
+      return initializerFn();
+    }),
   ],
-  declarations: [
-    NotificationsPage,
-    SettingsPage,
-    NotificationOptionsComponent,
-  ],
-  providers: [{
-    provide: APP_INITIALIZER,
-    useFactory: initModule,
-    deps: [
-      ProjectModuleService,
-      NotificationsRepository,
-      ToastController,
-      Platform,
-    ],
-    multi: true
-  }]
 })
-
 export class NotificationsModule {
-
   static routerLink = '/notifications';
 
   static forRoot(config: NotificationsModuleConfig): ModuleWithProviders<NotificationsModule> {
     return {
       ngModule: NotificationsModule,
-      providers: [
-        { provide: NOTIFICATIONS_CONFIG, useValue: config }
-      ]
+      providers: [{ provide: NOTIFICATIONS_CONFIG, useValue: config }],
     };
   }
 
   static async initPushNotifications(
     notificationsRepository: NotificationsRepository,
     toastController: ToastController,
-    platform: Platform
+    platform: Platform,
   ) {
-
-    const createToast = (notification: Notification | NotificationCapacitor) => (
+    const createToast = (notification: Notification | NotificationCapacitor) =>
       toastController.create({
         header: notification.title,
-        message: notification.body.length >= 110 ? notification.body.slice(0, 110) + '...' : notification.body,
+        message:
+          notification.body.length >= 110
+            ? notification.body.slice(0, 110) + '...'
+            : notification.body,
         position: 'top',
         duration: 4000,
-      })
-    );
-
-    if (!platform.is('capacitor')) { // Web
-
-      navigator.serviceWorker.addEventListener('message', (event: any) => {
-        createToast(event.data.notification).then(toast => toast.present());
       });
 
-    } else { // Mobile
+    if (!platform.is('capacitor')) {
+      // Web
+
+      navigator.serviceWorker.addEventListener('message', (event: any) => {
+        createToast(event.data.notification).then((toast) => toast.present());
+      });
+    } else {
+      // Mobile
 
       // @TODO à supprimer une fois la mise à jour vers capacitor 5 effectuée =>
       // Android 13 = pas de demande d'autorisation de notification avant la première notification reçue qui, elle, ne sera pas affichée.
@@ -151,10 +133,9 @@ export class NotificationsModule {
       // }
       // _______________________________________
 
-      await FirebaseMessaging.addListener('notificationReceived', event => {
-        createToast(event.notification).then(toast => toast.present());
+      await FirebaseMessaging.addListener('notificationReceived', (event) => {
+        createToast(event.notification).then((toast) => toast.present());
       });
-
     }
   }
 }

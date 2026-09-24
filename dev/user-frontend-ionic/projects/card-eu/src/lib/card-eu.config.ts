@@ -40,9 +40,8 @@
 import { InjectionToken } from '@angular/core';
 
 export interface CardEuModuleConfig {
-    knownErrors: string[];
-    display: 'light' | 'extended';
+  knownErrors: string[];
+  display: 'light' | 'extended';
 }
 
-export const CARD_EU_CONFIG =
-  new InjectionToken<CardEuModuleConfig>('Card eu module config');
+export const CARD_EU_CONFIG = new InjectionToken<CardEuModuleConfig>('Card eu module config');

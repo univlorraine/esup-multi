@@ -37,35 +37,28 @@
  * termes.
  */
 
-import { APP_INITIALIZER, NgModule } from '@angular/core';
+import { inject, NgModule, provideAppInitializer } from '@angular/core';
 import { ProjectModuleService } from '@multi/shared';
 import { UnreadMailComponent } from './widget/unread-mail/unread-mail.component';
-import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
 
-const initModule = (projectModuleService: ProjectModuleService) =>
-  () => projectModuleService.initProjectModule({
+const initModule = (projectModuleService: ProjectModuleService) => () =>
+  projectModuleService.initProjectModule({
     name: 'unread-mail',
     translation: true,
-    widgets: [{
-      id: 'unread-mail',
-      component: UnreadMailComponent,
-    }]
+    widgets: [
+      {
+        id: 'unread-mail',
+        component: UnreadMailComponent,
+      },
+    ],
   });
 
 @NgModule({
-  declarations: [UnreadMailComponent],
-  imports: [
-    CommonModule,
-    IonicModule,
-    TranslateModule,
+  providers: [
+    provideAppInitializer(() => {
+      const initializerFn = initModule(inject(ProjectModuleService));
+      return initializerFn();
+    }),
   ],
-  providers: [{
-    provide: APP_INITIALIZER,
-    useFactory: initModule,
-    deps:[ProjectModuleService],
-    multi: true
-  }],
 })
-export class UnreadMailModule { }
+export class UnreadMailModule {}

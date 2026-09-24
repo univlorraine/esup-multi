@@ -37,15 +37,15 @@
  */
 
 import { Injectable, Logger } from '@nestjs/common';
-import { WidgetsDirectus } from '@directus/collections/widgets/widgets.directus.model';
-import { Widgets } from '@common/models/widgets.model';
-import { DirectusService } from '@directus/directus.service';
 import { OnEvent } from '@nestjs/event-emitter';
-import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
-import { normalizeEmptyStringToNull } from '@common/utils/normalize';
-import { WidgetsSchema } from '@common/validation/schemas/widgets.schema';
-import { CacheService } from '@cache/cache.service';
-import { CacheCollection } from '@cache/cache.config';
+import { CacheCollection } from '#cache/cache.config.js';
+import { CacheService } from '#cache/cache.service.js';
+import { ValidateMapping } from '#common/decorators/validate-mapping.decorator.js';
+import { Widgets } from '#common/models/widgets.model.js';
+import { normalizeEmptyStringToNull } from '#common/utils/normalize.js';
+import { WidgetsSchema } from '#common/validation/schemas/widgets.schema.js';
+import { WidgetsDirectus } from '#directus/collections/widgets/widgets.directus.model.js';
+import { DirectusService } from '#directus/directus.service.js';
 
 @Injectable()
 export class WidgetsDirectusService {
@@ -63,7 +63,7 @@ export class WidgetsDirectusService {
     } catch (error) {
       this.logger.error(
         'Failed to preload widgets after cache clear:',
-        error.message,
+        error instanceof Error ? error.message : JSON.stringify(error),
       );
     }
   }
@@ -162,7 +162,7 @@ export class WidgetsDirectusService {
         }
       }
     `);
-    return data.widgets.map(this.mapToMultiModel);
+    return data.widgets.map(this.mapToMultiModel.bind(this));
   }
 
   async getWidget(id: number): Promise<Widgets> {

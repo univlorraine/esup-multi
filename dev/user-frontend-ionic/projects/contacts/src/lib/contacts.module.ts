@@ -37,42 +37,25 @@
  * termes.
  */
 
-import { CommonModule } from '@angular/common';
-import { APP_INITIALIZER, ModuleWithProviders, NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
-import { ProjectModuleService, SharedComponentsModule } from '@multi/shared';
+import { inject, ModuleWithProviders, NgModule, provideAppInitializer } from '@angular/core';
+import { ProjectModuleService } from '@multi/shared';
 import { ContactsRoutingModule } from './contacts-routing.module';
-import { ContactsModuleConfig, CONTACTS_CONFIG } from './contacts.config';
-import { ContactsComponent } from './contacts.page';
+import { CONTACTS_CONFIG, ContactsModuleConfig } from './contacts.config';
 
-
-const initModule = (projectModuleService: ProjectModuleService) =>
-  () => projectModuleService.initProjectModule({
+const initModule = (projectModuleService: ProjectModuleService) => () =>
+  projectModuleService.initProjectModule({
     name: 'contacts',
-    translation: true
+    translation: true,
   });
 
 @NgModule({
-  declarations: [
-    ContactsComponent
+  imports: [ContactsRoutingModule],
+  providers: [
+    provideAppInitializer(() => {
+      const initializerFn = initModule(inject(ProjectModuleService));
+      return initializerFn();
+    }),
   ],
-  imports: [
-    CommonModule,
-    IonicModule,
-    ContactsRoutingModule,
-    TranslateModule,
-    FormsModule,
-    ReactiveFormsModule,
-    SharedComponentsModule,
-  ],
-  providers: [{
-    provide: APP_INITIALIZER,
-    useFactory: initModule,
-    deps:[ProjectModuleService],
-    multi: true
-  }],
 })
 export class ContactsModule {
   static routerLink = '/contatcs';
@@ -80,9 +63,7 @@ export class ContactsModule {
   static forRoot(config: ContactsModuleConfig): ModuleWithProviders<ContactsModule> {
     return {
       ngModule: ContactsModule,
-      providers: [
-        { provide: CONTACTS_CONFIG, useValue: config }
-      ]
+      providers: [{ provide: CONTACTS_CONFIG, useValue: config }],
     };
   }
 }

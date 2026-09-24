@@ -36,10 +36,10 @@
  * termes.
  */
 
-import { NestFactory, Reflector } from '@nestjs/core';
-import { AppModule } from './app.module';
 import { Logger, LogLevel } from '@nestjs/common';
-import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
+import { NestFactory, Reflector } from '@nestjs/core';
+import { AppModule } from './app.module.js';
+import { JwtAuthGuard } from './auth/guards/jwt-auth.guard.js';
 
 async function bootstrap() {
   const logLevels: LogLevel[] =
@@ -59,4 +59,4 @@ async function bootstrap() {
   Logger.log(`App listening on the port ${port}`);
   await app.listen(port);
 }
-bootstrap();
+void bootstrap();

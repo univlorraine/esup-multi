@@ -37,25 +37,63 @@
  * termes.
  */
 
-import { Component, Inject } from '@angular/core';
+import { AsyncPipe, NgClass, NgStyle } from '@angular/common';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { currentLanguage$, StatisticsService, ThemeService } from '@multi/shared';
+import {
+  IonButton,
+  IonCol,
+  IonGrid,
+  IonIcon,
+  IonLabel,
+  IonRow,
+  IonSpinner,
+  IonText,
+} from '@ionic/angular';
 import { combineLatest, Observable } from 'rxjs';
 import { finalize, map, take } from 'rxjs/operators';
-import { ImportantNews, importantNewsList$, setImportantNews as setImportantNewsList } from '../../important-news.repository';
-import { ImportantNewsService } from '../../important-news.service';
-import { TranslatedImportantNews } from '../../important-news.repository';
+import {
+  currentLanguage$,
+  NavigationService,
+  StatisticsService,
+  ThemeService,
+} from '@multi/shared';
 import { IMPORTANT_NEWS_CONFIG, ImportantNewsModuleConfig } from '../../important-news.config';
-import { NavigationService } from '@multi/shared';
-
+import {
+  ImportantNews,
+  importantNewsList$,
+  setImportantNews as setImportantNewsList,
+  TranslatedImportantNews,
+} from '../../important-news.repository';
+import { ImportantNewsService } from '../../important-news.service';
 
 @Component({
   selector: 'app-important-news-widget',
   templateUrl: './important-news.component.html',
-  styleUrls: ['../../../../../../src/theme/app-theme/styles/important-news/important-news.component.scss'],
+  styleUrls: [
+    '../../../../../../src/theme/app-theme/styles/important-news/important-news.component.scss',
+  ],
+  imports: [
+    NgClass,
+    NgStyle,
+    AsyncPipe,
+    IonButton,
+    IonCol,
+    IonGrid,
+    IonIcon,
+    IonLabel,
+    IonRow,
+    IonSpinner,
+    IonText,
+  ],
 })
 export class ImportantNewsComponent {
-
+  private importantNewsService = inject(ImportantNewsService);
+  private router = inject(Router);
+  private statisticsService = inject(StatisticsService);
+  private themeService = inject(ThemeService);
+  private navigationService = inject(NavigationService);
+  config = inject<ImportantNewsModuleConfig>(IMPORTANT_NEWS_CONFIG);
 
   public isLoading = false;
   public importantNewsList$: Observable<ImportantNews[]> = importantNewsList$;
@@ -63,43 +101,42 @@ export class ImportantNewsComponent {
   public translatedImportantNewsList$: Observable<TranslatedImportantNews[]>;
   public randomImportantNews$: Observable<TranslatedImportantNews | undefined>;
 
-
-  constructor(
-    private importantNewsService: ImportantNewsService,
-    private router: Router,
-    private statisticsService: StatisticsService,
-    private themeService: ThemeService,
-    private navigationService: NavigationService,
-    @Inject(IMPORTANT_NEWS_CONFIG) public config: ImportantNewsModuleConfig,
-  ) {
+  constructor() {
     this.isEmpty$ = this.importantNewsList$.pipe(
-      map(importantNewsList => !importantNewsList || importantNewsList.length === 0)
+      map((importantNewsList) => !importantNewsList || importantNewsList.length === 0),
     );
 
-    this.translatedImportantNewsList$ = combineLatest([this.importantNewsList$, currentLanguage$])
-      .pipe(
-        map(importantNewsListAndCurrentLang => this.importantNewsService.mapToTranslatedImportantNews(importantNewsListAndCurrentLang))
-      );
+    this.translatedImportantNewsList$ = combineLatest([
+      this.importantNewsList$,
+      currentLanguage$,
+    ]).pipe(
+      map((importantNewsListAndCurrentLang) =>
+        this.importantNewsService.mapToTranslatedImportantNews(importantNewsListAndCurrentLang),
+      ),
+    );
 
     this.randomImportantNews$ = this.translatedImportantNewsList$.pipe(
-      map(translatedImportantNewsList => {
+      map((translatedImportantNewsList) => {
         if (!translatedImportantNewsList || translatedImportantNewsList.length === 0) {
           return undefined;
         }
         const randomIndex = Math.floor(Math.random() * translatedImportantNewsList.length);
         return translatedImportantNewsList[randomIndex];
-      })
+      }),
     );
   }
 
   widgetViewDidEnter(): void {
     this.isLoading = true;
-    this.importantNewsService.loadImportantNewsList().pipe(
-      take(1),
-      finalize(() => this.isLoading = false)
-    ).subscribe(importantNewsList => {
-      setImportantNewsList(importantNewsList);
-    });
+    this.importantNewsService
+      .loadImportantNewsList()
+      .pipe(
+        take(1),
+        finalize(() => (this.isLoading = false)),
+      )
+      .subscribe((importantNewsList) => {
+        setImportantNewsList(importantNewsList);
+      });
   }
 
   public onClick(importantNews: TranslatedImportantNews): Promise<void | boolean> {
@@ -117,7 +154,8 @@ export class ImportantNewsComponent {
   }
 
   fontColor(backgroundColor) {
-    return this.themeService.isBackgroundFromCmsDarkOrIsDarkTheme(backgroundColor) ?
-      'light-font-color' : 'dark-font-color';
+    return this.themeService.isBackgroundFromCmsDarkOrIsDarkTheme(backgroundColor)
+      ? 'light-font-color'
+      : 'dark-font-color';
   }
 }

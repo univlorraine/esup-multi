@@ -37,13 +37,18 @@
  * termes.
  */
 
+import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { AuthenticatedUser, authenticatedUser$ } from '@multi/shared';
+import { IonLabel, IonRow } from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
+import { AuthenticatedUser, authenticatedUser$ } from '@multi/shared';
+
 @Component({
   selector: 'app-auth-greeting-widget',
   templateUrl: './greeting.component.html',
   styleUrls: ['../../../../../../src/theme/app-theme/styles/auth/greeting.component.scss'],
+  imports: [AsyncPipe, TranslatePipe, IonLabel, IonRow],
 })
 export class GreetingComponent implements OnInit {
   authenticatedUser$: Observable<AuthenticatedUser>;

@@ -37,9 +37,9 @@
  */
 
 import { forwardRef, Module } from '@nestjs/common';
-import { FeaturesWordpressResolver } from './features.wordpress.resolver';
-import { FeaturesWordpressService } from './features.wordpress.service';
-import { WordpressModule } from '@wordpress/wordpress.module';
+import { WordpressModule } from '#wordpress/wordpress.module.js';
+import { FeaturesWordpressResolver } from './features.wordpress.resolver.js';
+import { FeaturesWordpressService } from './features.wordpress.service.js';
 
 @Module({
   imports: [forwardRef(() => WordpressModule)],

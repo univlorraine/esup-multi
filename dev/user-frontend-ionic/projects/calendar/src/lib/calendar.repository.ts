@@ -56,7 +56,7 @@ export interface MailCalendarEvent {
   location: string;
 }
 
-export const store = createStore({ name: STORE_NAME }, withProps<MailCalendar>({ events: null }));
+export const store = createStore({ name: STORE_NAME }, withProps<MailCalendar>({ events: [] }));
 
 export const persist = persistState(store, {
   key: STORE_NAME,

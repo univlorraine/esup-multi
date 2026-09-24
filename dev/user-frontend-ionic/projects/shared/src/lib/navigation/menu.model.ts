@@ -42,7 +42,7 @@ export type MenuItemType = 'static' | 'dynamic';
 export enum MenuItemLinkType {
   router,
   external,
-  sso
+  sso,
 }
 
 interface MenuItemLinkCommon {

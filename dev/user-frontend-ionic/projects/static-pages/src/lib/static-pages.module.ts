@@ -37,43 +37,31 @@
  * termes.
  */
 
-import { CommonModule } from '@angular/common';
-import { APP_INITIALIZER, NgModule } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
-import { ProjectModuleService, SharedComponentsModule } from '@multi/shared';
-import { StaticPageComponent } from './static-page/static-page.component';
+import { inject, NgModule, provideAppInitializer } from '@angular/core';
+import { ProjectModuleService } from '@multi/shared';
 import { StaticPagesRoutingModule } from './static-pages-routing.module';
 import { StaticPagesWidgetComponent } from './widgets/static-pages-widget/static-pages-widget.component';
 
-
-const initModule = (projectModuleService: ProjectModuleService) =>
-  () => projectModuleService.initProjectModule({
+const initModule = (projectModuleService: ProjectModuleService) => () =>
+  projectModuleService.initProjectModule({
     name: 'static-pages',
-    widgets: [{
-      id: 'static-pages-widget',
-      component: StaticPagesWidgetComponent,
-    }]
+    widgets: [
+      {
+        id: 'static-pages-widget',
+        component: StaticPagesWidgetComponent,
+      },
+    ],
   });
 
 @NgModule({
-  declarations: [
-    StaticPageComponent,
-    StaticPagesWidgetComponent
+  providers: [
+    provideAppInitializer(() => {
+      const initializerFn = initModule(inject(ProjectModuleService));
+      return initializerFn();
+    }),
   ],
-  providers: [{
-    provide: APP_INITIALIZER,
-    useFactory: initModule,
-    deps: [ProjectModuleService],
-    multi: true
-  }],
-  imports: [
-    CommonModule,
-    IonicModule,
-    StaticPagesRoutingModule,
-    SharedComponentsModule,
-  ]
+  imports: [StaticPagesRoutingModule],
 })
 export class StaticPagesModule {
   static routerLink = '/page';
 }
-

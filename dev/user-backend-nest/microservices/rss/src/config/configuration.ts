@@ -37,7 +37,10 @@
  * termes.
  */
 
-import { KeepAliveOptions, RssConfiguration } from './configuration.interface';
+import {
+  RssConfiguration,
+  type KeepAliveOptions,
+} from './configuration.interface.js';
 
 const DEFAULT_FEED_TIMEOUT_MS = 15000;
 const DEFAULT_RETRY_COUNT = 1;

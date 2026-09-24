@@ -43,15 +43,12 @@ import { localForageStore } from '@multi/shared';
 
 const STORE_NAME = 'map_data';
 
-export type MapData = MarkersCollectionsProps &
-  CategoriesProps &
-  CampusesProps &
-  IconsProps;
+export type MapData = MarkersCollectionsProps & CategoriesProps & CampusesProps & IconsProps;
 
 export interface Translatable {
-  translations?: Array<{
+  translations?: {
     languagesCode: string;
-  }>;
+  }[];
 }
 
 export interface MarkersCollectionsProps {
@@ -66,11 +63,11 @@ export interface Marker extends Translatable {
   categoryId: string;
   campusId: string;
   iconId: string;
-  translations?: Array<{
+  translations?: {
     languagesCode: string;
     name: string;
     description: string;
-  }>;
+  }[];
 }
 
 interface CategoriesProps {
@@ -79,10 +76,10 @@ interface CategoriesProps {
 export interface Category extends Translatable {
   id: string;
   label: string;
-  translations?: Array<{
+  translations?: {
     languagesCode: string;
     label: string;
-  }>;
+  }[];
 }
 
 interface CampusesProps {
@@ -140,4 +137,4 @@ export const setData = (data: MapData) => {
     campuses: data ? data.campuses : [],
     icons: data ? data.icons : [],
   }));
-}
+};

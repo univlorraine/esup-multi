@@ -37,66 +37,56 @@
   ~ termes.
   -->
 
-<ion-progress-bar *ngIf="isLoading" type="indeterminate"></ion-progress-bar>
-<app-header></app-header>
+@if (isLoading) {
+  <ion-progress-bar type="indeterminate" />
+}
+<app-header />
 
 <ion-content>
-  <ng-container *ngIf="(userAndCardData$ | async) as userCard; else noCardsData">
-
+  @if (userAndCardData$ | async; as userCard) {
     <!-- Gestion des erreurs -->
-    <div *ngIf="hasErrors(userCard); else cardTemplate" class="ion-padding">
-      <ng-container *ngFor="let error of userCard.errors">
-        <ion-note *ngIf="isKnownError(error); else unknownError" class="column app-text-2">
-          {{ (userCard.affiliation === 'staff' ? 'CARD.ERRORS_STAFF.' : 'CARD.ERRORS_STUDENT.') + error | translate }}
-        </ion-note>
-      </ng-container>
-    </div>
-
-    <!-- Template pour erreur inconnue -->
-    <ng-template #unknownError>
-      <ion-note class="column app-text-2">
-        {{ 'CARD.ERRORS.UNKNOWN' | translate }}
-      </ion-note>
-    </ng-template>
-
-    <!-- Template de la carte -->
-    <ng-template #cardTemplate>
+    @if (hasErrors(userCard)) {
+      <div class="ion-padding">
+        @for (error of userCard.errors; track $index) {
+          <ion-note class="column app-text-2">
+            @if (isKnownError(error)) {
+              {{
+                (userCard.affiliation === 'staff' ? 'CARD.ERRORS_STAFF.' : 'CARD.ERRORS_STUDENT.') +
+                  error | translate
+              }}
+            } @else {
+              {{ 'CARD.ERRORS.UNKNOWN' | translate }}
+            }
+          </ion-note>
+        }
+      </div>
+    } @else {
       <div class="card-wrapper">
-        <app-student-card
-          *ngIf="userCard.affiliation === 'student'"
-          [userCard]="userCard">
-        </app-student-card>
-
-        <app-staff-card
-          *ngIf="userCard.affiliation !== 'student'"
-          [userCard]="userCard">
-        </app-staff-card>
+        @if (userCard.affiliation === 'student') {
+          <app-student-card [userCard]="userCard" />
+        } @else {
+          <app-staff-card [userCard]="userCard" />
+        }
       </div>
 
       <!-- QR Code -->
-      <ion-row class="ion-justify-content-center qr-code-container" *ngIf="userCard.qrCode">
-        <div
-          *ngIf="userCard.qrCode.type === 'image' && userCard.qrCode.value"
-          [innerHTML]="userCard.qrCode.value | sanitizeSvg">
-        </div>
+      @if (userCard.qrCode) {
+        <ion-row class="ion-justify-content-center qr-code-container">
+          @if (userCard.qrCode.type === 'image' && userCard.qrCode.value) {
+            <div [innerHTML]="userCard.qrCode.value | sanitizeSvg"></div>
+          }
 
-        <qrcode
-          *ngIf="userCard.qrCode.type !== 'image' && userCard.qrCode.value"
-          [qrdata]="userCard.qrCode.value"
-          [errorCorrectionLevel]="'M'"
-          [width]="300">
-        </qrcode>
-      </ion-row>
-    </ng-template>
-
-  </ng-container>
+          @if (userCard.qrCode.type !== 'image' && userCard.qrCode.value) {
+            <qrcode [qrdata]="userCard.qrCode.value" [errorCorrectionLevel]="'M'" [width]="300" />
+          }
+        </ion-row>
+      }
+    }
+  } @else {
+    <ion-content class="ion-padding">
+      <ion-note>
+        {{ 'CARD.ERRORS.NO_DATA' | translate }}
+      </ion-note>
+    </ion-content>
+  }
 </ion-content>
-
-<!-- Template sans données -->
-<ng-template #noCardsData>
-  <ion-content class="ion-padding">
-    <ion-note>
-      {{ "CARD.ERRORS.NO_DATA" | translate }}
-    </ion-note>
-  </ion-content>
-</ng-template>

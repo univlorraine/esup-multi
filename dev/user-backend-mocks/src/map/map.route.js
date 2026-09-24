@@ -37,14 +37,17 @@
  * termes.
  */
 
-const express = require('express');
-const router = express.Router();
-const { categories, campuses, pois } = require('./map.mock');
+import express from 'express';
+import { campuses, categories, pois } from './map.mock.js';
 
-router.get('/', (req, res) => res.json({
+const router = express.Router();
+
+router.get('/', (req, res) =>
+  res.json({
     pois,
     categories,
     campuses,
-}));
+  }),
+);
 
-module.exports = router;
+export default router;

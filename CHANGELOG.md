@@ -4,9 +4,46 @@ All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
 ## Next Version (2026-mm-dd)
+### Client
+#### Autres
+* Migration de [NodeJS](https://nodejs.org/fr/about/previous-releases) : Version 20 -> [Version 26](https://nodejs.org/docs/latest-v26.x/api/index.html)
+* Mise à jour du framework [Angular](https://angular.dev/reference/versions) : Version 16 -> [Version 20](https://v20.angular.dev/overview)
+* Mise à jour du framework [Ionic](https://ionicframework.com/docs/) : Version 8 -> Version 9
+* Mise à jour du moteur [Capacitor](https://capacitorjs.com/docs) : Version 7 -> Version 8.5
+  * Migration de CocoaPods vers Swift Package Manager
+  * Remplacement de [`@capacitor-mlkit/barcode-scanning`](https://www.npmjs.com/package/@capacitor-mlkit/barcode-scanning) par [`@capacitor/barcode-scanner`](https://www.npmjs.com/package/@capacitor/barcode-scanner)
+* Mises à jour des dépendances suite aux alertes CVE
+* TypeScript 4 -> 5
+* Correction de la conf de test
+
 ### Backend
 #### Bug Fixes
 * **(rss)** : Correction du problème de mise en cache des données du flux
+
+#### Autres
+* Migration de [NodeJS](https://nodejs.org/fr/about/previous-releases) : Version 20 -> Version 26
+* Mises à jour des dépendances suite aux alertes CVE
+* TypeScript 4/5 -> 6
+* Migration CommonJS -> ESM
+* Migration NestJS 11 -> 12
+* Correction et migration de la conf de test : Jest -> Vitest
+
+### Serveur de mocks
+* Amélioration du mock `schedule`
+
+#### Autres
+* Migration de [NodeJS](https://nodejs.org/fr/about/previous-releases) : Version 20 -> Version 26
+* Mises à jour des dépendances suite aux alertes CVE
+* Migration CommonJS -> ESM
+
+### Connecteurs
+#### Autres
+* Migration de [NodeJS](https://nodejs.org/fr/about/previous-releases) : Version 20 -> Version 26
+* Mises à jour des dépendances suite aux alertes CVE
+* TypeScript 4/5 -> 6
+* Migration CommonJS -> ESM
+* Migration NestJS 11 -> 12
+* Correction et migration de la conf de test : Jest -> Vitest
 
 ## 2.3.0 (2026-05-28)
 ### Client

@@ -43,7 +43,6 @@ import { localForageStore } from '../store/local-forage';
 
 const STORE_NAME = 'auth';
 
-
 export interface AuthProps {
   authenticatedUser: AuthenticatedUser;
 }
@@ -59,7 +58,7 @@ export interface AuthenticatedUser {
 
 const authStore = createStore(
   { name: STORE_NAME },
-  withProps<AuthProps>({ authenticatedUser: null })
+  withProps<AuthProps>({ authenticatedUser: null }),
 );
 
 export const persistAuthenticatedUser = persistState(authStore, {
@@ -81,4 +80,3 @@ export const updateUser = (authenticatedUser: AuthProps['authenticatedUser']) =>
 export const userIsAuthenticated$ = authStore.pipe(select((state) => !!state.authenticatedUser));
 
 export const clearAuthenticatedUser = () => authStore.reset();
-

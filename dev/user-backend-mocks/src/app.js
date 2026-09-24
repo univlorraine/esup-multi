@@ -37,23 +37,22 @@
  * termes.
  */
 
-const createError = require('http-errors');
-const express = require('express');
-const logger = require('morgan');
-
-const authRouter = require('./auth/auth.route');
-const contactsRouter = require('./contacts/contacts.route');
-const notificationsRouter = require('./notifications/notifications.route');
-const chatbotRouter = require('./chatbot/chatbot.route');
-const mailCalendarRouter = require('./mail-calendar/mail-calendar.route');
-const scheduleRouter = require('./schedule/schedule.route');
-const restaurantsRouter = require('./restaurants/restaurants.route');
-const cardRouter = require('./card/card.route');
-const cardEuRouter = require('./card-eu/card-eu.route');
-const rssRouter = require('./rss/rss.route');
-const statisticsRouter = require('./statistics/statistics.route');
-const clockingRouter = require('./clocking/clocking.route');
-const mapRouter = require('./map/map.route');
+import express from 'express';
+import createError from 'http-errors';
+import logger from 'morgan';
+import authRouter from './auth/auth.route.js';
+import cardEuRouter from './card-eu/card-eu.route.js';
+import cardRouter from './card/card.route.js';
+import chatbotRouter from './chatbot/chatbot.route.js';
+import clockingRouter from './clocking/clocking.route.js';
+import contactsRouter from './contacts/contacts.route.js';
+import mailCalendarRouter from './mail-calendar/mail-calendar.route.js';
+import mapRouter from './map/map.route.js';
+import notificationsRouter from './notifications/notifications.route.js';
+import restaurantsRouter from './restaurants/restaurants.route.js';
+import rssRouter from './rss/rss.route.js';
+import scheduleRouter from './schedule/schedule.route.js';
+import statisticsRouter from './statistics/statistics.route.js';
 
 const app = express();
 
@@ -77,12 +76,12 @@ app.use('/mocking/clocking', clockingRouter);
 app.use('/mocking/map', mapRouter);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
@@ -92,4 +91,4 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
+export default app;

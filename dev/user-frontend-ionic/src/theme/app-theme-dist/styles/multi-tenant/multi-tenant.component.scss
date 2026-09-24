@@ -40,3 +40,7 @@
 .app-title-4 {
   color: #ffffff !important;
 }
+
+ion-footer {
+  margin-bottom: var(--ion-safe-area-bottom, 0);
+}

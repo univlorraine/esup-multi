@@ -37,25 +37,29 @@
   ~ termes.
   -->
 
-<ng-container *ngIf="authenticatedUser$ | async as authenticatedUser; else notAuthenticated">
-  <ion-grid class="ion-text-center ion-padding-top ion-padding-bottom menu-section multi-auth-widget">
+@if (authenticatedUser$ | async; as authenticatedUser) {
+  <ion-grid
+    class="ion-text-center ion-padding-top ion-padding-bottom menu-section multi-auth-widget"
+  >
     <ion-col>
       <ion-label>
-        <h1 class="app-title-3">{{authenticatedUser.firstname}} {{authenticatedUser.name}}</h1>
+        <h1 class="app-title-3">{{ authenticatedUser.firstname }} {{ authenticatedUser.name }}</h1>
         <h3 class="app-text-3 light">{{ 'AUTH.WIDGET.SUBTITLE' | translate }}</h3>
       </ion-label>
     </ion-col>
   </ion-grid>
   <ion-list class="menu-section" lines="none">
-    <ion-item button="true" mode="md" detail="true" *ngIf="authenticatedUser$ | async" (click)="logout()" [disabled]="isLoading">
-      <ion-icon slot="start" class="app-icon-4" name="logout" aria-label=""></ion-icon>
-      <ion-label class="app-text-3 light">{{'AUTH.CONNECTED.LOGOUT' | translate}}</ion-label>
-    </ion-item>
+    @if (authenticatedUser$ | async) {
+      <ion-item [button]="true" mode="md" [detail]="true" (click)="logout()" [disabled]="isLoading">
+        <ion-icon slot="start" class="app-icon-4" name="logout" aria-label="" />
+        <ion-label class="app-text-3 light">{{ 'AUTH.CONNECTED.LOGOUT' | translate }}</ion-label>
+      </ion-item>
+    }
   </ion-list>
-</ng-container>
-
-<ng-template #notAuthenticated>
-  <ion-grid class="ion-text-center ion-padding-top ion-padding-bottom menu-section multi-auth-widget">
+} @else {
+  <ion-grid
+    class="ion-text-center ion-padding-top ion-padding-bottom menu-section multi-auth-widget"
+  >
     <ion-col>
       <ion-label>
         <h1 class="app-title-3">{{ 'AUTH.WIDGET.NOT_LOGGED_IN' | translate }}</h1>
@@ -64,9 +68,9 @@
     </ion-col>
   </ion-grid>
   <ion-list class="menu-section" lines="none">
-    <ion-item routerLink="/auth" mode="md" detail="true">
-      <ion-icon slot="start" class="app-icon-4" name="login" aria-label=""></ion-icon>
-      <ion-label class="app-text-3 light">{{'AUTH.MENU' | translate}}</ion-label>
+    <ion-item routerLink="/auth" mode="md" [detail]="true">
+      <ion-icon slot="start" class="app-icon-4" name="login" aria-label="" />
+      <ion-label class="app-text-3 light">{{ 'AUTH.MENU' | translate }}</ion-label>
     </ion-item>
   </ion-list>
-</ng-template>
+}

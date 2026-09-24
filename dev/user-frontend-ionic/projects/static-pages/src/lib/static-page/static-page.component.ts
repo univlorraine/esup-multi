@@ -37,11 +37,13 @@
  * termes.
  */
 
-import { Component, OnInit } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NetworkService } from '@multi/shared';
+import { IonButtons, IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
+import { BackButtonComponent, NetworkService } from '@multi/shared';
 import { StaticPagesRepository, TranslatedStaticPage } from '../static-pages.repository';
 import { StaticPagesService } from '../static-pages.service';
 
@@ -49,36 +51,42 @@ import { StaticPagesService } from '../static-pages.service';
   selector: 'app-static-page',
   templateUrl: './static-page.component.html',
   styleUrls: ['../../../../../src/theme/app-theme/styles/static-pages/static-page.component.scss'],
+  imports: [
+    AsyncPipe,
+    BackButtonComponent,
+    IonButtons,
+    IonContent,
+    IonHeader,
+    IonTitle,
+    IonToolbar,
+  ],
 })
 export class StaticPageComponent implements OnInit {
+  private route = inject(ActivatedRoute);
+  private staticPagesService = inject(StaticPagesService);
+  private staticPagesRepository = inject(StaticPagesRepository);
+  private networkService = inject(NetworkService);
 
   public translatedStaticPages$: Observable<TranslatedStaticPage[]>;
   public page$: Observable<TranslatedStaticPage>;
 
-  constructor(private route: ActivatedRoute,
-    private staticPagesService: StaticPagesService,
-    private staticPagesRepository: StaticPagesRepository,
-    private networkService: NetworkService,
-  ) {
+  constructor() {
     this.translatedStaticPages$ = this.staticPagesRepository.translatedStaticPages$;
   }
 
   ngOnInit() {
-   this.loadStaticPagesIfNetworkAvailable();
+    this.loadStaticPagesIfNetworkAvailable();
 
     const id = this.route.snapshot.paramMap.get('id');
 
     this.page$ = this.staticPagesRepository.getStaticPage(id);
   }
 
-  public async loadStaticPagesIfNetworkAvailable(){
+  public async loadStaticPagesIfNetworkAvailable() {
     if (!(await this.networkService.getConnectionStatus()).connected) {
       return;
     }
 
-    this.staticPagesService.loadAndStoreStaticPages()
-    .pipe(
-      take(1)
-    ).subscribe();
+    this.staticPagesService.loadAndStoreStaticPages().pipe(take(1)).subscribe();
   }
 }

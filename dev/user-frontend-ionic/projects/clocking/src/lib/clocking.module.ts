@@ -37,38 +37,31 @@
  * termes.
  */
 
-import { CommonModule } from '@angular/common';
-import { APP_INITIALIZER, NgModule } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
+import { inject, NgModule, provideAppInitializer } from '@angular/core';
 import { EffectsNgModule } from '@ngneat/effects-ng';
 import { ProjectModuleService } from '@multi/shared';
-import { ClockingComponent } from './widgets/clocking/clocking.component';
 import { ClockingEffects } from './clocking.effects';
+import { ClockingComponent } from './widgets/clocking/clocking.component';
 
-const initModule = (projectModuleService: ProjectModuleService) =>
-  () => projectModuleService.initProjectModule({
+const initModule = (projectModuleService: ProjectModuleService) => () =>
+  projectModuleService.initProjectModule({
     name: 'clocking',
     translation: true,
-    widgets: [{
-      id: 'clocking',
-      component: ClockingComponent,
-    }]
+    widgets: [
+      {
+        id: 'clocking',
+        component: ClockingComponent,
+      },
+    ],
   });
 
 @NgModule({
-  declarations: [ClockingComponent],
-  imports: [
-    CommonModule,
-    IonicModule,
-    TranslateModule,
-    EffectsNgModule.forFeature([ClockingEffects]),
+  imports: [EffectsNgModule.forFeature([ClockingEffects])],
+  providers: [
+    provideAppInitializer(() => {
+      const initializerFn = initModule(inject(ProjectModuleService));
+      return initializerFn();
+    }),
   ],
-  providers: [{
-    provide: APP_INITIALIZER,
-    useFactory: initModule,
-    deps:[ProjectModuleService],
-    multi: true
-  }],
 })
-export class ClockingModule { }
+export class ClockingModule {}

@@ -37,28 +37,23 @@
  * termes.
  */
 
-import { Inject, Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { FirebaseMessaging, GetTokenOptions } from '@capacitor-firebase/messaging';
 import { Platform } from '@ionic/angular';
 import { FCMRepository } from './fcm.repository';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class FCMService {
+  private environment = inject<any>('environment' as any);
+  fcmRepository = inject(FCMRepository);
+  private platform = inject(Platform);
 
   private currentTopic: string;
 
-  constructor(
-    @Inject('environment')
-    private environment: any,
-    public fcmRepository: FCMRepository,
-    private platform: Platform
-  ) {
-  }
-
   public unsubscribeFromTopic() {
-    if(this.currentTopic) {
+    if (this.currentTopic) {
       FirebaseMessaging.unsubscribeFromTopic({ topic: this.currentTopic });
     }
   }
@@ -87,20 +82,24 @@ export class FCMService {
       // It could be fixed by firebase in a future release
       this.fcmRepository.setFcmToken(tokenResult.token);
       return tokenResult.token || null;
-    }
+    };
 
-    if (!this.platform.is('capacitor')) { // Web
+    if (!this.platform.is('capacitor')) {
+      // Web
       const options: GetTokenOptions = {
         vapidKey: this.environment.firebase.vapidKey,
-        serviceWorkerRegistration: await navigator.serviceWorker.register('firebase-messaging-sw.js'),
+        serviceWorkerRegistration: await navigator.serviceWorker.register(
+          'firebase-messaging-sw.js',
+        ),
       };
 
       const tokenResult = await FirebaseMessaging.getToken(options);
       return handleToken(tokenResult);
-    } else { // Mobile
+    } else {
+      // Mobile
       const tokenResult = await FirebaseMessaging.getToken();
-      if(topic) {
-        this.subscribeToTopic(topic)
+      if (topic) {
+        this.subscribeToTopic(topic);
       }
       return handleToken(tokenResult);
     }

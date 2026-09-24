@@ -45,11 +45,11 @@ import { RestaurantsPage } from './restaurants.page';
 const routes: Routes = [
   {
     path: 'restaurants',
-    component: RestaurantsPage
+    component: RestaurantsPage,
   },
   {
     path: 'restaurants/:id/menu',
-    component: RestaurantMenusPage
+    component: RestaurantMenusPage,
   },
 ];
 

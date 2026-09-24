@@ -41,7 +41,7 @@ const msInDay = 86_400_000;
 const rssOrigin = 'https://www.esup-portail.org/';
 const urlImages = `${process.env.PUBLIC_URL}/rss`;
 
-module.exports.rssData = `<?xml version="1.0" encoding="utf-8"?>
+export const rssData = `<?xml version="1.0" encoding="utf-8"?>
 <rss version="2.0" xml:base="${rssOrigin}" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
     <channel>
         <title>Flux Université Exemple</title>

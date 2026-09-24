@@ -36,11 +36,11 @@
  * termes.
  */
 
-import {
-  IdSchema,
-  GpsCoordinatesSchema,
-} from '@common/validation/schemas/base-type.schema';
 import { z } from 'zod';
+import {
+  GpsCoordinatesSchema,
+  IdSchema,
+} from '#common/validation/schemas/base-type.schema.js';
 
 export const CampusSchema = z.object({
   id: IdSchema,

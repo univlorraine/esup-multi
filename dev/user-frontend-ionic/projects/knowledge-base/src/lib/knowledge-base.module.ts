@@ -37,41 +37,24 @@
  * termes.
  */
 
-import { CommonModule } from '@angular/common';
-import { APP_INITIALIZER, NgModule } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
-import { TranslateModule } from '@ngx-translate/core';
-import { ProjectModuleService, SharedComponentsModule, SharedPipeModule } from '@multi/shared';
+import { inject, NgModule, provideAppInitializer } from '@angular/core';
+import { ProjectModuleService } from '@multi/shared';
 import { KnowledgeBasePageRoutingModule } from './knowledge-base-routing.module';
-import { KnowledgeBasePage } from './knowledge-base.page';
-import { KnowledgeBaseCardComponent } from './knowledge-base-card/knowledge-base-card.component';
 
-const initModule = (projectModuleService: ProjectModuleService) =>
-  () => projectModuleService.initProjectModule({
+const initModule = (projectModuleService: ProjectModuleService) => () =>
+  projectModuleService.initProjectModule({
     name: 'knowledge-base',
-    translation: true
+    translation: true,
   });
 @NgModule({
-  imports: [
-    CommonModule,
-    IonicModule,
-    KnowledgeBasePageRoutingModule,
-    TranslateModule,
-    SharedComponentsModule,
-    SharedPipeModule
+  imports: [KnowledgeBasePageRoutingModule],
+  providers: [
+    provideAppInitializer(() => {
+      const initializerFn = initModule(inject(ProjectModuleService));
+      return initializerFn();
+    }),
   ],
-  declarations: [
-    KnowledgeBasePage,
-    KnowledgeBaseCardComponent
-  ],
-  providers: [{
-    provide: APP_INITIALIZER,
-    useFactory: initModule,
-    deps:[ProjectModuleService],
-    multi: true
-  }],
 })
-
 export class KnowledgeBasePageModule {
   static routerLink = '/knowledge-base';
 }

@@ -37,8 +37,8 @@
  */
 
 import { Args, Query, Resolver } from '@nestjs/graphql';
-import { SocialNetworksWordpressService } from './social-networks.wordpress.service';
-import { SocialNetworks } from '@common/models/social-networks.model';
+import { SocialNetworks } from '#common/models/social-networks.model.js';
+import { SocialNetworksWordpressService } from './social-networks.wordpress.service.js';
 
 @Resolver(() => SocialNetworks)
 export class SocialNetworksWordpressResolver {
