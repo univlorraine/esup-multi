@@ -855,7 +855,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 ### [rss](./dev/user-backend-nest/microservices/rss)
 <span id="backend-rss"></span>
 ```
-├─ MIT: 30
+├─ MIT: 31
 └─ Apache-2.0: 5
 ```
 
@@ -872,12 +872,13 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@nestjs/config@12.0.0](https://github.com/nestjs/config) - MIT
 - [@nestjs/core@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@nestjs/microservices@12.0.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/platform-express@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/platform-express@12.0.3](https://github.com/nestjs/nest) - MIT
 - [@nestjs/schematics@12.0.0](https://github.com/nestjs/schematics) - MIT
 - [@nestjs/testing@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@types/express@5.0.6](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/node@26.2.0](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@vitest/coverage-v8@5.0.0](https://github.com/vitest-dev/vitest) - MIT
+- [agentkeepalive@4.6.0](https://github.com/node-modules/agentkeepalive) - MIT
 - [cache-manager@7.2.9](https://github.com/jaredwray/cacheable) - MIT
 - [eslint-config-prettier@10.1.8](https://github.com/prettier/eslint-config-prettier) - MIT
 - [eslint-plugin-prettier@5.5.6](https://github.com/prettier/eslint-plugin-prettier) - MIT
