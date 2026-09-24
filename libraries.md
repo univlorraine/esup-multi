@@ -171,7 +171,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [express@5.2.1](https://github.com/expressjs/express) - MIT
 - [globals@17.11.0](https://github.com/sindresorhus/globals) - MIT
 - [http-errors@2.0.1](https://github.com/jshttp/http-errors) - MIT
-- [morgan@1.11.0](https://github.com/expressjs/morgan) - MIT
+- [morgan@1.12.1](https://github.com/expressjs/morgan) - MIT
 - [prettier@3.9.6](https://github.com/prettier/prettier) - MIT
 - [qrcode@1.5.4](https://github.com/soldair/node-qrcode) - MIT
 - [uuid@14.0.2](https://github.com/uuidjs/uuid) - MIT
@@ -199,7 +199,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@nestjs/jwt@12.0.1](https://github.com/nestjs/jwt) - MIT
 - [@nestjs/microservices@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@nestjs/passport@12.0.0](https://github.com/nestjs/passport) - MIT
-- [@nestjs/platform-express@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/platform-express@12.0.3](https://github.com/nestjs/nest) - MIT
 - [@nestjs/schematics@12.0.0](https://github.com/nestjs/schematics) - MIT
 - [@nestjs/terminus@12.0.0](https://github.com/nestjs/terminus) - MIT
 - [@nestjs/testing@12.0.1](https://github.com/nestjs/nest) - MIT
@@ -252,7 +252,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@nestjs/jwt@12.0.1](https://github.com/nestjs/jwt) - MIT
 - [@nestjs/microservices@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@nestjs/mongoose@12.0.0](https://github.com/nestjs/mongoose) - MIT
-- [@nestjs/platform-express@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/platform-express@12.0.3](https://github.com/nestjs/nest) - MIT
 - [@nestjs/schedule@12.0.1](https://github.com/nestjs/schedule) - MIT
 - [@nestjs/schematics@12.0.0](https://github.com/nestjs/schematics) - MIT
 - [@nestjs/testing@12.0.1](https://github.com/nestjs/nest) - MIT
@@ -298,7 +298,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@nestjs/config@12.0.0](https://github.com/nestjs/config) - MIT
 - [@nestjs/core@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@nestjs/microservices@12.0.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/platform-express@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/platform-express@12.0.3](https://github.com/nestjs/nest) - MIT
 - [@nestjs/schematics@12.0.0](https://github.com/nestjs/schematics) - MIT
 - [@nestjs/testing@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@types/express@5.0.6](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
@@ -341,7 +341,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@nestjs/config@12.0.0](https://github.com/nestjs/config) - MIT
 - [@nestjs/core@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@nestjs/microservices@12.0.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/platform-express@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/platform-express@12.0.3](https://github.com/nestjs/nest) - MIT
 - [@nestjs/schematics@12.0.0](https://github.com/nestjs/schematics) - MIT
 - [@nestjs/testing@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@types/express@5.0.6](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
@@ -384,7 +384,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@nestjs/config@12.0.0](https://github.com/nestjs/config) - MIT
 - [@nestjs/core@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@nestjs/microservices@12.0.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/platform-express@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/platform-express@12.0.3](https://github.com/nestjs/nest) - MIT
 - [@nestjs/schematics@12.0.0](https://github.com/nestjs/schematics) - MIT
 - [@nestjs/testing@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@types/express@5.0.6](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
@@ -429,7 +429,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@nestjs/config@12.0.0](https://github.com/nestjs/config) - MIT
 - [@nestjs/core@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@nestjs/microservices@12.0.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/platform-express@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/platform-express@12.0.3](https://github.com/nestjs/nest) - MIT
 - [@nestjs/schematics@12.0.0](https://github.com/nestjs/schematics) - MIT
 - [@nestjs/testing@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@types/express@5.0.6](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
@@ -476,7 +476,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@nestjs/config@12.0.0](https://github.com/nestjs/config) - MIT
 - [@nestjs/core@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@nestjs/microservices@12.0.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/platform-express@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/platform-express@12.0.3](https://github.com/nestjs/nest) - MIT
 - [@nestjs/schematics@12.0.0](https://github.com/nestjs/schematics) - MIT
 - [@nestjs/testing@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@types/express@5.0.6](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
@@ -520,7 +520,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@nestjs/config@12.0.0](https://github.com/nestjs/config) - MIT
 - [@nestjs/core@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@nestjs/microservices@12.0.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/platform-express@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/platform-express@12.0.3](https://github.com/nestjs/nest) - MIT
 - [@nestjs/schematics@12.0.0](https://github.com/nestjs/schematics) - MIT
 - [@nestjs/testing@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@types/express@5.0.6](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
@@ -563,7 +563,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@nestjs/config@12.0.0](https://github.com/nestjs/config) - MIT
 - [@nestjs/core@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@nestjs/microservices@12.0.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/platform-express@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/platform-express@12.0.3](https://github.com/nestjs/nest) - MIT
 - [@nestjs/schematics@12.0.0](https://github.com/nestjs/schematics) - MIT
 - [@nestjs/testing@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@types/express@5.0.6](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
@@ -606,7 +606,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@nestjs/config@12.0.0](https://github.com/nestjs/config) - MIT
 - [@nestjs/core@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@nestjs/microservices@12.0.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/platform-express@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/platform-express@12.0.3](https://github.com/nestjs/nest) - MIT
 - [@nestjs/schematics@12.0.0](https://github.com/nestjs/schematics) - MIT
 - [@nestjs/testing@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@types/express@5.0.6](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
@@ -649,7 +649,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@nestjs/config@12.0.0](https://github.com/nestjs/config) - MIT
 - [@nestjs/core@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@nestjs/microservices@12.0.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/platform-express@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/platform-express@12.0.3](https://github.com/nestjs/nest) - MIT
 - [@nestjs/schematics@12.0.0](https://github.com/nestjs/schematics) - MIT
 - [@nestjs/testing@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@swc/cli@0.8.1](https://github.com/swc-project/pkgs) - MIT
@@ -696,7 +696,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@nestjs/config@12.0.0](https://github.com/nestjs/config) - MIT
 - [@nestjs/core@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@nestjs/microservices@12.0.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/platform-express@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/platform-express@12.0.3](https://github.com/nestjs/nest) - MIT
 - [@nestjs/schematics@12.0.0](https://github.com/nestjs/schematics) - MIT
 - [@nestjs/testing@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@types/express@5.0.6](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
@@ -740,7 +740,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@nestjs/config@12.0.0](https://github.com/nestjs/config) - MIT
 - [@nestjs/core@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@nestjs/microservices@12.0.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/platform-express@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/platform-express@12.0.3](https://github.com/nestjs/nest) - MIT
 - [@nestjs/schematics@12.0.0](https://github.com/nestjs/schematics) - MIT
 - [@nestjs/testing@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@types/express@5.0.6](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
@@ -783,7 +783,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@nestjs/config@12.0.0](https://github.com/nestjs/config) - MIT
 - [@nestjs/core@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@nestjs/microservices@12.0.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/platform-express@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/platform-express@12.0.3](https://github.com/nestjs/nest) - MIT
 - [@nestjs/schematics@12.0.0](https://github.com/nestjs/schematics) - MIT
 - [@nestjs/testing@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@types/express@5.0.6](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
@@ -827,7 +827,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@nestjs/config@12.0.0](https://github.com/nestjs/config) - MIT
 - [@nestjs/core@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@nestjs/microservices@12.0.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/platform-express@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/platform-express@12.0.3](https://github.com/nestjs/nest) - MIT
 - [@nestjs/schematics@12.0.0](https://github.com/nestjs/schematics) - MIT
 - [@nestjs/testing@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@types/express@5.0.6](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
@@ -921,7 +921,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@nestjs/config@12.0.0](https://github.com/nestjs/config) - MIT
 - [@nestjs/core@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@nestjs/microservices@12.0.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/platform-express@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/platform-express@12.0.3](https://github.com/nestjs/nest) - MIT
 - [@nestjs/schematics@12.0.0](https://github.com/nestjs/schematics) - MIT
 - [@nestjs/testing@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@types/express@5.0.6](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
@@ -965,7 +965,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@nestjs/config@12.0.0](https://github.com/nestjs/config) - MIT
 - [@nestjs/core@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@nestjs/microservices@12.0.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/platform-express@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/platform-express@12.0.3](https://github.com/nestjs/nest) - MIT
 - [@nestjs/schematics@12.0.0](https://github.com/nestjs/schematics) - MIT
 - [@nestjs/testing@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@types/express@5.0.6](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
@@ -1008,7 +1008,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@nestjs/config@12.0.0](https://github.com/nestjs/config) - MIT
 - [@nestjs/core@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@nestjs/microservices@12.0.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/platform-express@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/platform-express@12.0.3](https://github.com/nestjs/nest) - MIT
 - [@nestjs/schematics@12.0.0](https://github.com/nestjs/schematics) - MIT
 - [@nestjs/testing@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@types/express@5.0.6](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
@@ -1051,7 +1051,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@nestjs/config@12.0.0](https://github.com/nestjs/config) - MIT
 - [@nestjs/core@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@nestjs/microservices@12.0.1](https://github.com/nestjs/nest) - MIT
-- [@nestjs/platform-express@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/platform-express@12.0.3](https://github.com/nestjs/nest) - MIT
 - [@nestjs/schematics@12.0.0](https://github.com/nestjs/schematics) - MIT
 - [@nestjs/testing@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@types/express@5.0.6](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
@@ -1101,7 +1101,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@nestjs/graphql@14.0.0](https://github.com/nestjs/graphql) - MIT
 - [@nestjs/jwt@12.0.1](https://github.com/nestjs/jwt) - MIT
 - [@nestjs/passport@12.0.0](https://github.com/nestjs/passport) - MIT
-- [@nestjs/platform-express@12.0.1](https://github.com/nestjs/nest) - MIT
+- [@nestjs/platform-express@12.0.3](https://github.com/nestjs/nest) - MIT
 - [@nestjs/schematics@12.0.0](https://github.com/nestjs/schematics) - MIT
 - [@nestjs/testing@12.0.1](https://github.com/nestjs/nest) - MIT
 - [@types/express@5.0.6](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
