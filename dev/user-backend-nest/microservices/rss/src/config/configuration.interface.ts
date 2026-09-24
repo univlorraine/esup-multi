@@ -37,18 +37,35 @@
  * termes.
  */
 
-import { Controller } from '@nestjs/common';
-import { MessagePattern } from '@nestjs/microservices';
-import { Observable } from 'rxjs';
-import { FeedItem } from './feed-item.dto.js';
-import { RssService } from './rss.service.js';
+export interface KeepAliveOptions {
+  keepAlive?: boolean;
+  keepAliveMsecs?: number;
+  freeSocketTimeout?: number;
+  timeout?: number;
+  maxSockets?: number;
+  maxFreeSockets?: number;
+  socketActiveTTL?: number;
+}
 
-@Controller()
-export class RssController {
-  constructor(private readonly appService: RssService) {}
+export interface FeedOptions {
+  /** Url du flux RSS à consommer. */
+  url: string;
+  /** Délai maximum d'une requête vers le flux, en millisecondes. */
+  timeoutMs: number;
+  /** Nombre de nouvelles tentatives après un échec (0 = aucune). */
+  retryCount: number;
+  /** Délai avant une nouvelle tentative, en millisecondes. */
+  retryDelayMs: number;
+  /**
+   * Âge maximum du dernier flux valide servi lorsque la récupération échoue,
+   * en millisecondes (0 = désactive ce repli).
+   */
+  staleMaxAgeMs: number;
+}
 
-  @MessagePattern({ cmd: 'rss' })
-  getRssFeed(): Observable<FeedItem[]> {
-    return this.appService.getRssFeed();
-  }
+export interface RssConfiguration {
+  feed: FeedOptions;
+  allowedHtmlTags: string[];
+  cacheTtl: number;
+  keepAliveOptions: KeepAliveOptions;
 }

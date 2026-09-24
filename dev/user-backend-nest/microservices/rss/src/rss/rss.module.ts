@@ -37,26 +37,14 @@
  * termes.
  */
 
-import { HttpModule } from '@nestjs/axios';
-import { CacheModule } from '@nestjs/cache-manager';
 import { Module } from '@nestjs/common';
-import { ConfigModule, ConfigService } from '@nestjs/config';
+import { ConfigModule } from '@nestjs/config';
+import { KeepaliveHttpModule } from '../keepalive-http.module.js';
 import { RssController } from './rss.controller.js';
 import { RssService } from './rss.service.js';
 
 @Module({
-  imports: [
-    ConfigModule,
-    HttpModule,
-    CacheModule.registerAsync({
-      imports: [ConfigModule],
-      useFactory: (configService: ConfigService) => ({
-        ttl: configService.get<number>('cacheTtl') || 300,
-        max: configService.get<number>('cacheMax') || 200,
-      }),
-      inject: [ConfigService],
-    }),
-  ],
+  imports: [ConfigModule, KeepaliveHttpModule],
   providers: [RssService],
   controllers: [RssController],
 })
