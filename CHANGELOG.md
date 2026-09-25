@@ -3,9 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## Next Version (2026-mm-dd)
+## 2.3.1 (2026-09-25)
+### Client
+#### Bug Fixes
+* **(knowledge-base)** : Rafraîchissement des rubriques enfants lors de la navigation, correction des liens dans les sous-rubriques et prise en compte de l'état de connexion (affichage du mode hors-ligne).
+
 ### Backend
 #### Bug Fixes
+* **(knowledge-base)** : Vérification des droits de l'utilisateur à partir des rubriques parentes, rafraîchissement de la rubrique courante sur la route `/knowledge-base/children` et suppression des rubriques enfants orphelines.
 * **(rss)** : Correction du problème de mise en cache des données du flux
 
 ## 2.3.0 (2026-05-28)
