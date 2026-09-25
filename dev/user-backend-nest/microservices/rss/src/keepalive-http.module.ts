@@ -37,15 +37,54 @@
  * termes.
  */
 
-import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
-import { KeepaliveHttpModule } from '../keepalive-http.module';
-import { RssController } from './rss.controller';
-import { RssService } from './rss.service';
+import { HttpModule } from '@nestjs/axios';
+import { Logger, Module } from '@nestjs/common';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { HttpAgent, HttpsAgent } from 'agentkeepalive';
+import {
+  FeedOptions,
+  KeepAliveOptions,
+} from './config/configuration.interface';
 
 @Module({
-  imports: [ConfigModule, KeepaliveHttpModule],
-  providers: [RssService],
-  controllers: [RssController],
+  imports: [
+    ConfigModule,
+    HttpModule.registerAsync({
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => {
+        const logger = new Logger(KeepaliveHttpModule.name);
+        const keepAliveOptions =
+          configService.get<KeepAliveOptions>('keepAliveOptions');
+        const feed = configService.get<FeedOptions>('feed');
+
+        // L'agent ne doit pas fermer la socket avant l'expiration de la
+        // requête : sinon une réponse lente du serveur de flux remonte en
+        // ECONNRESET au lieu du timeout attendu. Le défaut d'agentkeepalive
+        // (8s) est plus court que le timeout de récupération du flux.
+        const agentOptions: KeepAliveOptions = {
+          timeout: feed.timeoutMs + 5000,
+          ...keepAliveOptions,
+        };
+
+        logger.log(
+          `Using agentkeepalive options: ${JSON.stringify(agentOptions)}`,
+        );
+        if (agentOptions.timeout <= feed.timeoutMs) {
+          logger.warn(
+            `Agent timeout (${agentOptions.timeout}ms) is not greater than the ` +
+              `feed request timeout (${feed.timeoutMs}ms): slow responses will ` +
+              `be cut by the agent before the request times out`,
+          );
+        }
+
+        return {
+          httpAgent: new HttpAgent(agentOptions),
+          httpsAgent: new HttpsAgent(agentOptions),
+        };
+      },
+      inject: [ConfigService],
+    }),
+  ],
+  exports: [HttpModule],
 })
-export class RssModule {}
+export class KeepaliveHttpModule {}

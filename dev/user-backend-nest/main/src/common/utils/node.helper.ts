@@ -43,14 +43,28 @@ export interface NodeInterface {
 }
 
 export class NodeHelper<N extends NodeInterface> {
-  private existingIds: Set<string>;
+  private readonly existingIds: Set<string>;
 
-  constructor(private nodes: N[]) {
+  constructor(private readonly nodes: N[]) {
     this.existingIds = new Set(nodes.map((node) => node.id));
   }
 
   public removeOrphans(): N[] {
     return this.nodes.filter((node) => this.hasValidParent(node));
+  }
+
+  // Ajoute un champ hasChildren à chaque noeud pour indiquer s'il a des enfants
+  public withHasChildren(): (N & { hasChildren: boolean })[] {
+    const parentIds = new Set(
+      this.nodes
+        .map((node) => node.parentId)
+        .filter((parentId) => parentId !== null && parentId !== undefined),
+    );
+
+    return this.nodes.map((node) => ({
+      ...node,
+      hasChildren: parentIds.has(node.id),
+    }));
   }
 
   private hasValidParent(currentNode: N, visited = new Set<string>()): boolean {

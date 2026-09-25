@@ -67,10 +67,29 @@ export class KnowledgeBaseService {
     );
   }
 
+  public loadAndStoreKnowledgeBaseChildren(parentId: string): Observable<KnowledgeBaseItem[]> {
+    return from(this.networkService.getConnectionStatus()).pipe(
+      filter(status => status.connected),
+      switchMap(() => getAuthToken()),
+      take(1),
+      switchMap(authToken => this.getKnowledgeBaseChildren(authToken, parentId)),
+      tap(children => this.knowledgeBaseRepository.replaceChildren(parentId, children)),
+    );
+  }
+
   private getKnowledgeBase(authToken: string): Observable<KnowledgeBaseItem[]> {
     const url = `${this.multiTenantService.getApiEndpoint()}/knowledge-base`;
     const data = {
       authToken
+    };
+    return this.http.post<KnowledgeBaseItem[]>(url, data);
+  }
+
+  private getKnowledgeBaseChildren(authToken: string, parentId: string): Observable<KnowledgeBaseItem[]> {
+    const url = `${this.multiTenantService.getApiEndpoint()}/knowledge-base/children`;
+    const data = {
+      authToken,
+      parentId,
     };
     return this.http.post<KnowledgeBaseItem[]>(url, data);
   }

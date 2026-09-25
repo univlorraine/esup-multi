@@ -43,8 +43,10 @@ import {
 } from '@ngneat/elf-persist-state';
 import {currentLanguage$, localForageStore} from '@multi/shared';
 import {
+  deleteEntities,
   selectAllEntities,
   setEntities,
+  upsertEntities,
   withEntities
 } from "@ngneat/elf-entities";
 import {combineLatest, Observable} from "rxjs";
@@ -76,6 +78,7 @@ export interface KnowledgeBaseItem {
   display?:Display,
   translations?: Translation[],
   coverImage?: string;
+  hasChildren?: boolean,
   isLeaf?: boolean
 }
 
@@ -95,6 +98,7 @@ export interface TranslatedKnowledgeBaseItem {
   display?:Display,
   coverImage?: string;
   searchKeywords?: string[];
+  hasChildren?: boolean,
   isLeaf?: boolean
 }
 
@@ -149,14 +153,13 @@ export class KnowledgeBaseRepository {
 
   private updateDisplayFromParent(knowledgeBaseItems: KnowledgeBaseItem[]) {
     knowledgeBaseItems.forEach(item => {
-      const children = knowledgeBaseItems.filter(child => child.parentId === item.id);
-      item.display = (item.type===Type.content && children.length === 0) ? Display.card : undefined;
+      item.display = (item.type===Type.content && !item.hasChildren) ? Display.card : undefined;
 
       if (!item.parentId || item.display)
         return
 
       const parent = knowledgeBaseItems.find((parent) => parent.id === item.parentId);
-      item.display = parent.childDisplay;
+      item.display = parent?.childDisplay;
     })
   }
 
@@ -169,10 +172,9 @@ export class KnowledgeBaseRepository {
     this.translatedKnowledgeBases$.pipe(
       map(allItems => {
         const children = allItems.filter(item => item.parentId === parentId);
-        const parentIds = new Set(allItems.map(item => item.parentId).filter(id => id !== null));
         return children.map(child => ({
           ...child,
-          isLeaf: !parentIds.has(child.id)
+          isLeaf: !child.hasChildren
         }));
       })
     );
@@ -190,6 +192,42 @@ export class KnowledgeBaseRepository {
         item.searchKeywords?.some(key => key.toLowerCase().includes(text.toLowerCase()))
       ))
     );
+
+  public replaceChildren(parentId: string, children: KnowledgeBaseItem[]): void {
+    const currentItems = Object.values(store.getValue().entities);
+    const newChildrenIds = new Set(children.map(child => child.id));
+
+    const currentChildrenIds = currentItems
+      .filter(item => item.parentId === parentId)
+      .map(item => item.id);
+
+    const idsToDelete = new Set(currentChildrenIds);
+    const removedIds = currentChildrenIds.filter(id => !newChildrenIds.has(id));
+
+    while (removedIds.length > 0) {
+      const removedId = removedIds.shift();
+      currentItems
+        .filter(item => item.parentId === removedId)
+        .forEach(descendant => {
+          if (idsToDelete.has(descendant.id)) {
+            return;
+          }
+          idsToDelete.add(descendant.id);
+          removedIds.push(descendant.id);
+        });
+    }
+
+    store.update(
+      deleteEntities([...idsToDelete]),
+      upsertEntities(children)
+    );
+
+    const updatedItems = Object.values(store.getValue().entities);
+
+    this.updateDisplayFromParent(updatedItems);
+
+    store.update(setEntities(updatedItems));
+  }
 }
 
 
