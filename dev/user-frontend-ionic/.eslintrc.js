@@ -50,6 +50,20 @@ module.exports = {
         "plugin:@angular-eslint/template/accessibility"
       ],
       rules: {}
+    },
+    {
+      // Scripts Node (scripts/*.mjs)
+      files: ["*.mjs"],
+      extends: ["eslint:recommended"],
+      parserOptions: {
+        ecmaVersion: "latest",
+        sourceType: "module"
+      },
+      env: {
+        node: true,
+        es2022: true
+      },
+      rules: {}
     }
   ]
 }
