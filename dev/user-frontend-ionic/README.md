@@ -224,7 +224,13 @@ npm run release:preprod
 npm run release:prod -- 2.1.2
 ```
 
-Pour vérifier les numéros qui seront appliqués sans rien modifier :
+Chaque commande lance le build Angular avec l'env en configuration (ainsi que modules:build-all), `npx cap sync`,
+puis l'écriture des nouveaux numéros dans `trapeze-config.yml` suivie de `npx trapeze run`.
+
+La correspondance env → configuration Angular n'est déclarée qu'à un seul endroit, la
+table `allowEnvironments` en tête de `scripts/release-mobile.mjs`.
+
+Pour vérifier les numéros qui seront appliqués sans rien modifier, sans lancer le build :
 
 ```bash
 node scripts/release-mobile.mjs test --dry-run

@@ -189,6 +189,9 @@ if (dryRun) {
   console.log('\n--dry-run : aucune écriture, aucune commande exécutée.');
 }
 
+// Build Angular sur la configuration de l'environnement
+run('npm', ['run', 'build', '--', '--configuration', configuration]);
+
 // exécution de `npx cap sync` pour synchroniser les plugins et les fichiers natifs
 run('npx', ['cap', 'sync']);
 
