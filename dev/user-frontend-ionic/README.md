@@ -100,8 +100,6 @@ Pour que le projet puisse quand même build sans avoir les fichiers réels de la
 
 Veillez à ne pas commiter votre configuration Firebase réelle dans le projet.
 
-En exécutant la commande `npx cap sync`, les fichiers de configuration Firebase seront injectés lors du build dans la plateforme visée, grâce à la librairie *trapeze*.
-
 **Procédure pour ajouter un nouvel environnement de développement avec une configuration Firebase spécifique :**
 
 Firebase permet de créer plusieurs applications par environnement de développement pour un même projet. Il génère des fichiers configuration `google-service.json` (Android) et `GoogleServices-info.plist` (iOS) pour chacune d’entre elles.
@@ -175,6 +173,68 @@ npm run module:build-all
 - [Module social-network](./projects/social-network/README.md)
 - [Module static-pages](./projects/static-pages/README.md)
 - [Module unread-mail](./projects/unread-mail/README.md)
+
+## Releases mobiles
+
+L'application est distribuée via **une seule fiche store par plateforme**, avec un canal
+par environnement :
+
+| Canal | Commande | Configuration Angular | Suffixe `versionName` Android |
+|---|---|---|---|
+| Test interne | `npm run release:test` | `development` | `-test` |
+| Préproduction | `npm run release:preprod` | `staging` | `-preprod` |
+| Production | `npm run release:prod` | `production` | *(aucun)* |
+
+Tous les canaux partagent le même `applicationId` / `bundleId`, la même signature et
+la même configuration Firebase. Deux conséquences importantes :
+
+* le **`versionCode` Android est une séquence unique et strictement croissante**, quel
+  que soit le canal : un numéro uploadé sur le Play Store est définitivement consommé ;
+* un build **n'est promouvable que vers un canal visant le même backend**. Un build de
+  test interne ne l'est donc jamais en production ; un build de préproduction ne l'est que
+  si `staging` et `production` visent bien le même backend sur l'instance concernée.
+
+### Numérotation des versions
+
+Trois numéros distincts, tous calculés par `scripts/release-mobile.mjs`. **Ne jamais les
+éditer à la main**, ni dans `trapeze-config.yml`, ni dans les fichiers natifs.
+
+| Variable trapeze | Cible native | Règle                                                                             |
+|---|---|-----------------------------------------------------------------------------------|
+| `VERSION_NAME` | iOS `CFBundleShortVersionString` | Version  de l'app                                                                 |
+| `ANDROID_VERSION_NAME` | Android `versionName` | `VERSION_NAME`, suffixé selon le canal (`-test`, `-preprod`, rien en production). |
+| `ANDROID_VERSION_CODE` | Android `versionCode` | Build Number global, strictement croissant, tous canaux confondus.                |
+| `IOS_BUILD_NUMBER` | iOS `CFBundleVersion` | Build Number par **version** : repart à 1 dès que `VERSION_NAME` change.          |
+
+Le suffixe de canal rend le build identifiable dans le menu burger.
+
+> Ce suffixe n'est **appliqué que sur Android**. App Store Connect impose un
+> `CFBundleShortVersionString` composé d'au plus trois entiers séparés par des points et
+> rejette l'archive sinon ; la version iOS reste donc toujours numérique. Le script refuse
+> par la même occasion un `versionName` non conforme passé en argument.
+
+### Préparer une release
+
+```bash
+# Conserve la version courante
+npm run release:test
+npm run release:preprod
+
+# Ou impose une version
+npm run release:prod -- 2.1.2
+```
+
+Chaque commande lance le build Angular avec l'env en configuration (ainsi que modules:build-all), `npx cap sync`,
+puis l'écriture des nouveaux numéros dans `trapeze-config.yml` suivie de `npx trapeze run`.
+
+La correspondance env → configuration Angular n'est déclarée qu'à un seul endroit, la
+table `allowEnvironments` en tête de `scripts/release-mobile.mjs`.
+
+Pour vérifier les numéros qui seront appliqués sans rien modifier, sans lancer le build :
+
+```bash
+node scripts/release-mobile.mjs test --dry-run
+```
 
 ## Personnalisation du style de l'application
 
