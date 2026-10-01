@@ -5,9 +5,13 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## Next Version (2026-mm-dd)
 ### Client
+#### Bug Fixes
+* AppErrorHandler était écrasé par MultiTenantErrorHandler, les erreurs n'étaient donc plus gérées
+
 #### Autres
 * Migration de [NodeJS](https://nodejs.org/fr/about/previous-releases) : Version 20 -> [Version 26](https://nodejs.org/docs/latest-v26.x/api/index.html)
 * Mise à jour du framework [Angular](https://angular.dev/reference/versions) : Version 16 -> [Version 20](https://v20.angular.dev/overview)
+  * Migration de NgModule à standalone
 * Mise à jour du framework [Ionic](https://ionicframework.com/docs/) : Version 8 -> Version 9
 * Mise à jour du moteur [Capacitor](https://capacitorjs.com/docs) : Version 7 -> Version 8.5
   * Migration de CocoaPods vers Swift Package Manager
@@ -17,9 +21,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * Correction de la conf de test
 
 ### Backend
-#### Bug Fixes
-* **(rss)** : Correction du problème de mise en cache des données du flux
-
 #### Autres
 * Migration de [NodeJS](https://nodejs.org/fr/about/previous-releases) : Version 20 -> Version 26
 * Mises à jour des dépendances suite aux alertes CVE
@@ -44,6 +45,16 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * Migration CommonJS -> ESM
 * Migration NestJS 11 -> 12
 * Correction et migration de la conf de test : Jest -> Vitest
+
+## 2.3.1 (2026-09-25)
+### Client
+#### Bug Fixes
+* **(knowledge-base)** : Rafraîchissement des rubriques enfants lors de la navigation, correction des liens dans les sous-rubriques et prise en compte de l'état de connexion (affichage du mode hors-ligne).
+
+### Backend
+#### Bug Fixes
+* **(knowledge-base)** : Vérification des droits de l'utilisateur à partir des rubriques parentes, rafraîchissement de la rubrique courante sur la route `/knowledge-base/children` et suppression des rubriques enfants orphelines.
+* **(rss)** : Correction du problème de mise en cache des données du flux
 
 ## 2.3.0 (2026-05-28)
 ### Client
