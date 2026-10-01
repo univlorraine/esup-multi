@@ -6,7 +6,7 @@ Module permettant l'affichage des emplois du temps de l'utilisateur.
 
 Exemple dans `environment.ts` :
 ```typescript
-ScheduleModule.forRoot({
+provideSchedule({
     nextEventsWidget: {
         numberOfEventsLimit: 2,
         numberOfDaysLimit: 7,

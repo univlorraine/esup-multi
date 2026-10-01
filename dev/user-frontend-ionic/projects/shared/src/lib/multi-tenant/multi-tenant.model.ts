@@ -48,7 +48,7 @@ export interface Tenant {
   tenants?: Tenant[];
   modulesConfigurations: {
     chatbot?: {
-      logoRegex?: string;
+      logoRegex?: RegExp;
     };
     map?: {
       defaultLocation?: {

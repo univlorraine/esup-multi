@@ -41,7 +41,7 @@
  * Public API Surface of features
  */
 
-export * from './lib/features.module';
+export * from './lib/features.providers';
 export * from './lib/pages/widgets/widgets.page';
 export * from './lib/pages/widgets/widget/widget-internal-feature/widget-internal-feature.component';
 export * from './lib/pages/widgets/widget/widget-external-feature/widget-external-feature.component';

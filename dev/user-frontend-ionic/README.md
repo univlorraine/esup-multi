@@ -26,14 +26,41 @@ Puis mettre à jour le "path" du module dans le fichier `tsconfig.json` pour pr�
     },
 ```
 
-À partir de là, le module peut être importé dans l'application hôte :
+À partir de là, le module expose une fonction `provideHello()` (voir « Providers et routes » ci-dessous) à brancher dans l'application hôte :
 ```ts
-import { HelloPageModule } from '@multi/hello';
+import { provideHello } from '@multi/hello';
 ```
 
 Il faut également ajouter le module au script npm `module:build-all` :
 ```json
   "module:build-all": "npm run module:build hello && npm run module:build [nom du module]",
+```
+
+#### Providers et routes
+
+Depuis la migration standalone, un module n'expose plus de `NgModule`. Il expose une fonction `provideXxx()` qui retourne des providers, et ses routes sont enregistrées via le token `ROUTES`.
+
+`projects/[mon-module]/src/lib/[mon-module].providers.ts` :
+```typescript
+export function provideHello(): (Provider | EnvironmentProviders)[] {
+  return [
+    { provide: ROUTES, multi: true, useValue: HELLO_ROUTES },
+    provideAppInitializer(() => {
+      const projectModuleService = inject(ProjectModuleService);
+      return projectModuleService.initProjectModule({ name: 'hello' });
+    }),
+  ];
+}
+```
+
+Il faut ensuite l'enregistrer dans `enabledModules` du fichier d'environnement (`src/environments/environment.ts`). C'est un tableau de providers, aplati au démarrage dans `src/main.ts` :
+```typescript
+import { provideHello } from '@multi/hello';
+...
+enabledModules: [
+  provideHello(),
+  ...
+]
 ```
 
 #### Lint
@@ -66,16 +93,19 @@ Pour les traductions, nous utilisons [ngx translate](https://github.com/ngx-tran
 
 Si le module contient des éléments qui doivent être traduits, il faudra créer un fichier de traduction pour ce module dans `src/theme/app-theme/i18n/modules/[mon module]/fr.json`. Pensez à le copier dans le dossier `app-theme-dist` pour partager ces traductions.
 
-Et enfin à l'initialisation dans le constructeur du module Angular (`projects/[mon-module]/src/lib/[mon-module].module.ts`), il faut faire appel au `ProjectModuleService` de shared afin d'indiquer que mon module contient des traductions :
+Et enfin, dans la fonction `provideXxx()` du module (`projects/[mon-module]/src/lib/[mon-module].providers.ts`), il faut faire appel au `ProjectModuleService` de shared afin d'indiquer que mon module contient des traductions :
 ```typescript
-projectModuleService.initProjectModule({
-  name: '[mon module]',
-  translation: true
-});
+provideAppInitializer(() => {
+  const projectModuleService = inject(ProjectModuleService);
+  return projectModuleService.initProjectModule({
+    name: '[mon module]',
+    translation: true
+  });
+})
 ```
 Notez que toutes les clés de traduction du module seront préfixées par ce que vous aurez passé à `addTranslation()` mais converties en majuscules (`addTranslation('info')` --> `'INFO.XXX'`).
 
-**ATTENTION** un module qui contient des traductions doit être initialisé avant que le module de traduction ne démarre, il faudra donc obligatoirement importer le module dans `app.module.ts` (avant l'import du `TranslateModule`).
+**ATTENTION** le `TranslateLoader` lit la liste des modules traduits **une seule fois**, à sa création (lors de la première injection de `TranslateService`). Un module qui contient des traductions doit donc être enregistré dans `enabledModules` (fichier d'environnement) afin que son initialisation (`provideAppInitializer`) s'exécute avant le chargement des traductions. Pour la même raison, évitez d'injecter `TranslateService` trop tôt dans l'initialisation de l'application (voir le contournement dans `src/app/error/app.error-handler.ts`).
 
 ### Firebase (à compléter avec la partie iOS)
 
@@ -323,7 +353,6 @@ Dans les fichiers `src/environments/environment.*.ts`, on peut définir plusieur
       name: 'Etablissement 2',
       logo: 'assets/logos/logo2.svg',
       apiEndpoint: 'http://localhost:3000',
-      cmsPublicAssetsEndpoint: 'http://localhost:8055/assets/',
       topic: 'etablissement2',
       modulesConfigurations: {
         chatbot: {
@@ -344,7 +373,7 @@ Dans les fichiers `src/environments/environment.*.ts`, on peut définir plusieur
   ],
 ```
 
-Ainsi, on peut facilement configurer un `apiEndpoint` ainsi qu'un `cmsPublicAssetsEndpoint` différent pour chacun d'entre eux afin d'utiliser un backend et/ou un cms différent selon l'établissement sélectionné.
+Ainsi, on peut facilement configurer un `apiEndpoint` différent pour chacun d'entre eux afin d'utiliser un backend différent selon l'établissement sélectionné.
 
 D'autres configurations peuvent également varier en fonction de l'établissement :
 - `topic` firebase utilisé
@@ -364,7 +393,6 @@ Il n'est possible de créer qu'un seul groupe de tenant, celui-ci devant alors s
       forceSelect: false,
       logo: 'assets/logos/logo.svg',
       apiEndpoint: 'http://localhost:3000',
-      cmsPublicAssetsEndpoint: 'http://localhost:8055/assets/',
       modulesConfigurations: {
         chatbot: {
           logoRegex: /_chacha5/i
@@ -386,7 +414,6 @@ Il n'est possible de créer qu'un seul groupe de tenant, celui-ci devant alors s
           name: 'Etablissement 1',
           logo: 'assets/logos/logo1.svg',
           apiEndpoint: 'http://localhost:3000',
-          cmsPublicAssetsEndpoint: 'http://localhost:8055/assets/',
           topic: 'etablissement1',
           modulesConfigurations: {
             chatbot: {
@@ -409,7 +436,6 @@ Il n'est possible de créer qu'un seul groupe de tenant, celui-ci devant alors s
           name: 'Etablissement 2',
           logo: 'assets/logos/logo2.svg',
           apiEndpoint: 'http://localhost:3000',
-          cmsPublicAssetsEndpoint: 'http://localhost:8055/assets/',
           topic: 'etablissement2',
           modulesConfigurations: {
             chatbot: {
@@ -477,4 +503,40 @@ La translation finale qui sera chargée ressemblera alors à ça :
     "VERSION_NOT_FOUND": "Version indisponible"
   }
 }
+```
+
+## Matomo
+
+Matomo (statistiques d'audience) est **désactivé par défaut**. Deux paramètres du fichier d'environnement (`src/environments/environment.ts`) le pilotent :
+
+- `matomoConfig` : configuration Matomo. Par défaut `{ mode: 'manual', disabled: true }` (Matomo inactif).
+- `matomoRouteTrackingEnabled` : active le **suivi automatique des pages** (route tracking). Sans effet si Matomo est inactif.
+
+```typescript
+export const environment = {
+  ...
+  matomoConfig: { mode: 'manual', disabled: true } satisfies MatomoConfiguration,
+  // Remplacer matomoConfig par la configuration suivante pour activer Matomo
+  // matomoConfig: {
+  //   scriptUrl: 'https://webstats.mon-univ.fr/matomo.js',
+  //   trackers: [
+  //     {
+  //       trackerUrl: 'https://webstats.mon-univ.fr/matomo.php',
+  //       siteId: 453,
+  //     },
+  //   ],
+  // } satisfies MatomoConfiguration,
+  // Suivi automatique des changements de page (sans effet si Matomo est inactif)
+  matomoRouteTrackingEnabled: false,
+  ...
+};
+```
+
+Le branchement se fait dans `src/main.ts` :
+
+```typescript
+provideMatomo(
+  environment.matomoConfig || { mode: 'manual', disabled: true },
+  ...(environment.matomoRouteTrackingEnabled ? [withRouter()] : []),
+),
 ```

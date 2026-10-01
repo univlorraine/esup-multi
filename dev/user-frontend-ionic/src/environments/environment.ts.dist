@@ -41,30 +41,32 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
-// import { MatomoRouterModule } from 'ngx-matomo-client';
-import { AppUpdateModule } from '@multi/app-update';
-import { AuthModule } from '@multi/auth';
-import { CalendarModule } from '@multi/calendar';
-import { CardPageModule } from '@multi/card';
-import { CardEuPageModule } from '@multi/card-eu';
-import { ChatbotModule } from '@multi/chatbot';
-import { ClockingModule } from '@multi/clocking';
-import { ContactUsModule } from '@multi/contact-us';
-import { ContactsModule } from '@multi/contacts';
-import { ImportantNewsModule } from '@multi/important-news';
-import { KnowledgeBasePageModule } from '@multi/knowledge-base';
-import { MapModule } from '@multi/map';
-import { NotificationsModule } from '@multi/notifications';
-import { ReservationModule } from '@multi/reservation';
-import { RestaurantsModule } from '@multi/restaurants';
-import { RssPageModule } from '@multi/rss';
-import { ScheduleModule } from '@multi/schedule';
-import { SocialNetworkModule } from '@multi/social-network';
-import { StaticPagesModule } from '@multi/static-pages';
-import { UnreadMailModule } from '@multi/unread-mail';
+import type { EnvironmentProviders, Provider } from '@angular/core';
+import type { MatomoConfiguration } from 'ngx-matomo-client';
+// import { provideAppUpdate } from '@multi/app-update';
+import { provideAuth } from '@multi/auth';
+import { provideCalendar } from '@multi/calendar';
+import { provideCard } from '@multi/card';
+import { provideCardEu } from '@multi/card-eu';
+import { provideChatbot } from '@multi/chatbot';
+import { provideClocking } from '@multi/clocking';
+import { provideContactUs } from '@multi/contact-us';
+import { provideContacts } from '@multi/contacts';
+import { provideImportantNews } from '@multi/important-news';
+import { provideKnowledgeBase } from '@multi/knowledge-base';
+import { provideMap } from '@multi/map';
+import { provideNotifications } from '@multi/notifications';
+import { provideReservation } from '@multi/reservation';
+import { provideRestaurants } from '@multi/restaurants';
+import { provideRss } from '@multi/rss';
+import { provideSchedule } from '@multi/schedule';
+import type { Tenant } from '@multi/shared';
+import { provideSocialNetwork } from '@multi/social-network';
+import { provideStaticPages } from '@multi/static-pages';
+import { provideUnreadMail } from '@multi/unread-mail';
 import firebasePwaEnvironment from './firebase/web/firebase-environment.pwa.json';
 
-export const environment: any = {
+export const environment = {
   firebase: firebasePwaEnvironment, // A commenter pour désactiver les notifs web
   production: false,
   languages: ['fr', 'en'],
@@ -75,16 +77,19 @@ export const environment: any = {
   forceFullLayoutFeatures: [],
   useExternalNotificationSystem: true,
   defaultLogo: 'assets/logos/white-logo.svg',
-  // Uncomment matomoConfig to enable Matomo
+  matomoConfig: { mode: 'manual', disabled: true } satisfies MatomoConfiguration,
+  // replace matomoConfig with the following to enable Matomo
   // matomoConfig: {
-  //   scriptUrl: 'https://webstats.mon-univ.fr/matomo.js',
+  //   scriptUrl: 'https://webstats.univ-lorraine.fr/matomo.js',
   //   trackers: [
   //     {
-  //       trackerUrl: 'https://webstats.mon-univ.fr/matomo.php',
-  //       siteId: 453
-  //     }
+  //       trackerUrl: 'http://localhost:3099/mocking/statistics',
+  //       siteId: 453,
+  //     },
   //   ],
-  // },
+  // } satisfies MatomoConfiguration,
+  // Enable Matomo automatic route tracking (no effect if matomo is disabled)
+  matomoRouteTrackingEnabled: false,
   tenants: [
     {
       apiEndpoint: 'http://localhost:3000',
@@ -104,28 +109,28 @@ export const environment: any = {
         },
       },
     },
-  ],
+  ] satisfies Tenant[],
   enabledModules: [
-    AppUpdateModule,
-    AuthModule,
-    CalendarModule.forRoot({
+    provideAppUpdate(),
+    provideAuth(),
+    provideCalendar({
       numberOfEventsLimit: 3,
       display: 'list',
     }),
-    CardPageModule.forRoot({ knownErrors: ['NO_PHOTO', 'NO_ACTIVE_CARD', 'UNPAID_FEES'] }),
-    CardEuPageModule.forRoot({
+    provideCard({ knownErrors: ['NO_PHOTO', 'NO_ACTIVE_CARD', 'UNPAID_FEES'] }),
+    provideCardEu({
       knownErrors: ['NO_PHOTO', 'NO_ACTIVE_CARD', 'ESCN_MISSING'],
       display: 'extended',
     }),
-    ChatbotModule,
-    ClockingModule,
-    ContactUsModule,
-    ContactsModule.forRoot({ contactTypes: ['STUDENT', 'STAFF', 'STANDIN'] }),
-    ImportantNewsModule.forRoot({
+    provideChatbot(),
+    provideClocking(),
+    provideContactUs(),
+    provideContacts({ contactTypes: ['STUDENT', 'STAFF', 'STANDIN'] }),
+    provideImportantNews({
       display: 'vertically',
     }),
-    KnowledgeBasePageModule,
-    MapModule.forRoot({
+    provideKnowledgeBase(),
+    provideMap({
       mapType: 'osm',
       accessToken: '',
       minZoom: 1,
@@ -134,19 +139,19 @@ export const environment: any = {
       highAccuracy: false,
       maxDisplayedFloatingButton: 5,
     }),
-    NotificationsModule.forRoot({
+    provideNotifications({
       numberOfNotificationsOnFirstLoad: 20,
       numberOfNotificationsToLoadOnScroll: 10,
     }),
-    ReservationModule,
-    RestaurantsModule,
-    RssPageModule.forRoot({
+    provideReservation(),
+    provideRestaurants(),
+    provideRss({
       latestNewsWidget: {
         display: 'horizontally',
       },
       display: 'vertically',
     }),
-    ScheduleModule.forRoot({
+    provideSchedule({
       nextEventsWidget: {
         numberOfEventsLimit: 2,
         numberOfDaysLimit: 7,
@@ -156,12 +161,10 @@ export const environment: any = {
       nextWeeksInCache: 2,
       managerRoles: ['schedule-manager', 'multi-admin'],
     }),
-    SocialNetworkModule,
-    StaticPagesModule,
-    UnreadMailModule,
-    // Uncomment the following line to enable Matomo route tracking (without any effect if matomoConfig is not set)
-    // MatomoRouterModule,
-  ],
+    provideSocialNetwork(),
+    provideStaticPages(),
+    provideUnreadMail(),
+  ] satisfies (Provider | EnvironmentProviders)[][],
 };
 
 /*

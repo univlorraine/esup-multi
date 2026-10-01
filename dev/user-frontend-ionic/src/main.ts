@@ -43,26 +43,28 @@ import {
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
-import {
-  enableProdMode,
-  ErrorHandler,
-  importProvidersFrom,
-  provideZoneChangeDetection,
-} from '@angular/core';
+import { enableProdMode, provideZoneChangeDetection } from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
-import { PreloadAllModules, provideRouter, RouteReuseStrategy, withPreloading } from '@angular/router';
-import { setAssetPath } from '@ionic/core/components';
+import {
+  PreloadAllModules,
+  provideRouter,
+  RouteReuseStrategy,
+  withPreloading,
+} from '@angular/router';
 import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular';
+import { setAssetPath } from '@ionic/core/components';
 import { provideTranslateService, TranslateLoader } from '@ngx-translate/core';
-import { MatomoModule } from 'ngx-matomo-client';
-import { FeaturesModule } from '@multi/features';
-import { MenuModule } from '@multi/menu';
-import { PreferencesPageModule } from '@multi/preferences';
+import { provideMatomo } from 'ngx-matomo-client';
+import { withRouter } from 'ngx-matomo-client/router';
+import { provideFeatures } from '@multi/features';
+import { provideMenu } from '@multi/menu';
+import { providePreferences } from '@multi/preferences';
 import {
   AuthInterceptor,
-  MultiTenantModule,
+  FALLBACK_ERROR_HANDLER,
   MultiTenantService,
   ProjectModuleService,
+  provideMultiTenant,
   translationsLoaderFactory,
 } from '@multi/shared';
 import { AppComponent } from './app/app.component';
@@ -100,7 +102,11 @@ bootstrapApplication(AppComponent, {
     }),
     { provide: 'environment', useValue: environment },
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    { provide: ErrorHandler, useClass: AppErrorHandler },
+    ...provideMenu(),
+    ...provideFeatures(),
+    ...providePreferences(),
+    { provide: FALLBACK_ERROR_HANDLER, useExisting: AppErrorHandler },
+    ...provideMultiTenant(),
     { provide: AuthInterceptor },
     {
       provide: HTTP_INTERCEPTORS,
@@ -108,13 +114,10 @@ bootstrapApplication(AppComponent, {
       multi: true,
     },
     provideHttpClient(withInterceptorsFromDi()),
-    importProvidersFrom(
-      MatomoModule.forRoot(environment.matomoConfig || { mode: 'manual', disabled: true }),
-      FeaturesModule,
-      MenuModule,
-      PreferencesPageModule,
-      MultiTenantModule,
-      ...environment.enabledModules,
+    provideMatomo(
+      environment.matomoConfig,
+      ...(environment.matomoRouteTrackingEnabled ? [withRouter()] : []),
     ),
+    ...environment.enabledModules.flat(),
   ],
 }).catch((err) => console.error(err));

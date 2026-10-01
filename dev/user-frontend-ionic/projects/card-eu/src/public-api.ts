@@ -41,6 +41,6 @@
  * Public API Surface of card-eu
  */
 
-export * from './lib/card-eu.module';
+export * from './lib/card-eu.providers';
 export * from './lib/card-eu.page';
 export * from './lib/card-eu.service';

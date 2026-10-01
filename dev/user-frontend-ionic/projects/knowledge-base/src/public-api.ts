@@ -3,4 +3,4 @@
  */
 
 export * from './lib/knowledge-base.page';
-export * from './lib/knowledge-base.module';
+export * from './lib/knowledge-base.providers';

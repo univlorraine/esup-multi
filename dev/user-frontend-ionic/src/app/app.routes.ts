@@ -38,12 +38,12 @@
  */
 
 import { Routes } from '@angular/router';
-import { FeaturesModule } from '@multi/features';
+import { FEATURES_ROUTER_LINK } from '@multi/features';
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: `${FeaturesModule.routerLink}/widgets`,
+    redirectTo: `${FEATURES_ROUTER_LINK}/widgets`,
     pathMatch: 'full',
   },
 ];

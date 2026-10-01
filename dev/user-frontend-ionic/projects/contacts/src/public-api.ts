@@ -43,4 +43,4 @@
 
 export * from './lib/contacts.service';
 export * from './lib/contacts.page';
-export * from './lib/contacts.module';
+export * from './lib/contacts.providers';
