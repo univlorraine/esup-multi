@@ -37,11 +37,37 @@
  * termes.
  */
 
-import { enableProdMode, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
+import {
+  HTTP_INTERCEPTORS,
+  HttpClient,
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
+import {
+  enableProdMode,
+  ErrorHandler,
+  importProvidersFrom,
+  provideZoneChangeDetection,
+} from '@angular/core';
 import { bootstrapApplication } from '@angular/platform-browser';
+import { PreloadAllModules, provideRouter, RouteReuseStrategy, withPreloading } from '@angular/router';
 import { setAssetPath } from '@ionic/core/components';
+import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular';
+import { provideTranslateService, TranslateLoader } from '@ngx-translate/core';
+import { MatomoModule } from 'ngx-matomo-client';
+import { FeaturesModule } from '@multi/features';
+import { MenuModule } from '@multi/menu';
+import { PreferencesPageModule } from '@multi/preferences';
+import {
+  AuthInterceptor,
+  MultiTenantModule,
+  MultiTenantService,
+  ProjectModuleService,
+  translationsLoaderFactory,
+} from '@multi/shared';
 import { AppComponent } from './app/app.component';
-import { AppModule } from './app/app.module';
+import { routes } from './app/app.routes';
+import { AppErrorHandler } from './app/error/app.error-handler';
 import { environment } from './environments/environment';
 
 if (environment.production) {
@@ -52,5 +78,43 @@ if (environment.production) {
 setAssetPath(document.baseURI);
 
 bootstrapApplication(AppComponent, {
-  providers: [provideZoneChangeDetection(), importProvidersFrom(AppModule)],
+  providers: [
+    provideZoneChangeDetection(),
+    provideRouter(routes, withPreloading(PreloadAllModules)),
+    provideIonicAngular({
+      platform: {
+        desktop: (win) => {
+          const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+            win.navigator.userAgent,
+          );
+          return !isMobile;
+        },
+      },
+    }),
+    provideTranslateService({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: translationsLoaderFactory,
+        deps: [HttpClient, ProjectModuleService, MultiTenantService, 'environment'],
+      },
+    }),
+    { provide: 'environment', useValue: environment },
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    { provide: ErrorHandler, useClass: AppErrorHandler },
+    { provide: AuthInterceptor },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+    provideHttpClient(withInterceptorsFromDi()),
+    importProvidersFrom(
+      MatomoModule.forRoot(environment.matomoConfig || { mode: 'manual', disabled: true }),
+      FeaturesModule,
+      MenuModule,
+      PreferencesPageModule,
+      MultiTenantModule,
+      ...environment.enabledModules,
+    ),
+  ],
 }).catch((err) => console.error(err));

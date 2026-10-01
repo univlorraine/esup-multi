@@ -37,16 +37,13 @@
  * termes.
  */
 
-import { ErrorHandler, NgModule } from '@angular/core';
-import { AuthInterceptor } from '@multi/shared';
-import { AppErrorHandler } from './app.error-handler';
+import { Routes } from '@angular/router';
+import { FeaturesModule } from '@multi/features';
 
-@NgModule({
-  providers: [
-    { provide: ErrorHandler, useClass: AppErrorHandler },
-    {
-      provide: AuthInterceptor,
-    },
-  ],
-})
-export class ErrorModule {}
+export const routes: Routes = [
+  {
+    path: '',
+    redirectTo: `${FeaturesModule.routerLink}/widgets`,
+    pathMatch: 'full',
+  },
+];
