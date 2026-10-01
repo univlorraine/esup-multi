@@ -37,5 +37,8 @@
   ~ termes.
   -->
 
-<app-widget-external-feature *ngIf="feature.type==='external'" [feature]="feature"></app-widget-external-feature>
-<app-widget-internal-feature *ngIf="feature.type==='internal'" [feature]="feature"></app-widget-internal-feature>
+@if (feature.type === externalFeatureType) {
+  <app-widget-external-feature [feature]="feature" />
+} @else {
+  <app-widget-internal-feature [feature]="feature" />
+}

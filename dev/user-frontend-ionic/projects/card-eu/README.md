@@ -6,7 +6,7 @@ Module permettant l'affichage de la carte européenne dématérialisée
 Exemple dans `environment.ts` :
 
 ```typescript 
-CardEuPageModule.forRoot({
+provideCardEu({
   knownErrors: ['NO_PHOTO', 'NO_ACTIVE_CARD', 'UNPAID_FEES', 'ESCN_MISSING'],
   display: 'light' | 'extended',
 })

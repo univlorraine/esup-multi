@@ -40,8 +40,8 @@
 import { Controller } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
 import { Observable } from 'rxjs';
-import { KnowledgeBaseDto } from './knowledge-base.dto';
-import { KnowledgeBaseService } from './knowledge-base.service';
+import { KnowledgeBaseDto } from './knowledge-base.dto.js';
+import { KnowledgeBaseService } from './knowledge-base.service.js';
 
 @Controller()
 export class KnowledgeBaseController {

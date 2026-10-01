@@ -39,9 +39,9 @@
 
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { KeepaliveHttpModule } from '../keepalive-http.module';
-import { RssController } from './rss.controller';
-import { RssService } from './rss.service';
+import { KeepaliveHttpModule } from '../keepalive-http.module.js';
+import { RssController } from './rss.controller.js';
+import { RssService } from './rss.service.js';
 
 @Module({
   imports: [ConfigModule, KeepaliveHttpModule],

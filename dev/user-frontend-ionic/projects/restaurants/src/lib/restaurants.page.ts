@@ -37,14 +37,34 @@
  * termes.
  */
 
-import { Component, OnInit } from '@angular/core';
+import { AsyncPipe, DecimalPipe } from '@angular/common';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Geolocation, Position } from '@capacitor/geolocation';
-import { NetworkService } from '@multi/shared';
+import {
+  IonCol,
+  IonContent,
+  IonGrid,
+  IonIcon,
+  IonItem,
+  IonLabel,
+  IonList,
+  IonProgressBar,
+  IonRow,
+  IonText,
+} from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
 import { getDistance } from 'geolib';
 import { combineLatest, from, Observable, of } from 'rxjs';
 import { catchError, map, take, tap } from 'rxjs/operators';
-import { favoritesRestaurantsIds$, RestaurantOpening, restaurants$, setFavoriteRestaurant, unsetFavoriteRestaurant } from './restaurants.repository';
+import { HeaderComponent, NetworkService } from '@multi/shared';
+import {
+  favoritesRestaurantsIds$,
+  RestaurantOpening,
+  restaurants$,
+  setFavoriteRestaurant,
+  unsetFavoriteRestaurant,
+} from './restaurants.repository';
 import { RestaurantsService } from './restaurants.service';
 
 export interface PositionDto {
@@ -64,28 +84,37 @@ export interface RestaurantDto {
   selector: 'app-restaurants',
   templateUrl: './restaurants.page.html',
   styleUrls: ['../../../../src/theme/app-theme/styles/restaurants/restaurants.page.scss'],
+  imports: [
+    AsyncPipe,
+    DecimalPipe,
+    TranslatePipe,
+    HeaderComponent,
+    IonCol,
+    IonContent,
+    IonGrid,
+    IonIcon,
+    IonItem,
+    IonLabel,
+    IonList,
+    IonProgressBar,
+    IonRow,
+    IonText,
+  ],
 })
 export class RestaurantsPage implements OnInit {
+  private restaurantsService = inject(RestaurantsService);
+  private router = inject(Router);
+  private networkService = inject(NetworkService);
 
   public restaurants$: Observable<RestaurantDto[]>;
   public isLoading = false;
   public restaurantsIsEmpty$: Observable<boolean>;
-
-
-  constructor(
-    private restaurantsService: RestaurantsService,
-    private router: Router,
-    private networkService: NetworkService
-  ) {
-  }
   async ngOnInit() {
     if (!(await this.networkService.getConnectionStatus()).connected) {
       return;
     }
 
-    this.restaurantsService.loadAndStoreRestaurants()
-      .pipe(take(1))
-      .subscribe();
+    this.restaurantsService.loadAndStoreRestaurants().pipe(take(1)).subscribe();
   }
 
   ionViewWillEnter() {
@@ -104,8 +133,10 @@ export class RestaurantsPage implements OnInit {
     this.router.navigate(['restaurants', restaurantId, 'menu']);
   }
 
-  public getCurrentOpening(opening: Record<string, RestaurantOpening>): RestaurantOpening | undefined {
-    return opening[1 + (new Date().getDay() + 6) % 7]; // 1 = monday, 7 = sunday
+  public getCurrentOpening(
+    opening: Record<string, RestaurantOpening>,
+  ): RestaurantOpening | undefined {
+    return opening[1 + ((new Date().getDay() + 6) % 7)]; // 1 = monday, 7 = sunday
   }
 
   private getMyCurrentPosition(): Observable<PositionDto> {
@@ -114,14 +145,17 @@ export class RestaurantsPage implements OnInit {
         const { latitude, longitude } = position.coords;
         return {
           latitude,
-          longitude
+          longitude,
         };
       }),
-      catchError(() => of(null))
+      catchError(() => of(null)),
     );
   }
 
-  private calculateDistanceInKilometers(fromPosition: PositionDto, toPosition: PositionDto): number {
+  private calculateDistanceInKilometers(
+    fromPosition: PositionDto,
+    toPosition: PositionDto,
+  ): number {
     return getDistance(fromPosition, toPosition) / 1000;
   }
 
@@ -131,17 +165,19 @@ export class RestaurantsPage implements OnInit {
     this.restaurants$ = combineLatest([
       restaurants$,
       this.getMyCurrentPosition(),
-      favoritesRestaurantsIds$
+      favoritesRestaurantsIds$,
     ]).pipe(
       map(([restaurants, myPosition, favoritesRestaurantsIds]) => {
         const restaurantsSortedByDistance = restaurants
           // Restaurant from store to RestaurantDto to display
-          .map(restaurant => {
+          .map((restaurant) => {
             const restaurantPosition = {
               latitude: restaurant.latitude,
-              longitude: restaurant.longitude
+              longitude: restaurant.longitude,
             };
-            const distance = (myPosition) ? this.calculateDistanceInKilometers(myPosition, restaurantPosition) : null;
+            const distance = myPosition
+              ? this.calculateDistanceInKilometers(myPosition, restaurantPosition)
+              : null;
             return {
               id: restaurant.id,
               title: restaurant.title,
@@ -149,23 +185,27 @@ export class RestaurantsPage implements OnInit {
               shortDesc: restaurant.shortDesc,
               opening: restaurant.opening,
               distance,
-              favorite: favoritesRestaurantsIds.includes(restaurant.id)
+              favorite: favoritesRestaurantsIds.includes(restaurant.id),
             };
           })
           // sort by distance
           .sort((restaurantA, restaurantB) => restaurantA.distance - restaurantB.distance);
 
         // favorite restaurants comes first
-        const favoriteRestaurants = restaurantsSortedByDistance.filter(r => r.favorite === true);
-        const nonFavoriteRestaurants = restaurantsSortedByDistance.filter(r => r.favorite === false);
+        const favoriteRestaurants = restaurantsSortedByDistance.filter((r) => r.favorite === true);
+        const nonFavoriteRestaurants = restaurantsSortedByDistance.filter(
+          (r) => r.favorite === false,
+        );
 
         return [...favoriteRestaurants, ...nonFavoriteRestaurants];
       }),
       tap(() => {
         this.isLoading = false;
-      })
+      }),
     );
 
-    this.restaurantsIsEmpty$ = this.restaurants$.pipe(map(restaurants => restaurants.length === 0));
+    this.restaurantsIsEmpty$ = this.restaurants$.pipe(
+      map((restaurants) => restaurants.length === 0),
+    );
   }
 }

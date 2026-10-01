@@ -37,15 +37,15 @@
  */
 
 import { Injectable, Logger } from '@nestjs/common';
-import { ContactUsDirectus } from '@directus/collections/contact-us/contact-us.directus.model';
-import { ContactUs } from '@common/models/contact-us.model';
-import { DirectusService } from '@directus/directus.service';
 import { OnEvent } from '@nestjs/event-emitter';
-import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
-import { ContactUsSchema } from '@common/validation/schemas/contact-us.schema';
-import { normalizeEmptyStringToNull } from '@common/utils/normalize';
-import { CacheService } from '@cache/cache.service';
-import { CacheCollection } from '@cache/cache.config';
+import { CacheCollection } from '#cache/cache.config.js';
+import { CacheService } from '#cache/cache.service.js';
+import { ValidateMapping } from '#common/decorators/validate-mapping.decorator.js';
+import { ContactUs } from '#common/models/contact-us.model.js';
+import { normalizeEmptyStringToNull } from '#common/utils/normalize.js';
+import { ContactUsSchema } from '#common/validation/schemas/contact-us.schema.js';
+import { ContactUsDirectus } from '#directus/collections/contact-us/contact-us.directus.model.js';
+import { DirectusService } from '#directus/directus.service.js';
 
 @Injectable()
 export class ContactUsDirectusService {
@@ -63,7 +63,7 @@ export class ContactUsDirectusService {
     } catch (error) {
       this.logger.error(
         'Failed to preload contact-us after cache clear:',
-        error.message,
+        error instanceof Error ? error.message : JSON.stringify(error),
       );
     }
   }

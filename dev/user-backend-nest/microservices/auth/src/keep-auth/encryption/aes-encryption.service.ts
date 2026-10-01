@@ -37,9 +37,9 @@
  * termes.
  */
 
+import { createCipheriv, createDecipheriv, randomBytes } from 'crypto';
 import { Injectable } from '@nestjs/common';
-import { AesEncryptionParametersDto } from './aes-encryption.dto';
-import { randomBytes, createCipheriv, createDecipheriv } from 'crypto';
+import { AesEncryptionParametersDto } from './aes-encryption.dto.js';
 
 const KEY_SIZE = 32;
 const IV_SIZE = 16;

@@ -37,8 +37,9 @@
   ~ termes.
   -->
 
-<ion-item button="true" mode="md" detail="true" *ngIf="translatedPageContent$ | async as pageContent" routerLink="/contact-us">
-  <ion-icon slot="start" class="app-icon-4" [name]="pageContent.icon" aria-label=""></ion-icon>
-  <ion-label class="app-text-3 light">{{pageContent.title}}</ion-label>
-</ion-item>
-
+@if (translatedPageContent$ | async; as pageContent) {
+  <ion-item [button]="true" mode="md" [detail]="true" routerLink="/contact-us">
+    <ion-icon slot="start" class="app-icon-4" [name]="pageContent.icon" aria-label="" />
+    <ion-label class="app-text-3 light">{{ pageContent.title }}</ion-label>
+  </ion-item>
+}

@@ -37,18 +37,25 @@
   ~ termes.
   -->
 <svg
-    xmlns="http://www.w3.org/2000/svg"
-    height="100%"
-    width="100%"
-    viewBox="0 0 850 540"
-    preserveAspectRatio="xMidYMin meet"
-    class="svg-card"
+  xmlns="http://www.w3.org/2000/svg"
+  height="100%"
+  width="100%"
+  viewBox="0 0 850 540"
+  preserveAspectRatio="xMidYMin meet"
+  class="svg-card"
 >
   <!-- Card white background -->
-  <rect class="card-background" rx="15" width="850" height="540" fill="white"/>
+  <rect class="card-background" rx="15" width="850" height="540" fill="white" />
 
   <!-- User photo -->
-  <image class="card-user-photo" height="320" width="240" x="605" y="5" [attr.href]="userCard.photo"/>
+  <image
+    class="card-user-photo"
+    height="320"
+    width="240"
+    x="605"
+    y="5"
+    [attr.href]="userCard.photo"
+  />
 
   <!-- Lastname -->
   <text class="card-lastname" x="40" y="70">
@@ -91,7 +98,14 @@
   </text>
 
   <!-- Logo Etablissement -->
-  <image class="card-logo" height="150" width="150" x="40" y="400" href="assets/cards/card/university-logo.svg"/>
+  <image
+    class="card-logo"
+    height="150"
+    width="150"
+    x="40"
+    y="400"
+    href="assets/cards/card/university-logo.svg"
+  />
 
   <!-- Millesime y -->
   <text class="card-date-1" x="650" y="420">
@@ -102,5 +116,4 @@
   <text class="card-date-2" x="710" y="455">
     {{ userCard.endDate }}
   </text>
-
 </svg>

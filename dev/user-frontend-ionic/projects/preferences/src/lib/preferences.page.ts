@@ -37,23 +37,30 @@
  * termes.
  */
 
-import { Component, OnInit, QueryList, Type, ViewChildren, ViewContainerRef } from '@angular/core';
-import { ProjectModuleService } from '@multi/shared';
+import {
+  Component,
+  inject,
+  OnInit,
+  QueryList,
+  Type,
+  ViewChildren,
+  ViewContainerRef,
+} from '@angular/core';
+import { IonContent } from '@ionic/angular';
+import { HeaderComponent, ProjectModuleService } from '@multi/shared';
 
 @Component({
   selector: 'app-preferences',
   templateUrl: './preferences.page.html',
   styleUrls: ['../../../../src/theme/app-theme/styles/preferences/preferences.page.scss'],
+  imports: [HeaderComponent, IonContent],
 })
 export class PreferencesPage implements OnInit {
+  private projectModuleService = inject(ProjectModuleService);
 
-  @ViewChildren('preferences', {read: ViewContainerRef}) preferences: QueryList<ViewContainerRef>;
+  @ViewChildren('preferences', { read: ViewContainerRef }) preferences: QueryList<ViewContainerRef>;
 
   public preferencesComponents: Type<any>[] = [];
-
-  constructor(
-    private projectModuleService: ProjectModuleService
-  ) { }
 
   ngOnInit(): void {
     this.preferencesComponents = this.projectModuleService.getPreferencesComponents();
@@ -66,5 +73,4 @@ export class PreferencesPage implements OnInit {
       viewContainerRef.createComponent(componentToCreate);
     });
   }
-
 }

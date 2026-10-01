@@ -40,14 +40,13 @@
 import { InjectionToken } from '@angular/core';
 
 export interface MapModuleConfig {
-    mapType: 'mapbox' | 'osm';
-    accessToken: string;
-    minZoom: number;
-    maxZoom: number;
-    maxBounds: boolean;
-    highAccuracy: boolean;
-    maxDisplayedFloatingButton: number;
+  mapType: 'mapbox' | 'osm';
+  accessToken: string;
+  minZoom: number;
+  maxZoom: number;
+  maxBounds: boolean;
+  highAccuracy: boolean;
+  maxDisplayedFloatingButton: number;
 }
 
-export const MAP_CONFIG =
-  new InjectionToken<MapModuleConfig>('Map module config');
+export const MAP_CONFIG = new InjectionToken<MapModuleConfig>('Map module config');

@@ -37,8 +37,8 @@
  */
 
 import { Field, ObjectType } from '@nestjs/graphql';
-import { KnowledgeBaseTranslations } from '@common/models/translations.model';
-import { Authorization } from '@common/models/authorization.model';
+import { Authorization } from '#common/models/authorization.model.js';
+import { KnowledgeBaseTranslations } from '#common/models/translations.model.js';
 
 @ObjectType()
 export class KnowledgeBase {

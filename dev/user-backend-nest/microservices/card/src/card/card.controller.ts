@@ -40,8 +40,8 @@
 import { Controller } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
 import { Observable } from 'rxjs';
-import { UserCardDto } from './card.dto';
-import { CardService } from './card.service';
+import { UserCardDto } from './card.dto.js';
+import { CardService } from './card.service.js';
 
 @Controller()
 export class CardController {

@@ -37,30 +37,35 @@
  * termes.
  */
 
-import { Component } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NetworkService, StatisticsService } from '@multi/shared';
+import { IonItem, IonLabel } from '@ionic/angular';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
+import { CustomIconComponent, NetworkService, StatisticsService } from '@multi/shared';
 import { StaticPagesRepository, TranslatedStaticPage } from '../../static-pages.repository';
 import { StaticPagesService } from '../../static-pages.service';
 
 @Component({
   selector: 'app-static-pages-widget',
   templateUrl: './static-pages-widget.component.html',
-  styleUrls: ['../../../../../../src/theme/app-theme/styles/static-pages/static-pages-widget.component.scss'],
+  styleUrls: [
+    '../../../../../../src/theme/app-theme/styles/static-pages/static-pages-widget.component.scss',
+  ],
+  imports: [AsyncPipe, CustomIconComponent, IonItem, IonLabel],
 })
 export class StaticPagesWidgetComponent {
+  private route = inject(ActivatedRoute);
+  private staticPagesService = inject(StaticPagesService);
+  private staticPagesRepository = inject(StaticPagesRepository);
+  private router = inject(Router);
+  private statisticsService = inject(StatisticsService);
+  private networkService = inject(NetworkService);
 
   public translatedStaticPages$: Observable<TranslatedStaticPage[]>;
 
-  constructor(private route: ActivatedRoute,
-    private staticPagesService: StaticPagesService,
-    private staticPagesRepository: StaticPagesRepository,
-    private router: Router,
-    private statisticsService: StatisticsService,
-    private networkService: NetworkService,
-  ) {
+  constructor() {
     this.translatedStaticPages$ = this.staticPagesRepository.translatedStaticPages$;
   }
 
@@ -69,10 +74,7 @@ export class StaticPagesWidgetComponent {
       return;
     }
 
-    this.staticPagesService.loadAndStoreStaticPages()
-      .pipe(
-        take(1)
-      ).subscribe();
+    this.staticPagesService.loadAndStoreStaticPages().pipe(take(1)).subscribe();
   }
 
   public onClick(page: TranslatedStaticPage): Promise<boolean> {

@@ -37,23 +37,32 @@
  * termes.
  */
 
-import {ErrorHandler, Injectable, NgZone} from '@angular/core';
+import { ErrorHandler, inject, Injectable, InjectionToken, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { NoTenantSelectedError } from './multi-tenant.error';
+
+/**
+ * Token du handler de repli auquel `MultiTenantErrorHandler` délègue toute
+ * erreur qui n'est pas liée au tenant (typiquement le `AppErrorHandler` de
+ * l'application hôte).
+ */
+export const FALLBACK_ERROR_HANDLER = new InjectionToken<ErrorHandler>('FALLBACK_ERROR_HANDLER');
 
 @Injectable({
   providedIn: 'root',
 })
 export class MultiTenantErrorHandler implements ErrorHandler {
-  constructor(
-    private router: Router,
-    private zone: NgZone
-  ) {
-  }
+  private router = inject(Router);
+  private zone = inject(NgZone);
+  private fallback = inject(FALLBACK_ERROR_HANDLER, { optional: true });
 
   handleError(error: any): void {
     if (error instanceof NoTenantSelectedError) {
       this.zone.run(() => this.router.navigate(['/multi-tenant/select']));
+      return;
+    }
+    if (this.fallback) {
+      this.fallback.handleError(error);
       return;
     }
     throw error;

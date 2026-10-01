@@ -40,12 +40,12 @@
 import { Controller } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
 import { Observable } from 'rxjs';
-import {
+import type {
   ChatbotButtonPayloadRequestDto,
   ChatbotResponseDto,
   ChatbotTextRequestDto,
-} from './chatbot.dto';
-import { ChatbotService } from './chatbot.service';
+} from './chatbot.dto.js';
+import { ChatbotService } from './chatbot.service.js';
 
 @Controller()
 export class ChatbotController {

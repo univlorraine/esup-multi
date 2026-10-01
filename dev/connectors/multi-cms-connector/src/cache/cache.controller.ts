@@ -37,16 +37,16 @@
  */
 
 import {
+  BadRequestException,
   Controller,
-  Logger,
+  Get,
   HttpCode,
   HttpStatus,
-  BadRequestException,
-  Get,
+  Logger,
   Param,
 } from '@nestjs/common';
-import { CacheService } from './cache.service';
-import { CacheCollection, isCacheEnabled } from './cache.config';
+import { CacheCollection, isCacheEnabled } from './cache.config.js';
+import { CacheService } from './cache.service.js';
 
 @Controller('cache')
 export class CacheController {

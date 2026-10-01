@@ -37,11 +37,11 @@
  * termes.
  */
 
-const express = require('express');
+import express from 'express';
+import { chatbotData } from './chatbot.mock.js';
+
 const router = express.Router();
-const { chatbotData } = require('./chatbot.mock');
 
 router.post('/', (req, res) => res.json(chatbotData));
 
-
-module.exports = router;
+export default router;

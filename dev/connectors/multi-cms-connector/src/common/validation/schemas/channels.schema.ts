@@ -36,8 +36,8 @@
  * termes.
  */
 import { z } from 'zod';
-import { IdSchema } from '@common/validation/schemas/base-type.schema';
-import { ChannelsTranslationsSchema } from '@common/validation/schemas/translations.schema';
+import { IdSchema } from '#common/validation/schemas/base-type.schema.js';
+import { ChannelsTranslationsSchema } from '#common/validation/schemas/translations.schema.js';
 
 export const ChannelsSchema = z.object({
   id: IdSchema,

@@ -51,7 +51,7 @@ const store = createStore(
   { name: STORE_NAME },
   withProps<AppUpdateProps>({
     dismissedVersion: null,
-  })
+  }),
 );
 
 export const persist = persistState(store, {

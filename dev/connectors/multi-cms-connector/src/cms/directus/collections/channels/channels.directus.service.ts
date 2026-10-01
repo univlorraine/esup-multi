@@ -37,15 +37,15 @@
  */
 
 import { Injectable, Logger } from '@nestjs/common';
-import { ChannelsDirectus } from '@directus/collections/channels/channels.directus.model';
-import { Channels } from '@common/models/channels.model';
-import { DirectusService } from '@directus/directus.service';
 import { OnEvent } from '@nestjs/event-emitter';
-import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
-import { ChannelsSchema } from '@common/validation/schemas/channels.schema';
-import { normalizeEmptyStringToNull } from '@common/utils/normalize';
-import { CacheService } from '@cache/cache.service';
-import { CacheCollection } from '@cache/cache.config';
+import { CacheCollection } from '#cache/cache.config.js';
+import { CacheService } from '#cache/cache.service.js';
+import { ValidateMapping } from '#common/decorators/validate-mapping.decorator.js';
+import { Channels } from '#common/models/channels.model.js';
+import { normalizeEmptyStringToNull } from '#common/utils/normalize.js';
+import { ChannelsSchema } from '#common/validation/schemas/channels.schema.js';
+import { ChannelsDirectus } from '#directus/collections/channels/channels.directus.model.js';
+import { DirectusService } from '#directus/directus.service.js';
 
 @Injectable()
 export class ChannelsDirectusService {
@@ -63,7 +63,7 @@ export class ChannelsDirectusService {
     } catch (error) {
       this.logger.error(
         'Failed to preload channels after cache clear:',
-        error.message,
+        error instanceof Error ? error.message : JSON.stringify(error),
       );
     }
   }
@@ -120,7 +120,7 @@ export class ChannelsDirectusService {
         }
       }
     `);
-    return data.channels.map(this.mapToMultiModel);
+    return data.channels.map(this.mapToMultiModel.bind(this));
   }
 
   async getChannel(id: number): Promise<Channels> {

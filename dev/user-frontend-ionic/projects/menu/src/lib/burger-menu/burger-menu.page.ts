@@ -37,32 +37,80 @@
  * termes.
  */
 
-import { Component, Inject, OnDestroy } from '@angular/core';
-import { AlertController } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
+import { AsyncPipe } from '@angular/common';
+import { Component, inject, OnDestroy } from '@angular/core';
 import {
-  AuthenticatedUser, authenticatedUser$, isDarkTheme, isDarkTheme$, MenuItem, MenuOpenerService,
-  MenuService as SharedMenuService, setIsDarkTheme, setLanguage, setUserHaveSetThemeInApp,
-  WidgetLifecycleService, GuidedTourService, VersionService, MultiTenantService, Tenant, tenantThemeApplied$
-} from '@multi/shared';
+  AlertController,
+  IonButton,
+  IonContent,
+  IonIcon,
+  IonItem,
+  IonLabel,
+  IonList,
+  IonRow,
+} from '@ionic/angular';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { Observable, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
+import {
+  AuthenticatedUser,
+  authenticatedUser$,
+  CustomIconComponent,
+  GuidedTourService,
+  isDarkTheme,
+  isDarkTheme$,
+  MenuItem,
+  MenuOpenerService,
+  MultiTenantService,
+  setIsDarkTheme,
+  setLanguage,
+  setUserHaveSetThemeInApp,
+  MenuService as SharedMenuService,
+  Tenant,
+  tenantThemeApplied$,
+  VersionService,
+  WidgetComponent,
+  WidgetLifecycleService,
+} from '@multi/shared';
 
 @Component({
   selector: 'app-menu',
   templateUrl: './burger-menu.page.html',
   styleUrls: ['../../../../../src/theme/app-theme/styles/menu/burger-menu.page.scss'],
+  imports: [
+    AsyncPipe,
+    TranslatePipe,
+    WidgetComponent,
+    CustomIconComponent,
+    IonButton,
+    IonContent,
+    IonIcon,
+    IonItem,
+    IonLabel,
+    IonList,
+    IonRow,
+  ],
 })
 export class BurgerMenuPage implements OnDestroy {
+  private environment = inject<any>('environment' as any);
+  private sharedMenuService = inject(SharedMenuService);
+  private widgetLifecycleService = inject(WidgetLifecycleService);
+  private guidedTourService = inject(GuidedTourService);
+  private versionService = inject(VersionService);
+  private alertController = inject(AlertController);
+  private translateService = inject(TranslateService);
+  menuOpenerService = inject(MenuOpenerService);
+  multiTenantService = inject(MultiTenantService);
+
   public widgetIds = {
     auth: 'auth:auth-widget',
     contactUs: 'contact-us:contact-us-menu-item-widget',
     staticPages: 'static-pages:static-pages-widget',
-    socialNetwork: 'social-network:social-network-widget'
+    socialNetwork: 'social-network:social-network-widget',
   };
   public dynamicMenuItems$: Observable<MenuItem[]>;
   public staticMenuItems$: Observable<MenuItem[]>;
-  public languages: Array<string> = [];
+  public languages: string[] = [];
   appVersion$: Observable<string>;
   authenticatedUser$: Observable<AuthenticatedUser>;
   public darkModeEnabled: boolean;
@@ -71,26 +119,15 @@ export class BurgerMenuPage implements OnDestroy {
   isUniversitiesButtonVisible: boolean;
   private defaultTenantThemeSubscription: Subscription;
 
-  constructor(
-    @Inject('environment')
-    private environment: any,
-    private sharedMenuService: SharedMenuService,
-    private widgetLifecycleService: WidgetLifecycleService,
-    private guidedTourService: GuidedTourService,
-    private versionService: VersionService,
-    private alertController: AlertController,
-    private translateService: TranslateService,
-  public menuOpenerService: MenuOpenerService,
-    public multiTenantService: MultiTenantService
-  ) {
+  constructor() {
     this.languages = this.environment.languages;
     this.authenticatedUser$ = authenticatedUser$;
     this.tenantThemeApplied$ = tenantThemeApplied$;
     this.staticMenuItems$ = this.sharedMenuService.burgerMenuItems$.pipe(
-      map(menuItems => menuItems.filter(menuItem => menuItem.type === 'static'))
+      map((menuItems) => menuItems.filter((menuItem) => menuItem.type === 'static')),
     );
     this.dynamicMenuItems$ = this.sharedMenuService.burgerMenuItems$.pipe(
-      map(menuItems => menuItems.filter(menuItem => menuItem.type === 'dynamic'))
+      map((menuItems) => menuItems.filter((menuItem) => menuItem.type === 'dynamic')),
     );
     this.appVersion$ = this.versionService.getCurrentAppVersion();
 
@@ -128,13 +165,17 @@ export class BurgerMenuPage implements OnDestroy {
     this.widgetLifecycleService.sendWidgetViewDidLeave(Object.values(this.widgetIds));
   }
 
-  getMenuId(menuItem: MenuItem){
+  getMenuId(menuItem: MenuItem) {
     return this.guidedTourService.generateMenuItemIdFromTitle(menuItem);
   }
 
   async clearSelectedTenant() {
-    const header = this.translateService.instant('MULTI-TENANT.CHANGE_UNIVERSITY_CONFIRMATION.HEADER');
-    const message = this.translateService.instant('MULTI-TENANT.CHANGE_UNIVERSITY_CONFIRMATION.MESSAGE');
+    const header = this.translateService.instant(
+      'MULTI-TENANT.CHANGE_UNIVERSITY_CONFIRMATION.HEADER',
+    );
+    const message = this.translateService.instant(
+      'MULTI-TENANT.CHANGE_UNIVERSITY_CONFIRMATION.MESSAGE',
+    );
     const confirmation = await this.alertController.create({
       header,
       message,
@@ -158,7 +199,8 @@ export class BurgerMenuPage implements OnDestroy {
   }
 
   displayUniversitiesButton(): boolean {
-    const isSingleTenant: boolean = this.multiTenantService.getFlattenTenantObjects(undefined, 0).length === 1;
+    const isSingleTenant: boolean =
+      this.multiTenantService.getFlattenTenantObjects(undefined, 0).length === 1;
     const currentTenant: Tenant = this.multiTenantService.getCurrentTenantOrThrowError();
     return !isSingleTenant || currentTenant.isGroup === true;
   }

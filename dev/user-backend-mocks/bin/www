@@ -43,10 +43,13 @@
  * Module dependencies.
  */
 
-require('dotenv').config();
-const app = require('../src/app');
-const debug = require('debug')('user-backend-mocks:server');
-const http = require('http');
+import 'dotenv/config'
+import app from '../src/app.js';
+import debug from 'debug';
+import http from 'http';
+
+const Logger = debug('user-backend-mocks:server');
+debug.enable('user-backend-mocks:server');
 
 /**
  * Get port from environment and store in Express.
@@ -126,5 +129,5 @@ function onListening() {
   const bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
-  debug('Listening on ' + bind);
+  Logger('Listening on ' + bind);
 }

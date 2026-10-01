@@ -37,17 +37,17 @@
  */
 
 import { Injectable, Logger } from '@nestjs/common';
-import { Login } from '@common/models/login.model';
-import { WordpressService } from '@wordpress/wordpress.service';
-import { LoginTranslations } from '@common/models/translations.model';
-import { LoginTranslationsWordpress } from '@wordpress/collections/translations/translations.wordpress.model';
-import { LoginWordpress } from '@wordpress/collections/login/login.wordpress.model';
 import { OnEvent } from '@nestjs/event-emitter';
-import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
-import { LoginSchema } from '@common/validation/schemas/login.schema';
-import { normalizeEmptyStringToNull } from '@common/utils/normalize';
-import { CacheService } from '@cache/cache.service';
-import { CacheCollection } from '@cache/cache.config';
+import { CacheCollection } from '#cache/cache.config.js';
+import { CacheService } from '#cache/cache.service.js';
+import { ValidateMapping } from '#common/decorators/validate-mapping.decorator.js';
+import { Login } from '#common/models/login.model.js';
+import { LoginTranslations } from '#common/models/translations.model.js';
+import { normalizeEmptyStringToNull } from '#common/utils/normalize.js';
+import { LoginSchema } from '#common/validation/schemas/login.schema.js';
+import { LoginWordpress } from '#wordpress/collections/login/login.wordpress.model.js';
+import { LoginTranslationsWordpress } from '#wordpress/collections/translations/translations.wordpress.model.js';
+import { WordpressService } from '#wordpress/wordpress.service.js';
 
 // TODO: Move FRENCH_CODE to .env and rename it to DEFAULT_LANGUAGE_CODE
 const FRENCH_CODE = 'FR';
@@ -67,7 +67,7 @@ export class LoginWordpressService {
     } catch (error) {
       this.logger.error(
         'Failed to preload login after cache clear:',
-        error.message,
+        error instanceof Error ? error.message : JSON.stringify(error),
       );
     }
   }

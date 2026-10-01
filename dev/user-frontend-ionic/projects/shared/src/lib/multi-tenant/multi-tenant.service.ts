@@ -37,27 +37,34 @@
  * termes.
  */
 
-import {Inject, Injectable} from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { getRegistry } from '@ngneat/elf';
+import { BehaviorSubject, firstValueFrom, Observable, Subject, withLatestFrom } from 'rxjs';
+import { filter, take } from 'rxjs/operators';
+import {
+  authenticatedUserRepoInitialized$,
+  userIsAuthenticated$,
+} from '../auth/authenticated-user.repository';
+import { FCMService } from '../fcm/fcm-global.service';
+import { setTenantThemeApplied } from '../theme/theme.repository';
+import { getSelectedTenantId, updateSelectedTenantId } from './multi-tenant-selected.repository';
 import {
   NoModulesConfigurationError,
   NoTenantSelectedError,
   NoTenantsError,
-  NoTenantWithIdError
+  NoTenantWithIdError,
 } from './multi-tenant.error';
 import { Tenant } from './multi-tenant.model';
-import { updateSelectedTenantId, getSelectedTenantId } from './multi-tenant-selected.repository';
-import { getRegistry } from '@ngneat/elf';
-import { setTenantThemeApplied } from '../theme/theme.repository';
-import { FCMService } from '../fcm/fcm-global.service';
-import { BehaviorSubject, firstValueFrom, Observable, Subject, withLatestFrom } from 'rxjs';
-import { authenticatedUserRepoInitialized$, userIsAuthenticated$ } from '../auth/authenticated-user.repository';
-import { filter, take } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MultiTenantService {
+  private environment = inject<any>('environment' as any);
+  private router = inject(Router);
+  private fcmService = inject(FCMService);
+
   public currentTenantLogo$: Observable<string>;
   public tenantChange$: Observable<Tenant>;
 
@@ -68,28 +75,26 @@ export class MultiTenantService {
   private currentTenantLogoSubject = new BehaviorSubject<string>(this.environment.defaultLogo);
   private tenantChangeSubject = new Subject<Tenant>();
 
-  constructor(
-    @Inject('environment')
-    private environment: any,
-    private router: Router,
-    private fcmService: FCMService,
-  ) {
+  constructor() {
     this.currentTenantLogo$ = this.currentTenantLogoSubject.asObservable();
     this.tenantChange$ = this.tenantChangeSubject.asObservable();
 
     const tenantId = getSelectedTenantId();
-    if(tenantId) {
+    if (tenantId) {
       this.setCurrentTenantById(tenantId);
     }
 
-    userIsAuthenticated$.pipe(
-      withLatestFrom(authenticatedUserRepoInitialized$),
-      filter(([isAuth, isAuthRepoInit]) => !isAuth && isAuthRepoInit)
-    ).subscribe(() => {
-      if(this.currentTenant && this.canUseGroupMode()) { // Only disconnect from tenant when we can use the group mode
-        this.disconnectFromTenant();
-      }
-    });
+    userIsAuthenticated$
+      .pipe(
+        withLatestFrom(authenticatedUserRepoInitialized$),
+        filter(([isAuth, isAuthRepoInit]) => !isAuth && isAuthRepoInit),
+      )
+      .subscribe(() => {
+        if (this.currentTenant && this.canUseGroupMode()) {
+          // Only disconnect from tenant when we can use the group mode
+          this.disconnectFromTenant();
+        }
+      });
 
     this.emitServiceReady();
   }
@@ -104,7 +109,7 @@ export class MultiTenantService {
   }
 
   public getCurrentTenantOrThrowError(): Tenant {
-    if(!this.isCurrentTenantStateAllowed()) {
+    if (!this.isCurrentTenantStateAllowed()) {
       throw new NoTenantSelectedError();
     }
 
@@ -112,8 +117,8 @@ export class MultiTenantService {
   }
 
   public isCurrentTenantStateAllowed(): boolean {
-    if(this.currentTenant) {
-      if(this.currentTenant.isGroup === false) {
+    if (this.currentTenant) {
+      if (this.currentTenant.isGroup === false) {
         // There's a tenant and it's not a group, all good
         return true;
       }
@@ -125,7 +130,7 @@ export class MultiTenantService {
     // No tenant is selected
     const availableTenants = this.getAvailableTenants();
 
-    if(!this.isSingleTenant()) {
+    if (!this.isSingleTenant()) {
       // There are multiple tenants, one must be selected
       return false;
     }
@@ -148,10 +153,11 @@ export class MultiTenantService {
     updateSelectedTenantId(tenantId);
     this.currentTenant = foundTenant;
     this.applyTenantTheme(this.currentTenant.id);
-    if(previousTenantId !== tenantId) { // If the tenant changes from previous value
+    if (previousTenantId !== tenantId) {
+      // If the tenant changes from previous value
       this.tenantChangeSubject.next(foundTenant);
     }
-    if(this.currentTenant?.logo) {
+    if (this.currentTenant?.logo) {
       this.currentTenantLogoSubject.next(this.currentTenant.logo);
     }
 
@@ -187,16 +193,18 @@ export class MultiTenantService {
     }, modulesConfiguration);
   }
 
-  public async redirectToTenantSelection(backToAuth: boolean = false) {
-    if(backToAuth) {
-      await this.router.navigate(['/multi-tenant/select'], {queryParams: {redirectToAuth: true}});
+  public async redirectToTenantSelection(backToAuth = false) {
+    if (backToAuth) {
+      await this.router.navigate(['/multi-tenant/select'], {
+        queryParams: { redirectToAuth: true },
+      });
       return;
     }
     await this.router.navigate(['/multi-tenant/select']);
   }
 
   public disconnectFromTenant() {
-    getRegistry().forEach(store => store.reset());
+    getRegistry().forEach((store) => store.reset());
     updateSelectedTenantId(undefined);
     const defaultTheme = this.environment.defaultTheme || '';
     this.currentTenant = undefined;
@@ -261,7 +269,6 @@ export class MultiTenantService {
   }
 
   private findTenant(tenantId: string): Tenant {
-
     const flattenedTenants = this.getFlattenTenantObjects(undefined, 0);
 
     return flattenedTenants.find((tenant: Tenant) => tenant.id === tenantId);
@@ -270,6 +277,9 @@ export class MultiTenantService {
   // Tells if we can use the tenant group, i.e. not having a specific tenant selected
   private canUseGroupMode(): boolean {
     // There is a group defined and the group does not force tenant selection
-    return this.getAvailableTenants()[0].isGroup === true && this.getAvailableTenants()[0].forceSelect === false
+    return (
+      this.getAvailableTenants()[0].isGroup === true &&
+      this.getAvailableTenants()[0].forceSelect === false
+    );
   }
 }

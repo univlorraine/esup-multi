@@ -40,17 +40,17 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
-import { LoginPageContentService } from '../page-content/login-page-content/login-page-content.service';
-import { AuthController } from './auth.controller';
-import { AuthService } from './auth.service';
-import { AuthenticatedUserRepository } from './authenticated-user/authenticated-user.repository';
+import { KeepaliveHttpModule } from '../keepalive-http.module.js';
+import { LoginPageContentService } from '../page-content/login-page-content/login-page-content.service.js';
+import { AuthController } from './auth.controller.js';
+import { AuthService } from './auth.service.js';
+import { AuthenticatedUserRepository } from './authenticated-user/authenticated-user.repository.js';
 import {
   AuthenticatedUser,
   AuthenticatedUserSchema,
-} from './authenticated-user/authenticated-user.schema';
-import { CasService } from './cas.service';
-import { UserService } from './user.service';
-import { KeepaliveHttpModule } from '../keepalive-http.module';
+} from './authenticated-user/authenticated-user.schema.js';
+import { CasService } from './cas.service.js';
+import { UserService } from './user.service.js';
 
 @Module({
   imports: [

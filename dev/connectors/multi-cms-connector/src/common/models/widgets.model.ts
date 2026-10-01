@@ -37,9 +37,9 @@
  */
 
 import { Field, ObjectType } from '@nestjs/graphql';
-import { Authorization } from '@common/models/authorization.model';
-import { WidgetsTranslations } from '@common/models/translations.model';
-import { SettingsByRole } from '@common/models/settings-by-role.model';
+import { Authorization } from '#common/models/authorization.model.js';
+import { SettingsByRole } from '#common/models/settings-by-role.model.js';
+import { WidgetsTranslations } from '#common/models/translations.model.js';
 
 @ObjectType()
 export class Widgets {

@@ -36,8 +36,8 @@
  * termes.
  */
 import { z } from 'zod';
-import { IdSchema } from '@common/validation/schemas/base-type.schema';
-import { StaticPagesTranslationsSchema } from '@common/validation/schemas/translations.schema';
+import { IdSchema } from '#common/validation/schemas/base-type.schema.js';
+import { StaticPagesTranslationsSchema } from '#common/validation/schemas/translations.schema.js';
 
 export const StaticPagesSchema = z.object({
   id: IdSchema,

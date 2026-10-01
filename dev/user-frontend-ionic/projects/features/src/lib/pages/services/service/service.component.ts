@@ -37,23 +37,29 @@
  * termes.
  */
 
-import { Component, Input } from '@angular/core';
-import { isDarkTheme$, MenuOpenerService, ServiceMenuItem, updateFeatureIsNewToFalse } from '@multi/shared';
-
+import { AsyncPipe } from '@angular/common';
+import { Component, inject, Input } from '@angular/core';
+import { IonLabel } from '@ionic/angular';
+import {
+  CustomIconComponent,
+  isDarkTheme$,
+  MenuOpenerService,
+  ServiceMenuItem,
+  updateFeatureIsNewToFalse,
+} from '@multi/shared';
 
 @Component({
   selector: 'app-service',
   templateUrl: './service.component.html',
   styleUrls: ['../../../../../../../src/theme/app-theme/styles/features/service.component.scss'],
+  imports: [AsyncPipe, CustomIconComponent, IonLabel],
 })
 export class ServiceComponent {
+  menuOpenerService = inject(MenuOpenerService);
+
   @Input() menuItem: ServiceMenuItem;
   @Input() draggableIsOn: boolean;
   public isDarkTheme$ = isDarkTheme$;
-
-  constructor(
-    public menuOpenerService: MenuOpenerService
-  ) {}
 
   open(menuItem: ServiceMenuItem) {
     updateFeatureIsNewToFalse(menuItem);

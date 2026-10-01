@@ -38,7 +38,7 @@
  */
 
 import { Controller, Get } from '@nestjs/common';
-import * as infosJsonData from '../infos.json';
+import infosJsonData from '../infos.json' with { type: 'json' };
 
 @Controller()
 export class MonitoringController {

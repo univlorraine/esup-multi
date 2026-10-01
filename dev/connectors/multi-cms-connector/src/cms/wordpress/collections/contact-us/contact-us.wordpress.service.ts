@@ -37,17 +37,17 @@
  */
 
 import { Injectable, Logger } from '@nestjs/common';
-import { ContactUsWordpress } from '@wordpress/collections/contact-us/contact-us.wordpress.model';
-import { ContactUs } from '@common/models/contact-us.model';
-import { WordpressService } from '@wordpress/wordpress.service';
-import { ContactUsTranslations } from '@common/models/translations.model';
-import { ContactUsTranslationsWordpress } from '@wordpress/collections/translations/translations.wordpress.model';
 import { OnEvent } from '@nestjs/event-emitter';
-import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
-import { ContactUsSchema } from '@common/validation/schemas/contact-us.schema';
-import { normalizeEmptyStringToNull } from '@common/utils/normalize';
-import { CacheService } from '@cache/cache.service';
-import { CacheCollection } from '@cache/cache.config';
+import { CacheCollection } from '#cache/cache.config.js';
+import { CacheService } from '#cache/cache.service.js';
+import { ValidateMapping } from '#common/decorators/validate-mapping.decorator.js';
+import { ContactUs } from '#common/models/contact-us.model.js';
+import { ContactUsTranslations } from '#common/models/translations.model.js';
+import { normalizeEmptyStringToNull } from '#common/utils/normalize.js';
+import { ContactUsSchema } from '#common/validation/schemas/contact-us.schema.js';
+import { ContactUsWordpress } from '#wordpress/collections/contact-us/contact-us.wordpress.model.js';
+import { ContactUsTranslationsWordpress } from '#wordpress/collections/translations/translations.wordpress.model.js';
+import { WordpressService } from '#wordpress/wordpress.service.js';
 
 // TODO: Move FRENCH_CODE to .env and rename it to DEFAULT_LANGUAGE_CODE
 const FRENCH_CODE = 'FR';
@@ -67,7 +67,7 @@ export class ContactUsWordpressService {
     } catch (error) {
       this.logger.error(
         'Failed to preload contact-us after cache clear:',
-        error.message,
+        error instanceof Error ? error.message : JSON.stringify(error),
       );
     }
   }

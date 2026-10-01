@@ -37,18 +37,50 @@
  * termes.
  */
 
-import { Component, Input } from '@angular/core';
+import { NgStyle } from '@angular/common';
+import { Component, inject, Input } from '@angular/core';
+import {
+  IonButton,
+  IonCard,
+  IonCardContent,
+  IonCardHeader,
+  IonCardTitle,
+  IonCol,
+  IonIcon,
+  IonRow,
+  IonText,
+} from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
 import { take } from 'rxjs/operators';
-import {Course, Event, HiddenCourse} from '../../schedule.repository';
+import { LocalHourPipe, NavigationService } from '@multi/shared';
+import { Course, Event, HiddenCourse } from '../../schedule.repository';
 import { ScheduleService } from '../../schedule.service';
-import { NavigationService } from '@multi/shared';
+import { ShortenedDatePipe } from '../pipe/shortened-date.pipe';
 
 @Component({
   selector: 'app-event-detail',
   templateUrl: './event-detail.component.html',
   styleUrls: ['../../../../../../src/theme/app-theme/styles/schedule/event-detail.component.scss'],
+  imports: [
+    NgStyle,
+    TranslatePipe,
+    ShortenedDatePipe,
+    LocalHourPipe,
+    IonButton,
+    IonCard,
+    IonCardContent,
+    IonCardHeader,
+    IonCardTitle,
+    IonCol,
+    IonIcon,
+    IonRow,
+    IonText,
+  ],
 })
 export class EventDetailComponent {
+  private scheduleService = inject(ScheduleService);
+  private navigationService = inject(NavigationService);
+
   @Input() event: Event;
   @Input() displayShortenedDate = false;
   @Input() showHideButton = true;
@@ -56,28 +88,26 @@ export class EventDetailComponent {
   public isGroupsVisible = false;
   public courseUrlRegex = /^https?:\/\//;
 
-  constructor(
-    private scheduleService: ScheduleService,
-    private navigationService: NavigationService,
-  ) { }
-
   hideAllSimilarCourse(course: Course) {
     this.disableHideCourseButton = true;
 
-    this.scheduleService.getStoreManager().hiddenCourseList$.pipe(
-      take(1)
-    ).subscribe((hiddenCourseList) => {
-      const hiddenCourseObj: HiddenCourse = {
-        id: course.id,
-        title: course.label
-      };
+    this.scheduleService
+      .getStoreManager()
+      .hiddenCourseList$.pipe(take(1))
+      .subscribe((hiddenCourseList) => {
+        const hiddenCourseObj: HiddenCourse = {
+          id: course.id,
+          title: course.label,
+        };
 
-      if (!hiddenCourseList.some(hiddenCourse => hiddenCourse.id === hiddenCourseObj.id)) {
-        this.scheduleService.getStoreManager().setHiddenCourseList([...hiddenCourseList, hiddenCourseObj]);
-      }
+        if (!hiddenCourseList.some((hiddenCourse) => hiddenCourse.id === hiddenCourseObj.id)) {
+          this.scheduleService
+            .getStoreManager()
+            .setHiddenCourseList([...hiddenCourseList, hiddenCourseObj]);
+        }
 
-      this.scheduleService.emitHideCourseEvt();
-    });
+        this.scheduleService.emitHideCourseEvt();
+      });
   }
 
   openCourseURL(url: string) {

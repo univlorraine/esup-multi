@@ -40,8 +40,8 @@
 import { Controller } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
 import { Observable } from 'rxjs';
-import { SocialNetworkDto } from './social-network.dto';
-import { SocialNetworkService } from './social-network.service';
+import { SocialNetworkDto } from './social-network.dto.js';
+import { SocialNetworkService } from './social-network.service.js';
 
 @Controller()
 export class SocialNetworkController {

@@ -37,7 +37,9 @@
   ~ termes.
   -->
 
-<app-header></app-header>
+<app-header />
 <ion-content class="ion-padding">
-    <ng-template #preferences *ngFor="let preferencesComponent of preferencesComponents"></ng-template>
+  @for (preferencesComponent of preferencesComponents; track preferencesComponent) {
+    <ng-template #preferences />
+  }
 </ion-content>

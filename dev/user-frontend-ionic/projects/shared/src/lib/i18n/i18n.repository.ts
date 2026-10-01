@@ -51,7 +51,7 @@ const store = createStore(
   { name: STORE_NAME },
   withProps<I18nProps>({
     language: null,
-  })
+  }),
 );
 
 export const persistI18n = persistState(store, {

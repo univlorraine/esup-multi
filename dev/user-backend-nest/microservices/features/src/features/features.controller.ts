@@ -40,8 +40,8 @@
 import { Controller } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
 import { firstValueFrom } from 'rxjs';
-import { AppElement } from './features.dto';
-import { FeaturesService } from './features.service';
+import { AppElement } from './features.dto.js';
+import { FeaturesService } from './features.service.js';
 
 @Controller()
 export class FeaturesController {

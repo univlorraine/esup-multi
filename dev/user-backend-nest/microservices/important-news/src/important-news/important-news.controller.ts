@@ -40,8 +40,8 @@
 import { Controller } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
 import { Observable } from 'rxjs';
-import { ImportantNewsDto } from './important-news.dto';
-import { ImportantNewsService } from './important-news.service';
+import { ImportantNewsDto } from './important-news.dto.js';
+import { ImportantNewsService } from './important-news.service.js';
 
 @Controller()
 export class ImportantNewsController {

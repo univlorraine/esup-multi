@@ -37,31 +37,42 @@
  * termes.
  */
 
-import { Pipe, PipeTransform } from "@angular/core";
-import DOMPurify from "dompurify";
+import { Pipe, PipeTransform } from '@angular/core';
+import DOMPurify from 'dompurify';
 
-@Pipe({ name: "sanitizeHtml" })
+@Pipe({ name: 'sanitizeHtml' })
 export class SanitizeHtmlPipe implements PipeTransform {
   transform(value: string | null | undefined): string {
     if (!value) {
-      return "";
+      return '';
     }
     return DOMPurify.sanitize(value, {
       // Liste des tags et attributs utilisés par l'éditeur Wysiwyg de Wordpress
       // A faire évoluer selon les besoins
       // eslint-disable-next-line @typescript-eslint/naming-convention
       ALLOWED_TAGS: [
-        "a",
-        "b", "strong",
-        "i", "em",
-        "ul", "ol", "li",
-        "code", "pre",
-        "blockquote",
-        "h1", "h2", "h3", "h4", "h5", "h6",
-        "p", "br",
+        'a',
+        'b',
+        'strong',
+        'i',
+        'em',
+        'ul',
+        'ol',
+        'li',
+        'code',
+        'pre',
+        'blockquote',
+        'h1',
+        'h2',
+        'h3',
+        'h4',
+        'h5',
+        'h6',
+        'p',
+        'br',
       ],
       // eslint-disable-next-line @typescript-eslint/naming-convention
-      ALLOWED_ATTR: ["href", "target", "rel", "style"],
+      ALLOWED_ATTR: ['href', 'target', 'rel', 'style'],
     });
   }
 }

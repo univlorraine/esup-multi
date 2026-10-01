@@ -70,15 +70,15 @@
  * termes.
  */
 
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpHeaders } from '@capacitor/core';
 import { TranslateLoader } from '@ngx-translate/core';
 import { mergeDeepRight, reduce } from 'ramda';
 import { forkJoin as ForkJoin, MonoTypeOperatorFunction, Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { HttpHeaders } from '@capacitor/core';
 import { MultiTenantService } from '../../multi-tenant/multi-tenant.service';
 
-export type Translation = object;
+export type Translation = Record<string, any>;
 
 export interface ModuleTranslationOptions {
   modules: ModuleTranslation[];
@@ -111,13 +111,13 @@ export class ModuleTranslateLoader implements TranslateLoader {
     disableNamespace: false,
     lowercaseNamespace: false,
     deepMerge: true,
-    ...this.options
+    ...this.options,
   };
 
   constructor(
     private readonly http: HttpClient,
     private readonly options: ModuleTranslationOptions,
-    private multiTenantService: MultiTenantService
+    private multiTenantService: MultiTenantService,
   ) {}
 
   public getTranslation(language: string): Observable<Translation> {
@@ -127,7 +127,7 @@ export class ModuleTranslateLoader implements TranslateLoader {
 
   private getTenantTranslationFolder() {
     const tenantId = this.multiTenantService.getSelectedTenantId();
-    if(tenantId) {
+    if (tenantId) {
       return tenantId.toLowerCase();
     }
     return '';
@@ -135,42 +135,50 @@ export class ModuleTranslateLoader implements TranslateLoader {
 
   private mergeTranslations(
     moduleTranslations: Observable<Translation>[],
-    { deepMerge, translateMerger }: ModuleTranslationOptions
+    { deepMerge, translateMerger }: ModuleTranslationOptions,
   ): Observable<Translation> {
     return ForkJoin(moduleTranslations).pipe(
       map((translations) =>
-        translateMerger ?
-          translateMerger(translations) :
-          deepMerge ?
-            reduce(mergeDeepRight, Object(), translations) :
-            translations.reduce((acc, curr) => ({ ...acc, ...curr }), Object()))
+        translateMerger
+          ? translateMerger(translations)
+          : deepMerge
+            ? reduce(mergeDeepRight, Object(), translations)
+            : translations.reduce((acc, curr) => ({ ...acc, ...curr }), Object()),
+      ),
     );
   }
 
-  private getModuleTranslations(language: string, options: ModuleTranslationOptions): Observable<Translation>[] {
+  private getModuleTranslations(
+    language: string,
+    options: ModuleTranslationOptions,
+  ): Observable<Translation>[] {
     const { modules } = options;
 
     // Fetches the translations by module
     // If byTenant=true, will also fetch by tenant, retrieving the specific translation file associated with the current tenant
-    const fetchTranslation = (module: ModuleTranslation, byTenant: boolean): Observable<Translation> => {
+    const fetchTranslation = (
+      module: ModuleTranslation,
+      byTenant: boolean,
+    ): Observable<Translation> => {
       const { moduleName } = module;
-      return moduleName ?
-        this.fetchTranslationForModule(language, options, module, byTenant) :
-        this.fetchTranslation(language, options, module, byTenant);
+      return moduleName
+        ? this.fetchTranslationForModule(language, options, module, byTenant)
+        : this.fetchTranslation(language, options, module, byTenant);
     };
 
     // If no tenant, no need to merge
-    if(!this.multiTenantService.getSelectedTenantId()) {
+    if (!this.multiTenantService.getSelectedTenantId()) {
       return modules.map((module) => fetchTranslation(module, false));
     }
 
     // If there's a tenant currently selected, we'll return a merge between the default translation and the tenant's one,
     // with priority to the tenant translation
     return modules.map((module) =>
-      this.mergeTranslations(
-        [fetchTranslation(module, false), fetchTranslation(module, true)],
-        { ...options, deepMerge: true, translateMerger: null }
-      )
+      this.mergeTranslations([fetchTranslation(module, false), fetchTranslation(module, true)], {
+        ...options,
+        deepMerge: true,
+        translateMerger: null,
+      }),
     );
   }
 
@@ -178,38 +186,51 @@ export class ModuleTranslateLoader implements TranslateLoader {
     language: string,
     { translateError, version, headers }: ModuleTranslationOptions,
     { pathTemplate, baseTranslateUrl, translateMap }: ModuleTranslation,
-    byTenant: boolean = false
+    byTenant = false,
   ): Observable<Translation> {
     const pathOptions = Object({
       baseTranslateUrl,
       filename: language,
-      fileFolder: byTenant ? this.getTenantTranslationFolder() : ''
+      fileFolder: byTenant ? this.getTenantTranslationFolder() : '',
     });
     const template = pathTemplate || DEFAULT_PATH_TEMPLATE;
 
     const cleanedPath = concatJson(
-      template.replace(PATH_TEMPLATE_REGEX, (_, m1: string) => pathOptions[m1] || '')
+      template.replace(PATH_TEMPLATE_REGEX, (_, m1: string) => pathOptions[m1] || ''),
     ).replace(PATH_CLEAN_REGEX, '$1');
 
     const path = version ? `${cleanedPath}?v=${version}` : cleanedPath;
 
     return this.http.get<Translation>(path, { headers }).pipe(
       map((translation) => (translateMap ? translateMap(translation) : translation)),
-      this.catchError(cleanedPath, translateError, byTenant)
+      this.catchError(cleanedPath, translateError, byTenant),
     );
   }
 
   private fetchTranslationForModule(
     language: string,
-    { disableNamespace, lowercaseNamespace, translateError, version, headers }: ModuleTranslationOptions,
-    { pathTemplate, baseTranslateUrl, moduleName, namespace, translateMap, headers: moduleHeaders }: ModuleTranslation,
-    byTenant: boolean = false
+    {
+      disableNamespace,
+      lowercaseNamespace,
+      translateError,
+      version,
+      headers,
+    }: ModuleTranslationOptions,
+    {
+      pathTemplate,
+      baseTranslateUrl,
+      moduleName,
+      namespace,
+      translateMap,
+      headers: moduleHeaders,
+    }: ModuleTranslation,
+    byTenant = false,
   ): Observable<Translation> {
     const pathOptions = Object({
       baseTranslateUrl: `${baseTranslateUrl}/modules`,
       moduleName,
       filename: language,
-      fileFolder: byTenant ? this.getTenantTranslationFolder() : ''
+      fileFolder: byTenant ? this.getTenantTranslationFolder() : '',
     });
     const template = pathTemplate || DEFAULT_PATH_TEMPLATE;
 
@@ -220,7 +241,7 @@ export class ModuleTranslateLoader implements TranslateLoader {
         : moduleName.toUpperCase();
 
     const cleanedPath = concatJson(
-      template.replace(PATH_TEMPLATE_REGEX, (_, m1: string) => pathOptions[m1] || '')
+      template.replace(PATH_TEMPLATE_REGEX, (_, m1: string) => pathOptions[m1] || ''),
     ).replace(PATH_CLEAN_REGEX, '$1');
 
     const path = version ? `${cleanedPath}?v=${version}` : cleanedPath;
@@ -231,19 +252,19 @@ export class ModuleTranslateLoader implements TranslateLoader {
           ? translateMap(translation)
           : disableNamespace
             ? translation
-            : Object({ [namespaceKey]: translation })
+            : Object({ [namespaceKey]: translation }),
       ),
-      this.catchError(cleanedPath, translateError, byTenant)
+      this.catchError(cleanedPath, translateError, byTenant),
     );
   }
 
   private catchError<T>(
     path: string,
     translateError?: (error: any, path: string) => void,
-    fetchedByTenant: boolean = false
+    fetchedByTenant = false,
   ): MonoTypeOperatorFunction<T> {
     return catchError((e: HttpErrorResponse) => {
-      if(fetchedByTenant && e.status === 404) {
+      if (fetchedByTenant && e.status === 404) {
         return of(Object()); // Do not throw error if the file wasn't found when fetching for tenant
       }
 

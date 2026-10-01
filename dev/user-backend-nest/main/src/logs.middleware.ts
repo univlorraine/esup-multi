@@ -38,7 +38,7 @@
  */
 
 import { Injectable, Logger, NestMiddleware } from '@nestjs/common';
-import { Request, Response, NextFunction } from 'express';
+import { NextFunction, Request, Response } from 'express';
 
 @Injectable()
 export class LogsMiddleware implements NestMiddleware {

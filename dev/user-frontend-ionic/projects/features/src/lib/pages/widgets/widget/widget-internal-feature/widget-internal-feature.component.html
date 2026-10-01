@@ -37,22 +37,40 @@
   ~ termes.
   -->
 
-<ion-card [attr.data-widget-id]="feature.widget" [ngClass]="{'ion-no-margin': true, 'widget-empty': isEmpty}"
-          (click)="onClick()" [ngStyle]="{'background-color': feature.color}">
-  <ion-card-header *ngIf="feature.title" class="ion-no-padding">
-    <ion-card-title [ngClass]="fontColor(feature.color)" class="feature-title app-title-5">
-      <app-custom-icon *ngIf="feature.icon || feature.iconSvgLight || feature.iconSvgDark"
-                       [icon]="feature.icon"
-                       [iconSvgLight]="feature.iconSvgLight"
-                       [iconSvgDark]="feature.iconSvgDark"></app-custom-icon>
-      {{feature.title}}
-    </ion-card-title>
-  </ion-card-header>
+<ion-card
+  [attr.data-widget-id]="feature.widget"
+  [ngClass]="{ 'ion-no-margin': true, 'widget-empty': isEmpty }"
+  (click)="onClick()"
+  [ngStyle]="{ 'background-color': feature.color }"
+>
+  @if (feature.title) {
+    <ion-card-header class="ion-no-padding">
+      <ion-card-title [ngClass]="fontColor(feature.color)" class="feature-title app-title-5">
+        @if (feature.icon || feature.iconSvgLight || feature.iconSvgDark) {
+          <app-custom-icon
+            [icon]="feature.icon"
+            [iconSvgLight]="feature.iconSvgLight"
+            [iconSvgDark]="feature.iconSvgDark"
+          />
+        }
+        {{ feature.title }}
+      </ion-card-title>
+    </ion-card-header>
+  }
   <ion-card-content class="ion-no-padding">
-    <ion-col *ngIf="feature.content" class="ion-padding">
-      <ion-label [ngClass]="fontColor(feature.color)" class="app-text-4">{{feature.content}}</ion-label>
-    </ion-col>
-    <app-widget (click)="onClick()" [ngStyle]="{'background-color': feature.color}" [widgetId]="feature.widget"
-      [widgetColor]="feature.color" (widgetIsEmpty)="onWidgetIsEmpty($event)"></app-widget>
+    @if (feature.content) {
+      <ion-col class="ion-padding">
+        <ion-label [ngClass]="fontColor(feature.color)" class="app-text-4">
+          {{ feature.content }}
+        </ion-label>
+      </ion-col>
+    }
+    <app-widget
+      (click)="onClick()"
+      [ngStyle]="{ 'background-color': feature.color }"
+      [widgetId]="feature.widget"
+      [widgetColor]="feature.color"
+      (widgetIsEmpty)="onWidgetIsEmpty($event)"
+    />
   </ion-card-content>
 </ion-card>

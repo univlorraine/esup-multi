@@ -39,9 +39,9 @@
 
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { KnowledgeBaseService } from './knowledge-base.service';
-import { KnowledgeBaseController } from './knowledge-base.controller';
-import { KeepaliveHttpModule } from '../keepalive-http.module';
+import { KeepaliveHttpModule } from '../keepalive-http.module.js';
+import { KnowledgeBaseController } from './knowledge-base.controller.js';
+import { KnowledgeBaseService } from './knowledge-base.service.js';
 
 @Module({
   imports: [ConfigModule, KeepaliveHttpModule],

@@ -39,15 +39,13 @@
 
 import { Injectable } from '@angular/core';
 import { createEffect, ofType } from '@ngneat/effects';
-import { cleanupPrivateData } from '@multi/shared';
 import { tap } from 'rxjs/operators';
+import { cleanupPrivateData } from '@multi/shared';
 import { clearScheduleData } from './schedule.repository';
 
 @Injectable({ providedIn: 'root' })
 export class ScheduleEffects {
-
-  cleanupPrivateData$ = createEffect(actions => actions.pipe(
-    ofType(cleanupPrivateData),
-    tap(clearScheduleData),
-  ));
+  cleanupPrivateData$ = createEffect((actions) =>
+    actions.pipe(ofType(cleanupPrivateData), tap(clearScheduleData)),
+  );
 }

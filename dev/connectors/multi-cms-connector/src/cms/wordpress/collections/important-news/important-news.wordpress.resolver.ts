@@ -37,8 +37,8 @@
  */
 
 import { Args, Query, Resolver } from '@nestjs/graphql';
-import { ImportantNewsWordpressService } from './important-news.wordpress.service';
-import { ImportantNews } from '@common/models/important-news.model';
+import { ImportantNews } from '#common/models/important-news.model.js';
+import { ImportantNewsWordpressService } from './important-news.wordpress.service.js';
 
 @Resolver(() => ImportantNews)
 export class ImportantNewsWordpressResolver {

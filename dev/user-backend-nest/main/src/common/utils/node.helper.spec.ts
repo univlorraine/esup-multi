@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { NodeInterface, NodeHelper } from './node.helper';
+import { NodeHelper, NodeInterface } from './node.helper.js';
 
 interface Stuff extends NodeInterface {
   name: string;

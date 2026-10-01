@@ -24,3 +24,5 @@ node_modules/
 !/env/local
 /env/local/docker/directus/mysql-data/
 /env/local/docker/wordpress/wp-data/
+
+cve-report/

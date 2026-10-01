@@ -37,21 +37,68 @@
  * termes.
  */
 
-import { Component, ElementRef, Inject, Injector, ViewChild } from '@angular/core';
+import { NgClass, NgStyle } from '@angular/common';
+import { Component, ElementRef, inject, Injector, ViewChild } from '@angular/core';
 import { Capacitor } from '@capacitor/core';
-import { ActionSheetController, AlertController, ToastController } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
+import {
+  ActionSheetController,
+  AlertController,
+  IonAvatar,
+  IonButton,
+  IonCard,
+  IonCardContent,
+  IonContent,
+  IonIcon,
+  IonItem,
+  IonLabel,
+  IonList,
+  IonRadio,
+  IonRadioGroup,
+  IonRow,
+  IonSearchbar,
+  IonSpinner,
+  IonText,
+  ToastController,
+} from '@ionic/angular';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { finalize, take } from 'rxjs/operators';
-import { ContactsModuleConfig, CONTACTS_CONFIG } from './contacts.config';
+import { HeaderComponent } from '@multi/shared';
+import { CONTACTS_CONFIG, ContactsModuleConfig } from './contacts.config';
 import { Contact, ContactsBody, ContactsService } from './contacts.service';
 
 @Component({
   selector: 'app-contacts',
   templateUrl: './contacts.page.html',
   styleUrls: ['../../../../src/theme/app-theme/styles/contacts/contacts.page.scss'],
+  imports: [
+    NgClass,
+    NgStyle,
+    TranslatePipe,
+    HeaderComponent,
+    IonAvatar,
+    IonButton,
+    IonCard,
+    IonCardContent,
+    IonContent,
+    IonIcon,
+    IonItem,
+    IonLabel,
+    IonList,
+    IonRadio,
+    IonRadioGroup,
+    IonRow,
+    IonSearchbar,
+    IonSpinner,
+    IonText,
+  ],
 })
-
 export class ContactsComponent {
+  private contactsService = inject(ContactsService);
+  actionSheetController = inject(ActionSheetController);
+  private alertController = inject(AlertController);
+  private config = inject<ContactsModuleConfig>(CONTACTS_CONFIG);
+  private injector = inject(Injector);
+  private toastController = inject(ToastController);
 
   @ViewChild('searchBlock') viewBlock: ElementRef;
   public contacts: Contact[] = [];
@@ -65,14 +112,7 @@ export class ContactsComponent {
   private translateService: TranslateService;
   private deltaSearchDisplay = 10; // number of pixels to scroll down/up before display the search block
 
-  constructor(
-    private contactsService: ContactsService,
-    public actionSheetController: ActionSheetController,
-    private alertController: AlertController,
-    @Inject(CONTACTS_CONFIG) private config: ContactsModuleConfig,
-    private injector: Injector,
-    private toastController: ToastController,
-  ) {
+  constructor() {
     this.filtersList = this.config.contactTypes;
     this.filterChecked = this.config.contactTypes[0];
     this.translateService = this.injector.get(TranslateService);
@@ -92,18 +132,27 @@ export class ContactsComponent {
       value: this.searchBarText,
     };
 
-    this.contactsService.getContacts(searchBody)
-    .pipe(take(1), finalize(() => this.loading = false))
-    .subscribe(contacts => {
-      this.contacts = contacts.map(contact => ({
-        ...contact,
-        phoneNumbers: contact.phoneNumbers?.filter(phoneNumber => phoneNumber && phoneNumber.trim() !== ''),
-        mobileNumbers: contact.mobileNumbers?.filter(mobileNumber => mobileNumber && mobileNumber.trim() !== ''),
-        mailAddresses: contact.mailAddresses?.filter(mailAddresse => mailAddresse && mailAddresse.trim() !== '')
-      }));
-      this.searchButtonPressed = true;
-    });
-
+    this.contactsService
+      .getContacts(searchBody)
+      .pipe(
+        take(1),
+        finalize(() => (this.loading = false)),
+      )
+      .subscribe((contacts) => {
+        this.contacts = contacts.map((contact) => ({
+          ...contact,
+          phoneNumbers: contact.phoneNumbers?.filter(
+            (phoneNumber) => phoneNumber && phoneNumber.trim() !== '',
+          ),
+          mobileNumbers: contact.mobileNumbers?.filter(
+            (mobileNumber) => mobileNumber && mobileNumber.trim() !== '',
+          ),
+          mailAddresses: contact.mailAddresses?.filter(
+            (mailAddresse) => mailAddresse && mailAddresse.trim() !== '',
+          ),
+        }));
+        this.searchButtonPressed = true;
+      });
   }
 
   async createContact(user: Contact) {
@@ -118,27 +167,27 @@ export class ContactsComponent {
       return;
     }
     if (await this.contactsService.contactAlreadyExists(user)) {
-    const alreadyExist = await this.toastController.create({
-      message: this.translateService.instant('CONTACTS.ALERT.ERROR.EXIST'),
-      duration: 1500,
-      position: 'middle',
-      color: 'warning'
-    });
-    await alreadyExist.present();
-    return;
+      const alreadyExist = await this.toastController.create({
+        message: this.translateService.instant('CONTACTS.ALERT.ERROR.EXIST'),
+        duration: 1500,
+        position: 'middle',
+        color: 'warning',
+      });
+      await alreadyExist.present();
+      return;
     }
     await this.contactsService.createContact(user);
     const toast = await this.toastController.create({
       message: this.translateService.instant('CONTACTS.ALERT.SUCCESS.MESSAGE'),
       duration: 1500,
       position: 'middle',
-      color: 'success'
+      color: 'success',
     });
     await toast.present();
   }
 
   selectedCategory(item) {
-   this.filterChecked = item.detail.value;
+    this.filterChecked = item.detail.value;
   }
 
   handleScroll(event: Event) {
