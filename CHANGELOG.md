@@ -3,6 +3,11 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## Next Release x.y.z (YYYY-MM-DD)
+### Client
+#### New features
+* **(mobile)** : ajout d'un script d'automatisation pour la préparation des releases Android et iOS : build Angular + modules, capacitor sync, et calcul des numéros de version + application via trapeze.
+
 ## 2.3.1 (2026-09-25)
 ### Client
 #### Bug Fixes
