@@ -3,10 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## Next Version (2026-mm-dd)
+## Next Release x.y.z (YYYY-MM-DD)
 ### Client
 #### Bug Fixes
 * AppErrorHandler était écrasé par MultiTenantErrorHandler, les erreurs n'étaient donc plus gérées
+
+#### New features
+* **(mobile)** : ajout d'un script d'automatisation pour la préparation des releases Android et iOS : build Angular + modules, capacitor sync, et calcul des numéros de version + application via trapeze.
 
 #### Autres
 * Migration de [NodeJS](https://nodejs.org/fr/about/previous-releases) : Version 20 -> [Version 26](https://nodejs.org/docs/latest-v26.x/api/index.html)
