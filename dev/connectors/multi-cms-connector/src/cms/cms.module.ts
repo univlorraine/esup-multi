@@ -38,11 +38,11 @@
 
 import { DynamicModule, Logger, Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { cmsConfig } from './cms.config';
-import { CmsConfigError } from './cms.exception';
-import { CmsService } from './cms.service';
-import { DirectusModule } from '@directus/directus.module';
-import { WordpressModule } from '@wordpress/wordpress.module';
+import { DirectusModule } from '#directus/directus.module.js';
+import { WordpressModule } from '#wordpress/wordpress.module.js';
+import { cmsConfig } from './cms.config.js';
+import { CmsConfigError } from './cms.exception.js';
+import { CmsService } from './cms.service.js';
 
 const CMS_MODULES = {
   wordpress: WordpressModule,

@@ -37,24 +37,52 @@
   ~ termes.
   -->
 
-<ion-row *ngIf="isLoading">
-  <ion-spinner class="ion-margin safe-area-lr-ionic-margin" name="dots"></ion-spinner>
-</ion-row>
-<ng-container *ngIf="!isLoading">
-  <ion-row *ngIf="(mails$ | async) as mails" class="ion-padding">
-    <ion-text [ngClass]="fontColor()" class='app-text-4 safe-area-padding-lr' *ngIf='mails.error'>
-      <ion-icon [ngClass]="fontColor()" name='warning' class='unread-icon app-icon-3' aria-label=""></ion-icon>
-      <span [ngClass]="fontColor()">{{ "UNREAD-MAIL." + mails.error | translate }}</span>
-    </ion-text>
-    <ion-text [ngClass]="fontColor()" class='app-text-4 safe-area-padding-lr' *ngIf='!mails.error && mails.unreadMails === 0'>
-      <ion-icon [ngClass]="fontColor()" name='mail-open' class='unread-icon app-icon-3' aria-label=""></ion-icon>
-      <span [ngClass]="fontColor()">{{ "UNREAD-MAIL.NO_UNREAD" | translate }}</span>
-    </ion-text>
-    <ion-text [ngClass]="fontColor()" class='app-text-4 safe-area-padding-lr' *ngIf='!mails.error && mails.unreadMails > 0'>
-      <ion-icon [ngClass]="fontColor()" name='mail-unread' class='unread-icon app-icon-3' aria-label=""></ion-icon>
-      <span [ngClass]="fontColor()">
-        {{ (mails.unreadMails === 1 ? "UNREAD-MAIL.ONE_UNREAD" : "UNREAD-MAIL.MULTIPLE_UNREAD") | translate: {nb: mails.unreadMails} }}
-      </span>
-    </ion-text>
+@if (isLoading) {
+  <ion-row>
+    <ion-spinner class="ion-margin safe-area-lr-ionic-margin" name="dots" />
   </ion-row>
-</ng-container>
+} @else {
+  <!--  TODO: merge else+if when Angular 20+ (required for 'as' in '@else if' blocks) -->
+  @if (mails$ | async; as mails) {
+    <ion-row class="ion-padding">
+      @if (mails.error) {
+        <ion-text [ngClass]="fontColor()" class="app-text-4 safe-area-padding-lr">
+          <ion-icon
+            [ngClass]="fontColor()"
+            name="warning"
+            class="unread-icon app-icon-3"
+            aria-label=""
+          />
+          <span [ngClass]="fontColor()">{{ 'UNREAD-MAIL.' + mails.error | translate }}</span>
+        </ion-text>
+      }
+      @if (!mails.error && mails.unreadMails === 0) {
+        <ion-text [ngClass]="fontColor()" class="app-text-4 safe-area-padding-lr">
+          <ion-icon
+            [ngClass]="fontColor()"
+            name="mail-open"
+            class="unread-icon app-icon-3"
+            aria-label=""
+          />
+          <span [ngClass]="fontColor()">{{ 'UNREAD-MAIL.NO_UNREAD' | translate }}</span>
+        </ion-text>
+      }
+      @if (!mails.error && mails.unreadMails > 0) {
+        <ion-text [ngClass]="fontColor()" class="app-text-4 safe-area-padding-lr">
+          <ion-icon
+            [ngClass]="fontColor()"
+            name="mail-unread"
+            class="unread-icon app-icon-3"
+            aria-label=""
+          />
+          <span [ngClass]="fontColor()">
+            {{
+              (mails.unreadMails === 1 ? 'UNREAD-MAIL.ONE_UNREAD' : 'UNREAD-MAIL.MULTIPLE_UNREAD')
+                | translate: { nb: mails.unreadMails }
+            }}
+          </span>
+        </ion-text>
+      }
+    </ion-row>
+  }
+}

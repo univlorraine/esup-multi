@@ -38,24 +38,24 @@
  */
 
 import { Injectable, Logger, UnauthorizedException } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { JwtService } from '@nestjs/jwt';
+import { RpcException } from '@nestjs/microservices';
+import { Cron } from '@nestjs/schedule';
+import * as dotenv from 'dotenv';
+import { concatMap, from, map, Observable, of, tap } from 'rxjs';
+import { AuthenticatedDto, AuthenticateQueryDto } from '../auth/auth.dto.js';
+import { AuthService } from '../auth/auth.service.js';
+import { AesEncryptionService } from './encryption/aes-encryption.service.js';
 import {
-  ReauthenticateQueryDto,
   KeepAuthenticatedDto,
   KeepAuthenticatedLogoutQueryDto,
-  ReauthenticateIfNeededResultDto,
   ReauthenticateIfNeededQueryDto,
+  ReauthenticateIfNeededResultDto,
+  ReauthenticateQueryDto,
   RemoveSavedCredentialsQueryDto,
-} from './keep-auth.dto';
-import { AuthService } from '../auth/auth.service';
-import { AuthenticatedDto, AuthenticateQueryDto } from '../auth/auth.dto';
-import { concatMap, from, map, Observable, of, tap } from 'rxjs';
-import { AesEncryptionService } from './encryption/aes-encryption.service';
-import { UserCredentialsRepository } from './user-credentials/user-credentials.repository';
-import { JwtService } from '@nestjs/jwt';
-import { Cron } from '@nestjs/schedule';
-import { ConfigService } from '@nestjs/config';
-import * as dotenv from 'dotenv';
-import { RpcException } from '@nestjs/microservices';
+} from './keep-auth.dto.js';
+import { UserCredentialsRepository } from './user-credentials/user-credentials.repository.js';
 
 dotenv.config(); // used to get process.env access prior to AppModule instanciation (typically in @Cron decorators)
 @Injectable()
@@ -158,13 +158,11 @@ export class KeepAuthService {
   public logoutAndDeleteCredentials(
     query: KeepAuthenticatedLogoutQueryDto,
   ): Observable<boolean> {
-    return this.authService
-      .logout({ authToken: query.authToken })
-      .pipe(
-        tap(() =>
-          this.userCredentialsRepository.removeCredentialsById(query.uuid),
-        ),
-      );
+    return this.authService.logout({ authToken: query.authToken }).pipe(
+      tap(() => {
+        void this.userCredentialsRepository.removeCredentialsById(query.uuid);
+      }),
+    );
   }
 
   public deleteCredentials(
@@ -207,7 +205,7 @@ export class KeepAuthService {
       limitDate.getDate() - this.credentialsCleanupNotUsedSinceInDays,
     );
     this.logger.log(
-      `Removing credentials not used for ${this.credentialsCleanupNotUsedSinceInDays} days (since ${limitDate})`,
+      `Removing credentials not used for ${this.credentialsCleanupNotUsedSinceInDays} days (since ${limitDate.toISOString()})`,
     );
     await this.userCredentialsRepository.removeCredentialsLastUsedBefore(
       limitDate,

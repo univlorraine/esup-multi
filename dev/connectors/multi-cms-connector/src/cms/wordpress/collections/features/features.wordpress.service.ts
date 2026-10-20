@@ -38,17 +38,17 @@
 
 import { Injectable, Logger } from '@nestjs/common';
 import { OnEvent } from '@nestjs/event-emitter';
-import { Features } from '@common/models/features.model';
-import { WordpressService } from '@wordpress/wordpress.service';
-import { FeaturesTranslations } from '@common/models/translations.model';
-import { FeaturesTranslationsWordpress } from '@wordpress/collections/translations/translations.wordpress.model';
-import { FeaturesWordpress } from '@wordpress/collections/features/features.wordpress.model';
-import { SettingsByRole } from '@common/models/settings-by-role.model';
-import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
-import { FeaturesSchema } from '@common/validation/schemas/features.schema';
-import { normalizeEmptyStringToNull } from '@common/utils/normalize';
-import { CacheService } from '@cache/cache.service';
-import { CacheCollection } from '@cache/cache.config';
+import { CacheCollection } from '#cache/cache.config.js';
+import { CacheService } from '#cache/cache.service.js';
+import { ValidateMapping } from '#common/decorators/validate-mapping.decorator.js';
+import { Features } from '#common/models/features.model.js';
+import { SettingsByRole } from '#common/models/settings-by-role.model.js';
+import { FeaturesTranslations } from '#common/models/translations.model.js';
+import { normalizeEmptyStringToNull } from '#common/utils/normalize.js';
+import { FeaturesSchema } from '#common/validation/schemas/features.schema.js';
+import { FeaturesWordpress } from '#wordpress/collections/features/features.wordpress.model.js';
+import { FeaturesTranslationsWordpress } from '#wordpress/collections/translations/translations.wordpress.model.js';
+import { WordpressService } from '#wordpress/wordpress.service.js';
 
 // TODO: Move FRENCH_CODE to .env and rename it to DEFAULT_LANGUAGE_CODE
 const FRENCH_CODE = 'FR';
@@ -69,7 +69,7 @@ export class FeaturesWordpressService {
     } catch (error) {
       this.logger.error(
         'Failed to preload features after cache clear:',
-        error.message,
+        error instanceof Error ? error.message : JSON.stringify(error)
       );
     }
   }
@@ -214,7 +214,7 @@ export class FeaturesWordpressService {
       }
     `);
 
-    return data.features.nodes.map(this.mapToMultiModel);
+    return data.features.nodes.map(this.mapToMultiModel.bind(this));
   }
 
   async getFeature(id: number): Promise<Features> {

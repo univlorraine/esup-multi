@@ -37,9 +37,9 @@
  */
 
 import { Field, ObjectType } from '@nestjs/graphql';
-import { AuthorizationDirectus } from '@directus/collections/authorization/authorization.directus.model';
-import { ImportantNewsTranslationsDirectus } from '@directus/collections/translations/translations.directus.model';
-import { FileDirectus } from '@directus/collections/system/file.directus.model';
+import { AuthorizationDirectus } from '#directus/collections/authorization/authorization.directus.model.js';
+import { FileDirectus } from '#directus/collections/system/file.directus.model.js';
+import { ImportantNewsTranslationsDirectus } from '#directus/collections/translations/translations.directus.model.js';
 
 @ObjectType()
 export class ImportantNewsDirectus {

@@ -38,7 +38,7 @@
   -->
 <ion-row class="ion-justify-content-center ion-text-center">
   <ion-label>
-    <h2 class="ion-margin app-title-4 title">{{'CARD-EU.CARD_TITLE' | translate }}</h2>
+    <h2 class="ion-margin app-title-4 title">{{ 'CARD-EU.CARD_TITLE' | translate }}</h2>
     <h3 class="ion-margin app-title-5 subtitle">{{ 'CARD-EU.CARD_SUBTITLE' | translate }}</h3>
   </ion-label>
 </ion-row>
@@ -53,6 +53,6 @@
 <ion-card class="card-eu-light">
   <ion-card-content class="ion-text-center">
     <div class="eu-qrcode" [innerHTML]="userCardEuLight.qrCode.value | sanitizeSvg"></div>
-    <img class="logo" src="assets/cards/card-eu/university-logo.svg" alt="Logo université">
+    <img class="logo" src="assets/cards/card-eu/university-logo.svg" alt="Logo université" />
   </ion-card-content>
 </ion-card>

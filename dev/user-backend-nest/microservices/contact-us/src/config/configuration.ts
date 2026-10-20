@@ -38,10 +38,10 @@
  */
 
 import {
-  MailConfig,
   CmsApi,
   KeepAliveOptions,
-} from './configuration.interface';
+  MailConfig,
+} from './configuration.interface.js';
 
 interface Configuration {
   cmsApi: CmsApi;

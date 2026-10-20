@@ -37,10 +37,10 @@
  */
 
 import { Field, ObjectType } from '@nestjs/graphql';
-import { MapPointTranslationsDirectus } from '@directus/collections/translations/translations.directus.model';
-import { MapIconDirectus } from '@directus/collections/map-icons/map-icons.directus.model';
-import { MapCategoryDirectus } from '@directus/collections/map-categories/map-categories.directus.model';
-import { CampusDirectus } from '@directus/collections/campuses/campuses.directus.model';
+import { CampusDirectus } from '#directus/collections/campuses/campuses.directus.model.js';
+import { MapCategoryDirectus } from '#directus/collections/map-categories/map-categories.directus.model.js';
+import { MapIconDirectus } from '#directus/collections/map-icons/map-icons.directus.model.js';
+import { MapPointTranslationsDirectus } from '#directus/collections/translations/translations.directus.model.js';
 
 @ObjectType()
 export class MapPointDirectus {

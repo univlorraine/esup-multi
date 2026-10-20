@@ -51,9 +51,7 @@ export interface SocialNetwork {
 
 const STORE_NAME = 'social-network';
 
-const store = createStore(
-    { name: STORE_NAME },
-    withEntities<SocialNetwork>());
+const store = createStore({ name: STORE_NAME }, withEntities<SocialNetwork>());
 
 export const persist = persistState(store, {
   key: STORE_NAME,
@@ -67,4 +65,3 @@ export const setSocialNetworks = (socialNetworks: SocialNetwork[]) => {
 };
 
 export const clearSocialNetworks = () => store.reset();
-

@@ -37,11 +37,11 @@
  * termes.
  */
 
-import {createStore, select, Store, withProps} from '@ngneat/elf';
-import {persistState} from '@ngneat/elf-persist-state';
-import {localForageStore} from '@multi/shared';
-import {combineLatest, Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import { createStore, select, Store, withProps } from '@ngneat/elf';
+import { persistState } from '@ngneat/elf-persist-state';
+import { combineLatest, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { localForageStore } from '@multi/shared';
 
 const STORE_NAME = 'schedule';
 const STORE_NAME_2 = 'impersonated-schedule';
@@ -71,12 +71,14 @@ export interface Planning {
   label: string;
   default: boolean;
   type: string;
-  messages: [
-    {
-      level: string;
-      text: string;
-    }
-  ] | [];
+  messages:
+    | [
+        {
+          level: string;
+          text: string;
+        },
+      ]
+    | [];
   events?: Event[];
 }
 
@@ -99,20 +101,20 @@ export interface Event {
       label: string;
       type: string;
       building: string;
-    }
+    },
   ];
   teachers: [
     {
       id: string;
       displayname: string;
       email: string;
-    }
+    },
   ];
   groups: [
     {
       id: string;
       label: string;
-    }
+    },
   ];
 }
 
@@ -164,7 +166,6 @@ export class ScheduleStoreManager {
 
   public updateAllPlanningsData(plannings: Planning[]) {
     this.store.update((state) => {
-
       const mappedPlannings = plannings.map((newPlanning) => ({
         id: newPlanning.id,
         label: newPlanning.label,
@@ -172,10 +173,12 @@ export class ScheduleStoreManager {
         isSelected: newPlanning.default,
       }));
 
-      const uniqueNewPlannings = mappedPlannings
-        .filter((newPlanning) => !state.allPlanningsData
-          .some((existingPlanning) => existingPlanning.id === newPlanning.id)
-        );
+      const uniqueNewPlannings = mappedPlannings.filter(
+        (newPlanning) =>
+          !state.allPlanningsData.some(
+            (existingPlanning) => existingPlanning.id === newPlanning.id,
+          ),
+      );
 
       const updatedPlannings = [...state.allPlanningsData, ...uniqueNewPlannings];
       updatedPlannings.sort((a, b) => (b.default ? 1 : 0) - (a.default ? 1 : 0));
@@ -188,31 +191,28 @@ export class ScheduleStoreManager {
   }
 
   public setSchedule(schedule: ScheduleProps['schedule']) {
-
     this.updateAllPlanningsData(schedule.plannings);
-
 
     this.store.update((state) => {
       const activePlanningIdsInSchedule = schedule.plannings
         .map(mapPlanningId)
-        .filter(planningId => {
-          const planningData = state.allPlanningsData.find(data => data.id === planningId);
+        .filter((planningId) => {
+          const planningData = state.allPlanningsData.find((data) => data.id === planningId);
           return planningData?.isSelected === true;
         });
 
-      const noActivePlanningIds = !state.allPlanningsData.find(data => data?.isSelected === true);
+      const noActivePlanningIds = !state.allPlanningsData.find((data) => data?.isSelected === true);
       const noActivePlanningIdsInSchedule = activePlanningIdsInSchedule.length === 0;
       const applyDefaultPlanning = noActivePlanningIds || noActivePlanningIdsInSchedule;
 
-      const activePlanningIds = (applyDefaultPlanning) ?
-        schedule.plannings
-          .filter(filterDefaultPlanning)
-          .map(mapPlanningId) :
-        activePlanningIdsInSchedule;
+      const activePlanningIds = applyDefaultPlanning
+        ? schedule.plannings.filter(filterDefaultPlanning).map(mapPlanningId)
+        : activePlanningIdsInSchedule;
 
-      const updatedAllPlanningsData = state.allPlanningsData.map(planningData => {
+      const updatedAllPlanningsData = state.allPlanningsData.map((planningData) => {
         const isActive = activePlanningIds.includes(planningData.id);
-        const isSelected = planningData.isSelected === null && isActive ? isActive : planningData.isSelected;
+        const isSelected =
+          planningData.isSelected === null && isActive ? isActive : planningData.isSelected;
 
         return {
           ...planningData,
@@ -230,16 +230,14 @@ export class ScheduleStoreManager {
 
   public setActivePlanningIds(activePlanningIds) {
     this.store.update((state) => {
-      const updatedPlanningsData = state.allPlanningsData
-        .map((planningData: PlanningData) => ({
-            ...planningData,
-            isSelected: activePlanningIds.includes(planningData.id)
-          })
-        );
+      const updatedPlanningsData = state.allPlanningsData.map((planningData: PlanningData) => ({
+        ...planningData,
+        isSelected: activePlanningIds.includes(planningData.id),
+      }));
 
       return {
         ...state,
-        allPlanningsData: updatedPlanningsData
+        allPlanningsData: updatedPlanningsData,
       };
     });
   }
@@ -256,22 +254,22 @@ export class ScheduleStoreManager {
       schedule: null,
       activePlanningIds: [],
       hiddenCourseList: [],
-      allPlanningsData: []
+      allPlanningsData: [],
     }));
   }
 
   public persistStore(storeName: string) {
-    persistState(this.store, {key: storeName, storage: localForageStore});
+    persistState(this.store, { key: storeName, storage: localForageStore });
   }
 
   private createStore(storeName: string): Store {
     return createStore(
-      {name: storeName},
+      { name: storeName },
       withProps<ScheduleProps>({
         schedule: null,
         hiddenCourseList: [],
         allPlanningsData: [],
-      })
+      }),
     );
   }
 
@@ -287,21 +285,27 @@ export class ScheduleStoreManager {
     return this.store.pipe(
       select((state: ScheduleProps) => {
         const eventIds = [];
-        return state.schedule?.plannings?.filter(planning => {
-          const planningData = state.allPlanningsData.find(data => data.id === planning.id);
-          return planningData?.isSelected === true;
-        })
-          .reduce((events, planning) => {
-            planning.events.forEach(event => {
-              if (!eventIds.includes(event.id)) {
-                eventIds.push(event.id);
-                events.push(event);
-              }
-            });
-            return events;
-          }, [])
-          .sort((a: Event, b: Event) => new Date(a.startDateTime).getTime() - new Date(b.startDateTime).getTime()) || [];
-      })
+        return (
+          state.schedule?.plannings
+            ?.filter((planning) => {
+              const planningData = state.allPlanningsData.find((data) => data.id === planning.id);
+              return planningData?.isSelected === true;
+            })
+            .reduce((events, planning) => {
+              planning.events.forEach((event) => {
+                if (!eventIds.includes(event.id)) {
+                  eventIds.push(event.id);
+                  events.push(event);
+                }
+              });
+              return events;
+            }, [])
+            .sort(
+              (a: Event, b: Event) =>
+                new Date(a.startDateTime).getTime() - new Date(b.startDateTime).getTime(),
+            ) || []
+        );
+      }),
     );
   }
 
@@ -310,13 +314,13 @@ export class ScheduleStoreManager {
   }
 
   private getDisplayedEvents(): Observable<Event[]> {
-    return combineLatest([this.eventsFromActivePlannings$, this.hiddenCourseList$])
-      .pipe(
-        map(([storedEvents, hiddenCourses]) =>
-          storedEvents.filter(event => !hiddenCourses
-            .some(hiddenCourse => hiddenCourse.id === event.course.id)
-          )
-        ));
+    return combineLatest([this.eventsFromActivePlannings$, this.hiddenCourseList$]).pipe(
+      map(([storedEvents, hiddenCourses]) =>
+        storedEvents.filter(
+          (event) => !hiddenCourses.some((hiddenCourse) => hiddenCourse.id === event.course.id),
+        ),
+      ),
+    );
   }
 }
 

@@ -37,18 +37,19 @@
  * termes.
  */
 
-const express = require('express');
+import express from 'express';
+import getCardData from './card.mock.js';
+
 const router = express.Router();
-const { getCardData } = require('./card.mock.js');
 
 router.get('/:username', async (req, res) => {
-    const {username} = req.params;
-    let data = await getCardData();
-    let card= data[username];
-    if (!card) {
-        card = data.noActiveCard;
-    }
-    return res.json(card);
+  const { username } = req.params;
+  let data = await getCardData();
+  let card = data[username];
+  if (!card) {
+    card = data.noActiveCard;
+  }
+  return res.json(card);
 });
 
-module.exports = router;
+export default router;

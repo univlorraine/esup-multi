@@ -37,9 +37,9 @@
  */
 
 import { Field, ObjectType } from '@nestjs/graphql';
-import { KnowledgeBaseTranslationsWordpress } from '@wordpress/collections/translations/translations.wordpress.model';
-import { ImageWordpress } from '@wordpress/collections/system/image.wordpress.model';
-import { RolesWordpress } from '@wordpress/collections/roles/roles.wordpress.model';
+import { RolesWordpress } from '#wordpress/collections/roles/roles.wordpress.model.js';
+import { ImageWordpress } from '#wordpress/collections/system/image.wordpress.model.js';
+import { KnowledgeBaseTranslationsWordpress } from '#wordpress/collections/translations/translations.wordpress.model.js';
 
 @ObjectType()
 class KnowledgeBaseRolesWordpress {

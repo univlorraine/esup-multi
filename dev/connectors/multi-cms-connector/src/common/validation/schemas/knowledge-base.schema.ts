@@ -36,9 +36,9 @@
  * termes.
  */
 import { z } from 'zod';
-import { IdSchema } from '@common/validation/schemas/base-type.schema';
-import { KnowledgeBaseTranslationsSchema } from '@common/validation/schemas/translations.schema';
-import { AuthorizationSchema } from '@common/validation/schemas/authorization.schema';
+import { AuthorizationSchema } from '#common/validation/schemas/authorization.schema.js';
+import { IdSchema } from '#common/validation/schemas/base-type.schema.js';
+import { KnowledgeBaseTranslationsSchema } from '#common/validation/schemas/translations.schema.js';
 
 export const KnowledgeBaseSchema = z.object({
   id: IdSchema,

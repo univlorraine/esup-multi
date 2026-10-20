@@ -37,8 +37,8 @@
  */
 
 import { Args, Query, Resolver } from '@nestjs/graphql';
-import { ChannelsDirectusService } from './channels.directus.service';
-import { Channels } from '@common/models/channels.model';
+import { Channels } from '#common/models/channels.model.js';
+import { ChannelsDirectusService } from './channels.directus.service.js';
 
 @Resolver(() => Channels)
 export class ChannelsDirectusResolver {

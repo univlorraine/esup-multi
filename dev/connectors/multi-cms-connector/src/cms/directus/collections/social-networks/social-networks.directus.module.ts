@@ -37,9 +37,9 @@
  */
 
 import { forwardRef, Module } from '@nestjs/common';
-import { SocialNetworksDirectusResolver } from './social-networks.directus.resolver';
-import { SocialNetworksDirectusService } from './social-networks.directus.service';
-import { DirectusModule } from '@directus/directus.module';
+import { DirectusModule } from '#directus/directus.module.js';
+import { SocialNetworksDirectusResolver } from './social-networks.directus.resolver.js';
+import { SocialNetworksDirectusService } from './social-networks.directus.service.js';
 
 @Module({
   imports: [forwardRef(() => DirectusModule)],

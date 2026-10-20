@@ -106,8 +106,8 @@ Chaque service de collection implémente le pattern suivant :
 ```typescript
 import { Injectable, Logger } from '@nestjs/common';
 import { OnEvent } from '@nestjs/event-emitter';
-import { CacheService } from '@cache/cache.service';
-import { CacheCollection } from '@cache/cache.config';
+import { CacheService } from '#cache/cache.service.js';
+import { CacheCollection } from '#cache/cache.config.js';
 
 @Injectable()
 export class FeaturesWordpressService {

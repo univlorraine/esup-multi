@@ -36,7 +36,7 @@ Remplacer le contenu du fichier `microservices/[nom-du-microservice]/src/main.ts
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { Transport, MicroserviceOptions } from '@nestjs/microservices';
-import { AppModule } from './app.module';
+import { AppModule } from './app.module.js';
 
 async function bootstrap() {
   const host = process.env.[NOM-DU-MICROSERVICE]_SERVICE_HOST || '127.0.0.1';
@@ -58,7 +58,7 @@ async function bootstrap() {
   Logger.log(`Listening on host ${host}, port ${port}`);
   await app.listen();
 }
-bootstrap();
+void bootstrap();
 ```
 
 Ne pas oublier de créer les différentes variables d'env :
@@ -73,8 +73,8 @@ Ces trois lignes sont à ajouter à la suite du `/main/.env` ainsi que du `/[NOM
 
 Ajouter le code suivant dans le controller du microservice :
 ```typescript
-import * as infosJsonData from './infos.json';
-...
+import infosJsonData from './infos.json' with { type: 'json' };
+// ...
 
 @MessagePattern({ cmd: 'health' })
 getHealthStatus() {
@@ -87,11 +87,9 @@ getHealthStatus() {
 ```
 Ajouter  `"resolveJsonModule": true`dans `tsconfig.json`
 
-Créer un fichier `update-infos.ts` à la racine du microservice avec le code suivant
-```typescript
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+Créer un fichier `update-infos.cjs` à la racine du microservice avec le code suivant
+```cjs
 const fs = require('fs');
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const packageData = require('./package.json');
 
 const version = packageData.version;
@@ -107,6 +105,6 @@ fs.writeFileSync('src/infos.json', infoJson);
 ```
 
 Modifier `package.json` pour ajouter un script prebuild :
-`"prebuild": "node update-infos.ts"`
+`"prebuild": "node update-infos.cjs"`
 
 Ajouter également la vérification de l'état de santé au niveau global, dans `global-health.controller.ts`

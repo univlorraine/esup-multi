@@ -37,9 +37,9 @@
  */
 
 import { forwardRef, Module } from '@nestjs/common';
-import { LanguagesDirectusResolver } from './languages.directus.resolver';
-import { LanguagesDirectusService } from './languages.directus.service';
-import { DirectusModule } from '@directus/directus.module';
+import { DirectusModule } from '#directus/directus.module.js';
+import { LanguagesDirectusResolver } from './languages.directus.resolver.js';
+import { LanguagesDirectusService } from './languages.directus.service.js';
 
 @Module({
   imports: [forwardRef(() => DirectusModule)],

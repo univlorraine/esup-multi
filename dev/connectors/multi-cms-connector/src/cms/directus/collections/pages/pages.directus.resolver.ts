@@ -37,8 +37,8 @@
  */
 
 import { Args, Query, Resolver } from '@nestjs/graphql';
-import { PagesDirectusService } from './pages.directus.service';
-import { StaticPages } from '@common/models/static-pages.model';
+import { StaticPages } from '#common/models/static-pages.model.js';
+import { PagesDirectusService } from './pages.directus.service.js';
 
 @Resolver(() => StaticPages)
 export class PagesDirectusResolver {

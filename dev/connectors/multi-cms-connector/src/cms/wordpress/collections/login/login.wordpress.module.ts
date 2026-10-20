@@ -37,9 +37,9 @@
  */
 
 import { forwardRef, Module } from '@nestjs/common';
-import { LoginWordpressResolver } from './login.wordpress.resolver';
-import { LoginWordpressService } from './login.wordpress.service';
-import { WordpressModule } from '@wordpress/wordpress.module';
+import { WordpressModule } from '#wordpress/wordpress.module.js';
+import { LoginWordpressResolver } from './login.wordpress.resolver.js';
+import { LoginWordpressService } from './login.wordpress.service.js';
 
 @Module({
   imports: [forwardRef(() => WordpressModule)],

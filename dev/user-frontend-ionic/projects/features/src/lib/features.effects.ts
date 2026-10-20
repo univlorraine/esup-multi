@@ -37,28 +37,28 @@
  * termes.
  */
 
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { createEffect, ofType } from '@ngneat/effects';
-import { cleanupPrivateData, clearFeatures, FeaturesService, NetworkService } from '@multi/shared';
 import { tap } from 'rxjs/operators';
+import { cleanupPrivateData, clearFeatures, FeaturesService, NetworkService } from '@multi/shared';
 
 @Injectable({ providedIn: 'root' })
 export class FeaturesEffects {
+  private featuresService = inject(FeaturesService);
+  private networkService = inject(NetworkService);
 
-  cleanupPrivateData$ = createEffect(actions => actions.pipe(
-    ofType(cleanupPrivateData),
-    tap(clearFeatures),
-    tap(async () =>  {
-      // skip if network is not available
-      if (!(await this.networkService.getConnectionStatus()).connected) {
-        return;
-      }
+  cleanupPrivateData$ = createEffect((actions) =>
+    actions.pipe(
+      ofType(cleanupPrivateData),
+      tap(clearFeatures),
+      tap(async () => {
+        // skip if network is not available
+        if (!(await this.networkService.getConnectionStatus()).connected) {
+          return;
+        }
 
-      this.featuresService.loadAndStoreFeatures().subscribe();
-    })
-  ));
-
-  constructor(private featuresService: FeaturesService,
-    private networkService: NetworkService,) {}
-
+        this.featuresService.loadAndStoreFeatures().subscribe();
+      }),
+    ),
+  );
 }

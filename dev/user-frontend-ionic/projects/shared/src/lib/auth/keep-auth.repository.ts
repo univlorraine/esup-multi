@@ -43,52 +43,50 @@ import { catchError, map, switchMap } from 'rxjs/operators';
 
 const REFRESH_AUTH_TOKEN_KEY = 'refresh-auth-token';
 
-export const updateRefreshAuthToken = (token: string): Observable<boolean> => from(
+export const updateRefreshAuthToken = (token: string): Observable<boolean> =>
+  from(
     SecureStoragePlugin.set({
-        key: REFRESH_AUTH_TOKEN_KEY,
-        value: token
-    }))
-    .pipe(
-        map(result => result.value)
-    );
+      key: REFRESH_AUTH_TOKEN_KEY,
+      value: token,
+    }),
+  ).pipe(map((result) => result.value));
 
-export const getRefreshAuthToken = (): Observable<string | null> => from(
-  SecureStoragePlugin.keys()).pipe(
-    map(result => result.value),
-    switchMap(keys => {
+export const getRefreshAuthToken = (): Observable<string | null> =>
+  from(SecureStoragePlugin.keys()).pipe(
+    map((result) => result.value),
+    switchMap((keys) => {
       // On vérifie l'existence de la clé avant suppression pour éviter de tomber dans le catch de l'erreur du plugin
       // https://github.com/martinkasa/capacitor-secure-storage-plugin/issues/39
       if (keys.includes(REFRESH_AUTH_TOKEN_KEY)) {
-        return from(SecureStoragePlugin.get({key: REFRESH_AUTH_TOKEN_KEY}))
-          .pipe(
-            map(result => result.value),
-            catchError(() => {
-              return of(null)
-            }),)
+        return from(SecureStoragePlugin.get({ key: REFRESH_AUTH_TOKEN_KEY })).pipe(
+          map((result) => result.value),
+          catchError(() => {
+            return of(null);
+          }),
+        );
       } else {
         return of(null);
       }
     }),
-  catchError(() => of(null))
-);
+    catchError(() => of(null)),
+  );
 
-export const deleteRefreshAuthToken = (): Observable<boolean> => from(
-  SecureStoragePlugin.keys()).pipe(
-  map(result => result.value),
-  switchMap(keys => {
-    // On vérifie l'existence de la clé avant suppression pour éviter de tomber dans le catch de l'erreur du plugin
-    // https://github.com/martinkasa/capacitor-secure-storage-plugin/issues/39
-    if (keys.includes(REFRESH_AUTH_TOKEN_KEY)) {
-      return from(
-        SecureStoragePlugin.remove({key: REFRESH_AUTH_TOKEN_KEY}))
-        .pipe(
-          map(result => result.value),
+export const deleteRefreshAuthToken = (): Observable<boolean> =>
+  from(SecureStoragePlugin.keys()).pipe(
+    map((result) => result.value),
+    switchMap((keys) => {
+      // On vérifie l'existence de la clé avant suppression pour éviter de tomber dans le catch de l'erreur du plugin
+      // https://github.com/martinkasa/capacitor-secure-storage-plugin/issues/39
+      if (keys.includes(REFRESH_AUTH_TOKEN_KEY)) {
+        return from(SecureStoragePlugin.remove({ key: REFRESH_AUTH_TOKEN_KEY })).pipe(
+          map((result) => result.value),
           catchError(() => {
-            return of(null)
-          }));
-    } else {
-      return of(null);
-    }
-  }),
-  catchError(() => of(null))
-);
+            return of(null);
+          }),
+        );
+      } else {
+        return of(null);
+      }
+    }),
+    catchError(() => of(null)),
+  );

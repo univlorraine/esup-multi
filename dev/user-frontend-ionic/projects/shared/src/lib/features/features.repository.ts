@@ -38,12 +38,18 @@
  */
 
 import { select, withProps } from '@ngneat/elf';
-import { getAllEntities, getEntity, selectAllEntities, setEntities, updateEntities, withEntities } from '@ngneat/elf-entities';
+import {
+  getAllEntities,
+  getEntity,
+  selectAllEntities,
+  setEntities,
+  updateEntities,
+  withEntities,
+} from '@ngneat/elf-entities';
 import { mergeMap } from 'rxjs/operators';
 import { Authorization } from '../authorization/authorization.helper';
 import { ServiceMenuItem } from '../navigation/menu.model';
-import { registerUserStore, isUserStoreInitialized$ } from '../store/user-store-helper';
-
+import { isUserStoreInitialized$, registerUserStore } from '../store/user-store-helper';
 
 const STORE_NAME = 'features';
 
@@ -100,12 +106,9 @@ const [userStore$, getUserStore] = registerUserStore(
   }),
 );
 
-
-export const features$ = userStore$.pipe(
-  mergeMap(selectAllEntities()),
-);
+export const features$ = userStore$.pipe(mergeMap(selectAllEntities()));
 export const featuresUserOrder$ = userStore$.pipe(
-  mergeMap(select((state: any) => state.userOrder))
+  mergeMap(select((state: any) => state.userOrder)),
 );
 export const isFeatureStoreInitialized$ = isUserStoreInitialized$(STORE_NAME);
 
@@ -119,7 +122,7 @@ export const setFeatures = (features: Feature[]) => {
       if (featureExist) {
         return {
           ...feature,
-          isNew: featureExist?.isNew
+          isNew: featureExist?.isNew,
         };
       } else {
         return {
@@ -146,7 +149,7 @@ export const updateFeaturesListIsNewToFalse = () => {
 export const updateFeatureIsNewToFalse = (menuItem: ServiceMenuItem) => {
   const feature = getUserStore().query(getEntity(menuItem.id));
   const updatedFeature = { ...feature, isNew: false };
-  getUserStore().update(updateEntities(updatedFeature.id, () => (updatedFeature)));
+  getUserStore().update(updateEntities(updatedFeature.id, () => updatedFeature));
 };
 
 export const setFeaturesUserOrder = (userOrder: FeaturesProps['userOrder']) => {

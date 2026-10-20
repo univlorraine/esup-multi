@@ -36,15 +36,15 @@
  * termes.
  */
 
-import { Module } from '@nestjs/common';
-import { GraphQLModule } from '@nestjs/graphql';
-import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { CmsModule } from './cms/cms.module';
-import { AuthModule } from './auth/auth.module';
-import { MonitoringModule } from './monitoring/monitoring.module';
-import { CacheModule } from '@cache/cache.module';
+import { GraphQLModule } from '@nestjs/graphql';
+import { CacheModule } from '#cache/cache.module.js';
+import { AuthModule } from './auth/auth.module.js';
+import { CmsModule } from './cms/cms.module.js';
+import { MonitoringModule } from './monitoring/monitoring.module.js';
 
 @Module({
   imports: [
@@ -55,7 +55,7 @@ import { CacheModule } from '@cache/cache.module';
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gpl'),
       sortSchema: true,
-      playground: true,
+      graphiql: true,
     }),
     CacheModule,
     AuthModule,

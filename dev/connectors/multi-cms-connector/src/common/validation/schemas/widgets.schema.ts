@@ -37,11 +37,10 @@
  */
 
 import { z } from 'zod';
-
-import { IdSchema, AccessTypeSchema } from './base-type.schema';
-import { AuthorizationSchema } from '@common/validation/schemas/authorization.schema';
-import { SettingsByRoleSchema } from '@common/validation/schemas/settingsByRole.schema';
-import { WidgetsTranslationsSchema } from '@common/validation/schemas/translations.schema';
+import { AuthorizationSchema } from '#common/validation/schemas/authorization.schema.js';
+import { SettingsByRoleSchema } from '#common/validation/schemas/settingsByRole.schema.js';
+import { WidgetsTranslationsSchema } from '#common/validation/schemas/translations.schema.js';
+import { AccessTypeSchema, IdSchema } from './base-type.schema.js';
 
 export const WidgetsSchema = z.object({
   id: IdSchema,

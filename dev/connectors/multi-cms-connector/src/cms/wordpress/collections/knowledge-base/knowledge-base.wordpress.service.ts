@@ -37,17 +37,17 @@
  */
 
 import { Injectable, Logger } from '@nestjs/common';
-import { WordpressService } from '@wordpress/wordpress.service';
-import { KnowledgeBaseTranslations } from '@common/models/translations.model';
-import { KnowledgeBaseTranslationsWordpress } from '@wordpress/collections/translations/translations.wordpress.model';
-import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
-import { KnowledgeBaseSchema } from '@common/validation/schemas/knowledge-base.schema';
-import { normalizeEmptyStringToNull } from '@common/utils/normalize';
-import { KnowledgeBaseWordpress } from '@wordpress/collections/knowledge-base/knowledge-base.wordpress.model';
-import { KnowledgeBase } from '@common/models/knowledge-base.model';
-import { CacheCollection } from '@cache/cache.config';
-import { CacheService } from '@cache/cache.service';
 import { OnEvent } from '@nestjs/event-emitter';
+import { CacheCollection } from '#cache/cache.config.js';
+import { CacheService } from '#cache/cache.service.js';
+import { ValidateMapping } from '#common/decorators/validate-mapping.decorator.js';
+import { KnowledgeBase } from '#common/models/knowledge-base.model.js';
+import { KnowledgeBaseTranslations } from '#common/models/translations.model.js';
+import { normalizeEmptyStringToNull } from '#common/utils/normalize.js';
+import { KnowledgeBaseSchema } from '#common/validation/schemas/knowledge-base.schema.js';
+import { KnowledgeBaseWordpress } from '#wordpress/collections/knowledge-base/knowledge-base.wordpress.model.js';
+import { KnowledgeBaseTranslationsWordpress } from '#wordpress/collections/translations/translations.wordpress.model.js';
+import { WordpressService } from '#wordpress/wordpress.service.js';
 
 // TODO: Move FRENCH_CODE to .env and rename it to DEFAULT_LANGUAGE_CODE
 const FRENCH_CODE = 'FR';
@@ -68,7 +68,7 @@ export class KnowledgeBaseWordpressService {
     } catch (error) {
       this.logger.error(
         'Failed to preload knowledge-base after cache clear:',
-        error.message,
+        error instanceof Error ? error.message : JSON.stringify(error),
       );
     }
   }

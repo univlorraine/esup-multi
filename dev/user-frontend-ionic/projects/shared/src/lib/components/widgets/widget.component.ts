@@ -40,12 +40,14 @@
 import {
   AfterViewInit,
   ChangeDetectorRef,
-  Component, DestroyRef,
-  EventEmitter, inject,
+  Component,
+  DestroyRef,
+  EventEmitter,
+  inject,
   Input,
   Output,
   ViewChild,
-  ViewContainerRef
+  ViewContainerRef,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ProjectModuleService } from '../../project-module/project-module.service';
@@ -57,18 +59,16 @@ import { WidgetLifecycleService } from './widget-lifecycle.service';
   styleUrls: ['../../../../../../src/theme/app-theme/styles/shared/widget.component.scss'],
 })
 export class WidgetComponent implements AfterViewInit {
+  private projectModuleService = inject(ProjectModuleService);
+  private cdr = inject(ChangeDetectorRef);
+  private widgetLifecycleService = inject(WidgetLifecycleService);
+
   @Input() widgetId: string;
   @Input() widgetColor: string;
   @ViewChild('widget', { read: ViewContainerRef }) widgetContainerRef: ViewContainerRef;
   @Output() widgetIsEmpty = new EventEmitter<boolean>();
 
   private destroyRef = inject(DestroyRef);
-
-  constructor(
-    private projectModuleService: ProjectModuleService,
-    private cdr: ChangeDetectorRef,
-    private widgetLifecycleService: WidgetLifecycleService
-  ) { }
 
   async ngAfterViewInit() {
     this.widgetContainerRef.clear();
@@ -93,23 +93,39 @@ export class WidgetComponent implements AfterViewInit {
   }
 
   private handleWidgetLifecycle(widgetInstance: any) {
-    if (widgetInstance.widgetViewWillEnter && typeof widgetInstance.widgetViewWillEnter === 'function') {
-      this.widgetLifecycleService.widgetViewWillEnter(this.widgetId)
+    if (
+      widgetInstance.widgetViewWillEnter &&
+      typeof widgetInstance.widgetViewWillEnter === 'function'
+    ) {
+      this.widgetLifecycleService
+        .widgetViewWillEnter(this.widgetId)
         .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe(() => widgetInstance.widgetViewWillEnter());
     }
-    if (widgetInstance.widgetViewDidEnter && typeof widgetInstance.widgetViewDidEnter === 'function') {
-      this.widgetLifecycleService.widgetViewDidEnter(this.widgetId)
+    if (
+      widgetInstance.widgetViewDidEnter &&
+      typeof widgetInstance.widgetViewDidEnter === 'function'
+    ) {
+      this.widgetLifecycleService
+        .widgetViewDidEnter(this.widgetId)
         .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe(() => widgetInstance.widgetViewDidEnter());
     }
-    if (widgetInstance.widgetViewWillLeave && typeof widgetInstance.widgetViewWillLeave === 'function') {
-      this.widgetLifecycleService.widgetViewWillLeave(this.widgetId)
+    if (
+      widgetInstance.widgetViewWillLeave &&
+      typeof widgetInstance.widgetViewWillLeave === 'function'
+    ) {
+      this.widgetLifecycleService
+        .widgetViewWillLeave(this.widgetId)
         .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe(() => widgetInstance.widgetViewWillLeave());
     }
-    if (widgetInstance.widgetViewDidLeave && typeof widgetInstance.widgetViewDidLeave === 'function') {
-      this.widgetLifecycleService.widgetViewDidLeave(this.widgetId)
+    if (
+      widgetInstance.widgetViewDidLeave &&
+      typeof widgetInstance.widgetViewDidLeave === 'function'
+    ) {
+      this.widgetLifecycleService
+        .widgetViewDidLeave(this.widgetId)
         .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe(() => widgetInstance.widgetViewDidLeave());
     }

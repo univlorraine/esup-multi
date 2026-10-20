@@ -37,23 +37,34 @@
   ~ termes.
   -->
 
-<ion-row *ngIf="isLoading">
-  <ion-spinner  class="safe-area-lr-ionic-margin" name="dots"></ion-spinner>
-</ion-row>
-<ng-container *ngIf="!isLoading">
-  <ion-row *ngIf="errorMessage" class="ion-padding">
-    <ion-note class="danger">{{errorMessage}}</ion-note>
+@if (isLoading) {
+  <ion-row>
+    <ion-spinner class="safe-area-lr-ionic-margin" name="dots" />
   </ion-row>
-  <ion-grid [fixed]="true">
-    <ion-row *ngIf="!errorMessage" [ngClass]="fontColor()" class="ion-padding app-text-4">
-      <ion-col size="3" *ngFor="let time of (clocking$ | async)?.times">
-        <ion-chip class="app-text-4 dark-font-color">{{ time }}</ion-chip>
-      </ion-col>
+} @else {
+  @if (errorMessage) {
+    <ion-row class="ion-padding">
+      <ion-note class="danger">{{ errorMessage }}</ion-note>
     </ion-row>
+  }
+  <ion-grid [fixed]="true">
+    @if (!errorMessage) {
+      <ion-row [ngClass]="fontColor()" class="ion-padding app-text-4">
+        @for (time of (clocking$ | async)?.times; track time) {
+          <ion-col size="3">
+            <ion-chip class="app-text-4 dark-font-color">{{ time }}</ion-chip>
+          </ion-col>
+        }
+      </ion-row>
+    }
   </ion-grid>
   <ion-row class="ion-justify-content-center ion-padding">
-    <ion-button class="app-rectangle-button-1" *ngIf="!clockInLoading" (click)="onClockIn($event)">
-      <ion-label>{{ 'CLOCKING.CLOCK_IN' | translate }}</ion-label></ion-button>
-    <ion-spinner *ngIf="clockInLoading" name="lines"></ion-spinner>
+    @if (clockInLoading) {
+      <ion-spinner name="lines" />
+    } @else {
+      <ion-button class="app-rectangle-button-1" (click)="onClockIn($event)">
+        <ion-label>{{ 'CLOCKING.CLOCK_IN' | translate }}</ion-label>
+      </ion-button>
+    }
   </ion-row>
-</ng-container>
+}

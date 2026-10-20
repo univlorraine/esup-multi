@@ -40,11 +40,11 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { DeleteResult, Model } from 'mongoose';
-import { AuthenticatedUserDto } from './authenticated-user.dto';
+import { AuthenticatedUserDto } from './authenticated-user.dto.js';
 import {
   AuthenticatedUser,
   AuthenticatedUserDocument,
-} from './authenticated-user.schema';
+} from './authenticated-user.schema.js';
 
 @Injectable()
 export class AuthenticatedUserRepository {

@@ -48,7 +48,10 @@ export interface MailCalendar {
   unreadMails: number;
 }
 
-export const store = createStore({ name: STORE_NAME }, withProps<MailCalendar>({ unreadMails: null }));
+export const store = createStore(
+  { name: STORE_NAME },
+  withProps<MailCalendar>({ unreadMails: null }),
+);
 
 export const persist = persistState(store, {
   key: STORE_NAME,

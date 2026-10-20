@@ -42,24 +42,20 @@ import { EventInput } from 'fullcalendar';
 import { Event } from '../schedule.repository';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ScheduleCalendarService {
-
   eventsToCalendarEvents(events: Event[]): EventInput[] {
-
     if (events.length === 0) {
       return [];
     }
 
-    return events
-        .map(event =>
-          ({
-            start: event.startDateTime,
-            end: event.endDateTime,
-            extendedProps: {
-              event
-            }
-          }));
+    return events.map((event) => ({
+      start: event.startDateTime,
+      end: event.endDateTime,
+      extendedProps: {
+        event,
+      },
+    }));
   }
 }

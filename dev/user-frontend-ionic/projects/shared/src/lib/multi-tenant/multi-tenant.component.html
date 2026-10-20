@@ -39,37 +39,47 @@
 
 <ion-header>
   <ion-toolbar>
-    <ion-title class="app-centered-header-title app-title-4">
-
-    </ion-title>
+    <ion-title class="app-centered-header-title app-title-4" />
   </ion-toolbar>
 </ion-header>
 <ion-content class="ion-padding">
   <ion-row class="ion-justify-content-center">
-    <p>{{ "MULTI-TENANT.CHOICE_UNIVERSITY" | translate }}</p>
+    <p>{{ 'MULTI-TENANT.CHOICE_UNIVERSITY' | translate }}</p>
   </ion-row>
-  <ion-row *ngFor="let tenant of availableTenants" class="ion-justify-content-center tenant-option" (click)="onValidate(tenant.id)">
-    <p>{{tenant.name}}</p>
-  </ion-row>
+  @for (tenant of availableTenants; track tenant.id) {
+    <ion-row class="ion-justify-content-center tenant-option" (click)="onValidate(tenant.id)">
+      <p>{{ tenant.name }}</p>
+    </ion-row>
+  }
 </ion-content>
 <ion-footer class="ion-no-border">
   <ion-row class="ion-justify-content-center">
-    <ion-button fill="clear" shape="round" class="app-round-button-1 ion-no-padding ion-no-margin" (click)="toggleDarkMode()">
-      <ion-icon *ngIf="(isDarkTheme$ | async) === false" name="moon" slot="icon-only"></ion-icon>
-      <ion-icon *ngIf="(isDarkTheme$ | async) === true" name="sunny-outline" slot="icon-only"></ion-icon>
+    <ion-button
+      fill="clear"
+      shape="round"
+      class="app-round-button-1 ion-no-padding ion-no-margin"
+      (click)="toggleDarkMode()"
+    >
+      @if ((isDarkTheme$ | async) === false) {
+        <ion-icon name="moon" slot="icon-only" />
+      }
+      @if ((isDarkTheme$ | async) === true) {
+        <ion-icon name="sunny-outline" slot="icon-only" />
+      }
     </ion-button>
   </ion-row>
   <ion-row class="ion-justify-content-center">
-    <ion-button *ngFor="let language of languages" fill=“clear” (click)="useLanguage(language)">
-      <ion-icon name="{{language}}"></ion-icon>
-    </ion-button>
+    @for (language of languages; track language) {
+      <ion-button fill="“clear”" (click)="useLanguage(language)">
+        <ion-icon name="{{ language }}" />
+      </ion-button>
+    }
   </ion-row>
-  <ion-row
-    *ngIf="appVersion$ | async as version"
-    class="ion-justify-content-center ion-padding-bottom"
-  >
-    <ion-label class="app-title-6 light ion-no-padding">
-      {{ 'MENU.VERSION' | translate }} {{ version }}
-    </ion-label>
-  </ion-row>
+  @if (appVersion$ | async; as version) {
+    <ion-row class="ion-justify-content-center ion-padding-bottom">
+      <ion-label class="app-title-6 light ion-no-padding">
+        {{ 'MENU.VERSION' | translate }} {{ version }}
+      </ion-label>
+    </ion-row>
+  }
 </ion-footer>

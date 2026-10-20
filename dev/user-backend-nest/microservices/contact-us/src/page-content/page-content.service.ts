@@ -40,11 +40,12 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { Observable, catchError, map } from 'rxjs';
-import { CmsApi } from 'src/config/configuration.interface';
-import { PageContentResultDto } from './page-content.dto';
-import { ContactUsGraphQLResponse } from 'src/common/common.dto';
 import { RpcException } from '@nestjs/microservices';
+import type { AxiosError } from 'axios';
+import { catchError, map, Observable } from 'rxjs';
+import { ContactUsGraphQLResponse } from '../common/common.dto.js';
+import { CmsApi } from '../config/configuration.interface.js';
+import { PageContentResultDto } from './page-content.dto.js';
 
 @Injectable()
 export class PageContentService {
@@ -90,7 +91,7 @@ export class PageContentService {
         requestConfig,
       )
       .pipe(
-        catchError((err: any) => {
+        catchError((err: AxiosError) => {
           const errorMessage = 'Unable to get contact-us content from CMS';
           this.logger.error(errorMessage, err);
           throw new RpcException(errorMessage);

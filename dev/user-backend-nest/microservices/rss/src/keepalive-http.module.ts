@@ -44,14 +44,14 @@ import { HttpAgent, HttpsAgent } from 'agentkeepalive';
 import {
   FeedOptions,
   KeepAliveOptions,
-} from './config/configuration.interface';
+} from './config/configuration.interface.js';
 
 @Module({
   imports: [
     ConfigModule,
     HttpModule.registerAsync({
       imports: [ConfigModule],
-      useFactory: async (configService: ConfigService) => {
+      useFactory: (configService: ConfigService) => {
         const logger = new Logger(KeepaliveHttpModule.name);
         const keepAliveOptions =
           configService.get<KeepAliveOptions>('keepAliveOptions');

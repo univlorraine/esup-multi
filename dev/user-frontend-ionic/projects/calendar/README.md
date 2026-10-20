@@ -5,7 +5,7 @@ Module permettant d'afficher un calendrier avec les prochains événements sur l
 Exemple dans `environment.ts` :
 
 ```typescript
-CalendarModule.forRoot({
+provideCalendar({
   numberOfEventsLimit: 3,
   display: 'slider'
 })

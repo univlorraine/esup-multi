@@ -3,4 +3,4 @@
  */
 
 export * from './lib/app-update.service';
-export * from './lib/app-update.module';
+export * from './lib/app-update.providers';

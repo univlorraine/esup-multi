@@ -41,6 +41,6 @@
  * Public API Surface of card
  */
 
-export * from './lib/card.module';
+export * from './lib/card.providers';
 export * from './lib/card.page';
 export * from './lib/card.service';

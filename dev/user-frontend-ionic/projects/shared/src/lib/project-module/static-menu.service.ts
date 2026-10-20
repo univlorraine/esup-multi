@@ -42,44 +42,43 @@ import { Injectable } from '@angular/core';
 export type StaticMenuType = 'tabs:start' | 'tabs:end' | 'burger';
 
 export interface StaticMenuItem {
-    title: string;
-    shortTitle?: string;
-    icon: string;
-    position: number;
-    routerLink: string;
-    type: StaticMenuType;
+  title: string;
+  shortTitle?: string;
+  icon: string;
+  position: number;
+  routerLink: string;
+  type: StaticMenuType;
 }
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root',
 })
 export class StaticMenuService {
+  private menuItemsByType = new Map<StaticMenuType, StaticMenuItem[]>([
+    ['tabs:start', []],
+    ['tabs:end', []],
+    ['burger', []],
+  ]);
 
-    private menuItemsByType: Map<StaticMenuType, StaticMenuItem[]> = new Map([
-        ['tabs:start', []],
-        ['tabs:end', []],
-        ['burger', []],
-    ]);
+  private menuItems: StaticMenuItem[] = [];
 
-    private menuItems: StaticMenuItem[] = [];
+  public addMenuItems(menuItems: StaticMenuItem[]) {
+    menuItems.forEach((menuItem) => this.addMenuItem(menuItem));
+  }
 
-    public addMenuItems(menuItems: StaticMenuItem[]) {
-        menuItems.forEach(menuItem => this.addMenuItem(menuItem));
-    }
+  public getMenuItemsByType(menuType: StaticMenuType) {
+    return this.menuItemsByType.get(menuType);
+  }
 
-    public getMenuItemsByType(menuType: StaticMenuType) {
-        return this.menuItemsByType.get(menuType);
-    }
+  public getMenuItems() {
+    return this.menuItems;
+  }
 
-    public getMenuItems() {
-        return this.menuItems;
-    }
+  private addMenuItem(menuItem: StaticMenuItem) {
+    const menuItemsForThisType = this.menuItemsByType.get(menuItem.type);
+    menuItemsForThisType.push(menuItem);
+    menuItemsForThisType.sort((itemA, itemB) => itemA.position - itemB.position);
 
-    private addMenuItem(menuItem: StaticMenuItem) {
-        const menuItemsForThisType = this.menuItemsByType.get(menuItem.type);
-        menuItemsForThisType.push(menuItem);
-        menuItemsForThisType.sort((itemA, itemB) => itemA.position - itemB.position);
-
-        this.menuItems.push(menuItem);
-    }
+    this.menuItems.push(menuItem);
+  }
 }

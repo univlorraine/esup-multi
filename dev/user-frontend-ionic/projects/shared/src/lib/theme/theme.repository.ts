@@ -38,31 +38,29 @@
  */
 
 import { createStore, select, setProps, withProps } from '@ngneat/elf';
-import {
-  persistState
-} from '@ngneat/elf-persist-state';
+import { persistState } from '@ngneat/elf-persist-state';
 import { localForageStore } from '../store/local-forage';
 
 const STORE_NAME = 'theme';
 
 export interface ThemeProps {
-    isDarkTheme: boolean;
-    userHadSetThemeInApp: boolean;
-    tenantThemeApplied: string;
+  isDarkTheme: boolean;
+  userHadSetThemeInApp: boolean;
+  tenantThemeApplied: string;
 }
 
 const store = createStore(
-    { name: STORE_NAME },
-    withProps<ThemeProps>({
-      isDarkTheme: false,
-      userHadSetThemeInApp: false,
-      tenantThemeApplied: ''
-    })
-  );
+  { name: STORE_NAME },
+  withProps<ThemeProps>({
+    isDarkTheme: false,
+    userHadSetThemeInApp: false,
+    tenantThemeApplied: '',
+  }),
+);
 
 export const persist = persistState(store, {
-    key: STORE_NAME,
-    storage: localForageStore,
+  key: STORE_NAME,
+  storage: localForageStore,
 });
 
 export const themeRepoInitialized$ = persist.initialized$;
@@ -74,24 +72,33 @@ export const userHadSetThemeInApp$ = store.pipe(select((state) => state.userHadS
 export const tenantThemeApplied$ = store.pipe(select((state) => state.tenantThemeApplied));
 
 export const setIsDarkTheme = (isDarkThemeProps: ThemeProps['isDarkTheme']) => {
-    store.update(setProps({
-      isDarkTheme: isDarkThemeProps
-    }));
+  store.update(
+    setProps({
+      isDarkTheme: isDarkThemeProps,
+    }),
+  );
 };
 
-export const setUserHaveSetThemeInApp = (userHadSetThemeInAppProps: ThemeProps['userHadSetThemeInApp']) => {
-  store.update(setProps({
-    userHadSetThemeInApp: userHadSetThemeInAppProps
-  }));
+export const setUserHaveSetThemeInApp = (
+  userHadSetThemeInAppProps: ThemeProps['userHadSetThemeInApp'],
+) => {
+  store.update(
+    setProps({
+      userHadSetThemeInApp: userHadSetThemeInAppProps,
+    }),
+  );
 };
 
-export const setTenantThemeApplied = (tenantThemeAppliedProps: ThemeProps['tenantThemeApplied']) => {
-  store.update(setProps({
-    tenantThemeApplied: tenantThemeAppliedProps
-  }));
+export const setTenantThemeApplied = (
+  tenantThemeAppliedProps: ThemeProps['tenantThemeApplied'],
+) => {
+  store.update(
+    setProps({
+      tenantThemeApplied: tenantThemeAppliedProps,
+    }),
+  );
 };
 
 export const isDarkTheme = () => store.getValue()?.isDarkTheme;
 
 export const userHadSetThemeInApp = () => store.getValue()?.userHadSetThemeInApp;
-

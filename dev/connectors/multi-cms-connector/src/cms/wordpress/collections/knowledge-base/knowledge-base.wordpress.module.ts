@@ -37,9 +37,9 @@
  */
 
 import { forwardRef, Module } from '@nestjs/common';
-import { KnowledgeBaseWordpressResolver } from './knowledge-base.wordpress.resolver';
-import { KnowledgeBaseWordpressService } from './knowledge-base.wordpress.service';
-import { WordpressModule } from '@wordpress/wordpress.module';
+import { WordpressModule } from '#wordpress/wordpress.module.js';
+import { KnowledgeBaseWordpressResolver } from './knowledge-base.wordpress.resolver.js';
+import { KnowledgeBaseWordpressService } from './knowledge-base.wordpress.service.js';
 
 @Module({
   imports: [forwardRef(() => WordpressModule)],

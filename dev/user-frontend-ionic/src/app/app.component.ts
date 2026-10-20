@@ -37,40 +37,104 @@
  * termes.
  */
 
-import { DOCUMENT } from '@angular/common';
-import { Component, DestroyRef, inject, Inject, Injector, OnDestroy, OnInit, Optional, Renderer2 } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import {
+  Component,
+  DestroyRef,
+  DOCUMENT,
+  inject,
+  Injector,
+  OnDestroy,
+  OnInit,
+  Renderer2,
+} from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { FirebaseMessaging } from '@capacitor-firebase/messaging';
 import { App } from '@capacitor/app';
-import { Capacitor, PluginListenerHandle } from '@capacitor/core';
+import { Capacitor, PluginListenerHandle, SystemBars, SystemBarsStyle } from '@capacitor/core';
 import { Device } from '@capacitor/device';
+import { PushNotifications } from '@capacitor/push-notifications';
 import { SplashScreen } from '@capacitor/splash-screen';
-import { StatusBar, Style } from '@capacitor/status-bar';
 import { Badge } from '@capawesome/capacitor-badge';
-import { ModalController, Platform, PopoverController } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
 import {
-  currentLanguage$, features$, FeaturesService, isDarkTheme$, isFeatureStoreInitialized$, NavigationService,
-  NotificationsService, NetworkService, PageLayout, PageLayoutService, setIsDarkTheme, StatisticsService,
-  themeRepoInitialized$, userHadSetThemeInApp, userHadSetThemeInApp$, tenantThemeApplied$, MultiTenantService,
-  ProjectModuleService, statsUid$
-} from '@multi/shared';
+  IonApp,
+  IonCard,
+  IonCardContent,
+  IonCardHeader,
+  IonCardTitle,
+  IonText,
+  ModalController,
+  Platform,
+  PopoverController,
+} from '@ionic/angular';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { initializeApp } from 'firebase/app';
+import { MatomoTracker } from 'ngx-matomo-client';
 import { combineLatest, Observable, of } from 'rxjs';
 import { distinctUntilChanged, filter, map, switchMap } from 'rxjs/operators';
-import { Title } from '@angular/platform-browser';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { PushNotifications } from '@capacitor/push-notifications';
-import { Router } from '@angular/router';
-import { MatomoTracker } from 'ngx-matomo';
-import { EdgeToEdge } from '@capawesome/capacitor-android-edge-to-edge-support';
+import {
+  currentLanguage$,
+  features$,
+  FeaturesService,
+  isDarkTheme$,
+  isFeatureStoreInitialized$,
+  MultiTenantService,
+  NavigationService,
+  NetworkService,
+  NotificationsService,
+  PageLayout,
+  PageLayoutService,
+  ProjectModuleService,
+  setIsDarkTheme,
+  StatisticsService,
+  statsUid$,
+  tenantThemeApplied$,
+  themeRepoInitialized$,
+  userHadSetThemeInApp,
+  userHadSetThemeInApp$,
+} from '@multi/shared';
+import { LayoutPage } from './layout/layout.page';
 
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['../theme/app-theme/styles/app/app.component.scss'],
+  imports: [
+    CommonModule,
+    TranslatePipe,
+    LayoutPage,
+    IonApp,
+    IonCard,
+    IonCardContent,
+    IonCardHeader,
+    IonCardTitle,
+    IonText,
+  ],
 })
 export class AppComponent implements OnInit, OnDestroy {
-  public languages: Array<string> = [];
+  private environment = inject<any>('environment' as any);
+  private platform = inject(Platform);
+  private translateService = inject(TranslateService);
+  private pageLayoutService = inject(PageLayoutService);
+  private navigationService = inject(NavigationService);
+  private modalController = inject(ModalController);
+  private popoverController = inject(PopoverController);
+  private renderer = inject(Renderer2);
+  private document = inject<Document>(DOCUMENT);
+  private networkService = inject(NetworkService);
+  private featuresService = inject(FeaturesService);
+  private notificationsService = inject(NotificationsService);
+  private statisticsService = inject(StatisticsService);
+  private titleService = inject(Title);
+  private router = inject(Router);
+  private multiTenantService = inject(MultiTenantService);
+  private injector = inject(Injector);
+  private projectModuleService = inject(ProjectModuleService);
+  private matomoTracker = inject(MatomoTracker);
+
+  public languages: string[] = [];
   public currentPageLayout$: Observable<PageLayout>;
   public isNothingToShow$: Observable<boolean>;
   private backButtonListener: Promise<PluginListenerHandle>;
@@ -80,28 +144,7 @@ export class AppComponent implements OnInit, OnDestroy {
   private themeToApply: string;
   private defaultTheme: string;
 
-  constructor(
-    @Inject('environment')
-    private environment: any,
-    private platform: Platform,
-    private translateService: TranslateService,
-    private pageLayoutService: PageLayoutService,
-    private navigationService: NavigationService,
-    private modalController: ModalController,
-    private popoverController: PopoverController,
-    private renderer: Renderer2,
-    @Inject(DOCUMENT) private document: Document,
-    private networkService: NetworkService,
-    private featuresService: FeaturesService,
-    private notificationsService: NotificationsService,
-    private statisticsService: StatisticsService,
-    private titleService: Title,
-    private router: Router,
-    private multiTenantService: MultiTenantService,
-    private injector: Injector,
-    private projectModuleService: ProjectModuleService,
-    @Optional() private matomoTracker: MatomoTracker,
-  ) {
+  constructor() {
     this.initializeApp();
   }
 
@@ -167,7 +210,7 @@ export class AppComponent implements OnInit, OnDestroy {
   private initializeAppResume(): void {
     // reload notifications when app is resumed (back to foreground)
     this.appResumeListener = App.addListener('resume', () =>
-      this.notificationsService.loadNotifications(0, 10).subscribe()
+      this.notificationsService.loadNotifications(0, 10).subscribe(),
     );
   }
 
@@ -175,30 +218,32 @@ export class AppComponent implements OnInit, OnDestroy {
     this.prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
     this.prefersDark.addEventListener('change', this.handleColorSchemeChange);
 
-    themeRepoInitialized$.pipe(
-      filter((isInitialized: boolean) => isInitialized),
-      switchMap(() => combineLatest([isDarkTheme$, userHadSetThemeInApp$, tenantThemeApplied$])),
-      takeUntilDestroyed(this.destroyRef)
-    ).subscribe(([isDarkTheme, userHadSetThemeInApplication, tenantThemeApplied]) => {
-      if (!userHadSetThemeInApplication) {
-        isDarkTheme = this.prefersDark.matches;
-        setIsDarkTheme(isDarkTheme);
-      }
-      this.toggleDarkTheme(isDarkTheme);
+    themeRepoInitialized$
+      .pipe(
+        filter((isInitialized: boolean) => isInitialized),
+        switchMap(() => combineLatest([isDarkTheme$, userHadSetThemeInApp$, tenantThemeApplied$])),
+        takeUntilDestroyed(this.destroyRef),
+      )
+      .subscribe(([isDarkTheme, userHadSetThemeInApplication, tenantThemeApplied]) => {
+        if (!userHadSetThemeInApplication) {
+          isDarkTheme = this.prefersDark.matches;
+          setIsDarkTheme(isDarkTheme);
+        }
+        this.toggleDarkTheme(isDarkTheme);
 
-      // Remove the current theme from the body
-      if (this.themeToApply !== '') {
-        this.disableTenantTheme(this.themeToApply);
-      }
+        // Remove the current theme from the body
+        if (this.themeToApply !== '') {
+          this.disableTenantTheme(this.themeToApply);
+        }
 
-      // Assign the current theme
-      this.themeToApply = (tenantThemeApplied !== '') ? tenantThemeApplied : this.defaultTheme;
+        // Assign the current theme
+        this.themeToApply = tenantThemeApplied !== '' ? tenantThemeApplied : this.defaultTheme;
 
-      // Add the current theme as a class for the body element
-      if (this.themeToApply !== '') {
-        this.enableTenantTheme(this.themeToApply);
-      }
-    });
+        // Add the current theme as a class for the body element
+        if (this.themeToApply !== '') {
+          this.enableTenantTheme(this.themeToApply);
+        }
+      });
   }
 
   private handleColorSchemeChange(mediaQuery: MediaQueryListEvent): void {
@@ -227,23 +272,20 @@ export class AppComponent implements OnInit, OnDestroy {
     PushNotifications.addListener('pushNotificationActionPerformed', async () => {
       this.router.navigateByUrl('/notifications');
     });
-
   }
 
   private initializeMatomo(): void {
-    if (!this.matomoTracker) {
-      return;
-    }
-
     // On désactive les cookies, car on va utiliser le stats-uid présent en local storage
     this.matomoTracker.disableCookies();
 
-    statsUid$.pipe(
-      filter(uid => !!uid),
-      takeUntilDestroyed(this.destroyRef)
-    ).subscribe(uid => {
-      this.matomoTracker.setUserId(uid);
-    });
+    statsUid$
+      .pipe(
+        filter((uid) => !!uid),
+        takeUntilDestroyed(this.destroyRef),
+      )
+      .subscribe((uid) => {
+        this.matomoTracker.setUserId(uid);
+      });
   }
 
   private initializeLanguage(): void {
@@ -251,18 +293,17 @@ export class AppComponent implements OnInit, OnDestroy {
     this.languages = this.environment.languages;
     this.translateService.addLangs(this.languages);
     // Observable permettant de mettre à jour le code language dans l'entête html et d'appliquer la langue choisie
-    currentLanguage$.pipe(
-      distinctUntilChanged(),
-      takeUntilDestroyed(this.destroyRef)
-    ).subscribe(language => {
-      // Mise à jour du langage dans l'application et dans l'attribut lang de l'élément HTML
-      this.translateService.use(language || this.environment.defaultLanguage);
-      this.document.documentElement.lang = language || this.environment.defaultLanguage;
-    });
+    currentLanguage$
+      .pipe(distinctUntilChanged(), takeUntilDestroyed(this.destroyRef))
+      .subscribe((language) => {
+        // Mise à jour du langage dans l'application et dans l'attribut lang de l'élément HTML
+        this.translateService.use(language || this.environment.defaultLanguage);
+        this.document.documentElement.lang = language || this.environment.defaultLanguage;
+      });
   }
 
   private initializeEmptyStateDetection(): void {
-    const featuresIsEmpty$ : Observable<boolean> = features$.pipe(map(val => val.length === 0));
+    const featuresIsEmpty$: Observable<boolean> = features$.pipe(map((val) => val.length === 0));
     this.isNothingToShow$ = isFeatureStoreInitialized$.pipe(
       filter((isInitialized: boolean) => isInitialized),
       switchMap(() => combineLatest([featuresIsEmpty$, this.networkService.isOnline$])),
@@ -273,7 +314,7 @@ export class AppComponent implements OnInit, OnDestroy {
         return of(featuresIsEmpty || !isOnline);
       }),
       distinctUntilChanged(),
-      takeUntilDestroyed(this.destroyRef)
+      takeUntilDestroyed(this.destroyRef),
     );
     this.isNothingToShow$.subscribe();
   }
@@ -286,7 +327,7 @@ export class AppComponent implements OnInit, OnDestroy {
     SplashScreen.show({
       showDuration: 1500,
       autoHide: true,
-      fadeInDuration: 500
+      fadeInDuration: 500,
     });
   }
 
@@ -295,24 +336,17 @@ export class AppComponent implements OnInit, OnDestroy {
       return;
     }
     this.platform.ready().then(async () => {
-      const primaryColor = getComputedStyle(document.documentElement).getPropertyValue('--ion-color-primary');
+      const primaryColor = getComputedStyle(document.documentElement).getPropertyValue(
+        '--ion-toolbar-background',
+      );
       const r = parseInt(primaryColor.slice(1, 3), 16);
       const g = parseInt(primaryColor.slice(3, 5), 16);
       const b = parseInt(primaryColor.slice(5, 7), 16);
       const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-      StatusBar.setStyle({ style: luminance > 0.5 ? Style.Light : Style.Dark });
-      StatusBar.setBackgroundColor({ color: primaryColor });
 
-      // Gestion du edge to edge sur android
-      const info = await Device.getInfo();
-      if (info.platform === 'android') {
-        if (Number(info.osVersion) >= 15) {
-          await EdgeToEdge.enable();
-          await EdgeToEdge.setBackgroundColor({ color: primaryColor });
-        } else {
-          await EdgeToEdge.disable();
-        }
-      }
+      await SystemBars.setStyle({
+        style: luminance > 0.5 ? SystemBarsStyle.Light : SystemBarsStyle.Dark,
+      });
     });
   }
 
@@ -362,13 +396,15 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   private handleTranslationsChangeForTenant() {
-    this.multiTenantService.tenantChange$.pipe(
-      takeUntilDestroyed(this.destroyRef)
-    ).subscribe(() => {
-      this.translateService.setTranslation(
-        this.translateService.currentLang,
-        this.translateService.getTranslation(this.translateService.currentLang)
-      ); // Workaround to force the translateService to register the translations change, not working by simply calling reloadLang()
-    });
+    this.multiTenantService.tenantChange$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => {
+        const currentLang = this.translateService.getCurrentLang();
+        if (currentLang === null) {
+          return;
+        }
+        this.translateService.getLangs().forEach((lang) => this.translateService.resetLang(lang));
+        this.translateService.reloadLang(currentLang).subscribe();
+      });
   }
 }

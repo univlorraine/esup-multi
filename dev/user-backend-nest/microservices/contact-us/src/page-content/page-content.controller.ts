@@ -40,8 +40,8 @@
 import { Controller } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
 import { from, Observable } from 'rxjs';
-import { PageContentResultDto } from './page-content.dto';
-import { PageContentService } from './page-content.service';
+import { PageContentResultDto } from './page-content.dto.js';
+import { PageContentService } from './page-content.service.js';
 
 @Controller()
 export class PageContentController {

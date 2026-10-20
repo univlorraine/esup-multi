@@ -37,9 +37,9 @@
  */
 
 import { Field, ObjectType } from '@nestjs/graphql';
-import { FeaturesTranslationsDirectus } from '@directus/collections/translations/translations.directus.model';
-import { AuthorizationDirectus } from '@directus/collections/authorization/authorization.directus.model';
-import { SettingsByRoleDirectus } from '@directus/collections/settings-by-role/settings-by-role.directus.model';
+import { AuthorizationDirectus } from '#directus/collections/authorization/authorization.directus.model.js';
+import { SettingsByRoleDirectus } from '#directus/collections/settings-by-role/settings-by-role.directus.model.js';
+import { FeaturesTranslationsDirectus } from '#directus/collections/translations/translations.directus.model.js';
 
 @ObjectType()
 export class FeaturesDirectus {

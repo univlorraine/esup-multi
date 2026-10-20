@@ -39,9 +39,9 @@
 
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { CardEuModule } from './card-eu/card-eu.module';
-import configuration from './config/configuration';
-import { MonitoringModule } from './monitoring/monitoring.module';
+import { CardEuModule } from './card-eu/card-eu.module.js';
+import configuration from './config/configuration.js';
+import { MonitoringModule } from './monitoring/monitoring.module.js';
 
 @Module({
   imports: [

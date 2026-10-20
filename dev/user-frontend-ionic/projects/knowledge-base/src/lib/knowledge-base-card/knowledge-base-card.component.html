@@ -41,72 +41,90 @@
   <ion-grid>
     <ion-row>
       <ion-col size="auto">
-        <img *ngIf="item.coverImage" class="thumbnail" alt="" [src]="item.coverImage">
+        @if (item.coverImage) {
+          <img class="thumbnail" alt="" [src]="item.coverImage" />
+        }
       </ion-col>
       <ion-col class="title-col">
         <ion-card-title>
-          {{item.title}}
+          {{ item.title }}
         </ion-card-title>
       </ion-col>
       <ion-col size="auto" class="button-col">
-        <ion-button
-          *ngIf="displayMode !== Display.card && canOpenItem(item)"
-          fill="solid"
-          shape="round"
-          class="app-round-button-1"
-          (click)="openItemLink(item)"
-          [attr.aria-label]="'KNOWLEDGE-BASE.OPEN_ITEM' | translate: {title: item.title}">
-          <ion-icon [name]="getButtonIcon(item.type)" slot="icon-only" size="large"></ion-icon>
-        </ion-button>
-        <ion-button
-          *ngIf="displayMode === Display.card"
-          shape="round"
-          fill="solid"
-          class="app-round-button-1"
-          (click)="toggleDetails()"
-          [attr.aria-expanded]="isExpanded"
-          [attr.aria-label]="'KNOWLEDGE-BASE.TOGGLE_DETAILS' | translate: {title: item.title}">
-          <ion-icon [name]="isExpanded ? 'chevron-up-outline' : 'chevron-down-outline'" slot="icon-only" size="large"></ion-icon>
-        </ion-button>
+        @if (displayMode !== Display.card && canOpenItem(item)) {
+          <ion-button
+            fill="solid"
+            shape="round"
+            class="app-round-button-1"
+            (click)="openItemLink(item)"
+            [attr.aria-label]="'KNOWLEDGE-BASE.OPEN_ITEM' | translate: { title: item.title }"
+          >
+            <ion-icon [name]="getButtonIcon(item.type)" slot="icon-only" size="large" />
+          </ion-button>
+        }
+        @if (displayMode === Display.card) {
+          <ion-button
+            shape="round"
+            fill="solid"
+            class="app-round-button-1"
+            (click)="toggleDetails()"
+            [attr.aria-expanded]="isExpanded"
+            [attr.aria-label]="'KNOWLEDGE-BASE.TOGGLE_DETAILS' | translate: { title: item.title }"
+          >
+            <ion-icon
+              [name]="isExpanded ? 'chevron-up-outline' : 'chevron-down-outline'"
+              slot="icon-only"
+              size="large"
+            />
+          </ion-button>
+        }
       </ion-col>
     </ion-row>
   </ion-grid>
 
-  <ng-container *ngIf="displayMode === Display.card && isExpanded">
+  @if (displayMode === Display.card && isExpanded) {
     <div class="separator"></div>
     <ion-card-content>
       <ion-item lines="none">
-        <div [innerHTML]="item.content | sanitizeHtml" class="safe-area-padding-lr link-inherit-color"></div>
+        <div
+          [innerHTML]="item.content | sanitizeHtml"
+          class="safe-area-padding-lr link-inherit-color"
+        ></div>
       </ion-item>
 
       <ng-template #clickableItem let-icon="icon" let-value="value" let-click="click">
-        <ion-item
-          *ngIf="value"
-          [button]="true"
-          [detail]="false"
-          lines="none"
-          (click)="click(value)"
-        >
-          <ion-icon [name]="icon" slot="start"></ion-icon>
-          <ion-label class="underline-text">{{ value }}</ion-label>
-        </ion-item>
+        @if (value) {
+          <ion-item [button]="true" [detail]="false" lines="none" (click)="click(value)">
+            <ion-icon [name]="icon" slot="start" />
+            <ion-label class="underline-text">{{ value }}</ion-label>
+          </ion-item>
+        }
       </ng-template>
 
       <ng-container
-        *ngTemplateOutlet="clickableItem; context: { icon: 'mail-outline', value: item.email, click: handleEmail }"
-      ></ng-container>
+        *ngTemplateOutlet="
+          clickableItem;
+          context: { icon: 'mail-outline', value: item.email, click: handleEmail }
+        "
+      />
       <ng-container
-        *ngTemplateOutlet="clickableItem; context: { icon: 'call-outline', value: item.phone, click: handlePhone }"
-      ></ng-container>
-      <ion-item *ngIf="item.address" lines="none">
-        <ion-icon name="location-outline" slot="start"></ion-icon>
-        <ion-label>{{ item.address }}</ion-label>
-      </ion-item>
+        *ngTemplateOutlet="
+          clickableItem;
+          context: { icon: 'call-outline', value: item.phone, click: handlePhone }
+        "
+      />
+      @if (item.address) {
+        <ion-item lines="none">
+          <ion-icon name="location-outline" slot="start" />
+          <ion-label>{{ item.address }}</ion-label>
+        </ion-item>
+      }
       <ng-container
-        *ngTemplateOutlet="clickableItem; context: { icon: 'globe-outline', value: item.link, click: handleLink }"
-      ></ng-container>
+        *ngTemplateOutlet="
+          clickableItem;
+          context: { icon: 'globe-outline', value: item.link, click: handleLink }
+        "
+      />
     </ion-card-content>
-  </ng-container>
-
+  }
 </ion-card>
-

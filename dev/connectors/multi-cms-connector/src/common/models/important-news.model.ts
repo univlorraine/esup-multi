@@ -37,8 +37,8 @@
  */
 
 import { Field, ObjectType } from '@nestjs/graphql';
-import { Authorization } from './authorization.model';
-import { ImportantNewsTranslations } from './translations.model';
+import { Authorization } from './authorization.model.js';
+import { ImportantNewsTranslations } from './translations.model.js';
 
 @ObjectType()
 export class ImportantNews {

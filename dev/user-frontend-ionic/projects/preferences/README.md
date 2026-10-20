@@ -4,14 +4,19 @@ Module permettant la gestion des préférences utilisateurs au travers d'un écr
 
 ## Ajout de préférences utilisateur
 
-Chaque module peut pousser ses préférences en définissant un composant qui sera un morceau de la page "préférences" en utilisant `PreferencesService` (du module shared). 
-`PreferenceComponent` est ici un composant défini localement dans `MyModule`.
+Chaque module peut pousser ses préférences en définissant un composant qui sera un morceau de la page "préférences", via `ProjectModuleService.initProjectModule` (du module shared). 
+`PreferencesComponent` est ici un composant défini localement dans le module.
 
 ```typescript
-export class MyModule {
-  constructor(private preferencesService: PreferencesService) {
-    this.preferencesService.addPreferencesComponent({
-      component: PreferencesComponent
-    });
-  }
+export function provideMyModule(): (Provider | EnvironmentProviders)[] {
+  return [
+    provideAppInitializer(() => {
+      const projectModuleService = inject(ProjectModuleService);
+      return projectModuleService.initProjectModule({
+        name: 'my-module',
+        preferencesComponent: PreferencesComponent,
+      });
+    }),
+  ];
 }
+```

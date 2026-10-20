@@ -38,9 +38,7 @@
  */
 
 import { createStore, select, withProps } from '@ngneat/elf';
-import {
-  persistState
-} from '@ngneat/elf-persist-state';
+import { persistState } from '@ngneat/elf-persist-state';
 import { localForageStore } from '@multi/shared';
 
 const STORE_NAME = 'rssFeed';
@@ -64,14 +62,11 @@ export interface FeedItem {
   guid: string;
 }
 
-const rssFeedStore = createStore(
-    { name: STORE_NAME },
-    withProps<RssFeedProps>({ rssFeed: []})
-  );
+const rssFeedStore = createStore({ name: STORE_NAME }, withProps<RssFeedProps>({ rssFeed: [] }));
 
 export const persist = persistState(rssFeedStore, {
-    key: STORE_NAME,
-    storage: localForageStore,
+  key: STORE_NAME,
+  storage: localForageStore,
 });
 
 export const rssFeed$ = rssFeedStore.pipe(select((state) => state.rssFeed));

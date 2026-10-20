@@ -37,8 +37,8 @@
  */
 
 import { Query, Resolver } from '@nestjs/graphql';
-import { LoginDirectusService } from './login.directus.service';
-import { Login } from '@common/models/login.model';
+import { Login } from '#common/models/login.model.js';
+import { LoginDirectusService } from './login.directus.service.js';
 
 @Resolver(() => Login)
 export class LoginDirectusResolver {

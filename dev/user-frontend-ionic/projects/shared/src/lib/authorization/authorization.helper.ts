@@ -37,36 +37,36 @@
  * termes.
  */
 
-type AuthorizationType = 'ALLOW'|'DISALLOW';
+type AuthorizationType = 'ALLOW' | 'DISALLOW';
 
 export interface Authorization {
-    roles: string[];
-    type: AuthorizationType;
+  roles: string[];
+  type: AuthorizationType;
 }
 
 export interface WithAuthorization {
-    authorization?: Authorization;
+  authorization?: Authorization;
 }
 
 export class AuthorizationHelper {
+  constructor(private userRoles: string[]) {}
 
-    constructor(private userRoles: string[]) {}
+  public filter<T extends WithAuthorization>(toFilter: T[]): T[] {
+    return toFilter.filter(({ authorization }) => {
+      if (!authorization) {
+        return true;
+      }
 
-    public filter<T extends WithAuthorization>(toFilter: T[]): T[] {
-        return toFilter.filter(({authorization}) => {
-            if (!authorization) {
-                return true;
-            }
+      const intersection = authorization.roles.filter((authorizationRole) =>
+        this.userRoles.includes(authorizationRole),
+      );
 
-            const intersection = authorization.roles
-                .filter(authorizationRole => this.userRoles.includes(authorizationRole));
-
-            switch(authorization.type) {
-                case 'ALLOW':
-                    return intersection.length > 0;
-                case 'DISALLOW':
-                    return intersection.length === 0;
-            }
-        });
-    }
+      switch (authorization.type) {
+        case 'ALLOW':
+          return intersection.length > 0;
+        case 'DISALLOW':
+          return intersection.length === 0;
+      }
+    });
+  }
 }

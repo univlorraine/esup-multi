@@ -37,9 +37,11 @@
  * termes.
  */
 
-const express = require('express');
+import express from 'express';
+import mailCalendarData from './mail-calendar.mock.js';
+
 const router = express.Router();
-const { mailCalendarData } = require('./mail-calendar.mock');
+
 router.get('/{*any}', (req, res) => res.json(mailCalendarData()));
 
-module.exports = router;
+export default router;

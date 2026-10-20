@@ -37,8 +37,8 @@
  */
 
 import { Args, Query, Resolver } from '@nestjs/graphql';
-import { StaticPagesWordpressService } from './static-pages.wordpress.service';
-import { StaticPages } from '@common/models/static-pages.model';
+import { StaticPages } from '#common/models/static-pages.model.js';
+import { StaticPagesWordpressService } from './static-pages.wordpress.service.js';
 
 @Resolver(() => StaticPages)
 export class StaticPagesWordpressResolver {

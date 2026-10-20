@@ -40,18 +40,16 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root',
 })
 export class TranslationsService {
+  private translations: string[] = [];
 
-    private translations: string[] = [];
+  public addTranslation(translation: string) {
+    this.translations.push(translation);
+  }
 
-    public addTranslation(translation: string) {
-        this.translations.push(translation);
-    }
-
-    public getTranslations() {
-        return this.translations;
-    }
-
+  public getTranslations() {
+    return this.translations;
+  }
 }

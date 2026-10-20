@@ -54,8 +54,8 @@ const store = createStore(
   withProps<GuidedTourProps>({
     anonymousTourViewed: false,
     loggedTourViewed: false,
-    scheduleTourViewed: false
-  })
+    scheduleTourViewed: false,
+  }),
 );
 
 export const persistGuidedTour = persistState(store, {
@@ -68,19 +68,25 @@ export const isLoggedTourViewed = () => store.getValue()?.loggedTourViewed;
 export const isScheduleTourViewed = () => store.getValue()?.scheduleTourViewed;
 
 export const setAnonymousTourViewed = () => {
-  store.update(setProps({
-    anonymousTourViewed: true
-  }));
+  store.update(
+    setProps({
+      anonymousTourViewed: true,
+    }),
+  );
 };
 
 export const setLoggedTourViewed = () => {
-  store.update(setProps({
-    loggedTourViewed: true
-  }));
+  store.update(
+    setProps({
+      loggedTourViewed: true,
+    }),
+  );
 };
 
 export const setScheduleTourViewed = () => {
-  store.update(setProps({
-    scheduleTourViewed: true
-  }));
+  store.update(
+    setProps({
+      scheduleTourViewed: true,
+    }),
+  );
 };
