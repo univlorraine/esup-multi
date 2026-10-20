@@ -43,7 +43,7 @@
 
 import type { EnvironmentProviders, Provider } from '@angular/core';
 import type { MatomoConfiguration } from 'ngx-matomo-client';
-// import { provideAppUpdate } from '@multi/app-update';
+import { provideAppUpdate } from '@multi/app-update';
 import { provideAuth } from '@multi/auth';
 import { provideCalendar } from '@multi/calendar';
 import { provideCard } from '@multi/card';
