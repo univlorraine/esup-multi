@@ -91,7 +91,7 @@ export class MultiTenantComponent {
   private activatedRoute = inject(ActivatedRoute);
 
   public availableTenants: Tenant[];
-  public selectedTenantId: string;
+  public selectedTenantId: string | undefined;
   public languages: string[] = [];
   appVersion$: Observable<string>;
   public darkModeEnabled: boolean;
@@ -110,7 +110,7 @@ export class MultiTenantComponent {
 
   getAvailableTenants(): Tenant[] {
     const theTenants: Tenant[] = this.multiTenantService.getAvailableTenants();
-    if (theTenants.length === 1 && theTenants[0].isGroup === true) {
+    if (theTenants.length === 1 && theTenants[0].isGroup === true && theTenants[0].tenants) {
       return theTenants[0].tenants;
     }
 

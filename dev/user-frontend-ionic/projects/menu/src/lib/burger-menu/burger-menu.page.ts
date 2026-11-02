@@ -200,7 +200,7 @@ export class BurgerMenuPage implements OnDestroy {
 
   displayUniversitiesButton(): boolean {
     const isSingleTenant: boolean =
-      this.multiTenantService.getFlattenTenantObjects(undefined, 0).length === 1;
+      this.multiTenantService.getFlattenTenantObjects(undefined).length === 1;
     const currentTenant: Tenant = this.multiTenantService.getCurrentTenantOrThrowError();
     return !isSingleTenant || currentTenant.isGroup === true;
   }

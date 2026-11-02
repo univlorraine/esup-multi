@@ -72,11 +72,6 @@
 /* Theme */
 @include meta.load-css("./theme/theme.scss");
 
-body.scanner-active {
-  --background: transparent !important;
-  --ion-background-color: transparent !important;
-}
-
 body {
   --ion-background-color: var(--app-color-background) !important;
 }

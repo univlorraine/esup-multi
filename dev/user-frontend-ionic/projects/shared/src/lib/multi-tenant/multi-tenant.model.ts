@@ -38,12 +38,14 @@
  */
 
 export interface Tenant {
-  id: string;
-  name: string;
+  // required when multiple tenants are available
+  id?: string;
+  // required when multiple tenants are available
+  name?: string;
   isGroup?: boolean;
   forceSelect?: boolean;
   apiEndpoint: string;
-  logo: string;
+  logo?: string;
   topic?: string;
   tenants?: Tenant[];
   modulesConfigurations: {

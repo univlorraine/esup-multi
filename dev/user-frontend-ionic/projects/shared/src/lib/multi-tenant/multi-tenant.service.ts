@@ -66,14 +66,14 @@ export class MultiTenantService {
   private fcmService = inject(FCMService);
 
   public currentTenantLogo$: Observable<string>;
-  public tenantChange$: Observable<Tenant>;
+  public tenantChange$: Observable<Tenant | undefined>;
 
   private readySubject = new BehaviorSubject<boolean>(false);
   public readonly ready$ = this.readySubject.asObservable();
 
-  private currentTenant: Tenant;
+  private currentTenant?: Tenant;
   private currentTenantLogoSubject = new BehaviorSubject<string>(this.environment.defaultLogo);
-  private tenantChangeSubject = new Subject<Tenant>();
+  private tenantChangeSubject = new Subject<Tenant | undefined>();
 
   constructor() {
     this.currentTenantLogo$ = this.currentTenantLogoSubject.asObservable();
@@ -152,7 +152,7 @@ export class MultiTenantService {
     }
     updateSelectedTenantId(tenantId);
     this.currentTenant = foundTenant;
-    this.applyTenantTheme(this.currentTenant.id);
+    this.applyTenantTheme(this.currentTenant.id!);
     if (previousTenantId !== tenantId) {
       // If the tenant changes from previous value
       this.tenantChangeSubject.next(foundTenant);
@@ -164,9 +164,12 @@ export class MultiTenantService {
     this.emitServiceReady();
   }
 
-  public getSelectedTenantId(): string {
-    const foundTenant = this.findTenant(getSelectedTenantId());
-    return foundTenant?.id || this.getAvailableTenants()[0]?.id;
+  public getSelectedTenantId(): string | undefined {
+    let id = getSelectedTenantId();
+    if (id !== undefined) {
+      id = this.findTenant(id)?.id;
+    }
+    return id || this.getAvailableTenants()[0]?.id;
   }
 
   public isSingleTenant(): boolean {
@@ -181,13 +184,13 @@ export class MultiTenantService {
   public getModuleConfiguration(configName: string): any {
     const modulesConfiguration = this.getCurrentTenantOrThrowError().modulesConfigurations;
     if (!modulesConfiguration) {
-      throw new NoModulesConfigurationError(configName, this.currentTenant.id);
+      throw new NoModulesConfigurationError(configName, this.currentTenant?.id ?? 'undefined');
     }
     // Get module configuration with configName and dot notation
     return configName.split('.').reduce((modulesConfig: any, config: string) => {
       const currentModuleConfig = modulesConfig[config];
       if (!currentModuleConfig) {
-        throw new NoModulesConfigurationError(configName, this.currentTenant.id);
+        throw new NoModulesConfigurationError(configName, this.currentTenant?.id ?? 'undefined');
       }
       return currentModuleConfig;
     }, modulesConfiguration);
@@ -216,26 +219,16 @@ export class MultiTenantService {
     this.emitServiceReady();
   }
 
-  public getFlattenTenantObjects(t: Tenant[], level: number): Tenant[] {
-    let tenants: Tenant[] = t;
-    if (t === undefined && level === 0) {
-      tenants = this.environment.tenants;
+  public getFlattenTenantObjects(t: Tenant[] | undefined): Tenant[] {
+    let tenants = t;
+    if (tenants === undefined) {
+      tenants = (this.environment.tenants as Tenant[] | undefined) || [];
     }
 
-    return tenants.reduce((flattened, tenant) => {
+    return tenants.reduce((flattened: Tenant[], tenant: Tenant) => {
       flattened.push(tenant);
       if (tenant.tenants) {
-        flattened.push(...this.getFlattenTenantObjects(tenant.tenants, 1));
-      }
-      return flattened;
-    }, []);
-  }
-
-  public flattenTenantObjects(tenants: Tenant[]): Tenant[] {
-    return tenants.reduce((flattened, tenant) => {
-      flattened.push(tenant);
-      if (tenant.tenants) {
-        flattened.push(...this.flattenTenantObjects(tenant.tenants));
+        flattened.push(...this.getFlattenTenantObjects(tenant.tenants));
       }
       return flattened;
     }, []);
@@ -268,8 +261,8 @@ export class MultiTenantService {
     return tenants;
   }
 
-  private findTenant(tenantId: string): Tenant {
-    const flattenedTenants = this.getFlattenTenantObjects(undefined, 0);
+  private findTenant(tenantId: string): Tenant | undefined {
+    const flattenedTenants = this.getFlattenTenantObjects(undefined);
 
     return flattenedTenants.find((tenant: Tenant) => tenant.id === tenantId);
   }

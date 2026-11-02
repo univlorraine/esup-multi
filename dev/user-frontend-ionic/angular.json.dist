@@ -71,9 +71,6 @@
               "node_modules/swiper/swiper-bundle.min.css",
               "node_modules/shepherd.js/dist/css/shepherd.css"
             ],
-            "scripts": [
-              "node_modules/swiper/swiper-bundle.min.js"
-            ],
             "aot": false,
             "extractLicenses": false,
             "sourceMap": true,

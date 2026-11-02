@@ -43,12 +43,12 @@ import { localStorageStrategy, persistState } from '@ngneat/elf-persist-state';
 const STORE_NAME = 'multi-tenant-selected';
 
 interface MultiTenantProps {
-  selectedTenantId: string;
+  selectedTenantId: string | undefined;
 }
 
 const selectedTenantStore = createStore(
   { name: STORE_NAME },
-  withProps<MultiTenantProps>({ selectedTenantId: null }),
+  withProps<MultiTenantProps>({ selectedTenantId: undefined }),
 );
 
 export const persistSelectedTenant = persistState(selectedTenantStore, {
