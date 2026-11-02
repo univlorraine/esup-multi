@@ -48,7 +48,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 
 ## [Frontend](./dev/user-frontend-ionic)
 ```
-├─ MIT: 78
+├─ MIT: 77
 ├─ Apache-2.0: 7
 ├─ MIT*: 1
 ├─ (MPL-2.0 OR Apache-2.0): 1
@@ -106,7 +106,6 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@ngneat/elf@2.5.1](https://github.com/ngneat/elf) - MIT
 - [@ngx-translate/core@18.0.0](https://github.com/ngx-translate/core) - MIT
 - [@trapezedev/configure@7.1.10](https://github.com/ionic-team/trapeze) - MIT*
-- [@types/dompurify@3.0.5](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/jasmine@3.6.11](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/jasminewd2@2.0.13](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
 - [@types/leaflet@1.9.22](https://github.com/DefinitelyTyped/DefinitelyTyped) - MIT
