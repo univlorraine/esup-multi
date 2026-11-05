@@ -323,6 +323,46 @@
         }
       }
     },
+    "card": {
+      "projectType": "library",
+      "root": "projects/card",
+      "sourceRoot": "projects/card/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/card/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/card/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/card/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/card/src/test.ts",
+            "tsConfig": "projects/card/tsconfig.spec.json",
+            "karmaConfig": "projects/card/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/card/**/*.ts",
+              "projects/card/**/*.html"
+            ]
+          }
+        }
+      }
+    },
     "card-eu": {
       "projectType": "library",
       "root": "projects/card-eu",
@@ -362,46 +402,6 @@
           }
         }
 
-      }
-    },
-    "card": {
-      "projectType": "library",
-      "root": "projects/card",
-      "sourceRoot": "projects/card/src",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
-          "options": {
-            "project": "projects/card/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/card/tsconfig.lib.prod.json"
-            },
-            "development": {
-              "tsConfig": "projects/card/tsconfig.lib.json"
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/card/src/test.ts",
-            "tsConfig": "projects/card/tsconfig.spec.json",
-            "karmaConfig": "projects/card/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
-          "options": {
-            "lintFilePatterns": [
-              "projects/card/**/*.ts",
-              "projects/card/**/*.html"
-            ]
-          }
-        }
       }
     },
     "chatbot": {
@@ -685,6 +685,46 @@
           }
         }
 
+      }
+    },
+    "knowledge-base": {
+      "projectType": "library",
+      "root": "projects/knowledge-base",
+      "sourceRoot": "projects/knowledge-base/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/knowledge-base/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/knowledge-base/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/knowledge-base/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/knowledge-base/src/test.ts",
+            "tsConfig": "projects/knowledge-base/tsconfig.spec.json",
+            "karmaConfig": "projects/knowledge-base/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/knowledge-base/**/*.ts",
+              "projects/knowledge-base/**/*.html"
+            ]
+          }
+        }
       }
     },
     "map": {
@@ -1157,46 +1197,6 @@
             "lintFilePatterns": [
               "projects/unread-mail/**/*.ts",
               "projects/unread-mail/**/*.html"
-            ]
-          }
-        }
-      }
-    },
-    "knowledge-base": {
-      "projectType": "library",
-      "root": "projects/knowledge-base",
-      "sourceRoot": "projects/knowledge-base/src",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
-          "options": {
-            "project": "projects/knowledge-base/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/knowledge-base/tsconfig.lib.prod.json"
-            },
-            "development": {
-              "tsConfig": "projects/knowledge-base/tsconfig.lib.json"
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/knowledge-base/src/test.ts",
-            "tsConfig": "projects/knowledge-base/tsconfig.spec.json",
-            "karmaConfig": "projects/knowledge-base/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
-          "options": {
-            "lintFilePatterns": [
-              "projects/knowledge-base/**/*.ts",
-              "projects/knowledge-base/**/*.html"
             ]
           }
         }
