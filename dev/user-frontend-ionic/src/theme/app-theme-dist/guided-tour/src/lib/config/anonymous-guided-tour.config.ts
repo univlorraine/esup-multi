@@ -54,7 +54,7 @@ export const anonymousSteps = (
         classes: 'shepherd-button-secondary',
         text: translateService.instant('GUIDED-TOUR.CLOSE'),
         action() {
-          onComplete();
+          onComplete?.();
           return this.complete();
         },
       },
@@ -79,7 +79,7 @@ export const anonymousSteps = (
         classes: 'shepherd-button-secondary',
         text: translateService.instant('GUIDED-TOUR.CLOSE'),
         action() {
-          onComplete();
+          onComplete?.();
           return this.complete();
         },
       },
@@ -104,7 +104,7 @@ export const anonymousSteps = (
         classes: 'shepherd-button-primary',
         text: translateService.instant('GUIDED-TOUR.FINISH'),
         action() {
-          onComplete();
+          onComplete?.();
           return this.complete();
         },
       },
