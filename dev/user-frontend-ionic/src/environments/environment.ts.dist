@@ -43,6 +43,7 @@
 
 import type { EnvironmentProviders, Provider } from '@angular/core';
 import type { MatomoConfiguration } from 'ngx-matomo-client';
+import type { Tenant } from '@multi/shared';
 import { provideAppUpdate } from '@multi/app-update';
 import { provideAuth } from '@multi/auth';
 import { provideCalendar } from '@multi/calendar';
@@ -60,7 +61,6 @@ import { provideReservation } from '@multi/reservation';
 import { provideRestaurants } from '@multi/restaurants';
 import { provideRss } from '@multi/rss';
 import { provideSchedule } from '@multi/schedule';
-import type { Tenant } from '@multi/shared';
 import { provideSocialNetwork } from '@multi/social-network';
 import { provideStaticPages } from '@multi/static-pages';
 import { provideUnreadMail } from '@multi/unread-mail';
