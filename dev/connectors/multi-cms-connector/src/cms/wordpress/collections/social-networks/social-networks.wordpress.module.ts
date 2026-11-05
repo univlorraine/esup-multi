@@ -37,9 +37,9 @@
  */
 
 import { forwardRef, Module } from '@nestjs/common';
-import { SocialNetworksWordpressResolver } from './social-networks.wordpress.resolver';
-import { SocialNetworksWordpressService } from './social-networks.wordpress.service';
-import { WordpressModule } from '@wordpress/wordpress.module';
+import { WordpressModule } from '#wordpress/wordpress.module.js';
+import { SocialNetworksWordpressResolver } from './social-networks.wordpress.resolver.js';
+import { SocialNetworksWordpressService } from './social-networks.wordpress.service.js';
 
 @Module({
   imports: [forwardRef(() => WordpressModule)],

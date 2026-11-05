@@ -43,4 +43,4 @@
 
 export * from './lib/contact-us.service';
 export * from './lib/contact-us.page';
-export * from './lib/contact-us.module';
+export * from './lib/contact-us.providers';

@@ -37,9 +37,9 @@
  */
 
 import { Field, ObjectType } from '@nestjs/graphql';
-import { RolesWordpress } from '@wordpress/collections/roles/roles.wordpress.model';
-import { FeaturesTranslationsWordpress } from '@wordpress/collections/translations/translations.wordpress.model';
-import { PositionsByRoleWordpress } from '@wordpress/collections/positions-by-role/positions-by-role.wordpress.model';
+import { PositionsByRoleWordpress } from '#wordpress/collections/positions-by-role/positions-by-role.wordpress.model.js';
+import { RolesWordpress } from '#wordpress/collections/roles/roles.wordpress.model.js';
+import { FeaturesTranslationsWordpress } from '#wordpress/collections/translations/translations.wordpress.model.js';
 
 @ObjectType()
 class FeaturesRolesConnection {

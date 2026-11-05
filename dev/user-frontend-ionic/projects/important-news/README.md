@@ -9,7 +9,7 @@ Module permettant l'affichage d'un widget d'informations importantes.
 Exemple dans `environment.ts` :
 
 ```typescript
-ImportantNewsModule.forRoot({ 
+provideImportantNews({ 
   display: 'vertically'
 })
 ```

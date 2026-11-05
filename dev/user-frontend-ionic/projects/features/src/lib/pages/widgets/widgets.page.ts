@@ -37,69 +37,76 @@
  * termes.
  */
 
-import { Component } from '@angular/core';
-import { FeaturesService, GuidedTourService, TranslatedFeature, WidgetLifecycleService, MultiTenantService } from '@multi/shared';
+import { AsyncPipe } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import { IonContent, IonNote } from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, filter, map, take } from 'rxjs/operators';
+import {
+  FeaturesService,
+  GuidedTourService,
+  MultiTenantService,
+  TranslatedFeature,
+  WidgetLifecycleService,
+} from '@multi/shared';
+import { WidgetComponent } from './widget/widget.component';
 
 @Component({
   selector: 'app-widgets',
   templateUrl: './widgets.page.html',
   styleUrls: ['../../../../../../src/theme/app-theme/styles/features/widgets.page.scss'],
+  imports: [WidgetComponent, AsyncPipe, TranslatePipe, IonContent, IonNote],
 })
 export class WidgetsPage {
+  private featuresService = inject(FeaturesService);
+  private widgetLifecycleService = inject(WidgetLifecycleService);
+  private guidedTourService = inject(GuidedTourService);
+  private multiTenantService = inject(MultiTenantService);
+
   public featuresIsEmpty$: Observable<boolean>;
   public translatedFeatures$: Observable<TranslatedFeature[]>;
 
-  constructor(
-    private featuresService: FeaturesService,
-    private widgetLifecycleService: WidgetLifecycleService,
-    private guidedTourService: GuidedTourService,
-    private multiTenantService: MultiTenantService
-  ) {
+  constructor() {
     this.translatedFeatures$ = this.featuresService.translatedFeatures$.pipe(
       debounceTime(0), // Only get the last value of the replay subject
-      filter(features => features && features.length > 0),
-      map(features => features.filter(t => t.widget)),
-      distinctUntilChanged((prev, current)=> JSON.stringify(prev) === JSON.stringify(current)),
+      filter((features) => features && features.length > 0),
+      map((features) => features.filter((t) => t.widget)),
+      distinctUntilChanged((prev, current) => JSON.stringify(prev) === JSON.stringify(current)),
     );
-    this.featuresIsEmpty$ = this.translatedFeatures$.pipe(map(features => features.length === 0));
+    this.featuresIsEmpty$ = this.translatedFeatures$.pipe(map((features) => features.length === 0));
   }
 
   ionViewWillEnter() {
-    this.translatedFeatures$.pipe(
-      take(1),
-    ).subscribe(features => {
-      this.widgetLifecycleService.sendWidgetViewWillEnter(features.map(feature => feature.widget));
+    this.translatedFeatures$.pipe(take(1)).subscribe((features) => {
+      this.widgetLifecycleService.sendWidgetViewWillEnter(
+        features.map((feature) => feature.widget),
+      );
     });
   }
 
   ionViewDidEnter() {
-    this.translatedFeatures$.pipe(
-      take(1),
-    ).subscribe(features => {
-      this.widgetLifecycleService.sendWidgetViewDidEnter(features.map(feature => feature.widget));
+    this.translatedFeatures$.pipe(take(1)).subscribe((features) => {
+      this.widgetLifecycleService.sendWidgetViewDidEnter(features.map((feature) => feature.widget));
     });
 
-    if(this.multiTenantService.isCurrentTenantStateAllowed()) {
+    if (this.multiTenantService.isCurrentTenantStateAllowed()) {
       // If the current tenant state is not allowed, we will get redirected to the tenant selection page, so no need to show the guided tour yet
       this.guidedTourService.startGlobalTour();
     }
   }
 
   ionViewWillLeave() {
-    this.translatedFeatures$.pipe(
-      take(1),
-    ).subscribe(features => {
-      this.widgetLifecycleService.sendWidgetViewWillLeave(features.map(feature => feature.widget));
+    this.translatedFeatures$.pipe(take(1)).subscribe((features) => {
+      this.widgetLifecycleService.sendWidgetViewWillLeave(
+        features.map((feature) => feature.widget),
+      );
     });
   }
 
   ionViewDidLeave() {
-    this.translatedFeatures$.pipe(
-      take(1),
-    ).subscribe(features => {
-      this.widgetLifecycleService.sendWidgetViewDidLeave(features.map(feature => feature.widget));
+    this.translatedFeatures$.pipe(take(1)).subscribe((features) => {
+      this.widgetLifecycleService.sendWidgetViewDidLeave(features.map((feature) => feature.widget));
     });
   }
 }

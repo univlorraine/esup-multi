@@ -37,7 +37,7 @@
  */
 
 import { Field, ObjectType } from '@nestjs/graphql';
-import { LoginTranslations } from '@common/models/translations.model';
+import { LoginTranslations } from '#common/models/translations.model.js';
 
 @ObjectType()
 export class Login {

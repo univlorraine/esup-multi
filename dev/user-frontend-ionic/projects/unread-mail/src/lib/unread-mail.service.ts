@@ -38,26 +38,24 @@
  */
 
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { getAuthToken, MultiTenantService, NetworkService } from '@multi/shared';
+import { inject, Injectable } from '@angular/core';
 import { filter, first, Observable } from 'rxjs';
 import { map, switchMap, take, tap } from 'rxjs/operators';
+import { getAuthToken, MultiTenantService, NetworkService } from '@multi/shared';
 import { MailCalendar, setMails } from './unread-mail.repository';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UnreadMailService {
-  constructor(
-    private multiTenantService: MultiTenantService,
-    private http: HttpClient,
-    private networkService: NetworkService
-  ) { }
+  private multiTenantService = inject(MultiTenantService);
+  private http = inject(HttpClient);
+  private networkService = inject(NetworkService);
 
   public loadUnreadMailIfNetworkAvailable(): Observable<void> {
     return this.networkService.isOnline$.pipe(
       first(),
-      filter(isOnline => isOnline),
+      filter((isOnline) => isOnline),
       switchMap(() => this.getAndStoreMailStats()),
     );
   }
@@ -66,14 +64,14 @@ export class UnreadMailService {
     const url = `${this.multiTenantService.getApiEndpoint()}/mail-calendar`;
     return getAuthToken().pipe(
       take(1),
-      switchMap(authToken => this.http.post<MailCalendar>(url, { authToken }))
+      switchMap((authToken) => this.http.post<MailCalendar>(url, { authToken })),
     );
   }
 
   private getAndStoreMailStats(): Observable<void> {
     return this.getMailCalendar().pipe(
       tap(setMails),
-      map(() => null)
+      map(() => null),
     );
   }
 }

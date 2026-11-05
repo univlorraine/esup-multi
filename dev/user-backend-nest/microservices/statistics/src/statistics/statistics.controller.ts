@@ -39,9 +39,9 @@
 
 import { Controller } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
-import { Observable } from 'rxjs';
-import { StatisticsUserActionDto } from './statistics.dto';
-import { StatisticsService } from './statistics.service';
+import { map, Observable } from 'rxjs';
+import type { StatisticsUserActionDto } from './statistics.dto.js';
+import { StatisticsService } from './statistics.service.js';
 
 @Controller()
 export class StatisticsController {
@@ -49,6 +49,8 @@ export class StatisticsController {
 
   @MessagePattern({ cmd: 'postUserActionStatistic' })
   postUserActionStatistic(statData: StatisticsUserActionDto): Observable<void> {
-    return this.statisticsService.postUserActionStatistic(statData);
+    return this.statisticsService
+      .postUserActionStatistic(statData)
+      .pipe(map(() => {}));
   }
 }

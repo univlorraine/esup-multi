@@ -40,8 +40,7 @@
 import { InjectionToken } from '@angular/core';
 
 export interface CardModuleConfig {
-    knownErrors: string[];
+  knownErrors: string[];
 }
 
-export const CARD_CONFIG =
-  new InjectionToken<CardModuleConfig>('Card module config');
+export const CARD_CONFIG = new InjectionToken<CardModuleConfig>('Card module config');

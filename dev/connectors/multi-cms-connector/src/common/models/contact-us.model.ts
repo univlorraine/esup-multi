@@ -37,7 +37,7 @@
  */
 
 import { Field, ObjectType } from '@nestjs/graphql';
-import { ContactUsTranslations } from '@common/models/translations.model';
+import { ContactUsTranslations } from '#common/models/translations.model.js';
 
 @ObjectType()
 export class ContactUs {

@@ -37,9 +37,27 @@
  * termes.
  */
 
-import { Component, OnDestroy, ViewChild } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { Component, inject, OnDestroy, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import {
+  IonButton,
+  IonButtons,
+  IonContent,
+  IonIcon,
+  IonLabel,
+  IonProgressBar,
+  IonTabBar,
+  IonTabButton,
+  IonTabs,
+  IonTitle,
+  IonToolbar,
+} from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
 import { take } from 'rxjs/operators';
+import { HeaderComponent } from '@multi/shared';
+import { SelectPlanningComponent } from './common/select-planning/select-planning.component';
+import { SelectUserComponent } from './common/select-user/select-user.component';
 import { ScheduleCalendarComponent } from './schedule-calendar/schedule-calendar.component';
 import { impersonatedScheduleStoreManager } from './schedule.repository';
 import { ScheduleService } from './schedule.service';
@@ -52,17 +70,33 @@ const DEFAULT_VIEW_TYPE: ViewType = 'month';
   selector: 'app-schedule',
   templateUrl: './schedule.page.html',
   styleUrls: ['../../../../src/theme/app-theme/styles/schedule/schedule.page.scss'],
+  imports: [
+    SelectUserComponent,
+    SelectPlanningComponent,
+    AsyncPipe,
+    TranslatePipe,
+    HeaderComponent,
+    IonButton,
+    IonButtons,
+    IonContent,
+    IonIcon,
+    IonLabel,
+    IonProgressBar,
+    IonTabBar,
+    IonTabButton,
+    IonTabs,
+    IonTitle,
+    IonToolbar,
+  ],
 })
 export class SchedulePage implements OnDestroy {
+  private scheduleService = inject(ScheduleService);
+  private router = inject(Router);
 
   @ViewChild(ScheduleCalendarComponent) calendarRef: ScheduleCalendarComponent;
   viewType: ViewType = DEFAULT_VIEW_TYPE;
   public isLoading$ = this.scheduleService.isLoading$;
   public asUser: string;
-
-  constructor(
-    private scheduleService: ScheduleService,
-    private router: Router) { }
 
   onViewTypeChange(evt) {
     this.viewType = evt.detail.value;
@@ -71,7 +105,7 @@ export class SchedulePage implements OnDestroy {
   ionViewDidEnter() {
     this.calendarRef?.initCalendar();
     this.scheduleService.loadScheduleToState().pipe(take(1)).subscribe();
-    this.scheduleService.asUser.subscribe((asUser) => this.asUser = asUser);
+    this.scheduleService.asUser.subscribe((asUser) => (this.asUser = asUser));
   }
 
   ngOnDestroy() {

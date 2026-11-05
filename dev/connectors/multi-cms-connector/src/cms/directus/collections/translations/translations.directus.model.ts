@@ -37,7 +37,7 @@
  */
 
 import { Field, ObjectType } from '@nestjs/graphql';
-import { LanguagesDirectus } from '@directus/collections/languages/languages.directus.model';
+import { LanguagesDirectus } from '#directus/collections/languages/languages.directus.model.js';
 
 @ObjectType({ isAbstract: true })
 export class BaseTranslationsDirectus {

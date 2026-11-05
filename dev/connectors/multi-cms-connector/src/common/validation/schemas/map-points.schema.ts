@@ -36,15 +36,15 @@
  * termes.
  */
 
+import { z } from 'zod';
 import {
   GpsCoordinatesSchema,
   IdSchema,
-} from '@common/validation/schemas/base-type.schema';
-import { z } from 'zod';
-import { MapPointTranslationsSchema } from '@common/validation/schemas/translations.schema';
-import { CampusSchema } from '@common/validation/schemas/campuses.schema';
-import { MapCategorySchema } from '@common/validation/schemas/map-categories.schema';
-import { MapIconSchema } from '@common/validation/schemas/map-icons.schema';
+} from '#common/validation/schemas/base-type.schema.js';
+import { CampusSchema } from '#common/validation/schemas/campuses.schema.js';
+import { MapCategorySchema } from '#common/validation/schemas/map-categories.schema.js';
+import { MapIconSchema } from '#common/validation/schemas/map-icons.schema.js';
+import { MapPointTranslationsSchema } from '#common/validation/schemas/translations.schema.js';
 
 const FeaturePointSchema = z.object({
   id: IdSchema,

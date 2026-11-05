@@ -37,59 +37,64 @@
  * termes.
  */
 
-import {Inject, Injectable} from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { getRegistry } from '@ngneat/elf';
+import { BehaviorSubject, firstValueFrom, Observable, Subject, withLatestFrom } from 'rxjs';
+import { filter, take } from 'rxjs/operators';
+import {
+  authenticatedUserRepoInitialized$,
+  userIsAuthenticated$,
+} from '../auth/authenticated-user.repository';
+import { FCMService } from '../fcm/fcm-global.service';
+import { setTenantThemeApplied } from '../theme/theme.repository';
+import { getSelectedTenantId, updateSelectedTenantId } from './multi-tenant-selected.repository';
 import {
   NoModulesConfigurationError,
   NoTenantSelectedError,
   NoTenantsError,
-  NoTenantWithIdError
+  NoTenantWithIdError,
 } from './multi-tenant.error';
 import { Tenant } from './multi-tenant.model';
-import { updateSelectedTenantId, getSelectedTenantId } from './multi-tenant-selected.repository';
-import { getRegistry } from '@ngneat/elf';
-import { setTenantThemeApplied } from '../theme/theme.repository';
-import { FCMService } from '../fcm/fcm-global.service';
-import { BehaviorSubject, firstValueFrom, Observable, Subject, withLatestFrom } from 'rxjs';
-import { authenticatedUserRepoInitialized$, userIsAuthenticated$ } from '../auth/authenticated-user.repository';
-import { filter, take } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class MultiTenantService {
+  private environment = inject<any>('environment' as any);
+  private router = inject(Router);
+  private fcmService = inject(FCMService);
+
   public currentTenantLogo$: Observable<string>;
-  public tenantChange$: Observable<Tenant>;
+  public tenantChange$: Observable<Tenant | undefined>;
 
   private readySubject = new BehaviorSubject<boolean>(false);
   public readonly ready$ = this.readySubject.asObservable();
 
-  private currentTenant: Tenant;
+  private currentTenant?: Tenant;
   private currentTenantLogoSubject = new BehaviorSubject<string>(this.environment.defaultLogo);
-  private tenantChangeSubject = new Subject<Tenant>();
+  private tenantChangeSubject = new Subject<Tenant | undefined>();
 
-  constructor(
-    @Inject('environment')
-    private environment: any,
-    private router: Router,
-    private fcmService: FCMService,
-  ) {
+  constructor() {
     this.currentTenantLogo$ = this.currentTenantLogoSubject.asObservable();
     this.tenantChange$ = this.tenantChangeSubject.asObservable();
 
     const tenantId = getSelectedTenantId();
-    if(tenantId) {
+    if (tenantId) {
       this.setCurrentTenantById(tenantId);
     }
 
-    userIsAuthenticated$.pipe(
-      withLatestFrom(authenticatedUserRepoInitialized$),
-      filter(([isAuth, isAuthRepoInit]) => !isAuth && isAuthRepoInit)
-    ).subscribe(() => {
-      if(this.currentTenant && this.canUseGroupMode()) { // Only disconnect from tenant when we can use the group mode
-        this.disconnectFromTenant();
-      }
-    });
+    userIsAuthenticated$
+      .pipe(
+        withLatestFrom(authenticatedUserRepoInitialized$),
+        filter(([isAuth, isAuthRepoInit]) => !isAuth && isAuthRepoInit),
+      )
+      .subscribe(() => {
+        if (this.currentTenant && this.canUseGroupMode()) {
+          // Only disconnect from tenant when we can use the group mode
+          this.disconnectFromTenant();
+        }
+      });
 
     this.emitServiceReady();
   }
@@ -104,7 +109,7 @@ export class MultiTenantService {
   }
 
   public getCurrentTenantOrThrowError(): Tenant {
-    if(!this.isCurrentTenantStateAllowed()) {
+    if (!this.isCurrentTenantStateAllowed()) {
       throw new NoTenantSelectedError();
     }
 
@@ -112,8 +117,8 @@ export class MultiTenantService {
   }
 
   public isCurrentTenantStateAllowed(): boolean {
-    if(this.currentTenant) {
-      if(this.currentTenant.isGroup === false) {
+    if (this.currentTenant) {
+      if (this.currentTenant.isGroup === false) {
         // There's a tenant and it's not a group, all good
         return true;
       }
@@ -125,7 +130,7 @@ export class MultiTenantService {
     // No tenant is selected
     const availableTenants = this.getAvailableTenants();
 
-    if(!this.isSingleTenant()) {
+    if (!this.isSingleTenant()) {
       // There are multiple tenants, one must be selected
       return false;
     }
@@ -147,20 +152,24 @@ export class MultiTenantService {
     }
     updateSelectedTenantId(tenantId);
     this.currentTenant = foundTenant;
-    this.applyTenantTheme(this.currentTenant.id);
-    if(previousTenantId !== tenantId) { // If the tenant changes from previous value
+    this.applyTenantTheme(this.currentTenant.id!);
+    if (previousTenantId !== tenantId) {
+      // If the tenant changes from previous value
       this.tenantChangeSubject.next(foundTenant);
     }
-    if(this.currentTenant?.logo) {
+    if (this.currentTenant?.logo) {
       this.currentTenantLogoSubject.next(this.currentTenant.logo);
     }
 
     this.emitServiceReady();
   }
 
-  public getSelectedTenantId(): string {
-    const foundTenant = this.findTenant(getSelectedTenantId());
-    return foundTenant?.id || this.getAvailableTenants()[0]?.id;
+  public getSelectedTenantId(): string | undefined {
+    let id = getSelectedTenantId();
+    if (id !== undefined) {
+      id = this.findTenant(id)?.id;
+    }
+    return id || this.getAvailableTenants()[0]?.id;
   }
 
   public isSingleTenant(): boolean {
@@ -175,28 +184,30 @@ export class MultiTenantService {
   public getModuleConfiguration(configName: string): any {
     const modulesConfiguration = this.getCurrentTenantOrThrowError().modulesConfigurations;
     if (!modulesConfiguration) {
-      throw new NoModulesConfigurationError(configName, this.currentTenant.id);
+      throw new NoModulesConfigurationError(configName, this.currentTenant?.id ?? 'undefined');
     }
     // Get module configuration with configName and dot notation
     return configName.split('.').reduce((modulesConfig: any, config: string) => {
       const currentModuleConfig = modulesConfig[config];
       if (!currentModuleConfig) {
-        throw new NoModulesConfigurationError(configName, this.currentTenant.id);
+        throw new NoModulesConfigurationError(configName, this.currentTenant?.id ?? 'undefined');
       }
       return currentModuleConfig;
     }, modulesConfiguration);
   }
 
-  public async redirectToTenantSelection(backToAuth: boolean = false) {
-    if(backToAuth) {
-      await this.router.navigate(['/multi-tenant/select'], {queryParams: {redirectToAuth: true}});
+  public async redirectToTenantSelection(backToAuth = false) {
+    if (backToAuth) {
+      await this.router.navigate(['/multi-tenant/select'], {
+        queryParams: { redirectToAuth: true },
+      });
       return;
     }
     await this.router.navigate(['/multi-tenant/select']);
   }
 
   public disconnectFromTenant() {
-    getRegistry().forEach(store => store.reset());
+    getRegistry().forEach((store) => store.reset());
     updateSelectedTenantId(undefined);
     const defaultTheme = this.environment.defaultTheme || '';
     this.currentTenant = undefined;
@@ -208,26 +219,16 @@ export class MultiTenantService {
     this.emitServiceReady();
   }
 
-  public getFlattenTenantObjects(t: Tenant[], level: number): Tenant[] {
-    let tenants: Tenant[] = t;
-    if (t === undefined && level === 0) {
-      tenants = this.environment.tenants;
+  public getFlattenTenantObjects(t: Tenant[] | undefined): Tenant[] {
+    let tenants = t;
+    if (tenants === undefined) {
+      tenants = (this.environment.tenants as Tenant[] | undefined) || [];
     }
 
-    return tenants.reduce((flattened, tenant) => {
+    return tenants.reduce((flattened: Tenant[], tenant: Tenant) => {
       flattened.push(tenant);
       if (tenant.tenants) {
-        flattened.push(...this.getFlattenTenantObjects(tenant.tenants, 1));
-      }
-      return flattened;
-    }, []);
-  }
-
-  public flattenTenantObjects(tenants: Tenant[]): Tenant[] {
-    return tenants.reduce((flattened, tenant) => {
-      flattened.push(tenant);
-      if (tenant.tenants) {
-        flattened.push(...this.flattenTenantObjects(tenant.tenants));
+        flattened.push(...this.getFlattenTenantObjects(tenant.tenants));
       }
       return flattened;
     }, []);
@@ -260,9 +261,8 @@ export class MultiTenantService {
     return tenants;
   }
 
-  private findTenant(tenantId: string): Tenant {
-
-    const flattenedTenants = this.getFlattenTenantObjects(undefined, 0);
+  private findTenant(tenantId: string): Tenant | undefined {
+    const flattenedTenants = this.getFlattenTenantObjects(undefined);
 
     return flattenedTenants.find((tenant: Tenant) => tenant.id === tenantId);
   }
@@ -270,6 +270,9 @@ export class MultiTenantService {
   // Tells if we can use the tenant group, i.e. not having a specific tenant selected
   private canUseGroupMode(): boolean {
     // There is a group defined and the group does not force tenant selection
-    return this.getAvailableTenants()[0].isGroup === true && this.getAvailableTenants()[0].forceSelect === false
+    return (
+      this.getAvailableTenants()[0].isGroup === true &&
+      this.getAvailableTenants()[0].forceSelect === false
+    );
   }
 }

@@ -37,31 +37,63 @@
  * termes.
  */
 
-import { Component, Input, SecurityContext } from '@angular/core';
-import { Display, KnowledgeBaseItem, TranslatedKnowledgeBaseItem, Type } from '../knowledge-base.repository';
-import { Browser } from '@capacitor/browser';
+import { NgTemplateOutlet } from '@angular/common';
+import { Component, inject, Input, SecurityContext } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { DomSanitizer } from "@angular/platform-browser";
-import { NavigationService, SsoService } from "@multi/shared";
+import { Browser } from '@capacitor/browser';
+import {
+  IonButton,
+  IonCard,
+  IonCardContent,
+  IonCardTitle,
+  IonCol,
+  IonGrid,
+  IonIcon,
+  IonItem,
+  IonLabel,
+  IonRow,
+} from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
+import { NavigationService, SanitizeHtmlPipe, SsoService } from '@multi/shared';
+import {
+  Display,
+  KnowledgeBaseItem,
+  TranslatedKnowledgeBaseItem,
+  Type,
+} from '../knowledge-base.repository';
 
 @Component({
   selector: 'app-knowledge-base-card',
   templateUrl: './knowledge-base-card.component.html',
-  styleUrls: ['../../../../../src/theme/app-theme/styles/knowledge-base/knowledge-base-card.component.scss']
+  styleUrls: [
+    '../../../../../src/theme/app-theme/styles/knowledge-base/knowledge-base-card.component.scss',
+  ],
+  imports: [
+    NgTemplateOutlet,
+    TranslatePipe,
+    SanitizeHtmlPipe,
+    IonButton,
+    IonCard,
+    IonCardContent,
+    IonCardTitle,
+    IonCol,
+    IonGrid,
+    IonIcon,
+    IonItem,
+    IonLabel,
+    IonRow,
+  ],
 })
-
 export class KnowledgeBaseCardComponent {
+  private router = inject(Router);
+  private sanitizer = inject(DomSanitizer);
+  private ssoService = inject(SsoService);
+  private navigationService = inject(NavigationService);
+
   @Input() item: TranslatedKnowledgeBaseItem;
   @Input() displayMode: Display;
-  public isExpanded: boolean = false;
-
-  constructor(
-    private router: Router,
-    private sanitizer: DomSanitizer,
-    private ssoService: SsoService,
-    private navigationService: NavigationService
-  ) {
-  }
+  public isExpanded = false;
 
   openItemLink(item: KnowledgeBaseItem) {
     switch (item.type) {
@@ -108,11 +140,12 @@ export class KnowledgeBaseCardComponent {
       return this.navigationService.openExternalLink(item.link);
     }
 
-    this.ssoService.getSsoExternalLink({
-      urlTemplate: item.link,
-      service: item.ssoService
-    })
-      .subscribe(url => this.navigationService.openExternalLink(url));
+    this.ssoService
+      .getSsoExternalLink({
+        urlTemplate: item.link,
+        service: item.ssoService,
+      })
+      .subscribe((url) => this.navigationService.openExternalLink(url));
   }
 
   getButtonIcon(type: Type) {
@@ -147,7 +180,7 @@ export class KnowledgeBaseCardComponent {
   }
 
   handleLink = (link: string) => {
-    Browser.open({url: this.sanitizer.sanitize(SecurityContext.URL, link)});
+    Browser.open({ url: this.sanitizer.sanitize(SecurityContext.URL, link) });
   };
 
   canOpenItem(item: TranslatedKnowledgeBaseItem): boolean {

@@ -37,7 +37,7 @@
  */
 
 import { Field, ObjectType } from '@nestjs/graphql';
-import { RolesWordpress } from '@wordpress/collections/roles/roles.wordpress.model';
+import { RolesWordpress } from '#wordpress/collections/roles/roles.wordpress.model.js';
 
 @ObjectType()
 class PositionByRoleRoleConnection {

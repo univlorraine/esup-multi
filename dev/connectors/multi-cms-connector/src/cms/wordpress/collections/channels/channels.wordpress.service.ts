@@ -38,16 +38,16 @@
 
 import { Injectable, Logger } from '@nestjs/common';
 import { OnEvent } from '@nestjs/event-emitter';
-import { ChannelsWordpress } from '@wordpress/collections/channels/channels.wordpress.model';
-import { Channels } from '@common/models/channels.model';
-import { WordpressService } from '@wordpress/wordpress.service';
-import { ChannelsTranslations } from '@common/models/translations.model';
-import { ChannelsTranslationsWordpress } from '@wordpress/collections/translations/translations.wordpress.model';
-import { normalizeEmptyStringToNull } from '@common/utils/normalize';
-import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
-import { ChannelsSchema } from '@common/validation/schemas/channels.schema';
-import { CacheService } from '@cache/cache.service';
-import { CacheCollection } from '@cache/cache.config';
+import { CacheCollection } from '#cache/cache.config.js';
+import { CacheService } from '#cache/cache.service.js';
+import { ValidateMapping } from '#common/decorators/validate-mapping.decorator.js';
+import { Channels } from '#common/models/channels.model.js';
+import { ChannelsTranslations } from '#common/models/translations.model.js';
+import { normalizeEmptyStringToNull } from '#common/utils/normalize.js';
+import { ChannelsSchema } from '#common/validation/schemas/channels.schema.js';
+import { ChannelsWordpress } from '#wordpress/collections/channels/channels.wordpress.model.js';
+import { ChannelsTranslationsWordpress } from '#wordpress/collections/translations/translations.wordpress.model.js';
+import { WordpressService } from '#wordpress/wordpress.service.js';
 
 // TODO: Move FRENCH_CODE to .env and rename it to DEFAULT_LANGUAGE_CODE
 const FRENCH_CODE = 'FR';
@@ -67,7 +67,7 @@ export class ChannelsWordpressService {
     } catch (error) {
       this.logger.error(
         'Failed to preload channels after cache clear:',
-        error.message,
+        error instanceof Error ? error.message : JSON.stringify(error),
       );
     }
   }
@@ -137,7 +137,7 @@ export class ChannelsWordpressService {
         }
       }
     `);
-    return data.channels.nodes.map(this.mapToMultiModel);
+    return data.channels.nodes.map(this.mapToMultiModel.bind(this));
   }
 
   async getChannel(id: number): Promise<Channels> {

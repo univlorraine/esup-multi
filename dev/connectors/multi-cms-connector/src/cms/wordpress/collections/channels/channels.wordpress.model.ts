@@ -37,7 +37,7 @@
  */
 
 import { Field, ObjectType } from '@nestjs/graphql';
-import { ChannelsTranslationsWordpress } from '@wordpress/collections/translations/translations.wordpress.model';
+import { ChannelsTranslationsWordpress } from '#wordpress/collections/translations/translations.wordpress.model.js';
 
 @ObjectType()
 export class ChannelsWordpress {

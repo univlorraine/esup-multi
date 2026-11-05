@@ -38,13 +38,16 @@
  */
 
 import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { TranslatePipe } from '@ngx-translate/core';
+import { SanitizeSvgPipe } from '@multi/shared';
 import { UserAndCardEuData } from '../card-eu.repository';
 
 @Component({
   selector: 'app-card-eu-extended',
   templateUrl: './card-eu-extended.component.html',
   styleUrls: ['../../../../../src/theme/app-theme/styles/card-eu/card-eu-extended.component.scss'],
-  encapsulation: ViewEncapsulation.None // Pour pouvoir jouer sur la taille du QR Code avec les CSS
+  encapsulation: ViewEncapsulation.None,
+  imports: [TranslatePipe, SanitizeSvgPipe],
 })
 export class CardEuExtendedComponent {
   @Input() userCardEu: UserAndCardEuData;

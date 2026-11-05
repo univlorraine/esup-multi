@@ -37,44 +37,60 @@
  * termes.
  */
 
-import { Component, OnInit } from '@angular/core';
-import { finalize, take } from 'rxjs/operators';
-import { KnowledgeBaseService } from './knowledge-base.service';
-import { Observable } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NetworkService } from '@multi/shared';
+import { IonContent, IonList, IonProgressBar, IonRow, IonSearchbar, IonText } from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
+import { Observable } from 'rxjs';
+import { finalize, take } from 'rxjs/operators';
+import { HeaderComponent, NetworkService, SanitizeHtmlPipe } from '@multi/shared';
+import { KnowledgeBaseCardComponent } from './knowledge-base-card/knowledge-base-card.component';
 import {
+  Display,
   KnowledgeBaseRepository,
   TranslatedKnowledgeBaseItem,
-  Display,
-  Type
+  Type,
 } from './knowledge-base.repository';
+import { KnowledgeBaseService } from './knowledge-base.service';
 
 @Component({
   selector: 'app-knowledge-base',
   templateUrl: './knowledge-base.page.html',
   styleUrls: ['../../../../src/theme/app-theme/styles/knowledge-base/knowledge-base.page.scss'],
+  imports: [
+    KnowledgeBaseCardComponent,
+    AsyncPipe,
+    TranslatePipe,
+    HeaderComponent,
+    SanitizeHtmlPipe,
+    IonContent,
+    IonList,
+    IonProgressBar,
+    IonRow,
+    IonSearchbar,
+    IonText,
+  ],
 })
 export class KnowledgeBasePage implements OnInit {
+  private activatedRoute = inject(ActivatedRoute);
+  private knowledgeBaseService = inject(KnowledgeBaseService);
+  private knowledgeBasesRepository = inject(KnowledgeBaseRepository);
+  private networkService = inject(NetworkService);
 
   public isLoading = false;
   public parentPageId: string;
   public knowledgeBases$: Observable<TranslatedKnowledgeBaseItem[]>;
   public knowledgeBaseParentItem$: Observable<TranslatedKnowledgeBaseItem>;
 
-  constructor(
-    private activatedRoute: ActivatedRoute,
-    private knowledgeBaseService: KnowledgeBaseService,
-    private knowledgeBasesRepository: KnowledgeBaseRepository,
-    private networkService: NetworkService
-  ) {}
-
   async ngOnInit() {
     this.parentPageId = this.activatedRoute.snapshot.paramMap.get('id');
     this.knowledgeBases$ = this.parentPageId
       ? this.knowledgeBasesRepository.getKnowledgeBaseByParentId(this.parentPageId)
       : this.knowledgeBasesRepository.getKnowledgeBase();
-    this.knowledgeBaseParentItem$ = this.knowledgeBasesRepository.getKnowledgeBaseItemById(this.parentPageId);
+    this.knowledgeBaseParentItem$ = this.knowledgeBasesRepository.getKnowledgeBaseItemById(
+      this.parentPageId,
+    );
 
     if (!(await this.networkService.getConnectionStatus()).connected) {
       return;
@@ -89,19 +105,18 @@ export class KnowledgeBasePage implements OnInit {
     refresh$
       .pipe(
         take(1),
-        finalize(() => this.isLoading = false)
+        finalize(() => (this.isLoading = false)),
       )
       .subscribe();
   }
 
   searchKnowledgeBase(event) {
     const query = event.target.value.toLowerCase();
-    if(!query) {
+    if (!query) {
       this.knowledgeBases$ = this.knowledgeBasesRepository.getKnowledgeBase();
       return;
     }
-    this.knowledgeBases$=this.knowledgeBasesRepository.searchKnowledgeBase(query);
-
+    this.knowledgeBases$ = this.knowledgeBasesRepository.searchKnowledgeBase(query);
   }
 
   // eslint-disable-next-line @typescript-eslint/naming-convention

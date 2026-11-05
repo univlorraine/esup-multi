@@ -40,8 +40,8 @@
 import { Controller } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
 import { Observable } from 'rxjs';
-import { MapService } from './map.service';
-import { MapDataJsonDto } from './map.dto';
+import { MapDataJsonDto } from './map.dto.js';
+import { MapService } from './map.service.js';
 
 @Controller()
 export class MapController {

@@ -42,7 +42,7 @@ import {
   IsAuthenticationValidQueryDto,
   LogoutQueryDto,
   SsoServiceTokenQueryDto,
-} from '../auth/auth.dto';
+} from '../auth/auth.dto.js';
 
 export interface ReauthenticateQueryDto {
   uuid: string;

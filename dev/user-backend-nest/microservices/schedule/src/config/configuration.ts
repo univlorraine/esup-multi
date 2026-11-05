@@ -41,7 +41,7 @@ import {
   KeepAliveOptions,
   RedisSocket,
   ScheduleProviderApi,
-} from './configuration.interface';
+} from './configuration.interface.js';
 
 const applyIfNotBlank = (param: string, applyFn: (value: string) => void) => {
   if (param && param.trim().length > 0) {

@@ -38,33 +38,33 @@
  */
 
 /* Custom CSS variables theming */
-@import "./app-theme/styles/app-theme-variables.scss";
+@use "./app-theme/styles/app-theme-variables.scss";
 
 /* variables theming */
-@import "./app-theme/styles/variables.scss";
+@use "./app-theme/styles/variables.scss";
 
 /* Font CSS classes */
-@import "./app-theme/styles/app/fonts.scss";
+@use "./app-theme/styles/app/fonts.scss";
 
 /* Icons CSS classes */
-@import "./app-theme/styles/app/icons.scss";
+@use "./app-theme/styles/app/icons.scss";
 
 /* Logos CSS classes */
-@import "./app-theme/styles/app/logos.scss";
+@use "./app-theme/styles/app/logos.scss";
 
 /* Button CSS classes */
-@import "./app-theme/styles/app/button.scss";
+@use "./app-theme/styles/app/button.scss";
 
 /* Header CSS classes */
-@import "./app-theme/styles/app/header.scss";
+@use "./app-theme/styles/app/header.scss";
 
 /* External library */
 /* FullCalendar (Calendar in schedule module) */
-@import "./app-theme/styles/external-ui-library/fullcalendar/fullcalendar.scss";
+@use "./app-theme/styles/external-ui-library/fullcalendar/fullcalendar.scss";
 
 /* External library */
 /* Leaflet (Map in map module) */
-@import "./app-theme/styles/external-ui-library/leaflet/leaflet.scss";
+@use "./app-theme/styles/external-ui-library/leaflet/leaflet.scss";
 
 /* Shepherd.js */
-@import "./app-theme/styles/external-ui-library/shepherd/shepherd.scss";
+@use "./app-theme/styles/external-ui-library/shepherd/shepherd.scss";

@@ -37,7 +37,7 @@
  */
 
 import { Field, ObjectType } from '@nestjs/graphql';
-import { ChannelsTranslations } from '@common/models/translations.model';
+import { ChannelsTranslations } from '#common/models/translations.model.js';
 
 // Modèle pour les canaux des notifications attendu par le backend de Multi
 @ObjectType()

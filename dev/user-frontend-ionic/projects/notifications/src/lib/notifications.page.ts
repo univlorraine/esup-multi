@@ -37,28 +37,123 @@
  * termes.
  */
 
-import { Component, Inject, OnDestroy, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { InfiniteScrollCustomEvent, IonContent, IonModal, Platform } from '@ionic/angular';
-import { NetworkService, PageLayoutService } from '@multi/shared';
+import { AsyncPipe, NgClass, NgStyle } from '@angular/common';
+import { Component, inject, OnDestroy, ViewChild } from '@angular/core';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import { RouterLink } from '@angular/router';
+import {
+  InfiniteScrollCustomEvent,
+  IonButton,
+  IonButtons,
+  IonCheckbox,
+  IonChip,
+  IonCol,
+  IonContent,
+  IonGrid,
+  IonHeader,
+  IonIcon,
+  IonInfiniteScroll,
+  IonInfiniteScrollContent,
+  IonItem,
+  IonItemOption,
+  IonItemOptions,
+  IonItemSliding,
+  IonLabel,
+  IonList,
+  IonModal,
+  IonNote,
+  IonPopover,
+  IonProgressBar,
+  IonRefresher,
+  IonRefresherContent,
+  IonRouterLink,
+  IonRow,
+  IonText,
+  IonToolbar,
+  Platform,
+} from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
 import { combineLatest, Observable, Subscription } from 'rxjs';
 import { catchError, filter, finalize, map, mergeMap, startWith, take } from 'rxjs/operators';
-import { NotificationsModuleConfig, NOTIFICATIONS_CONFIG } from './notifications.config';
 import {
   Channel,
-  Notification, NotificationsRepository, TranslatedChannel, NotificationsService, NavigationService
+  HeaderComponent,
+  NavigationService,
+  NetworkService,
+  Notification,
+  NotificationsRepository,
+  NotificationsService,
+  PageLayoutService,
+  RelativeTimePipe,
+  TranslatedChannel,
 } from '@multi/shared';
-
+import { NotificationOptionsComponent } from './notification-options/notification-options.component';
+import { NOTIFICATIONS_CONFIG, NotificationsModuleConfig } from './notifications.config';
 import { ToastService } from './toast.service';
 
-const defaultBreakpoint = 0.50;
+const defaultBreakpoint = 0.5;
 
 @Component({
   selector: 'app-notifications',
   templateUrl: './notifications.page.html',
   styleUrls: ['../../../../src/theme/app-theme/styles/notifications/notifications.page.scss'],
+  imports: [
+    RouterLink,
+    FormsModule,
+    ReactiveFormsModule,
+    NgStyle,
+    NgClass,
+    NotificationOptionsComponent,
+    AsyncPipe,
+    TranslatePipe,
+    HeaderComponent,
+    RelativeTimePipe,
+    IonButton,
+    IonButtons,
+    IonCheckbox,
+    IonChip,
+    IonCol,
+    IonContent,
+    IonGrid,
+    IonHeader,
+    IonIcon,
+    IonInfiniteScroll,
+    IonInfiniteScrollContent,
+    IonItem,
+    IonItemOption,
+    IonItemOptions,
+    IonItemSliding,
+    IonLabel,
+    IonList,
+    IonModal,
+    IonNote,
+    IonPopover,
+    IonProgressBar,
+    IonRefresher,
+    IonRefresherContent,
+    IonRouterLink,
+    IonRow,
+    IonText,
+    IonToolbar,
+  ],
 })
 export class NotificationsPage implements OnDestroy {
+  private notificationsService = inject(NotificationsService);
+  private config = inject<NotificationsModuleConfig>(NOTIFICATIONS_CONFIG);
+  private formBuilder = inject(FormBuilder);
+  pageLayoutService = inject(PageLayoutService);
+  platform = inject(Platform);
+  notificationRepository = inject(NotificationsRepository);
+  private toastService = inject(ToastService);
+  private networkService = inject(NetworkService);
+  private navigationService = inject(NavigationService);
 
   @ViewChild('popover') popover;
   @ViewChild('modal') modal: IonModal;
@@ -82,69 +177,71 @@ export class NotificationsPage implements OnDestroy {
   private enabledChannels$: Observable<TranslatedChannel[]>;
   private subscriptions: Subscription[] = [];
 
-  constructor(
-    private notificationsService: NotificationsService,
-    @Inject(NOTIFICATIONS_CONFIG) private config: NotificationsModuleConfig,
-    private formBuilder: FormBuilder,
-    public pageLayoutService: PageLayoutService,
-    public platform: Platform,
-    public notificationRepository: NotificationsRepository,
-    private toastService: ToastService,
-    private networkService: NetworkService,
-    private navigationService: NavigationService,
-  ) {
+  constructor() {
     this.translatedChannels$ = this.notificationRepository.translatedChannels$;
     this.channels$ = this.notificationRepository.channels$;
 
     this.form = this.formBuilder.group({
-      channelsForm: this.formBuilder.array([])
+      channelsForm: this.formBuilder.array([]),
     });
 
     this.filterableChannels$ = this.translatedChannels$.pipe(
-      map((channels) => channels.filter((channel) => channel.filterable === true))
+      map((channels) => channels.filter((channel) => channel.filterable === true)),
     );
 
     this.nonFilterableChannels$ = this.translatedChannels$.pipe(
-      map((channels) => channels.filter((channel) => channel.filterable === false))
+      map((channels) => channels.filter((channel) => channel.filterable === false)),
     );
 
-    this.subscriptions.push(this.filterableChannels$.subscribe(filterableChannels => {
-      this.channelsForm.clear();
-      filterableChannels.forEach(() => this.channelsForm.push(new FormControl(false)));
-    }));
+    this.subscriptions.push(
+      this.filterableChannels$.subscribe((filterableChannels) => {
+        this.channelsForm.clear();
+        filterableChannels.forEach(() => this.channelsForm.push(new FormControl(false)));
+      }),
+    );
 
-    this.channelsSelected$ = combineLatest([this.channelsForm.valueChanges, this.filterableChannels$]).pipe(
+    this.channelsSelected$ = combineLatest([
+      this.channelsForm.valueChanges,
+      this.filterableChannels$,
+    ]).pipe(
       filter(([checkboxes, channels]) => checkboxes.length === channels.length),
       map(([checkboxes, channels]) =>
         checkboxes
-          .map((checked, index) => checked ? channels[index] : null)
-          .filter((index) => index != null)
-      )
+          .map((checked, index) => (checked ? channels[index] : null))
+          .filter((index) => index != null),
+      ),
     );
 
     this.hasNoChannelsSelected$ = this.channelsSelected$.pipe(
-      map((channels) => channels.length === 0)
+      map((channels) => channels.length === 0),
     );
 
-    this.enabledChannels$ = combineLatest([this.channelsSelected$, this.nonFilterableChannels$]).pipe(
-      map(([channelsSelected, nonFilterableChannels]) => [...channelsSelected, ...nonFilterableChannels])
+    this.enabledChannels$ = combineLatest([
+      this.channelsSelected$,
+      this.nonFilterableChannels$,
+    ]).pipe(
+      map(([channelsSelected, nonFilterableChannels]) => [
+        ...channelsSelected,
+        ...nonFilterableChannels,
+      ]),
     );
 
     this.filteredNotifications$ = combineLatest([
       this.notificationRepository.notifications$,
-      this.enabledChannels$.pipe(startWith([]))])
-      .pipe(
-        map(([notifications, enabledChannels]) => {
-          if (notifications.length > 0 && this.content) {
-            this.checkForScrollbar();
-          }
-          if (enabledChannels.every(channel => !channel.filterable)) {
-            return notifications;
-          }
-          return notifications.filter(notification => enabledChannels.some(channel => channel.code === notification.channel));
-        }),
-      );
-
+      this.enabledChannels$.pipe(startWith([])),
+    ]).pipe(
+      map(([notifications, enabledChannels]) => {
+        if (notifications.length > 0 && this.content) {
+          this.checkForScrollbar();
+        }
+        if (enabledChannels.every((channel) => !channel.filterable)) {
+          return notifications;
+        }
+        return notifications.filter((notification) =>
+          enabledChannels.some((channel) => channel.code === notification.channel),
+        );
+      }),
+    );
   }
 
   get channelsForm() {
@@ -152,7 +249,7 @@ export class NotificationsPage implements OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.subscriptions.forEach(subscription => {
+    this.subscriptions.forEach((subscription) => {
       subscription.unsubscribe();
     });
   }
@@ -163,9 +260,11 @@ export class NotificationsPage implements OnDestroy {
 
     this.loadDataIfNetworkAvailable();
 
-    this.subscriptions.push(this.platform.resize.subscribe(async () => {
-      this.updateBreakpoints();
-    }));
+    this.subscriptions.push(
+      this.platform.resize.subscribe(async () => {
+        this.updateBreakpoints();
+      }),
+    );
   }
 
   async checkForScrollbar() {
@@ -174,13 +273,16 @@ export class NotificationsPage implements OnDestroy {
   }
 
   async handleRefresh(event) {
-    this.notificationsService.loadNotifications(0, this.config.numberOfNotificationsOnFirstLoad).pipe(
-      take(1),
-      finalize(() => {
-        event.target.complete();
-        this.endOfNotifications = false;
-      }
-      )).subscribe();
+    this.notificationsService
+      .loadNotifications(0, this.config.numberOfNotificationsOnFirstLoad)
+      .pipe(
+        take(1),
+        finalize(() => {
+          event.target.complete();
+          this.endOfNotifications = false;
+        }),
+      )
+      .subscribe();
   }
 
   async onIonInfinite(ev: Event) {
@@ -195,26 +297,29 @@ export class NotificationsPage implements OnDestroy {
       return;
     }
 
-    this.notificationsService.loadNotifications(offset, this.config.numberOfNotificationsToLoadOnScroll).pipe(
-      take(1),
-      catchError((error) => {
-        this.loadMoreNotificationsError = true;
-        throw new Error(error);
-      }),
-      finalize(() => infiniteScrollEvent.target ?? infiniteScrollEvent.target.complete())
-    ).subscribe((loadedNotifications) => {
-      this.loadMoreNotificationsError = false;
-      if (loadedNotifications.length < this.config.numberOfNotificationsToLoadOnScroll) {
-        this.endOfNotifications = true;
-      }
-    });
+    this.notificationsService
+      .loadNotifications(offset, this.config.numberOfNotificationsToLoadOnScroll)
+      .pipe(
+        take(1),
+        catchError((error) => {
+          this.loadMoreNotificationsError = true;
+          throw new Error(error);
+        }),
+        finalize(() => infiniteScrollEvent.target ?? infiniteScrollEvent.target.complete()),
+      )
+      .subscribe((loadedNotifications) => {
+        this.loadMoreNotificationsError = false;
+        if (loadedNotifications.length < this.config.numberOfNotificationsToLoadOnScroll) {
+          this.endOfNotifications = true;
+        }
+      });
   }
 
   deleteNotification(id: string) {
-    this.notificationsService.deleteNotification(id)
-      .pipe(
-        take(1),
-      ).subscribe(async () => {
+    this.notificationsService
+      .deleteNotification(id)
+      .pipe(take(1))
+      .subscribe(async () => {
         this.notificationRepository.deletNotification(id);
         this.toastService.displayToast('NOTIFICATIONS.ALERT.DELETED');
         this.dismissModal();
@@ -222,15 +327,12 @@ export class NotificationsPage implements OnDestroy {
   }
 
   async removeChannelFromFilter(channelCode: string) {
-    this.filterableChannels$
-      .pipe(take(1))
-      .subscribe(channels => {
-        const index = channels.findIndex(channel => channel.code === channelCode);
-        const newValue = [...this.channelsForm.value];
-        newValue[index] = false;
-        this.channelsForm.setValue(newValue);
-      });
-
+    this.filterableChannels$.pipe(take(1)).subscribe((channels) => {
+      const index = channels.findIndex((channel) => channel.code === channelCode);
+      const newValue = [...this.channelsForm.value];
+      newValue[index] = false;
+      this.channelsForm.setValue(newValue);
+    });
   }
 
   dismissModal() {
@@ -238,10 +340,14 @@ export class NotificationsPage implements OnDestroy {
   }
 
   async openModal(notificationId: string) {
-    this.selectedNotificationOption = await this.filteredNotifications$.pipe(
-      take(1),
-      map(notifications => notifications.find(notification => notification.id === notificationId))
-    ).toPromise();
+    this.selectedNotificationOption = await this.filteredNotifications$
+      .pipe(
+        take(1),
+        map((notifications) =>
+          notifications.find((notification) => notification.id === notificationId),
+        ),
+      )
+      .toPromise();
 
     this.isNotificationOptionsOpen = true;
     await this.modal.present();
@@ -270,7 +376,8 @@ export class NotificationsPage implements OnDestroy {
     this.notificationsService.loadAndStoreChannels().pipe(take(1)).subscribe();
     this.notificationsService.loadAndStoreUnsubscribedChannels().pipe(take(1)).subscribe();
 
-    this.notificationsService.loadNotifications(0, this.config.numberOfNotificationsOnFirstLoad)
+    this.notificationsService
+      .loadNotifications(0, this.config.numberOfNotificationsOnFirstLoad)
       .pipe(
         take(1),
         mergeMap((notifications) => {
@@ -280,19 +387,18 @@ export class NotificationsPage implements OnDestroy {
 
           return this.notificationsService.markUnreadNotificationsAsRead(notificationIds);
         }),
-        finalize(() => this.isLoading = false),
-      ).subscribe();
+        finalize(() => (this.isLoading = false)),
+      )
+      .subscribe();
   }
 
   private updateBreakpoints() {
     const isLandscape = this.platform.isLandscape();
     const isDesktop = this.platform.is('desktop');
 
-    const breakpoint = (isDesktop || !isLandscape) ? defaultBreakpoint : 1;
+    const breakpoint = isDesktop || !isLandscape ? defaultBreakpoint : 1;
 
     this.modal.initialBreakpoint = breakpoint;
     this.modal.setCurrentBreakpoint(breakpoint);
   }
 }
-
-

@@ -38,39 +38,41 @@
   -->
 
 <ion-grid class="ion-margin-start safe-area-margin-lr">
-    <ion-row class="ion-align-items-center ion-margin-bottom">
-      <ion-icon [name]="notification.icon" aria-label="" size="large"></ion-icon>
-      <ion-label class="ion-margin-start">
-        <h2 class="app-text-2 ion-text-wrap">{{notification.title}}</h2>
-      </ion-label>
-    </ion-row>
-    <ion-row class="ion-margin-bottom">
-      <ion-text class="app-text-4">{{notification.message}}</ion-text>
-    </ion-row>
+  <ion-row class="ion-align-items-center ion-margin-bottom">
+    <ion-icon [name]="notification.icon" aria-label="" size="large" />
+    <ion-label class="ion-margin-start">
+      <h2 class="app-text-2 ion-text-wrap">{{ notification.title }}</h2>
+    </ion-label>
+  </ion-row>
+  <ion-row class="ion-margin-bottom">
+    <ion-text class="app-text-4">{{ notification.message }}</ion-text>
+  </ion-row>
 </ion-grid>
 
-<ng-container *ngIf="(notificationOptions$ | async) as options">
-  <ion-item button *ngIf="options.isSubscribed && options.filterable"
-    (click)="onUnsubscribeFromChannel(options.channel)">
-    <ion-icon aria-label="" name="close-circle-outline" slot="start"></ion-icon>
-    <ion-label class="app-text-4 ion-text-wrap">
-      {{ 'NOTIFICATIONS.UNSUBSCRIBE_TO_CHANNEL' | translate }}
-      <ion-text> '{{ options.channel.label }}' </ion-text>
-    </ion-label>
-  </ion-item>
+@if (notificationOptions$ | async; as options) {
+  @if (options.isSubscribed && options.filterable) {
+    <ion-item [button]="true" (click)="onUnsubscribeFromChannel(options.channel)">
+      <ion-icon aria-label="" name="close-circle-outline" slot="start" />
+      <ion-label class="app-text-4 ion-text-wrap">
+        {{ 'NOTIFICATIONS.UNSUBSCRIBE_TO_CHANNEL' | translate }}
+        <ion-text> '{{ options.channel.label }}'</ion-text>
+      </ion-label>
+    </ion-item>
+  }
 
-  <ion-item button *ngIf="!options.isSubscribed && options.filterable"
-    (click)="onSubscribeToChannel(options.channel)">
-    <ion-icon aria-label="" name="notifications-outline" slot="start"></ion-icon>
-    <ion-label class="app-text-4 ion-text-wrap">
-      {{ 'NOTIFICATIONS.SUBSCRIBE_TO_CHANNEL' | translate }}
-      <ion-text> '{{ options.channel.label }}' </ion-text>
-    </ion-label>
-  </ion-item>
-</ng-container>
+  @if (!options.isSubscribed && options.filterable) {
+    <ion-item [button]="true" (click)="onSubscribeToChannel(options.channel)">
+      <ion-icon aria-label="" name="notifications-outline" slot="start" />
+      <ion-label class="app-text-4 ion-text-wrap">
+        {{ 'NOTIFICATIONS.SUBSCRIBE_TO_CHANNEL' | translate }}
+        <ion-text> '{{ options.channel.label }}'</ion-text>
+      </ion-label>
+    </ion-item>
+  }
+}
 
-<ion-item button (click)="deleteNotification(notification.id)">
-  <ion-icon aria-label="" name="trash-outline" slot="start"></ion-icon>
+<ion-item [button]="true" (click)="deleteNotification(notification.id)">
+  <ion-icon aria-label="" name="trash-outline" slot="start" />
   <ion-label class="app-text-4 ion-text-wrap">
     {{ 'NOTIFICATIONS.DELETE_THIS_NOTIFICATION' | translate }}
   </ion-label>

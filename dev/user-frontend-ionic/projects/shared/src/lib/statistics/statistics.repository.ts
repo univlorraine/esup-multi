@@ -38,10 +38,7 @@
  */
 
 import { createStore, select, withProps } from '@ngneat/elf';
-import {
-  persistState,
-  localStorageStrategy
-} from '@ngneat/elf-persist-state';
+import { localStorageStrategy, persistState } from '@ngneat/elf-persist-state';
 
 const STORE_NAME = 'stats-uid';
 
@@ -49,10 +46,7 @@ interface StatsUidProps {
   uid: string;
 }
 
-const statsUidStore = createStore(
-  { name: STORE_NAME },
-  withProps<StatsUidProps>({ uid: null })
-);
+const statsUidStore = createStore({ name: STORE_NAME }, withProps<StatsUidProps>({ uid: null }));
 
 export const persistStatsUid = persistState(statsUidStore, {
   key: STORE_NAME,

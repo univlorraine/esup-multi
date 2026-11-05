@@ -37,25 +37,25 @@
  */
 
 import { Injectable, Logger } from '@nestjs/common';
-import { DirectusService } from '@directus/directus.service';
 import { OnEvent } from '@nestjs/event-emitter';
-import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
-import { normalizeEmptyStringToNull } from '@common/utils/normalize';
-import { CacheService } from '@cache/cache.service';
-import { CacheCollection } from '@cache/cache.config';
+import { CacheCollection } from '#cache/cache.config.js';
+import { CacheService } from '#cache/cache.service.js';
+import { ValidateMapping } from '#common/decorators/validate-mapping.decorator.js';
+import { Campus } from '#common/models/campuses.model.js';
+import { MapCategory } from '#common/models/map-categories.model.js';
+import { MapIcon } from '#common/models/map-icons.model.js';
 import {
   MapData,
   MapFeatureCollection,
   MapPointData,
-} from '@common/models/map-points.model';
+} from '#common/models/map-points.model.js';
+import { normalizeEmptyStringToNull } from '#common/utils/normalize.js';
 import {
   MapDataSchema,
   MapPointSchema,
-} from '@common/validation/schemas/map-points.schema';
-import { Campus } from '@common/models/campuses.model';
-import { MapCategory } from '@common/models/map-categories.model';
-import { MapIcon } from '@common/models/map-icons.model';
-import { MapPointDirectus } from '@directus/collections/map-points/map-points.directus.model';
+} from '#common/validation/schemas/map-points.schema.js';
+import { MapPointDirectus } from '#directus/collections/map-points/map-points.directus.model.js';
+import { DirectusService } from '#directus/directus.service.js';
 
 @Injectable()
 export class MapPointsDirectusService {
@@ -73,7 +73,7 @@ export class MapPointsDirectusService {
     } catch (error) {
       this.logger.error(
         'Failed to preload map points after cache clear:',
-        error.message,
+        error instanceof Error ? error.message : JSON.stringify(error),
       );
     }
   }
@@ -148,7 +148,7 @@ export class MapPointsDirectusService {
 
   @ValidateMapping({ schema: MapDataSchema })
   private mapToMultiModelData(nodes: MapPointDirectus[]): MapData {
-    const data: MapPointData[] = nodes.map(this.mapToMultiModel);
+    const data: MapPointData[] = nodes.map(this.mapToMultiModel.bind(this));
 
     const campuses: Campus[] = [];
     const categories: MapCategory[] = [];

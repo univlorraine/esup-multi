@@ -41,10 +41,10 @@ import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { Controller, Inject } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { MessagePattern } from '@nestjs/microservices';
-import { Cache } from 'cache-manager';
+import type { Cache } from 'cache-manager';
 import { firstValueFrom } from 'rxjs';
-import { Schedule, UserScheduleQueryDto } from './schedule.dto';
-import { ScheduleService } from './schedule.service';
+import type { Schedule, UserScheduleQueryDto } from './schedule.dto.js';
+import { ScheduleService } from './schedule.service.js';
 
 @Controller()
 export class ScheduleController {

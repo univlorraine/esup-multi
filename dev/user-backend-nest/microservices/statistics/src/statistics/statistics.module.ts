@@ -39,9 +39,9 @@
 
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { StatisticsController } from './statistics.controller';
-import { StatisticsService } from './statistics.service';
-import { KeepaliveHttpModule } from '../keepalive-http.module';
+import { KeepaliveHttpModule } from '../keepalive-http.module.js';
+import { StatisticsController } from './statistics.controller.js';
+import { StatisticsService } from './statistics.service.js';
 
 @Module({
   imports: [ConfigModule, KeepaliveHttpModule],

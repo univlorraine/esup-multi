@@ -37,18 +37,45 @@
  * termes.
  */
 
-import { Component, Input } from '@angular/core';
+import { AsyncPipe } from '@angular/common';
+import { Component, inject, Input } from '@angular/core';
+import {
+  IonButtons,
+  IonCol,
+  IonHeader,
+  IonRow,
+  IonText,
+  IonTitle,
+  IonToolbar,
+} from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
+import { NavigationService } from '../../navigation/navigation.service';
 import { PageLayoutService, PageTitle } from '../../navigation/page-layout.service';
 import { NetworkService } from '../../network/network.service';
-import { NavigationService } from '../../navigation/navigation.service';
+import { BackButtonComponent } from '../back-button/back-button.component';
 
 @Component({
   selector: 'app-header',
   templateUrl: 'header.component.html',
-  styleUrls: ['../../../../../../src/theme/app-theme/styles/shared/header.component.scss']
+  styleUrls: ['../../../../../../src/theme/app-theme/styles/shared/header.component.scss'],
+  imports: [
+    BackButtonComponent,
+    AsyncPipe,
+    TranslatePipe,
+    IonButtons,
+    IonCol,
+    IonHeader,
+    IonRow,
+    IonText,
+    IonTitle,
+    IonToolbar,
+  ],
 })
 export class HeaderComponent {
+  private pageLayoutService = inject(PageLayoutService);
+  private networkService = inject(NetworkService);
+  private navigationService = inject(NavigationService);
 
   @Input() backRouterLink = '';
 
@@ -57,11 +84,7 @@ export class HeaderComponent {
   public isOnline$: Observable<boolean>;
   public hideBackButton$: Observable<boolean>;
 
-  constructor(
-    private pageLayoutService: PageLayoutService,
-    private networkService: NetworkService,
-    private navigationService: NavigationService
-  ) {
+  constructor() {
     this.currentPageTitle$ = this.pageLayoutService.currentPageTitle$;
     this.showCurrentPageHeader$ = this.pageLayoutService.showCurrentPageHeader$;
     this.isOnline$ = this.networkService.isOnline$;

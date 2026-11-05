@@ -43,5 +43,6 @@ export interface ImportantNewsModuleConfig {
   display: 'vertically' | 'horizontally';
 }
 
-export const IMPORTANT_NEWS_CONFIG =
-  new InjectionToken<ImportantNewsModuleConfig>('Important news module config');
+export const IMPORTANT_NEWS_CONFIG = new InjectionToken<ImportantNewsModuleConfig>(
+  'Important news module config',
+);

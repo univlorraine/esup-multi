@@ -45,7 +45,6 @@ import { isDarkTheme } from './theme.repository';
   providedIn: 'root',
 })
 export class ThemeService {
-
   isBackgroundFromCmsDarkOrIsDarkTheme(color: string): boolean {
     const colorObj = color ? tinycolor(color) : null;
     return colorObj ? colorObj.isDark() : isDarkTheme();

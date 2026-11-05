@@ -39,9 +39,9 @@
 
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import configuration from './config/configuration';
-import { MailCalendarModule } from './mail-calendar/mail-calendar.module';
-import { MonitoringModule } from './monitoring/monitoring.module';
+import configuration from './config/configuration.js';
+import { MailCalendarModule } from './mail-calendar/mail-calendar.module.js';
+import { MonitoringModule } from './monitoring/monitoring.module.js';
 
 @Module({
   imports: [

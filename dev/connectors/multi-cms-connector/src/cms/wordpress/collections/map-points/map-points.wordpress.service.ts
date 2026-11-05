@@ -1,31 +1,31 @@
 import { Injectable, Logger } from '@nestjs/common';
-import { CacheService } from '@cache/cache.service';
-import { WordpressService } from '@wordpress/wordpress.service';
 import { OnEvent } from '@nestjs/event-emitter';
-import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
-import { CacheCollection } from '@cache/cache.config';
-import { MapPointWordpress } from '@wordpress/collections/map-points/map-points.wordpress.model';
+import { CacheCollection } from '#cache/cache.config.js';
+import { CacheService } from '#cache/cache.service.js';
+import { ValidateMapping } from '#common/decorators/validate-mapping.decorator.js';
+import { Campus } from '#common/models/campuses.model.js';
+import { MapCategory } from '#common/models/map-categories.model.js';
+import { MapIcon } from '#common/models/map-icons.model.js';
 import {
-  MapDataSchema,
-  MapPointSchema,
-} from '@common/validation/schemas/map-points.schema';
-import {
-  MapPointData,
   MapData,
   MapFeatureCollection,
-} from '@common/models/map-points.model';
+  MapPointData,
+} from '#common/models/map-points.model.js';
 import {
   MapCategoryTranslations,
   MapPointTranslations,
-} from '@common/models/translations.model';
+} from '#common/models/translations.model.js';
+import { normalizeEmptyStringToNull } from '#common/utils/normalize.js';
+import {
+  MapDataSchema,
+  MapPointSchema,
+} from '#common/validation/schemas/map-points.schema.js';
+import { MapPointWordpress } from '#wordpress/collections/map-points/map-points.wordpress.model.js';
 import {
   MapCategoryTranslationsWordpress,
   MapPointTranslationsWordpress,
-} from '@wordpress/collections/translations/translations.wordpress.model';
-import { normalizeEmptyStringToNull } from '@common/utils/normalize';
-import { Campus } from '@common/models/campuses.model';
-import { MapCategory } from '@common/models/map-categories.model';
-import { MapIcon } from '@common/models/map-icons.model';
+} from '#wordpress/collections/translations/translations.wordpress.model.js';
+import { WordpressService } from '#wordpress/wordpress.service.js';
 
 // TODO: Move FRENCH_CODE to .env and rename it to DEFAULT_LANGUAGE_CODE
 const FRENCH_CODE = 'FR';
@@ -46,7 +46,7 @@ export class MapPointsWordpressService {
     } catch (error) {
       this.logger.error(
         'Failed to preload map points after cache clear:',
-        error.message,
+        error instanceof Error ? error.message : JSON.stringify(error),
       );
     }
   }
@@ -165,7 +165,7 @@ export class MapPointsWordpressService {
 
   @ValidateMapping({ schema: MapDataSchema })
   private mapToMultiModelData(nodes: MapPointWordpress[]): MapData {
-    const data: MapPointData[] = nodes.map(this.mapToMultiModel);
+    const data: MapPointData[] = nodes.map(this.mapToMultiModel.bind(this));
 
     const campuses: Campus[] = [];
     const categories: MapCategory[] = [];

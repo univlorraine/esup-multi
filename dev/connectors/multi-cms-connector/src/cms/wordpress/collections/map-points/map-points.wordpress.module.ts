@@ -37,9 +37,9 @@
  */
 
 import { forwardRef, Module } from '@nestjs/common';
-import { WordpressModule } from '@wordpress/wordpress.module';
-import { MapPointsWordpressService } from '@wordpress/collections/map-points/map-points.wordpress.service';
-import { MapPointsWordpressResolver } from '@wordpress/collections/map-points/map-points.wordpress.resolver';
+import { MapPointsWordpressResolver } from '#wordpress/collections/map-points/map-points.wordpress.resolver.js';
+import { MapPointsWordpressService } from '#wordpress/collections/map-points/map-points.wordpress.service.js';
+import { WordpressModule } from '#wordpress/wordpress.module.js';
 
 @Module({
   imports: [forwardRef(() => WordpressModule)],

@@ -39,9 +39,9 @@
 
 import {
   KeepAliveOptions,
-  RedisSocket,
   MailCalendarProviderApi,
-} from './configuration.interface';
+  RedisSocket,
+} from './configuration.interface.js';
 
 const applyIfNotBlank = (param: string, applyFn: (value: string) => void) => {
   if (param && param.trim().length > 0) {

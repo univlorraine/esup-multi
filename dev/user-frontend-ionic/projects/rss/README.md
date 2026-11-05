@@ -6,7 +6,7 @@ Module permettant l'affichage de flux RSS.
 Exemple dans `environment.ts` :
 
 ```typescript
-RssPageModule.forRoot({
+provideRss({
   latestNewsWidget: {
     display: 'horizontally'
   },

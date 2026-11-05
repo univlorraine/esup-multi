@@ -139,8 +139,8 @@ const currentProject = {
   trapezeVersionName: readVar(originalTrapezeConfig, 'VERSION_NAME'),
   trapezeVersionCode: readVar(originalTrapezeConfig, 'ANDROID_VERSION_CODE'),
   trapezeIosBuild: readVar(originalTrapezeConfig, 'IOS_BUILD_NUMBER'),
-  gradleVersionName: buildGradle.match(/versionName\s+"([^"]+)"/)?.[1],
-  gradleVersionCode: buildGradle.match(/versionCode\s+(\d+)/)?.[1],
+  gradleVersionName: buildGradle.match(/versionName\s*=?\s*"([^"]+)"/)?.[1],
+  gradleVersionCode: buildGradle.match(/versionCode\b\s*=?\s*(\d+)/)?.[1],
   iosVersionName: maxVersionName(...allMatches(pbxproj, /MARKETING_VERSION\s*=\s*([^;\s]+)\s*;/g)),
   iosBuildNumber: maxNumber(...allMatches(pbxproj, /CURRENT_PROJECT_VERSION\s*=\s*(\d+)\s*;/g)),
 };

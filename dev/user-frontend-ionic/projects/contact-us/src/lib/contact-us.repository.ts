@@ -37,13 +37,12 @@
  * termes.
  */
 
-import { Inject, Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { createStore, select, withProps } from '@ngneat/elf';
 import { persistState } from '@ngneat/elf-persist-state';
-import { currentLanguage$, localForageStore } from '@multi/shared';
 import { combineLatest } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
-
+import { currentLanguage$, localForageStore } from '@multi/shared';
 
 interface ContactUsProps {
   pageContent: ContactUsPageContent | null;
@@ -68,10 +67,7 @@ interface Translation {
 
 const STORE_NAME = 'contact-us';
 
-const store = createStore(
-  { name: STORE_NAME },
-  withProps<ContactUsProps>({ pageContent: null })
-);
+const store = createStore({ name: STORE_NAME }, withProps<ContactUsProps>({ pageContent: null }));
 
 export const persist = persistState(store, {
   key: STORE_NAME,
@@ -80,15 +76,18 @@ export const persist = persistState(store, {
 
 @Injectable({ providedIn: 'root' })
 export class ContactUsRepository {
+  private environment = inject<any>('environment' as any);
 
   private pageContent$ = store.pipe(select((state) => state.pageContent));
 
-  //eslint-disable-next-line @typescript-eslint/member-ordering
   public translatedPageContent$ = combineLatest([this.pageContent$, currentLanguage$]).pipe(
     filter(([pageContent]) => pageContent !== null),
     map(([pageContent, currentLanguage]) => {
-      const translation = pageContent.translations.find((t) => t.languagesCode === currentLanguage) ||
-        pageContent.translations.find((t) => t.languagesCode === this.environment.defaultLanguage) ||
+      const translation =
+        pageContent.translations.find((t) => t.languagesCode === currentLanguage) ||
+        pageContent.translations.find(
+          (t) => t.languagesCode === this.environment.defaultLanguage,
+        ) ||
         pageContent.translations[0];
 
       return {
@@ -96,13 +95,8 @@ export class ContactUsRepository {
         content: translation.content,
         icon: pageContent.icon,
       };
-    })
+    }),
   );
-
-  constructor(
-    @Inject('environment')
-    private environment: any,) {
-  }
 
   public setPageContent = (pageContent: ContactUsPageContent) => {
     store.update((state) => ({
@@ -110,5 +104,4 @@ export class ContactUsRepository {
       pageContent,
     }));
   };
-
 }

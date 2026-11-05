@@ -37,10 +37,22 @@
  * termes.
  */
 
-import { AfterViewInit, ChangeDetectorRef, Component, Input } from '@angular/core';
-import { getExpectedErrorMessage, ThemeService } from '@multi/shared';
+import { AsyncPipe, NgClass } from '@angular/common';
+import { AfterViewInit, ChangeDetectorRef, Component, inject, Input } from '@angular/core';
+import {
+  IonButton,
+  IonChip,
+  IonCol,
+  IonGrid,
+  IonLabel,
+  IonNote,
+  IonRow,
+  IonSpinner,
+} from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { catchError, finalize, take } from 'rxjs/operators';
+import { getExpectedErrorMessage, ThemeService } from '@multi/shared';
 import { Clocking, clocking$ } from '../../clocking.repository';
 import { ClockingService } from '../../clocking.service';
 
@@ -48,8 +60,24 @@ import { ClockingService } from '../../clocking.service';
   selector: 'app-clocking-widget',
   templateUrl: './clocking.component.html',
   styleUrls: ['../../../../../../src/theme/app-theme/styles/clocking/clocking.component.scss'],
+  imports: [
+    NgClass,
+    AsyncPipe,
+    TranslatePipe,
+    IonButton,
+    IonChip,
+    IonCol,
+    IonGrid,
+    IonLabel,
+    IonNote,
+    IonRow,
+    IonSpinner,
+  ],
 })
 export class ClockingComponent implements AfterViewInit {
+  private clockingService = inject(ClockingService);
+  private themeService = inject(ThemeService);
+  private changeDetectorRef = inject(ChangeDetectorRef);
 
   @Input() widgetColor: string;
 
@@ -58,19 +86,16 @@ export class ClockingComponent implements AfterViewInit {
   public clockInLoading = false;
   public errorMessage: string | null = null;
 
-  constructor(private clockingService: ClockingService,
-    private themeService: ThemeService,
-    private changeDetectorRef: ChangeDetectorRef) { }
-
   widgetViewDidEnter(): void {
     this.isLoading = true;
-    this.clockingService.loadClockingIfNetworkAvailable()
+    this.clockingService
+      .loadClockingIfNetworkAvailable()
       .pipe(
         take(1),
-        catchError(err => this.catchExpectedError(err)),
-        finalize(() => this.isLoading = false)
+        catchError((err) => this.catchExpectedError(err)),
+        finalize(() => (this.isLoading = false)),
       )
-      .subscribe(() => this.errorMessage = null);
+      .subscribe(() => (this.errorMessage = null));
   }
 
   ngAfterViewInit() {
@@ -81,17 +106,20 @@ export class ClockingComponent implements AfterViewInit {
     event.stopPropagation(); // prevent from triggering card click
 
     this.clockInLoading = true;
-    this.clockingService.clockIn().pipe(
-      take(1),
-      catchError(err => this.catchExpectedError(err)),
-      finalize(() => this.clockInLoading = false)
-    )
-    .subscribe(() => this.errorMessage = null);
+    this.clockingService
+      .clockIn()
+      .pipe(
+        take(1),
+        catchError((err) => this.catchExpectedError(err)),
+        finalize(() => (this.clockInLoading = false)),
+      )
+      .subscribe(() => (this.errorMessage = null));
   }
 
   fontColor() {
-    return this.themeService.isBackgroundFromCmsDarkOrIsDarkTheme(this.widgetColor) ?
-      'light-font-color' : 'dark-font-color';
+    return this.themeService.isBackgroundFromCmsDarkOrIsDarkTheme(this.widgetColor)
+      ? 'light-font-color'
+      : 'dark-font-color';
   }
 
   private catchExpectedError(err) {

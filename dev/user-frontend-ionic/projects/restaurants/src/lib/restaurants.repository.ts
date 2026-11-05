@@ -47,28 +47,28 @@ interface RestaurantsProps {
 }
 
 export interface Restaurant {
-    id: number;
-    title: string;
-    thumbnailUrl: string;
-    shortDesc: string;
-    opening: Record<string, RestaurantOpening>;
-    latitude: number;
-    longitude: number;
+  id: number;
+  title: string;
+  thumbnailUrl: string;
+  shortDesc: string;
+  opening: Record<string, RestaurantOpening>;
+  latitude: number;
+  longitude: number;
 }
 
 export interface RestaurantOpening {
-    label: string;
-    isOpen: boolean;
+  label: string;
+  isOpen: boolean;
 }
 
 const STORE_NAME = 'restaurants';
 
 const store = createStore(
-    { name: STORE_NAME },
-    withEntities<Restaurant>(),
-    withProps<RestaurantsProps>({
-      favoritesRestaurantsIds: []
-    })
+  { name: STORE_NAME },
+  withEntities<Restaurant>(),
+  withProps<RestaurantsProps>({
+    favoritesRestaurantsIds: [],
+  }),
 );
 
 export const persist = persistState(store, {
@@ -90,7 +90,7 @@ export const getFavoritesRestaurantsIds = () => {
   favoritesRestaurantsIds$.subscribe({
     next(value) {
       favoritesRestaurantsIdsArray = value;
-    }
+    },
   });
   return favoritesRestaurantsIdsArray;
 };
@@ -98,19 +98,21 @@ export const getFavoritesRestaurantsIds = () => {
 export const setFavoriteRestaurant = (restaurantId: number) => {
   store.update(
     setProps({
-      favoritesRestaurantsIds: [...getFavoritesRestaurantsIds(),restaurantId],
-    })
+      favoritesRestaurantsIds: [...getFavoritesRestaurantsIds(), restaurantId],
+    }),
   );
 };
 
 export const unsetFavoriteRestaurant = (restaurantId: number) => {
   store.update(
     setProps({
-      favoritesRestaurantsIds: getFavoritesRestaurantsIds().filter(item => item !== restaurantId),
-    })
+      favoritesRestaurantsIds: getFavoritesRestaurantsIds().filter((item) => item !== restaurantId),
+    }),
   );
 };
 
-export const favoritesRestaurantsIds$ = store.pipe(select((state) => state.favoritesRestaurantsIds));
+export const favoritesRestaurantsIds$ = store.pipe(
+  select((state) => state.favoritesRestaurantsIds),
+);
 
 export const getRestaurantById = (restaurantId: number) => store.pipe(selectEntity(restaurantId));

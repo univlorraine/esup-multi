@@ -37,18 +37,18 @@
  */
 
 import { Injectable, Logger } from '@nestjs/common';
-import { WordpressService } from '@wordpress/wordpress.service';
-import { Widgets } from '@common/models/widgets.model';
-import { WidgetsTranslations } from '@common/models/translations.model';
-import { WidgetsTranslationsWordpress } from '@wordpress/collections/translations/translations.wordpress.model';
-import { WidgetsWordpress } from '@wordpress/collections/widgets/widgets.wordpress.model';
-import { SettingsByRole } from '@common/models/settings-by-role.model';
 import { OnEvent } from '@nestjs/event-emitter';
-import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
-import { normalizeEmptyStringToNull } from '@common/utils/normalize';
-import { WidgetsSchema } from '@common/validation/schemas/widgets.schema';
-import { CacheService } from '@cache/cache.service';
-import { CacheCollection } from '@cache/cache.config';
+import { CacheCollection } from '#cache/cache.config.js';
+import { CacheService } from '#cache/cache.service.js';
+import { ValidateMapping } from '#common/decorators/validate-mapping.decorator.js';
+import { SettingsByRole } from '#common/models/settings-by-role.model.js';
+import { WidgetsTranslations } from '#common/models/translations.model.js';
+import { Widgets } from '#common/models/widgets.model.js';
+import { normalizeEmptyStringToNull } from '#common/utils/normalize.js';
+import { WidgetsSchema } from '#common/validation/schemas/widgets.schema.js';
+import { WidgetsTranslationsWordpress } from '#wordpress/collections/translations/translations.wordpress.model.js';
+import { WidgetsWordpress } from '#wordpress/collections/widgets/widgets.wordpress.model.js';
+import { WordpressService } from '#wordpress/wordpress.service.js';
 
 // TODO: Move FRENCH_CODE to .env and rename it to DEFAULT_LANGUAGE_CODE
 const FRENCH_CODE = 'FR';
@@ -69,7 +69,7 @@ export class WidgetsWordpressService {
     } catch (error) {
       this.logger.error(
         'Failed to preload widgets after cache clear:',
-        error.message,
+        error instanceof Error ? error.message : JSON.stringify(error),
       );
     }
   }
@@ -199,7 +199,7 @@ export class WidgetsWordpressService {
         }
       }
     `);
-    return data.widgets.nodes.map(this.mapToMultiModel);
+    return data.widgets.nodes.map(this.mapToMultiModel.bind(this));
   }
 
   async getWidget(id: number): Promise<Widgets> {

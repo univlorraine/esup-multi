@@ -40,7 +40,7 @@
 import {
   KeepAliveOptions,
   StatisticsCollectorApi,
-} from './configuration.interfaces';
+} from './configuration.interfaces.js';
 
 const applyIfNotBlank = (param: string, applyFn: (value: string) => void) => {
   if (param && param.trim().length > 0) {

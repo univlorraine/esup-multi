@@ -37,9 +37,16 @@
   ~ termes.
   -->
 
-<ion-row *ngIf="(socialNetworks$ | async) as socialNetworks" class="ion-justify-content-center ion-padding socialNetworks ">
-  <button *ngFor="let social_network of socialNetworks" class="app-button-4" (click)="openExternalLink(social_network.link)"
-          [attr.aria-label]="social_network.title">
-    <ion-icon class="app-icon-4" slot="icon-only" [name]="social_network.icon" aria-label=""></ion-icon>
-  </button>
-</ion-row>
+@if (socialNetworks$ | async; as socialNetworks) {
+  <ion-row class="ion-justify-content-center ion-padding socialNetworks">
+    @for (socialNetwork of socialNetworks; track socialNetwork.id) {
+      <button
+        class="app-button-4"
+        (click)="openExternalLink(socialNetwork.link)"
+        [attr.aria-label]="socialNetwork.title"
+      >
+        <ion-icon class="app-icon-4" slot="icon-only" [name]="socialNetwork.icon" aria-label="" />
+      </button>
+    }
+  </ion-row>
+}

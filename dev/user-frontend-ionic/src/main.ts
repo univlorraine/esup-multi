@@ -37,15 +37,87 @@
  * termes.
  */
 
-import { enableProdMode } from '@angular/core';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-
-import { AppModule } from './app/app.module';
+import {
+  HTTP_INTERCEPTORS,
+  HttpClient,
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
+import { enableProdMode, provideZoneChangeDetection } from '@angular/core';
+import { bootstrapApplication } from '@angular/platform-browser';
+import {
+  PreloadAllModules,
+  provideRouter,
+  RouteReuseStrategy,
+  withPreloading,
+} from '@angular/router';
+import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular';
+import { setAssetPath } from '@ionic/core/components';
+import { provideTranslateService, TranslateLoader } from '@ngx-translate/core';
+import { provideMatomo } from 'ngx-matomo-client';
+import { withRouter } from 'ngx-matomo-client/router';
+import { provideFeatures } from '@multi/features';
+import { provideMenu } from '@multi/menu';
+import { providePreferences } from '@multi/preferences';
+import {
+  AuthInterceptor,
+  FALLBACK_ERROR_HANDLER,
+  MultiTenantService,
+  ProjectModuleService,
+  provideMultiTenant,
+  translationsLoaderFactory,
+} from '@multi/shared';
+import { AppComponent } from './app/app.component';
+import { routes } from './app/app.routes';
+import { AppErrorHandler } from './app/error/app.error-handler';
 import { environment } from './environments/environment';
 
 if (environment.production) {
   enableProdMode();
 }
 
-platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => console.error(err));
+// fix ion-icon
+setAssetPath(document.baseURI);
+
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideZoneChangeDetection(),
+    provideRouter(routes, withPreloading(PreloadAllModules)),
+    provideIonicAngular({
+      platform: {
+        desktop: (win) => {
+          const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+            win.navigator.userAgent,
+          );
+          return !isMobile;
+        },
+      },
+    }),
+    provideTranslateService({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: translationsLoaderFactory,
+        deps: [HttpClient, ProjectModuleService, MultiTenantService, 'environment'],
+      },
+    }),
+    { provide: 'environment', useValue: environment },
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    ...provideMenu(),
+    ...provideFeatures(),
+    ...providePreferences(),
+    { provide: FALLBACK_ERROR_HANDLER, useExisting: AppErrorHandler },
+    ...provideMultiTenant(),
+    { provide: AuthInterceptor },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+    provideHttpClient(withInterceptorsFromDi()),
+    provideMatomo(
+      environment.matomoConfig,
+      ...(environment.matomoRouteTrackingEnabled ? [withRouter()] : []),
+    ),
+    ...environment.enabledModules.flat(),
+  ],
+}).catch((err) => console.error(err));

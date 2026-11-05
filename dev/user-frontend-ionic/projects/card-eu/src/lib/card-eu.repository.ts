@@ -56,7 +56,8 @@ export interface UserAndCardEuData {
 const userAndCardEuDataSubject = new BehaviorSubject<UserAndCardEuData | null>(null);
 
 // Observable to expose the card data to components
-export const userAndCardEuData$: Observable<UserAndCardEuData | null> = userAndCardEuDataSubject.asObservable();
+export const userAndCardEuData$: Observable<UserAndCardEuData | null> =
+  userAndCardEuDataSubject.asObservable();
 
 /**
  * Set the user and card data

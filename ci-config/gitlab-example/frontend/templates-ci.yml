@@ -35,7 +35,7 @@
     - npm run build -- --configuration=${PWA_ENV_CONFIG_NAME}
   artifacts:
     paths:
-      - '${CI_PROJECT_DIR}/${FRONTEND_PATH}/www/'
+      - '${CI_PROJECT_DIR}/${FRONTEND_PATH}/www/browser/'
     expire_in: 1 hour
     reports:
       dotenv: ${CI_PROJECT_DIR}/${FRONTEND_PATH}/pwa_image_tag.env

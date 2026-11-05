@@ -37,41 +37,60 @@
  * termes.
  */
 
-import { Component, Inject, OnInit } from '@angular/core';
-import { AuthenticatedUser, getAuthToken, NetworkService, authenticatedUser$ } from '@multi/shared';
+import { AsyncPipe } from '@angular/common';
+import { Component, inject, OnInit } from '@angular/core';
+import { IonContent, IonNote, IonProgressBar } from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
 import { Observable, Subscription } from 'rxjs';
 import { filter, finalize, switchMap, take } from 'rxjs/operators';
-import { CardEuModuleConfig, CARD_EU_CONFIG } from './card-eu.config';
+import {
+  AuthenticatedUser,
+  authenticatedUser$,
+  getAuthToken,
+  HeaderComponent,
+  NetworkService,
+  ScreenService,
+} from '@multi/shared';
+import { CARD_EU_CONFIG, CardEuModuleConfig } from './card-eu.config';
 import { setUserAndCardEuData, UserAndCardEuData, userAndCardEuData$ } from './card-eu.repository';
 import { CardEuService } from './card-eu.service';
-import { ScreenService } from '@multi/shared';
+import { CardEuExtendedComponent } from './card-eu/card-eu-extended.component';
+import { CardEuLightComponent } from './card-eu/card-eu-light.component';
 
 @Component({
   selector: 'app-card-eu',
   templateUrl: './card-eu.page.html',
-  styleUrls: ['../../../../src/theme/app-theme/styles/card-eu/card-eu.page.scss']
+  styleUrls: ['../../../../src/theme/app-theme/styles/card-eu/card-eu.page.scss'],
+  imports: [
+    CardEuExtendedComponent,
+    CardEuLightComponent,
+    AsyncPipe,
+    TranslatePipe,
+    HeaderComponent,
+    IonContent,
+    IonNote,
+    IonProgressBar,
+  ],
 })
 export class CardEuPage implements OnInit {
+  private cardEuService = inject(CardEuService);
+  private screenService = inject(ScreenService);
+  private networkService = inject(NetworkService);
+  config = inject<CardEuModuleConfig>(CARD_EU_CONFIG);
+
   public authenticatedUser$: Observable<AuthenticatedUser>;
   public userAndCardEuData$: Observable<UserAndCardEuData> = userAndCardEuData$;
   public isLoading = false;
   private userAndCardEuDataSubscription: Subscription;
-
-  constructor(
-    private cardEuService: CardEuService,
-    private screenService: ScreenService,
-    private networkService: NetworkService,
-    @Inject(CARD_EU_CONFIG) public config: CardEuModuleConfig,
-  ) {}
 
   ngOnInit() {
     this.authenticatedUser$ = authenticatedUser$;
   }
 
   ionViewWillEnter() {
-    this.userAndCardEuDataSubscription = userAndCardEuData$.subscribe(userAndCardEuData => {
+    this.userAndCardEuDataSubscription = userAndCardEuData$.subscribe((userAndCardEuData) => {
       if (
-        userAndCardEuData  &&
+        userAndCardEuData &&
         (!userAndCardEuData.errors || userAndCardEuData.errors.length === 0)
       ) {
         this.screenService.fullBrightness();
@@ -101,25 +120,27 @@ export class CardEuPage implements OnInit {
 
     this.isLoading = true;
 
-    this.authenticatedUser$.pipe(
-      take(1),
-      filter(user => user != null),
-      switchMap((user: AuthenticatedUser) => {
-        return getAuthToken().pipe(
-          take(1),
-          filter(authToken => authToken != null),
-          switchMap(authToken => this.cardEuService.getUserAndCardEuData(
-              authToken,
-              this.config.display === 'light',
-              user.escn
-            )
-          ),
-        );
-      }),
-        finalize(() => this.isLoading = false)
-    ).subscribe(userAndCardEuData => {
-      setUserAndCardEuData(userAndCardEuData);
-    })
-    ;
+    this.authenticatedUser$
+      .pipe(
+        take(1),
+        filter((user) => user != null),
+        switchMap((user: AuthenticatedUser) => {
+          return getAuthToken().pipe(
+            take(1),
+            filter((authToken) => authToken != null),
+            switchMap((authToken) =>
+              this.cardEuService.getUserAndCardEuData(
+                authToken,
+                this.config.display === 'light',
+                user.escn,
+              ),
+            ),
+          );
+        }),
+        finalize(() => (this.isLoading = false)),
+      )
+      .subscribe((userAndCardEuData) => {
+        setUserAndCardEuData(userAndCardEuData);
+      });
   }
 }

@@ -36,11 +36,11 @@
  * termes.
  */
 
+import { HttpService } from '@nestjs/axios';
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { HttpService } from '@nestjs/axios';
 import { firstValueFrom } from 'rxjs';
-import { CmsConfigError, CmsQueryError } from '../cms.exception';
+import { CmsConfigError, CmsQueryError } from '../cms.exception.js';
 
 @Injectable()
 export class DirectusService {
@@ -87,7 +87,10 @@ export class DirectusService {
       this.logger.debug('Query executed successfully');
       return response.data.data;
     } catch (error) {
-      throw new CmsQueryError('Failed to fetch data from Directus', error);
+      throw new CmsQueryError(
+        'Failed to fetch data from Directus',
+        error as Error,
+      );
     }
   }
 

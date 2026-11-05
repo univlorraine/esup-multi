@@ -37,8 +37,8 @@
  */
 
 import { Query, Resolver } from '@nestjs/graphql';
-import { KnowledgeBaseWordpressService } from './knowledge-base.wordpress.service';
-import { KnowledgeBase } from '@common/models/knowledge-base.model';
+import { KnowledgeBase } from '#common/models/knowledge-base.model.js';
+import { KnowledgeBaseWordpressService } from './knowledge-base.wordpress.service.js';
 
 @Resolver(() => KnowledgeBase)
 export class KnowledgeBaseWordpressResolver {

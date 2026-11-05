@@ -37,7 +37,7 @@
  */
 
 import { Field, ObjectType } from '@nestjs/graphql';
-import { MapCategoryTranslations } from '@common/models/translations.model';
+import { MapCategoryTranslations } from '#common/models/translations.model.js';
 
 @ObjectType()
 export class MapCategory {

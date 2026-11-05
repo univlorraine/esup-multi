@@ -39,9 +39,9 @@
 
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import configuration from './config/configuration';
-import { MonitoringModule } from './monitoring/monitoring.module';
-import { NotificationsModule } from './notifications/notifications.module';
+import configuration from './config/configuration.js';
+import { MonitoringModule } from './monitoring/monitoring.module.js';
+import { NotificationsModule } from './notifications/notifications.module.js';
 
 @Module({
   imports: [

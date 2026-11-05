@@ -37,10 +37,11 @@
  * termes.
  */
 
-const express = require('express');
+import express from 'express';
+import { clockingData } from './clocking.mock.js';
+
 const router = express.Router();
-const { clockingData } = require('./clocking.mock');
 
 router.post('/', (req, res) => res.send(clockingData));
 
-module.exports = router;
+export default router;

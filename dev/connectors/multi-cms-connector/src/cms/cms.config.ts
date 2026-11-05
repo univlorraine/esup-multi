@@ -36,9 +36,9 @@
  * termes.
  */
 
-import { registerAs } from '@nestjs/config';
 import { Logger } from '@nestjs/common';
-import { CmsConfigError } from './cms.exception';
+import { registerAs } from '@nestjs/config';
+import { CmsConfigError } from './cms.exception.js';
 
 const logger = new Logger('CmsConfig');
 
@@ -46,7 +46,7 @@ export const cmsConfig = registerAs('cms', async () => {
   const defaultCms = process.env.DEFAULT_CMS || 'wordpress';
   logger.debug(`Loading configuration for CMS: ${defaultCms}`);
 
-  const configPath = `./${defaultCms}/config/${defaultCms}.config`;
+  const configPath = `./${defaultCms}/config/${defaultCms}.config.js`;
   logger.debug(`Attempting to import config from: ${configPath}`);
 
   let cmsModuleConfig: { default: () => any };
@@ -55,7 +55,10 @@ export const cmsConfig = registerAs('cms', async () => {
     cmsModuleConfig = await import(configPath);
   } catch (error) {
     const errorMessage = `Failed to load configuration for CMS: ${defaultCms}`;
-    logger.error(errorMessage, error.stack);
+    logger.error(
+      errorMessage,
+      error instanceof Error ? error.stack : JSON.stringify(error),
+    );
     throw new CmsConfigError(errorMessage);
   }
 
