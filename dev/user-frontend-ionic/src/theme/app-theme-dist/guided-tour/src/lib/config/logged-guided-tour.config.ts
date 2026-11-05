@@ -78,7 +78,7 @@ export const loggedSteps = (
         classes: 'shepherd-button-secondary',
         text: translateService.instant('GUIDED-TOUR.CLOSE'),
         action() {
-            onComplete?.();
+          onComplete?.();
           return this.complete();
         },
       },
