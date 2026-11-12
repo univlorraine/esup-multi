@@ -81,6 +81,9 @@
       ],
       "@multi/knowledge-base": [
         "dist/knowledge-base"
+      ],
+      "@multi/mfa": [
+        "dist/mfa"
       ]
     },
     "esModuleInterop": true,
