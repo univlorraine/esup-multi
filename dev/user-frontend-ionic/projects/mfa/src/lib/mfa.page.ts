@@ -39,6 +39,7 @@
 
 import { Component } from '@angular/core';
 import { IonContent } from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
 import { HeaderComponent } from '@multi/shared';
 
 @Component({
@@ -46,6 +47,6 @@ import { HeaderComponent } from '@multi/shared';
   templateUrl: './mfa.page.html',
   styleUrls: ['../../../../src/theme/app-theme/styles/mfa/mfa.page.scss'],
   standalone: true,
-  imports: [HeaderComponent, IonContent],
+  imports: [HeaderComponent, IonContent, TranslatePipe],
 })
 export class MfaPage {}
