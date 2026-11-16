@@ -40,9 +40,10 @@
 import { EnvironmentProviders, inject, provideAppInitializer, Provider } from '@angular/core';
 import { ROUTES } from '@angular/router';
 import { ProjectModuleService } from '@multi/shared';
+import { MFA_CONFIG, MfaModuleConfig } from './mfa.config';
 import { MFA_ROUTES } from './mfa.routes';
 
-export function provideMfa(): (Provider | EnvironmentProviders)[] {
+export function provideMfa(config: MfaModuleConfig): (Provider | EnvironmentProviders)[] {
   return [
     { provide: ROUTES, multi: true, useValue: MFA_ROUTES },
     provideAppInitializer(() => {
@@ -52,5 +53,6 @@ export function provideMfa(): (Provider | EnvironmentProviders)[] {
         translation: true,
       });
     }),
+    { provide: MFA_CONFIG, useValue: config },
   ];
 }

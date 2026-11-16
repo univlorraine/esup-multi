@@ -37,16 +37,29 @@
  * termes.
  */
 
-import { Component } from '@angular/core';
-import { IonContent } from '@ionic/angular';
+import { Component, inject } from '@angular/core';
+import { IonButton, IonContent, IonIcon, IonLabel } from '@ionic/angular';
 import { TranslatePipe } from '@ngx-translate/core';
-import { HeaderComponent } from '@multi/shared';
+import { CustomIconComponent, HeaderComponent } from '@multi/shared';
+import { MfaFactorComponent } from './mfa-factor/mfa-factor.component';
+import { MFA_CONFIG, MfaModuleConfig } from './mfa.config';
 
 @Component({
   selector: 'app-mfa',
   templateUrl: './mfa.page.html',
   styleUrls: ['../../../../src/theme/app-theme/styles/mfa/mfa.page.scss'],
   standalone: true,
-  imports: [HeaderComponent, IonContent, TranslatePipe],
+  imports: [
+    HeaderComponent,
+    IonContent,
+    TranslatePipe,
+    IonButton,
+    CustomIconComponent,
+    IonIcon,
+    IonLabel,
+    MfaFactorComponent,
+  ],
 })
-export class MfaPage {}
+export class MfaPage {
+  protected config = inject<MfaModuleConfig>(MFA_CONFIG);
+}

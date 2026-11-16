@@ -38,6 +38,37 @@
   -->
 
 <app-header />
-<ion-content>
-  <p>{{ 'MFA.MFA' | translate }}</p>
+<ion-content class="ion-padding ion-text-center">
+  @if (config.icon) {
+    <app-custom-icon
+      [icon]="config.icon.ionIcon"
+      [iconSvgLight]="config.icon.iconSvgLight"
+      [iconSvgDark]="config.icon.iconSvgDark"
+      size="4rem"
+    />
+  }
+
+  <h2>{{ 'MFA.TITLE' | translate }}</h2>
+  <p>{{ 'MFA.INTRO' | translate }}</p>
+
+  @if (true) {
+    <p>{{ 'MFA.NONE_ACTIVE.MESSAGE' | translate }}</p>
+
+    @for (availableFactor of config.availableFactors; track availableFactor.id) {
+      @let i18nKey = `MFA.FACTOR.${availableFactor.id.toUpperCase()}`;
+      <app-mfa-factor [factor]="availableFactor" [disabled]="true">
+        <p>{{ i18nKey + '.DESCRIPTION' | translate }}</p>
+      </app-mfa-factor>
+    }
+
+    <ion-button class="mfa-otp-manager">
+      <ion-icon class="app-icon-4" slot="start" name="open-outline" aria-label="" />
+      <ion-label>{{ 'MFA.NONE_ACTIVE.OTP_MANAGER' | translate }}</ion-label>
+    </ion-button>
+
+    <ion-button class="mfa-add-factor-qr">
+      <ion-icon class="app-icon-4" slot="start" name="qr-code-outline" aria-label="" />
+      <ion-label>{{ 'MFA.ADD_BY_QR' | translate }}</ion-label>
+    </ion-button>
+  }
 </ion-content>
