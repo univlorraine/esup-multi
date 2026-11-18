@@ -3,7 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## Next Release x.y.z (YYYY-MM-DD)
+## 2.4.0 (2026-11-18)
+
+> ⚠️ **Mise à jour technique majeure** : Node 26, migration ESM du backend et des connecteurs, 
+> Angular 20 en standalone, Capacitor 8.5 (iOS : CocoaPods → Swift Package Manager), tests Jest → Vitest. 
+> Les personnalisations des établissements doivent être migrées : 
+> voir la documentation [Mise à jour de la version 2.3.1 à la version 2.4.0](https://www.esup-portail.org/wiki/x/GIBYag) avant de mettre à jour.
+
 ### Client
 #### Bug Fixes
 * AppErrorHandler était écrasé par MultiTenantErrorHandler, les erreurs n'étaient donc plus gérées
