@@ -38,11 +38,11 @@
  */
 
 export interface SsoServiceTokenQueryDto {
-    service: string;
-    authToken: string;
+  service: string;
+  authToken: string;
 }
 
 export interface SsoExternalLinkQueryDto {
-    urlTemplate: string;
-    service: string;
+  urlTemplate: string;
+  service: string;
 }

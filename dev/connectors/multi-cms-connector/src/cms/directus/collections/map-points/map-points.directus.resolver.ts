@@ -37,8 +37,8 @@
  */
 
 import { Args, Query, Resolver } from '@nestjs/graphql';
-import { MapData, MapPointData } from '@common/models/map-points.model';
-import { MapPointsDirectusService } from '@directus/collections/map-points/map-points.directus.service';
+import { MapData, MapPointData } from '#common/models/map-points.model.js';
+import { MapPointsDirectusService } from '#directus/collections/map-points/map-points.directus.service.js';
 
 @Resolver(() => MapPointData)
 export class MapPointsDirectusResolver {

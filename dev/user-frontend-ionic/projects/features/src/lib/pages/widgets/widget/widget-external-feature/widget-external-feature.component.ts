@@ -37,26 +37,54 @@
  * termes.
  */
 
-import { ChangeDetectorRef, Component, Input } from '@angular/core';
-import { SsoService, StatisticsService, ThemeService, TranslatedExternalFeature } from '@multi/shared';
-import { NavigationService } from '@multi/shared';
+import { NgClass, NgStyle } from '@angular/common';
+import { ChangeDetectorRef, Component, inject, Input } from '@angular/core';
+import {
+  IonCard,
+  IonCardContent,
+  IonCardHeader,
+  IonCardTitle,
+  IonCol,
+  IonLabel,
+} from '@ionic/angular';
+import {
+  CustomIconComponent,
+  NavigationService,
+  SsoService,
+  StatisticsService,
+  ThemeService,
+  TranslatedExternalFeature,
+  WidgetComponent,
+} from '@multi/shared';
 
 @Component({
   selector: 'app-widget-external-feature',
   templateUrl: './widget-external-feature.component.html',
-  styleUrls: ['../../../../../../../../src/theme/app-theme/styles/features/widget-external-feature.component.scss'],
+  styleUrls: [
+    '../../../../../../../../src/theme/app-theme/styles/features/widget-external-feature.component.scss',
+  ],
+  imports: [
+    NgClass,
+    NgStyle,
+    WidgetComponent,
+    CustomIconComponent,
+    IonCard,
+    IonCardContent,
+    IonCardHeader,
+    IonCardTitle,
+    IonCol,
+    IonLabel,
+  ],
 })
 export class WidgetExternalFeatureComponent {
+  private ssoService = inject(SsoService);
+  private statisticsService = inject(StatisticsService);
+  private themeService = inject(ThemeService);
+  private changeDetector = inject(ChangeDetectorRef);
+  private navigationService = inject(NavigationService);
+
   @Input() feature: TranslatedExternalFeature;
   isEmpty = false;
-
-  constructor(
-    private ssoService: SsoService,
-    private statisticsService: StatisticsService,
-    private themeService: ThemeService,
-    private changeDetector: ChangeDetectorRef,
-    private navigationService: NavigationService,
-  ) { }
 
   public onClick(): Promise<void> {
     if (!this.feature.link) {
@@ -69,16 +97,18 @@ export class WidgetExternalFeatureComponent {
       return this.navigationService.openExternalLink(this.feature.link);
     }
 
-    this.ssoService.getSsoExternalLink({
-      urlTemplate: this.feature.link,
-      service: this.feature.ssoService
-    })
-      .subscribe(url => this.navigationService.openExternalLink(url));
+    this.ssoService
+      .getSsoExternalLink({
+        urlTemplate: this.feature.link,
+        service: this.feature.ssoService,
+      })
+      .subscribe((url) => this.navigationService.openExternalLink(url));
   }
 
   fontColor(backgroundColor) {
-    return this.themeService.isBackgroundFromCmsDarkOrIsDarkTheme(backgroundColor) ?
-      'light-font-color' : 'dark-font-color';
+    return this.themeService.isBackgroundFromCmsDarkOrIsDarkTheme(backgroundColor)
+      ? 'light-font-color'
+      : 'dark-font-color';
   }
 
   onWidgetIsEmpty(isEmpty: boolean) {

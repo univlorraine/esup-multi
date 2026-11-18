@@ -37,78 +37,118 @@
   ~ termes.
   -->
 
+@let hiddenCourseList = hiddenCourseList$ | async;
+
 <ion-buttons>
-  <ion-button (click)="openSelectPlanningModal()" fill="clear" class="ion-no-padding"
-              [attr.aria-label]="'SCHEDULE.SELECT_PLANNING.TITLE' | translate">
-    <ion-icon name="layers-outline" aria-label=""></ion-icon>
+  <ion-button
+    (click)="openSelectPlanningModal()"
+    fill="clear"
+    class="ion-no-padding"
+    [attr.aria-label]="'SCHEDULE.SELECT_PLANNING.TITLE' | translate"
+  >
+    <ion-icon name="layers-outline" aria-label="" />
   </ion-button>
-  <ion-button *ngIf="(hiddenCourseList$ | async)?.length > 0" (click)="openHiddenCourseModal()" fill="clear" class="ion-no-padding"
-              [attr.aria-label]="'SCHEDULE.SELECT_PLANNING.HIDDEN_COURSE' | translate">
-    <ion-icon name="eye-off-outline" aria-label=""></ion-icon>
-  </ion-button>
+  @if (hiddenCourseList && hiddenCourseList.length > 0) {
+    <ion-button
+      (click)="openHiddenCourseModal()"
+      fill="clear"
+      class="ion-no-padding"
+      [attr.aria-label]="'SCHEDULE.SELECT_PLANNING.HIDDEN_COURSE' | translate"
+    >
+      <ion-icon name="eye-off-outline" aria-label="" />
+    </ion-button>
+  }
 </ion-buttons>
 
 <ion-modal [isOpen]="isSelectPlanningModalOpen" (willDismiss)="onDismissSelectPlanningModal()">
   <ng-template>
-    <ion-progress-bar *ngIf="isLoading" type="indeterminate"></ion-progress-bar>
+    @if (isLoading) {
+      <ion-progress-bar type="indeterminate" />
+    }
 
     <ion-header>
       <ion-toolbar>
         <ion-buttons slot="secondary">
           <ion-button (click)="closeSelectPlanningModal()">
-            <ion-text class="app-title-7">{{ 'SCHEDULE.SELECT_PLANNING.CANCEL' | translate }}</ion-text></ion-button>
+            <ion-text class="app-title-7">{{
+              'SCHEDULE.SELECT_PLANNING.CANCEL' | translate
+            }}</ion-text></ion-button
+          >
         </ion-buttons>
-        <ion-title class="app-title-5">{{ 'SCHEDULE.SELECT_PLANNING.TITLE' | translate }}</ion-title>
+        <ion-title class="app-title-5">{{
+          'SCHEDULE.SELECT_PLANNING.TITLE' | translate
+        }}</ion-title>
         <ion-buttons slot="primary">
           <ion-button [disabled]="!form.valid" fill="solid" (click)="validate()">
             <ion-text class="app-title-7 contrast">
-              {{ 'SCHEDULE.SELECT_PLANNING.VALIDATE' | translate }}</ion-text></ion-button>
+              {{ 'SCHEDULE.SELECT_PLANNING.VALIDATE' | translate }}</ion-text
+            ></ion-button
+          >
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
 
     <ion-content>
       <ion-row class="ion-margin">
-        <ion-label *ngIf="availablePlanningList.length > 0" class="app-text-4 safe-area-padding-lr">{{'SCHEDULE.SELECT_PLANNING.SUBTITLE' | translate }}</ion-label>
-        <ion-label *ngIf="availablePlanningList.length === 0" class="app-text-4 safe-area-padding-lr">{{'SCHEDULE.SELECT_PLANNING.NO_PLANNING' | translate }}</ion-label>
+        @if (availablePlanningList.length > 0) {
+          <ion-label class="app-text-4 safe-area-padding-lr"
+            >{{ 'SCHEDULE.SELECT_PLANNING.SUBTITLE' | translate }}
+          </ion-label>
+        } @else {
+          <ion-label class="app-text-4 safe-area-padding-lr"
+            >{{ 'SCHEDULE.SELECT_PLANNING.NO_PLANNING' | translate }}
+          </ion-label>
+        }
       </ion-row>
       <form [formGroup]="form">
-        <ion-item formArrayName="planningList" *ngFor="let planning of planningList.controls; let i = index">
-          <ion-checkbox [formControlName]="i">
-            <ion-label class="app-text-4 ion-text-wrap" for="terms">{{availablePlanningList[i].label}}</ion-label>
-          </ion-checkbox>
-        </ion-item>
+        @for (planning of planningList.controls; track planning; let i = $index) {
+          <ion-item formArrayName="planningList">
+            <ion-checkbox [formControlName]="i">
+              <ion-label class="app-text-4 ion-text-wrap" for="terms"
+                >{{ availablePlanningList[i].label }}
+              </ion-label>
+            </ion-checkbox>
+          </ion-item>
+        }
       </form>
     </ion-content>
-
   </ng-template>
 </ion-modal>
 
-
-<ion-modal [isOpen]="isHiddenCourseModalOpen && ((hiddenCourseList$ | async)?.length > 0)" (willDismiss)="onDismissHiddenCourseModal()">
+<ion-modal
+  [isOpen]="isHiddenCourseModalOpen && !!hiddenCourseList && hiddenCourseList.length > 0"
+  (willDismiss)="onDismissHiddenCourseModal()"
+>
   <ng-template>
-    <ion-progress-bar *ngIf="isLoading" type="indeterminate"></ion-progress-bar>
+    @if (isLoading) {
+      <ion-progress-bar type="indeterminate" />
+    }
 
     <ion-header>
       <ion-toolbar>
-        <ion-title class="app-title-5">{{ 'SCHEDULE.SELECT_PLANNING.HIDDEN_COURSE' | translate }}</ion-title>
+        <ion-title class="app-title-5">{{
+          'SCHEDULE.SELECT_PLANNING.HIDDEN_COURSE' | translate
+        }}</ion-title>
         <ion-buttons slot="primary">
           <ion-button fill="solid" (click)="closeHiddenCourseModal()">
             <ion-text class="app-title-7 contrast">
-              {{ 'SCHEDULE.CLOSE'
-              | translate }}</ion-text></ion-button>
+              {{ 'SCHEDULE.CLOSE' | translate }}</ion-text
+            ></ion-button
+          >
         </ion-buttons>
       </ion-toolbar>
     </ion-header>
 
     <ion-content>
-      <ion-row class="ion-margin" *ngIf="(hiddenCourseList$ | async)?.length > 0;">
-        <ion-col class="ion-margin-bottom">
-          <app-hidden-course *ngFor="let course of (hiddenCourseList$ | async);"
-            [hiddenCourse]="course"></app-hidden-course>
-        </ion-col>
-      </ion-row>
+      @if (hiddenCourseList && hiddenCourseList.length > 0) {
+        <ion-row class="ion-margin">
+          <ion-col class="ion-margin-bottom">
+            @for (course of hiddenCourseList; track course.id) {
+              <app-hidden-course [hiddenCourse]="course" />
+            }
+          </ion-col>
+        </ion-row>
+      }
     </ion-content>
-
   </ng-template>
 </ion-modal>

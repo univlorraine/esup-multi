@@ -37,7 +37,10 @@
  * termes.
  */
 
-import { KeepAliveOptions, CardEuProviderApi } from './configuration.interface';
+import {
+  CardEuProviderApi,
+  KeepAliveOptions,
+} from './configuration.interface.js';
 
 const applyIfNotBlank = (param: string, applyFn: (value: string) => void) => {
   if (param && param.trim().length > 0) {

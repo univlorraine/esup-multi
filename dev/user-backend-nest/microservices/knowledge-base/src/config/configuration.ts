@@ -37,7 +37,7 @@
  * termes.
  */
 
-import { CmsApi, KeepAliveOptions } from './configuration.interface';
+import { CmsApi, KeepAliveOptions } from './configuration.interface.js';
 
 const applyIfNotBlank = (param: string, applyFn: (value: string) => void) => {
   if (param && param.trim().length > 0) {

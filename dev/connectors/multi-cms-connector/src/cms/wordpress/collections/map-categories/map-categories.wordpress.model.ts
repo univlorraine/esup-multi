@@ -37,8 +37,8 @@
  */
 
 import { Field, ObjectType } from '@nestjs/graphql';
-import { MapCategoryTranslationsWordpress } from '@wordpress/collections/translations/translations.wordpress.model';
-import { LanguagesWordpress } from '@wordpress/collections/languages/languages.wordpress.model';
+import { LanguagesWordpress } from '#wordpress/collections/languages/languages.wordpress.model.js';
+import { MapCategoryTranslationsWordpress } from '#wordpress/collections/translations/translations.wordpress.model.js';
 
 @ObjectType()
 export class MapCategoryWordpress {

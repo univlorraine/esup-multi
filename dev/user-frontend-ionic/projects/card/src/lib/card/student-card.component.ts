@@ -37,13 +37,15 @@
  * termes.
  */
 
+import { UpperCasePipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { UserAndCardData } from '../card.repository';
 
 @Component({
   selector: 'app-student-card',
   templateUrl: './student-card.component.html',
-  styleUrls: ['../../../../../src/theme/app-theme/styles/card/card.component.scss']
+  styleUrls: ['../../../../../src/theme/app-theme/styles/card/card.component.scss'],
+  imports: [UpperCasePipe],
 })
 export class StudentCardComponent {
   @Input() userCard: UserAndCardData;

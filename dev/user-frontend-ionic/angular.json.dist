@@ -11,12 +11,12 @@
       "schematics": {},
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:browser",
+          "builder": "@angular-devkit/build-angular:application",
           "options": {
             "outputPath": "www",
             "index": "src/index.html",
-            "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
+            "browser": "src/main.ts",
+            "polyfills": ["src/polyfills.ts"],
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/firebase-messaging-sw.js",
@@ -71,13 +71,8 @@
               "node_modules/swiper/swiper-bundle.min.css",
               "node_modules/shepherd.js/dist/css/shepherd.css"
             ],
-            "scripts": [
-              "node_modules/swiper/swiper-bundle.min.js"
-            ],
             "aot": false,
-            "vendorChunk": true,
             "extractLicenses": false,
-            "buildOptimizer": false,
             "sourceMap": true,
             "optimization": false,
             "namedChunks": true
@@ -96,8 +91,6 @@
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -119,8 +112,6 @@
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -142,8 +133,6 @@
               "namedChunks": false,
               "aot": true,
               "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -160,25 +149,25 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "app:build"
+            "buildTarget": "app:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "app:build:production"
+              "buildTarget": "app:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "app:build"
+            "buildTarget": "app:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": ["src/polyfills.ts"],
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "styles": [],
@@ -334,6 +323,46 @@
         }
       }
     },
+    "card": {
+      "projectType": "library",
+      "root": "projects/card",
+      "sourceRoot": "projects/card/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/card/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/card/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/card/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/card/src/test.ts",
+            "tsConfig": "projects/card/tsconfig.spec.json",
+            "karmaConfig": "projects/card/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/card/**/*.ts",
+              "projects/card/**/*.html"
+            ]
+          }
+        }
+      }
+    },
     "card-eu": {
       "projectType": "library",
       "root": "projects/card-eu",
@@ -373,46 +402,6 @@
           }
         }
 
-      }
-    },
-    "card": {
-      "projectType": "library",
-      "root": "projects/card",
-      "sourceRoot": "projects/card/src",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
-          "options": {
-            "project": "projects/card/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/card/tsconfig.lib.prod.json"
-            },
-            "development": {
-              "tsConfig": "projects/card/tsconfig.lib.json"
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/card/src/test.ts",
-            "tsConfig": "projects/card/tsconfig.spec.json",
-            "karmaConfig": "projects/card/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
-          "options": {
-            "lintFilePatterns": [
-              "projects/card/**/*.ts",
-              "projects/card/**/*.html"
-            ]
-          }
-        }
       }
     },
     "chatbot": {
@@ -696,6 +685,46 @@
           }
         }
 
+      }
+    },
+    "knowledge-base": {
+      "projectType": "library",
+      "root": "projects/knowledge-base",
+      "sourceRoot": "projects/knowledge-base/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/knowledge-base/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/knowledge-base/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/knowledge-base/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/knowledge-base/src/test.ts",
+            "tsConfig": "projects/knowledge-base/tsconfig.spec.json",
+            "karmaConfig": "projects/knowledge-base/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "projects/knowledge-base/**/*.ts",
+              "projects/knowledge-base/**/*.html"
+            ]
+          }
+        }
       }
     },
     "map": {
@@ -1172,46 +1201,6 @@
           }
         }
       }
-    },
-    "knowledge-base": {
-      "projectType": "library",
-      "root": "projects/knowledge-base",
-      "sourceRoot": "projects/knowledge-base/src",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:ng-packagr",
-          "options": {
-            "project": "projects/knowledge-base/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "tsConfig": "projects/knowledge-base/tsconfig.lib.prod.json"
-            },
-            "development": {
-              "tsConfig": "projects/knowledge-base/tsconfig.lib.json"
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/knowledge-base/src/test.ts",
-            "tsConfig": "projects/knowledge-base/tsconfig.spec.json",
-            "karmaConfig": "projects/knowledge-base/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-eslint/builder:lint",
-          "options": {
-            "lintFilePatterns": [
-              "projects/knowledge-base/**/*.ts",
-              "projects/knowledge-base/**/*.html"
-            ]
-          }
-        }
-      }
     }
   },
   "cli": {
@@ -1226,6 +1215,30 @@
     },
     "@ionic/angular-toolkit:page": {
       "styleext": "scss"
+    },
+    "@schematics/angular:component": {
+      "type": "component"
+    },
+    "@schematics/angular:directive": {
+      "type": "directive"
+    },
+    "@schematics/angular:service": {
+      "type": "service"
+    },
+    "@schematics/angular:guard": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:interceptor": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:module": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:pipe": {
+      "typeSeparator": "."
+    },
+    "@schematics/angular:resolver": {
+      "typeSeparator": "."
     }
   }
 }

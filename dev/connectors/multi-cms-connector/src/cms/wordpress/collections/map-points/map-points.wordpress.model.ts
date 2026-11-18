@@ -37,10 +37,10 @@
  */
 
 import { Field, ObjectType } from '@nestjs/graphql';
-import { MapPointTranslationsWordpress } from '@wordpress/collections/translations/translations.wordpress.model';
-import { MapCategoryWordpress } from '@wordpress/collections/map-categories/map-categories.wordpress.model';
-import { CampusWordpress } from '@wordpress/collections/campuses/campuses.wordpress.model';
-import { MapIconWordpress } from '@wordpress/collections/map-icons/map-icons.wordpress.model';
+import { CampusWordpress } from '#wordpress/collections/campuses/campuses.wordpress.model.js';
+import { MapCategoryWordpress } from '#wordpress/collections/map-categories/map-categories.wordpress.model.js';
+import { MapIconWordpress } from '#wordpress/collections/map-icons/map-icons.wordpress.model.js';
+import { MapPointTranslationsWordpress } from '#wordpress/collections/translations/translations.wordpress.model.js';
 
 @ObjectType()
 class MapPointMapCategoryConnection {

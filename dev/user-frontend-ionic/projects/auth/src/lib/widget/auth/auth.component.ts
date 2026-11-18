@@ -37,24 +37,46 @@
  * termes.
  */
 
-import { Component, OnInit } from '@angular/core';
-import { AuthenticatedUser, authenticatedUser$ } from '@multi/shared';
+import { AsyncPipe } from '@angular/common';
+import { Component, inject, OnInit } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import {
+  IonCol,
+  IonGrid,
+  IonIcon,
+  IonItem,
+  IonLabel,
+  IonList,
+  IonRouterLink,
+} from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { finalize, take } from 'rxjs/operators';
+import { AuthenticatedUser, authenticatedUser$ } from '@multi/shared';
 import { AuthService } from '../../common/auth.service';
 
 @Component({
   selector: 'app-auth-widget',
   templateUrl: './auth.component.html',
   styleUrls: ['../../../../../../src/theme/app-theme/styles/auth/auth.component.scss'],
+  imports: [
+    RouterLink,
+    AsyncPipe,
+    TranslatePipe,
+    IonCol,
+    IonGrid,
+    IonIcon,
+    IonItem,
+    IonLabel,
+    IonList,
+    IonRouterLink,
+  ],
 })
 export class AuthComponent implements OnInit {
+  private authService = inject(AuthService);
+
   isLoading = false;
   authenticatedUser$: Observable<AuthenticatedUser>;
-
-  constructor(
-    private authService: AuthService,
-  ) { }
 
   ngOnInit() {
     this.authenticatedUser$ = authenticatedUser$;
@@ -62,10 +84,11 @@ export class AuthComponent implements OnInit {
 
   logout() {
     this.isLoading = true;
-    this.authService.logout()
+    this.authService
+      .logout()
       .pipe(
         take(1),
-        finalize(() => this.isLoading = false),
+        finalize(() => (this.isLoading = false)),
       )
       .subscribe();
   }

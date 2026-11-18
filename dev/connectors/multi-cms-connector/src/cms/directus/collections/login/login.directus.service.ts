@@ -37,15 +37,15 @@
  */
 
 import { Injectable, Logger } from '@nestjs/common';
-import { LoginDirectus } from '@directus/collections/login/login.directus.model';
-import { Login } from '@common/models/login.model';
-import { DirectusService } from '@directus/directus.service';
 import { OnEvent } from '@nestjs/event-emitter';
-import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
-import { LoginSchema } from '@common/validation/schemas/login.schema';
-import { normalizeEmptyStringToNull } from '@common/utils/normalize';
-import { CacheService } from '@cache/cache.service';
-import { CacheCollection } from '@cache/cache.config';
+import { CacheCollection } from '#cache/cache.config.js';
+import { CacheService } from '#cache/cache.service.js';
+import { ValidateMapping } from '#common/decorators/validate-mapping.decorator.js';
+import { Login } from '#common/models/login.model.js';
+import { normalizeEmptyStringToNull } from '#common/utils/normalize.js';
+import { LoginSchema } from '#common/validation/schemas/login.schema.js';
+import { LoginDirectus } from '#directus/collections/login/login.directus.model.js';
+import { DirectusService } from '#directus/directus.service.js';
 
 @Injectable()
 export class LoginDirectusService {
@@ -63,7 +63,7 @@ export class LoginDirectusService {
     } catch (error) {
       this.logger.error(
         'Failed to preload login after cache clear:',
-        error.message,
+        error instanceof Error ? error.message : JSON.stringify(error),
       );
     }
   }

@@ -42,7 +42,7 @@ import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { RpcException } from '@nestjs/microservices';
 import { decode } from 'html-entities';
-import * as Parser from 'rss-parser';
+import Parser, { Item } from 'rss-parser';
 import {
   catchError,
   finalize,
@@ -57,9 +57,9 @@ import {
   throwError,
   timer,
 } from 'rxjs';
-import { FeedOptions } from '../config/configuration.interface';
-import { FeedItem } from './feed-item.dto';
 import { striptags } from 'striptags';
+import { FeedOptions } from '../config/configuration.interface.js';
+import { FeedItem } from './feed-item.dto.js';
 
 interface CachedFeed {
   items: FeedItem[];
@@ -146,7 +146,7 @@ export class RssService {
 
     return this.fetchFeed().pipe(
       switchMap((xml) => from(this.rssParser.parseString(xml))),
-      map((feed: Parser.Output<FeedItem>) => this.toFeedItems(feed)),
+      map((feed) => this.toFeedItems(feed)),
       tap((items) => {
         this.cached = { items, fetchedAt: Date.now() };
         this.logger.log(
@@ -155,7 +155,7 @@ export class RssService {
           }ms`,
         );
       }),
-      catchError((err: any) => this.handleFailure(err, startedAt)),
+      catchError((err) => this.handleFailure(err, startedAt)),
     );
   }
 
@@ -165,7 +165,7 @@ export class RssService {
         timeout: this.feed.timeoutMs,
         responseType: 'text',
         // Sans cela axios tente un JSON.parse sur le xml reçu.
-        transformResponse: [(data) => data],
+        transformResponse: [(data: string) => data],
         headers: {
           Accept:
             'application/rss+xml, application/xml;q=0.9, text/xml;q=0.8, */*;q=0.5',
@@ -179,9 +179,11 @@ export class RssService {
             this.logger.warn(
               `Feed request failed (attempt ${retryIndex}/${
                 this.feed.retryCount
-              }), retrying in ${this.feed.retryDelayMs}ms: ${this.describeError(
-                err,
-              )}`,
+              }), retrying in ${this.feed.retryDelayMs}ms: ${
+                err instanceof Error
+                  ? this.describeError(err)
+                  : JSON.stringify(err)
+              }`,
             );
             return timer(this.feed.retryDelayMs);
           },
@@ -189,26 +191,37 @@ export class RssService {
       );
   }
 
-  private toFeedItems(feed: Parser.Output<FeedItem>): FeedItem[] {
-    return (feed.items || []).map((item: any) => ({
+  private toFeedItems(feed: Parser.Output<unknown>): FeedItem[] {
+    return (feed.items || []).map((item: Item) => ({
       ...item,
       title: item.title ? decode(item.title) : '',
       content: item.content
         ? striptags(item.content, { allowedTags: this.allowedHtmlTags })
         : '',
+      link: item.link ?? '',
+      pubDate: item.pubDate ?? '',
+      guid: item.guid ?? '',
     }));
   }
 
   /**
    * En cas d'échec, sert le dernier flux valide connu s'il n'est pas trop ancien
    */
-  private handleFailure(err: any, startedAt: number): Observable<FeedItem[]> {
-    this.logger.error(
-      `Unable to get Rss Feed from ${this.feed.url} after ${
-        Date.now() - startedAt
-      }ms: ${this.describeError(err)}`,
-      err?.stack,
-    );
+  private handleFailure(err, startedAt: number): Observable<FeedItem[]> {
+    if (err instanceof Error) {
+      this.logger.error(
+        `Unable to get Rss Feed from ${this.feed.url} after ${
+          Date.now() - startedAt
+        }ms: ${this.describeError(err)}`,
+        err?.stack,
+      );
+    } else {
+      this.logger.error(
+        `Unable to get Rss Feed from ${this.feed.url} after ${
+          Date.now() - startedAt
+        }ms: ${JSON.stringify(err)}`,
+      );
+    }
 
     const staleAge = this.cached ? Date.now() - this.cached.fetchedAt : null;
     if (
@@ -226,18 +239,30 @@ export class RssService {
   }
 
   /** Détaille l'erreur réseau */
-  private describeError(err: any): string {
+  private describeError(err: Error): string {
     const details = [];
-    if (err?.code) details.push(`code=${err.code}`);
-    if (err?.errno !== undefined && err?.errno !== null) {
-      details.push(`errno=${err.errno}`);
+    if ('code' in err) {
+      details.push(`code=${JSON.stringify(err.code)}`);
     }
-    if (err?.syscall) details.push(`syscall=${err.syscall}`);
-    if (err?.address) {
-      details.push(`address=${err.address}${err.port ? ':' + err.port : ''}`);
+    if ('errno' in err) {
+      details.push(`errno=${JSON.stringify(err.errno)}`);
     }
-    if (err?.response?.status) details.push(`status=${err.response.status}`);
-    details.push(`message=${err?.message}`);
+    if ('syscall' in err) {
+      details.push(`syscall=${JSON.stringify(err.syscall)}`);
+    }
+    if ('address' in err) {
+      details.push(
+        `address=${JSON.stringify(err.address)}${'port' in err ? ':' + JSON.stringify(err.port) : ''}`,
+      );
+    }
+    if (
+      'response' in err &&
+      typeof err.response === 'object' &&
+      'status' in err.response
+    ) {
+      details.push(`status=${JSON.stringify(err.response.status)}`);
+    }
+    details.push(`message=${JSON.stringify(err.message)}`);
     return details.join(' ');
   }
 }

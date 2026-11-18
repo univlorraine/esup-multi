@@ -37,13 +37,42 @@
  * termes.
  */
 
-import { Component } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { AsyncPipe } from '@angular/common';
+import { Component, inject } from '@angular/core';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  ValidationErrors,
+  ValidatorFn,
+} from '@angular/forms';
+import {
+  IonButton,
+  IonButtons,
+  IonCheckbox,
+  IonCol,
+  IonContent,
+  IonHeader,
+  IonIcon,
+  IonItem,
+  IonLabel,
+  IonModal,
+  IonProgressBar,
+  IonRow,
+  IonText,
+  IonTitle,
+  IonToolbar,
+} from '@ionic/angular';
 import { distinctUntilArrayItemChanged } from '@ngneat/elf';
+import { TranslatePipe } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { HiddenCourse, PlanningData, scheduleStoreManager } from '../../schedule.repository';
 import { ScheduleService } from '../../schedule.service';
+import { HiddenCourseComponent } from './hidden-course/hidden-course.component';
 
 interface AvailablePlanningFormInput extends AvailablePlanning {
   checked: boolean;
@@ -53,18 +82,45 @@ interface AvailablePlanning {
   label: string;
 }
 
-const atLeastOneCheckedValidator = (): ValidatorFn =>
- (control: FormArray): ValidationErrors | null => {
-    const countChecked = control.controls.filter(c => c.value === true).length;
-    return countChecked >= 1 ? null : {atLeastOnChecked: false};
+const atLeastOneCheckedValidator =
+  (): ValidatorFn =>
+  (control: FormArray): ValidationErrors | null => {
+    const countChecked = control.controls.filter((c) => c.value === true).length;
+    return countChecked >= 1 ? null : { atLeastOnChecked: false };
   };
 
 @Component({
   selector: 'app-select-planning',
   templateUrl: './select-planning.component.html',
-  styleUrls: ['../../../../../../src/theme/app-theme/styles/schedule/select-planning.component.scss'],
+  styleUrls: [
+    '../../../../../../src/theme/app-theme/styles/schedule/select-planning.component.scss',
+  ],
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    HiddenCourseComponent,
+    AsyncPipe,
+    TranslatePipe,
+    IonButton,
+    IonButtons,
+    IonCheckbox,
+    IonCol,
+    IonContent,
+    IonHeader,
+    IonIcon,
+    IonItem,
+    IonLabel,
+    IonModal,
+    IonProgressBar,
+    IonRow,
+    IonText,
+    IonTitle,
+    IonToolbar,
+  ],
 })
 export class SelectPlanningComponent {
+  private formBuilder = inject(FormBuilder);
+  private scheduleService = inject(ScheduleService);
 
   form: FormGroup;
   public isSelectPlanningModalOpen = false;
@@ -74,15 +130,12 @@ export class SelectPlanningComponent {
   public lastSelectedPlanningIndex: number | null = null;
   public hiddenCourseList$: Observable<HiddenCourse[]> = scheduleStoreManager.hiddenCourseList$;
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private scheduleService: ScheduleService
-  ) {
+  constructor() {
     this.scheduleService.asUser.subscribe(
-      () => this.hiddenCourseList$ = this.scheduleService.getStoreManager().hiddenCourseList$
+      () => (this.hiddenCourseList$ = this.scheduleService.getStoreManager().hiddenCourseList$),
     );
     this.form = this.formBuilder.group({
-      planningList: this.formBuilder.array([], atLeastOneCheckedValidator())
+      planningList: this.formBuilder.array([], atLeastOneCheckedValidator()),
     });
   }
 
@@ -109,39 +162,42 @@ export class SelectPlanningComponent {
     this.isLoading = true;
     this.isSelectPlanningModalOpen = true;
 
-    this.scheduleService.getStoreManager().allPlanningsData$
-      .pipe(
+    this.scheduleService
+      .getStoreManager()
+      .allPlanningsData$.pipe(
         distinctUntilArrayItemChanged(),
-        filter((allPlanningsData) => allPlanningsData !== null && allPlanningsData !== undefined))
+        filter((allPlanningsData) => allPlanningsData !== null && allPlanningsData !== undefined),
+      )
       .subscribe((allPlanningsData) => {
-          const availablePlanningFormInputs = allPlanningsData.map((p: PlanningData)  => (
-            {
-            id: p.id,
-            label: p.label,
-            checked: p.isSelected ? true : false
-          }));
-          this.buildForm(availablePlanningFormInputs);
-          this.isLoading = false;
-        });
+        const availablePlanningFormInputs = allPlanningsData.map((p: PlanningData) => ({
+          id: p.id,
+          label: p.label,
+          checked: p.isSelected ? true : false,
+        }));
+        this.buildForm(availablePlanningFormInputs);
+        this.isLoading = false;
+      });
   }
 
-  openHiddenCourseModal(){
+  openHiddenCourseModal() {
     this.isHiddenCourseModalOpen = true;
   }
 
-  onDismissHiddenCourseModal(){
+  onDismissHiddenCourseModal() {
     this.closeHiddenCourseModal();
     return false;
   }
 
-  closeHiddenCourseModal(){
+  closeHiddenCourseModal() {
     this.isHiddenCourseModalOpen = false;
   }
 
   private buildForm(availablePlanningFormInputs: AvailablePlanningFormInput[]) {
     this.planningList.clear();
-    availablePlanningFormInputs.forEach(formInput => this.planningList.push(new FormControl(formInput.checked)));
-    this.availablePlanningList = availablePlanningFormInputs.map(formInput => ({
+    availablePlanningFormInputs.forEach((formInput) =>
+      this.planningList.push(new FormControl(formInput.checked)),
+    );
+    this.availablePlanningList = availablePlanningFormInputs.map((formInput) => ({
       id: formInput.id,
       label: formInput.label,
     }));
@@ -150,7 +206,7 @@ export class SelectPlanningComponent {
   private applySelectedPlanning() {
     const selectedPlanningIds = [];
     for (const i in this.planningList.value) {
-      if( this.planningList.value[i] === true ) {
+      if (this.planningList.value[i] === true) {
         selectedPlanningIds.push(this.availablePlanningList[i].id);
       }
     }

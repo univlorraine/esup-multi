@@ -38,34 +38,33 @@
  */
 
 import { HttpClient } from '@angular/common/http';
-import { ProjectModuleService } from '../project-module.service';
-import { ModuleTranslationOptions, ModuleTranslateLoader } from './module-translate-loader';
 import { MultiTenantService } from '../../multi-tenant/multi-tenant.service';
+import { ProjectModuleService } from '../project-module.service';
+import { ModuleTranslateLoader, ModuleTranslationOptions } from './module-translate-loader';
 
 export const translationsLoaderFactory = (
   http: HttpClient,
   projectModuleService: ProjectModuleService,
   multiTenantService: MultiTenantService,
-  environment: any
+  environment: any,
 ) => {
   const baseTranslateUrl = './i18n';
 
-  const translations = projectModuleService.getTranslatedProjectModules().map(projectModule => ({
-    baseTranslateUrl, moduleName: projectModule
+  const translations = projectModuleService.getTranslatedProjectModules().map((projectModule) => ({
+    baseTranslateUrl,
+    moduleName: projectModule,
   }));
 
   // Conditionally adding guided-tour module translations
-  if(environment.guidedTourEnabled) {
+  if (environment.guidedTourEnabled) {
     translations.push({
-      baseTranslateUrl, moduleName: 'guided-tour'
+      baseTranslateUrl,
+      moduleName: 'guided-tour',
     });
   }
 
   const options: ModuleTranslationOptions = {
-    modules: [
-      { baseTranslateUrl },
-      ...translations,
-    ]
+    modules: [{ baseTranslateUrl }, ...translations],
   };
 
   return new ModuleTranslateLoader(http, options, multiTenantService);

@@ -39,9 +39,9 @@
 
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { NotificationsController } from './notifications.controller';
-import { NotificationsService } from './notifications.service';
-import { KeepaliveHttpModule } from '../keepalive-http.module';
+import { KeepaliveHttpModule } from '../keepalive-http.module.js';
+import { NotificationsController } from './notifications.controller.js';
+import { NotificationsService } from './notifications.service.js';
 
 @Module({
   imports: [ConfigModule, KeepaliveHttpModule],

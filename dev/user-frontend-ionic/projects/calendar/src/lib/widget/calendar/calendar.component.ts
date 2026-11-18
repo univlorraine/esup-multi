@@ -37,20 +37,63 @@
  * termes.
  */
 
-import { AfterViewInit, ChangeDetectorRef, Component, Inject, Input, TemplateRef, ViewChild } from '@angular/core';
-import { ThemeService } from '@multi/shared';
+import { AsyncPipe, NgClass, NgTemplateOutlet, SlicePipe } from '@angular/common';
+import {
+  AfterViewInit,
+  ChangeDetectorRef,
+  Component,
+  inject,
+  Input,
+  TemplateRef,
+  ViewChild,
+} from '@angular/core';
+import {
+  IonCard,
+  IonCardContent,
+  IonCol,
+  IonIcon,
+  IonRow,
+  IonSpinner,
+  IonText,
+} from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { finalize, take } from 'rxjs/operators';
+import { CompleteLocalDatePipe, LocalHourPipe, ThemeService } from '@multi/shared';
+import { CALENDAR_CONFIG, CalendarModuleConfig } from '../../calendar.config';
 import { MailCalendarEvents } from '../../calendar.repository';
 import { CalendarService } from '../../calendar.service';
-import { CALENDAR_CONFIG, CalendarModuleConfig } from '../../calendar.config';
+import { LocalDatePipe } from '../../common/pipe/local-date.pipe';
+import { LocalTimePipe } from '../../common/pipe/local-time.pipe';
 
 @Component({
   selector: 'app-calendar-widget',
   templateUrl: './calendar.component.html',
   styleUrls: ['../../../../../../src/theme/app-theme/styles/calendar/calendar.component.scss'],
+  imports: [
+    NgTemplateOutlet,
+    NgClass,
+    AsyncPipe,
+    SlicePipe,
+    TranslatePipe,
+    LocalDatePipe,
+    LocalTimePipe,
+    LocalHourPipe,
+    CompleteLocalDatePipe,
+    IonCard,
+    IonCardContent,
+    IonCol,
+    IonIcon,
+    IonRow,
+    IonSpinner,
+    IonText,
+  ],
 })
-export class CalendarComponent implements AfterViewInit{
+export class CalendarComponent implements AfterViewInit {
+  private calendarService = inject(CalendarService);
+  private themeService = inject(ThemeService);
+  private changeDetectorRef = inject(ChangeDetectorRef);
+  private config = inject<CalendarModuleConfig>(CALENDAR_CONFIG);
 
   @Input() widgetColor: string;
   @ViewChild('list') list!: TemplateRef<any>;
@@ -59,19 +102,17 @@ export class CalendarComponent implements AfterViewInit{
   public isLoading = false;
   public nextEvents$: Observable<MailCalendarEvents>;
 
-  constructor(private calendarService: CalendarService,
-    private themeService: ThemeService,
-    private changeDetectorRef: ChangeDetectorRef,
-    @Inject(CALENDAR_CONFIG) private config: CalendarModuleConfig) {
+  constructor() {
     this.nextEvents$ = this.calendarService.getNextEvents$();
   }
 
   widgetViewDidEnter(): void {
     this.isLoading = true;
-    this.calendarService.loadCalendarIfNetworkAvailable()
+    this.calendarService
+      .loadCalendarIfNetworkAvailable()
       .pipe(
         take(1),
-        finalize(() => this.isLoading = false)
+        finalize(() => (this.isLoading = false)),
       )
       .subscribe();
   }
@@ -81,8 +122,9 @@ export class CalendarComponent implements AfterViewInit{
   }
 
   fontColor() {
-    return this.themeService.isBackgroundFromCmsDarkOrIsDarkTheme(this.widgetColor) ?
-      'light-font-color' : 'dark-font-color';
+    return this.themeService.isBackgroundFromCmsDarkOrIsDarkTheme(this.widgetColor)
+      ? 'light-font-color'
+      : 'dark-font-color';
   }
 
   getTemplateRef(): TemplateRef<any> {

@@ -43,8 +43,8 @@ import { ConfigService } from '@nestjs/config';
 import { RpcException } from '@nestjs/microservices';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { ContactsProviderApi } from '../config/configuration.interfaces';
-import { Contact, ContactQueryDto } from './contacts.dto';
+import { ContactsProviderApi } from '../config/configuration.interfaces.js';
+import { Contact, ContactQueryDto } from './contacts.dto.js';
 
 @Injectable()
 export class ContactsService {

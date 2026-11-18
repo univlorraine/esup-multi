@@ -37,33 +37,46 @@
  * termes.
  */
 
-import { Component, OnInit } from '@angular/core';
-import { AuthenticatedUser, authenticatedUser$ } from '@multi/shared';
+import { AsyncPipe } from '@angular/common';
+import { Component, inject, OnInit } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { IonButton, IonCol, IonLabel, IonRouterLink, IonRow } from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 import { take } from 'rxjs/operators';
+import { AuthenticatedUser, authenticatedUser$ } from '@multi/shared';
 import { LoginRepository, TranslatedLoginPageContent } from '../../common/login.repository';
 import { LoginService } from '../../common/login.service';
+
 @Component({
   selector: 'app-auth-not-authentified-widget',
   templateUrl: './not-authentified.component.html',
   styleUrls: ['../../../../../../src/theme/app-theme/styles/auth/not-authentified.component.scss'],
+  imports: [
+    RouterLink,
+    AsyncPipe,
+    TranslatePipe,
+    IonButton,
+    IonCol,
+    IonLabel,
+    IonRouterLink,
+    IonRow,
+  ],
 })
 export class NotAuthentifiedComponent implements OnInit {
+  private loginService = inject(LoginService);
+  private loginRepository = inject(LoginRepository);
+
   authenticatedUser$: Observable<AuthenticatedUser>;
 
   public translatedPageContent$: Observable<TranslatedLoginPageContent>;
 
-  constructor(
-    private loginService: LoginService,
-    private loginRepository: LoginRepository,
-  ) {
+  constructor() {
     this.translatedPageContent$ = this.loginRepository.translatedPageContent$;
   }
 
   ngOnInit() {
     this.authenticatedUser$ = authenticatedUser$;
-    this.loginService.loadAndStoreLoginPageContent()
-      .pipe(take(1))
-      .subscribe();
+    this.loginService.loadAndStoreLoginPageContent().pipe(take(1)).subscribe();
   }
 }

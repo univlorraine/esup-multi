@@ -37,9 +37,9 @@
  */
 
 import { Field, ObjectType } from '@nestjs/graphql';
-import { SettingsByRole } from '@common/models/settings-by-role.model';
-import { Authorization } from '@common/models/authorization.model';
-import { FeaturesTranslations } from '@common/models/translations.model';
+import { Authorization } from '#common/models/authorization.model.js';
+import { SettingsByRole } from '#common/models/settings-by-role.model.js';
+import { FeaturesTranslations } from '#common/models/translations.model.js';
 
 @ObjectType()
 export class Features {

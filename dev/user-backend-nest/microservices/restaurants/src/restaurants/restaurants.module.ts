@@ -40,9 +40,9 @@
 import { CacheModule } from '@nestjs/cache-manager';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { RestaurantsController } from './restaurants.controller';
-import { RestaurantsService } from './restaurants.service';
-import { KeepaliveHttpModule } from '../keepalive-http.module';
+import { KeepaliveHttpModule } from '../keepalive-http.module.js';
+import { RestaurantsController } from './restaurants.controller.js';
+import { RestaurantsService } from './restaurants.service.js';
 
 @Module({
   imports: [
@@ -50,7 +50,7 @@ import { KeepaliveHttpModule } from '../keepalive-http.module';
     KeepaliveHttpModule,
     CacheModule.registerAsync({
       imports: [ConfigModule],
-      useFactory: async (configService: ConfigService) => ({
+      useFactory: (configService: ConfigService) => ({
         max: configService.get<number>('cacheMax') || 200,
       }),
       inject: [ConfigService],

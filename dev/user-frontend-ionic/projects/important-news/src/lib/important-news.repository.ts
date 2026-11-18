@@ -39,9 +39,7 @@
 
 import { createStore } from '@ngneat/elf';
 import { selectAllEntities, setEntities, withEntities } from '@ngneat/elf-entities';
-import {
-  persistState
-} from '@ngneat/elf-persist-state';
+import { persistState } from '@ngneat/elf-persist-state';
 import { Authorization, localForageStore } from '@multi/shared';
 
 const STORE_NAME = 'important-news';
@@ -75,10 +73,7 @@ export interface TranslatedImportantNews {
   statisticName?: string;
 }
 
-export const store = createStore(
-  { name: STORE_NAME },
-  withEntities<ImportantNews>()
-);
+export const store = createStore({ name: STORE_NAME }, withEntities<ImportantNews>());
 
 export const persist = persistState(store, {
   key: STORE_NAME,
@@ -90,4 +85,3 @@ export const importantNewsList$ = store.pipe(selectAllEntities());
 export const setImportantNews = (importantNews: ImportantNews[]) => {
   store.update(setEntities(importantNews));
 };
-

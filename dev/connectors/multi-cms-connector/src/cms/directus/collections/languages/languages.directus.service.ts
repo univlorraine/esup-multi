@@ -37,12 +37,12 @@
  */
 
 import { Injectable } from '@nestjs/common';
-import { LanguagesDirectus } from './languages.directus.model';
-import { Languages } from '@common/models/languages.model';
-import { DirectusService } from '@directus/directus.service';
-import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
-import { LanguagesSchema } from '@common/validation/schemas/languages.schema';
-import { normalizeEmptyStringToNull } from '@common/utils/normalize';
+import { ValidateMapping } from '#common/decorators/validate-mapping.decorator.js';
+import { Languages } from '#common/models/languages.model.js';
+import { normalizeEmptyStringToNull } from '#common/utils/normalize.js';
+import { LanguagesSchema } from '#common/validation/schemas/languages.schema.js';
+import { DirectusService } from '#directus/directus.service.js';
+import { LanguagesDirectus } from './languages.directus.model.js';
 
 @Injectable()
 export class LanguagesDirectusService {
@@ -69,7 +69,7 @@ export class LanguagesDirectusService {
         }
       }
     `);
-    return data.languages.map(this.mapToMultiModel);
+    return data.languages.map(this.mapToMultiModel.bind(this));
   }
 
   // TODO: vérifier si la fonction est bien utile au niveau de multi

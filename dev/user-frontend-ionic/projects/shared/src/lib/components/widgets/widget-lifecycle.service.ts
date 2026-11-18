@@ -50,12 +50,12 @@ import { filter, shareReplay } from 'rxjs/operators';
  * - widgetViewDidLeave(void)
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class WidgetLifecycleService {
-  private widgetViewWillEnterSubject: Subject<string[]> = new Subject();
+  private widgetViewWillEnterSubject = new Subject<string[]>();
   private widgetViewDidEnterSubject: ReplaySubject<string[]> = new ReplaySubject<string[]>(1);
-  private widgetViewWillLeaveSubject: Subject<string[]> = new Subject();
+  private widgetViewWillLeaveSubject = new Subject<string[]>();
   private widgetViewDidLeaveSubject: ReplaySubject<string[]> = new ReplaySubject<string[]>(1);
 
   sendWidgetViewWillEnter(widgets) {
@@ -64,8 +64,8 @@ export class WidgetLifecycleService {
 
   widgetViewWillEnter(widgetId: string): Observable<string[]> {
     return this.widgetViewWillEnterSubject.asObservable().pipe(
-      filter(widgetIds => widgetIds.includes(widgetId)),
-      shareReplay()
+      filter((widgetIds) => widgetIds.includes(widgetId)),
+      shareReplay(),
     );
   }
 
@@ -75,8 +75,8 @@ export class WidgetLifecycleService {
 
   widgetViewDidEnter(widgetId: string): Observable<string[]> {
     return this.widgetViewDidEnterSubject.asObservable().pipe(
-      filter(widgetIds => widgetIds.includes(widgetId)),
-      shareReplay()
+      filter((widgetIds) => widgetIds.includes(widgetId)),
+      shareReplay(),
     );
   }
 
@@ -86,8 +86,8 @@ export class WidgetLifecycleService {
 
   widgetViewWillLeave(widgetId: string): Observable<string[]> {
     return this.widgetViewWillLeaveSubject.asObservable().pipe(
-      filter(widgetIds => widgetIds.includes(widgetId)),
-      shareReplay()
+      filter((widgetIds) => widgetIds.includes(widgetId)),
+      shareReplay(),
     );
   }
 
@@ -97,8 +97,8 @@ export class WidgetLifecycleService {
 
   widgetViewDidLeave(widgetId: string): Observable<string[]> {
     return this.widgetViewDidLeaveSubject.asObservable().pipe(
-      filter(widgetIds => widgetIds.includes(widgetId)),
-      shareReplay()
+      filter((widgetIds) => widgetIds.includes(widgetId)),
+      shareReplay(),
     );
   }
 }

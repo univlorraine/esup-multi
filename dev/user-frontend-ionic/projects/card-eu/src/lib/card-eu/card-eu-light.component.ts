@@ -38,13 +38,17 @@
  */
 
 import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { IonCard, IonCardContent, IonLabel, IonRow } from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
+import { SanitizeSvgPipe } from '@multi/shared';
 import { UserAndCardEuData } from '../card-eu.repository';
 
 @Component({
   selector: 'app-card-eu-light',
   templateUrl: './card-eu-light.component.html',
   styleUrls: ['../../../../../src/theme/app-theme/styles/card-eu/card-eu-light.component.scss'],
-  encapsulation: ViewEncapsulation.None // Pour pouvoir jouer sur la taille du QR Code avec les CSS
+  encapsulation: ViewEncapsulation.None,
+  imports: [TranslatePipe, SanitizeSvgPipe, IonCard, IonCardContent, IonLabel, IonRow],
 })
 export class CardEuLightComponent {
   @Input() userCardEuLight: UserAndCardEuData;

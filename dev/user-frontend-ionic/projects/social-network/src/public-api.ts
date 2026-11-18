@@ -43,4 +43,4 @@
 
 export * from './lib/social-network.service';
 export * from './lib/widgets/social-network/social-network.component';
-export * from './lib/social-network.module';
+export * from './lib/social-network.providers';

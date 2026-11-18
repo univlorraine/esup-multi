@@ -37,11 +37,18 @@
  * termes.
  */
 
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Platform } from '@ionic/angular';
+import { AsyncPipe } from '@angular/common';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { IonGrid, IonIcon, IonItem, IonLabel, IonRow, IonText, Platform } from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
 import { combineLatest, Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-import { Notification, NotificationsRepository, TranslatedChannel, NotificationsService } from '@multi/shared';
+import {
+  Notification,
+  NotificationsRepository,
+  NotificationsService,
+  TranslatedChannel,
+} from '@multi/shared';
 import { ToastService } from '../toast.service';
 
 interface NotificationOptions {
@@ -53,9 +60,16 @@ interface NotificationOptions {
 @Component({
   selector: 'app-notification-options',
   templateUrl: './notification-options.component.html',
-  styleUrls: ['../../../../../src/theme/app-theme/styles/notifications/notification-options.component.scss'],
+  styleUrls: [
+    '../../../../../src/theme/app-theme/styles/notifications/notification-options.component.scss',
+  ],
+  imports: [AsyncPipe, TranslatePipe, IonGrid, IonIcon, IonItem, IonLabel, IonRow, IonText],
 })
 export class NotificationOptionsComponent {
+  platform = inject(Platform);
+  private notificationsService = inject(NotificationsService);
+  notificationRepository = inject(NotificationsRepository);
+  private toastService = inject(ToastService);
 
   @Input() notification: Notification;
   @Output() closeModal: EventEmitter<void> = new EventEmitter<void>();
@@ -64,12 +78,7 @@ export class NotificationOptionsComponent {
   public notificationOptions$: Observable<NotificationOptions>;
   unsubscribedChannelsCodes: string[] = [];
 
-  constructor(public platform: Platform,
-    private notificationsService: NotificationsService,
-    public notificationRepository: NotificationsRepository,
-    private toastService: ToastService,
-  ) {
-
+  constructor() {
     this.notificationOptions$ = combineLatest([
       this.notificationRepository.translatedChannels$,
       this.notificationRepository.unsubscribedChannels$,
@@ -79,56 +88,62 @@ export class NotificationOptionsComponent {
         const isSubscribed = !unsubscribedChannels.includes(this.notification.channel);
         this.unsubscribedChannelsCodes = unsubscribedChannels;
         return {
-          filterable: channels.some(c => c.code === this.notification.channel && channel.filterable),
+          filterable: channels.some(
+            (c) => c.code === this.notification.channel && channel.filterable,
+          ),
           channel,
           isSubscribed,
         };
-      })
+      }),
     );
   }
 
   deleteNotification(id: string) {
-    this.notificationsService.deleteNotification(id)
-      .pipe(
-        take(1),
-      ).subscribe(async () => {
+    this.notificationsService
+      .deleteNotification(id)
+      .pipe(take(1))
+      .subscribe(async () => {
         this.notificationRepository.deletNotification(id);
         this.toastService.displayToast('NOTIFICATIONS.ALERT.DELETED');
         this.closeModal.emit();
       });
   }
 
-  onSubscribeToChannel(channel: TranslatedChannel){
+  onSubscribeToChannel(channel: TranslatedChannel) {
     this.onSubscribeOrUnsubscribeChannelClick(channel, true);
   }
 
-  onUnsubscribeFromChannel(channel: TranslatedChannel){
+  onUnsubscribeFromChannel(channel: TranslatedChannel) {
     this.onSubscribeOrUnsubscribeChannelClick(channel, false);
   }
 
-  private onSubscribeOrUnsubscribeChannelClick(channel: TranslatedChannel, isSubscription: boolean) {
+  private onSubscribeOrUnsubscribeChannelClick(
+    channel: TranslatedChannel,
+    isSubscription: boolean,
+  ) {
     if (isSubscription === !this.unsubscribedChannelsCodes.includes(channel.code)) {
       return;
     } else if (isSubscription) {
       this.unsubscribedChannelsCodes = this.unsubscribedChannelsCodes.filter(
-        (unsubscribedChannelCode: string) => unsubscribedChannelCode !== channel.code
+        (unsubscribedChannelCode: string) => unsubscribedChannelCode !== channel.code,
       );
     } else {
       this.unsubscribedChannelsCodes.push(channel.code);
     }
 
-    this.notificationsService.subscribeOrUnsubscribeUserToChannels({
-      channelCodes: this.unsubscribedChannelsCodes
-    }).pipe(
-      take(1)
-    ).subscribe(async () => {
-      if (isSubscription) {
-        this.notificationRepository.subscribeChannel(channel.code);
-        this.toastService.displayToast('NOTIFICATIONS.ALERT.CHANNEL.SUBSCRIBED', channel.label);
-      } else {
-        this.notificationRepository.unsubscribeChannel(channel.code);
-        this.toastService.displayToast('NOTIFICATIONS.ALERT.CHANNEL.UNSUBSCRIBED', channel.label);
-      }
-    });
+    this.notificationsService
+      .subscribeOrUnsubscribeUserToChannels({
+        channelCodes: this.unsubscribedChannelsCodes,
+      })
+      .pipe(take(1))
+      .subscribe(async () => {
+        if (isSubscription) {
+          this.notificationRepository.subscribeChannel(channel.code);
+          this.toastService.displayToast('NOTIFICATIONS.ALERT.CHANNEL.SUBSCRIBED', channel.label);
+        } else {
+          this.notificationRepository.unsubscribeChannel(channel.code);
+          this.toastService.displayToast('NOTIFICATIONS.ALERT.CHANNEL.UNSUBSCRIBED', channel.label);
+        }
+      });
   }
 }

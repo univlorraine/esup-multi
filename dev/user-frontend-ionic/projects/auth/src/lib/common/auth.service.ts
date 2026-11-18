@@ -37,44 +37,52 @@
  * termes.
  */
 
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { Actions } from '@ngneat/effects-ng';
-import {
-  authenticate, AuthenticatedUser, userIsAuthenticated$,
-  cleanupPrivateData, getAuthToken, getRefreshAuthToken, updateAuthenticatedUsername, MultiTenantService
-} from '@multi/shared';
 import { Observable, withLatestFrom } from 'rxjs';
 import { concatMap, filter, switchMap, take, tap } from 'rxjs/operators';
+import {
+  authenticate,
+  AuthenticatedUser,
+  cleanupPrivateData,
+  getAuthToken,
+  getRefreshAuthToken,
+  MultiTenantService,
+  updateAuthenticatedUsername,
+  userIsAuthenticated$,
+} from '@multi/shared';
 import { saveCredentialsOnAuthentication$ } from '../preferences/preferences.repository';
 import { KeepAuthService } from './keep-auth.service';
 import { StandardAuthService } from './standard-auth.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
+  private actions = inject(Actions);
+  private standardAuthService = inject(StandardAuthService);
+  private keepAuthService = inject(KeepAuthService);
+  private multiTenantService = inject(MultiTenantService);
 
-  constructor(
-    private actions: Actions,
-    private standardAuthService: StandardAuthService,
-    private keepAuthService: KeepAuthService,
-    private multiTenantService: MultiTenantService,
-  ) {
+  constructor() {
     // Si l'utilisateur passe en mode anonyme et qu'il est toujours connecté, on le déconnecte
-    this.multiTenantService.tenantChange$.pipe(
-      withLatestFrom(userIsAuthenticated$),
-      filter(([tenant, isAuthenticated]) => tenant === undefined && isAuthenticated),
-      switchMap(() => this.logout())
-    ).subscribe();
+    this.multiTenantService.tenantChange$
+      .pipe(
+        withLatestFrom(userIsAuthenticated$),
+        filter(([tenant, isAuthenticated]) => tenant === undefined && isAuthenticated),
+        switchMap(() => this.logout()),
+      )
+      .subscribe();
   }
 
   login(username: string, password: string): Observable<AuthenticatedUser | null> {
     return saveCredentialsOnAuthentication$.pipe(
       take(1),
       tap(() => this.cleanupPrivateData()),
-      concatMap(saveCredentialsOnAuthentication => saveCredentialsOnAuthentication ?
-        this.keepAuthService.login(username, password) :
-        this.standardAuthService.login(username, password)
+      concatMap((saveCredentialsOnAuthentication) =>
+        saveCredentialsOnAuthentication
+          ? this.keepAuthService.login(username, password)
+          : this.standardAuthService.login(username, password),
       ),
       tap(() => updateAuthenticatedUsername(username)),
     );
@@ -83,15 +91,16 @@ export class AuthService {
   logout(): Observable<boolean> {
     return getRefreshAuthToken().pipe(
       tap(() => this.cleanupPrivateData()),
-      concatMap(token => token ?
-        this.keepAuthService.logout(token) :
-        this.standardAuthService.logout()
-      )
+      concatMap((token) =>
+        token ? this.keepAuthService.logout(token) : this.standardAuthService.logout(),
+      ),
     );
   }
 
   cleanupPrivateData() {
-    getAuthToken().subscribe(token => this.actions.dispatch(cleanupPrivateData({authToken: token})));
+    getAuthToken().subscribe((token) =>
+      this.actions.dispatch(cleanupPrivateData({ authToken: token })),
+    );
   }
 
   dispatchLoginAction() {

@@ -37,15 +37,15 @@
  * termes.
  */
 
-import { ExtractJwt, Strategy } from 'passport-jwt';
-import { PassportStrategy } from '@nestjs/passport';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { PassportStrategy } from '@nestjs/passport';
+import { ExtractJwt, Strategy } from 'passport-jwt';
 
 @Injectable()
 export class AuthJwtStrategy extends PassportStrategy(Strategy, 'auth-jwt') {
   constructor(private readonly config: ConfigService) {
-    const secretOrKey = config.get('security.authJwtSecret');
+    const secretOrKey = config.get<string>('security.authJwtSecret');
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
       ignoreExpiration: false,
@@ -53,7 +53,7 @@ export class AuthJwtStrategy extends PassportStrategy(Strategy, 'auth-jwt') {
     });
   }
 
-  async validate(payload: any) {
+  validate(payload: unknown) {
     return payload;
   }
 }

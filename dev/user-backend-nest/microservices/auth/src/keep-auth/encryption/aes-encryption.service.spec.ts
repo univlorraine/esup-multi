@@ -37,8 +37,8 @@
  * termes.
  */
 
-import { Test, TestingModule } from '@nestjs/testing';
-import { AesEncryptionService } from './aes-encryption.service';
+import { Test, type TestingModule } from '@nestjs/testing';
+import { AesEncryptionService } from './aes-encryption.service.js';
 
 describe('AesEncryptionService', () => {
   let service: AesEncryptionService;

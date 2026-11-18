@@ -65,7 +65,7 @@ export interface RestaurantDTO {
 
 export interface RestaurantMenusQueryDto {
   id: string;
-  date: Date;
+  date: string;
 }
 
 export interface RestaurantMenu {

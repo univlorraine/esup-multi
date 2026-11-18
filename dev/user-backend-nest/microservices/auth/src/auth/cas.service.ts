@@ -41,14 +41,15 @@ import { HttpService } from '@nestjs/axios';
 import { Injectable, Logger, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { RpcException } from '@nestjs/microservices';
+import { AxiosError } from 'axios';
 import { Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-import { CasUrl } from '../config/configuration.interface';
+import { CasUrl } from '../config/configuration.interface.js';
 import {
   AuthenticateQueryDto,
   LogoutQueryDto,
   SsoServiceTokenQueryDto,
-} from './auth.dto';
+} from './auth.dto.js';
 
 const CAS_HEADERS = {
   Accept: 'application/json',
@@ -76,9 +77,9 @@ export class CasService {
 
   public isTgtValid(tgt: string): Observable<boolean> {
     const url = this.casUrlConfig.validateTgt.replace(/\{tgt\}/g, tgt);
-    return this.httpService.get<any>(url).pipe(
+    return this.httpService.get<never>(url).pipe(
       map(() => true),
-      catchError((err) => {
+      catchError((err: AxiosError) => {
         switch (err.response.status) {
           case 404:
             return of(false);
@@ -99,7 +100,7 @@ export class CasService {
         headers: this.formatCasHeaderWithIp(query.ip),
       })
       .pipe(
-        catchError((err) => {
+        catchError((err: AxiosError) => {
           if (err.response) {
             switch (err.response.status) {
               case 401:
@@ -133,7 +134,7 @@ export class CasService {
       })
       .pipe(
         map((res) => res.data),
-        catchError((err) => {
+        catchError((err: AxiosError) => {
           switch (err.response.status) {
             case 404:
               throw new RpcException(
@@ -152,7 +153,7 @@ export class CasService {
     return this.httpService
       .delete<string>(url, { headers: this.formatCasHeaderWithIp(query.ip) })
       .pipe(
-        catchError((err) => {
+        catchError((err: AxiosError) => {
           throw new RpcException(err);
         }),
         map((res) => res.status === 200),

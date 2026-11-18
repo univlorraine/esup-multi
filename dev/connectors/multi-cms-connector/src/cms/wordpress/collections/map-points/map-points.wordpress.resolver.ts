@@ -37,8 +37,8 @@
  */
 
 import { Args, Query, Resolver } from '@nestjs/graphql';
-import { MapPointsWordpressService } from './map-points.wordpress.service';
-import { MapData, MapPointData } from '@common/models/map-points.model';
+import { MapData, MapPointData } from '#common/models/map-points.model.js';
+import { MapPointsWordpressService } from './map-points.wordpress.service.js';
 
 @Resolver(() => MapPointData)
 export class MapPointsWordpressResolver {

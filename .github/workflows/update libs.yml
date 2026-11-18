@@ -13,24 +13,27 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           ref: ${{ github.event.pull_request.head.ref }}
           repository: ${{ github.event.pull_request.head.repo.full_name }}
 
       - name: Check if any package.json was modified
-        uses: dorny/paths-filter@v3
+        uses: dorny/paths-filter@v4
         id: changes
         with:
           filters: |
             packageJson:
               - '**/package.json'
 
+      - name: Read Node.js version
+        id: node_version
+        run: echo NODE_VERSION=$(cat .nvmrc) >> $GITHUB_OUTPUT
+
       - name: Set up Node.js
-        if: steps.changes.outputs.packageJson == 'true'
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
-          node-version: '20'
+          node-version: ${{ steps.node_version.outputs.NODE_VERSION }}
 
       - name: Install libs
         if: steps.changes.outputs.packageJson == 'true'
@@ -68,7 +71,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Fork  detected
+      - name: Fork detected
         if: steps.changes.outputs.packageJson == 'true' && steps.diff.outputs.CHANGES == 1 && github.event.pull_request.head.repo.full_name != github.repository
         run: |
           echo "La liste des dépendances doit être mise à jour."

@@ -2,7 +2,7 @@
 
 ## Installation
 
-Installer node en version 16+ avec nvm (Node Version Manager) :
+Installer node en version 26+ avec nvm (Node Version Manager) :
 - [Installation nvm](https://github.com/nvm-sh/nvm)
 
 ### Utiliser la version par défaut du projet

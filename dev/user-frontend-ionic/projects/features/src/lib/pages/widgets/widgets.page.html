@@ -37,10 +37,17 @@
   ~ termes.
   -->
 
-<ion-content *ngIf="(featuresIsEmpty$ | async) === false">
-  <app-feature-widget *ngFor="let translatedFeature of (translatedFeatures$ | async)" [feature]="translatedFeature"></app-feature-widget>
-</ion-content>
+@let featuresIsEmpty = featuresIsEmpty$ | async;
+@if (featuresIsEmpty === false) {
+  <ion-content>
+    @for (translatedFeature of translatedFeatures$ | async; track translatedFeature.id) {
+      <app-feature-widget [feature]="translatedFeature" />
+    }
+  </ion-content>
+}
 
-<ion-content class="ion-padding" *ngIf="(featuresIsEmpty$ | async)">
-  <ion-note> {{ "FEATURES.NO_DATA" | translate }} </ion-note>
-</ion-content>
+@if (featuresIsEmpty) {
+  <ion-content class="ion-padding">
+    <ion-note> {{ 'FEATURES.NO_DATA' | translate }}</ion-note>
+  </ion-content>
+}

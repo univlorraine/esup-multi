@@ -37,30 +37,59 @@
  * termes.
  */
 
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
+import {
+  CapacitorBarcodeScanner,
+  CapacitorBarcodeScannerTypeHint,
+} from '@capacitor/barcode-scanner';
+import {
+  IonButton,
+  IonContent,
+  IonIcon,
+  IonLabel,
+  IonRow,
+  IonText,
+  NavController,
+} from '@ionic/angular';
+import { TranslatePipe } from '@ngx-translate/core';
+import { HeaderComponent } from '@multi/shared';
 import { ReservationService } from './reservation.service';
-import { Router} from '@angular/router';
-import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-reservation',
   templateUrl: './reservation.page.html',
   styleUrls: ['../../../../src/theme/app-theme/styles/reservation/reservation.page.scss'],
+  imports: [
+    TranslatePipe,
+    HeaderComponent,
+    IonButton,
+    IonContent,
+    IonIcon,
+    IonLabel,
+    IonRow,
+    IonText,
+  ],
 })
 export class ReservationPage {
-
-  constructor(
-    private navController: NavController,
-    private router: Router,
-    private reservationService: ReservationService,
-  ) { }
+  private navController = inject(NavController);
+  private router = inject(Router);
+  private reservationService = inject(ReservationService);
 
   openReservationService() {
     this.reservationService.openReservationService();
   }
 
-  navigateToScanPage() {
-    this.navController.setDirection('forward', false);
-    this.router.navigate(['/reservation/scan']);
+  async startScan() {
+    const options = {
+      hint: CapacitorBarcodeScannerTypeHint.QR_CODE,
+    };
+
+    try {
+      const result = (await CapacitorBarcodeScanner.scanBarcode(options)).ScanResult;
+      this.reservationService.openURL(result);
+    } catch (error) {
+      console.error('Error starting scan:', error);
+    }
   }
 }

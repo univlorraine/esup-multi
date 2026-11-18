@@ -40,8 +40,8 @@
 import { Controller } from '@nestjs/common';
 import { MessagePattern } from '@nestjs/microservices';
 import { Observable } from 'rxjs';
-import { FeedItem } from './feed-item.dto';
-import { RssService } from './rss.service';
+import { FeedItem } from './feed-item.dto.js';
+import { RssService } from './rss.service.js';
 
 @Controller()
 export class RssController {

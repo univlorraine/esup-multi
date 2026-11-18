@@ -37,24 +37,24 @@
   ~ termes.
   -->
 
-<ion-icon *ngIf="!iconSvgLight && !iconSvgDark"
-          [name]="icon"
-          [slot]="slot"
-          [size]="size"
-          [color]="color"
-          aria-label=""
-></ion-icon>
-<ion-icon *ngIf="iconSvgLight && (isDarkTheme$ | async) === false"
-          [src]="'data:image/svg+xml;utf8, ' + iconSvgLight"
-          [slot]="slot"
-          [size]="size"
-          [color]="color"
-          aria-label=""
-></ion-icon>
-<ion-icon *ngIf="iconSvgDark && (isDarkTheme$ | async) === true"
-          [src]="'data:image/svg+xml;utf8, ' + iconSvgDark"
-          [slot]="slot"
-          [size]="size"
-          [color]="color"
-          aria-label=""
-></ion-icon>
+@if (!iconSvgLight && !iconSvgDark) {
+  <ion-icon [name]="icon" [slot]="slot" [size]="size" [color]="color" aria-label="" />
+}
+@if (iconSvgLight && (isDarkTheme$ | async) === false) {
+  <ion-icon
+    [src]="'data:image/svg+xml;utf8, ' + iconSvgLight"
+    [slot]="slot"
+    [size]="size"
+    [color]="color"
+    aria-label=""
+  />
+}
+@if (iconSvgDark && (isDarkTheme$ | async) === true) {
+  <ion-icon
+    [src]="'data:image/svg+xml;utf8, ' + iconSvgDark"
+    [slot]="slot"
+    [size]="size"
+    [color]="color"
+    aria-label=""
+  />
+}

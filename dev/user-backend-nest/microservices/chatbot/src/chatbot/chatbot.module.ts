@@ -39,9 +39,9 @@
 
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { ChatbotController } from './chatbot.controller';
-import { ChatbotService } from './chatbot.service';
-import { KeepaliveHttpModule } from '../keepalive-http.module';
+import { KeepaliveHttpModule } from '../keepalive-http.module.js';
+import { ChatbotController } from './chatbot.controller.js';
+import { ChatbotService } from './chatbot.service.js';
 
 @Module({
   imports: [ConfigModule, KeepaliveHttpModule],

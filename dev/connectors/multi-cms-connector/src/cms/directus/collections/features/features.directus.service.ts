@@ -37,18 +37,18 @@
  */
 
 import { Injectable, Logger } from '@nestjs/common';
-import { Features } from '@common/models/features.model';
-import { FeaturesDirectus } from '@directus/collections/features/features.directus.model';
-import { DirectusService } from '@directus/directus.service';
 import { OnEvent } from '@nestjs/event-emitter';
-import { ValidateMapping } from '@common/decorators/validate-mapping.decorator';
-import { FeaturesSchema } from '@common/validation/schemas/features.schema';
+import { CacheCollection } from '#cache/cache.config.js';
+import { CacheService } from '#cache/cache.service.js';
+import { ValidateMapping } from '#common/decorators/validate-mapping.decorator.js';
+import { Features } from '#common/models/features.model.js';
 import {
   normalizeEmptyArrayToNull,
   normalizeEmptyStringToNull,
-} from '@common/utils/normalize';
-import { CacheService } from '@cache/cache.service';
-import { CacheCollection } from '@cache/cache.config';
+} from '#common/utils/normalize.js';
+import { FeaturesSchema } from '#common/validation/schemas/features.schema.js';
+import { FeaturesDirectus } from '#directus/collections/features/features.directus.model.js';
+import { DirectusService } from '#directus/directus.service.js';
 
 @Injectable()
 export class FeaturesDirectusService {
@@ -66,7 +66,7 @@ export class FeaturesDirectusService {
     } catch (error) {
       this.logger.error(
         'Failed to preload features after cache clear:',
-        error.message,
+        error instanceof Error ? error.message : JSON.stringify(error),
       );
     }
   }
@@ -164,7 +164,7 @@ export class FeaturesDirectusService {
         }
       }
     `);
-    return data.features.map(this.mapToMultiModel);
+    return data.features.map(this.mapToMultiModel.bind(this));
   }
 
   async getFeature(id: number): Promise<Features> {

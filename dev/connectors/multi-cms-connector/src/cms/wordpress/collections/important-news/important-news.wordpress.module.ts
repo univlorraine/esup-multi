@@ -37,9 +37,9 @@
  */
 
 import { forwardRef, Module } from '@nestjs/common';
-import { ImportantNewsWordpressResolver } from './important-news.wordpress.resolver';
-import { ImportantNewsWordpressService } from './important-news.wordpress.service';
-import { WordpressModule } from '@wordpress/wordpress.module';
+import { WordpressModule } from '#wordpress/wordpress.module.js';
+import { ImportantNewsWordpressResolver } from './important-news.wordpress.resolver.js';
+import { ImportantNewsWordpressService } from './important-news.wordpress.service.js';
 
 @Module({
   imports: [forwardRef(() => WordpressModule)],

@@ -37,36 +37,34 @@
  * termes.
  */
 
-module.exports.mailCalendarData = () => ({
-    "unreadMails": "92",
-    "events": [
-        {
-            "label": "Réunion avec le directeur",
-            "startDateTime": (() => {
-                const now = new Date();
-                const start = new Date(now.getTime() + 259200000).setHours(10, 30, 0, 0);
-                return new Date(start).toISOString();
-            })(),
-            "endDateTime": (() => {
-                const now = new Date();
-                const end = new Date(now.getTime() + 259200000).setHours(12, 0, 0, 0);
-                return new Date(end).toISOString();
-            })(),
-            "location": "Salle 12"
-        },
-        {
-            "label": "Présentation des options",
-            "startDateTime": (() => {
-                const now = new Date();
-                const start = new Date(now.getTime() + 345600000).setHours(14, 0, 0, 0);
-                return new Date(start).toISOString();
-            })(),
-            "endDateTime": (() => {
-                const now = new Date();
-                const end = new Date(now.getTime() + 345600000).setHours(16, 0, 0, 0);
-                return new Date(end).toISOString();
-            })(),
-            "location": "Bâtiment A, Amphi 3"
-        }
-    ]
-});
+export default function mailCalendarData() {
+  const now = Temporal.Now.plainDateTimeISO();
+
+  const evt1Start = now
+    .add({ days: 3 })
+    .with({ hour: 10, minute: 30, second: 0, millisecond: 0 });
+  const evt1End = evt1Start.add({ hours: 1, minutes: 30 });
+
+  const evt2Start = now
+    .add({ days: 4 })
+    .with({ hour: 14, minute: 0, second: 0, millisecond: 0 });
+  const evt2End = evt2Start.add({ hours: 2 });
+
+  return {
+    unreadMails: '92',
+    events: [
+      {
+        label: 'Réunion avec le directeur',
+        startDateTime: evt1Start,
+        endDateTime: evt1End,
+        location: 'Salle 12',
+      },
+      {
+        label: 'Présentation des options',
+        startDateTime: evt2Start,
+        endDateTime: evt2End,
+        location: 'Bâtiment A, Amphi 3',
+      },
+    ],
+  };
+}

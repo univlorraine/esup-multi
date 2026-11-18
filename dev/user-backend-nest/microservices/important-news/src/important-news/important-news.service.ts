@@ -41,12 +41,13 @@ import { HttpService } from '@nestjs/axios';
 import { Injectable, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { RpcException } from '@nestjs/microservices';
+import type { AxiosError } from 'axios';
 import { catchError, map, Observable } from 'rxjs';
-import { CmsApi } from '../config/configuration.interface';
+import { CmsApi } from '../config/configuration.interface.js';
 import {
   ImportantNewsDto,
   ImportantNewsGraphQLResponse,
-} from './important-news.dto';
+} from './important-news.dto.js';
 
 @Injectable()
 export class ImportantNewsService {
@@ -102,7 +103,7 @@ export class ImportantNewsService {
         requestConfig,
       )
       .pipe(
-        catchError((err: any) => {
+        catchError((err: AxiosError) => {
           const errorMessage = 'Unable to get important news data from CMS';
           this.logger.error(errorMessage, err);
           throw new RpcException(errorMessage);

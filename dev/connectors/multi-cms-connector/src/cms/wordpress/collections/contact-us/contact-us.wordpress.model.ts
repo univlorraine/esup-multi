@@ -37,7 +37,7 @@
  */
 
 import { Field, ObjectType } from '@nestjs/graphql';
-import { ContactUsTranslationsWordpress } from '@wordpress/collections/translations/translations.wordpress.model';
+import { ContactUsTranslationsWordpress } from '#wordpress/collections/translations/translations.wordpress.model.js';
 
 @ObjectType()
 export class ContactUsWordpress {
