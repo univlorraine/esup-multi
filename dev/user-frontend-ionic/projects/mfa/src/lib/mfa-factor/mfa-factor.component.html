@@ -1,0 +1,27 @@
+@let i18nKey = `MFA.FACTOR.${factor.id.toUpperCase()}`;
+
+<div
+  [class]="['ion-margin-vertical', 'mfa-factor-card', `mfa-factor-${factor.id}`]"
+  [class.disabled]="disabled"
+>
+  @if (factor.icon) {
+    <app-custom-icon
+      [icon]="factor.icon.ionIcon"
+      [iconSvgLight]="factor.icon.iconSvgLight"
+      [iconSvgDark]="factor.icon.iconSvgDark"
+      size="3rem"
+    />
+  }
+
+  <h3>{{ i18nKey + '.TITLE' | translate }}</h3>
+
+  @if (showMenu && !disabled) {
+    <ion-button button-type="clear">
+      <ion-icon ios="ellipsis-horizontal" md="ellipsis-vertical" />
+    </ion-button>
+  }
+
+  <div class="mfa-factor-content">
+    <ng-content />
+  </div>
+</div>

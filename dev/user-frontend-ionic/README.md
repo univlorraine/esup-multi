@@ -183,6 +183,7 @@ npm run module:build-all
 - [Module important-news](./projects/important-news/README.md)
 - [Module knowledge-base](./projects/knowledge-base/README.md)
 - [Module map](./projects/map/README.md)
+- [Module mfa](./projects/mfa/README.md)
 - [Module menu](./projects/menu/README.md)
 - [Module notifications](./projects/notifications/README.md)
 - [Module preferences](./projects/preferences/README.md)

@@ -48,7 +48,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 
 ## [Frontend](./dev/user-frontend-ionic)
 ```
-├─ MIT: 77
+├─ MIT: 78
 ├─ Apache-2.0: 7
 ├─ MIT*: 1
 ├─ (MPL-2.0 OR Apache-2.0): 1
@@ -64,6 +64,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@angular-eslint/eslint-plugin@20.7.0](https://github.com/angular-eslint/angular-eslint) - MIT
 - [@angular-eslint/template-parser@20.7.0](https://github.com/angular-eslint/angular-eslint) - MIT
 - [@angular/animations@20.3.31](https://github.com/angular/angular) - MIT
+- [@angular/build@20.3.37](https://github.com/angular/angular-cli) - MIT
 - [@angular/cli@20.3.37](https://github.com/angular/angular-cli) - MIT
 - [@angular/common@20.3.31](https://github.com/angular/angular) - MIT
 - [@angular/compiler-cli@20.3.31](https://github.com/angular/angular) - MIT

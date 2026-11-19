@@ -1,0 +1,19 @@
+{
+  "TITLE": "Sécurisez votre compte",
+  "INTRO": "L'Université Exemple met en place l'authentification renforcée : en plus de votre mot de passe, vous confirmez votre identité avec ce téléphone.",
+  "NONE_ACTIVE": {
+    "MESSAGE": "Votre smartphone n'est synchronisé comme second facteur d'aucune méthode d'authentification renforcée.",
+    "OTP_MANAGER": "Choisir mes méthodes d'authentification renforcée"
+  },
+  "ADD_BY_QR": "J'ai déjà un Qrcode",
+  "FACTOR": {
+    "TOTP": {
+      "TITLE": "Code temporaire",
+      "DESCRIPTION": "Un code à 6 chiffres, renouvelé toutes les 30s, à saisir à la connexion"
+    },
+    "PUSH": {
+      "TITLE": "Notification",
+      "DESCRIPTION": "Une notification à accepter ou refuser depuis votre smartphone"
+    }
+  }
+}
