@@ -6,6 +6,7 @@ ENV NODE_ENV="production"
 
 RUN mkdir -p /usr/app
 
+COPY ./package.json /usr/app/package.json
 COPY ./dist /usr/app/dist
 COPY ./node_modules /usr/app/node_modules
 
