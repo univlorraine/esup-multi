@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## X.Y.Z (YYYY-MM-DD)
+
+> ⚠️ **Reconnexion obligatoire** : le plugin de stockage sécurisé change, les jetons de connexion enregistrés
+> ne seront pas repris. Après la mise à jour, **tous les utilisateurs devront se reconnecter une fois**
+> (application mobile et PWA).
+
+### Client
+#### Autres
+* Remplacement de [`capacitor-secure-storage-plugin`](https://www.npmjs.com/package/capacitor-secure-storage-plugin) par [`@aparajita/capacitor-secure-storage`](https://www.npmjs.com/package/@aparajita/capacitor-secure-storage)
+
 ## 2.4.0 (2026-11-18)
 
 > ⚠️ **Mise à jour technique majeure** : Node 26, migration ESM du backend et des connecteurs, 

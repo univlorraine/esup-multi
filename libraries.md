@@ -74,6 +74,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [@angular/language-service@20.3.31](https://github.com/angular/angular) - MIT
 - [@angular/platform-browser@20.3.31](https://github.com/angular/angular) - MIT
 - [@angular/router@20.3.31](https://github.com/angular/angular) - MIT
+- [@aparajita/capacitor-secure-storage@8.0.1](https://github.com/aparajita/capacitor-secure-storage) - MIT
 - [@capacitor-community/contacts@8.0.0](https://github.com/capacitor-community/contacts) - MIT
 - [@capacitor-community/screen-brightness@8.0.0](https://github.com/capacitor-community/screen-brightness) - MIT
 - [@capacitor-firebase/messaging@8.5.1](https://github.com/capawesome-team/capacitor-firebase) - Apache-2.0
@@ -114,7 +115,6 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [angular-eslint@20.7.0](https://github.com/angular-eslint/angular-eslint) - MIT
 - [angular-shepherd@20.0.0](https://github.com/shipshapecode/angular-shepherd) - MIT
 - [angularx-qrcode@20.0.0](https://github.com/cordobo/angularx-qrcode) - MIT
-- [capacitor-secure-storage-plugin@0.13.0](https://github.com/martinkasa/capacitor-secure-storage-plugin) - MIT
 - [date-fns@4.4.0](https://github.com/date-fns/date-fns) - MIT
 - [dompurify@3.4.14](https://github.com/cure53/DOMPurify) - (MPL-2.0 OR Apache-2.0)
 - [eslint-config-prettier@10.1.8](https://github.com/prettier/eslint-config-prettier) - MIT
