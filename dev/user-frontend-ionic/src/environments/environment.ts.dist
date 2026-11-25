@@ -169,9 +169,17 @@ export const environment = {
       availableFactors: [
         {
           id: 'totp',
+          icon: {
+            iconSvgLight: '',
+            iconSvgDark: '',
+          }
         },
         {
           id: 'push',
+          icon: {
+            iconSvgLight: '',
+            iconSvgDark: '',
+          }
         },
       ],
     }),
