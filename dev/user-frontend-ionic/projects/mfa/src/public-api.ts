@@ -43,3 +43,4 @@
 
 export * from './lib/mfa.page';
 export * from './lib/mfa.providers';
+export * from './lib/totp/totp.repository';
