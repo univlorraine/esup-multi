@@ -10,6 +10,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 > (application mobile et PWA).
 
 ### Client
+#### Bug Fixes
+* **(preferences)** Le jeton de rafraîchissement n'était pas supprimé lors de la désactivation de « rester connecté »
+
 #### Autres
 * Remplacement de [`capacitor-secure-storage-plugin`](https://www.npmjs.com/package/capacitor-secure-storage-plugin) par [`@aparajita/capacitor-secure-storage`](https://www.npmjs.com/package/@aparajita/capacitor-secure-storage)
 
