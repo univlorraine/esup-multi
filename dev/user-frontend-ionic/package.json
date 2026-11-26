@@ -74,6 +74,7 @@
     "localforage": "^1.10.0",
     "ng2-dragula": "^7.0.0",
     "ngx-matomo-client": "^8.0.0",
+    "otpauth": "^9.6.0",
     "ramda": "~0.32.0",
     "rxjs": "^7.8.2",
     "swiper": "^14.2.0",

@@ -16,9 +16,24 @@
   <h3>{{ i18nKey + '.TITLE' | translate }}</h3>
 
   @if (showMenu && !disabled) {
-    <ion-button button-type="clear">
+    <ion-button button-type="clear" (click)="openMenu($event)">
       <ion-icon ios="ellipsis-horizontal" md="ellipsis-vertical" />
     </ion-button>
+
+    <ion-popover [isOpen]="menuOpen" [event]="menuEvent" (didDismiss)="menuOpen = false">
+      <ng-template>
+        <ion-content>
+          <ion-list>
+            <ion-item [button]="true" (click)="selectAction('info')">
+              <ion-label>{{ 'MFA.ACTIONS.MORE_INFO' | translate }}</ion-label>
+            </ion-item>
+            <ion-item [button]="true" (click)="selectAction('delete')">
+              <ion-label>{{ 'MFA.ACTIONS.DELETE' | translate }}</ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-content>
+      </ng-template>
+    </ion-popover>
   }
 
   <div class="mfa-factor-content">

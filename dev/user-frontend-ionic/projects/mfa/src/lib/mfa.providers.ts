@@ -42,6 +42,7 @@ import { ROUTES } from '@angular/router';
 import { ProjectModuleService } from '@multi/shared';
 import { MFA_CONFIG, MfaModuleConfig } from './mfa.config';
 import { MFA_ROUTES } from './mfa.routes';
+import { TotpEnrollmentLinkService } from './totp/totp-enrollment-link.service';
 
 export function provideMfa(config: MfaModuleConfig): (Provider | EnvironmentProviders)[] {
   return [
@@ -54,5 +55,6 @@ export function provideMfa(config: MfaModuleConfig): (Provider | EnvironmentProv
       });
     }),
     { provide: MFA_CONFIG, useValue: config },
+    provideAppInitializer(() => inject(TotpEnrollmentLinkService).init()),
   ];
 }

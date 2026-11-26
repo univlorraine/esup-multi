@@ -48,27 +48,129 @@
     />
   }
 
-  <h2>{{ 'MFA.TITLE' | translate }}</h2>
-  <p>{{ 'MFA.INTRO' | translate }}</p>
+  @if (activeFactors$ | async; as activeFactors) {
+    @if (activeFactors.length === 0) {
+      <h2>{{ 'MFA.NONE_ACTIVE.TITLE' | translate }}</h2>
+      <p>{{ 'MFA.NONE_ACTIVE.INTRO' | translate }}</p>
+      <p>{{ 'MFA.NONE_ACTIVE.MESSAGE' | translate }}</p>
 
-  @if (true) {
-    <p>{{ 'MFA.NONE_ACTIVE.MESSAGE' | translate }}</p>
+      @for (availableFactor of config.availableFactors; track availableFactor.id) {
+        @let i18nKey = `MFA.FACTOR.${availableFactor.id.toUpperCase()}`;
+        <app-mfa-factor [factor]="availableFactor" [disabled]="true">
+          <p>{{ i18nKey + '.DESCRIPTION' | translate }}</p>
+        </app-mfa-factor>
+      }
 
-    @for (availableFactor of config.availableFactors; track availableFactor.id) {
-      @let i18nKey = `MFA.FACTOR.${availableFactor.id.toUpperCase()}`;
-      <app-mfa-factor [factor]="availableFactor" [disabled]="true">
-        <p>{{ i18nKey + '.DESCRIPTION' | translate }}</p>
-      </app-mfa-factor>
+      <ion-button class="mfa-otp-manager app-rectangle-button-1 ion-padding-left ion-padding-right">
+        <ion-icon class="app-icon-4" slot="start" name="open-outline" aria-label="" />
+        <ion-label>{{ 'MFA.NONE_ACTIVE.OTP_MANAGER' | translate }}</ion-label>
+      </ion-button>
+
+      <ion-button
+        class="mfa-add-factor-qr app-rectangle-button-1 ion-padding-left ion-padding-right"
+      >
+        <ion-icon class="app-icon-4" slot="start" name="qr-code-outline" aria-label="" />
+        <ion-label>{{ 'MFA.ADD_BY_QR' | translate }}</ion-label>
+      </ion-button>
+    } @else {
+      <h2>{{ 'MFA.TITLE' | translate }}</h2>
+      <p>{{ 'MFA.INTRO' | translate }}</p>
+
+      @for (activeFactor of activeFactors; track activeFactor.id) {
+        <app-mfa-factor
+          [factor]="activeFactor"
+          [showMenu]="true"
+          (actionSelected)="onFactorAction(activeFactor, $event)"
+        >
+          @switch (activeFactor.id) {
+            @case ('totp') {
+              @if (totpJustEnrolled) {
+                <p class="mfa-totp-enroll-confirm">
+                  {{ 'MFA.FACTOR.TOTP.ENROLL_CONFIRM' | translate }}
+                </p>
+              }
+
+              @if (totpAccount$ | async; as account) {
+                <app-totp-code [account]="account" />
+              }
+            }
+          }
+        </app-mfa-factor>
+      }
     }
-
-    <ion-button class="mfa-otp-manager app-rectangle-button-1 ion-padding-left ion-padding-right">
-      <ion-icon class="app-icon-4" slot="start" name="open-outline" aria-label="" />
-      <ion-label>{{ 'MFA.NONE_ACTIVE.OTP_MANAGER' | translate }}</ion-label>
-    </ion-button>
-
-    <ion-button class="mfa-add-factor-qr app-rectangle-button-1 ion-padding-left ion-padding-right">
-      <ion-icon class="app-icon-4" slot="start" name="qr-code-outline" aria-label="" />
-      <ion-label>{{ 'MFA.ADD_BY_QR' | translate }}</ion-label>
-    </ion-button>
   }
 </ion-content>
+
+@let pendingTotpEnrollment = pendingTotpEnrollment$ | async;
+@let existingTotpAccount = totpAccount$ | async;
+
+<ion-modal
+  [isOpen]="pendingTotpEnrollment !== null"
+  [backdropDismiss]="false"
+  (didDismiss)="cancelTotpEnrollment()"
+>
+  <ng-template>
+    <ion-content class="ion-padding ion-text-center">
+      <h2>{{ 'MFA.FACTOR.TOTP.TITLE' | translate }}</h2>
+      <p>{{ 'MFA.FACTOR.TOTP.ENROLL' | translate }}</p>
+
+      @if (existingTotpAccount) {
+        <p class="mfa-totp-enroll-warning">
+          {{ 'MFA.FACTOR.TOTP.ENROLL_OVERRIDE' | translate }}
+        </p>
+      }
+
+      <ion-button
+        class="mfa-enroll-confirm-button"
+        (click)="confirmTotpEnrollment(pendingTotpEnrollment)"
+      >
+        {{ 'MFA.ACTIONS.CONFIRM' | translate }}
+      </ion-button>
+
+      <ion-button fill="clear" (click)="cancelTotpEnrollment()">
+        {{ 'MFA.ACTIONS.CANCEL' | translate }}
+      </ion-button>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+<ion-modal
+  [isOpen]="infoFactor !== null"
+  [initialBreakpoint]="0.75"
+  [breakpoints]="[0, 0.75, 1]"
+  (didDismiss)="closeFactorInfo()"
+>
+  <ng-template>
+    <ion-content class="ion-padding">
+      @if (infoFactor) {
+        @let factorKey = `MFA.FACTOR.${infoFactor.id.toUpperCase()}`;
+        <h2>{{ factorKey + '.TITLE' | translate }}</h2>
+        <p class="mfa-factor-info-content">{{ factorKey + '.INFO' | translate }}</p>
+
+        <ion-button expand="block" (click)="closeFactorInfo()">
+          {{ 'MFA.ACTIONS.CLOSE' | translate }}
+        </ion-button>
+      }
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
+<ion-modal [isOpen]="factorToDelete !== null" (didDismiss)="cancelFactorDeletion()">
+  <ng-template>
+    <ion-content class="ion-padding ion-text-center">
+      @if (factorToDelete) {
+        @let deleteKey = `MFA.FACTOR.${factorToDelete.id.toUpperCase()}.DELETE`;
+        <h2>{{ deleteKey + '.TITLE' | translate }}</h2>
+        <p>{{ deleteKey + '.CONTENT' | translate }}</p>
+
+        <ion-button color="danger" expand="block" (click)="deleteFactor(factorToDelete)">
+          {{ 'MFA.ACTIONS.DELETE' | translate }}
+        </ion-button>
+
+        <ion-button fill="clear" expand="block" (click)="cancelFactorDeletion()">
+          {{ 'MFA.ACTIONS.CANCEL' | translate }}
+        </ion-button>
+      }
+    </ion-content>
+  </ng-template>
+</ion-modal>

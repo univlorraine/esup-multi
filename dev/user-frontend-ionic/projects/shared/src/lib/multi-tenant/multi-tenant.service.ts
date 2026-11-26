@@ -196,14 +196,11 @@ export class MultiTenantService {
     }, modulesConfiguration);
   }
 
-  public async redirectToTenantSelection(backToAuth = false) {
-    if (backToAuth) {
-      await this.router.navigate(['/multi-tenant/select'], {
-        queryParams: { redirectToAuth: true },
-      });
-      return;
-    }
-    await this.router.navigate(['/multi-tenant/select']);
+  public async redirectToTenantSelection(redirectTo?: string) {
+    await this.router.navigate(
+      ['/multi-tenant/select'],
+      redirectTo ? { queryParams: { redirectTo } } : {},
+    );
   }
 
   public disconnectFromTenant() {

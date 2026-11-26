@@ -37,12 +37,18 @@
  * termes.
  */
 
+import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { IonButton, IonContent, IonIcon, IonLabel } from '@ionic/angular';
+import { IonButton, IonContent, IonIcon, IonLabel, IonModal } from '@ionic/angular';
 import { TranslatePipe } from '@ngx-translate/core';
+import { BehaviorSubject, combineLatest, defaultIfEmpty, Observable, of } from 'rxjs';
+import { map, shareReplay, switchMap } from 'rxjs/operators';
 import { CustomIconComponent, HeaderComponent } from '@multi/shared';
-import { MfaFactorComponent } from './mfa-factor/mfa-factor.component';
-import { MFA_CONFIG, MfaModuleConfig } from './mfa.config';
+import { MfaFactorComponent, MfaFactorMenuAction } from './mfa-factor/mfa-factor.component';
+import { MFA_CONFIG, MfaFactor, MfaModuleConfig } from './mfa.config';
+import { TotpCodeComponent } from './totp/totp-code/totp-code.component';
+import { TotpEnrollmentLinkService } from './totp/totp-enrollment-link.service';
+import { TotpAccount, TotpRepository } from './totp/totp.repository';
 
 @Component({
   selector: 'app-mfa',
@@ -58,8 +64,100 @@ import { MFA_CONFIG, MfaModuleConfig } from './mfa.config';
     IonIcon,
     IonLabel,
     MfaFactorComponent,
+    TotpCodeComponent,
+    IonModal,
+    AsyncPipe,
   ],
 })
 export class MfaPage {
-  protected config = inject<MfaModuleConfig>(MFA_CONFIG);
+  protected readonly config = inject<MfaModuleConfig>(MFA_CONFIG);
+  private readonly totpRepository = inject(TotpRepository);
+  private readonly totpEnrollmentLinkService = inject(TotpEnrollmentLinkService);
+
+  private readonly totpAccountRefreshSubject = new BehaviorSubject<void>(undefined);
+
+  /** Enrôlement TOTP reçu par lien, en attente de confirmation par l'utilisateur. */
+  protected readonly pendingTotpEnrollment$ = this.totpEnrollmentLinkService.pendingEnrollment$;
+
+  protected readonly totpAccount$: Observable<TotpAccount | null> =
+    this.totpAccountRefreshSubject.pipe(
+      switchMap(() => this.totpRepository.getTotpAccount()),
+      shareReplay({ bufferSize: 1, refCount: true }),
+    );
+
+  private readonly factorEnabled: Record<MfaFactor['id'], () => Observable<boolean>> = {
+    totp: () => this.totpAccount$.pipe(map((account) => !!account)),
+    push: () => of(false), // TODO
+  };
+
+  /** Facteurs présents dans la configuration et activés par l'utilisateur. */
+  protected readonly activeFactors$: Observable<MfaFactor[]> = combineLatest(
+    this.config.availableFactors.map((factor) =>
+      this.factorEnabled[factor.id]().pipe(map((enabled) => ({ factor, enabled }))),
+    ),
+  ).pipe(
+    map((factors) => factors.filter(({ enabled }) => enabled).map(({ factor }) => factor)),
+    defaultIfEmpty([]),
+  );
+
+  /** Affiche le rappel OTP-Manager uniquement juste après un enrôlement. */
+  protected totpJustEnrolled = false;
+
+  /** Facteur dont le pavé « Plus d'info » est ouvert. */
+  protected infoFactor: MfaFactor | null = null;
+
+  /** Facteur en attente de confirmation de suppression. */
+  protected factorToDelete: MfaFactor | null = null;
+
+  protected onFactorAction(factor: MfaFactor, action: MfaFactorMenuAction): void {
+    if (action === 'info') {
+      this.infoFactor = factor;
+      return;
+    }
+
+    this.factorToDelete = factor;
+  }
+
+  protected closeFactorInfo(): void {
+    this.infoFactor = null;
+  }
+
+  protected cancelFactorDeletion(): void {
+    this.factorToDelete = null;
+  }
+
+  protected deleteFactor(factor: MfaFactor): void {
+    this.factorToDelete = null;
+
+    switch (factor.id) {
+      case 'totp':
+        this.totpRepository.deleteTotpAccount().subscribe({
+          next: () => {
+            this.totpEnrollmentLinkService.forgetLastEnrollment();
+            this.totpJustEnrolled = false;
+            this.totpAccountRefreshSubject.next();
+          },
+          error: () => console.error('MFA: impossible de supprimer le compte TOTP'),
+        });
+        break;
+    }
+  }
+
+  protected confirmTotpEnrollment(account: TotpAccount | null): void {
+    if (!account) {
+      return;
+    }
+
+    this.totpEnrollmentLinkService.enroll(account).subscribe({
+      next: () => {
+        this.totpJustEnrolled = true;
+        this.totpAccountRefreshSubject.next();
+      },
+      error: (e) => console.error("MFA: impossible d'enregistrer le compte TOTP", e),
+    });
+  }
+
+  protected cancelTotpEnrollment(): void {
+    this.totpEnrollmentLinkService.discard();
+  }
 }

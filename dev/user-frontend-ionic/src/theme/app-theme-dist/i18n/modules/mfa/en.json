@@ -1,19 +1,42 @@
 {
-  "TITLE": "Secure your account",
-  "INTRO": "Université Exemple is introducing strong authentication: as well as your password, you will need to confirm your identity using this mobile phone.",
+  "TITLE": "Your account is secure",
+  "INTRO": "Your smartphone is set up as a second factor for strong authentication.",
   "NONE_ACTIVE": {
+    "TITLE": "Secure your account",
+    "INTRO": "Université Exemple is introducing strong authentication: as well as your password, you will need to confirm your identity using this mobile phone.",
     "MESSAGE": "Your smartphone is not synchronised as a second factor for any strong authentication method.",
     "OTP_MANAGER": "Choose my strong authentication methods"
   },
   "ADD_BY_QR": "I already have a QR code",
+  "ACTIONS": {
+    "CONFIRM": "Confirm",
+    "CANCEL": "Cancel",
+    "CLOSE": "Close",
+    "MORE_INFO": "More info",
+    "DELETE": "Delete"
+  },
   "FACTOR": {
     "TOTP": {
       "TITLE": "Temporary code",
-      "DESCRIPTION": "A 6-digit code, refreshed every 30 seconds, to be entered when logging in"
+      "DESCRIPTION": "A 6-digit code, refreshed every 30 seconds, to be entered when logging in",
+      "ENROLL": "Do you want to synchronise your smartphone to display the temporary code?",
+      "ENROLL_OVERRIDE": "A temporary code is already registered on this device. Continuing will replace it.",
+      "ENROLL_CONFIRM": "To complete the registration of this device, copy the temporary code into the OTP-Manager portal.",
+      "REMAINING": "New code in {{ seconds }}s",
+      "INFO": "The temporary code method provides a security code that is automatically renewed every 30 seconds. The user must enter this code in addition to their password to confirm their identity.\n\nThis mechanism strengthens security by making access much more difficult for an unauthorised third party.\n\nTo activate this method, scan the QR code displayed on the strong authentication management portal.",
+      "DELETE": {
+        "TITLE": "Delete the temporary code?",
+        "CONTENT": "This device will no longer be synchronised for the temporary code. You will not be able to sign in with this second factor until you enrol it again."
+      }
     },
     "PUSH": {
       "TITLE": "Notification",
-      "DESCRIPTION": "A notification to accept or decline on your smartphone"
+      "DESCRIPTION": "A notification to accept or decline on your smartphone",
+      "INFO": "Smartphone notification authentication sends a notification to the user's phone when a sign-in is attempted. The user must then approve or decline the request through the dedicated application. This process adds a layer of security by requiring explicit validation on a personal device.\n\nTo activate this method, scan the QR code displayed on the strong authentication management portal.",
+      "DELETE": {
+        "TITLE": "Delete notifications?",
+        "CONTENT": "This device will no longer receive authentication notifications. You will not be able to sign in with this second factor until you enrol it again."
+      }
     }
   }
 }

@@ -1,0 +1,15 @@
+<div class="mfa-totp-code">
+  @if (account.issuer) {
+    <p class="mfa-totp-code-account">{{ account.issuer }} — {{ account.name }}</p>
+  } @else {
+    <p class="mfa-totp-code-account">{{ account.name }}</p>
+  }
+
+  <p class="mfa-totp-code-value">{{ formattedCode }}</p>
+
+  <ion-progress-bar [value]="progress" />
+
+  <p class="mfa-totp-code-remaining">
+    {{ 'MFA.FACTOR.TOTP.REMAINING' | translate: { seconds: remainingSeconds } }}
+  </p>
+</div>

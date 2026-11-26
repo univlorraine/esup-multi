@@ -1,0 +1,26 @@
+.mfa-totp-code {
+  .mfa-totp-code-account {
+    font-size: 0.875rem;
+    opacity: 0.7;
+    margin: 0;
+  }
+
+  .mfa-totp-code-value {
+    font-size: 3rem;
+    font-weight: bold;
+    letter-spacing: 0.2rem;
+    font-variant-numeric: tabular-nums;
+    margin: 0.5rem 0 1rem;
+  }
+
+  ion-progress-bar {
+    max-width: 16rem;
+    margin: 0 auto;
+  }
+
+  .mfa-totp-code-remaining {
+    font-size: 0.875rem;
+    opacity: 0.7;
+    margin-top: 0.5rem;
+  }
+}

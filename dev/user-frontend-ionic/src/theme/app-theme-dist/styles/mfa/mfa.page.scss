@@ -11,3 +11,16 @@ h2 {
 
   margin-top: 2rem;
 }
+
+.mfa-totp-enroll-confirm {
+  color: var(--ion-color-danger);
+}
+
+.mfa-totp-enroll-warning {
+  color: var(--ion-color-warning);
+  font-weight: bold;
+}
+
+.mfa-factor-info-content {
+  white-space: pre-line;
+}

@@ -38,11 +38,13 @@
  */
 
 import { Routes } from '@angular/router';
+import { IsTenantSelectedGuard } from '@multi/shared';
 import { MfaPage } from './mfa.page';
 
 export const MFA_ROUTES: Routes = [
   {
     path: 'mfa',
     component: MfaPage,
+    canActivate: [IsTenantSelectedGuard],
   },
 ];
