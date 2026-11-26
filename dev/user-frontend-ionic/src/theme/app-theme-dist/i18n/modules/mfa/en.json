@@ -41,6 +41,7 @@
         "CONTENT": "This device will no longer receive authentication notifications. You will not be able to sign in with this second factor until you enrol it again."
       },
       "NAME": "Account name",
+      "NAME_REQUIRED": "Account name required",
       "SECRET": "Activation code",
       "SECRET_HELP": "6-digit code shown below the QR code generated on your strong authentication portal",
       "SECRET_INVALID": "Invalid code: only digits are allowed"

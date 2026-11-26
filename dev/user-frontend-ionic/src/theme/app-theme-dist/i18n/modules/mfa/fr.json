@@ -41,6 +41,7 @@
         "CONTENT": "Cet appareil ne recevra plus de notification d'authentification. Vous ne pourrez plus vous connecter avec ce second facteur tant que vous ne l'aurez pas réenrôlé."
       },
       "NAME": "Nom de compte",
+      "NAME_REQUIRED": "Nom de compte requis",
       "SECRET": "Code d'activation",
       "SECRET_HELP": "Code à 6 chiffres affiché sous le QR code généré sur votre portail d'authentification renforcée",
       "SECRET_INVALID": "Code invalide : seuls les chiffres sont autorisés"

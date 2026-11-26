@@ -38,27 +38,23 @@
   -->
 
 <form [formGroup]="totpForm" (ngSubmit)="onSubmit()">
-  <ion-list>
-    <ion-item>
-      <ion-input
-        formControlName="secret"
-        label="{{ 'MFA.FACTOR.TOTP.SECRET' | translate }}"
-        labelPlacement="stacked"
-        autocapitalize="characters"
-        autocomplete="off"
-        [spellcheck]="false"
-        helperText="{{ 'MFA.FACTOR.TOTP.SECRET_HELP' | translate }}"
-        errorText="{{ 'MFA.FACTOR.TOTP.SECRET_INVALID' | translate }}"
-      />
-    </ion-item>
-  </ion-list>
+  <ion-item lines="none">
+    <ion-input
+      class="app-text-3 light"
+      formControlName="secret"
+      label="{{ 'MFA.FACTOR.TOTP.SECRET' | translate }}"
+      labelPlacement="floating"
+      autocapitalize="characters"
+      autocomplete="off"
+      [spellcheck]="false"
+      helperText="{{ 'MFA.FACTOR.TOTP.SECRET_HELP' | translate }}"
+      errorText="{{ 'MFA.FACTOR.TOTP.SECRET_INVALID' | translate }}"
+    />
+  </ion-item>
 
-  <ion-button
-    class="app-rectangle-button-1 ion-margin-top"
-    expand="block"
-    type="submit"
-    [disabled]="!totpForm.valid"
-  >
-    <ion-label>{{ 'MFA.MANUAL.SUBMIT' | translate }}</ion-label>
-  </ion-button>
+  <ion-row class="ion-margin-top ion-padding-horizontal ion-justify-content-center">
+    <ion-button class="app-rectangle-button-1" type="submit" [disabled]="!totpForm.valid">
+      <ion-label>{{ 'MFA.MANUAL.SUBMIT' | translate }}</ion-label>
+    </ion-button>
+  </ion-row>
 </form>

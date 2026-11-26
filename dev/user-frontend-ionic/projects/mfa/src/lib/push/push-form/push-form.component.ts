@@ -39,14 +39,15 @@
 
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { IonButton, IonInput, IonItem, IonLabel, IonList } from '@ionic/angular';
+import { IonButton, IonInput, IonItem, IonLabel, IonRow } from '@ionic/angular';
 import { TranslatePipe } from '@ngx-translate/core';
 import { getAuthenticatedUsername } from '@multi/shared';
 
 @Component({
   selector: 'app-push-form',
   templateUrl: './push-form.component.html',
-  imports: [IonButton, IonInput, IonItem, IonLabel, IonList, ReactiveFormsModule, TranslatePipe],
+  styleUrls: ['../../../../../../src/theme/app-theme/styles/mfa/mfa-form.component.scss'],
+  imports: [IonButton, IonInput, IonItem, IonLabel, IonRow, ReactiveFormsModule, TranslatePipe],
 })
 export class PushFormComponent {
   @Output() saved = new EventEmitter<void>();
