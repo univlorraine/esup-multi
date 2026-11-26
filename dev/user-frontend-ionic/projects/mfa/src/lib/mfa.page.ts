@@ -39,8 +39,16 @@
 
 import { AsyncPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { IonButton, IonContent, IonIcon, IonLabel, IonModal } from '@ionic/angular';
-import { TranslatePipe } from '@ngx-translate/core';
+import {
+  ActionSheetController,
+  IonButton,
+  IonContent,
+  IonIcon,
+  IonLabel,
+  IonModal,
+  NavController,
+} from '@ionic/angular';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { BehaviorSubject, combineLatest, defaultIfEmpty, Observable, of } from 'rxjs';
 import { map, shareReplay, switchMap } from 'rxjs/operators';
 import { CustomIconComponent, HeaderComponent } from '@multi/shared';
@@ -49,6 +57,8 @@ import { MFA_CONFIG, MfaFactor, MfaModuleConfig } from './mfa.config';
 import { TotpCodeComponent } from './totp/totp-code/totp-code.component';
 import { TotpEnrollmentLinkService } from './totp/totp-enrollment-link.service';
 import { TotpAccount, TotpRepository } from './totp/totp.repository';
+
+// import { MfaService } from './mfa.service';
 
 @Component({
   selector: 'app-mfa',
@@ -71,8 +81,13 @@ import { TotpAccount, TotpRepository } from './totp/totp.repository';
 })
 export class MfaPage {
   protected readonly config = inject<MfaModuleConfig>(MFA_CONFIG);
+  private actionSheetController = inject(ActionSheetController);
+  private navController = inject(NavController);
+  private translateService = inject(TranslateService);
   private readonly totpRepository = inject(TotpRepository);
   private readonly totpEnrollmentLinkService = inject(TotpEnrollmentLinkService);
+
+  // private mfaService = inject(MfaService);
 
   private readonly totpAccountRefreshSubject = new BehaviorSubject<void>(undefined);
 
@@ -159,5 +174,40 @@ export class MfaPage {
 
   protected cancelTotpEnrollment(): void {
     this.totpEnrollmentLinkService.discard();
+  }
+
+  // Menu en bas d'écran : scanner un QR code, saisir la clé manuellement ou annuler
+  async openAddMenu() {
+    const actionSheet = await this.actionSheetController.create({
+      header: this.translateService.instant('MFA.ADD_MENU.HEADER'),
+      buttons: [
+        {
+          text: this.translateService.instant('MFA.ADD_MENU.SCAN'),
+          data: 'scan',
+        },
+        {
+          text: this.translateService.instant('MFA.ADD_MENU.MANUAL'),
+          data: 'manual',
+        },
+        {
+          text: this.translateService.instant('MFA.ADD_MENU.CANCEL'),
+          role: 'cancel',
+        },
+      ],
+    });
+    await actionSheet.present();
+
+    const { data } = await actionSheet.onDidDismiss();
+    if (data === 'scan') {
+      await this.scanQRCode();
+    }
+    if (data === 'manual') {
+      await this.navController.navigateForward('/mfa/manual');
+    }
+  }
+
+  private async scanQRCode() {
+    // const scannedUrl = await this.mfaService.scanQrCode();
+    // todo
   }
 }

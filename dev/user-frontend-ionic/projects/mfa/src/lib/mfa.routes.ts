@@ -39,12 +39,18 @@
 
 import { Routes } from '@angular/router';
 import { IsTenantSelectedGuard } from '@multi/shared';
+import { MfaManualPage } from './mfa-manual/mfa-manual.page';
 import { MfaPage } from './mfa.page';
 
 export const MFA_ROUTES: Routes = [
   {
     path: 'mfa',
     component: MfaPage,
+    canActivate: [IsTenantSelectedGuard],
+  },
+  {
+    path: 'mfa/manual',
+    component: MfaManualPage,
     canActivate: [IsTenantSelectedGuard],
   },
 ];

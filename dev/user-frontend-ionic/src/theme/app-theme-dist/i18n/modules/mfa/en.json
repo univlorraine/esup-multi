@@ -27,7 +27,10 @@
       "DELETE": {
         "TITLE": "Delete the temporary code?",
         "CONTENT": "This device will no longer be synchronised for the temporary code. You will not be able to sign in with this second factor until you enrol it again."
-      }
+      },
+      "SECRET": "Secret key",
+      "SECRET_HELP": "It is shown below the QR code generated on your strong authentication portal",
+      "SECRET_INVALID": "Invalid secret key: only letters A to Z and digits 2 to 7 are allowed"
     },
     "PUSH": {
       "TITLE": "Notification",
@@ -36,7 +39,22 @@
       "DELETE": {
         "TITLE": "Delete notifications?",
         "CONTENT": "This device will no longer receive authentication notifications. You will not be able to sign in with this second factor until you enrol it again."
-      }
+      },
+      "NAME": "Account name",
+      "SECRET": "Activation code",
+      "SECRET_HELP": "6-digit code shown below the QR code generated on your strong authentication portal",
+      "SECRET_INVALID": "Invalid code: only digits are allowed"
     }
+  },
+  "ADD_MENU": {
+    "HEADER": "Add a method",
+    "SCAN": "Scan a QR code",
+    "MANUAL": "Enter the key manually",
+    "CANCEL": "Cancel"
+  },
+  "MANUAL": {
+    "TITLE": "Manual entry",
+    "SUBMIT": "Confirm",
+    "CANCEL": "Cancel"
   }
 }
