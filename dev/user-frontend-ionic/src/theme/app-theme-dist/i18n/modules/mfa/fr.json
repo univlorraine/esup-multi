@@ -18,6 +18,7 @@
       "TITLE": "Notification",
       "DESCRIPTION": "Une notification à accepter ou refuser depuis votre smartphone",
       "NAME": "Nom de compte",
+      "NAME_REQUIRED": "Nom de compte requis",
       "SECRET": "Code d'activation",
       "SECRET_HELP": "Code à 6 chiffres affiché sous le QR code généré sur votre portail d'authentification renforcée",
       "SECRET_INVALID": "Code invalide : seuls les chiffres sont autorisés"

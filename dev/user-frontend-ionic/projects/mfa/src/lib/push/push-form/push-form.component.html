@@ -38,35 +38,33 @@
   -->
 
 <form [formGroup]="pushForm" (ngSubmit)="onSubmit()">
-  <ion-list>
-    <ion-item>
-      <ion-input
-        formControlName="name"
-        label="{{ 'MFA.FACTOR.PUSH.NAME' | translate }}"
-        labelPlacement="stacked"
-        autocapitalize="off"
-        autocomplete="username"
-      />
-    </ion-item>
-    <ion-item>
-      <ion-input
-        formControlName="secret"
-        label="{{ 'MFA.FACTOR.PUSH.SECRET' | translate }}"
-        labelPlacement="stacked"
-        inputmode="numeric"
-        autocomplete="off"
-        helperText="{{ 'MFA.FACTOR.PUSH.SECRET_HELP' | translate }}"
-        errorText="{{ 'MFA.FACTOR.PUSH.SECRET_INVALID' | translate }}"
-      />
-    </ion-item>
-  </ion-list>
+  <ion-item lines="none">
+    <ion-input
+      class="app-text-3 light"
+      formControlName="name"
+      label="{{ 'MFA.FACTOR.PUSH.NAME' | translate }}"
+      labelPlacement="floating"
+      autocapitalize="off"
+      autocomplete="username"
+      errorText="{{ 'MFA.FACTOR.PUSH.NAME_REQUIRED' | translate }}"
+    />
+  </ion-item>
+  <ion-item lines="none">
+    <ion-input
+      class="app-text-3 light"
+      formControlName="secret"
+      label="{{ 'MFA.FACTOR.PUSH.SECRET' | translate }}"
+      labelPlacement="floating"
+      inputmode="numeric"
+      autocomplete="off"
+      helperText="{{ 'MFA.FACTOR.PUSH.SECRET_HELP' | translate }}"
+      errorText="{{ 'MFA.FACTOR.PUSH.SECRET_INVALID' | translate }}"
+    />
+  </ion-item>
 
-  <ion-button
-    class="app-rectangle-button-1 ion-margin-top"
-    expand="block"
-    type="submit"
-    [disabled]="!pushForm.valid"
-  >
-    <ion-label>{{ 'MFA.MANUAL.SUBMIT' | translate }}</ion-label>
-  </ion-button>
+  <ion-row class="ion-margin-top ion-padding-horizontal ion-justify-content-center">
+    <ion-button class="app-rectangle-button-1" type="submit" [disabled]="!pushForm.valid">
+      <ion-label>{{ 'MFA.MANUAL.SUBMIT' | translate }}</ion-label>
+    </ion-button>
+  </ion-row>
 </form>

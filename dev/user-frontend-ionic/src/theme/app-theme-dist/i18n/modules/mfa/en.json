@@ -18,6 +18,7 @@
       "TITLE": "Notification",
       "DESCRIPTION": "A notification to accept or decline on your smartphone",
       "NAME": "Account name",
+      "NAME_REQUIRED": "Account name required",
       "SECRET": "Activation code",
       "SECRET_HELP": "6-digit code shown below the QR code generated on your strong authentication portal",
       "SECRET_INVALID": "Invalid code: only digits are allowed"
