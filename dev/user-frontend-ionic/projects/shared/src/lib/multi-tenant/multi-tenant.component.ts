@@ -119,13 +119,19 @@ export class MultiTenantComponent {
 
   onValidate(tenantId: string) {
     this.multiTenantService.setCurrentTenantById(tenantId);
-    const redirectToAuth = this.activatedRoute.snapshot.queryParams['redirectToAuth'];
+    const redirectTo = this.activatedRoute.snapshot.queryParams['redirectTo'];
 
-    if (redirectToAuth === 'true') {
-      this.router.navigate(['/auth']);
-    } else {
-      this.router.navigate(['/']);
+    // Retour vers la page d'origine (login, enrôlement MFA interrompu par la sélection…).
+    if (
+      typeof redirectTo === 'string' &&
+      redirectTo.startsWith('/') &&
+      !redirectTo.startsWith('//')
+    ) {
+      this.router.navigateByUrl(redirectTo);
+      return;
     }
+
+    this.router.navigate(['/']);
   }
 
   useLanguage(language: string): void {

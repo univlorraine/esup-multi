@@ -1,0 +1,61 @@
+{
+  "TITLE": "Votre compte est sécurisé",
+  "INTRO": "Votre smartphone est synchronisé comme second facteur d'authentification renforcée.",
+  "NONE_ACTIVE": {
+    "TITLE": "Sécurisez votre compte",
+    "INTRO": "L'Université Exemple met en place l'authentification renforcée : en plus de votre mot de passe, vous confirmez votre identité avec ce téléphone.",
+    "MESSAGE": "Votre smartphone n'est synchronisé comme second facteur d'aucune méthode d'authentification renforcée.",
+    "OTP_MANAGER": "Choisir mes méthodes d'authentification renforcée"
+  },
+  "ADD_BY_QR": "J'ai déjà un Qrcode",
+  "ACTIONS": {
+    "CONFIRM": "Confirmer",
+    "CANCEL": "Annuler",
+    "CLOSE": "Fermer",
+    "MORE_INFO": "Plus d'info",
+    "DELETE": "Supprimer"
+  },
+  "FACTOR": {
+    "TOTP": {
+      "TITLE": "Code temporaire",
+      "DESCRIPTION": "Un code à 6 chiffres, renouvelé toutes les 30s, à saisir à la connexion",
+      "ENROLL": "Voulez-vous synchroniser votre smartphone pour l'affichage du code temporaire ?",
+      "ENROLL_OVERRIDE": "Un code temporaire est déjà enregistré sur cet appareil. Continuer le remplacera.",
+      "ENROLL_CONFIRM": "Pour finaliser l'enregistrement de cet appareil, recopiez le code temporaire sur le portail OTP-Manager.",
+      "REMAINING": "Nouveau code dans {{ seconds }} s",
+      "INFO": "La méthode code temporaire fournit un code de sécurité qui se renouvelle automatiquement toutes les 30 secondes. L'utilisateur doit saisir ce code en complément de son mot de passe afin de confirmer son identité.\n\nCe mécanisme renforce la sécurité en rendant l'accès beaucoup plus difficile pour un tiers non autorisé.\n\nPour activer cette méthode, scanner le QRCode affiché sur le portail de gestion de l'authentification renforcée.",
+      "DELETE": {
+        "TITLE": "Supprimer le code temporaire ?",
+        "CONTENT": "Cet appareil ne sera plus synchronisé pour le code temporaire. Vous ne pourrez plus vous connecter avec ce second facteur tant que vous ne l'aurez pas réenrôlé."
+      },
+      "SECRET": "Clé secrète",
+      "SECRET_HELP": "Elle figure sous le QR code généré sur votre portail d'authentification renforcée",
+      "SECRET_INVALID": "Clé secrète invalide : seuls les lettres A à Z et les chiffres 2 à 7 sont autorisés"
+    },
+    "PUSH": {
+      "TITLE": "Notification",
+      "DESCRIPTION": "Une notification à accepter ou refuser depuis votre smartphone",
+      "INFO": "L'authentification par notification sur smartphone envoie une notification sur le mobile de l'utilisateur lorsqu'une connexion est tentée. L'utilisateur doit alors approuver ou refuser la demande via l'application dédiée. Ce procédé ajoute une couche de sécurité en exigeant une validation explicite sur un appareil personnel.\n\nPour activer cette méthode, scanner le QRCode affiché sur le portail de gestion de l'authentification renforcée.",
+      "DELETE": {
+        "TITLE": "Supprimer les notifications ?",
+        "CONTENT": "Cet appareil ne recevra plus de notification d'authentification. Vous ne pourrez plus vous connecter avec ce second facteur tant que vous ne l'aurez pas réenrôlé."
+      },
+      "NAME": "Nom de compte",
+      "NAME_REQUIRED": "Nom de compte requis",
+      "SECRET": "Code d'activation",
+      "SECRET_HELP": "Code à 6 chiffres affiché sous le QR code généré sur votre portail d'authentification renforcée",
+      "SECRET_INVALID": "Code invalide : seuls les chiffres sont autorisés"
+    }
+  },
+  "ADD_MENU": {
+    "HEADER": "Ajouter une méthode",
+    "SCAN": "Scanner un QR code",
+    "MANUAL": "Saisir la clé manuellement",
+    "CANCEL": "Annuler"
+  },
+  "MANUAL": {
+    "TITLE": "Saisie manuelle",
+    "SUBMIT": "Valider",
+    "CANCEL": "Annuler"
+  }
+}

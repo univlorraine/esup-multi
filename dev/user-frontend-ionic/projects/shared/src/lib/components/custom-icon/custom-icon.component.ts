@@ -42,6 +42,8 @@ import { Component, Input } from '@angular/core';
 import { IonIcon } from '@ionic/angular';
 import { isDarkTheme$ } from '../../theme/theme.repository';
 
+const ioniconSizes = ['small', 'medium', 'large'];
+
 @Component({
   selector: 'app-custom-icon',
   templateUrl: 'custom-icon.component.html',
@@ -57,4 +59,12 @@ export class CustomIconComponent {
   @Input() slot?: string;
 
   public isDarkTheme$ = isDarkTheme$;
+
+  isIoniconSize() {
+    return !!this.size && ioniconSizes.includes(this.size);
+  }
+
+  getIoniconSize() {
+    return this.isIoniconSize() ? this.size : undefined;
+  }
 }

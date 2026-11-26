@@ -37,24 +37,40 @@
   ~ termes.
   -->
 
+@let ioniconSize = getIoniconSize();
+
 @if (!iconSvgLight && !iconSvgDark) {
-  <ion-icon [name]="icon" [slot]="slot" [size]="size" [color]="color" aria-label="" />
-}
-@if (iconSvgLight && (isDarkTheme$ | async) === false) {
+  @let customSizeStyleFont = !!size && !ioniconSize ? 'font-size: ' + size : undefined;
   <ion-icon
-    [src]="'data:image/svg+xml;utf8, ' + iconSvgLight"
+    [name]="icon"
     [slot]="slot"
-    [size]="size"
+    [size]="ioniconSize"
+    [style]="customSizeStyleFont"
     [color]="color"
     aria-label=""
   />
-}
-@if (iconSvgDark && (isDarkTheme$ | async) === true) {
-  <ion-icon
-    [src]="'data:image/svg+xml;utf8, ' + iconSvgDark"
-    [slot]="slot"
-    [size]="size"
-    [color]="color"
-    aria-label=""
-  />
+} @else {
+  @let customSizeStyleSvg =
+    !!size && !ioniconSize ? 'height: ' + size + ';width: ' + size : undefined;
+
+  @if (iconSvgLight && (isDarkTheme$ | async) === false) {
+    <ion-icon
+      [src]="'data:image/svg+xml;utf8, ' + iconSvgLight"
+      [slot]="slot"
+      [size]="ioniconSize"
+      [style]="customSizeStyleSvg"
+      [color]="color"
+      aria-label=""
+    />
+  }
+  @if (iconSvgDark && (isDarkTheme$ | async) === true) {
+    <ion-icon
+      [src]="'data:image/svg+xml;utf8, ' + iconSvgDark"
+      [slot]="slot"
+      [size]="ioniconSize"
+      [style]="customSizeStyleSvg"
+      [color]="color"
+      aria-label=""
+    />
+  }
 }

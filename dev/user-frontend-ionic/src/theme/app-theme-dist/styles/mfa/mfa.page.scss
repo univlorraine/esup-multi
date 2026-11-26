@@ -1,0 +1,26 @@
+h2 {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.mfa-otp-manager, .mfa-add-factor-qr {
+  display: block;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+
+  margin-top: 2rem;
+}
+
+.mfa-totp-enroll-confirm {
+  color: var(--ion-color-danger);
+}
+
+.mfa-totp-enroll-warning {
+  color: var(--ion-color-warning);
+  font-weight: bold;
+}
+
+.mfa-factor-info-content {
+  white-space: pre-line;
+}

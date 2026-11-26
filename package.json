@@ -24,7 +24,7 @@
     "build:mocks": "npm run mocks -- npm ci",
     "start:back": "concurrently \"npm run back:* -- npm run start\"",
     "start:back:dev": "concurrently \"npm run back:* -- npm run start:dev\"",
-    "start:front": "npm run front -- ionic serve",
+    "start:front": "npm run front -- npx ionic serve",
     "start:mocks": "npm run mocks -- npm start",
     "front": "cd dev/user-frontend-ionic && ",
     "mocks": "cd dev/user-backend-mocks && ",

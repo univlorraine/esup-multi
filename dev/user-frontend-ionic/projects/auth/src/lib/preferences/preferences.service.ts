@@ -65,7 +65,7 @@ export class PreferencesService {
         concatMap((token) =>
           this.keepAuthService
             .removeSavedCredentials(token)
-            .pipe(finalize(() => deleteRefreshAuthToken())),
+            .pipe(finalize(() => deleteRefreshAuthToken().subscribe())),
         ),
       )
       .subscribe();

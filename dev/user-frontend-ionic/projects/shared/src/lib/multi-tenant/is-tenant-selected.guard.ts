@@ -38,7 +38,7 @@
  */
 
 import { inject, Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot } from '@angular/router';
 import { MultiTenantService } from './multi-tenant.service';
 
 @Injectable({
@@ -46,9 +46,8 @@ import { MultiTenantService } from './multi-tenant.service';
 })
 export class IsTenantSelectedGuard implements CanActivate {
   private multiTenantService = inject(MultiTenantService);
-  private router = inject(Router);
 
-  canActivate() {
+  canActivate(_route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     const isSingleTenant: boolean = this.multiTenantService.isSingleTenant();
     const hasCurrentTenant: boolean = this.multiTenantService.hasCurrentTenant();
     const availableTenants: any[] = this.multiTenantService.getAvailableTenants();
@@ -57,8 +56,9 @@ export class IsTenantSelectedGuard implements CanActivate {
       availableTenants && availableTenants.length === 1 && availableTenants[0].isGroup === true;
 
     if (!hasCurrentTenant && (groupExists || !isSingleTenant)) {
-      // The tenant should have been selected if group or if not single tenant
-      this.multiTenantService.redirectToTenantSelection(true).then();
+      // The tenant should have been selected if group or if not single tenant.
+      // On revient sur la page demandée une fois le tenant choisi.
+      void this.multiTenantService.redirectToTenantSelection(state.url);
       return false;
     }
 

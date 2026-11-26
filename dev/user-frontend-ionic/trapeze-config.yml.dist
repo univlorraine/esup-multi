@@ -17,6 +17,47 @@ platforms:
     packageName: $PACKAGE_NAME
     versionName: $ANDROID_VERSION_NAME
     versionCode: $ANDROID_VERSION_CODE
+    # Exclut le stockage sécurisé (jetons de connexion, comptes TOTP) des sauvegardes et transferts Android :
+    res:
+      - path: xml
+        file: backup_rules.xml
+        text: |
+          <?xml version="1.0" encoding="utf-8"?>
+          <full-backup-content>
+            <exclude domain="sharedpref" path="WSSecureStorageSharedPreferences.xml" />
+          </full-backup-content>
+      - path: xml
+        file: data_extraction_rules.xml
+        text: |
+          <?xml version="1.0" encoding="utf-8"?>
+          <data-extraction-rules>
+            <cloud-backup>
+              <exclude domain="sharedpref" path="WSSecureStorageSharedPreferences.xml" />
+            </cloud-backup>
+            <device-transfer>
+              <exclude domain="sharedpref" path="WSSecureStorageSharedPreferences.xml" />
+            </device-transfer>
+          </data-extraction-rules>
+    manifest:
+      - file: AndroidManifest.xml
+        target: manifest/application
+        attrs:
+          android:fullBackupContent: '@xml/backup_rules'
+          android:dataExtractionRules: '@xml/data_extraction_rules'
+      # Module MFA : liens d'enrôlement TOTP (otpauth://), ouverture de l'app depuis un mail
+      # ou un navigateur. Décommenter si le module MFA est utilisé.
+      # Le delete rend l'opération idempotente, sinon chaque `trapeze run` ajouterait un filtre.
+      #- file: AndroidManifest.xml
+      #  delete: "manifest/application/activity[@android:name='.MainActivity']/intent-filter[data[@android:scheme='otpauth']]"
+      #- file: AndroidManifest.xml
+      #  target: "manifest/application/activity[@android:name='.MainActivity']"
+      #  inject: |
+      #    <intent-filter>
+      #      <action android:name="android.intent.action.VIEW" />
+      #      <category android:name="android.intent.category.DEFAULT" />
+      #      <category android:name="android.intent.category.BROWSABLE" />
+      #      <data android:scheme="otpauth" android:host="totp" />
+      #    </intent-filter>
     # Décommenter le bloc si utilisation des notifications
     #copy:
     #  - src: ../src/environments/firebase/android/google-services-prod.json
@@ -30,3 +71,24 @@ platforms:
     #copy:
     #  - src: ../../src/environments/firebase/ios/GoogleService-Info-prod.plist
     #    dest: App/GoogleService-Info.plist
+    # Module MFA : liens d'enrôlement TOTP (otpauth://) côté iOS. Décommenter si le module MFA est utilisé.
+    #plist:
+    #  - replace: false
+    #    xml: |
+    #      <?xml version="1.0" encoding="UTF-8"?>
+    #      <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+    #      <plist version="1.0">
+    #      <dict>
+    #        <key>CFBundleURLTypes</key>
+    #        <array>
+    #          <dict>
+    #            <key>CFBundleURLName</key>
+    #            <string>fr.esupportail.mobile.multi.otpauth</string>
+    #            <key>CFBundleURLSchemes</key>
+    #            <array>
+    #              <string>otpauth</string>
+    #            </array>
+    #          </dict>
+    #        </array>
+    #      </dict>
+    #      </plist>
