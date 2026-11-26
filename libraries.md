@@ -48,7 +48,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 
 ## [Frontend](./dev/user-frontend-ionic)
 ```
-├─ MIT: 78
+├─ MIT: 79
 ├─ Apache-2.0: 7
 ├─ MIT*: 1
 ├─ (MPL-2.0 OR Apache-2.0): 1
@@ -138,6 +138,7 @@ The `*` next to the license name indicates that the license was *guessed* by [li
 - [ng-packagr@20.3.2](https://github.com/ng-packagr/ng-packagr) - MIT
 - [ng2-dragula@7.0.0](https://github.com/valor-software/ng2-dragula) - MIT
 - [ngx-matomo-client@8.0.0](https://github.com/EmmanuelRoux/ngx-matomo-client) - MIT
+- [otpauth@9.6.0](https://github.com/hectorm/otpauth) - MIT
 - [prettier@3.9.6](https://github.com/prettier/prettier) - MIT
 - [ramda@0.32.0](https://github.com/ramda/ramda) - MIT
 - [rxjs@7.8.2](https://github.com/reactivex/rxjs) - Apache-2.0
