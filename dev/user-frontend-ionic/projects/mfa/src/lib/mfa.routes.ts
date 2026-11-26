@@ -38,11 +38,16 @@
  */
 
 import { Routes } from '@angular/router';
+import { MfaManualPage } from './mfa-manual/mfa-manual.page';
 import { MfaPage } from './mfa.page';
 
 export const MFA_ROUTES: Routes = [
   {
     path: 'mfa',
     component: MfaPage,
+  },
+  {
+    path: 'mfa/manual',
+    component: MfaManualPage,
   },
 ];

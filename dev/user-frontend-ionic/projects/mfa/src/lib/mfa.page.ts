@@ -38,11 +38,20 @@
  */
 
 import { Component, inject } from '@angular/core';
-import { IonButton, IonContent, IonIcon, IonLabel } from '@ionic/angular';
-import { TranslatePipe } from '@ngx-translate/core';
+import {
+  ActionSheetController,
+  IonButton,
+  IonContent,
+  IonIcon,
+  IonLabel,
+  NavController,
+} from '@ionic/angular';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { CustomIconComponent, HeaderComponent } from '@multi/shared';
 import { MfaFactorComponent } from './mfa-factor/mfa-factor.component';
 import { MFA_CONFIG, MfaModuleConfig } from './mfa.config';
+
+// import { MfaService } from './mfa.service';
 
 @Component({
   selector: 'app-mfa',
@@ -62,4 +71,44 @@ import { MFA_CONFIG, MfaModuleConfig } from './mfa.config';
 })
 export class MfaPage {
   protected config = inject<MfaModuleConfig>(MFA_CONFIG);
+  private actionSheetController = inject(ActionSheetController);
+  private navController = inject(NavController);
+  private translateService = inject(TranslateService);
+
+  // private mfaService = inject(MfaService);
+
+  // Menu en bas d'écran : scanner un QR code, saisir la clé manuellement ou annuler
+  async openAddMenu() {
+    const actionSheet = await this.actionSheetController.create({
+      header: this.translateService.instant('MFA.ADD_MENU.HEADER'),
+      buttons: [
+        {
+          text: this.translateService.instant('MFA.ADD_MENU.SCAN'),
+          data: 'scan',
+        },
+        {
+          text: this.translateService.instant('MFA.ADD_MENU.MANUAL'),
+          data: 'manual',
+        },
+        {
+          text: this.translateService.instant('MFA.ADD_MENU.CANCEL'),
+          role: 'cancel',
+        },
+      ],
+    });
+    await actionSheet.present();
+
+    const { data } = await actionSheet.onDidDismiss();
+    if (data === 'scan') {
+      await this.scanQRCode();
+    }
+    if (data === 'manual') {
+      await this.navController.navigateForward('/mfa/manual');
+    }
+  }
+
+  private async scanQRCode() {
+    // const scannedUrl = await this.mfaService.scanQrCode();
+    // todo
+  }
 }

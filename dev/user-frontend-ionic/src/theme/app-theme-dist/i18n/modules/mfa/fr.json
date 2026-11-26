@@ -9,11 +9,29 @@
   "FACTOR": {
     "TOTP": {
       "TITLE": "Code temporaire",
-      "DESCRIPTION": "Un code à 6 chiffres, renouvelé toutes les 30s, à saisir à la connexion"
+      "DESCRIPTION": "Un code à 6 chiffres, renouvelé toutes les 30s, à saisir à la connexion",
+      "SECRET": "Clé secrète",
+      "SECRET_HELP": "Elle figure sous le QR code généré sur votre portail d'authentification renforcée",
+      "SECRET_INVALID": "Clé secrète invalide : seuls les lettres A à Z et les chiffres 2 à 7 sont autorisés"
     },
     "PUSH": {
       "TITLE": "Notification",
-      "DESCRIPTION": "Une notification à accepter ou refuser depuis votre smartphone"
+      "DESCRIPTION": "Une notification à accepter ou refuser depuis votre smartphone",
+      "NAME": "Nom de compte",
+      "SECRET": "Code d'activation",
+      "SECRET_HELP": "Code à 6 chiffres affiché sous le QR code généré sur votre portail d'authentification renforcée",
+      "SECRET_INVALID": "Code invalide : seuls les chiffres sont autorisés"
     }
+  },
+  "ADD_MENU": {
+    "HEADER": "Ajouter une méthode",
+    "SCAN": "Scanner un QR code",
+    "MANUAL": "Saisir la clé manuellement",
+    "CANCEL": "Annuler"
+  },
+  "MANUAL": {
+    "TITLE": "Saisie manuelle",
+    "SUBMIT": "Valider",
+    "CANCEL": "Annuler"
   }
 }

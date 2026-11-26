@@ -9,11 +9,29 @@
   "FACTOR": {
     "TOTP": {
       "TITLE": "Temporary code",
-      "DESCRIPTION": "A 6-digit code, refreshed every 30 seconds, to be entered when logging in"
+      "DESCRIPTION": "A 6-digit code, refreshed every 30 seconds, to be entered when logging in",
+      "SECRET": "Secret key",
+      "SECRET_HELP": "It is shown below the QR code generated on your strong authentication portal",
+      "SECRET_INVALID": "Invalid secret key: only letters A to Z and digits 2 to 7 are allowed"
     },
     "PUSH": {
       "TITLE": "Notification",
-      "DESCRIPTION": "A notification to accept or decline on your smartphone"
+      "DESCRIPTION": "A notification to accept or decline on your smartphone",
+      "NAME": "Account name",
+      "SECRET": "Activation code",
+      "SECRET_HELP": "6-digit code shown below the QR code generated on your strong authentication portal",
+      "SECRET_INVALID": "Invalid code: only digits are allowed"
     }
+  },
+  "ADD_MENU": {
+    "HEADER": "Add a method",
+    "SCAN": "Scan a QR code",
+    "MANUAL": "Enter the key manually",
+    "CANCEL": "Cancel"
+  },
+  "MANUAL": {
+    "TITLE": "Manual entry",
+    "SUBMIT": "Confirm",
+    "CANCEL": "Cancel"
   }
 }

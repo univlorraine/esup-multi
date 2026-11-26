@@ -66,7 +66,10 @@
       <ion-label>{{ 'MFA.NONE_ACTIVE.OTP_MANAGER' | translate }}</ion-label>
     </ion-button>
 
-    <ion-button class="mfa-add-factor-qr app-rectangle-button-1 ion-padding-left ion-padding-right">
+    <ion-button
+      class="mfa-add-factor-qr app-rectangle-button-1 ion-padding-left ion-padding-right"
+      (click)="openAddMenu()"
+    >
       <ion-icon class="app-icon-4" slot="start" name="qr-code-outline" aria-label="" />
       <ion-label>{{ 'MFA.ADD_BY_QR' | translate }}</ion-label>
     </ion-button>
